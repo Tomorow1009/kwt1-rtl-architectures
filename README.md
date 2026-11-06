@@ -40,3 +40,7 @@ python scripts/gen_vectors.py
 仓库不保存原始语音数据集、预训练模型大文件、完整波形或本机安装目录。相关来源、版本和校验值应写入对应版本的资料说明，所需小型输入样例可放在 examples。
 
 私人仓库成员需由仓库所有者逐一邀请；仓库链接本身不授予访问权限。
+
+## VNC 与 FileZilla 操作交接
+
+[队友交接文档](handoff/eda_audit_20261106_01/CODEX_VNC_FILEZILLA_HANDOFF.md)包含操作流程、路径映射、已完成盘点和未确认事项；配套提供[环境盘点报告](handoff/eda_audit_20261106_01/AUDIT_REPORT.txt)、[inventory.sh](handoff/eda_audit_20261106_01/inventory.sh)及[probe.sh](handoff/eda_audit_20261106_01/probe.sh)。这些是 2026-11-06 的交接记录，先阅读已有结果；本次归档未执行脚本或重新盘点服务器。

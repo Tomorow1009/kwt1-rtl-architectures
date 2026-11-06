@@ -1,0 +1,88 @@
+EDA 环境与 SRAM／工艺库盘点报告
+日期：2026-11-06
+方式：FileZilla 单向上传检查脚本；VNC 终端运行；通过屏幕阅读摘要。
+本报告为屏幕观察结论的人工整理，不是服务器日志下载副本。
+
+一、现场验证：目录与运行环境
+HOME=/storage2/2026contest/server4/s4_21usr
+Desktop=/storage2/2026contest/server4/s4_21usr/Desktop
+Shell=/bin/tcsh；Python3=3.6.8。
+FTP /iccompetition 对应 Linux $HOME/Desktop/iccompetition，可写。
+Linux 绝对路径 /iccompetition 不存在，不能直接用于脚本。
+.cshrc 可读，保留未修改；配置引用 /eda/synopsys/admin_snps_env 下的环境脚本。
+
+二、现场验证：EDA 工具最小启动
+运行方式：在独立盘点子目录执行 <tool> -f startup.tcl。
+startup.tcl 仅输出 AUDIT_SHELL_READY 并 exit，不读取设计或执行设计流程。
+dc_shell：T-2022.03-SP5-5；exit=0，检查标记已输出。
+  /eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell
+pt_shell：T-2022.03-SP5-1；exit=0，检查标记已输出。
+  /eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell
+  同时出现 PT-063：Library Compiler executable path is not set。
+  Diagnostics summary: 1 error。不能判定为无错误可用。
+fm_shell：R-2020.09-SP5；exit=0，检查标记已输出。
+  /eda/synopsys/fm/fm_2020.09-SP5/bin/fm_shell
+icc2_shell：T-2022.03-SP2-1；exit=0，检查标记已输出。
+  /eda/synopsys/icc2/icc2_2022.03-SP2-1/bin/icc2_shell
+lc_shell：T-2022.03-SP5；exit=0，检查标记已输出。
+  /eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5/bin/lc_shell
+vcs -ID：exit=0，输出 VCS script version Q-2020.03。
+verdi -version：20 秒超时，脚本终止自身启动的进程组，返回124。
+  当前版本和完整功能可用性未确认，不能从超时直接推断缺许可证。
+innovus、genus、xrun、virtuoso、spectre、calibre：当前 PATH 未发现命令；不等于服务器未安装。
+
+许可证验证边界：上述五个 Shell 完成了本次最小启动，但没有对具体许可证 feature 作 checkout 审计。
+综合、形式验证、STA 分析、布局布线、库转换、VCS 编译仿真等功能许可证仍未验证。
+不能以启动横幅中的通用 license 文本作为许可证有效的独立证据。
+所有启动探测均已结束；未执行综合、布局布线、SRAM 生成或库转换。
+
+三、现场验证：SRAM 资源
+根目录：/storage1/admin_public_dir/SRAM_Lib_2025
+宏目录与抽查 Verilog module 名称一致：
+  RAMSP128X16、RAMSP1024X16、RAMSP2048X16、RAMSP4096X16
+  RAMTP128X16、RAMTP1024X16
+每个宏的目录清单均含：28 个 .lib、1 个 .lef、1 个 .gds2、2 个 .v、1 个 .cdl。
+还存在 .bitmap/.clf/.ctl/.dat/.mdt/.memlib/.ps/.tv 等文件。
+六个宏目录遍历 errors 均为0；抽查 Liberty 和 Verilog 文件可读。
+此前口头报告的“8 项访问错误”为小字截图误读，应以本报告的0为准。
+未逐个打开全部文件验证完整性；GDS2/LEF 的内容与工具导入尚未测试。
+抽查每宏一个文件：lib/<宏名>_tt_1p00v_1p00v_125c.lib。
+库头显示 nom_process=1、nom_voltage=1.000、nom_temperature=125.000、time_unit=1ns、voltage_unit=1V。
+这仅描述所抽查的 TT 文件，不代表全部工艺角或设计工作条件。
+容量及端口行为目前仅有宏命名线索，实际位宽、深度、读写时序、极性、供电接口仍需读取模型和说明确认。
+未发现 .db；未确认 SRAM 生成器入口、发行版本及该宏与选定标准单元工艺的兼容性。
+
+四、现场验证：SMIC40 入口与压缩包索引
+根目录：/storage1/admin_public_dir/SMIC40_2025
+含 S40.tar.gz、techfile.tar.gz 和工艺相关 PDF。
+未解压，未复制或转换库文件。
+S40.tar.gz：tar -tzf 60秒超时，exit=124；获得的索引不完整。
+部分索引显示 S40/smic/SCC40NLL_VHSC40_HVT_V0.1/ 下资源，含：
+  .db、.lib、.lef、.tf、.tluplus、.gds、.v。
+这些后缀仅证明包中存在相应条目，不能保证全包完整、可导入或覆盖目标工艺角。
+techfile.tar.gz：索引exit=0，170条；具体工艺文件内容、层叠与角配置仍待核对。
+SCC40NLL_VHSC40_HVT_V0.1 是归档路径标识，不作为最终批准的工艺版本结论。
+
+五、资料记录与尚未确认
+平台手册记录 FTP 根映射桌面、使用既有环境配置；本次实际路径已另行现场验证。
+公共入口还包括 Document、2025_Lab、SOC_RTL_2025，本次仅有限深度盘点。
+旧截图中的工具内部 Tcl 文件不是芯片工艺库证据。
+未确认：平台指定的最终工艺版本、完整标准单元/IO资源、RC角映射、SRAM与工艺兼容性、生成器和专用许可证。
+
+六、下一步接入前置条件（本次未执行）
+1. 依据目标设计确定 SRAM 位宽/深度/端口/时序需求，核对模型及说明后选宏。
+2. 确认平台批准的标准单元、IO、RC角和SRAM版本组合。
+3. 在用户独立工程目录准备所需工艺资源；大压缩包需另安排足够时间完成索引与完整性检查。
+4. 解决 PrimeTime PT-063；先用工程级配置验证，不改全局 .cshrc。
+5. 确定 SRAM .lib 的使用或 .db 转换方案；本轮没有转换。
+6. 对实际要用的功能做最小许可证验证，再配置 link/target library、约束和物理资源。
+7. 单独诊断 Verdi 启动超时，不能将本次版本查询视为可用性通过。
+
+七、留存位置
+本地：D:\IC_compeyition\Fast_coding\eda_audit_20261106_01\
+  inventory.sh、probe.sh、本报告。
+服务器：$HOME/Desktop/iccompetition/eda_audit_20261106_01/
+  run_20261106_225701_225097/：第一轮摘要和完整清单；INVENTORY_EXIT=0。
+  probe_20261106_230736_233687/：第二轮摘要、driver.log、各工具stdout.log和归档索引。
+第二轮屏幕已确认最终标记 AUDIT_PROBE_COMPLETE。
+没有下载服务器文件，没有建立回传通道；没有更改设计或全局配置。
