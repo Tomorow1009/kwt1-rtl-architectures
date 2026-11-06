@@ -1,0 +1,12 @@
+**/sim/
+**/vectors/
+**/__pycache__/
+*.pyc
+.Xil/
+*.wdb
+*.vcd
+*.jou
+*.log
+*.zip
+*.tar.gz
+.env
