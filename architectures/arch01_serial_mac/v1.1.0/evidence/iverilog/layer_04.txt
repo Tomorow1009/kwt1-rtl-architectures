@@ -1,0 +1,3 @@
+VCD info: dumpfile single.vcd opened for output.
+PASS: single HEX dot result=-1720 saturated=0 total=-7045610
+D:/IC_compeyition/Fast_coding/tb/tb_single_hex.sv:58: $finish called at 746000 (1ps)

@@ -1,0 +1,50 @@
+{
+  "layer_number": 12,
+  "layer_index": 11,
+  "target": "enc_layers[11].ffn.layers[0]",
+  "input_tensor": "post-attention residual LayerNorm output; Dense input",
+  "output_tensor": "first Dense output before GELU",
+  "weights": [
+    "dense_71/kernel:0",
+    "dense_71/bias:0"
+  ],
+  "shapes": {
+    "X": [
+      99,
+      64
+    ],
+    "W": [
+      64,
+      256
+    ],
+    "b": [
+      256
+    ],
+    "Y_float": [
+      99,
+      256
+    ]
+  },
+  "x_min": -4.182041168212891,
+  "x_max": 3.6992011070251465,
+  "y_min": -3.1661715507507324,
+  "y_max": 3.0153465270996094,
+  "x_clipped": 0,
+  "w_clipped": 0,
+  "bias_clipped": 0,
+  "output_saturated": 0,
+  "output_count": 25344,
+  "single_sample_layer_nrmse": 0.0007752328615766513,
+  "float64_recompute_max_abs_error": 8.8202483450317e-07,
+  "selected_dot": {
+    "row": 0,
+    "column": 0,
+    "tensorflow_float32": 0.2043609470129013,
+    "total_integer": 3434822,
+    "result_integer": 839,
+    "decoded_result": 0.204833984375,
+    "saturated": false,
+    "absolute_error": 0.00047303736209869385
+  },
+  "hex_dir": "layer_12/dot_i00_j000"
+}

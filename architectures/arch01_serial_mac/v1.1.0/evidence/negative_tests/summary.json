@@ -1,0 +1,32 @@
+[
+  {
+    "test": "missing_file",
+    "passed": true,
+    "exit_code": 1,
+    "message": "FAIL: layer 01 (layer_01/dot_i00_j000): [Errno 2] No such file or directory: 'D:\\\\IC_compeyition\\\\Fast_coding\\\\sim\\\\real_kwt1\\\\20261106_170636_29021d7b\\\\negative_tests\\\\missing_file\\\\layer_01\\\\dot_i00_j000\\\\x.hex'"
+  },
+  {
+    "test": "wrong_count",
+    "passed": true,
+    "exit_code": 1,
+    "message": "FAIL: layer 01 (layer_01/dot_i00_j000): w.hex element count: got 63, expected 64"
+  },
+  {
+    "test": "wrong_answer",
+    "passed": true,
+    "exit_code": 1,
+    "message": "FAIL: layer 01 (layer_01/dot_i00_j000): result.hex[0]: got 0, expected -48"
+  },
+  {
+    "test": "padding_bits",
+    "passed": true,
+    "exit_code": 1,
+    "message": "FAIL: layer 01 (layer_01/dot_i00_j000): shift.hex[0]: nonzero padding bits"
+  },
+  {
+    "test": "bad_format",
+    "passed": true,
+    "exit_code": 1,
+    "message": "FAIL: manifest.numeric_format.x_fraction: got 11, expected 12"
+  }
+]

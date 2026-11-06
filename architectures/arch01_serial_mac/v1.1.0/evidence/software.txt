@@ -1,0 +1,13 @@
+PASS layer=01 total=-195157 result=-48 sat=0 float=-0.0112970881 decoded=-0.01171875 abs_error=0.000421661884
+PASS layer=02 total=-35246 result=-9 sat=0 float=-0.00200902298 decoded=-0.00219726562 abs_error=0.000188242644
+PASS layer=03 total=-48172 result=-12 sat=0 float=-0.00235281885 decoded=-0.0029296875 abs_error=0.000576868653
+PASS layer=04 total=-7045610 result=-1720 sat=0 float=-0.420818418 decoded=-0.419921875 abs_error=0.000896543264
+PASS layer=05 total=-155988 result=-38 sat=0 float=-0.00892967544 decoded=-0.00927734375 abs_error=0.000347668305
+PASS layer=06 total=-439689 result=-107 sat=0 float=-0.0261658095 decoded=-0.0261230469 abs_error=4.27626073e-05
+PASS layer=07 total=-150418 result=-37 sat=0 float=-0.00824715756 decoded=-0.00903320312 abs_error=0.000786045566
+PASS layer=08 total=-126490 result=-31 sat=0 float=-0.0073456876 decoded=-0.00756835938 abs_error=0.000222671777
+PASS layer=09 total=246262 result=60 sat=0 float=0.0143090785 decoded=0.0146484375 abs_error=0.000339359045
+PASS layer=10 total=270948 result=66 sat=0 float=0.0167057645 decoded=0.0161132812 abs_error=0.000592483208
+PASS layer=11 total=-6612934 result=-1614 sat=0 float=-0.393712163 decoded=-0.394042969 abs_error=0.000330805779
+PASS layer=12 total=3434822 result=839 sat=0 float=0.204360947 decoded=0.204833984 abs_error=0.000473037362
+PASS: software 12/12 real KWT dots (HEX, integer NPZ, float quantization)

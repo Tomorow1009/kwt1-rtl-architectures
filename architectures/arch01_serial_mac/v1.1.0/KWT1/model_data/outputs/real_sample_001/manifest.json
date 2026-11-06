@@ -1,0 +1,1886 @@
+{
+  "schema_version": 1,
+  "purpose": "real model dot64 RTL smoke vectors",
+  "sample": "right/a69b9b3e_nohash_0.wav",
+  "split": "validation",
+  "sample_rate": 16000,
+  "original_sample_count": 15018,
+  "used_sample_count": 16000,
+  "expected_label": "right",
+  "predicted_label": "right",
+  "python": "3.8.20 (default, Oct  2 2024, 15:21:04) [MSC v.1929 64 bit (AMD64)]",
+  "tensorflow": "2.4.0",
+  "tensorflow_addons": "0.12.1",
+  "numpy": "1.19.5",
+  "repository_requested_tensorflow": "2.4.0rc1",
+  "environment_note": "2.4.0rc1 unavailable from PyPI; using 2.4.0. No claim of bitwise equivalence to rc1.",
+  "requested_repository_commit": "237e4097",
+  "repository_commit_verified": false,
+  "repository_note": "Local source has no Git metadata; content hashes below identify this run.",
+  "checkpoint_existing_objects_matched": true,
+  "model_parameters": 607308,
+  "checkpoint_variables_bitwise_verified": [
+    {
+      "variable": "pos_emb:0",
+      "checkpoint_key": "layer_with_weights-0/pos_emb/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        1,
+        99,
+        64
+      ]
+    },
+    {
+      "variable": "class_emb:0",
+      "checkpoint_key": "layer_with_weights-0/class_emb/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        1,
+        1,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/dense/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/patch_proj/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        40,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/dense/bias:0",
+      "checkpoint_key": "layer_with_weights-0/patch_proj/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/multi_head_self_attention/dense_1/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/multi_head_self_attention/dense_2/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/multi_head_self_attention/dense_3/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/multi_head_self_attention/dense_4/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/multi_head_self_attention/dense_4/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_5/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_5/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_6/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_6/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/layer_normalization/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/layer_normalization/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/layer_normalization_1/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block/layer_normalization_1/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/0/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/multi_head_self_attention_1/dense_7/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/multi_head_self_attention_1/dense_8/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/multi_head_self_attention_1/dense_9/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/multi_head_self_attention_1/dense_10/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/multi_head_self_attention_1/dense_10/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_11/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_11/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_12/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_12/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/layer_normalization_2/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/layer_normalization_2/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/layer_normalization_3/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_1/layer_normalization_3/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/1/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/multi_head_self_attention_2/dense_13/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/multi_head_self_attention_2/dense_14/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/multi_head_self_attention_2/dense_15/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/multi_head_self_attention_2/dense_16/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/multi_head_self_attention_2/dense_16/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_17/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_17/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_18/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_18/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/layer_normalization_4/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/layer_normalization_4/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/layer_normalization_5/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_2/layer_normalization_5/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/2/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/multi_head_self_attention_3/dense_19/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/multi_head_self_attention_3/dense_20/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/multi_head_self_attention_3/dense_21/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/multi_head_self_attention_3/dense_22/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/multi_head_self_attention_3/dense_22/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_23/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_23/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_24/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_24/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/layer_normalization_6/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/layer_normalization_6/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/layer_normalization_7/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_3/layer_normalization_7/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/3/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/multi_head_self_attention_4/dense_25/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/multi_head_self_attention_4/dense_26/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/multi_head_self_attention_4/dense_27/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/multi_head_self_attention_4/dense_28/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/multi_head_self_attention_4/dense_28/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_29/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_29/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_30/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_30/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/layer_normalization_8/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/layer_normalization_8/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/layer_normalization_9/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_4/layer_normalization_9/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/4/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/multi_head_self_attention_5/dense_31/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/multi_head_self_attention_5/dense_32/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/multi_head_self_attention_5/dense_33/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/multi_head_self_attention_5/dense_34/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/multi_head_self_attention_5/dense_34/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_35/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_35/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_36/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_36/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/layer_normalization_10/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/layer_normalization_10/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/layer_normalization_11/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_5/layer_normalization_11/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/5/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/multi_head_self_attention_6/dense_37/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/multi_head_self_attention_6/dense_38/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/multi_head_self_attention_6/dense_39/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/multi_head_self_attention_6/dense_40/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/multi_head_self_attention_6/dense_40/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_41/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_41/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_42/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_42/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/layer_normalization_12/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/layer_normalization_12/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/layer_normalization_13/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_6/layer_normalization_13/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/6/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/multi_head_self_attention_7/dense_43/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/multi_head_self_attention_7/dense_44/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/multi_head_self_attention_7/dense_45/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/multi_head_self_attention_7/dense_46/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/multi_head_self_attention_7/dense_46/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_47/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_47/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_48/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_48/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/layer_normalization_14/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/layer_normalization_14/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/layer_normalization_15/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_7/layer_normalization_15/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/7/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/multi_head_self_attention_8/dense_49/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/multi_head_self_attention_8/dense_50/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/multi_head_self_attention_8/dense_51/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/multi_head_self_attention_8/dense_52/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/multi_head_self_attention_8/dense_52/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_53/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_53/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_54/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_54/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/layer_normalization_16/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/layer_normalization_16/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/layer_normalization_17/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_8/layer_normalization_17/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/8/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/multi_head_self_attention_9/dense_55/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/multi_head_self_attention_9/dense_56/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/multi_head_self_attention_9/dense_57/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/multi_head_self_attention_9/dense_58/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/multi_head_self_attention_9/dense_58/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_59/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_59/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_60/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_60/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/layer_normalization_18/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/layer_normalization_18/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/layer_normalization_19/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_9/layer_normalization_19/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/9/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/multi_head_self_attention_10/dense_61/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/multi_head_self_attention_10/dense_62/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/multi_head_self_attention_10/dense_63/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/multi_head_self_attention_10/dense_64/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/multi_head_self_attention_10/dense_64/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_65/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_65/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_66/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_66/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/layer_normalization_20/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/layer_normalization_20/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/layer_normalization_21/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_10/layer_normalization_21/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/10/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/multi_head_self_attention_11/dense_67/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/att/query_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/multi_head_self_attention_11/dense_68/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/att/key_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/multi_head_self_attention_11/dense_69/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/att/value_dense/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/multi_head_self_attention_11/dense_70/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/att/combine_heads/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/multi_head_self_attention_11/dense_70/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/att/combine_heads/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_71/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "variable": "dense_71/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256
+      ]
+    },
+    {
+      "variable": "dense_72/kernel:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-1/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "variable": "dense_72/bias:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/ffn/layer_with_weights-1/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/layer_normalization_22/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/layernorm1/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/layer_normalization_22/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/layernorm1/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/layer_normalization_23/gamma:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/layernorm2/gamma/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "kws_transformer/transformer_block_11/layer_normalization_23/beta:0",
+      "checkpoint_key": "layer_with_weights-0/enc_layers/11/layernorm2/beta/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64
+      ]
+    },
+    {
+      "variable": "dense_73/kernel:0",
+      "checkpoint_key": "layer_with_weights-1/layer_with_weights-0/kernel/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        64,
+        12
+      ]
+    },
+    {
+      "variable": "dense_73/bias:0",
+      "checkpoint_key": "layer_with_weights-1/layer_with_weights-0/bias/.ATTRIBUTES/VARIABLE_VALUE",
+      "shape": [
+        12
+      ]
+    }
+  ],
+  "capture_preserves_logits_bitwise": true,
+  "repeated_logits_bitwise_identical": true,
+  "inference_overrides": {
+    "batch_size": 1,
+    "training": false,
+    "train": 0,
+    "distill_teacher_json": "",
+    "prenorm": false,
+    "approximate_gelu": false,
+    "use_spec_augment": 0,
+    "use_spec_cutout": 0,
+    "time_shift_ms": 0.0,
+    "sp_time_shift_ms": 0.0,
+    "resample": 0.0,
+    "sp_resample": 0.0,
+    "volume_resample": 0.0,
+    "background_volume": 0.0,
+    "background_frequency": 0.0,
+    "data_dir": "E:\\fpga_race-two\\data2\\speech_commands_v0.02",
+    "train_dir": "E:\\fpga_race-two\\keyword-transformer\\models_data_v2_12_labels\\kwt1"
+  },
+  "numeric_format": {
+    "x_bits": 16,
+    "w_bits": 16,
+    "bias_bits": 40,
+    "total_bits": 41,
+    "result_bits": 16,
+    "x_fraction": 12,
+    "w_fraction": 12,
+    "bias_fraction": 24,
+    "shift": 12,
+    "rounding": "nearest, ties away from zero",
+    "overflow": "saturation"
+  },
+  "metric_scope": "One validation sample, independently extracted float inputs for all 12 layers. Not competition-wide accuracy certification.",
+  "max_single_sample_layer_nrmse": 0.0014105192445086488,
+  "layers": [
+    {
+      "layer_number": 1,
+      "layer_index": 0,
+      "target": "enc_layers[0].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_5/kernel:0",
+        "dense_5/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.8409264087677,
+      "x_max": 2.955625534057617,
+      "y_min": -3.4619016647338867,
+      "y_max": 2.4601128101348877,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0009161082971097552,
+      "float64_recompute_max_abs_error": 8.575448378067563e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.011297088116407394,
+        "total_integer": -195157,
+        "result_integer": -48,
+        "decoded_result": -0.01171875,
+        "saturated": false,
+        "absolute_error": 0.0004216618835926056
+      },
+      "hex_dir": "layer_01/dot_i00_j000"
+    },
+    {
+      "layer_number": 2,
+      "layer_index": 1,
+      "target": "enc_layers[1].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_11/kernel:0",
+        "dense_11/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.6645379066467285,
+      "x_max": 3.580325126647949,
+      "y_min": -3.258108139038086,
+      "y_max": 3.2488059997558594,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0009016589954813952,
+      "float64_recompute_max_abs_error": 9.62630628986716e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.002009022980928421,
+        "total_integer": -35246,
+        "result_integer": -9,
+        "decoded_result": -0.002197265625,
+        "saturated": false,
+        "absolute_error": 0.00018824264407157898
+      },
+      "hex_dir": "layer_02/dot_i00_j000"
+    },
+    {
+      "layer_number": 3,
+      "layer_index": 2,
+      "target": "enc_layers[2].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_17/kernel:0",
+        "dense_17/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.316115140914917,
+      "x_max": 3.8261184692382812,
+      "y_min": -4.191775321960449,
+      "y_max": 3.7286524772644043,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0010550755390762848,
+      "float64_recompute_max_abs_error": 1.3195879171590263e-06,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.0023528188467025757,
+        "total_integer": -48172,
+        "result_integer": -12,
+        "decoded_result": -0.0029296875,
+        "saturated": false,
+        "absolute_error": 0.0005768686532974243
+      },
+      "hex_dir": "layer_03/dot_i00_j000"
+    },
+    {
+      "layer_number": 4,
+      "layer_index": 3,
+      "target": "enc_layers[3].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_23/kernel:0",
+        "dense_23/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.596388816833496,
+      "x_max": 3.374760627746582,
+      "y_min": -3.987755060195923,
+      "y_max": 2.8422274589538574,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.001134785524775677,
+      "float64_recompute_max_abs_error": 1.317196014927191e-06,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.42081841826438904,
+        "total_integer": -7045610,
+        "result_integer": -1720,
+        "decoded_result": -0.419921875,
+        "saturated": false,
+        "absolute_error": 0.0008965432643890381
+      },
+      "hex_dir": "layer_04/dot_i00_j000"
+    },
+    {
+      "layer_number": 5,
+      "layer_index": 4,
+      "target": "enc_layers[4].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_29/kernel:0",
+        "dense_29/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.9410736560821533,
+      "x_max": 3.598327159881592,
+      "y_min": -3.7935707569122314,
+      "y_max": 2.8933234214782715,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0014105192445086488,
+      "float64_recompute_max_abs_error": 8.501324870735516e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.008929675444960594,
+        "total_integer": -155988,
+        "result_integer": -38,
+        "decoded_result": -0.00927734375,
+        "saturated": false,
+        "absolute_error": 0.0003476683050394058
+      },
+      "hex_dir": "layer_05/dot_i00_j000"
+    },
+    {
+      "layer_number": 6,
+      "layer_index": 5,
+      "target": "enc_layers[5].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_35/kernel:0",
+        "dense_35/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.842193603515625,
+      "x_max": 3.285856008529663,
+      "y_min": -3.631807804107666,
+      "y_max": 2.582979440689087,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0012808228155150412,
+      "float64_recompute_max_abs_error": 9.836755383574314e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.026165809482336044,
+        "total_integer": -439689,
+        "result_integer": -107,
+        "decoded_result": -0.026123046875,
+        "saturated": false,
+        "absolute_error": 4.276260733604431e-05
+      },
+      "hex_dir": "layer_06/dot_i00_j000"
+    },
+    {
+      "layer_number": 7,
+      "layer_index": 6,
+      "target": "enc_layers[6].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_41/kernel:0",
+        "dense_41/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.5515384674072266,
+      "x_max": 3.212576150894165,
+      "y_min": -3.095599889755249,
+      "y_max": 3.1157140731811523,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0013101858914070523,
+      "float64_recompute_max_abs_error": 1.1898029597112725e-06,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.00824715755879879,
+        "total_integer": -150418,
+        "result_integer": -37,
+        "decoded_result": -0.009033203125,
+        "saturated": false,
+        "absolute_error": 0.00078604556620121
+      },
+      "hex_dir": "layer_07/dot_i00_j000"
+    },
+    {
+      "layer_number": 8,
+      "layer_index": 7,
+      "target": "enc_layers[7].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_47/kernel:0",
+        "dense_47/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.7839930057525635,
+      "x_max": 3.8464367389678955,
+      "y_min": -3.29244327545166,
+      "y_max": 2.179739475250244,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0013857418206428768,
+      "float64_recompute_max_abs_error": 7.49594411431076e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.007345687597990036,
+        "total_integer": -126490,
+        "result_integer": -31,
+        "decoded_result": -0.007568359375,
+        "saturated": false,
+        "absolute_error": 0.000222671777009964
+      },
+      "hex_dir": "layer_08/dot_i00_j000"
+    },
+    {
+      "layer_number": 9,
+      "layer_index": 8,
+      "target": "enc_layers[8].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_53/kernel:0",
+        "dense_53/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -4.138151168823242,
+      "x_max": 3.5394270420074463,
+      "y_min": -3.528176784515381,
+      "y_max": 1.96958327293396,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0012815709804298782,
+      "float64_recompute_max_abs_error": 1.1018379555416402e-06,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": 0.014309078454971313,
+        "total_integer": 246262,
+        "result_integer": 60,
+        "decoded_result": 0.0146484375,
+        "saturated": false,
+        "absolute_error": 0.0003393590450286865
+      },
+      "hex_dir": "layer_09/dot_i00_j000"
+    },
+    {
+      "layer_number": 10,
+      "layer_index": 9,
+      "target": "enc_layers[9].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_59/kernel:0",
+        "dense_59/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.7911741733551025,
+      "x_max": 3.9807944297790527,
+      "y_min": -3.499927043914795,
+      "y_max": 2.5152220726013184,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0012038782275479848,
+      "float64_recompute_max_abs_error": 9.884039671170797e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": 0.016705764457583427,
+        "total_integer": 270948,
+        "result_integer": 66,
+        "decoded_result": 0.01611328125,
+        "saturated": false,
+        "absolute_error": 0.0005924832075834274
+      },
+      "hex_dir": "layer_10/dot_i00_j000"
+    },
+    {
+      "layer_number": 11,
+      "layer_index": 10,
+      "target": "enc_layers[10].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_65/kernel:0",
+        "dense_65/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -3.757709503173828,
+      "x_max": 3.929661512374878,
+      "y_min": -3.5310792922973633,
+      "y_max": 3.207009792327881,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0010053392027458811,
+      "float64_recompute_max_abs_error": 1.1141464759667485e-06,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": -0.3937121629714966,
+        "total_integer": -6612934,
+        "result_integer": -1614,
+        "decoded_result": -0.39404296875,
+        "saturated": false,
+        "absolute_error": 0.00033080577850341797
+      },
+      "hex_dir": "layer_11/dot_i00_j000"
+    },
+    {
+      "layer_number": 12,
+      "layer_index": 11,
+      "target": "enc_layers[11].ffn.layers[0]",
+      "input_tensor": "post-attention residual LayerNorm output; Dense input",
+      "output_tensor": "first Dense output before GELU",
+      "weights": [
+        "dense_71/kernel:0",
+        "dense_71/bias:0"
+      ],
+      "shapes": {
+        "X": [
+          99,
+          64
+        ],
+        "W": [
+          64,
+          256
+        ],
+        "b": [
+          256
+        ],
+        "Y_float": [
+          99,
+          256
+        ]
+      },
+      "x_min": -4.182041168212891,
+      "x_max": 3.6992011070251465,
+      "y_min": -3.1661715507507324,
+      "y_max": 3.0153465270996094,
+      "x_clipped": 0,
+      "w_clipped": 0,
+      "bias_clipped": 0,
+      "output_saturated": 0,
+      "output_count": 25344,
+      "single_sample_layer_nrmse": 0.0007752328615766513,
+      "float64_recompute_max_abs_error": 8.8202483450317e-07,
+      "selected_dot": {
+        "row": 0,
+        "column": 0,
+        "tensorflow_float32": 0.2043609470129013,
+        "total_integer": 3434822,
+        "result_integer": 839,
+        "decoded_result": 0.204833984375,
+        "saturated": false,
+        "absolute_error": 0.00047303736209869385
+      },
+      "hex_dir": "layer_12/dot_i00_j000"
+    }
+  ],
+  "sha256": {
+    "keyword-transformer/models_data_v2_12_labels/kwt1/flags.json": "fcd480d309f96d2029a3ba764634f9e46dd73b667c0ebb84b66af02680494c58",
+    "keyword-transformer/models_data_v2_12_labels/kwt1/best_weights.index": "5a60a0fa78a1855572084a42669768e2998d37e7d93c833962960fdb0db70fbc",
+    "keyword-transformer/models_data_v2_12_labels/kwt1/best_weights.data-00000-of-00001": "ae993f6ed995938c1ab584b0857b35ca18f31f88001c7e17c7d7c3868bd33ad3",
+    "keyword-transformer/kws_streaming/models/transformer_utils.py": "aee79450556166161adf1f3d70191017ebdc3e54983e86f9c7e45944c476bd02",
+    "keyword-transformer/kws_streaming/models/kws_transformer.py": "3dc1ef411d7a42bd19a6aa6d6b6e592d5bc42a90a2b98b7199d913a52438c20b",
+    "KWT1_HEX_handoff/KWT1_HEX_handoff/scripts/export_dot_json.py": "d3810a2793be5d46ffa8f854887876afa0f829b1177eaf882ae54f543a0b31d6",
+    "KWT1_HEX_handoff/KWT1_HEX_handoff/scripts/gen_vectors.py": "70641d81144e626e49822d24a79b2bd6d6c696d7a6545a6c6bc2655d2789f100",
+    "model_data/scripts/extract_kwt.py": "4458577d6c2a05df430ccb252bf77d5b7814676f2415cd20c269857068180016",
+    "data2/speech_commands_v0.02/right/a69b9b3e_nohash_0.wav": "fbcc80dfc1a5ce3c51caf38351b597748aafa9582bee447cd0283940b98bc483",
+    "data2/speech_commands_v0.02/validation_list.txt": "5747407275538b4056e823982f0db1fc993776ab532048196a19be701bdc87d2"
+  }
+}

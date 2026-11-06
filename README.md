@@ -7,10 +7,13 @@
 | 阶段 | 版本 | 状态 | 内容 |
 |---|---|---|---|
 | [架构一：串行 64 项 MAC](architectures/arch01_serial_mac/v1.0.0/ORIGINAL_README.md) | v1.0.0 / 2026-11-06 | 独立 RTL 回归通过 | 点积、偏置、定点转换、握手及复位 |
+| [架构一：真实 KWT-1 HEX 验证](architectures/arch01_serial_mac/v1.1.0/README.md) | v1.1.0 / 2026-11-06 | 软件与双仿真器各 12/12 通过 | 真实数据接入、独立定点校验、验证证据 |
 | 架构二：矩阵加速器 | 待实现 | 规划 | 缓存、地址生成、多通道、参数加载 |
 | SoC 集成 | 待实现 | 规划 | E203、总线、驱动、内存映射 |
 
 当前验证对象不是完整矩阵层或 SoC。真实模型精度标定、综合及时序收敛尚未完成。
+
+最新版本：[v1.1.0](architectures/arch01_serial_mac/v1.1.0/README.md)，[与 v1.0.0 的区别](architectures/arch01_serial_mac/v1.1.0/CHANGELOG.md)。旧版目录完整保留。
 
 ## 从这里开始
 

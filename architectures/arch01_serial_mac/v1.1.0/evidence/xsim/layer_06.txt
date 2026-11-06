@@ -1,0 +1,29 @@
+
+****** xsim v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/real_dot_sim/xsim_script.tcl
+# xsim {real_dot_sim} -testplusarg DATA_DIR=D:/IC_compeyition/Fast_coding/KWT1/model_data/outputs/real_sample_001/layer_06/dot_i00_j000 -wdb {layer_06.wdb} -autoloadwcfg -tclbatch {layer_06.tcl}
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+source layer_06.tcl
+## log_wave -r /tb_single_hex/dut/*
+## source {D:/IC_compeyition/Fast_coding/scripts/real_kwt1_waves.tcl}
+### if {[llength [get_wave_configs]] == 0} { create_wave_config }
+### add_wave /tb_single_hex/dut/clk /tb_single_hex/dut/rst_n
+### add_wave /tb_single_hex/dut/start_valid /tb_single_hex/dut/start_ready /tb_single_hex/dut/busy
+### add_wave /tb_single_hex/dut/in_valid /tb_single_hex/dut/in_ready
+### add_wave -radix dec /tb_single_hex/dut/x /tb_single_hex/dut/w /tb_single_hex/dut/product
+### add_wave -radix unsigned /tb_single_hex/dut/state /tb_single_hex/dut/accepted_count /tb_single_hex/dut/shift_reg
+### add_wave -radix dec /tb_single_hex/dut/accumulator /tb_single_hex/dut/bias_reg /tb_single_hex/dut/sum_with_bias
+### add_wave /tb_single_hex/dut/out_valid /tb_single_hex/dut/out_ready
+### add_wave -radix dec /tb_single_hex/dut/result
+### add_wave /tb_single_hex/dut/saturated
+## save_wave_config layer_06.wcfg
+## run all
+PASS: single HEX dot result=-107 saturated=0 total=-439689
+$finish called at time : 746 ns : File "D:/IC_compeyition/Fast_coding/tb/tb_single_hex.sv" Line 58
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 17:07:22 2026...

@@ -1,0 +1,17 @@
+{
+  "input": "E:\\fpga_race-two\\model_data\\outputs\\real_sample_001\\layer_12\\dot_input.json",
+  "count": 64,
+  "x_fraction_bits": 12,
+  "w_fraction_bits": 12,
+  "bias_fraction_bits": 24,
+  "shift": 12,
+  "x_clipped": 0,
+  "w_clipped": 0,
+  "bias_clipped": false,
+  "total_integer": 3434822,
+  "result_integer": 839,
+  "saturated": 0,
+  "decoded_result": 0.204833984375,
+  "floating_dot_python": 0.20436100547059244,
+  "note": "floating_dot_python is not the captured TensorFlow float32 output"
+}
