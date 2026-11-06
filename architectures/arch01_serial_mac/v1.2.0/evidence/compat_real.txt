@@ -1,0 +1,26 @@
+Run directory: D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_181107_484867ec
+iverilog layer_01 PASS: single HEX dot result=-48 saturated=0 total=-195157
+iverilog layer_02 PASS: single HEX dot result=-9 saturated=0 total=-35246
+iverilog layer_03 PASS: single HEX dot result=-12 saturated=0 total=-48172
+iverilog layer_04 PASS: single HEX dot result=-1720 saturated=0 total=-7045610
+iverilog layer_05 PASS: single HEX dot result=-38 saturated=0 total=-155988
+iverilog layer_06 PASS: single HEX dot result=-107 saturated=0 total=-439689
+iverilog layer_07 PASS: single HEX dot result=-37 saturated=0 total=-150418
+iverilog layer_08 PASS: single HEX dot result=-31 saturated=0 total=-126490
+iverilog layer_09 PASS: single HEX dot result=60 saturated=0 total=246262
+iverilog layer_10 PASS: single HEX dot result=66 saturated=0 total=270948
+iverilog layer_11 PASS: single HEX dot result=-1614 saturated=0 total=-6612934
+iverilog layer_12 PASS: single HEX dot result=839 saturated=0 total=3434822
+xsim layer_01 PASS: single HEX dot result=-48 saturated=0 total=-195157
+xsim layer_02 PASS: single HEX dot result=-9 saturated=0 total=-35246
+xsim layer_03 PASS: single HEX dot result=-12 saturated=0 total=-48172
+xsim layer_04 PASS: single HEX dot result=-1720 saturated=0 total=-7045610
+xsim layer_05 PASS: single HEX dot result=-38 saturated=0 total=-155988
+xsim layer_06 PASS: single HEX dot result=-107 saturated=0 total=-439689
+xsim layer_07 PASS: single HEX dot result=-37 saturated=0 total=-150418
+xsim layer_08 PASS: single HEX dot result=-31 saturated=0 total=-126490
+xsim layer_09 PASS: single HEX dot result=60 saturated=0 total=246262
+xsim layer_10 PASS: single HEX dot result=66 saturated=0 total=270948
+xsim layer_11 PASS: single HEX dot result=-1614 saturated=0 total=-6612934
+xsim layer_12 PASS: single HEX dot result=839 saturated=0 total=3434822
+PASS: software 12/12; completed 24 RTL runs (both)

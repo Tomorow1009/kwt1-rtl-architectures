@@ -1,0 +1,2 @@
+FATAL: D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv:117: Unexpected trailing HEX data
+       Time: 730000  Scope: tb_batch_hex

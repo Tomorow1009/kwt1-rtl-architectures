@@ -1,0 +1,2 @@
+FATAL: D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv:72: Cannot open HEX files
+       Time: 0  Scope: tb_batch_hex

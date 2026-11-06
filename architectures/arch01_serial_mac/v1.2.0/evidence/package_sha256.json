@@ -1,0 +1,20 @@
+{
+  "rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+  "rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+  "tb/tb_batch_hex.sv": "0e44a83c336f9b3ee2677c6879f5295e48d49c5d915bf2706d545ac501a63d57",
+  "tb/tb_dot64.sv": "b88462050fbe0ddda762fb840e322aa1cbf2209ffa1afc7d50817e7e78f6032f",
+  "tb/tb_single_hex.sv": "0f1b3ef615c744765d4b63068d69e4eadcdab74b276a371b78cc47c6e18ea7ea",
+  "scripts/create_vivado_project.tcl": "967eb46891e3507bba0047395cb537317d29732e5e109693a62e8032067c0c3d",
+  "scripts/gen_vectors.py": "70641d81144e626e49822d24a79b2bd6d6c696d7a6545a6c6bc2655d2789f100",
+  "scripts/real_kwt1_waves.tcl": "ffd94de73b19ec2d0b5b00170653073cb4388f9ff0b87092cb7419a6e68287f4",
+  "scripts/run_batch_kwt1.ps1": "62e4b27c0e5d9bb32050cfac62471a17434512f096d1790eca346e5189659ff6",
+  "scripts/run_iverilog.ps1": "efff3155ce6f412108565abd0458706c8738258392c6238f75ef1c947a49d36c",
+  "scripts/run_real_kwt1.ps1": "0bef42e0eb7e6d38cf23cdf8680325ceb132308f93a53b960911b6ce2af4aa2a",
+  "scripts/run_xsim.ps1": "f649d0e37f13a49684576a3c53916cfe7af37f0e057a2906dbb9409ddd8b0686",
+  "scripts/run_xsim.tcl": "570fffc4c085a2b753575d37ef91f063565ee0095459e30baa869805305fdb26",
+  "scripts/test_batch_failures.py": "dae7c2696502cd551fe905ecbb1534130851fa5cea2eeba58c91968cd08cb8de",
+  "scripts/test_real_hex_failures.py": "f9ae08a330ad31bc544e1582dc00f3004cc9e3c1bd3aef47752d2b5891e337fe",
+  "scripts/verify_batch_hex.py": "9b8dd5630f56eafe927a5f406f005dc60dc4ae27f3c85faac13b4e86c02f15f2",
+  "scripts/verify_real_hex.py": "1a4142ea7d056c70cea6447ac7d78187af9a3c27988894697ccde3f52a0d436b",
+  "scripts/waves.tcl": "89d183c557ae5446fe36f5db828482f31b8186200d037dba923d1746ccceb54f"
+}

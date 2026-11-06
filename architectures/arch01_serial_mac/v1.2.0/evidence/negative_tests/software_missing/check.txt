@@ -1,0 +1,1 @@
+FAIL: shard=training/shard_0000: [Errno 2] No such file or directory: 'D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_missing\\training\\shard_0000\\bias.hex'

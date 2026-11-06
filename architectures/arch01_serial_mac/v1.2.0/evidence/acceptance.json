@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "software_samples": 105829,
+  "software_tasks": 1269948,
+  "software_shards": 208,
+  "rtl": {
+    "iverilog": {
+      "jobs": 19,
+      "smoke_tasks": 432,
+      "full_shard_tasks": 6144,
+      "executions": 6576,
+      "unique_tasks": 6528
+    },
+    "xsim": {
+      "jobs": 19,
+      "smoke_tasks": 432,
+      "full_shard_tasks": 6144,
+      "executions": 6576,
+      "unique_tasks": 6528
+    }
+  },
+  "negative_cases": 15,
+  "positive_control_cases": 1,
+  "rtl_unchanged": true,
+  "compatibility": "12 real dots and 1103 vector regression on both simulators"
+}

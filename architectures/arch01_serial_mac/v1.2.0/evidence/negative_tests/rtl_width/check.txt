@@ -1,0 +1,2 @@
+FATAL: D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv:41: Invalid width shift task=0 k=64
+       Time: 30000  Scope: tb_batch_hex.read_value

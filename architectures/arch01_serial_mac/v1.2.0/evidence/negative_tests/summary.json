@@ -1,0 +1,130 @@
+[
+  {
+    "suite": "software",
+    "case": "missing",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "bias.hex",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_missing\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "truncated",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "x.hex",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_truncated\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "answer",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "integer oracle",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_answer\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "invalid",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "invalid/X/Z",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_invalid\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "padding",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "padding",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_padding\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "range",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "task/sample",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_range\\check.log"
+  },
+  {
+    "suite": "software",
+    "case": "hash",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "SHA256 mismatch",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\software_hash\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "valid",
+    "passed": true,
+    "exit_code": 0,
+    "expected": "PASS: batch HEX tasks=1",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_valid\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "missing",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Cannot open",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_missing\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "truncated",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Missing",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_truncated\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "answer",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Mismatch",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_answer\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "invalid",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Invalid/X/Z",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_invalid\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "padding",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Padding",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_padding\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "width",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Invalid width",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_width\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "range",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Invalid task range",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_range\\check.log"
+  },
+  {
+    "suite": "iverilog",
+    "case": "trailing",
+    "passed": true,
+    "exit_code": 1,
+    "expected": "Unexpected trailing",
+    "log": "D:\\IC_compeyition\\Fast_coding\\sim\\batch_kwt1\\20261106_180955_9ab89b16\\negative_tests\\rtl_trailing\\check.log"
+  }
+]

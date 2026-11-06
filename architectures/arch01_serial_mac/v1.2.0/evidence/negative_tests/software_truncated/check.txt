@@ -1,0 +1,1 @@
+FAIL: shard=training/shard_0000: x.hex: wrong byte/element count; got 1966075, expected 393216 records of 4 hex digits

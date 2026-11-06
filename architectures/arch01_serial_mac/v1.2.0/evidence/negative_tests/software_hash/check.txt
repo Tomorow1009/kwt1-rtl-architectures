@@ -1,0 +1,1 @@
+FAIL: shard=training/shard_0000: result.hex: SHA256 mismatch (task/sample/layer unavailable before decode)
