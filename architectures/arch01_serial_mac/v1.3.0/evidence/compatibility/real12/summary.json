@@ -1,0 +1,251 @@
+{
+  "status": "passed",
+  "run": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363",
+  "data_root": "D:/IC_compeyition/Fast_coding/KWT1/model_data/outputs/real_sample_001",
+  "simulator": "both",
+  "results": [
+    {
+      "saturated": 0,
+      "result": -48,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_01.log",
+      "total": -195157,
+      "layer": 1,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -9,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_02.log",
+      "total": -35246,
+      "layer": 2,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -12,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_03.log",
+      "total": -48172,
+      "layer": 3,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -1720,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_04.log",
+      "total": -7045610,
+      "layer": 4,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -38,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_05.log",
+      "total": -155988,
+      "layer": 5,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -107,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_06.log",
+      "total": -439689,
+      "layer": 6,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -37,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_07.log",
+      "total": -150418,
+      "layer": 7,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -31,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_08.log",
+      "total": -126490,
+      "layer": 8,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 60,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_09.log",
+      "total": 246262,
+      "layer": 9,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 66,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_10.log",
+      "total": 270948,
+      "layer": 10,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -1614,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_11.log",
+      "total": -6612934,
+      "layer": 11,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 839,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/iverilog/layer_12.log",
+      "total": 3434822,
+      "layer": 12,
+      "simulator": "iverilog",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -48,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_01.log",
+      "total": -195157,
+      "layer": 1,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -9,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_02.log",
+      "total": -35246,
+      "layer": 2,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -12,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_03.log",
+      "total": -48172,
+      "layer": 3,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -1720,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_04.log",
+      "total": -7045610,
+      "layer": 4,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -38,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_05.log",
+      "total": -155988,
+      "layer": 5,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -107,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_06.log",
+      "total": -439689,
+      "layer": 6,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -37,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_07.log",
+      "total": -150418,
+      "layer": 7,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -31,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_08.log",
+      "total": -126490,
+      "layer": 8,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 60,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_09.log",
+      "total": 246262,
+      "layer": 9,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 66,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_10.log",
+      "total": 270948,
+      "layer": 10,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": -1614,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_11.log",
+      "total": -6612934,
+      "layer": 11,
+      "simulator": "xsim",
+      "passed": true
+    },
+    {
+      "saturated": 0,
+      "result": 839,
+      "log": "D:/IC_compeyition/Fast_coding/sim/real_kwt1/20261106_201504_3799b363/xsim/layer_12.log",
+      "total": 3434822,
+      "layer": 12,
+      "simulator": "xsim",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "78D4F4385E0A94808409967C3E3D1C862771997EEB3094C2742D67C89A817872",
+      "path": "D:/IC_compeyition/Fast_coding/rtl/dot64.sv"
+    },
+    {
+      "sha256": "7CA0D77FD93B968FE38660BD98F797B9112EDE6905A48FBAA7987465C0127E61",
+      "path": "D:/IC_compeyition/Fast_coding/rtl/requantize.sv"
+    },
+    {
+      "sha256": "0F1B3EF615C744765D4B63068D69E4EADCDAB74B276A371B78CC47C6E18EA7EA",
+      "path": "D:/IC_compeyition/Fast_coding/tb/tb_single_hex.sv"
+    },
+    {
+      "sha256": "1A4142EA7D056C70CEA6447AC7D78187AF9A3C27988894697CCDE3F52A0D436B",
+      "path": "D:/IC_compeyition/Fast_coding/scripts/verify_real_hex.py"
+    },
+    {
+      "sha256": "0BEF42E0EB7E6D38CF23CDF8680325CEB132308F93A53B960911B6CE2AF4AA2A",
+      "path": "D:/IC_compeyition/Fast_coding/scripts/run_real_kwt1.ps1"
+    },
+    {
+      "sha256": "FFD94DE73B19EC2D0B5B00170653073CB4388F9FF0B87092CB7419A6E68287F4",
+      "path": "D:/IC_compeyition/Fast_coding/scripts/real_kwt1_waves.tcl"
+    }
+  ],
+  "software_passed": 12
+}

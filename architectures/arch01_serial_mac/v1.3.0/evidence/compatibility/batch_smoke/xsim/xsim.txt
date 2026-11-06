@@ -1,0 +1,21 @@
+#-----------------------------------------------------------
+# xsim v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Nov  6 20:30:32 2026
+# Process ID: 10464
+# Current directory: D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim
+# Command line: xsim.exe -mode tcl -source {xsim.dir/batch_sim/xsim_script.tcl}
+# Log file: D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/xsim.log
+# Journal file: D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/batch_sim/xsim_script.tcl
+# xsim {batch_sim} -testplusarg DATA_DIR=D:/IC_compeyition/Fast_coding/KWT1/model_data/outputs/all_speech_dot00/testing/shard_0021 -testplusarg TASKS=3036 -testplusarg SKIP_TASKS=3012 -testplusarg LIMIT_TASKS=24 -wdb {testing_shard_0021_skip3012_count24.wdb} -autoloadwcfg -tclbatch {testing_shard_0021_skip3012_count24.tcl}
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+source testing_shard_0021_skip3012_count24.tcl
+## run all
+PASS: batch HEX tasks=24 skip=3012 available=3036
+$finish called at time : 16830 ns : File "D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv" Line 135
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 20:30:37 2026...

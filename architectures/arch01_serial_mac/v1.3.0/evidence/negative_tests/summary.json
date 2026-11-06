@@ -1,0 +1,68 @@
+[
+  {
+    "suite": "npz",
+    "case": "valid",
+    "passed": true,
+    "error": ""
+  },
+  {
+    "suite": "npz",
+    "case": "shape",
+    "passed": true,
+    "error": "integer_tensors.npz/X_int: shape (98, 64), expected (99, 64)"
+  },
+  {
+    "suite": "npz",
+    "case": "range",
+    "passed": true,
+    "error": "integer_tensors.npz/W_int(0, 0): out of range 32768"
+  },
+  {
+    "suite": "npz",
+    "case": "reference",
+    "passed": true,
+    "error": "result_int(0, 0): got -47, expected -48"
+  },
+  {
+    "suite": "npz",
+    "case": "quantization",
+    "passed": true,
+    "error": "X quantization(0, 0): got -10525, expected -10526"
+  },
+  {
+    "suite": "hex",
+    "case": "valid",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "suite": "hex",
+    "case": "missing",
+    "passed": true,
+    "exit_code": 1
+  },
+  {
+    "suite": "hex",
+    "case": "truncated",
+    "passed": true,
+    "exit_code": 1
+  },
+  {
+    "suite": "hex",
+    "case": "reference",
+    "passed": true,
+    "exit_code": 1
+  },
+  {
+    "suite": "capture",
+    "case": "duplicate",
+    "passed": true,
+    "error": "task sequence(256,): got 255, expected 256"
+  },
+  {
+    "suite": "capture",
+    "case": "value",
+    "passed": true,
+    "error": "D:\\IC_compeyition\\Fast_coding\\sim\\full_matrix_kwt1\\20261106_202300_448dcc0e\\negative_tests\\value.csv: row=1 column=0 result: got=-69 expected=-68"
+  }
+]

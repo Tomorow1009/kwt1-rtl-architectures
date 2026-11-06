@@ -1,0 +1,86 @@
+Run directory: D:\IC_compeyition\Fast_coding\sim\full_matrix_kwt1\20261106_202300_448dcc0e
+PASS software layer=01 outputs=25344 saturated=0
+PASS software layer=02 outputs=25344 saturated=0
+PASS software layer=03 outputs=25344 saturated=0
+PASS software layer=04 outputs=25344 saturated=0
+PASS software layer=05 outputs=25344 saturated=0
+PASS software layer=06 outputs=25344 saturated=0
+PASS software layer=07 outputs=25344 saturated=0
+PASS software layer=08 outputs=25344 saturated=0
+PASS software layer=09 outputs=25344 saturated=0
+PASS software layer=10 outputs=25344 saturated=0
+PASS software layer=11 outputs=25344 saturated=0
+PASS software layer=12 outputs=25344 saturated=0
+PASS xsim layer_01_full outputs=25344
+PASS xsim layer_01_first_row_boundary outputs=257
+PASS xsim layer_01_last outputs=1
+PASS xsim layer_02_full outputs=25344
+PASS xsim layer_02_first_row_boundary outputs=257
+PASS xsim layer_02_last outputs=1
+PASS xsim layer_03_full outputs=25344
+PASS xsim layer_03_first_row_boundary outputs=257
+PASS iverilog layer_01_full outputs=25344
+PASS xsim layer_03_last outputs=1
+PASS iverilog layer_01_first_row_boundary outputs=257
+PASS iverilog layer_01_last outputs=1
+PASS xsim layer_04_full outputs=25344
+PASS xsim layer_04_first_row_boundary outputs=257
+PASS xsim layer_04_last outputs=1
+PASS xsim layer_05_full outputs=25344
+PASS xsim layer_05_first_row_boundary outputs=257
+PASS xsim layer_05_last outputs=1
+PASS xsim layer_06_full outputs=25344
+PASS xsim layer_06_first_row_boundary outputs=257
+PASS xsim layer_06_last outputs=1
+PASS iverilog layer_02_full outputs=25344
+PASS iverilog layer_02_first_row_boundary outputs=257
+PASS iverilog layer_02_last outputs=1
+PASS xsim layer_07_full outputs=25344
+PASS xsim layer_07_first_row_boundary outputs=257
+PASS xsim layer_07_last outputs=1
+PASS xsim layer_08_full outputs=25344
+PASS xsim layer_08_first_row_boundary outputs=257
+PASS xsim layer_08_last outputs=1
+PASS xsim layer_09_full outputs=25344
+PASS xsim layer_09_first_row_boundary outputs=257
+PASS xsim layer_09_last outputs=1
+PASS xsim layer_10_full outputs=25344
+PASS xsim layer_10_first_row_boundary outputs=257
+PASS iverilog layer_03_full outputs=25344
+PASS iverilog layer_03_first_row_boundary outputs=257
+PASS iverilog layer_03_last outputs=1
+PASS xsim layer_10_last outputs=1
+PASS xsim layer_11_full outputs=25344
+PASS xsim layer_11_first_row_boundary outputs=257
+PASS xsim layer_11_last outputs=1
+PASS xsim layer_12_full outputs=25344
+PASS xsim layer_12_first_row_boundary outputs=257
+PASS xsim layer_12_last outputs=1
+PASS iverilog layer_04_full outputs=25344
+PASS iverilog layer_04_first_row_boundary outputs=257
+PASS iverilog layer_04_last outputs=1
+PASS iverilog layer_05_full outputs=25344
+PASS iverilog layer_05_first_row_boundary outputs=257
+PASS iverilog layer_05_last outputs=1
+PASS iverilog layer_06_full outputs=25344
+PASS iverilog layer_06_first_row_boundary outputs=257
+PASS iverilog layer_06_last outputs=1
+PASS iverilog layer_07_full outputs=25344
+PASS iverilog layer_07_first_row_boundary outputs=257
+PASS iverilog layer_07_last outputs=1
+PASS iverilog layer_08_full outputs=25344
+PASS iverilog layer_08_first_row_boundary outputs=257
+PASS iverilog layer_08_last outputs=1
+PASS iverilog layer_09_full outputs=25344
+PASS iverilog layer_09_first_row_boundary outputs=257
+PASS iverilog layer_09_last outputs=1
+PASS iverilog layer_10_full outputs=25344
+PASS iverilog layer_10_first_row_boundary outputs=257
+PASS iverilog layer_10_last outputs=1
+PASS iverilog layer_11_full outputs=25344
+PASS iverilog layer_11_first_row_boundary outputs=257
+PASS iverilog layer_11_last outputs=1
+PASS iverilog layer_12_full outputs=25344
+PASS iverilog layer_12_first_row_boundary outputs=257
+PASS iverilog layer_12_last outputs=1
+PASS: full matrices software=304128 simulators=['iverilog', 'xsim']

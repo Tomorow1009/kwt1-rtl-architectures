@@ -1,0 +1,539 @@
+{
+  "status": "passed",
+  "run": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340",
+  "mode": "smoke",
+  "simulator": "both",
+  "data_root": "D:/IC_compeyition/Fast_coding/KWT1/model_data/outputs/all_speech_dot00",
+  "jobs": [
+    {
+      "skip": 0,
+      "shard": "training/shard_0000",
+      "tasks": 24,
+      "wave": true,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "training/shard_0000",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "training/shard_0083",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "training/shard_0083",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "training/shard_0165",
+      "tasks": 24,
+      "wave": false,
+      "available": 4356,
+      "kind": "smoke"
+    },
+    {
+      "skip": 4332,
+      "shard": "training/shard_0165",
+      "tasks": 24,
+      "wave": false,
+      "available": 4356,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "validation/shard_0000",
+      "tasks": 24,
+      "wave": true,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "validation/shard_0000",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "validation/shard_0010",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "validation/shard_0010",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "validation/shard_0019",
+      "tasks": 24,
+      "wave": false,
+      "available": 3036,
+      "kind": "smoke"
+    },
+    {
+      "skip": 3012,
+      "shard": "validation/shard_0019",
+      "tasks": 24,
+      "wave": false,
+      "available": 3036,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "testing/shard_0000",
+      "tasks": 24,
+      "wave": true,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "testing/shard_0000",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "testing/shard_0011",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 6120,
+      "shard": "testing/shard_0011",
+      "tasks": 24,
+      "wave": false,
+      "available": 6144,
+      "kind": "smoke"
+    },
+    {
+      "skip": 0,
+      "shard": "testing/shard_0021",
+      "tasks": 24,
+      "wave": false,
+      "available": 3036,
+      "kind": "smoke"
+    },
+    {
+      "skip": 3012,
+      "shard": "testing/shard_0021",
+      "tasks": 24,
+      "wave": false,
+      "available": 3036,
+      "kind": "smoke"
+    }
+  ],
+  "results": [
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0000",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0000",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0083",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0083_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0083",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0083_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0165",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0165_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0165",
+      "skip": 4332,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/training_shard_0165_skip4332_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0000",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0000",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0010",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0010_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0010",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0010_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0019",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0019_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0019",
+      "skip": 3012,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/validation_shard_0019_skip3012_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0000",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0000",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0011",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0011_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0011",
+      "skip": 6120,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0011_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0021",
+      "skip": 0,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0021_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0021",
+      "skip": 3012,
+      "simulator": "iverilog",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/iverilog/testing_shard_0021_skip3012_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0000",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0000",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0083",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0083_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0083",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0083_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0165",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0165_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "training/shard_0165",
+      "skip": 4332,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/training_shard_0165_skip4332_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0000",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0000",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0010",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0010_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0010",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0010_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0019",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0019_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "validation/shard_0019",
+      "skip": 3012,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/validation_shard_0019_skip3012_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0000",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0000_skip0_count24.log",
+      "wave": true
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0000",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0000_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0011",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0011_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0011",
+      "skip": 6120,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0011_skip6120_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0021",
+      "skip": 0,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0021_skip0_count24.log",
+      "wave": false
+    },
+    {
+      "passed": true,
+      "tasks": 24,
+      "shard": "testing/shard_0021",
+      "skip": 3012,
+      "simulator": "xsim",
+      "kind": "smoke",
+      "log": "D:/IC_compeyition/Fast_coding/sim/batch_kwt1/20261106_202326_96b92340/xsim/testing_shard_0021_skip3012_count24.log",
+      "wave": false
+    }
+  ],
+  "sources": [
+    {
+      "path": "D:/IC_compeyition/Fast_coding/rtl/dot64.sv",
+      "sha256": "78D4F4385E0A94808409967C3E3D1C862771997EEB3094C2742D67C89A817872"
+    },
+    {
+      "path": "D:/IC_compeyition/Fast_coding/rtl/requantize.sv",
+      "sha256": "7CA0D77FD93B968FE38660BD98F797B9112EDE6905A48FBAA7987465C0127E61"
+    },
+    {
+      "path": "D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv",
+      "sha256": "33EE28A2C1200007C885BE473165D2A4128E97EEDF245A294E40F0E742BF8E9E"
+    },
+    {
+      "path": "D:/IC_compeyition/Fast_coding/scripts/verify_batch_hex.py",
+      "sha256": "9B8DD5630F56EAFE927A5F406F005DC60DC4AE27F3C85FAAC13B4E86C02F15F2"
+    },
+    {
+      "path": "D:/IC_compeyition/Fast_coding/scripts/run_batch_kwt1.ps1",
+      "sha256": "62E4B27C0E5D9BB32050CFAC62471A17434512F096D1790ECA346E5189659FF6"
+    }
+  ],
+  "software_tasks": 1269948,
+  "manifest_sha256": "4da0f843445d1f074cd04538d4be171230a977b9b7bab08ff1cb1ceb4aaa811d"
+}

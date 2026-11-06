@@ -1,0 +1,2 @@
+FATAL: D:\IC_compeyition\Fast_coding\tb\tb_batch_hex.sv:116: Mismatch task=0 got=-48 expected=-47 total=-195157 expected_total=-195157 sat=0 expected_sat=0
+       Time: 700000  Scope: tb_batch_hex

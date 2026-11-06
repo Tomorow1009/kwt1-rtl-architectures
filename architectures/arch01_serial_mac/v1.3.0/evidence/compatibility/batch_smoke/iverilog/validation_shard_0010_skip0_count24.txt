@@ -1,0 +1,2 @@
+PASS: batch HEX tasks=24 skip=0 available=6144
+D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv:135: $finish called at 16830000 (1ps)

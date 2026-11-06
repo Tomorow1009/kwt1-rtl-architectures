@@ -1,0 +1,17 @@
+
+****** xsim v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/batch_sim/xsim_script.tcl
+# xsim {batch_sim} -testplusarg DATA_DIR=D:/IC_compeyition/Fast_coding/sim/full_matrix_kwt1/20261106_202300_448dcc0e/data/layer_09 -testplusarg TASKS=25344 -testplusarg SKIP_TASKS=0 -testplusarg LIMIT_TASKS=25344 -testplusarg TASK_BASE=0 -testplusarg OUTPUT_FILE=D:/IC_compeyition/Fast_coding/sim/full_matrix_kwt1/20261106_202300_448dcc0e/xsim/layer_09_full.csv -wdb {layer_09_full.wdb} -autoloadwcfg -tclbatch {layer_09_full.tcl}
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+source layer_09_full.tcl
+## run all
+PASS: batch HEX tasks=25344 skip=0 available=25344
+$finish called at time : 17740830 ns : File "D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv" Line 135
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:29 . Memory (MB): peak = 219.492 ; gain = 0.000
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 20:30:37 2026...

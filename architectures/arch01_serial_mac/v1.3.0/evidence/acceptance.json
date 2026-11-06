@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-06T12:53:08.559445+00:00",
+  "run": "D:\\IC_compeyition\\Fast_coding\\sim\\full_matrix_kwt1\\20261106_202300_448dcc0e",
+  "software_outputs": 304128,
+  "rtl": {
+    "iverilog": {
+      "full_layers": 12,
+      "independent_outputs": 304128,
+      "wave_jobs": 24,
+      "extra_wave_executions": 3096,
+      "total_executions": 307224
+    },
+    "xsim": {
+      "full_layers": 12,
+      "independent_outputs": 304128,
+      "wave_jobs": 24,
+      "extra_wave_executions": 3096,
+      "total_executions": 307224
+    }
+  },
+  "negative_cases": 9,
+  "positive_controls": 2,
+  "compatibility": {
+    "vectors": 1103,
+    "real_tasks_per_simulator": 12,
+    "batch_smoke_tasks_per_simulator": 432
+  },
+  "rtl_unchanged_from_v1_2_0": true,
+  "source_and_data_hashes_verified": true,
+  "fault_test_source_sha256": "65ae6dc6468efa46b313671e8f93b7bd4962181ce284684d8a55f74c0b110e09",
+  "scope": "One captured sample, 12 independent complete matrices; not chained KWT inference or SoC"
+}

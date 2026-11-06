@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/IC_compeyition/Fast_coding/rtl/requantize.sv" into library work
+INFO: [VRFC 10-311] analyzing module requantize
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/IC_compeyition/Fast_coding/rtl/dot64.sv" into library work
+INFO: [VRFC 10-311] analyzing module dot64
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/IC_compeyition/Fast_coding/tb/tb_single_hex.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_single_hex

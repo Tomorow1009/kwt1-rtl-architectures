@@ -1,0 +1,2 @@
+FATAL: D:\IC_compeyition\Fast_coding\tb\tb_batch_hex.sv:45: Missing x task=0 k=1
+       Time: 30000  Scope: tb_batch_hex.read_value

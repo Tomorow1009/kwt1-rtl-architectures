@@ -1,0 +1,17 @@
+
+****** xsim v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/batch_sim/xsim_script.tcl
+# xsim {batch_sim} -testplusarg DATA_DIR=D:/IC_compeyition/Fast_coding/KWT1/model_data/outputs/all_speech_dot00/validation/shard_0010 -testplusarg TASKS=6144 -testplusarg SKIP_TASKS=6120 -testplusarg LIMIT_TASKS=24 -wdb {validation_shard_0010_skip6120_count24.wdb} -autoloadwcfg -tclbatch {validation_shard_0010_skip6120_count24.tcl}
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+source validation_shard_0010_skip6120_count24.tcl
+## run all
+PASS: batch HEX tasks=24 skip=6120 available=6144
+$finish called at time : 16830 ns : File "D:/IC_compeyition/Fast_coding/tb/tb_batch_hex.sv" Line 135
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:05 . Memory (MB): peak = 219.281 ; gain = 0.000
+## quit
+INFO: [Common 17-206] Exiting xsim at Fri Nov  6 20:29:34 2026...

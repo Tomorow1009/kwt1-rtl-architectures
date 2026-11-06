@@ -1,0 +1,8 @@
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:183: error: The expression '$sformatf("%s/x.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:184: error: The expression '$sformatf("%s/w.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:185: error: The expression '$sformatf("%s/bias.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:186: error: The expression '$sformatf("%s/shift.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:187: error: The expression '$sformatf("%s/total.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:188: error: The expression '$sformatf("%s/result.hex", data_dir)' cannot be implicitly cast to the target type.
+D:\IC_compeyition\Fast_coding\tb\tb_dot64.sv:189: error: The expression '$sformatf("%s/saturated.hex", data_dir)' cannot be implicitly cast to the target type.
+7 error(s) during elaboration.
