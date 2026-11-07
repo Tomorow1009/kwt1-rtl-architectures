@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "backend": "behavioral",
+      "simulator": "iverilog",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "behavioral",
+      "simulator": "xsim",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "pin_mock",
+      "simulator": "iverilog",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "pin_mock",
+      "simulator": "xsim",
+      "cases": 4,
+      "passed": true
+    }
+  ],
+  "tb_sha256": "42249f38f554e6017e41e9eb3ba496313855a579f4261b2aca494430089ee35b"
+}
