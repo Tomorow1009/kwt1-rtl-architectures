@@ -1,0 +1,49 @@
+{
+  "status": "in_progress_vendor_unit_failed",
+  "remote_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r01",
+  "vendor_run": "server_runs/20261107_234747_152837",
+  "observed_config": {
+    "128": {
+      "ema": 2,
+      "emaw": 0,
+      "ret1n": 1,
+      "cen_low": true,
+      "gwen_low": true,
+      "wen_low": true
+    },
+    "4096": {
+      "ema": 2,
+      "emaw": 0,
+      "ret1n": 1,
+      "cen_low": true,
+      "gwen_low": true,
+      "wen_low": true
+    }
+  },
+  "vcs_compiled": true,
+  "vendor_unit_passed": false,
+  "first_failure": {
+    "time_ps": 66000,
+    "address_width": 7,
+    "read_latency": 1,
+    "expected": "1357",
+    "actual": "xxxx",
+    "source": "arch02/tb/tb_sram_adapter.sv:26"
+  },
+  "full_matrix_vendor_run": false,
+  "dc_run": false,
+  "next_step": "Inspect vendor timing/default delays and initialization; diagnose pins and sample time. Do not mark substitute tests as vendor pass.",
+  "uploaded_launchers": [
+    "a2.sh",
+    "a3.sh",
+    "a4.sh",
+    "a5.sh",
+    "a6.sh"
+  ],
+  "notes": [
+    "a3 CRLF startup failed; a4 LF inspection succeeded",
+    "a5 produced logic128.txt and logic4096.txt, but task readWrite case did not match task readwrite regex; use case-insensitive expression for complete extraction.",
+    "a6 records vendor config and file hashes on server and runs real models without fallback",
+    "No core RTL changes made in this phase yet"
+  ]
+}

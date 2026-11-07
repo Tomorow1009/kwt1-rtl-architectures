@@ -1,0 +1,20 @@
+
+****** xsim v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/tb_sram_adapter_sim/xsim_script.tcl
+# xsim {tb_sram_adapter_sim} -wdb {sram_adapter.wdb} -autoloadwcfg -tclbatch {sram_adapter.tcl}
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+source sram_adapter.tcl
+## run all
+PASS adapter AW=7 latency=1
+PASS adapter AW=7 latency=2
+PASS adapter AW=12 latency=1
+PASS adapter AW=12 latency=2
+PASS: SRAM adapter cases=4
+$finish called at time : 1400 ns : File "D:/IC_compeyition/Fast_coding/arch02/tb/tb_sram_adapter.sv" Line 58
+## quit
+INFO: [Common 17-206] Exiting xsim at Sun Nov  8 00:06:19 2026...

@@ -1,0 +1,7 @@
+{
+  "kind": "pin_mock_assumptions_only",
+  "macros": {
+    "128": {"cen_low": 1, "gwen_low": 1, "wen_low": 1, "ema": 0, "emaw": 0, "ret1n": 1, "read_latency": 1, "clock_edge": "posedge"},
+    "4096": {"cen_low": 1, "gwen_low": 1, "wen_low": 1, "ema": 0, "emaw": 0, "ret1n": 1, "read_latency": 1, "clock_edge": "posedge"}
+  }
+}

@@ -1,0 +1,6 @@
+PASS adapter AW=7 latency=1
+PASS adapter AW=7 latency=2
+PASS adapter AW=12 latency=1
+PASS adapter AW=12 latency=2
+PASS: SRAM adapter cases=4
+D:\IC_compeyition\Fast_coding\arch02\tb\tb_sram_adapter.sv:58: $finish called at 1400000 (1ps)
