@@ -1,0 +1,21 @@
+{
+  "status": "ready_for_server_run_not_uploaded",
+  "source_commit": "d00633b3331edf9cdd897c4935e958642a54ddab",
+  "primary_archive": "local_runs/light-light126-d1-baseline-arch03-20261109_004719-d00633b3331e.zip",
+  "archive_sha256": "a38db68171ec70b40693b2b4b9173f7cf640364c6146399ad911bb2c5e96815d",
+  "bytes": 10681621,
+  "input_files": 341,
+  "clean_unpack": "local_runs\\d1_clean_unpack_20261109\\light-light126-d1-baseline-arch03-20261109_004719-d00633b3331e",
+  "standalone_reference_cases": 14,
+  "standalone_reference_outputs": 354816,
+  "firmware_images_checked": 14,
+  "all_input_bytes_and_shifts_checked": true,
+  "default_auditor_case_set_compatible": true,
+  "cpu_executed": false,
+  "strict_timing_verified": false,
+  "whole_soc_synthesized": false,
+  "system_power_verified": false,
+  "supplemental_archive": "local_runs/light-light126-d1-arch03-20261109_004519-d00633b3331e.zip",
+  "supplemental_note": "21-case diagnostic archive; standard audit.py accepts exactly the baseline 14-case set. Use primary_archive for the current default staged acceptance.",
+  "evidence": "handoff/team/evidence/UNDERGRAD_D1_20261109.json"
+}
