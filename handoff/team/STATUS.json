@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Clean verify latest standard/sequence packages. Upload authorization is still pending after auto-review rejection. Actual vendor, ASIC CPU, whole-SoC synthesis/gate/timing/power verification requires new server runs; old stopped regression remains stopped.",
+    "next": "Latest verified local packages are ready (383/438 files; clean-package 52 tests passed). Explicit upload authorization remains pending after automatic approval rejection. Next actual work: new locked vendor/ASIC CPU/sequence and whole-SoC synthesis runs; do not resume old hex100.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": false,
     "clean_package_input_files": 341,
@@ -125,6 +125,7 @@
     "asic_branch_fix_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
     "corrected_packages_evidence": "evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json",
     "d3_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
-    "d3_evidence": "evidence/UNDERGRAD_D3_PREPARATION_20261109.json"
+    "d3_evidence": "evidence/UNDERGRAD_D3_PREPARATION_20261109.json",
+    "d3_ready_packages_evidence": "evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json"
   }
 }

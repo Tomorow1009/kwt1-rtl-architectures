@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-09",
+  "status": "latest_packages_clean_verified_NOT_uploaded",
+  "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+  "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+  "packages": [
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+        "archive": "light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
+        "bytes": 10769549,
+        "sha256": "190056eb7ea44589b7d7249c952f9a40bbabc2cdb2c4ee60b77ed7249aee1274",
+        "files": 383
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_ready_single_clean_20261109\\light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b",
+      "cases": [
+        "extremes",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding"
+      ],
+      "software_outputs": 354816,
+      "firmware_images_checked": 14,
+      "cpu_executed": false,
+      "server_uploaded": false,
+      "asic_link_verified": false
+    },
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+        "archive": "light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip",
+        "bytes": 14388276,
+        "sha256": "7f5398c598b1756e15896dd4e52c4a0f7996072b8cb13b836a3c23b0e62c69c3",
+        "files": 438
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_ready_sequence_clean_20261109\\light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b",
+      "cases": [
+        "cancellation",
+        "extremes",
+        "largest_input",
+        "largest_output",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding",
+        "shift00",
+        "shift31",
+        "worst_error",
+        "zero"
+      ],
+      "software_outputs": 532224,
+      "firmware_images_checked": 2,
+      "cpu_executed": false,
+      "server_uploaded": false,
+      "asic_link_verified": false
+    }
+  ],
+  "clean_package_unit_tests": 52,
+  "clean_unit_log_sha256": "4bf2820ae92424cf99ad2709aec05d8bc1b443119d3de640daf2cba598c48349",
+  "all_input_hashes_rechecked_after_clean_tests": true,
+  "server_uploaded": false,
+  "new_cpu_executed": false,
+  "whole_soc_dc_executed": false,
+  "strict_timing_verified": false,
+  "system_power_verified": false
+}

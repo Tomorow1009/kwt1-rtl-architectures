@@ -30,20 +30,23 @@
     "D2: clean committed 355-file package verified; independent integer recomputation of 14 cases/354816 outputs and byte-exact firmware layout checks passed",
     "D2 follow-on: pinned the actual standard-cell Verilog model (2198450 bytes; all 11 target modules present; no includes); local independent stdcell substitute bench passed 8 input patterns and 12 gate state checks. Server stdcell entry added but NOT executed.",
     "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false",
-    "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run."
+    "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run.",
+    "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local."
   ],
   "pending_authorization": {
     "state": "asynchronous_user_question_pending",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d1-baseline-arch03-20261109_004719-d00633b3331e.zip",
-    "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
+    "current_package": "../../local_runs/light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
+    "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work.",
+    "additional_package": "../../local_runs/light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip"
   },
   "next_independent_work": [
-    "Commit activity checker and D3 evidence",
-    "Generate latest standard/sequence packages, clean verify all hashes/references/firmware images",
-    "After explicit upload authorization: FileZilla new destination, actual vendor TCM/stdcell/boot, ASIC CPU smoke and standard/sequence regression, whole-SoC synthesis reports",
-    "Actual mapped netlist/gate simulation and power work depend on those server results; do not fabricate or infer them from preparation tests"
+    "Explicit user upload authorization is the remaining prerequisite for actual server work; do not bypass automatic approval rejection",
+    "After authorization, use latest_ready_packages (not old D1/D2 packages); observe shared desktop/processes/lock, upload via Linux FileZilla to the approved new destination and verify SHA256",
+    "Run vendor tcm/stdcell/asic_boot, ASIC CPU layer_01 smoke then standard 14 cases, separate functional CPU sequence cases",
+    "Run asic_synth in a new session, review all warnings/constraints/area basis; then implement/verify gate simulation and mapped full-window power from actual results",
+    "Do not resume old hex100 job or start optimization PR #6 before mandatory acceptance"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -90,7 +93,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "All implementation committed through 83126c3. D3 evidence/checkpoint currently being recorded, then prepare final ready packages.",
+  "uncommitted_follow_on": "Implementation frozen at 83126c3; D3 evidence commit de6e6e4 is the latest package source. Final package receipts are being recorded. No uncommitted implementation changes.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -216,5 +219,22 @@
     "scope": "streamed hash, six component hierarchies, exact task dumping interval, unknown event accounting; no power estimate or mapped-netlist coverage claim",
     "source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0"
   },
-  "d3_preparation_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_PREPARATION_20261109.json"
+  "d3_preparation_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_PREPARATION_20261109.json",
+  "latest_ready_packages": [
+    {
+      "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+      "archive": "light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
+      "bytes": 10769549,
+      "sha256": "190056eb7ea44589b7d7249c952f9a40bbabc2cdb2c4ee60b77ed7249aee1274",
+      "files": 383
+    },
+    {
+      "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+      "archive": "light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip",
+      "bytes": 14388276,
+      "sha256": "7f5398c598b1756e15896dd4e52c4a0f7996072b8cb13b836a3c23b0e62c69c3",
+      "files": 438
+    }
+  ],
+  "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json"
 }
