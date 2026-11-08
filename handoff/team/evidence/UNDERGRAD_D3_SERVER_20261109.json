@@ -70,6 +70,17 @@
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
       "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+      "archive": "light-light126-d3-sdc-arch03-20261109_062614-c323781f10f3.zip",
+      "bytes": 10767860,
+      "sha256": "fec1b964efdd2241c9eaf61407d7a901125fab277560ceefd7b3e293a15ce31f",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     }
   ],
   "local_screenshot_root": "../takeover_local/d2_20261109",
@@ -345,7 +356,7 @@
     "note": "Liberty metadata only; actual mapped timing/power report units still require review. SRAM leakage units are 1mW, not the standard-cell 1uW."
   },
   "synthesis_flow_correction": {
-    "status": "local_preparation",
+    "status": "committed_uploaded_verified_waiting_for_full_regression_lock",
     "production_RTL_changed": false,
     "clock_request_ns": "6.666666",
     "strict_measured_period_check_preserved": true,
@@ -356,6 +367,36 @@
       "Count only exact DC **logic_0**/**logic_1** virtual sources separately as zero synthesis area; reject other unresolved/zero-area cells"
     ],
     "tests": "55 Python tests passed, including Tcl fail-stop execution; Python 3.6 syntax passed",
-    "log": "local_runs/d3_sdc_area_final_unit_tests_20261109.log"
+    "log": "local_runs/d3_sdc_area_final_unit_tests_20261109.log",
+    "package": {
+      "source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+      "archive": "light-light126-d3-sdc-arch03-20261109_062614-c323781f10f3.zip",
+      "bytes": 10767860,
+      "sha256": "fec1b964efdd2241c9eaf61407d7a901125fab277560ceefd7b3e293a15ce31f",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    }
+  },
+  "gate_preparation": {
+    "status": "local_only_not_server_verified",
+    "python_tests": 59,
+    "python36_syntax": true,
+    "log": "local_runs/d3_gate_unit_tests_20261109.log",
+    "mapped_loader_run": "local_runs/gate_loader_20261109_063502_674200",
+    "mapped_loader_rows": 16384,
+    "mapped_loader_macros": 32,
+    "cpu_executed": false,
+    "gate_simulation_verified": false,
+    "checks": [
+      "Exact escaped mapped SRAM instance paths tested in XSim storage-only substitute",
+      "Synthesis summary/artifact/input and runtime RTL/software provenance required",
+      "Explicit mapped top input drivers; reset 0 to 1 at 120 ns, HF 6.666666 ns/LF 66 ns as pinned TB",
+      "Same full CPU input/output monitor bound to shared SRAM module ports",
+      "No SDF or timing/power claims"
+    ],
+    "failure_preserved": "gate_loader_20261109_063425_819209: local substitute modules lacked default timescale; fixed"
   }
 }

@@ -172,14 +172,20 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','dc_accel','dc_shared','asic_link','asic_synth'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','dc_accel','dc_shared','asic_link','asic_synth'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
     p.add_argument('--activity-cases',nargs='*',default=[],help='SoC cases to record complete-system VCD over the measured task window')
+    p.add_argument('--synth-run',type=Path,help='Completed ASIC synthesis directory for mapped gate verification')
+    p.add_argument('--synth-summary-sha256',help='Explicit expected digest of that synthesis summary')
     a=p.parse_args()
+    if a.stage=='gate_soc' and (a.synth_run is None or a.synth_summary_sha256 is None):
+        raise ValueError('Gate verification requires synthesis run and summary digest')
+    if a.stage!='gate_soc' and (a.synth_run is not None or a.synth_summary_sha256 is not None):
+        raise ValueError('Synthesis artifact selection is only for gate verification')
     if len(a.cases)!=len(set(a.cases)):raise ValueError('Duplicate case names would overwrite run artifacts')
-    if a.activity_cases and (a.stage not in ('soc','asic_soc') or not set(a.activity_cases).issubset(a.cases)):
+    if a.activity_cases and (a.stage not in ('soc','asic_soc','gate_soc') or not set(a.activity_cases).issubset(a.cases)):
         raise ValueError('Activity cases must be selected SoC cases')
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,64}',a.session):raise ValueError('Bad session')
     cfg=json.loads((ROOT/'handoff/team/server_config.json').read_text())
@@ -204,7 +210,10 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage=='asic_boot':
+            if a.stage=='gate_soc':
+                from gate_soc import verify
+                report=verify(cfg,run,a.synth_run.resolve(),a.synth_summary_sha256,a.cases,call,a.activity_cases)
+            elif a.stage=='asic_boot':
                 from asic_soc import boot_test
                 report=boot_test(cfg,run,call)
             elif a.stage=='asic_soc':

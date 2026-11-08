@@ -94,7 +94,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "SDC port/rounding/group-slack/virtual-area/fail-stop corrections under local test; production RTL unchanged.",
+  "uncommitted_follow_on": "Gate verification entry and mapped-loader local test prepared; 59 Python tests and 16384-row XSim storage-substitute check passed; no actual gate simulation yet.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -243,7 +243,7 @@
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "Eight uploaded verified bundles preserved; corrected SDC package not created yet",
+    "state": "c323781 SDC package uploaded with all hashes verified; awaiting d3_full01 completion before d3_synth03",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -286,17 +286,17 @@
   "latest_synthesis_retry_package": {
     "status": "passed_local_package",
     "package": {
-      "source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
-      "archive": "light-light126-d3-libhash-arch03-20261109_055726-46cb3de310d2.zip",
-      "bytes": 10768840,
-      "sha256": "e7fa91c3b33538ba73c8c42b051b1fa1eb38401543875eaf35a501629975813d",
+      "source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+      "archive": "light-light126-d3-sdc-arch03-20261109_062614-c323781f10f3.zip",
+      "bytes": 10767860,
+      "sha256": "fec1b964efdd2241c9eaf61407d7a901125fab277560ceefd7b3e293a15ce31f",
       "files": 383,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
       "server_safe_unpack_hashes_verified": true
     },
-    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_libhash_clean_20261109\\light-light126-d3-libhash-arch03-20261109_055726-46cb3de310d2",
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_sdc_clean_20261109\\light-light126-d3-sdc-arch03-20261109_062614-c323781f10f3",
     "cases": [
       "extremes",
       "layer_01",
@@ -318,5 +318,24 @@
     "cpu_executed": false,
     "server_uploaded": true,
     "asic_link_verified": false
+  },
+  "gate_preparation": {
+    "status": "local_only_not_server_verified",
+    "python_tests": 59,
+    "python36_syntax": true,
+    "log": "local_runs/d3_gate_unit_tests_20261109.log",
+    "mapped_loader_run": "local_runs/gate_loader_20261109_063502_674200",
+    "mapped_loader_rows": 16384,
+    "mapped_loader_macros": 32,
+    "cpu_executed": false,
+    "gate_simulation_verified": false,
+    "checks": [
+      "Exact escaped mapped SRAM instance paths tested in XSim storage-only substitute",
+      "Synthesis summary/artifact/input and runtime RTL/software provenance required",
+      "Explicit mapped top input drivers; reset 0 to 1 at 120 ns, HF 6.666666 ns/LF 66 ns as pinned TB",
+      "Same full CPU input/output monitor bound to shared SRAM module ports",
+      "No SDF or timing/power claims"
+    ],
+    "failure_preserved": "gate_loader_20261109_063425_819209: local substitute modules lacked default timescale; fixed"
   }
 }
