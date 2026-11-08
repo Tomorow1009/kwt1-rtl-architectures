@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-09",
+  "source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
+  "branch": "codex/light-light126/undergrad-d1-numerics",
+  "status": "local_d2_preparation_passed_server_pending",
+  "code_sha256": {
+    "workspaces/arch03/rtl/arch03_tcm_ram.sv": "768739619c24703ea8950a670436cf13d006a27e79ecb0e4d4d66076ae1f6f9a",
+    "workspaces/arch03/scripts/asic_link.py": "f8b6f8b16242fe87358ccad804f65d9fd81fb83eb242e1df64ba55b8ea2cbf10",
+    "workspaces/arch03/scripts/audit.py": "3d9835b28bf04b3793eb4e9aaa1c9c1d4c00c842fef3803281ecb7255835ead3",
+    "workspaces/arch03/scripts/install_platform.py": "f8a6329e65c3d2a678787ac74cd004c7325590b5be3fba0a6aa4af922c2e7f0f",
+    "workspaces/arch03/scripts/local_tcm_verify.py": "4a540ff72d7c26c58766a3f3bf8e943e616a5d15693a2e10364352ec79f56755",
+    "workspaces/arch03/scripts/local_window_verify.py": "4ea7ce82762d30de2260128ff864c5469d505a1f069fe5868812f79e7ddd2ca6",
+    "workspaces/arch03/scripts/server_run.py": "9499f01e6cb39863e8505c16a324b8212f81ba7ebf96ffc5c3c4444b98ea5ac0",
+    "workspaces/arch03/scripts/technology_binding.py": "23371f8fe851f2004f7a121330c6ddbc1b40aeb46018188bff1c2b7c8d009215",
+    "workspaces/arch03/scripts/test_install_platform.py": "b58894cebc86f4494aa3d71ee95d53d550e89fd32e0ed958658690460ddb573c",
+    "workspaces/arch03/scripts/test_task_window.py": "47f9e505fcc652c35cef17b5ebbdf069912c076f9f84600a548b39c72a5b6285",
+    "workspaces/arch03/scripts/test_technology_binding.py": "4b6c35b27adf1730c96369322984bdc066ed11a16425f4c00b8db16dbb41484a",
+    "workspaces/arch03/scripts/timing_contract.py": "5aff94685fc1c133265f064659388c5ef5fd22921ce77594479e85490f7d801d",
+    "workspaces/arch03/sw/main.c": "b6eb82956d4c6936bbc54da1da2b2a1f1f3359630ef43bd75d6c3bdd835121bb",
+    "workspaces/arch03/tb/arch03_monitor.svh": "a2561287e7f5088466640ef66ba7149bc07de23ec26671f580e2ac52b96281ad",
+    "workspaces/arch03/tb/arch03_task_window.sv": "eba36c41ba419ebfdc77ffd1a42bc3026d6effd49920a1767a3e89a1b59b3317",
+    "workspaces/arch03/tb/tb_arch03_monitor_compile.sv": "ab4d22fba5770008221bb2656faf43a7783e39e1c8fc87d66dadb7c0e781cc25",
+    "workspaces/arch03/tb/tb_arch03_tcm.sv": "2cc1916113f8b465b91b76319ca18f4fc723e21dc99637f3e06aafbda52ab8c6",
+    "workspaces/arch03/tb/tb_arch03_window.sv": "d04f8b055701c38e1a52232c1d699513715ddccdb71325925fc87667278473c8",
+    "workspaces/arch03/technology_bindings.json": "47ad63ecd11f34850bdc06fa8a05687d19bb3c6909e1f52b4540093027eb4bb2"
+  },
+  "local_runs": {
+    "tcm_pin_mock": {
+      "directory": "local_runs/tcm_20261109_014118_056334_pin_mock",
+      "summary_sha256": "0c1463b34280952536757ed64eab7948f30269fc0348ecbee0be6060208515f2",
+      "status": "passed"
+    },
+    "tcm_behavioral": {
+      "directory": "local_runs/tcm_20261109_014118_658573_behavioral",
+      "summary_sha256": "555aebfa712e141e23a2aa8464333593781fac362d5f6348c4edaffa0103c220",
+      "status": "passed"
+    },
+    "task_window": {
+      "directory": "local_runs/window_20261109_020618_757259",
+      "summary_sha256": "30462763d42925f20345c3a915dbe3f8abf5ca722bc671ae1eed340132569956",
+      "status": "passed"
+    }
+  },
+  "tcm": {
+    "itcm_bytes": 262144,
+    "dtcm_bytes": 262144,
+    "macro_4096x16_per_tcm": 32,
+    "word_checks_per_backend": 98682,
+    "backends": [
+      "behavioral",
+      "pin_mock"
+    ],
+    "all_addresses_tested": true,
+    "all_byte_masks_tested": true,
+    "reset_retention_tested": true,
+    "vendor_model_verified": false
+  },
+  "technology_binding": {
+    "old_cell_types": 11,
+    "instances": 23,
+    "target_family": "12TR40",
+    "specification": "workspaces/arch03/technology_bindings.json",
+    "specification_sha256": "47ad63ecd11f34850bdc06fa8a05687d19bb3c6909e1f52b4540093027eb4bb2",
+    "target_library_cells": 1276,
+    "server_readonly_metadata_verified": true,
+    "actual_dc_link": false
+  },
+  "task_window": {
+    "start": "successful BEGIN marker response, before first CPU source read",
+    "end": "successful response for final output store",
+    "tb_period_ns": "6.666666",
+    "synthesis_target_period_ns": "6.666666666",
+    "directed_handshake_test": true,
+    "negative_tests": 2,
+    "monitor_include_elaborated": true,
+    "full_soc_vcd_entry_prepared": true,
+    "actual_cpu_window_measured": false,
+    "system_power_estimated": false
+  },
+  "firmware": {
+    "directory": "local_runs/d2_window_firmware_20261109",
+    "images": 14,
+    "manifest_sha256": "fbfe8bcfef070d5e1b97fd394837452b05df881014570c713b0b56bd39365490",
+    "elf_sha256": "831ed097d1d3cfe5311e436dd9190ddbae3367ed6ade52cd9a99750013a6b887",
+    "cpu_executed": false
+  },
+  "unit_tests": {
+    "passed": 37,
+    "log": "local_runs/d2_unit_tests_20261109.log",
+    "log_sha256": "c15b10f54322356e8e3536b6f11bc9fbd75bc313f7ad4f6ce49589414d90717f"
+  },
+  "server_python36_syntax_checked": [
+    "asic_link.py",
+    "server_run.py",
+    "install_platform.py",
+    "audit.py",
+    "technology_binding.py",
+    "timing_contract.py"
+  ],
+  "new_server_uploaded": false,
+  "whole_soc_synthesis": false,
+  "strict_timing_verified": false,
+  "gate_functional_verified": false,
+  "old_hex100_resumed": false,
+  "physical_signoff": false,
+  "remaining": [
+    "Explicit package upload authorization",
+    "Real vendor TCM and standard cell tests",
+    "Whole SoC ASIC link/synthesis and strict timing",
+    "ASIC firmware boot loading and real CPU consecutive/timeout recovery",
+    "Gate functional checks",
+    "Same-window system power and area accounting",
+    "Submission portal details"
+  ]
+}

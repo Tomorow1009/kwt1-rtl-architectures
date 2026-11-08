@@ -2,6 +2,8 @@
 
 2026-11-09 已开始本科组修订计划：新增通用编解码、600 条开发样本全矩阵精度评估、逐任务误差门槛、本地连续任务回归和严格 150 MHz 约束脚本。当前进度与未完成项见 [D1 验收清单](ACCEPTANCE_20261109.md)，接口及复现见 [数值格式](NUMERIC_FORMAT.md)。以下服务器记录均为历史证据，不代表新增配置已经服务器验收。
 
+D2 本地准备见 [验收清单](ACCEPTANCE_20261109.md) 和 [证据](../../handoff/team/evidence/UNDERGRAD_D2_20261109.json)：完整容量 TCM 宏适配通过两种替身模型，旧工艺单元已按目标 Liberty 元数据显式绑定，新增实际写应答计时观察器及可选同窗口 VCD。源码提交 `860a6b3`，37 项 Python 单测通过；新固件、厂商宏、整机 ASIC 链接和功耗均未服务器验收。
+
 状态：Linux FileZilla 上传、293 个受测输入核对、厂商模型 ICB 与真实 E203 C 驱动各 14 组（354,816 输出）、两块 DC 及独立审计通过。受测源码 `f00e7acf7b40`，审计工具 `8fc4756a715c`；见 [正式范围与哈希](../../handoff/team/evidence/ARCH03_ACCEPTANCE_20261108.json) 和 [保留的失败尝试](../../handoff/team/evidence/ARCH03_SERVER_20261108.json)。
 **两块 DC 不是整机 DC；综合后功能与端到端分类仍未验证。100 样本批量于 2026-11-08 按用户要求停止以优化吞吐：软件 1,200 组通过，CPU 37/1,200 组通过，第 38 组中断。整批尚未验收。**
 这是开发中的架构三，不替换架构二或历史快照。
@@ -59,7 +61,7 @@
 | 栈 | DTCM 顶部，`0x9003FFF0` |
 
 SoC 监视器只检查真实 ICB 写入，覆盖全部输入复制与输出坐标，收到软件完成邮箱后才打印 `ARCH03_SOC_PASS`。
-SoC TB 复用原 ITCM 装载流程，移除旧教学测试固定 PC 的退出条件，时钟设为 6.667 ns。
+SoC TB 复用原 ITCM 装载流程，移除旧教学测试固定 PC 的退出条件。本轮时钟为显式 1 fs 精度、6.666666 ns 周期，旧 6.667 ns 配置只属于历史运行。ASIC TCM 层级改变后的程序装载仍需独立适配，不能直接复用功能 TB 宣称 ASIC CPU 已通过。
 
 本地命令（仓库根；工具路径由个人配置提供）：
 
@@ -88,7 +90,11 @@ python3 workspaces/arch03/scripts/server_run.py icb --session acceptance01
 python3 workspaces/arch03/scripts/server_run.py soc --session acceptance01
 python3 workspaces/arch03/scripts/server_run.py dc_accel --session acceptance01
 python3 workspaces/arch03/scripts/server_run.py dc_shared --session acceptance01
+python3 workspaces/arch03/scripts/server_run.py tcm --session asic01
+python3 workspaces/arch03/scripts/server_run.py asic_link --session asic01
 ```
+
+`tcm` 只验实际 SRAM 功能模型；`asic_link` 只检查完整 SoC 的工艺链接与宏数量，均是新准备入口、尚未服务器运行。`soc --activity-cases layer_01` 可生成该用例全系统同窗口 VCD；使用新固件/监视器，不能拿旧镜像通过新的计时验收。VCD 存在不代表功耗已估算或活动已正确映射。
 
 运行前仍须核对共享桌面、已有 EDA 进程和临时修改；入口复用 `.arch02_team_lock` 目录锁。
 每个阶段只运行一次；失败保留，修复后提交新包/新会话。中断时若子进程仍运行，锁保留，禁止直接重启。

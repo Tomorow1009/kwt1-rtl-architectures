@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "local_d1_passed_server_pending",
+    "phase": "local_d2_preparation_passed_server_pending",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,9 +112,11 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Use a new immutable package; inspect shared desktop/processes/team lock through the established route, then prioritize whole-SoC ASIC adaptation and strict timing before performance optimization.",
+    "next": "Finish local D2 package and standard-cell/sequence preparation; explicit upload authorization remains pending. Run new locked vendor TCM, real CPU and ASIC link stages before claiming server acceptance.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": false,
-    "clean_package_input_files": 341
+    "clean_package_input_files": 341,
+    "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
+    "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json"
   }
 }
