@@ -47,9 +47,14 @@ def install(source,dest):
         ports=['.clk(clk)','.rst_n(rst_n)']+['.%s(%s%s)'%(key,prefix,key) for key in fields]
         return module+' '+name+'(\n  '+',\n  '.join(ports)+'\n);\n'
     # Existing example ICB signals remain; only its unused AXI implementation is removed.
-    patch=(declarations+'\n'+ties+'\n'+instance('arch03_shared_sram','u_arch03_shared','a3_mem_')+
+    patch=(ties+'\n'+instance('arch03_shared_sram','u_arch03_shared','a3_mem_')+
            instance('arch03_icb_accel','u_arch03_accel','expl_axi_icb_'))
     text=text[:start.start()]+patch+'\n'+text[end:]
+    # VCS otherwise creates implicit scalar nets at the first bus connection
+    # and reports IPDW/PCWM when a later declaration attempts to widen them.
+    buses=list(re.finditer(r'(?m)^\s*sirv_icb1to8_bus\s*#\s*\(',text))
+    if len(buses)!=1:raise ValueError('Unexpected platform split-bus declaration')
+    pos=buses[0].start();text=text[:pos]+declarations+'\n'+text[pos:]
     path.write_text(text)
     tb=dest/'tb/tb_top.v';text=tb.read_text()
     text,n=re.subn(r'(`define\s+PC_\w+\s+)[^\n]+',r"\g<1>32'hffffffff",text)

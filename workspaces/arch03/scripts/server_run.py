@@ -92,7 +92,9 @@ def vcs(stage,cfg,run,platform_source,cases):
     if stage=='soc':tracked+= [p for p in platform.rglob('*') if p.is_file()]
     source_hashes={str(p):sha(p) for p in tracked}
     save(run/'source_inputs.json',source_hashes)
-    call(cmd,run,'compile.log')
+    compile_text=call(cmd,run,'compile.log')
+    if re.search(r'Warning-\[(?:IPDW|PCWM-W|INAV|SIOB)\]',compile_text):
+        raise ValueError('VCS declaration/width warning requires review; see compile.log')
     results=[]
     for name in cases:
         if not re.fullmatch(r'layer_\d\d|extremes|rounding',name):raise ValueError('Invalid case')

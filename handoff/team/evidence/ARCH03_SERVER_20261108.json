@@ -78,7 +78,7 @@
       "uploaded": true,
       "unpack_verified": true,
       "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_180302-530db1f89b3d",
-      "soc": "failed: VCS bit-select analysis treated hierarchical references as scalar; monitor now uses explicit-width aliases",
+      "soc": "failed: new platform bus signals were declared after first use; VCS inferred scalar nets and reported IPDW/PCWM/INAV/SIOB. Local fix moves declarations before bus instance, uses typed monitor aliases and rejects these warning classes.",
       "dc_shared": {
         "status": "failed_pending_review",
         "RAMSP4096X16": 64,
