@@ -30,6 +30,8 @@ def runtime(rel):
                        'workspaces/arch03/scripts/dc_blocks.py','workspaces/arch03/scripts/install_platform.py',
                        'workspaces/arch03/scripts/asic_link.py',
                        'workspaces/arch03/scripts/technology_binding.py','workspaces/arch03/technology_bindings.json',
+                       'workspaces/arch03/scripts/stdcell_verify.py',
+                       'workspaces/arch03/scripts/sequence_soc.py',
                        'workspaces/arch03/scripts/timing_contract.py'))
 
 def capture(path,expected,saturated,columns):

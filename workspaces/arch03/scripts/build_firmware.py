@@ -35,7 +35,7 @@ def main():
         target=a.output/(task.name+'.verilog')
         target.write_text(''.join('%02x\n'%x for x in memory),encoding='ascii')
         images[task.name]=dict(sha256=sha(target),input_sha256=sha(task/'load.hex'),shift=info['shift'])
-    report=dict(compiler_version=subprocess.check_output([str(a.zig),'version']).decode().strip(),
+    report=dict(run_mode='single_cpu_v2',compiler_version=subprocess.check_output([str(a.zig),'version']).decode().strip(),
                 compiler_sha256=sha(a.zig),command=command,elf_sha256=sha(elf),
                 source_sha256={x.name:sha(x) for x in SW.iterdir() if x.is_file()},images=images)
     (a.output/'manifest.json').write_text(json.dumps(report,indent=2),encoding='utf8')

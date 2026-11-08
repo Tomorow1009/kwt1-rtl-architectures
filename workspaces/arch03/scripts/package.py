@@ -28,6 +28,8 @@ def main():
             raw=subprocess.check_output(['git','-c','safe.directory='+ROOT.as_posix(),'show',commit+':'+rel],cwd=str(ROOT))
             target.write_bytes(raw)
     fw=json.loads((a.firmware/'manifest.json').read_text())
+    if fw.get('run_mode','single_cpu_v2') not in ('single_cpu_v2','sequence_cpu_v1'):
+        raise ValueError('Unsupported firmware run mode')
     for rel,digest in fw['source_sha256'].items():
         if sha(folder/'workspaces/arch03/sw'/rel)!=digest:raise ValueError('Firmware/committed source mismatch')
     if sha(a.firmware/'driver.elf')!=fw['elf_sha256']:raise ValueError('ELF changed')
@@ -36,6 +38,15 @@ def main():
         if sha(a.data/case/'load.hex')!=meta['input_sha256']:raise ValueError('Firmware/input mismatch')
         layout=json.loads((a.data/case/'layout.json').read_text())
         if layout['shift']!=meta['shift']:raise ValueError('Firmware shift mismatch')
+        if fw.get('run_mode')=='sequence_cpu_v1':
+            next_case=meta['next_case']
+            if Path(next_case).name!=next_case or next_case in ('.','..'):raise ValueError('Invalid next case')
+            if meta['tasks']!=[case,next_case,case]:raise ValueError('Sequence task order mismatch')
+            secondary=json.loads((a.data/next_case/'layout.json').read_text())
+            if sha(a.data/next_case/'load.hex')!=meta['next_input_sha256'] or secondary['shift']!=meta['next_shift']:
+                raise ValueError('Sequence secondary input/shift changed')
+            for rel,digest in secondary['sha256'].items():
+                if sha(a.data/next_case/rel)!=digest:raise ValueError('Secondary data changed '+next_case+'/'+rel)
         for rel,digest in layout['sha256'].items():
             if sha(a.data/case/rel)!=digest:raise ValueError('Data changed '+case+'/'+rel)
     shutil.copytree(str(a.data),str(folder/'validated_data'))

@@ -41,6 +41,10 @@ initial begin
     if(!$value$plusargs("CAPTURE=%s",a3_capture))$fatal(1,"missing CAPTURE");
     $readmemh({a3_dir,"/result.hex"},a3_expected);
     $readmemh({a3_dir,"/load.hex"},a3_input_expected);
+    for(a3_i=0;a3_i<25344;a3_i=a3_i+1)
+        if((^a3_expected[a3_i])===1'bx)$fatal(1,"Missing/unknown CPU reference result");
+    for(a3_i=0;a3_i<23488;a3_i=a3_i+1)
+        if((^a3_input_expected[a3_i])===1'bx)$fatal(1,"Missing/unknown CPU reference input");
     for(a3_i=0;a3_i<25344;a3_i=a3_i+1)a3_seen[a3_i]=0;
     for(a3_i=0;a3_i<7;a3_i=a3_i+1)a3_mail[a3_i]=0;
     a3_file=$fopen(a3_capture,"w");if(a3_file==0)$fatal(1,"capture open");

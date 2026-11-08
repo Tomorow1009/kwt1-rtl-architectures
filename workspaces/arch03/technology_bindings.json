@@ -2,6 +2,9 @@
   "schema": "arch03-smic-generic-binding-v1",
   "library_member": "S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.lib",
   "library_sha256": "5d236b1571f5bc791895328fa3f6f94e3873e985ee7963b9ac5e3e849b48949f",
+  "verilog_model_member": "S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/verilog/scc40nll_vhsc40_rvt.v",
+  "verilog_model_sha256": "9ceaac7085f267c9a2da19d86aa9d88ddb25894df4b2485e32d13e04d0e46581",
+  "verilog_model_bytes": 2198450,
   "corner": "SS 0.99 V 125 C",
   "source": "Read-only inspection of the existing official platform and target Liberty on 2026-11-09; only binding metadata is stored here, no vendor library contents",
   "cells": {

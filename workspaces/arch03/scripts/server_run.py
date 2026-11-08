@@ -82,6 +82,10 @@ def vcs_tcm(cfg,run):
                 timing_verified=False,whole_soc_verified=False,
                 artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})
 def vcs(stage,cfg,run,platform_source,cases,activity_cases=()):
+    if stage=='soc':
+        firmware=json.loads((ROOT/'firmware/manifest.json').read_text())
+        if firmware.get('run_mode','single_cpu_v2')!='single_cpu_v2':
+            raise ValueError('Single-task SoC monitor cannot accept sequence firmware')
     if activity_cases and (stage!='soc' or not set(activity_cases).issubset(cases)):
         raise ValueError('Activity cases must be selected SoC cases')
     files=source_list();includes=[run,A3/'tb']
@@ -168,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','tcm','dc_accel','dc_shared','asic_link'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','dc_accel','dc_shared','asic_link'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -200,7 +204,13 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage=='tcm':
+            if a.stage=='sequence':
+                from sequence_soc import verify
+                report=verify(cfg,run,a.platform,a.cases,call)
+            elif a.stage=='stdcell':
+                from stdcell_verify import verify
+                report=verify(cfg,run,call)
+            elif a.stage=='tcm':
                 report=vcs_tcm(cfg,run)
             elif a.stage=='asic_link':
                 from asic_link import link_soc

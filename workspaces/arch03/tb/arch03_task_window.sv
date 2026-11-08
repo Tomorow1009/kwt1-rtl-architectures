@@ -2,7 +2,7 @@
 // Passive observer: never drives a CPU/memory signal or supplies expected data.
 // BEGIN response precedes the first CPU source read. END is the successful
 // response to the final output store, not accelerator DONE or command acceptance.
-module arch03_task_window #(parameter INPUT_WORDS=23488,OUTPUT_WORDS=25344)(
+module arch03_task_window #(parameter INPUT_WORDS=23488,OUTPUT_WORDS=25344,REPEAT_TASKS=0)(
     input wire clk,rst_n,cmd_valid,cmd_ready,cmd_read,
     input wire [31:0] cmd_addr,cmd_wdata,input wire [3:0] cmd_wmask,
     input wire rsp_valid,rsp_ready,rsp_err,
@@ -13,13 +13,14 @@ module arch03_task_window #(parameter INPUT_WORDS=23488,OUTPUT_WORDS=25344)(
     localparam [31:0] BEGIN_ADDR=32'ha001f020,BEGIN_MAGIC=32'h4b575442;
     reg pending=0;
     integer pending_kind=0,pending_halves=0,inputs=0,outputs=0;
+    integer completed_tasks=0;
     reg [63:0] cycles=0;
     realtime start_ns=0,end_ns=0,period_ns=0,last_edge_ns=0;
     always @(posedge clk) begin
         if(last_edge_ns!=0) period_ns=$realtime-last_edge_ns;
         last_edge_ns=$realtime;
         if(!rst_n) begin
-            active=0;finished=0;pending=0;cycles=0;inputs=0;outputs=0;
+            active=0;finished=0;pending=0;cycles=0;inputs=0;outputs=0;completed_tasks=0;
             start_cycle=0;end_cycle=0;read_commands=0;write_commands=0;
             command_wait_cycles=0;response_wait_cycles=0;
         end else begin
@@ -33,7 +34,10 @@ module arch03_task_window #(parameter INPUT_WORDS=23488,OUTPUT_WORDS=25344)(
                 if(!pending)$fatal(1,"Window monitor observed orphan ICB response");
                 if(rsp_err)$fatal(1,"Shared-memory response error during monitored run");
                 if(pending_kind==1) begin
-                    if(active || finished || inputs || outputs)$fatal(1,"Duplicate or late BEGIN marker");
+                    if(active || (finished && !REPEAT_TASKS) || (!finished && (inputs || outputs)))
+                        $fatal(1,"Duplicate or late BEGIN marker");
+                    inputs=0;outputs=0;finished=0;read_commands=0;write_commands=0;
+                    command_wait_cycles=0;response_wait_cycles=0;
                     active=1;start_cycle=cycles;start_ns=$realtime;
                 end
                 if(pending_kind==2 || pending_kind==3) begin
@@ -44,6 +48,7 @@ module arch03_task_window #(parameter INPUT_WORDS=23488,OUTPUT_WORDS=25344)(
                     if(outputs==OUTPUT_WORDS) begin
                         if(inputs!=INPUT_WORDS)$fatal(1,"Incomplete input loading at final write response");
                         end_cycle=cycles;end_ns=$realtime;active=0;finished=1;
+                        completed_tasks=completed_tasks+1;
                         $display("ARCH03_TASK_WINDOW start_cycle=%0d end_cycle=%0d cycles=%0d start_ns=%.6f end_ns=%.6f period_ns=%.6f input_words=%0d output_words=%0d",start_cycle,end_cycle,end_cycle-start_cycle,start_ns,end_ns,period_ns,inputs,outputs);
                     end
                 end

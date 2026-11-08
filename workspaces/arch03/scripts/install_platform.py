@@ -36,7 +36,9 @@ def platform_sources(platform):
     if not result:raise ValueError('Empty platform source list')
     return result
 
-def install(source,dest,asic=False):
+def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
+    if monitor not in ('arch03_monitor.svh','arch03_sequence_monitor.svh'):
+        raise ValueError('Unreviewed platform monitor')
     source=source.resolve();dest=dest.resolve()
     if dest.exists():raise ValueError('Refusing existing platform destination')
     files=sorted([p for p in (source/'rtl').rglob('*') if p.is_file() and p.suffix in ('.v','.vh','.sv')]+
@@ -99,12 +101,13 @@ def install(source,dest,asic=False):
     text=replace_once(text,'#40000000','#1000000000')
     text=text.replace('$finish;', '$fatal(1,"Legacy platform monitor exited without arch03 acceptance");')
     text=re.sub(r'(?m)^(.*\$(?:dump|fsdbDump)\w+\s*\(.*)$',r'// ARCH03 no bulk waves: \1',text)
-    text=replace_once(text,'endmodule','`include "arch03_monitor.svh"\nendmodule')
+    text=replace_once(text,'endmodule','`include "'+monitor+'"\nendmodule')
     tb.write_text(text)
     modified.append(tb)
     result=dict(original_root=str(source),baseline_sha256=digest,original_files=records,
                 modified_files={p.relative_to(dest).as_posix():sha(p) for p in modified},
                 tcm_mode='asic_macro' if asic else 'legacy_functional',
+                monitor=monitor,
                 generic_cell_bindings=binding_counts if asic else None,
                 asic_simulation_ready=False,
                 changes=['ICB accelerator at 0x40000000','new 512 KiB SRAM at 0xa0000000',
