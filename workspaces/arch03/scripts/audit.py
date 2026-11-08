@@ -6,6 +6,7 @@ match the auditor bundle; added audit tools/docs do not imply a hardware rerun.
 """
 import argparse,hashlib,importlib.util,json,math,os,re,socket,subprocess,sys
 from pathlib import Path
+from timing_contract import validate_period
 ROOT=Path(__file__).resolve().parents[3]
 CASES=['layer_%02d'%i for i in range(1,13)]+['extremes','rounding']
 
@@ -26,7 +27,8 @@ def runtime(rel):
     return (rel.startswith(('validated_data/','firmware/','architectures/','workspaces/arch02/'))
             or rel.startswith(('workspaces/arch03/rtl/','workspaces/arch03/sw/','workspaces/arch03/tb/'))
             or rel in ('handoff/team/server_config.json','workspaces/arch03/scripts/server_run.py',
-                       'workspaces/arch03/scripts/dc_blocks.py','workspaces/arch03/scripts/install_platform.py'))
+                       'workspaces/arch03/scripts/dc_blocks.py','workspaces/arch03/scripts/install_platform.py',
+                       'workspaces/arch03/scripts/timing_contract.py'))
 
 def capture(path,expected,saturated,columns):
     seen=set();count=0
@@ -82,7 +84,8 @@ def check_dc(root,session,name,output,cfg,lock):
     require(int(m['latches'])==0,'Inferred latch')
     require(all(math.isfinite(float(m[k])) for k in ('max','min','area')),'Non-finite synthesis metric')
     require(min(float(m['max']),float(m['min']))>=0 and float(m['area'])>0,'Invalid synthesis metrics')
-    require(result['clock_ns']==6.667 and result['scope']=='block_only_not_whole_soc','DC scope changed')
+    require(result['scope']=='block_only_not_whole_soc','DC scope changed')
+    require(validate_period(result['clock_ns'])==validate_period(m['period_ns']),'DC clock mismatch')
     if name=='dc_accel':require(float(m['area'])<=2250000,'Accelerator area limit')
     for rel,digest in result['artifacts'].items():
         p=(run/rel).resolve();p.relative_to(run)

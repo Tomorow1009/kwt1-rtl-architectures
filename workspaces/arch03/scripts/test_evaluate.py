@@ -2,6 +2,7 @@ import hashlib,json,math,tempfile,unittest
 from pathlib import Path
 import numpy as np
 from evaluate import evaluate
+from numeric import numeric_format
 
 class EvaluationTests(unittest.TestCase):
     def setUp(self):
@@ -50,4 +51,32 @@ class EvaluationTests(unittest.TestCase):
             if t['sample_id']=='a':t['reference_npz_sha256']=hashlib.sha256(p.read_bytes()).hexdigest()
         self.write()
         with self.assertRaisesRegex(ValueError,'reference'):evaluate(self.manifest)
+    def test_layer_pass_cannot_hide_bad_performance_task(self):
+        p=self.root/'b_float.npz';np.savez(str(p),Y_float=np.full((99,256),100.))
+        e=self.root/'b_int.npz';np.savez(str(e),result_int=np.full((99,256),100,dtype=np.int16))
+        c=self.root/'b.csv';np.savetxt(str(c),np.column_stack((np.arange(25344),np.full(25344,100))),fmt='%d',delimiter=',')
+        for t in self.tasks:
+            if t['sample_id']=='b':
+                for key,path in [('reference_npz',p),('integer_npz',e),('actual_csv',c)]:
+                    t[key+'_sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+        self.write();r=evaluate(self.manifest)
+        self.assertTrue(r['layer_threshold_passed'])
+        self.assertFalse(r['task_threshold_passed'])
+        self.assertFalse(r['threshold_passed'])
+        self.assertEqual(r['max_task_nrmse'],1.)
+        self.assertEqual(len(r['failing_tasks']),12)
+    def test_inconsistent_scale_rejected(self):
+        self.tasks[0]['numeric_format']=numeric_format()
+        self.write()
+        with self.assertRaisesRegex(ValueError,'scale'):evaluate(self.manifest)
+    def test_invalid_scale_rejected(self):
+        self.tasks[0]['fraction_bits']=True
+        self.write()
+        with self.assertRaisesRegex(ValueError,'scale'):evaluate(self.manifest)
+    def test_missing_output_rejected_after_rehash(self):
+        p=self.root/'a.csv';p.write_text('\n'.join(p.read_text().splitlines()[:-1])+'\n')
+        for t in self.tasks:
+            if t['sample_id']=='a':t['actual_csv_sha256']=hashlib.sha256(p.read_bytes()).hexdigest()
+        self.write()
+        with self.assertRaisesRegex(ValueError,'capture'):evaluate(self.manifest)
 if __name__=='__main__':unittest.main()

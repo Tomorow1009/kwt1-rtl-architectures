@@ -1,6 +1,7 @@
 """DC checks for the new accelerator interface and shared SRAM (NOT whole SoC)."""
 import hashlib,json,math,re,shutil,tarfile
 from pathlib import Path
+from timing_contract import CLOCK_PERIOD_NS, validate_period
 
 def review_design(text):
     """Accept only the arithmetic optimization warnings inspected on the server.
@@ -78,7 +79,7 @@ if {![link]} {error "Unresolved references"}
 uniquify
 set memories [get_cells -hierarchical -filter "ref_name == RAMSP128X16 || ref_name == RAMSP4096X16"]
 set_dont_touch $memories true
-create_clock -name core_clk -period 6.667 [get_ports clk]
+create_clock -name core_clk -period @CLOCK_NS@ [get_ports clk]
 set_clock_uncertainty 0.1 [get_clocks core_clk]
 set ins [remove_from_collection [all_inputs] [get_ports clk]]
 set_input_delay -max 1.0 -clock core_clk $ins
@@ -106,6 +107,7 @@ write -format verilog -hierarchy -output mapped.v
 write -format ddc -hierarchy -output mapped.ddc
 write_sdc mapped.sdc
 set out [open metrics.txt w]
+puts $out "period_ns [format %.12f [get_attribute [get_clocks core_clk] period]]"
 foreach kind {RAMSP128X16 RAMSP4096X16} {
   puts $out "$kind [sizeof_collection [get_cells -hierarchical -filter "ref_name == $kind"]]"
 }
@@ -127,11 +129,13 @@ puts "ARCH03_DC_REPORTS_READY"
 quit
 '''
     for key,value in {'RUN':'{%s}'%run,'STD':'{%s}'%std,'DBS':' '.join('{%s}'%p for p in databases),
-                      'SOURCES':' '.join('{%s}'%p for p in sources),'TOP':top}.items():script=script.replace('@'+key+'@',value)
+                      'SOURCES':' '.join('{%s}'%p for p in sources),'TOP':top,
+                      'CLOCK_NS':CLOCK_PERIOD_NS}.items():script=script.replace('@'+key+'@',value)
     (run/'synth.tcl').write_text(script)
     text=call([cfg['tools']['dc_shell'],'-f',run/'synth.tcl'],run,'dc.log')
     if 'ARCH03_DC_REPORTS_READY' not in text:raise ValueError('Missing DC completion')
     metrics=measured_metrics((run/'metrics.txt').read_text(),(run/'area.rpt').read_text())
+    measured_period=validate_period(metrics['period_ns'])
     if int(metrics['RAMSP128X16'])!=expect128 or int(metrics['RAMSP4096X16'])!=expect4096:
         raise ValueError('Wrong mapped SRAM count '+str(metrics))
     if min(float(metrics['max']),float(metrics['min']))<0:raise ValueError('Timing violation '+str(metrics))
@@ -150,7 +154,8 @@ quit
         if line.startswith(expected) and line.endswith('(TIM-134)') and high_fanout=={'clk'}:
             timing_review.append(dict(code='TIM-134',nets=['clk'],reason='Ideal clock; clock tree implementation remains outside block synthesis'))
         else:raise ValueError('Unreviewed DC timing warning: '+line)
-    return dict(status='passed',top=top,metrics=metrics,clock_ns=6.667,physical_signoff=False,
+    return dict(status='passed',top=top,metrics=metrics,clock_ns=measured_period,
+                target_clock_ns=CLOCK_PERIOD_NS,physical_signoff=False,
                 scope='block_only_not_whole_soc',gate_simulation_verified=False,reviewed_structural_warnings=reviewed,
                 reviewed_timing_warnings=timing_review,high_fanout_nets=sorted(high_fanout),
                 artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in run.iterdir() if p.is_file()},

@@ -97,7 +97,8 @@ def vcs(stage,cfg,run,platform_source,cases):
         raise ValueError('VCS declaration/width warning requires review; see compile.log')
     results=[]
     for name in cases:
-        if not re.fullmatch(r'layer_\d\d|extremes|rounding',name):raise ValueError('Invalid case')
+        if not re.fullmatch(r'layer_(?:0[1-9]|1[0-2])|extremes|rounding|worst_error|largest_input|largest_output|zero|shift00|shift31|cancellation',name):
+            raise ValueError('Invalid case')
         task=ROOT/'validated_data'/name
         info=json.loads((task/'layout.json').read_text())
         for rel,h in info['sha256'].items():

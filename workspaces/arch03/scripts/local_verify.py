@@ -29,6 +29,7 @@ def main():
     ap.add_argument('--backend',choices=['behavioral','pin_mock'],default='behavioral')
     ap.add_argument('--cases',nargs='+',default=['layer_01','extremes','rounding'])
     ap.add_argument('--prepared',type=Path)
+    ap.add_argument('--next-case',help='Run each selected case, this different case, then abort/poison/recover the first case in one simulation')
     args=ap.parse_args()
     folder=ROOT/'local_runs'/('arch03_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f')+'_'+args.backend)
     folder.mkdir(parents=True)
@@ -51,6 +52,9 @@ def main():
                 lines.append("`define A02_%s_%s %d'd%d"%(size,key.upper(),width,cfg['macros'][size][key]))
         (folder/'arch02_sram_config.vh').write_text('\n'.join(lines)+'\n',encoding='ascii')
     tool=lambda n:Path(args.vivado_bin)/(n+'.bat')
+    tracked=files+[Path(__file__).resolve()]
+    if args.backend=='pin_mock':tracked += [A2/'arch02/tb/pin_mock_config.json',folder/'arch02_sram_config.vh']
+    source_hashes={str(p):sha(p) for p in tracked}
     run([tool('xvlog'),'--sv','-d',define,'-i',folder]+files,folder,'compile.log')
     run([tool('xelab'),'tb_arch03_icb','-debug','typical','-s','arch03_icb'],folder,'elaborate.log')
     (folder/'run.tcl').write_text('run all\nquit\n',encoding='ascii')
@@ -63,22 +67,39 @@ def main():
             if sha(task/filename)!=digest:raise ValueError('Vector hash mismatch: '+filename)
         capture=folder/(name+'.csv')
         opt=folder/(name+'.options')
-        opt.write_text('arch03_icb\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n'%
-                       (task.as_posix(),capture.as_posix(),layout['shift']),encoding='ascii')
+        options='arch03_icb\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n'%(
+            task.as_posix(),capture.as_posix(),layout['shift'])
+        captures=[(name,task,capture)]
+        if args.next_case:
+            second=data/args.next_case
+            second_layout=json.loads((second/'layout.json').read_text())
+            for filename,digest in second_layout['sha256'].items():
+                if sha(second/filename)!=digest:raise ValueError('Second vector hash mismatch: '+filename)
+            second_capture=folder/(name+'__next.csv');recovery=folder/(name+'__recovery.csv')
+            options+='-testplusarg SECOND_DIR=%s\n-testplusarg SECOND_SHIFT=%d\n-testplusarg SECOND_CAPTURE=%s\n-testplusarg RECOVERY_CAPTURE=%s\n'%(
+                second.as_posix(),second_layout['shift'],second_capture.as_posix(),recovery.as_posix())
+            captures += [(args.next_case,second,second_capture),(name,task,recovery)]
+        opt.write_text(options,encoding='ascii')
         text=run([tool('xsim'),'-f',opt],folder,name+'.log')
         if 'ARCH03_ICB_PASS outputs=25344' not in text:raise RuntimeError('Missing PASS '+name)
+        if args.next_case and 'ARCH03_ICB_SEQUENCE_PASS tasks=3 outputs=76032' not in text:
+            raise RuntimeError('Missing consecutive-task acceptance '+name)
         import numpy as np
-        actual=np.loadtxt(str(capture),delimiter=',',dtype=np.int64,ndmin=2)
-        if actual.shape!=(25344,3) or not np.array_equal(np.sort(actual[:,0]),np.arange(25344)):
-            raise ValueError('capture coverage')
-        actual=actual[np.argsort(actual[:,0])]
-        with np.load(str(task/'expected.npz'),allow_pickle=False) as expected:
-            for index,key in [(1,'result'),(2,'saturated')]:
-                if not np.array_equal(actual[:,index],expected[key].ravel()):raise ValueError('capture '+key)
-        results.append(dict(case=name,outputs=25344,capture_sha256=sha(capture)))
+        for case_name,vector,capture_file in captures:
+            actual=np.loadtxt(str(capture_file),delimiter=',',dtype=np.int64,ndmin=2)
+            if actual.shape!=(25344,3) or not np.array_equal(np.sort(actual[:,0]),np.arange(25344)):
+                raise ValueError('capture coverage')
+            actual=actual[np.argsort(actual[:,0])]
+            with np.load(str(vector/'expected.npz'),allow_pickle=False) as expected:
+                for index,key in [(1,'result'),(2,'saturated')]:
+                    if not np.array_equal(actual[:,index],expected[key].ravel()):raise ValueError('capture '+key)
+            results.append(dict(case=case_name,outputs=25344,capture=capture_file.name,capture_sha256=sha(capture_file)))
         print('PASS arch03 ICB',args.backend,name,flush=True)
+    for path,digest in source_hashes.items():
+        if sha(path)!=digest:raise ValueError('Source changed during local RTL run: '+path)
     summary=dict(status='passed',cpu_executed=False,backend=args.backend,cases=results,
-                 source_sha256={p.relative_to(ROOT).as_posix():sha(p) for p in files},data_root=str(data))
+                 consecutive_tasks=bool(args.next_case),abort_recovery=bool(args.next_case),
+                 source_sha256={Path(p).relative_to(ROOT).as_posix():h for p,h in source_hashes.items()},data_root=str(data))
     (folder/'summary.json').write_text(json.dumps(summary,indent=2),encoding='utf8')
     print('LOCAL_ICB_PASS '+str(folder),flush=True)
 if __name__=='__main__':main()

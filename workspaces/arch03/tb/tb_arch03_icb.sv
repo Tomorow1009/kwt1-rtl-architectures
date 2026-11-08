@@ -45,13 +45,61 @@ module tb_arch03_icb;
     reg [15:0] load_words[0:23487],expected[0:25343];
     reg sat_expected[0:25343];
     reg seen[0:25343];
-    reg [4095:0] data_dir,capture_path;
-    integer i,b,j,shift_arg,input_count,output_count,index,row,col,loops,fd;
+    reg [4095:0] data_dir,capture_path,first_dir,first_capture,second_dir,second_capture,recovery_capture;
+    integer i,b,j,shift_arg,first_shift,second_shift,sequence_mode,input_count,output_count,index,row,col,loops,fd;
     reg [31:0] address,reference_word;
+    task run_matrix;
+        begin
+            $readmemh({data_dir,"/load.hex"},load_words);
+            $readmemh({data_dir,"/result.hex"},expected);
+            $readmemh({data_dir,"/saturated.hex"},sat_expected);
+            for(i=0;i<25344;i=i+1)seen[i]=0;
+            fd=$fopen(capture_path,"w");if(fd==0)$fatal(1,"capture open");
+            wr(32'h4000000c,shift_arg);wr(32'h40000004,1);
+            rd(32'h40000018);if(got!==0)$fatal(1,"stale input count");
+            rd(32'h4000001c);if(got!==0)$fatal(1,"stale output count");
+            input_count=0;output_count=0;loops=0;
+            while(output_count<25344) begin
+                rd(32'h40000008);status=got;
+                if(status&16)$fatal(1,"unexpected device error");
+                // Until all X and the first bank's W/b are loaded, no old
+                // cached values may produce an output in this task.
+                if((status&4) && input_count<6872)$fatal(1,"output from stale task cache");
+                if((status&2) && input_count<23488) begin
+                    wr(32'h40000010,{16'b0,load_words[input_count]});input_count=input_count+1;
+                end
+                if(status&4) begin
+                    transaction(32'h40000014,0,1,15,0,output_count%4);
+                    row=(got>>16)&127;col=(got>>23)&255;index=row*256+col;
+                    if(row>98 || seen[index])$fatal(1,"duplicate/out-of-range coordinate");
+                    if(row!==(output_count%792)/8 || col!==(output_count/792)*8+output_count%8)
+                        $fatal(1,"output order");
+                    if(got[15:0]!==expected[index] || got[31]!==sat_expected[index])
+                        $fatal(1,"matrix mismatch index=%0d actual=%h expected=%h",index,got[15:0],expected[index]);
+                    seen[index]=1;
+                    $fdisplay(fd,"%0d,%0d,%0d",index,$signed(got[15:0]),got[31]);output_count=output_count+1;
+                end
+                loops=loops+1;if(loops>2000000)$fatal(1,"matrix progress timeout");
+            end
+            $fclose(fd);
+            rd(32'h40000008);if((got&25)!==8)$fatal(1,"completion status %h",got);
+            rd(32'h40000018);if(got!==23488 || input_count!=23488)$fatal(1,"input count");
+            rd(32'h4000001c);if(got!==25344)$fatal(1,"output count");
+            for(i=0;i<25344;i=i+1)if(!seen[i])$fatal(1,"missing output");
+            $display("ARCH03_MATRIX_PASS outputs=25344 shift=%0d",shift_arg);
+        end
+    endtask
     initial begin
         if(!$value$plusargs("DATA_DIR=%s",data_dir))$fatal(1,"missing data");
         if(!$value$plusargs("CAPTURE=%s",capture_path))$fatal(1,"missing capture");
         if(!$value$plusargs("SHIFT=%d",shift_arg))$fatal(1,"missing shift");
+        sequence_mode=$value$plusargs("SECOND_DIR=%s",second_dir);
+        if(sequence_mode) begin
+            if(!$value$plusargs("SECOND_SHIFT=%d",second_shift))$fatal(1,"missing second shift");
+            if(!$value$plusargs("SECOND_CAPTURE=%s",second_capture))$fatal(1,"missing second capture");
+            if(!$value$plusargs("RECOVERY_CAPTURE=%s",recovery_capture))$fatal(1,"missing recovery capture");
+        end
+        first_dir=data_dir;first_capture=capture_path;first_shift=shift_arg;
         $readmemh({data_dir,"/load.hex"},load_words);
         $readmemh({data_dir,"/result.hex"},expected);
         $readmemh({data_dir,"/saturated.hex"},sat_expected);
@@ -98,35 +146,21 @@ module tb_arch03_icb;
         for(i=0;i<6336+512+2;i=i+1)wr(32'h40000010,0);
         wr(32'h40000010,256);rd(32'h40000008);
         if(!(got&16))$fatal(1,"bias fault not propagated");abort_task();
-        // Actual matrix through the bus, with output stalls and exact coordinate coverage.
-        for(i=0;i<25344;i=i+1)seen[i]=0;
-        fd=$fopen(capture_path,"w");if(fd==0)$fatal(1,"capture open");
-        wr(32'h4000000c,shift_arg);wr(32'h40000004,1);
-        input_count=0;output_count=0;loops=0;
-        while(output_count<25344) begin
-            rd(32'h40000008);status=got;
-            if(status&16)$fatal(1,"unexpected device error");
-            if((status&2) && input_count<23488) begin
-                wr(32'h40000010,{16'b0,load_words[input_count]});input_count=input_count+1;
-            end
-            if(status&4) begin
-                transaction(32'h40000014,0,1,15,0,output_count%4);
-                row=(got>>16)&127;col=(got>>23)&255;index=row*256+col;
-                if(row>98 || seen[index])$fatal(1,"duplicate/out-of-range coordinate");
-                if(row!==(output_count%792)/8 || col!==(output_count/792)*8+output_count%8)
-                    $fatal(1,"output order");
-                if(got[15:0]!==expected[index] || got[31]!==sat_expected[index])
-                    $fatal(1,"matrix mismatch index=%0d actual=%h expected=%h",index,got[15:0],expected[index]);
-                seen[index]=1;
-                $fdisplay(fd,"%0d,%0d,%0d",index,$signed(got[15:0]),got[31]);output_count=output_count+1;
-            end
-            loops=loops+1;if(loops>2000000)$fatal(1,"matrix progress timeout");
+        // Real matrices use only the public ICB transactions. No DUT memory poke.
+        run_matrix();
+        if(sequence_mode) begin
+            // A different layer starts immediately, without resetting the DUT.
+            data_dir=second_dir;capture_path=second_capture;shift_arg=second_shift;
+            run_matrix();
+            // Poison a partial task through LOAD, then abort and recover.
+            wr(32'h40000004,1);
+            for(i=0;i<256;i=i+1)wr(32'h40000010,{16'b0,~load_words[i]});
+            rd(32'h40000008);if(got&12)$fatal(1,"partial load produced output/done");
+            abort_task();
+            data_dir=first_dir;capture_path=recovery_capture;shift_arg=first_shift;
+            run_matrix();
+            $display("ARCH03_ICB_SEQUENCE_PASS tasks=3 outputs=76032 abort_recovery=true cpu_executed=false");
         end
-        $fclose(fd);
-        rd(32'h40000008);if((got&25)!==8)$fatal(1,"completion status %h",got);
-        rd(32'h40000018);if(got!==23488 || input_count!=23488)$fatal(1,"input count");
-        rd(32'h4000001c);if(got!==25344)$fatal(1,"output count");
-        for(i=0;i<25344;i=i+1)if(!seen[i])$fatal(1,"missing output");
         // Next start clears done and counters without retaining previous task validity.
         wr(32'h40000004,1);rd(32'h40000008);if(got!==3)$fatal(1,"next task state");abort_task();
         $display("ARCH03_ICB_PASS outputs=25344 shared_bytes=524288 cpu_executed=false");$finish;
