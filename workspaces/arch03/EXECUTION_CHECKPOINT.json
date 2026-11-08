@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Actual vendor stdcell/TCM/boot and real E203 functional-TCM continuous A/B/A + abort/timeout/recovery passed: two sequences, six tasks, 152064 outputs. ASIC CPU d3_smoke03 now running.",
+  "last_completed_stage": "Vendor stdcell/TCM/boot and 6 real E203 sequence tasks passed; ASIC-bound layer_01 d3_smoke04 passed 25344 outputs, valid clock mode, full window 3890080 cycles. Full 14 ASIC cases, synthesis/STA/gate/power still pending.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -33,7 +33,8 @@
     "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run.",
     "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local.",
     "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified.",
-    "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied."
+    "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied.",
+    "D3 ASIC d3_smoke04 passed layer_01 all 25344 outputs without global FPGA define; real vendor TCM and stdcells, boot verified, task clock mode 0/1/1, window 3890080 cycles at 6.666666 ns. Gate/STA/power and complete ASIC suite remain pending."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
@@ -45,12 +46,12 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_smoke04 (e60a3cc monitor package); on pass run full 14-case ASIC baseline",
-    "Commit/package/upload corrected SRAM fingerprint; new asic_synth session only after active ASIC CPU releases shared lock",
-    "Review actual synthesis reports then implement/validate gate and full-window power. Preserve all failures and old stopped hex100"
+    "Observe d3_synth02 from 46cb3de package; inspect actual library/link/synthesis failures and reports",
+    "Run full 14-case ASIC-bound matrix suite after lock release, plus exact-window activity on selected case",
+    "Review full-SoC STA/area, implement and validate post-synthesis functions and system power. Preserve failures and never resume old hex100"
   ],
   "still_unverified": [
-    "ASIC-bound whole-SoC real E203 execution (vendor components and functional-TCM CPU sequences passed)",
+    "Complete 14-case ASIC-bound CPU suite (single layer_01 smoke and two functional-TCM sequences passed)",
     "ASIC TCM/ROM/clock/reset adaptation and whole SoC linking",
     "strict 150 MHz synthesis/STA and complete area accounting",
     "post-synthesis functional checks",
@@ -63,7 +64,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal d3_smoke04 running from e60a3cc monitor package. d3_synth01 stopped before LC/DC because of a transcribed SRAM hash typo; actual file hash matches original screenshot. Fingerprint correction local, ready to freeze/package.",
+  "server_readonly_job": "Third terminal running d3_synth02 from 46cb3de libhash bundle. Fourth terminal idle in e60a3cc monitor bundle, latest screen is server_asic_smoke04_receipt.png. d3_smoke04 passed; do not run parallel EDA while synthesis owns lock.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -239,11 +240,11 @@
   ],
   "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_FILELIST_PACKAGES_20261109.json",
   "active_transfer": {
-    "packages_source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
+    "packages_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "e60a3cc monitor package uploaded and server ZIP/entry hashes verified; d3_smoke04 active",
+    "state": "46cb3de libhash uploaded, server ZIP/entry hashes passed; d3_synth02 active",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -261,6 +262,42 @@
       "server_safe_unpack_hashes_verified": true
     },
     "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_monitor_clean_20261109\\light-light126-d3-monitor-arch03-20261109_055251-e60a3cc8e2f6",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false
+  },
+  "latest_synthesis_retry_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+      "archive": "light-light126-d3-libhash-arch03-20261109_055726-46cb3de310d2.zip",
+      "bytes": 10768840,
+      "sha256": "e7fa91c3b33538ba73c8c42b051b1fa1eb38401543875eaf35a501629975813d",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_libhash_clean_20261109\\light-light126-d3-libhash-arch03-20261109_055726-46cb3de310d2",
     "cases": [
       "extremes",
       "layer_01",

@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "real_cpu_sequence_passed_asic_smoke_running",
+    "phase": "asic_cpu_smoke_passed_synthesis_retry_running",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Observe d3_smoke03 in cd524e2 standard bundle; complete ASIC 14-case baseline and whole-SoC synthesis, then gate/power. Sequence d3_sequence01 passed 6 tasks/152064 outputs.",
+    "next": "Third terminal running d3_synth02 from 46cb3de libhash bundle; inspect real LC/DC/STA results. Then full 14-case ASIC baseline and activity, followed by gate/power. Fourth diagnostic terminal idle in e60a3cc monitor bundle.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": true,
     "clean_package_input_files": 341,
@@ -134,8 +134,10 @@
       "tcm",
       "asic_boot"
     ],
-    "new_cpu_tasks": 6,
-    "new_cpu_outputs": 152064,
-    "new_cpu_scope": "sequence/recovery with functional platform TCM; ASIC CPU still pending"
+    "new_cpu_tasks": 7,
+    "new_cpu_outputs": 177408,
+    "new_cpu_scope": "6 functional-TCM sequence tasks plus 1 ASIC-bound layer_01 smoke task",
+    "asic_cpu_smoke_verified": true,
+    "asic_matrix_suite_verified": false
   }
 }

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "real_cpu_sequences_passed_asic_smoke_running",
+  "status": "asic_cpu_smoke_passed_synthesis_retry_running",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -54,6 +54,17 @@
       "archive": "light-light126-d3-monitor-arch03-20261109_055251-e60a3cc8e2f6.zip",
       "bytes": 10768820,
       "sha256": "78709f27e698c598a2173b0c97667eb0840e5256f8771398ad139992bf3f590b",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+      "archive": "light-light126-d3-libhash-arch03-20261109_055726-46cb3de310d2.zip",
+      "bytes": 10768840,
+      "sha256": "e7fa91c3b33538ba73c8c42b051b1fa1eb38401543875eaf35a501629975813d",
       "files": 383,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
@@ -188,15 +199,52 @@
       "screenshot": "server_synth01_progress2.png"
     },
     "asic_soc_monitor_fixed": {
-      "status": "running",
+      "status": "passed",
       "session": "d3_smoke04",
       "package_source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
       "cases": [
         "layer_01"
-      ]
+      ],
+      "summary_sha256": "e5159073b88106374e4954dc3b719ff485fb4c421797d14ce5bd0f5340e772e3",
+      "cpu_executed": true,
+      "asic_cpu_verified": true,
+      "global_FPGA_defined": false,
+      "outputs": 25344,
+      "cycles": 3890176,
+      "saturated": 0,
+      "window": {
+        "start_cycle": 68,
+        "end_cycle": 3890148,
+        "cycles": 3890080,
+        "start_ns": "18043.331529",
+        "end_ns": "25951907.404809",
+        "period_ns": "6.666666",
+        "input_words": 23488,
+        "output_words": 25344
+      },
+      "bus": {
+        "reads": 23488,
+        "writes": 48832,
+        "command_wait": 0,
+        "response_wait": 0
+      },
+      "clock_mode": {
+        "test_mode": 0,
+        "pllbypass": 1,
+        "divider_bypass": 1
+      },
+      "screenshot": "server_asic_smoke04_receipt.png",
+      "timing_verified": false,
+      "gate_simulation_verified": false,
+      "system_power_verified": false
+    },
+    "asic_synth_corrected_digest": {
+      "status": "running",
+      "session": "d3_synth02",
+      "package_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4"
     }
   },
-  "whole_soc_cpu_verified": false,
+  "whole_soc_cpu_verified": true,
   "strict_timing_verified": false,
   "system_power_verified": false,
   "old_hex100_resumed": false,
@@ -221,7 +269,7 @@
     "scope": "Move clock guard after task monitor include; no production RTL change",
     "unit_tests": 53,
     "log": "local_runs/d3_monitor_order_unit_tests_20261109.log",
-    "server_verified": false
+    "server_verified": true
   },
   "sram_digest_correction": {
     "actual_sha256": "a75e37ed1d6a8d9ea1193edc1aaa0757ff9359ac382d54821612056984afa807",
@@ -230,5 +278,7 @@
     "original_metadata_screenshot": "d3_sram_library_fingerprints.png",
     "fresh_metadata_screenshot": "server_sram_hash_metadata_monitor_unpack.png",
     "finding": "Fresh SHA256 matches original 03:12 screenshot, not the mistyped local metadata. Only fingerprint text corrected; no library change or ignored check."
-  }
+  },
+  "whole_soc_cpu_scope": "ASIC-bound RTL one layer_01 smoke case; complete fourteen-case suite still pending",
+  "asic_matrix_suite_verified": false
 }
