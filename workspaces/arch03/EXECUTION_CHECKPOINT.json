@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "D1 numeric/local RTL validation; D2/D3 local TCM, CPU firmware, ASIC boot/mode, synthesis report and VCD integrity preparation. No new server verification.",
+  "last_completed_stage": "Latest D3 packages uploaded via authorized Linux FileZilla; server ZIP and all unpacked entry hashes passed. First vendor TCM failed at 10 ps read sample; investigate testbench clock-to-Q aperture. stdcell vendor stage running.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -34,19 +34,19 @@
     "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local."
   ],
   "pending_authorization": {
-    "state": "asynchronous_user_question_pending",
+    "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
     "current_package": "../../local_runs/light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
-    "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work.",
-    "additional_package": "../../local_runs/light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip"
+    "reason": "Prior automatic approval rejection resolved by explicit user response. Latest D3 standard/sequence packages are staged on the AC820 with verified hashes; Linux FileZilla upload to the exact authorized destination has started.",
+    "additional_package": "../../local_runs/light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip",
+    "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Explicit user upload authorization is the remaining prerequisite for actual server work; do not bypass automatic approval rejection",
-    "After authorization, use latest_ready_packages (not old D1/D2 packages); observe shared desktop/processes/lock, upload via Linux FileZilla to the approved new destination and verify SHA256",
-    "Run vendor tcm/stdcell/asic_boot, ASIC CPU layer_01 smoke then standard 14 cases, separate functional CPU sequence cases",
-    "Run asic_synth in a new session, review all warnings/constraints/area basis; then implement/verify gate simulation and mapped full-window power from actual results",
-    "Do not resume old hex100 job or start optimization PR #6 before mandatory acceptance"
+    "Preserve d3_vendor01/tcm failure; local benches now sample at 3 ns inside same cycle and log early/settled first read; verify, commit, package and upload correction before new vendor TCM/boot runs",
+    "Observe currently running d3_vendor01/stdcell; then continue independent ASIC CPU smoke on unchanged production runtime",
+    "Run ASIC CPU smoke and standard matrix tests; separate sequence package for actual CPU sequence/recovery",
+    "Run whole-SoC synthesis and review actual reports, then gate/power; no old hex100 restart"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -62,7 +62,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Finished; exit() returned to tcsh shell in original platform directory, confirmed screenshot readonly_library_session_closed.png. No remote EDA task launched, no private package uploaded. VNC relay exec session 97189 remains; recheck windows/screenshot/lock/processes before further input.",
+  "server_readonly_job": "Existing VNC terminal remains idle; 2026-11-09 05:01 shared lock absent and no active EDA processes observed (only inspection Python itself). Original platform and old stopped run untouched.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -236,5 +236,13 @@
       "files": 438
     }
   ],
-  "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json"
+  "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json",
+  "active_transfer": {
+    "packages_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+    "board_staging": "/home/root/undergrad-d3-20261109",
+    "filezilla_local": "/home/board/undergrad-d3-20261109",
+    "destination": "/IC/light-light126-undergrad-d2-20261109",
+    "state": "FileZilla_success_2_packages_server_ZIP_SHA256_verified_unpack_running",
+    "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
+  }
 }

@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "local_D3_preparation_verified_upload_authorization_pending",
+    "phase": "vendor_validation_first_tcm_sampling_failure_under_investigation",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,9 +112,9 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Latest verified local packages are ready (383/438 files; clean-package 52 tests passed). Explicit upload authorization remains pending after automatic approval rejection. Next actual work: new locked vendor/ASIC CPU/sequence and whole-SoC synthesis runs; do not resume old hex100.",
+    "next": "Both D3 packages uploaded and server safe unpack hashes passed. Preserve d3_vendor01 TCM first-read failure; verify corrected within-cycle testbench sampling in a new package. Observe running stdcell stage, then ASIC CPU smoke. See UNDERGRAD_D3_SERVER_20261109.json.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
-    "server_uploaded": false,
+    "server_uploaded": true,
     "clean_package_input_files": 341,
     "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
     "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json",
@@ -126,6 +126,7 @@
     "corrected_packages_evidence": "evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json",
     "d3_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
     "d3_evidence": "evidence/UNDERGRAD_D3_PREPARATION_20261109.json",
-    "d3_ready_packages_evidence": "evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json"
+    "d3_ready_packages_evidence": "evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json",
+    "upload_authorization": "User explicitly allowed stated current and subsequent verified source/firmware/test package upload and server validation."
   }
 }

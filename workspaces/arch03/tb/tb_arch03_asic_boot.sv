@@ -22,7 +22,8 @@ module tb_arch03_asic_boot;
         rst_n=1;
         for(word_index=0;word_index<32768;word_index=word_index+1) begin
             @(negedge clk);addr=word_index;cs=1;
-            @(posedge clk);#0.001;
+            // Allow functional clock-to-Q delay, still inside the read cycle.
+            @(posedge clk);#3;
             for(lane=0;lane<8;lane=lane+1) begin
                 if((^expected[word_index*8+lane])===1'bx) $fatal(1,"Unknown source byte");
                 if(dout[lane*8+:8] !== expected[word_index*8+lane])

@@ -7,7 +7,7 @@ module tcm_check #(parameter DW=64,AW=15,DP=32768)(output reg done=0);
     reg [MW-1:0] wem=0;
     wire [DW-1:0] dout;
     reg [DW-1:0] expected[0:DP-1];
-    reg [DW-1:0] held,pattern;
+    reg [DW-1:0] held,pattern,early_read;
     integer b,k,m,a,j,checks=0;
     always #3.333 clk=~clk;
     arch03_tcm_ram #(.DP(DP),.DW(DW),.MW(MW),.AW(AW)) dut(.*);
@@ -23,6 +23,12 @@ module tcm_check #(parameter DW=64,AW=15,DP=32768)(output reg done=0);
         begin
             @(negedge clk);cs=1;we=0;addr=address;wem=0;
             @(posedge clk);#0.01;
+            early_read=dout;
+            // Functional macro models may have nonzero clock-to-Q delay.
+            // Check within this same cycle, before the falling edge; this
+            // does not waive any read or imply physical timing acceptance.
+            #2.99;
+            if(checks==0) $display("TCM_READ_SETTLE DW=%0d early=%h settled=%h sample_ns=3",DW,early_read,dout);
             if(dout!==expected[address])
                 $fatal(1,"TCM DW=%0d addr=%0d got=%h expected=%h",DW,address,dout,expected[address]);
             checks=checks+1;

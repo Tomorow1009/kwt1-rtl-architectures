@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-09 Asia/Shanghai",
+  "status": "vendor_validation_running",
+  "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+  "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+  "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
+  "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
+  "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
+  "packages": [
+    {
+      "archive": "light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
+      "bytes": 10769549,
+      "files": 383,
+      "sha256": "190056eb7ea44589b7d7249c952f9a40bbabc2cdb2c4ee60b77ed7249aee1274",
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "archive": "light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip",
+      "bytes": 14388276,
+      "files": 438,
+      "sha256": "7f5398c598b1756e15896dd4e52c4a0f7996072b8cb13b836a3c23b0e62c69c3",
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    }
+  ],
+  "local_screenshot_root": "../takeover_local/d2_20261109",
+  "transfer_screenshots": [
+    "filezilla_upload_verified_ui.png",
+    "server_zip_hash_verified.png",
+    "server_unpack_progress.png",
+    "server_before_vendor_stage.png"
+  ],
+  "preflight": {
+    "session": "d3_vendor01",
+    "new_session": true,
+    "team_lock_absent": true,
+    "active_eda_processes": [],
+    "observed_server_time": "2026-11-09 05:18:40"
+  },
+  "stages": {
+    "tcm": {
+      "status": "failed",
+      "session": "d3_vendor01",
+      "observed_start": "2026-11-09 05:21:54",
+      "observed_failure": "First ITCM read at addr 28672, time 129997 ps: unknown output versus 03deb9946f4a2500; no compile warnings. Testbench sampled 10 ps after rising edge. Clock-to-Q aperture hypothesis requires actual vendor rerun.",
+      "screenshot": "server_tcm_failure_detail.png"
+    },
+    "stdcell": {"status": "passed", "session": "d3_vendor01", "observed_start": "2026-11-09 05:24:05", "observed_pass": "2026-11-09 05:26:13", "screenshot": "server_stdcell_progress2.png"},
+    "asic_soc": {"status": "running", "session": "d3_smoke01", "cases": ["layer_01"]}
+  },
+  "whole_soc_cpu_verified": false,
+  "strict_timing_verified": false,
+  "system_power_verified": false,
+  "old_hex100_resumed": false,
+  "sampling_correction_local": {
+    "scope": "Read testbenches only; production RTL unchanged; server hypothesis not yet confirmed",
+    "sample_delay_ns": 3,
+    "tcm_pin_mock_run": "local_runs/tcm_20261109_052438_925786_pin_mock",
+    "boot_delayed_physical_mock_run": "local_runs/asic_boot_20261109_052517_217283",
+    "boot_synthetic_clock_to_q_ns": 1,
+    "vendor_verified": false
+  }
+}
