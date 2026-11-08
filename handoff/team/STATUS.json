@@ -25,7 +25,7 @@
     "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7"
   },
   "arch03": {
-    "phase": "hex100_batch_preparing",
+    "phase": "hex100_batch_running",
     "workspace": "workspaces/arch03",
     "branch": "codex/light-light126/arch03-e203",
     "source_commit": "f00e7acf7b40e76c1f47e83a58ab725a101b7e3f",
@@ -47,7 +47,7 @@
     "whole_soc_dc_and_gate_flow_complete": false,
     "official_precision_verified": false,
     "blocker": null,
-    "next": "Run all 100 samples / 1200 complete matrices through E203; whole-SoC DC, gate and speech classification remain unverified.",
+    "next": "Monitor existing hex100_soc01 process and state; do not launch a duplicate. Require all 1200 actual E203 captures plus final hash checks before declaring the batch passed.",
     "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40",
     "server_input_hashes_verified": 293,
     "server_icb_verified": true,
@@ -64,10 +64,18 @@
       "layers_per_sample": 12,
       "cases": 1200,
       "outputs": 30412800,
-      "status": "user_authorized_complete_real_E203_batch_pending",
+      "status": "running",
       "existing_record_scope": "Software only; not RTL/CPU or official classification acceptance",
       "manifest_claimed_rtl_commit": "9dcdc6bb38929caef610debd0657b6a02392d97e",
-      "claimed_commit_available_in_local_git": false
+      "claimed_commit_available_in_local_git": false,
+      "record": "evidence/ARCH03_BATCH100_20261108.json",
+      "tool_source_commit": "63abe3d0b53d45502e21cdf49bbbe49c0a305acb",
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_195108-63abe3d0b53d",
+      "run": "runs/hex100_soc01",
+      "driver_pid_at_launch": 205722,
+      "software_cases_verified": 1200,
+      "observed_cpu_cases": 2,
+      "observed_server_time": "2026-11-08T20:12:37"
     }
   },
   "member_acceptances": {

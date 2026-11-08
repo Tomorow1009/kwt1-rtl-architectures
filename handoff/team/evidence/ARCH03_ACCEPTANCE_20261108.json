@@ -120,10 +120,11 @@
     "layers_per_sample": 12,
     "cases": 1200,
     "outputs": 30412800,
-    "status": "user_authorized_complete_real_E203_batch_pending",
+    "status": "batch_running_not_yet_passed",
     "existing_record_scope": "Software only; not RTL/CPU or official classification acceptance",
     "manifest_claimed_rtl_commit": "9dcdc6bb38929caef610debd0657b6a02392d97e",
-    "claimed_commit_available_in_local_git": false
+    "claimed_commit_available_in_local_git": false,
+    "batch_record": "ARCH03_BATCH100_20261108.json"
   },
   "failed_attempt_history": "ARCH03_SERVER_20261108.json"
 }
