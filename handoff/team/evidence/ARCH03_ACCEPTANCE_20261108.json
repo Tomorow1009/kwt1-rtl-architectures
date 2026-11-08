@@ -120,11 +120,13 @@
     "layers_per_sample": 12,
     "cases": 1200,
     "outputs": 30412800,
-    "status": "batch_running_not_yet_passed",
+    "status": "user_stopped_for_throughput_optimization",
     "existing_record_scope": "Software only; not RTL/CPU or official classification acceptance",
     "manifest_claimed_rtl_commit": "9dcdc6bb38929caef610debd0657b6a02392d97e",
     "claimed_commit_available_in_local_git": false,
-    "batch_record": "ARCH03_BATCH100_20261108.json"
+    "batch_record": "ARCH03_BATCH100_20261108.json",
+    "passed_cpu_cases": 37,
+    "passed_cpu_outputs": 937728
   },
   "failed_attempt_history": "ARCH03_SERVER_20261108.json"
 }
