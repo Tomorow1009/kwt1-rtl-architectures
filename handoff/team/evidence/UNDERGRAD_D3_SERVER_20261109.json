@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "asic_cpu_smoke_passed_synthesis_retry_running",
+  "status": "asic_full_suite_running_synthesis_constraints_fix_prepared",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -239,9 +239,64 @@
       "system_power_verified": false
     },
     "asic_synth_corrected_digest": {
-      "status": "running",
+      "status": "failed_reports_not_accepted",
       "session": "d3_synth02",
-      "package_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4"
+      "package_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+      "library_checks_passed": true,
+      "sram_lc_compilation_passed": true,
+      "whole_soc_link_passed": true,
+      "memory_inventory": {
+        "RAMSP4096X16": 130,
+        "RAMSP128X16": 8
+      },
+      "mapped_synthesis_status": "mapped_artifacts_exist_constraints_invalid",
+      "link_progress_screenshot": "server_synth02_progress2.png",
+      "errors": [
+        "SDC first task-mode reset port misspelled; sourced constraints aborted before case analysis and I/O budgets",
+        "Requested 6.666666666 ns stored by DC as 6.666667000000 ns, outside strict threshold",
+        "Multi-group timing collection incorrectly required exactly one path",
+        "Virtual DC **logic_1** leaf incorrectly queried as physical library cell"
+      ],
+      "preliminary_reported_area": 3810997.784444,
+      "preliminary_latches": 24,
+      "preliminary_setup_examples_ns": [
+        -364.70791626,
+        -3.40749407
+      ],
+      "timing_verified": false,
+      "area_verified": false,
+      "scope": "Invalid/incomplete constraints: raw findings preserved for diagnosis only; no clock/timing/area acceptance",
+      "screenshots": [
+        "server_synth02_errors_metrics.png",
+        "server_synth02_lock_check.png",
+        "server_task_mode_ports.png",
+        "server_clock_pin_check.png"
+      ]
+    },
+    "asic_full_suite": {
+      "status": "running",
+      "session": "d3_full01",
+      "package_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+      "cases": [
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "extremes",
+        "rounding"
+      ],
+      "pid": 153366,
+      "started": "2026-11-09T06:19:47.812711",
+      "screenshot": "server_full01_progress1.png",
+      "activity_recorded": false
     }
   },
   "whole_soc_cpu_verified": true,
@@ -280,5 +335,27 @@
     "finding": "Fresh SHA256 matches original 03:12 screenshot, not the mistyped local metadata. Only fingerprint text corrected; no library change or ignored check."
   },
   "whole_soc_cpu_scope": "ASIC-bound RTL one layer_01 smoke case; complete fourteen-case suite still pending",
-  "asic_matrix_suite_verified": false
+  "asic_matrix_suite_verified": false,
+  "standard_library_units_metadata": {
+    "time": "1ns",
+    "voltage": "1V",
+    "current": "1mA",
+    "leakage_power": "1uW",
+    "screenshot": "server_synth02_units_and_progress_done.png",
+    "note": "Liberty metadata only; actual mapped timing/power report units still require review. SRAM leakage units are 1mW, not the standard-cell 1uW."
+  },
+  "synthesis_flow_correction": {
+    "status": "local_preparation",
+    "production_RTL_changed": false,
+    "clock_request_ns": "6.666666",
+    "strict_measured_period_check_preserved": true,
+    "changes": [
+      "Exact pinned top port names and inactive wakeup value from actual testbench",
+      "Catch Tcl errors and exit before mapping when task constraints fail",
+      "Take worst slack across all returned path groups; reject empty collections",
+      "Count only exact DC **logic_0**/**logic_1** virtual sources separately as zero synthesis area; reject other unresolved/zero-area cells"
+    ],
+    "tests": "55 Python tests passed, including Tcl fail-stop execution; Python 3.6 syntax passed",
+    "log": "local_runs/d3_sdc_area_final_unit_tests_20261109.log"
+  }
 }

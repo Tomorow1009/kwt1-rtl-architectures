@@ -46,17 +46,16 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_synth02 from 46cb3de package; inspect actual library/link/synthesis failures and reports",
-    "Run full 14-case ASIC-bound matrix suite after lock release, plus exact-window activity on selected case",
-    "Review full-SoC STA/area, implement and validate post-synthesis functions and system power. Preserve failures and never resume old hex100"
+    "Observe d3_full01 without interrupting; verify every capture and summary hash",
+    "Commit/test/package corrected SDC/area flow, upload via authorized Linux FileZilla; run d3_synth03 only after team lock released",
+    "Prepare gate function and exact-window activity/power validation; do not resume old hex100"
   ],
   "still_unverified": [
-    "Complete 14-case ASIC-bound CPU suite (single layer_01 smoke and two functional-TCM sequences passed)",
-    "ASIC TCM/ROM/clock/reset adaptation and whole SoC linking",
-    "strict 150 MHz synthesis/STA and complete area accounting",
-    "post-synthesis functional checks",
-    "full-window activity, system power and energy",
-    "official submission deadline, fields, templates and video requirements"
+    "Complete 14-case ASIC CPU suite currently running",
+    "Strict 150 MHz synthesis/STA and complete area accounting",
+    "Post-synthesis functional checks",
+    "Full-window activity, system power and energy",
+    "Official submission deadline, fields, templates and video requirements"
   ],
   "preserve": [
     "Do not resume old 100-sample run; retain 37 passed CPU cases and interrupted case 38",
@@ -64,7 +63,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Third terminal running d3_synth02 from 46cb3de libhash bundle. Fourth terminal idle in e60a3cc monitor bundle, latest screen is server_asic_smoke04_receipt.png. d3_smoke04 passed; do not run parallel EDA while synthesis owns lock.",
+  "server_readonly_job": "Third terminal: d3_full01 ASIC 14-case suite running in 46cb3de libhash bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_synth02 failed reporting and invalid constraints; preserve all artifacts. No simultaneous EDA.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -95,7 +94,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Implementation frozen at 83126c3; D3 evidence commit de6e6e4 is the latest package source. Final package receipts are being recorded. No uncommitted implementation changes.",
+  "uncommitted_follow_on": "SDC port/rounding/group-slack/virtual-area/fail-stop corrections under local test; production RTL unchanged.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -244,7 +243,7 @@
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "46cb3de libhash uploaded, server ZIP/entry hashes passed; d3_synth02 active",
+    "state": "Eight uploaded verified bundles preserved; corrected SDC package not created yet",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",

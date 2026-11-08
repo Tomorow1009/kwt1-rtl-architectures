@@ -1,5 +1,7 @@
 import unittest
-from soc_synth import area_inventory,constraints
+import tempfile
+from pathlib import Path
+from soc_synth import area_inventory,constraints,script
 
 
 def inventory():
@@ -16,6 +18,41 @@ def inventory():
 
 
 class SocSynthTests(unittest.TestCase):
+    def test_constraint_error_stops_tcl_before_compile(self):
+        try:
+            import tkinter
+        except ImportError:
+            self.skipTest('Tcl interpreter unavailable')
+        interp=tkinter.Tcl()
+        interp.eval(r'''
+set compiled 0
+proc set_app_var {name value} {set ::$name $value}
+proc read_ddc {args} {}
+proc current_design {args} {}
+proc link {} {return 1}
+proc get_cells {args} {return [lrepeat 138 cell]}
+proc sizeof_collection {c} {llength $c}
+proc set_dont_touch {args} {}
+proc create_clock {args} {}
+proc set_clock_uncertainty {args} {}
+proc all_clocks {} {return {hf_clk lf_clk}}
+proc get_ports {args} {return {}}
+proc source {path} {uplevel 1 $::test_sdc}
+proc compile {args} {set ::compiled 1}
+proc puts {args} {set ::last_message $args}
+proc exit {code} {error "TASK_EXIT $code"}
+proc quit {} {error UNEXPECTED_QUIT}
+''')
+        interp.setvar('test_sdc',constraints())
+        with tempfile.TemporaryDirectory() as directory:
+            run=Path(directory);(run/'libs').mkdir()
+            for name in ('small.db','large.db'):(run/'libs'/name).touch()
+            generated=script(run,{'standard_library_member':'standard.db'})
+            self.assertEqual(interp.call('info','complete',generated),1)
+            with self.assertRaisesRegex(tkinter.TclError,'TASK_EXIT 1'):interp.eval(generated)
+        self.assertEqual(int(interp.getvar('compiled')),0)
+        self.assertIn('Missing task-mode port io_pads_aon_erst_n_i_ival',str(interp.getvar('last_message')))
+
     def test_partition_counts_area_once_and_does_not_decide_scoring(self):
         result=area_inventory('\n'.join(inventory()),13804)
         self.assertEqual(result['whole_system_library_area'],13804)
@@ -36,11 +73,26 @@ class SocSynthTests(unittest.TestCase):
 
     def test_constraints_keep_cross_clock_paths_and_strict_frequency(self):
         commands='\n'.join(s for s in constraints().splitlines() if not s.lstrip().startswith('#'))
-        self.assertIn('-period 6.666666666',commands)
+        self.assertIn('-period 6.666666 ',commands)
         self.assertIn('-period 66.0',commands)
         for forbidden in ('set_false_path','set_multicycle_path','set_clock_groups'):
             self.assertNotIn(forbidden,commands)
         self.assertIn('Missing/ambiguous clock mode pin',commands)
+        self.assertIn('io_pads_aon_erst_n_i_ival 1',commands)
+        self.assertIn('io_pads_aon_pmu_dwakeup_n_i_ival 1',commands)
+        self.assertIn('io_pads_jtag_TCK_i_ival 0',commands)
+
+    def test_virtual_constants_are_separate_and_cannot_hide_unmapped_cells(self):
+        base=inventory()
+        virtual='top/const0\t**logic_0**\t0\tbuiltin_logic_constant'
+        result=area_inventory('\n'.join(base+[virtual]),13804)
+        self.assertEqual(result['groups']['platform_other']['virtual_constant_count'],1)
+        self.assertEqual(result['groups']['platform_other']['standard_cell_count'],1)
+        self.assertEqual(result['whole_system_library_area'],13804)
+        for bad in (virtual.replace('logic_0','logic_x'),virtual.replace('\t0\t','\t1\t'),
+                    virtual.replace('\t0\t','\tnan\t'),virtual.replace('builtin_logic_constant','lib/FAKE'),
+                    'top/unknown\tUNKNOWN\t2\tbuiltin_logic_constant'):
+            with self.assertRaises(ValueError):area_inventory('\n'.join(base+[bad]),13804)
 
 
 if __name__=='__main__':unittest.main()

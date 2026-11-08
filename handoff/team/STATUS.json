@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "asic_cpu_smoke_passed_synthesis_retry_running",
+    "phase": "asic_full_suite_running_synthesis_constraints_fix_prepared",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Third terminal running d3_synth02 from 46cb3de libhash bundle; inspect real LC/DC/STA results. Then full 14-case ASIC baseline and activity, followed by gate/power. Fourth diagnostic terminal idle in e60a3cc monitor bundle.",
+    "next": "Third terminal: d3_full01 ASIC 14-case suite running in 46cb3de libhash bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_synth02 failed reporting and invalid constraints; preserve all artifacts. No simultaneous EDA.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": true,
     "clean_package_input_files": 341,

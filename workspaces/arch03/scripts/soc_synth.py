@@ -23,14 +23,15 @@ create_clock -name hf_clk -period @PERIOD@ [get_ports hfextclk]
 create_clock -name lf_clk -period 66.0 [get_ports lfextclk]
 set_clock_uncertainty 0.1 [all_clocks]
 foreach {name value} {
-    io_pads_aon_erst_n_ival 1
-    io_pads_bootrom_n_ival 0
-    io_pads_dbgmode0_n_ival 1
-    io_pads_dbgmode1_n_ival 1
-    io_pads_dbgmode2_n_ival 1
-    io_pads_jtag_TCK_ival 0
-    io_pads_jtag_TMS_ival 0
-    io_pads_jtag_TDI_ival 0
+    io_pads_aon_erst_n_i_ival 1
+    io_pads_aon_pmu_dwakeup_n_i_ival 1
+    io_pads_bootrom_n_i_ival 0
+    io_pads_dbgmode0_n_i_ival 1
+    io_pads_dbgmode1_n_i_ival 1
+    io_pads_dbgmode2_n_i_ival 1
+    io_pads_jtag_TCK_i_ival 0
+    io_pads_jtag_TMS_i_ival 0
+    io_pads_jtag_TDI_i_ival 0
 } {
     set port [get_ports $name]
     if {[sizeof_collection $port] != 1} {error "Missing task-mode port $name"}
@@ -60,6 +61,8 @@ def script(run,cfg):
     databases=sorted(p for p in (run/'libs').glob('*.db') if p!=standard)
     if len(databases)!=2:raise ValueError('Expected two compiled SRAM databases')
     text=r'''
+proc arch03_collect_reports {} {
+global target_library
 set_app_var target_library [list @STANDARD@]
 set_app_var link_library [concat [list *] $target_library [list @DATABASES@]]
 read_ddc linked.ddc
@@ -92,8 +95,15 @@ foreach kind {RAMSP128X16 RAMSP4096X16} {
 }
 foreach delay {max min} {
     set paths [get_timing_paths -delay_type $delay -max_paths 1]
-    if {[sizeof_collection $paths] != 1} {error "Missing constrained whole-SoC timing path"}
-    foreach_in_collection path $paths {puts $out "$delay [get_attribute $path slack]"}
+    # DC returns up to max_paths PER GROUP; a complete SoC has multiple groups.
+    if {[sizeof_collection $paths] < 1} {error "Missing constrained whole-SoC timing path"}
+    set worst {}
+    foreach_in_collection path $paths {
+        set slack [get_attribute $path slack]
+        if {$worst eq {} || $slack < $worst} {set worst $slack}
+    }
+    puts $out "$delay $worst"
+    puts $out "${delay}_path_groups [sizeof_collection $paths]"
 }
 puts $out "latches [sizeof_collection [all_registers -level_sensitive]]"
 close $out
@@ -101,6 +111,12 @@ close $out
 set out [open leaf_area.tsv w]
 foreach_in_collection cell [get_cells -hierarchical -filter "is_hierarchical == false"] {
     set reference [get_attribute $cell ref_name]
+    # DC logical constant sources are virtual nodes, not physical tie cells.
+    # Only these exact built-ins have zero area; all other leaves need a library.
+    if {$reference eq "**logic_0**" || $reference eq "**logic_1**"} {
+        puts $out "[get_object_name $cell]\t$reference\t0\tbuiltin_logic_constant"
+        continue
+    }
     set libcell [get_lib_cells */$reference]
     if {[sizeof_collection $libcell] != 1} {error "Unmapped/ambiguous leaf $reference"}
     puts $out "[get_object_name $cell]\t$reference\t[get_attribute $libcell area]\t[get_object_name $libcell]"
@@ -110,6 +126,11 @@ set out [open latch_inventory.txt w]
 foreach_in_collection cell [all_registers -level_sensitive] {puts $out [get_object_name $cell]}
 close $out
 puts "ARCH03_SOC_SYNTH_REPORTS_READY timing_verified=false scoring_area_verified=false"
+}
+if {[catch {arch03_collect_reports} message]} {
+    puts stderr "Error: ARCH03_SYNTH_ABORT $message"
+    exit 1
+}
 quit
 '''
     for key,value in {'STANDARD':'{%s}'%standard,'DATABASES':' '.join('{%s}'%p for p in databases)}.items():
@@ -133,10 +154,17 @@ def area_inventory(text,reported_total):
         name,reference,value,library=fields
         if not name or name in seen:raise ValueError('Duplicate/missing leaf instance')
         seen.add(name);area=float(value)
-        if not math.isfinite(area) or area<=0:raise ValueError('Missing/invalid leaf library area')
-        kind='sram' if reference in ('RAMSP128X16','RAMSP4096X16') else 'standard_cell'
+        if reference in ('**logic_0**','**logic_1**'):
+            if area!=0 or library!='builtin_logic_constant':
+                raise ValueError('Invalid virtual constant area/source')
+            kind='virtual_constant'
+        else:
+            if not math.isfinite(area) or area<=0 or library=='builtin_logic_constant':
+                raise ValueError('Missing/invalid leaf library area')
+            kind='sram' if reference in ('RAMSP128X16','RAMSP4096X16') else 'standard_cell'
         category=owner(name)
-        group=groups.setdefault(category,dict(standard_cell_area=0.,sram_area=0.,standard_cell_count=0,sram_count=0))
+        group=groups.setdefault(category,dict(standard_cell_area=0.,sram_area=0.,standard_cell_count=0,sram_count=0,
+                                             virtual_constant_area=0.,virtual_constant_count=0))
         group[kind+'_area']+=area;group[kind+'_count']+=1
         rows.append(dict(instance=name,reference=reference,library=library,area=area,owner=category,kind=kind))
     expected={('itcm','RAMSP4096X16'):32,('dtcm','RAMSP4096X16'):32,
@@ -151,6 +179,7 @@ def area_inventory(text,reported_total):
         raise ValueError('Leaf area sum disagrees with whole-SoC report')
     return dict(whole_system_library_area=total,reported_total=float(reported_total),groups=groups,
                 leaf_count=len(rows),physical_sram_bytes=1042*1024,
+                virtual_constant_note='DC built-in logical sources have zero synthesis area; no physical tie-cell insertion or area is claimed',
                 units='library area units; physical unit basis requires review',
                 official_scoring_area=None,scoring_area_verified=False,
                 shared_memory_treatment='unresolved; no exemption or inclusion assumed',
