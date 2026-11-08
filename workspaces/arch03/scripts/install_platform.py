@@ -5,13 +5,38 @@ External vendor libraries are not copied. Python 3.6 compatible.
 """
 import argparse,hashlib,json,re,shutil
 from pathlib import Path
+from timing_contract import TB_HALF_PERIOD_NS
+from technology_binding import patch_generic_cells
 EXPECTED='ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e'
 ROOT=Path(__file__).resolve().parents[3]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def replace_once(text,old,new):
     if text.count(old)!=1:raise ValueError('Platform context changed: '+old[:90])
     return text.replace(old,new,1)
-def install(source,dest):
+def patch_tcm(text):
+    """Change only the ASIC generic RAM instance, preserving platform ports."""
+    text,n=re.subn(r'\bsirv_gnrl_ram\s*#\s*\(', 'arch03_tcm_ram #(', text)
+    if n!=1:raise ValueError('Expected exactly one ASIC generic TCM RAM instance')
+    return text
+
+def platform_sources(platform):
+    """Strict source list parser; an unfamiliar file-list directive is an error."""
+    result=[]
+    for raw in (platform/'vcode_rtl.f').read_text().splitlines():
+        line=raw.strip()
+        if not line or line.startswith('//') or line=='-sverilog':continue
+        candidate=line[3:].strip() if line.startswith('-v ') else line
+        # Include directories are collected separately from the pinned RTL tree.
+        if candidate.startswith('+incdir+'):continue
+        if not candidate.startswith('./'):
+            raise ValueError('Unsupported platform file-list entry: '+line)
+        path=(platform/candidate[2:]).resolve();path.relative_to(platform.resolve())
+        if not path.is_file():raise ValueError('Missing platform source: '+str(path))
+        if path not in result:result.append(path)
+    if not result:raise ValueError('Empty platform source list')
+    return result
+
+def install(source,dest,asic=False):
     source=source.resolve();dest=dest.resolve()
     if dest.exists():raise ValueError('Refusing existing platform destination')
     files=sorted([p for p in (source/'rtl').rglob('*') if p.is_file() and p.suffix in ('.v','.vh','.sv')]+
@@ -56,17 +81,32 @@ def install(source,dest):
     if len(buses)!=1:raise ValueError('Unexpected platform split-bus declaration')
     pos=buses[0].start();text=text[:pos]+declarations+'\n'+text[pos:]
     path.write_text(text)
+    modified=[path]
+    if asic:
+        for name in ('itcm','dtcm'):
+            ram=dest/('rtl/e203/core/e203_%s_ram.v'%name)
+            ram.write_text(patch_tcm(ram.read_text()))
+            modified.append(ram)
+        generic=dest/'rtl/e203/generic/GENERIC_RVT_SMIC.v'
+        mapped,binding_counts=patch_generic_cells(generic.read_text())
+        generic.write_text(mapped);modified.append(generic)
     tb=dest/'tb/tb_top.v';text=tb.read_text()
     text,n=re.subn(r'(`define\s+PC_\w+\s+)[^\n]+',r"\g<1>32'hffffffff",text)
     if n!=5:raise ValueError('Unexpected legacy PC monitor count '+str(n))
-    text=replace_once(text,'#2 clk <= ~clk;', '#3.3335 clk <= ~clk;')
+    if re.search(r'`timescale\b',text):raise ValueError('Unexpected platform TB time precision')
+    text='`timescale 1ns/1fs\n'+text
+    text=replace_once(text,'#2 clk <= ~clk;', '#'+TB_HALF_PERIOD_NS+' clk <= ~clk;')
     text=replace_once(text,'#40000000','#1000000000')
     text=text.replace('$finish;', '$fatal(1,"Legacy platform monitor exited without arch03 acceptance");')
     text=re.sub(r'(?m)^(.*\$(?:dump|fsdbDump)\w+\s*\(.*)$',r'// ARCH03 no bulk waves: \1',text)
     text=replace_once(text,'endmodule','`include "arch03_monitor.svh"\nendmodule')
     tb.write_text(text)
+    modified.append(tb)
     result=dict(original_root=str(source),baseline_sha256=digest,original_files=records,
-                modified_files={p.relative_to(dest).as_posix():sha(p) for p in (path,tb)},
+                modified_files={p.relative_to(dest).as_posix():sha(p) for p in modified},
+                tcm_mode='asic_macro' if asic else 'legacy_functional',
+                generic_cell_bindings=binding_counts if asic else None,
+                asic_simulation_ready=False,
                 changes=['ICB accelerator at 0x40000000','new 512 KiB SRAM at 0xa0000000',
                          '150 MHz TB clock and CPU writeback acceptance monitor'],
                 competition_memory_compatibility='not_confirmed')
@@ -74,4 +114,5 @@ def install(source,dest):
     return result
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('destination',type=Path)
-    a=p.parse_args();print(json.dumps(install(a.source,a.destination),indent=2))
+    p.add_argument('--asic',action='store_true',help='Replace both ASIC TCM RAM instances; does not adapt the boot TB')
+    a=p.parse_args();print(json.dumps(install(a.source,a.destination,asic=a.asic),indent=2))

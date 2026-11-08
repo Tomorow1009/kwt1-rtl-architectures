@@ -1,0 +1,25 @@
+{
+  "schema": "arch03-smic-generic-binding-v1",
+  "library_member": "S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.lib",
+  "library_sha256": "5d236b1571f5bc791895328fa3f6f94e3873e985ee7963b9ac5e3e849b48949f",
+  "corner": "SS 0.99 V 125 C",
+  "source": "Read-only inspection of the existing official platform and target Liberty on 2026-11-09; only binding metadata is stored here, no vendor library contents",
+  "cells": {
+    "BUFV4_8TR40": {"target": "BUFV4_12TR40", "count": 1, "ports": ["I", "Z"], "pins": ["I", "Z"], "function": "I"},
+    "CLKBUFV4_8TR40": {"target": "CLKBUFV4_12TR40", "count": 1, "ports": ["I", "Z"], "pins": ["I", "Z"], "function": "I"},
+    "CLKAND2V4_8TR40": {"target": "CLKAND2V4_12TR40", "count": 1, "ports": ["A1", "A2", "Z"], "pins": ["A1", "A2", "Z"], "function": "(A1&A2)"},
+    "CLKNAND2V4_8TR40": {"target": "CLKNAND2V4_12TR40", "count": 1, "ports": ["A1", "A2", "ZN"], "pins": ["A1", "A2", "ZN"], "function": "(!(A1&A2))"},
+    "CKMUX2V4_8TR40": {"target": "CLKMUX2V4_12TR40", "count": 11, "ports": ["I0", "I1", "S", "Z"], "pins": ["I0", "I1", "S", "Z"], "function": "((I0&(!S))|(I1&S))"},
+    "INV4_8TR40": {"target": "INV4_12TR40", "count": 2, "ports": ["I", "ZN"], "pins": ["I", "ZN"], "function": "(!I)"},
+    "OR2V4_8TR40": {"target": "OR2V4_12TR40", "count": 2, "ports": ["A1", "A2", "Z"], "pins": ["A1", "A2", "Z"], "function": "(A1|A2)"},
+    "CLKLANAQV4_8TR40": {"target": "CLKLANAQV4_12TR40", "count": 1, "ports": ["CK", "E", "Q", "TE"], "pins": ["CK", "E", "M", "Q", "TE"], "function_attribute": "state_function", "function": "((M|TE)&CK)", "clock_gating_integrated_cell": "latch_posedge_postcontrol"},
+    "CLKXOR2V4_8TR40": {"target": "CLKXOR2V4_12TR40", "count": 1, "ports": ["A1", "A2", "Z"], "pins": ["A1", "A2", "Z"], "function": "(A1^A2)"},
+    "NAND2V4_8TR40": {"target": "NAND2V4_12TR40", "count": 1, "ports": ["A1", "A2", "ZN"], "pins": ["A1", "A2", "ZN"], "function": "(!(A1&A2))"},
+    "NORV4_8TR40": {"target": "NOR2V4_12TR40", "count": 1, "ports": ["A1", "A2", "ZN"], "pins": ["A1", "A2", "ZN"], "function": "(!(A1|A2))"}
+  },
+  "limits": [
+    "Functional/pin compatibility only; this does not establish equal delays, power or drive strengths across 8TR40 and 12TR40",
+    "The integrated gate latches E while CK is low; TE is a post-latch control and must remain static during functional timing measurements",
+    "Actual DC link, ASIC vendor-cell simulation, clock/reset timing and power remain unverified"
+  ]
+}

@@ -28,6 +28,8 @@ def runtime(rel):
             or rel.startswith(('workspaces/arch03/rtl/','workspaces/arch03/sw/','workspaces/arch03/tb/'))
             or rel in ('handoff/team/server_config.json','workspaces/arch03/scripts/server_run.py',
                        'workspaces/arch03/scripts/dc_blocks.py','workspaces/arch03/scripts/install_platform.py',
+                       'workspaces/arch03/scripts/asic_link.py',
+                       'workspaces/arch03/scripts/technology_binding.py','workspaces/arch03/technology_bindings.json',
                        'workspaces/arch03/scripts/timing_contract.py'))
 
 def capture(path,expected,saturated,columns):
@@ -73,6 +75,13 @@ def check_vcs(root,session,name,reference):
             require(match is not None,'Missing CPU counters')
             require(int(match.group(1))==c['cycles']>0,'CPU cycle mismatch')
             require(int(match.group(2))==c['saturated']==sum(sats),'CPU saturation count mismatch')
+            from server_run import read_task_window
+            window=read_task_window(log)
+            require(c.get('task_window')==window and window['cycles']<=c['cycles'],'Full-task timing window mismatch')
+            if 'activity' in c:
+                activity=c['activity'];wave=run/(case+'.vcd')
+                require(activity['file']==wave.name and wave.is_file(),'System activity file missing')
+                require(sha(wave)==activity['sha256'] and wave.stat().st_size==activity['bytes'],'System activity changed')
         records.append(dict(case=case,outputs=25344,capture_sha256=sha(path),log_sha256=sha(run/(case+'.log'))))
     return dict(summary_sha256=sha(run/'summary.json'),cases=records,cpu_executed=name=='soc')
 

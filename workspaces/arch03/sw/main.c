@@ -9,9 +9,16 @@ int main(void) {
     uint32_t before_lo,before_hi,after_lo,after_hi,again;
     int rc;
     mail[0]=0;
+    // Invalidate prior task state before the measured load window. Physical SRAM
+    // contents remain; every new task must supply all input and parameter words.
+    kwt_abort();
     do { __asm__ volatile("csrr %0,mcycleh":"=r"(before_hi));
          __asm__ volatile("csrr %0,mcycle":"=r"(before_lo));
          __asm__ volatile("csrr %0,mcycleh":"=r"(again)); } while(before_hi!=again);
+    // The passive bus observer starts at this store's successful response.
+    // The fence ensures no source input read precedes that boundary.
+    mail[8]=0x4b575442u;
+    __asm__ volatile("fence iorw,iorw" ::: "memory");
     // Initial layer loading occurs through E203's actual system bus, not a TB force.
     for(unsigned i=0;i<KWT_LOAD_WORDS;i++) input[i]=source[i];
     __asm__ volatile("fence iorw,iorw" ::: "memory");

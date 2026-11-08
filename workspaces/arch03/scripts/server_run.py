@@ -61,7 +61,29 @@ def check_capture(p,task,cols):
         seen.add(i)
     if len(seen)!=25344:raise ValueError('Incomplete matrix')
     return dict(outputs=len(seen),capture_sha256=sha(p),expected_sha256=sha(task/'result.hex'))
-def vcs(stage,cfg,run,platform_source,cases):
+def vcs_tcm(cfg,run):
+    files=[A3/'rtl/arch03_shared_sram.sv',A3/'rtl/arch03_tcm_ram.sv',A3/'tb/tb_arch03_tcm.sv']+vendor(cfg,run)
+    tracked=files+[run/'arch02_sram_config.vh']
+    before={str(p):sha(p) for p in tracked}
+    save(run/'source_inputs.json',before)
+    cmd=[cfg['tools']['vcs'],'-full64','-sverilog','-timescale=1ns/1ps','+define+ARM_UD_MODEL',
+         '+incdir+'+str(run),'-top','tb_arch03_tcm','-o',str(run/'simv')]+files
+    log=call(cmd,run,'compile.log')
+    if re.search(r'Warning-\[(?:IPDW|PCWM-W|INAV|SIOB)\]',log):raise ValueError('TCM VCS width/declaration warning')
+    text=call([run/'simv'],run,'tcm.log')
+    if 'ARCH03_TCM_PASS macros=64 cpu_executed=false' not in text:raise ValueError('TCM vendor test did not complete')
+    geometries=re.findall(r'TCM_GEOMETRY_PASS DW=(\d+) DP=(\d+) checks=(\d+) macros=32',text)
+    if sorted(geometries)!=[('32','65536','65621'),('64','32768','33061')]:
+        raise ValueError('TCM coverage does not match complete address/mask regression')
+    for path,digest in before.items():
+        if sha(Path(path))!=digest:raise ValueError('TCM vendor test input changed')
+    return dict(status='passed',scope='tcm_vendor_functional_only',cpu_executed=False,
+                vendor_model='ARM_UD_MODEL',geometry_checks=geometries,
+                timing_verified=False,whole_soc_verified=False,
+                artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})
+def vcs(stage,cfg,run,platform_source,cases,activity_cases=()):
+    if activity_cases and (stage!='soc' or not set(activity_cases).issubset(cases)):
+        raise ValueError('Activity cases must be selected SoC cases')
     files=source_list();includes=[run,A3/'tb']
     top='tb_arch03_icb';cols=3
     if stage=='soc':
@@ -77,7 +99,7 @@ def vcs(stage,cfg,run,platform_source,cases):
                 if p not in pf:pf.append(p)
         if not pf:raise ValueError('Empty platform file list')
         # Defines precede CPU source files, as in the original list. TB is last.
-        files=pf+files+[platform/'tb/tb_top.v'];top='tb_top';cols=2
+        files=pf+files+[A3/'tb/arch03_task_window.sv',platform/'tb/tb_top.v'];top='tb_top';cols=2
         includes += [platform/'rtl/e203/core']
     else:files.append(A3/'tb/tb_arch03_icb.sv')
     files+=vendor(cfg,run)
@@ -106,6 +128,7 @@ def vcs(stage,cfg,run,platform_source,cases):
         capture=run/(name+'.csv')
         cmd=[run/'simv','+DATA_DIR='+str(task),'+CAPTURE='+str(capture),'+SHIFT='+str(info['shift'])]
         if stage=='soc':cmd+=['+TESTCASE='+str(ROOT/'firmware'/name)]
+        if name in activity_cases:cmd+=['+ACTIVITY='+str(run/(name+'.vcd'))]
         text=call(cmd,run,name+'.log')
         marker='ARCH03_SOC_PASS outputs=25344 cpu_executed=true' if stage=='soc' else 'ARCH03_ICB_PASS outputs=25344'
         if marker not in text:raise ValueError('Missing acceptance marker '+name)
@@ -114,19 +137,46 @@ def vcs(stage,cfg,run,platform_source,cases):
             found=re.search(r'ARCH03_SOC_PASS[^\n]*cycles=(\d+) saturated=(\d+)',text)
             if not found:raise ValueError('Missing cycle accounting')
             result.update(cycles=int(found.group(1)),saturated=int(found.group(2)))
+            window=read_task_window(text)
+            if window['cycles']>result['cycles']:raise ValueError('Bus timing window exceeds enclosing CPU cycle interval')
+            result['task_window']=window
+            if name in activity_cases:
+                activity=run/(name+'.vcd')
+                if not activity.is_file() or activity.stat().st_size==0:raise ValueError('Missing system activity')
+                result['activity']=dict(file=activity.name,sha256=sha(activity),bytes=activity.stat().st_size,
+                                        scope='u_e203_soc_top',power_estimated=False)
         results.append(result);print('CASE_PASS',stage,name,flush=True)
     for path,digest in source_hashes.items():
         if sha(Path(path))!=digest:raise ValueError('Input changed during VCS '+path)
     return dict(status='passed',stage=stage,cpu_executed=stage=='soc',cases=results,
                 real_outputs=sum(r['outputs'] for r in results if r['case'].startswith('layer_')),
                 official_precision_verified=False,physical_signoff=False)
+
+def read_task_window(text):
+    from timing_contract import validate_period,TB_PERIOD_NS
+    from decimal import Decimal
+    matches=re.findall(r'ARCH03_TASK_WINDOW start_cycle=(\d+) end_cycle=(\d+) cycles=(\d+) start_ns=([0-9.]+) end_ns=([0-9.]+) period_ns=([0-9.]+) input_words=(\d+) output_words=(\d+)',text)
+    if len(matches)!=1:raise ValueError('Expected exactly one full-task bus timing window')
+    start,end,cycles,t0,t1,period,loads,outputs=matches[0]
+    start,end,cycles,loads,outputs=map(int,(start,end,cycles,loads,outputs))
+    validate_period(period)
+    if not (end-start==cycles>0 and loads==23488 and outputs==25344):raise ValueError('Invalid task window counts')
+    if Decimal(period)!=Decimal(TB_PERIOD_NS):raise ValueError('Measured TB period differs from frozen period')
+    if abs((Decimal(t1)-Decimal(t0))-Decimal(cycles)*Decimal(period))>Decimal('0.000002'):
+        raise ValueError('Task waveform time and cycle count disagree')
+    return dict(start_cycle=start,end_cycle=end,cycles=cycles,start_ns=t0,end_ns=t1,period_ns=period,
+                input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','dc_accel','dc_shared'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','tcm','dc_accel','dc_shared','asic_link'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
+    p.add_argument('--activity-cases',nargs='*',default=[],help='SoC cases to record complete-system VCD over the measured task window')
     a=p.parse_args()
+    if len(a.cases)!=len(set(a.cases)):raise ValueError('Duplicate case names would overwrite run artifacts')
+    if a.activity_cases and (a.stage!='soc' or not set(a.activity_cases).issubset(a.cases)):
+        raise ValueError('Activity cases must be selected SoC cases')
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,64}',a.session):raise ValueError('Bad session')
     cfg=json.loads((ROOT/'handoff/team/server_config.json').read_text())
     session=ROOT/'runs'/a.session
@@ -150,12 +200,18 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage.startswith('dc_'):
+            if a.stage=='tcm':
+                report=vcs_tcm(cfg,run)
+            elif a.stage=='asic_link':
+                from asic_link import link_soc
+                vendor(cfg,run)
+                report=link_soc(cfg,run,a.platform,source_list(),call)
+            elif a.stage.startswith('dc_'):
                 from dc_blocks import synth
                 vendor(cfg,run)
                 top='arch03_icb_accel' if a.stage=='dc_accel' else 'arch03_shared_sram'
                 report=synth(cfg,run,top,source_list(),call)
-            else:report=vcs(a.stage,cfg,run,a.platform,a.cases)
+            else:report=vcs(a.stage,cfg,run,a.platform,a.cases,a.activity_cases)
             inputs();save(run/'summary.json',report)
             record.update(status='passed',summary_sha256=sha(run/'summary.json'))
         except BaseException as exc:record.update(status='failed',error=str(exc));raise

@@ -3,6 +3,10 @@ from decimal import Decimal, InvalidOperation
 
 # Round DOWN: 6.667 ns and even rounding 20/3 upward are not 150 MHz evidence.
 CLOCK_PERIOD_NS = '6.666666666'
+# Simulation uses an explicit 1 fs precision; round down to a representable
+# half-period. Report the measured waveform period, never substitute 6.667 ns.
+TB_HALF_PERIOD_NS = '3.333333'
+TB_PERIOD_NS = '6.666666'
 
 
 def validate_period(value):
