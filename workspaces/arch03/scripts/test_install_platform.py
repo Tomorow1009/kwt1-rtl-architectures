@@ -1,5 +1,7 @@
 import tempfile
 import unittest
+import hashlib
+from unittest.mock import patch
 from pathlib import Path
 from install_platform import patch_tcm,patch_rom,platform_sources,select_else_interface
 
@@ -34,6 +36,23 @@ class PlatformTests(unittest.TestCase):
             self.assertEqual(platform_sources(root),[(root/'rtl.v').resolve()])
             for invalid in ('-f hidden.f','./missing.v','./../escape.v','+define+FPGA',''):
                 source_list.write_text(invalid)
+                with self.assertRaises(ValueError):platform_sources(root)
+
+    def test_only_exact_reviewed_filelist_can_exclude_stale_libraries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            (root/'rtl.v').write_text('module top;endmodule')
+            source_list=root/'vcode_rtl.f'
+            text='./rtl.v\n'+''.join('-v /old/library%d.v\n'%i for i in range(6))
+            source_list.write_text(text)
+            with self.assertRaises(ValueError):platform_sources(root)
+            reviewed=hashlib.sha256(source_list.read_bytes()).hexdigest()
+            with patch('install_platform.PINNED_FILELIST_SHA256',reviewed):
+                self.assertEqual(platform_sources(root),[(root/'rtl.v').resolve()])
+                source_list.write_text(text+'-v /other/unreviewed.v\n')
+                with self.assertRaises(ValueError):platform_sources(root)
+            source_list.write_text('./rtl.v\n-v /old/only_one.v\n')
+            with patch('install_platform.PINNED_FILELIST_SHA256',hashlib.sha256(source_list.read_bytes()).hexdigest()):
                 with self.assertRaises(ValueError):platform_sources(root)
 
 

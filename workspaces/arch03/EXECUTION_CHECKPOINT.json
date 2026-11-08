@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Latest D3 packages uploaded via authorized Linux FileZilla; server ZIP and all unpacked entry hashes passed. First vendor TCM failed at 10 ps read sample; investigate testbench clock-to-Q aperture. stdcell vendor stage running.",
+  "last_completed_stage": "Real vendor stdcell, full-address TCM and physical boot mapping passed. ASIC CPU stopped before compile on stale library file-list entries; strict pinned-filelist correction passed 53 local tests and needs new package.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -31,7 +31,8 @@
     "D2 follow-on: pinned the actual standard-cell Verilog model (2198450 bytes; all 11 target modules present; no includes); local independent stdcell substitute bench passed 8 input patterns and 12 gate state checks. Server stdcell entry added but NOT executed.",
     "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false",
     "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run.",
-    "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local."
+    "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local.",
+    "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
@@ -43,13 +44,12 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Preserve d3_vendor01/tcm failure; local benches now sample at 3 ns inside same cycle and log early/settled first read; verify, commit, package and upload correction before new vendor TCM/boot runs",
-    "Observe currently running d3_vendor01/stdcell; then continue independent ASIC CPU smoke on unchanged production runtime",
-    "Run ASIC CPU smoke and standard matrix tests; separate sequence package for actual CPU sequence/recovery",
+    "Commit and clean-verify standard/sequence packages containing strict pinned file-list handling",
+    "Upload new packages via already-authorized Linux FileZilla path; run ASIC CPU smoke, full 14 cases and separate sequence",
     "Run whole-SoC synthesis and review actual reports, then gate/power; no old hex100 restart"
   ],
   "still_unverified": [
-    "new server VCS, real E203 and vendor macro execution",
+    "new whole-SoC real E203 execution (vendor TCM/stdcell/boot components now passed)",
     "ASIC TCM/ROM/clock/reset adaptation and whole SoC linking",
     "strict 150 MHz synthesis/STA and complete area accounting",
     "post-synthesis functional checks",
@@ -62,7 +62,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Existing VNC terminal remains idle; 2026-11-09 05:01 shared lock absent and no active EDA processes observed (only inspection Python itself). Original platform and old stopped run untouched.",
+  "server_readonly_job": "No active EDA at observed 05:33:26 after d3_vendor02/asic_boot completion. Third terminal in sampling bundle; old stopped jobs untouched.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -242,7 +242,8 @@
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "FileZilla_success_2_packages_server_ZIP_SHA256_verified_unpack_running",
+    "state": "D3 ready and sampling packages uploaded, server ZIP/entry hashes verified",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
-  }
+  },
+  "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json"
 }

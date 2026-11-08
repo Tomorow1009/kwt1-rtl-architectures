@@ -8,6 +8,7 @@ from pathlib import Path
 from timing_contract import TB_HALF_PERIOD_NS
 from technology_binding import patch_generic_cells,mask_comments
 EXPECTED='ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e'
+PINNED_FILELIST_SHA256='022c32e139d83331d16412acf15eea7ce2b9d1b8bc7ab469202984f1a3d6bcc0'
 ROOT=Path(__file__).resolve().parents[3]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def replace_once(text,old,new):
@@ -56,19 +57,32 @@ def patch_rom(text):
 
 def platform_sources(platform):
     """Strict source list parser; an unfamiliar file-list directive is an error."""
-    result=[]
-    for raw in (platform/'vcode_rtl.f').read_text().splitlines():
+    result=[];excluded=[]
+    source_file=platform/'vcode_rtl.f'
+    reviewed=sha(source_file)==PINNED_FILELIST_SHA256
+    for raw in source_file.read_text().splitlines():
         line=raw.strip()
         if not line or line.startswith('//') or line=='-sverilog':continue
         candidate=line[3:].strip() if line.startswith('-v ') else line
         # Include directories are collected separately from the pinned RTL tree.
         if candidate.startswith('+incdir+'):continue
+        if line.startswith('-v /'):
+            # Exactly six stale library search entries in the pinned platform:
+            # two pad libraries (outside e203_soc_top), one PLL library (the
+            # platform PLL is passthrough), and three replaced SRAM/ROM models.
+            # Never open these old paths. VCS elaboration/DC link must still
+            # resolve every ACTIVE reference using our explicit model/library
+            # inputs; unresolved instances remain a hard failure.
+            if not reviewed:raise ValueError('Unreviewed external platform library entry: '+line)
+            excluded.append(candidate)
+            continue
         if not candidate.startswith('./'):
             raise ValueError('Unsupported platform file-list entry: '+line)
         path=(platform/candidate[2:]).resolve();path.relative_to(platform.resolve())
         if not path.is_file():raise ValueError('Missing platform source: '+str(path))
         if path not in result:result.append(path)
     if not result:raise ValueError('Empty platform source list')
+    if excluded and len(excluded)!=6:raise ValueError('Pinned external library entry count changed')
     return result
 
 def install(source,dest,asic=False,monitor='arch03_monitor.svh',asic_boot=False):

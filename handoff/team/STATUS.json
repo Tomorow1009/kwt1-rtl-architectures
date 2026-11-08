@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "vendor_validation_first_tcm_sampling_failure_under_investigation",
+    "phase": "vendor_components_passed_platform_filelist_fix_prepared",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Both D3 packages uploaded and server safe unpack hashes passed. Preserve d3_vendor01 TCM first-read failure; verify corrected within-cycle testbench sampling in a new package. Observe running stdcell stage, then ASIC CPU smoke. See UNDERGRAD_D3_SERVER_20261109.json.",
+    "next": "Freeze/upload strict file-list parser correction; resume new ASIC CPU and sequence sessions, then whole-SoC synthesis. Actual vendor TCM/stdcell/boot passed; CPU/STA/power still pending.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": true,
     "clean_package_input_files": 341,
@@ -127,6 +127,12 @@
     "d3_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
     "d3_evidence": "evidence/UNDERGRAD_D3_PREPARATION_20261109.json",
     "d3_ready_packages_evidence": "evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json",
-    "upload_authorization": "User explicitly allowed stated current and subsequent verified source/firmware/test package upload and server validation."
+    "upload_authorization": "User explicitly allowed stated current and subsequent verified source/firmware/test package upload and server validation.",
+    "d3_server_evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
+    "vendor_components_verified": [
+      "stdcell",
+      "tcm",
+      "asic_boot"
+    ]
   }
 }

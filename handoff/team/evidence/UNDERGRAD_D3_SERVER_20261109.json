@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "vendor_validation_running",
+  "status": "vendor_components_passed_platform_filelist_fix_prepared",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -22,6 +22,17 @@
       "bytes": 14388276,
       "files": 438,
       "sha256": "7f5398c598b1756e15896dd4e52c4a0f7996072b8cb13b836a3c23b0e62c69c3",
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "074285d3d2abb39849a9c8f8f15aeb7a507a1b29",
+      "archive": "light-light126-d3-sampling-arch03-20261109_052708-074285d3d2ab.zip",
+      "bytes": 10767793,
+      "sha256": "2c1082f6b3de593d6d6b37c0c338817dade26d5842496de49addcb2d82b8932f",
+      "files": 383,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
@@ -50,8 +61,50 @@
       "observed_failure": "First ITCM read at addr 28672, time 129997 ps: unknown output versus 03deb9946f4a2500; no compile warnings. Testbench sampled 10 ps after rising edge. Clock-to-Q aperture hypothesis requires actual vendor rerun.",
       "screenshot": "server_tcm_failure_detail.png"
     },
-    "stdcell": {"status": "passed", "session": "d3_vendor01", "observed_start": "2026-11-09 05:24:05", "observed_pass": "2026-11-09 05:26:13", "screenshot": "server_stdcell_progress2.png"},
-    "asic_soc": {"status": "running", "session": "d3_smoke01", "cases": ["layer_01"]}
+    "stdcell": {
+      "status": "passed",
+      "session": "d3_vendor01",
+      "observed_start": "2026-11-09 05:24:05",
+      "observed_pass": "2026-11-09 05:26:13",
+      "screenshot": "server_stdcell_progress2.png",
+      "types": 11,
+      "gate_checks": 12,
+      "summary_sha256": "6c61c9c503690bd1e93a736ad3b9a0cb2ba69261d3b9aa9390c304011fdf745d"
+    },
+    "asic_soc": {
+      "status": "failed_before_compile",
+      "session": "d3_smoke01",
+      "cases": [
+        "layer_01"
+      ],
+      "error": "Unreviewed stale absolute library search entry in pinned official vcode_rtl.f",
+      "screenshot": "server_asic_smoke_failure.png"
+    },
+    "tcm_corrected": {
+      "status": "passed",
+      "session": "d3_vendor02",
+      "package_source_commit": "074285d3d2abb39849a9c8f8f15aeb7a507a1b29",
+      "checks": 98682,
+      "macros": 64,
+      "cpu_executed": false,
+      "timing_verified": false,
+      "summary_sha256": "97991255ba4f9d4c53773176bd4504048ba5af08ad0b6037374d778bfd648f76",
+      "screenshot": "server_tcm02_pass_boot_start.png",
+      "finding": "10 ps samples were unknown; 3 ns samples correct. Complete all-address/mask/retention regression passed without production RTL changes."
+    },
+    "asic_boot": {
+      "status": "passed",
+      "session": "d3_vendor02",
+      "package_source_commit": "074285d3d2abb39849a9c8f8f15aeb7a507a1b29",
+      "bytes": 262144,
+      "words": 32768,
+      "macros": 32,
+      "vendor_verified": true,
+      "cpu_executed": false,
+      "timing_verified": false,
+      "summary_sha256": "218c38cc7098a8559c336f2a00f8902ddaafc7e648aa289ea46b4deb15a3ba29",
+      "screenshot": "server_boot02_pass.png"
+    }
   },
   "whole_soc_cpu_verified": false,
   "strict_timing_verified": false,
@@ -64,5 +117,13 @@
     "boot_delayed_physical_mock_run": "local_runs/asic_boot_20261109_052517_217283",
     "boot_synthetic_clock_to_q_ns": 1,
     "vendor_verified": false
+  },
+  "platform_filelist_correction": {
+    "pinned_sha256": "022c32e139d83331d16412acf15eea7ce2b9d1b8bc7ab469202984f1a3d6bcc0",
+    "excluded_legacy_library_search_entries": 6,
+    "scope": "Two pad models outside e203_soc_top, passthrough PLL model, and three replaced legacy SRAM/ROM models. Omission allowed only for byte-exact pinned file list. Active unresolved references remain hard VCS/DC failures.",
+    "local_python_tests": 53,
+    "unit_log": "local_runs/d3_filelist_unit_tests_20261109.log",
+    "server_verified": false
   }
 }
