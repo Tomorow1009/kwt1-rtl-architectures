@@ -8,6 +8,7 @@ Official scoring treatment of the shared SRAM remains unresolved.
 import json
 import math
 import re
+import shutil
 from pathlib import Path
 from asic_link import link_soc,sha
 from dc_blocks import measured_metrics
@@ -186,6 +187,15 @@ def area_inventory(text,reported_total):
                 rows=rows)
 
 
+def require_tool_marker(text,marker):
+    # DC echoes proc definitions. Only the emitted whole line is completion,
+    # not the marker literal appearing inside a Tcl puts command.
+    if sum(line.strip()==marker for line in text.splitlines())!=1:
+        raise ValueError('Whole-SoC report collection incomplete')
+    if re.search(r'(?im)^\s*(Error-|Fatal:|Error:)',text):
+        raise ValueError('Tool errors prevent report collection')
+
+
 def synth(cfg,run,platform_source,team_sources,call):
     linked=link_soc(cfg,run,platform_source,team_sources,call)
     (run/'task_mode.sdc').write_text(constraints())
@@ -195,8 +205,12 @@ def synth(cfg,run,platform_source,team_sources,call):
     before[str(run/'task_mode.sdc')]=sha(run/'task_mode.sdc')
     before[str(tcl)]=sha(tcl)
     text=call([cfg['tools']['dc_shell'],'-f',tcl],run,'soc_synth.log')
+    return collect_reports(run,linked,before,text)
+
+
+def collect_reports(run,linked,before,text):
     marker='ARCH03_SOC_SYNTH_REPORTS_READY timing_verified=false scoring_area_verified=false'
-    if text.count(marker)!=1:raise ValueError('Whole-SoC report collection incomplete')
+    require_tool_marker(text,marker)
     metrics=measured_metrics((run/'metrics.txt').read_text(),(run/'area.rpt').read_text())
     validate_period(metrics['period_ns'])
     if float(metrics['lf_period_ns'])!=66.0:raise ValueError('Unexpected LF mode clock')
@@ -216,3 +230,58 @@ def synth(cfg,run,platform_source,team_sources,call):
                                   'library area units and official shared SRAM treatment','post-synthesis functionality'],
                 gate_simulation_verified=False,system_power_verified=False,physical_signoff=False,
                 link_report=linked,artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})
+
+
+def recover_reports(cfg,run,origin,current_bundle):
+    """Re-audit a marker-only failed run in a NEW directory; never edit it."""
+    origin=origin.resolve();origin.relative_to(Path(cfg['server_root']).resolve())
+    state=json.loads((origin.parent/'state.json').read_text())['stages']['asic_synth']
+    if state.get('status')!='failed' or state.get('error')!='Whole-SoC report collection incomplete':
+        raise ValueError('Only the known completion-marker parser failure can be recovered')
+    text=(origin/'soc_synth.log').read_text()
+    require_tool_marker(text,'ARCH03_SOC_SYNTH_REPORTS_READY timing_verified=false scoring_area_verified=false')
+    require_tool_marker((origin/'dc_link.log').read_text(),'ARCH03_ASIC_LINK_READY whole_soc=true synthesis_verified=false timing_verified=false')
+    source_bundle=origin.parents[2]
+    manifest=json.loads((source_bundle/'manifest.json').read_text())
+    for name,digest in manifest['files'].items():
+        if sha(source_bundle/name)!=digest:raise ValueError('Original synthesis bundle changed')
+    before=json.loads((origin/'source_inputs.json').read_text())
+    for name,digest in before.items():
+        path=Path(name)
+        if sha(path)!=digest:raise ValueError('Original synthesis input changed')
+        try:relative=path.relative_to(source_bundle)
+        except ValueError:continue
+        if relative.parts[0]=='workspaces' and sha(current_bundle/relative)!=digest:
+            raise ValueError('Current synthesis RTL differs from original')
+    # Installer and technology selection are not in the tool's source file list.
+    preparation=['workspaces/arch03/scripts/'+name for name in
+                 ('install_platform.py','technology_binding.py','memory_technology.py','timing_contract.py')]
+    preparation+=['workspaces/arch03/'+name for name in ('technology_bindings.json','memory_technology.json')]
+    relevant=('workspaces/arch02/rtl/','workspaces/arch02/arch02/rtl/',
+              'workspaces/arch03/rtl/','workspaces/arch03/sw/')
+    current_manifest=json.loads((current_bundle/'manifest.json').read_text())
+    old={p:h for p,h in manifest['files'].items() if p.startswith(relevant)}
+    new={p:h for p,h in current_manifest['files'].items() if p.startswith(relevant)}
+    if old!=new:raise ValueError('Current runtime source inventory differs from original')
+    for relative in preparation+list(old):
+        if relative not in manifest['files'] or sha(current_bundle/relative)!=manifest['files'][relative]:
+            raise ValueError('Current synthesis preparation differs: '+relative)
+    if (origin/'task_mode.sdc').read_text()!=constraints():raise ValueError('Task constraints differ')
+    original_files={p.name:sha(p) for p in origin.iterdir() if p.is_file()}
+    for name in original_files:
+        if name=='summary.json':raise ValueError('Refusing to replace an existing synthesis summary')
+        shutil.copy2(str(origin/name),str(run/name))
+    (run/'libs').mkdir()
+    databases=list((origin/'libs').glob('*.db'))
+    if len(databases)!=3:raise ValueError('Incomplete original synthesis library databases')
+    for source in databases:shutil.copy2(str(source),str(run/'libs'/source.name))
+    origin_receipt=dict(origin=str(origin),source_commit=manifest['source_commit'],
+                        original_state=state,original_artifacts=original_files,
+                        synthesis_reexecuted=False,reason='Completion marker echoed in Tcl proc definition was counted twice')
+    (run/'report_recovery.json').write_text(json.dumps(origin_receipt,indent=2)+'\n')
+    linked=dict(status='linked',scope='original_whole_soc_link_and_mapping_preserved',report_recovery=origin_receipt)
+    result=collect_reports(run,linked,before,text)
+    for name,digest in original_files.items():
+        if sha(origin/name)!=digest:raise ValueError('Original report changed during re-audit')
+    result['report_recovery']=origin_receipt
+    return result

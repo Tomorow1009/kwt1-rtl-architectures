@@ -181,7 +181,10 @@ def main():
     p.add_argument('--synth-summary-sha256',help='Explicit expected digest of that synthesis summary')
     p.add_argument('--gate-run',type=Path,help='Passed gate verification directory containing audited task activity')
     p.add_argument('--gate-summary-sha256',help='Explicit expected digest of that gate summary')
+    p.add_argument('--synth-reports-from',type=Path,help='Re-audit a marker-only failed synthesis into a new run; no mapping rerun')
     a=p.parse_args()
+    if a.synth_reports_from is not None and a.stage!='asic_synth':
+        raise ValueError('Synthesis report re-audit is only for asic_synth')
     if a.stage=='asic_power' and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
         raise ValueError('Power requires gate run, summary digest and exactly one --cases selection')
     if a.stage!='asic_power' and (a.gate_run is not None or a.gate_summary_sha256 is not None):
@@ -241,9 +244,12 @@ def main():
                 vendor(cfg,run)
                 report=link_soc(cfg,run,a.platform,source_list(),call)
             elif a.stage=='asic_synth':
-                from soc_synth import synth
-                vendor(cfg,run)
-                report=synth(cfg,run,a.platform,source_list(),call)
+                from soc_synth import synth,recover_reports
+                if a.synth_reports_from is not None:
+                    report=recover_reports(cfg,run,a.synth_reports_from,ROOT)
+                else:
+                    vendor(cfg,run)
+                    report=synth(cfg,run,a.platform,source_list(),call)
             elif a.stage.startswith('dc_'):
                 from dc_blocks import synth
                 vendor(cfg,run)

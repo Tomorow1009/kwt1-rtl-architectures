@@ -47,9 +47,10 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_synth03 logs and exact SDC application; analyze actual setup/hold/area/coverage",
-    "Run gate smoke from 38c89eb gate package only using a completed synthesis summary digest; then expand 14 cases",
-    "Record full-window activity and validate power using observed installed PrimeTime; license/commands not yet verified"
+    "Commit/package/verify/upload report recovery; re-audit d3_synth03 into new d3_reports01 without altering original",
+    "Use recovered summary digest for gate smoke; preserve explicit negative-STA scope",
+    "Inspect bootrom-deglitch LF/HF and timer synchronizer paths, then repair documented clock/task assumptions or actual RTL as evidence requires",
+    "Gate full suite and audited task VCD; actual system power/energy and final same-configuration acceptance"
   ],
   "still_unverified": [
     "Strict 150 MHz synthesis/STA and complete area accounting",
@@ -63,7 +64,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Third terminal: corrected d3_synth03 running in c323781 SDC bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_full01 completed and lock released before synthesis launch; preserve old failures and hex100.",
+  "server_readonly_job": "No active EDA job or team lock observed 07:12. Third terminal completed d3_synth03 in SDC bundle; fourth idle diagnostic terminal in monitor bundle.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -94,7 +95,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "System-power report entry locally prepared and 61 tests passed; no license/power run. Current server task remains c323781 d3_synth03 mapping, no tool errors observed at 06:50.",
+  "uncommitted_follow_on": "Report recovery prepared, 63 tests passed; package/upload next. d3_synth03 mapping/report generation completed but completion-marker parser failed; setup -1.77329254 ns and hold -0.09681505 ns remain real unresolved results.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -243,7 +244,7 @@
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "Ten uploaded verified packages; latest gate package safely unpacked. c323781 d3_synth03 running.",
+    "state": "Ten verified uploads; gate package unpacked. Synthesis finished with marker-parser failure and negative timing. Recovery package pending.",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -401,5 +402,45 @@
       "actual W/mW/uW conversion and task energy"
     ],
     "system_power_verified": false
+  },
+  "latest_power_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "dbf9e87df9629b3605a11f52f735efe1e11f0465",
+      "archive": "light-light126-d3-power-arch03-20261109_065307-dbf9e87df962.zip",
+      "bytes": 10784334,
+      "sha256": "c4b708ed498842dc541a2ccaf9220901174011b6001782ba777625e04e624b93",
+      "files": 388
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_power_clean_20261109\\light-light126-d3-power-arch03-20261109_065307-dbf9e87df962",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": false,
+    "asic_link_verified": false
+  },
+  "report_recovery_preparation": {
+    "python_tests": 63,
+    "log": "local_runs/d3_recovery_unit_tests_20261109.log",
+    "method": "New run only; verify original source/bundle/artifacts and current preparation/runtime; copy server-local outputs/databases, parse emitted whole-line markers and re-audit reports without remapping",
+    "server_executed": false,
+    "negative_timing_preserved": true,
+    "original_failed_run_preserved": true
   }
 }

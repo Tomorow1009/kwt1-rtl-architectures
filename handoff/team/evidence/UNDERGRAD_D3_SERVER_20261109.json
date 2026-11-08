@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "asic_full_suite_passed_corrected_synthesis_running",
+  "status": "asic_full_passed_synthesis_reports_complete_marker_parser_failed_timing_negative",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -339,10 +339,32 @@
       "system_power_verified": false
     },
     "asic_synth_sdc_fixed": {
-      "status": "running",
+      "status": "failed_after_completed_mapping_reports",
       "session": "d3_synth03",
       "package_source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
-      "timing_verified": false
+      "timing_verified": false,
+      "error": "Whole-SoC report collection incomplete",
+      "cause": "Tcl echoed proc definition plus emitted completion line made substring count two",
+      "metrics": {
+        "period_ns": "6.666666000000",
+        "lf_period_ns": "66.000000000000",
+        "max": "-1.77329254",
+        "min": "-0.09681505",
+        "area": "3812814.351672",
+        "RAMSP128X16": 8,
+        "RAMSP4096X16": 130,
+        "latches": 24
+      },
+      "summary_generated": false,
+      "report_recovery_pending": true,
+      "screenshots": [
+        "server_synth03_final_metrics.png",
+        "server_synth03_critical_endpoints.png"
+      ],
+      "critical_paths": {
+        "setup": "bootrom_deglitch/last_reg to ITCM SRAM",
+        "hold": "lfextclk to APB timer r_ls_clk_sync_reg[0]"
+      }
     }
   },
   "whole_soc_cpu_verified": true,
@@ -479,5 +501,22 @@
       "actual W/mW/uW conversion and task energy"
     ],
     "system_power_verified": false
+  },
+  "submission_public_recheck": {
+    "date": "2026-11-09",
+    "official_entry": "https://www.socchina.net/",
+    "design_track_link": "https://devise.socchina.net/home?trackType=1",
+    "finding": "Official homepage script routes chip design to devise.socchina.net with trackType=1. The fetched/search-indexed design page shows stale 2025 schedule and mixed 2026 application notices; no precise 2026 chip-design deadline/template/upload fields verified. Do not reuse July 9 application or Nov 4 FPGA dates.",
+    "university_notice": "https://www.xupt.edu.cn/info/2104/87092.htm",
+    "notice_scope": "2026 chip design mid-November submission, exact requirements announced separately",
+    "submitted": false
+  },
+  "report_recovery_preparation": {
+    "python_tests": 63,
+    "log": "local_runs/d3_recovery_unit_tests_20261109.log",
+    "method": "New run only; verify original source/bundle/artifacts and current preparation/runtime; copy server-local outputs/databases, parse emitted whole-line markers and re-audit reports without remapping",
+    "server_executed": false,
+    "negative_timing_preserved": true,
+    "original_failed_run_preserved": true
   }
 }

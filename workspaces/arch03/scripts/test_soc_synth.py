@@ -1,7 +1,8 @@
 import unittest
 import tempfile
+import json
 from pathlib import Path
-from soc_synth import area_inventory,constraints,script
+from soc_synth import area_inventory,constraints,script,require_tool_marker,recover_reports,sha
 
 
 def inventory():
@@ -18,6 +19,55 @@ def inventory():
 
 
 class SocSynthTests(unittest.TestCase):
+    def test_recovery_preserves_failed_run_and_negative_timing_and_rejects_changed_sources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);old=root/'old';current=root/'current'
+            origin=old/'runs/failed/asic_synth';origin.mkdir(parents=True)
+            files=['workspaces/arch03/scripts/'+n for n in ('install_platform.py','technology_binding.py',
+                    'memory_technology.py','timing_contract.py')]
+            files+=['workspaces/arch03/technology_bindings.json','workspaces/arch03/memory_technology.json',
+                    'workspaces/arch03/rtl/example.sv']
+            for bundle in (old,current):
+                for name in files:
+                    path=bundle/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text('original')
+                (bundle/'manifest.json').write_text(json.dumps({'source_commit':'original_commit',
+                    'files':{name:sha(bundle/name) for name in files}}))
+            state={'stages':{'asic_synth':{'status':'failed','error':'Whole-SoC report collection incomplete'}}}
+            (origin.parent/'state.json').write_text(json.dumps(state))
+            marker='ARCH03_SOC_SYNTH_REPORTS_READY timing_verified=false scoring_area_verified=false'
+            (origin/'soc_synth.log').write_text('puts "'+marker+'"\n'+marker+'\n')
+            (origin/'dc_link.log').write_text('ARCH03_ASIC_LINK_READY whole_soc=true synthesis_verified=false timing_verified=false\n')
+            (origin/'task_mode.sdc').write_text(constraints())
+            (origin/'metrics.txt').write_text('period_ns 6.666666\nlf_period_ns 66\nRAMSP128X16 8\nRAMSP4096X16 130\nmax -1.77\nmin -0.09\n')
+            (origin/'area.rpt').write_text('Total cell area: 13804\n')
+            (origin/'leaf_area.tsv').write_text('\n'.join(inventory()))
+            (origin/'source_inputs.json').write_text(json.dumps({str(old/files[-1]):sha(old/files[-1])}))
+            for name in ('mapped.v','mapped.ddc','mapped.sdc','check_timing.rpt','constraints.rpt','timing_max.rpt','timing_min.rpt'):
+                (origin/name).write_text('original tool artifact')
+            (origin/'libs').mkdir()
+            for name in ('standard.db','small.db','large.db'):(origin/'libs'/name).write_text(name)
+            before={str(p):sha(p) for p in old.rglob('*') if p.is_file()}
+            run=current/'runs/recovery/asic_synth';run.mkdir(parents=True)
+            result=recover_reports({'server_root':str(root)},run,origin,current)
+            self.assertTrue(result['synthesis_completed'])
+            self.assertFalse(result['setup_hold_nonnegative'])
+            self.assertFalse(result['timing_verified'])
+            self.assertFalse(result['report_recovery']['synthesis_reexecuted'])
+            self.assertEqual(before,{str(p):sha(p) for p in old.rglob('*') if p.is_file()})
+            for name in (files[-2],files[-1]):
+                (current/name).write_text('changed')
+                with self.assertRaises(ValueError):recover_reports({'server_root':str(root)},run,origin,current)
+                (current/name).write_text('original')
+            (old/files[-1]).write_text('changed original')
+            with self.assertRaises(ValueError):recover_reports({'server_root':str(root)},run,origin,current)
+
+    def test_echoed_proc_marker_is_not_execution_and_errors_still_fail(self):
+        marker='ARCH03_TEST_REPORT_READY'
+        echo='proc collect {} {\n    puts "'+marker+'"\n}\n'
+        require_tool_marker(echo+marker+'\n',marker)
+        for bad in (echo,marker+'\n'+marker,echo+marker+'\nError: invalid constraints'):
+            with self.assertRaises(ValueError):require_tool_marker(bad,marker)
+
     def test_constraint_error_stops_tcl_before_compile(self):
         try:
             import tkinter

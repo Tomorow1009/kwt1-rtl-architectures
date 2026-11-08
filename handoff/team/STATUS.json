@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "asic_full_suite_passed_corrected_synthesis_running",
+    "phase": "asic_full_passed_synthesis_reports_complete_marker_parser_failed_timing_negative",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",

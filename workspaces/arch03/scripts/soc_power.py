@@ -9,6 +9,7 @@ import re
 from decimal import Decimal
 from pathlib import Path
 from gate_soc import verify_synthesis
+from soc_synth import require_tool_marker
 from server_run import ROOT,sha,save
 
 PT_SHELL='/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell'
@@ -117,8 +118,7 @@ def estimate(cfg,run,gate,expected_sha,case,call):
     before={str(p):sha(p) for p in (tcl,synthesis/'mapped.v',synthesis/'mapped.sdc',synthesis/'summary.json',gate/'summary.json')}
     save(run/'source_inputs.json',before)
     text=call([PT_SHELL,'-f',tcl],run,'power.log')
-    if text.count('ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false')!=1:
-        raise ValueError('System power reports incomplete')
+    require_tool_marker(text,'ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false')
     required=('units.rpt','power.rpt','power_hierarchy.rpt','power_sram.rpt','activity_coverage_after.rpt',
               'activity_unannotated_after.rpt','activity_sources.rpt','timing_check.rpt','clocks.rpt')
     for name in required:
