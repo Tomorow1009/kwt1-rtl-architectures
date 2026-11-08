@@ -147,8 +147,8 @@ def vcs(stage,cfg,run,platform_source,cases,activity_cases=()):
             if name in activity_cases:
                 activity=run/(name+'.vcd')
                 if not activity.is_file() or activity.stat().st_size==0:raise ValueError('Missing system activity')
-                result['activity']=dict(file=activity.name,sha256=sha(activity),bytes=activity.stat().st_size,
-                                        scope='u_e203_soc_top',power_estimated=False)
+                from activity import audit_vcd
+                result['activity']=audit_vcd(activity,window)
         results.append(result);print('CASE_PASS',stage,name,flush=True)
     for path,digest in source_hashes.items():
         if sha(Path(path))!=digest:raise ValueError('Input changed during VCS '+path)

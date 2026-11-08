@@ -108,6 +108,8 @@ python3 workspaces/arch03/scripts/server_run.py asic_synth --session synth01
 
 `asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1，与初步综合模式一致；这不代替门级、时序或功耗验证。新 `memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零分电源漏电项。共享 SRAM 官方计分归属与物理面积单位仍需独立审查。
 
+启用活动记录时，`activity.py` 流式校验 VCD：必须包含 CPU、互连、加速器、共享 SRAM、ITCM/DTCM，且只能有一段与实际任务起止时间一致的 `$dumpon`/`$dumpoff` 区间。截断、错窗口、缺部件或未声明信号会失败；未知值事件单独计数。它只核验波形范围、窗口和完整性，不代表综合网表活动映射覆盖或功耗通过。目前仅用合成 VCD 测试解析器，真实 VCS 波形仍待服务器执行。
+
 完成同一受测包的 `icb`、`soc`、`dc_accel`、`dc_shared` 后，从包含已提交审计工具的新完整包执行：
 
 ```text

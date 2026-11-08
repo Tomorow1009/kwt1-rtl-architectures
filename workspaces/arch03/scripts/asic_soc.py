@@ -105,8 +105,8 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
         if name in activity_cases:
             activity=run/(name+'.vcd')
             if not activity.is_file() or not activity.stat().st_size:raise ValueError('Missing ASIC system activity')
-            result['activity']=dict(file=activity.name,sha256=sha(activity),bytes=activity.stat().st_size,
-                                    scope='u_e203_soc_top',power_estimated=False)
+            from activity import audit_vcd
+            result['activity']=audit_vcd(activity,window)
         for filename,digest in prepared['files'].items():
             if sha(boot/filename)!=digest:raise ValueError('ASIC boot payload changed')
         results.append(result);print('ASIC_CPU_CASE_PASS',name,flush=True)

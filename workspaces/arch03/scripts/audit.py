@@ -32,6 +32,9 @@ def runtime(rel):
                        'workspaces/arch03/scripts/technology_binding.py','workspaces/arch03/technology_bindings.json',
                        'workspaces/arch03/scripts/stdcell_verify.py',
                        'workspaces/arch03/scripts/sequence_soc.py',
+                       'workspaces/arch03/scripts/asic_boot.py','workspaces/arch03/scripts/asic_soc.py',
+                       'workspaces/arch03/scripts/soc_synth.py','workspaces/arch03/scripts/activity.py',
+                       'workspaces/arch03/scripts/memory_technology.py','workspaces/arch03/memory_technology.json',
                        'workspaces/arch03/scripts/timing_contract.py'))
 
 def capture(path,expected,saturated,columns):
@@ -83,7 +86,8 @@ def check_vcs(root,session,name,reference):
             if 'activity' in c:
                 activity=c['activity'];wave=run/(case+'.vcd')
                 require(activity['file']==wave.name and wave.is_file(),'System activity file missing')
-                require(sha(wave)==activity['sha256'] and wave.stat().st_size==activity['bytes'],'System activity changed')
+                from activity import audit_vcd
+                require(audit_vcd(wave,window)==activity,'System activity scope/window/content changed')
         records.append(dict(case=case,outputs=25344,capture_sha256=sha(path),log_sha256=sha(run/(case+'.log'))))
     return dict(summary_sha256=sha(run/'summary.json'),cases=records,cpu_executed=name=='soc')
 
