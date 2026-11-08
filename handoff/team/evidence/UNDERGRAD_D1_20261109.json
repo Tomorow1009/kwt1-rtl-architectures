@@ -1,0 +1,282 @@
+{
+  "date": "2026-11-09",
+  "timezone": "Asia/Shanghai",
+  "status": "local_d1_passed_server_pending",
+  "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
+  "base_commit": "aa3f90724720020fe3b4468181eed16646c55f0f",
+  "branch": "codex/light-light126/undergrad-d1-numerics",
+  "source_commit_matches_tested_bytes": true,
+  "configuration": {
+    "lanes": 8,
+    "x_bits": 16,
+    "w_bits": 16,
+    "bias_bits": 40,
+    "default_shift": 12,
+    "numeric_format": {
+      "x_bits": 16,
+      "w_bits": 16,
+      "bias_bits": 40,
+      "accumulator_bits": 40,
+      "sum_bits": 41,
+      "output_bits": 16,
+      "x_fraction_bits": 12,
+      "w_fraction_bits": 12,
+      "bias_fraction_bits": 24,
+      "shift": 12,
+      "output_fraction_bits": 12,
+      "rounding": "nearest_ties_away_from_zero",
+      "overflow": "saturate",
+      "byte_order": "little"
+    },
+    "strict_target_clock_ns": "6.666666666",
+    "technology": "historical SS 0.99 V 125 C; not rerun",
+    "pr6_candidate": {
+      "commit": "895ffc10d9aad073e294093cb5181e1e32fdcabd",
+      "url": "https://github.com/Tomorow1009/kwt1-rtl-architectures/pull/6",
+      "merged": false,
+      "tested_in_this_run": false
+    }
+  },
+  "software_precision": {
+    "dataset_kind": "development",
+    "sample_count": 600,
+    "tasks": 7200,
+    "outputs": 182476800,
+    "split": "validation",
+    "target_speech": 500,
+    "other_speech": 99,
+    "canonical_zero_silence": 1,
+    "calibration": false,
+    "max_layer_nrmse": 0.0014941870963892663,
+    "max_task_nrmse": 0.0022915376589929767,
+    "worst_task": {
+      "sample_id": "dev_000599",
+      "layer": 7
+    },
+    "layers": [
+      {
+        "layer": 1,
+        "outputs": 15206400,
+        "sse": 5.137488817760409,
+        "reference_energy": 5712459.424152969,
+        "nrmse": 0.0009483395886582072
+      },
+      {
+        "layer": 2,
+        "outputs": 15206400,
+        "sse": 4.873794470741758,
+        "reference_energy": 6088876.442587112,
+        "nrmse": 0.000894674429015527
+      },
+      {
+        "layer": 3,
+        "outputs": 15206400,
+        "sse": 5.652573326849696,
+        "reference_energy": 4466668.218477829,
+        "nrmse": 0.0011249449103955531
+      },
+      {
+        "layer": 4,
+        "outputs": 15206400,
+        "sse": 5.216909183131379,
+        "reference_energy": 3872284.3995083766,
+        "nrmse": 0.0011607080995254906
+      },
+      {
+        "layer": 5,
+        "outputs": 15206400,
+        "sse": 5.058586617922361,
+        "reference_energy": 2784471.7023330173,
+        "nrmse": 0.0013478550528715427
+      },
+      {
+        "layer": 6,
+        "outputs": 15206400,
+        "sse": 5.462420303806872,
+        "reference_energy": 2779009.7289398923,
+        "nrmse": 0.001401998416978973
+      },
+      {
+        "layer": 7,
+        "outputs": 15206400,
+        "sse": 5.240524952930656,
+        "reference_energy": 2347279.6308589657,
+        "nrmse": 0.0014941870963892663
+      },
+      {
+        "layer": 8,
+        "outputs": 15206400,
+        "sse": 5.224530540695052,
+        "reference_energy": 2680918.4517565663,
+        "nrmse": 0.0013959884793978642
+      },
+      {
+        "layer": 9,
+        "outputs": 15206400,
+        "sse": 4.935126218668762,
+        "reference_energy": 2689821.939518663,
+        "nrmse": 0.0013545260647328569
+      },
+      {
+        "layer": 10,
+        "outputs": 15206400,
+        "sse": 5.45509713036431,
+        "reference_energy": 3944248.39233423,
+        "nrmse": 0.001176031935516395
+      },
+      {
+        "layer": 11,
+        "outputs": 15206400,
+        "sse": 5.88169304470656,
+        "reference_energy": 5428908.9507803805,
+        "nrmse": 0.0010408661828941726
+      },
+      {
+        "layer": 12,
+        "outputs": 15206400,
+        "sse": 5.835122175631459,
+        "reference_energy": 9416829.843424905,
+        "nrmse": 0.000787177397112235
+      }
+    ],
+    "clipping_totals": {
+      "X": 0,
+      "W": 0,
+      "b": 0
+    },
+    "output_saturated": 0,
+    "capture_check": {
+      "repeat_bit_exact": true,
+      "pcm_matches_tensorflow": true,
+      "original_logits_max_abs_error": 2.086162567138672e-07,
+      "batch_x_max_abs_error": 3.933906555175781e-06,
+      "batch_y_max_abs_error": 4.5299530029296875e-06
+    },
+    "all_tasks_threshold_passed": true,
+    "independent_legacy_integer_model_bit_exact": true,
+    "official_precision_verified": false,
+    "report": {
+      "path": "local_runs/d1_full_matrix_600_20261109/evaluation.json",
+      "sha256": "8832e338ecdf383a68266ca32da1b522b77c631df86db7291688dd4830b50934",
+      "bytes": 4025022
+    },
+    "sample_manifest": {
+      "path": "local_runs/d1_full_matrix_600_20261109/samples.json",
+      "sha256": "80e9ea7de8f0412ce222310f0e84f2c32022b440bbed5c61d7830fa0879c9b11",
+      "bytes": 154551
+    },
+    "environment": {
+      "path": "local_runs/d1_full_matrix_600_20261109/environment.json",
+      "sha256": "0fd3cb704c56cdf133cdf8a2fecd3dbfe4ca3b57244cb0c6e7cea4632c4be7ad",
+      "bytes": 43807
+    },
+    "independent_recheck": {
+      "path": "local_runs/d1_precision_cases_20261109/selection.json",
+      "sha256": "7a18c7802a0473f1bb7b20d8aabf6219343802f5716d986de48f2873cfdd66e5",
+      "bytes": 8117
+    }
+  },
+  "baseline_local_rerun": {
+    "source_commit": "aa3f90724720020fe3b4468181eed16646c55f0f",
+    "cases": 14,
+    "outputs": 354816,
+    "cpu_executed": false,
+    "summary": {
+      "path": "local_runs/arch03_20261109_003117_322983_pin_mock/summary.json",
+      "sha256": "52016f666eca4f8e7d47d4f7d40b79d5fcdbdb46b54ae951f45b5b892b3b96b9",
+      "bytes": 3523
+    }
+  },
+  "new_local_rtl": {
+    "backend": "XSim 2018.3 pin_mock",
+    "single_cases": 19,
+    "consecutive_tasks": 6,
+    "outputs": 633600,
+    "cpu_executed": false,
+    "vendor_macro_verified": false,
+    "consecutive_layer_switch": true,
+    "partial_load_abort_recovery": true,
+    "cold_stale_output_guard": true,
+    "single_summary": {
+      "path": "local_runs/arch03_20261109_003549_351287_pin_mock/summary.json",
+      "sha256": "127d669ccaa39c9e62b0fb5d4fc024f2d1a242e7dd1d86dd13bf9f4062e749dd",
+      "bytes": 5421
+    },
+    "consecutive_summary": {
+      "path": "local_runs/arch03_20261109_003549_356276_pin_mock/summary.json",
+      "sha256": "3c5df595aee07a47d3942f38ea9e8f2a120b5c1d401594da960852f5d9b4f3e5",
+      "bytes": 2913
+    },
+    "actual_precision": {
+      "path": "local_runs/d1_actual_precision_20261109/evaluation.json",
+      "sha256": "b89dc4a4f699a0ac3ca10778c155c3ead84d9d2350f23dc42efca2e70ecff492",
+      "bytes": 20323
+    },
+    "actual_real_precision_tasks": 15,
+    "actual_real_outputs": 380160,
+    "decoded_worst": {
+      "path": "local_runs/d1_decoded_worst_20261109.npz",
+      "sha256": "114f2bae058bbac9c1fa70d5fad256c7971677560455b819f7fec91b03b2d195",
+      "bytes": 94159
+    },
+    "sources": {
+      "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+      "workspaces/arch02/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+      "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "workspaces/arch02/arch02/rtl/arch02_linear.sv": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2",
+      "workspaces/arch03/rtl/arch03_icb_accel.sv": "0b68ca31adad4b865601c7c2145e254304cc2b2f53e8e3fe201262a8acfd2505",
+      "workspaces/arch03/rtl/arch03_shared_sram.sv": "a4d003559992e647084b0c60650ca8a46715f6e76834b603735eb32cefa1da1f",
+      "workspaces/arch03/tb/tb_arch03_icb.sv": "8533a40137a8ba562347264ba59ee6aa071fb26c6471dd6b63faf88f7182cdd0",
+      "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+      "workspaces/arch03/scripts/local_verify.py": "b323315805d32f7f89d80ac8f444e5ef287bf7b9f5599adffdc0b49ac4ed245c",
+      "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+      "local_runs/arch03_20261109_003549_351287_pin_mock/arch02_sram_config.vh": "2c27538c9af6dc5081c6950248808bc97e808733462c06d145646413c51361be"
+    }
+  },
+  "checks": {
+    "unit_tests": 29,
+    "unit_log": {
+      "path": "local_runs/d1_unit_tests_20261109.log",
+      "sha256": "3f46e31a73f34f2f8805f905597f8cf4f276ff6feb7b778f66fc313b85e2e2f9",
+      "bytes": 2206
+    },
+    "server_python36_syntax_passed": [
+      "audit.py",
+      "dc_blocks.py",
+      "server_run.py",
+      "timing_contract.py"
+    ],
+    "old_6_667_ns_rejected": true,
+    "new_dc_executed": false
+  },
+  "firmware": {
+    "images": 21,
+    "compiler_version": "0.13.0",
+    "compiler_sha256": "2e44af5bbf7a72ef8cbdae370284687c95d65a19affa469d2ad0364d905b8e84",
+    "elf_sha256": "c370b8b6a7879a0108c99120e0e6d85dd0ee2b06362d0dcaf08bb2ff6897e5eb",
+    "manifest": {
+      "path": "local_runs/d1_server_firmware_20261109/manifest.json",
+      "sha256": "1637fc529b38b4b04011d0c71653c75bc0591e1fc44d3159c0efc433ce936f41",
+      "bytes": 6141
+    },
+    "cpu_executed": false,
+    "failed_first_attempt": "local_runs/d1_firmware_20261109: Zig default cache AccessDenied; preserved, retried with workspace-local caches"
+  },
+  "not_verified": [
+    "new server VCS/CPU/vendor macro execution",
+    "real E203 consecutive tasks and timeout recovery",
+    "platform ASIC TCM/ROM/clock/reset implementation",
+    "whole SoC synthesis and exact 150 MHz STA",
+    "complete system and scoring area accounting",
+    "post-synthesis matrix functional equivalence",
+    "formal cold-task transfer timing and same-window VCD/SAIF",
+    "system power and energy with macro coverage",
+    "PR6 performance comparison",
+    "exact submission deadline, portal fields, templates and video requirements"
+  ],
+  "server_uploaded": false,
+  "old_hex100_resumed": false,
+  "whole_plan_complete": false,
+  "next": "Use a new immutable package; inspect shared desktop/processes/team lock through the established route, then prioritize whole-SoC ASIC adaptation and strict timing before performance optimization."
+}

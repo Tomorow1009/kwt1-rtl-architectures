@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -95,5 +95,23 @@
       "reuse_receipt": "evidence/SERVER_REUSE_light-light126_20261108.json",
       "synchronization": "complete_for_current_runtime_inputs"
     }
+  },
+  "undergraduate_execution": {
+    "phase": "local_d1_passed_server_pending",
+    "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
+    "branch": "codex/light-light126/undergrad-d1-numerics",
+    "evidence": "evidence/UNDERGRAD_D1_20261109.json",
+    "software_samples": 600,
+    "software_tasks": 7200,
+    "max_layer_nrmse": 0.0014941870963892663,
+    "max_task_nrmse": 0.0022915376589929767,
+    "new_local_rtl_tasks": 25,
+    "new_local_rtl_outputs": 633600,
+    "new_cpu_execution": false,
+    "whole_soc_dc": false,
+    "strict_timing_verified": false,
+    "system_power_verified": false,
+    "old_hex100_resumed": false,
+    "next": "Use a new immutable package; inspect shared desktop/processes/team lock through the established route, then prioritize whole-SoC ASIC adaptation and strict timing before performance optimization."
   }
 }
