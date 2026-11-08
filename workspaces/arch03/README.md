@@ -92,5 +92,15 @@ python3 workspaces/arch03/scripts/server_run.py dc_shared --session acceptance01
 每个阶段只运行一次；失败保留，修复后提交新包/新会话。中断时若子进程仍运行，锁保留，禁止直接重启。
 以上 DC 阶段**仅覆盖加速器接口块和共享 SRAM**，检查真实宏数量、150 MHz setup/hold 和约束报告，不能冒充整机综合。
 
+完成同一受测包的 `icb`、`soc`、`dc_accel`、`dc_shared` 后，从包含已提交审计工具的新完整包执行：
+
+```text
+python3 workspaces/arch03/scripts/audit.py <受测完整包绝对路径> --session acceptance01 --output runs/audit01
+```
+
+审计工具先核对自身包与受测包全部硬件、驱动、数据、配置和执行脚本字节一致；新增审计工具/文档可来自后续提交。
+它独立重算 14 组整数参考，重新检查 ICB/真实 CPU 的全部输出与饱和计数、源码/捕获/综合产物哈希，并以匹配的库重新加载两个块的 DDC 核对链接、锁存器和宏数量。
+输出目录必须不存在；运行使用同一团队锁。`ARCH03_AUDIT_PASS` 仍明确表示 `whole_soc_dc=false physical_signoff=false`，不扩大通过范围。
+
 尚待完成：服务器实际平台补丁/启动验证、14 组 SoC VCS、分模块 DC 实跑、平台 TCM/时钟/复位的工艺适配与整机 DC、综合后功能验证、最终证据审计及官方精度验收。
 这些条件通过前 PR 保持草稿，不能合并并宣布完成。

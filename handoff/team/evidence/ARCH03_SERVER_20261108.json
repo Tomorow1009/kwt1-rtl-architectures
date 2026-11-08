@@ -90,6 +90,24 @@
         "timing_warnings": [],
         "design_warnings": "Only unused cmd_addr[0:1]; word address uses [18:2], byte selection uses wmask. Exact two-pin review added locally."
       }
+    },
+    {
+      "source_commit": "f00e7acf7b40e76c1f47e83a58ab725a101b7e3f",
+      "archive": "light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40.zip",
+      "sha256": "276334c4e9604390ab8df300a912a44282d53cca8f5eb71d40d1fe4653103146",
+      "bytes": 9658054,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40",
+      "soc": {
+        "status": "running",
+        "observed_passed_real_layers": 7,
+        "layer_01_cpu_cycles": 3890166,
+        "outputs_per_case": 25344
+      },
+      "dc_accel": "not_run",
+      "dc_shared": "not_run"
     }
   ]
 }
