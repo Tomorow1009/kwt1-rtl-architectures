@@ -1,0 +1,129 @@
+{
+  "date": "2026-11-08",
+  "member": "light-light126",
+  "scope": "14_matrix_cases_real_E203_and_two_DC_blocks",
+  "status": "passed",
+  "runtime_source_commit": "f00e7acf7b40e76c1f47e83a58ab725a101b7e3f",
+  "auditor_source_commit": "8fc4756a715c5d9f91f7d6cc8374533d4c558b09",
+  "runtime_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40",
+  "runtime_archive_sha256": "276334c4e9604390ab8df300a912a44282d53cca8f5eb71d40d1fe4653103146",
+  "runtime_manifest_sha256": "2cb2b517f436819153dde6269b3cc59d38b305022a7fb3821c5100f8f6c06b0b",
+  "runtime_files_verified": 293,
+  "audit_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_183226-8fc4756a715c",
+  "audit_archive_sha256": "0dccda8a91238cb8449005ee2ee434cac378dcef97cab2481270cf0e466e19e0",
+  "auditor_files_verified": 294,
+  "identical_runtime_inputs": 286,
+  "session": "acceptance01",
+  "audit_run": "runs/audit01",
+  "audit_summary_sha256": "96a3e91e3f116b1f9e56c060b3e2640d498c2e969f951869429a6467a2d054d6",
+  "stages": {
+    "icb": {
+      "status": "passed",
+      "cases": 14,
+      "outputs": 354816,
+      "real_outputs": 304128,
+      "cpu_executed": false,
+      "summary_sha256": "a539790985a4202dac19a6023986420bed3acbc9af9cde28a98dc31cf488e872"
+    },
+    "soc": {
+      "status": "passed",
+      "cases": 14,
+      "outputs": 354816,
+      "real_outputs": 304128,
+      "cpu_executed": true,
+      "cycles_per_case": 3890166,
+      "saturated": {
+        "real_layers": 0,
+        "extremes": 6336,
+        "rounding": 4554
+      },
+      "summary_sha256": "35fc4c2b69b9018ddb4404965e73788ad9604a93c4728d7d741515b9d4b9c34d"
+    },
+    "dc_accel": {
+      "status": "passed",
+      "scope": "block_only_not_whole_soc",
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 2,
+      "latches": 0,
+      "setup_slack_ns": 0.000171185,
+      "hold_slack_ns": 0.00158095,
+      "total_cell_area_um2": 129773.082115,
+      "summary_sha256": "e74284595f73171a25aeda5d470aaf9e7458333af7dba683f79bae6ddd08af1b",
+      "ddc_sha256": "956cc9ea5017132c2890a364480ffe874cd432d44d1688c77cb8de883ae26386",
+      "structural_warning_counts": {
+        "LINT-2": 88,
+        "LINT-8": 88,
+        "LINT-28": 904,
+        "LINT-32": 864,
+        "LINT-33": 80
+      },
+      "timing_warning_review": "TIM-134: actual high-fanout net set is clk only; ideal clock, not a physical clock tree"
+    },
+    "dc_shared": {
+      "status": "passed",
+      "scope": "block_only_not_whole_soc",
+      "RAMSP128X16": 0,
+      "RAMSP4096X16": 64,
+      "latches": 0,
+      "setup_slack_ns": 3.74377,
+      "hold_slack_ns": 0.00187597,
+      "total_cell_area_um2": 1763018.98117,
+      "summary_sha256": "09c96b86978a5ead38416eda251f40ac85cb009d3fb5706f890f3f0459849a5d",
+      "ddc_sha256": "17d541ed5da36707382c37ed8cb282305d1c699816a36967903945fc80b1d84e",
+      "structural_warning_review": "Only unused cmd_addr[0] and cmd_addr[1]; word addressing uses [18:2], byte selection uses wmask"
+    },
+    "audit": {
+      "status": "passed",
+      "software_cases": 14,
+      "software_outputs": 354816,
+      "real_outputs": 304128,
+      "ddc_reload_both_passed": true,
+      "artifact_and_library_hashes_verified": true
+    }
+  },
+  "input_groups": {
+    "algorithm": "SHA256 of sorted compact JSON mapping repository-relative path to SHA256",
+    "runtime_data": {
+      "files": 84,
+      "sha256": "8a8095217f5d6f078d71813253919dd7a7a09a2552ba8630f906ad043933d787"
+    },
+    "raw_npz": {
+      "files": 24,
+      "sha256": "0cc8c3053b8edcd472712574e56f225329a6f2ef0010147020dccd53fd0ebcc9"
+    },
+    "firmware": {
+      "files": 16,
+      "sha256": "a46708af59e0c82978a1e1588797b70306dd35c33e0041f9bdf9c933548ab3b7"
+    },
+    "server_config_sha256": "c4bad4fb1afd0313c1bb50c9ad3f1d0e7098a6edda707aadb9253b65a55f8b54"
+  },
+  "constraints": {
+    "clock_ns": 6.667,
+    "clock_uncertainty_ns": 0.1,
+    "corner": "RVT SS 0.99V 125C",
+    "clock_model": "ideal",
+    "reset_exception": "rst_n only; platform must synchronize release"
+  },
+  "not_verified": [
+    "whole-SoC ASIC TCM/ROM/clock/IO adaptation",
+    "whole-SoC DC",
+    "post-synthesis gate/SDF simulation",
+    "physical signoff",
+    "end-to-end speech classification"
+  ],
+  "server_runtime_inputs_modified": false,
+  "server_temporary_source_edits_pending": false,
+  "external_hex_dataset": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex",
+    "manifest_sha256": "0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507",
+    "samples": 100,
+    "layers_per_sample": 12,
+    "cases": 1200,
+    "outputs": 30412800,
+    "status": "user_authorized_complete_real_E203_batch_pending",
+    "existing_record_scope": "Software only; not RTL/CPU or official classification acceptance",
+    "manifest_claimed_rtl_commit": "9dcdc6bb38929caef610debd0657b6a02392d97e",
+    "claimed_commit_available_in_local_git": false
+  },
+  "failed_attempt_history": "ARCH03_SERVER_20261108.json"
+}

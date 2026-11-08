@@ -101,13 +101,62 @@
       "unpack_verified": true,
       "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40",
       "soc": {
-        "status": "running",
-        "observed_passed_real_layers": 7,
-        "layer_01_cpu_cycles": 3890166,
-        "outputs_per_case": 25344
+        "status": "passed",
+        "cases": 14,
+        "outputs": 354816,
+        "real_outputs": 304128,
+        "cpu_executed": true,
+        "cycles_per_case": 3890166,
+        "saturated": {
+          "real_layers": 0,
+          "extremes": 6336,
+          "rounding": 4554
+        },
+        "summary_sha256": "35fc4c2b69b9018ddb4404965e73788ad9604a93c4728d7d741515b9d4b9c34d"
       },
-      "dc_accel": "not_run",
-      "dc_shared": "not_run"
+      "dc_accel": {
+        "status": "passed",
+        "scope": "block_only_not_whole_soc",
+        "RAMSP128X16": 8,
+        "RAMSP4096X16": 2,
+        "latches": 0,
+        "setup_slack_ns": 0.000171185,
+        "hold_slack_ns": 0.00158095,
+        "total_cell_area_um2": 129773.082115,
+        "summary_sha256": "e74284595f73171a25aeda5d470aaf9e7458333af7dba683f79bae6ddd08af1b",
+        "ddc_sha256": "956cc9ea5017132c2890a364480ffe874cd432d44d1688c77cb8de883ae26386",
+        "structural_warning_counts": {
+          "LINT-2": 88,
+          "LINT-8": 88,
+          "LINT-28": 904,
+          "LINT-32": 864,
+          "LINT-33": 80
+        },
+        "timing_warning_review": "TIM-134: actual high-fanout net set is clk only; ideal clock, not a physical clock tree"
+      },
+      "dc_shared": {
+        "status": "passed",
+        "scope": "block_only_not_whole_soc",
+        "RAMSP128X16": 0,
+        "RAMSP4096X16": 64,
+        "latches": 0,
+        "setup_slack_ns": 3.74377,
+        "hold_slack_ns": 0.00187597,
+        "total_cell_area_um2": 1763018.98117,
+        "summary_sha256": "09c96b86978a5ead38416eda251f40ac85cb009d3fb5706f890f3f0459849a5d",
+        "ddc_sha256": "17d541ed5da36707382c37ed8cb282305d1c699816a36967903945fc80b1d84e",
+        "structural_warning_review": "Only unused cmd_addr[0] and cmd_addr[1]; word addressing uses [18:2], byte selection uses wmask"
+      },
+      "icb": {
+        "status": "passed",
+        "cases": 14,
+        "outputs": 354816,
+        "real_outputs": 304128,
+        "cpu_executed": false,
+        "summary_sha256": "a539790985a4202dac19a6023986420bed3acbc9af9cde28a98dc31cf488e872"
+      },
+      "acceptance_record": "ARCH03_ACCEPTANCE_20261108.json"
     }
-  ]
+  ],
+  "latest_acceptance_record": "ARCH03_ACCEPTANCE_20261108.json"
 }
