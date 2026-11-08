@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending.",
+  "last_completed_stage": "d3_reports01 report re-audit and d3_gate01 mapped layer_01 passed; 25344 outputs and 3890080-cycle window. Negative timing preserved. d3_activity01 running.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -35,7 +35,8 @@
     "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified.",
     "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied.",
     "D3 ASIC d3_smoke04 passed layer_01 all 25344 outputs without global FPGA define; real vendor TCM and stdcells, boot verified, task clock mode 0/1/1, window 3890080 cycles at 6.666666 ns. Gate/STA/power and complete ASIC suite remain pending.",
-    "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending."
+    "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending.",
+    "d3_reports01 report re-audit and d3_gate01 mapped layer_01 passed; 25344 outputs and 3890080-cycle window. Negative timing preserved. d3_activity01 running."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
@@ -47,10 +48,11 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Commit/package/verify/upload report recovery; re-audit d3_synth03 into new d3_reports01 without altering original",
-    "Use recovered summary digest for gate smoke; preserve explicit negative-STA scope",
-    "Inspect bootrom-deglitch LF/HF and timer synchronizer paths, then repair documented clock/task assumptions or actual RTL as evidence requires",
-    "Gate full suite and audited task VCD; actual system power/energy and final same-configuration acceptance"
+    "Commit/package/clean-verify/upload d3-repair bundle with native scanner and gate report re-audit",
+    "Verify original audit PID/terminal/state is still our postprocessor, no VCS child; interrupt only that own audit so driver records failed state and releases its lock normally",
+    "Run new gate_soc --gate-reports-from old d3_activity01/gate_soc --cases layer_01, preserving original VCD and rechecking all captures/inputs",
+    "After native activity passes, use original-config power collector from reports package to estimate actual power; no current-config acceptance claim",
+    "Run new UART original/patched miter, new ASIC synthesis strict clock/coverage and same-config CPU/gate/full-window power"
   ],
   "still_unverified": [
     "Strict 150 MHz synthesis/STA and complete area accounting",
@@ -64,7 +66,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "No active EDA job or team lock observed 07:12. Third terminal completed d3_synth03 in SDC bundle; fourth idle diagnostic terminal in monitor bundle.",
+  "server_readonly_job": "Third terminal (cwd c323 SDC bundle) runs 4c8803e d3_activity01: VCS finished, Python audit still PID 200903. Fourth diagnostic terminal cwd 4c8803e reports bundle. No other EDA launched.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -95,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Report recovery prepared, 63 tests passed; package/upload next. d3_synth03 mapping/report generation completed but completion-marker parser failed; setup -1.77329254 ns and hold -0.09681505 ns remain real unresolved results.",
+  "uncommitted_follow_on": "Task-mode/CDC/UART repair plus native VCD audit and original gate-report re-audit ready locally. 68 tests pass with actual compiled scanner, seven XSim mode cases pass. Need commit/package/upload. Original d3_activity01 Python audit PID 200903 still running; do not mistake completed VCS for final stage pass.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -244,7 +246,7 @@
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "Ten verified uploads; gate package unpacked. Synthesis finished with marker-parser failure and negative timing. Recovery package pending.",
+    "state": "Eleven verified uploads; latest 4c8803e reports package. d3_reports01 and d3_gate01 complete; d3_activity01 running.",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -442,5 +444,134 @@
     "server_executed": false,
     "negative_timing_preserved": true,
     "original_failed_run_preserved": true
+  },
+  "latest_reports_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+      "archive": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0.zip",
+      "bytes": 10788921,
+      "sha256": "28edf4128359dcff70a003705275fceee18dbedbcab1ba4706ab322d47d4fd0d",
+      "files": 388,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_reports_clean_20261109\\light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false
+  },
+  "synthesis_report_recovery": {
+    "status": "reports_ready_review_required",
+    "package": {
+      "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+      "archive": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0.zip",
+      "bytes": 10788921,
+      "sha256": "28edf4128359dcff70a003705275fceee18dbedbcab1ba4706ab322d47d4fd0d",
+      "files": 388,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "session": "d3_reports01",
+    "original_session": "d3_synth03",
+    "original_mapping_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+    "summary_sha256": "41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d",
+    "synthesis_reexecuted": false,
+    "original_preserved": true,
+    "all_manifest_and_source_inputs_verified": true,
+    "area_sum_reconciled": true,
+    "sram_count": 138,
+    "reported_area": 3812814.351672,
+    "metrics": {
+      "period_ns": "6.666666000000",
+      "max": "-1.7733",
+      "min": "-0.096815"
+    },
+    "timing_verified": false,
+    "scoring_area_verified": false,
+    "screenshot": "server_reports01_receipt.png"
+  },
+  "gate_smoke": {
+    "status": "passed",
+    "package_source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+    "session": "d3_gate01",
+    "started": "2026-11-09T07:18:02.669569",
+    "finished": "2026-11-09T07:26:00.448061",
+    "summary_sha256": "5718b46f46bc31c2facf5a9b40a1c8f82915fe91d90c6090cc92bb2c20afd544",
+    "scope": "whole_soc_mapped_functional_without_SDF",
+    "case": "layer_01",
+    "outputs": 25344,
+    "saturated": 0,
+    "cpu_cycles": 3890176,
+    "task_window_cycles": 3890080,
+    "period_ns": "6.666666",
+    "synthesis_summary_sha256": "41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d",
+    "timing_verified": false,
+    "system_power_verified": false,
+    "complete_gate_suite_verified": false,
+    "screenshots": [
+      "server_gate01_diagnostic.png",
+      "server_gate01_receipt.png"
+    ]
+  },
+  "activity_run": {
+    "status": "simulation_completed_python_activity_audit_running_slow",
+    "session": "d3_activity01",
+    "case": "layer_01",
+    "scope": "same mapped SoC full-task VCD",
+    "verified": false,
+    "driver_pid": 200903,
+    "simulation_finished": "2026-11-09T07:40:52",
+    "vcd_bytes_approx": 29861000000,
+    "outputs": 25344,
+    "cycles": 3890176,
+    "window_cycles": 3890080,
+    "audit_position_at_0744": 55496704,
+    "audit_position_at_0746": 93954096,
+    "measured_audit_MB_per_second_approx": 0.27,
+    "screenshot": "server_activity_header_audit_rate.png",
+    "next": "After tested replacement upload, interrupt only our completed-simulation Python audit, allowing its own finally to save failed state and release lock; re-audit preserved data in a NEW session."
+  },
+  "taskmode_uart_preparation": {
+    "status": "local_tests_only_NOT_server_verified",
+    "python_tests": 68,
+    "log": "local_runs/d3_native_activity_tests_20261109.log",
+    "timing_review": "workspaces/arch03/TIMING_REVIEW_20261109.md",
+    "clock_mode_test": "local_runs/clock_mode_20261109_073814_603735",
+    "clock_mode_cases": 7,
+    "uart_testbench": "syntax_compiled_only; actual original/patched UART miter pending server",
+    "native_activity_parity": "Six positive variants and fourteen malformed variants agree with Python reference; no record sampling",
+    "native_activity_benchmark": {
+      "bytes": 32000676,
+      "seconds": 0.5111629,
+      "MB_per_second": 62.60367487546534,
+      "records": 8000008,
+      "scope": "local synthetic streaming audit and full SHA256; actual server pending"
+    },
+    "production_change": "ASIC installer adds only inactive UART FIFO payload default zero; original official platform preserved",
+    "constraints_change": "bootrom_deglitch io_q=1 only during monitored stable task; four exact LF timer first-stage D exceptions after mapping; all other crossings retained",
+    "remaining": "Server UART comparison, actual scanner, strict synthesis and coverage, complete same-config CPU/gate/power"
   }
 }

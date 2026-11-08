@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "asic_full_passed_synthesis_reports_complete_marker_parser_failed_timing_negative",
+  "status": "mapped_gate_smoke_passed_activity_running_timing_negative",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -88,6 +88,17 @@
       "bytes": 10777527,
       "sha256": "025276feb948bd10beab8b35cb0875734d7476b39cc9e814b416b76a55637af7",
       "files": 386,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+      "archive": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0.zip",
+      "bytes": 10788921,
+      "sha256": "28edf4128359dcff70a003705275fceee18dbedbcab1ba4706ab322d47d4fd0d",
+      "files": 388,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
@@ -518,5 +529,98 @@
     "server_executed": false,
     "negative_timing_preserved": true,
     "original_failed_run_preserved": true
+  },
+  "synthesis_report_recovery": {
+    "status": "reports_ready_review_required",
+    "package": {
+      "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+      "archive": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0.zip",
+      "bytes": 10788921,
+      "sha256": "28edf4128359dcff70a003705275fceee18dbedbcab1ba4706ab322d47d4fd0d",
+      "files": 388,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "session": "d3_reports01",
+    "original_session": "d3_synth03",
+    "original_mapping_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+    "summary_sha256": "41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d",
+    "synthesis_reexecuted": false,
+    "original_preserved": true,
+    "all_manifest_and_source_inputs_verified": true,
+    "area_sum_reconciled": true,
+    "sram_count": 138,
+    "reported_area": 3812814.351672,
+    "metrics": {
+      "period_ns": "6.666666000000",
+      "max": "-1.7733",
+      "min": "-0.096815"
+    },
+    "timing_verified": false,
+    "scoring_area_verified": false,
+    "screenshot": "server_reports01_receipt.png"
+  },
+  "gate_smoke": {
+    "status": "passed",
+    "package_source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+    "session": "d3_gate01",
+    "started": "2026-11-09T07:18:02.669569",
+    "finished": "2026-11-09T07:26:00.448061",
+    "summary_sha256": "5718b46f46bc31c2facf5a9b40a1c8f82915fe91d90c6090cc92bb2c20afd544",
+    "scope": "whole_soc_mapped_functional_without_SDF",
+    "case": "layer_01",
+    "outputs": 25344,
+    "saturated": 0,
+    "cpu_cycles": 3890176,
+    "task_window_cycles": 3890080,
+    "period_ns": "6.666666",
+    "synthesis_summary_sha256": "41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d",
+    "timing_verified": false,
+    "system_power_verified": false,
+    "complete_gate_suite_verified": false,
+    "screenshots": [
+      "server_gate01_diagnostic.png",
+      "server_gate01_receipt.png"
+    ]
+  },
+  "activity_run": {
+    "status": "simulation_completed_python_activity_audit_running_slow",
+    "session": "d3_activity01",
+    "case": "layer_01",
+    "scope": "same mapped SoC full-task VCD",
+    "verified": false,
+    "driver_pid": 200903,
+    "simulation_finished": "2026-11-09T07:40:52",
+    "vcd_bytes_approx": 29861000000,
+    "outputs": 25344,
+    "cycles": 3890176,
+    "window_cycles": 3890080,
+    "audit_position_at_0744": 55496704,
+    "audit_position_at_0746": 93954096,
+    "measured_audit_MB_per_second_approx": 0.27,
+    "screenshot": "server_activity_header_audit_rate.png",
+    "next": "After tested replacement upload, interrupt only our completed-simulation Python audit, allowing its own finally to save failed state and release lock; re-audit preserved data in a NEW session."
+  },
+  "taskmode_uart_preparation": {
+    "status": "local_tests_only_NOT_server_verified",
+    "python_tests": 68,
+    "log": "local_runs/d3_native_activity_tests_20261109.log",
+    "timing_review": "workspaces/arch03/TIMING_REVIEW_20261109.md",
+    "clock_mode_test": "local_runs/clock_mode_20261109_073814_603735",
+    "clock_mode_cases": 7,
+    "uart_testbench": "syntax_compiled_only; actual original/patched UART miter pending server",
+    "native_activity_parity": "Six positive variants and fourteen malformed variants agree with Python reference; no record sampling",
+    "native_activity_benchmark": {
+      "bytes": 32000676,
+      "seconds": 0.5111629,
+      "MB_per_second": 62.60367487546534,
+      "records": 8000008,
+      "scope": "local synthetic streaming audit and full SHA256; actual server pending"
+    },
+    "production_change": "ASIC installer adds only inactive UART FIFO payload default zero; original official platform preserved",
+    "constraints_change": "bootrom_deglitch io_q=1 only during monitored stable task; four exact LF timer first-stage D exceptions after mapping; all other crossings retained",
+    "remaining": "Server UART comparison, actual scanner, strict synthesis and coverage, complete same-config CPU/gate/power"
   }
 }

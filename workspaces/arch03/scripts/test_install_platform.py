@@ -3,10 +3,18 @@ import unittest
 import hashlib
 from unittest.mock import patch
 from pathlib import Path
-from install_platform import patch_tcm,patch_rom,platform_sources,select_else_interface
+from install_platform import patch_tcm,patch_rom,platform_sources,select_else_interface,patch_uart_defaults
 
 
 class PlatformTests(unittest.TestCase):
+    def test_uart_patch_only_defines_inactive_payload_and_rejects_changed_shape(self):
+        source="always @(*) begin\n fifo_tx_valid = 1'b0;\n if (write_thr) begin\n fifo_tx_data = PWDATA[7:0];\n fifo_tx_valid = 1'b1;\n end\nend\n"
+        actual=patch_uart_defaults(source)
+        insertion="\n        fifo_tx_data = 8'b0; // ARCH03: inactive FIFO payload, no latch\n"
+        self.assertEqual(actual.replace(insertion,''),source)
+        for bad in (source+source,source.replace('PWDATA[7:0]','PWDATA[15:8]'),actual):
+            with self.assertRaises(ValueError):patch_uart_defaults(bad)
+
     def test_tcm_patch_preserves_named_connections(self):
         text='`ifdef E203_HAS_ITCM\n`ifndef FPGA\nsram_wrap_32KX64 legacy();\n`else\nsirv_gnrl_ram #(\n`ifdef E203_HAS_ECC\n.FORCE_X2ZERO(0),\n`endif\n.DW(64)) ram(.cs(cs));\n`endif\n`endif\n'
         patched=patch_tcm(text)

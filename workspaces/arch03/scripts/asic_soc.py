@@ -98,6 +98,8 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
         if text.count(marker)!=1:raise ValueError('Missing/duplicate ASIC boot evidence')
         if text.count('ARCH03_ASIC_MODE_MATCH test_mode=0 pllbypass=1 divider_bypass=1')!=1:
             raise ValueError('Missing/duplicate actual ASIC task clock-mode evidence')
+        if text.count('ARCH03_BOOT_MODE_MATCH bootrom_selected=1 scope=complete_task')!=1:
+            raise ValueError('Missing/duplicate actual ASIC task boot-mode evidence')
         matches=re.findall(r'ARCH03_SOC_PASS outputs=25344 cpu_executed=true cycles=(\d+) saturated=(\d+)',text)
         if len(matches)!=1:raise ValueError('ASIC CPU task did not complete uniquely')
         cycles,sats=map(int,matches[0]);window=read_task_window(text)
@@ -107,8 +109,8 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
         if name in activity_cases:
             activity=run/(name+'.vcd')
             if not activity.is_file() or not activity.stat().st_size:raise ValueError('Missing ASIC system activity')
-            from activity import audit_vcd
-            result['activity']=audit_vcd(activity,window)
+            from activity_fast import audit_activity
+            result['activity']=audit_activity(activity,window,run,call)
         for filename,digest in prepared['files'].items():
             if sha(boot/filename)!=digest:raise ValueError('ASIC boot payload changed')
         results.append(result);print('ASIC_CPU_CASE_PASS',name,flush=True)

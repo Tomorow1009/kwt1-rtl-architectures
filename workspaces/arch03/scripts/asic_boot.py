@@ -99,6 +99,7 @@ def patch_testbench(text):
     if text.count(monitor)!=1:raise ValueError('Expected one ASIC task monitor include')
     guard='arch03_clock_mode_guard a3_asic_mode(.clk(a3_mon_clk),.rst_n(a3_mon_rst_n),'
     guard+='.active(a3_window_active),.finished(a3_window_finished),'
+    guard+='.bootrom_selected(u_e203_soc_top.u_e203_subsys_top.u_sirv_aon_top.u_sirv_aon_wrapper.bootrom_deglitch.io_q),'
     guard+=','.join('.%s(%s.%s)'%(name,clock,name) for name in ('test_mode','pllbypass','plloutdivby1'))+');\n'
     text=text.replace(monitor,monitor+'\n'+guard)
     return text

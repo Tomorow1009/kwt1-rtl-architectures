@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
-from soc_synth import area_inventory,constraints,script,require_tool_marker,recover_reports,sha
+from soc_synth import area_inventory,constraints,script,require_tool_marker,recover_reports,sha,mapped_exceptions
 
 
 def inventory():
@@ -19,6 +19,29 @@ def inventory():
 
 
 class SocSynthTests(unittest.TestCase):
+    def test_cdc_exceptions_only_reach_four_first_stage_timer_pins(self):
+        import tkinter
+        interp=tkinter.Tcl()
+        interp.eval(r'''
+proc get_pins {args} {if {[lindex $args end] eq "__arch03_no_such_pin__"} {return {}}; return $::candidates}
+proc get_ports {name} {return $name}
+proc get_object_name {pin} {return $pin}
+proc sizeof_collection {pins} {llength $pins}
+proc add_to_collection {pins pin} {lappend pins $pin;return $pins}
+proc foreach_in_collection {name pins body} {foreach pin $pins {uplevel 1 [list set $name $pin]; uplevel 1 $body}}
+proc set_false_path {args} {set ::exception $args}
+proc puts {args} {}
+''')
+        pins=['top/u_perips_apb_pwm/u_tim%d/u_in_stage/r_ls_clk_sync_reg[%d]/D'%(timer,stage)
+              for timer in range(4) for stage in range(3)]
+        pins+=['top/other/u_tim0/u_in_stage/r_ls_clk_sync_reg[0]/D']
+        interp.setvar('candidates',tuple(pins));interp.eval(mapped_exceptions())
+        actual=interp.splitlist(interp.getvar('exception'))
+        self.assertEqual(actual[0:3],('-from','lfextclk','-to'))
+        self.assertEqual(set(interp.splitlist(actual[3])),set(pins[::3][:-1]))
+        interp.setvar('candidates',tuple(pins[1:]))
+        with self.assertRaisesRegex(tkinter.TclError,'Expected four reviewed'):interp.eval(mapped_exceptions())
+
     def test_recovery_preserves_failed_run_and_negative_timing_and_rejects_changed_sources(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);old=root/'old';current=root/'current'

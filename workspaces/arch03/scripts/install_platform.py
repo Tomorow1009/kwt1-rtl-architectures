@@ -85,6 +85,18 @@ def platform_sources(platform):
     if excluded and len(excluded)!=6:raise ValueError('Pinned external library entry count changed')
     return result
 
+def patch_uart_defaults(text):
+    # Original APB UART leaves the FIFO payload latched while valid=0.
+    # The FIFO accepts payload only with valid; give the inactive payload a
+    # defined value so no data-enabled, unconstrained latch is synthesized.
+    defaults=list(re.finditer(r"(?m)^(\s*)fifo_tx_valid\s*=\s*1'b0\s*;",text))
+    writes=re.findall(r'\bfifo_tx_data\s*=\s*([^;]+);',text)
+    if len(defaults)!=1 or writes!=['PWDATA[7:0]']:
+        raise ValueError('Unexpected APB UART TX payload/default assignments')
+    pos=defaults[0].end()
+    return text[:pos]+"\n        fifo_tx_data = 8'b0; // ARCH03: inactive FIFO payload, no latch\n"+text[pos:]
+
+
 def install(source,dest,asic=False,monitor='arch03_monitor.svh',asic_boot=False):
     if asic_boot and not asic:raise ValueError('ASIC boot requires ASIC platform binding')
     if monitor not in ('arch03_monitor.svh','arch03_sequence_monitor.svh'):
@@ -144,6 +156,8 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh',asic_boot=False)
         generic=dest/'rtl/e203/generic/GENERIC_RVT_SMIC.v'
         mapped,binding_counts=patch_generic_cells(generic.read_text())
         generic.write_text(mapped);modified.append(generic)
+        uart=dest/'rtl/e203/perips/apb_uart/apb_uart.v'
+        uart.write_text(patch_uart_defaults(uart.read_text()));modified.append(uart)
     tb=dest/'tb/tb_top.v';text=tb.read_text()
     text,n=re.subn(r'(`define\s+PC_\w+\s+)[^\n]+',r"\g<1>32'hffffffff",text)
     if n!=5:raise ValueError('Unexpected legacy PC monitor count '+str(n))
@@ -165,6 +179,7 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh',asic_boot=False)
                 rom_mode='existing_constant_logic' if asic else 'legacy_functional',
                 monitor=monitor,
                 generic_cell_bindings=binding_counts if asic else None,
+                uart_tx_payload_mode='zero_when_invalid_no_latch' if asic else 'original_platform',
                 asic_simulation_prepared=asic_boot,
                 asic_simulation_verified=False,
                 changes=['ICB accelerator at 0x40000000','new 512 KiB SRAM at 0xa0000000',

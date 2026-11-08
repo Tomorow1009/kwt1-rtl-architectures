@@ -14,7 +14,7 @@ def main():
     run([tool('xvlog'),'--sv']+files,folder,'compile.log')
     run([tool('xelab'),'tb_arch03_clock_mode','-debug','typical','-s','mode'],folder,'elaborate.log')
     (folder/'run.tcl').write_text('run all\nquit\n')
-    cases=['positive','test','bypass','divider','unknown']
+    cases=['positive','test','bypass','divider','unknown','bootrom','boot_unknown']
     for name in cases:
         options=folder/(name+'.options');options.write_text('-testplusarg MODE_CASE='+name+'\n')
         try:run([tool('xsim'),'mode','-tclbatch','run.tcl','-f',options],folder,name+'.log')
@@ -24,7 +24,8 @@ def main():
         marker='ARCH03_CLOCK_MODE_TEST_PASS cpu_executed=false'
         if name=='positive':
             if marker not in log or log.count('ARCH03_ASIC_MODE_MATCH')!=1:raise ValueError('Positive mode observation failed')
-        elif marker in log or 'ASIC task clock mode differs from synthesis assumptions' not in log:
+        elif marker in log or ('ASIC task boot mode differs from synthesis assumptions' if name.startswith('boot')
+                              else 'ASIC task clock mode differs from synthesis assumptions') not in log:
             raise ValueError('Wrong/unknown clock mode was accepted: '+name)
     for p,h in before.items():
         if sha(p)!=h:raise ValueError('Clock-mode test input changed')

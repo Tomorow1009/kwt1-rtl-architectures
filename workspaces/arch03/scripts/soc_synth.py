@@ -1,8 +1,8 @@
 """Collect whole-SoC mapped netlist, strict-clock reports and area inventory.
 
 This stage produces REVIEWABLE REPORTS, never automatic timing/area acceptance.
-Clock mode and I/O budgets are explicit assumptions. Cross-clock paths are left
-analyzed; no blanket clock groups or data-path exceptions hide CDC problems.
+Clock mode and I/O budgets are explicit assumptions. Cross-clock paths remain
+analyzed except four reviewed first-stage timer synchronizer input pins.
 Official scoring treatment of the shared SRAM remains unresolved.
 """
 import json
@@ -44,6 +44,12 @@ foreach control {pllbypass plloutdivby1} {
     if {[sizeof_collection $pin] != 1} {error "Missing/ambiguous clock mode pin $control"}
     set_case_analysis 1 $pin
 }
+# Fixed active-low boot strap, deglitched for four LF edges before the task.
+# The complete-task observer requires this exact output to remain one.
+# Startup and strap changes are outside this steady-state task mode.
+set bootrom [get_pins -hierarchical -filter "full_name =~ */u_sirv_aon_wrapper/bootrom_deglitch/io_q"]
+if {[sizeof_collection $bootrom] != 1} {error "Missing/ambiguous bootrom task-mode pin"}
+set_case_analysis 1 $bootrom
 set ins [remove_from_collection [all_inputs] [get_ports {hfextclk lfextclk}]]
 set_input_delay -max 1.0 -clock hf_clk $ins
 set_input_delay -min 0.0 -clock hf_clk $ins
@@ -51,10 +57,34 @@ set_input_transition 0.1 $ins
 set_output_delay -max 1.0 -clock hf_clk [all_outputs]
 set_output_delay -min 0.0 -clock hf_clk [all_outputs]
 set_load 0.01 [all_outputs]
-# No false paths, multicycle paths, asynchronous clock groups, or forced
-# TCM/core clock-enable values. Reset assertion is outside this task mode;
+# No blanket clock groups or forced TCM/core clock-enable values.
+# Four first-stage timer CDC pins are constrained after mapping below.
+# Reset assertion is outside this task mode;
 # reset release/synchronizers must be reviewed separately.
 '''.replace('@PERIOD@',CLOCK_PERIOD_NS)
+
+
+def mapped_exceptions():
+    return r'''
+# The pinned APB timer input_stage.v has a 3-FF LF clock synchronizer.
+# Stage 0 drives only stage 1; edge detection uses stages 1 and 2.
+# Exempt only external LF -> stage-0 D, preserving all downstream timing.
+# Exact mapped endpoints and count are mandatory; no asynchronous groups.
+set sync0 [get_pins -quiet __arch03_no_such_pin__]
+set sync_names {}
+foreach_in_collection pin [get_pins -hierarchical -filter "full_name =~ */u_in_stage/*/D"] {
+    set name [get_object_name $pin]
+    if {[regexp {/u_perips_apb_pwm/u_tim([0-3])/u_in_stage/r_ls_clk_sync_reg\[0\]/D$} $name]} {
+        set sync0 [add_to_collection $sync0 $pin]
+        lappend sync_names $name
+    }
+}
+if {[sizeof_collection $sync0] != 4 || [llength [lsort -unique $sync_names]] != 4} {
+    error "Expected four reviewed LF timer first-stage synchronizer D pins"
+}
+set_false_path -from [get_ports lfextclk] -to $sync0
+puts "ARCH03_REVIEWED_CDC_ENDPOINTS $sync_names"
+'''
 
 
 def script(run,cfg):
@@ -75,6 +105,7 @@ set_dont_touch $memories true
 source task_mode.sdc
 set_fix_multiple_port_nets -all -buffer_constants
 compile -map_effort high
+@EXCEPTIONS@
 set_fix_hold [all_clocks]
 compile -incremental_mapping -map_effort high
 redirect check_design_mapped.rpt {check_design}
@@ -134,7 +165,8 @@ if {[catch {arch03_collect_reports} message]} {
 }
 quit
 '''
-    for key,value in {'STANDARD':'{%s}'%standard,'DATABASES':' '.join('{%s}'%p for p in databases)}.items():
+    for key,value in {'STANDARD':'{%s}'%standard,'DATABASES':' '.join('{%s}'%p for p in databases),
+                      'EXCEPTIONS':mapped_exceptions()}.items():
         text=text.replace('@'+key+'@',value)
     return text
 
@@ -226,7 +258,8 @@ def collect_reports(run,linked,before,text):
                 setup_hold_nonnegative=min(float(metrics['max']),float(metrics['min']))>=0,
                 metrics=metrics,area_summary={k:v for k,v in area.items() if k!='rows'},
                 required_reviews=['clock propagation and gated-clock coverage','all check_timing and structural warnings',
-                                  'unconstrained paths and LF/HF crossings','reset/clock mode and I/O assumptions',
+                                  'unconstrained paths and LF/HF crossings, including four explicit timer CDC pins',
+                                  'reset/clock/boot strap mode and I/O assumptions',
                                   'library area units and official shared SRAM treatment','post-synthesis functionality'],
                 gate_simulation_verified=False,system_power_verified=False,physical_signoff=False,
                 link_report=linked,artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})

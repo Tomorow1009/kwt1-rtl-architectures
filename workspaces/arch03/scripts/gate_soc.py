@@ -92,6 +92,7 @@ e203_soc_top u_e203_soc_top(
 `include "arch03_gate_monitor.svh"
 arch03_clock_mode_guard a3_gate_mode(.clk(a3_mon_clk),.rst_n(a3_mon_rst_n),
     .active(a3_window_active),.finished(a3_window_finished),
+    .bootrom_selected(u_e203_soc_top.u_e203_subsys_top.u_sirv_aon_top.u_sirv_aon_wrapper.bootrom_deglitch.io_q),
 @MODE@);
 endmodule
 '''.replace('@HALF@',TB_HALF_PERIOD_NS).replace('@PORTS@',',\n'.join('    .%s(%s)'%item for item in sorted(values.items()))).replace('@MODE@',',\n'.join('    .%s(%s.%s)'%(n,clock,n) for n in ('test_mode','pllbypass','plloutdivby1')))
@@ -148,6 +149,7 @@ def verify(cfg,run,synthesis,expected_sha,cases,call,activity_cases=()):
         if name in activity_cases:cmd+=['+ACTIVITY='+str(run/(name+'.vcd'))]
         text=call(cmd,run,name+'.log')
         for marker in ('ARCH03_ASIC_BOOT_READY bytes=262144 macros=32 scope=initial_ITCM_only',
+                       'ARCH03_BOOT_MODE_MATCH bootrom_selected=1 scope=complete_task',
                        'ARCH03_ASIC_MODE_MATCH test_mode=0 pllbypass=1 divider_bypass=1'):
             if text.count(marker)!=1:raise ValueError('Missing/duplicate gate boot or mode evidence')
         matches=re.findall(r'ARCH03_SOC_PASS outputs=25344 cpu_executed=true cycles=(\d+) saturated=(\d+)',text)
@@ -157,8 +159,8 @@ def verify(cfg,run,synthesis,expected_sha,cases,call,activity_cases=()):
         if sats!=sum(int(x,16) for x in (task/'saturated.hex').read_text().split()):raise ValueError('Gate saturation mismatch')
         result=dict(case=name,cycles=cycles,saturated=sats,task_window=window,boot=prepared,**check_capture(capture,task,2))
         if name in activity_cases:
-            from activity import audit_vcd
-            result['activity']=audit_vcd(run/(name+'.vcd'),window)
+            from activity_fast import audit_activity
+            result['activity']=audit_activity(run/(name+'.vcd'),window,run,call)
         for filename,digest in prepared['files'].items():
             if sha(boot/filename)!=digest:raise ValueError('Gate boot payload changed')
         results.append(result);print('GATE_CPU_CASE_PASS',name,flush=True)
