@@ -25,7 +25,7 @@
     "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7"
   },
   "arch03": {
-    "phase": "server_icb_passed_soc_baseline_fix_pending",
+    "phase": "server_icb_passed_soc_and_dc_iteration",
     "workspace": "workspaces/arch03",
     "branch": "codex/light-light126/arch03-e203",
     "source_commit": "91eb48805dc419229b59c9b78088bfb1a9fcaae3",
@@ -47,8 +47,8 @@
     "dc_verified": false,
     "whole_soc_dc_and_gate_flow_complete": false,
     "official_precision_verified": false,
-    "blocker": "Initial SoC stage rejected a transposed platform fingerprint; local correction requires a new committed package",
-    "next": "Upload corrected package; run actual E203 VCS and block DC, complete whole-SoC and gate checks before PR acceptance",
+    "blocker": "SoC compile macro ordering and DC area extraction fixed locally; fresh committed package and server validation pending. DC high-fanout warning remains a strict gate.",
+    "next": "Upload next committed package; execute real E203 VCS; inspect DC high fanout and rerun synthesis. Full SoC/gate and official data acceptance remain outstanding.",
     "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_172206-91eb48805dc4",
     "server_input_hashes_verified": 293,
     "server_icb_verified": true,

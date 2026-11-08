@@ -29,11 +29,44 @@
     "platform_files": 163
   },
   "dc_accel": {
-    "status": "running",
+    "status": "failed",
     "pid": 58340,
-    "scope": "block_only"
+    "scope": "block_only",
+    "reason": "DC completed mapping; unsupported design area attribute produced a blank metric. Strict acceptance also requires reviewing timing warning TIM-134.",
+    "metrics_observed": {
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 2,
+      "max_slack_ns": 0.000171185,
+      "min_slack_ns": 0.00158095,
+      "latches": 0,
+      "total_cell_area_um2": 129773.082115
+    },
+    "design_warning_codes": [
+      "LINT-2",
+      "LINT-8",
+      "LINT-28",
+      "LINT-32",
+      "LINT-33"
+    ],
+    "timing_warning_codes": [
+      "TIM-134"
+    ]
   },
   "physical_signoff": false,
   "official_precision_verified": false,
-  "server_runtime_inputs_modified": false
+  "server_runtime_inputs_modified": false,
+  "followup_bundles": [
+    {
+      "source_commit": "5048a6450401fb28b8341e8d2ed30126db475df4",
+      "archive": "light-light126-lenovo-arch03-20261108_174936-5048a6450401.zip",
+      "sha256": "a6244acbcbaba401b3f21d5235f32ff71750137fe6ae38ae4bddedbf529ad4a9",
+      "bytes": 9656157,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_174936-5048a6450401",
+      "soc": "failed: VCS parsed platform RTL before the TB-local FPGA define; ASIC TCM/ROM library modules unresolved",
+      "platform_patch_applied": true
+    }
+  ]
 }

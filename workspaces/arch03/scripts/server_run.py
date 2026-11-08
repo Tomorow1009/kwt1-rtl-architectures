@@ -84,6 +84,10 @@ def vcs(stage,cfg,run,platform_source,cases):
     includes+=list(dict.fromkeys(p.parent for p in files))
     cmd=[cfg['tools']['vcs'],'-full64','-sverilog','-timescale=1ns/1ps','+define+ARM_UD_MODEL',
          '-top',top,'-o',str(run/'simv')]+['+incdir+'+str(p) for p in includes]+files
+    # The official TB defines FPGA only after the RTL has already been parsed.
+    # Select its existing functional TCM/ROM/clock branch for the entire SoC.
+    # Accelerator/shared SRAM remain the actual ARM_UD_MODEL vendor macros.
+    if stage=='soc':cmd.insert(4,'+define+FPGA')
     tracked=files+[run/'arch02_sram_config.vh',A3/'tb/arch03_monitor.svh']
     if stage=='soc':tracked+= [p for p in platform.rglob('*') if p.is_file()]
     source_hashes={str(p):sha(p) for p in tracked}
