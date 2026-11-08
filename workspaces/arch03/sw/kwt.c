@@ -17,6 +17,7 @@ int kwt_run_layer(const volatile uint16_t *load,volatile int16_t *output,
     unsigned shift,uint64_t timeout_cycles,struct kwt_stats *stats) {
     uintptr_t a=(uintptr_t)load,b=(uintptr_t)output;
     uint32_t sent=0,received=0,saturated=0;
+    uint32_t expected_row=0,expected_col=0;
     uint64_t start;
     if(!stats || shift>31 || !timeout_cycles || !buffer_ok(a,2*KWT_LOAD_WORDS) ||
        !buffer_ok(b,2*KWT_OUTPUT_WORDS) ||
@@ -35,12 +36,20 @@ int kwt_run_layer(const volatile uint16_t *load,volatile int16_t *output,
             uint32_t word=read_reg(KWT_OUTPUT);
             uint32_t row=(word>>16)&127u,col=(word>>23)&255u;
             // Exact group -> row -> lane sequence; detects duplicate/missing coordinates.
-            uint32_t group=received/792u,within=received%792u;
-            if(received>=KWT_OUTPUT_WORDS || row!=within/8u || col!=group*8u+(within%8u)) {
+            // Advance only after a checked output. Avoid /792 and %792 in the
+            // per-output path without weakening the exact coordinate check.
+            if(received>=KWT_OUTPUT_WORDS || row!=expected_row || col!=expected_col) {
                 kwt_abort();return KWT_BAD_OUTPUT;
             }
             output[row*256u+col]=(int16_t)(word&65535u);
             saturated+=word>>31;received++;
+            if((expected_col&7u)!=7u) {
+                expected_col++;
+            } else if(expected_row!=98u) {
+                expected_row++;expected_col-=7u;
+            } else {
+                expected_row=0;expected_col++;
+            }
         }
         if((status&8u) && received==KWT_OUTPUT_WORDS) break;
         if(cycles()-start>=timeout_cycles) { kwt_abort();return KWT_TIMEOUT; }
