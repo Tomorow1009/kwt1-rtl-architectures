@@ -95,19 +95,62 @@
     "uploaded": false
   },
   "server": {
-    "live_verification": "pending",
+    "live_verification": "passed_readonly_integrity_and_target_digest_comparison",
     "historical_source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
     "historical_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
     "historical_session": "acceptance01",
     "git_diff_since_historical": "only documentation and evidence; no execution inputs changed",
-    "history_reused": false,
-    "jobs_and_lock": "not_checked",
-    "temporary_changes": "not_checked",
-    "physical_signoff": false
+    "history_reused": true,
+    "jobs_and_lock": "no matching python/vcs/simv/dc_shell/lc_shell/verdi processes; IC .arch02_team_lock absent at inspection",
+    "temporary_changes": "123 manifest-covered inputs unchanged; other server directories not audited",
+    "physical_signoff": false,
+    "inspection_time": "2026-11-08T13:47:00+08:00/2026-11-08T13:56:00+08:00",
+    "inspection_method": "VNC terminal read-only commands and Python stdlib; inspector file not uploaded or executed",
+    "manifest_inputs_verified": 123,
+    "target_digest_matches": [
+      "data.canonical_sha256",
+      "bundle.source_and_vector_sha256",
+      "bundle.validated_hex_sha256",
+      "bundle.server_config_sha256"
+    ],
+    "stages_passed": [
+      "preflight",
+      "software",
+      "unit",
+      "vcs",
+      "synth",
+      "hold",
+      "audit"
+    ],
+    "stage_summary_hashes_verified": [
+      "software",
+      "unit",
+      "vcs",
+      "audit"
+    ],
+    "software_outputs": 304128,
+    "vcs_outputs": 304128,
+    "vcs_jobs_passed": 22,
+    "vcs_source_hashes_verified": 11,
+    "capture_hashes_verified": 14,
+    "second_capture_hashes_verified": 1,
+    "audit_artifact_hashes_verified": 4,
+    "audit_outputs": 304128,
+    "macro_counts": {
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 2
+    },
+    "latches": 0,
+    "slack_ns": {
+      "max": 0.000641823,
+      "min": 0.00111431
+    },
+    "new_jobs_started": false,
+    "server_files_modified": false
   },
   "limitations": [
     "Icarus not installed",
-    "Server input hashes, stages and artifacts still require live inspection",
+    "Independent member bundle not uploaded; FileZilla team site connection pending",
     "No SDF, multi-corner, post-layout, power, SoC or classification accuracy signoff"
   ]
 }

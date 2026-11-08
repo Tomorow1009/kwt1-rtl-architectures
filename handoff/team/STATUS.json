@@ -15,8 +15,8 @@
     "clean_clone_package": "passed: 123 input file hashes, 304128 outputs, source 115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
     "chat_archive": "saved locally; 37 accessible turns, 236 messages, 20 attachment references; truncation limitations documented"
   },
-  "teammate_machine_acceptance": "local_passed_server_inspection_pending",
-  "next": "Finish light-light126 server coordination, upload independent committed bundle and inspect historical input/result hashes before declaring synchronization complete",
+  "teammate_machine_acceptance": "local_passed_existing_server_evidence_verified_transfer_pending",
+  "next": "Connect FileZilla team site, upload independent committed bundle and verify transfer/unpack; matching historical acceptance was verified live and reused without new EDA jobs",
   "server_acceptance": {
     "evidence": "evidence/SERVER_ACCEPTANCE_20261108.md",
     "session": "acceptance01",
@@ -31,9 +31,9 @@
       "evidence": "evidence/LOCAL_ACCEPTANCE_light-light126_20261108.json",
       "local": "preflight, 12-layer software 304128 outputs, XSim behavioral/pin_mock macro and mask passed",
       "icarus": "not_installed_not_run",
-      "server": "live_hashes_jobs_lock_temporary_changes_pending",
+      "server": "live_input_stage_capture_artifact_hashes_verified; no relevant jobs or lock observed; manifest-covered inputs unchanged",
       "uploaded": false,
-      "historical_evidence_reused": false
+      "historical_evidence_reused": true
     }
   }
 }

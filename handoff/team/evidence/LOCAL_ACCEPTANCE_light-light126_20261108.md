@@ -18,10 +18,19 @@
 - ZIP SHA256：`3efb36ce1816556e475cfb3eb1e7300f01bc38027e5fa4005ca3c8aaf4517c74`。
 - 拟上传至 FileZilla `/IC/light-light126-takeover-20261108/`；尚未上传，不将拟定路径表述为实际运行目录。
 
-## 尚未完成的服务器核对
+## 服务器现场只读核对与证据复用
 
-VNC 已连接，用户确认共享桌面无人操作；当前屏幕可见旧 `acceptance01` 的 `TEAM_FLOW_PASS outputs=304128 physical_signoff=false`。这只是历史终端输出，不替代本轮实物校验。现场锁、实际进程、临时修改、包输入与产物哈希仍待核对；本轮没有启动或终止服务器作业。
+2026-11-08 13:47–13:56（Asia/Shanghai），在用户确认无人操作的 VNC 终端，通过只读命令和 Python 标准库读取、重算哈希。没有运行新 EDA 作业，没有修改服务器文件，也没有直接执行尚未上传的 inspect_existing.py；以下是现场逐项核对结果。
 
-当前基准相对 `115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7` 仅增加文档和证据，执行输入无变更。可候选复用 `team_runs/member1/member1-20261108_111917-115c54dc5a05` 的历史验收，当前尚未标记复用成功。
+- 当前账号进程名称过滤 python/vcs/simv/dc_shell/lc_shell/verdi 无匹配；IC 根目录不存在 `.arch02_team_lock`。这是检查时刻的状态，新作业前仍需重新协调。
+- 实际包根：`/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05`。123 个 manifest 输入全部重算匹配；本受测包的受管输入没有临时修改，不据此推断其他目录没有修改。
+- 原始数据清单、源码/向量、运行 HEX 的三组规范摘要以及 server_config.json SHA256 均与本地 JSON 记录一致；全部 14 组 layout shift 正确。当前基准相对受测提交仅改变文档/证据，执行输入无变更。
+- `team_sessions/acceptance01/state.json` 关联 manifest 一致，preflight/software/unit/vcs/synth/hold/audit 全部 passed；除无子进程退出码的 preflight 外，各阶段 exit_code=0。software/unit/vcs/audit 的已记录 summary 哈希均匹配。
+- 软件摘要实际为 passed、304128 输出。VCS 摘要实际为 passed、functional、304128 输出，22 个 job 全部通过；manifest、11 个源码（含实际厂商模型）、14 组 CSV 捕获及 rounding 第二次捕获哈希全部匹配。
+- 审计实际为 passed，重核 304128 输出；8 个 RAMSP128X16、2 个 RAMSP4096X16、0 锁存器。最终网表、DDC、SDC、VCS 摘要四个产物哈希匹配。max/min slack 分别为 0.000641823 / 0.00111431 ns，仍仅为文档所述单 SS 角理想时钟检查，physical_signoff=false。
 
-下一步：完成 FileZilla 队伍站点登录；检查服务器协作状态；上传独立输入包及已提交的只读检查脚本，校验传输、ZIP 和解包完整性。按 SERVER.md 核对历史证据和本机目标摘要，匹配时复用，缺失或变化时使用新的 session 重跑对应阶段。现场修改必须回写 Git。SDF、多角、布局布线、功耗、SoC、完整推理及官方精度仍未验证。
+据此复用上述 acceptance01 的历史软件、宏单测、VCS、DC synth/hold 和 audit 证据，不重复启动。各实际运行目录见同目录 SERVER_ACCEPTANCE_20261108.md；这是历史结果完整性复核，不标记为本轮重新执行。
+
+## 未完成的传输
+
+独立包尚未上传；FileZilla 官方客户端已准备，但队伍站点尚未连接，凭据仅由用户在客户端输入。下一步连接后上传上述 ZIP、已提交的 unpack.py/inspect_existing.py 至个人目录，核对传输 SHA256 并安全解包，再核对新副本与已复用证据的输入对应关系。在此之前不宣布整个接手同步完成。SDF、多角、布局布线、功耗、SoC、完整推理及官方精度仍未验证。
