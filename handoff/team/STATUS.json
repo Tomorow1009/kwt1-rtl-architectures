@@ -1,0 +1,10 @@
+{
+  "updated": "2026-11-08",
+  "phase": "migration_tooling_in_development",
+  "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
+  "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
+  "historical_status": "VCS functional 304128 outputs and single SS DC checks passed; see v2.0.0 handoff",
+  "current_checks": {"fresh_github_clone_npz_hashes": "24/24 match original", "portable_software_preparation": "12 layers, 304128 outputs passed", "local_macro": "behavioral/pin_mock x Icarus/XSim: 4 groups passed, 4 cases each, pin mask also passed", "failure_tests": "8 passed", "server_python36_syntax": "passed", "new_server_flow": "not_run"},
+  "teammate_machine_acceptance": "not_run",
+  "next": "Finish macro and failure tests, fresh-path rehearsal, server full flow, chat archive, then publish"
+}

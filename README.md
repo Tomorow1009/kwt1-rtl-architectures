@@ -1,5 +1,7 @@
 # KWT-1 RTL 架构版本与团队交接
 
+换电脑与持续同步：[团队接手入口](handoff/team/README.md)、[修改后的同步流程](handoff/team/SYNC.md)、[Codex提示词](handoff/team/PROMPT.md)。日常开发使用 `workspaces/arch02`，历史版本目录保持不变。迁移工具验收进度见 [STATUS](handoff/team/STATUS.json)。
+
 私人协作仓库，用于保存各阶段架构的 RTL、验证代码、数值协议与设计说明。
 
 ## 版本索引

@@ -1,0 +1,111 @@
+{
+  "source_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
+  "source_path": "architectures/arch02_matrix/v2.0.0",
+  "normalization": "CRLF to LF only",
+  "files": {
+    "rtl/dot64.sv": {
+      "source_sha256": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+      "workspace_sha256": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872"
+    },
+    "rtl/requantize.sv": {
+      "source_sha256": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+      "workspace_sha256": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61"
+    },
+    "scripts/full_matrix_data.py": {
+      "source_sha256": "e210bdd1ccff927898f07f89ca6fe89758f9f9fce2402dbd5ccbd6e7203ebf69",
+      "workspace_sha256": "e210bdd1ccff927898f07f89ca6fe89758f9f9fce2402dbd5ccbd6e7203ebf69"
+    },
+    "scripts/gen_vectors.py": {
+      "source_sha256": "70641d81144e626e49822d24a79b2bd6d6c696d7a6545a6c6bc2655d2789f100",
+      "workspace_sha256": "70641d81144e626e49822d24a79b2bd6d6c696d7a6545a6c6bc2655d2789f100"
+    },
+    "scripts/verify_real_hex.py": {
+      "source_sha256": "1a4142ea7d056c70cea6447ac7d78187af9a3c27988894697ccde3f52a0d436b",
+      "workspace_sha256": "1a4142ea7d056c70cea6447ac7d78187af9a3c27988894697ccde3f52a0d436b"
+    },
+    "arch02/rtl/arch02_linear.sv": {
+      "source_sha256": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2",
+      "workspace_sha256": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2"
+    },
+    "arch02/rtl/sram_macro_adapter.sv": {
+      "source_sha256": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "workspace_sha256": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72"
+    },
+    "arch02/rtl/sram_port.sv": {
+      "source_sha256": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "workspace_sha256": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a"
+    },
+    "arch02/tb/pin_mock.sv": {
+      "source_sha256": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+      "workspace_sha256": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417"
+    },
+    "arch02/tb/pin_mock_config.json": {
+      "source_sha256": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+      "workspace_sha256": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d"
+    },
+    "arch02/tb/sram_model.sv": {
+      "source_sha256": "3485c49b67aebc6b50581ccc72cb9955502e6130245385eee6e42d3973557eb6",
+      "workspace_sha256": "3485c49b67aebc6b50581ccc72cb9955502e6130245385eee6e42d3973557eb6"
+    },
+    "arch02/tb/tb_arch02.sv": {
+      "source_sha256": "4fc2c171245ee3bab6278a9bd5a383a513bd382371480c8f800d28528974b794",
+      "workspace_sha256": "4fc2c171245ee3bab6278a9bd5a383a513bd382371480c8f800d28528974b794"
+    },
+    "arch02/tb/tb_lanes.sv": {
+      "source_sha256": "9d800c189dc3ac95daf23318a5ebf2a23f034caea109b442c5d0304773f07aff",
+      "workspace_sha256": "9d800c189dc3ac95daf23318a5ebf2a23f034caea109b442c5d0304773f07aff"
+    },
+    "arch02/tb/tb_sram_adapter.sv": {
+      "source_sha256": "42249f38f554e6017e41e9eb3ba496313855a579f4261b2aca494430089ee35b",
+      "workspace_sha256": "42249f38f554e6017e41e9eb3ba496313855a579f4261b2aca494430089ee35b"
+    },
+    "arch02/tb/tb_sram_guard.sv": {
+      "source_sha256": "d54194cbd44df5d82c72a613c9b2f8808739364707d5f980a65557298b243b64",
+      "workspace_sha256": "d54194cbd44df5d82c72a613c9b2f8808739364707d5f980a65557298b243b64"
+    },
+    "arch02/scripts/data.py": {
+      "source_sha256": "023649500a3f4264919c7e0a1f9548040a7cdc77ea0c7f932f5fe32b0096ff59",
+      "workspace_sha256": "023649500a3f4264919c7e0a1f9548040a7cdc77ea0c7f932f5fe32b0096ff59"
+    },
+    "arch02/scripts/run.py": {
+      "source_sha256": "a7b44a7939026cc04f54650b3a836b0dea8a5c544765fd3cfeca9f2120d60ed8",
+      "workspace_sha256": "a7b44a7939026cc04f54650b3a836b0dea8a5c544765fd3cfeca9f2120d60ed8"
+    },
+    "arch02/scripts/run_arch02.ps1": {
+      "source_sha256": "23157cea06bbd9afa79c11fe2dcdccefc0a903f2d152dcef1daf973b7241808e",
+      "workspace_sha256": "23157cea06bbd9afa79c11fe2dcdccefc0a903f2d152dcef1daf973b7241808e"
+    },
+    "arch02/scripts/server_probe.py": {
+      "source_sha256": "c08a1992023b2c393a6e0802314ea5a7a28394bce3e4b44114204e2dce2cc8e6",
+      "workspace_sha256": "c08a1992023b2c393a6e0802314ea5a7a28394bce3e4b44114204e2dce2cc8e6"
+    },
+    "arch02/scripts/server_vcs.py": {
+      "source_sha256": "22c9930dc8f52eebd8e05a5c90e1a7b87e5b45c27e11c44193010f705a6d23f4",
+      "workspace_sha256": "22c9930dc8f52eebd8e05a5c90e1a7b87e5b45c27e11c44193010f705a6d23f4"
+    },
+    "arch02/README.md": {
+      "source_sha256": "0a64ebac22ba4bdc21bbf1b2b5b7be218d911e138d0c735647b857b7008ff345",
+      "workspace_sha256": "112da2ed8b33182f3f0b2b1a1d70ec755f011bd9f4eb9900671ef7fcdb65ac69"
+    },
+    "arch02/SERVER_HANDOFF.md": {
+      "source_sha256": "cf471a52b4d542e2178051498017c751b9927606e8dd14dd23add104a0064c71",
+      "workspace_sha256": "cf471a52b4d542e2178051498017c751b9927606e8dd14dd23add104a0064c71"
+    },
+    "arch02/SRAM_ADAPTER.md": {
+      "source_sha256": "5bd1058ebbcc0c8a013f7be1c018be418c24ba631e8773610aeae20340234682",
+      "workspace_sha256": "83c41433ada20e482f78c971aaee72670702de23246c8bef9620e5e3b230dd7c"
+    },
+    "arch02/SRAM_VERIFICATION.md": {
+      "source_sha256": "7cf0f70a46fc0aa9d630b6617c0515eafccc37792296044c6bed501890e07c49",
+      "workspace_sha256": "14ccf5440753aa81018f5752a6c66362b03e6de930fa570838442c6ab6d0bd9c"
+    },
+    "arch02/VERIFICATION.md": {
+      "source_sha256": "4ea446031898784963937b6be92e73f10d8cc69d8a2ecbd7a4ef9f3b454a0a27",
+      "workspace_sha256": "90a129c7ed451acad40feb1dae88569d7d6830a1ecc73163797be4ee6b38d6ba"
+    },
+    "vcs_run.py": {
+      "source_sha256": "22c9930dc8f52eebd8e05a5c90e1a7b87e5b45c27e11c44193010f705a6d23f4",
+      "workspace_sha256": "22c9930dc8f52eebd8e05a5c90e1a7b87e5b45c27e11c44193010f705a6d23f4"
+    }
+  }
+}
