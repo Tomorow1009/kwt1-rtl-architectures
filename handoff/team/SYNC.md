@@ -2,6 +2,44 @@
 
 Git已合并提交是团队基准；服务器独立快照是验证证据。不要靠修改时间或文件夹名称判断最新版。
 
+## 各类内容同步到哪里
+
+| 内容 | 同步方式 | 接手者怎么用 |
+|---|---|---|
+| RTL、TB、Python/Tcl/运行脚本、交接文档 | 个人分支提交、推送，PR审查后合入main | fetch后拉取已合并提交 |
+| 小型验证摘要、配置模板、数据清单与哈希 | 随代码提交，注明受测提交和服务器目录 | 检查证据是否对应本次源码 |
+| 服务器输入包 | 从已提交源码重新打包，通过FileZilla上传新目录 | 按包manifest核对，不能只替换某个RTL后沿用旧PASS |
+| 大型HEX、波形、完整日志 | 保留服务器独立运行目录；Git记录位置、数量和哈希 | 需要时在服务器检查；新增本地数据须单独安排传输 |
+| 个人工具路径、凭据、EDA/SRAM/工艺库 | 个人配置或服务器原位置，不提交Git | 每台电脑重新配置与预检 |
+
+GitHub推送不会自动更新服务器；服务器文件修改也不会自动回到GitHub。两步都完成并记录对应关系后，才算同步完成。
+
+## 一轮实际命令
+
+以下命令在克隆仓库根目录运行。成员名和任务名换成自己的；若status有修改，先在原分支保存并提交工作，不直接切换、覆盖或丢弃。
+
+```powershell
+git status --short
+git fetch origin
+git switch main
+git pull --ff-only origin main
+git switch -c codex/member1/sram-fix
+# 修改、检查后，仅暂存本轮明确要交付的文件
+git add workspaces/arch02/arch02/rtl/example.sv
+git diff --cached
+git commit -m "Fix SRAM adapter alignment"
+git push -u origin codex/member1/sram-fix
+python handoff/team/local.py package --config handoff/team/config.local.json
+```
+
+`example.sv`只是占位示例，必须换成实际修改文件。运行包按SERVER.md上传和执行；本次结果另作提交更新STATUS及摘要，再推送同一分支并创建PR。没有服务器运行的文档变更，明确记为“不涉及RTL重验”；未完成的硬件验证必须保留“未验证”。
+
+PR合并后，另一台电脑先确认工作区干净，再执行 `git fetch origin`、`git switch main`、`git pull --ff-only origin main`，阅读最新STATUS。若pull因分叉失败，保留两个版本，解决差异并复验，不用强推或reset掩盖冲突。
+
+## 再次交接时给Codex的提示词
+
+> 请按AGENTS.md和handoff/team/SYNC.md接手同步。先检查本地未提交修改、当前分支、远端main和STATUS，保留个人工作；说明队友新增了哪些提交及影响。检查服务器是否有运行中任务或未回写的临时修改。需要修改时使用个人codex分支；提交后重新打包到服务器独立目录，按改动范围验证，并把受测提交、输入哈希、运行路径、结果及未验证项目写回文档。推送团队私人仓库并通过PR合并，保留旧版本。不要把Git推送当成服务器已更新，也不要用旧日志证明新源码通过。
+
 ## 正常往返
 
 1. `git status --short` 检查未提交内容。先保存个人工作，再fetch；没有本地改动时可 `git pull --ff-only`。不自动reset/clean，不覆盖改动。
