@@ -451,5 +451,33 @@
     "license_not_checked": true,
     "power_not_run": true,
     "screenshot": "server_power_tool_paths.png"
+  },
+  "power_preparation": {
+    "status": "local_preparation_only",
+    "python_tests": 61,
+    "python36_syntax": true,
+    "test_log": "local_runs/d3_power_preparation_tests_20261109.log",
+    "tool": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "license_verified": false,
+    "server_executed": false,
+    "command_syntax_evidence": "server_power_command_syntax_compact.png",
+    "time_units_evidence": "server_power_vcd_time_units.png",
+    "manual_time_units": "read_vcd -time uses nanoseconds independent of VCD timescale",
+    "source": "installed PrimeTime 2022.03 command manuals; no technology library source exported",
+    "coverage": [
+      "whole SoC and per-hierarchy power",
+      "all 138 SRAM cell power report",
+      "before/after activity coverage and unannotated objects",
+      "exact full-task activity/window provenance",
+      "tool unit report and explicit incomplete-review status"
+    ],
+    "unresolved": [
+      "actual PrimeTime/PX license and execution",
+      "wire/clock capacitance model",
+      "unknown/unannotated activity",
+      "SRAM internal and conditional leakage models",
+      "actual W/mW/uW conversion and task energy"
+    ],
+    "system_power_verified": false
   }
 }

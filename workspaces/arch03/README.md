@@ -111,6 +111,8 @@ python3 workspaces/arch03/scripts/server_run.py gate_soc --session gate01 --synt
 
 `gate_soc` 要求完整综合阶段及明确摘要哈希，复核网表、SDC、输入及当前 RTL/固件源码匹配。它采用映射后 ITCM 实例路径预装启动镜像、复用实际 CPU 总线写回检查，并支持 `--activity-cases layer_01`。当前此入口只通过本地准备测试，尚未服务器执行；即便门级功能通过，也不会自动认可源综合的负裕量、未约束路径或功耗。该入口没有 SDF，不能当作带延迟时序仿真。
 
+系统功耗准备入口 `asic_power --session <new> --gate-run <passed-gate-directory> --gate-summary-sha256 <digest> --cases layer_01` 只接受通过功能检查且带完整窗口 VCD 的门级用例。它校验所有来源，按监视器的纳秒起止时间调用 PrimeTime PX，保留整机/层级/SRAM 功耗和活动未标注清单。状态仍为 `reports_ready_review_required`；当前只有本地脚本验证，没有实际功耗结果或许可证验证。提取寄生参数、时钟网络/线负载假设、未知活动、宏模型及 µW/mW 单位差异都须另行审查，不按零处理缺项。
+
 `asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1，与初步综合模式一致；这不代替门级、时序或功耗验证。新 `memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零分电源漏电项。共享 SRAM 官方计分归属与物理面积单位仍需独立审查。
 
 启用活动记录时，`activity.py` 流式校验 VCD：必须包含 CPU、互连、加速器、共享 SRAM、ITCM/DTCM，且只能有一段与实际任务起止时间一致的 `$dumpon`/`$dumpoff` 区间。截断、错窗口、缺部件或未声明信号会失败；未知值事件单独计数。它只核验波形范围、窗口和完整性，不代表综合网表活动映射覆盖或功耗通过。目前仅用合成 VCD 测试解析器，真实 VCS 波形仍待服务器执行。

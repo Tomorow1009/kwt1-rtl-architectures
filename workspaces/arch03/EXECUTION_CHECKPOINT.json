@@ -94,7 +94,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Only latest run evidence/docs pending commit; gate entry committed 38c89eb and verified/uploaded.",
+  "uncommitted_follow_on": "System-power report entry locally prepared and 61 tests passed; no license/power run. Current server task remains c323781 d3_synth03 mapping, no tool errors observed at 06:50.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -373,5 +373,33 @@
     "cpu_executed": false,
     "server_uploaded": true,
     "asic_link_verified": false
+  },
+  "power_preparation": {
+    "status": "local_preparation_only",
+    "python_tests": 61,
+    "python36_syntax": true,
+    "test_log": "local_runs/d3_power_preparation_tests_20261109.log",
+    "tool": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "license_verified": false,
+    "server_executed": false,
+    "command_syntax_evidence": "server_power_command_syntax_compact.png",
+    "time_units_evidence": "server_power_vcd_time_units.png",
+    "manual_time_units": "read_vcd -time uses nanoseconds independent of VCD timescale",
+    "source": "installed PrimeTime 2022.03 command manuals; no technology library source exported",
+    "coverage": [
+      "whole SoC and per-hierarchy power",
+      "all 138 SRAM cell power report",
+      "before/after activity coverage and unannotated objects",
+      "exact full-task activity/window provenance",
+      "tool unit report and explicit incomplete-review status"
+    ],
+    "unresolved": [
+      "actual PrimeTime/PX license and execution",
+      "wire/clock capacitance model",
+      "unknown/unannotated activity",
+      "SRAM internal and conditional leakage models",
+      "actual W/mW/uW conversion and task energy"
+    ],
+    "system_power_verified": false
   }
 }

@@ -172,14 +172,20 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','dc_accel','dc_shared','asic_link','asic_synth'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','dc_accel','dc_shared','asic_link','asic_synth'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
     p.add_argument('--activity-cases',nargs='*',default=[],help='SoC cases to record complete-system VCD over the measured task window')
     p.add_argument('--synth-run',type=Path,help='Completed ASIC synthesis directory for mapped gate verification')
     p.add_argument('--synth-summary-sha256',help='Explicit expected digest of that synthesis summary')
+    p.add_argument('--gate-run',type=Path,help='Passed gate verification directory containing audited task activity')
+    p.add_argument('--gate-summary-sha256',help='Explicit expected digest of that gate summary')
     a=p.parse_args()
+    if a.stage=='asic_power' and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
+        raise ValueError('Power requires gate run, summary digest and exactly one --cases selection')
+    if a.stage!='asic_power' and (a.gate_run is not None or a.gate_summary_sha256 is not None):
+        raise ValueError('Gate activity selection is only for power estimation')
     if a.stage=='gate_soc' and (a.synth_run is None or a.synth_summary_sha256 is None):
         raise ValueError('Gate verification requires synthesis run and summary digest')
     if a.stage!='gate_soc' and (a.synth_run is not None or a.synth_summary_sha256 is not None):
@@ -210,7 +216,10 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage=='gate_soc':
+            if a.stage=='asic_power':
+                from soc_power import estimate
+                report=estimate(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
+            elif a.stage=='gate_soc':
                 from gate_soc import verify
                 report=verify(cfg,run,a.synth_run.resolve(),a.synth_summary_sha256,a.cases,call,a.activity_cases)
             elif a.stage=='asic_boot':
