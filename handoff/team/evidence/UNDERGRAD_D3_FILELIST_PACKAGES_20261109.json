@@ -1,0 +1,85 @@
+{
+  "source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+  "status": "uploaded_server_zip_and_unpack_verified",
+  "packages": [
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+        "archive": "light-light126-d3-filelist-single-arch03-20261109_053438-b400db08e7dc.zip",
+        "bytes": 10773917,
+        "sha256": "432d97f3ec89f02402d2ada20b78b1ac915dc1cd976fb041f0ff7b383b7a7549",
+        "files": 383
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_filelist_single_clean_20261109\\light-light126-d3-filelist-single-arch03-20261109_053438-b400db08e7dc",
+      "cases": [
+        "extremes",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding"
+      ],
+      "software_outputs": 354816,
+      "firmware_images_checked": 14,
+      "cpu_executed": false,
+      "server_uploaded": true,
+      "asic_link_verified": false,
+      "server_zip_sha256_verified": true,
+      "server_entry_hashes_verified": true
+    },
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+        "archive": "light-light126-d3-filelist-sequence-arch03-20261109_053455-b400db08e7dc.zip",
+        "bytes": 14392971,
+        "sha256": "6711d0a5e80cc82ee66160ccec9863ea521fa130c2d4caddf1ecb596b6277121",
+        "files": 438
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_filelist_sequence_clean_20261109\\light-light126-d3-filelist-sequence-arch03-20261109_053455-b400db08e7dc",
+      "cases": [
+        "cancellation",
+        "extremes",
+        "largest_input",
+        "largest_output",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding",
+        "shift00",
+        "shift31",
+        "worst_error",
+        "zero"
+      ],
+      "software_outputs": 532224,
+      "firmware_images_checked": 2,
+      "cpu_executed": false,
+      "server_uploaded": true,
+      "asic_link_verified": false,
+      "server_zip_sha256_verified": true,
+      "server_entry_hashes_verified": true
+    }
+  ],
+  "python_tests": 53,
+  "whole_soc_cpu_verified": false,
+  "transfer_screenshot": "../takeover_local/d2_20261109/filelist_filezilla_completed.png",
+  "server_unpack_screenshot": "../takeover_local/d2_20261109/server_smoke02_progress.png"
+}

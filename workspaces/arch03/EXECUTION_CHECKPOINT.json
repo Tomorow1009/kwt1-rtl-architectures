@@ -44,7 +44,7 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Commit and clean-verify standard/sequence packages containing strict pinned file-list handling",
+    "Observe d3_smoke02 actual CPU stage; inspect failure or proceed to full 14-case ASIC baseline",
     "Upload new packages via already-authorized Linux FileZilla path; run ASIC CPU smoke, full 14 cases and separate sequence",
     "Run whole-SoC synthesis and review actual reports, then gate/power; no old hex100 restart"
   ],
@@ -62,7 +62,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "No active EDA at observed 05:33:26 after d3_vendor02/asic_boot completion. Third terminal in sampling bundle; old stopped jobs untouched.",
+  "server_readonly_job": "New d3_smoke02 ASIC CPU stage running in b400db0 standard bundle; two new UNPACK_HASH_PASS observed 05:38. Do not repeat or modify active bundle.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -222,27 +222,27 @@
   "d3_preparation_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_PREPARATION_20261109.json",
   "latest_ready_packages": [
     {
-      "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
-      "archive": "light-light126-d3-ready-single-arch03-20261109_032312-de6e6e41ae5b.zip",
-      "bytes": 10769549,
-      "sha256": "190056eb7ea44589b7d7249c952f9a40bbabc2cdb2c4ee60b77ed7249aee1274",
+      "source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+      "archive": "light-light126-d3-filelist-single-arch03-20261109_053438-b400db08e7dc.zip",
+      "bytes": 10773917,
+      "sha256": "432d97f3ec89f02402d2ada20b78b1ac915dc1cd976fb041f0ff7b383b7a7549",
       "files": 383
     },
     {
-      "source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
-      "archive": "light-light126-d3-ready-sequence-arch03-20261109_032312-de6e6e41ae5b.zip",
-      "bytes": 14388276,
-      "sha256": "7f5398c598b1756e15896dd4e52c4a0f7996072b8cb13b836a3c23b0e62c69c3",
+      "source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+      "archive": "light-light126-d3-filelist-sequence-arch03-20261109_053455-b400db08e7dc.zip",
+      "bytes": 14392971,
+      "sha256": "6711d0a5e80cc82ee66160ccec9863ea521fa130c2d4caddf1ecb596b6277121",
       "files": 438
     }
   ],
-  "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_READY_PACKAGES_20261109.json",
+  "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_FILELIST_PACKAGES_20261109.json",
   "active_transfer": {
-    "packages_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+    "packages_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "D3 ready and sampling packages uploaded, server ZIP/entry hashes verified",
+    "state": "b400db0 standard/sequence uploaded and server ZIP/entry hashes verified",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json"
