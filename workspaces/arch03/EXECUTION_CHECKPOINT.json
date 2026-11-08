@@ -40,9 +40,9 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Prepare ASIC boot image mapping and ASIC CPU entry from read-only verified vendor row/column layout",
-    "Continue clock/reset review and prepare whole-SoC synthesis constraints",
-    "Explicit upload authorization remains pending; after approval use a new committed package and new locked stages"
+    "Freeze ASIC boot preparation and its local evidence",
+    "Prepare explicit whole-SoC synthesis/report collection with reviewed operating-mode assumptions",
+    "After authorization, regenerate latest committed package, clean verify, upload through FileZilla, and run new locked server stages"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -165,5 +165,32 @@
     "ram4096_functional_array": "reg [127:0] mem[0:511]; row=A>>3, column=A&7; logical bit b occupies physical bit b*8+column",
     "boot_scope": "only initial ITCM firmware/source image may be preloaded; task shared-memory loading and accelerator execution remain CPU operations",
     "screenshots": "../takeover_local/d2_20261109/d3_clock_bindings.png, d3_ram_arrays_loader.png, d3_ram_mapping_detail.png, d3_ram_init_reset_retry.png"
+  },
+  "d3_boot_preparation": {
+    "status": "locally_verified_NOT_server_executed",
+    "run": "local_runs/asic_boot_20261109_030552_331287",
+    "coverage": "32768 words / 262144 bytes / 32 physical-layout substitute macros; missing macro file rejected",
+    "python_tests": 45,
+    "firmware_images_checked": 14,
+    "python36_files_checked": 5,
+    "server_stages": [
+      "asic_boot",
+      "asic_soc"
+    ],
+    "scope": "initial ITCM firmware/source preload only; runtime input loading and arithmetic remain actual CPU/accelerator operations",
+    "actual_vendor_verified": false,
+    "actual_cpu_verified": false,
+    "whole_soc_synth_verified": false
+  },
+  "d3_clock_readonly": {
+    "source_screenshot": "../takeover_local/d2_20261109/d3_clock_operating_mode.png",
+    "pllbypass_reset": 1,
+    "plloutdivby1_reset": 1,
+    "reset_flop": "sirv_gnrl_dfflrs resets qout_r to all ones",
+    "jtag_TCK": 0,
+    "jtag_TMS": 0,
+    "jtag_TDI": 0,
+    "lfextclk_tb_period_ns": 66,
+    "note": "These describe the pinned functional task mode; whole-SoC timing/CDC and area constraints are not yet verified."
   }
 }

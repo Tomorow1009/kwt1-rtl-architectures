@@ -71,7 +71,8 @@ def platform_sources(platform):
     if not result:raise ValueError('Empty platform source list')
     return result
 
-def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
+def install(source,dest,asic=False,monitor='arch03_monitor.svh',asic_boot=False):
+    if asic_boot and not asic:raise ValueError('ASIC boot requires ASIC platform binding')
     if monitor not in ('arch03_monitor.svh','arch03_sequence_monitor.svh'):
         raise ValueError('Unreviewed platform monitor')
     source=source.resolve();dest=dest.resolve()
@@ -139,6 +140,9 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
     text=text.replace('$finish;', '$fatal(1,"Legacy platform monitor exited without arch03 acceptance");')
     text=re.sub(r'(?m)^(.*\$(?:dump|fsdbDump)\w+\s*\(.*)$',r'// ARCH03 no bulk waves: \1',text)
     text=replace_once(text,'endmodule','`include "'+monitor+'"\nendmodule')
+    if asic_boot:
+        from asic_boot import patch_testbench
+        text=patch_testbench(text)
     tb.write_text(text)
     modified.append(tb)
     result=dict(original_root=str(source),baseline_sha256=digest,original_files=records,
@@ -147,7 +151,8 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
                 rom_mode='existing_constant_logic' if asic else 'legacy_functional',
                 monitor=monitor,
                 generic_cell_bindings=binding_counts if asic else None,
-                asic_simulation_ready=False,
+                asic_simulation_prepared=asic_boot,
+                asic_simulation_verified=False,
                 changes=['ICB accelerator at 0x40000000','new 512 KiB SRAM at 0xa0000000',
                          '150 MHz TB clock and CPU writeback acceptance monitor'],
                 competition_memory_compatibility='not_confirmed')

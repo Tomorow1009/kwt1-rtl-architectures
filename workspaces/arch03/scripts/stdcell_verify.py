@@ -11,8 +11,9 @@ from technology_binding import BINDINGS,load_bindings
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def verify(cfg,run,call):
+def extract_model(cfg,run):
     spec=load_bindings();model=run/'standard_cells.v'
+    if model.exists():raise ValueError('Refusing existing standard-cell model destination')
     with tarfile.open(cfg['process_archive'],'r|gz') as archive:
         for member in archive:
             if member.name!=spec['verilog_model_member']:continue
@@ -21,6 +22,11 @@ def verify(cfg,run,call):
             break
     if not model.is_file() or model.stat().st_size!=spec['verilog_model_bytes'] or sha(model)!=spec['verilog_model_sha256']:
         raise ValueError('Vendor standard-cell model fingerprint mismatch')
+    return model
+
+
+def verify(cfg,run,call):
+    model=extract_model(cfg,run)
     bench=Path(__file__).resolve().parents[1]/'tb/tb_arch03_stdcell.sv'
     before={str(p):sha(p) for p in (model,bench,BINDINGS)}
     (run/'source_inputs.json').write_text(json.dumps(before,indent=2))
