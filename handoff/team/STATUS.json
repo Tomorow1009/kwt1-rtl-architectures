@@ -15,13 +15,25 @@
     "clean_clone_package": "passed: 123 input file hashes, 304128 outputs, source 115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
     "chat_archive": "saved locally; 37 accessible turns, 236 messages, 20 attachment references; truncation limitations documented"
   },
-  "teammate_machine_acceptance": "not_run",
-  "next": "Teammate clones merged handoff, configures local tools and credentials, runs preflight and macro checks; future changes use SYNC.md",
+  "teammate_machine_acceptance": "local_passed_existing_server_evidence_verified_transfer_pending",
+  "next": "Connect FileZilla team site, upload independent committed bundle and verify transfer/unpack; matching historical acceptance was verified live and reused without new EDA jobs",
   "server_acceptance": {
     "evidence": "evidence/SERVER_ACCEPTANCE_20261108.md",
     "session": "acceptance01",
     "completed": true,
     "bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
     "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7"
+  },
+  "member_acceptances": {
+    "light-light126-lenovo": {
+      "date": "2026-11-08",
+      "source_commit": "bda985eedb4b8d97ec705afabade485b827711de",
+      "evidence": "evidence/LOCAL_ACCEPTANCE_light-light126_20261108.json",
+      "local": "preflight, 12-layer software 304128 outputs, XSim behavioral/pin_mock macro and mask passed",
+      "icarus": "not_installed_not_run",
+      "server": "live_input_stage_capture_artifact_hashes_verified; no relevant jobs or lock observed; manifest-covered inputs unchanged",
+      "uploaded": false,
+      "historical_evidence_reused": true
+    }
   }
 }

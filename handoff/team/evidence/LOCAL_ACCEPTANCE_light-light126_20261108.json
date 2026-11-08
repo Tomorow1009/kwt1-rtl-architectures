@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-08",
+  "member": "light-light126-lenovo",
+  "source_commit": "bda985eedb4b8d97ec705afabade485b827711de",
+  "branch": "codex/light-light126/arch02-takeover-20261108",
+  "preflight": "passed_local_prerequisites",
+  "python": "3.8.20",
+  "numpy": "1.19.5",
+  "simulator": "Vivado XSim 2018.3",
+  "icarus": "not_installed_not_run",
+  "software": {
+    "status": "passed",
+    "layers": 12,
+    "outputs": 304128,
+    "run": "local_runs/software_20261108_131651"
+  },
+  "macro": {
+    "status": "passed",
+    "results": [
+      {
+        "backend": "behavioral",
+        "simulator": "xsim",
+        "cases": 4,
+        "passed": true
+      },
+      {
+        "backend": "pin_mock",
+        "simulator": "xsim",
+        "cases": 4,
+        "passed": true
+      }
+    ],
+    "pin_mask": "passed",
+    "run": "local_runs/macro_20261108_131651",
+    "sources": {
+      "workspaces/arch02/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+      "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+      "workspaces/arch02/arch02/rtl/arch02_linear.sv": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2",
+      "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+      "workspaces/arch02/arch02/tb/sram_model.sv": "3485c49b67aebc6b50581ccc72cb9955502e6130245385eee6e42d3973557eb6",
+      "workspaces/arch02/arch02/tb/tb_arch02.sv": "4fc2c171245ee3bab6278a9bd5a383a513bd382371480c8f800d28528974b794",
+      "workspaces/arch02/arch02/tb/tb_lanes.sv": "9d800c189dc3ac95daf23318a5ebf2a23f034caea109b442c5d0304773f07aff",
+      "workspaces/arch02/arch02/tb/tb_sram_adapter.sv": "42249f38f554e6017e41e9eb3ba496313855a579f4261b2aca494430089ee35b",
+      "workspaces/arch02/arch02/tb/tb_sram_guard.sv": "d54194cbd44df5d82c72a613c9b2f8808739364707d5f980a65557298b243b64"
+    },
+    "sources_match_historical": true
+  },
+  "portability_tests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "data": {
+    "relative_root": "architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001",
+    "npz_original_and_git_matches": 24,
+    "sha256": {
+      "manifest.json": "2ae608aea276eb0a320b9d5cd0dbff3948a8a588451f5a6183920041e463dd9c",
+      "layer_01/float_tensors.npz": "ab616d8542e9574b6a47f40f410b87612f69a392cfec39b48db2b9e91426c6f5",
+      "layer_01/integer_tensors.npz": "2577c108dcc790fd948bcc0ee4d97cacdd83c078bd82166017b78b4e8e560d13",
+      "layer_02/float_tensors.npz": "76d143f21695636fd49c943de6299252c2d17d0c7d47d75e16d33c3a8d2c3b78",
+      "layer_02/integer_tensors.npz": "088859058f1dc249f66d4815415a456f8c45500f4201121746b19dbf974d0739",
+      "layer_03/float_tensors.npz": "4d958e801f0fb136f1f6fd57bddf9891e2fe350783ebd14d8cd44dc582ed6056",
+      "layer_03/integer_tensors.npz": "43569ac4eb62dddf5fc26b9585f91a8e595c40d30d9b8bcbd69af478606883b7",
+      "layer_04/float_tensors.npz": "8db36ad623ceb5ec79a46d8f52d6517619e81a3d1cf91f6b505193ca37774d4a",
+      "layer_04/integer_tensors.npz": "1fadb832bee1792f53ccd9640fa73f63227b2618ac26442aa207786d697289e4",
+      "layer_05/float_tensors.npz": "8e9c7d4f23f8e27319a820704b5ea26256124413871230e050001f690fa18187",
+      "layer_05/integer_tensors.npz": "23d4f97088516d9874c33e1a2f9911eb716f4fa67453f1c26a288b397a0b6c73",
+      "layer_06/float_tensors.npz": "67e7f90ff487f84c838485bcab41b47f4a4032c2eaabaf721ca8c622be038421",
+      "layer_06/integer_tensors.npz": "23c83633b8a1c314cc07835346785d717d8eb8e66cbd4036ee171c730adef1e0",
+      "layer_07/float_tensors.npz": "da8f243ff0b0635b019e1cc9003cb6025425d5016e5329bcbd5bfe36bb238a5a",
+      "layer_07/integer_tensors.npz": "59a9678256adc9dd6eac2fe83957708987ce01faceb646ed25e23807134799ab",
+      "layer_08/float_tensors.npz": "5d6be403c5c01f29ac4e100c970773165d0b7ebbbd3a07eba2d1861762c9e16f",
+      "layer_08/integer_tensors.npz": "f5ab594df374b9619d6819ab518c2715ff00ae0013e8f19c0607cd7249ccbd3f",
+      "layer_09/float_tensors.npz": "6153ee523b6d2f09771e4875b22073b7e5b64ce680424029a8820d570dfda982",
+      "layer_09/integer_tensors.npz": "4b07e6b6b056d63612ab1daf06337d4e93da79ae45e68416937a297c5c98eaa0",
+      "layer_10/float_tensors.npz": "c302776b088d6ec9a4470c60f943b78babc5663b01503c630e9cbfc86ff38819",
+      "layer_10/integer_tensors.npz": "cf6b2cad23754f34855f64d2550e4d48f9251f876ea775f3ce84e224a14efb8e",
+      "layer_11/float_tensors.npz": "79ea8447845cb87636a86532cce9881e99de8e35b143cd0119dbd4eb31974356",
+      "layer_11/integer_tensors.npz": "d977059659a80a5b45fe205449fec4281be7d7f2ad3686dc6cfe9771b6d241bf",
+      "layer_12/float_tensors.npz": "16fc2213b7f3e1de2710814951a19c7af6acdb91c5fbf55c0dc2d5e80bb7ee00",
+      "layer_12/integer_tensors.npz": "911187c00c5446ac9deac8e1c2755b996afb37b00de7c0873d4b44394d1ec713"
+    },
+    "canonical_sha256": "dfcb139071f4f89a392cb1ab614e4e3d59ffa4dbb68ed1a8e59d1cfffdb050b6"
+  },
+  "bundle": {
+    "name": "light-light126-lenovo-20261108_131929-bda985eedb4b",
+    "zip_bytes": 4517406,
+    "zip_sha256": "3efb36ce1816556e475cfb3eb1e7300f01bc38027e5fa4005ca3c8aaf4517c74",
+    "input_count": 123,
+    "source_and_vector_sha256": "712231ecaf76b234b0e31549c0a21b6537abe495b457efa68f14a955b7ef06b1",
+    "validated_hex_sha256": "0bcc493c3af31d347ed852dd74fff7b99405ae529061b7bc3b46d764342734be",
+    "server_config_sha256": "c4bad4fb1afd0313c1bb50c9ad3f1d0e7098a6edda707aadb9253b65a55f8b54",
+    "development": false,
+    "uploaded": false
+  },
+  "server": {
+    "live_verification": "passed_readonly_integrity_and_target_digest_comparison",
+    "historical_source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
+    "historical_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
+    "historical_session": "acceptance01",
+    "git_diff_since_historical": "only documentation and evidence; no execution inputs changed",
+    "history_reused": true,
+    "jobs_and_lock": "no matching python/vcs/simv/dc_shell/lc_shell/verdi processes; IC .arch02_team_lock absent at inspection",
+    "temporary_changes": "123 manifest-covered inputs unchanged; other server directories not audited",
+    "physical_signoff": false,
+    "inspection_time": "2026-11-08T13:47:00+08:00/2026-11-08T13:56:00+08:00",
+    "inspection_method": "VNC terminal read-only commands and Python stdlib; inspector file not uploaded or executed",
+    "manifest_inputs_verified": 123,
+    "target_digest_matches": [
+      "data.canonical_sha256",
+      "bundle.source_and_vector_sha256",
+      "bundle.validated_hex_sha256",
+      "bundle.server_config_sha256"
+    ],
+    "stages_passed": [
+      "preflight",
+      "software",
+      "unit",
+      "vcs",
+      "synth",
+      "hold",
+      "audit"
+    ],
+    "stage_summary_hashes_verified": [
+      "software",
+      "unit",
+      "vcs",
+      "audit"
+    ],
+    "software_outputs": 304128,
+    "vcs_outputs": 304128,
+    "vcs_jobs_passed": 22,
+    "vcs_source_hashes_verified": 11,
+    "capture_hashes_verified": 14,
+    "second_capture_hashes_verified": 1,
+    "audit_artifact_hashes_verified": 4,
+    "audit_outputs": 304128,
+    "macro_counts": {
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 2
+    },
+    "latches": 0,
+    "slack_ns": {
+      "max": 0.000641823,
+      "min": 0.00111431
+    },
+    "new_jobs_started": false,
+    "server_files_modified": false
+  },
+  "limitations": [
+    "Icarus not installed",
+    "Independent member bundle not uploaded; FileZilla team site connection pending",
+    "No SDF, multi-corner, post-layout, power, SoC or classification accuracy signoff"
+  ]
+}

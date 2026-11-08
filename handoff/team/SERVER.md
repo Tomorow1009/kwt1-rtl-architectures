@@ -48,3 +48,17 @@ state.json中的run字段是实际目录，不能照抄旧时间戳。VCS summar
 DC日志和qor/constraints/timing/area报告、网表/DDC/SDC留在dc_runs；审计结果在audits。先读错误和阶段退出码，再看PASS。没有完整跑完，状态只能是失败或未完成。
 
 当前移植入口的服务器实测状态以STATUS为准。[2026-11-08新入口验收](evidence/SERVER_ACCEPTANCE_20261108.md)已完成全部阶段，最终输出TEAM_FLOW_PASS；这是独立于旧r03的新运行证据。后续修改仍需重新验证。
+
+## 只读核对已有验收
+
+先协调桌面、检查当前账号的作业和 `.arch02_team_lock`。不要因旧终端显示 PASS 就重启或认定同步完成。
+
+将已提交的 `inspect_existing.py` 上传到个人独立目录后，可从该目录执行：
+
+```sh
+python3 inspect_existing.py /storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05 --session acceptance01
+```
+
+此脚本只读：检查包内所有输入、session 关联、阶段摘要、VCS 源码及捕获文件、审计产物哈希和计数，不运行 EDA、不删除锁、不生成新的验收。`existing_evidence_integrity_passed` 仅说明这些已存证据仍自洽；仍须核对受测提交与目标提交的输入差异，并将输出中的源码/向量、原始数据、运行 HEX、配置摘要与本机目标包比较，同时检查实际进程和未回写修改。锁存在时不得直接开始新任务。
+
+跨机器比较原始 NPZ 清单时去除 `real_sample_001/` 前的个人路径；使用排序 JSON（`sort_keys=True, separators=(',', ':')`）后取 SHA256。源码/向量摘要不包含 `validated_data/` 和 `software_preparation.json`；运行 HEX 独立比较，并核对全部 14 组 layout 的 shift。生成的 expected.npz 容器和包含本机路径的准备报告仍逐文件核对各自包内 manifest，但不作为跨机器字节等价条件。所有原始 NPZ、执行脚本、RTL、配置和服务器运行 HEX 都必须匹配，不能忽略业务输入差异。
