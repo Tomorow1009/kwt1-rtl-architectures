@@ -79,6 +79,17 @@
       "observed_cpu_outputs": 937728,
       "driver_exited": true,
       "team_lock_released": true
+    },
+    "throughput_candidate": {
+      "branch": "codex/member1/arch03-throughput-static",
+      "base_commit": "aa3f90724720020fe3b4468181eed16646c55f0f",
+      "status": "static_checks_passed_simulation_paused",
+      "notes": "workspaces/arch03/THROUGHPUT.md",
+      "evidence": "evidence/ARCH03_THROUGHPUT_STATIC_20261108.json",
+      "server_uploaded": false,
+      "firmware_built": false,
+      "optimized_cycles": null,
+      "automatic_restart_authorized": false
     }
   },
   "member_acceptances": {
