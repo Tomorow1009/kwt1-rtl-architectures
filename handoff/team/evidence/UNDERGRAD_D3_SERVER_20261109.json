@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "vendor_components_passed_platform_filelist_fix_prepared",
+  "status": "real_cpu_sequences_passed_asic_smoke_running",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -32,6 +32,17 @@
       "archive": "light-light126-d3-sampling-arch03-20261109_052708-074285d3d2ab.zip",
       "bytes": 10767793,
       "sha256": "2c1082f6b3de593d6d6b37c0c338817dade26d5842496de49addcb2d82b8932f",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
+      "archive": "light-light126-d3-timescale-arch03-20261109_054147-cd524e28c9be.zip",
+      "bytes": 10769419,
+      "sha256": "bb4d23703a64ff818729ba0bab2a67b92fdba915ef9b437bcf47b3e84562d7cd",
       "files": 383,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
@@ -113,13 +124,48 @@
       "screenshot": "server_smoke02_compile_error.png"
     },
     "sequence": {
-      "status": "running",
+      "status": "passed",
       "session": "d3_sequence01",
       "cases": [
         "layer_01",
         "worst_error"
       ],
-      "package_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c"
+      "package_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+      "summary_sha256": "932e3748d8c8f6fb6bf1c2a72f83e00893e9a20b700cfbeb1dea18df4e2010b3",
+      "tasks": 6,
+      "outputs": 152064,
+      "cpu_executed": true,
+      "scope": "real_cpu_consecutive_and_recovery_functional_tcm",
+      "reset_between_tasks": false,
+      "poison_abort_verified": true,
+      "actual_driver_timeout_verified": true,
+      "timeout_loads": [
+        1,
+        1
+      ],
+      "window_cycles": [
+        3890077,
+        3890077,
+        3890077,
+        3890077,
+        3890077,
+        3890077
+      ],
+      "window_period_ns": "6.666666",
+      "input_halfwords_per_task": 23488,
+      "output_halfwords_per_task": 25344,
+      "asic_cpu_verified": false,
+      "timing_verified": false,
+      "system_power_verified": false,
+      "screenshot": "server_sequence_pass_smoke03_start.png"
+    },
+    "asic_soc_timescale_fixed": {
+      "status": "running",
+      "session": "d3_smoke03",
+      "cases": [
+        "layer_01"
+      ],
+      "package_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df"
     }
   },
   "whole_soc_cpu_verified": false,

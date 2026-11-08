@@ -44,9 +44,9 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_sequence01. Commit/upload ASIC default-timescale fix, then new ASIC CPU smoke session.",
-    "Upload new packages via already-authorized Linux FileZilla path; run ASIC CPU smoke, full 14 cases and separate sequence",
-    "Run whole-SoC synthesis and review actual reports, then gate/power; no old hex100 restart"
+    "Observe d3_sequence01 until complete, record summary and verify shared lock released",
+    "Use already-unpacked timescale cd524e2 standard bundle for d3_smoke03 ASIC CPU layer_01",
+    "Run full 14-case ASIC baseline and actual whole-SoC synthesis, then gate/power; preserve all failed sessions and old stopped hex100"
   ],
   "still_unverified": [
     "new whole-SoC real E203 execution (vendor TCM/stdcell/boot components now passed)",
@@ -62,7 +62,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "d3_sequence01 running in b400db0 sequence bundle. d3_smoke02 failed compile with missing default timescale; fixed locally, needs new standard package.",
+  "server_readonly_job": "Fourth diagnostic tab in b400db0 sequence bundle; third tab running sequence. First primary layer_01 sequence 3x25344 HDL outputs and windows passed; second worst_error has completed first task. Do not start concurrent EDA.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -238,12 +238,46 @@
   ],
   "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_FILELIST_PACKAGES_20261109.json",
   "active_transfer": {
-    "packages_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+    "packages_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "b400db0 standard/sequence uploaded and server ZIP/entry hashes verified",
+    "state": "timescale cd524e2 uploaded and safely unpacked; waiting for d3_sequence01 shared lock",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
-  "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json"
+  "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
+  "latest_asic_retry_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
+      "archive": "light-light126-d3-timescale-arch03-20261109_054147-cd524e28c9be.zip",
+      "bytes": 10769419,
+      "sha256": "bb4d23703a64ff818729ba0bab2a67b92fdba915ef9b437bcf47b3e84562d7cd",
+      "files": 383
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_timescale_clean_20261109\\light-light126-d3-timescale-arch03-20261109_054147-cd524e28c9be",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "server_zip_sha256_verified": true,
+    "server_entry_hashes_verified": true
+  }
 }

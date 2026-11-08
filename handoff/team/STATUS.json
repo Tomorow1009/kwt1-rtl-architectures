@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "vendor_components_passed_platform_filelist_fix_prepared",
+    "phase": "real_cpu_sequence_passed_asic_smoke_running",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -107,12 +107,12 @@
     "max_task_nrmse": 0.0022915376589929767,
     "new_local_rtl_tasks": 25,
     "new_local_rtl_outputs": 633600,
-    "new_cpu_execution": false,
+    "new_cpu_execution": true,
     "whole_soc_dc": false,
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Freeze/upload strict file-list parser correction; resume new ASIC CPU and sequence sessions, then whole-SoC synthesis. Actual vendor TCM/stdcell/boot passed; CPU/STA/power still pending.",
+    "next": "Observe d3_smoke03 in cd524e2 standard bundle; complete ASIC 14-case baseline and whole-SoC synthesis, then gate/power. Sequence d3_sequence01 passed 6 tasks/152064 outputs.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": true,
     "clean_package_input_files": 341,
@@ -133,6 +133,9 @@
       "stdcell",
       "tcm",
       "asic_boot"
-    ]
+    ],
+    "new_cpu_tasks": 6,
+    "new_cpu_outputs": 152064,
+    "new_cpu_scope": "sequence/recovery with functional platform TCM; ASIC CPU still pending"
   }
 }
