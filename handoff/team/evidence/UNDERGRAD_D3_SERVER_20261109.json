@@ -160,11 +160,18 @@
       "screenshot": "server_sequence_pass_smoke03_start.png"
     },
     "asic_soc_timescale_fixed": {
-      "status": "running",
+      "status": "failed_warning_guard_before_simulation",
       "session": "d3_smoke03",
       "cases": [
         "layer_01"
       ],
+      "package_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
+      "error": "VCS IPDW: ASIC clock-mode guard connected monitor signals before their explicit declarations",
+      "screenshot": "server_smoke03_warning_details2.png"
+    },
+    "asic_synth": {
+      "status": "running",
+      "session": "d3_synth01",
       "package_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df"
     }
   },
@@ -188,5 +195,11 @@
     "unit_log": "local_runs/d3_filelist_unit_tests_20261109.log",
     "server_verified": true,
     "scope_verified": "Both platform copies/install and strict source list selection completed before VCS compile; not whole-SoC link acceptance"
+  },
+  "monitor_order_fix": {
+    "scope": "Move clock guard after task monitor include; no production RTL change",
+    "unit_tests": 53,
+    "log": "local_runs/d3_monitor_order_unit_tests_20261109.log",
+    "server_verified": false
   }
 }

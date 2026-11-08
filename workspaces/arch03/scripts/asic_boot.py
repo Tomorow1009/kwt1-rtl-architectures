@@ -90,10 +90,15 @@ def patch_testbench(text):
     pattern=r'(?ms)^\s*reg\s+\[7:0\]\s+itcm_mem\s*\[[^;]+;\s*initial\s+begin\s*\$readmemh\(\{testcase,\s*"\.verilog"\},\s*itcm_mem\);.*?\$display\("ITCM 0x20:[^\n]+\n\s*end\b'
     clock='u_e203_soc_top.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen'
     replacement='\n`include "arch03_asic_boot.svh"\n'
-    replacement+='arch03_clock_mode_guard a3_asic_mode(.clk(a3_mon_clk),.rst_n(a3_mon_rst_n),'
-    replacement+='.active(a3_window_active),.finished(a3_window_finished),'
-    replacement+=','.join('.%s(%s.%s)'%(name,clock,name) for name in ('test_mode','pllbypass','plloutdivby1'))+');\n'
     text,count=re.subn(pattern,replacement,text)
     if count!=1 or re.search(r'`ITCM\b|\bitcm_mem\b',text):
         raise ValueError('Original ITCM loader changed or remains active')
+    # The monitor declares its signals. Place the guard AFTER that include to
+    # prevent VCS from first creating implicit nets and ignoring declarations.
+    monitor='`include "arch03_monitor.svh"'
+    if text.count(monitor)!=1:raise ValueError('Expected one ASIC task monitor include')
+    guard='arch03_clock_mode_guard a3_asic_mode(.clk(a3_mon_clk),.rst_n(a3_mon_rst_n),'
+    guard+='.active(a3_window_active),.finished(a3_window_finished),'
+    guard+=','.join('.%s(%s.%s)'%(name,clock,name) for name in ('test_mode','pllbypass','plloutdivby1'))+');\n'
+    text=text.replace(monitor,monitor+'\n'+guard)
     return text

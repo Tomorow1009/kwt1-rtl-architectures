@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Real vendor stdcell, full-address TCM and physical boot mapping passed. ASIC CPU stopped before compile on stale library file-list entries; strict pinned-filelist correction passed 53 local tests and needs new package.",
+  "last_completed_stage": "Actual vendor stdcell/TCM/boot and real E203 functional-TCM continuous A/B/A + abort/timeout/recovery passed: two sequences, six tasks, 152064 outputs. ASIC CPU d3_smoke03 now running.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -32,7 +32,8 @@
     "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false",
     "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run.",
     "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local.",
-    "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified."
+    "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified.",
+    "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
@@ -44,12 +45,12 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_sequence01 until complete, record summary and verify shared lock released",
-    "Use already-unpacked timescale cd524e2 standard bundle for d3_smoke03 ASIC CPU layer_01",
-    "Run full 14-case ASIC baseline and actual whole-SoC synthesis, then gate/power; preserve all failed sessions and old stopped hex100"
+    "Freeze/package/upload monitor declaration order correction; observe active d3_synth01, then ASIC CPU retry after shared lock is released",
+    "Run actual whole-SoC synthesis and review STA/area reports; then post-synthesis functions and full-window system power",
+    "Preserve failed d3_vendor01/tcm, d3_smoke01 and d3_smoke02; never resume old hex100"
   ],
   "still_unverified": [
-    "new whole-SoC real E203 execution (vendor TCM/stdcell/boot components now passed)",
+    "ASIC-bound whole-SoC real E203 execution (vendor components and functional-TCM CPU sequences passed)",
     "ASIC TCM/ROM/clock/reset adaptation and whole SoC linking",
     "strict 150 MHz synthesis/STA and complete area accounting",
     "post-synthesis functional checks",
@@ -62,7 +63,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth diagnostic tab in b400db0 sequence bundle; third tab running sequence. First primary layer_01 sequence 3x25344 HDL outputs and windows passed; second worst_error has completed first task. Do not start concurrent EDA.",
+  "server_readonly_job": "Fourth terminal running d3_synth01 asic_synth in cd524e2 timescale bundle. d3_smoke03 compiled but stopped on implicit monitor net declarations before simulation. New monitor order correction local only, 53 tests passed.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",

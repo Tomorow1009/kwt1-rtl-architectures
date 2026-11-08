@@ -45,13 +45,15 @@ initial begin
   $display("ITCM 0x20: %h", `ITCM.mem_r[8'h20]);
 end
 e203_soc_top cpu();
+`include "arch03_monitor.svh"
 '''
         patched=patch_testbench(source)
         self.assertIn('e203_soc_top cpu();',patched)
         self.assertIn('arch03_asic_boot.svh',patched)
         self.assertNotIn('itcm_mem',patched)
         self.assertNotIn('u_sirv_sim_ram',patched)
-        for invalid in (source+source,source.replace('ITCM 0x20','ITCM altered'),patched):
+        self.assertLess(patched.index('`include "arch03_monitor.svh"'),patched.index('arch03_clock_mode_guard a3_asic_mode'))
+        for invalid in (source+source,source.replace('ITCM 0x20','ITCM altered'),source.replace('arch03_monitor.svh','missing.svh'),patched):
             with self.assertRaises(ValueError):patch_testbench(invalid)
 
 
