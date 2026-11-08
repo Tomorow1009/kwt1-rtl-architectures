@@ -4,6 +4,8 @@
 
 先读 [当前状态](STATUS.json)、[再次同步](SYNC.md)、[通用提示词](PROMPT.md)。已验证历史见 [服务器交接](../../architectures/arch02_matrix/v2.0.0/arch02/SERVER_HANDOFF.md)。
 
+新交接入口已于2026-11-08完成本机干净路径演练及服务器软件/VCS 304128输出、DC综合、hold修复和审计，见[本次验收记录](evidence/SERVER_ACCEPTANCE_20261108.md)。队友首次仍需在自己的电脑完成预检与小规模验证。
+
 ## 本地到底需要什么
 
 日常开发位于 `workspaces/arch02`；历史 `architectures/*/v*` 不直接修改。共享 `rtl` 与 `arch02/rtl` 都要保留，不能只拿后者。

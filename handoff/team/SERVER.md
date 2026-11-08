@@ -47,4 +47,4 @@ state.json中的run字段是实际目录，不能照抄旧时间戳。VCS summar
 
 DC日志和qor/constraints/timing/area报告、网表/DDC/SDC留在dc_runs；审计结果在audits。先读错误和阶段退出码，再看PASS。没有完整跑完，状态只能是失败或未完成。
 
-当前移植入口的服务器实测状态以STATUS为准。首次工具移植验收尚未完成时不能引用旧r03作为新入口通过证据。
+当前移植入口的服务器实测状态以STATUS为准。[2026-11-08新入口验收](evidence/SERVER_ACCEPTANCE_20261108.md)已完成全部阶段，最终输出TEAM_FLOW_PASS；这是独立于旧r03的新运行证据。后续修改仍需重新验证。
