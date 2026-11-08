@@ -104,6 +104,22 @@
       "timing_verified": false,
       "summary_sha256": "218c38cc7098a8559c336f2a00f8902ddaafc7e648aa289ea46b4deb15a3ba29",
       "screenshot": "server_boot02_pass.png"
+    },
+    "asic_soc_filelist_fixed": {
+      "status": "failed_compile",
+      "session": "d3_smoke02",
+      "package_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c",
+      "error": "VCS ITSFM: official modules lack timescale; ASIC runner omitted the default timescale option",
+      "screenshot": "server_smoke02_compile_error.png"
+    },
+    "sequence": {
+      "status": "running",
+      "session": "d3_sequence01",
+      "cases": [
+        "layer_01",
+        "worst_error"
+      ],
+      "package_source_commit": "b400db08e7dc399aabd7a1b9b4ee215e8fee885c"
     }
   },
   "whole_soc_cpu_verified": false,
@@ -124,6 +140,7 @@
     "scope": "Two pad models outside e203_soc_top, passthrough PLL model, and three replaced legacy SRAM/ROM models. Omission allowed only for byte-exact pinned file list. Active unresolved references remain hard VCS/DC failures.",
     "local_python_tests": 53,
     "unit_log": "local_runs/d3_filelist_unit_tests_20261109.log",
-    "server_verified": false
+    "server_verified": true,
+    "scope_verified": "Both platform copies/install and strict source list selection completed before VCS compile; not whole-SoC link acceptance"
   }
 }

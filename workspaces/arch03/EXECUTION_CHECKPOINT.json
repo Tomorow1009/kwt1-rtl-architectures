@@ -44,7 +44,7 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_smoke02 actual CPU stage; inspect failure or proceed to full 14-case ASIC baseline",
+    "Observe d3_sequence01. Commit/upload ASIC default-timescale fix, then new ASIC CPU smoke session.",
     "Upload new packages via already-authorized Linux FileZilla path; run ASIC CPU smoke, full 14 cases and separate sequence",
     "Run whole-SoC synthesis and review actual reports, then gate/power; no old hex100 restart"
   ],
@@ -62,7 +62,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "New d3_smoke02 ASIC CPU stage running in b400db0 standard bundle; two new UNPACK_HASH_PASS observed 05:38. Do not repeat or modify active bundle.",
+  "server_readonly_job": "d3_sequence01 running in b400db0 sequence bundle. d3_smoke02 failed compile with missing default timescale; fixed locally, needs new standard package.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",

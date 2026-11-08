@@ -79,7 +79,9 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
     tracked=files+[loader,A3/'tb/arch03_monitor.svh',run/'arch02_sram_config.vh',firmware/'manifest.json']
     tracked += [p for p in platform.rglob('*') if p.is_file()]
     before={str(p):sha(p) for p in tracked};save(run/'source_inputs.json',before)
-    cmd=[cfg['tools']['vcs'],'-full64','-sverilog','+define+ARM_UD_MODEL','+define+functional',
+    # Official platform modules have no timescale; a default is required when
+    # mixed with explicit team/vendor units. TB's explicit 1 fs precision stays.
+    cmd=[cfg['tools']['vcs'],'-full64','-sverilog','-timescale=1ns/1fs','+define+ARM_UD_MODEL','+define+functional',
          '-top','tb_top','-o',str(run/'simv')]+['+incdir+'+str(p) for p in includes]+files
     compiled=call(cmd,run,'compile.log')
     if re.search(r'Warning-\[(?:IPDW|PCWM-W|INAV|SIOB)\]',compiled):raise ValueError('ASIC VCS width/declaration warning')
