@@ -12,6 +12,8 @@ D2 本地准备源码已冻结为 `860a6b3f820df2e3933d1989cf8453f59ce87665`，�
 
 D2 标准包 `light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7.zip` 已在干净目录核验：355 个输入文件、14 组独立整数复算及 14 份固件完整字节布局均通过。包为 10,706,838 字节，SHA256 `594e17548064aba1656795faaed5c1f02290981081ed3a2c1f83708825e5d155`，包提交 `71902ce3b9d76a0aa5669914fbe23dd56362d185`；[回执](../../handoff/team/evidence/UNDERGRAD_D2_PACKAGE_20261109.json)明确记录尚未上传。
 
+D2 后续源码 `cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f` 又补齐标准单元厂商测试入口、A/B/A 连续任务固件与观察器，见 [后续证据](../../handoff/team/evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json)。40 项 Python 测试、重复计时窗口、两种监视器展开、标准单元本地替身测试均通过；三任务观察器使用**合成流量**核对 76,032 条结果并拒绝四类反例，明确没有 CPU 或算术硬件。两份连续固件只完成构建与字节布局核验，不能写成真实 CPU 连续任务通过。
+
 | 验收项 | 当前状态 | 证据或下一步 |
 |---|---|---|
 | 基线、候选与范围冻结 | 完成 | 基线如上；PR #6 895ffc10 仍为待测草稿，不混入本轮实现 |
@@ -60,6 +62,26 @@ python workspaces/arch03/scripts/local_window_verify.py --vivado-bin <Vivado/bin
 ```
 
 后续仍优先真实库 TCM/单元测试、ASIC 链接与 CPU 启动适配、整机综合/严格时序、网表功能、面积和功耗。CPU 连续任务与超时恢复尚未完成；新增函数或本地 PASS 不代替这些证据。每次上下文压缩后必须回读实施计划及 [执行检查点](EXECUTION_CHECKPOINT.json)，再核对已做、未做和待授权事项。
+
+## D2 后续连续任务与标准单元准备
+
+标准单元模型已只读核对：同工艺 `scc40nll_vhsc40_rvt.v` 为 2,198,450 字节，包含全部 11 个目标模块，无额外 include，SHA256 锁定于 `technology_bindings.json`。`stdcell` 阶段使用实际模型的 `functional` 分支，只验逻辑与引脚；本地 `stdcell_pin_mock.sv` 是明确标注的独立替身，不能当作厂商通过。
+
+连续固件把 A、B 两组独立输入放在启动前 ITCM 源区，由 CPU 完整搬运并计算 A→B→A。B 后执行 17 字部分装载、中止、周期超时及恢复；专用观察器核对实际 MMIO START/LOAD/ABORT 次数、三份完整写回和三段计时。普通 `soc` 拒绝连续固件，连续入口要求 `sequence_cpu_v1`，避免普通监视器在首任务后提前退出并误验收。
+
+本地观察器测试保留了失败尝试：XSim Windows 参数分割、动态字符串 `$readmemh` 路径及填充空格文件名。实际 CSV 的 `x` 值曾被独立检查拒绝；修复后，所有参考数组在读取前置为未知，读取后逐项检查完整/已知。缺失参考、重复输出、缺少 ABORT、跳过超时均必须失败。后续测试产物与源码提交的字节一致性已核对。
+
+准备入口：
+
+```text
+python workspaces/arch03/scripts/local_stdcell_verify.py --vivado-bin <Vivado/bin>
+python workspaces/arch03/scripts/local_sequence_monitor_verify.py --vivado-bin <Vivado/bin> --data <14-case-data>
+python workspaces/arch03/scripts/build_sequence_firmware.py --zig <zig> --data <21-case-data> --output <new-dir> --cases layer_01 worst_error --next-case layer_12
+python3 workspaces/arch03/scripts/server_run.py stdcell --session <new-session>
+python3 workspaces/arch03/scripts/server_run.py sequence --session <new-session> --cases layer_01 worst_error
+```
+
+最后两条尚未运行。连续包应单独使用对应固件和包含两个主任务及 layer_12 的数据；标准 14 用例审计不能给连续包盖通过结论。连续 CPU 入口仍沿用明确标识的功能 TCM 分支，ASIC CPU 启动、综合网表和功耗必须另行验证。
 
 本地复现（完整提取/向量准备命令见数值文档）：
 

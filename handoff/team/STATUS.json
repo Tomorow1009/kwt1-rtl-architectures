@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "local_d2_preparation_passed_server_pending",
+    "phase": "local_d2_sequence_and_technology_preparation_passed_server_pending",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -118,6 +118,8 @@
     "clean_package_input_files": 341,
     "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
     "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json",
-    "d2_package_readiness": "evidence/UNDERGRAD_D2_PACKAGE_20261109.json"
+    "d2_package_readiness": "evidence/UNDERGRAD_D2_PACKAGE_20261109.json",
+    "follow_on_source_commit": "cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f",
+    "follow_on_evidence": "evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json"
   }
 }

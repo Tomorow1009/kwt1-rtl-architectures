@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-09",
+  "source_commit": "cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f",
+  "status": "local_follow_on_preparation_passed_server_pending",
+  "local_runs": {
+    "standard_cell_substitute": {
+      "path": "local_runs/stdcell_20261109_021610_940278",
+      "summary_sha256": "caa761e4c28ca38d5435da31902b9ed596ab15a6db5c74b408908c123a0c678c",
+      "cpu_executed": false
+    },
+    "task_windows": {
+      "path": "local_runs/window_20261109_023406_510473",
+      "summary_sha256": "2886605f84efc33d1d44ab56c9c576ec5342d6de444293b6036df16714fb9f14",
+      "cpu_executed": false
+    },
+    "sequence_observer": {
+      "path": "local_runs/sequence_observer_20261109_023258_967120",
+      "summary_sha256": "184cd4db7c0ac04dd73bcec5c9140706240b3717809998010cb87a8eeadd19fe",
+      "cpu_executed": false
+    }
+  },
+  "firmware": {
+    "single": {
+      "path": "local_runs/d2_follow_on_single_firmware_20261109",
+      "manifest_sha256": "6c756293656a51de56f6f1d032a2dc2ed8c7332c21f7a84b0270e49cab0dc07d",
+      "elf_sha256": "831ed097d1d3cfe5311e436dd9190ddbae3367ed6ade52cd9a99750013a6b887",
+      "images": 14,
+      "run_mode": "single_cpu_v2",
+      "cpu_executed": false
+    },
+    "sequence": {
+      "path": "local_runs/d2_sequence_firmware_20261109_v2",
+      "manifest_sha256": "b4a798e7a893075c7589fc86dee7d69d2bb8e018448d14dfd13d0edd41e51664",
+      "elf_sha256": "4ef1fbef69593f408b3262e9e4d4453d6c82953cd3811a6a5e0a41e2a81a1980",
+      "images": 2,
+      "run_mode": "sequence_cpu_v1",
+      "cpu_executed": false
+    }
+  },
+  "unit_tests": {
+    "passed": 40,
+    "log": "local_runs/d2_follow_on_unit_tests_20261109.log",
+    "log_sha256": "3eb9fdd269de8aa2344714dfd56a682f4b80ff7392620874e09c5d3acde7caa8"
+  },
+  "source_bytes_match_commit": true,
+  "sequence_scope": {
+    "protocol": "A, layer_12, poison17/abort, actual-driver timeout1, recovery A",
+    "cases": [
+      "layer_01",
+      "worst_error"
+    ],
+    "positive_observer_outputs": 76032,
+    "negative_tests": [
+      "missing abort",
+      "skipped timeout",
+      "duplicate output",
+      "missing reference"
+    ],
+    "stimulus": "Synthetic observer-only hierarchy; no CPU or arithmetic accelerator exists in this local test",
+    "sequence_image_layout_checked": true,
+    "actual_cpu_executed": false
+  },
+  "standard_cells": {
+    "types": 11,
+    "combinational_patterns": 8,
+    "gate_state_checks": 12,
+    "local_backend": "independent_pin_mock",
+    "actual_vendor_model_verified": false,
+    "model_metadata_sha256": "e6b6dcd1c09e6c627443e3c524d6f7f2fa68951132fb4709357d5f3b2ffdf198"
+  },
+  "corrected_observer_defects": [
+    "Windows XSim batch plusarg parsing requires options files",
+    "XSim 2018 dynamic-string readmemh paths replaced by packed paths",
+    "All reference arrays checked for missing/unknown words before any comparisons",
+    "Capture path formatting no longer inserts leading spaces"
+  ],
+  "preserved_failed_runs": [
+    "local_runs/sequence_observer_20261109_022912_633488",
+    "local_runs/sequence_observer_20261109_022957_943342",
+    "local_runs/sequence_observer_20261109_023209_587771"
+  ],
+  "server_uploaded": false,
+  "whole_soc_synthesis": false,
+  "strict_timing_verified": false,
+  "asic_cpu_verified": false,
+  "system_power_verified": false,
+  "old_hex100_resumed": false
+}

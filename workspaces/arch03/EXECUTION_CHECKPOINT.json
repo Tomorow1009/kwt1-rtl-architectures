@@ -27,7 +27,9 @@
     "D2: 34 Python unit tests passed; optional same-window complete-system VCD entry added, NOT yet exercised on actual SoC",
     "D2: actual monitor include and passive hierarchy bindings elaborated in XSim using an explicitly non-CPU compile-only harness",
     "D2: 23 original native instances mapped explicitly to 11 target 12TR40 types; actual target pins/functions and Liberty SHA256 inspected; 37 Python tests passed",
-    "D2: clean committed 355-file package verified; independent integer recomputation of 14 cases/354816 outputs and byte-exact firmware layout checks passed"
+    "D2: clean committed 355-file package verified; independent integer recomputation of 14 cases/354816 outputs and byte-exact firmware layout checks passed",
+    "D2 follow-on: pinned the actual standard-cell Verilog model (2198450 bytes; all 11 target modules present; no includes); local independent stdcell substitute bench passed 8 input patterns and 12 gate state checks. Server stdcell entry added but NOT executed.",
+    "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false"
   ],
   "pending_authorization": {
     "state": "asynchronous_user_question_pending",
@@ -37,10 +39,9 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Finish reading target standard-cell Verilog model hash/dependencies in retained Python session, then prepare vendor-cell test entry",
-    "Prepare CPU consecutive A/B/A task firmware and verification with timeout/abort recovery; use a new source commit/package",
-    "Prepare whole-SoC synthesis/constraints and post-synthesis/area/power work using observed ASIC interfaces",
-    "After explicit upload authorization, upload a new verified package through existing Linux FileZilla and run locked TCM/ASIC link/CPU stages"
+    "Finish follow-on evidence and create/verify separate standard and sequence packages",
+    "Read actual clock/reset and ASIC boot-loading interfaces to prepare whole-SoC synthesis and CPU ASIC flow",
+    "After explicit upload authorization, use established Linux FileZilla to transfer verified packages and run new locked stdcell/tcm/sequence/ASIC-link stages"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -56,12 +57,17 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Retained Python interactive session is scanning S40.tar.gz for standard-cell .v member names. After completion >>> remains with s, cells, blocks, wanted, inst, m, digest. Observe desktop before input.",
+  "server_readonly_job": "Finished; exit() returned to tcsh shell in original platform directory, confirmed screenshot readonly_library_session_closed.png. No remote EDA task launched, no private package uploaded. VNC relay exec session 97189 remains; recheck windows/screenshot/lock/processes before further input.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
     "task_window": "local_runs/window_20261109_020618_757259",
-    "firmware": "local_runs/d2_window_firmware_20261109"
+    "firmware": "local_runs/d2_window_firmware_20261109",
+    "stdcell_pin_mock": "local_runs/stdcell_20261109_021610_940278",
+    "sequence_firmware": "local_runs/d2_sequence_firmware_20261109_v2",
+    "sequence_observer": "local_runs/sequence_observer_20261109_023258_967120",
+    "task_window_follow_on": "local_runs/window_20261109_023406_510473",
+    "single_firmware_follow_on": "local_runs/d2_follow_on_single_firmware_20261109"
   },
   "discovered_blockers": [
     {
@@ -81,5 +87,27 @@
     "files": 355,
     "clean_verified": true,
     "server_uploaded": false
-  }
+  },
+  "uncommitted_follow_on": "Implementation committed as cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f; follow-on evidence/docs/checkpoint currently being recorded, then prepare separate single-task and sequence packages.",
+  "sequence_pending_design": {
+    "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
+    "cases": [
+      "layer_01 -> layer_12 -> layer_01",
+      "worst_error -> layer_12 -> worst_error"
+    ],
+    "task_mailbox": "Normal fields [0..6], task index 1/2/3 in mail[7] at 0xa001f01c; BEGIN in mail[8] at 0xa001f020",
+    "phase_mailbox": "mail[10] at 0xa001f028; POI1=0x504f4931, POI2=0x504f4932, TIM1=0x54494d31, TIM2=0x54494d32; timeout rc -1 in mail[11] at 0xa001f02c",
+    "observer_required": "Reuse passive task window with an explicit repeat-task parameter (default strict single); start each new window on BEGIN successful response, reset counters then, preserve global cycles; verify 3 windows",
+    "control_checks_required": "Observe actual expl_axi_icb command handshakes in platform mems. POI phase: one START, 17 LOAD, one ABORT, no output reads. TIM phase: driver initial ABORT, START, partial LOAD (>0 and <23488), timeout ABORT, no output reads; firmware verifies cleared busy/output_valid/done/error and counts",
+    "monitor_required": "IMPLEMENTED arch03_sequence_monitor.svh; 3 captures, A/B/A reference switching, phase bus evidence and final CPU marker. Synthetic selftest uses ARCH03_MONITOR_SELFTEST so it cannot emit cpu_executed=true.",
+    "runner_required": "IMPLEMENTED sequence_soc.py and server_run.py sequence stage; image payload checks, 3 output captures, timing/saturation/phase evidence; actual server execution pending.",
+    "tests_required": "DONE locally: repeated-window tests, both monitor includes elaborated, 76032-output synthetic observer plus four negative tests, 40 Python tests and two full image layout checks. Actual CPU/vendor runs remain pending upload authorization."
+  },
+  "preserved_follow_on_failures": [
+    "sequence_observer_20261109_022912_633488: Windows batch plusarg parsing; fixed via options file",
+    "sequence_observer_20261109_022957_943342: dynamic string readmemh paths became unreadable in XSim; CSV x values rejected despite misleading HDL selftest marker; fixed packed paths plus unknown-value guards",
+    "sequence_observer_20261109_023209_587771: packed path formatting added leading spaces to capture name; hard failed and fixed via direct packed concatenation"
+  ],
+  "follow_on_source_commit": "cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f",
+  "follow_on_evidence": "../../handoff/team/evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json"
 }

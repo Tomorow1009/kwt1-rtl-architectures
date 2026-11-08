@@ -4,6 +4,8 @@
 
 D2 本地准备见 [验收清单](ACCEPTANCE_20261109.md) 和 [证据](../../handoff/team/evidence/UNDERGRAD_D2_20261109.json)：完整容量 TCM 宏适配通过两种替身模型，旧工艺单元已按目标 Liberty 元数据显式绑定，新增实际写应答计时观察器及可选同窗口 VCD。源码提交 `860a6b3`，37 项 Python 单测通过；新固件、厂商宏、整机 ASIC 链接和功耗均未服务器验收。
 
+后续提交 `cc5e193` 增加标准单元厂商测试入口、A/B/A 连续固件、超时/中止被动观察器及重复窗口检查。40 项 Python 测试通过；合成观察器测试明确 `cpu_executed=false`，实际 CPU 连续执行仍待服务器验证。见 [后续证据](../../handoff/team/evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json)。
+
 状态：Linux FileZilla 上传、293 个受测输入核对、厂商模型 ICB 与真实 E203 C 驱动各 14 组（354,816 输出）、两块 DC 及独立审计通过。受测源码 `f00e7acf7b40`，审计工具 `8fc4756a715c`；见 [正式范围与哈希](../../handoff/team/evidence/ARCH03_ACCEPTANCE_20261108.json) 和 [保留的失败尝试](../../handoff/team/evidence/ARCH03_SERVER_20261108.json)。
 **两块 DC 不是整机 DC；综合后功能与端到端分类仍未验证。100 样本批量于 2026-11-08 按用户要求停止以优化吞吐：软件 1,200 组通过，CPU 37/1,200 组通过，第 38 组中断。整批尚未验收。**
 这是开发中的架构三，不替换架构二或历史快照。
