@@ -1,0 +1,27 @@
+{
+  "updated": "2026-11-08",
+  "phase": "portable_handoff_validated",
+  "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
+  "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
+  "historical_status": "VCS functional 304128 outputs and single SS DC checks passed; see v2.0.0 handoff",
+  "current_checks": {
+    "fresh_github_clone_npz_hashes": "24/24 match original",
+    "portable_software_preparation": "12 layers, 304128 outputs passed",
+    "local_macro": "behavioral/pin_mock x Icarus/XSim: 4 groups passed, 4 cases each, pin mask also passed",
+    "failure_tests": "8 passed",
+    "server_python36_syntax": "passed",
+    "new_server_flow": "passed: preflight/software/unit/vcs/synth/hold/audit; 304128 outputs; physical_signoff=false",
+    "clean_clone_macro": "passed: behavioral/pin_mock x Icarus/XSim, 4 groups",
+    "clean_clone_package": "passed: 123 input file hashes, 304128 outputs, source 115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
+    "chat_archive": "saved locally; 37 accessible turns, 236 messages, 20 attachment references; truncation limitations documented"
+  },
+  "teammate_machine_acceptance": "not_run",
+  "next": "Teammate clones merged handoff, configures local tools and credentials, runs preflight and macro checks; future changes use SYNC.md",
+  "server_acceptance": {
+    "evidence": "evidence/SERVER_ACCEPTANCE_20261108.md",
+    "session": "acceptance01",
+    "completed": true,
+    "bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
+    "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7"
+  }
+}

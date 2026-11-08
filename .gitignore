@@ -10,3 +10,6 @@
 *.zip
 *.tar.gz
 .env
+local_runs/
+chat_archive/
+handoff/team/config.local.json

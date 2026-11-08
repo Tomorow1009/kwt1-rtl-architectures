@@ -1,0 +1,16 @@
+{
+  "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC",
+  "process_archive": "/storage1/admin_public_dir/SMIC40_2025/S40.tar.gz",
+  "standard_library_member": "S40/smic/SCC40NLL_VHSC40_RVT_V0.1/SCC40NLL_VHSC40_RVT_V0p1/liberty/1.1v/scc40nll_vhsc40_rvt_ss_v0p99_125c_basic.db",
+  "sram_root": "/storage1/admin_public_dir/SRAM_Lib_2025",
+  "tools": {
+    "vcs": "/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs",
+    "dc_shell": "/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell",
+    "lc_shell": "/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5/bin/lc_shell",
+    "verdi": "/eda/synopsys/verdi/verdi_2020.03-SP2-6/bin/verdi"
+  },
+  "models": {
+    "128": {"path": "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP128X16/verilog/RAMSP128X16.v", "sha256": "f9d6d881746681dacd4f3851467561e441ee7190776ab566b1f0a729aa3ddb4d"},
+    "4096": {"path": "/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP4096X16/verilog/RAMSP4096X16.v", "sha256": "3d1cf053be4cf15573ab8c6197e2ec713be73394d736781e1d9828341bda451d"}
+  }
+}

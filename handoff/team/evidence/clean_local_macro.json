@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "backend": "behavioral",
+      "simulator": "iverilog",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "behavioral",
+      "simulator": "xsim",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "pin_mock",
+      "simulator": "iverilog",
+      "cases": 4,
+      "passed": true
+    },
+    {
+      "backend": "pin_mock",
+      "simulator": "xsim",
+      "cases": 4,
+      "passed": true
+    }
+  ],
+  "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
+  "sources": {
+    "workspaces\\arch02\\rtl\\dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+    "workspaces\\arch02\\rtl\\requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+    "workspaces\\arch02\\arch02\\rtl\\arch02_linear.sv": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2",
+    "workspaces\\arch02\\arch02\\rtl\\sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+    "workspaces\\arch02\\arch02\\rtl\\sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+    "workspaces\\arch02\\arch02\\tb\\pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+    "workspaces\\arch02\\arch02\\tb\\sram_model.sv": "3485c49b67aebc6b50581ccc72cb9955502e6130245385eee6e42d3973557eb6",
+    "workspaces\\arch02\\arch02\\tb\\tb_arch02.sv": "4fc2c171245ee3bab6278a9bd5a383a513bd382371480c8f800d28528974b794",
+    "workspaces\\arch02\\arch02\\tb\\tb_lanes.sv": "9d800c189dc3ac95daf23318a5ebf2a23f034caea109b442c5d0304773f07aff",
+    "workspaces\\arch02\\arch02\\tb\\tb_sram_adapter.sv": "42249f38f554e6017e41e9eb3ba496313855a579f4261b2aca494430089ee35b",
+    "workspaces\\arch02\\arch02\\tb\\tb_sram_guard.sv": "d54194cbd44df5d82c72a613c9b2f8808739364707d5f980a65557298b243b64"
+  }
+}

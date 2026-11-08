@@ -1,0 +1,9 @@
+{
+  "member": "member1",
+  "data_root": "architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001",
+  "icarus_bin": "",
+  "vivado_bin": "",
+  "vnc_exe": "",
+  "filezilla_exe": "",
+  "computer_control": "unverified"
+}
