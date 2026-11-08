@@ -88,7 +88,12 @@ def patch_testbench(text):
     text,count=re.subn(pattern,'`define ARCH03_ASIC_ITCM `CPU_TOP.u_e203_srams.u_e203_itcm_ram.u_e203_itcm_gnrl_ram',text)
     if count!=1:raise ValueError('Original ITCM hierarchy changed')
     pattern=r'(?ms)^\s*reg\s+\[7:0\]\s+itcm_mem\s*\[[^;]+;\s*initial\s+begin\s*\$readmemh\(\{testcase,\s*"\.verilog"\},\s*itcm_mem\);.*?\$display\("ITCM 0x20:[^\n]+\n\s*end\b'
-    text,count=re.subn(pattern,'\n`include "arch03_asic_boot.svh"',text)
+    clock='u_e203_soc_top.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_hclkgen'
+    replacement='\n`include "arch03_asic_boot.svh"\n'
+    replacement+='arch03_clock_mode_guard a3_asic_mode(.clk(a3_mon_clk),.rst_n(a3_mon_rst_n),'
+    replacement+='.active(a3_window_active),.finished(a3_window_finished),'
+    replacement+=','.join('.%s(%s.%s)'%(name,clock,name) for name in ('test_mode','pllbypass','plloutdivby1'))+');\n'
+    text,count=re.subn(pattern,replacement,text)
     if count!=1 or re.search(r'`ITCM\b|\bitcm_mem\b',text):
         raise ValueError('Original ITCM loader changed or remains active')
     return text

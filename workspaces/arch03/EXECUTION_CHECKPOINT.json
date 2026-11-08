@@ -40,9 +40,10 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Freeze ASIC boot preparation and its local evidence",
-    "Prepare explicit whole-SoC synthesis/report collection with reviewed operating-mode assumptions",
-    "After authorization, regenerate latest committed package, clean verify, upload through FileZilla, and run new locked server stages"
+    "Freeze D3 synthesis/mode/library preparation and evidence",
+    "Add same-window VCD integrity review before any later power estimation",
+    "Regenerate final committed standard and sequence packages and clean verify",
+    "Explicit upload authorization pending; only then use FileZilla and new locked server runs"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -89,7 +90,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Implementation cc5e193 and evidence 49f0556 committed. Exact ifndef FPGA branch correction passed 41 tests and is being frozen separately; old packages are superseded for ASIC link.",
+  "uncommitted_follow_on": "D2 implementation/evidence and branch correction committed. ASIC boot preparation committed in 7b0b52f. D3 whole-SoC report collection, memory technology guards and clock-mode observer currently awaiting local freeze.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -180,7 +181,9 @@
     "scope": "initial ITCM firmware/source preload only; runtime input loading and arithmetic remain actual CPU/accelerator operations",
     "actual_vendor_verified": false,
     "actual_cpu_verified": false,
-    "whole_soc_synth_verified": false
+    "whole_soc_synth_verified": false,
+    "source_commit": "7b0b52fcc4a15f4b186a8fb31a7fd32db53f2711",
+    "latest_run": "local_runs/asic_boot_20261109_031545_081254"
   },
   "d3_clock_readonly": {
     "source_screenshot": "../takeover_local/d2_20261109/d3_clock_operating_mode.png",
@@ -192,5 +195,16 @@
     "jtag_TDI": 0,
     "lfextclk_tb_period_ns": 66,
     "note": "These describe the pinned functional task mode; whole-SoC timing/CDC and area constraints are not yet verified."
+  },
+  "d3_synthesis_preparation": {
+    "status": "local_preparation_only_not_committed_yet",
+    "python_tests": 50,
+    "unit_log": "local_runs/d3_preparation_unit_tests_20261109.log",
+    "clock_mode_run": "local_runs/clock_mode_20261109_031459_956948",
+    "new_stage": "asic_synth",
+    "stage_result": "reports_ready_review_required; timing_verified=false and scoring_area_verified=false even when report collection completes",
+    "clock_mode": "HF 6.666666666 ns; LF 66 ns; test_mode=0, pllbypass=1, divider bypass=1; actual CPU task observer added",
+    "area": "138 macros exact ownership; leaf areas summed once and reconciled to whole report; official scoring area remains null",
+    "power": "Pinned SRAM Liberty fingerprints, 80 internal power groups and four nonzero leakage groups per macro; two rails. Zero cell_leakage_power summary must not hide conditional/default leakage. No power estimated."
   }
 }

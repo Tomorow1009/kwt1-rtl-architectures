@@ -74,7 +74,7 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
     platform=run/'platform';manifest=install(platform_source,platform,asic=True,asic_boot=True)
     loader=run/'arch03_asic_boot.svh';loader.write_text(loader_include())
     model=extract_model(cfg,run)
-    files=platform_sources(platform)+source_list()+[A3/'rtl/arch03_tcm_ram.sv',A3/'tb/arch03_task_window.sv',platform/'tb/tb_top.v',model]+vendor(cfg,run)
+    files=platform_sources(platform)+source_list()+[A3/'rtl/arch03_tcm_ram.sv',A3/'tb/arch03_task_window.sv',A3/'tb/arch03_clock_mode_guard.sv',platform/'tb/tb_top.v',model]+vendor(cfg,run)
     includes=list(dict.fromkeys([run,A3/'tb',platform/'rtl/e203/core']+[p.parent for p in files]))
     tracked=files+[loader,A3/'tb/arch03_monitor.svh',run/'arch02_sram_config.vh',firmware/'manifest.json']
     tracked += [p for p in platform.rglob('*') if p.is_file()]
@@ -94,6 +94,8 @@ def verify(cfg,run,platform_source,cases,call,activity_cases=()):
         text=call(cmd,run,name+'.log')
         marker='ARCH03_ASIC_BOOT_READY bytes=262144 macros=32 scope=initial_ITCM_only'
         if text.count(marker)!=1:raise ValueError('Missing/duplicate ASIC boot evidence')
+        if text.count('ARCH03_ASIC_MODE_MATCH test_mode=0 pllbypass=1 divider_bypass=1')!=1:
+            raise ValueError('Missing/duplicate actual ASIC task clock-mode evidence')
         matches=re.findall(r'ARCH03_SOC_PASS outputs=25344 cpu_executed=true cycles=(\d+) saturated=(\d+)',text)
         if len(matches)!=1:raise ValueError('ASIC CPU task did not complete uniquely')
         cycles,sats=map(int,matches[0]);window=read_task_window(text)

@@ -12,6 +12,7 @@ import tarfile
 from pathlib import Path
 from install_platform import install, platform_sources
 from technology_binding import BINDINGS,load_bindings,verify_liberty
+from memory_technology import METADATA,verify_memory_liberty
 
 
 def sha(path):
@@ -36,17 +37,20 @@ def libraries(cfg, run, call):
     if not all(p.is_file() for p in wanted.values()):raise ValueError('Missing pinned standard-cell DB/Liberty member')
     verified=verify_liberty(liberty.read_bytes(),binding)
     (run/'technology_verification.json').write_text(json.dumps(verified,indent=2))
-    inputs=[standard,liberty,BINDINGS]
+    inputs=[standard,liberty,BINDINGS,METADATA]
     databases=[]
     commands=[]
+    memories=[]
     for size in (128,4096):
         lib=Path(cfg['sram_root'])/('RAMSP%dX16/lib/RAMSP%dX16_ss_0p99v_0p99v_125c.lib'%(size,size))
         text=lib.read_text()
+        memories.append(verify_memory_liberty(lib.read_bytes(),'RAMSP%dX16'%size))
         names=re.findall(r'library\s*\(\s*"?([^\s")]+)',text)
         if len(names)!=1:raise ValueError('Ambiguous SRAM library name')
         db=libs/(names[0]+'.db')
         commands.extend(['read_lib {%s}'%lib,'write_lib {%s} -format db -output {%s}'%(names[0],db)])
         inputs.append(lib);databases.append(db)
+    (run/'memory_library_verification.json').write_text(json.dumps(memories,indent=2))
     script=run/'libs.tcl'
     script.write_text('\n'.join(commands+['quit'])+'\n')
     call([cfg['tools']['lc_shell'],'-f',script],run,'lc.log')

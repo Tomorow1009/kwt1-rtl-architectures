@@ -63,7 +63,7 @@ D2 本地准备见 [验收清单](ACCEPTANCE_20261109.md) 和 [证据](../../han
 | 栈 | DTCM 顶部，`0x9003FFF0` |
 
 SoC 监视器只检查真实 ICB 写入，覆盖全部输入复制与输出坐标，收到软件完成邮箱后才打印 `ARCH03_SOC_PASS`。
-SoC TB 复用原 ITCM 装载流程，移除旧教学测试固定 PC 的退出条件。本轮时钟为显式 1 fs 精度、6.666666 ns 周期，旧 6.667 ns 配置只属于历史运行。ASIC TCM 层级改变后的程序装载仍需独立适配，不能直接复用功能 TB 宣称 ASIC CPU 已通过。
+功能 SoC TB 复用原 ITCM 装载流程，移除旧教学测试固定 PC 的退出条件。本轮时钟为显式 1 fs 精度、6.666666 ns 周期，旧 6.667 ns 配置只属于历史运行。新增 ASIC 入口在复位期间按厂商物理行列布局预装 ITCM 源镜像，运行时仍由 CPU 完整搬运、计算和写回；目前只通过本地独立物理布局替身验证，实际 ASIC CPU 尚未执行。
 
 本地命令（仓库根；工具路径由个人配置提供）：
 
@@ -94,13 +94,19 @@ python3 workspaces/arch03/scripts/server_run.py dc_accel --session acceptance01
 python3 workspaces/arch03/scripts/server_run.py dc_shared --session acceptance01
 python3 workspaces/arch03/scripts/server_run.py tcm --session asic01
 python3 workspaces/arch03/scripts/server_run.py asic_link --session asic01
+python3 workspaces/arch03/scripts/server_run.py stdcell --session asic01
+python3 workspaces/arch03/scripts/server_run.py asic_boot --session asic01
+python3 workspaces/arch03/scripts/server_run.py asic_soc --session asic01 --cases layer_01 --activity-cases layer_01
+python3 workspaces/arch03/scripts/server_run.py asic_synth --session synth01
 ```
 
 `tcm` 只验实际 SRAM 功能模型；`asic_link` 只检查完整 SoC 的工艺链接与宏数量，均是新准备入口、尚未服务器运行。`soc --activity-cases layer_01` 可生成该用例全系统同窗口 VCD；使用新固件/监视器，不能拿旧镜像通过新的计时验收。VCD 存在不代表功耗已估算或活动已正确映射。
 
 运行前仍须核对共享桌面、已有 EDA 进程和临时修改；入口复用 `.arch02_team_lock` 目录锁。
 每个阶段只运行一次；失败保留，修复后提交新包/新会话。中断时若子进程仍运行，锁保留，禁止直接重启。
-以上 DC 阶段**仅覆盖加速器接口块和共享 SRAM**，检查真实宏数量、150 MHz setup/hold 和约束报告，不能冒充整机综合。
+`dc_accel`、`dc_shared` **仅覆盖加速器接口块和共享 SRAM**。`asic_synth` 才生成整机映射网表、SDC、setup/hold 与约束报告，以及逐叶实例面积表；其完成状态为 `reports_ready_review_required`，不是整机时序验收通过。必须审查所有时钟传播、未约束路径、LF/HF 交叉、结构警告、复位/工作模式和 I/O 假设。仅凭阶段完成标记不能宣布验收。
+
+`asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1，与初步综合模式一致；这不代替门级、时序或功耗验证。新 `memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零分电源漏电项。共享 SRAM 官方计分归属与物理面积单位仍需独立审查。
 
 完成同一受测包的 `icb`、`soc`、`dc_accel`、`dc_shared` 后，从包含已提交审计工具的新完整包执行：
 

@@ -22,6 +22,10 @@ ASIC 启动准备新增 `asic_boot.py`、`asic_soc.py`：从已核验的固件�
 
 后续入口：`server_run.py asic_boot --session <new>`，随后 `server_run.py asic_soc --session <new> --cases layer_01`，再扩至标准 14 用例。两者均须新包、上传授权及团队锁；不能使用不含这些入口的早期包。
 
+D3 整机综合与功耗库准备：`asic_synth` 从新 ASIC 平台副本链接并生成整机网表、SDC、面积/时序/约束报告；严格要求 130 个大宏、8 个小宏，逐叶实例面积求和与总报告一致。报告状态仍为 `reports_ready_review_required`，不会自动声称 setup/hold、约束覆盖或计分面积通过。时钟采用精确 150 MHz HF 和原 TB 的 66 ns LF；复位外任务模式、JTAG 静止及 I/O 预算均显式记录，不屏蔽 LF/HF 交叉路径。新增时钟模式观察器本地正常模式及四类反例通过，实际 CPU 模式仍待测。
+
+服务器只读确认两份 SRAM Liberty 各有 80 个内部功耗组、4 个非零漏电组，分别涉及 VDDPE/VDDCE；总漏电字段的 0 不能替代这些分组。指纹、面积及功耗元数据检查已接入 ASIC 链接。50 项 Python 测试、8 份服务器脚本 Python 3.6 语法、生成 Tcl 完整性检查通过；这些均不是 DC 或系统功耗运行结果。
+
 | 验收项 | 当前状态 | 证据或下一步 |
 |---|---|---|
 | 基线、候选与范围冻结 | 完成 | 基线如上；PR #6 895ffc10 仍为待测草稿，不混入本轮实现 |

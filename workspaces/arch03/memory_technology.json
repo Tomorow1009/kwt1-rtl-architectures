@@ -1,0 +1,27 @@
+{
+  "schema": "arch03-sram-ss-metadata-v1",
+  "corner": "SS 0.99 V 125 C",
+  "time_unit": "1ns",
+  "leakage_power_unit": "1mW",
+  "source": "Read-only metadata inspection of the existing server SRAM Liberty files on 2026-11-09; no vendor model or table contents stored here",
+  "cells": {
+    "RAMSP128X16": {
+      "sha256": "68bd174a0a8ac7a931e8a81412db97a3912e293a63ce1331d51e18d9e6c78b56",
+      "area": 2677.051,
+      "internal_power_groups": 80,
+      "leakage_groups": 4
+    },
+    "RAMSP4096X16": {
+      "sha256": "a75e37ed1d6a8d9ae1193edc1aaa0757ff9359ac382d54821612056984afa807",
+      "area": 27517.3168,
+      "internal_power_groups": 80,
+      "leakage_groups": 4
+    }
+  },
+  "limits": [
+    "The cell_leakage_power field is zero, but nonzero leakage_power groups exist for both VDDPE and VDDCE. Do not treat the macro as zero leakage.",
+    "RET1N is tied high by the adapter. Validate tool interpretation of conditional/default leakage groups and supply rails using actual power reports.",
+    "Internal-power tables are available, but activity mapping, clock/data coverage and system power have not been verified.",
+    "Area numbers are Liberty area values; physical units and official scoring exclusions require separate review."
+  ]
+}
