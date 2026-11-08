@@ -121,6 +121,8 @@
     "d2_package_readiness": "evidence/UNDERGRAD_D2_PACKAGE_20261109.json",
     "follow_on_source_commit": "cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f",
     "follow_on_evidence": "evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json",
-    "asic_branch_correction": "TCM and ROM use ifndef FPGA. Earlier D2 installer selected the inactive branch; previous D2 packages are superseded for ASIC link. See EXECUTION_CHECKPOINT.json. No ASIC stage was executed."
+    "asic_branch_correction": "TCM and ROM use ifndef FPGA. Earlier D2 installer selected the inactive branch; previous D2 packages are superseded for ASIC link. See EXECUTION_CHECKPOINT.json. No ASIC stage was executed.",
+    "asic_branch_fix_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+    "corrected_packages_evidence": "evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json"
   }
 }

@@ -29,7 +29,8 @@
     "D2: 23 original native instances mapped explicitly to 11 target 12TR40 types; actual target pins/functions and Liberty SHA256 inspected; 37 Python tests passed",
     "D2: clean committed 355-file package verified; independent integer recomputation of 14 cases/354816 outputs and byte-exact firmware layout checks passed",
     "D2 follow-on: pinned the actual standard-cell Verilog model (2198450 bytes; all 11 target modules present; no includes); local independent stdcell substitute bench passed 8 input patterns and 12 gate state checks. Server stdcell entry added but NOT executed.",
-    "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false"
+    "D2 follow-on: sequence_soc.py and dedicated A/B/A observer implemented; independent image layout check passed for two built sequence images; synthetic observer positive 76032 outputs and four negative checks passed, explicitly cpu_executed=false",
+    "D3 correction: exact ifndef branch fixed in bc6ebbe; 41 tests passed; corrected single/sequence archives clean unpacked (367/422 files), independent 14/21-case references and 14/2 byte-exact firmware layouts passed. No upload or CPU/DC run."
   ],
   "pending_authorization": {
     "state": "asynchronous_user_question_pending",
@@ -39,10 +40,9 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Commit and record exact ifndef-FPGA ASIC branch correction; regenerate corrected standard/sequence packages and verify them",
-    "Continue read-only clock/reset and ASIC boot-loading interface review",
-    "Prepare whole-SoC synthesis/constraints and ASIC CPU flow from actual interfaces",
-    "Wait for explicit upload authorization before transferring any private package; then run new locked vendor/CPU/ASIC stages"
+    "Prepare ASIC boot image mapping and ASIC CPU entry from read-only verified vendor row/column layout",
+    "Continue clock/reset review and prepare whole-SoC synthesis constraints",
+    "Explicit upload authorization remains pending; after approval use a new committed package and new locked stages"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -118,7 +118,9 @@
     "impact": "Previous ASIC installer only renamed the else-path RAM, leaving original non-FPGA wrappers active. No ASIC run was performed; old D2 packages must NOT be used for asic_link. Their local numeric/TCM component/observer evidence remains valid for its stated scope.",
     "fix": "Explicitly select/remove the pinned ifndef FPGA conditional, preserve nested ECC guards, bind selected TCM interface to arch03_tcm_ram, and select existing constant sirv_mrom. All 41 Python tests passed. Actual official-platform installation and DC remain pending.",
     "unit_log": "local_runs/d3_asic_branch_unit_tests_20261109.log",
-    "unit_log_sha256": "458c2b341627064a0aa87dea9fb56daa3b6b97da14df0d3c989d2b6dad29ea15"
+    "unit_log_sha256": "458c2b341627064a0aa87dea9fb56daa3b6b97da14df0d3c989d2b6dad29ea15",
+    "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+    "evidence": "../../handoff/team/evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json"
   },
   "superseded_for_asic_link": [
     "light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7.zip",
@@ -140,5 +142,28 @@
       "sha256": "377a17ee08c9283cb249259990299b808c3c69b511012241675db46296ec4188",
       "files": 422
     }
-  ]
+  ],
+  "corrected_packages": [
+    {
+      "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+      "archive": "light-light126-d3-single-arch03-20261109_025411-bc6ebbe19421.zip",
+      "bytes": 10734351,
+      "sha256": "46f2cc24515bd811fb6ae0935476578161b1ff2ef59cc6f9320eb474c42f8284",
+      "files": 367
+    },
+    {
+      "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+      "archive": "light-light126-d3-sequence-arch03-20261109_025411-bc6ebbe19421.zip",
+      "bytes": 14352359,
+      "sha256": "6e99adea91c7d685bb33f9a509c50138883efeb5ddab994ab313e5c49ca708f4",
+      "files": 422
+    }
+  ],
+  "server_readonly_findings": {
+    "test_mode": "e203_soc_top passes literal 1b0 to subsystem",
+    "hfclk": "e203_subsys_hclkgen uses gfcm output in normal mode; pllbypass chooses hfextclk vs divided passthrough PLL",
+    "ram4096_functional_array": "reg [127:0] mem[0:511]; row=A>>3, column=A&7; logical bit b occupies physical bit b*8+column",
+    "boot_scope": "only initial ITCM firmware/source image may be preloaded; task shared-memory loading and accelerator execution remain CPU operations",
+    "screenshots": "../takeover_local/d2_20261109/d3_clock_bindings.png, d3_ram_arrays_loader.png, d3_ram_mapping_detail.png, d3_ram_init_reset_retry.png"
+  }
 }

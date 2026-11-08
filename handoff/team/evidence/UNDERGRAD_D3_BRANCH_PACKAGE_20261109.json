@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-09",
+  "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+  "status": "local_corrected_packages_verified_not_uploaded",
+  "python_unit_tests": 41,
+  "unit_log_sha256": "458c2b341627064a0aa87dea9fb56daa3b6b97da14df0d3c989d2b6dad29ea15",
+  "correction": "Exact original ifndef FPGA selects legacy SRAM/ROM wrappers. Remove that outer conditional in an ASIC copy; bind alternate full TCM interface to real macro adapter and use existing constant ROM. No earlier ASIC stage ran.",
+  "packages": [
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+        "archive": "light-light126-d3-single-arch03-20261109_025411-bc6ebbe19421.zip",
+        "bytes": 10734351,
+        "sha256": "46f2cc24515bd811fb6ae0935476578161b1ff2ef59cc6f9320eb474c42f8284",
+        "files": 367
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_single_clean_20261109\\light-light126-d3-single-arch03-20261109_025411-bc6ebbe19421",
+      "cases": [
+        "extremes",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding"
+      ],
+      "software_outputs": 354816,
+      "firmware_images_checked": 14,
+      "cpu_executed": false,
+      "server_uploaded": false,
+      "asic_link_verified": false
+    },
+    {
+      "status": "passed_local_package",
+      "package": {
+        "source_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
+        "archive": "light-light126-d3-sequence-arch03-20261109_025411-bc6ebbe19421.zip",
+        "bytes": 14352359,
+        "sha256": "6e99adea91c7d685bb33f9a509c50138883efeb5ddab994ab313e5c49ca708f4",
+        "files": 422
+      },
+      "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_sequence_clean_20261109\\light-light126-d3-sequence-arch03-20261109_025411-bc6ebbe19421",
+      "cases": [
+        "cancellation",
+        "extremes",
+        "largest_input",
+        "largest_output",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12",
+        "rounding",
+        "shift00",
+        "shift31",
+        "worst_error",
+        "zero"
+      ],
+      "software_outputs": 532224,
+      "firmware_images_checked": 2,
+      "cpu_executed": false,
+      "server_uploaded": false,
+      "asic_link_verified": false
+    }
+  ],
+  "server_uploaded": false,
+  "asic_link_verified": false,
+  "new_cpu_executed": false,
+  "strict_timing_verified": false,
+  "system_power_verified": false
+}
