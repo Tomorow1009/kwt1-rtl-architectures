@@ -1,0 +1,278 @@
+{
+  "date": "2026-11-09",
+  "source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+  "status": "local_D3_preparation_verified_server_pending",
+  "python_unit_tests": 52,
+  "unit_log": "local_runs/d3_activity_unit_tests_20261109.log",
+  "unit_log_sha256": "8c58cae18ed2ba05bd3a3e3e5fdbf7732c512ccad3f0184569ee80644aff7095",
+  "server_python36_syntax_files": [
+    "activity.py",
+    "audit.py",
+    "asic_boot.py",
+    "asic_soc.py",
+    "soc_synth.py",
+    "memory_technology.py",
+    "server_run.py",
+    "install_platform.py",
+    "stdcell_verify.py",
+    "asic_link.py"
+  ],
+  "python_sources": {
+    "workspaces/arch03/scripts/activity.py": {
+      "tested_checkout_sha256": "ddc870516b7e8a97a21ced1b91f274a64daf8b6f17afeeced0a6bfa9dacf365e",
+      "committed_sha256": "ddc870516b7e8a97a21ced1b91f274a64daf8b6f17afeeced0a6bfa9dacf365e"
+    },
+    "workspaces/arch03/scripts/asic_boot.py": {
+      "tested_checkout_sha256": "9bc361c7b96e11e33c427d5f3514e7bdabf49c439a292fc30c69fd541ab2e3ca",
+      "committed_sha256": "9bc361c7b96e11e33c427d5f3514e7bdabf49c439a292fc30c69fd541ab2e3ca"
+    },
+    "workspaces/arch03/scripts/asic_link.py": {
+      "tested_checkout_sha256": "64ef7421437ba3b7ae98de3ec8b2a2ca5c7777a7885b036cf93166e686a8fd5d",
+      "committed_sha256": "64ef7421437ba3b7ae98de3ec8b2a2ca5c7777a7885b036cf93166e686a8fd5d"
+    },
+    "workspaces/arch03/scripts/asic_soc.py": {
+      "tested_checkout_sha256": "aceefceece2f291959ca4ca23f5bd527616590deab6af44e6f6ba0db1db82302",
+      "committed_sha256": "aceefceece2f291959ca4ca23f5bd527616590deab6af44e6f6ba0db1db82302"
+    },
+    "workspaces/arch03/scripts/audit.py": {
+      "tested_checkout_sha256": "4389d16efb2e1477c976e85b7e8a2c68becd522c78326c549d173b0c6f68756b",
+      "committed_sha256": "4389d16efb2e1477c976e85b7e8a2c68becd522c78326c549d173b0c6f68756b"
+    },
+    "workspaces/arch03/scripts/batch_soc.py": {
+      "tested_checkout_sha256": "d68be179f0dd69832118cae868d71aa7c74ca105d8b63c895d43540b8a033092",
+      "committed_sha256": "d68be179f0dd69832118cae868d71aa7c74ca105d8b63c895d43540b8a033092"
+    },
+    "workspaces/arch03/scripts/build_firmware.py": {
+      "tested_checkout_sha256": "cd2b563942f94a84a35dc850e3d5b8234f0b258e2880ef0569d548e3298ac981",
+      "committed_sha256": "cd2b563942f94a84a35dc850e3d5b8234f0b258e2880ef0569d548e3298ac981"
+    },
+    "workspaces/arch03/scripts/build_sequence_firmware.py": {
+      "tested_checkout_sha256": "58016298bd75ee614c134eedecd87854c16e50c3c0aa4130d2861cebc2583b64",
+      "committed_sha256": "58016298bd75ee614c134eedecd87854c16e50c3c0aa4130d2861cebc2583b64"
+    },
+    "workspaces/arch03/scripts/check_precision_captures.py": {
+      "tested_checkout_sha256": "c4c205b5a0e39e1cd3f496a9bb4de302db24aa0fdd7e1a0a530491063e479c29",
+      "committed_sha256": "c4c205b5a0e39e1cd3f496a9bb4de302db24aa0fdd7e1a0a530491063e479c29"
+    },
+    "workspaces/arch03/scripts/dc_blocks.py": {
+      "tested_checkout_sha256": "026d3ab8d2e6be519103579cb0e17783e08a2d0ae60fa676b94cce1a4ab5be89",
+      "committed_sha256": "026d3ab8d2e6be519103579cb0e17783e08a2d0ae60fa676b94cce1a4ab5be89"
+    },
+    "workspaces/arch03/scripts/evaluate.py": {
+      "tested_checkout_sha256": "0652f76fef7cca0d38e4a8ad8a1441f402095dbcac516b91544d2f341c214de2",
+      "committed_sha256": "0652f76fef7cca0d38e4a8ad8a1441f402095dbcac516b91544d2f341c214de2"
+    },
+    "workspaces/arch03/scripts/full_matrix_eval.py": {
+      "tested_checkout_sha256": "6296cdaddddc5d086ab111d5fd8ead446df97d782e9bc10ff604a763c71f5606",
+      "committed_sha256": "6296cdaddddc5d086ab111d5fd8ead446df97d782e9bc10ff604a763c71f5606"
+    },
+    "workspaces/arch03/scripts/install_platform.py": {
+      "tested_checkout_sha256": "eb00a1614afde5cc6e350335340c6fab55598fffd5d36bbdf1abcc3de83449b3",
+      "committed_sha256": "eb00a1614afde5cc6e350335340c6fab55598fffd5d36bbdf1abcc3de83449b3"
+    },
+    "workspaces/arch03/scripts/local_boot_verify.py": {
+      "tested_checkout_sha256": "2217201ffaf4f677bbcb8379b0225ce374355305d1905162b37e424264c15ef5",
+      "committed_sha256": "2217201ffaf4f677bbcb8379b0225ce374355305d1905162b37e424264c15ef5"
+    },
+    "workspaces/arch03/scripts/local_clock_mode_verify.py": {
+      "tested_checkout_sha256": "3aadc688c14d100fde3354c2a04818f4b8b1a7a74c6dfddc475859ac8386d928",
+      "committed_sha256": "3aadc688c14d100fde3354c2a04818f4b8b1a7a74c6dfddc475859ac8386d928"
+    },
+    "workspaces/arch03/scripts/local_sequence_monitor_verify.py": {
+      "tested_checkout_sha256": "8ce9bb6db435727ec891603dc1485335fc775f667a5933951d9f169fa364aca9",
+      "committed_sha256": "8ce9bb6db435727ec891603dc1485335fc775f667a5933951d9f169fa364aca9"
+    },
+    "workspaces/arch03/scripts/local_stdcell_verify.py": {
+      "tested_checkout_sha256": "39b27ea25707ec5083eb05c8ba900f84e1a1c4d0f60d59ecde66708844bd1658",
+      "committed_sha256": "39b27ea25707ec5083eb05c8ba900f84e1a1c4d0f60d59ecde66708844bd1658"
+    },
+    "workspaces/arch03/scripts/local_tcm_verify.py": {
+      "tested_checkout_sha256": "4a540ff72d7c26c58766a3f3bf8e943e616a5d15693a2e10364352ec79f56755",
+      "committed_sha256": "4a540ff72d7c26c58766a3f3bf8e943e616a5d15693a2e10364352ec79f56755"
+    },
+    "workspaces/arch03/scripts/local_verify.py": {
+      "tested_checkout_sha256": "b323315805d32f7f89d80ac8f444e5ef287bf7b9f5599adffdc0b49ac4ed245c",
+      "committed_sha256": "b323315805d32f7f89d80ac8f444e5ef287bf7b9f5599adffdc0b49ac4ed245c"
+    },
+    "workspaces/arch03/scripts/local_window_verify.py": {
+      "tested_checkout_sha256": "7ea0c596e3ad2db1c6155d6a935681c550bcaed28aa1a5d6be9eb285e8c21d6c",
+      "committed_sha256": "7ea0c596e3ad2db1c6155d6a935681c550bcaed28aa1a5d6be9eb285e8c21d6c"
+    },
+    "workspaces/arch03/scripts/memory_technology.py": {
+      "tested_checkout_sha256": "0851234885cfc6e43aa9a31e870e9e7acc2866a3320e5d06c3b9a727244ce0b0",
+      "committed_sha256": "0851234885cfc6e43aa9a31e870e9e7acc2866a3320e5d06c3b9a727244ce0b0"
+    },
+    "workspaces/arch03/scripts/numeric.py": {
+      "tested_checkout_sha256": "8e763ae71e154d057f216c4f84d4dd675a1226d7ca9e38eaf03a95728ff1b2f5",
+      "committed_sha256": "8e763ae71e154d057f216c4f84d4dd675a1226d7ca9e38eaf03a95728ff1b2f5"
+    },
+    "workspaces/arch03/scripts/package.py": {
+      "tested_checkout_sha256": "f76bf644868d5dda28b0e02ad1f6ab627291177cca06181c34894f252e681912",
+      "committed_sha256": "f76bf644868d5dda28b0e02ad1f6ab627291177cca06181c34894f252e681912"
+    },
+    "workspaces/arch03/scripts/prepare_precision_cases.py": {
+      "tested_checkout_sha256": "6b3a992fd9e4e39be6e672f00b1b49a5e3bde1e9d598091ea938455f933bfe59",
+      "committed_sha256": "6b3a992fd9e4e39be6e672f00b1b49a5e3bde1e9d598091ea938455f933bfe59"
+    },
+    "workspaces/arch03/scripts/sequence_soc.py": {
+      "tested_checkout_sha256": "b9b0be1b0dcef008a92d245422a0875d02b8bea794ba50672612fc783fe49fab",
+      "committed_sha256": "b9b0be1b0dcef008a92d245422a0875d02b8bea794ba50672612fc783fe49fab"
+    },
+    "workspaces/arch03/scripts/server_run.py": {
+      "tested_checkout_sha256": "0ac5bf62880d72842a718092a1c9496e01d0d0e54e876206f8c1e999297c9e1c",
+      "committed_sha256": "0ac5bf62880d72842a718092a1c9496e01d0d0e54e876206f8c1e999297c9e1c"
+    },
+    "workspaces/arch03/scripts/soc_synth.py": {
+      "tested_checkout_sha256": "f5f357a194363d220362030165a26da3da3e9d33ae41f6b7c546e77207bf89e0",
+      "committed_sha256": "f5f357a194363d220362030165a26da3da3e9d33ae41f6b7c546e77207bf89e0"
+    },
+    "workspaces/arch03/scripts/stdcell_verify.py": {
+      "tested_checkout_sha256": "a171f90744cdacad1280d7166b02414bf432b8517c0fd9826cdbf5003b639ebf",
+      "committed_sha256": "a171f90744cdacad1280d7166b02414bf432b8517c0fd9826cdbf5003b639ebf"
+    },
+    "workspaces/arch03/scripts/technology_binding.py": {
+      "tested_checkout_sha256": "23371f8fe851f2004f7a121330c6ddbc1b40aeb46018188bff1c2b7c8d009215",
+      "committed_sha256": "23371f8fe851f2004f7a121330c6ddbc1b40aeb46018188bff1c2b7c8d009215"
+    },
+    "workspaces/arch03/scripts/test_activity.py": {
+      "tested_checkout_sha256": "3ea0e8d8971e9762c1c99a32f7d43c4fc0d1351bf603442226a2ec66d9a044c0",
+      "committed_sha256": "3ea0e8d8971e9762c1c99a32f7d43c4fc0d1351bf603442226a2ec66d9a044c0"
+    },
+    "workspaces/arch03/scripts/test_asic_boot.py": {
+      "tested_checkout_sha256": "a9c282347a2088415d065fd2aac89e7c05311215765a15cee580dfae9335693c",
+      "committed_sha256": "a9c282347a2088415d065fd2aac89e7c05311215765a15cee580dfae9335693c"
+    },
+    "workspaces/arch03/scripts/test_batch_soc.py": {
+      "tested_checkout_sha256": "54f70cf0acec5b4593f11dd6cbc0a7747a6b674f1dac85d6bdf1ab46231943a3",
+      "committed_sha256": "54f70cf0acec5b4593f11dd6cbc0a7747a6b674f1dac85d6bdf1ab46231943a3"
+    },
+    "workspaces/arch03/scripts/test_evaluate.py": {
+      "tested_checkout_sha256": "b0f8cd560ccd100d066814373ef152b35b56af8e14653fe5652df3acaac85cea",
+      "committed_sha256": "b0f8cd560ccd100d066814373ef152b35b56af8e14653fe5652df3acaac85cea"
+    },
+    "workspaces/arch03/scripts/test_install_platform.py": {
+      "tested_checkout_sha256": "f761a4997871ff07c5f4e365f6c7dab47bb80b99b6b29c9a401db2c0fc1b455e",
+      "committed_sha256": "f761a4997871ff07c5f4e365f6c7dab47bb80b99b6b29c9a401db2c0fc1b455e"
+    },
+    "workspaces/arch03/scripts/test_memory_technology.py": {
+      "tested_checkout_sha256": "71e13a9879de3b7efc94f86da253301553c97e16c922fc0503b74ac90b181687",
+      "committed_sha256": "71e13a9879de3b7efc94f86da253301553c97e16c922fc0503b74ac90b181687"
+    },
+    "workspaces/arch03/scripts/test_numeric.py": {
+      "tested_checkout_sha256": "dd0bbc8d4de41908ee28510af2509162d01a145ae11516d70f06f48ec8141801",
+      "committed_sha256": "dd0bbc8d4de41908ee28510af2509162d01a145ae11516d70f06f48ec8141801"
+    },
+    "workspaces/arch03/scripts/test_sequence_soc.py": {
+      "tested_checkout_sha256": "cd884de0e3af00f41deb381da2107b44c7e538bf88022634d2e443b249b34028",
+      "committed_sha256": "cd884de0e3af00f41deb381da2107b44c7e538bf88022634d2e443b249b34028"
+    },
+    "workspaces/arch03/scripts/test_soc_synth.py": {
+      "tested_checkout_sha256": "3c2ebc136340c529133cf1ef5e55788f04d07830ce2c63867e28156075e8a3bf",
+      "committed_sha256": "3c2ebc136340c529133cf1ef5e55788f04d07830ce2c63867e28156075e8a3bf"
+    },
+    "workspaces/arch03/scripts/test_task_window.py": {
+      "tested_checkout_sha256": "47f9e505fcc652c35cef17b5ebbdf069912c076f9f84600a548b39c72a5b6285",
+      "committed_sha256": "47f9e505fcc652c35cef17b5ebbdf069912c076f9f84600a548b39c72a5b6285"
+    },
+    "workspaces/arch03/scripts/test_technology_binding.py": {
+      "tested_checkout_sha256": "4b6c35b27adf1730c96369322984bdc066ed11a16425f4c00b8db16dbb41484a",
+      "committed_sha256": "4b6c35b27adf1730c96369322984bdc066ed11a16425f4c00b8db16dbb41484a"
+    },
+    "workspaces/arch03/scripts/test_timing_contract.py": {
+      "tested_checkout_sha256": "96c33ac1636e1349e38af8bf03b71873d3158820906cd1c527b6055f8d116670",
+      "committed_sha256": "96c33ac1636e1349e38af8bf03b71873d3158820906cd1c527b6055f8d116670"
+    },
+    "workspaces/arch03/scripts/timing_contract.py": {
+      "tested_checkout_sha256": "5aff94685fc1c133265f064659388c5ef5fd22921ce77594479e85490f7d801d",
+      "committed_sha256": "5aff94685fc1c133265f064659388c5ef5fd22921ce77594479e85490f7d801d"
+    }
+  },
+  "checkout_line_ending_only_differences": [],
+  "local_runs": {
+    "boot": {
+      "path": "local_runs/asic_boot_20261109_031545_081254",
+      "summary_sha256": "c7a80bd024c6a1381d550e9a6cd21066b6a946b1106a46e181d43eb2aa4b4b4c",
+      "result": {
+        "status": "passed",
+        "words": 32768,
+        "bytes": 262144,
+        "macros": 32,
+        "missing_macro_rejected": true,
+        "cpu_executed": false,
+        "vendor_verified": false,
+        "scope": "physical_layout_substitute_only",
+        "source_sha256": {
+          "workspaces/arch03/rtl/arch03_shared_sram.sv": "a4d003559992e647084b0c60650ca8a46715f6e76834b603735eb32cefa1da1f",
+          "workspaces/arch03/rtl/arch03_tcm_ram.sv": "768739619c24703ea8950a670436cf13d006a27e79ecb0e4d4d66076ae1f6f9a",
+          "workspaces/arch03/tb/tcm_physical_pin_mock.sv": "8655f57fe966f5b93cc8c6012ce362b3dc71cfb901631cd8e3a96df4d782301d",
+          "workspaces/arch03/tb/tb_arch03_asic_boot.sv": "43ddefa40d999a3702a63909670b862b08f9f4bb8419da44ea1ca11b5afb8189",
+          "workspaces/arch03/scripts/local_boot_verify.py": "2217201ffaf4f677bbcb8379b0225ce374355305d1905162b37e424264c15ef5",
+          "workspaces/arch03/scripts/asic_boot.py": "9bc361c7b96e11e33c427d5f3514e7bdabf49c439a292fc30c69fd541ab2e3ca",
+          "local_runs/asic_boot_20261109_031545_081254/arch03_asic_boot.svh": "c540efbd454b0e6e4640fa855e3b7e6236fc4b50f7ea7a2782ed798074647672",
+          "local_runs/asic_boot_20261109_031545_081254/arch02_sram_config.vh": "d953b7ddaf1f13829d6904b0085659334929689eacfaac72bd1566cc779957aa",
+          "local_runs/asic_boot_20261109_031545_081254/source.verilog": "41402db2e23e051357673e6edf98d050e012cca47f5b6077d70d2cb70eb686a9"
+        },
+        "logs": {
+          "positive.log": "ccc1b03a109409f551fab1c2497de7e9d8491993ac0ff2ec64b643d0af1d6844",
+          "missing_macro.log": "71ee6111ecc09bc66aa2bd909444a59ceaf6226eb79a8939499ed9dc07cb0135"
+        }
+      },
+      "input_commit": "82e57191cd3d2a4cc4b04e46dde371d992f1e913",
+      "committed_test_input_hashes_matched": true
+    },
+    "clock_mode": {
+      "path": "local_runs/clock_mode_20261109_031459_956948",
+      "summary_sha256": "ffa2c250b7f8263c43666f5584937d96d339926ea656f039370ddad457c076a8",
+      "result": {
+        "status": "passed",
+        "cpu_executed": false,
+        "cases": [
+          "positive",
+          "test",
+          "bypass",
+          "divider",
+          "unknown"
+        ],
+        "source_sha256": {
+          "workspaces/arch03/tb/arch03_clock_mode_guard.sv": "6258e84bd5ca7d78927822d710f004254c3089484a56a1ca71507a682fc8c1c7",
+          "workspaces/arch03/tb/tb_arch03_clock_mode.sv": "64bd2113240ed848bc7ddd9a54c7795b02ca0fc11bb26cafb1589c63fc071381",
+          "workspaces/arch03/scripts/local_clock_mode_verify.py": "3aadc688c14d100fde3354c2a04818f4b8b1a7a74c6dfddc475859ac8386d928"
+        },
+        "logs": {
+          "positive": "a1d3211f91eaa7ccc4b0a0d45baab4f742e44d64045c2e85cb5282d84f42ee4d",
+          "test": "099a0157e1db54990e9c5baa046b23a847af40724c9cc10138041db0d23ff8d0",
+          "bypass": "73f88d696e3b9be98957d7937246ffbbde77ec4bf0709b10bcf2e6fb1326f48f",
+          "divider": "fdc4205c0bbb6616c725ad5e72f3c04c740c7965aeec569853aeacc50d81b409",
+          "unknown": "9272891a5054508bb1f1032bd6d1190eea363c3821776bd8b72cf32c09eded13"
+        }
+      },
+      "input_commit": "82e57191cd3d2a4cc4b04e46dde371d992f1e913",
+      "committed_test_input_hashes_matched": true
+    }
+  },
+  "read_only_screenshot_hashes": {
+    "d3_exact_boot_anchors.png": "b2e42bfc7e508c5857a880725ea53019f4db2e192d522509cf44edff7df21ffa",
+    "d3_clock_operating_mode.png": "b660084e5fb5317694a6997e3b8deac348d56e6a0c9dc4126f758a017cd08b05",
+    "d3_ram_arrays_loader.png": "39566a5acfea5651a767289ff23508a310084ac389fe1e80ecd3cf74a96ef501",
+    "d3_ram_mapping_detail.png": "953d34f382608fca271d70d316788d03c6e2c912b836d1f7b52ce538ffeb9635",
+    "d3_ram_init_reset_retry.png": "55c9d437ff6b0c4e33135295a212dcccb11b45f27e9a2b196cbdf89c16693828",
+    "d3_sram_power_metadata.png": "e9e52fc3ea3d4f6e212ded71e1a644d80ac25d88aababff8ba99bb5c12885702",
+    "d3_sram_conditional_leakage.png": "9f3e00f4942ada631bcb52995057049f387fd85d453f5789a73e69a07dbae2f4",
+    "d3_sram_library_fingerprints.png": "ccf1c00243fdd14ed6ab4ebd223d007a5f152c1f664ec09654e1416bf5246b4f"
+  },
+  "stages_prepared": [
+    "asic_boot",
+    "asic_soc",
+    "asic_synth"
+  ],
+  "synthesis_result_policy": "reports_ready_review_required; never automatic whole-SoC timing or scoring-area acceptance",
+  "activity_scope": "Synthetic VCD tests only; no actual system waveform yet",
+  "pending_authorization": "Private source/data package upload via existing Linux FileZilla to icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109; auto-review rejected staging/upload and user question is pending",
+  "server_uploaded": false,
+  "new_cpu_executed": false,
+  "whole_soc_synthesis_executed": false,
+  "gate_simulation_verified": false,
+  "strict_timing_verified": false,
+  "system_power_verified": false,
+  "old_hex100_resumed": false
+}

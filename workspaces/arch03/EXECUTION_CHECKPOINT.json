@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "D2 local TCM macro adapter and full-task window preparation; server stages pending",
+  "last_completed_stage": "D1 numeric/local RTL validation; D2/D3 local TCM, CPU firmware, ASIC boot/mode, synthesis report and VCD integrity preparation. No new server verification.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -90,7 +90,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "D3 synthesis/technology/mode preparation committed as 82e5719. Activity integrity checker passed 52 tests and is being frozen next; no package upload or new CPU/DC job.",
+  "uncommitted_follow_on": "All implementation committed through 83126c3. D3 evidence/checkpoint currently being recorded, then prepare final ready packages.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -213,6 +213,8 @@
     "python_tests_total": 52,
     "unit_log": "local_runs/d3_activity_unit_tests_20261109.log",
     "file": "scripts/activity.py",
-    "scope": "streamed hash, six component hierarchies, exact task dumping interval, unknown event accounting; no power estimate or mapped-netlist coverage claim"
-  }
+    "scope": "streamed hash, six component hierarchies, exact task dumping interval, unknown event accounting; no power estimate or mapped-netlist coverage claim",
+    "source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0"
+  },
+  "d3_preparation_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_PREPARATION_20261109.json"
 }

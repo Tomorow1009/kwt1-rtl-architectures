@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "local_d2_sequence_and_technology_preparation_passed_server_pending",
+    "phase": "local_D3_preparation_verified_upload_authorization_pending",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "ASIC installer branch correction passed 41 local tests. Regenerate clean verified standard/sequence packages; continue clock/reset and ASIC boot review. Explicit upload authorization pending; no new server acceptance.",
+    "next": "Clean verify latest standard/sequence packages. Upload authorization is still pending after auto-review rejection. Actual vendor, ASIC CPU, whole-SoC synthesis/gate/timing/power verification requires new server runs; old stopped regression remains stopped.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": false,
     "clean_package_input_files": 341,
@@ -123,6 +123,8 @@
     "follow_on_evidence": "evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json",
     "asic_branch_correction": "TCM and ROM use ifndef FPGA. Earlier D2 installer selected the inactive branch; previous D2 packages are superseded for ASIC link. See EXECUTION_CHECKPOINT.json. No ASIC stage was executed.",
     "asic_branch_fix_commit": "bc6ebbe194210a50d1fe56b4022830672b2a049b",
-    "corrected_packages_evidence": "evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json"
+    "corrected_packages_evidence": "evidence/UNDERGRAD_D3_BRANCH_PACKAGE_20261109.json",
+    "d3_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+    "d3_evidence": "evidence/UNDERGRAD_D3_PREPARATION_20261109.json"
   }
 }
