@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Vendor stdcell/TCM/boot and 6 real E203 sequence tasks passed; ASIC-bound layer_01 d3_smoke04 passed 25344 outputs, valid clock mode, full window 3890080 cycles. Full 14 ASIC cases, synthesis/STA/gate/power still pending.",
+  "last_completed_stage": "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -34,7 +34,8 @@
     "Latest D3 standard/sequence packages from de6e6e4: 383/438 file hashes, independent 14/21 case references and 14/2 firmware layouts passed; 52 tests passed from clean single-package checkout; all package input hashes rechecked after tests. Both packages remain local.",
     "D3 actual server: stdcell d3_vendor01 passed; corrected TCM and ASIC boot d3_vendor02 passed; 98682 TCM word checks and 262144 boot bytes, CPU/timing/power remain unverified.",
     "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied.",
-    "D3 ASIC d3_smoke04 passed layer_01 all 25344 outputs without global FPGA define; real vendor TCM and stdcells, boot verified, task clock mode 0/1/1, window 3890080 cycles at 6.666666 ns. Gate/STA/power and complete ASIC suite remain pending."
+    "D3 ASIC d3_smoke04 passed layer_01 all 25344 outputs without global FPGA define; real vendor TCM and stdcells, boot verified, task clock mode 0/1/1, window 3890080 cycles at 6.666666 ns. Gate/STA/power and complete ASIC suite remain pending.",
+    "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
@@ -46,12 +47,11 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_full01 without interrupting; verify every capture and summary hash",
-    "Commit/test/package corrected SDC/area flow, upload via authorized Linux FileZilla; run d3_synth03 only after team lock released",
-    "Prepare gate function and exact-window activity/power validation; do not resume old hex100"
+    "Observe d3_synth03 logs and exact SDC application; analyze actual setup/hold/area/coverage",
+    "Run gate smoke from 38c89eb gate package only using a completed synthesis summary digest; then expand 14 cases",
+    "Record full-window activity and validate power using observed installed PrimeTime; license/commands not yet verified"
   ],
   "still_unverified": [
-    "Complete 14-case ASIC CPU suite currently running",
     "Strict 150 MHz synthesis/STA and complete area accounting",
     "Post-synthesis functional checks",
     "Full-window activity, system power and energy",
@@ -63,7 +63,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Third terminal: d3_full01 ASIC 14-case suite running in 46cb3de libhash bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_synth02 failed reporting and invalid constraints; preserve all artifacts. No simultaneous EDA.",
+  "server_readonly_job": "Third terminal: corrected d3_synth03 running in c323781 SDC bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_full01 completed and lock released before synthesis launch; preserve old failures and hex100.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -94,7 +94,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Gate verification entry and mapped-loader local test prepared; 59 Python tests and 16384-row XSim storage-substitute check passed; no actual gate simulation yet.",
+  "uncommitted_follow_on": "Only latest run evidence/docs pending commit; gate entry committed 38c89eb and verified/uploaded.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -239,11 +239,11 @@
   ],
   "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_FILELIST_PACKAGES_20261109.json",
   "active_transfer": {
-    "packages_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+    "packages_source_commit": "38c89ebbe7c45e6499a68c54ef10ba4b0a311f20",
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "c323781 SDC package uploaded with all hashes verified; awaiting d3_full01 completion before d3_synth03",
+    "state": "Ten uploaded verified packages; latest gate package safely unpacked. c323781 d3_synth03 running.",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -337,5 +337,41 @@
       "No SDF or timing/power claims"
     ],
     "failure_preserved": "gate_loader_20261109_063425_819209: local substitute modules lacked default timescale; fixed"
+  },
+  "latest_gate_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "38c89ebbe7c45e6499a68c54ef10ba4b0a311f20",
+      "archive": "light-light126-d3-gate-arch03-20261109_063758-38c89ebbe7c4.zip",
+      "bytes": 10777527,
+      "sha256": "025276feb948bd10beab8b35cb0875734d7476b39cc9e814b416b76a55637af7",
+      "files": 386,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_gate_clean_20261109\\light-light126-d3-gate-arch03-20261109_063758-38c89ebbe7c4",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false
   }
 }

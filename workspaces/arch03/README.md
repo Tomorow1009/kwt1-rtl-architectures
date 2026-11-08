@@ -98,6 +98,7 @@ python3 workspaces/arch03/scripts/server_run.py stdcell --session asic01
 python3 workspaces/arch03/scripts/server_run.py asic_boot --session asic01
 python3 workspaces/arch03/scripts/server_run.py asic_soc --session asic01 --cases layer_01 --activity-cases layer_01
 python3 workspaces/arch03/scripts/server_run.py asic_synth --session synth01
+python3 workspaces/arch03/scripts/server_run.py gate_soc --session gate01 --synth-run <completed-asic_synth-directory> --synth-summary-sha256 <verified-summary-sha256> --cases layer_01
 ```
 
 `tcm` 只验实际 SRAM 功能模型；`asic_link` 只检查完整 SoC 的工艺链接与宏数量，均是新准备入口、尚未服务器运行。`soc --activity-cases layer_01` 可生成该用例全系统同窗口 VCD；使用新固件/监视器，不能拿旧镜像通过新的计时验收。VCD 存在不代表功耗已估算或活动已正确映射。
@@ -105,6 +106,10 @@ python3 workspaces/arch03/scripts/server_run.py asic_synth --session synth01
 运行前仍须核对共享桌面、已有 EDA 进程和临时修改；入口复用 `.arch02_team_lock` 目录锁。
 每个阶段只运行一次；失败保留，修复后提交新包/新会话。中断时若子进程仍运行，锁保留，禁止直接重启。
 `dc_accel`、`dc_shared` **仅覆盖加速器接口块和共享 SRAM**。`asic_synth` 才生成整机映射网表、SDC、setup/hold 与约束报告，以及逐叶实例面积表；其完成状态为 `reports_ready_review_required`，不是整机时序验收通过。必须审查所有时钟传播、未约束路径、LF/HF 交叉、结构警告、复位/工作模式和 I/O 假设。仅凭阶段完成标记不能宣布验收。
+
+整机首轮实际 DC 暴露了端口拼写、工具周期舍入、多路径组和虚拟常量分类问题，失败报告均保留。当前综合请求周期为 `6.666666 ns`，仍严格检查工具实际读取值不得大于 `20/3 ns`；不接受将 `6.666667 ns` 视为舍入容差。约束错误会立即退出。DC 的两个逻辑常量源单列零综合面积，不表示物理 tie cell 已插入或免费。
+
+`gate_soc` 要求完整综合阶段及明确摘要哈希，复核网表、SDC、输入及当前 RTL/固件源码匹配。它采用映射后 ITCM 实例路径预装启动镜像、复用实际 CPU 总线写回检查，并支持 `--activity-cases layer_01`。当前此入口只通过本地准备测试，尚未服务器执行；即便门级功能通过，也不会自动认可源综合的负裕量、未约束路径或功耗。该入口没有 SDF，不能当作带延迟时序仿真。
 
 `asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1，与初步综合模式一致；这不代替门级、时序或功耗验证。新 `memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零分电源漏电项。共享 SRAM 官方计分归属与物理面积单位仍需独立审查。
 

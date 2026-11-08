@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "asic_full_suite_running_synthesis_constraints_fix_prepared",
+  "status": "asic_full_suite_passed_corrected_synthesis_running",
   "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
@@ -77,6 +77,17 @@
       "bytes": 10767860,
       "sha256": "fec1b964efdd2241c9eaf61407d7a901125fab277560ceefd7b3e293a15ce31f",
       "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "38c89ebbe7c45e6499a68c54ef10ba4b0a311f20",
+      "archive": "light-light126-d3-gate-arch03-20261109_063758-38c89ebbe7c4.zip",
+      "bytes": 10777527,
+      "sha256": "025276feb948bd10beab8b35cb0875734d7476b39cc9e814b416b76a55637af7",
+      "files": 386,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
@@ -285,7 +296,7 @@
       ]
     },
     "asic_full_suite": {
-      "status": "running",
+      "status": "passed",
       "session": "d3_full01",
       "package_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
       "cases": [
@@ -306,8 +317,32 @@
       ],
       "pid": 153366,
       "started": "2026-11-09T06:19:47.812711",
-      "screenshot": "server_full01_progress1.png",
-      "activity_recorded": false
+      "screenshot": "server_full01_receipt.png",
+      "activity_recorded": false,
+      "finished": "2026-11-09T06:39:35.680178",
+      "summary_sha256": "d799ba311f50b1b8ff78b8a60a86a76ca3dc2d9c67238e7a7a25c994ddbfe310",
+      "scope": "asic_bound_RTL_functional",
+      "tasks": 14,
+      "outputs": 354816,
+      "cpu_executed": true,
+      "asic_cpu_verified": true,
+      "global_FPGA_defined": false,
+      "cycles_per_case": 3890176,
+      "window_cycles_per_case": 3890080,
+      "period_ns": "6.666666",
+      "model_layer_saturation_count": 0,
+      "synthetic_extremes_saturated": 6336,
+      "synthetic_rounding_saturated": 4554,
+      "all_capture_outputs_checked": true,
+      "timing_verified": false,
+      "gate_simulation_verified": false,
+      "system_power_verified": false
+    },
+    "asic_synth_sdc_fixed": {
+      "status": "running",
+      "session": "d3_synth03",
+      "package_source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+      "timing_verified": false
     }
   },
   "whole_soc_cpu_verified": true,
@@ -345,8 +380,8 @@
     "fresh_metadata_screenshot": "server_sram_hash_metadata_monitor_unpack.png",
     "finding": "Fresh SHA256 matches original 03:12 screenshot, not the mistyped local metadata. Only fingerprint text corrected; no library change or ignored check."
   },
-  "whole_soc_cpu_scope": "ASIC-bound RTL one layer_01 smoke case; complete fourteen-case suite still pending",
-  "asic_matrix_suite_verified": false,
+  "whole_soc_cpu_scope": "Complete ASIC-bound RTL 14-case suite, 354816 actual CPU outputs; not gates/STA/power",
+  "asic_matrix_suite_verified": true,
   "standard_library_units_metadata": {
     "time": "1ns",
     "voltage": "1V",
@@ -397,6 +432,24 @@
       "Same full CPU input/output monitor bound to shared SRAM module ports",
       "No SDF or timing/power claims"
     ],
-    "failure_preserved": "gate_loader_20261109_063425_819209: local substitute modules lacked default timescale; fixed"
+    "failure_preserved": "gate_loader_20261109_063425_819209: local substitute modules lacked default timescale; fixed",
+    "package": {
+      "source_commit": "38c89ebbe7c45e6499a68c54ef10ba4b0a311f20",
+      "archive": "light-light126-d3-gate-arch03-20261109_063758-38c89ebbe7c4.zip",
+      "bytes": 10777527,
+      "sha256": "025276feb948bd10beab8b35cb0875734d7476b39cc9e814b416b76a55637af7",
+      "files": 386,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    }
+  },
+  "power_tool_discovery": {
+    "pt_shell": "/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell",
+    "executable_path_observed": true,
+    "license_not_checked": true,
+    "power_not_run": true,
+    "screenshot": "server_power_tool_paths.png"
   }
 }

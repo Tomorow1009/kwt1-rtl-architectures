@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "asic_full_suite_running_synthesis_constraints_fix_prepared",
+    "phase": "asic_full_suite_passed_corrected_synthesis_running",
     "source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D1_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Third terminal: d3_full01 ASIC 14-case suite running in 46cb3de libhash bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_synth02 failed reporting and invalid constraints; preserve all artifacts. No simultaneous EDA.",
+    "next": "Third terminal: corrected d3_synth03 running in c323781 SDC bundle. Fourth diagnostic terminal idle in e60a3cc monitor bundle. d3_full01 completed and lock released before synthesis launch; preserve old failures and hex100.",
     "package_readiness": "evidence/UNDERGRAD_D1_PACKAGE_20261109.json",
     "server_uploaded": true,
     "clean_package_input_files": 341,
@@ -138,6 +138,7 @@
     "new_cpu_outputs": 177408,
     "new_cpu_scope": "6 functional-TCM sequence tasks plus 1 ASIC-bound layer_01 smoke task",
     "asic_cpu_smoke_verified": true,
-    "asic_matrix_suite_verified": false
+    "asic_matrix_suite_verified": true,
+    "asic_cpu_outputs": 354816
   }
 }
