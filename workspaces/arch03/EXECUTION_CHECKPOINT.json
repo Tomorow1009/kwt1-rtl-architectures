@@ -26,7 +26,8 @@
     "D2: 14 new RV32 firmware images built with cold-task invalidation and begin marker; NOT executed on CPU",
     "D2: 34 Python unit tests passed; optional same-window complete-system VCD entry added, NOT yet exercised on actual SoC",
     "D2: actual monitor include and passive hierarchy bindings elaborated in XSim using an explicitly non-CPU compile-only harness",
-    "D2: 23 original native instances mapped explicitly to 11 target 12TR40 types; actual target pins/functions and Liberty SHA256 inspected; 37 Python tests passed"
+    "D2: 23 original native instances mapped explicitly to 11 target 12TR40 types; actual target pins/functions and Liberty SHA256 inspected; 37 Python tests passed",
+    "D2: clean committed 355-file package verified; independent integer recomputation of 14 cases/354816 outputs and byte-exact firmware layout checks passed"
   ],
   "pending_authorization": {
     "state": "asynchronous_user_question_pending",
@@ -36,12 +37,10 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Read target library cell functions/pins in retained Python session, implement and locally test explicit GENERIC_RVT_SMIC technology bindings",
-    "Inspect native-cell library comparison; resolve actual standard-cell incompatibilities if found",
-    "Validate monitor inclusion/boot bindings without claiming CPU execution",
-    "Freeze and package the D2 local source and record evidence",
-    "Prepare real-CPU consecutive-task and timeout-recovery firmware/monitor flow",
-    "After explicit upload authorization, transfer a NEW committed package through approved Linux FileZilla route and run new locked ASIC link/CPU stages"
+    "Finish reading target standard-cell Verilog model hash/dependencies in retained Python session, then prepare vendor-cell test entry",
+    "Prepare CPU consecutive A/B/A task firmware and verification with timeout/abort recovery; use a new source commit/package",
+    "Prepare whole-SoC synthesis/constraints and post-synthesis/area/power work using observed ASIC interfaces",
+    "After explicit upload authorization, upload a new verified package through existing Linux FileZilla and run locked TCM/ASIC link/CPU stages"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -73,5 +72,14 @@
     }
   ],
   "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
-  "d2_evidence": "../../handoff/team/evidence/UNDERGRAD_D2_20261109.json"
+  "d2_evidence": "../../handoff/team/evidence/UNDERGRAD_D2_20261109.json",
+  "d2_package": {
+    "source_commit": "71902ce3b9d76a0aa5669914fbe23dd56362d185",
+    "archive": "light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7.zip",
+    "bytes": 10706838,
+    "sha256": "594e17548064aba1656795faaed5c1f02290981081ed3a2c1f83708825e5d155",
+    "files": 355,
+    "clean_verified": true,
+    "server_uploaded": false
+  }
 }

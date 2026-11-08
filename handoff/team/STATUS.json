@@ -117,6 +117,7 @@
     "server_uploaded": false,
     "clean_package_input_files": 341,
     "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
-    "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json"
+    "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json",
+    "d2_package_readiness": "evidence/UNDERGRAD_D2_PACKAGE_20261109.json"
   }
 }

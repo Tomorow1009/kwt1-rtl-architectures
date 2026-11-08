@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-09",
+  "status": "local_package_verified_not_uploaded",
+  "package": {
+    "source_commit": "71902ce3b9d76a0aa5669914fbe23dd56362d185",
+    "archive": "light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7.zip",
+    "bytes": 10706838,
+    "sha256": "594e17548064aba1656795faaed5c1f02290981081ed3a2c1f83708825e5d155",
+    "files": 355
+  },
+  "clean_verification": {
+    "status": "passed",
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d2_clean_unpack_20261109\\light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7",
+    "source_commit": "71902ce3b9d76a0aa5669914fbe23dd56362d185",
+    "manifest_sha256": "7b5200b921f3999f948882175cfa9da52ea12775602a493dd5af6981b493b34a",
+    "input_files": 355,
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": false
+  },
+  "runtime_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
+  "server_uploaded": false,
+  "new_cpu_executed": false,
+  "whole_soc_link_verified": false,
+  "strict_timing_verified": false,
+  "system_power_verified": false
+}
