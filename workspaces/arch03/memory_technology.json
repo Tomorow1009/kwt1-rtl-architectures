@@ -12,7 +12,7 @@
       "leakage_groups": 4
     },
     "RAMSP4096X16": {
-      "sha256": "a75e37ed1d6a8d9ae1193edc1aaa0757ff9359ac382d54821612056984afa807",
+      "sha256": "a75e37ed1d6a8d9ea1193edc1aaa0757ff9359ac382d54821612056984afa807",
       "area": 27517.3168,
       "internal_power_groups": 80,
       "leakage_groups": 4

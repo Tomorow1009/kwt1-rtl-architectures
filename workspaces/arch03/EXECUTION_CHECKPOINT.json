@@ -45,9 +45,9 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Freeze/package/upload monitor declaration order correction; observe active d3_synth01, then ASIC CPU retry after shared lock is released",
-    "Run actual whole-SoC synthesis and review STA/area reports; then post-synthesis functions and full-window system power",
-    "Preserve failed d3_vendor01/tcm, d3_smoke01 and d3_smoke02; never resume old hex100"
+    "Observe d3_smoke04 (e60a3cc monitor package); on pass run full 14-case ASIC baseline",
+    "Commit/package/upload corrected SRAM fingerprint; new asic_synth session only after active ASIC CPU releases shared lock",
+    "Review actual synthesis reports then implement/validate gate and full-window power. Preserve all failures and old stopped hex100"
   ],
   "still_unverified": [
     "ASIC-bound whole-SoC real E203 execution (vendor components and functional-TCM CPU sequences passed)",
@@ -63,7 +63,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal running d3_synth01 asic_synth in cd524e2 timescale bundle. d3_smoke03 compiled but stopped on implicit monitor net declarations before simulation. New monitor order correction local only, 53 tests passed.",
+  "server_readonly_job": "Fourth terminal d3_smoke04 running from e60a3cc monitor package. d3_synth01 stopped before LC/DC because of a transcribed SRAM hash typo; actual file hash matches original screenshot. Fingerprint correction local, ready to freeze/package.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -239,24 +239,28 @@
   ],
   "latest_package_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_FILELIST_PACKAGES_20261109.json",
   "active_transfer": {
-    "packages_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
+    "packages_source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
     "board_staging": "/home/root/undergrad-d3-20261109",
     "filezilla_local": "/home/board/undergrad-d3-20261109",
     "destination": "/IC/light-light126-undergrad-d2-20261109",
-    "state": "timescale cd524e2 uploaded and safely unpacked; waiting for d3_sequence01 shared lock",
+    "state": "e60a3cc monitor package uploaded and server ZIP/entry hashes verified; d3_smoke04 active",
     "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109"
   },
   "server_evidence": "../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json",
   "latest_asic_retry_package": {
     "status": "passed_local_package",
     "package": {
-      "source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
-      "archive": "light-light126-d3-timescale-arch03-20261109_054147-cd524e28c9be.zip",
-      "bytes": 10769419,
-      "sha256": "bb4d23703a64ff818729ba0bab2a67b92fdba915ef9b437bcf47b3e84562d7cd",
-      "files": 383
+      "source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
+      "archive": "light-light126-d3-monitor-arch03-20261109_055251-e60a3cc8e2f6.zip",
+      "bytes": 10768820,
+      "sha256": "78709f27e698c598a2173b0c97667eb0840e5256f8771398ad139992bf3f590b",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     },
-    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_timescale_clean_20261109\\light-light126-d3-timescale-arch03-20261109_054147-cd524e28c9be",
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_monitor_clean_20261109\\light-light126-d3-monitor-arch03-20261109_055251-e60a3cc8e2f6",
     "cases": [
       "extremes",
       "layer_01",
@@ -277,8 +281,6 @@
     "firmware_images_checked": 14,
     "cpu_executed": false,
     "server_uploaded": true,
-    "asic_link_verified": false,
-    "server_zip_sha256_verified": true,
-    "server_entry_hashes_verified": true
+    "asic_link_verified": false
   }
 }

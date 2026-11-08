@@ -48,6 +48,17 @@
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
       "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
+      "archive": "light-light126-d3-monitor-arch03-20261109_055251-e60a3cc8e2f6.zip",
+      "bytes": 10768820,
+      "sha256": "78709f27e698c598a2173b0c97667eb0840e5256f8771398ad139992bf3f590b",
+      "files": 383,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     }
   ],
   "local_screenshot_root": "../takeover_local/d2_20261109",
@@ -170,9 +181,19 @@
       "screenshot": "server_smoke03_warning_details2.png"
     },
     "asic_synth": {
-      "status": "running",
+      "status": "failed_before_lc_dc",
       "session": "d3_synth01",
-      "package_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df"
+      "package_source_commit": "cd524e28c9be0d0ebaac85d308632911005f31df",
+      "error": "4096 SRAM Liberty digest transcription swapped adjacent ea to ae",
+      "screenshot": "server_synth01_progress2.png"
+    },
+    "asic_soc_monitor_fixed": {
+      "status": "running",
+      "session": "d3_smoke04",
+      "package_source_commit": "e60a3cc8e2f6786f531f7d7c30ffc05316dc3ee0",
+      "cases": [
+        "layer_01"
+      ]
     }
   },
   "whole_soc_cpu_verified": false,
@@ -201,5 +222,13 @@
     "unit_tests": 53,
     "log": "local_runs/d3_monitor_order_unit_tests_20261109.log",
     "server_verified": false
+  },
+  "sram_digest_correction": {
+    "actual_sha256": "a75e37ed1d6a8d9ea1193edc1aaa0757ff9359ac382d54821612056984afa807",
+    "old_mistyped_sha256": "a75e37ed1d6a8d9ae1193edc1aaa0757ff9359ac382d54821612056984afa807",
+    "bytes": 230137,
+    "original_metadata_screenshot": "d3_sram_library_fingerprints.png",
+    "fresh_metadata_screenshot": "server_sram_hash_metadata_monitor_unpack.png",
+    "finding": "Fresh SHA256 matches original 03:12 screenshot, not the mistyped local metadata. Only fingerprint text corrected; no library change or ignored check."
   }
 }
