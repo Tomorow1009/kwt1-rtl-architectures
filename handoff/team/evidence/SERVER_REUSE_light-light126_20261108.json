@@ -1,0 +1,23 @@
+{
+  "status": "existing_evidence_integrity_passed",
+  "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
+  "input_count": 123,
+  "manifest_sha256": "a3b755604769fe7de7c9a57c51aba5280acbd3e58eaec19dca24d485bb0267ee",
+  "source_and_vector_sha256": "712231ecaf76b234b0e31549c0a21b6537abe495b457efa68f14a955b7ef06b1",
+  "validated_hex_sha256": "0bcc493c3af31d347ed852dd74fff7b99405ae529061b7bc3b46d764342734be",
+  "data_sha256": "dfcb139071f4f89a392cb1ab614e4e3d59ffa4dbb68ed1a8e59d1cfffdb050b6",
+  "server_config_sha256": "c4bad4fb1afd0313c1bb50c9ad3f1d0e7098a6edda707aadb9253b65a55f8b54",
+  "slack_ns": {
+    "max": 0.000641823,
+    "min": 0.00111431
+  },
+  "outputs": 304128,
+  "physical_signoff": false,
+  "team_lock_exists": false,
+  "note": "Compare digests with target evidence; separately inspect live processes and shared desktop. Generated NPZ containers/preparation paths are checked against their own manifest; cross-machine comparison uses original NPZ hashes, runtime HEX and checked layout shifts.",
+  "target_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-takeover-20261108/bundles/light-light126-lenovo-20261108_131929-bda985eedb4b",
+  "target_commit": "bda985eedb4b8d97ec705afabade485b827711de",
+  "target_manifest_sha256": "e204f8cf3bdeafdcb56261cd985437eec6b43897fa55b2514b69c2ae95eb7054",
+  "target_inputs_verified": 123,
+  "comparison": "passed"
+}

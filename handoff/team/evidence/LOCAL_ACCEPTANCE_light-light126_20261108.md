@@ -16,7 +16,7 @@
 - 文件：`local_runs/light-light126-lenovo-20261108_131929-bda985eedb4b.zip`
 - 大小：4517406 字节；manifest 列出 123 个输入文件。
 - ZIP SHA256：`3efb36ce1816556e475cfb3eb1e7300f01bc38027e5fa4005ca3c8aaf4517c74`。
-- 拟上传至 FileZilla `/IC/light-light126-takeover-20261108/`；尚未上传，不将拟定路径表述为实际运行目录。
+- 已上传至 FileZilla `/IC/light-light126-takeover-20261108/`，传输与落盘核对结果见下文。
 
 ## 服务器现场只读核对与证据复用
 
@@ -31,6 +31,16 @@
 
 据此复用上述 acceptance01 的历史软件、宏单测、VCS、DC synth/hold 和 audit 证据，不重复启动。各实际运行目录见同目录 SERVER_ACCEPTANCE_20261108.md；这是历史结果完整性复核，不标记为本轮重新执行。
 
-## 未完成的传输
+## 独立上传、落盘校验与同步完成
 
-独立包尚未上传；FileZilla 官方客户端已准备，但队伍站点尚未连接，凭据仅由用户在客户端输入。下一步连接后上传上述 ZIP、已提交的 unpack.py/inspect_existing.py 至个人目录，核对传输 SHA256 并安全解包，再核对新副本与已复用证据的输入对应关系。在此之前不宣布整个接手同步完成。SDF、多角、布局布线、功耗、SoC、完整推理及官方精度仍未验证。
+2026-11-08 15:06 再次核对当前账号相关进程和 IC 协作锁，均未发现。FileZilla 客户端恢复启动并由用户完成站点登录后，新建上述独立目录；5 个文件均上传成功，ZIP 为 4517406 字节。最初的 FTP 421 并发连接错误通过串行传输和释放本机浏览连接解决，没有终止队友连接或作业。
+
+Linux 独立目录为 `/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-takeover-20261108`。ZIP 与 unpack.py、inspect_existing.py 的 SHA256 均与本机回执一致。安全解包输出 UNPACK_HASH_PASS，新副本位于该目录的 `bundles/light-light126-lenovo-20261108_131929-bda985eedb4b`；不存在原地覆盖。
+
+15:14–15:16 运行已提交的只读检查器，历史 acceptance01 返回 existing_evidence_integrity_passed。再次重算新副本全部 123 个落盘输入，比较原始数据、源码/向量、运行 HEX、配置的规范摘要，全部与已验收包相同，输出 `SYNC_INPUT_PASS bda985eedb4b8d97ec705afabade485b827711de 123 existing_evidence_integrity_passed`。
+
+服务器个人目录新增 `reuse_receipt_20261108.json`，以独占新建方式写入。其本地归档为 [SERVER_REUSE_light-light126_20261108.json](SERVER_REUSE_light-light126_20261108.json)，SHA256 为 `89b33070dd474e1600f08ae0908a9f03c60e7ffdb5266ffb75461442029da452`。下载回执时 FTP 浏览重连再次被限流，因此本地副本按现场可见字段重建，并以服务器原文件 SHA256 核实逐字节一致；不将其描述为成功下载。
+
+当前运行输入的本地版本、独立服务器副本、历史验证记录已建立对应关系，接手同步完成。后续 Git 提交仅补充本机接手工具和证据，不改变 bda985e 输入包；GitHub 文档更新不视为服务器自动部署。未进行新软件/VCS/DC作业；历史包保持只读，没有服务器临时源码修复需要回写。只有个人目录新增上传、解包和复用记录。
+
+Icarus 本机未安装，SDF、多角、布局布线、功耗、SoC、完整推理及官方精度仍未验证。后续改变执行输入时必须重新提交、打包并在新目录执行对应阶段。

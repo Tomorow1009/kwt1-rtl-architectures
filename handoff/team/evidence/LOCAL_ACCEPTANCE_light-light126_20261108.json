@@ -92,10 +92,16 @@
     "validated_hex_sha256": "0bcc493c3af31d347ed852dd74fff7b99405ae529061b7bc3b46d764342734be",
     "server_config_sha256": "c4bad4fb1afd0313c1bb50c9ad3f1d0e7098a6edda707aadb9253b65a55f8b54",
     "development": false,
-    "uploaded": false
+    "uploaded": true,
+    "ftp_directory": "/IC/light-light126-takeover-20261108",
+    "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-takeover-20261108/bundles/light-light126-lenovo-20261108_131929-bda985eedb4b",
+    "server_manifest_sha256": "e204f8cf3bdeafdcb56261cd985437eec6b43897fa55b2514b69c2ae95eb7054",
+    "transfer": "passed_4517406_bytes_sha256_matched",
+    "unpack": "UNPACK_HASH_PASS_123_inputs",
+    "on_disk_verification": "SYNC_INPUT_PASS_123_inputs"
   },
   "server": {
-    "live_verification": "passed_readonly_integrity_and_target_digest_comparison",
+    "live_verification": "passed_uploaded_input_and_reused_evidence_correspondence",
     "historical_source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7",
     "historical_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
     "historical_session": "acceptance01",
@@ -104,8 +110,8 @@
     "jobs_and_lock": "no matching python/vcs/simv/dc_shell/lc_shell/verdi processes; IC .arch02_team_lock absent at inspection",
     "temporary_changes": "123 manifest-covered inputs unchanged; other server directories not audited",
     "physical_signoff": false,
-    "inspection_time": "2026-11-08T13:47:00+08:00/2026-11-08T13:56:00+08:00",
-    "inspection_method": "VNC terminal read-only commands and Python stdlib; inspector file not uploaded or executed",
+    "inspection_time": "2026-11-08T13:47:00+08:00/2026-11-08T13:56:00+08:00; rechecked 15:06-15:16",
+    "inspection_method": "VNC read-only checks followed by committed inspect_existing.py and direct target comparison; new receipt written exclusively in independent member directory",
     "manifest_inputs_verified": 123,
     "target_digest_matches": [
       "data.canonical_sha256",
@@ -146,11 +152,16 @@
       "min": 0.00111431
     },
     "new_jobs_started": false,
-    "server_files_modified": false
+    "server_files_modified": "new independent upload directory, extracted bundle and reuse receipt only",
+    "historical_files_modified": false,
+    "reuse_receipt": "evidence/SERVER_REUSE_light-light126_20261108.json",
+    "reuse_receipt_sha256": "89b33070dd474e1600f08ae0908a9f03c60e7ffdb5266ffb75461442029da452",
+    "reuse_receipt_acquisition": "reconstructed from observed fields; byte-for-byte SHA256 matches server original; FTP receipt download was rate-limited",
+    "sync_status": "complete_for_validated_runtime_inputs_and_reused_acceptance"
   },
   "limitations": [
     "Icarus not installed",
-    "Independent member bundle not uploaded; FileZilla team site connection pending",
     "No SDF, multi-corner, post-layout, power, SoC or classification accuracy signoff"
-  ]
+  ],
+  "transfer_recovery": "FileZilla initially had no visible window; stopped stalled local instances, prepared portable config and relaunched. FTP 421 concurrent connection failures recovered by serializing transfers and releasing own browse connection. All five uploads completed; subsequent receipt-download reconnection was limited."
 }
