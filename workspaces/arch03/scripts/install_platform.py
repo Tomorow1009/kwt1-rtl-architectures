@@ -5,7 +5,7 @@ External vendor libraries are not copied. Python 3.6 compatible.
 """
 import argparse,hashlib,json,re,shutil
 from pathlib import Path
-EXPECTED='ee8bfec8d1e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e'
+EXPECTED='ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e'
 ROOT=Path(__file__).resolve().parents[3]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def replace_once(text,old,new):
@@ -18,7 +18,9 @@ def install(source,dest):
                  [source/'tb/tb_top.v',source/'vcode_rtl.f'])
     records={p.relative_to(source).as_posix():sha(p) for p in files}
     digest=hashlib.sha256(''.join(k+':'+records[k]+'\n' for k in sorted(records)).encode()).hexdigest()
-    if digest!=EXPECTED or len(records)!=163:raise ValueError('Official platform baseline mismatch '+digest)
+    if digest!=EXPECTED or len(records)!=163:
+        raise ValueError('Official platform baseline mismatch actual=%s expected=%s files=%d expected_files=163'
+                         %(digest,EXPECTED,len(records)))
     dest.mkdir(parents=True)
     for p in files:
         target=dest/p.relative_to(source);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(str(p),str(target))

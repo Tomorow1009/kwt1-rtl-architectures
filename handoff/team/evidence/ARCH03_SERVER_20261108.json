@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-08",
+  "member": "light-light126",
+  "source_commit": "91eb48805dc419229b59c9b78088bfb1a9fcaae3",
+  "archive": "light-light126-lenovo-arch03-20261108_172206-91eb48805dc4.zip",
+  "bytes": 9655993,
+  "archive_sha256": "9db4737b3c4aba459ebd0aecce12ee2c262d8542908c48baff77b3e7431ae2f8",
+  "manifest_sha256": "4f93b4d7d0346d400c3653cff7ed691880b881910212baf324c881d410a8018d",
+  "input_files_verified": 293,
+  "uploaded": true,
+  "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_172206-91eb48805dc4",
+  "session": "acceptance01",
+  "transfer": "Linux FileZilla; release directory browsing connection before processing upload queue",
+  "unpack": "ZIP hash and embedded committed unpack.py hash checked, extracted with exclusive creation; unpack manifest checks passed",
+  "unpack_py_sha256": "4e90f02c3465b48f8d198a89c1be1735f8fb30d7c42f957b32fb7f2b7b88ce4f",
+  "icb": {
+    "status": "passed",
+    "cases": 14,
+    "outputs": 354816,
+    "real_outputs": 304128,
+    "summary_sha256": "a539790985a4202dac19a6023986420bed3acbc9af9cde28a98dc31cf488e872",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_172206-91eb48805dc4/runs/acceptance01/icb",
+    "cpu_executed": false
+  },
+  "soc": {
+    "status": "failed",
+    "reason": "Pinned platform hash has adjacent characters transposed in previous local transcription; rejected before copying platform or VCS compilation",
+    "actual_platform_sha256": "ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e",
+    "platform_files": 163
+  },
+  "dc_accel": {
+    "status": "running",
+    "pid": 58340,
+    "scope": "block_only"
+  },
+  "physical_signoff": false,
+  "official_precision_verified": false,
+  "server_runtime_inputs_modified": false
+}
