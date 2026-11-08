@@ -1,5 +1,14 @@
 // Included inside the official tb_top. Observe only actual E203 bus transactions.
 `define A3MEM u_e203_soc_top.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems
+// Typed aliases defer cross-module binding to elaboration before bit selects.
+wire a3_mon_clk = `A3MEM.clk;
+wire a3_mon_rst_n = `A3MEM.rst_n;
+wire a3_mon_cmd_valid = `A3MEM.a3_mem_cmd_valid;
+wire a3_mon_cmd_ready = `A3MEM.a3_mem_cmd_ready;
+wire a3_mon_cmd_read = `A3MEM.a3_mem_cmd_read;
+wire [31:0] a3_mon_cmd_addr = `A3MEM.a3_mem_cmd_addr;
+wire [31:0] a3_mon_cmd_wdata = `A3MEM.a3_mem_cmd_wdata;
+wire [3:0] a3_mon_cmd_wmask = `A3MEM.a3_mem_cmd_wmask;
 reg [15:0] a3_expected[0:25343],a3_input_expected[0:23487];
 reg a3_seen[0:25343];
 reg [31:0] a3_mail[0:6];
@@ -15,28 +24,28 @@ initial begin
     for(a3_i=0;a3_i<7;a3_i=a3_i+1)a3_mail[a3_i]=0;
     a3_file=$fopen(a3_capture,"w");if(a3_file==0)$fatal(1,"capture open");
 end
-always @(posedge `A3MEM.clk) begin
-    if(`A3MEM.rst_n && `A3MEM.a3_mem_cmd_valid && `A3MEM.a3_mem_cmd_ready && !`A3MEM.a3_mem_cmd_read) begin
-        if(`A3MEM.a3_mem_cmd_addr>=32'ha0000000 && `A3MEM.a3_mem_cmd_addr<32'ha000b780) begin
-            a3_index=(`A3MEM.a3_mem_cmd_addr-32'ha0000000)>>1;
-            if(`A3MEM.a3_mem_cmd_wmask!==(`A3MEM.a3_mem_cmd_addr[1] ? 4'hc : 4'h3))$fatal(1,"load mask");
-            a3_value=`A3MEM.a3_mem_cmd_addr[1] ? `A3MEM.a3_mem_cmd_wdata[31:16] : `A3MEM.a3_mem_cmd_wdata[15:0];
+always @(posedge a3_mon_clk) begin
+    if(a3_mon_rst_n && a3_mon_cmd_valid && a3_mon_cmd_ready && !a3_mon_cmd_read) begin
+        if(a3_mon_cmd_addr>=32'ha0000000 && a3_mon_cmd_addr<32'ha000b780) begin
+            a3_index=(a3_mon_cmd_addr-32'ha0000000)>>1;
+            if(a3_mon_cmd_wmask!==(a3_mon_cmd_addr[1] ? 4'hc : 4'h3))$fatal(1,"load mask");
+            a3_value=a3_mon_cmd_addr[1] ? a3_mon_cmd_wdata[31:16] : a3_mon_cmd_wdata[15:0];
             if(a3_index!=a3_loads || a3_value!==a3_input_expected[a3_index])$fatal(1,"CPU input copy mismatch");
             a3_loads=a3_loads+1;
         end
-        if(`A3MEM.a3_mem_cmd_addr>=32'ha000c000 && `A3MEM.a3_mem_cmd_addr<32'ha0018600) begin
-            a3_index=(`A3MEM.a3_mem_cmd_addr-32'ha000c000)>>1;
-            if(`A3MEM.a3_mem_cmd_wmask!==(`A3MEM.a3_mem_cmd_addr[1] ? 4'hc : 4'h3))$fatal(1,"output mask");
-            a3_value=`A3MEM.a3_mem_cmd_addr[1] ? `A3MEM.a3_mem_cmd_wdata[31:16] : `A3MEM.a3_mem_cmd_wdata[15:0];
+        if(a3_mon_cmd_addr>=32'ha000c000 && a3_mon_cmd_addr<32'ha0018600) begin
+            a3_index=(a3_mon_cmd_addr-32'ha000c000)>>1;
+            if(a3_mon_cmd_wmask!==(a3_mon_cmd_addr[1] ? 4'hc : 4'h3))$fatal(1,"output mask");
+            a3_value=a3_mon_cmd_addr[1] ? a3_mon_cmd_wdata[31:16] : a3_mon_cmd_wdata[15:0];
             if(a3_seen[a3_index] || a3_value!==a3_expected[a3_index])
                 $fatal(1,"CPU writeback mismatch index=%0d got=%h expected=%h",a3_index,a3_value,a3_expected[a3_index]);
             a3_seen[a3_index]=1;a3_outputs=a3_outputs+1;
             $fdisplay(a3_file,"%0d,%0d",a3_index,$signed(a3_value));
         end
-        if(`A3MEM.a3_mem_cmd_addr>=32'ha001f000 && `A3MEM.a3_mem_cmd_addr<32'ha001f01c) begin
-            if(`A3MEM.a3_mem_cmd_wmask!==15)$fatal(1,"mailbox mask");
-            a3_index=(`A3MEM.a3_mem_cmd_addr-32'ha001f000)>>2;
-            a3_mail[a3_index]=`A3MEM.a3_mem_cmd_wdata;
+        if(a3_mon_cmd_addr>=32'ha001f000 && a3_mon_cmd_addr<32'ha001f01c) begin
+            if(a3_mon_cmd_wmask!==15)$fatal(1,"mailbox mask");
+            a3_index=(a3_mon_cmd_addr-32'ha001f000)>>2;
+            a3_mail[a3_index]=a3_mon_cmd_wdata;
             if(a3_index==0 && a3_mail[0]!=0) begin
                 if(a3_mail[0]!==32'h4b575450 || a3_mail[1]!==0)
                     $fatal(1,"firmware failed magic=%h rc/cause=%h epc/count=%h mtval/count=%h",a3_mail[0],a3_mail[1],a3_mail[2],a3_mail[3]);

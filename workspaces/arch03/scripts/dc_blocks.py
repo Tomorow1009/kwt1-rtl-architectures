@@ -25,6 +25,9 @@ def review_design(text):
         ok=ok or (code=='LINT-28' and arithmetic and '_DW' in design and
                   (obj in ('CI','CO','TC','DATA_TC','SH_TC') or re.fullmatch(r'[AB]\[\d+\]',obj)))
         ok=ok or (code in ('LINT-32','LINT-33') and arithmetic and operator)
+        # Shared SRAM selects a 32-bit word with addr[18:2]; byte lanes come
+        # from wmask and load extraction is performed by the E203 LSU.
+        ok=ok or (code=='LINT-28' and design=='arch03_shared_sram' and obj in ('cmd_addr[0]','cmd_addr[1]'))
         if not ok:raise ValueError('Unreviewed DC warning: '+line)
         counts[code]=counts.get(code,0)+1
     return counts
@@ -115,6 +118,11 @@ foreach delay {max min} {
 # Python reads the measured Total cell area from report_area instead.
 puts $out "latches [sizeof_collection [all_registers -level_sensitive]]"
 close $out
+set hf_out [open high_fanout.txt w]
+foreach_in_collection net [all_high_fanout -nets -threshold 1000] {
+  puts $hf_out [get_object_name $net]
+}
+close $hf_out
 puts "ARCH03_DC_REPORTS_READY"
 quit
 '''
@@ -132,11 +140,18 @@ quit
     for path,digest in before.items():
         if hashlib.sha256(Path(path).read_bytes()).hexdigest()!=digest:raise ValueError('DC input changed '+path)
     reviewed=review_design((run/'check_design.rpt').read_text())
-    # Keep timing warnings as a strict gate. High fanout still needs inspection
-    # against the actual clock/reset nets; do not waive it by warning code alone.
-    if re.search(r'(?im)^\s*(Warning:|Error:)',(run/'check_timing.rpt').read_text()):
-        raise ValueError('Review required: check_timing.rpt')
+    # The only reviewed timing warning is this block's ideal clock fanout.
+    # Check actual mapped nets every run: a high-fanout data/reset net still fails.
+    high_fanout=set((run/'high_fanout.txt').read_text().splitlines())
+    timing_review=[]
+    for line in (run/'check_timing.rpt').read_text().splitlines():
+        if not re.match(r'\s*(Warning:|Error:)',line):continue
+        expected="Warning: Design '%s' contains 1 high-fanout nets."%top
+        if line.startswith(expected) and line.endswith('(TIM-134)') and high_fanout=={'clk'}:
+            timing_review.append(dict(code='TIM-134',nets=['clk'],reason='Ideal clock; clock tree implementation remains outside block synthesis'))
+        else:raise ValueError('Unreviewed DC timing warning: '+line)
     return dict(status='passed',top=top,metrics=metrics,clock_ns=6.667,physical_signoff=False,
-                scope='block_only_not_whole_soc',gate_simulation_verified=False,reviewed_arithmetic_warnings=reviewed,
+                scope='block_only_not_whole_soc',gate_simulation_verified=False,reviewed_structural_warnings=reviewed,
+                reviewed_timing_warnings=timing_review,high_fanout_nets=sorted(high_fanout),
                 artifacts={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in run.iterdir() if p.is_file()},
                 library_inputs={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in library_inputs+databases})

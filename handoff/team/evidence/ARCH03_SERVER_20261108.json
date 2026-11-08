@@ -50,7 +50,8 @@
     ],
     "timing_warning_codes": [
       "TIM-134"
-    ]
+    ],
+    "high_fanout_diagnostic": "Read-only DDC inspection found clk only; new acceptance must query the freshly linked netlist and reject other networks."
   },
   "physical_signoff": false,
   "official_precision_verified": false,
@@ -67,6 +68,28 @@
       "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_174936-5048a6450401",
       "soc": "failed: VCS parsed platform RTL before the TB-local FPGA define; ASIC TCM/ROM library modules unresolved",
       "platform_patch_applied": true
+    },
+    {
+      "source_commit": "530db1f89b3dd656cc7e7ccd46226d11a775b07b",
+      "archive": "light-light126-lenovo-arch03-20261108_180302-530db1f89b3d.zip",
+      "sha256": "733a8ced05d19aa3c450cb97c1ba9d7dc234e2dcfe921c22f06765a5cddc4699",
+      "bytes": 9657357,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_180302-530db1f89b3d",
+      "soc": "failed: VCS bit-select analysis treated hierarchical references as scalar; monitor now uses explicit-width aliases",
+      "dc_shared": {
+        "status": "failed_pending_review",
+        "RAMSP4096X16": 64,
+        "RAMSP128X16": 0,
+        "latches": 0,
+        "max_slack_ns": 3.74377,
+        "min_slack_ns": 0.00187597,
+        "total_cell_area_um2": 1763018.98117,
+        "timing_warnings": [],
+        "design_warnings": "Only unused cmd_addr[0:1]; word address uses [18:2], byte selection uses wmask. Exact two-pin review added locally."
+      }
     }
   ]
 }
