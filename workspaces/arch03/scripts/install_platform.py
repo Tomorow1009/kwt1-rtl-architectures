@@ -6,17 +6,52 @@ External vendor libraries are not copied. Python 3.6 compatible.
 import argparse,hashlib,json,re,shutil
 from pathlib import Path
 from timing_contract import TB_HALF_PERIOD_NS
-from technology_binding import patch_generic_cells
+from technology_binding import patch_generic_cells,mask_comments
 EXPECTED='ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e'
 ROOT=Path(__file__).resolve().parents[3]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def replace_once(text,old,new):
     if text.count(old)!=1:raise ValueError('Platform context changed: '+old[:90])
     return text.replace(old,new,1)
+def select_else_interface(text):
+    """Remove the pinned `ifndef FPGA wrapper branch, keeping its alternate interface.
+
+    This is applied only to an ASIC copy. The TCM's selected interface is then
+    rebound to REAL macros; the ROM's selected implementation is constant logic.
+    No global FPGA define or simulation RAM is allowed to implement ASIC TCM.
+    """
+    lines=text.splitlines(keepends=True)
+    masked=mask_comments(text).splitlines(keepends=True)
+    starts=[i for i,line in enumerate(masked) if re.match(r'^\s*`ifndef\s+FPGA\b',line)]
+    if len(starts)!=1:raise ValueError('Expected one pinned ifndef FPGA memory branch')
+    start=starts[0];depth=0;alternative=None;finish=None
+    for i in range(start,len(lines)):
+        match=re.match(r'^\s*`(ifdef|ifndef|elsif|else|endif)\b',masked[i])
+        if not match:continue
+        token=match.group(1)
+        if token in ('ifdef','ifndef'):depth+=1
+        elif token=='elsif' and depth==1:raise ValueError('Unreviewed memory elsif branch')
+        elif token=='else' and depth==1:
+            if alternative is not None:raise ValueError('Duplicate memory else')
+            alternative=i
+        elif token=='endif':
+            depth-=1
+            if depth==0:finish=i;break
+    if alternative is None or finish is None:raise ValueError('Incomplete memory conditional')
+    return ''.join(lines[:start]+lines[alternative+1:finish]+lines[finish+1:])
+
 def patch_tcm(text):
-    """Change only the ASIC generic RAM instance, preserving platform ports."""
+    """Select the full named TCM interface and bind it to the physical adapter."""
+    text=select_else_interface(text)
     text,n=re.subn(r'\bsirv_gnrl_ram\s*#\s*\(', 'arch03_tcm_ram #(', text)
     if n!=1:raise ValueError('Expected exactly one ASIC generic TCM RAM instance')
+    return text
+
+def patch_rom(text):
+    text=select_else_interface(text)
+    masked=mask_comments(text)
+    if len(re.findall(r'\bsirv_mrom\s*#',masked))!=1 or re.search(r'\bROM1KX32\b',masked):
+        raise ValueError('Expected existing constant boot ROM implementation')
     return text
 
 def platform_sources(platform):
@@ -89,6 +124,8 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
             ram=dest/('rtl/e203/core/e203_%s_ram.v'%name)
             ram.write_text(patch_tcm(ram.read_text()))
             modified.append(ram)
+        rom=dest/'rtl/e203/mems/sirv_mrom_top.v'
+        rom.write_text(patch_rom(rom.read_text()));modified.append(rom)
         generic=dest/'rtl/e203/generic/GENERIC_RVT_SMIC.v'
         mapped,binding_counts=patch_generic_cells(generic.read_text())
         generic.write_text(mapped);modified.append(generic)
@@ -107,6 +144,7 @@ def install(source,dest,asic=False,monitor='arch03_monitor.svh'):
     result=dict(original_root=str(source),baseline_sha256=digest,original_files=records,
                 modified_files={p.relative_to(dest).as_posix():sha(p) for p in modified},
                 tcm_mode='asic_macro' if asic else 'legacy_functional',
+                rom_mode='existing_constant_logic' if asic else 'legacy_functional',
                 monitor=monitor,
                 generic_cell_bindings=binding_counts if asic else None,
                 asic_simulation_ready=False,

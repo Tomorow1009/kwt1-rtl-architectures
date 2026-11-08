@@ -19,7 +19,7 @@
     "committed 14-case standard package and clean input/firmware verification",
     "D2: AC820 online; existing fixed-target Linux VNC session restored",
     "D2: new remote terminal tab; no team lock, no active EDA/Python job candidates observed",
-    "D2: official TCM ASIC branch confirmed to instantiate sirv_sim_ram; both 256 KiB TCMs now have a local ASIC macro adapter",
+    "D2: original TCM non-FPGA branch uses legacy SRAM wrappers (corrected after exact directive inspection); both 256 KiB TCMs have a local ASIC macro adapter",
     "D2: full-capacity TCM behavioral and pin_mock regressions passed, 98682 word checks per backend, all addresses, masks, reset retention",
     "D2: ASIC-only platform patch and whole-SoC link entry prepared; 130 large + 8 small SRAM inventory checks; NOT executed in DC",
     "D2: passive begin-marker-response to final-output-write-response observer passed handshake/negative tests",
@@ -39,9 +39,10 @@
     "reason": "Automatic approval review rejected FTP proxy and package staging/upload as insufficiently explicit authorization for private code/data transmission. Do not bypass through alternate or indirect transfer. Continue unaffected work."
   },
   "next_independent_work": [
-    "Finish follow-on evidence and create/verify separate standard and sequence packages",
-    "Read actual clock/reset and ASIC boot-loading interfaces to prepare whole-SoC synthesis and CPU ASIC flow",
-    "After explicit upload authorization, use established Linux FileZilla to transfer verified packages and run new locked stdcell/tcm/sequence/ASIC-link stages"
+    "Commit and record exact ifndef-FPGA ASIC branch correction; regenerate corrected standard/sequence packages and verify them",
+    "Continue read-only clock/reset and ASIC boot-loading interface review",
+    "Prepare whole-SoC synthesis/constraints and ASIC CPU flow from actual interfaces",
+    "Wait for explicit upload authorization before transferring any private package; then run new locked vendor/CPU/ASIC stages"
   ],
   "still_unverified": [
     "new server VCS, real E203 and vendor macro execution",
@@ -88,7 +89,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Implementation committed as cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f; follow-on evidence/docs/checkpoint currently being recorded, then prepare separate single-task and sequence packages.",
+  "uncommitted_follow_on": "Implementation cc5e193 and evidence 49f0556 committed. Exact ifndef FPGA branch correction passed 41 tests and is being frozen separately; old packages are superseded for ASIC link.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -109,5 +110,35 @@
     "sequence_observer_20261109_023209_587771: packed path formatting added leading spaces to capture name; hard failed and fixed via direct packed concatenation"
   ],
   "follow_on_source_commit": "cc5e193da0c7657b2b0f4e0599bdd7bf2aa40e4f",
-  "follow_on_evidence": "../../handoff/team/evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json"
+  "follow_on_evidence": "../../handoff/team/evidence/UNDERGRAD_D2_FOLLOW_ON_20261109.json",
+  "asic_branch_correction": {
+    "discovered": "2026-11-09 02:45 Asia/Shanghai",
+    "source_screenshot": "../takeover_local/d2_20261109/d3_memory_directives_exact.png",
+    "fact": "ITCM, DTCM and ROM use ifndef FPGA (not ifdef). Original non-FPGA paths instantiate SRAM/ROM wrappers; sirv_gnrl_ram and constant sirv_mrom are in else paths. Earlier screenshot reading was wrong.",
+    "impact": "Previous ASIC installer only renamed the else-path RAM, leaving original non-FPGA wrappers active. No ASIC run was performed; old D2 packages must NOT be used for asic_link. Their local numeric/TCM component/observer evidence remains valid for its stated scope.",
+    "fix": "Explicitly select/remove the pinned ifndef FPGA conditional, preserve nested ECC guards, bind selected TCM interface to arch03_tcm_ram, and select existing constant sirv_mrom. All 41 Python tests passed. Actual official-platform installation and DC remain pending.",
+    "unit_log": "local_runs/d3_asic_branch_unit_tests_20261109.log",
+    "unit_log_sha256": "458c2b341627064a0aa87dea9fb56daa3b6b97da14df0d3c989d2b6dad29ea15"
+  },
+  "superseded_for_asic_link": [
+    "light-light126-d2-prep-arch03-20261109_020924-71902ce3b9d7.zip",
+    "light-light126-d2-single-arch03-20261109_024059-49f0556704e1.zip",
+    "light-light126-d2-sequence-arch03-20261109_024059-49f0556704e1.zip"
+  ],
+  "follow_on_packages_before_asic_correction": [
+    {
+      "source_commit": "49f0556704e169e8a2f9e8e0d5501b97dc095531",
+      "archive": "light-light126-d2-single-arch03-20261109_024059-49f0556704e1.zip",
+      "bytes": 10732378,
+      "sha256": "8c95400d120e2729cbcc92ce3a51e5492d52d778b09e40e30042375a4f762ce3",
+      "files": 367
+    },
+    {
+      "source_commit": "49f0556704e169e8a2f9e8e0d5501b97dc095531",
+      "archive": "light-light126-d2-sequence-arch03-20261109_024059-49f0556704e1.zip",
+      "bytes": 14350386,
+      "sha256": "377a17ee08c9283cb249259990299b808c3c69b511012241675db46296ec4188",
+      "files": 422
+    }
+  ]
 }
