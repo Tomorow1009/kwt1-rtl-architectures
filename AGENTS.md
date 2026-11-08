@@ -2,6 +2,7 @@
 
 - 开始前阅读 `handoff/team/README.md`、`handoff/team/STATUS.json` 和 `handoff/team/SYNC.md`。
 - 日常架构二开发位于 `workspaces/arch02`；`architectures/*/v*` 是历史快照，不直接修改。
+- 架构三开发位于 `workspaces/arch03`，先读其 README 与独立验收状态；本地 ICB 回归不代表 E203 或服务器验收通过，不替换架构二基线。
 - 团队私人仓库为 Tomorow1009/kwt1-rtl-architectures；ARM-software/keyword-transformer 只用于模型来源。
 - 同步前检查未提交改动，不覆盖队友工作；使用个人任务分支。服务器使用独立运行包，不覆盖历史运行。
 - 提示词不授予工具或账号权限。使用当前电脑的 computer-use 技能，不复用旧窗口 ID、坐标或登录状态。

@@ -13,7 +13,7 @@
 | [架构一：全量语音批量验证](architectures/arch01_serial_mac/v1.2.0/README.md) | v1.2.0 / 2026-11-06 | 软件全量与双仿真器分阶段通过 | 1269948 软件任务；每套 RTL 6528 独立任务 |
 | [架构一：完整矩阵验证](architectures/arch01_serial_mac/v1.3.0/README.md) | v1.3.0 / 2026-11-06 | 软件及双仿真器全矩阵通过 | 单样本 12 层，各 304128 个独立输出 |
 | [架构二：8 路 MAC 与 SRAM](architectures/arch02_matrix/v2.0.0/README.md) | v2.0.0 / 2026-11-08 | VCS 功能与 DC 单角检查通过 | 304128 输出、18 KiB SRAM、服务器交接 |
-| SoC 集成 | 待实现 | 规划 | E203、总线、驱动、内存映射 |
+| [架构三：E203 System Bus 集成](workspaces/arch03/README.md) | 开发中 | 本地 ICB/矩阵回归通过；服务器上传受 FTP 421 阻塞 | ICB、512 KiB 共享 SRAM、C 驱动、平台补丁和验证入口；SoC/DC 尚未验收 |
 
 架构二已完成单样本 12 层全部 304128 输出的厂商 SRAM 模型功能验证，以及指定 SS 角、6.667 ns 下 DC 综合检查。多角物理实现、功耗、端到端推理和 SoC 尚未验收。
 

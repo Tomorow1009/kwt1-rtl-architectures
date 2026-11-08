@@ -24,6 +24,23 @@
     "bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/team_runs/member1/member1-20261108_111917-115c54dc5a05",
     "source_commit": "115c54dc5a05a5e4f242b51b9c8b1824a41b1ce7"
   },
+  "arch03": {
+    "phase": "local_icb_verified_server_upload_blocked",
+    "workspace": "workspaces/arch03",
+    "branch": "codex/light-light126/arch03-e203",
+    "evidence": "evidence/ARCH03_LOCAL_20261108.md",
+    "local_real_outputs": 304128,
+    "local_pin_mock_cases": 14,
+    "firmware_built": true,
+    "uploaded": false,
+    "cpu_execution_verified": false,
+    "server_vcs_verified": false,
+    "dc_verified": false,
+    "whole_soc_dc_and_gate_flow_complete": false,
+    "official_precision_verified": false,
+    "blocker": "Linux FileZilla receives FTP 421 too many connected users before login",
+    "next": "Upload committed bundle when FTP permits; validate pinned platform copy and E203 driver; iterate VCS/DC; finish whole-SoC and gate flow before accepting PR."
+  },
   "member_acceptances": {
     "light-light126-lenovo": {
       "date": "2026-11-08",
