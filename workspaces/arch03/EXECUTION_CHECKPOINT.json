@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "UART original/patched actual comparison passed after complete baseline activity audit. Baseline power reports exist but strict startup PT-063 error rejects acceptance. Repaired synthesis d3_synth04 running.",
+  "last_completed_stage": "d3_synth04 report collection completed: zero latches, hold positive, three LF output budget setup violations remain. Toolenv package uploaded and verified. New ASIC 14-case d3_full02 running.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -42,16 +42,16 @@
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d3-repair-arch03-20261109_075555-371316af486e.zip",
-    "reason": "Explicit user upload authorization received and used for 12 verified packages. No upload approval currently pending.",
+    "current_package": "../../local_runs/light-light126-d3-toolenv-arch03-20261109_091306-55698a6f2584.zip",
+    "reason": "Explicit authorization used for 13 verified FileZilla packages. No pending upload approval.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_synth04 actual constraints, latch count and setup/hold; do not assume new constraints match mapped endpoint names",
-    "Prepare/test/freeze/upload power LC environment and copied-DB integrity fix; actual server rerun required",
-    "Review preserved baseline power annotation/unknowns/SRAM contributions and model assumptions without accepting failed run",
-    "Complete repaired-config ASIC 14 cases, mapped 14 cases, full-task activity and error-free power",
-    "Confirm final scoring ownership and actual submission requirements; optional SAIF research is lower priority"
+    "Finish repaired ASIC full02; preserve exact case receipts and complete-task boot mode evidence",
+    "Freeze/package LF output budget and gate installer provenance checks; after full02 finishes, run independent synth05",
+    "Review fresh strict setup/hold, coverage and interface assumptions, then complete mapped 14-case functionality plus same-task activity and power",
+    "Actual-server test LC environment fix; retain baseline failed power reports and review unknown activity/model limits",
+    "Complete scoring ownership, submission details and final reproducible evidence"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -66,7 +66,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal (reports bundle cwd) runs repair-package d3_synth04 driver 305094. Third diagnostic terminal idle SDC bundle. Earlier d3_power01 and d3_uart01 have exited normally and released own locks.",
+  "server_readonly_job": "Fourth terminal, reports bundle cwd, runs repair-package d3_full02 driver 23104. Third diagnostic terminal idle SDC bundle. Synth04 completed and released lock before full02.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -97,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "soc_power.py and its focused tests modified locally: LC environment and active copied-DB provenance. Four tests passed; not yet packaged/server verified. Actual timing repairs still source 371316a.",
+  "uncommitted_follow_on": "LF output timing budgets and gate platform-preparation provenance checks locally tested; hardware/firmware unchanged; new package pending.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -826,13 +826,53 @@
     "screenshot": "server_uart01_receipt.png"
   },
   "repaired_synthesis": {
-    "status": "running",
+    "status": "reports_ready_review_required",
     "session": "d3_synth04",
     "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
     "driver_pid": 305094,
     "started": "2026-11-09T09:04:52.820785",
+    "finished": "2026-11-09T09:18:43.254697",
+    "summary_sha256": "504842eb0a8822d9f2915eee5f58bc37fddb2e96411fd2e6ffed8bc8b50eff4",
+    "metrics": {
+      "period_ns": "6.666666000000",
+      "lf_period_ns": "66.000000000000",
+      "max": "-0.740983",
+      "min": "0.00623399",
+      "latches": 0,
+      "area": "3817053.008485",
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 130,
+      "max_path_groups": 2,
+      "min_path_groups": 2
+    },
+    "reviewed_timer_cdc_pins": 4,
+    "unconstrained_endpoints_reported": false,
+    "high_fanout_warning_nets": 3,
     "timing_verified": false,
-    "screenshot": "server_synth04_state_lc_metadata.png"
+    "system_power_verified": false,
+    "remaining_setup_violations": [
+      {
+        "endpoint": "io_pads_aon_pmu_padrst_0_oval",
+        "slack_ns": "-0.74098206"
+      },
+      {
+        "endpoint": "io_pads_aon_pmu_vddpaden_oval",
+        "slack_ns": "-0.74098206"
+      },
+      {
+        "endpoint": "lfxoscen",
+        "slack_ns": "-0.62426758"
+      }
+    ],
+    "violation_basis": "All three launched by lf_clk but output budget incorrectly referenced hf_clk. Correct source-domain interface budget still requires new synthesis.",
+    "least_reported_passing_setup_ns": "0.00001001",
+    "team_lock_released": true,
+    "screenshots": [
+      "server_synth04_compact.png",
+      "server_synth04_violations.png",
+      "server_synth04_lf_domains.png",
+      "server_lf_output_sources.png"
+    ]
   },
   "power_fix_preparation": {
     "status": "local_tests_passed_NOT_server_verified",
@@ -849,5 +889,72 @@
       "workspaces/arch03/scripts/soc_power.py",
       "workspaces/arch03/scripts/test_soc_power.py"
     ]
+  },
+  "latest_toolenv_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "55698a6f2584764f91b694b80266a6a75a8e645c",
+      "archive": "light-light126-d3-toolenv-arch03-20261109_091306-55698a6f2584.zip",
+      "bytes": 10821773,
+      "sha256": "afcd44e4731b0b54d07ffc00917458ace2fb04719d2c7d72607f236a583e7b18",
+      "files": 399,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_toolenv_clean_20261109\\light-light126-d3-toolenv-arch03-20261109_091306-55698a6f2584",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "filezilla_toolenv_done.png",
+    "unpack_screenshot": "server_toolenv_unpack.png"
+  },
+  "repaired_asic_suite": {
+    "status": "running",
+    "session": "d3_full02",
+    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "driver_pid": 23104,
+    "started": "2026-11-09T09:24:35.949783",
+    "scope": "new UART patch and complete-task boot mode guard, actual ASIC-bound E203, 14 cases",
+    "screenshots": [
+      "server_full02_start.png",
+      "server_synth04_lf_domains.png"
+    ]
+  },
+  "lf_output_preparation": {
+    "status": "local_tests_passed_NOT_server_verified",
+    "changes": [
+      "Three exact AON LF outputs retain 1 ns max/0 ns min output timing budgets, referenced to LF instead of HF",
+      "Gate/power provenance additionally binds platform installer and technology preparation, with both manifests and on-disk hashes"
+    ],
+    "hardware_changed": false,
+    "rtl_changed": false,
+    "firmware_changed": false,
+    "unit_tests": 71,
+    "standard_suite_passed": 69,
+    "standard_suite_skipped": 2,
+    "native_tests": "Separate explicit scanner parity run recorded in d3_lf_output_native_tests_20261109.log",
+    "log": "local_runs/d3_lf_output_provenance_tests_20261109.log",
+    "review": "1 ns output budget is an explicit source-domain interface assumption, not a supplied external receiver specification. No new false paths or multicycle exceptions.",
+    "python36_syntax": true
   }
 }

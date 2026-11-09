@@ -120,6 +120,16 @@ def verify_synthesis(synthesis,expected_sha,cfg):
     old={p:h for p,h in source_manifest['files'].items() if p.startswith(relevant)}
     new={p:h for p,h in current_manifest['files'].items() if p.startswith(relevant)}
     if not old or old!=new:raise ValueError('Gate runtime RTL/firmware source differs from synthesis bundle')
+    # Platform patches affect hardware even though the installer is not a
+    # Verilog compilation input. A matching team RTL tree alone is insufficient.
+    preparation=['workspaces/arch03/scripts/'+name for name in
+                 ('install_platform.py','technology_binding.py','memory_technology.py','timing_contract.py')]
+    preparation+=['workspaces/arch03/'+name for name in ('technology_bindings.json','memory_technology.json')]
+    for relative in preparation+list(old):
+        expected=source_manifest['files'].get(relative)
+        if (not expected or current_manifest['files'].get(relative)!=expected or
+                sha(source_bundle/relative)!=expected or sha(ROOT/relative)!=expected):
+            raise ValueError('Gate hardware preparation differs from synthesis bundle: '+relative)
     area=area_inventory((synthesis/'leaf_area.tsv').read_text(),summary['metrics']['area'])
     return summary,area
 

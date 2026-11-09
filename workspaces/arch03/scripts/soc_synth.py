@@ -15,6 +15,27 @@ from dc_blocks import measured_metrics
 from timing_contract import CLOCK_PERIOD_NS,validate_period
 
 
+def output_constraints():
+    return r'''
+# Pinned-platform AON control outputs are launched by lf_clk, not hf_clk.
+# This is a 1 ns interface budget in their source domain, not an external
+# receiver specification. Keep every output timed; do not false-path them.
+set lf_outputs [get_ports -quiet __arch03_no_such_port__]
+foreach name {io_pads_aon_pmu_padrst_0_oval io_pads_aon_pmu_vddpaden_oval lfxoscen} {
+    set port [get_ports $name]
+    if {[sizeof_collection $port] != 1} {error "Missing/ambiguous LF control output $name"}
+    set lf_outputs [add_to_collection $lf_outputs $port]
+}
+if {[sizeof_collection $lf_outputs] != 3} {error "Expected three LF control outputs"}
+set hf_outputs [remove_from_collection [all_outputs] $lf_outputs]
+set_output_delay -max 1.0 -clock hf_clk $hf_outputs
+set_output_delay -min 0.0 -clock hf_clk $hf_outputs
+set_output_delay -max 1.0 -clock lf_clk $lf_outputs
+set_output_delay -min 0.0 -clock lf_clk $lf_outputs
+puts "ARCH03_LF_OUTPUT_BUDGET [get_object_name $lf_outputs]"
+'''
+
+
 def constraints():
     return r'''
 # Measured-task mode of the pinned platform; not all software/JTAG modes.
@@ -54,14 +75,13 @@ set ins [remove_from_collection [all_inputs] [get_ports {hfextclk lfextclk}]]
 set_input_delay -max 1.0 -clock hf_clk $ins
 set_input_delay -min 0.0 -clock hf_clk $ins
 set_input_transition 0.1 $ins
-set_output_delay -max 1.0 -clock hf_clk [all_outputs]
-set_output_delay -min 0.0 -clock hf_clk [all_outputs]
+@OUTPUT_CONSTRAINTS@
 set_load 0.01 [all_outputs]
 # No blanket clock groups or forced TCM/core clock-enable values.
 # Four first-stage timer CDC pins are constrained after mapping below.
 # Reset assertion is outside this task mode;
 # reset release/synchronizers must be reviewed separately.
-'''.replace('@PERIOD@',CLOCK_PERIOD_NS)
+'''.replace('@PERIOD@',CLOCK_PERIOD_NS).replace('@OUTPUT_CONSTRAINTS@',output_constraints())
 
 
 def mapped_exceptions():

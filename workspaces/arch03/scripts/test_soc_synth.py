@@ -2,7 +2,7 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
-from soc_synth import area_inventory,constraints,script,require_tool_marker,recover_reports,sha,mapped_exceptions
+from soc_synth import area_inventory,constraints,script,require_tool_marker,recover_reports,sha,mapped_exceptions,output_constraints
 
 
 def inventory():
@@ -19,6 +19,33 @@ def inventory():
 
 
 class SocSynthTests(unittest.TestCase):
+    def test_output_budgets_cover_every_port_once_in_its_reviewed_domain(self):
+        import tkinter
+        interp=tkinter.Tcl()
+        interp.eval(r'''
+proc get_ports {args} {set name [lindex $args end]; if {[lsearch -exact $::ports $name] < 0} {return {}}; return $name}
+proc all_outputs {} {return $::ports}
+proc sizeof_collection {ports} {llength $ports}
+proc add_to_collection {ports port} {concat $ports $port}
+proc remove_from_collection {ports removed} {set result {}; foreach p $ports {if {[lsearch -exact $removed $p] < 0} {lappend result $p}}; return $result}
+proc get_object_name {ports} {return $ports}
+proc set_output_delay {args} {lappend ::delays $args}
+proc puts {args} {}
+''')
+        lf=('io_pads_aon_pmu_padrst_0_oval','io_pads_aon_pmu_vddpaden_oval','lfxoscen')
+        hf=('gpio_output','uart_output','hfclk_output')
+        interp.setvar('ports',lf+hf);interp.setvar('delays','');interp.eval(output_constraints())
+        rows=[interp.splitlist(row) for row in interp.splitlist(interp.getvar('delays'))]
+        for kind,value in (('-max','1.0'),('-min','0.0')):
+            selected=[r for r in rows if r[0]==kind]
+            self.assertEqual(len(selected),2)
+            domains={r[3]:set(interp.splitlist(r[4])) for r in selected}
+            self.assertEqual(domains,{'hf_clk':set(hf),'lf_clk':set(lf)})
+            self.assertTrue(all(r[1]==value for r in selected))
+        interp.setvar('ports',lf[1:]+hf)
+        with self.assertRaisesRegex(tkinter.TclError,'Missing/ambiguous LF control output'):
+            interp.eval(output_constraints())
+
     def test_cdc_exceptions_only_reach_four_first_stage_timer_pins(self):
         import tkinter
         interp=tkinter.Tcl()

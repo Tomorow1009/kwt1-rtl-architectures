@@ -21,7 +21,14 @@ class GateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);bundle=root/'old';run=bundle/'runs/session/asic_synth';run.mkdir(parents=True)
             current=root/'current';current.mkdir()
-            manifest={'files':{'workspaces/arch03/rtl/example.sv':'abc'}}
+            names=['workspaces/arch03/rtl/example.sv']
+            names+=['workspaces/arch03/scripts/'+n for n in
+                    ('install_platform.py','technology_binding.py','memory_technology.py','timing_contract.py')]
+            names+=['workspaces/arch03/'+n for n in ('technology_bindings.json','memory_technology.json')]
+            for p in (bundle,current):
+                for name in names:
+                    path=p/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text('original')
+            manifest={'files':{name:sha(bundle/name) for name in names}}
             for p in (bundle,current):(p/'manifest.json').write_text(json.dumps(manifest))
             for name in ('mapped.v','mapped.ddc','mapped.sdc','area_inventory.json'):(run/name).write_text('original')
             (run/'leaf_area.tsv').write_text('\n'.join(inventory()))
@@ -39,6 +46,21 @@ class GateTests(unittest.TestCase):
                 (run/'mapped.v').write_text('changed')
                 with self.assertRaises(ValueError):verify_synthesis(run,digest,{'server_root':str(root)})
                 (run/'mapped.v').write_text('original')
+                for name in names:
+                    path=current/name;path.write_text('changed')
+                    with self.assertRaisesRegex(ValueError,'hardware preparation differs'):
+                        verify_synthesis(run,digest,{'server_root':str(root)})
+                    path.write_text('original')
+                for name in names[1:]:
+                    changed=copy.deepcopy(manifest);changed['files'][name]='changed'
+                    (current/'manifest.json').write_text(json.dumps(changed))
+                    with self.assertRaisesRegex(ValueError,'hardware preparation differs'):
+                        verify_synthesis(run,digest,{'server_root':str(root)})
+                    (current/'manifest.json').write_text(json.dumps(manifest))
+                path=bundle/names[1];path.write_text('changed')
+                with self.assertRaisesRegex(ValueError,'hardware preparation differs'):
+                    verify_synthesis(run,digest,{'server_root':str(root)})
+                path.write_text('original')
                 manifest['files']['workspaces/arch03/rtl/example.sv']='changed'
                 (current/'manifest.json').write_text(json.dumps(manifest))
                 with self.assertRaises(ValueError):verify_synthesis(run,digest,{'server_root':str(root)})
