@@ -2,6 +2,8 @@
 
 ## DMA16当前综合的独立复查（2026-11-10）
 
+05:52补充：重新核对当前`check_design_mapped.rpt`与综合摘要中的SHA，实际15159行；仅统计Warning行得到LINT-1=4、LINT-2=178、LINT-8=178、LINT-28=4674、LINT-32=4549、LINT-33=502。四个无负载cell来自debug的ndreset/fullreset、AON POR和PLIC flop。178个无负载输入主要出现在综合算术子模块，实际例子有dot64的A[39]/B[39]及DMA地址加法器A[0]；未连接端口涉及238个design，含原平台接口和算术单元未用位。已取得完整报告及模块计数，但查看代表对象不是全部对象审定，不能仅凭告警分类或功能通过自动升级strict_timing_verified。当前只读统计不运行DC、不修改原网表。原始截图`takeover_local/d2_20261109/dma16_lint_inventory.png`、`dma16_lint_examples.png`、`lint_module_inventory.png`留本机。
+
 04:57实际诊断完成：8c包`dma16_timing_audit01`于04:32:14.234559通过，SHA=`2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa`。原DDC查询的3条网络为`u_e203_subsys_top/core_csr_clk`、`u_e203_subsys_top/hfclk`、`u_e203_subsys_top/u_sirv_aon_top/crossing_clock`。同次冻结平台源码分别追到`clk_core_exu`、HF选择器、`aon_io_lfclk`，均为时钟网络，不是漏计的数据高扇出。PT189个no_clock对象也已精确归入被固定TCK关闭的JTAG DTM和复位同步器；actual mapped.sdc的TCK/TMS/TDI均case=0。禁用弧C46683/p12863/c1992/d202，共61740条，没有l/L/u/U/f标记，原综合无TIM-209/约束违规。仍保持稳定任务模式、理想时钟和布局前库/负载假设；setup裕量非常小，不能宣称物理时钟树、寄生或启动/JTAG工作模式签核。
 
 04:27：新增`dma16_timing_audit`只读阶段，使用原mapped.ddc及同库查询实际高扇出网络，完整保留原文件SHA并复核生产身份；相关63tests通过，尚未上传/执行。不能把查询入口已完成当成高扇出已审核。实际首层PT已无工具错误；其189个no_clock对象为JTAG DTM 186和JTAG复位同步3，禁用弧61740行仍在核查。后续须记录完整原因与实际SDC约束，不能移用历史结论。
