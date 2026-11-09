@@ -902,7 +902,7 @@
     "driver_pid": 34122,
     "started_launcher": "2026-11-10T00:50:35.105734",
     "started": "2026-11-10T00:50:35.684215",
-    "last_observed": "2026-11-10T02:44:21.900607",
+    "last_observed": "2026-11-10T02:54:15.790502",
     "child_pid_last": 124528,
     "child_log_last": "layer_09_activity_scan.log",
     "expected_cases": 14,
@@ -915,7 +915,7 @@
     "first_case_header_audit_passed": true,
     "first_vcd_bytes": 8745588450,
     "child_log_bytes_last": null,
-    "child_pid_source": "Current shared owner; complete native activity scan active",
+    "child_pid_source": "Current shared owner; layer_09 native full-file audit still active",
     "first_case_activity_passed": true,
     "first_case_source_bits": 106,
     "first_case_active_value_records": 1712153505,
@@ -1096,7 +1096,7 @@
     "cpu_executed": false,
     "gate_executed": false,
     "power_executed": false,
-    "server_uploaded": false,
+    "server_uploaded": true,
     "production_rtl_firmware_changed": false,
     "handoff": "workspaces/arch03/MMIO8_GATE_POWER_HANDOFF.md",
     "fixture_receipts": [
@@ -1109,5 +1109,26 @@
         "sha256": "1cfdf7710087d7db60d7c477e4a0aeddad449711135c4ac7b0e7e1d68a3b9d46"
       }
     ]
+  },
+  "mmio_gate_package": {
+    "source_commit": "4310d9b7cb3484352b6293ea58ff967cbda3ec26",
+    "archive": "light-light126-mmio-gate-dma16-20261110_024809-4310d9b7cb34.zip",
+    "bytes": 16522096,
+    "files": 648,
+    "sha256": "88d25cdcfdddc3a60fc5228305151a490bd6f6e741bcc7e2ab7cd0ce3d6d449c",
+    "clean_audit": "local_runs/dma16_mmio_gate_clean_audit_20261110_0250/receipt.json",
+    "clean_audit_sha256": "92570a71dfd549c1d06c1c757e6ef1719e976ef112799533aa68af9f7c2d16d0",
+    "clean_tests": 112,
+    "firmware_variants": 5,
+    "server_uploaded": true,
+    "server_zip_sha_verified": true,
+    "server_unpacked_observed": "2026-11-10T02:53:37.823430",
+    "server_inputs_verified": 648,
+    "server_inputs_observed": "2026-11-10T02:54:15.790502",
+    "ftp_success_seconds": 33,
+    "ftp_disconnected": true,
+    "hardware_changed": false,
+    "formal_irq_firmware_changed": false,
+    "cloud_push_pending": true
   }
 }
