@@ -1,0 +1,155 @@
+{
+  "date": "2026-11-09",
+  "phase": "local_DMA16_complete_initial_ASIC_integration_package_preparation",
+  "h0": "2026-11-09T17:16:08+08:00",
+  "server_last_observed": "2026-11-09T17:24:18.141307",
+  "synth07": {
+    "state": "passed",
+    "meaning": "reports_ready_review_required",
+    "finished": "2026-11-09T11:33:34.089843",
+    "summary_sha256": "3a167b8a0c3f77d5837a91c9aa43264f4c4e2fbec44313e075f84a4ed92e3ed6",
+    "period_ns": "6.666666000000",
+    "lf_period_ns": "66.000000000000",
+    "setup_slack_ns": "3.76701e-05",
+    "hold_slack_ns": "0.00131178",
+    "area_um2": "3813934.743782",
+    "big_macros": 130,
+    "small_macros": 8,
+    "latches": 0,
+    "timing_review_complete": false,
+    "gate_verified": false,
+    "power_verified": false,
+    "lock_exists_at_observation": false,
+    "eda_processes_at_observation": []
+  },
+  "fixed_platform": {
+    "root": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master",
+    "o4_base": "0x80000000",
+    "o4_region_lsb": 31,
+    "source_base": "0xb0000000",
+    "source_bytes": 46976,
+    "original_soc_sysmem": "zero-latency loopback response, zero rdata; address/read/write signals not connected",
+    "implementation": "Expose the existing sysmem ICB interface at the simulation/gate boundary; retain original bus/shared path, constrain all restored ports. No private SRAM port.",
+    "plic_base": "0x0c000000",
+    "plic_source_still_under_review": false,
+    "plic_source": 16,
+    "plic_shared_with": "original GPIOB retained with OR",
+    "mtime": "0x0200bff8",
+    "mtimecmp": "0x02004000",
+    "irq_mapping": "workspaces/arch03/irq_mapping.json",
+    "mems_clock": "hfclk"
+  },
+  "local": {
+    "layout_14_cases": true,
+    "layout_outputs_compared": 354816,
+    "layout_unit_tests": 14,
+    "core_pinned14_tasks": 42,
+    "core_pinned14_outputs": 1064448,
+    "core_sha256": "6bb63bf42437617a5b73b71c22c0874528868f5ef9b4f01be5d9687dde433322",
+    "core_unstalled_cycles": {
+      "prefetch_off": 156560,
+      "prefetch_on": 140480
+    },
+    "core_scope": "local pin_mock/behavioral; not SoC, STA or final throughput",
+    "dma_protocol_tests": 15,
+    "dma_protocol_scope": "actual RTL core stub protocol errors; normal real datapath separately verified",
+    "batch_unit_tests": 19,
+    "batch_fixture_scope": "reference-copy runner fixture only; ASIC not executed",
+    "fabric_scope": "386 transactions passed, including 128 real contests and response/cmd backpressure",
+    "dma_real_datapath_tasks": 28,
+    "dma_real_datapath_outputs": 709632,
+    "dma_real_datapath_cycles": {
+      "prefetch_off": 347397,
+      "prefetch_on": 291159
+    },
+    "dma_real_datapath_scope": "local pin_mock with injected stalls, no E203",
+    "source_model": "edge N accept, earliest response ACK N+1; one outstanding",
+    "monitor_fixture_tasks": 6,
+    "monitor_fixture_outputs": 152064,
+    "monitor_fixture_cycles": {
+      "prefetch_off": 274010,
+      "prefetch_on": 225770
+    },
+    "monitor_fixture_scope": "production source/window/monitor and real DMA/core/fabric, procedural MMIO, no E203",
+    "firmware_polling_and_IRQ_compiled": true,
+    "firmware_only_inputs_zero": true,
+    "ASIC_CPU_executed": false,
+    "EDA_offline_tests": 23,
+    "integration_contract_tests": 6,
+    "activity_boundary_pin_mock": {
+      "status": "passed_boundary_only",
+      "cycles": 225770,
+      "period_ns": "6.666666",
+      "report": "local_runs/dma16_monitor_fixture_20261109_184337_045342/activity_boundary_audit.json",
+      "cpu_executed": false,
+      "ASIC_activity_audit_passed": false,
+      "limitations": [
+        "XSim emitted dcv instead of dynamic filename",
+        "Strict ASIC VCD parser rejects XSim zero-width parameter declarations; unchanged"
+      ]
+    },
+    "firmware_irq_manifest": "local_runs/dma16_firmware_irq_20261109_mapping_v1/manifest.json",
+    "firmware_poll_manifest": "local_runs/dma16_firmware_poll_20261109_startready_v2/manifest.json"
+  },
+  "still_unverified": [
+    "DMA16 real E203 integration",
+    "DMA16 vendor macros and gate",
+    "new loader full-window baseline",
+    "IRQ/WFI",
+    "strict DMA16 STA/area",
+    "system power",
+    "final1200"
+  ],
+  "preserve": [
+    "Original synth07 not restarted",
+    "Old37/1200 not resumed",
+    "Failures and stale-snapshot runs preserved",
+    "No DMA16 package uploaded yet"
+  ],
+  "connection": {
+    "relay_exec_session": 22118,
+    "board_vnc_window": 18874436,
+    "recovery": "Viewer exited once, recovered with fresh window; never reuse old 18874435",
+    "helper_requires_escalation": "Existing board key read blocked by sandbox; reviewed escalation succeeded, no credentials printed"
+  },
+  "updated_local": "2026-11-09T18:49:00+08:00",
+  "receipts": {
+    "protocol15": {
+      "path": "local_runs/dma16_protocol_20261109_182449_665683/summary.json",
+      "sha256": "3f06b1d523dfc9c37057be5b492f7065589a4fba24773a07db5abffba7e83f2b",
+      "status": "passed"
+    },
+    "datapath28": {
+      "path": "local_runs/dma16_datapath_20261109_182450_311356/summary.json",
+      "sha256": "c0e8731324ab0144e679f36d9cabf5b140bbbda086ba26cb1f8ac5c52f49e736",
+      "status": "passed"
+    },
+    "monitor6": {
+      "path": "local_runs/dma16_monitor_fixture_20261109_183941_919463/summary.json",
+      "sha256": "d4e318474b27d4baeb9e9cee2e78c7cd5140c8075a98993839f417acafcc860d",
+      "status": "passed"
+    },
+    "source": {
+      "path": "local_runs/arch03_source16_20261109_183204_772860/summary.json",
+      "sha256": "80d737af5b4e278ad401cae307c59238420fade758428fc1871663c9f8f5eb5a",
+      "status": "passed"
+    },
+    "window": {
+      "path": "local_runs/arch03_window16_20261109_181620_539354/summary.json",
+      "sha256": "6ecc985408b44c134e4256ddd35544898c647b96eda69d489ddff7cf3fbeecf9",
+      "status": "passed"
+    },
+    "fabric": {
+      "path": "local_runs/arch03_fabric_20261109_175055_289123/summary.json",
+      "sha256": "6f68f7e2ec7a84a652ac6ef517a3f99def090ba63f0b20c93f72841ea5073fa3",
+      "status": "passed"
+    }
+  },
+  "new_entrypoints": [
+    "install_dma16.py",
+    "dma16_soc.py",
+    "dma16_synth.py",
+    "package_dma16.py",
+    "dma16_batch.py"
+  ]
+}

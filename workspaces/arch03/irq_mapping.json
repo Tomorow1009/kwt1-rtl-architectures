@@ -1,0 +1,55 @@
+{
+  "schema": "arch03-dma16-irq-mapping-v1",
+  "mapping_verified": true,
+  "mapping_evidence": "2026-11-09: fixed E203 platform RTL inspected by the main agent. sirv_plic_man.v register decode and sirv_clint.v generated index/select/read/write decode were checked; source mapping is not a CPU execution result. Evidence images and platform fingerprint are listed below.",
+  "verified_date": "2026-11-09",
+  "platform_baseline_sha256": "ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e",
+  "irq_id": 16,
+  "plic_priority_addr": "0x0c000040",
+  "plic_enable_addr": "0x0c002000",
+  "plic_enable_mask": "0x00010000",
+  "plic_threshold_addr": "0x0c200000",
+  "plic_claim_addr": "0x0c200004",
+  "mtime_addr": "0x0200bff8",
+  "mtimecmp_addr": "0x02004000",
+  "timer_wake_ticks": 1024,
+  "timer_probe_cycles": 1000000,
+  "timer_parameters_status": "Initial software parameters pending actual CPU/timer validation; they do not assert a measured tick frequency or wake interval.",
+  "timer_frequency_hz": null,
+  "cpu_irq_verified": false,
+  "timer_wakeup_verified": false,
+  "plic_source": {
+    "base": "0x0c000000",
+    "physical_sources": 16,
+    "plic_irq_num_including_reserved_zero": 17,
+    "gpio_b_port": "io_devices_0_15",
+    "gpio_b_retained": true,
+    "dma_connection": "gpioB_irq OR arch03_dma_irq on the existing GPIOB source; claim handler must inspect DMA sticky status and preserve other peripheral handling",
+    "priority_offset_rule": "4 * source_id",
+    "enable_word_offset_rule": "0x2000 + 4 * word_index",
+    "threshold_offset": "0x200000",
+    "claim_complete_offset": "0x200004"
+  },
+  "clint_source": {
+    "base": "0x02000000",
+    "mtime_low_offset": "0xbff8",
+    "mtime_high_offset": "0xbffc",
+    "mtimecmp_low_offset": "0x4000",
+    "mtimecmp_high_offset": "0x4004",
+    "read_decode": "T958=addr[25:2]; T940_bits_index=T958[13:0]; T1015_bits_index=T940_bits_index; T1600={index[12],index[1],index[0]}; offsets bff8/bffc/4000/4004 select 2/3/4/5",
+    "read_values": "T1861_2=time_0; T1861_3=time_1; T1861_4=timecmp_0_0; T1861_5=timecmp_0_1",
+    "write_decode": "T1093_2/3/4 and low index[0] select low/high timer registers; full byte-mask write decode inspected"
+  },
+  "local_audit_artifacts": [
+    {
+      "path": "takeover_local/d2_20261109/dma16_irq_decode.png",
+      "path_base": "E:/fpga_race-two",
+      "sha256": "ab16a1529f3b74671c5fb726ab5d2f3611373bbffb03980f7a66def2f6afd1bd"
+    },
+    {
+      "path": "takeover_local/d2_20261109/dma16_clint_verified.png",
+      "path_base": "E:/fpga_race-two",
+      "sha256": "b71344f73b17d685f21debe646f684d3ff5c0d83d73ae56378c7c6da2e86ffb1"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 {
   "updated_date": "2026-11-09",
   "timezone": "Asia/Shanghai",
-  "user_instruction": "Continue while useful work is possible. After EVERY context compaction, reread the implementation plan and reconcile completed, unverified, and remaining work before acting.",
+  "user_instruction": "Implement accepted direct16 DMA three-day plan; previous pause revoked.",
   "reread_after_compaction": [
+    "IMPLEMENTATION_PLAN_DMA16_20261109.md",
     "../../CONTEXT_HANDOFF.md",
     "../../../2026芯片设计赛道本科组_实施计划_20261109.md",
     "../../AGENTS.md",
@@ -1408,7 +1409,7 @@
     "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386"
   },
   "portcheck_synthesis": {
-    "status": "running",
+    "status": "passed_reports_ready_review_required",
     "session": "d3_synth07",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "driver_pid": 139120,
@@ -1425,13 +1426,15 @@
       "server_synth07_start.png",
       "server_synth07_state.png"
     ],
-    "last_observed": "2026-11-09T11:30:53.840890",
+    "last_observed": "2026-11-09T17:24:18.141307",
     "child_pid_at_last_observation": 141535,
     "left_running_on_user_pause": true,
     "lf_outputs_actual_bound": true,
     "lf_binding_screenshot": "server_synth07_bound_progress.png",
     "status_is_last_observed": true,
-    "current_remote_status": "not_rechecked_during_pause"
+    "current_remote_status": "completed_read_at_17_24; lock/EDA absent at that observation",
+    "finished": "2026-11-09T11:33:34.089843",
+    "summary_sha256": "3a167b8a0c3f77d5837a91c9aa43264f4c4e2fbec44313e075f84a4ed92e3ed6"
   },
   "pause2": {
     "status": "paused_by_explicit_user_request",
@@ -1468,10 +1471,10 @@
     "final_timing_area_power_pending": true
   },
   "plan_update_handoff": {
-    "status": "waiting_for_updated_user_plan_keep_paused",
+    "status": "new_plan_received_implementation_authorized",
     "date": "2026-11-09",
     "document": "PROGRESS_BEFORE_PLAN_UPDATE_20261109.md",
-    "remote_rechecked": false,
+    "remote_rechecked": true,
     "remote_last_observed": "2026-11-09T11:30:53.840890",
     "previous_cloud_verified_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
     "instruction": "Compare updated plan against recorded completed, unverified and remaining work before resuming. Preserve pause unless user instructs execution."
@@ -1488,5 +1491,50 @@
       "next_steps_and_preservation_constraints"
     ],
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
+  },
+  "dma16_execution": {
+    "phase": "local_DMA16_complete_initial_ASIC_integration_package_preparation",
+    "h0": "2026-11-09T17:16:08+08:00",
+    "freeze_h28": "2026-11-10T21:16:08+08:00",
+    "verification_h64": "2026-11-12T09:16:08+08:00",
+    "internal_h72": "2026-11-12T17:16:08+08:00",
+    "plan": "IMPLEMENTATION_PLAN_DMA16_20261109.md",
+    "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
+    "remote_rechecked": true,
+    "new_hardware_verified": false,
+    "next": "Finish local integration review; commit/package both polling and IRQ; upload via board Linux FileZilla; real fixed-platform ASIC smoke then IRQ and14; new synthesis and evidence.",
+    "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
+    "local_receipts": {
+      "protocol15": {
+        "path": "local_runs/dma16_protocol_20261109_182449_665683/summary.json",
+        "sha256": "3f06b1d523dfc9c37057be5b492f7065589a4fba24773a07db5abffba7e83f2b",
+        "status": "passed"
+      },
+      "datapath28": {
+        "path": "local_runs/dma16_datapath_20261109_182450_311356/summary.json",
+        "sha256": "c0e8731324ab0144e679f36d9cabf5b140bbbda086ba26cb1f8ac5c52f49e736",
+        "status": "passed"
+      },
+      "monitor6": {
+        "path": "local_runs/dma16_monitor_fixture_20261109_183941_919463/summary.json",
+        "sha256": "d4e318474b27d4baeb9e9cee2e78c7cd5140c8075a98993839f417acafcc860d",
+        "status": "passed"
+      },
+      "source": {
+        "path": "local_runs/arch03_source16_20261109_183204_772860/summary.json",
+        "sha256": "80d737af5b4e278ad401cae307c59238420fade758428fc1871663c9f8f5eb5a",
+        "status": "passed"
+      },
+      "window": {
+        "path": "local_runs/arch03_window16_20261109_181620_539354/summary.json",
+        "sha256": "6ecc985408b44c134e4256ddd35544898c647b96eda69d489ddff7cf3fbeecf9",
+        "status": "passed"
+      },
+      "fabric": {
+        "path": "local_runs/arch03_fabric_20261109_175055_289123/summary.json",
+        "sha256": "6f68f7e2ec7a84a652ac6ef517a3f99def090ba63f0b20c93f72841ea5073fa3",
+        "status": "passed"
+      }
+    }
   }
 }

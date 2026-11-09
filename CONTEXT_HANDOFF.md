@@ -4,9 +4,44 @@
 
 ## 当前要求与停点
 
-用户要求暂停开发板和电脑端工作，保留远端 Linux 作业；随后要求记录进度，准备提供更新后的计划。当前只进行文档保存，未恢复验证，也未收到新计划。用户新增要求：每次准备压缩上下文前，把完成、未完成和尝试过的路径写入项目 Markdown，便于压缩后重读。
+用户已明确 PLEASE IMPLEMENT 新版三天计划，撤销此前暂停，开始直接16路MAC＋ICB DMA＋双缓冲；不做8路DMA。H0=2026-11-09T17:16:08+08:00，H28硬冻结=2026-11-10T21:16:08+08:00，内部H72=2026-11-12T17:16:08+08:00，官方精确截止尚未核实。
 
-当前有效计划为项目外层 `E:/fpga_race-two/2026芯片设计赛道本科组_实施计划_20261109.md`，仓库内有[逐字副本](workspaces/arch03/IMPLEMENTATION_PLAN_20261109.md)。原计划是工作目标，完成状态以实际证据为准。收到更新计划后先比较范围、优先级和验收标准；保持暂停，按用户后续执行指示恢复。
+当前有效计划为 [DMA16三天计划](workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md)，老师答复记录在 [答疑依据](workspaces/arch03/QA_DMA_LOADING_20261109.md)。旧七天计划和历史证据保留。DMA16核心、搬运、仲裁、布局和正式监视器已通过本地测试；真实E203/厂商宏、新STA、门级及功耗尚待新运行。
+
+本地分工：dma_feasibility负责新增linear16核心和核心测试；evidence_audit负责DMA16引擎/MMIO及协议测试；contest_requirements负责tile16布局和独立数值验证；主代理负责平台源接口核查、仲裁/安装、CPU固件、集成及服务器调度。各代理只改自己新增文件，不提交git；主代理统一集成。
+
+已核对原sysmem_icb_*接线/译码，source=0xb0000000位于原O4覆盖范围；恢复原加载源响应路径，禁止新增SRAM私口。DMA源读→共享写ACK→共享读到缓存→结果写ACK全部计时。新版数据46976B，输出50688B，四段191616B；同任务预取允许，跨任务预装禁止。
+
+## 最新实施检查点（2026-11-09约18:49）
+
+- 以下内容覆盖下方旧暂停/17:50记录的实时状态。旧synth07已读完成，不重跑；远端EDA/锁最后实际观察仍是17:24无任务/无锁，下一次启动前重新查。
+- DMA最终RTL SHA4270345c39477220831ef4fda8227dc4f3c8d6df71f66234bfc0ec63b2df9f53；ABI6b1c53a46e8f490208adbd1d4734d2aead2bbe1ebf0df93cf0e294c7eba87c90。15协议、28真实core/arb/router/shared任务709632输出通过；包括首源请求前X/W失效、无复位新任务、held请求取消排空。最终协议和datapath目录在DMA16_ENGINE_HANDOFF及主JSON。
+- fabric386事务公平性/owner/反压通过；source统一为N接受、N+1最早ACK，11752请求测试通过。此前多余pending拍已删除，旧模型从未进ASIC。window3完整任务及12失败/取消、完成后非法事务拒绝通过。
+- 正式source/window/monitor同名层次夹具6任务152064输出通过：pf0=274010、pf1=225770周期。夹具只用过程MMIO，没有E203，不能当ASIC吞吐。单任务VCD边界轻审计已过，起163.333317ns/止1505296.516137ns与window逐fs一致、225770周期。XSim动态路径落为dcv，且其0宽parameter不被既有严格ASIC活动审计器接受；保留两次失败，不放宽服务器审计。
+- PLIC全部16原源已分配：DMA与GPIOB原线OR，共claim ID16；priority0x0c000040/enable0x0c002000 mask0x10000/threshold0x0c200000/claim0x0c200004。CLINT实际generated RTL已核对mtime0x0200bff8、mtimecmp0x02004000；irq_mapping.json记录源链和截图哈希。MEMS使用hfclk，实际WFI期间DMA仍需CPU验证。
+- 新固件显式等待STATUS bit14 ready：poll目录local_runs/dma16_firmware_poll_20261109_startready_v2；IRQ目录local_runs/dma16_firmware_irq_20261109_mapping_v1。只含程序/SHIFT，0x10000后全零；IRQ真trap/WFI/PLIC和timer probe已编译未运行。1024timer ticks、1M probe cycles是初版参数待测。
+- root新增install_dma16.py、dma16_soc.py、package_dma16.py及server_run dma16_soc/build/synth阶段；6集成契约测试通过，实际固定平台新安装/编译仍未执行。旧8路参考安装显式拒绝，不能误用DMA监视器；旧对照完整新加载口径尚未实现。
+- batch支持冻结boot_by_shift；19单测和14case夹具通过，不属于ASIC。独立批量在build释放sharedlock后自行持同一锁，旧37不续。新1200、真实CPU连续A/B/A和错误恢复、14门级、12功耗、150MHz和新增面积均未完成。
+- 新dma16_synth已完成，23项新旧离线测试通过；不改旧综合脚本。需包入UNDERGRAD_D3_SERVER_20261109.json用于同Liberty面积单位依据。仲裁/router/内联IRQ/glue不能漏计。
+- 新文件准备首个实施提交/上传；代理review的IRQ映射/固件源码冻结缺口和包名变量覆盖均已修，实际打包后再核验ZIP根目录与全部哈希；固定源码与固件哈希→提交私人分支→package_dma16.py→开发板暂存→Linux FileZilla→服务器安全解包→先dma16_smoke01/layer01，再IRQ和14。独立运行说明DMA16_EXECUTION.md。
+- 最近VNC窗口18874436，relay session22118；辅助工具key必须--keys Return；服务器Python必须python3，系统python是2且无pathlib。UI若命令已输入只补Return，勿重复输入。最近18:41只读平台检查；当前没有新EDA任务。工具截图在takeover_local/d2_20261109/dma16_*。
+- 正式监视器在最终mailbox检查finished&&!failed及全部ACK；VCD在最终output ACK停止，不等稍晚drain证明。IRQ模式要求mail中的external/timer/WFI>0、done event且无未处理中断；程序source和irq_mapping均进入batch contract哈希。
+
+每次压缩后仍按必读列表读取并核对，继续此实施链，不重做已完成本地测试，不将本地证据替代ASIC结果。
+
+## DMA16实施进度（H0后，2026-11-09约17:50）
+
+- 新计划和老师答复已落盘；用户已授权实施和恢复。所有新版功能/时序/功耗状态仍按实际分层，不沿用旧PASS。
+- 原synth07已读：11:33:34.089843结束，stage passed仅表示reports ready；setup +0.0000376701ns，hold +0.00131178ns，latches0，仍待完整约束审核/新门级/功耗。17:24:18读到锁已释放、无EDA。原结果未修改、未重启。
+- 固定平台O4 base=0x80000000/regionLSB31；0xb0000000源窗口合法。原e203_soc_top的sysmem为空零响应占位，恢复原已有ICB接口至仿真/门级边界，不加SRAM私口。PLIC base0x0c000000已核验，中断源号仍审查。
+- tile16 14用例软件转换通过，354816输出与旧整数参考逐位一致；14布局单测通过。新目录local_runs/dma16_layout_14case_20261109_h0。
+- linear16正式d3 14用例A/B/A pin_mock通过42任务/1064448输出，另旧源56任务与行为测试通过；核心无停顿pf0=156560、pf1=140480周期，仅核心性能。核心SHA6bb63bf42437617a5b73b71c22c0874528868f5ef9b4f01be5d9687dde433322。
+- DMA/MMIO引擎9个协议测试通过（core stub），真实core集成正在测，不能当E203完成。DMA首版先完成整个源→shared装载，然后读缓存/计算/输出重叠；保留单笔在途。
+- 原ASIC批量入口不复用旧功能TCM路径；新stdlib dma16_batch.py的15单测、14case重排和runner夹具通过，夹具复制参考不算RTL执行。
+- 主代理新增arb2/router；258事务payload/owner/error等检查通过后公平性覆盖不足，核心代理正在补持续竞争激励，原失败日志保留，尚未标fabric全通过。
+- 主代理下一步：完成IRQ映射、install_dma16与TB加载/计时/真实CPU固件，干净集成测试后打包上传。新代码尚未commit/上传/真实ASIC验证。
+- 开发板VNC曾退出，已恢复；现窗口18874436，仅作为最近观察，操作前仍重新发现。relay exec session22118仍运行。已有助手读取保存key需reviewed escalation，不输出key。服务器操作经开发板Linux VNC，上传仍用Linux FileZilla。
+- 分工独立交接见DMA16_CORE_HANDOFF.md、DMA16_ENGINE_HANDOFF.md、DMA16_LAYOUT_HANDOFF.md；主证据见handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json。
 
 ## 已完成
 
@@ -41,7 +76,7 @@
 ## 当前冻结配置与远端状态
 
 - 仓库：`E:/fpga_race-two/kwt1-rtl-architectures`。
-- 分支：`codex/light-light126/undergrad-d1-numerics`，团队私人 GitHub 仓库。最近一次已核对的进度记录云端提交为 `8cfd92ab33e8c2a7e0cf02fa2a6e5af3c579fdda`；文档提交不改变运行包源码。
+- 分支：`codex/light-light126/undergrad-d1-numerics`，团队私人 GitHub 仓库。本地/此前缓存origin已核对的进度记录提交为 `fd47609107faece19235c0b04112e9c44fe6a72b`；文档提交不改变运行包源码。
 - 受测源码：`5946c54263868bb701bebe515a285ffb9f238e47`。
 - 包：`light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip`；10,843,580 字节、402 文件；SHA256 `2d998f7dc8cadfaf230c90da499e1e7b3c110d1f86e2afeaca5723ecbb2ec4c5`。本地、开发板暂存、FileZilla 上传、服务器安全解包均已核验。
 - 远端最后观察时间：**2026-11-09 11:30:53.840890**。`d3_synth07` 当时 running，驱动 139120、DC 子进程 141535，实际协作锁由该运行持有。开始时间 11:18:46.512651。
@@ -60,17 +95,17 @@
 
 ## 未完成与恢复顺序
 
-1. 等待更新计划，核对已完成/需重验/尚未开始项目和优先级；得到继续指示后恢复连接。
+1. 新计划已收到并获执行指示；先恢复连接，核对固定平台加载源/中断接口并读取synth07最终结果。
 2. 先读取原 `d3_synth07` 状态及实际协作锁，审查最终 setup/hold、约束覆盖和结构警告，不重复启动。
 3. 有效新网表需完整 14 用例门级验证，并采集同配置完整任务活动。
 4. 实际运行并审核系统功耗：单位、SRAM、未知活动、映射及导线/时钟假设；通过后计算 J/task。
 5. 用最终叶清单重算面积，确认官方计分归属，统一配置的精度、时序、面积、性能与功耗证据。
 6. 完善最终报告和提交材料；精确截止、模板、字段及视频要求仍待确认。PR #6 与 32 位复制优化尚未测量，按新计划决定后续安排。
 
-用户既有授权允许本计划当前及后续已核验源码/固件/测试包经开发板 Linux FileZilla 上传到 `icdesigns0.nicu.cn:18888` 的 `/IC/light-light126-undergrad-d2-20261109`，也已授权同步团队私人云端分支；暂停仍然有效。不要重新索取已授予的上传授权，也不要把该授权当成撤销暂停。
+用户既有授权允许本计划当前及后续已核验源码/固件/测试包经开发板 Linux FileZilla 上传到 `icdesigns0.nicu.cn:18888` 的 `/IC/light-light126-undergrad-d2-20261109`，也已授权同步团队私人云端分支；用户本次IMPLEMENT指示已恢复执行。不要重新索取已授予的上传授权；只在已授权独立目录运行已核验包。
 
 保留旧 1,200 组批量的 37 组通过和第 38 组中断，禁止自动恢复旧批次、修改原平台/历史快照、删除旧失败、自动清锁或停止其他人的作业。不同版本的最好结果不得拼成当前配置通过。
 
 ## 压缩后必读
 
-依次核对 [AGENTS.md](AGENTS.md)、本文件、[当前计划副本](workspaces/arch03/IMPLEMENTATION_PLAN_20261109.md)、[团队状态](handoff/team/STATUS.json)、[验收清单](workspaces/arch03/ACCEPTANCE_20261109.md)、[执行检查点](workspaces/arch03/EXECUTION_CHECKPOINT.json)及[服务器证据](handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json)。新计划到来后在此处更新有效计划指向，保留旧计划和历史证据。
+依次核对 [AGENTS.md](AGENTS.md)、本文件、[当前DMA16计划](workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md)、[团队状态](handoff/team/STATUS.json)、[验收清单](workspaces/arch03/ACCEPTANCE_20261109.md)、[执行检查点](workspaces/arch03/EXECUTION_CHECKPOINT.json)及[服务器证据](handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json)。新计划到来后在此处更新有效计划指向，保留旧计划和历史证据。

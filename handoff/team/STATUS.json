@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "paused_by_user_remote_synth07_left_running",
+    "phase": "local_DMA16_complete_initial_ASIC_integration_package_preparation",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Remain paused, await updated user plan, reconcile it with progress record, then inspect preserved synth07 when execution resumes.",
+    "next": "Finish local integration review; commit/package both polling and IRQ; upload via board Linux FileZilla; real fixed-platform ASIC smoke then IRQ and14; new synthesis and evidence.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -140,10 +140,10 @@
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "Portcheck 5946c54 verified and uploaded; all 402 server input hashes passed. Synth07 was running at last observation 2026-11-09 11:30:53; final result not rechecked. No new gate/timing/power acceptance.",
+    "source_commit_scope": "Old ASIC14 runtime 5946c54 unchanged; synth07 completed and read, no current DMA16 ASIC pass. New uncommitted DMA16 local tests listed separately.",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
-    "whole_soc_dc_scope": "synth04 mapped artifacts complete, latches=0 and hold positive; three LF output budget setup violations remain",
+    "whole_soc_dc_scope": "Old synth07 reports complete, setup/hold positive, full constraint/gate/power review pending; not DMA16 netlist.",
     "gate_smoke_verified": true,
     "complete_gate_suite_verified": false,
     "library_area_units_verified": true,
@@ -153,7 +153,7 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": "d3_synth07",
+    "active_session": null,
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
@@ -163,6 +163,10 @@
       "main_merged": false
     },
     "resume_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json resume",
-    "plan_update_handoff": "../../workspaces/arch03/PROGRESS_BEFORE_PLAN_UPDATE_20261109.md"
+    "plan_update_handoff": "../../workspaces/arch03/PROGRESS_BEFORE_PLAN_UPDATE_20261109.md",
+    "active_plan": "../../workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md",
+    "dma16_h0": "2026-11-09T17:16:08+08:00",
+    "dma16_verified": false,
+    "dma16_evidence": "evidence/DMA16_IMPLEMENTATION_20261109.json"
   }
 }
