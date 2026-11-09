@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_final1200_passed_full_unknown_activity_next",
+  "phase": "DMA16_power_l03_running_review_record_correction_local175tests",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Keep final1200_v2 as sole shared EDA job; observe progress and host budget. Locally prepare power/model/X and final review artifacts; after batch complete remaining11 powers, MMIO8 fresh PPA, final re-audit/export/reproduction.",
+  "next": "Package corrected review record and constant-instance guard; clean175checks then upload and new binding02. Track L03, serial L04-L12. Complete all unknown-object review, final1200 report re-audit, MMIO8 PPA and clean reproduction.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -1082,10 +1082,9 @@
     "budget_upper_mm2": "0.434796781612",
     "project_limit_mm2": "2.00",
     "within_project_limit": true,
-    "leaf_rows_unique": 139430,
+    "leaf_rows_unique": 143118,
     "standard_cell_count": 139266,
     "macro_count": 162,
-    "virtual_constants": 2,
     "excluded_macro_counts": {
       "shared": 64,
       "itcm": 32,
@@ -1095,7 +1094,16 @@
     "observed": "2026-11-10T02:25:44.706690",
     "physical_signoff": false,
     "official_scoring_confirmed": false,
-    "handoff": "workspaces/arch03/AREA_REVIEW_20261109.md"
+    "handoff": "workspaces/arch03/AREA_REVIEW_20261109.md",
+    "virtual_constant_instances": 3690,
+    "virtual_constant_reference_types": 2,
+    "zero_reference_instance_counts": {
+      "**logic_0**": 1018,
+      "**logic_1**": 2672
+    },
+    "instance_counts_rechecked": "2026-11-10 approximately 06:54",
+    "prior_instance_count_transcription": 139430,
+    "area_sum_unchanged": true
   },
   "cloud_sync_pending": {
     "local_committed_evidence": "20a0111",
@@ -1270,7 +1278,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "b60bef16c4dd966a32d73ee52e5497d9fa08466f",
+  "current_server_tool_commit": "89b35a37eb7179bdb69df0374a20dd41115ba73e",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1373,7 +1381,7 @@
     "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
     "system_power_verified": false,
     "finished": "2026-11-10T04:10:02.258177",
-    "summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9",
+    "summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9",
     "log_errors": 0,
     "log_warnings": 1549,
     "shared_lock_released": true,
@@ -1628,7 +1636,7 @@
   "project_area_upper_bound_verified": true,
   "frozen_review_record": "workspaces/arch03/FROZEN_REVIEW_20261110.json",
   "review_exporter_local": {
-    "tests_passed": 174,
+    "tests_passed": 175,
     "skipped": 0,
     "production_changed": false,
     "server_executed": false,
@@ -1639,9 +1647,69 @@
     "run": "runs/dma16_unknown_l01_v1/dma16_unknown_activity",
     "driver_pid": 274570,
     "started_launcher": "2026-11-10T06:25:05.092274",
-    "status": "launched_completion_unobserved",
+    "status": "passed_diagnostics_review_required",
     "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
     "case": "layer_01",
+    "system_power_verified": false,
+    "last_observed": "2026-11-10T06:36:44.336398",
+    "scanner_pid": 274909,
+    "vcd_read_offset": 8145769298,
+    "vcd_bytes": 8745588450,
+    "finished": "2026-11-10T06:37:58.048814",
+    "summary_sha256": "4581955c327470998048a8298165e4740112d9eebe03049830fdb4ad3e00d715",
+    "summary_sha256_independently_verified": true,
+    "counters": {
+      "unknown_value_records": 389025,
+      "unknown_records_at_begin": 29654,
+      "unknown_records_after_begin": 359371,
+      "identifiers_without_initial_observation": 614,
+      "unknown_identifiers_at_end": 9576,
+      "unknown_identifiers": 34128
+    },
+    "diagnostic_identifiers": 34742,
+    "positive_unknown_duration_identifiers": 34118
+  },
+  "review_export_package": {
+    "source_commit": "89b35a37eb7179bdb69df0374a20dd41115ba73e",
+    "archive": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71.zip",
+    "bytes": 16599863,
+    "sha256": "4f5ca45777aeaf83e4a610e182ee1d53657e6bc6ce20d4310228d5915c936f52",
+    "files": 667,
+    "clean_tests": 174,
+    "production_files_unchanged": 40,
+    "clean_audit_receipt": "local_runs/dma16_review_clean_audit_20261110_0630/receipt.json",
+    "clean_audit_sha256": "57fba3998c7d71c620fecd30ced36cca0637f447a58b9b84548924c89b97c7fa",
+    "upload_state": "FileZilla_success_disconnected",
+    "server_inputs_verified": true,
+    "filezilla_transfer_seconds_observed": 33,
+    "unpacked": "2026-11-10T06:35:54.473392",
+    "inputs_verified": "2026-11-10T06:36:44.336398"
+  },
+  "review_binding01": {
+    "status": "rejected_preserved_no_decision_written",
+    "reasons": [
+      "First-power digest transposition in review record",
+      "Leaf count confused two constant reference types with3690 constant instances"
+    ],
+    "production_inputs_modified": false,
+    "corrected_local": true,
+    "corrected_package_uploaded": false
+  },
+  "dma16_power_l02_v1": {
+    "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
+    "run": "runs/dma16_power_l02_v1/dma16_power",
+    "status": "passed_reports_review_required",
+    "driver_pid": 285538,
+    "finished": "2026-11-10T06:49:14.157641",
+    "summary_sha256_not_yet_transcribed": true,
+    "system_power_verified": false
+  },
+  "dma16_power_l03_v1": {
+    "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
+    "run": "runs/dma16_power_l03_v1/dma16_power",
+    "status": "launched_completion_unobserved",
+    "driver_pid": 292470,
+    "started_launcher": "2026-11-10T06:55:24.759277",
     "system_power_verified": false
   }
 }

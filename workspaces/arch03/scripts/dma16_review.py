@@ -54,7 +54,10 @@ def validate(record, refs, synthesis, timing, ports):
     area = synthesis['area_summary']; basis = synthesis['area_basis']
     bound = Decimal(str(area['conservative_budget_mm2']))
     require(area['units'] == basis['units'] == 'um^2' and basis['standard_cells_checked'] == 1276 and
-            area['leaf_count'] == 139430 and area['macro_count'] == 162 and
+            area['leaf_count'] == 143118 and area['macro_count'] == 162 and
+            sum(g['standard_cell_count'] for g in area['groups'].values()) == 139266 and
+            sum(g['sram_count'] for g in area['groups'].values()) == 162 and
+            sum(g['virtual_constant_count'] for g in area['groups'].values()) == 3690 and
             abs(bound-Decimal(expected['area_upper_mm2'])) < Decimal('1e-9') and
             Decimal(expected['project_area_limit_mm2']) == Decimal('2.00') and 0 < bound <= 2,
             'Reviewed conservative area bound differs')

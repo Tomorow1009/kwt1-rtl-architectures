@@ -18,7 +18,8 @@ def fixtures():
     record.update({key+'_summary_sha256': value['sha256'] for key, value in refs.items()})
     synth = dict(metrics=dict(period_ns='6.666666000000', max='0.0000290871', min='0.00136402', latches=0),
         loop_check={'combinational_loops_detected': False},
-        area_summary=dict(units='um^2', leaf_count=139430, macro_count=162, conservative_budget_mm2=0.434796781612),
+        area_summary=dict(units='um^2', leaf_count=143118, macro_count=162, conservative_budget_mm2=0.434796781612,
+            groups={'fixture': dict(standard_cell_count=139266, sram_count=162, virtual_constant_count=3690)}),
         area_basis=dict(units='um^2', standard_cells_checked=1276))
     timing = dict(scope='dma16_frozen_mapped_ddc_readonly_timing_diagnostics', synthesis_summary_sha256='b'*64,
         netlist_modified=False, high_fanout=dict(count=3, nets=['u_e203_subsys_top/core_csr_clk',
@@ -70,6 +71,12 @@ class ReviewTests(unittest.TestCase):
         for key, value in [('units', 'mm^2'), ('standard_cells_checked', 1200)]:
             values = fixtures(); values[2]['area_basis'][key] = value
             with self.subTest(key=key), self.assertRaises(ValueError): r.validate(*values)
+
+    def test_constant_reference_types_are_not_constant_instance_counts(self):
+        values = fixtures()
+        values[2]['area_summary']['groups']['fixture']['virtual_constant_count'] = 2
+        values[2]['area_summary']['leaf_count'] = 139430
+        with self.assertRaises(ValueError): r.validate(*values)
 
     def test_files_explanation_and_original_structural_inputs_are_bound(self):
         with tempfile.TemporaryDirectory() as directory:

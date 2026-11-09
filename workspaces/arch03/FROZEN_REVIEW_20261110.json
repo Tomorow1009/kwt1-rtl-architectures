@@ -8,7 +8,7 @@
   "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
   "timing_diagnostic_summary_sha256": "2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa",
   "port_diagnostic_sha256": "999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60",
-  "first_power_summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9",
+  "first_power_summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9",
   "decisions": {
     "task_mode_synthesis_timing": "accepted_for_declared_scope",
     "project_area_upper_bound": "accepted_for_declared_scope",
@@ -20,13 +20,18 @@
     "setup_slack_ns": "0.0000290871",
     "hold_slack_ns": "0.00136402",
     "area_upper_mm2": "0.434796781612",
-    "project_area_limit_mm2": "2.00"
+    "project_area_limit_mm2": "2.00",
+    "leaf_instances": 143118,
+    "standard_cell_instances": 139266,
+    "sram_instances": 162,
+    "virtual_constant_instances": 3690,
+    "virtual_constant_reference_types": 2
   },
   "physical_signoff": false,
   "official_scoring_confirmed": false,
   "official_precision_verified": false,
   "report_exporter_integration_verified": false,
   "review_document": "workspaces/arch03/FROZEN_REVIEW_20261110.md",
-  "review_document_sha256": "c35b12760e7ae41ae1c88a2bc698c6e0fc609ad9fe29ad1f34ec94d3ce69e659",
+  "review_document_sha256": "949deed2ceda22343018ae51a368542278563268f05d73de08e08af93d00eed7",
   "batch_state_sha256": "764a854321921a0ca06f82394697cfa23200931dc1d0297ffa457ad822d35d93"
 }
