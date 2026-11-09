@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_gate14_activity12_passed_power_expected_empty_query_fix_pending",
+    "phase": "DMA16_gate14_activity12_contention2_passed_corrected_power_l01_running",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Commit/package/clean-audit/upload PT expected-absence query fix; start a new first-layer power session only after shared-lock/EDA checks. Preserve failed l01_v1, keep all guard errors fail-closed. Then first PT review, contention, final1200, remaining powers/MMIO8 PPA/export/reproduction.",
+    "next": "Read corrected l01_v2 PT completion and actual reports. Review no_clock/disabled arcs/high-fanout/X/coverage/models/units, then final1200 and remaining11 powers/MMIO8 fresh PPA/reviewed exports/reproduction. Preserve failed v1.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1931,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": null,
+    "active_session": "dma16_power_l01_v2",
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": false,
@@ -2616,11 +2616,11 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "414bc5631438bed31e7228d8659ccd519ad1ac7f",
+    "current_server_tool_commit": "27bf49a938c752f77ba815ca5f4a0f43b595d6fb",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
-      "status": "local_tests_passed_not_uploaded",
+      "status": "uploaded_actual_PT_reading_VCD_zero_error_lines_so_far",
       "cause": "PT emits SEL-005 for four expected-empty nonquiet forbidden-memory get_cells queries",
       "change": "Add -quiet only to expected-absence queries; keep nonempty forbidden guard, exact macro inventory and all actual error rejection",
       "related_tests": 51,
@@ -2631,7 +2631,94 @@
       ],
       "hardware_changed": false,
       "synthesis_changed": false,
-      "gate_changed": false
-    }
+      "gate_changed": false,
+      "source_commit": "27bf49a938c752f77ba815ca5f4a0f43b595d6fb"
+    },
+    "ptquiet_package": {
+      "source_commit": "27bf49a938c752f77ba815ca5f4a0f43b595d6fb",
+      "archive": "light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7.zip",
+      "bytes": 16544198,
+      "files": 654,
+      "sha256": "a13d9e9e0ad5f82b0a3081f531638f38c815398285376d9668fd9312898d44ff",
+      "clean_audit": "local_runs/dma16_ptquiet_clean_audit_20261110_0359/receipt.json",
+      "clean_audit_sha256": "17603adbbca74ec06e7e885ab98087f777491731faa325ec57d497ddeeae8e58",
+      "clean_tests": 124,
+      "firmware_variants": 5,
+      "board_staged": true,
+      "board_sha_verified": true,
+      "server_uploaded": true,
+      "cloud_push_pending": true,
+      "hardware_changed": false,
+      "server_zip_sha_verified": true,
+      "server_unpacked_observed": "2026-11-10T04:02:28.049584",
+      "server_inputs_verified": 654,
+      "server_inputs_observed": "2026-11-10T04:03:17.132980",
+      "ftp_disconnected": true,
+      "ftp_queue_empty": true,
+      "ftp_success_seconds": 33
+    },
+    "dma16_contention01": {
+      "state": "passed",
+      "bundle": "light-light126-ref-export-dma16-20261110_032204-414bc5631438",
+      "driver_pid": 181178,
+      "started_launcher": "2026-11-10T03:58:52.124581",
+      "cases": [
+        "layer_01",
+        "rounding"
+      ],
+      "performance_measurement": false,
+      "contention_verified": true,
+      "finished": "2026-11-10T04:01:07.123980",
+      "summary_sha256": "a55fe2e951ad239403c230a28bd771affa3588abd6cc751c86c84f7a9faf4e8e",
+      "outputs": 50688,
+      "case_counts": {
+        "layer_01": {
+          "competing_cycles": 1248,
+          "cpu_grants": 21893,
+          "dma_grants": 47904,
+          "competing_cpu_grants": 1146,
+          "competing_dma_grants": 102,
+          "competing_blocked": 0,
+          "arb_grants": 69797,
+          "arb_acks": 69797,
+          "ready_wait_cycles": 25049,
+          "response_backpressure_cycles": 0,
+          "cpu_owned_wait_cycles": 23903
+        },
+        "rounding": {
+          "competing_cycles": 1248,
+          "cpu_grants": 21893,
+          "dma_grants": 47904,
+          "competing_cpu_grants": 1146,
+          "competing_dma_grants": 102,
+          "competing_blocked": 0,
+          "arb_grants": 69797,
+          "arb_acks": 69797,
+          "ready_wait_cycles": 25049,
+          "response_backpressure_cycles": 0,
+          "cpu_owned_wait_cycles": 23903
+        }
+      },
+      "scope": "dma16_asic_cpu_shared_contention_validation",
+      "evidence_limit": "Observed both-master service for this traffic pattern; not all arbitration histories or IRQ energy savings"
+    },
+    "dma16_power_l01_v2": {
+      "state": "running",
+      "bundle": "light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7",
+      "session": "dma16_power_l01_v2",
+      "stage": "dma16_power",
+      "case": "layer_01",
+      "driver_pid": 188741,
+      "child_pid_last": 188961,
+      "child_log_last": "power.log",
+      "started_launcher": "2026-11-10T04:04:30.789625",
+      "started": "2026-11-10T04:04:31.140224",
+      "last_observed": "2026-11-10T04:07:24.331056",
+      "error_lines_at_observation": 0,
+      "reading_full_vcd": true,
+      "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
+      "system_power_verified": false
+    },
+    "dma16_contention_verified": true
   }
 }
