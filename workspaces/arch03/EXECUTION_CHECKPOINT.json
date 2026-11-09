@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "d3_synth04 report collection completed: zero latches, hold positive, three LF output budget setup violations remain. Toolenv package uploaded and verified. New ASIC 14-case d3_full02 running.",
+  "last_completed_stage": "New UART/boot-mode ASIC full02 passed all 14 cases, 354816 outputs. Powerctx package uploaded with 400 hashes verified. Corrected LF output synthesis05 running from f03d1c9.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -42,16 +42,15 @@
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d3-lfports-arch03-20261109_093203-f8fc1d819803.zip",
-    "reason": "Explicit authorization used for 14 verified FileZilla packages; no approval pending.",
+    "current_package": "../../local_runs/light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip",
+    "reason": "Explicit authorization used for 15 verified FileZilla packages; no pending approval.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Finish repaired ASIC full02; preserve exact case receipts and complete-task boot mode evidence",
-    "After full02 finishes, run f8fc1d8 lfports package synth05; package already server verified",
-    "Review fresh strict setup/hold, coverage and interface assumptions, then complete mapped 14-case functionality plus same-task activity and power",
-    "Actual-server test LC environment fix; retain baseline failed power reports and review unknown activity/model limits",
-    "Complete scoring ownership, submission details and final reproducible evidence"
+    "Observe powerctx/f03d1c9 d3_synth05: actual LF output clock binding, four CDC first-stage pins, strict setup/hold, latch count, constraint coverage and area",
+    "After synthesis review, run full 14-case mapped regression with at least layer_01 complete-task VCD; use exact new synthesis summary digest",
+    "Run error-free same-config power from powerctx, verifying LC environment, detailed units, unknown transition settings, SRAM sums, boundary nets and mapping",
+    "Update final same-config area/performance/energy and provenance; official scoring ownership and submission details remain unresolved"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -66,7 +65,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal, reports bundle cwd, runs repair-package d3_full02 driver 23104. Third diagnostic terminal idle SDC bundle. Synth04 completed and released lock before full02.",
+  "server_readonly_job": "Fourth terminal (reports bundle cwd) runs powerctx package d3_synth05 driver 48479; third diagnostic terminal idle SDC bundle. Actual lock is IC/.arch02_team_lock from server_config, NOT the upload root.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -97,7 +96,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Power reporting context and diagnostic review locally prepared; LF ports source f8fc1d8 already uploaded/verified. Synth05 can use f8fc1d8 when full02 releases the lock.",
+  "uncommitted_follow_on": "Only current result/checkpoint documentation after f03d1c9; runtime source is committed and uploaded.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -929,18 +928,17 @@
     "unpack_screenshot": "server_toolenv_unpack.png"
   },
   "repaired_asic_suite": {
-    "status": "running",
+    "status": "passed",
     "session": "d3_full02",
     "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
     "driver_pid": 23104,
     "started": "2026-11-09T09:24:35.949783",
-    "scope": "new UART patch and complete-task boot mode guard, actual ASIC-bound E203, 14 cases",
-    "screenshots": [
-      "server_full02_start.png",
-      "server_synth04_lf_domains.png"
-    ],
-    "last_observed": "2026-11-09T09:39:50",
-    "observed_pass_cases": [
+    "finished": "2026-11-09T09:44:45.600451",
+    "scope": "asic_bound_RTL_functional",
+    "summary_sha256": "d799ba311f50b1b8ff78b8a60a86a76ca3dc2d9c67238e7a7a25c994ddbfe310",
+    "source_inputs_sha256": "dcb6ca8bcf70dd64323e3dd3e03a89e9aabd0555a0f496c06c4be6d71c8ce8e",
+    "summary_digest_note": "Numerical result summary is byte-identical to full01; run path, source commit, new source_inputs digest and actual new boot-mode log markers distinguish this execution.",
+    "cases": [
       "layer_01",
       "layer_02",
       "layer_03",
@@ -950,9 +948,36 @@
       "layer_07",
       "layer_08",
       "layer_09",
-      "layer_10"
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "extremes",
+      "rounding"
     ],
-    "progress_screenshot": "server_synth04_area_full02_progress.png"
+    "outputs": 354816,
+    "outputs_per_case": 25344,
+    "cpu_cycles_per_case": 3890176,
+    "task_window_cycles_per_case": 3890080,
+    "period_ns": "6.666666",
+    "model_saturated": 0,
+    "synthetic_saturated": {
+      "extremes": 6336,
+      "rounding": 4554
+    },
+    "complete_task_boot_mode_markers": 14,
+    "task_clock_mode": "test_mode=0 pllbypass=1 divider_bypass=1",
+    "global_FPGA_defined": false,
+    "vendor_models": "ARM_UD_MODEL and standard-cell functional",
+    "cpu_executed": true,
+    "timing_verified": false,
+    "gate_simulation_verified": false,
+    "system_power_verified": false,
+    "team_lock_released": true,
+    "screenshots": [
+      "server_full02_receipt.png",
+      "server_full02_boundary_progress.png",
+      "server_synth05_preflight.png"
+    ]
   },
   "lf_output_preparation": {
     "status": "local_tests_passed_NOT_server_verified",
@@ -1038,12 +1063,108 @@
     ]
   },
   "power_report_preparation": {
-    "status": "local_tests_only_NOT_server_verified",
+    "status": "uploaded_verified_NOT_actual_power_run",
     "change": "Detailed units/wire/model report, actual X-handling settings, separate boundary-net-inclusive power report",
     "focused_tests": 4,
     "python36_syntax": true,
     "tcl_syntax_complete": true,
     "test_log": "local_runs/d3_power_report_context_tests_20261109.log",
-    "hardware_changed": false
-  }
+    "hardware_changed": false,
+    "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
+    "package": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
+  },
+  "lf_output_synthesis": {
+    "status": "running",
+    "session": "d3_synth05",
+    "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
+    "driver_pid": 48479,
+    "started": "2026-11-09T09:47:34.970752",
+    "change": "Three LF control output interface budgets referenced to LF; retained 1 ns max/0 ns min checks; hardware/firmware unchanged",
+    "timing_verified": false,
+    "scoring_area_verified": false,
+    "screenshots": [
+      "server_synth05_start.png",
+      "server_synth05_state.png"
+    ]
+  },
+  "latest_powerctx_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
+      "archive": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip",
+      "bytes": 10829864,
+      "sha256": "0cc413186fcfc73c5cf186b38f7113d6915a39e7f5ffac464dcebfd480286047",
+      "files": 400,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_powerctx_clean_20261109\\light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "filezilla_powerctx_done.png",
+    "unpack_screenshot": "server_powerctx_unpack.png"
+  },
+  "runtime_identity": {
+    "status": "all_selected_runtime_inputs_byte_identical",
+    "bundles": [
+      {
+        "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+        "archive": "light-light126-d3-repair-arch03-20261109_075555-371316af486e.zip"
+      },
+      {
+        "source_commit": "f8fc1d819803e89a9a2143820028293ec83713c0",
+        "archive": "light-light126-d3-lfports-arch03-20261109_093203-f8fc1d819803.zip"
+      },
+      {
+        "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
+        "archive": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
+      }
+    ],
+    "groups": {
+      "rtl": {
+        "files": 8,
+        "inventory_sha256": "126ac17e7dea39fd1fc143fba08ddbcd69c9d1a0872be96310ebeebc8aca5b49"
+      },
+      "firmware": {
+        "files": 22,
+        "inventory_sha256": "963d625b3430f37a093ecb819d57662768d5b30c1e09a63bdd103dca27ead1b4"
+      },
+      "vectors": {
+        "files": 120,
+        "inventory_sha256": "6fe2ad5624faf85e358be8f7e4bd6e96a1b3804a3a2f396a7b288ecf26bc4008"
+      },
+      "testbench": {
+        "files": 16,
+        "inventory_sha256": "aaab945b63f9a28ba37ff04155f29b7282247a3cd50a2f67d3df6c1a9eb44777"
+      },
+      "platform_preparation": {
+        "files": 12,
+        "inventory_sha256": "b99f81e563f4e8baf4c86a9e5375034b93e09f6a87312525b0dd90afa988aedc"
+      }
+    },
+    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports and powerctx packages; synthesis constraints and power report collectors intentionally differ.",
+    "cpu_execution_implied": false
+  },
+  "actual_team_lock_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock"
 }

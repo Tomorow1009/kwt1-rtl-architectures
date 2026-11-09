@@ -97,8 +97,8 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "synth04_hold_and_latches_fixed_setup_output_budget_pending_asic_full02_running",
-    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "phase": "new_asic_full02_passed_lf_output_synth05_running_power_pending",
+    "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
     "software_samples": 600,
@@ -112,10 +112,10 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Finish repair d3_full02; freeze/upload corrected LF output budget and installer provenance checks; synth05 then full gate/activity/power. Current timing and power are not accepted.",
-    "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_toolenv_package",
+    "next": "Observe f03d1c9 d3_synth05; after strict report review run full mapped 14 cases and same-config activity/power. No accepted power or final timing yet.",
+    "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_powerctx_package",
     "server_uploaded": true,
-    "clean_package_input_files": 399,
+    "clean_package_input_files": 400,
     "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
     "d2_evidence": "evidence/UNDERGRAD_D2_20261109.json",
     "d2_package_readiness": "evidence/UNDERGRAD_D2_PACKAGE_20261109.json",
@@ -134,13 +134,13 @@
       "tcm",
       "asic_boot"
     ],
-    "new_cpu_tasks": 23,
-    "new_cpu_outputs": 582912,
-    "new_cpu_scope": "6 sequence, 1 ASIC smoke, 14 ASIC full, 1 gate smoke, 1 recovered activity simulation; repeated executions counted, re-audit not counted twice",
+    "new_cpu_tasks": 37,
+    "new_cpu_outputs": 937728,
+    "new_cpu_scope": "6 sequence + 1 ASIC smoke + 14 old ASIC full + 1 old gate smoke + 1 old activity simulation + 14 new ASIC full; distinct executions, re-audit not counted twice, excludes paused historical hex100",
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "latest uploaded repair/auditor preparation; NOT all runtime acceptance",
+    "source_commit_scope": "latest verified uploaded runtime package; ASIC full02 used byte-identical runtime inputs in 371316a, synthesis05 now running",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "synth04 mapped artifacts complete, latches=0 and hold positive; three LF output budget setup violations remain",
@@ -150,6 +150,7 @@
     "scoring_area_verified": false,
     "delivery_index": "../../workspaces/arch03/DELIVERY_INDEX_20261109.md",
     "whole_task_activity_audit_verified": true,
-    "uart_original_patched_comparison_verified": true
+    "uart_original_patched_comparison_verified": true,
+    "repaired_asic_matrix_suite_verified": true
   }
 }
