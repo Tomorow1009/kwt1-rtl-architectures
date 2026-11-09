@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','dma16_gate','dma16_power','dma16_sequence'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','mmio8_synth','dma16_gate','dma16_power','dma16_sequence'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -242,6 +242,10 @@ def main():
             elif a.stage=='dma16_power':
                 from dma16_power import estimate
                 report=estimate(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
+            elif a.stage=='mmio8_synth':
+                from mmio8_synth import synth
+                vendor(cfg,run)
+                report=synth(cfg,run,a.platform,call)
             elif a.stage=='dma16_synth':
                 from dma16_synth import synth
                 vendor(cfg,run)

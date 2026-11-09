@@ -135,6 +135,76 @@ proc quit {} {error UNEXPECTED_QUIT}
             t.eval(script)
         self.assertEqual(int(t.getvar('probed')), 0)
 
+    def test_actual_dc_arithmetic_reference_prefixes_do_not_alias_modules(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory); (run/'libs').mkdir(); paths = []
+            for name in ('std', 'small', 'large'):
+                path = run/'libs'/(name+'.db'); path.write_text(name); paths.append(path)
+            (run/'source_inputs.json').write_text(json.dumps({str(p): g.sha(p) for p in paths}))
+            script = g.probe_script(run)
+        # Names independently observed in the actual fcd mapped netlist.
+        # Match all predicates against multiple real-style hierarchy objects.
+        for fault in ('none', 'missing_accel', 'duplicate_accel'):
+            t = tkinter.Tcl(); t.eval(r'''
+set selected {};set completed 0;set messages {}
+set cells {
+  chip/mems/u_arch03_accel arch03_dma16_accel
+  chip/mems/u_arch03_accel/add_308 arch03_dma16_accel_DW01_add_0
+  chip/mems/u_arch03_accel/core arch03_linear16
+  chip/mems/u_arch03_accel/core/inc_4 arch03_linear16_DW01_inc_4
+  chip/mems/u_arch03_shared arch03_shared_sram
+  chip/mems/u_arch03_shared/bank0 arch03_sram_half_128
+  chip/mems/u_arch03_arb arch03_icb_arb2
+  chip/mems/u_arch03_router arch03_icb_memory_router
+}
+proc set_app_var {args} {}
+proc read_ddc {args} {}
+proc current_design {args} {}
+proc link {} {return 1}
+proc open {args} {return sink}
+proc close {args} {}
+proc get_cells {args} {
+  set filter [lindex $args end]
+  if {![regexp {^is_hierarchical == true && ref_name =~ ([^ ]+) && full_name =~ ([^ ]+)$} $filter -> refpattern pathpattern]} {error "unreviewed selection"}
+  set result {}
+  foreach {name reference} $::cells {
+    if {[string match $refpattern $reference] && [string match $pathpattern $name]} {lappend result $name}
+  }
+  return $result
+}
+proc sizeof_collection {c} {return [llength $c]}
+proc get_object_name {c} {return $c}
+proc get_attribute {object attribute} {
+  if {$attribute eq "ref_name"} {return [dict get $::cells $object]}
+  return in
+}
+proc get_pins {args} {
+  if {[lindex $args 0] eq "-of_objects"} {
+    lappend ::selected [lindex [lindex $args 1] 0];return {}
+  }
+  return clk_guard_pin
+}
+proc foreach_in_collection {name collection body} {
+  foreach item $collection {uplevel 1 [list set $name $item];uplevel 1 $body}
+}
+proc puts {args} {lappend ::messages [lindex $args end]}
+proc exit {code} {error "TASK_EXIT $code"}
+proc quit {} {set ::completed 1}
+''')
+            if fault == 'missing_accel':
+                t.eval('dict unset cells chip/mems/u_arch03_accel')
+            elif fault == 'duplicate_accel':
+                t.eval('dict set cells other/mems/u_arch03_accel arch03_dma16_accel_1')
+            if fault != 'none':
+                with self.subTest(fault=fault), self.assertRaisesRegex(tkinter.TclError, 'TASK_EXIT 1'):
+                    t.eval(script)
+                self.assertEqual(t.splitlist(t.getvar('selected')), ())
+            else:
+                t.eval(script)
+                self.assertEqual(set(t.splitlist(t.getvar('selected'))),
+                    {'chip/mems/'+suffix for suffix in g.INSTANCE_SUFFIXES.values()})
+                self.assertEqual(int(t.getvar('completed')), 1)
+
     def test_source_provenance_rejects_old_stage_and_changed_platform(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); bundle = root/'bundle'; run = bundle/'runs/synth/dma16_synth'; run.mkdir(parents=True)

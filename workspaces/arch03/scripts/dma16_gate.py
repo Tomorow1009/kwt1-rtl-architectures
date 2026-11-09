@@ -24,6 +24,8 @@ SCOPE = 'dma16_whole_soc_mapped_functional_without_SDF'
 PROBE_MARKER = 'DMA16_MAPPED_PORT_PROBE_READY netlist_modified=false'
 REFERENCES = dict(accel='arch03_dma16_accel', core='arch03_linear16', shared='arch03_shared_sram',
                   arb='arch03_icb_arb2', router='arch03_icb_memory_router')
+INSTANCE_SUFFIXES = dict(accel='u_arch03_accel', core='u_arch03_accel/core', shared='u_arch03_shared',
+                         arb='u_arch03_arb', router='u_arch03_router')
 SIMPLE_PATH = r'[A-Za-z_$][A-Za-z0-9_$]*(?:/[A-Za-z_$][A-Za-z0-9_$]*)*'
 
 
@@ -66,9 +68,14 @@ proc dma16_probe {} {
     current_design e203_soc_top
     if {![link]} {error "Mapped DMA16 probe link failed"}
     set out [open mapped_port_probe.tsv w]
-    foreach {role reference} {@REFERENCES@} {
-        set cells [get_cells -quiet -hierarchical -filter "is_hierarchical == true && ref_name =~ $reference*"]
-        if {[sizeof_collection $cells] != 1} {error "Missing/ambiguous actual mapped module $role"}
+    foreach {role reference instance} {@REFERENCES@} {
+        # DC also creates hierarchical arithmetic references named e.g.
+        # arch03_dma16_accel_DW01_add_*. Match the actual module instance
+        # suffix as well; never pick the first prefix match or bind a child.
+        set cells [get_cells -quiet -hierarchical -filter "is_hierarchical == true && ref_name =~ $reference* && full_name =~ */$instance"]
+        if {[sizeof_collection $cells] != 1} {
+            error "Missing/ambiguous actual mapped module ${role}: [get_object_name $cells]"
+        }
         set path [get_object_name $cells]
         puts $out "cell\t$role\t$path\t[get_attribute $cells ref_name]"
         foreach_in_collection pin [get_pins -of_objects $cells] {
@@ -95,7 +102,8 @@ if {[catch {dma16_probe} message]} {
 quit
 '''
     return text.replace('@LIBS@', ' '.join(tcl_path(p) for p in libraries)).replace('@DDC@', tcl_path(synthesis/'mapped.ddc')).replace(
-        '@REFERENCES@', ' '.join('%s %s' % pair for pair in sorted(REFERENCES.items()))).replace('@MARKER@', PROBE_MARKER)
+        '@REFERENCES@', ' '.join('%s %s %s' % (role, reference, INSTANCE_SUFFIXES[role])
+                                for role, reference in sorted(REFERENCES.items()))).replace('@MARKER@', PROBE_MARKER)
 
 
 def parse_probe(text, frozen_probe):

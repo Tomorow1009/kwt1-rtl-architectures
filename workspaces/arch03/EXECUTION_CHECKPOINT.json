@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "user_resumed_cloud_sync_then_DMA16_synthesis",
+    "phase": "MMIO8_source_smoke_running_and_gate_probe_fix_packaging",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Push saved evidence first; restore boardVNC; recheck original summarySHA and current sharedlock; new corrected synthesis under lock; continue gate/power/final1200",
+    "next": "Read MMIO8 single-layer state; package/upload local gate probe selection fix; new gate session reuses unchanged fcd synthesized hardware after hash audit. No failed run overwrite.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1820,7 +1820,7 @@
       "bytes": 16429946,
       "sha256": "c58499378295ba493ce7bdaff18dcd62b49fe9537252eb351376ef4b358fd7d0",
       "files": 624,
-      "hardware_executed": false,
+      "hardware_executed": true,
       "local_archive_audit_passed": true,
       "clean_contract_tests": 109,
       "firmware_variants": 4,
@@ -1871,9 +1871,44 @@
       "extremes_saturated": 6336,
       "rounding_saturated": 4554,
       "bus_metrics_parser_verified": true,
-      "bus_metrics_detailed_values_reviewed": false,
+      "bus_metrics_detailed_values_reviewed": true,
       "summary_sha256_transcription_candidate": "1b7e03944fcab5f17eefdd71bb5a6a739180e2718e8a77ddf9a0148704ec8514",
-      "summary_transcription_remotely_asserted": false
+      "summary_transcription_remotely_asserted": true,
+      "summary_sha256": "1b7e03944fcbaf5f17eefd71bb5a6a739180e2718e8a77ddf9a0148704ec8514",
+      "hash_verified_time": "2026-11-09T23:17:21.083030",
+      "prior_transcription_rejected": true,
+      "bus_service_observation": {
+        "observed": "2026-11-09T23:21:48.945435",
+        "phase_ack_counts": [
+          11744,
+          11744,
+          11744,
+          12672
+        ],
+        "phase_response_latency_min_max_cycles": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "cpu_grants": 0,
+        "competing_cycles": 0,
+        "actual_CPU_DMA_contention_measured": false,
+        "task_host_simulation_mean_seconds_rounded": 3.268,
+        "host_scope": "Simulation only, excludes preparation and receipt re-audit"
+      }
     },
     "pause_20261109_late": {
       "status": "user_paused",
@@ -1896,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": null,
+    "active_session": "mmio8_source01",
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": false,
@@ -1910,22 +1945,122 @@
       "last_observed": "2026-11-09T22:36:25.050096",
       "source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "runner_status_verified": true,
-      "phase_summary_details_reviewed": false,
+      "phase_summary_details_reviewed": true,
       "expected_phases": 10,
       "expected_complete_tasks": 3,
       "expected_outputs": 76032,
       "summary_sha256_transcription_candidate": "44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1",
-      "summary_transcription_remotely_asserted": false,
+      "summary_transcription_remotely_asserted": true,
       "evidence_image": "E:/fpga_race-two/takeover_local/d2_20261109/dma16_pause3_remote_status.png",
-      "timing_verified": false
+      "timing_verified": false,
+      "summary_sha256": "44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1",
+      "outputs": 76032,
+      "actual_CPU_traps_verified": true,
+      "actual_driver_timeout_verified": true,
+      "no_reset_ABA_verified": true,
+      "guarded_faults": 5,
+      "successful_tasks": 3,
+      "successful_task_cycles": 677310,
+      "average_cycles": 225770,
+      "saturation_counts": [
+        0,
+        4554,
+        0
+      ]
     },
     "resume_20261109_late": {
       "recorded": "2026-11-09T23:07:27+08:00",
       "authorized_by_user": true,
       "board_powered_on_by_user": true,
       "order": "cloud sync then continue implementation",
-      "server_state_rechecked": false,
-      "hardware_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5"
+      "server_state_rechecked": true,
+      "hardware_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+      "cloud_commit": "590b3b566655c1fd652a6fadcb6d5fd57d845798",
+      "cloud_remote_verified": true,
+      "board_VNC_restored": true,
+      "viewer_window": 18874435,
+      "vnc_relay_pid": 25104,
+      "ftp_proxy_pid": 30216,
+      "FileZilla_client_open": false
+    },
+    "dma16_fix_synth01": {
+      "state": "passed",
+      "meaning": "reports_ready_review_required",
+      "driver_pid": 205580,
+      "started_launcher": "2026-11-09T23:12:48.139901",
+      "started": "2026-11-09T23:12:49.044790",
+      "finished": "2026-11-09T23:32:09.934485",
+      "last_observed": "2026-11-09T23:43:53.855048",
+      "stage": "dma16_synth",
+      "run": "loopfixpackage/runs/dma16_fix_synth01/dma16_synth",
+      "source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+      "summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+      "summary_transcription_remotely_asserted": true,
+      "hash_method": "Decimal digest bytes transcribed after two failed small-font hexadecimal candidates; original summary unchanged",
+      "period_ns": "6.666666000000",
+      "lf_period_ns": "66.000000000000",
+      "setup_slack_ns": "2.90871e-05",
+      "hold_slack_ns": "0.00136402",
+      "latches": 0,
+      "large_macros": 130,
+      "small_macros": 32,
+      "whole_system_area_um2": "3957013.281303",
+      "known_added_area_mm2_rounded": 0.273483,
+      "conservative_budget_mm2_rounded": 0.434797,
+      "conservative_budget_within_2mm2": true,
+      "loop_breakpoints_detected": false,
+      "final_constraints_violated": false,
+      "timing_verified": false,
+      "scoring_area_verified": false,
+      "review_pending": [
+        "TIM-134 three high-fanout nets use fanout1000 delay estimate",
+        "Full mapped design warnings and inactive clock/disabled-arc review",
+        "Mapped14 and full activity/power",
+        "Physical/pre-layout scope must remain explicit"
+      ],
+      "hash_verified_time": "2026-11-09T23:43:53.855048"
+    },
+    "mmio8_source_synthesis_local": {
+      "status": "tool_contracts_passed_not_server_executed",
+      "tests": 34,
+      "reference_has_DMA": false,
+      "existing8_core_reused": true,
+      "server_synthesis_executed": false,
+      "source": "workspaces/arch03/scripts/mmio8_synth.py"
+    },
+    "dma16_fix_gate01": {
+      "state": "failed",
+      "driver_pid": 257190,
+      "started_launcher": "2026-11-09T23:45:13.003819",
+      "stage": "dma16_gate",
+      "source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+      "expected_cases": 14,
+      "expected_activity_cases": 12,
+      "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+      "firmware": "loopfixpackage/firmware_irq",
+      "outputs_verified": 0,
+      "timing_verified": false,
+      "system_power_verified": false,
+      "started": "2026-11-09T23:45:13.801071",
+      "finished": "2026-11-09T23:45:26.822803",
+      "failure_stage": "read_only_DC_module_port_probe_before_simulation",
+      "error": "Missing/ambiguous actual mapped module accel",
+      "cause": "Reference prefix also selects DC-created arch03_dma16_accel_DW01_* arithmetic hierarchy",
+      "source_or_netlist_changed": false,
+      "local_fix": "Reference prefix plus anchored actual instance suffix; exact module port set and original synthesis receipts remain required",
+      "related_tests_passed": 56
+    },
+    "mmio8_source01": {
+      "state": "launched_status_pending",
+      "driver_pid": 264068,
+      "started_launcher": "2026-11-09T23:51:40.124705",
+      "stage": "mmio8_soc",
+      "source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+      "cases": [
+        "layer_01"
+      ],
+      "reference_has_DMA": false,
+      "outputs_verified": 0
     }
   }
 }

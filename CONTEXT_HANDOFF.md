@@ -22,6 +22,25 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- 23:52：`dma16_fix_gate01` driver257190，started23:45:13.801071，finished23:45:26.822803 **failed**，只读DC模块探测未过，尚未编译/仿真，0输出。实际mapped.v同时含`arch03_dma16_accel`与多个`arch03_dma16_accel_DW01_*`算术子设计，旧ref前缀选法产生歧义。已本地改为ref前缀＋实际实例后缀双限定，仍逐位核对所有五模块边界/冻结probe；生产RTL、SDC与网表不变。56项gate/power/MMIO8/synth相关测试通过；第一遍新Tcl夹具因Python接收嵌套单元素tuple比对失败，已修夹具并全组重过。
+- 同一fcd包已请求启动`mmio8_source01`单layer_01实际CPU对照，启动前检查共享锁和本账号EDA均空；待读取PID/状态。准备提交新gate工具与MMIO8综合入口，独立包经FileZilla上传后在新session重跑gate14/活动12；严禁原地改fcd包或覆盖gate01失败目录。完整功耗、最终1200、正式报告和真实CPU竞争微基准仍待完成。
+
+- 23:45新综合已完成：`dma16_fix_synth01` finished23:32:09.934485。最终check_timing含Checking loops且无TIM-209/断弧；约束报告无违反项。setup +0.0000290871ns、hold +0.00136402ns、0锁存、130大宏/32小宏；保守面积约0.434797mm²（全部SoC标准单元＋加速器宏），已知新增约0.273483mm²。仍是布局前报告，严格时序/功耗总验收保持false；TIM-134三高扇出网用1000估算及设计/时钟警告待完整审计。
+- 新综合正确SHA为`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`，23:43:53.855048服务器assert已通过，真实共享锁False、本账号EDA列表空。两次小字体十六进制转录断言失败已保留截图，改32个十进制字节转回摘要后通过；原始summary未改变。
+- 已发送新`dma16_fix_gate01`启动命令：同fcd445f包/新synth01网表/原IRQ固件，默认14例、12层全部VCD；launcher PID/实际state待读取，不得重复启动。完成后首先审门级输出与活动，再逐层功耗，最终1200仍未启动。
+- 本地原8路同源`mmio8_synth.py`及7新测试已完成，相关34工具测试通过；无8路DMA，服务器尚未执行。`MMIO8_SYNTH_HANDOFF.md`记录独立网表及保守面积规则。新文件和本次证据尚未再次提交/push；不会改运行中的fcd包。一次中文Python管道编码失败未写出该文档，已改apply_patch成功保存。
+
+- 23:29压缩恢复核对：已重读AGENTS、有效三天计划、STATUS/执行检查点；云端最新仍590b3b5，受测RTL仍fcd445f。23:26:55.976046服务器实际综合仍running，driver205580，child208780；尚无dma16_metrics.txt，不重启/清锁。
+- 23:21实际14例bus_metrics已读：四段事务11744/11744/11744/12672，响应延迟分别1/1/2/1拍（各段min=max）；总47904次。IRQ/WFI运行cpu_grants和competing_cycles均0，不能据此宣称真实CPU/DMA竞争覆盖。实际仿真宿主约2.920—3.457秒/任务，均值约3.268秒，只代表仿真，不含最终批量准备/复核。
+- 本地新增mmio8_synth.py及server_run mmio8_synth入口，尚未测试/提交/上传；只给原8路软件搬运同加载源对照做新综合，不是8路DMA，不改变当前fcd服务器包。下一步审查并测试此入口，同时等当前DMA16综合自然结束。
+- 尚缺：新RTL严格STA与面积审计、同网表14门级/12全窗口功耗、最终1200 ASIC/30412800输出、实际同源MMIO8对照、竞争微基准及正式中文JSON/CSV交付。旧组合loop网表/旧37组/旧BEGIN功耗都不能替代。
+
+- 23:20恢复进展：七份证据/文档已提交并push私人分支`590b3b566655c1fd652a6fadcb6d5fd57d845798`，`git ls-remote`核对一致；生产受测源码仍fcd445f，不重传已在服务器的包。本机现VNC中继PID25104、FTP代理30216，板端查看器重新发现为18874435；FileZilla客户端尚未打开。VNC与FTP代理均由既有start_link.ps1恢复，固定目标/loopback限制不变。
+- 恢复后的首次摘要assert暴露暂停记录中的FULL SHA转录错误；原文件没有变化。正确FULL SHA为`1b7e03944fcbaf5f17eefd71bb5a6a739180e2718e8a77ddf9a0148704ec8514`，23:17:21.083030服务器assert已通过。sequence SHA仍`44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1`，已由服务器比较核实。旧candidate字段/截图保留为失败转录历史，不再使用其值。
+- 新`dma16_fix_synth01`已启动，driver **205580**，launcher23:12:48.139901，started23:12:49.044790；最后23:15实际state running。启动前再次检查本账号dc_shell/pt_shell/vcs/simv进程为空及真实共享锁不存在；runner仍独立持锁。第一次双SHA断言失败后已纠正，不能把那次失败输出说成两SHA都通过。禁止重启当前综合或清锁。
+- 恢复序列实际summary已细读关键指标：76032输出、actual_CPU_traps/actual_driver_timeout/no_reset_ABA均true、5 guarded faults；3完整任务合计677310周期，平均225770，饱和0/4554/0。这是实际CPU功能证据，不是门级/时序/功耗验收。
+- 当前只读查询已发出，待截图收回实际14例宿主耗时、四段ACK延迟、CPU竞争统计及disk_free；勿盲目重复输入。新综合完成后先审TIM-209/约束/面积，再门级14及12完整活动功耗。最终1200、MMIO8同加载源对照仍未运行；中文最终JSON/CSV报告生成器也尚未实现。
+
 - 已重新读取有效三天计划、AGENTS、交接及JSON检查点。用户明确恢复开发板和工程操作，并先要求云端同步；既有上传范围与FileZilla单连接方案继续有效。
 - 本次待同步仅7份证据/Markdown文档，不含凭据、厂商库或大型运行产物；受测生产RTL仍是fcd445f，不为文档提交重跑已完成14例。两摘要SHA转录尚需服务器assert，保留未复核标记。
 - 云端同步后重建本机VNC中继与板端查看器；不复用旧窗口ID或已停止PID，不清协作锁，不重跑旧1200的37组。新综合仍待实际状态检查后启动。
