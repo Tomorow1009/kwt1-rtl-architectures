@@ -1,5 +1,7 @@
 # 原8路同源对照的门级及功耗入口
 
+03:31服务器回执：上述报告入口已随414bc56新包完成654输入/五固件/123项干净检查，并通过板端及服务器整ZIP SHA。服务器03:27:08核对全部654输入，且新导出器只读检查真实c5 ASIC14摘要格式、窗口及3843121周期通过。仍没有实际新MMIO8综合/门级/PPA完整导出；下方“尚未上传”是此前状态。当前gate03已完成前11层，第12层全活动扫描中。
+
 03:20新增本地报告入口：`mmio8_report.py`要求本版本真实ASIC14、新综合网表门级14、12个完整活动窗口及绑定的功耗摘要，导出JSON、逐层/模块/汇总CSV及中文报告。它使用138宏范围、原8路固件与source布局，比较全部14例输出/饱和，拒绝DMA16/旧BEGIN/预装ITCM证据；能量保留首VALID实际相位，缺层功耗不补零。50项相关测试通过；仍只有本地合成测试，没有实际新MMIO8 PPA或完整导出，尚未上传本次新入口。共享DMA16写出器仅增加可选标题和回执schema，默认行为未改变，生产RTL/固件未变。
 
 入口：`python3 workspaces/arch03/scripts/mmio8_report.py --request <新JSON> --output <不存在目录>`。请求schema为`mmio8-source-report-request-v1`；asic/synthesis/gate各含run及sha256，power为可选数组，history保留failed/stopped/unverified记录。最终1200候选回归不挂在本对照请求上，禁止混用DMA16批量证据。所有批准功耗/能耗及验收标志继续保留null/false，需实际报告和独立审核。

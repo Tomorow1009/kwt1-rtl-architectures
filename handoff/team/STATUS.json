@@ -767,12 +767,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T03:20:26.602751",
-      "child_pid_last": null,
-      "child_log_last": "layer_11_activity_scan.log",
+      "last_observed": "2026-11-10T03:27:51.694021",
+      "child_pid_last": 157914,
+      "child_log_last": "layer_12_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 10,
+      "completed_cases": 11,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -799,9 +799,10 @@
         "layer_07",
         "layer_08",
         "layer_09",
-        "layer_10"
+        "layer_10",
+        "layer_11"
       ],
-      "child_cpu_percent_last": 99.7
+      "child_cpu_percent_last": 100.0
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -1041,7 +1042,7 @@
       "module": "workspaces/arch03/scripts/mmio8_report.py",
       "related_tests": 50,
       "actual_mmio8_full_export_executed": false,
-      "server_uploaded": false,
+      "server_uploaded": true,
       "production_rtl_firmware_changed": false,
       "required_cases": 14,
       "required_activity_layers": 12,
@@ -1060,6 +1061,39 @@
         12
       ],
       "actual_batch_started": false
+    },
+    "ref_export_package": {
+      "source_commit": "414bc5631438bed31e7228d8659ccd519ad1ac7f",
+      "archive": "light-light126-ref-export-dma16-20261110_032204-414bc5631438.zip",
+      "bytes": 16545313,
+      "files": 654,
+      "sha256": "06cb7083b785c069439d59029adce6d5aedc1a304f47d9f70cd355a5ac7d5d0a",
+      "clean_audit": "local_runs/dma16_ref_export_clean_audit_20261110_0323/receipt.json",
+      "clean_audit_sha256": "c041f91d1ddff5570486a9beeb55330de94a4f0ac7fda249339010a054a46cec",
+      "clean_tests": 123,
+      "firmware_variants": 5,
+      "board_staged": true,
+      "board_sha_verified": true,
+      "server_uploaded": true,
+      "cloud_push_pending": true,
+      "hardware_changed": false,
+      "formal_irq_firmware_changed": false,
+      "server_zip_sha_verified": true,
+      "server_unpacked_observed": "2026-11-10T03:26:19.036366",
+      "server_inputs_verified": 654,
+      "server_inputs_observed": "2026-11-10T03:27:08.350746",
+      "ftp_disconnected": true,
+      "ftp_queue_empty": true,
+      "actual_mmio8_asic14_schema_checked": true
+    },
+    "waveform_storage_observation": {
+      "observed": "2026-11-10T03:29:47.972852",
+      "gate_vcd_files": 12,
+      "gate_vcd_bytes": 102909728001,
+      "filesystem_free_bytes": 2818079457280,
+      "filesystem_total_bytes": 9597106520064,
+      "individual_quota_checked": false,
+      "files_deleted": false
     }
   }
 }
