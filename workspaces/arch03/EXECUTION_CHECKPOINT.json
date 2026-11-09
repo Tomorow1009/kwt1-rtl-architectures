@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "USER PAUSED. Board FileZilla and VNC closed, queue empty. Full02 CPU pass preserved. Synth05 already failed naturally at 10:01:32 and released lock; no remote EDA active at 10:05:59. Exactport package transferred, NOT server-unpacked.",
+  "last_completed_stage": "Cloud branch verified at 9b7cff5; board/VNC restored; exactport ZIP SHA256 and all 400 inputs verified. Independent d3_synth06 started 10:58:34, driver 113085. Full02 pass and failed synth05 preserved.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -36,22 +36,21 @@
     "D3 real E203 d3_sequence01 passed two A/B/A sequences: six full captures 152064 outputs, no resets between tasks, poison17/abort and one-LOAD actual-driver timeout/recovery passed. All six measured windows 3890077 cycles at 6.666666 ns; ASIC/gate/power not implied.",
     "D3 ASIC d3_smoke04 passed layer_01 all 25344 outputs without global FPGA define; real vendor TCM and stdcells, boot verified, task clock mode 0/1/1, window 3890080 cycles at 6.666666 ns. Gate/STA/power and complete ASIC suite remain pending.",
     "d3_full01 ASIC-bound RTL 14 cases passed, 354816 actual CPU outputs, all task windows 3890080 cycles at 6.666666 ns; synthetic saturations match references. Gate/STA/power pending.",
-    "d3_reports01 report re-audit and d3_gate01 mapped layer_01 passed; 25344 outputs and 3890080-cycle window. Negative timing preserved. d3_activity01 running."
+    "d3_reports01 report re-audit and d3_gate01 mapped layer_01 passed; 25344 outputs and 3890080-cycle window. Negative timing preserved. d3_activity01 running.",
+    "Resume: private cloud branch pushed and remote hash verified; exactport 400 server input hashes passed; synth06 launched without changing frozen runtime."
   ],
   "pending_authorization": {
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
     "current_package": "../../local_runs/light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
-    "reason": "Prior explicit upload authorization remains valid, but user has paused all new work. 16 FileZilla transfers completed; latest exactport archive awaits server hash/unpack.",
+    "reason": "Existing upload authorization remains valid; user explicitly resumed and authorized cloud sync. Exactport archive now server-verified and unpacked.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "WAIT for explicit user resume; reread implementation plan and this checkpoint before new work",
-    "Reconnect board/VNC with fresh window inventory; preserve remote terminal session and verify actual IC/.arch02_team_lock",
-    "Verify exactport ZIP SHA256 c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7 and safe-unpack all 400 inputs",
-    "Run exactport source 5754632 independent synth06; inspect exact three LF outputs, error-stop setting, four CDC pins, strict timing and coverage",
-    "After valid synthesis, complete full mapped 14-case functionality and same-config activity/power; then final reports and unresolved official submission/scoring requirements"
+    "Monitor d3_synth06; inspect three exact LF outputs, fail-fast SDC, four CDC pins, strict timing and coverage",
+    "After valid synthesis, complete mapped 14-case functionality and same-config full-task activity/power",
+    "Review final area, units, coverage and energy; finish delivery evidence and unresolved official scoring/submission requirements"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -66,7 +65,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "No remote EDA active at pause. Remote MateTerminal preserved: third diagnostic tab cwd SDC bundle, fourth cwd reports bundle with completed failed synth05. Board viewers both closed; all old window IDs must be refreshed on resume.",
+  "server_readonly_job": "d3_synth06 running in remote terminal tab 4; tab 3 remains diagnostic. Shared lock owned by driver 113085. Do not duplicate jobs or remove lock.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -97,7 +96,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Pause/result documentation only; runtime exactport commit 57546321d739db04b0850732d3f98297f9823f3d committed and transferred, awaiting server unpack.",
+  "uncommitted_follow_on": "Documentation-only resume/cloud/plan records; frozen runtime remains 57546321d739db04b0850732d3f98297f9823f3d.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -1247,7 +1246,9 @@
       "pause_server_final_state.png",
       "pause_board_apps_closed.png"
     ],
-    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts."
+    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts.",
+    "resumed": true,
+    "resume_record": "resume"
   },
   "latest_exactport_package": {
     "status": "passed_local_package",
@@ -1259,8 +1260,8 @@
       "files": 400,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
-      "server_zip_sha256_verified": false,
-      "server_safe_unpack_hashes_verified": false
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     },
     "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_exactport_clean_20261109\\light-light126-d3-exactport-arch03-20261109_100139-57546321d739",
     "cases": [
@@ -1285,6 +1286,54 @@
     "server_uploaded": true,
     "asic_link_verified": false,
     "transfer_screenshot": "pause_filezilla_state.png",
-    "server_unpack_status": "NOT_RUN_user_paused_after_transfer"
+    "server_unpack_status": "passed_400_input_hashes",
+    "unpack_screenshot": "resume_exactport_unpack_done.png",
+    "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-exactport-arch03-20261109_100139-57546321d739"
+  },
+  "resume": {
+    "status": "resumed_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "user_request": "同步到云端一下，然后继续，开发板已经上电了",
+    "board_connection_restored": true,
+    "remote_desktop_preserved": true,
+    "preflight_time": "2026-11-09T10:54:38",
+    "preflight_eda_processes": [],
+    "preflight_team_lock_present": false,
+    "server_unpack_verified": true,
+    "server_verified_inputs": 400,
+    "screenshots": [
+      "resume_exactport_unpack_done.png",
+      "resume_synth06_state.png"
+    ]
+  },
+  "cloud_sync": {
+    "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
+    "private": true,
+    "branch": "codex/light-light126/undergrad-d1-numerics",
+    "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+    "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
+    "main_merged": false
+  },
+  "exactport_synthesis": {
+    "status": "running",
+    "session": "d3_synth06",
+    "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+    "driver_pid": 113085,
+    "started": "2026-11-09T10:58:34.605128",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-exactport-arch03-20261109_100139-57546321d739/runs/d3_synth06/asic_synth",
+    "timing_verified": false,
+    "gate_simulation_verified": false,
+    "system_power_verified": false,
+    "change": "Correct lowercase-o LF port and fail-fast DC SDC source; hardware/firmware identical to repaired full02",
+    "screenshots": [
+      "resume_synth06_start.png",
+      "resume_synth06_state.png"
+    ]
+  },
+  "plan_mirror": {
+    "path": "IMPLEMENTATION_PLAN_20261109.md",
+    "sha256": "3f82eb12865f22ee39bbe0149b1e0b12d76a7f4519100f9902cbc8660a5bd5eb",
+    "scope": "Exact copy of user-supplied implementation plan; current evidence takes precedence over prospective completion statements"
   }
 }

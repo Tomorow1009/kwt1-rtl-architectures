@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "paused_by_user",
+    "phase": "resumed_exactport_synthesis_running",
     "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Wait for user resume. Board VNC/FileZilla closed; no remote EDA active at 10:05:59. Verify/unpack exactport then new synth06; preserve failed synth05 and passed full02.",
+    "next": "Monitor d3_synth06, review strict timing and coverage, then new mapped 14-case suite and same-config power. Preserve failed synth05 and passed full02.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_exactport_package",
     "server_uploaded": true,
     "clean_package_input_files": 400,
@@ -140,7 +140,7 @@
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "exactport runtime locally verified and FileZilla transferred; server ZIP verification/unpack and synth06 not started",
+    "source_commit_scope": "Exactport committed runtime and all 400 server inputs verified; d3_synth06 running. No new gate/timing/power acceptance yet.",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "synth04 mapped artifacts complete, latches=0 and hold positive; three LF output budget setup violations remain",
@@ -152,6 +152,16 @@
     "whole_task_activity_audit_verified": true,
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
-    "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause"
+    "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause",
+    "active_session": "d3_synth06",
+    "cloud_sync": {
+      "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
+      "private": true,
+      "branch": "codex/light-light126/undergrad-d1-numerics",
+      "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+      "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
+      "main_merged": false
+    },
+    "resume_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json resume"
   }
 }

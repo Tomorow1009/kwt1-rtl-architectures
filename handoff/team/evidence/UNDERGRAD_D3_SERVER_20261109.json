@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "paused_by_user_full02_passed_synth05_failed_exactport_uploaded_not_unpacked",
+  "status": "resumed_exactport_synth06_running_full02_passed",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -154,8 +154,8 @@
       "files": 400,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
-      "server_zip_sha256_verified": false,
-      "server_safe_unpack_hashes_verified": false
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     }
   ],
   "local_screenshot_root": "../takeover_local/d2_20261109",
@@ -1317,7 +1317,9 @@
       "pause_server_final_state.png",
       "pause_board_apps_closed.png"
     ],
-    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts."
+    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts.",
+    "resumed": true,
+    "resume_record": "resume"
   },
   "latest_exactport_package": {
     "status": "passed_local_package",
@@ -1329,8 +1331,8 @@
       "files": 400,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
-      "server_zip_sha256_verified": false,
-      "server_safe_unpack_hashes_verified": false
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
     },
     "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_exactport_clean_20261109\\light-light126-d3-exactport-arch03-20261109_100139-57546321d739",
     "cases": [
@@ -1355,6 +1357,49 @@
     "server_uploaded": true,
     "asic_link_verified": false,
     "transfer_screenshot": "pause_filezilla_state.png",
-    "server_unpack_status": "NOT_RUN_user_paused_after_transfer"
+    "server_unpack_status": "passed_400_input_hashes",
+    "unpack_screenshot": "resume_exactport_unpack_done.png",
+    "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-exactport-arch03-20261109_100139-57546321d739"
+  },
+  "resume": {
+    "status": "resumed_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "user_request": "同步到云端一下，然后继续，开发板已经上电了",
+    "board_connection_restored": true,
+    "remote_desktop_preserved": true,
+    "preflight_time": "2026-11-09T10:54:38",
+    "preflight_eda_processes": [],
+    "preflight_team_lock_present": false,
+    "server_unpack_verified": true,
+    "server_verified_inputs": 400,
+    "screenshots": [
+      "resume_exactport_unpack_done.png",
+      "resume_synth06_state.png"
+    ]
+  },
+  "cloud_sync": {
+    "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
+    "private": true,
+    "branch": "codex/light-light126/undergrad-d1-numerics",
+    "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+    "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
+    "main_merged": false
+  },
+  "exactport_synthesis": {
+    "status": "running",
+    "session": "d3_synth06",
+    "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+    "driver_pid": 113085,
+    "started": "2026-11-09T10:58:34.605128",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-exactport-arch03-20261109_100139-57546321d739/runs/d3_synth06/asic_synth",
+    "timing_verified": false,
+    "gate_simulation_verified": false,
+    "system_power_verified": false,
+    "change": "Correct lowercase-o LF port and fail-fast DC SDC source; hardware/firmware identical to repaired full02",
+    "screenshots": [
+      "resume_synth06_start.png",
+      "resume_synth06_state.png"
+    ]
   }
 }
