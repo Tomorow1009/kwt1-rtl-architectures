@@ -92,7 +92,7 @@ quit
         'dma_router', 'source_router').replace('DMA16', 'MMIO8 source')
     values = dict(LIBS=' '.join(soc_power.tcl_path(p) for p in soc_power.power_databases(synthesis)),
         NETLIST=soc_power.tcl_path(synthesis/'mapped.v'), SDC=soc_power.tcl_path(synthesis/'mapped.sdc'),
-        VCD=soc_power.tcl_path(vcd), START=start, END=end, MACROS=synth.macro_guard(),
+        VCD=soc_power.tcl_path(vcd), START=start, END=end, MACROS=shared.quiet_absence_checks(synth.macro_guard()),
         PORTS=synth.shared.port_guard('power_sysmem_ports.tsv'), COMPONENTS=inventory, MARKER=MARKER)
     for key, value in values.items():
         text = text.replace('@'+key+'@', value)

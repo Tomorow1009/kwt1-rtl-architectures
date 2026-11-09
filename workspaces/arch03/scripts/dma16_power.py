@@ -77,6 +77,16 @@ close $inventory_file
 '''
 
 
+def quiet_absence_checks(guard):
+    # PT T-2022.03 emits SEL-005 for an empty non-quiet get_cells result,
+    # even when sizeof_collection correctly returns zero. Only the query
+    # asserting that functional memory is ABSENT may legitimately be empty.
+    # Required macro counts and the explicit nonempty-forbidden check remain.
+    return replace_once(guard,
+        '[get_cells -hierarchical -filter "ref_name =~ $forbidden*"]',
+        '[get_cells -quiet -hierarchical -filter "ref_name =~ $forbidden*"]')
+
+
 def script(cfg, synthesis, vcd, window):
     window_values(window)
     text = soc_power.script(cfg, synthesis, vcd, window)
@@ -88,7 +98,7 @@ def script(cfg, synthesis, vcd, window):
     text = replace_once(text, 'redirect timing_check.rpt {check_timing}',
                         'redirect timing_check.rpt {check_timing -verbose}\n'
                         '    redirect disabled_timing.rpt {report_disable_timing -nosplit}')
-    text = replace_once(text, 'redirect units.rpt', macro_guard()+port_guard('power_sysmem_ports.tsv')+
+    text = replace_once(text, 'redirect units.rpt', quiet_absence_checks(macro_guard())+port_guard('power_sysmem_ports.tsv')+
                         component_inventory_script()+'\n    redirect units.rpt')
     text = replace_once(text, 'ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false', MARKER)
     return text

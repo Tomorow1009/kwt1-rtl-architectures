@@ -48,6 +48,47 @@ def fake_databases(run):
 
 
 class Dma16PowerTests(unittest.TestCase):
+    def test_pt_expected_absence_is_quiet_but_real_forbidden_memory_still_fails(self):
+        import mmio8_synth
+        for guard, small in ((p.macro_guard(), 32), (mmio8_synth.macro_guard(), 8)):
+            fixed = p.quiet_absence_checks(guard)
+            def interpreter(forbidden='', missing=False):
+                t = tkinter.Tcl(); t.setvar('forbidden_present', forbidden); t.setvar('missing', int(missing))
+                t.setvar('small_count', small)
+                t.eval(r'''
+proc get_cells {args} {
+    set filter [lindex $args end]
+    if {[string first "ref_name =~ " $filter] == 0} {
+        if {[lsearch -exact $args -quiet] < 0} {error "SEL-005 expected-empty query"}
+        set prefix [string range $filter 12 end-1]
+        if {$prefix eq $::forbidden_present} {return {functional_memory}}
+        return {}
+    }
+    set result {}
+    if {$filter eq "ref_name == RAMSP128X16"} {
+        for {set i 0} {$i < $::small_count-$::missing} {incr i} {lappend result "top/u_arch03_accel/small$i"}
+    } elseif {$filter eq "ref_name == RAMSP4096X16"} {
+        foreach {owner count} {u_e203_itcm_gnrl_ram 32 u_e203_dtcm_gnrl_ram 32 u_arch03_shared 64 u_arch03_accel 2} {
+            for {set i 0} {$i < $count} {incr i} {lappend result "top/$owner/big$i"}
+        }
+    } else {error "Unexpected required-cell query"}
+    return $result
+}
+proc sizeof_collection {v} {return [llength $v]}
+proc get_object_name {v} {return $v}
+proc foreach_in_collection {name collection body} {
+    foreach v $collection {uplevel 1 [list set $name $v];uplevel 1 $body}
+}
+''')
+                return t
+            with self.subTest(small=small):
+                with self.assertRaisesRegex(tkinter.TclError, 'SEL-005'): interpreter().eval(guard)
+                interpreter().eval(fixed)
+                for name in ('sirv_sim_ram', 'sram_wrap_32KX64', 'sram_wrap_64KX32', 'ROM1KX32'):
+                    with self.assertRaises(tkinter.TclError): interpreter(name).eval(fixed)
+                with self.assertRaises(tkinter.TclError): interpreter(missing=True).eval(fixed)
+        with self.assertRaises(ValueError): p.quiet_absence_checks('unexpected guard template')
+
     def test_exact_first_valid_last_ack_and_later_drain_proof(self):
         self.assertEqual(p.window_values(window()), ('100', '119.999998', '19.999998'))
         for key, value in [('boundary', 'begin_to_fifo'), ('transfer_bytes', 144640), ('end_cycle', 19),

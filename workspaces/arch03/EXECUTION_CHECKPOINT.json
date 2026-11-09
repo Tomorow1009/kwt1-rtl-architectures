@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_gate14_activity12_passed_first_full_window_power_running",
+    "phase": "DMA16_gate14_activity12_passed_power_expected_empty_query_fix_pending",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Review actual first DMA16 PT reports/units/no_clock/disabled arcs/X/coverage/models. Complete actual CPU contention, final1200, remaining11 powers, MMIO8 fresh PPA, reviewed exports and clean reproduction. Shared EDA sequential.",
+    "next": "Commit/package/clean-audit/upload PT expected-absence query fix; start a new first-layer power session only after shared-lock/EDA checks. Preserve failed l01_v1, keep all guard errors fail-closed. Then first PT review, contention, final1200, remaining powers/MMIO8 PPA/export/reproduction.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1931,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": "dma16_power_l01_v1",
+    "active_session": null,
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": false,
@@ -2591,7 +2591,7 @@
       "files_deleted": false
     },
     "dma16_power_l01_v1": {
-      "state": "running",
+      "state": "failed",
       "bundle": "light-light126-ref-export-dma16-20261110_032204-414bc5631438",
       "session": "dma16_power_l01_v1",
       "stage": "dma16_power",
@@ -2601,14 +2601,37 @@
       "child_log_last": "power.log",
       "started_launcher": "2026-11-10T03:47:17.440913",
       "started": "2026-11-10T03:47:17.940385",
-      "last_observed": "2026-11-10T03:48:09.774588",
+      "last_observed": "2026-11-10T03:53:50.710187",
       "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
       "system_power_verified": false,
-      "launch_guard_rejected_transposed_hash_before_any_job": true
+      "launch_guard_rejected_transposed_hash_before_any_job": true,
+      "finished": "2026-11-10T03:52:26.901824",
+      "tool_exit_code": 0,
+      "log_errors": 4,
+      "log_warnings": 1553,
+      "strict_error_rejection": true,
+      "shared_lock_released": true,
+      "manual_stop_signal_sent": false,
+      "manual_stop_record_exists": false,
+      "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "current_server_tool_commit": "414bc5631438bed31e7228d8659ccd519ad1ac7f",
     "dma16_complete_gate_suite_verified": true,
-    "dma16_complete_activity_suite_verified": true
+    "dma16_complete_activity_suite_verified": true,
+    "pt_expected_absence_fix": {
+      "status": "local_tests_passed_not_uploaded",
+      "cause": "PT emits SEL-005 for four expected-empty nonquiet forbidden-memory get_cells queries",
+      "change": "Add -quiet only to expected-absence queries; keep nonempty forbidden guard, exact macro inventory and all actual error rejection",
+      "related_tests": 51,
+      "changes": [
+        "workspaces/arch03/scripts/dma16_power.py",
+        "workspaces/arch03/scripts/mmio8_power.py",
+        "workspaces/arch03/scripts/test_dma16_power.py"
+      ],
+      "hardware_changed": false,
+      "synthesis_changed": false,
+      "gate_changed": false
+    }
   }
 }
