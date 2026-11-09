@@ -1,7 +1,8 @@
 """Extract actual PT numerical reports; never grant system power acceptance.
 
 Format checked against installed T-2022.03-SP5-1 report_units/report_power.
-Only the observed explicit 1-W dynamic AND leakage units are accepted. Other
+Power units are in report_power -verbose, not report_units. Only the observed
+explicit 1-W dynamic AND leakage units are accepted. Other
 unit settings need a reviewed conversion, not an inferred multiplier.
 """
 import argparse
@@ -10,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 from dma16_power import POWER_SCOPE, validate_activity
 
 NUMBER = r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?'
@@ -46,24 +48,59 @@ def number(token):
 
 def rounding(token):
     # The last displayed decimal digit gives an explicit half-unit bound.
-    return Decimal('0.5')*Decimal(10)**number(token).as_tuple().exponent
+    value = number(token)
+    return Decimal(0) if value == 0 else Decimal('0.5')*Decimal(10)**value.as_tuple().exponent
+
+
+def observed_binary32_rounding(token):
+    # Actual nine-digit PT cell values round-trip exactly as IEEE binary32.
+    # Only those observed representations qualify for a half-ULP allowance;
+    # this is not a general relative tolerance or a power-model accuracy claim.
+    raw = struct.pack('>f', float(number(token)))
+    value = struct.unpack('>f', raw)[0]
+    require(format(value, '.8e') == token.lower(), 'Value is not an observed binary32 representation')
+    bits = struct.unpack('>I', raw)[0]
+    require(bits < 0x7f7fffff, 'Nonfinite/overflowing binary32 power')
+    next_value = struct.unpack('>f', struct.pack('>I', bits+1))[0]
+    return (Decimal.from_float(next_value)-Decimal.from_float(value))/2
 
 
 def check_sum(terms, total, context):
     error = abs(sum(number(x) for x in terms)-number(total))
-    require(error <= sum(rounding(x) for x in terms)+rounding(total), 'Power sum mismatch: '+context)
+    bound = sum(rounding(x) for x in terms)+rounding(total); basis = 'decimal_display_rounding'
+    if error > bound:
+        try: bound += sum(observed_binary32_rounding(x) for x in terms+[total])
+        except (ValueError, OverflowError, struct.error):
+            raise ValueError('Power sum mismatch: '+context)
+        basis = 'decimal_display_plus_exact_binary32_roundtrip_half_ulp'
+    require(error <= bound, 'Power sum mismatch: '+context)
+    return dict(residual_w=str(error), bound_w=str(bound), numerical_basis=basis)
 
 
 def parse_units(text):
     values = {}
     for line in text.splitlines():
-        if re.match(r'\s*(?:Dynamic|Leakage)_power_unit\b', line):
-            match = re.fullmatch(r'\s*(Dynamic|Leakage)_power_unit\s*:\s*('+NUMBER+r')\s+Watt\s*', line)
+        if re.match(r'\s*(?:Dynamic|Leakage) Power Units\b', line):
+            match = re.fullmatch(r'\s*(Dynamic|Leakage) Power Units\s*=\s*('+NUMBER+r')\s+W\s*', line)
             require(match is not None and match.group(1) not in values, 'Unknown/duplicate PT power units')
             require(number(match.group(2)) == 1, 'PT power unit scale changed; review conversion')
             values[match.group(1)] = '1 Watt'
     require(set(values) == {'Dynamic', 'Leakage'}, 'Missing explicit dynamic/leakage power units')
     return values
+
+
+def parse_base_units(text):
+    require(re.search(r'(?m)^\s*Report\s*:\s*units\s*$', text) and
+            re.search(r'(?m)^\s*Design\s*:\s*e203_soc_top\s*$', text), 'Not the actual whole-SoC report_units')
+    wanted = {'Capacitive_load_unit': (Decimal('1e-12'), 'Farad'),
+              'Time_unit': (Decimal('1e-9'), 'Second'), 'Voltage_unit': (Decimal(1), 'Volt')}
+    result = {}
+    for key, (expected, unit) in wanted.items():
+        matches = re.findall(r'(?m)^\s*'+key+r'\s*:\s*('+NUMBER+r')\s+(\S+)\s*$', text)
+        require(len(matches) == 1 and number(matches[0][0]) == expected and matches[0][1] == unit,
+                'Missing/changed report_units field '+key)
+        result[key] = matches[0][0]+' '+unit
+    return result
 
 
 def parse_power(units, text):
@@ -87,10 +124,12 @@ def parse_power(units, text):
         elif re.match(r'\s*[A-Za-z_][A-Za-z_0-9]*\s+'+POWER_NUMBER+r'\s+'+POWER_NUMBER, line):
             raise ValueError('Unreviewed PT power group')
     require(set(totals) == set(LABELS.values()) and set(groups) == set(GROUPS), 'Incomplete PT power table/totals')
-    for name, row in groups.items(): check_sum([row[k] for k in ('internal', 'switching', 'leakage')], row['total'], name)
-    for key in totals: check_sum([groups[name][key] for name in GROUPS], totals[key], 'all groups '+key)
-    check_sum([totals[k] for k in ('internal', 'switching', 'leakage')], totals['total'], 'whole SoC')
+    checks = {}
+    for name, row in groups.items(): checks['group_'+name] = check_sum([row[k] for k in ('internal', 'switching', 'leakage')], row['total'], name)
+    for key in totals: checks['column_'+key] = check_sum([groups[name][key] for name in GROUPS], totals[key], 'all groups '+key)
+    checks['whole_soc'] = check_sum([totals[k] for k in ('internal', 'switching', 'leakage')], totals['total'], 'whole SoC')
     return dict(units=unit_values, reported_power_w=totals, reported_group_power_w=groups,
+                numerical_sum_checks=checks,
                 derived_dynamic_w=str(number(totals['internal'])+number(totals['switching'])),
                 note='Strings preserve reported decimal precision; grouping is PT taxonomy, not overlapping module hierarchy.')
 
@@ -99,9 +138,18 @@ def hierarchy_rounding(token):
     # Installed PT hierarchy output uses three significant digits even with
     # -significant_digits 8. Exact zero prints 0.000; small nonzero values use
     # scientific notation, so zero does not mean +/-0.0005 W.
-    require(token == '0.000' or re.fullmatch(r'[1-9]\.[0-9]{2}e[+-][0-9]{2,3}', token),
+    require(token == '0.000' or re.fullmatch(r'-?[1-9]\.[0-9]{2}e[+-][0-9]{2,3}', token),
             'Unreviewed PT hierarchy numerical format')
-    return Decimal(0) if token == '0.000' else rounding(token)
+    return Decimal(0) if token == '0.000' else Decimal('0.5')*Decimal(10)**Decimal(token).as_tuple().exponent
+
+
+def hierarchy_value(key, token):
+    # Actual PT reports contain signed internal contributions for two clock
+    # gate rows. Preserve them for model review; never drop or clamp them.
+    if key == 'internal':
+        require(re.fullmatch('-?'+NUMBER, token), 'Invalid signed internal contribution')
+        return Decimal(token)
+    return number(token)
 
 
 def parse_hierarchy(text, totals):
@@ -109,9 +157,9 @@ def parse_hierarchy(text, totals):
             re.search(r'(?m)^\s*Design\s*:\s*e203_soc_top\s*$', text) and
             re.search(r'(?m)^Hierarchy\s+Power\s+Power\s+Power\s+Power\s+%\s*$', text),
             'Unreviewed hierarchy header or design')
-    row_pattern = (r'^( *)(\S+)(?: \(([^()\s]+)\))?\s+'+
-                   r'\s+'.join(['('+NUMBER+')']*5)+r'\s*$')
-    stack = []; rows = {}; selected = {}; begun = False
+    row_pattern = (r'^( *)(\S+)(?: \(([^()\s]+)\))?\s+(-?'+NUMBER+r')\s+'+
+                   r'\s+'.join(['('+NUMBER+')']*4)+r'\s*$')
+    stack = []; rows = {}; selected = {}; begun = False; negative_internal = []
     for line in text.splitlines():
         match = re.fullmatch(row_pattern, line)
         if match is None:
@@ -127,8 +175,10 @@ def parse_hierarchy(text, totals):
         values = dict(zip(KEYS, match.groups()[3:7]))
         errors = {k: hierarchy_rounding(v) for k, v in values.items()}
         require(number(match.group(8)) <= 100, 'Invalid hierarchy percentage')
-        require(abs(sum(number(values[k]) for k in KEYS[:3])-number(values['total'])) <= sum(errors.values()),
+        require(abs(sum(hierarchy_value(k, values[k]) for k in KEYS[:3])-number(values['total'])) <= sum(errors.values()),
                 'Hierarchy row power sum mismatch')
+        if hierarchy_value('internal', values['internal']) < 0:
+            negative_internal.append(dict(path=path, reported_internal_w=values['internal']))
         rows[path] = dict(path=path, reported_power_w=values, rounding_bound_w={k: str(v) for k, v in errors.items()})
         for role, token in MODULES.items():
             if name == token:
@@ -138,7 +188,7 @@ def parse_hierarchy(text, totals):
     require(set(selected) == set(MODULES), 'Missing DMA16 hierarchy modules')
     root = rows['e203_soc_top']
     for key in KEYS:
-        require(abs(number(root['reported_power_w'][key])-number(totals[key])) <=
+        require(abs(hierarchy_value(key, root['reported_power_w'][key])-number(totals[key])) <=
                 number(root['rounding_bound_w'][key])+rounding(totals[key]), 'Hierarchy/root total differs')
     cpu = selected['cpu_including_tcm']['path']
     require(all(selected[k]['path'].startswith(cpu+'/') for k in ('itcm', 'dtcm')), 'TCM ownership changed')
@@ -153,8 +203,8 @@ def parse_hierarchy(text, totals):
     def difference(base, subtract):
         values = {}; errors = {}
         for key in KEYS:
-            value = number(base['reported_power_w'][key])-sum(number(x['reported_power_w'][key]) for x in subtract)
-            require(value >= 0, 'Negative rounded power residual; review actual report')
+            value = hierarchy_value(key, base['reported_power_w'][key])-sum(hierarchy_value(key, x['reported_power_w'][key]) for x in subtract)
+            require(key == 'internal' or value >= 0, 'Negative rounded power residual; review actual report')
             values[key] = str(value)
             errors[key] = str(number(base['rounding_bound_w'][key])+sum(number(x['rounding_bound_w'][key]) for x in subtract))
         return dict(derived_power_w=values, rounding_bound_w=errors)
@@ -165,12 +215,13 @@ def parse_hierarchy(text, totals):
     accurate_root = dict(reported_power_w=totals, rounding_bound_w={k: str(rounding(v)) for k, v in totals.items()})
     modules['platform_other'] = difference(accurate_root, [selected[k] for k in outer])
     for row in modules.values():
-        row['derived_dynamic_w'] = str(sum(number(row['derived_power_w'][k]) for k in KEYS[:2]))
+        row['derived_dynamic_w'] = str(sum(hierarchy_value(k, row['derived_power_w'][k]) for k in KEYS[:2]))
         row['dynamic_rounding_bound_w'] = str(sum(number(row['rounding_bound_w'][k]) for k in KEYS[:2]))
     for key in KEYS:
-        require(sum(number(v['derived_power_w'][key]) for v in modules.values()) == number(totals[key]),
+        require(sum(hierarchy_value(key, v['derived_power_w'][key]) for v in modules.values()) == number(totals[key]),
                 'Disjoint power sum mismatch')
     return dict(modules=modules, inclusive_module_rows=selected, hierarchy_rows=len(rows),
+                negative_internal_rows=negative_internal,
                 note='Rounded PT hierarchy values; CPU excludes its full ITCM/DTCM wrappers. Remaining platform is a residual. Bounds include print rounding only, not model uncertainty.')
 
 
@@ -192,8 +243,8 @@ def parse_sram(text):
         # Attribute b explicitly denotes an unresolved black box.
         require('b' not in match.group(6) and 'h' not in match.group(6), 'SRAM is unresolved or hierarchical')
         values = dict(zip(KEYS, match.groups()[1:5])); role = roles[0]
-        check_sum([values[k] for k in KEYS[:3]], values['total'], 'SRAM cell '+path)
-        cells[path] = dict(owner=role, reported_power_w=values, attributes=match.group(6))
+        check = check_sum([values[k] for k in KEYS[:3]], values['total'], 'SRAM cell '+path)
+        cells[path] = dict(owner=role, reported_power_w=values, attributes=match.group(6), numerical_sum_check=check)
         counts[role] = counts.get(role, 0)+1
         for key in KEYS: sums[(role, key)] = sums.get((role, key), Decimal(0))+number(values[key])
     require(counts == {'itcm': 32, 'dtcm': 32, 'shared': 64, 'accelerator': 34}, 'Incomplete DMA16 SRAM cell coverage')
@@ -210,13 +261,17 @@ def extract(run, expected):
     require(state['status'] == 'passed' and state['summary_sha256'] == expected and
             report.get('scope') == POWER_SCOPE and report.get('status') == 'reports_ready_review_required',
             'Need an actual completed DMA16 PT report collection')
-    require({'units.rpt', 'power.rpt', 'power.log', 'power_hierarchy.rpt', 'power_sram.rpt'} <= set(report['artifacts']), 'Missing numerical power artifacts')
+    require({'units.rpt', 'power_verbose.rpt', 'power.rpt', 'power.log', 'power_hierarchy.rpt', 'power_sram.rpt'} <= set(report['artifacts']), 'Missing numerical power artifacts')
     texts = {}
     for name, digest in report['artifacts'].items():
         require(Path(name).name == name and sha(run/name) == digest, 'Changed/unsafe power artifact '+name)
         if name.endswith(('.log', '.rpt')): texts[name] = (run/name).read_text(errors='replace')
     require(not any(re.search(r'(?im)^\s*(?:Error-|Error:|Fatal:)', text) for text in texts.values()), 'Actual tool errors require review')
-    values = parse_power(texts['units.rpt'], texts['power.rpt'])
+    values = parse_power(texts['power_verbose.rpt'], texts['power.rpt'])
+    values['base_units'] = parse_base_units(texts['units.rpt'])
+    verbose = parse_power(texts['power_verbose.rpt'], texts['power_verbose.rpt'])
+    require(values['reported_power_w'] == verbose['reported_power_w'] and
+            values['reported_group_power_w'] == verbose['reported_group_power_w'], 'Normal/verbose power reports disagree')
     values['module_breakdown'] = parse_hierarchy(texts['power_hierarchy.rpt'], values['reported_power_w'])
     values['sram_breakdown'] = parse_sram(texts['power_sram.rpt'])
     duration = Decimal(validate_activity(report['activity'], report['task_window']))

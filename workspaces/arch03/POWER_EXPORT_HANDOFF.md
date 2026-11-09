@@ -2,9 +2,13 @@
 
 2026-11-10 01:44：数值提取、模块分解和JSON/CSV/中文证据导出工具已实现，**30项相关测试通过，尚未在实际DMA16功耗报告执行**。生产RTL/固件、当前gate03运行包均未改变。此前01:18的18测试及b2afb88仅包含原始分类功耗提取；本次新增实际层级格式处理与汇总器。
 
-解析格式依据为服务器实际T-2022.03-SP5-1的历史`d3_power07_h0/asic_power`报告，只用于查看格式，不把旧8路功耗移给新配置。实际字段为`Dynamic_power_unit : 1 Watt`和`Leakage_power_unit : 1 Watt`；`report_power`为Averaged Power、e203_soc_top、9有效数字。表有clock_network、register、combinational、sequential、memory、io_pad、black_box七类，以及Net Switching、Cell Internal、Cell Leakage和Total四个总项。
+02:00修订：29992c7工具包已上传并核验643输入，但实际旧PT格式诊断发现三个工具假设错误，尚不能直接用于完整导出。原诊断失败保留，生产RTL/网表/门级作业不受影响。已本地修正，**33项相关测试通过，修正版尚待新包实际复验**。
+
+解析格式依据为服务器实际T-2022.03-SP5-1的历史`d3_power07_h0/asic_power`报告，只用于格式验证，不把旧8路功耗移给新配置。**真实功耗单位在power_verbose.rpt，为`Dynamic Power Units = 1 W`及`Leakage Power Units = 1 W`**；units.rpt只有电容1e-12 Farad、时间1e-09 Second、电压1 Volt等基本单位。此前记录的下划线字段并非实际格式，已纠正。修正解析器分别核对两份来源、普通与verbose功耗分类/总值一致。report_power为Averaged Power、e203_soc_top、9有效数字；七类clock_network、register、combinational、sequential、memory、io_pad、black_box，以及四个总项均必须完整。
 
 新工具核对明确1W单位、有限非负9位科学记数、完整唯一分类与总项，并按照显示末位的舍入误差核对行与列合计；缺项不能按零补齐，单位变更需先审核。它读取实际已通过报告收集阶段的summary SHA及每个artifact SHA，拒绝工具错误及文件变化，保留各文件警告出现次数、活动未知值和原始审核清单。
+
+实际旧报告有两行时钟门控负内部功耗（-6.90e-06 W），修正版保留有符号internal字段及完整路径供模型审查，不能删行或夹为零；switching/leakage/total仍要求非负。实际首个SRAM行分项和比总值大1.978e-12 W，四个9位数都精确符合IEEE binary32显示往返；单纯十进制显示末位不足以覆盖。新检查先使用十进制界限，只有全部数值逐个通过binary32往返时，才额外计入各数半ULP界限并记录依据/实际残差；不是任意相对容差，也不是功耗模型精度证明。更改指数、错误总数或不满足表示条件仍拒绝。
 
 ```text
 python3 workspaces/arch03/scripts/dma16_power_numbers.py --run <已完成dma16_power目录> --summary-sha256 <核对过的摘要> --output <新JSON文件>

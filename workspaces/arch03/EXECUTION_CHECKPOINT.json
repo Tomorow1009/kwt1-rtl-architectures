@@ -2101,7 +2101,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "b2afb882b0963c39d8183a69602ab442da39e35b",
+    "cloud_source_commit": "29992c76aa07f753e8370f8eba4d95f87fd6ea90",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -2248,12 +2248,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T01:40:07.717919",
-      "child_pid_last": 70242,
-      "child_log_last": "layer_04_activity_scan.log",
+      "last_observed": "2026-11-10T01:59:32.412571",
+      "child_pid_last": 80948,
+      "child_log_last": "layer_05_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 3,
+      "completed_cases": 4,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -2273,9 +2273,10 @@
       "completed_case_names": [
         "layer_01",
         "layer_02",
-        "layer_03"
+        "layer_03",
+        "layer_04"
       ],
-      "child_cpu_percent_last": 99.4
+      "child_cpu_percent_last": null
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -2300,17 +2301,20 @@
       "contention_cpu_executed": false
     },
     "power_numeric_extractor": {
-      "status": "local_contract_tests_passed_not_server_executed",
-      "tests": 30,
+      "status": "local_format_repairs_tested_not_server_revalidated",
+      "tests": 33,
       "new_report_tests": 9,
       "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
-      "module_sha256": "a0ef8fe5824f33f98337912ff2eefa84f81fae009a8ca9b0fce38edc6861c5e9",
+      "module_sha256": "e4b83b0cae2aa78a76a74e4c1ddeeb8bb94a3f6cbd495f5e9966e0e50820ef90",
       "handoff": "workspaces/arch03/POWER_EXPORT_HANDOFF.md",
       "approved_power_w": null,
       "approved_energy_j": null,
       "system_power_verified": false,
       "module_disjoint_breakdown_implemented": true,
-      "sram_cell_count_guard": 162
+      "sram_cell_count_guard": 162,
+      "actual_units_source": "power_verbose.rpt",
+      "signed_clockgate_internal_preserved": true,
+      "decimal_and_exact_binary32_roundtrip_sum_bounds": true
     },
     "evidence_exporter": {
       "status": "implemented_local_tests_only",
@@ -2324,6 +2328,26 @@
       "actual_server_export_complete": false,
       "acceptance_granted": false,
       "final_batch_requires_1200_actual_asic_tasks": true
+    },
+    "report_package": {
+      "source_commit": "29992c76aa07f753e8370f8eba4d95f87fd6ea90",
+      "archive": "light-light126-report-dma16-20261110_014431-29992c76aa07.zip",
+      "bytes": 16492249,
+      "files": 643,
+      "sha256": "d054c7c2a7f405351ba3fc6efd563e4958f9ee81e0050357a9fa3cab38d6624f",
+      "clean_audit": "local_runs/dma16_report_clean_audit_20261110_0145/receipt.json",
+      "clean_audit_sha256": "8b5d001a43494901e9436f53175753ab6d91ebb3e16675834812fcded165235a",
+      "clean_tests": 95,
+      "firmware_variants": 5,
+      "server_uploaded": true,
+      "server_zip_sha_verified": true,
+      "server_unpacked_observed": "2026-11-10T01:48:27.963770",
+      "server_inputs_verified": 643,
+      "server_inputs_observed": "2026-11-10T01:49:28.992472",
+      "ftp_success_seconds": 33,
+      "ftp_disconnected": true,
+      "actual_format_diagnostics": "failed units location; signed clockgate internal; SRAM decimal-only sum precision. Fix local, not yet uploaded.",
+      "hardware_changed": false
     }
   }
 }

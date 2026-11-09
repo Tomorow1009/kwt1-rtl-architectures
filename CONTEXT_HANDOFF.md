@@ -22,6 +22,11 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **02:00最新停点**：服务器01:59:32.412571，gate03完整通过layer_01..04，child80948为layer_05_activity_scan.log，driver34122、状态running，原a53包及fcd网表不变。继续全14/12活动，不重启、不清锁。当前没有其他服务器EDA任务。
+- 云端已push/ls-remote核对`29992c76aa07f753e8370f8eba4d95f87fd6ea90`。报告包`light-light126-report-dma16-20261110_014431-29992c76aa07.zip`，16492249字节、643文件，SHA`d054c7c2a7f405351ba3fc6efd563e4958f9ee81e0050357a9fa3cab38d6624f`；clean audit `local_runs/dma16_report_clean_audit_20261110_0145/receipt.json` SHA`8b5d001a43494901e9436f53175753ab6d91ebb3e16675834812fcded165235a`，五固件/95tests/CRC/全部hash通过。板端`/home/root/undergrad-report-20261110/`；FileZilla成功33秒、队列空、Ctrl+D断开并最小化。服务器01:48:27.963770 zip与安全解包通过，01:49:28.992472 inputs核验643项。
+- **299包数值导出工具实际格式诊断失败，不能直接称可用**：旧PT的功耗单位不在units.rpt而在power_verbose.rpt，真实字段为`Dynamic Power Units = 1 W`/`Leakage Power Units = 1 W`；全层级有两条clockgate负internal；首SRAM分项合计差1.978e-12W超出十进制显示舍入，实际四值均精确binary32显示往返。已本地修正分别核对基本/功耗单位，保留负internal行，只有逐个满足binary32表示才额外容许半ULP并记录残差；33相关测试通过。没有改动服务器包/原报告或放宽DMA16模块/162宏要求。修正源码和文档尚待提交、新包实际格式复验；失败诊断截图在takeover_local/d2_20261109/report_*。旧8功耗仍不用于DMA16。
+- `dma16_report.py`已实现JSON、逐层/模块/汇总CSV与中文报告、哈希绑定及1200逐例复核；此前“未实现”记录已过时，但实际最终导出/审核仍未完成。下一步提交并上传数值格式修正版，先用旧报告做格式与错误架构拒绝验证，再等gate03全14/12活动；首层实际PT审核、逐层12功耗、竞争/MMIO8综合与最终1200仍按共享锁串行。VNC18874435、FileZilla20972102、panel10485764及本机中继未变，当前无本地仿真进程或活动子代理。
+
 - **01:44最新停点**：已重读AGENTS、有效三天计划、STATUS/执行检查点和协作要求。云端当前已核对`b2afb882b0963c39d8183a69602ab442da39e35b`；此后新增报告工具尚待本次提交。生产RTL仍fcd445f，当前门级包a53不修改。服务器01:40:07.717919实际gate03仍running，layer_01/02/03已完成全部门级和活动检查；child70242正在layer_04_activity_scan.log，CPU99.4%、已运行01:49，driver34122不变，不清锁/重启。
 - 功耗工具新增互斥模块分解及162个SRAM逐单元检查；已读真实旧PT表格式（仅作格式，不移用旧功耗）。CPU顶层包含TCM，先减去完整TCM包装子树；层级只有3位有效数字，保留舍入界限。新增`dma16_report.py`、`test_dma16_report.py`，数值/层级/导出相关**30项测试通过**。JSON/CSV/中文证据导出工具现在已实现，但尚未在实际DMA16报告执行；始终保留时序/面积/功耗待审核，不能称最终验收。完整批次入口只接受1200真实ASIC任务并逐例重新核对输出，不接受旧37。
 - 当前本地未提交文件为power_numbers及测试、report及测试、POWER_EXPORT_HANDOFF和本次交接/证据。下一步提交/push、独立打包核验后FileZilla上传工具（不覆盖现有gate03包）；继续gate03全14/12活动，随后首层实际功耗审核再12层。实际CPU竞争、MMIO8新综合/PPA、最终1200、时钟/模型审核和最终交付仍缺。没有新增本地仿真或服务器作业。

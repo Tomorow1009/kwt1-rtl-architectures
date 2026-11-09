@@ -8,7 +8,9 @@ import unittest
 from unittest.mock import patch
 import dma16_power_numbers as p
 
-UNITS = 'Dynamic_power_unit : 1 Watt\nLeakage_power_unit : 1 Watt\n'
+UNITS = 'Dynamic Power Units = 1 W\nLeakage Power Units = 1 W\n'
+BASE_UNITS = ('Report : units\nDesign : e203_soc_top\nCapacitive_load_unit : 1e-12 Farad\n'
+              'Time_unit : 1e-09 Second\nVoltage_unit : 1 Volt\n')
 
 
 def power():
@@ -68,6 +70,15 @@ class PowerNumberTests(unittest.TestCase):
         for value in bad:
             with self.subTest(value=value), self.assertRaises(ValueError): p.parse_hierarchy(value, totals)
 
+    def test_actual_signed_clock_gate_internal_contribution_is_retained(self):
+        totals = p.parse_power(UNITS, power())['reported_power_w']
+        signed = hierarchy()+'      u_clkgate (fixture) -6.90e-06 1.55e-04 4.53e-09 1.48e-04 0.7\n'
+        result = p.parse_hierarchy(signed, totals)
+        self.assertEqual(result['negative_internal_rows'][0]['reported_internal_w'], '-6.90e-06')
+        self.assertEqual(result['modules']['platform_other']['derived_power_w']['total'], '0.00099000000')
+        with self.assertRaises(ValueError):
+            p.parse_hierarchy(signed.replace('1.55e-04', '-1.55e-04'), totals)
+
     def test_sram_counts_values_and_blackboxes_are_explicit(self):
         result = p.parse_sram(sram())
         self.assertEqual(result['cell_count'], 162)
@@ -86,9 +97,16 @@ class PowerNumberTests(unittest.TestCase):
         self.assertEqual(len(result['reported_group_power_w']), 7)
 
     def test_missing_duplicate_or_different_units_fail(self):
-        for text in ('', UNITS+UNITS, UNITS.replace('1 Watt', '1e-3 Watt'),
-                     UNITS.replace('Watt', 'mW'), UNITS.replace('Leakage_power_unit', 'unknown_unit')):
+        for text in ('', BASE_UNITS, UNITS+UNITS, UNITS.replace('1 W', '1e-3 W'),
+                     UNITS.replace(' W', ' mW'), UNITS.replace('Leakage Power Units', 'unknown_unit'),
+                     'Dynamic_power_unit : 1 Watt\nLeakage_power_unit : 1 Watt\n'):
             with self.subTest(text=text), self.assertRaises(ValueError): p.parse_power(text, power())
+
+    def test_base_units_come_from_report_units_and_power_units_from_verbose(self):
+        self.assertEqual(p.parse_base_units(BASE_UNITS)['Time_unit'], '1e-09 Second')
+        for bad in (UNITS, BASE_UNITS+BASE_UNITS, BASE_UNITS.replace('1e-09', '1e-12'),
+                    BASE_UNITS.replace('Farad', 'pf'), BASE_UNITS.replace('e203_soc_top', 'other')):
+            with self.assertRaises(ValueError): p.parse_base_units(bad)
 
     def test_incomplete_nonfinite_negative_duplicate_and_wrong_scope_fail(self):
         original = power()
@@ -109,10 +127,20 @@ class PowerNumberTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             p.check_sum(['1.00000000e-03', '2.00000000e-03'], '3.00000010e-03', 'changed')
 
+    def test_actual_binary32_display_roundtrip_has_a_bounded_recorded_residual(self):
+        terms = ['1.20398494e-04', '1.81365778e-07', '4.60310002e-05']
+        result = p.check_sum(terms, '1.66610858e-04', 'observed old SRAM row, format only')
+        self.assertEqual(Decimal(result['residual_w']), Decimal('1.978e-12'))
+        self.assertEqual(result['numerical_basis'], 'decimal_display_plus_exact_binary32_roundtrip_half_ulp')
+        self.assertLess(Decimal(result['bound_w']), Decimal('1e-10'))
+        with self.assertRaises(ValueError): p.check_sum(terms, '1.66610858e-03', 'changed exponent')
+        with self.assertRaises(ValueError): p.observed_binary32_rounding('1.20398495e-04')
+        self.assertEqual(p.rounding('0.00000000e+00'), 0)
+
     def test_actual_artifacts_bound_but_numbers_do_not_approve_power(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); run = root/'dma16_power'; run.mkdir()
-            for name, text in (('units.rpt', UNITS), ('power.rpt', power()),
+            for name, text in (('units.rpt', BASE_UNITS), ('power.rpt', power()), ('power_verbose.rpt', UNITS+power()),
                                ('power_hierarchy.rpt', hierarchy()), ('power_sram.rpt', sram()),
                                ('power.log', 'Warning: fixture activity requires review (PSW-208)\n')):
                 (run/name).write_text(text)
