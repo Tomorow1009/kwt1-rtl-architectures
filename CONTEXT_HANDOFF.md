@@ -18,7 +18,30 @@
 
 ## 最新实施检查点（2026-11-09约18:49）
 
-### 20:34实施检查点（优先于下方历史记录）
+### 21:09实施检查点（优先于下方历史记录）
+
+- 首包同IRQ固件 `dma16_full01` **完整14例通过**，354816输出。12层零饱和，extremes6336、rounding4554；全部完整首源至末ACK为225770周期。started20:51:18.258165，finished20:54:07.550197，driver316389。summary SHA `899da0be2f54ef99d5b93c641d932f0a16a5f6b36770bc91fb2fea32d082c3a5`；IRQ首层SHA `9ab83f86e125841b47f35ea64a6fbda2569a3d22f841e56c256bec6a4a072936`。两个转录摘要已21:05:32.213658通过服务器assert与原state交叉验证。
+- 14例实际仿真宿主耗时min2.668223730896938s、mean3.097152099462359s、max3.3244687309488654s、sum43.36012939247303s；compile_receipt55.1665074571035802s。按平均仿真×1200×1.2约1.24h只含仿真，不能当整个最终批量；新batch含准备/重核实际计时，最终仍按首批实际总耗时更新。旧28.8h估算不再适用。
+- 真实IRQ首层及14例证明当前实际PLIC/WFI/定时唤醒可执行，但仍不能声明节能；需要新门级功耗。累计额外poll1+IRQ1+14为16次实际ASIC任务，最终100样本1200另跑，不拿这些替代。
+- 新 `dma16_synth01` 已启动，driver **7612**（不要误抄7012）、started **20:59:17.415251**，child11305实际dma16_synth.log。21:05:32最后观察仍running，library/link已进展到综合。首包路径/runs/dma16_synth01/dma16_synth；禁止重启或清锁，等待现有任务结果。新严格STA、计分面积、门级、功耗尚未完成。
+- 旧power07 SHA `2368034a7fa03fb3124403758a86ecbd1b65d1448cc9d593fe36fd96e5959187` 已按4×16组抄回。verbose动态/泄漏为W，实际总原始值0.0200384986W；只适用旧BEGIN窗口，不能乘新225770周期。实际X设置0.5/false，112361nets精确映射。power.log可见773个PSW-208，工具总1547warnings差异需检查重定向报告。POWER_REVIEW已记录，正式system_power_verified仍false。
+- 新证据/交接/POWER_REVIEW修改待小型记录提交；后续工具包5bdf88b已完整本地核验并云端保存，尚未板端或服务器上传。**FileZilla保持用户暂停，必须等明确恢复。** 后续sequence/MMIO8/metrics/gate/power服务器入口须新包，不能手工把新脚本粘入旧服务器包绕过上传暂停。
+
+### 20:54实施补充（历史）
+
+- 真实IRQ首层dma16_irq01已通过：driver305472，started20:44:53.351114，finished20:46:53.150876。25344输出、零饱和；首源cycle11413/末ACK237183/225770周期，CPU236980；external=1、timer=23、WFI=23、events=1、unhandled=0。host仿真3.0708447720389813秒。原始图dma16_irq01_progress1.png、dma16_full01_started.png；summary SHA需精确分组读取，不猜抄。
+- 首包同IRQ固件完整14例已新启动dma16_full01，driver316389，launcher20:51:17.712172；最后观察20:52:18已启动，结果未读。不要重启；完成后检查全部354816输出/饱和/IRQ及周期，再串行启动首包dma16_synth01。
+- 旧power verbose已实际明确Dynamic Power Units=1 W、Leakage Power Units=1 W。尚未完成告警、未知值、各宏及活动覆盖审核，system_power_verified仍false。当前只读诊断命令在取精简warnings/settings/source映射头与分组SHA。新14仿真可同时只读旧报告，但不能同时启动另一EDA。
+
+### 20:45实施检查点（历史）
+
+- 后续源码/小型证据已提交并push私人分支：`5bdf88bf7d71439f585c68eaf6d9c6ce18bb7264`；生产RTL、原source/window/monitor、installer和synth保持首包字节。新增被动metrics只在仿真接入。现有新证据JSON修改尚未再次提交。
+- 后续完整包已在本地生成：`light-light126-dma16-followon-dma16-20261109_203856-5bdf88bf7d71.zip`，16426075字节、624项manifest输入，SHA `ec1308c0ae5bd2cc4e1ab3d7c628ee5ed0fa11c05a25625815eb7f76ae51ce95`。未传开发板/服务器。独立干净解包CRC/唯一根/全部路径与624hash、4套FW、93tests通过；audit在local_runs/dma16_followon_clean_audit_20261109_2040/receipt.json，SHA7df385e57e7a8e1b700e6af9ef2a4b0a109eb988beea41756c2f5e7a97cca4a1。FileZilla仍用户暂停，禁止自动恢复。
+- 第一次后续打包被严格FW源码hash拒绝：新start_dma16_sequence.S工作区CRLF而Git为LF。失败目录保留，未弱化哈希检查。仅规范该文件到Git原始LF字节，代码无diff；刷新其索引后重建sequence **v6**，manifest `fd58521b9763f6d332929a8cd44cb0196d15988c649f0b65905cd77045865cef`，ELF/boot与v5完全相同。后续包包含v6，v4/v5不可用于当前包的源码身份。
+- 旧d3_power07_h0阶段最终passed，结束20:39:00.549312，20:42:34.154052观察锁FREE。PT实际链接/读完整VCD/update_power/全部报告完成，没有Error行，原PT-063未出现。工具报告1547warnings，逐类核对未完成；第一次正则汇总转义错误返回空，不能当无警告。实际units为时间1e-9s/电压1V/电流0.001A/电容1e-12F；功耗报告数值和W单位仍要由verbose核对。system_power_verified仍false，不能把reports ready当正式功耗验收。
+- 已请求在首包独立session `dma16_irq01` 执行dma16_soc layer_01、firmware_irq；紧接上一步实际FREE检查，启动脚本也检查lock及session不存在。正在读取实际PID/状态；不得重复启动。接下来IRQ通过后同FW跑14，再启动首包dma16_synth；后续新门级/sequence/MMIO8/metrics服务器运行等待FTP恢复后上传已核验新包。
+
+### 20:34实施检查点（历史）
 
 - dma16_smoke01实际通过：layer_01、25344输出、零饱和、首源cycle993/末ACK226763/225770周期、CPU226351；仿真宿主9.16798612099734秒。结束20:11:24.332854，最后读20:21:54.780747。summary SHA4b32b136f7a5f368d2a2f3f29714e2bc2cd8b05d0c7eea420dea49ab8c9a207c。首包2bd6b0f polling范围；IRQ/14/新PPA未过，不能声明最终500task/s或全新版已验收。
 - 原锁自然释放后启动旧修复8路功耗d3_power07_h0，driver **266936**（先前误抄206936已改JSON），实际started20:23:42.769200，PT child267785。20:31日志实际LC/PT链接成功并在读完整31.25GB VCD，暂未出现早期PT-063；最终结果未读。run为portcheck包/runs/d3_power07_h0/asic_power。不得重启/清锁；它完成后按原首包串行IRQ首层、14例，再新DMA综合。
