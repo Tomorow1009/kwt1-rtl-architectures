@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_review_bound_L01_L05_collected_serial_L06_running",
+    "phase": "DMA16_L01_L08_power_collected_L09_running_unknown_netlist_tool_local",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -3132,14 +3132,38 @@
       "plan_sha256_independently_verified": true,
       "serial": true,
       "stop_on_first_failure": true,
-      "last_observed": "2026-11-10T07:25:54",
-      "current_session": "dma16_power_l06_v1",
-      "current_owner_pid": 308667,
-      "current_pt_pid": 308948,
+      "last_observed": "2026-11-10T07:38:34.600349",
+      "current_session": "dma16_power_l09_v1",
+      "current_owner_pid": 317811,
+      "current_pt_pid": 318019,
       "passed_observed_layers": [
-        5
+        5,
+        6,
+        7,
+        8
       ],
       "completed": false
+    },
+    "power_numbers_l02_l05_v1": {
+      "bundle": "light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d",
+      "path": "runs/power_numbers_l02_l05_v1/numbers.json",
+      "sha256": "403518dfb66ed613501c8111ae6f8c4937d8b8430eaa4a5a416a8ab0e63424e8",
+      "sha256_independently_verified": true,
+      "layers": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "system_power_verified": false
+    },
+    "unknown_netlist_tool_local": {
+      "script": "workspaces/arch03/scripts/dma16_unknown_netlist.py",
+      "new_tests_passed": 11,
+      "related_tests_passed": 19,
+      "server_run": false,
+      "power_acceptance_automatic": false,
+      "production_modified": false
     }
   }
 }
