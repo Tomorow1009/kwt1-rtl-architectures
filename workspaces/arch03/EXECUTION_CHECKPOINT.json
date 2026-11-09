@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_final1200_v2_running_438_passed_unknown_auditor_prepared",
+    "phase": "DMA16_final1200_v2_running_613_passed_boundary_extraction_verified",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -2616,7 +2616,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "66838470bb12a036b37305393c84b712b11cd43f",
+    "current_server_tool_commit": "3178c8faab53ed1dd8115f49978f1d9cb70330ee",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -2727,7 +2727,7 @@
       "raw_numbers_file": "runs/dma16_power_l01_v2/power_numbers.raw.json",
       "raw_numbers_sha256": "1c7e59c8275ed054ab79b40dfafc30112e45961f3d13a4cda74fd30eedb9bb45",
       "raw_reported_total_power_w": "0.0296837185",
-      "raw_reported_energy_j": "0.000044679497038379161700",
+      "raw_reported_energy_j": "0.0000446779497038379161700",
       "duration_ns": "1505133.182820",
       "approved_average_power_w": null,
       "approved_energy_j": null
@@ -2856,20 +2856,19 @@
       "started_launcher": "2026-11-10T04:56:55.618624",
       "expected_tasks": 1200,
       "expected_outputs": 30412800,
-      "completed_tasks_last_observed": 438,
+      "completed_tasks_last_observed": 613,
       "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
       "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
       "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
       "uses_old_37_tasks": false,
       "hardware_firmware_images_changed": false,
       "final_regression_verified": false,
-      "last_observed": "2026-11-10T05:27:40.065696",
-      "outputs_last_observed": 11100672,
+      "last_observed": "2026-11-10T05:40:02.214135",
+      "outputs_last_observed": 15535872,
       "failed_attempts_last_observed": 0,
-      "current_attempt_last_observed": "cases/sample_000037_layer_07/attempt_0001",
-      "host_mean_task_seconds_approx": 4.173856,
-      "remaining_tasks_last_observed": 762,
-      "remaining_seconds_with_20_percent_margin_approx": 3816.57,
+      "host_mean_task_seconds_approx": 4.185543,
+      "remaining_tasks_last_observed": 587,
+      "remaining_seconds_with_20_percent_margin_approx": 2948.3,
       "shared_lock_owned": true,
       "initial_pid_transcription_corrected_from": 214800
     },
@@ -2894,8 +2893,44 @@
         "RAMSP4096X16": "0.000046031",
         "RAMSP128X16": "0.000004881"
       },
-      "actual_boundary_new_extractor_verified": false,
-      "system_power_verified": false
+      "actual_boundary_new_extractor_verified": true,
+      "system_power_verified": false,
+      "extracted": "2026-11-10T05:38:42.271299",
+      "run": "3178c8faab53/runs/power_boundary_review01",
+      "numeric_sha256": "b01847992ca3ac7e43a302238a5601c3c4c9b40948ec3844032395fa7f0415b0",
+      "default_raw_energy_j": "0.0000446779497038379161700",
+      "boundary_raw_energy_j": "0.0000446808093063719558880",
+      "old_and_new_raw_energy_equal_verified": "2026-11-10T05:43:14.766660",
+      "manual_document_energy_transcription_corrected": true
+    },
+    "unknown_audit_package": {
+      "source_commit": "3178c8faab53ed1dd8115f49978f1d9cb70330ee",
+      "archive": "light-light126-unknown-audit-dma16-20261110_053139-3178c8faab53.zip",
+      "bytes": 16575930,
+      "sha256": "0b56714fa2f7563c5fae840e3eeb44b5230ddab187fbbdbd3b1fca17081684bb",
+      "files": 660,
+      "clean_tests": 159,
+      "production_files_unchanged": 40,
+      "clean_audit_receipt": "local_runs/dma16_unknown_clean_audit_20261110_0534/receipt.json",
+      "clean_audit_sha256": "328e0395849d817ef1999f46392cdbe774a35b264d5db44f3bf30847ea74e3f6",
+      "filezilla_transfer_seconds_observed": 33,
+      "unpacked": "2026-11-10T05:36:23.644361",
+      "inputs_verified": "2026-11-10T05:36:54.416400",
+      "actual_unknown_scan_started": false
+    },
+    "actual_mapped_structural_warnings": {
+      "artifact": "fcd445fb212a/runs/dma16_fix_synth01/dma16_synth/check_design_mapped.rpt",
+      "artifact_sha_checked": true,
+      "warning_counts": {
+        "LINT-1": 4,
+        "LINT-2": 178,
+        "LINT-8": 178,
+        "LINT-28": 4674,
+        "LINT-32": 4549,
+        "LINT-33": 502
+      },
+      "complete_object_review": false,
+      "scope": "Diagnostic inventory; no automatic timing acceptance"
     }
   }
 }
