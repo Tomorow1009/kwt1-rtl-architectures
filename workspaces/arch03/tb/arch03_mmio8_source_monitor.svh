@@ -7,6 +7,7 @@ wire a3_mon_rst_n=`M8MEM.rst_n;
 reg a3_window_active=0,a3_window_finished=0;
 reg [63:0] m8_cycle=0,m8_start_cycle=0,m8_end_cycle=0;
 realtime m8_start_ns=0,m8_end_ns=0;
+realtime m8_edge_ns=0,m8_start_edge_ns=0,m8_start_phase_ns=0;
 reg m8_armed=0,m8_cleared=0,m8_clear_command_seen=0,m8_finish_requested=0;
 reg [15:0] m8_expected[0:25343],m8_input[0:23487];
 reg m8_expected_sat[0:25343],m8_sat[0:25343],m8_seen[0:25343],m8_returned[0:25343];
@@ -58,6 +59,7 @@ always @(`M8MEM.a3_cpu_cmd_valid or `M8MEM.a3_cpu_cmd_addr or `M8MEM.a3_cpu_cmd_
     `M8MEM.a3_cpu_cmd_addr>=32'hb0000000 && `M8MEM.a3_cpu_cmd_addr<32'hb000b780)begin
   if(!m8_armed || !m8_cleared)$fatal(1,"MMIO8 source before arm and observed accelerator clear");
   a3_window_active=1;m8_start_cycle=m8_cycle;m8_start_ns=$realtime;
+  m8_start_edge_ns=m8_edge_ns;m8_start_phase_ns=$realtime-m8_edge_ns;
   if(m8_activity_enabled)$dumpon;
  end
 end
@@ -66,10 +68,13 @@ always @(m8_finish_requested or m8_pending or `M8MEM.a3_cpu_cmd_valid or
  if(m8_finish_requested && !m8_pending && !`M8MEM.a3_cpu_cmd_valid &&
     !`M8MEM.a3_arb_pending && !`M8MEM.a3_router_pending && !a3_window_finished)begin
   a3_window_active=0;a3_window_finished=1;
-  $display("MMIO8_SOURCE_WINDOW start_cycle=%0d end_cycle=%0d cycles=%0d start_ns=%.6f end_ns=%.6f source_read_acks=%0d input_write_acks=%0d input_read_acks=%0d output_write_acks=%0d command_wait=%0d response_wait=%0d",m8_start_cycle,m8_end_cycle,m8_end_cycle-m8_start_cycle,m8_start_ns,m8_end_ns,m8_sources,m8_copies,m8_reads,m8_outputs,m8_cmd_wait,m8_rsp_wait);
+  $display("MMIO8_SOURCE_WINDOW start_cycle=%0d end_cycle=%0d cycles=%0d start_ns=%.6f end_ns=%.6f start_edge_ns=%.6f start_phase_ns=%.6f source_read_acks=%0d input_write_acks=%0d input_read_acks=%0d output_write_acks=%0d command_wait=%0d response_wait=%0d",m8_start_cycle,m8_end_cycle,m8_end_cycle-m8_start_cycle,m8_start_ns,m8_end_ns,m8_start_edge_ns,m8_start_phase_ns,m8_sources,m8_copies,m8_reads,m8_outputs,m8_cmd_wait,m8_rsp_wait);
  end
 end
 always @(posedge a3_mon_clk)if(a3_mon_rst_n)begin
+ // Original E203 may issue VALID after a modeled clock-to-Q delay. Preserve
+ // its actual event time, plus the independent clock edge for cycle audit.
+ m8_edge_ns=$realtime;
  m8_cycle=m8_cycle+1;
  if(a3_window_active && `M8MEM.a3_cpu_cmd_valid && !`M8MEM.a3_cpu_cmd_ready)m8_cmd_wait=m8_cmd_wait+1;
  if(a3_window_active && `M8MEM.a3_cpu_rsp_valid && !`M8MEM.a3_cpu_rsp_ready)m8_rsp_wait=m8_rsp_wait+1;

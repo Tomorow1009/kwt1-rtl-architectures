@@ -22,6 +22,18 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **00:12实际运行停点**：`dma16_gate02`第一次launcher因新包尚无runs父目录而在open(driver.log)前失败，未创建作业；只创建空runs目录后成功启动，driver **295297**，launcher00:09:52.815904，started00:09:53.375096。最后00:10:59.374996为running，child295348/mapped_probe.log；不重启/清锁。包51bc8d1，生产网表fcd445f/synth01、SHA仍1ee58262…7042d339。上一段“已开始”需以此实际时间为准。
+- MMIO8相位本地测试已全部结束：phase1三例76032输出、phase0一例25344输出，合计4任务101376输出，两次各6拒绝测试，共12；28软件工具测试通过。phase1摘要SHA`1a5d7a33044d5988ff57bdf0033485b7c478328437fb3bda0b7e9864d572c722`，phase0摘要`103bd169fdef5e4e9b840ffc09a7596231e4914f5b26f0d263e510d33b47b28a`；session58118已完成。均NO_E203，服务器修复版尚未执行。下一步保存/提交这些已测观察器修复，再待后续新包上传；不改当前gate02的51bc包。
+
+- **11月10日00:07最新**：51bc8d1门级工具包FileZilla单连接上传成功32秒，队列空并Ctrl+D断开/最小化。服务器00:03:43.531138验证16437227字节及SHA完全一致，安全解包；00:06:09.486313 `inputs()`逐项核对627文件/提交一致，真实共享锁False、本账号EDA空。新bundle为`.../bundles/light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb`。已请求`dma16_gate02`默认14例＋12活动，使用旧fcd新synth01的实际网表；PID/状态待读取，勿重复启动。
+- 原8路`mmio8_source01`已结束为failed：真实E203完成25344输出且捕获逐位比较已过，但Python计时断言拒绝。原始window为start_cycle222/end3843343/cycles3843121，start_ns19070.998093/end25639874.102679，与整周期差1ns；首VALID实际在沿后发出，不能强行改时间或标PASS。生产MMIO8硬件/固件未改。本地已给观察器新增首沿时间和首请求相位、解析器严格校验两者及终沿，保留真实start_ns，以不足1周期的保守取整报告cycles；28相关工具测试通过。
+- 本地MMIO8相位夹具正在运行，exec session **58118**：先phase1的layer_01/extremes/rounding，再phase0的layer_01；各包含6原拒绝测试。受测新改动为mmio8_soc.py、arch03_mmio8_source_monitor.svh、fixture、local_verify_mmio8_source.py和test_mmio8_soc.py，尚未提交/上传，不在51bc包内。不得把这个本地过程CPU夹具称E203；这次新相位元数据需要未来新包真实CPU重验。DMA16观察器/数值核心/固件未改变。
+- 下一步优先读取gate02实际probe/编译进展；若成功，等14门级及12活动后逐层功耗。与此同时收回本地相位测试，补同源MMIO8对照。最终1200、系统功耗/严格时钟审计、真实CPU竞争微基准和最终JSON/CSV中文报告仍缺。正式报告生成器尚未编写，勿误记。
+
+- 23:55：本次工具修复/证据已提交并push私人分支`51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432`，ls-remote完全一致。生产受测RTL及新综合仍fcd445f；新包只改门级发现工具、增加MMIO8综合入口与证据，不需重综合相同硬件，但gate跨包会逐个核验实际硬件/准备文件。
+- 新包`light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb.zip`，16437227字节、627输入文件，SHA`70b3625339afb57660e72d40648d9d59a2a3aa282128fccd4fa3f4e4faf0cc23`。干净目录安全解包/CRC/所有文件hash/四固件/56相关tests通过；audit=`local_runs/dma16_gateprobe_clean_audit_20261109_2356/receipt.json`，SHA`4a8cf53270c26ee928238477cac309c5b4dddd293a15c7c0cc0e418727b54e40`。已板端`/home/root/undergrad-gateprobe-20261109/<zip>`逐字节SHA核验，尚未服务器上传；FileZilla已请求重新打开，须发现新window ID，使用已存IC-single-connection询问密码/并发1站点。
+- MMIO8最新实际state截图23:54:20.747277为running，started23:51:40.601496，已进入layer_01.log，尚无PASS。driver PID应以实际state为准（截图显示264688，先前launcher转录264068需纠正）；不重启。它无8路DMA，只有同源CPU搬运。待它自然释放共享锁，再在新包新session用同fcd网表继续gate14/活动12。
+
 - 23:52：`dma16_fix_gate01` driver257190，started23:45:13.801071，finished23:45:26.822803 **failed**，只读DC模块探测未过，尚未编译/仿真，0输出。实际mapped.v同时含`arch03_dma16_accel`与多个`arch03_dma16_accel_DW01_*`算术子设计，旧ref前缀选法产生歧义。已本地改为ref前缀＋实际实例后缀双限定，仍逐位核对所有五模块边界/冻结probe；生产RTL、SDC与网表不变。56项gate/power/MMIO8/synth相关测试通过；第一遍新Tcl夹具因Python接收嵌套单元素tuple比对失败，已修夹具并全组重过。
 - 同一fcd包已请求启动`mmio8_source01`单layer_01实际CPU对照，启动前检查共享锁和本账号EDA均空；待读取PID/状态。准备提交新gate工具与MMIO8综合入口，独立包经FileZilla上传后在新session重跑gate14/活动12；严禁原地改fcd包或覆盖gate01失败目录。完整功耗、最终1200、正式报告和真实CPU竞争微基准仍待完成。
 

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "MMIO8_source_smoke_running_and_gate_probe_fix_packaging",
+  "phase": "DMA16_gate02_running",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-09T19:38:01+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Read MMIO8 single-layer state; package/upload local gate probe selection fix; new gate session reuses unchanged fcd synthesized hardware after hash audit. No failed run overwrite.",
+  "next": "Observe gate02 without restarting. Commit/ship MMIO8 phase observer and rerun actual reference; final1200 and gate/power/strict timing/report remain.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "mmio8_source01",
+  "active_session": "dma16_gate02",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": false,
@@ -705,8 +705,8 @@
     "related_tests_passed": 56
   },
   "mmio8_source01": {
-    "state": "launched_status_pending",
-    "driver_pid": 264068,
+    "state": "failed",
+    "driver_pid": 264688,
     "started_launcher": "2026-11-09T23:51:40.124705",
     "stage": "mmio8_soc",
     "source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
@@ -714,6 +714,81 @@
       "layer_01"
     ],
     "reference_has_DMA": false,
-    "outputs_verified": 0
+    "outputs_verified": 0,
+    "started": "2026-11-09T23:51:40.601496",
+    "last_observed": "2026-11-09T23:54:20.747277",
+    "prior_launcher_pid_transcription": 264068,
+    "prior_pid_transcription_rejected": true,
+    "failure_stage": "post_simulation_time_cycle_parser",
+    "error": "MMIO8 time/cycle mismatch",
+    "simulator_output_marker": true,
+    "capture_checked_outputs": 25344,
+    "cycle_count_observed": 3843121,
+    "start_ns_observed": "19070.998093",
+    "end_ns_observed": "25639874.102679",
+    "timing_accepted": false,
+    "source_issue_phase_inferred_ns": "1.000000",
+    "next": "Add observed start clock edge and phase, preserve true firstVALID timestamp, verify exact endpoint equations; rerun in future immutable bundle"
+  },
+  "gateprobe_package": {
+    "source_commit": "51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432",
+    "archive": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb.zip",
+    "bytes": 16437227,
+    "sha256": "70b3625339afb57660e72d40648d9d59a2a3aa282128fccd4fa3f4e4faf0cc23",
+    "files": 627,
+    "hardware_executed": false,
+    "local_archive_audit_passed": true,
+    "clean_contract_tests": 56,
+    "firmware_variants": 4,
+    "clean_audit": "local_runs/dma16_gateprobe_clean_audit_20261109_2356/receipt.json",
+    "clean_audit_sha256": "4a8cf53270c26ee928238477cac309c5b4dddd293a15c7c0cc0e418727b54e40",
+    "board_staged": true,
+    "board_staging_sha256_verified": true,
+    "server_uploaded": true,
+    "server_zip_bytes_verified": true,
+    "server_zip_sha256_verified": true,
+    "server_unpacked_verified": true,
+    "server_sha_observed": "2026-11-10T00:03:43.531138",
+    "server_inputs_verified": 627,
+    "server_inputs_observed": "2026-11-10T00:06:09.486313",
+    "ftp_ui_success": true,
+    "ftp_transfer_seconds": 32,
+    "ftp_disconnected_after_transfer": true
+  },
+  "cloud_source_commit": "51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432",
+  "dma16_gate02": {
+    "state": "running",
+    "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
+    "source_commit": "51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432",
+    "hardware_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+    "stage": "dma16_gate",
+    "expected_cases": 14,
+    "expected_activity_cases": 12,
+    "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+    "driver_pid": 295297,
+    "started_launcher": "2026-11-10T00:09:52.815904",
+    "started": "2026-11-10T00:09:53.375096",
+    "last_observed": "2026-11-10T00:10:59.374996",
+    "child_pid_last": 295348,
+    "child_log_last": "mapped_probe.log",
+    "prior_launcher_error": "New bundle had no runs parent: open(driver.log) failed before Popen. Created empty runs; unique session then launched. No tool run was overwritten."
+  },
+  "mmio8_issue_phase_fix": {
+    "status": "local_fixture_and_contracts_passed_not_server_verified",
+    "tests": 28,
+    "cpu_executed": false,
+    "source_clock_issue_phase_ns": [
+      0,
+      1
+    ],
+    "cases": 4,
+    "outputs": 101376,
+    "negative_cases": 12,
+    "rtl_firmware_changed": false,
+    "phase1_run": "local_runs/mmio8_source_fixture_20261110_000632_386056",
+    "phase1_sha256": "1a5d7a33044d5988ff57bdf0033485b7c478328437fb3bda0b7e9864d572c722",
+    "phase0_run": "local_runs/mmio8_source_fixture_20261110_000754_276790",
+    "phase0_sha256": "103bd169fdef5e4e9b840ffc09a7596231e4914f5b26f0d263e510d33b47b28a",
+    "policy": "Preserve firstVALID actual timestamp; independently prove preceding edge and phase; conservative ceil elapsed cycles; no missing edge/phase metadata accepted"
   }
 }

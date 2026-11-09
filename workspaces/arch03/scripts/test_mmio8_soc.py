@@ -9,7 +9,7 @@ import mmio8_soc as soc
 
 def fixture_log():
     return '\n'.join(soc.MARKERS)+('\nMMIO8_SOURCE_WINDOW start_cycle=100 end_cycle=3000100 cycles=3000000 '
-        'start_ns=666.666600 end_ns=20000664.666600 source_read_acks=11744 input_write_acks=11744 '
+        'start_ns=666.666600 end_ns=20000664.666600 start_edge_ns=666.666600 start_phase_ns=0.000000 source_read_acks=11744 input_write_acks=11744 '
         'input_read_acks=23488 output_write_acks=25344 command_wait=7 response_wait=3\n'
         'ARCH03_MMIO8_SOURCE_PASS outputs=25344 cpu_executed=true cycles=3000000 cpu_cycles=3001000 saturated=5\n')
 
@@ -39,6 +39,24 @@ class Mmio8SocTests(unittest.TestCase):
         for value in ('20001666.666600', 'NaN', 'Infinity', 'invalid'):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 soc.read_window(fixture_log().replace('20000664.666600', value), 5)
+
+    def test_actual_first_valid_clock_phase_preserved_without_hiding_wait(self):
+        text = fixture_log().replace('start_ns=666.666600', 'start_ns=667.666600').replace(
+            'start_phase_ns=0.000000', 'start_phase_ns=1.000000')
+        result = soc.read_window(text, 5)
+        self.assertEqual(result['cycles'], 3000000)
+        self.assertEqual(result['start_ns'], '667.666600')
+        self.assertEqual(result['elapsed_ns'], '19999997.000000')
+        self.assertEqual(result['counted_duration_ns'], '19999998.000000')
+        for old, new in [('start_phase_ns=1.000000', 'start_phase_ns=0'),
+                         ('start_phase_ns=1.000000', 'start_phase_ns=NaN'),
+                         ('start_phase_ns=1.000000', 'start_phase_ns=6.666666'),
+                         ('start_edge_ns=666.666600', 'start_edge_ns=667.666600'),
+                         ('start_edge_ns=666.666600', 'start_edge_ns=659.999934')]:
+            with self.subTest(new=new), self.assertRaises(ValueError):
+                soc.read_window(text.replace(old, new), 5)
+        with self.assertRaises(ValueError):
+            soc.read_window(text.replace('start_edge_ns=666.666600 ', ''), 5)
 
     def test_missing_duplicate_and_changed_mode_markers_rejected(self):
         for text in (fixture_log().replace(soc.MARKERS[0], ''),

@@ -14,7 +14,10 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--vivado-bin',required=True,type=Path)
     parser.add_argument('--data',required=True,type=Path)
     parser.add_argument('--cases',nargs='+',default=['layer_01','extremes','rounding'])
+    parser.add_argument('--issue-phase-ns',type=Decimal,default=Decimal(0))
     args=parser.parse_args();data=args.data.resolve()
+    if not args.issue_phase_ns.is_finite() or not 0<=args.issue_phase_ns<Decimal('6.666666'):
+        raise ValueError('Issue phase must be within one clock period')
     folder=ROOT/'local_runs'/('mmio8_source_fixture_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     folder.mkdir(parents=True)
     files=[A2/'rtl/requantize.sv',A2/'rtl/dot64.sv',A2/'arch02/rtl/sram_port.sv',
@@ -67,8 +70,8 @@ def main():
     for case in args.cases:
         task=data/case;layout=json.loads((task/'layout_manifest.json').read_text());capture=folder/(case+'.csv')
         options=folder/(case+'.options')
-        options.write_text('fixture\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg LOAD32=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n'%(
-            task.as_posix(),(task/'load32.hex').as_posix(),capture.as_posix(),layout['shift']))
+        options.write_text('fixture\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg LOAD32=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg ISSUE_PHASE_NS=%s\n'%(
+            task.as_posix(),(task/'load32.hex').as_posix(),capture.as_posix(),layout['shift'],args.issue_phase_ns))
         log=run([tool('xsim'),'-f',options],folder,case+'.log')
         if 'MMIO8_SOURCE_FIXTURE_NO_CPU' not in log or 'MMIO8_SOURCE_FIXTURE_READY cpu_executed=false dma_executed=false' not in log:
             raise ValueError('Missing no-CPU fixture scope')
@@ -77,7 +80,9 @@ def main():
         if len(accepted)!=1 or len(windows)!=1:raise ValueError('Missing MMIO8 source monitor acceptance')
         window=dict(x.split('=') for x in windows[0].split());cycles=int(window['cycles'])
         if cycles!=int(window['end_cycle'])-int(window['start_cycle']):raise ValueError('Cycle arithmetic mismatch')
-        if Decimal(window['end_ns'])-Decimal(window['start_ns'])!=cycles*Decimal('6.666666'):
+        if (Decimal(window['end_ns'])-Decimal(window['start_edge_ns'])!=cycles*Decimal('6.666666') or
+            Decimal(window['start_ns'])-Decimal(window['start_edge_ns'])!=args.issue_phase_ns or
+            Decimal(window['start_phase_ns'])!=args.issue_phase_ns):
             raise ValueError('Clock/event timestamp mismatch')
         for key,count in [('source_read_acks',11744),('input_write_acks',11744),('input_read_acks',23488),('output_write_acks',25344)]:
             if int(window[key])!=count:raise ValueError('MMIO8 transaction count mismatch '+key)
@@ -97,7 +102,7 @@ def main():
     report=dict(status='passed',scope='original_mmio8_real_source_shared_and_core_procedural_CPU_bus_no_E203',
                 cpu_executed=False,dma_executed=False,backend='pin_mock',tasks=len(results),outputs=len(results)*25344,
                 production_monitor_cpu_flag_in_fixture_is_not_evidence=True,
-                instruction_timing_modeled=False,clock_period_fs=6666666,cases=results,
+                instruction_timing_modeled=False,clock_period_fs=6666666,issue_phase_ns=str(args.issue_phase_ns),cases=results,
                 clear_reset_negative_cases=negative_results,
                 source_sha256={p.relative_to(ROOT).as_posix():h for p,h in hashes.items()},
                 data_sha256={p.relative_to(ROOT).as_posix():h for p,h in data_hashes.items()})

@@ -98,6 +98,7 @@ def read_window(text, saturated):
     common.require(done['cpu_executed'] == 'true' and natural(done, 'outputs') == 25344 and
                    natural(done, 'saturated') == saturated, 'MMIO8 completion/capture mismatch')
     fields = fields_line(text, 'MMIO8_SOURCE_WINDOW', ('start_cycle', 'end_cycle', 'cycles', 'start_ns', 'end_ns',
+        'start_edge_ns', 'start_phase_ns',
         'source_read_acks', 'input_write_acks', 'input_read_acks', 'output_write_acks', 'command_wait', 'response_wait'))
     start, end, cycles = [natural(fields, key) for key in ('start_cycle', 'end_cycle', 'cycles')]
     cpu_cycles = natural(done, 'cpu_cycles')
@@ -105,10 +106,13 @@ def read_window(text, saturated):
                    'MMIO8 measured/CPU cycle mismatch')
     try:
         t0, t1 = Decimal(fields['start_ns']), Decimal(fields['end_ns'])
+        edge, phase = Decimal(fields['start_edge_ns']), Decimal(fields['start_phase_ns'])
     except InvalidOperation:
         raise ValueError('Invalid MMIO8 task timestamps')
-    common.require(t0.is_finite() and t1.is_finite() and 0 <= t0 < t1 and
-                   abs(t1-t0-Decimal(cycles)*Decimal(TB_PERIOD_NS)) <= Decimal('0.000002'),
+    period = Decimal(TB_PERIOD_NS); tolerance = Decimal('0.000002')
+    common.require(all(t.is_finite() for t in (t0, t1, edge, phase)) and 0 <= edge <= t0 < t1 and
+                   0 <= phase < period and abs(t0-edge-phase) <= tolerance and
+                   abs(t1-edge-Decimal(cycles)*period) <= tolerance,
                    'MMIO8 time/cycle mismatch')
     counts = {key: natural(fields, key) for key in
               ('source_read_acks', 'input_write_acks', 'input_read_acks', 'output_write_acks')}
@@ -119,6 +123,9 @@ def read_window(text, saturated):
     useful = dict(source_read=counts['source_read_acks']*4, initial_shared_write=counts['input_write_acks']*4,
                   shared_input_read=counts['input_read_acks']*2, output_write=counts['output_write_acks']*2)
     return dict(start_cycle=start, end_cycle=end, cycles=cycles, start_ns=str(t0), end_ns=str(t1),
+        start_edge_ns=str(edge), start_phase_ns=str(phase), elapsed_ns=str(t1-t0),
+        counted_duration_ns=str(Decimal(cycles)*period),
+        cycle_quantization='end_minus_start_clock_index; ceiling of exact event duration, less than one cycle conservative rounding',
         period_ns=TB_PERIOD_NS, cpu_cycles=cpu_cycles, saturated=saturated, outputs=25344,
         boundary='first_source_valid_to_last_output_write_response_with_drain_proof',
         completion_proof='window published only after CPU data-port and arbiter/router drain; PASS after CPU mailbox',

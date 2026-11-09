@@ -58,6 +58,7 @@ module mmio8_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         .src_rsp_err(sysmem_icb_rsp_err),.transaction_pending(a3_router_pending));
     arch03_shared_sram u_arch03_shared(.clk(clk),.rst_n(rst_n),`FIX_CONNECT(a3_mem_));
     integer shift_arg=12,copied=0,sent=0,received=0,sats=0,polls=0,negative_arg=0;
+    real issue_phase_ns=0;
     reg negative_reset_request=0;
     reg [31:0] value,status,word,row,column,group_index,within_group;
     task mmio(input reading,input [11:0] offset,input [31:0] write_value,output [31:0] read_value);
@@ -76,7 +77,9 @@ module mmio8_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         begin
             // Model a synchronous CPU-side VALID issue. It becomes visible
             // after edge N; acceptance can first occur at edge N+1.
-            @(posedge clk);a3_cpu_cmd_valid<=1;a3_cpu_cmd_addr<=address;a3_cpu_cmd_read<=reading;
+            @(posedge clk);
+            if(reading && address==32'hb0000000 && issue_phase_ns>0) #(issue_phase_ns);
+            a3_cpu_cmd_valid<=1;a3_cpu_cmd_addr<=address;a3_cpu_cmd_read<=reading;
             a3_cpu_cmd_wdata<=write_value;a3_cpu_cmd_wmask<=write_mask;
             @(posedge clk);while(!a3_cpu_cmd_ready)@(posedge clk);
             @(negedge clk);a3_cpu_cmd_valid=0;
@@ -100,6 +103,8 @@ module mmio8_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
     initial begin
         if(!$value$plusargs("SHIFT=%d",shift_arg))shift_arg=12;
         if(!$value$plusargs("NEGATIVE=%d",negative_arg))negative_arg=0;
+        if(!$value$plusargs("ISSUE_PHASE_NS=%f",issue_phase_ns))issue_phase_ns=0;
+        if(issue_phase_ns<0 || issue_phase_ns>=6.666666)$fatal(1,"Invalid source issue phase");
         wait(rst_n);repeat(2)@(negedge clk);
         mailbox_write(0,0);mailbox_write(8,0);
         if(negative_arg!=0)begin
