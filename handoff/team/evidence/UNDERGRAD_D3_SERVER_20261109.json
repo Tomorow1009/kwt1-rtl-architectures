@@ -1,8 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "mapped_gate_smoke_passed_activity_running_timing_negative",
-  "package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
-  "runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+  "status": "gate_activity_native_reaudit_running_timing_repair_uploaded_unverified",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -99,6 +97,17 @@
       "bytes": 10788921,
       "sha256": "28edf4128359dcff70a003705275fceee18dbedbcab1ba4706ab322d47d4fd0d",
       "files": 388,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+      "archive": "light-light126-d3-repair-arch03-20261109_075555-371316af486e.zip",
+      "bytes": 10807260,
+      "sha256": "77a2f2559678b97093bf052181986764e3d79e3a275a50c68407cf447975eb38",
+      "files": 396,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
@@ -367,7 +376,7 @@
         "latches": 24
       },
       "summary_generated": false,
-      "report_recovery_pending": true,
+      "report_recovery_pending": false,
       "screenshots": [
         "server_synth03_final_metrics.png",
         "server_synth03_critical_endpoints.png"
@@ -375,7 +384,8 @@
       "critical_paths": {
         "setup": "bootrom_deglitch/last_reg to ITCM SRAM",
         "hold": "lfextclk to APB timer r_ls_clk_sync_reg[0]"
-      }
+      },
+      "recovered_by": "d3_reports01; original failed state and negative timing preserved"
     }
   },
   "whole_soc_cpu_verified": true,
@@ -586,7 +596,7 @@
     ]
   },
   "activity_run": {
-    "status": "simulation_completed_python_activity_audit_running_slow",
+    "status": "own_slow_postprocessor_interrupted_simulation_and_VCD_preserved",
     "session": "d3_activity01",
     "case": "layer_01",
     "scope": "same mapped SoC full-task VCD",
@@ -601,7 +611,14 @@
     "audit_position_at_0746": 93954096,
     "measured_audit_MB_per_second_approx": 0.27,
     "screenshot": "server_activity_header_audit_rate.png",
-    "next": "After tested replacement upload, interrupt only our completed-simulation Python audit, allowing its own finally to save failed state and release lock; re-audit preserved data in a NEW session."
+    "next": "Original preserved; d3_activity02 performs complete native scan and original capture/source checks in a new directory.",
+    "finished": "2026-11-09T08:00:56.218760",
+    "driver_exited": true,
+    "team_lock_released_by_own_finally": true,
+    "vcd_bytes": 29860998380,
+    "original_state_error": "",
+    "interrupt_method": "SIGINT to PID 200903 only after owner/session/command/no-children/open-VCD guards",
+    "preserved_screenshot": "server_activity01_preserved_after_interrupt.png"
   },
   "taskmode_uart_preparation": {
     "status": "local_tests_only_NOT_server_verified",
@@ -621,6 +638,90 @@
     },
     "production_change": "ASIC installer adds only inactive UART FIFO payload default zero; original official platform preserved",
     "constraints_change": "bootrom_deglitch io_q=1 only during monitored stable task; four exact LF timer first-stage D exceptions after mapping; all other crossings retained",
-    "remaining": "Server UART comparison, actual scanner, strict synthesis and coverage, complete same-config CPU/gate/power"
-  }
+    "remaining": "Server UART comparison, actual scanner, strict synthesis and coverage, complete same-config CPU/gate/power",
+    "counter_interpretation": "In uploaded 371316a UART bench, tx_accepts counts fifo_tx_valid cycles, not guaranteed FIFO admissions; use as valid-payload comparison coverage only."
+  },
+  "activity_reaudit": {
+    "status": "running",
+    "session": "d3_activity02",
+    "package_source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "origin_package": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0",
+    "origin_session": "d3_activity01",
+    "simulation_reexecuted": false,
+    "native_scan_verified": false,
+    "screenshot": "server_activity02_start.png",
+    "driver_pid": 232927,
+    "native_pid": 233022,
+    "started": "2026-11-09T08:02:54.690834",
+    "last_observed": "2026-11-09T08:24:48",
+    "bytes_scanned": 19339098438,
+    "total_bytes": 29860998380,
+    "server_native_parity_tests": 2,
+    "server_native_parity_seconds": 0.468,
+    "parity_screenshot": "server_native_activity_parity.png"
+  },
+  "area_basis": {
+    "status": "library_units_cross_checked_scoring_scope_pending",
+    "original_mapping_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+    "synthesis_summary_sha256": "41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d",
+    "units": "um^2",
+    "method": "All 1276 Liberty standard cells and both SRAM macro areas compared to corresponding LEF SIZE products",
+    "standard_cells_checked": 1276,
+    "standard_lef_macros": 1291,
+    "standard_missing": 0,
+    "standard_max_relative_error": 1.9526412955637452e-16,
+    "standard_lef_sha256": "561b217e16475a32fb946b2c3ff599e9c9a3e5d6fd100ca73b7a03e8c0d4712b",
+    "sram": {
+      "RAMSP128X16": {
+        "width_um": "55.9",
+        "height_um": "47.89",
+        "area_um2": "2677.051",
+        "count": 8,
+        "lef_sha256": "23b2f07d37aaf633e698145082246d84eb882c2bbece589480873e16fc998143"
+      },
+      "RAMSP4096X16": {
+        "width_um": "135.58",
+        "height_um": "202.96",
+        "area_um2": "27517.3168",
+        "count": 130,
+        "lef_sha256": "55dcff2c4759ceb559fd785b3068d4d04a712d5f7556e5fed680a168e61e102a"
+      }
+    },
+    "standard_cell_sum_um2": "214146.8112",
+    "sram_exact_sum_um2": "3598667.5920",
+    "whole_system_geometry_mm2": "3.8128144032",
+    "dc_reported_area_um2": "3812814.351672",
+    "dc_leaf_sum_um2": "3812814.3521793317",
+    "conservative_scenario_mm2": "2.0517061280",
+    "conservative_scenario_condition": "Exclude only the 64 original-capacity E203 TCM macros; include ALL remaining standard cells and macros, including shared SRAM. TCM reuse classification still requires final scoring review.",
+    "shared_sram_exemption_assumed": false,
+    "official_scoring_area_mm2": null,
+    "scoring_area_verified": false,
+    "screenshots": [
+      "server_sram_geometry.png",
+      "server_area_compare_result.png",
+      "server_area_and_scan_0825.png"
+    ],
+    "document": "workspaces/arch03/AREA_REVIEW_20261109.md"
+  },
+  "baseline_performance": {
+    "status": "functional_simulation_baseline_negative_STA_not_final_score",
+    "asic_source_commit": "46cb3de310d2982f0944524e01f153b7206aadd4",
+    "mapped_source_commit": "c323781f10f3e09a6a3dc6d5fb4067b98b89c514",
+    "task_cycles": 3890080,
+    "period_ns": "6.666666",
+    "duration_ns": "25933864.073280",
+    "task_per_second": "38.55962216715376033401626702",
+    "outputs_per_second": "977255.0642043449019053082714",
+    "mac_per_second": "62544324.10907807372193972937",
+    "cpu_extra_cycles": 96,
+    "system_power_W": null,
+    "energy_J_per_task": null,
+    "timing_verified": false,
+    "document": "workspaces/arch03/BASELINE_PERFORMANCE_20261109.md"
+  },
+  "initial_preparation_package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
+  "initial_preparation_runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
+  "latest_uploaded_package_source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+  "commit_scope": "Each stage records its actual tested source; latest uploaded package is not automatically accepted."
 }
