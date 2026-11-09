@@ -30,8 +30,8 @@
 | 整机网表、SDC、时序/面积明细 | `c323781` / `d3_synth03/asic_synth`，由 `4c8803e` / `d3_reports01/asic_synth` 独立复核 | 原始映射不变，setup/hold 为负，24 个 UART 锁存器 |
 | 门级首层 | `4c8803e` / `d3_gate01/gate_soc` | 25,344 输出通过，无 SDF；不代表全部 14 用例 |
 | 完整任务 VCD | `4c8803e` / `d3_activity01/gate_soc`，由 `371316a` / `d3_activity02/gate_soc` 复核 | 完整 29,860,998,380 字节、文件哈希和原始输入/输出复核通过；未知活动与功耗仍待审核 |
-| 旧配置系统功耗 | `4c8803e` / `d3_power01/asic_power` | 绑定上述门级摘要及完整活动，实际运行中 |
-| UART、任务启动选择和 CDC 修正 | `371316a` 修正包 | 本地准备通过；实际 UART 对照、新综合、CPU、门级和功耗尚待验 |
+| 旧配置系统功耗 | `4c8803e` / `d3_power01/asic_power` | 工具运行 679 秒并生成报告；PT-063 启动错误导致验收失败，原报告保留 |
+| UART、任务启动选择和 CDC 修正 | `371316a` 修正包 | 实际 UART 对照 `d3_uart01` 通过；新综合 `d3_synth04` 运行中，完整 CPU/门级/功耗仍待验 |
 
 服务器包目录统一位于 `/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/`。包全名、源码提交、ZIP SHA256、摘要 SHA256 和截图索引见服务器证据；不得只凭日期或运行名选取“最新”结果。
 

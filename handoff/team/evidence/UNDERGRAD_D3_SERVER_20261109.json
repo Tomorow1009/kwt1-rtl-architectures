@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "baseline_activity_passed_power_running_repair_unverified",
+  "status": "uart_miter_passed_repaired_synthesis_running_baseline_power_failed_startup",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -768,7 +768,7 @@
   "latest_uploaded_package_source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
   "commit_scope": "Each stage records its actual tested source; latest uploaded package is not automatically accepted.",
   "power_run": {
-    "status": "running_primetime_vcd_annotation",
+    "status": "failed_tool_error_reports_preserved",
     "session": "d3_power01",
     "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
     "driver_pid": 270688,
@@ -786,7 +786,7 @@
     "pt_shell_exec_pid": 271427,
     "vcd_fd": 36,
     "last_observed": "2026-11-09T08:51:13",
-    "vcd_read_position": 2506014432,
+    "vcd_read_position": 25060114432,
     "units": {
       "capacitance_F": 1e-12,
       "current_A": 0.001,
@@ -806,6 +806,75 @@
       "server_power01_progress.png",
       "server_wire_basis_result.png",
       "server_power_actual_tree.png"
+    ],
+    "finished": "2026-11-09T08:53:05.534352",
+    "error": "Error: Library Compiler executable path is not set. (PT-063)",
+    "error_phase": "before PrimeTime banner; subsequent link/activity/power reports were generated, but strict error guard rejects run even with exit=0",
+    "diagnostics": {
+      "errors": 1,
+      "warnings": 1547,
+      "informationals": 12
+    },
+    "elapsed_tool_seconds": 679,
+    "reported_raw_total_power": "2.00509299e-02",
+    "reported_raw_internal_power": "1.22855455e-02",
+    "reported_raw_switching_power": "1.49438030e-03",
+    "reported_raw_leakage_power": "6.27100328e-03",
+    "report_power_units_verified": false,
+    "team_lock_released": true,
+    "progress_correction": "At 08:51:13 VCD position was 25.060114432 GB, not 2.5 GB; prior screenshot digit transcription corrected. Actual tool run lasted 679 seconds.",
+    "failure_screenshots": [
+      "server_power01_error_exact.png",
+      "server_power01_error_report.png",
+      "server_power_lc_exact.png"
+    ]
+  },
+  "uart_compare": {
+    "status": "passed",
+    "session": "d3_uart01",
+    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "started": "2026-11-09T08:59:59.624305",
+    "finished": "2026-11-09T09:00:03.464863",
+    "summary_sha256": "20319adb2a35a5a24f73f96cc8bfadc6ab1ae7574dcc8b7d7c99a499f82c6544",
+    "scope": "actual_original_vs_patched_official_UART_functional_miter",
+    "counters": {
+      "cycles": 31464,
+      "writes": 213,
+      "reads": 246,
+      "tx_valid_cycles": 195,
+      "idle_checks": 31269,
+      "tx_edges": 600
+    },
+    "counter_note": "Original summary names tx_valid_cycles as tx_accepts; it counts valid cycles rather than FIFO admissions.",
+    "original_sha256": "bd31f4a19b8e81ba2c8ce02b3244ada38cf211445d8ec96151d55f7e946ecadc",
+    "patched_sha256": "34490376257d35cdaa538e5d3faec8d36d1dc18e09390a1644630020c031685b",
+    "cpu_executed": false,
+    "timing_verified": false,
+    "screenshot": "server_uart01_receipt.png"
+  },
+  "repaired_synthesis": {
+    "status": "running",
+    "session": "d3_synth04",
+    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "driver_pid": 305094,
+    "started": "2026-11-09T09:04:52.820785",
+    "timing_verified": false,
+    "screenshot": "server_synth04_state_lc_metadata.png"
+  },
+  "power_fix_preparation": {
+    "status": "local_tests_passed_NOT_server_verified",
+    "change": "Child-only SYNOPSYS_LC_ROOT from pinned cfg lc_shell; record selected environment and guard all three active copied DB hashes against original synthesis provenance",
+    "installed_tool_recognizes_env_name": true,
+    "env_metadata_screenshot": "server_synth04_state_lc_metadata.png",
+    "focused_tests": 4,
+    "all_python_tests": 70,
+    "unit_log": "local_runs/d3_power_lc_fix_tests_20261109.log",
+    "python36_syntax": true,
+    "old_active_copied_db_hashes_match": true,
+    "copied_db_screenshot": "server_synth04_and_active_dbs.png",
+    "source_files": [
+      "workspaces/arch03/scripts/soc_power.py",
+      "workspaces/arch03/scripts/test_soc_power.py"
     ]
   }
 }

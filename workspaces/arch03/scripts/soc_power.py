@@ -15,6 +15,34 @@ from server_run import ROOT,sha,save
 PT_SHELL='/eda/synopsys/prime/prime_2022.03-SP5-1/bin/pt_shell'
 
 
+def power_databases(synthesis):
+    databases=sorted((synthesis/'libs').glob('*.db'))
+    if len(databases)!=3:raise ValueError('Power requires one standard and two SRAM databases')
+    expected={}
+    for path,digest in json.loads((synthesis/'source_inputs.json').read_text()).items():
+        name=Path(path)
+        if name.suffix!='.db':continue
+        if name.name in expected and expected[name.name]!=digest:
+            raise ValueError('Conflicting synthesis database provenance')
+        expected[name.name]=digest
+    if set(expected)!={p.name for p in databases}:
+        raise ValueError('Active power databases lack complete synthesis provenance')
+    for path in databases:
+        if sha(path)!=expected[path.name]:raise ValueError('Active power database changed: '+path.name)
+    return databases
+
+
+def power_invocation(cfg,tcl):
+    # PrimeTime emits PT-063 before its banner when this installation root is
+    # absent. Set it only for the child process, from the pinned LC executable.
+    compiler=Path(cfg['tools']['lc_shell'])
+    if not compiler.is_absolute() or compiler.name!='lc_shell' or compiler.parent.name!='bin' or not compiler.is_file():
+        raise ValueError('Invalid pinned Library Compiler executable')
+    environment={'SYNOPSYS_LC_ROOT':str(compiler.parent.parent)}
+    command=['/usr/bin/env','SYNOPSYS_LC_ROOT='+environment['SYNOPSYS_LC_ROOT'],PT_SHELL,'-f',tcl]
+    return command,dict(environment=environment,lc_shell=str(compiler),lc_launcher_sha256=sha(compiler))
+
+
 def window_values(window):
     start=Decimal(str(window['start_ns']));end=Decimal(str(window['end_ns']))
     period=Decimal(str(window['period_ns']));cycles=int(window['cycles'])
@@ -35,8 +63,7 @@ def tcl_path(path):
 
 def script(cfg,synthesis,vcd,window):
     start,end,_=window_values(window)
-    databases=sorted((synthesis/'libs').glob('*.db'))
-    if len(databases)!=3:raise ValueError('Power requires one standard and two SRAM databases')
+    databases=power_databases(synthesis)
     text=r'''
 proc arch03_power_reports {} {
     set_app_var power_enable_analysis true
@@ -115,9 +142,13 @@ def estimate(cfg,run,gate,expected_sha,case,call):
     if not Path(PT_SHELL).is_file():raise ValueError('Pinned PrimeTime executable missing')
     report,row,vcd,synthesis,duration=gate_activity(gate,expected_sha,case,cfg)
     tcl=run/'soc_power.tcl';tcl.write_text(script(cfg,synthesis,vcd,row['task_window']))
-    before={str(p):sha(p) for p in (tcl,synthesis/'mapped.v',synthesis/'mapped.sdc',synthesis/'summary.json',gate/'summary.json')}
+    command,environment=power_invocation(cfg,tcl)
+    environment_file=run/'power_environment.json';save(environment_file,environment)
+    tracked=[tcl,environment_file,synthesis/'mapped.v',synthesis/'mapped.sdc',synthesis/'summary.json',gate/'summary.json']
+    tracked+=power_databases(synthesis)
+    before={str(p):sha(p) for p in tracked}
     save(run/'source_inputs.json',before)
-    text=call([PT_SHELL,'-f',tcl],run,'power.log')
+    text=call(command,run,'power.log')
     require_tool_marker(text,'ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false')
     required=('units.rpt','power.rpt','power_hierarchy.rpt','power_sram.rpt','activity_coverage_after.rpt',
               'activity_unannotated_after.rpt','activity_sources.rpt','timing_check.rpt','clocks.rpt')
@@ -131,7 +162,7 @@ def estimate(cfg,run,gate,expected_sha,case,call):
                 gate_run=str(gate),gate_summary_sha256=expected_sha,case=case,
                 synthesis_run=str(synthesis),synthesis_summary_sha256=report['synthesis_summary_sha256'],
                 task_window=row['task_window'],duration_ns=duration,activity=row['activity'],
-                tool=PT_SHELL,analysis='averaged; zero-delay gate activity; no extracted parasitics',
+                tool=PT_SHELL,tool_environment=environment,analysis='averaged; zero-delay gate activity; no extracted parasitics',
                 required_reviews=['license/tool run and library units','SRAM internal and conditional leakage power',
                                   'all unmapped and unannotated objects, including unknown activity',
                                   'wire/load and clock network capacitance assumptions','six-component coverage and report sums',

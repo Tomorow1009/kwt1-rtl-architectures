@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "d3_activity02 full-file native activity, source/boot/capture and SHA256 audit passed; baseline d3_power01 started.",
+  "last_completed_stage": "UART original/patched actual comparison passed after complete baseline activity audit. Baseline power reports exist but strict startup PT-063 error rejects acceptance. Repaired synthesis d3_synth04 running.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -47,11 +47,11 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_power01 license/link/activity annotation/reports; review unknown/unannotated activity and all units/models",
-    "While PT processes full VCD, inspect installed VCS native SAIF documentation for future full-window activity; no SAIF implementation or acceptance yet",
-    "Then repair package uart_compare and new asic_synth, checking strict timing/latches/coverage",
-    "Complete repaired-configuration ASIC and full gate cases with same-config activity/power",
-    "Finalize exact scoring area ownership and submission requirements"
+    "Observe d3_synth04 actual constraints, latch count and setup/hold; do not assume new constraints match mapped endpoint names",
+    "Prepare/test/freeze/upload power LC environment and copied-DB integrity fix; actual server rerun required",
+    "Review preserved baseline power annotation/unknowns/SRAM contributions and model assumptions without accepting failed run",
+    "Complete repaired-config ASIC 14 cases, mapped 14 cases, full-task activity and error-free power",
+    "Confirm final scoring ownership and actual submission requirements; optional SAIF research is lower priority"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -66,7 +66,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal reports bundle d3_power01 driver 270688; actual PT binary 271427, VCD FD 36, active. Third terminal diagnostic SDC bundle. Process tree uses /proc/<pid>/task/<pid>/children; ps comma-equals formatting returned incomplete rows and must not be used.",
+  "server_readonly_job": "Fourth terminal (reports bundle cwd) runs repair-package d3_synth04 driver 305094. Third diagnostic terminal idle SDC bundle. Earlier d3_power01 and d3_uart01 have exited normally and released own locks.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -97,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Latest hardware/auditor repair package remains 371316a; docs checkpoint committed as 0458c7e. New runtime repairs NOT accepted. Activity re-audit passed for original old mapped configuration.",
+  "uncommitted_follow_on": "soc_power.py and its focused tests modified locally: LC environment and active copied-DB provenance. Four tests passed; not yet packaged/server verified. Actual timing repairs still source 371316a.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -741,7 +741,7 @@
   },
   "delivery_index": "DELIVERY_INDEX_20261109.md",
   "power_run": {
-    "status": "running_primetime_vcd_annotation",
+    "status": "failed_tool_error_reports_preserved",
     "session": "d3_power01",
     "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
     "driver_pid": 270688,
@@ -759,7 +759,7 @@
     "pt_shell_exec_pid": 271427,
     "vcd_fd": 36,
     "last_observed": "2026-11-09T08:51:13",
-    "vcd_read_position": 2506014432,
+    "vcd_read_position": 25060114432,
     "units": {
       "capacitance_F": 1e-12,
       "current_A": 0.001,
@@ -779,6 +779,75 @@
       "server_power01_progress.png",
       "server_wire_basis_result.png",
       "server_power_actual_tree.png"
+    ],
+    "finished": "2026-11-09T08:53:05.534352",
+    "error": "Error: Library Compiler executable path is not set. (PT-063)",
+    "error_phase": "before PrimeTime banner; subsequent link/activity/power reports were generated, but strict error guard rejects run even with exit=0",
+    "diagnostics": {
+      "errors": 1,
+      "warnings": 1547,
+      "informationals": 12
+    },
+    "elapsed_tool_seconds": 679,
+    "reported_raw_total_power": "2.00509299e-02",
+    "reported_raw_internal_power": "1.22855455e-02",
+    "reported_raw_switching_power": "1.49438030e-03",
+    "reported_raw_leakage_power": "6.27100328e-03",
+    "report_power_units_verified": false,
+    "team_lock_released": true,
+    "progress_correction": "At 08:51:13 VCD position was 25.060114432 GB, not 2.5 GB; prior screenshot digit transcription corrected. Actual tool run lasted 679 seconds.",
+    "failure_screenshots": [
+      "server_power01_error_exact.png",
+      "server_power01_error_report.png",
+      "server_power_lc_exact.png"
+    ]
+  },
+  "uart_compare": {
+    "status": "passed",
+    "session": "d3_uart01",
+    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "started": "2026-11-09T08:59:59.624305",
+    "finished": "2026-11-09T09:00:03.464863",
+    "summary_sha256": "20319adb2a35a5a24f73f96cc8bfadc6ab1ae7574dcc8b7d7c99a499f82c6544",
+    "scope": "actual_original_vs_patched_official_UART_functional_miter",
+    "counters": {
+      "cycles": 31464,
+      "writes": 213,
+      "reads": 246,
+      "tx_valid_cycles": 195,
+      "idle_checks": 31269,
+      "tx_edges": 600
+    },
+    "counter_note": "Original summary names tx_valid_cycles as tx_accepts; it counts valid cycles rather than FIFO admissions.",
+    "original_sha256": "bd31f4a19b8e81ba2c8ce02b3244ada38cf211445d8ec96151d55f7e946ecadc",
+    "patched_sha256": "34490376257d35cdaa538e5d3faec8d36d1dc18e09390a1644630020c031685b",
+    "cpu_executed": false,
+    "timing_verified": false,
+    "screenshot": "server_uart01_receipt.png"
+  },
+  "repaired_synthesis": {
+    "status": "running",
+    "session": "d3_synth04",
+    "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+    "driver_pid": 305094,
+    "started": "2026-11-09T09:04:52.820785",
+    "timing_verified": false,
+    "screenshot": "server_synth04_state_lc_metadata.png"
+  },
+  "power_fix_preparation": {
+    "status": "local_tests_passed_NOT_server_verified",
+    "change": "Child-only SYNOPSYS_LC_ROOT from pinned cfg lc_shell; record selected environment and guard all three active copied DB hashes against original synthesis provenance",
+    "installed_tool_recognizes_env_name": true,
+    "env_metadata_screenshot": "server_synth04_state_lc_metadata.png",
+    "focused_tests": 4,
+    "all_python_tests": 70,
+    "unit_log": "local_runs/d3_power_lc_fix_tests_20261109.log",
+    "python36_syntax": true,
+    "old_active_copied_db_hashes_match": true,
+    "copied_db_screenshot": "server_synth04_and_active_dbs.png",
+    "source_files": [
+      "workspaces/arch03/scripts/soc_power.py",
+      "workspaces/arch03/scripts/test_soc_power.py"
     ]
   }
 }
