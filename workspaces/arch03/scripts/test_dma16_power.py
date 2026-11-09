@@ -78,6 +78,43 @@ class Dma16PowerTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     p.validate_activity(changed, window())
 
+    def test_vcs_bit_declarations_require_all_106_bits_without_overlap(self):
+        original = waveform()
+        vector = next(line for line in original.splitlines() if 'sysmem_icb_cmd_wdata ' in line)
+        bits = ['$var wire 1 d%d sysmem_icb_cmd_wdata [%d] $end' % (bit, bit) for bit in range(31, -1, -1)]
+        split = original.replace(vector, '\n'.join(bits))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'split.vcd'; path.write_text(split)
+            result = a.audit_header(path)
+            self.assertEqual(result['source_port_bits'], 106)
+            self.assertEqual(len(result['source_port_declarations']['cmd_wdata']), 32)
+            # Constant bits can share a VCD identifier, but each bit still has
+            # its own explicit declaration. The native scan checks ID widths.
+            path.write_text(split.replace(' d0 ', ' d1 '))
+            self.assertEqual(a.audit_header(path)['source_port_bits'], 106)
+            bad = [split.replace(bits[-1]+'\n', ''), split.replace(bits[-1], bits[0]),
+                   split.replace('[31] $end', '[32] $end'), split.replace(bits[-1], vector),
+                   split.replace(bits[-1], '$var wire 1 d0 sysmem_icb_cmd_wdata $end'),
+                   split.replace(bits[-1], '$var wire 2 d0 sysmem_icb_cmd_wdata [0] $end'),
+                   split.replace(bits[-1], '$var wire 1 d0 sysmem_icb_unknown [0] $end')]
+            for index, text in enumerate(bad):
+                path.write_text(text)
+                with self.subTest(index=index), self.assertRaises(ValueError):
+                    a.audit_header(path)
+
+    def test_vcd_vector_slices_require_exact_disjoint_ranges(self):
+        original = waveform()
+        vector = next(line for line in original.splitlines() if 'sysmem_icb_cmd_wdata ' in line)
+        slices = '$var wire 16 high sysmem_icb_cmd_wdata [31:16] $end\n$var wire 16 low sysmem_icb_cmd_wdata [15:0] $end'
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'slices.vcd'; path.write_text(original.replace(vector, slices))
+            self.assertEqual(a.audit_header(path)['source_port_widths']['cmd_wdata'], 32)
+            for changed in (slices.replace('[15:0]', '[16:1]'), slices.replace('16 low', '15 low'),
+                            slices.replace('[31:16]', '[16:31]')):
+                path.write_text(original.replace(vector, changed))
+                with self.assertRaises(ValueError):
+                    a.audit_header(path)
+
     def test_power_script_has_same_corner_databases_162_macros_and_full_window(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); fake_databases(root)
@@ -196,6 +233,18 @@ class Dma16NativeActivityTests(unittest.TestCase):
             self.assertFalse(result['power_estimated'])
             self.assertFalse(result['mapped_netlist_annotation_verified'])
             self.assertEqual(result['dma16_header']['source_port_bits'], 106)
+            original = waveform()
+            vector = next(line for line in original.splitlines() if 'sysmem_icb_cmd_wdata ' in line)
+            identifier = vector.split()[3]
+            split = original.replace(vector, '\n'.join(
+                '$var wire 1 d%d sysmem_icb_cmd_wdata [%d] $end' % (bit, bit) for bit in range(32)))
+            split = split.replace('b0 '+identifier+'\n', '\n'.join('0d%d' % bit for bit in range(32))+'\n')
+            path.write_text(split)
+            split_result = a.audit_vcd(path, window(), binary)
+            self.assertEqual(split_result['dma16_header']['source_port_bits'], 106)
+            self.assertEqual(split_result['unknown_value_records'], result['unknown_value_records'])
+            self.assertEqual(split_result['start_ns'], result['start_ns'])
+            self.assertEqual(split_result['end_ns'], result['end_ns'])
             path.write_text(waveform().split('#119999998')[0])
             with self.assertRaises(ValueError):
                 a.audit_vcd(path, window(), binary)

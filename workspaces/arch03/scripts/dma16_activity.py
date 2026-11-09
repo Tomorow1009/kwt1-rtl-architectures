@@ -4,6 +4,7 @@ This proves file/scope/window integrity only, never PrimeTime annotation or
 power completeness. Unknown value records remain visible and are not toggles.
 """
 import hashlib
+import re
 from pathlib import Path
 from activity_fast import audit_vcd_fast, build_scanner
 from dma16_synth import SYSMEM
@@ -13,7 +14,8 @@ MODULES = ('u_arch03_accel', 'u_arch03_arb', 'u_arch03_router', 'u_arch03_shared
 
 def audit_header(path):
     scope = []; modules = {n: set() for n in MODULES}; declarations = {n: 0 for n in MODULES}
-    ports = {}; ended = False
+    port_bits = {name: set() for name in SYSMEM}
+    port_declarations = {name: [] for name in SYSMEM}; ended = False
     with Path(path).open('r', encoding='ascii') as stream:
         iterator = iter(stream)
         for line in iterator:
@@ -44,15 +46,30 @@ def audit_header(path):
                         declarations[name] += 1
                 if len(scope) == 2 and fields[4].startswith('sysmem_icb_'):
                     name = fields[4][len('sysmem_icb_'):]
-                    if name in ports or name not in SYSMEM:
-                        raise ValueError('Unexpected/duplicate DMA16 source port')
+                    if name not in SYSMEM:
+                        raise ValueError('Unexpected DMA16 source port')
                     width = int(fields[2])
-                    if width != SYSMEM[name][1]:
-                        raise ValueError('DMA16 source port VCD width mismatch')
-                    # Source trace is the entire vector, not a reduced alias.
-                    if width > 1 and fields[5:-1] != ['[%d:0]' % (width-1)]:
-                        raise ValueError('DMA16 source port VCD range mismatch')
-                    ports[name] = width
+                    expected = SYSMEM[name][1]
+                    indices = fields[5:-1]
+                    # VCS may emit mapped vectors as individual bit declarations.
+                    # Accept either representation only with exact, disjoint bit
+                    # coverage; never infer omitted constant or optimized bits.
+                    if expected == 1:
+                        if width != 1 or indices:
+                            raise ValueError('DMA16 scalar source port VCD mismatch')
+                        bits = {0}
+                    else:
+                        match = re.fullmatch(r'\[(\d+)(?::(\d+))?\]', indices[0]) if len(indices) == 1 else None
+                        if match is None:
+                            raise ValueError('DMA16 source port VCD range missing')
+                        high = int(match.group(1)); low = int(match.group(2) or match.group(1))
+                        if not 0 <= low <= high < expected or high-low+1 != width:
+                            raise ValueError('DMA16 source port VCD range/width mismatch')
+                        bits = set(range(low, high+1))
+                    if bits & port_bits[name]:
+                        raise ValueError('Overlapping DMA16 source port VCD bits')
+                    port_bits[name].update(bits)
+                    port_declarations[name].append(dict(identifier=fields[3], width=width, bits=sorted(bits)))
             elif command == '$enddefinitions':
                 ended = True
                 if scope:
@@ -60,11 +77,13 @@ def audit_header(path):
                 break
             elif command not in ('$date', '$version', '$comment', '$timescale'):
                 raise ValueError('Unknown DMA16 VCD header command')
-    if not ended or set(ports) != set(SYSMEM):
+    if not ended or any(port_bits[name] != set(range(width)) for name, (_, width) in SYSMEM.items()):
         raise ValueError('Missing complete DMA16 source interface in VCD')
     if any(len(modules[n]) != 1 or declarations[n] <= 0 for n in MODULES):
         raise ValueError('Missing/ambiguous DMA16 accelerator/arbiter/router/shared activity hierarchy')
+    ports = {name: len(bits) for name, bits in port_bits.items()}
     return dict(status='dma16_declarations_verified', source_port_widths=ports, source_port_bits=sum(ports.values()),
+                source_port_declarations=port_declarations,
                 module_paths={n: next(iter(paths)) for n, paths in modules.items()},
                 module_declarations=declarations, annotation_verified=False,
                 external_source_model_in_power_scope=False,

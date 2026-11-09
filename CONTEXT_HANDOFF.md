@@ -22,6 +22,14 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **11月10日00:34最新**：`dma16_gate02`实际于00:14:25.365488失败，原因`DMA16 source port VCD width mismatch`。实际layer_01 VCS已PASS25344输出、225770周期，饱和0，IRQ external1/timer23/wfi23/unhandled0；8,745,588,450字节VCD保留，尚无已审计case_progress，不称门级整轮通过。00:27实际头显示VCS将cmd_wdata等向量拆成逐位声明，原观察器只接受整向量。已修`dma16_activity.py`逐位核验完整106位，无缺位/重叠/越界；原生全文件扫描、未知值及真实边界不变。59项相关测试通过，新增逐位/分片拒绝覆盖和C++实际扫描复验，未改生产RTL/网表/固件。
+- c5相位包FileZilla成功32秒，队列空，已Ctrl+D断开并最小化。服务器00:23:56.259410校验16441116字节/SHA并安全解包；00:27:36.565681 `inputs()`核验627文件及完整c5提交。共享锁False、当前EDA空后启动原8路完整14例`mmio8_source02`，driver322427，launcher00:28:41.633308、started00:28:41.945678。最后00:30:29.905651 running/compile.log，child327331；不重启/清锁。新包路径见下方00:17记录，已上传状态以本节为准。
+- 下一步：新VCD审计工具提交/push/打独立包并上传，待MMIO8自然结束后gate03默认14例＋12全窗口活动，仍用fcd新synth01冻结网表及原IRQ固件。之后首层功耗审计、逐层12功耗与最终1200。正式报告生成器仍未开发；严格时钟/未知值/完整系统功耗、实际CPU竞争微基准仍缺。一次VNC终端多行Python命令被csh按行解析失败，未写文件；改为单行查询成功。失败gate02/旧运行原封保留，不改成PASS。
+
+- **00:17压缩前保存**：云端最新已push并ls-remote核对`c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c`；相位观察器修复已提交。gate02实际模块probe已通过（只读、无网表修改），编译也过；最后00:14:19正在layer_01.log，child298324，尚无case_progress完成记录。当前VNC18874435、FileZilla20972102（新发现后仍同ID）、panel10485764；本机relay25104/FTPproxy30216沿用，FileZilla用于下一包，未停远端作业。
+- 新8路相位包`light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d.zip`，16441116字节、627文件，SHA`07c08efeff205d76949f81e8a90830e23a2063b8a996831739b171161a82f410`。安全解包/CRC/全部hash/四固件/65相关工具测试通过，audit=`local_runs/mmio8_phase_clean_audit_20261110_0015/receipt.json`，SHA`aaed34237c12d35d9083440c5ad0b94e06ad3cf95ea455fbe4cf964db6a01cce`。已板端SHA核验，路径`/home/root/undergrad-mmio-phase-20261110/<zip>`，GUI`/home/board/undergrad-mmio-phase-20261110/`。正在同一个IC-single-connection站点重连准备上传，尚未核实传输完成；待查看`mmio_phase_ftp_ready.png`及后续队列。
+- 恢复先重读有效计划、AGENTS及本节/JSON，再确认实际gate02进度，不要重启或清锁；新包上传验证可与现有EDA共存，但其他EDA仍串行。gate02若成功，读14层输出/12活动/SHA后逐层功耗，再冻结1200；MMIO8新相位完整14及新综合仍待调度，未把首层失败标PASS。正式报告生成器仍未开始，系统功耗/严格时钟与无时钟对象审计、真实CPU竞争微基准、最终1200、提交材料仍缺。旧错组合回路、两次摘要转录失败、gate01探测失败、gate02启动父目录失败、旧MMIO8时间断言失败均保留，不能覆盖。
+
 - **00:12实际运行停点**：`dma16_gate02`第一次launcher因新包尚无runs父目录而在open(driver.log)前失败，未创建作业；只创建空runs目录后成功启动，driver **295297**，launcher00:09:52.815904，started00:09:53.375096。最后00:10:59.374996为running，child295348/mapped_probe.log；不重启/清锁。包51bc8d1，生产网表fcd445f/synth01、SHA仍1ee58262…7042d339。上一段“已开始”需以此实际时间为准。
 - MMIO8相位本地测试已全部结束：phase1三例76032输出、phase0一例25344输出，合计4任务101376输出，两次各6拒绝测试，共12；28软件工具测试通过。phase1摘要SHA`1a5d7a33044d5988ff57bdf0033485b7c478328437fb3bda0b7e9864d572c722`，phase0摘要`103bd169fdef5e4e9b840ffc09a7596231e4914f5b26f0d263e510d33b47b28a`；session58118已完成。均NO_E203，服务器修复版尚未执行。下一步保存/提交这些已测观察器修复，再待后续新包上传；不改当前gate02的51bc包。
 

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_gate02_running",
+  "phase": "MMIO8_full14_running_DMA16_gate_activity_fix_local",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-09T19:38:01+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Observe gate02 without restarting. Commit/ship MMIO8 phase observer and rerun actual reference; final1200 and gate/power/strict timing/report remain.",
+  "next": "Ship VCD bit-declaration audit fix; after MMIO8 completes run gate03 full14/activity12, power, final1200; strict timing and system-power review pending.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "dma16_gate02",
+  "active_session": "mmio8_source02",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": false,
@@ -755,9 +755,9 @@
     "ftp_transfer_seconds": 32,
     "ftp_disconnected_after_transfer": true
   },
-  "cloud_source_commit": "51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432",
+  "cloud_source_commit": "c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c",
   "dma16_gate02": {
-    "state": "running",
+    "state": "failed",
     "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
     "source_commit": "51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432",
     "hardware_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
@@ -768,10 +768,21 @@
     "driver_pid": 295297,
     "started_launcher": "2026-11-10T00:09:52.815904",
     "started": "2026-11-10T00:09:53.375096",
-    "last_observed": "2026-11-10T00:10:59.374996",
-    "child_pid_last": 295348,
-    "child_log_last": "mapped_probe.log",
-    "prior_launcher_error": "New bundle had no runs parent: open(driver.log) failed before Popen. Created empty runs; unique session then launched. No tool run was overwritten."
+    "last_observed": "2026-11-10T00:27:36.565681",
+    "child_pid_last": 298324,
+    "child_log_last": "layer_01.log",
+    "prior_launcher_error": "New bundle had no runs parent: open(driver.log) failed before Popen. Created empty runs; unique session then launched. No tool run was overwritten.",
+    "mapped_module_probe_passed": true,
+    "compile_passed": true,
+    "completed_cases": 0,
+    "finished": "2026-11-10T00:14:25.365488",
+    "error": "DMA16 source port VCD width mismatch",
+    "first_case_simulator_pass": true,
+    "first_case_outputs": 25344,
+    "first_case_cycles": 225770,
+    "first_vcd_bytes": 8745588450,
+    "activity_audited": false,
+    "root_cause": "Mapped VCS emits some vector top ports as explicit one-bit declarations; original auditor required a whole vector."
   },
   "mmio8_issue_phase_fix": {
     "status": "local_fixture_and_contracts_passed_not_server_verified",
@@ -790,5 +801,51 @@
     "phase0_run": "local_runs/mmio8_source_fixture_20261110_000754_276790",
     "phase0_sha256": "103bd169fdef5e4e9b840ffc09a7596231e4914f5b26f0d263e510d33b47b28a",
     "policy": "Preserve firstVALID actual timestamp; independently prove preceding edge and phase; conservative ceil elapsed cycles; no missing edge/phase metadata accepted"
+  },
+  "mmio_phase_package": {
+    "source_commit": "c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c",
+    "archive": "light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d.zip",
+    "bytes": 16441116,
+    "sha256": "07c08efeff205d76949f81e8a90830e23a2063b8a996831739b171161a82f410",
+    "files": 627,
+    "hardware_executed": false,
+    "local_archive_audit_passed": true,
+    "clean_contract_tests": 65,
+    "firmware_variants": 4,
+    "clean_audit": "local_runs/mmio8_phase_clean_audit_20261110_0015/receipt.json",
+    "clean_audit_sha256": "aaed34237c12d35d9083440c5ad0b94e06ad3cf95ea455fbe4cf964db6a01cce",
+    "board_staged": true,
+    "board_staging_sha256_verified": true,
+    "server_uploaded": true,
+    "server_zip_bytes_verified": true,
+    "server_zip_sha256_verified": true,
+    "server_unpacked_verified": true,
+    "server_sha_observed": "2026-11-10T00:23:56.259410",
+    "server_inputs_verified": 627,
+    "server_inputs_observed": "2026-11-10T00:27:36.565681",
+    "ftp_ui_success": true,
+    "ftp_transfer_seconds": 32,
+    "ftp_disconnected_after_transfer": true
+  },
+  "mmio8_source02": {
+    "state": "running",
+    "source_commit": "c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c",
+    "bundle": "light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d",
+    "driver_pid": 322427,
+    "started_launcher": "2026-11-10T00:28:41.633308",
+    "started": "2026-11-10T00:28:41.945678",
+    "last_observed": "2026-11-10T00:30:29.905651",
+    "child_pid_last": 327331,
+    "child_log_last": "compile.log",
+    "expected_cases": 14,
+    "completed_cases": 0,
+    "verified": false
+  },
+  "vcd_bit_declaration_fix": {
+    "status": "local_tests_passed_not_server_verified",
+    "related_tests": 59,
+    "native_scan_passed": true,
+    "hardware_firmware_changed": false,
+    "rule": "Exact complete 106 source bits; vector, bit or disjoint slices; reject missing/overlapping/out-of-range/width mismatch. Preserve full-file scan and unknown activity."
   }
 }
