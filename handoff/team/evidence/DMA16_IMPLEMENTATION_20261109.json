@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_power_l04_launching_review_canonical_LF_fix_local",
+  "phase": "DMA16_L01_L03_power_collected_L04_running_review_LF_package_staged",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Package corrected review record and constant-instance guard; clean175checks then upload and new binding02. Track L03, serial L04-L12. Complete all unknown-object review, final1200 report re-audit, MMIO8 PPA and clean reproduction.",
+  "next": "Upload verified d25 LF review package via FileZilla, server verify and fresh binding02. Track L04 then serial L05-L12. Full unknown-object review, per-layer numbers, final1200 re-audit/export, MMIO8 PPA and clean reproduction remain.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -1636,7 +1636,7 @@
   "project_area_upper_bound_verified": true,
   "frozen_review_record": "workspaces/arch03/FROZEN_REVIEW_20261110.json",
   "review_exporter_local": {
-    "tests_passed": 175,
+    "tests_passed": 177,
     "skipped": 0,
     "production_changed": false,
     "server_executed": false,
@@ -1713,8 +1713,10 @@
     "driver_pid": 292470,
     "started_launcher": "2026-11-10T06:55:24.759277",
     "system_power_verified": false,
-    "finished": "2026-11-10T07:00:26.274532",
-    "summary_sha256_not_yet_transcribed": true
+    "finished": "2026-11-10T07:00:28.058236",
+    "summary_sha256": "d1ea229f95cc54884af698e3f7406bb32c104dbab0b3f6db0fa7568aafc96b8a",
+    "summary_sha256_independently_verified": true,
+    "sha_verified_at": "2026-11-10T07:08:06.859410"
   },
   "review_correct_package_rejected": {
     "source_commit": "97553fe93b61c414499a12ef9492de72ddfd3d75",
@@ -1725,5 +1727,28 @@
     "preserved_audit": "local_runs/dma16_review_correct_clean_audit_20261110_0700",
     "local_fix": "Explicit LF document/record and package-time binding guard",
     "related_tests": 27
+  },
+  "review_lf_package": {
+    "source_commit": "d25ba8a0142d865f3e1ef69f32ea05fc041c03fb",
+    "archive": "light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d.zip",
+    "bytes": 16597053,
+    "sha256": "aa669fd81b9a597b92cf537d8a0ab8e5a0f289a8661c51897bef383f82ad8bbf",
+    "files": 667,
+    "clean_tests": 177,
+    "production_files_unchanged": 40,
+    "clean_audit_receipt": "local_runs/dma16_review_lf_clean_audit_20261110_0706/receipt.json",
+    "clean_audit_sha256": "f3d0d35283616a62349b9845f6972b5f26b6c96dbd489621fc37efba9932da55",
+    "board_staged_sha_verified": true,
+    "board_directory": "/home/root/undergrad-review-lf-20261110",
+    "server_uploaded": false
+  },
+  "dma16_power_l04_v1": {
+    "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
+    "run": "runs/dma16_power_l04_v1/dma16_power",
+    "status": "running_last_observed",
+    "driver_pid": 297135,
+    "started_launcher": "2026-11-10T07:03:19.473323",
+    "last_owner_observed": "2026-11-10 approximately07:07",
+    "system_power_verified": false
   }
 }
