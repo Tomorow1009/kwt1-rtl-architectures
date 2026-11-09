@@ -2248,12 +2248,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T02:54:15.790502",
-      "child_pid_last": 124528,
-      "child_log_last": "layer_09_activity_scan.log",
+      "last_observed": "2026-11-10T02:58:22.178477",
+      "child_pid_last": 135475,
+      "child_log_last": "layer_10_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 8,
+      "completed_cases": 9,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -2261,7 +2261,7 @@
       "first_case_header_audit_passed": true,
       "first_vcd_bytes": 8745588450,
       "child_log_bytes_last": null,
-      "child_pid_source": "Current shared owner; layer_09 native full-file audit still active",
+      "child_pid_source": "Current shared owner; complete native activity scan active",
       "first_case_activity_passed": true,
       "first_case_source_bits": 106,
       "first_case_active_value_records": 1712153505,
@@ -2278,9 +2278,10 @@
         "layer_05",
         "layer_06",
         "layer_07",
-        "layer_08"
+        "layer_08",
+        "layer_09"
       ],
-      "child_cpu_percent_last": 142.0
+      "child_cpu_percent_last": 103.0
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -2476,6 +2477,21 @@
       "hardware_changed": false,
       "formal_irq_firmware_changed": false,
       "cloud_push_pending": true
+    },
+    "mmio8_power_numeric_local": {
+      "status": "implemented_local_contracts_only",
+      "related_tests": 31,
+      "actual_new_mmio8_power_extracted": false,
+      "server_uploaded": false,
+      "system_power_verified": false,
+      "module": "workspaces/arch03/scripts/mmio8_power_numbers.py",
+      "default_DMA16_162_macro_guard_preserved": true,
+      "mmio8_source_macros": 138
+    },
+    "innovation_defense_draft": {
+      "path": "workspaces/arch03/INNOVATION_DEFENSE_20261110.md",
+      "final_submission": false,
+      "claims_bound_to_actual_evidence": true
     }
   }
 }

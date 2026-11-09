@@ -22,6 +22,9 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **03:03后续保存**：02:58:22.178477实际gate03完整通过layer_01..09，driver34122，child135475为layer_10_activity_scan.log（刚启动10秒、CPU103%）；其余还在跑，勿重启或清锁。当前最新本地已提交证据`ffe5243856ac527d713ce78aae3ab3e702c05b57`，云端仍因具体目的地审批等待用户答复而保持7379718。最新服务器工具包431，当前门级包a53，生产fcd均不变。
+- 新增`INNOVATION_DEFENSE_20261110.md`答辩准备稿，引用当前同源周期与面积证据，明确最终PPA/1200仍缺、板端仅用于服务器访问，不称芯片/开发板实测吞吐。另新增`mmio8_power_numbers.py`及4测试，共31相关检查通过；共享SRAM数值解析新增两个显式profile，DMA16默认162宏不放宽，MMIO8要求138宏。此本地变更尚未提交/打包/上传，详见MMIO8_GATE_POWER_HANDOFF；实际新MMIO8功耗尚无数字，不能把旧8路的不同窗口报告算作新对照。
+
 - **02:56压缩前保存，恢复从此处开始**：原8路门级/功耗入口已本地提交`4310d9b7cb3484352b6293ea58ff967cbda3ec26`，GitHub仍等待用户明确目的地答复，未push。包`light-light126-mmio-gate-dma16-20261110_024809-4310d9b7cb34.zip`为16522096字节/648文件，SHA`88d25cdcfdddc3a60fc5228305151a490bd6f6e741bcc7e2ab7cd0ce3d6d449c`。干净解包CRC/路径/全部哈希/五固件/112tests通过，audit=`local_runs/dma16_mmio_gate_clean_audit_20261110_0250/receipt.json`，SHA`92570a71dfd549c1d06c1c757e6ef1719e976ef112799533aa68af9f7c2d16d0`。与236包的生产RTL及正式IRQ固件逐文件相同。
 - 新包已暂存开发板`/home/root/undergrad-mmio-gate-20261110/`并通过现有FileZilla上传成功33秒。02:53:37.823430服务器ZIP/安全解包通过，02:54:15.790502核对648输入和完整提交。FZ随后Control_L+d断开，Alt_L+F9最小化；Linux组合键必须`--keys Control_L r`，此前误用`ctrl+r`被拒绝并一度使路径字段拼接，已更正，未误传或覆盖文件。窗口仍VNC18874435、FZ20972102、panel10485764，无新登录、无需读凭据。
 - **gate03最后02:54:15.790502仍running**：layer_01..08全部功能＋完整活动通过，driver34122、child124528仍layer_09_activity_scan.log。不重启、不清锁、不并发EDA。server最新工具可用431包，DMA16数值工具与236保持一致；正在运行的门级仍a53包，生产RTL/综合fcd不变。首层实际DMA16 PT、12功耗、竞争、MMIO8新综合/PPA、最终1200/30412800输出和最终实际导出仍缺。优先完成gate03全部14/12活动再读取summary SHA、首层新PT审查；不能用八层进度当完整gate。

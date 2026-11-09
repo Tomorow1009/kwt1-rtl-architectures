@@ -225,7 +225,8 @@ def parse_hierarchy(text, totals):
                 note='Rounded PT hierarchy values; CPU excludes its full ITCM/DTCM wrappers. Remaining platform is a residual. Bounds include print rounding only, not model uncertainty.')
 
 
-def parse_sram(text):
+def parse_sram(text, profile='dma16'):
+    require(profile in ('dma16', 'mmio8_source'), 'Unknown SRAM power inventory profile')
     require(re.search(r'(?m)^\s*Design\s*:\s*e203_soc_top\s*$', text) and '-cell_power' in text,
             'Not the complete SoC SRAM cell report')
     pattern = (r'^\s*(\S+)\s+'+r'\s+'.join(['('+POWER_NUMBER+')']*4)+
@@ -247,7 +248,8 @@ def parse_sram(text):
         cells[path] = dict(owner=role, reported_power_w=values, attributes=match.group(6), numerical_sum_check=check)
         counts[role] = counts.get(role, 0)+1
         for key in KEYS: sums[(role, key)] = sums.get((role, key), Decimal(0))+number(values[key])
-    require(counts == {'itcm': 32, 'dtcm': 32, 'shared': 64, 'accelerator': 34}, 'Incomplete DMA16 SRAM cell coverage')
+    expected = {'itcm': 32, 'dtcm': 32, 'shared': 64, 'accelerator': 34 if profile == 'dma16' else 10}
+    require(counts == expected, 'Incomplete '+profile+' SRAM cell coverage')
     return dict(cell_count=len(cells), counts=counts, cells=cells,
                 summed_cell_power_w={role: {key: str(sums[(role, key)]) for key in KEYS} for role in counts},
                 note='SRAM is already included in module/system totals; never add this separate breakdown again. Cell models and activity still require review.')

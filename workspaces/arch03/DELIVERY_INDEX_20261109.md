@@ -10,6 +10,8 @@
 
 当前有效实现见[DMA16实施报告](DMA16_IMPLEMENTATION_REPORT.md)、[三天计划](IMPLEMENTATION_PLAN_DMA16_20261109.md)、[DMA16运行命令](DMA16_EXECUTION.md)。程序-only物理启动、原SysMem源读取开始计时、16路MAC/ICB DMA/物理权重双bank及最终1200ASIC任务是当前要求。以下原8路索引和ITCM源输入描述仅为历史基线，不适用于新候选。
 
+新增[创新对照与答辩草稿](INNOVATION_DEFENSE_20261110.md)，涵盖三项自主改进、同源RTL对照、来源界定、演示顺序和常见追问。它是有明确未验项的准备稿，待同一冻结配置PPA／1200回执及正式提交模板齐全后更新，不能作为已完成答辩或最终合格提交。
+
 新工程入口：`rtl/arch03_linear16.sv`、`rtl/arch03_dma16_accel.sv`、`rtl/arch03_icb_arb2.sv`、`rtl/arch03_icb_memory_router.sv`；数据导出为`dma16_layout.py`，真实ASIC入口为`dma16_soc.py`，无复位恢复为`dma16_sequence_soc.py`，同加载源原驱动对照为`mmio8_soc.py`，最终批量为`dma16_batch.py`。新综合、门级、活动、功耗分别为`dma16_synth.py`、`dma16_gate.py`、`dma16_activity.py`、`dma16_power.py`。是否实际通过只查各新run，不以文件存在为验收依据。
 
 首包2bd6b0f组合回路已由fcd445f修复；旧综合和gate01的探测失败全部保留。51bc8d1新包627文件已三端核验上传，修正DC算术子设计与模块前缀同名造成的探测歧义；c5e0bbf另修原8路对照首VALID的沿内相位，4本地任务101376输出通过，尚需新包实际CPU重验。原8路首层输出匹配但计时解析失败，不能作为完整吞吐通过。截止仍为用户给出的11月13日晚上，内部11月12日17:16交付准备不后移。
