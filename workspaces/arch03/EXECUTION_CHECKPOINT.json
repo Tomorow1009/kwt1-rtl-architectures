@@ -48,7 +48,7 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "WAIT for explicit user resume; reread implementation plan and reconcile this checkpoint",
+    "WAIT for updated user plan; reconcile scope, priorities and evidence before any authorized resume",
     "Reconnect board with fresh window inventory and existing fixed-target VNC/FTP helpers as needed",
     "Inspect preserved d3_synth07 state, final report if finished, and actual IC/.arch02_team_lock; do not duplicate or restart",
     "Review strict timing/coverage/area; after valid synthesis complete mapped 14 cases and same-config full-window power",
@@ -1317,7 +1317,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
+    "verified_remote_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
@@ -1428,7 +1428,9 @@
     "child_pid_at_last_observation": 141535,
     "left_running_on_user_pause": true,
     "lf_outputs_actual_bound": true,
-    "lf_binding_screenshot": "server_synth07_bound_progress.png"
+    "lf_binding_screenshot": "server_synth07_bound_progress.png",
+    "status_is_last_observed": true,
+    "current_remote_status": "not_rechecked_during_pause"
   },
   "pause2": {
     "status": "paused_by_explicit_user_request",
@@ -1463,5 +1465,14 @@
     "status": "draft",
     "cloud_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
     "final_timing_area_power_pending": true
+  },
+  "plan_update_handoff": {
+    "status": "waiting_for_updated_user_plan_keep_paused",
+    "date": "2026-11-09",
+    "document": "PROGRESS_BEFORE_PLAN_UPDATE_20261109.md",
+    "remote_rechecked": false,
+    "remote_last_observed": "2026-11-09T11:30:53.840890",
+    "previous_cloud_verified_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
+    "instruction": "Compare updated plan against recorded completed, unverified and remaining work before resuming. Preserve pause unless user instructs execution."
   }
 }

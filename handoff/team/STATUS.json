@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Wait for user resume. Inspect preserved synth07 completion and actual shared lock before continuing; no remote process stopped. Board clients and local connection helpers exited.",
+    "next": "Remain paused, await updated user plan, reconcile it with progress record, then inspect preserved synth07 when execution resumes.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -140,7 +140,7 @@
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "Portcheck 5946c54 runtime verified, uploaded and all 402 server input hashes passed; synth07 running; no new gate/timing/power acceptance.",
+    "source_commit_scope": "Portcheck 5946c54 verified and uploaded; all 402 server input hashes passed. Synth07 was running at last observation 2026-11-09 11:30:53; final result not rechecked. No new gate/timing/power acceptance.",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "synth04 mapped artifacts complete, latches=0 and hold positive; three LF output budget setup violations remain",
@@ -158,10 +158,11 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+      "verified_remote_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
       "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
       "main_merged": false
     },
-    "resume_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json resume"
+    "resume_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json resume",
+    "plan_update_handoff": "../../workspaces/arch03/PROGRESS_BEFORE_PLAN_UPDATE_20261109.md"
   }
 }
