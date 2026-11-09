@@ -4,6 +4,10 @@
 
 02:00修订：29992c7工具包已上传并核验643输入，但实际旧PT格式诊断发现三个工具假设错误，尚不能直接用于完整导出。原诊断失败保留，生产RTL/网表/门级作业不受影响。已本地修正，**33项相关测试通过，修正版尚待新包实际复验**。
 
+02:11追加：7dc2617修正包五固件/98干净测试及三端核验完成。服务器02:05:29.144935核验643输入，并通过实际旧PT基本/功耗单位、普通/verbose表及全部合计；02:08:13.134472完整138宏SRAM表通过格式与合计，然后按预期被DMA16的162宏守卫拒绝。层级表还有两行负数实际显示为`-6.9e-06`（两位有效数字），前次误读为三位；已本地支持这两种有符号显示精度并计算真实末位舍入，12项数值相关测试通过，尚待后续包实际复验。旧包与诊断失败全部保留。
+
+同一汇总器已实际读取fcd ASIC与综合清单，02:08:56.845972核对10个生产RTL、161个平台RTL身份相同；02:10:17.812242核对已完成layer_01..05的ASIC/门级result和layout SHA一致。完整gate与最终报告尚未完成。
+
 解析格式依据为服务器实际T-2022.03-SP5-1的历史`d3_power07_h0/asic_power`报告，只用于格式验证，不把旧8路功耗移给新配置。**真实功耗单位在power_verbose.rpt，为`Dynamic Power Units = 1 W`及`Leakage Power Units = 1 W`**；units.rpt只有电容1e-12 Farad、时间1e-09 Second、电压1 Volt等基本单位。此前记录的下划线字段并非实际格式，已纠正。修正解析器分别核对两份来源、普通与verbose功耗分类/总值一致。report_power为Averaged Power、e203_soc_top、9有效数字；七类clock_network、register、combinational、sequential、memory、io_pad、black_box，以及四个总项均必须完整。
 
 新工具核对明确1W单位、有限非负9位科学记数、完整唯一分类与总项，并按照显示末位的舍入误差核对行与列合计；缺项不能按零补齐，单位变更需先审核。它读取实际已通过报告收集阶段的summary SHA及每个artifact SHA，拒绝工具错误及文件变化，保留各文件警告出现次数、活动未知值和原始审核清单。
@@ -16,7 +20,7 @@ python3 workspaces/arch03/scripts/dma16_power_numbers.py --run <已完成dma16_p
 
 输出`reported_power_w`和`raw_reported_energy_j`是未经最终审核的原始数值换算；`system_power_verified=false`、`approved_average_power_w=null`、`approved_energy_j=null`不会因为有数值自动改变。七类PT分类并非架构模块分解。
 
-已只读核对实际旧PT层级格式：`power_hierarchy.rpt`即使请求8位小数仍显示3位有效数字，零值显示`0.000`。新解析器保留显示舍入误差，不冒称高精度。CPU顶层包含ITCM/DTCM，分解时减去完整TCM包装子树；加速器、共享SRAM、DMA仲裁、DMA路由互斥，其余平台由总值减去这些互斥范围。缺失、重名、错误嵌套及负残差均拒绝。SRAM独立逐单元检查162宏（ITCM32、DTCM32、shared64、accelerator34），拒绝黑盒属性；SRAM已经包含在模块功耗内，不重复加总。模型与活动审核仍未完成。
+已只读核对实际旧PT层级格式：`power_hierarchy.rpt`即使请求8位小数仍最多显示3位有效数字，实际负internal两位，零值显示`0.000`。新解析器保留显示舍入误差，不冒称高精度。CPU顶层包含ITCM/DTCM，分解时减去完整TCM包装子树；加速器、共享SRAM、DMA仲裁、DMA路由互斥，其余平台由总值减去这些互斥范围。缺失、重名、错误嵌套及负的非internal残差均拒绝。SRAM独立逐单元检查162宏（ITCM32、DTCM32、shared64、accelerator34），拒绝黑盒属性；SRAM已经包含在模块功耗内，不重复加总。模型与活动审核仍未完成。
 
 新增`dma16_report.py`读取显式运行索引，核对阶段状态、摘要和文件哈希、ASIC/综合RTL与平台逐文件一致、同固件/布局/门级/波形绑定；导出`report.json`、`tasks.csv`、`modules.csv`、`summary.csv`、`report_zh.md`及哈希回执。12层能耗逐窗口累加，总平均功耗按总能量除总时长计算。缺一层时总功耗与总能耗保持null；未审核字段不会自动变成通过。
 

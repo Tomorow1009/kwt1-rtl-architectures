@@ -22,6 +22,11 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **02:11压缩前最新保存**：gate03在02:10:17.812242已完整通过layer_01..05；其余仍在运行，最后driver34122，旧child80948已是第五层旧扫描PID，下一次刷新owner，不能按旧PID判断。现有a53门级包、fcd综合网表不变，勿重启或清锁。实际新汇总器核对前五层ASIC/门级result和layout SHA相同；02:08:56.845972核对实际ASIC/综合10生产RTL及161平台RTL身份相同。
+- 云端已push/ls-remote核验`7dc2617176b6fddd3cdf8613563340e6d0adb6ba`。新包`light-light126-reportfix-dma16-20261110_020049-7dc2617176b6.zip`为16498625B/643文件，SHA`7713a0535dfedfb32ca2e9f0bd07ffad8d8454b981d23ff10d0577f6bf48bee7`；clean `local_runs/dma16_reportfix_clean_audit_20261110_0201/receipt.json` SHA`20b9c628096ac6bc18ef1ec4167e34e93fe8cde8aea398b78f1cd9525fb60d2e`，五固件/98tests/CRC/hash通过。板端`/home/root/undergrad-reportfix-20261110/`；FileZilla成功33秒、队列空后Ctrl+D断开/Alt+F9最小化。服务器02:04:38.867083 ZIP/SHA/安全解包、02:05:29.144935 inputs643通过。
+- **实际格式复验**：7dc包已通过旧PT基本单位、verbose双1W、普通/verbose表一致及全部合计；02:08:13.134472完整旧SRAM138宏全部数值行解析/合计通过，然后按预期被DMA16宏数守卫拒绝。层级仍有两行实际负internal显示`-6.9e-06`（不是三位），触发严格格式拒绝；只剩这一显示精度修正已在本地power_numbers/test中完成，12相关测试通过，尚未新包复验。不是DMA16功耗验收，不能把旧功耗用于新任务。所有失败截图和原包保留。
+- 新`dma16_report.py`已实现JSON/逐层、模块、汇总CSV/中文报告及1200逐例再核对，工具不自动授予时序/面积/功耗验收。下一步提交并独立打包本地负数显示精度修正，上传后再做完整旧层级格式＋错误架构拒绝；然后继续当前gate03全14/12活动，首层新PT实际审核，再12功耗、实际竞争、MMIO8新综合、最终1200及复现。最终报告尚未真正执行。此次没有新增服务器EDA作业，FileZilla当前断开、VNC保持，工具窗口及中继不变，无活动子代理。
+
 - **02:00最新停点**：服务器01:59:32.412571，gate03完整通过layer_01..04，child80948为layer_05_activity_scan.log，driver34122、状态running，原a53包及fcd网表不变。继续全14/12活动，不重启、不清锁。当前没有其他服务器EDA任务。
 - 云端已push/ls-remote核对`29992c76aa07f753e8370f8eba4d95f87fd6ea90`。报告包`light-light126-report-dma16-20261110_014431-29992c76aa07.zip`，16492249字节、643文件，SHA`d054c7c2a7f405351ba3fc6efd563e4958f9ee81e0050357a9fa3cab38d6624f`；clean audit `local_runs/dma16_report_clean_audit_20261110_0145/receipt.json` SHA`8b5d001a43494901e9436f53175753ab6d91ebb3e16675834812fcded165235a`，五固件/95tests/CRC/全部hash通过。板端`/home/root/undergrad-report-20261110/`；FileZilla成功33秒、队列空、Ctrl+D断开并最小化。服务器01:48:27.963770 zip与安全解包通过，01:49:28.992472 inputs核验643项。
 - **299包数值导出工具实际格式诊断失败，不能直接称可用**：旧PT的功耗单位不在units.rpt而在power_verbose.rpt，真实字段为`Dynamic Power Units = 1 W`/`Leakage Power Units = 1 W`；全层级有两条clockgate负internal；首SRAM分项合计差1.978e-12W超出十进制显示舍入，实际四值均精确binary32显示往返。已本地修正分别核对基本/功耗单位，保留负internal行，只有逐个满足binary32表示才额外容许半ULP并记录残差；33相关测试通过。没有改动服务器包/原报告或放宽DMA16模块/162宏要求。修正源码和文档尚待提交、新包实际格式复验；失败诊断截图在takeover_local/d2_20261109/report_*。旧8功耗仍不用于DMA16。

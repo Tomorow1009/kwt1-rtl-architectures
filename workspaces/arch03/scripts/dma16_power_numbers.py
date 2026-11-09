@@ -138,7 +138,7 @@ def hierarchy_rounding(token):
     # Installed PT hierarchy output uses three significant digits even with
     # -significant_digits 8. Exact zero prints 0.000; small nonzero values use
     # scientific notation, so zero does not mean +/-0.0005 W.
-    require(token == '0.000' or re.fullmatch(r'-?[1-9]\.[0-9]{2}e[+-][0-9]{2,3}', token),
+    require(token == '0.000' or re.fullmatch(r'(?:[1-9]\.[0-9]{2}|-[1-9]\.[0-9]{1,2})e[+-][0-9]{2,3}', token),
             'Unreviewed PT hierarchy numerical format')
     return Decimal(0) if token == '0.000' else Decimal('0.5')*Decimal(10)**Decimal(token).as_tuple().exponent
 

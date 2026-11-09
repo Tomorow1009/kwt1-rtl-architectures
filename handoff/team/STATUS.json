@@ -158,7 +158,7 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "29992c76aa07f753e8370f8eba4d95f87fd6ea90",
+      "verified_remote_commit": "7dc2617176b6fddd3cdf8613563340e6d0adb6ba",
       "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
       "main_merged": false
     },
@@ -620,7 +620,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "29992c76aa07f753e8370f8eba4d95f87fd6ea90",
+    "cloud_source_commit": "7dc2617176b6fddd3cdf8613563340e6d0adb6ba",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -767,12 +767,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T01:59:32.412571",
-      "child_pid_last": 80948,
-      "child_log_last": "layer_05_activity_scan.log",
+      "last_observed": "2026-11-10T02:10:17.812242",
+      "child_pid_last": null,
+      "child_log_last": null,
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 4,
+      "completed_cases": 5,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -780,7 +780,7 @@
       "first_case_header_audit_passed": true,
       "first_vcd_bytes": 8745588450,
       "child_log_bytes_last": null,
-      "child_pid_source": "Shared owner snapshot; subsequent read-only /proc query raced child exit. Refresh status; not a gate failure.",
+      "child_pid_source": "Prior fifth-layer scanner completed; refresh owner next",
       "first_case_activity_passed": true,
       "first_case_source_bits": 106,
       "first_case_active_value_records": 1712153505,
@@ -793,7 +793,8 @@
         "layer_01",
         "layer_02",
         "layer_03",
-        "layer_04"
+        "layer_04",
+        "layer_05"
       ],
       "child_cpu_percent_last": null
     },
@@ -820,11 +821,11 @@
       "contention_cpu_executed": false
     },
     "power_numeric_extractor": {
-      "status": "local_format_repairs_tested_not_server_revalidated",
+      "status": "actual_units_totals_and_sram_format_checked_hierarchy_negative_precision_fix_local",
       "tests": 33,
       "new_report_tests": 9,
       "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
-      "module_sha256": "e4b83b0cae2aa78a76a74e4c1ddeeb8bb94a3f6cbd495f5e9966e0e50820ef90",
+      "module_sha256": "de4b1d3a7490e6db6cb5771f4bbeb1b01db3a4d09b70224a65ee1cfcad47d894",
       "handoff": "workspaces/arch03/POWER_EXPORT_HANDOFF.md",
       "approved_power_w": null,
       "approved_energy_j": null,
@@ -833,7 +834,8 @@
       "sram_cell_count_guard": 162,
       "actual_units_source": "power_verbose.rpt",
       "signed_clockgate_internal_preserved": true,
-      "decimal_and_exact_binary32_roundtrip_sum_bounds": true
+      "decimal_and_exact_binary32_roundtrip_sum_bounds": true,
+      "latest_change_related_tests": 12
     },
     "evidence_exporter": {
       "status": "implemented_local_tests_only",
@@ -846,7 +848,14 @@
       ],
       "actual_server_export_complete": false,
       "acceptance_granted": false,
-      "final_batch_requires_1200_actual_asic_tasks": true
+      "final_batch_requires_1200_actual_asic_tasks": true,
+      "actual_asic_synth_source_identity": {
+        "production_rtl": 10,
+        "platform_rtl": 161,
+        "observed": "2026-11-10T02:08:56.845972"
+      },
+      "actual_asic_gate_results_layouts_matched": 5,
+      "actual_asic_gate_match_observed": "2026-11-10T02:10:17.812242"
     },
     "report_package": {
       "source_commit": "29992c76aa07f753e8370f8eba4d95f87fd6ea90",
@@ -866,6 +875,28 @@
       "ftp_success_seconds": 33,
       "ftp_disconnected": true,
       "actual_format_diagnostics": "failed units location; signed clockgate internal; SRAM decimal-only sum precision. Fix local, not yet uploaded.",
+      "hardware_changed": false
+    },
+    "reportfix_package": {
+      "source_commit": "7dc2617176b6fddd3cdf8613563340e6d0adb6ba",
+      "archive": "light-light126-reportfix-dma16-20261110_020049-7dc2617176b6.zip",
+      "bytes": 16498625,
+      "files": 643,
+      "sha256": "7713a0535dfedfb32ca2e9f0bd07ffad8d8454b981d23ff10d0577f6bf48bee7",
+      "clean_audit": "local_runs/dma16_reportfix_clean_audit_20261110_0201/receipt.json",
+      "clean_audit_sha256": "20b9c628096ac6bc18ef1ec4167e34e93fe8cde8aea398b78f1cd9525fb60d2e",
+      "clean_tests": 98,
+      "firmware_variants": 5,
+      "server_uploaded": true,
+      "server_zip_sha_verified": true,
+      "server_unpacked_observed": "2026-11-10T02:04:38.867083",
+      "server_inputs_verified": 643,
+      "server_inputs_observed": "2026-11-10T02:05:29.144935",
+      "ftp_success_seconds": 33,
+      "ftp_disconnected": true,
+      "actual_units_and_total_format_passed": true,
+      "actual_old_sram_format_parsed_then_scope_rejected": true,
+      "remaining_format_issue": "Negative hierarchy internal uses two significant digits; local fix tested, not yet uploaded",
       "hardware_changed": false
     }
   }

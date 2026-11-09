@@ -72,9 +72,10 @@ class PowerNumberTests(unittest.TestCase):
 
     def test_actual_signed_clock_gate_internal_contribution_is_retained(self):
         totals = p.parse_power(UNITS, power())['reported_power_w']
-        signed = hierarchy()+'      u_clkgate (fixture) -6.90e-06 1.55e-04 4.53e-09 1.48e-04 0.7\n'
+        signed = hierarchy()+'      u_clkgate (fixture) -6.9e-06 1.55e-04 4.53e-09 1.48e-04 0.7\n'
         result = p.parse_hierarchy(signed, totals)
-        self.assertEqual(result['negative_internal_rows'][0]['reported_internal_w'], '-6.90e-06')
+        self.assertEqual(result['negative_internal_rows'][0]['reported_internal_w'], '-6.9e-06')
+        self.assertEqual(p.hierarchy_rounding('-6.9e-06'), Decimal('0.05e-06'))
         self.assertEqual(result['modules']['platform_other']['derived_power_w']['total'], '0.00099000000')
         with self.assertRaises(ValueError):
             p.parse_hierarchy(signed.replace('1.55e-04', '-1.55e-04'), totals)
