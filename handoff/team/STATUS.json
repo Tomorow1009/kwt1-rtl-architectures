@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "gate_activity_native_reaudit_running_timing_repair_uploaded_unverified",
+    "phase": "baseline_activity_passed_power_running_repair_unverified",
     "source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "d3_activity02 native audit running from repair bundle, fourth terminal. Third terminal diagnostic in SDC bundle. Then baseline power, UART miter and repaired synthesis/full same-config validation.",
+    "next": "Fourth terminal reports bundle: d3_power01. Third terminal diagnostic SDC bundle. Next repair UART miter and repaired synthesis/full verification.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_repair_package",
     "server_uploaded": true,
     "clean_package_input_files": 396,
@@ -134,9 +134,9 @@
       "tcm",
       "asic_boot"
     ],
-    "new_cpu_tasks": 22,
-    "new_cpu_outputs": 557568,
-    "new_cpu_scope": "Accepted executions: 6 functional-TCM sequence tasks, 1 ASIC smoke, 14 ASIC suite, 1 mapped gate smoke; repeated inputs counted as executions; unfinished activity stage excluded",
+    "new_cpu_tasks": 23,
+    "new_cpu_outputs": 582912,
+    "new_cpu_scope": "6 sequence, 1 ASIC smoke, 14 ASIC full, 1 gate smoke, 1 recovered activity simulation; repeated executions counted, re-audit not counted twice",
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
@@ -148,6 +148,7 @@
     "complete_gate_suite_verified": false,
     "library_area_units_verified": true,
     "scoring_area_verified": false,
-    "delivery_index": "../../workspaces/arch03/DELIVERY_INDEX_20261109.md"
+    "delivery_index": "../../workspaces/arch03/DELIVERY_INDEX_20261109.md",
+    "whole_task_activity_audit_verified": true
   }
 }

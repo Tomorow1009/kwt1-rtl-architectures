@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Area units verified against LEF metadata; d3_reports01 and gate smoke passed previously. d3_activity02 complete native scan running; timing and UART repair unverified.",
+  "last_completed_stage": "d3_activity02 full-file native activity, source/boot/capture and SHA256 audit passed; baseline d3_power01 started.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -47,16 +47,17 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe d3_activity02 compilation/native scan and source/capture/full-window checks; record summary SHA256 if passed",
-    "Power estimate old mapped configuration using reports-package asic_power and new recovered gate summary, preserve old-config scope",
-    "In repair package run UART miter; then new synthesis strict timing, latch/coverage review, ASIC CPU and complete gate suite with new boot-mode guard",
-    "Complete same-config system power/energy and scoring area basis; exact official submission requirements remain unverified"
+    "Observe d3_power01 license/link/activity annotation/reports; review unknown/unannotated activity and all units/models",
+    "While PT processes full VCD, inspect installed VCS native SAIF documentation for future full-window activity; no SAIF implementation or acceptance yet",
+    "Then repair package uart_compare and new asic_synth, checking strict timing/latches/coverage",
+    "Complete repaired-configuration ASIC and full gate cases with same-config activity/power",
+    "Finalize exact scoring area ownership and submission requirements"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
     "Exact official scoring area ownership; library physical units now cross-checked",
     "Complete 14-case mapped functionality in new repair configuration",
-    "Full-window activity final audit and system power/energy",
+    "Mapped activity annotation and system power/energy",
     "Official submission deadline, fields, templates and video requirements"
   ],
   "preserve": [
@@ -65,7 +66,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal (cwd reports bundle) launches repair-package d3_activity02. Third terminal idle in c323 SDC bundle after original own audit interruption. No original VCS job remains.",
+  "server_readonly_job": "Fourth terminal reports bundle d3_power01 driver 270688; actual PT binary 271427, VCD FD 36, active. Third terminal diagnostic SDC bundle. Process tree uses /proc/<pid>/task/<pid>/children; ps comma-equals formatting returned incomplete rows and must not be used.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -96,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "371316a repair package uploaded and all 396 files verified. Original d3_activity01 audit safely interrupted after completed simulation; VCD 29860998380 bytes preserved, state failed and own lock released. d3_activity02 native full-file re-audit now running. Timing/UART repairs still NOT server verified.",
+  "uncommitted_follow_on": "Latest hardware/auditor repair package remains 371316a; docs checkpoint committed as 0458c7e. New runtime repairs NOT accepted. Activity re-audit passed for original old mapped configuration.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -617,23 +618,66 @@
     "asic_link_verified": false
   },
   "activity_reaudit": {
-    "status": "running",
+    "status": "passed",
     "session": "d3_activity02",
     "package_source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
     "origin_package": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0",
     "origin_session": "d3_activity01",
     "simulation_reexecuted": false,
-    "native_scan_verified": false,
-    "screenshot": "server_activity02_start.png",
+    "native_scan_verified": true,
+    "screenshot": "server_activity02_receipt.png",
     "driver_pid": 232927,
     "native_pid": 233022,
     "started": "2026-11-09T08:02:54.690834",
-    "last_observed": "2026-11-09T08:24:48",
-    "bytes_scanned": 19339098438,
+    "last_observed": "2026-11-09T08:38:52",
+    "bytes_scanned": 29860998380,
     "total_bytes": 29860998380,
     "server_native_parity_tests": 2,
     "server_native_parity_seconds": 0.468,
-    "parity_screenshot": "server_native_activity_parity.png"
+    "parity_screenshot": "server_native_activity_parity.png",
+    "finished": "2026-11-09T08:37:24.335057",
+    "summary_sha256": "cc75446e2f0c01ca4e57bd13af697be0f8a82f6b9d94566a40111f2e19f2d72f",
+    "source_capture_and_boot_verified": true,
+    "outputs": 25344,
+    "cycles": 3890176,
+    "task_window_cycles": 3890080,
+    "period_ns": "6.666666",
+    "saturated": 0,
+    "activity": {
+      "status": "scope_and_window_verified",
+      "bytes": 29860998380,
+      "sha256": "ace2f38409d9abd0ee4306db555f59cef09f7c3286ce0b801943d9c895d75a86",
+      "start_ns": "18043.331529",
+      "end_ns": "25951907.404809",
+      "timescale_ns": "0.000001",
+      "signal_declarations": 165237,
+      "unique_identifiers": 94769,
+      "active_value_records": 5495122711,
+      "unknown_value_records": 32517371,
+      "component_declarations": {
+        "cpu": 52243,
+        "itcm": 2008,
+        "dtcm": 1502,
+        "accelerator": 37117,
+        "shared": 3096,
+        "interconnect": 43157
+      },
+      "component_value_records": {
+        "cpu": 3776451005,
+        "itcm": 119517406,
+        "dtcm": 1469,
+        "accelerator": 1561892140,
+        "shared": 19723637,
+        "interconnect": 1667589803
+      },
+      "auditor_source_sha256": "2b56ba0f3449a43ff503878b6d852907b0ce16926bb50065c436b058463d2ab9",
+      "auditor_binary_sha256": "a7a58bc61cdf175cc856899cfaad774f68a19a458fe5cd4550950a7c2cab48ed",
+      "mapped_netlist_annotation_verified": false,
+      "power_estimated": false,
+      "review": "Component roles overlap; record counts are not toggle counts. Unknown activity must be reviewed in power analysis, not replaced by zero."
+    },
+    "team_lock_released": true,
+    "newer_platform_installer_verified": false
   },
   "area_basis": {
     "status": "library_units_cross_checked_scoring_scope_pending",
@@ -695,5 +739,46 @@
     "timing_verified": false,
     "document": "workspaces/arch03/BASELINE_PERFORMANCE_20261109.md"
   },
-  "delivery_index": "DELIVERY_INDEX_20261109.md"
+  "delivery_index": "DELIVERY_INDEX_20261109.md",
+  "power_run": {
+    "status": "running_primetime_vcd_annotation",
+    "session": "d3_power01",
+    "source_commit": "4c8803e509a0f4d90382ff9ca5d2de19f93a956f",
+    "driver_pid": 270688,
+    "started": "2026-11-09T08:40:36.178033",
+    "gate_session": "d3_activity02",
+    "gate_summary_sha256": "cc75446e2f0c01ca4e57bd13af697be0f8a82f6b9d94566a40111f2e19f2d72f",
+    "scope": "old mapped configuration; new UART/boot/CDC repair not covered",
+    "system_power_verified": false,
+    "screenshot": "server_power01_start.png",
+    "license_checked_out": "PrimePower",
+    "tool_version": "T-2022.03-SP5-1",
+    "whole_soc_linked": true,
+    "pt_shell_pid": 271413,
+    "prime_shell_pid": 271415,
+    "pt_shell_exec_pid": 271427,
+    "vcd_fd": 36,
+    "last_observed": "2026-11-09T08:51:13",
+    "vcd_read_position": 2506014432,
+    "units": {
+      "capacitance_F": 1e-12,
+      "current_A": 0.001,
+      "resistance_ohm": 1000,
+      "time_s": 1e-09,
+      "voltage_V": 1
+    },
+    "standard_library_wire_load_models": 0,
+    "standard_library_wire_load_defaults": 0,
+    "external_output_pin_load_pF": 0.01,
+    "modeling_limits": [
+      "No library wire-load model found; no extracted interconnect parasitics",
+      "No physical clock-tree insertion/extraction; pre-layout estimation only",
+      "Unknown activity, annotation coverage and effective macro leakage remain under review"
+    ],
+    "screenshots": [
+      "server_power01_progress.png",
+      "server_wire_basis_result.png",
+      "server_power_actual_tree.png"
+    ]
+  }
 }
