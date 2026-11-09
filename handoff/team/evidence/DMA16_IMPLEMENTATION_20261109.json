@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_first_power_and_actual_report_ready_final1200_v1_receipt_type_failure_local_fix_tested",
+  "phase": "DMA16_final1200_v2_running_first25_passed_no_failures",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Commit/package/upload JSON-stable histogram parser; read-only re-audit preserved failed first receipt; start new final1200_v2. Continue power model/X review, remaining11 powers, fresh MMIO8 PPA and final reviewed exports/reproduction.",
+  "next": "Keep final1200_v2 as sole shared EDA job; observe progress and host budget. Locally prepare power/model/X and final review artifacts; after batch complete remaining11 powers, MMIO8 fresh PPA, final re-audit/export/reproduction.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": null,
+  "active_session": "dma16_final1200_v2",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": false,
@@ -1270,7 +1270,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "8c3ad9f5cff79724de30bafeea2c75a82309b08a",
+  "current_server_tool_commit": "66838470bb12a036b37305393c84b712b11cd43f",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1461,7 +1461,7 @@
     "preserve_original_failed_state": true
   },
   "batch_receipt_fix": {
-    "status": "local_related_62_tests_passed_runtime_helper_binding_added_not_packaged",
+    "status": "server_uploaded_actual_preserved_first_receipt_reaudit_passed",
     "fix": "Return JSON arrays for histogram_cycle_bins; preserve strict counter comparisons",
     "end_to_end_persist_reaudit_test": true,
     "tamper_rejection_test": true,
@@ -1469,6 +1469,62 @@
     "new_batch_required": true,
     "runtime_helper_sha256_bound": true,
     "changed_runtime_helper_resume_rejected": true,
-    "superseded_unuploaded_package": "light-light126-receipt-fix-dma16-20261110_044410-197429560e54.zip"
+    "superseded_unuploaded_package": "light-light126-receipt-fix-dma16-20261110_044410-197429560e54.zip",
+    "source_commit": "66838470bb12a036b37305393c84b712b11cd43f",
+    "actual_reaudit_observed": "2026-11-10T04:55:45.723680",
+    "old_state_and_receipt_sha_unchanged": true,
+    "old_batch_state_remains": "failed",
+    "new_batch_credit_from_old_attempt": 0
+  },
+  "batch_identity_package": {
+    "source_commit": "66838470bb12a036b37305393c84b712b11cd43f",
+    "archive": "light-light126-batch-identity-dma16-20261110_045000-66838470bb12.zip",
+    "bytes": 16560820,
+    "files": 656,
+    "sha256": "a1ab4af4868ea010639ce474b6484c171b468e05bc336917594d65ab8088226c",
+    "clean_contract_tests": 149,
+    "firmware_variants": 5,
+    "clean_audit": "local_runs/dma16_identity_clean_audit_20261110_0451/receipt.json",
+    "clean_audit_sha256": "ca50388d5d5e7ed28a272f71b751311daf6489461c4396bea7dc575042c9b322",
+    "local_archive_audit_passed": true,
+    "board_staging_sha256_verified": true,
+    "server_uploaded": true,
+    "changed_production_metadata_only": [
+      "firmware_sequence/manifest.json"
+    ],
+    "sequence_v7_elf_bin_verilog_equal_v6": true,
+    "server_zip_bytes_verified": true,
+    "server_zip_sha256_verified": true,
+    "server_unpacked_verified": true,
+    "server_sha_observed": "2026-11-10T04:54:00.603859",
+    "server_inputs_observed": "2026-11-10T04:54:58.430249",
+    "server_inputs_verified": 656,
+    "ftp_ui_success": true,
+    "ftp_disconnected_after_transfer": true
+  },
+  "final1200_v2": {
+    "state": "running",
+    "bundle": "light-light126-batch-identity-dma16-20261110_045000-66838470bb12",
+    "run": "runs/dma16_final1200_v2",
+    "driver_pid": 221400,
+    "started_launcher": "2026-11-10T04:56:55.618624",
+    "expected_tasks": 1200,
+    "expected_outputs": 30412800,
+    "completed_tasks_last_observed": 25,
+    "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
+    "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
+    "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
+    "uses_old_37_tasks": false,
+    "hardware_firmware_images_changed": false,
+    "final_regression_verified": false,
+    "last_observed": "2026-11-10T04:58:50.263803",
+    "outputs_last_observed": 633600,
+    "failed_attempts_last_observed": 0,
+    "current_attempt_last_observed": "cases/sample_000003_layer_02/attempt_0001",
+    "host_mean_task_seconds_approx": 4.14956,
+    "remaining_tasks_last_observed": 1175,
+    "remaining_seconds_with_20_percent_margin_approx": 5851,
+    "shared_lock_owned": true,
+    "initial_pid_transcription_corrected_from": 214800
   }
 }

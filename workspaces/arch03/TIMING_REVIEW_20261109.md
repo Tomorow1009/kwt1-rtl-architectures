@@ -2,6 +2,8 @@
 
 ## DMA16当前综合的独立复查（2026-11-10）
 
+04:57实际诊断完成：8c包`dma16_timing_audit01`于04:32:14.234559通过，SHA=`2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa`。原DDC查询的3条网络为`u_e203_subsys_top/core_csr_clk`、`u_e203_subsys_top/hfclk`、`u_e203_subsys_top/u_sirv_aon_top/crossing_clock`。同次冻结平台源码分别追到`clk_core_exu`、HF选择器、`aon_io_lfclk`，均为时钟网络，不是漏计的数据高扇出。PT189个no_clock对象也已精确归入被固定TCK关闭的JTAG DTM和复位同步器；actual mapped.sdc的TCK/TMS/TDI均case=0。禁用弧C46683/p12863/c1992/d202，共61740条，没有l/L/u/U/f标记，原综合无TIM-209/约束违规。仍保持稳定任务模式、理想时钟和布局前库/负载假设；setup裕量非常小，不能宣称物理时钟树、寄生或启动/JTAG工作模式签核。
+
 04:27：新增`dma16_timing_audit`只读阶段，使用原mapped.ddc及同库查询实际高扇出网络，完整保留原文件SHA并复核生产身份；相关63tests通过，尚未上传/执行。不能把查询入口已完成当成高扇出已审核。实际首层PT已无工具错误；其189个no_clock对象为JTAG DTM 186和JTAG复位同步3，禁用弧61740行仍在核查。后续须记录完整原因与实际SDC约束，不能移用历史结论。
 
 本节绑定fcd445f的`dma16_fix_synth01/dma16_synth`，summary SHA256为`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`。新网表的周期为6.666666000000ns、LF66ns；最差setup **+0.0000290871ns**、hold **+0.00136402ns**，各有2个路径组，锁存器为0。数值非负，但setup裕量很小，不称宽裕。

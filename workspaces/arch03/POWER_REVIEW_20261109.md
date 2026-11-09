@@ -1,5 +1,15 @@
 # 整机任务功耗复核
 
+## DMA16首层实际报告（2026-11-10）
+
+27bf包`dma16_power_l01_v2/dma16_power`于04:10:02.258177通过报告收集，0 errors、1549 warnings；summary SHA=`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9`。实际单位和普通/verbose总项、模块互斥分解、162个宏表核对通过。原始total=0.0296837185W，完整1505133.182820ns窗口能耗=0.000044679497038379161700J；这是布局前估算，尚未完成系统功耗审核，不能将其复制到其他11层。
+
+实际activity_sources：152987个网络，152986 exact mapping、1 implied，default/propagated/unannotated为0；未标注对象清单为空。toggle_limit=1的活动覆盖为64909/152987=42.43%，不是映射率。实际X转换系数0.5、initial-X转换false；389025条未知值记录完整保留，尚须模型/对象解释，不按零活动处理。774个PSW-208来自常量网络的VCD/SAIF活动重置；power.log与coverage_before各774，加timing_check的PTE-003一条共1549，不是1549个独立新硬件问题。
+
+实际189个no_clock均位于JTAG DTM（186）和JTAG复位同步（3）；冻结SDC将TCK/TMS/TDI设为0，与门级任务模式一致。禁用弧61740行中C46683、p12863、c1992、d202，均为条件或常量相关，无loop-breaking/user-defined/false-net标记。新的只读DC诊断查明3个TIM-134网络均为平台时钟（详见TIMING_REVIEW与根交接）。这些结果解释当前对象，不能代替未知活动、宏模型/互连假设和剩余11功耗窗口审核。
+
+首份真实JSON/CSV/中文初步汇总位于27bf包`runs/dma16_report_preliminary01`，包括首层原始数值，其他层功耗和最终1200保持空/未验。下方旧8路记录保留，不混入新源加载窗口。
+
 当前没有验收通过的系统功耗或 J/task。旧配置 `4c8803e/d3_power01` 已产生报告，但启动时出现 `PT-063`（未设置 Library Compiler 路径），入口即使看到工具退出码 0 也正确拒绝本次运行。以下数字只用于分析该失败运行，不能与新配置时序、面积拼接为最终成绩。
 
 ## 最新修复运行：d3_power07_h0（2026-11-09晚）
