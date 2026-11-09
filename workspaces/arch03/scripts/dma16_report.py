@@ -75,6 +75,22 @@ def indexed_cases(report, gate=False):
     return {r['case']: r for r in rows}
 
 
+def boundary_fields(raw):
+    boundary = raw.get('boundary_inclusive') if raw else None
+    return dict(boundary_inclusive=boundary,
+                raw_boundary_inclusive_average_power_w=boundary['reported_power_w']['total'] if boundary else None,
+                raw_boundary_inclusive_energy_j=boundary['raw_reported_energy_j'] if boundary else None)
+
+
+def boundary_aggregate(rows, duration):
+    selected = [r['raw_boundary_inclusive_energy_j'] for r in rows if r['raw_boundary_inclusive_energy_j'] is not None]
+    energy = sum(Decimal(v) for v in selected) if len(selected) == 12 else None
+    return dict(boundary_power_layers=len(selected),
+                raw_boundary_inclusive_total_energy_j=str(energy) if energy is not None else None,
+                raw_boundary_inclusive_energy_per_task_j=str(energy/12) if energy is not None else None,
+                raw_boundary_inclusive_time_weighted_average_power_w=str(energy/(duration*Decimal('1e-9'))) if energy is not None else None)
+
+
 def join_cases(asic, gate, synthesis, refs, numbers):
     require(asic.get('scope') == 'asic_rtl_functional' and asic.get('cpu_executed') is True and
             asic.get('asic_cpu_verified') is True and asic.get('global_FPGA_defined') is False, 'Wrong ASIC scope')
@@ -120,6 +136,7 @@ def join_cases(asic, gate, synthesis, refs, numbers):
             warning_occurrences_by_artifact=raw['warning_occurrences_by_artifact'] if raw else None,
             power_summary_sha256=raw['power_summary_sha256'] if raw else None,
             system_power_verified=False))
+        rows[-1].update(boundary_fields(raw))
     total_cycles = sum(r['cycles'] for r in rows)
     duration = sum(Decimal(r['duration_ns']) for r in rows)
     total_energy = sum(Decimal(r['raw_energy_j']) for r in rows) if len(selected) == 12 else None
@@ -133,6 +150,7 @@ def join_cases(asic, gate, synthesis, refs, numbers):
         approved_average_power_w=None, approved_energy_per_task_j=None,
         goal_500_tasks_per_second_met_by_cycles=total_cycles <= 12*300000,
         note='Nominal 150 MHz throughput is conservative; energy uses each actual 6.666666 ns window. Missing powers are null, not zero.')
+    aggregate.update(boundary_aggregate(rows, duration))
     return rows, aggregate
 
 
@@ -212,7 +230,8 @@ def write_outputs(report, output):
         json.dump(report, stream, ensure_ascii=False, indent=2, allow_nan=False)
     fields = ['case', 'cycles', 'duration_ns', 'outputs', 'nominal_150mhz_tasks_per_second',
               'nominal_150mhz_mmac_per_second', 'raw_dynamic_w', 'raw_leakage_w', 'raw_average_power_w',
-              'raw_energy_j', 'approved_average_power_w', 'approved_energy_j', 'layout_sha256',
+              'raw_energy_j', 'raw_boundary_inclusive_average_power_w', 'raw_boundary_inclusive_energy_j',
+              'approved_average_power_w', 'approved_energy_j', 'layout_sha256',
               'activity_sha256', 'active_value_records', 'unknown_value_records', 'power_summary_sha256', 'system_power_verified']
     with (output/'tasks.csv').open('x', encoding='utf-8-sig', newline='') as stream:
         writer = csv.DictWriter(stream, fields, extrasaction='ignore'); writer.writeheader(); writer.writerows(report['cases'])
@@ -245,7 +264,7 @@ def write_outputs(report, output):
         lines.append('| %s | %s | %s | %s | %s |' % (row['case'], row['cycles'], row['nominal_150mhz_tasks_per_second'],
             row['raw_average_power_w'] if row['raw_average_power_w'] is not None else '未验证',
             row['raw_energy_j'] if row['raw_energy_j'] is not None else '未验证'))
-    lines += ['', '原始功耗与能耗不代表模型及活动审核通过；缺项保持为空。模块分解采用不重叠范围，CPU 扣除其 TCM 子模块，SRAM 明细不能再次加到模块总值。各模块值及显示舍入误差保留在 JSON。', '',
+    lines += ['', '原始功耗与能耗不代表模型及活动审核通过；缺项保持为空。上表采用默认不含输入边界网络的口径；包含该网络开关功耗的数值单列在 JSON/CSV 的 boundary_inclusive 字段，不替换默认值。模块分解采用不重叠范围，CPU 扣除其 TCM 子模块，SRAM 明细不能再次加到模块总值。各模块值及显示舍入误差保留在 JSON。', '',
         '100 样本内部回归：%s，%d 个任务、%d 个输出；不是官方 600 样本精度验收。' %
         (report['batch']['status'], report['batch']['tasks'], report['batch']['outputs']), '', '## 原始证据', '']
     for label, ref in report['references'].items(): lines += ['- %s：`%s`，SHA256 `%s`。' % (label, ref['run'], ref['sha256'])]

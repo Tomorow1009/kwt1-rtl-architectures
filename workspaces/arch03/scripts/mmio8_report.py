@@ -84,6 +84,8 @@ def join_cases(asic, gate, synthesis, refs, numbers):
             sram_breakdown=raw['sram_breakdown'] if raw else None,
             warning_occurrences_by_artifact=raw['warning_occurrences_by_artifact'] if raw else None,
             power_summary_sha256=raw['power_summary_sha256'] if raw else None, system_power_verified=False))
+    for row in rows:
+        row.update(common.boundary_fields(selected.get(row['case'])))
     total_cycles = sum(r['cycles'] for r in rows)
     duration = sum(Decimal(r['duration_ns']) for r in rows)
     energy = sum(Decimal(r['raw_energy_j']) for r in rows) if len(selected) == 12 else None
@@ -97,6 +99,7 @@ def join_cases(asic, gate, synthesis, refs, numbers):
         approved_average_power_w=None, approved_energy_per_task_j=None,
         goal_500_tasks_per_second_met_by_cycles=total_cycles <= 12*300000,
         note='Original MMIO8, no DMA; throughput uses conservative integer cycles, energy uses exact first-VALID phase. Missing power is null.')
+    aggregate.update(common.boundary_aggregate(rows, duration))
     return rows, aggregate
 
 

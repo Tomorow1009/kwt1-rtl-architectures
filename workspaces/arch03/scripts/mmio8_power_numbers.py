@@ -50,6 +50,11 @@ def extract(run, expected):
     values['sram_breakdown'] = shared.parse_sram(texts['power_sram.rpt'], profile='mmio8_source')
     duration = Decimal(validate_activity(report['activity'], report['task_window']))
     shared.require(duration == Decimal(str(report['duration_ns'])), 'MMIO8 exact power interval differs')
+    values['boundary_inclusive'] = None
+    if 'power_with_boundary_nets.rpt' in texts:
+        values['boundary_inclusive'] = shared.parse_boundary_power(texts['power_with_boundary_nets.rpt'], values)
+        values['boundary_inclusive']['raw_reported_energy_j'] = str(
+            shared.number(values['boundary_inclusive']['reported_power_w']['total'])*duration*Decimal('1e-9'))
     warnings = {}
     for name, text in texts.items():
         codes = re.findall(r'(?m)^\s*Warning:.*\(([A-Z]+-[0-9]+)\)\s*$', text)

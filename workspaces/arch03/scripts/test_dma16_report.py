@@ -40,6 +40,22 @@ def fixtures(root):
 
 
 class ReportTests(unittest.TestCase):
+    def test_boundary_energy_is_separate_and_partial_coverage_stays_null(self):
+        with tempfile.TemporaryDirectory() as d:
+            a, g, s, refs, n = fixtures(Path(d))
+            for item in n:
+                item['boundary_inclusive'] = dict(reported_power_w={'total': '0.02'},
+                    raw_reported_energy_j=str(Decimal('0.02')*Decimal(item['duration_ns'])*Decimal('1e-9')))
+            rows, summary = r.join_cases(a, g, s, refs, n)
+            self.assertEqual(Decimal(summary['raw_boundary_inclusive_time_weighted_average_power_w']), Decimal('0.02'))
+            self.assertNotEqual(summary['raw_time_weighted_average_power_w'], summary['raw_boundary_inclusive_time_weighted_average_power_w'])
+            self.assertEqual(rows[0]['boundary_inclusive'], n[0]['boundary_inclusive'])
+            n[-1]['boundary_inclusive'] = None
+            rows, summary = r.join_cases(a, g, s, refs, n)
+            self.assertEqual(summary['boundary_power_layers'], 11)
+            self.assertIsNone(summary['raw_boundary_inclusive_total_energy_j'])
+            self.assertIsNone(rows[-1]['raw_boundary_inclusive_energy_j'])
+
     def test_weighted_energy_uses_each_exact_window_not_average_of_powers(self):
         with tempfile.TemporaryDirectory() as d:
             a, g, s, refs, n = fixtures(Path(d))

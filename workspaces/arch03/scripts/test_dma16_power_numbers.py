@@ -47,6 +47,22 @@ def sram():
 
 
 class PowerNumberTests(unittest.TestCase):
+    def test_boundary_contribution_is_separate_from_unchanged_cell_groups(self):
+        baseline = p.parse_power(UNITS, power())
+        boundary = UNITS+'-include_boundary_nets\n'+power().replace(
+            'Net Switching Power = 2.00000000e-03', 'Net Switching Power = 2.10000000e-03').replace(
+            'Total Power = 3.30000000e-03', 'Total Power = 3.40000000e-03')
+        result = p.parse_boundary_power(boundary, baseline)
+        self.assertEqual(Decimal(result['primary_input_net_switching_w']), Decimal('0.0001'))
+        self.assertEqual(result['reported_group_power_w'], baseline['reported_group_power_w'])
+        with self.assertRaisesRegex(ValueError, 'Boundary report'): p.parse_power(UNITS, boundary)
+        for bad in (boundary.replace('-include_boundary_nets', ''), boundary+'-include_boundary_nets\n',
+                    boundary.replace('memory 1.00000000e-03', 'memory 1.10000000e-03'),
+                    boundary.replace('Cell Internal Power = 1.00000000e-03', 'Cell Internal Power = 1.10000000e-03'),
+                    boundary.replace('2.10000000e-03', '1.90000000e-03'),
+                    boundary.replace('3.40000000e-03', '3.50000000e-03')):
+            with self.assertRaises(ValueError): p.parse_boundary_power(bad, baseline)
+
     def test_module_sums_exclude_nested_cpu_tcm_and_keep_rounding(self):
         totals = p.parse_power(UNITS, power())['reported_power_w']
         result = p.parse_hierarchy(hierarchy(), totals)
@@ -156,9 +172,23 @@ class PowerNumberTests(unittest.TestCase):
                 result = p.extract(run, digest)
                 self.assertFalse(result['system_power_verified']); self.assertIsNone(result['approved_average_power_w'])
                 self.assertIsNone(result['approved_energy_j'])
+                self.assertIsNone(result['boundary_inclusive'])
                 self.assertEqual(Decimal(result['raw_reported_energy_j']), Decimal('3.3e-10'))
                 self.assertEqual(result['warning_occurrences_by_artifact']['power.log']['PSW-208'], 1)
                 with self.assertRaisesRegex(ValueError, 'digest'): p.extract(run, '0'*64)
+                boundary = UNITS+'-include_boundary_nets\n'+power().replace(
+                    'Net Switching Power = 2.00000000e-03', 'Net Switching Power = 2.10000000e-03').replace(
+                    'Total Power = 3.30000000e-03', 'Total Power = 3.40000000e-03')
+                name = 'power_with_boundary_nets.rpt'; (run/name).write_text(boundary)
+                summary['artifacts'][name] = p.sha(run/name)
+                (run/'summary.json').write_text(json.dumps(summary)); digest = p.sha(run/'summary.json')
+                (root/'state.json').write_text(json.dumps({'stages': {'dma16_power': {'status': 'passed', 'summary_sha256': digest}}}))
+                result = p.extract(run, digest)
+                self.assertEqual(Decimal(result['boundary_inclusive']['raw_reported_energy_j']), Decimal('3.4e-10'))
+                self.assertFalse(result['system_power_verified'])
+                (run/name).write_text(boundary+'changed')
+                with self.assertRaisesRegex(ValueError, 'Changed'): p.extract(run, digest)
+                (run/name).write_text(boundary)
                 (run/'power.rpt').write_text(power()+'changed')
                 with self.assertRaisesRegex(ValueError, 'Changed'): p.extract(run, digest)
 

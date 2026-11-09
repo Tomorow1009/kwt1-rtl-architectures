@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "DMA16_final1200_v2_running_first25_passed_no_failures",
+    "phase": "DMA16_final1200_v2_running_438_passed_unknown_auditor_prepared",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -1375,22 +1375,46 @@
       "started_launcher": "2026-11-10T04:56:55.618624",
       "expected_tasks": 1200,
       "expected_outputs": 30412800,
-      "completed_tasks_last_observed": 25,
+      "completed_tasks_last_observed": 438,
       "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
       "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
       "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
       "uses_old_37_tasks": false,
       "hardware_firmware_images_changed": false,
       "final_regression_verified": false,
-      "last_observed": "2026-11-10T04:58:50.263803",
-      "outputs_last_observed": 633600,
+      "last_observed": "2026-11-10T05:27:40.065696",
+      "outputs_last_observed": 11100672,
       "failed_attempts_last_observed": 0,
-      "current_attempt_last_observed": "cases/sample_000003_layer_02/attempt_0001",
-      "host_mean_task_seconds_approx": 4.14956,
-      "remaining_tasks_last_observed": 1175,
-      "remaining_seconds_with_20_percent_margin_approx": 5851,
+      "current_attempt_last_observed": "cases/sample_000037_layer_07/attempt_0001",
+      "host_mean_task_seconds_approx": 4.173856,
+      "remaining_tasks_last_observed": 762,
+      "remaining_seconds_with_20_percent_margin_approx": 3816.57,
       "shared_lock_owned": true,
       "initial_pid_transcription_corrected_from": 214800
+    },
+    "unknown_activity_tool_local": {
+      "stage": "dma16_unknown_activity",
+      "related_tests_passed": 159,
+      "actual_server_scan_started": false,
+      "production_and_batch_runtime_unchanged": true,
+      "shared_lock_required": true,
+      "documentation": "workspaces/arch03/UNKNOWN_ACTIVITY_REVIEW_20261110.md"
+    },
+    "power_boundary_review": {
+      "observed": "2026-11-10T05:29:07+08:00",
+      "manual": "/eda/synopsys/prime/prime_2022.03-SP5-1/doc/pt/man/cat2/report_power.2",
+      "default_switching_w": "2.68980535e-03",
+      "default_total_w": "2.96837185e-02",
+      "boundary_switching_w": "2.69170501e-03",
+      "boundary_total_w": "2.96856184e-02",
+      "cell_groups_equal": true,
+      "no_wire_load_model_is_set": true,
+      "macro_default_leakage_w": {
+        "RAMSP4096X16": "0.000046031",
+        "RAMSP128X16": "0.000004881"
+      },
+      "actual_boundary_new_extractor_verified": false,
+      "system_power_verified": false
     }
   }
 }

@@ -103,7 +103,7 @@ def parse_base_units(text):
     return result
 
 
-def parse_power(units, text):
+def read_power_table(units, text):
     unit_values = parse_units(units)
     require(re.search(r'(?m)^\s*Report\s*:\s*Averaged Power\s*$', text), 'Not the reviewed averaged-power report')
     require(re.search(r'(?m)^\s*Design\s*:\s*e203_soc_top\s*$', text), 'Not whole-SoC power')
@@ -124,6 +124,12 @@ def parse_power(units, text):
         elif re.match(r'\s*[A-Za-z_][A-Za-z_0-9]*\s+'+POWER_NUMBER+r'\s+'+POWER_NUMBER, line):
             raise ValueError('Unreviewed PT power group')
     require(set(totals) == set(LABELS.values()) and set(groups) == set(GROUPS), 'Incomplete PT power table/totals')
+    return unit_values, totals, groups
+
+
+def parse_power(units, text):
+    require(not re.search(r'(?m)^\s*-include_boundary_nets\s*$', text), 'Boundary report requires separate comparison')
+    unit_values, totals, groups = read_power_table(units, text)
     checks = {}
     for name, row in groups.items(): checks['group_'+name] = check_sum([row[k] for k in ('internal', 'switching', 'leakage')], row['total'], name)
     for key in totals: checks['column_'+key] = check_sum([groups[name][key] for name in GROUPS], totals[key], 'all groups '+key)
@@ -132,6 +138,36 @@ def parse_power(units, text):
                 numerical_sum_checks=checks,
                 derived_dynamic_w=str(number(totals['internal'])+number(totals['switching'])),
                 note='Strings preserve reported decimal precision; grouping is PT taxonomy, not overlapping module hierarchy.')
+
+
+def parse_boundary_power(text, baseline):
+    # Installed report_power(2): this adds primary-input net switching power.
+    # Actual T-2022.03-SP5-1 retains the seven cell groups unchanged; input-net
+    # power is therefore outside their sum. Do not relax normal group checks.
+    require(len(re.findall(r'(?m)^\s*-include_boundary_nets\s*$', text)) == 1,
+            'Missing/duplicate boundary option in actual report header')
+    units, totals, groups = read_power_table(text, text)
+    base = baseline['reported_power_w']
+    require(units == baseline['units'] and groups == baseline['reported_group_power_w'],
+            'Boundary report changed units or cell power groups')
+    require(all(totals[k] == base[k] for k in ('internal', 'leakage')),
+            'Boundary report changed cell internal/leakage power')
+    delta = number(totals['switching'])-number(base['switching'])
+    total_delta = number(totals['total'])-number(base['total'])
+    require(delta >= 0 and total_delta >= 0, 'Boundary contribution is negative')
+    check = check_sum([totals[k] for k in KEYS[:3]], totals['total'], 'boundary-inclusive whole SoC')
+    tokens = [totals[k] for k in ('switching', 'total')]+[base[k] for k in ('switching', 'total')]
+    residual = abs(delta-total_delta); bound = sum(rounding(t) for t in tokens); basis = 'decimal_display_rounding'
+    if residual > bound:
+        try: bound += sum(observed_binary32_rounding(t) for t in tokens)
+        except (ValueError, OverflowError, struct.error):
+            raise ValueError('Boundary switching/total increments disagree')
+        basis = 'decimal_display_plus_exact_binary32_roundtrip_half_ulp'
+    require(residual <= bound, 'Boundary switching/total increments disagree')
+    return dict(reported_power_w=totals, reported_group_power_w=groups, units=units,
+                primary_input_net_switching_w=str(delta), total_increment_w=str(total_delta),
+                whole_soc_sum_check=check, increment_check=dict(residual_w=str(residual), bound_w=str(bound), numerical_basis=basis),
+                note='Includes primary-input net switching. Cell groups are unchanged and exclude this extra contribution; model and unknown-activity review remain required.')
 
 
 def hierarchy_rounding(token):
@@ -278,6 +314,11 @@ def extract(run, expected):
     values['sram_breakdown'] = parse_sram(texts['power_sram.rpt'])
     duration = Decimal(validate_activity(report['activity'], report['task_window']))
     require(duration == Decimal(str(report['duration_ns'])), 'Reported power/window duration differs')
+    values['boundary_inclusive'] = None
+    if 'power_with_boundary_nets.rpt' in texts:
+        values['boundary_inclusive'] = parse_boundary_power(texts['power_with_boundary_nets.rpt'], values)
+        values['boundary_inclusive']['raw_reported_energy_j'] = str(
+            number(values['boundary_inclusive']['reported_power_w']['total'])*duration*Decimal('1e-9'))
     warnings = {}
     for name, text in texts.items():
         codes = re.findall(r'(?m)^\s*Warning:.*\(([A-Z]+-[0-9]+)\)\s*$', text)
