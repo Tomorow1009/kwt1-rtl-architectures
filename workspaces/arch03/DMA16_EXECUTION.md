@@ -48,7 +48,7 @@ python3 workspaces/arch03/scripts/server_run.py dma16_power --session dma16_powe
 
 `--sequence-firmware`打包独立程序-only序列固件到`firmware_sequence`，严格绑定A/B源payload及shift。`dma16_sequence`不接受activity参数，只验一次真实CPU启动的10阶段：5配置拒绝、装载取消、原驱动短timeout恢复、A/B/A三完整任务；每成功任务各有独立窗口，不能把整段序列当单任务功耗。阶段trap/输出/回执须真实观察，NO_CPU夹具日志一律不能作为ASIC通过。
 
-新版批量每case记录宿主开始/结束UTC、仿真耗时、准备和重核总耗时；state用实际均值估算剩余任务并加20%余量，明确另留编译、排队、门级和功耗时间。芯片cycles不代替宿主耗时。批量脚本或固件/观察器变更后重新构建冻结contract；不更改既有运行的文件或身份。
+新版批量每case记录宿主开始/结束UTC、仿真耗时、准备和重核总耗时；state用实际均值估算剩余任务并加20%余量，明确另留编译、排队、门级和功耗时间。芯片cycles不代替宿主耗时。生产RTL、固件或编译进模拟器的观察器变更后重新构建冻结contract。纯回执表示/解析工具修正若未改变模拟器输入，可保留原构建，但必须另建新批次、显式绑定runner及实际导入helper的SHA并逐项严格复核；668修正批次采用此路径，不把旧失败批次改为通过。不更改既有运行的文件或身份。
 
 后续包的dma16_soc/dma16_gate只在TB增加被动bus_metrics模块，不纳入生产RTL或综合输入。模块使用实际accel/arb端口；门级路径必须来自同DDC的probe。四段计数、等待/响应延迟、接受间隔、读写切换和CPU竞争直方图随逐任务摘要保存，并与原window逐周期核对。最终批量contract要求完整统计块，逐任务receipt复核时重新解析；不能只凭结束标记通过。阶段统计包含重叠与计算间隙，不可相加充当总周期。
 
@@ -63,3 +63,25 @@ python3 workspaces/arch03/scripts/server_run.py dma16_contention --session <新�
 ```
 
 包内该固件单列为`firmware_contention`。入口要求实际ASIC CPU输出检查通过、完整47904次DMA事务，且被动观察器记录同时请求、CPU获得服务及DMA获得服务均非零；缺任意一项就失败。结果scope为`dma16_asic_cpu_shared_contention_validation`，不混入正式IRQ版吞吐、功耗或最终1200性能配置。观察到该流量模式下的服务不等于穷尽所有仲裁序列。
+
+## 干净目录复现与最终报告
+
+以下是最终执行入口，尚未完成整轮干净复现。首先按所选包回执校验ZIP并安全解包到不存在的新目录，执行本包`server_run.inputs()`及五套固件验证；不得复制个人配置、厂商库或修改包manifest来通过。外部固定平台、库、工具和数据必须满足既有配置及哈希。
+
+确认共享锁空闲、无他人EDA后，先在新session执行正式IRQ的`dma16_soc`默认14例，取得真实ASIC编译contract。再在不同新session执行`dma16_sequence --cases layer_01 rounding`和`dma16_contention --cases layer_01 rounding`。同一生产RTL/正式固件还需新综合；综合摘要、库和面积依据确认后，使用该目录与实际摘要SHA做门级。完整14门级的活动参数须明确包含12层：
+
+```text
+python3 workspaces/arch03/scripts/server_run.py dma16_gate --session <新的完整门级session> --synth-run <本次综合目录> --synth-summary-sha256 <实际SHA> --firmware-root <本包绝对路径>/firmware_irq --activity-cases layer_01 layer_02 layer_03 layer_04 layer_05 layer_06 layer_07 layer_08 layer_09 layer_10 layer_11 layer_12
+```
+
+逐层功耗每次只指定一个case，必须使用同一门级摘要；每层单独新session，不在旧失败目录重跑。未知活动完整定位入口见`UNKNOWN_ACTIVITY_REVIEW_20261110.md`。所有大波形扫描及EDA串行占用共享锁；原始完整活动不下载到Git。
+
+最终1200使用已通过的真实ASIC contract，通过上述`dma16_batch.py run`进入全新输出目录；目录存在或配置不同不能覆盖。最终报告请求schema为`dma16-report-request-v1`：`asic`、`synthesis`、`gate`分别给出实际stage目录和summary SHA，`power`列出12个同配置stage目录和SHA，`batch`给出已完成批次目录及state SHA，`history`保留失败/停止/未验项。运行：
+
+```text
+python3 workspaces/arch03/scripts/dma16_report.py --request <哈希确认后的请求JSON> --output <不存在的新报告目录>
+```
+
+汇总器逐项重核1200回执、全部捕获输出及原始工件，不以文件数或完成标志代替验收。默认/含输入边界网络的功耗与能耗分列；缺项为null。时序、面积和功耗的正式审核仍须绑定具体报告及模型范围，不能因导出成功自动变为最终合格。
+
+当前3178工具包的干净本地检查为159tests、660输入、五套固件，不能冒称已完成这份实际服务器复现清单。生产实际完整证据仍分别位于fcd、a53、27bf和668冻结目录，借助哈希确认同一RTL/正式固件/数据，而不是拼接不同设计的最佳指标。

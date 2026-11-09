@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_final1200_v2_running_613_passed_boundary_extraction_verified",
+    "phase": "DMA16_final1200_v2_running_748_passed_verification_matrix_recorded",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -2856,21 +2856,22 @@
       "started_launcher": "2026-11-10T04:56:55.618624",
       "expected_tasks": 1200,
       "expected_outputs": 30412800,
-      "completed_tasks_last_observed": 613,
+      "completed_tasks_last_observed": 748,
       "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
       "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
       "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
       "uses_old_37_tasks": false,
       "hardware_firmware_images_changed": false,
       "final_regression_verified": false,
-      "last_observed": "2026-11-10T05:40:02.214135",
-      "outputs_last_observed": 15535872,
+      "last_observed": "2026-11-10T05:49:32.349551",
+      "outputs_last_observed": 18957312,
       "failed_attempts_last_observed": 0,
-      "host_mean_task_seconds_approx": 4.185543,
-      "remaining_tasks_last_observed": 587,
-      "remaining_seconds_with_20_percent_margin_approx": 2948.3,
+      "host_mean_task_seconds_approx": 4.186089,
+      "remaining_tasks_last_observed": 452,
+      "remaining_seconds_with_20_percent_margin_approx": 2270.535,
       "shared_lock_owned": true,
-      "initial_pid_transcription_corrected_from": 214800
+      "initial_pid_transcription_corrected_from": 214800,
+      "current_attempt_last_observed": "cases/sample_000063_layer_05/attempt_0001"
     },
     "unknown_activity_tool_local": {
       "stage": "dma16_unknown_activity",
@@ -2931,6 +2932,7 @@
       },
       "complete_object_review": false,
       "scope": "Diagnostic inventory; no automatic timing acceptance"
-    }
+    },
+    "directed_verification_matrix": "workspaces/arch03/VERIFICATION_MATRIX_20261110.md"
   }
 }
