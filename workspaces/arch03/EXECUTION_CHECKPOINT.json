@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "ASIC full02 passed. Synth05 has known LF output-name error and is unusable; exact lowercase-o fix and DC fail-fast setting locally tested, new package required.",
+  "last_completed_stage": "USER PAUSED. Board FileZilla and VNC closed, queue empty. Full02 CPU pass preserved. Synth05 already failed naturally at 10:01:32 and released lock; no remote EDA active at 10:05:59. Exactport package transferred, NOT server-unpacked.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -42,15 +42,16 @@
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip",
-    "reason": "Explicit authorization used for 15 verified FileZilla packages; no pending approval.",
+    "current_package": "../../local_runs/light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
+    "reason": "Prior explicit upload authorization remains valid, but user has paused all new work. 16 FileZilla transfers completed; latest exactport archive awaits server hash/unpack.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe synth05 final failed state and own lock release; never use this erroneous mapping. Freeze/upload exact LF-name/fail-fast fix and run independent synth06.",
-    "After synthesis review, run full 14-case mapped regression with at least layer_01 complete-task VCD; use exact new synthesis summary digest",
-    "Run error-free same-config power from powerctx, verifying LC environment, detailed units, unknown transition settings, SRAM sums, boundary nets and mapping",
-    "Update final same-config area/performance/energy and provenance; official scoring ownership and submission details remain unresolved"
+    "WAIT for explicit user resume; reread implementation plan and this checkpoint before new work",
+    "Reconnect board/VNC with fresh window inventory; preserve remote terminal session and verify actual IC/.arch02_team_lock",
+    "Verify exactport ZIP SHA256 c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7 and safe-unpack all 400 inputs",
+    "Run exactport source 5754632 independent synth06; inspect exact three LF outputs, error-stop setting, four CDC pins, strict timing and coverage",
+    "After valid synthesis, complete full mapped 14-case functionality and same-config activity/power; then final reports and unresolved official submission/scoring requirements"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -65,7 +66,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Fourth terminal (reports bundle cwd) runs powerctx package d3_synth05 driver 48479; third diagnostic terminal idle SDC bundle. Actual lock is IC/.arch02_team_lock from server_config, NOT the upload root.",
+  "server_readonly_job": "No remote EDA active at pause. Remote MateTerminal preserved: third diagnostic tab cwd SDC bundle, fourth cwd reports bundle with completed failed synth05. Board viewers both closed; all old window IDs must be refreshed on resume.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -96,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "soc_synth.py/test_soc_synth.py exact lowercase-o port correction and explicit sh_continue_on_error=false, plus diagnostic documentation; 9 focused tests pass.",
+  "uncommitted_follow_on": "Pause/result documentation only; runtime exactport commit 57546321d739db04b0850732d3f98297f9823f3d committed and transferred, awaiting server unpack.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -1074,7 +1075,7 @@
     "package": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
   },
   "lf_output_synthesis": {
-    "status": "running_with_known_constraint_errors_NOT_usable",
+    "status": "failed",
     "session": "d3_synth05",
     "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "driver_pid": 48479,
@@ -1093,7 +1094,12 @@
       "server_synth05_lf_binding_progress.png",
       "server_lf_port_exact_characters.png",
       "server_dc_source_error_behavior.png"
-    ]
+    ],
+    "finished": "2026-11-09T10:01:32.972908",
+    "strict_driver_error": "Tool failed soc_synth.log exit=0; log contains constraint errors",
+    "team_lock_released": true,
+    "driver_exited": true,
+    "final_screenshot": "pause_server_final_state.png"
   },
   "latest_powerctx_package": {
     "status": "passed_local_package",
@@ -1147,6 +1153,10 @@
       {
         "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
         "archive": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
+      },
+      {
+        "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+        "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip"
       }
     ],
     "groups": {
@@ -1171,7 +1181,7 @@
         "inventory_sha256": "b99f81e563f4e8baf4c86a9e5375034b93e09f6a87312525b0dd90afa988aedc"
       }
     },
-    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports and powerctx packages; synthesis constraints and power report collectors intentionally differ.",
+    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx and exactport packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
   },
   "actual_team_lock_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock",
@@ -1217,5 +1227,64 @@
       "server_unconnected_port_directions_fixed.png",
       "server_structural_top_team_scope.png"
     ]
+  },
+  "pause": {
+    "status": "paused_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "requested_scope": "User is powering down the development board; close board VNC and FileZilla, pause local work, leave remote Linux tasks alone.",
+    "board_vnc_closed": true,
+    "board_filezilla_closed": true,
+    "transfer_queue_empty": true,
+    "board_shutdown_by_assistant": false,
+    "remote_processes_stopped": false,
+    "remote_desktop_preserved": true,
+    "remote_last_checked": "2026-11-09T10:05:59.964420",
+    "remote_eda_processes": [],
+    "team_lock_present": false,
+    "screenshots": [
+      "pause_filezilla_state.png",
+      "pause_server_final_state.png",
+      "pause_board_apps_closed.png"
+    ],
+    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts."
+  },
+  "latest_exactport_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+      "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
+      "bytes": 10833804,
+      "sha256": "c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7",
+      "files": 400,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": false,
+      "server_safe_unpack_hashes_verified": false
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_exactport_clean_20261109\\light-light126-d3-exactport-arch03-20261109_100139-57546321d739",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "pause_filezilla_state.png",
+    "server_unpack_status": "NOT_RUN_user_paused_after_transfer"
   }
 }

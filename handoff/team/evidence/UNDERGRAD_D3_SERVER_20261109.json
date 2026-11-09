@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "asic_full02_passed_synth05_constraint_name_error_new_fix_prepared",
+  "status": "paused_by_user_full02_passed_synth05_failed_exactport_uploaded_not_unpacked",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -145,6 +145,17 @@
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
       "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+      "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
+      "bytes": 10833804,
+      "sha256": "c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7",
+      "files": 400,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": false,
+      "server_safe_unpack_hashes_verified": false
     }
   ],
   "local_screenshot_root": "../takeover_local/d2_20261109",
@@ -1135,7 +1146,7 @@
     "package": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
   },
   "lf_output_synthesis": {
-    "status": "running_with_known_constraint_errors_NOT_usable",
+    "status": "failed",
     "session": "d3_synth05",
     "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "driver_pid": 48479,
@@ -1154,7 +1165,12 @@
       "server_synth05_lf_binding_progress.png",
       "server_lf_port_exact_characters.png",
       "server_dc_source_error_behavior.png"
-    ]
+    ],
+    "finished": "2026-11-09T10:01:32.972908",
+    "strict_driver_error": "Tool failed soc_synth.log exit=0; log contains constraint errors",
+    "team_lock_released": true,
+    "driver_exited": true,
+    "final_screenshot": "pause_server_final_state.png"
   },
   "latest_powerctx_package": {
     "status": "passed_local_package",
@@ -1208,6 +1224,10 @@
       {
         "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
         "archive": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
+      },
+      {
+        "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+        "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip"
       }
     ],
     "groups": {
@@ -1232,7 +1252,7 @@
         "inventory_sha256": "b99f81e563f4e8baf4c86a9e5375034b93e09f6a87312525b0dd90afa988aedc"
       }
     },
-    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports and powerctx packages; synthesis constraints and power report collectors intentionally differ.",
+    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx and exactport packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
   },
   "exact_lf_port_preparation": {
@@ -1277,5 +1297,64 @@
       "server_unconnected_port_directions_fixed.png",
       "server_structural_top_team_scope.png"
     ]
+  },
+  "pause": {
+    "status": "paused_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "requested_scope": "User is powering down the development board; close board VNC and FileZilla, pause local work, leave remote Linux tasks alone.",
+    "board_vnc_closed": true,
+    "board_filezilla_closed": true,
+    "transfer_queue_empty": true,
+    "board_shutdown_by_assistant": false,
+    "remote_processes_stopped": false,
+    "remote_desktop_preserved": true,
+    "remote_last_checked": "2026-11-09T10:05:59.964420",
+    "remote_eda_processes": [],
+    "team_lock_present": false,
+    "screenshots": [
+      "pause_filezilla_state.png",
+      "pause_server_final_state.png",
+      "pause_board_apps_closed.png"
+    ],
+    "resume_rule": "Wait for user to resume. Reread plan and checkpoint first; reconnect with fresh window IDs. Verify/uploaded exactport ZIP and safe-unpack before independent synth06. Never use failed synth05 artifacts."
+  },
+  "latest_exactport_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
+      "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
+      "bytes": 10833804,
+      "sha256": "c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7",
+      "files": 400,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": false,
+      "server_safe_unpack_hashes_verified": false
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_exactport_clean_20261109\\light-light126-d3-exactport-arch03-20261109_100139-57546321d739",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "pause_filezilla_state.png",
+    "server_unpack_status": "NOT_RUN_user_paused_after_transfer"
   }
 }

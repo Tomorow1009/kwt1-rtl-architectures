@@ -97,8 +97,8 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "asic_full02_passed_synth05_constraint_name_error_new_fix_prepared",
-    "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
+    "phase": "paused_by_user",
+    "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
     "software_samples": 600,
@@ -112,8 +112,8 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Preserve synth05 as unusable due to exact output-name error and source continue-on-error default. Freeze/upload corrected name and fail-fast setting; run synth06 after lock release.",
-    "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_powerctx_package",
+    "next": "Wait for user resume. Board VNC/FileZilla closed; no remote EDA active at 10:05:59. Verify/unpack exactport then new synth06; preserve failed synth05 and passed full02.",
+    "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_exactport_package",
     "server_uploaded": true,
     "clean_package_input_files": 400,
     "d2_source_commit": "860a6b3f820df2e3933d1989cf8453f59ce87665",
@@ -140,7 +140,7 @@
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "latest verified uploaded runtime package; ASIC full02 used byte-identical runtime inputs in 371316a, synthesis05 now running",
+    "source_commit_scope": "exactport runtime locally verified and FileZilla transferred; server ZIP verification/unpack and synth06 not started",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "synth04 mapped artifacts complete, latches=0 and hold positive; three LF output budget setup violations remain",
@@ -151,6 +151,7 @@
     "delivery_index": "../../workspaces/arch03/DELIVERY_INDEX_20261109.md",
     "whole_task_activity_audit_verified": true,
     "uart_original_patched_comparison_verified": true,
-    "repaired_asic_matrix_suite_verified": true
+    "repaired_asic_matrix_suite_verified": true,
+    "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause"
   }
 }
