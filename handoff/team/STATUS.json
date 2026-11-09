@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "MMIO8_same_source14_passed_DMA16_gate03_running",
+    "phase": "DMA16_gate14_activity12_passed_first_full_window_power_running",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Complete gate03 full14/activity12; verify actual summary and run first DMA16 PT review. Then full12 power, actual CPU contention, final1200, MMIO8 fresh PPA and complete report/reproduction. No concurrent shared EDA.",
+    "next": "Review actual first DMA16 PT reports/units/no_clock/disabled arcs/X/coverage/models. Complete actual CPU contention, final1200, remaining11 powers, MMIO8 fresh PPA, reviewed exports and clean reproduction. Shared EDA sequential.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -145,7 +145,7 @@
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "Old synth07 reports complete, setup/hold positive, full constraint/gate/power review pending; not DMA16 netlist.",
     "gate_smoke_verified": true,
-    "complete_gate_suite_verified": false,
+    "complete_gate_suite_verified": true,
     "library_area_units_verified": true,
     "scoring_area_verified": false,
     "delivery_index": "../../workspaces/arch03/DELIVERY_INDEX_20261109.md",
@@ -153,7 +153,7 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": "dma16_gate03",
+    "active_session": "dma16_power_l01_v1",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
@@ -762,17 +762,17 @@
       "production_rtl_changed": false
     },
     "dma16_gate03": {
-      "state": "running",
+      "state": "passed",
       "bundle": "light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a",
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T03:27:51.694021",
-      "child_pid_last": 157914,
-      "child_log_last": "layer_12_activity_scan.log",
+      "last_observed": "2026-11-10T03:44:18+08:00",
+      "child_pid_last": null,
+      "child_log_last": null,
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 11,
+      "completed_cases": 14,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -800,9 +800,23 @@
         "layer_08",
         "layer_09",
         "layer_10",
-        "layer_11"
+        "layer_11",
+        "layer_12",
+        "extremes",
+        "rounding"
       ],
-      "child_cpu_percent_last": 100.0
+      "child_cpu_percent_last": 100.0,
+      "finished": "2026-11-10T03:41:09.458176",
+      "summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
+      "outputs": 354816,
+      "cycles_each": 225770,
+      "completed_activity_cases": 12,
+      "saturation_extremes": 6336,
+      "saturation_rounding": 4554,
+      "shared_lock_released": true,
+      "gate_verified": true,
+      "scope": "dma16_whole_soc_mapped_functional_without_SDF",
+      "physical_signoff": false
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -1094,6 +1108,26 @@
       "filesystem_total_bytes": 9597106520064,
       "individual_quota_checked": false,
       "files_deleted": false
-    }
+    },
+    "dma16_power_l01_v1": {
+      "state": "running",
+      "bundle": "light-light126-ref-export-dma16-20261110_032204-414bc5631438",
+      "session": "dma16_power_l01_v1",
+      "stage": "dma16_power",
+      "case": "layer_01",
+      "driver_pid": 174171,
+      "child_pid_last": 174385,
+      "child_log_last": "power.log",
+      "started_launcher": "2026-11-10T03:47:17.440913",
+      "started": "2026-11-10T03:47:17.940385",
+      "last_observed": "2026-11-10T03:48:09.774588",
+      "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
+      "system_power_verified": false,
+      "launch_guard_rejected_transposed_hash_before_any_job": true
+    },
+    "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+    "current_server_tool_commit": "414bc5631438bed31e7228d8659ccd519ad1ac7f",
+    "dma16_complete_gate_suite_verified": true,
+    "dma16_complete_activity_suite_verified": true
   }
 }
