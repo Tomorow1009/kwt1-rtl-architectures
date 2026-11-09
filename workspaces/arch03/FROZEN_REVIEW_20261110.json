@@ -13,7 +13,7 @@
     "task_mode_synthesis_timing": "accepted_for_declared_scope",
     "project_area_upper_bound": "accepted_for_declared_scope",
     "system_power": "pending_full_unknown_review_and_12_layers",
-    "final_asic_1200": "running"
+    "final_asic_1200": "passed_runtime_final_export_reaudit_pending"
   },
   "metrics": {
     "period_ns": "6.666666",
@@ -27,5 +27,6 @@
   "official_precision_verified": false,
   "report_exporter_integration_verified": false,
   "review_document": "workspaces/arch03/FROZEN_REVIEW_20261110.md",
-  "review_document_sha256": "289529689f5a2fce52995f976c7370944d1d9374128910a6fa4001afcd607e28"
+  "review_document_sha256": "c35b12760e7ae41ae1c88a2bc698c6e0fc609ad9fe29ad1f34ec94d3ce69e659",
+  "batch_state_sha256": "764a854321921a0ca06f82394697cfa23200931dc1d0297ffa457ad822d35d93"
 }

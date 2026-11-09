@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_final1200_running_task_mode_timing_and_area_reviewed",
+  "phase": "DMA16_final1200_passed_full_unknown_activity_next",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -1503,28 +1503,33 @@
     "ftp_disconnected_after_transfer": true
   },
   "final1200_v2": {
-    "state": "running",
+    "state": "passed",
     "bundle": "light-light126-batch-identity-dma16-20261110_045000-66838470bb12",
     "run": "runs/dma16_final1200_v2",
     "driver_pid": 221400,
     "started_launcher": "2026-11-10T04:56:55.618624",
     "expected_tasks": 1200,
     "expected_outputs": 30412800,
-    "completed_tasks_last_observed": 1100,
+    "completed_tasks_last_observed": 1200,
     "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
     "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
     "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
     "uses_old_37_tasks": false,
     "hardware_firmware_images_changed": false,
-    "final_regression_verified": false,
-    "last_observed": "2026-11-10T06:16:15.253439",
-    "outputs_last_observed": 27878400,
+    "final_regression_verified": true,
+    "last_observed": "2026-11-10T06:23:53.048048",
+    "outputs_last_observed": 30412800,
     "failed_attempts_last_observed": 0,
-    "host_mean_task_seconds_approx": 4.248643,
-    "remaining_tasks_last_observed": 100,
-    "remaining_seconds_with_20_percent_margin_approx": 510,
-    "shared_lock_owned": true,
-    "initial_pid_transcription_corrected_from": 214800
+    "host_mean_task_seconds_approx": 4.270007,
+    "remaining_tasks_last_observed": 0,
+    "remaining_seconds_with_20_percent_margin_approx": 0,
+    "shared_lock_owned": false,
+    "initial_pid_transcription_corrected_from": 214800,
+    "finished_utc": "2026-11-09T22:22:56.909362Z",
+    "host_total_task_seconds_approx": 5124.008,
+    "final_export_independent_reaudit_complete": false,
+    "state_sha256": "764a854321921a0ca06f82394697cfa23200931dc1d0297ffa457ad822d35d93",
+    "state_sha256_independently_verified": true
   },
   "unknown_activity_tool_local": {
     "stage": "dma16_unknown_activity",
@@ -1621,5 +1626,22 @@
   },
   "strict_timing_scope": "Stable task-mode synthesis at SS 0.99 V 125 C, 6.666666 ns; no physical signoff or active JTAG/startup claim",
   "project_area_upper_bound_verified": true,
-  "frozen_review_record": "workspaces/arch03/FROZEN_REVIEW_20261110.json"
+  "frozen_review_record": "workspaces/arch03/FROZEN_REVIEW_20261110.json",
+  "review_exporter_local": {
+    "tests_passed": 174,
+    "skipped": 0,
+    "production_changed": false,
+    "server_executed": false,
+    "scope": "Explicit scoped timing/area review with source and diagnostic binding; power remains unapproved"
+  },
+  "unknown_activity_l01_v1": {
+    "bundle": "light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd",
+    "run": "runs/dma16_unknown_l01_v1/dma16_unknown_activity",
+    "driver_pid": 274570,
+    "started_launcher": "2026-11-10T06:25:05.092274",
+    "status": "launched_completion_unobserved",
+    "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
+    "case": "layer_01",
+    "system_power_verified": false
+  }
 }

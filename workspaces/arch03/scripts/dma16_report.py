@@ -209,7 +209,7 @@ def build(request):
                'Clean-directory final reproduction and official submission materials']
     if len(numbers) != 12: pending.append('Missing complete power reports for one or more performance layers')
     if final_batch['tasks'] != 1200: pending.append('Final 1200 ASIC/E203 tasks have not passed and been re-audited')
-    return dict(schema='dma16-evidence-export-v1', status='evidence_exported_review_required', references=refs,
+    report = dict(schema='dma16-evidence-export-v1', status='evidence_exported_review_required', references=refs,
         declared_conditions=dict(corner='SS', voltage_v='0.99', temperature_c=125, clock_period_ns='6.666666',
             analysis='Pre-layout; zero-delay gate activity; no extracted parasitics or physical clock tree'),
         production_rtl_sha256=rtl, firmware_sha256=g['firmware_sha256'],
@@ -221,6 +221,10 @@ def build(request):
         verification=dict(asic_14=True, gate_14_without_sdf=True, activity_12=True,
             timing_verified=False, scoring_area_verified=False, system_power_verified=False,
             official_precision_verified=False, physical_signoff=False), exporter_sha256=sha(__file__))
+    if request.get('review') is not None:
+        from dma16_review import apply
+        apply(report, request['review'], s, load_stage)
+    return report
 
 
 def write_outputs(report, output):
@@ -237,6 +241,8 @@ def write_outputs(report, output):
         writer = csv.DictWriter(stream, fields, extrasaction='ignore'); writer.writeheader(); writer.writerows(report['cases'])
     aggregate = report['aggregate']
     summary_row = dict(aggregate)
+    for key in ('timing_verified', 'project_area_upper_bound_verified', 'system_power_verified', 'physical_signoff'):
+        summary_row[key] = report.get('verification', {}).get(key, False)
     for name in ('max', 'min', 'latches', 'period_ns'):
         summary_row['timing_'+name] = report.get('timing_metrics', {}).get(name)
     for name in ('known_added_mm2', 'conservative_budget_mm2', 'whole_system_library_area', 'project_budget_mm2'):
@@ -254,8 +260,11 @@ def write_outputs(report, output):
                 entry.update(case=row['case'], module=name, dynamic_w=values['derived_dynamic_w'],
                              total_print_rounding_bound_w=values['rounding_bound_w']['total'], system_power_verified=False)
                 writer.writerow(entry)
+    reviewed = report.get('verification', {}).get('timing_verified', False) and report.get('verification', {}).get('project_area_upper_bound_verified', False)
+    review_text = ('已绑定独立审定记录，声明范围内的稳定任务模式综合时序和项目面积上界通过；系统功耗及剩余事项见下文。' if reviewed else
+        '时序、面积归属及系统功耗仍需独立审核，不能视为最终参评验收。')
     lines = ['# '+report.get('architecture_label', '架构三 DMA16')+' 冻结配置证据汇总', '',
-        '本报告由原始运行摘要及文件哈希生成。真实 ASIC 14 例、无 SDF 门级 14 例和 12 个完整活动窗口通过；时序、面积归属及系统功耗仍需独立审核，不能视为最终参评验收。', '',
+        '本报告由原始运行摘要及文件哈希生成。真实 ASIC 14 例、无 SDF 门级 14 例和 12 个完整活动窗口通过；'+review_text, '',
         '统一计时为首个源请求 valid 至最后结果写响应，包含首请求等待及共享 SRAM 入库；每任务 191,616 B、1,622,016 MAC。声明工艺条件为 SS、0.99 V、125°C，工具周期 6.666666 ns；布局前估算不含提取寄生或物理时钟树。', '',
         '12 任务平均周期：'+aggregate['mean_cycles']+'；名义 150 MHz 吞吐：'+aggregate['nominal_150mhz_tasks_per_second']+' task/s。', '',
         '| 层 | 周期 | task/s（150 MHz） | 原始平均功耗 W | 原始能耗 J/task |',
@@ -268,6 +277,8 @@ def write_outputs(report, output):
         '100 样本内部回归：%s，%d 个任务、%d 个输出；不是官方 600 样本精度验收。' %
         (report['batch']['status'], report['batch']['tasks'], report['batch']['outputs']), '', '## 原始证据', '']
     for label, ref in report['references'].items(): lines += ['- %s：`%s`，SHA256 `%s`。' % (label, ref['run'], ref['sha256'])]
+    if report.get('engineering_review'):
+        lines += ['- 独立审定记录SHA256：`'+report['engineering_review']['record_sha256']+'`；仅接受其声明范围，官方成绩和物理签核仍为false。']
     lines += ['', '面积、setup/hold、库/源码/固件/布局/波形哈希和活动未知值见 report.json；逐层数据见 tasks.csv，模块功耗见 modules.csv，总计见 summary.csv。', '', '## 未验证与保留历史', '']
     lines += ['- '+x for x in report['unverified']]
     lines += ['- %s：%s；`%s`。' % (h['status'], h['description'], h['run']) for h in report['history']]
