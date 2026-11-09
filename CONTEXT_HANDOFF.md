@@ -22,6 +22,11 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **04:21最新：修正首层PT已完成，原始数值已成功提取。** 27bf包`runs/dma16_power_l01_v2/dma16_power`于04:10:02.258177 passed（报告收集），summary SHA=`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9`；PT 0 errors、1549 warnings。04:19:28实际锁False、EDA进程列表空。原始数值文件在同session的`power_numbers.raw.json`，SHA=`1c7e59c8275ed054ab79b40dfafc30112e45961f3d13a4cda74fd30eedb9bb45`。internal=0.0204980653W、switching=0.00268980953W、leakage=0.00649584783W、total=0.0296837185W，精确窗口1505133.182820ns，原始能耗0.000044679497038379161700J；单位、普通/verbose分类合计、层级互斥分解及162宏表核对通过。**system_power_verified仍false、approved值仍null**，这是布局前原始估算，非最终功耗验收。
+- 正在逐对象审核实际新PT：`timing_check.rpt`共189个no_clock对象，全部归入JTAG DTM/调试复位同步层级（186+3），仍需结合实际约束/对象确认；`disabled_timing.rpt`为10752138B/61740条对象行，正在归类实际原因，不能凭PTE-003总数认定通过。3个综合高扇出网络名称仍待新DDC只读诊断。首层summary曾手抄末段错误，数值提取器哈希守卫在写文件前拒绝；后改为读取已通过stage回执的SHA并独立重算文件，未放宽检查、未改原产物。
+- 下一步完成时钟/禁用弧/模型/活动审核、实际整轮初步导出及高扇出诊断，再启动最终1200与剩余11层功耗、原8路新PPA。最后本地提交e802b7f，生产fcd和工具27bf不变；GitHub仍待当前用户目的地确认，不重试。FileZilla已断开，开发板VNC保持；以下“v2仍running”为历史状态。
+- 04:27本地新增`dma16_timing_audit`受共享锁管理的只读DC阶段：复用当前DDC/库/宏/硬件身份守卫与实际模块probe，运行现有`all_high_fanout -nets -threshold 1000`，保存完整网络名，前后核对全部输入SHA；不综合、不改网表、不自动升级时序结论。相关63tests通过，尚待新包上传和服务器实际诊断。生产RTL/正式固件未修改。
+
 - **04:09压缩前最新保存：竞争实测已通过、修正功耗正在运行。** 414包`dma16_contention01/dma16_contention`于04:01:07.123980 passed，2例50688输出一致；摘要SHA=`a55fe2e951ad239403c230a28bd771affa3588abd6cc751c86c84f7a9faf4e8e`。layer_01与rounding各观察到竞争1248拍、CPU总授予21893、DMA总授予47904，竞争时CPU授予1146/DMA授予102，blocked0；总arb grants/acks各69797、ready_wait25049、CPU-owned wait23903、response backpressure0。原工具按真实ASIC/E203和双方服务检查通过；独立polling/scratch固件，不作正式PPA，也不是任意仲裁序列的数学证明。
 - 27bf49a功耗修正包已FileZilla成功上传33秒并断开，服务器04:02:28.049584核验ZIP并安全解包、04:03:17.132980核验654输入/完整提交号。**当前唯一EDA是27bf包`runs/dma16_power_l01_v2/dma16_power`**：launcher04:04:30.789625，stage04:04:31.140224，driver188741，child188961。最后04:07:24.331056为running、正在读完整layer_01 VCD，实际日志Error行0；四个SEL-005已不再出现，但还未完成/验收。不要误用之前误读的PID；以本条及新owner为准。完整门级仍用正确SHA `9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc`。
 - 下一步读v2完成及真实PT报告，审核units/no_clock/disabled/X/映射/宏模型/高扇出；旧v1保留failed（4 errors、1553 warnings、无实际SIGTERM）。再最终1200、剩余11层功耗、原8路同源新PPA、实际JSON/CSV中文导出及干净复现。尚未运行任何实际整轮报告导出；高扇出只读诊断可用现有DC `all_high_fanout -nets -threshold 1000`，尚未对新整机执行，不能把历史clk结论移用。

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_gate14_activity12_contention2_passed_corrected_power_l01_running",
+  "phase": "DMA16_gate14_activity12_contention2_passed_power_l01_reports_and_raw_numbers_ready_review_required",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Read corrected l01_v2 PT completion and actual reports. Review no_clock/disabled arcs/high-fanout/X/coverage/models/units, then final1200 and remaining11 powers/MMIO8 fresh PPA/reviewed exports/reproduction. Preserve failed v1.",
+  "next": "Review actual first PT clocks/disabled arcs/activity/models and current DDC high-fanout nets; exercise actual report export; final1200, remaining11 powers, MMIO8 fresh PPA and reproduction remain.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "dma16_power_l01_v2",
+  "active_session": null,
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": false,
@@ -976,7 +976,7 @@
     "contention_cpu_executed": false
   },
   "power_numeric_extractor": {
-    "status": "actual_old_PT_units_tables_hierarchy_SRAM_format_validated_no_DMA16_power_yet",
+    "status": "actual_DMA16_layer01_units_tables_hierarchy_162SRAM_extraction_passed_review_pending",
     "tests": 33,
     "new_report_tests": 9,
     "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
@@ -1357,7 +1357,7 @@
     "evidence_limit": "Observed both-master service for this traffic pattern; not all arbitration histories or IRQ energy savings"
   },
   "dma16_power_l01_v2": {
-    "state": "running",
+    "state": "passed_reports_ready_review_required",
     "bundle": "light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7",
     "session": "dma16_power_l01_v2",
     "stage": "dma16_power",
@@ -1367,11 +1367,24 @@
     "child_log_last": "power.log",
     "started_launcher": "2026-11-10T04:04:30.789625",
     "started": "2026-11-10T04:04:31.140224",
-    "last_observed": "2026-11-10T04:07:24.331056",
+    "last_observed": "2026-11-10T04:19:28+08:00",
     "error_lines_at_observation": 0,
     "reading_full_vcd": true,
     "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
-    "system_power_verified": false
+    "system_power_verified": false,
+    "finished": "2026-11-10T04:10:02.258177",
+    "summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9",
+    "log_errors": 0,
+    "log_warnings": 1549,
+    "shared_lock_released": true,
+    "eda_processes_observed": [],
+    "raw_numbers_file": "runs/dma16_power_l01_v2/power_numbers.raw.json",
+    "raw_numbers_sha256": "1c7e59c8275ed054ab79b40dfafc30112e45961f3d13a4cda74fd30eedb9bb45",
+    "raw_reported_total_power_w": "0.0296837185",
+    "raw_reported_energy_j": "0.000044679497038379161700",
+    "duration_ns": "1505133.182820",
+    "approved_average_power_w": null,
+    "approved_energy_j": null
   },
   "dma16_contention_verified": true
 }

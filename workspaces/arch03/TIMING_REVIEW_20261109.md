@@ -2,6 +2,8 @@
 
 ## DMA16当前综合的独立复查（2026-11-10）
 
+04:27：新增`dma16_timing_audit`只读阶段，使用原mapped.ddc及同库查询实际高扇出网络，完整保留原文件SHA并复核生产身份；相关63tests通过，尚未上传/执行。不能把查询入口已完成当成高扇出已审核。实际首层PT已无工具错误；其189个no_clock对象为JTAG DTM 186和JTAG复位同步3，禁用弧61740行仍在核查。后续须记录完整原因与实际SDC约束，不能移用历史结论。
+
 本节绑定fcd445f的`dma16_fix_synth01/dma16_synth`，summary SHA256为`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`。新网表的周期为6.666666000000ns、LF66ns；最差setup **+0.0000290871ns**、hold **+0.00136402ns**，各有2个路径组，锁存器为0。数值非负，但setup裕量很小，不称宽裕。
 
 02:37只读复查原始`check_timing.rpt`、`constraints.rpt`和综合日志：约束报告明确无违规，最终检查包含generated_clocks、loops、no_input_delay、unconstrained_endpoints、pulse_clock_cell_type、no_driving_cell、partial_input_delay；没有TIM-209或自动组合回路切断。**仍有3条高扇出网络，TIM-134说明按1000扇出参与延迟计算**（综合日志两次出现同类告警，不是6个独立网络）。mapped设计还保留LINT无负载及未连接端口等诊断，不能用“没有约束违规”替代全部结构解释。

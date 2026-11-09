@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -195,9 +195,9 @@ def main():
         raise ValueError('Power requires gate run, summary digest and exactly one --cases selection')
     if a.stage not in ('asic_power','dma16_power','mmio8_power') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
         raise ValueError('Gate activity selection is only for power estimation')
-    if a.stage in ('gate_soc','dma16_gate','mmio8_gate') and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
+    if a.stage in ('gate_soc','dma16_gate','mmio8_gate','dma16_timing_audit') and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
         raise ValueError('Gate verification requires synthesis run and summary digest')
-    if a.stage not in ('gate_soc','dma16_gate','mmio8_gate') and (a.synth_run is not None or a.synth_summary_sha256 is not None):
+    if a.stage not in ('gate_soc','dma16_gate','mmio8_gate','dma16_timing_audit') and (a.synth_run is not None or a.synth_summary_sha256 is not None):
         raise ValueError('Synthesis artifact selection is only for gate verification')
     if len(a.cases)!=len(set(a.cases)):raise ValueError('Duplicate case names would overwrite run artifacts')
     if a.firmware_root is not None and a.stage not in ('dma16_soc','dma16_build','mmio8_soc','dma16_gate','mmio8_gate','dma16_sequence','dma16_contention'):
@@ -255,6 +255,9 @@ def main():
                 from mmio8_synth import synth
                 vendor(cfg,run)
                 report=synth(cfg,run,a.platform,call)
+            elif a.stage=='dma16_timing_audit':
+                from dma16_timing_audit import audit
+                report=audit(cfg,run,a.synth_run.resolve(),a.synth_summary_sha256,call)
             elif a.stage=='dma16_synth':
                 from dma16_synth import synth
                 vendor(cfg,run)
