@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Synth06 failed safely at 11:01:33 before mapping; second LF name lacked _o_. All 20 actual server output names now independently captured and hash-matched; corrected budgets pass 9 focused tests.",
+  "last_completed_stage": "Portcheck 5946c54: 402 inputs, 14 integer cases and firmware layouts, 9 clean focused tests passed. Linux FileZilla upload and server safe-unpack passed. Synth07 running since 11:18:46, driver 139120.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -43,12 +43,12 @@
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip",
-    "reason": "Existing upload authorization remains valid; user explicitly resumed and authorized cloud sync. Exactport archive now server-verified and unpacked.",
+    "current_package": "../../local_runs/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip",
+    "reason": "User upload authorization and resume remain active. 17 total verified package transfers; latest portcheck server-unpacked and synth07 running.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Freeze, package, verify and upload port-inventory correction, then independent synth07; preserve failed synth06 and all earlier runs",
+    "Monitor synth07 actual three LF outputs, fail-fast SDC, four CDC pins, strict setup/hold, all constraints and coverage; do not duplicate job",
     "After valid synthesis, complete mapped 14-case functionality and same-config full-task activity/power",
     "Review final area, units, coverage and energy; finish delivery evidence and unresolved official scoring/submission requirements"
   ],
@@ -65,7 +65,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "No active EDA after synth06 failed; actual team lock observed released. Diagnostic tab 3 remains SDC cwd; tab 4 reports cwd.",
+  "server_readonly_job": "Synth07 driver 139120 owns actual IC/.arch02_team_lock. Remote tab 4 is job terminal (cwd reports package); tab 3 diagnostic (cwd SDC package). Linux VNC and FileZilla are open.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -96,7 +96,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "soc_synth.py port correction, independent actual output inventory fixture/test and failure evidence; not yet server verified.",
+  "uncommitted_follow_on": "Evidence and documentation only; frozen portcheck runtime source 5946c54263868bb701bebe515a285ffb9f238e47.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -1156,6 +1156,10 @@
       {
         "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
         "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip"
+      },
+      {
+        "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+        "archive": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip"
       }
     ],
     "groups": {
@@ -1180,7 +1184,7 @@
         "inventory_sha256": "b99f81e563f4e8baf4c86a9e5375034b93e09f6a87312525b0dd90afa988aedc"
       }
     },
-    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx and exactport packages; synthesis constraints and power report collectors intentionally differ.",
+    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx exactport and portcheck packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
   },
   "actual_team_lock_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock",
@@ -1311,7 +1315,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "5631a289d46d3948eb7662d76884fd8cf19a3fa2",
+    "verified_remote_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
@@ -1349,7 +1353,7 @@
     "scope": "Exact copy of user-supplied implementation plan; current evidence takes precedence over prospective completion statements"
   },
   "port_inventory_preparation": {
-    "status": "local_tests_passed_NOT_server_run",
+    "status": "uploaded_verified_synth07_running",
     "hardware_changed": false,
     "change": "Correct missing _o_ in second LF output; test against independently captured complete actual mapped top output inventory",
     "output_names": 20,
@@ -1359,5 +1363,64 @@
     "focused_tests": 9,
     "python36_syntax": true,
     "test_log": "local_runs/d3_port_inventory_tests_20261109.log"
+  },
+  "latest_portcheck_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+      "archive": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip",
+      "bytes": 10843580,
+      "sha256": "2d998f7dc8cadfaf230c90da499e1e7b3c110d1f86e2afeaca5723ecbb2ec4c5",
+      "files": 402,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_portcheck_clean_20261109\\light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "filezilla_portcheck_done.png",
+    "unpack_screenshot": "server_portcheck_unpack_pass.png",
+    "clean_focused_tests": 9,
+    "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386"
+  },
+  "portcheck_synthesis": {
+    "status": "running",
+    "session": "d3_synth07",
+    "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+    "driver_pid": 139120,
+    "started": "2026-11-09T11:18:46.512651",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_synth07/asic_synth",
+    "timing_verified": false,
+    "gate_simulation_verified": false,
+    "system_power_verified": false,
+    "preflight_time": "2026-11-09T11:18:20.145629",
+    "preflight_team_lock_present": false,
+    "preflight_eda_processes": [],
+    "screenshots": [
+      "server_synth07_preflight.png",
+      "server_synth07_start.png",
+      "server_synth07_state.png"
+    ]
   }
 }

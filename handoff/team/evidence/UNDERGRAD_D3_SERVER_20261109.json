@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "synth06_fail_fast_confirmed_second_port_correction_prepared",
+  "status": "full02_passed_portcheck_synth07_running",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -152,6 +152,17 @@
       "bytes": 10833804,
       "sha256": "c94d96d6440a76f7eb2cb0ed07011692bc95b94818d02db5312af289b72ecca7",
       "files": 400,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    {
+      "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+      "archive": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip",
+      "bytes": 10843580,
+      "sha256": "2d998f7dc8cadfaf230c90da499e1e7b3c110d1f86e2afeaca5723ecbb2ec4c5",
+      "files": 402,
       "board_staging_verified": true,
       "filezilla_transfer_completed": true,
       "server_zip_sha256_verified": true,
@@ -809,7 +820,7 @@
   },
   "initial_preparation_package_source_commit": "de6e6e41ae5b89c000b48c4a49dd398db8028f95",
   "initial_preparation_runtime_source_commit": "83126c3db7916cc8bc2371114df228edb558e9a0",
-  "latest_uploaded_package_source_commit": "371316af486ee7aa94a6b1cff6de503d86f1f306",
+  "latest_uploaded_package_source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
   "commit_scope": "Each stage records its actual tested source; latest uploaded package is not automatically accepted.",
   "power_run": {
     "status": "failed_tool_error_reports_preserved",
@@ -1228,6 +1239,10 @@
       {
         "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
         "archive": "light-light126-d3-exactport-arch03-20261109_100139-57546321d739.zip"
+      },
+      {
+        "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+        "archive": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip"
       }
     ],
     "groups": {
@@ -1252,7 +1267,7 @@
         "inventory_sha256": "b99f81e563f4e8baf4c86a9e5375034b93e09f6a87312525b0dd90afa988aedc"
       }
     },
-    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx and exactport packages; synthesis constraints and power report collectors intentionally differ.",
+    "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports, powerctx exactport and portcheck packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
   },
   "exact_lf_port_preparation": {
@@ -1382,7 +1397,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "5631a289d46d3948eb7662d76884fd8cf19a3fa2",
+    "verified_remote_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
@@ -1415,7 +1430,7 @@
     ]
   },
   "port_inventory_preparation": {
-    "status": "local_tests_passed_NOT_server_run",
+    "status": "uploaded_verified_synth07_running",
     "hardware_changed": false,
     "change": "Correct missing _o_ in second LF output; test against independently captured complete actual mapped top output inventory",
     "output_names": 20,
@@ -1425,5 +1440,64 @@
     "focused_tests": 9,
     "python36_syntax": true,
     "test_log": "local_runs/d3_port_inventory_tests_20261109.log"
+  },
+  "latest_portcheck_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+      "archive": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip",
+      "bytes": 10843580,
+      "sha256": "2d998f7dc8cadfaf230c90da499e1e7b3c110d1f86e2afeaca5723ecbb2ec4c5",
+      "files": 402,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_portcheck_clean_20261109\\light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "filezilla_portcheck_done.png",
+    "unpack_screenshot": "server_portcheck_unpack_pass.png",
+    "clean_focused_tests": 9,
+    "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386"
+  },
+  "portcheck_synthesis": {
+    "status": "running",
+    "session": "d3_synth07",
+    "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+    "driver_pid": 139120,
+    "started": "2026-11-09T11:18:46.512651",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_synth07/asic_synth",
+    "timing_verified": false,
+    "gate_simulation_verified": false,
+    "system_power_verified": false,
+    "preflight_time": "2026-11-09T11:18:20.145629",
+    "preflight_team_lock_present": false,
+    "preflight_eda_processes": [],
+    "screenshots": [
+      "server_synth07_preflight.png",
+      "server_synth07_start.png",
+      "server_synth07_state.png"
+    ]
   }
 }
