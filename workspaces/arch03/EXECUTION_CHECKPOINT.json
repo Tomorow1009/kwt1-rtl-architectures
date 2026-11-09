@@ -2315,7 +2315,7 @@
     "evidence_exporter": {
       "status": "implemented_local_tests_only",
       "module": "workspaces/arch03/scripts/dma16_report.py",
-      "module_sha256": "ad8278078556e8d061ff57365aafdb268291107a4c8d5bd338fcc60be9c57811",
+      "module_sha256": "935e0389d545b1a4f2c70c2bd266dc10100ac29004a6eb798908fd0148eec53f",
       "formats": [
         "JSON",
         "CSV",
