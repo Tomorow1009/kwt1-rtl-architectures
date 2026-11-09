@@ -23,7 +23,62 @@ def power():
     return '\n'.join(rows)+'\n'
 
 
+def hierarchy():
+    # Shape follows the installed PT hierarchy; synthetic values are not PPA.
+    header = 'Report : Averaged Power\nDesign : e203_soc_top\nHierarchy Power Power Power Power %\n'
+    def row(indent, name, factor, reference=True):
+        values = [Decimal('0.0001')*factor, Decimal('0.0002')*factor,
+                  Decimal('0.00003')*factor, Decimal('0.00033')*factor]
+        return ' '*indent+name+(' (fixture)' if reference else '')+' '+' '.join('%.2e' % v for v in values)+' 0.0\n'
+    return (header+row(0, 'e203_soc_top', 10, False)+row(2, 'soc', 10)+
+            row(4, 'u_e203_cpu_top', 3)+row(6, 'u_e203_itcm_ram', 1)+row(6, 'u_e203_dtcm_ram', 1)+
+            ''.join(row(4, name, 1) for name in ('u_arch03_accel', 'u_arch03_shared', 'u_arch03_arb', 'u_arch03_router')))
+
+
+def sram():
+    rows = ['Design : e203_soc_top', '-cell_power']
+    for token, count in (('u_e203_itcm_gnrl_ram', 32), ('u_e203_dtcm_gnrl_ram', 32),
+                         ('u_arch03_shared', 64), ('u_arch03_accel', 34)):
+        for index in range(count):
+            rows.append('soc/%s/bank%d/memory 1.00000000e-06 2.00000000e-06 3.00000000e-07 3.30000000e-06 (0.01%%) a' % (token, index))
+    return '\n'.join(rows)+'\n'
+
+
 class PowerNumberTests(unittest.TestCase):
+    def test_module_sums_exclude_nested_cpu_tcm_and_keep_rounding(self):
+        totals = p.parse_power(UNITS, power())['reported_power_w']
+        result = p.parse_hierarchy(hierarchy(), totals)
+        self.assertEqual(len(result['modules']), 8)
+        self.assertEqual(Decimal(result['modules']['cpu_excluding_tcm']['derived_power_w']['total']), Decimal('0.00033'))
+        self.assertEqual(Decimal(result['modules']['platform_other']['derived_power_w']['total']), Decimal('0.00099'))
+        self.assertGreater(Decimal(result['modules']['cpu_excluding_tcm']['rounding_bound_w']['total']), 0)
+        for key in p.KEYS:
+            self.assertEqual(sum(Decimal(r['derived_power_w'][key]) for r in result['modules'].values()), Decimal(totals[key]))
+        self.assertEqual(p.hierarchy_rounding('0.000'), 0)
+
+    def test_hierarchy_missing_duplicate_nested_bad_sum_and_wrong_root_fail(self):
+        totals = p.parse_power(UNITS, power())['reported_power_w']; text = hierarchy()
+        bad = [text.replace('u_arch03_arb', 'missing_arb'), text.replace('soc (fixture)', 'e203_soc_top'),
+               text+'    u_arch03_arb (fixture) 1.00e-04 2.00e-04 3.00e-05 3.30e-04 0.0\n',
+               text.replace('    u_arch03_router', '      u_arch03_router'),
+               text.replace('3.30e-04', '9.30e-04'), text.replace('3.30e-03', '3.80e-03'),
+               text.replace('3.30e-04', 'NaN'), text.replace('e203_soc_top', 'wrong_top'),
+               text.replace('      u_e203_itcm_ram', '    u_e203_itcm_ram'),
+               text.replace('      u_e203_dtcm_ram', '        u_e203_dtcm_ram')]
+        for value in bad:
+            with self.subTest(value=value), self.assertRaises(ValueError): p.parse_hierarchy(value, totals)
+
+    def test_sram_counts_values_and_blackboxes_are_explicit(self):
+        result = p.parse_sram(sram())
+        self.assertEqual(result['cell_count'], 162)
+        self.assertEqual(result['counts']['accelerator'], 34)
+        self.assertEqual(Decimal(result['summed_cell_power_w']['accelerator']['total']), Decimal('0.0001122'))
+        original = sram(); last = original.splitlines()[-1]
+        for bad in (original.replace(last+'\n', ''), original+last+'\n', original.replace(' a\n', ' b\n'),
+                    original.replace('u_arch03_shared', 'unowned'), original.replace('3.30000000e-06', '4.30000000e-06'),
+                    original.replace('3.30000000e-06', 'NaN')):
+            with self.assertRaises(ValueError): p.parse_sram(bad)
+
     def test_precision_and_group_sums_are_preserved(self):
         result = p.parse_power(UNITS, power())
         self.assertEqual(Decimal(result['derived_dynamic_w']), Decimal('0.003'))
@@ -58,6 +113,7 @@ class PowerNumberTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); run = root/'dma16_power'; run.mkdir()
             for name, text in (('units.rpt', UNITS), ('power.rpt', power()),
+                               ('power_hierarchy.rpt', hierarchy()), ('power_sram.rpt', sram()),
                                ('power.log', 'Warning: fixture activity requires review (PSW-208)\n')):
                 (run/name).write_text(text)
             summary = dict(status='reports_ready_review_required', scope=p.POWER_SCOPE,

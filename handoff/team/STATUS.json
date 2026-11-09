@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Observe gate03 without restart; after full14/activity12 pass verify summary SHA, first layer power review then12. Contention and MMIO8 synthesis queued separately. Final1200 and report exporter still pending.",
+    "next": "Keep gate03 running through full14/activity12; commit/package new report tools independently. Then actual first-layer PT review and twelve powers; contention/MMIO8 synthesis separately queued. Final1200 and technical acceptance remain pending.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -158,7 +158,7 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
+      "verified_remote_commit": "b2afb882b0963c39d8183a69602ab442da39e35b",
       "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
       "main_merged": false
     },
@@ -620,7 +620,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
+    "cloud_source_commit": "b2afb882b0963c39d8183a69602ab442da39e35b",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -767,12 +767,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T01:20:31.726365",
-      "child_pid_last": 51070,
-      "child_log_last": "layer_02_activity_scan.log",
+      "last_observed": "2026-11-10T01:40:07.717919",
+      "child_pid_last": 70242,
+      "child_log_last": "layer_04_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 1,
+      "completed_cases": 3,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -788,7 +788,13 @@
       "first_case_window_ns": [
         "93676.657299",
         "1598809.840119"
-      ]
+      ],
+      "completed_case_names": [
+        "layer_01",
+        "layer_02",
+        "layer_03"
+      ],
+      "child_cpu_percent_last": 99.4
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -814,16 +820,29 @@
     },
     "power_numeric_extractor": {
       "status": "local_contract_tests_passed_not_server_executed",
-      "tests": 18,
-      "new_tests": 6,
+      "tests": 30,
+      "new_report_tests": 9,
       "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
-      "module_sha256": "5938fbf11cc6499dc55b78c4b6002168d2d34c1b988177485002a8cc181d571e",
+      "module_sha256": "a0ef8fe5824f33f98337912ff2eefa84f81fae009a8ca9b0fce38edc6861c5e9",
       "handoff": "workspaces/arch03/POWER_EXPORT_HANDOFF.md",
-      "units": "Explicit 1 Watt for both dynamic/leakage; other settings rejected for review",
       "approved_power_w": null,
       "approved_energy_j": null,
       "system_power_verified": false,
-      "complete_json_csv_report_exporter": false
+      "module_disjoint_breakdown_implemented": true,
+      "sram_cell_count_guard": 162
+    },
+    "evidence_exporter": {
+      "status": "implemented_local_tests_only",
+      "module": "workspaces/arch03/scripts/dma16_report.py",
+      "module_sha256": "ad8278078556e8d061ff57365aafdb268291107a4c8d5bd338fcc60be9c57811",
+      "formats": [
+        "JSON",
+        "CSV",
+        "Chinese Markdown"
+      ],
+      "actual_server_export_complete": false,
+      "acceptance_granted": false,
+      "final_batch_requires_1200_actual_asic_tasks": true
     }
   }
 }
