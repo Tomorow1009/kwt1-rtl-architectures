@@ -51,3 +51,15 @@ python3 workspaces/arch03/scripts/server_run.py dma16_power --session dma16_powe
 新版批量每case记录宿主开始/结束UTC、仿真耗时、准备和重核总耗时；state用实际均值估算剩余任务并加20%余量，明确另留编译、排队、门级和功耗时间。芯片cycles不代替宿主耗时。批量脚本或固件/观察器变更后重新构建冻结contract；不更改既有运行的文件或身份。
 
 后续包的dma16_soc/dma16_gate只在TB增加被动bus_metrics模块，不纳入生产RTL或综合输入。模块使用实际accel/arb端口；门级路径必须来自同DDC的probe。四段计数、等待/响应延迟、接受间隔、读写切换和CPU竞争直方图随逐任务摘要保存，并与原window逐周期核对。最终批量contract要求完整统计块，逐任务receipt复核时重新解析；不能只凭结束标记通过。阶段统计包含重叠与计算间隙，不可相加充当总周期。
+
+## 独立CPU竞争验证
+
+`build_dma16_contention.py`构建独立轮询固件；生产IRQ固件、原驱动和RTL不修改。CPU在共享SRAM的`0xa0040000..0xa004007f`反复写入、fence、读回检查，与原ICB DMA竞争；该区不占用任务输入、输出或完成邮箱。至少16轮检查完成后才允许报告成功，输入/参数仍只经原SysMem源加载。构建完成不代表真实竞争已发生。
+
+```text
+python workspaces/arch03/scripts/build_dma16_contention.py --zig <zig> --output <新固件目录>
+python workspaces/arch03/scripts/package_dma16.py <原打包参数> --contention-firmware <新固件目录>
+python3 workspaces/arch03/scripts/server_run.py dma16_contention --session <新会话> --cases layer_01 rounding
+```
+
+包内该固件单列为`firmware_contention`。入口要求实际ASIC CPU输出检查通过、完整47904次DMA事务，且被动观察器记录同时请求、CPU获得服务及DMA获得服务均非零；缺任意一项就失败。结果scope为`dma16_asic_cpu_shared_contention_validation`，不混入正式IRQ版吞吐、功耗或最终1200性能配置。观察到该流量模式下的服务不等于穷尽所有仲裁序列。

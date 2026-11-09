@@ -22,6 +22,11 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **00:45最新保存**：云端已push/ls-remote核验`a53e4186a13aa3a493fc35571cf98037d0ce9d7e`。新VCD包`light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a.zip`为16441078字节、627文件，SHA`bfddbe51471d1e72a8af97ea0d2735edd5538f93e0ed07695debc4b9b43aacc3`。干净解包/CRC/hash/四固件/67tests通过，audit `local_runs/dma16_vcd_bits_clean_audit_20261110_0034/receipt.json` SHA`23a46264d5fceb544b376aefd4a9abda54934a3766df9e23bea466a27c3ab483`。板端核验后FileZilla上传成功32秒，队列空，Ctrl+D断开并最小化。服务器00:37:24.715634校验zip/安全解包，00:40:53.684894 `inputs()`核验627文件/提交；bundle位于既有base/bundles/同名无zip。
+- 原8路`mmio8_source02`仍running，最后约00:43已经layer_01..layer_10共10例通过，全部3843121周期，第一例源请求phase1ns精确校验已过；共享锁仍True。不要重启或开并行EDA。等其完成读14例摘要/hash后，在a53新包启动gate03（14例＋12活动），同fcd新synth01及原IRQ固件；a53修复未修改生产RTL/网表/固件。
+- 本地新增独立CPU竞争固件及入口，80相关测试通过，详见`workspaces/arch03/CONTENTION_HANDOFF.md`。受测固件只编译、未CPU执行；在`local_runs/dma16_contention_firmware_20261110_v1`，manifest `6f4445ec285319279c45d6381ca83172e19f29cd76ce2cc223a236aa528a5447`、ELF `6933ae865bee90f67770e7eecf8c0407f764c423923a2a918586b44363ffcbfb`。未改生产main/kwt驱动或RTL，只新增main/build/verifier/test，并给server_run/package加独立入口。准备提交新工具，不会影响已冻结a53门级包；未来用独立firmware_contention目录运行layer_01/rounding，不混入性能/PPA。首次构建相对辅助路径错误在mkdir前失败，修resolve后成功。
+- 仍缺正式JSON/CSV报告生成器（尚未实现）、严格时钟/无时钟与高扇出审计、系统功耗、最终1200和提交复现。00:43只读DC check_timing确认generated_clocks/loops/no_input_delay/unconstrained_endpoints检查有记录，无列出对象；仍有3高扇出网TIM-134采用1000估算，不能把这一摘要当完整PT时钟审核。
+
 - **11月10日00:34最新**：`dma16_gate02`实际于00:14:25.365488失败，原因`DMA16 source port VCD width mismatch`。实际layer_01 VCS已PASS25344输出、225770周期，饱和0，IRQ external1/timer23/wfi23/unhandled0；8,745,588,450字节VCD保留，尚无已审计case_progress，不称门级整轮通过。00:27实际头显示VCS将cmd_wdata等向量拆成逐位声明，原观察器只接受整向量。已修`dma16_activity.py`逐位核验完整106位，无缺位/重叠/越界；原生全文件扫描、未知值及真实边界不变。59项相关测试通过，新增逐位/分片拒绝覆盖和C++实际扫描复验，未改生产RTL/网表/固件。
 - c5相位包FileZilla成功32秒，队列空，已Ctrl+D断开并最小化。服务器00:23:56.259410校验16441116字节/SHA并安全解包；00:27:36.565681 `inputs()`核验627文件及完整c5提交。共享锁False、当前EDA空后启动原8路完整14例`mmio8_source02`，driver322427，launcher00:28:41.633308、started00:28:41.945678。最后00:30:29.905651 running/compile.log，child327331；不重启/清锁。新包路径见下方00:17记录，已上传状态以本节为准。
 - 下一步：新VCD审计工具提交/push/打独立包并上传，待MMIO8自然结束后gate03默认14例＋12全窗口活动，仍用fcd新synth01冻结网表及原IRQ固件。之后首层功耗审计、逐层12功耗与最终1200。正式报告生成器仍未开发；严格时钟/未知值/完整系统功耗、实际CPU竞争微基准仍缺。一次VNC终端多行Python命令被csh按行解析失败，未写文件；改为单行查询成功。失败gate02/旧运行原封保留，不改成PASS。

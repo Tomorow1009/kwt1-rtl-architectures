@@ -2101,7 +2101,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c",
+    "cloud_source_commit": "a53e4186a13aa3a493fc35571cf98037d0ce9d7e",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -2180,12 +2180,15 @@
       "driver_pid": 322427,
       "started_launcher": "2026-11-10T00:28:41.633308",
       "started": "2026-11-10T00:28:41.945678",
-      "last_observed": "2026-11-10T00:30:29.905651",
+      "last_observed": "2026-11-10T00:43:15+08:00",
       "child_pid_last": 327331,
       "child_log_last": "compile.log",
       "expected_cases": 14,
-      "completed_cases": 0,
-      "verified": false
+      "completed_cases": 10,
+      "verified": false,
+      "cycles_per_completed_case": 3843121,
+      "first_valid_phase_ns": 1,
+      "timing_parser_passed": true
     },
     "vcd_bit_declaration_fix": {
       "status": "local_tests_passed_not_server_verified",
@@ -2193,6 +2196,38 @@
       "native_scan_passed": true,
       "hardware_firmware_changed": false,
       "rule": "Exact complete 106 source bits; vector, bit or disjoint slices; reject missing/overlapping/out-of-range/width mismatch. Preserve full-file scan and unknown activity."
+    },
+    "vcd_bits_package": {
+      "source_commit": "a53e4186a13aa3a493fc35571cf98037d0ce9d7e",
+      "archive": "light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a.zip",
+      "bytes": 16441078,
+      "sha256": "bfddbe51471d1e72a8af97ea0d2735edd5538f93e0ed07695debc4b9b43aacc3",
+      "files": 627,
+      "clean_contract_tests": 67,
+      "firmware_variants": 4,
+      "local_archive_audit_passed": true,
+      "clean_audit": "local_runs/dma16_vcd_bits_clean_audit_20261110_0034/receipt.json",
+      "clean_audit_sha256": "23a46264d5fceb544b376aefd4a9abda54934a3766df9e23bea466a27c3ab483",
+      "server_uploaded": true,
+      "server_zip_bytes_verified": true,
+      "server_zip_sha256_verified": true,
+      "server_unpacked_verified": true,
+      "server_sha_observed": "2026-11-10T00:37:24.715634",
+      "server_inputs_verified": 627,
+      "server_inputs_observed": "2026-11-10T00:40:53.684894",
+      "ftp_transfer_seconds": 32,
+      "ftp_disconnected_after_transfer": true
+    },
+    "contention_local": {
+      "status": "compiled_and_contracts_only",
+      "cpu_executed": false,
+      "related_tests": 80,
+      "firmware": "local_runs/dma16_contention_firmware_20261110_v1",
+      "firmware_manifest_sha256": "6f4445ec285319279c45d6381ca83172e19f29cd76ce2cc223a236aa528a5447",
+      "elf_sha256": "6933ae865bee90f67770e7eecf8c0407f764c423923a2a918586b44363ffcbfb",
+      "handoff": "workspaces/arch03/CONTENTION_HANDOFF.md",
+      "performance_firmware_changed": false,
+      "production_rtl_changed": false
     }
   }
 }

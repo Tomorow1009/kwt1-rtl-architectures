@@ -42,6 +42,7 @@ def main():
     p.add_argument('--irq-firmware',type=Path)
     p.add_argument('--mmio8-firmware',type=Path,help='Original MMIO8 driver with the same real source-loading boundary')
     p.add_argument('--sequence-firmware',type=Path,help='Program-only polling DMA16 errors/cancel/timeout and A/B/A validation')
+    p.add_argument('--contention-firmware',type=Path,help='Separate polling CPU/shared-SRAM contention validation, not PPA firmware')
     p.add_argument('--member',required=True)
     a=p.parse_args()
     if not re.fullmatch('[A-Za-z0-9_-]{1,60}',a.member):raise ValueError('Member identifier')
@@ -54,6 +55,9 @@ def main():
     if a.mmio8_firmware:
         from mmio8_soc import verify_firmware as verify_mmio8
         verify_mmio8(a.mmio8_firmware)
+    if a.contention_firmware:
+        from dma16_contention import verify_firmware as verify_contention
+        verify_contention(a.contention_firmware)
     if a.sequence_firmware:
         from build_dma16_sequence import verify_firmware as verify_sequence
         sequence,_=verify_sequence(a.sequence_firmware)
@@ -73,6 +77,7 @@ def main():
     copy_firmware(a.firmware,folder/'firmware',folder)
     if a.irq_firmware:copy_firmware(a.irq_firmware,folder/'firmware_irq',folder)
     if a.mmio8_firmware:copy_firmware(a.mmio8_firmware,folder/'firmware_mmio8',folder,verify_mmio8)
+    if a.contention_firmware:copy_firmware(a.contention_firmware,folder/'firmware_contention',folder,verify_contention)
     if a.sequence_firmware:copy_sequence_firmware(a.sequence_firmware,folder/'firmware_sequence',folder)
     # Only the explicitly validated fourteen cases are inputs to this smoke package.
     for case_name in CASES14:
