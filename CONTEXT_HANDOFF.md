@@ -22,6 +22,12 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **02:19最新保存，恢复从这里开始**：02:18:24.985283实际gate03仍running，**layer_01..06完整门级及全波形审计通过**，child97116正在layer_07.log（模拟阶段，11秒、CPU99.5%），driver34122不变；共享锁由该作业占用，禁止重启/清锁/并发EDA。全14/12活动尚未完成，后续首层新PT、12功耗、竞争/MMIO8新综合、最终1200及PPA/复现仍缺。
+- 2363d00最新工具包已板端暂存`/home/root/undergrad-ptformat-20261110/`并FileZilla成功33秒，队列空，随后Ctrl+D断开/Alt+F9最小化。服务器02:16:42.082236 ZIP大小/SHA和安全解包通过；02:17:27.412078核对643输入/完整提交，并完成**真实旧PT完整层级格式解析，然后按预期拒绝旧8路缺DMA模块**。先前单位、负internal显示、SRAM数值精度诊断问题均已修正；实际单位/表合计/SRAM格式已在7dc包核验，236只补有符号层级显示。仍没有实际DMA16功耗数字，也没有实际最终导出，不可移用旧功耗。后续使用236工具包，不再用299/7dc的数值提取器。
+- 目前代码/工具已云端2363d009ed9fffd7f983da3f1fec2f2f0a199769；只有最新文档/证据修改待本次提交。README/验收表/实施报告已更新，说明真实ASIC14/同源MMIO8、报告生成器已实现但PPA/1200未完成。无挂起工具调用、无本地仿真任务、无活动子代理。窗口仍VNC18874435/FZ20972102/panel10485764，本机中继未变。下一步可以只读审核新综合时序/面积原始证据和准备最终运行索引；保持gate03自然推进，完成后核对其summary SHA再首层PT，不用未完成case_progress冒充完整gate验收。
+
+- **02:13压缩前补充**：负internal两位显示精度修正已提交/push，云端经ls-remote核验为`2363d009ed9fffd7f983da3f1fec2f2f0a199769`。新包`light-light126-ptformat-dma16-20261110_021151-2363d009ed9f.zip`，16498088B/643文件，SHA`510a98a9fb42a586db32a9cb340379455537779ff0880ee6ad21f0db61d523cc`；clean `local_runs/dma16_ptformat_clean_audit_20261110_0213/receipt.json` SHA`7db75b403a20a990f5deb9e7df7472305c9070d87a87538765b5e5c56aea9c17`，五套固件/98tests/CRC/path/hash通过。**尚未板端暂存或上传**；本地打包session16505已完成，没有挂起工具调用。下一步用新board暂存目录和现有FileZilla单连接上传此包，服务器核验后重做层级格式完整解析/旧8路错误架构拒绝。当前最后远端仍是02:10前五层通过；先刷新状态/owner，不重启。代码/固件/网表与当前gate03保持独立，只有本条Markdown未再提交。
+
 - **02:11压缩前最新保存**：gate03在02:10:17.812242已完整通过layer_01..05；其余仍在运行，最后driver34122，旧child80948已是第五层旧扫描PID，下一次刷新owner，不能按旧PID判断。现有a53门级包、fcd综合网表不变，勿重启或清锁。实际新汇总器核对前五层ASIC/门级result和layout SHA相同；02:08:56.845972核对实际ASIC/综合10生产RTL及161平台RTL身份相同。
 - 云端已push/ls-remote核验`7dc2617176b6fddd3cdf8613563340e6d0adb6ba`。新包`light-light126-reportfix-dma16-20261110_020049-7dc2617176b6.zip`为16498625B/643文件，SHA`7713a0535dfedfb32ca2e9f0bd07ffad8d8454b981d23ff10d0577f6bf48bee7`；clean `local_runs/dma16_reportfix_clean_audit_20261110_0201/receipt.json` SHA`20b9c628096ac6bc18ef1ec4167e34e93fe8cde8aea398b78f1cd9525fb60d2e`，五固件/98tests/CRC/hash通过。板端`/home/root/undergrad-reportfix-20261110/`；FileZilla成功33秒、队列空后Ctrl+D断开/Alt+F9最小化。服务器02:04:38.867083 ZIP/SHA/安全解包、02:05:29.144935 inputs643通过。
 - **实际格式复验**：7dc包已通过旧PT基本单位、verbose双1W、普通/verbose表一致及全部合计；02:08:13.134472完整旧SRAM138宏全部数值行解析/合计通过，然后按预期被DMA16宏数守卫拒绝。层级仍有两行实际负internal显示`-6.9e-06`（不是三位），触发严格格式拒绝；只剩这一显示精度修正已在本地power_numbers/test中完成，12相关测试通过，尚未新包复验。不是DMA16功耗验收，不能把旧功耗用于新任务。所有失败截图和原包保留。

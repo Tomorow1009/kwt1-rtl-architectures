@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Keep gate03 running through full14/activity12; commit/package new report tools independently. Then actual first-layer PT review and twelve powers; contention/MMIO8 synthesis separately queued. Final1200 and technical acceptance remain pending.",
+  "next": "Continue gate03 full14/activity12; use ptformat 236 report tools after real first-layer PT review. Shared EDA remains sequential. Final1200, contention, MMIO8 PPA and complete acceptance/reproduction pending.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -755,7 +755,7 @@
     "ftp_transfer_seconds": 32,
     "ftp_disconnected_after_transfer": true
   },
-  "cloud_source_commit": "7dc2617176b6fddd3cdf8613563340e6d0adb6ba",
+  "cloud_source_commit": "2363d009ed9fffd7f983da3f1fec2f2f0a199769",
   "dma16_gate02": {
     "state": "failed",
     "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -902,12 +902,12 @@
     "driver_pid": 34122,
     "started_launcher": "2026-11-10T00:50:35.105734",
     "started": "2026-11-10T00:50:35.684215",
-    "last_observed": "2026-11-10T02:10:17.812242",
-    "child_pid_last": null,
-    "child_log_last": null,
+    "last_observed": "2026-11-10T02:18:24.985283",
+    "child_pid_last": 97116,
+    "child_log_last": "layer_07.log",
     "expected_cases": 14,
     "expected_activity_cases": 12,
-    "completed_cases": 5,
+    "completed_cases": 6,
     "mapped_module_probe_passed": true,
     "compile_passed": true,
     "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -915,7 +915,7 @@
     "first_case_header_audit_passed": true,
     "first_vcd_bytes": 8745588450,
     "child_log_bytes_last": null,
-    "child_pid_source": "Prior fifth-layer scanner completed; refresh owner next",
+    "child_pid_source": "Current shared owner read; VCS simulation active",
     "first_case_activity_passed": true,
     "first_case_source_bits": 106,
     "first_case_active_value_records": 1712153505,
@@ -929,9 +929,10 @@
       "layer_02",
       "layer_03",
       "layer_04",
-      "layer_05"
+      "layer_05",
+      "layer_06"
     ],
-    "child_cpu_percent_last": null
+    "child_cpu_percent_last": 99.5
   },
   "contention_package": {
     "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -956,7 +957,7 @@
     "contention_cpu_executed": false
   },
   "power_numeric_extractor": {
-    "status": "actual_units_totals_and_sram_format_checked_hierarchy_negative_precision_fix_local",
+    "status": "actual_old_PT_units_tables_hierarchy_SRAM_format_validated_no_DMA16_power_yet",
     "tests": 33,
     "new_report_tests": 9,
     "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
@@ -1032,6 +1033,26 @@
     "actual_units_and_total_format_passed": true,
     "actual_old_sram_format_parsed_then_scope_rejected": true,
     "remaining_format_issue": "Negative hierarchy internal uses two significant digits; local fix tested, not yet uploaded",
+    "hardware_changed": false
+  },
+  "ptformat_package": {
+    "source_commit": "2363d009ed9fffd7f983da3f1fec2f2f0a199769",
+    "archive": "light-light126-ptformat-dma16-20261110_021151-2363d009ed9f.zip",
+    "bytes": 16498088,
+    "files": 643,
+    "sha256": "510a98a9fb42a586db32a9cb340379455537779ff0880ee6ad21f0db61d523cc",
+    "clean_audit": "local_runs/dma16_ptformat_clean_audit_20261110_0213/receipt.json",
+    "clean_audit_sha256": "7db75b403a20a990f5deb9e7df7472305c9070d87a87538765b5e5c56aea9c17",
+    "clean_tests": 98,
+    "firmware_variants": 5,
+    "server_uploaded": true,
+    "server_zip_sha_verified": true,
+    "server_unpacked_observed": "2026-11-10T02:16:42.082236",
+    "server_inputs_verified": 643,
+    "server_inputs_observed": "2026-11-10T02:17:27.412078",
+    "ftp_success_seconds": 33,
+    "ftp_disconnected": true,
+    "actual_hierarchy_format_passed_then_wrong_architecture_rejected": true,
     "hardware_changed": false
   }
 }
