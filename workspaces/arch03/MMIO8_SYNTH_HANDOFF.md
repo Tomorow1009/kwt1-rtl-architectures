@@ -1,5 +1,7 @@
 # 原8路同源加载综合入口
 
+2026-11-10 02:47：新增门级和功耗入口及本地验证已完成，详见[MMIO8_GATE_POWER_HANDOFF.md](MMIO8_GATE_POWER_HANDOFF.md)。仍未执行新MMIO8综合；共享服务器优先当前DMA16门级/功耗和冻结验证，不擅自并发。新工具本地通过不代表旧“mapped/PPA缺口”已闭环。
+
 2026-11-10 00:58接续：入口已在51bc/a53/525独立包上传并核验；c5的`mmio8_source02`完整14例真实ASIC已通过。**mmio8_synth仍未执行**，当前共享服务器由gate03占用，完成后独立排队。下方“尚未提交打包”仅为最初准备时的历史状态。
 
 2026-11-09：新增 `scripts/mmio8_synth.py` 与 `server_run.py mmio8_synth`。对照保留原8路MMIO计算驱动，由CPU经原SysMem响应源将输入实际搬入共享SRAM；不存在8路DMA。程序初始ITCM不含任务输入。

@@ -1,5 +1,17 @@
 # 整机任务模式时序复核
 
+## DMA16当前综合的独立复查（2026-11-10）
+
+本节绑定fcd445f的`dma16_fix_synth01/dma16_synth`，summary SHA256为`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`。新网表的周期为6.666666000000ns、LF66ns；最差setup **+0.0000290871ns**、hold **+0.00136402ns**，各有2个路径组，锁存器为0。数值非负，但setup裕量很小，不称宽裕。
+
+02:37只读复查原始`check_timing.rpt`、`constraints.rpt`和综合日志：约束报告明确无违规，最终检查包含generated_clocks、loops、no_input_delay、unconstrained_endpoints、pulse_clock_cell_type、no_driving_cell、partial_input_delay；没有TIM-209或自动组合回路切断。**仍有3条高扇出网络，TIM-134说明按1000扇出参与延迟计算**（综合日志两次出现同类告警，不是6个独立网络）。mapped设计还保留LINT无负载及未连接端口等诊断，不能用“没有约束违规”替代全部结构解释。
+
+约束继续为固定任务模式：PLL/分频旁路、启动去抖已稳定、JTAG静态、复位不处于切换；仅四个精确LF计时器同步器首级D例外，无整域屏蔽，无SysMem例外。SysMem全部106位仍有HF输入/输出1ns最大、0ns最小预算、输入转换0.1ns和输出负载0.01。三项LF外部控制输出继续采用其源域1ns/0ns预算，尚不是外部接收器规格验证。
+
+后续实际DMA16 PrimeTime报告将输出`check_timing -verbose`与`report_disable_timing -nosplit`。必须按具体对象解释no_clock、禁用弧及高扇出影响；旧8路189个no_clock对象尚不能直接归因为JTAG，更不能直接复用于新网表。当前保留strict_timing_verified=false，等待这些审核；稳定任务模式报告不包含上电全过程、复位释放或物理签核。赛题按逻辑综合验收面积，不要求物理边长或布局布线，不能把物理签核误列为官方新增前置条件。
+
+## 历史8路时序记录
+
 本记录对应 `c323781` 的 `d3_synth03` 原始映射，以及 `4c8803e` 的 `d3_reports01` 独立报告复核。后者未重新映射，也未修改原运行。摘要 SHA256 为 `41d1a1681b324f84e83a66a48a7701e945bf188d30898ee2ac5f8dfd9c6e784d`。
 
 实际 HF 周期为 6.666666000000 ns，LF 为 66 ns。最差 setup 为 −1.77329254 ns，最差 hold 为 −0.09681505 ns。138 个 SRAM 宏及逐叶面积与总报告核对一致；计分面积、时序和功耗均未通过最终验收。

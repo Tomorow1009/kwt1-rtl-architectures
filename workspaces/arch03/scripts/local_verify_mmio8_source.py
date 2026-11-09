@@ -15,6 +15,7 @@ def main():
     parser.add_argument('--data',required=True,type=Path)
     parser.add_argument('--cases',nargs='+',default=['layer_01','extremes','rounding'])
     parser.add_argument('--issue-phase-ns',type=Decimal,default=Decimal(0))
+    parser.add_argument('--mapped-monitor',action='store_true',help='Exercise generated module-port monitor, still RTL fixture without E203')
     args=parser.parse_args();data=args.data.resolve()
     if not args.issue_phase_ns.is_finite() or not 0<=args.issue_phase_ns<Decimal('6.666666'):
         raise ValueError('Issue phase must be within one clock period')
@@ -30,6 +31,18 @@ def main():
             lines.append("`define A02_%s_%s %d'd%d"%(size,key.upper(),width,cfg['macros'][size][key]))
     config=folder/'arch02_sram_config.vh';config.write_text('\n'.join(lines)+'\n')
     hashes={p:sha(p) for p in files+[cfg_path,config,A3/'tb/arch03_mmio8_source_monitor.svh',Path(__file__).resolve()]}
+    if args.mapped_monitor:
+        from mmio8_gate import generate_monitor,SUFFIXES
+        parent='u_e203_soc_top.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems'
+        bindings={role:parent+'.'+suffix.replace('/','.') for role,suffix in SUFFIXES.items()}
+        generated=folder/'arch03_mmio8_gate_monitor.svh'
+        generated.write_text(generate_monitor((A3/'tb/arch03_mmio8_source_monitor.svh').read_text(),bindings))
+        original=files[-1];fixture=folder/'tb_arch03_mmio8_source_fixture.sv'
+        text=original.read_text();old='`include "arch03_mmio8_source_monitor.svh"'
+        if text.count(old)!=1:raise ValueError('MMIO8 fixture include changed')
+        fixture.write_text(text.replace(old,'`include "arch03_mmio8_gate_monitor.svh"'))
+        files[-1]=fixture
+        hashes.update({p:sha(p) for p in (generated,fixture,A3/'scripts/mmio8_gate.py')})
     data_hashes={}
     for case in args.cases:
         task=data/case;layout=json.loads((task/'layout_manifest.json').read_text())
@@ -103,6 +116,7 @@ def main():
                 cpu_executed=False,dma_executed=False,backend='pin_mock',tasks=len(results),outputs=len(results)*25344,
                 production_monitor_cpu_flag_in_fixture_is_not_evidence=True,
                 instruction_timing_modeled=False,clock_period_fs=6666666,issue_phase_ns=str(args.issue_phase_ns),cases=results,
+                generated_module_port_monitor=args.mapped_monitor,mapped_gate_executed=False,
                 clear_reset_negative_cases=negative_results,
                 source_sha256={p.relative_to(ROOT).as_posix():h for p,h in hashes.items()},
                 data_sha256={p.relative_to(ROOT).as_posix():h for p,h in data_hashes.items()})
