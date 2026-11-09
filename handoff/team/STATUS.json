@@ -767,20 +767,28 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T01:03:19.569066",
-      "child_pid_last": 38566,
-      "child_log_last": "layer_01_activity_scan.log",
+      "last_observed": "2026-11-10T01:20:31.726365",
+      "child_pid_last": 51070,
+      "child_log_last": "layer_02_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 0,
+      "completed_cases": 1,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
       "first_case_simulator_completed": true,
       "first_case_header_audit_passed": true,
       "first_vcd_bytes": 8745588450,
-      "child_log_bytes_last": 0,
-      "child_pid_source": "Actual shared owner.json; earlier 38564 screenshot transcription was incorrect"
+      "child_log_bytes_last": null,
+      "child_pid_source": "Shared owner snapshot; subsequent read-only /proc query raced child exit. Refresh status; not a gate failure.",
+      "first_case_activity_passed": true,
+      "first_case_source_bits": 106,
+      "first_case_active_value_records": 1712153505,
+      "first_case_unknown_value_records": 389025,
+      "first_case_window_ns": [
+        "93676.657299",
+        "1598809.840119"
+      ]
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -803,6 +811,19 @@
       "ftp_transfer_seconds": 33,
       "ftp_disconnected_after_transfer": true,
       "contention_cpu_executed": false
+    },
+    "power_numeric_extractor": {
+      "status": "local_contract_tests_passed_not_server_executed",
+      "tests": 18,
+      "new_tests": 6,
+      "module": "workspaces/arch03/scripts/dma16_power_numbers.py",
+      "module_sha256": "5938fbf11cc6499dc55b78c4b6002168d2d34c1b988177485002a8cc181d571e",
+      "handoff": "workspaces/arch03/POWER_EXPORT_HANDOFF.md",
+      "units": "Explicit 1 Watt for both dynamic/leakage; other settings rejected for review",
+      "approved_power_w": null,
+      "approved_energy_j": null,
+      "system_power_verified": false,
+      "complete_json_csv_report_exporter": false
     }
   }
 }
