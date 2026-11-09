@@ -7,6 +7,7 @@ import struct
 import tempfile
 import unittest
 import sys
+from unittest.mock import patch
 
 import dma16_batch as batch
 
@@ -158,6 +159,15 @@ class BatchTests(unittest.TestCase):
         batch.save(attempt/'receipt.json', record)
         with self.assertRaisesRegex(ValueError, 'Receipt counters changed'):
             batch.verified_receipt(attempt, self.source, state['identity'], self.tasks[0])
+
+    def test_resume_rejects_changed_runtime_parser_from_newer_bundle(self):
+        self.failed_second()
+        original = batch.sha
+        def changed_parser(path):
+            return '0'*64 if Path(path).name == 'dma16_bus_metrics.py' else original(path)
+        with patch.object(batch, 'sha', side_effect=changed_parser):
+            with self.assertRaisesRegex(ValueError, 'configuration changed'):
+                batch.run_tasks(self.contract, self.tasks, self.output, dict(fixture=True), resume=True, executor=executor)
 
     def test_host_timing_does_not_accept_chip_cycles_or_missing_intervals(self):
         base=dict(started_utc='2026-11-09T00:00:00Z',capture_checked_utc='2026-11-09T00:00:02Z',

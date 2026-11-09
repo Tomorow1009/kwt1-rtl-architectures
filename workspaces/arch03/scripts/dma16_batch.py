@@ -290,7 +290,13 @@ def validate_contract(contract, required_shifts=()):
         require(all(str(s) in boot_by_shift for s in required_shifts), 'Missing boot directory for task shift')
     else:
         require(sum(v.startswith('+BOOT_DIR=') for v in prefix+extra) <= 1, 'Duplicate fixture BOOT_DIR')
-    return dict(contract=contract, runner_sha256=sha(__file__), contract_sha256=digest_object(contract))
+    # The frozen simulator may come from an earlier immutable bundle. Bind the
+    # parser actually imported by this runner as well, not only the parser
+    # recorded beside that earlier build. Recheck it at every task boundary.
+    import dma16_bus_metrics
+    helper = Path(dma16_bus_metrics.__file__).resolve()
+    return dict(contract=contract, runner_sha256=sha(__file__), contract_sha256=digest_object(contract),
+                runtime_helpers_sha256={helper.name: sha(helper)})
 
 
 def command_for(contract, prepared, capture, shift):

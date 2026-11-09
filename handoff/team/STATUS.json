@@ -1326,12 +1326,15 @@
       "preserve_original_failed_state": true
     },
     "batch_receipt_fix": {
-      "status": "local_related_61_tests_passed_not_packaged",
+      "status": "local_related_62_tests_passed_runtime_helper_binding_added_not_packaged",
       "fix": "Return JSON arrays for histogram_cycle_bins; preserve strict counter comparisons",
       "end_to_end_persist_reaudit_test": true,
       "tamper_rejection_test": true,
       "production_rtl_firmware_changed": false,
-      "new_batch_required": true
+      "new_batch_required": true,
+      "runtime_helper_sha256_bound": true,
+      "changed_runtime_helper_resume_rejected": true,
+      "superseded_unuploaded_package": "light-light126-receipt-fix-dma16-20261110_044410-197429560e54.zip"
     }
   }
 }
