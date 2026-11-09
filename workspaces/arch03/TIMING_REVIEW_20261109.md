@@ -2,6 +2,8 @@
 
 ## DMA16当前综合的独立复查（2026-11-10）
 
+05:58本地新增`dma16_structural_audit.py`：绑定当前综合摘要及mapped.v/check_design_mapped.rpt的实际SHA，逐模块读取端口方向/范围，并检查全部LINT-8/LINT-28对象在去掉头部与声明后的实际逻辑引用。仅声明、表达式仍存在、缺失/未解析对象分别处理；输出完整对象表及其余LINT计数，不自动批准时序。8个定向测试通过，尚未上传或在实际1315模块网表运行。入口为`python3 workspaces/arch03/scripts/dma16_structural_audit.py --synth-run <fcd综合目录> --summary-sha256 1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339 --output <新的JSON>`，只读原工件，不需要启动EDA。
+
 05:52补充：重新核对当前`check_design_mapped.rpt`与综合摘要中的SHA，实际15159行；仅统计Warning行得到LINT-1=4、LINT-2=178、LINT-8=178、LINT-28=4674、LINT-32=4549、LINT-33=502。四个无负载cell来自debug的ndreset/fullreset、AON POR和PLIC flop。178个无负载输入主要出现在综合算术子模块，实际例子有dot64的A[39]/B[39]及DMA地址加法器A[0]；未连接端口涉及238个design，含原平台接口和算术单元未用位。已取得完整报告及模块计数，但查看代表对象不是全部对象审定，不能仅凭告警分类或功能通过自动升级strict_timing_verified。当前只读统计不运行DC、不修改原网表。原始截图`takeover_local/d2_20261109/dma16_lint_inventory.png`、`dma16_lint_examples.png`、`lint_module_inventory.png`留本机。
 
 04:57实际诊断完成：8c包`dma16_timing_audit01`于04:32:14.234559通过，SHA=`2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa`。原DDC查询的3条网络为`u_e203_subsys_top/core_csr_clk`、`u_e203_subsys_top/hfclk`、`u_e203_subsys_top/u_sirv_aon_top/crossing_clock`。同次冻结平台源码分别追到`clk_core_exu`、HF选择器、`aon_io_lfclk`，均为时钟网络，不是漏计的数据高扇出。PT189个no_clock对象也已精确归入被固定TCK关闭的JTAG DTM和复位同步器；actual mapped.sdc的TCK/TMS/TDI均case=0。禁用弧C46683/p12863/c1992/d202，共61740条，没有l/L/u/U/f标记，原综合无TIM-209/约束违规。仍保持稳定任务模式、理想时钟和布局前库/负载假设；setup裕量非常小，不能宣称物理时钟树、寄生或启动/JTAG工作模式签核。
