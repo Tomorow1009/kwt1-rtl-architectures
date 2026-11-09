@@ -12,7 +12,7 @@ from gate_soc import mapped_loader, input_values as baseline_inputs
 from asic_boot import prepare
 from stdcell_verify import extract_model
 from dma16_soc import verify_firmware, read_window, MARKERS
-from dma16_synth import SYSMEM, area_inventory, verify_top_sysmem
+from dma16_synth import SYSMEM, area_inventory, verify_top_sysmem, require_loop_free_timing
 from dma16_gate_monitor import generate
 from dma16_activity import audit_activity
 from soc_power import power_databases, tcl_path
@@ -147,13 +147,25 @@ def parse_probe(text, frozen_probe):
             raise ValueError('Frozen synthesis probe count mismatch')
         prior[fields[0]] = set(names)
     needed_dma = {n for n in pins['accel'] if n.startswith(cells['accel']+'/dma_')}
-    if prior.get('dma_interface') != needed_dma or not set(pins['core']) <= prior.get('core_interface', set()):
-        raise ValueError('Mapped DC probe disagrees with frozen synthesis DMA/core interface')
+    frozen_counts = {}
+    for group, role, expected, pattern in (
+            ('dma_interface', 'accel', needed_dma, 'dma_'),
+            ('core_interface', 'core', set(pins['core']), '')):
+        names = prior.get(group, set()); prefix = cells[role]+'/'
+        # DC full_name wildcards also match pins below descendant cells.
+        # Verify the exact direct module boundary, retaining all raw evidence.
+        if any(not n.startswith(prefix+pattern) for n in names):
+            raise ValueError('Frozen synthesis probe contains a foreign hierarchy: '+group)
+        direct = {n for n in names if '/' not in n[len(prefix):]}
+        if direct != expected:
+            raise ValueError('Mapped DC probe disagrees with frozen synthesis DMA/core interface')
+        frozen_counts[group] = dict(total=len(names), direct=len(direct), descendants=len(names-direct))
     convert = lambda path: 'u_e203_soc_top.'+path.replace('/', '.')
     return dict(bindings={r: convert(path) for r, path in cells.items()},
                 guards={r: convert(path) for r, path in guards.items()},
                 cells=cells, port_interfaces=interfaces(), pin_counts={r: len(p) for r, p in pins.items()},
-                frozen_synthesis_interfaces_crosschecked=True, alias_binding_used=False)
+                frozen_synthesis_interfaces_crosschecked=True, frozen_probe_counts=frozen_counts,
+                alias_binding_used=False)
 
 
 def verify_synthesis(synthesis, expected_sha, cfg):
@@ -168,10 +180,11 @@ def verify_synthesis(synthesis, expected_sha, cfg):
         raise ValueError('DMA16 synthesis report collection not complete')
     required = ('mapped.v', 'mapped.ddc', 'mapped.sdc', 'leaf_area.tsv', 'area_inventory.json',
                 'source_inputs.json', 'synthesis_inputs.json', 'mapped_probe_inventory.tsv',
-                'mapped_sysmem_ports.tsv', 'area_basis.json')
+                'mapped_sysmem_ports.tsv', 'area_basis.json', 'check_timing.rpt')
     for name in required:
         if sha(synthesis/name) != summary['artifacts'][name]:
             raise ValueError('Changed DMA16 synthesis artifact '+name)
+    require_loop_free_timing((synthesis/'check_timing.rpt').read_text())
     traced = {}
     for receipt in ('source_inputs.json', 'synthesis_inputs.json'):
         for name, digest in json.loads((synthesis/receipt).read_text()).items():

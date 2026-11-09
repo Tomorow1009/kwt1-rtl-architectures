@@ -63,6 +63,26 @@ class Dma16GateTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 g.parse_probe(text, bad)
 
+    def test_dc_wildcard_descendants_do_not_replace_exact_boundary_pins(self):
+        text, frozen = probe_fixture()
+        prefix = 'observed_chip/observed_mems/u_arch03_accel/'
+        additions = {'dma_interface': prefix+'dma_cmd_addr_reg[7]/D',
+                     'core_interface': prefix+'core/lane[15]/dot64/U9/A1'}
+        lines = []
+        for line in frozen.splitlines():
+            group, count, names = line.split('\t')
+            lines.append('%s\t%d\t%s %s' % (group, int(count)+1, names, additions[group]))
+        expanded = '\n'.join(lines)+'\n'
+        receipt = g.parse_probe(text, expanded)
+        for group in additions:
+            self.assertEqual(receipt['frozen_probe_counts'][group]['descendants'], 1)
+        for bad in (expanded.replace('dma_cmd_addr[17]', 'dma_cmd_addr[99]'),
+                    expanded.replace('dma_cmd_addr_reg[7]/D', 'dma_unexpected_port'),
+                    expanded.replace('core/lane[15]/dot64/U9/A1', 'core/unexpected_port'),
+                    expanded.replace(additions['dma_interface'], 'foreign/dma_cmd_addr_reg[7]/D')):
+            with self.assertRaises(ValueError):
+                g.parse_probe(text, bad)
+
     def test_netlist_has_full_sysmem_and_only_reviewed_top_inputs(self):
         receipt = g.parse_probe(*probe_fixture()); tb = g.testbench(top(), receipt)
         for name in SYSMEM:
@@ -126,6 +146,7 @@ proc quit {} {error UNEXPECTED_QUIT}
             (bundle/'manifest.json').write_text(json.dumps({'files': {n: g.sha(bundle/n) for n in preparation}}))
             rows = inventory(); (run/'leaf_area.tsv').write_text('\n'.join(rows)); (run/'mapped.v').write_text(top())
             (run/'mapped_probe_inventory.tsv').write_text(probe_fixture()[1])
+            (run/'check_timing.rpt').write_text('Information: Checking loops...\n')
             for name in ('mapped.ddc', 'mapped.sdc', 'area_inventory.json', 'mapped_sysmem_ports.tsv', 'area_basis.json'):
                 (run/name).write_text('immutable test artifact')
             (run/'libs').mkdir(); dbs = []
@@ -145,6 +166,19 @@ proc quit {} {error UNEXPECTED_QUIT}
                 report, area = g.verify_synthesis(run, digest, {'server_root': str(root)})
                 self.assertFalse(report['setup_hold_nonnegative'])
                 self.assertEqual(area['macro_count'], 162)
+                (run/'check_timing.rpt').write_text('Information: Checking loops...\nWarning: Timing loops detected. (TIM-209)\n')
+                summary['artifacts']['check_timing.rpt'] = g.sha(run/'check_timing.rpt')
+                (run/'summary.json').write_text(json.dumps(summary)); bad_digest = g.sha(run/'summary.json')
+                state['stages']['dma16_synth']['summary_sha256'] = bad_digest
+                (run.parent/'state.json').write_text(json.dumps(state))
+                with self.assertRaisesRegex(ValueError, 'combinational loops'):
+                    g.verify_synthesis(run, bad_digest, {'server_root': str(root)})
+                (run/'check_timing.rpt').write_text('Information: Checking loops...\n')
+                summary['artifacts']['check_timing.rpt'] = g.sha(run/'check_timing.rpt')
+                (run/'summary.json').write_text(json.dumps(summary))
+                self.assertEqual(g.sha(run/'summary.json'), digest)
+                state['stages']['dma16_synth']['summary_sha256'] = digest
+                (run.parent/'state.json').write_text(json.dumps(state))
                 # Independent later gate bundle adds software that never went
                 # into synthesis; only the selected firmware is checked later.
                 current = root/'later_gate_bundle'; current.mkdir()

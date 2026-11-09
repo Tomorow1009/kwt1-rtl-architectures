@@ -10,6 +10,8 @@
 
 实际设置已保存：averaged、power_x_transition_derate_factor=0.5、power_include_initial_x_transitions=false。活动源总览显示112361条网络精确映射；仍要核对完整来源表、未标注文件和各部件活动。power.log可见773条PSW-208（对常量网的SAIF/VCD活动重置）；工具最终diagnostic总计1547 warnings，完整重定向报告中的告警尚待汇总，不能将日志计数直接当全部告警。原生扫描未知值34900278条仍保留，不能当零活动。
 
+21:35补充原始报告核对：power.log773条PSW-208、activity_coverage_before.rpt773条PSW-208、timing_check.rpt1条PTE-003，合计1547。来源表112361nets均精确标注，default/propagated/unannotated为0，未标注清单为空；这不能消除未知活动和模型覆盖风险。timing_check另提示189个寄存器时钟pin无clock，但默认报告未列对象；须实际列出并逐项判断，不能先假定都是无关模块。PTE-003指出回路或常量传播导致时序弧关闭，尚须对象级审查。
+
 本次证实环境修复可以实际运行；后续DMA16仍需自己的新网表、完整活动、工艺/宏模型及12任务报告，不能复用此处的数值。
 
 ## 活动和映射口径

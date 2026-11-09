@@ -329,8 +329,20 @@ def area_basis(run):
                 physical_signoff=False, official_scoring_verified=False)
 
 
+def require_loop_free_timing(report):
+    # Positive slack after DC breaks a feedback arc is not strict STA proof.
+    # Require the actual final mapped check, not a synthetic PASS marker.
+    if 'Checking loops' not in report:
+        raise ValueError('Missing final mapped timing loop check')
+    if re.search(r'TIM-209|timing\s+loops\s+detected|loop\s+breakpoint', report, re.I):
+        raise ValueError('Mapped timing contains combinational loops; preserve reports and repair RTL')
+    return dict(final_mapped_loop_check_present=True, combinational_loops_detected=False,
+                strict_timing_verified=False)
+
+
 def collect_reports(run, linked, before, text):
     soc_synth.require_tool_marker(text, SYNTH_MARKER)
+    loop_check = require_loop_free_timing((run/'check_timing.rpt').read_text())
     metrics = measured_metrics((run/'metrics.txt').read_text(), (run/'area.rpt').read_text())
     validate_period(metrics['period_ns'])
     if float(metrics['lf_period_ns']) != 66 or int(metrics['RAMSP128X16']) != 32 or int(metrics['RAMSP4096X16']) != 130:
@@ -357,7 +369,8 @@ def collect_reports(run, linked, before, text):
     return dict(status='reports_ready_review_required', scope='dma16_whole_soc_task_mode_preliminary_synthesis',
                 synthesis_completed=True, timing_verified=False, scoring_area_verified=False,
                 setup_hold_nonnegative=min(float(metrics['max']), float(metrics['min'])) >= 0,
-                metrics=metrics, area_summary={k: v for k, v in area.items() if k != 'rows'},
+                metrics=metrics, loop_check=loop_check,
+                area_summary={k: v for k, v in area.items() if k != 'rows'},
                 area_basis=basis, sysmem_constraints=ports,
                 required_reviews=['All check_timing, unconstrained paths and structural warnings',
                     'Clock propagation, gated clocks, reset release, fixed boot/PLL task mode',

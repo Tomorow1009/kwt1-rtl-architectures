@@ -90,6 +90,9 @@ class Dma16PowerTests(unittest.TestCase):
                       'power_component_inventory.tsv', 'u_arch03_router', p.MARKER):
             self.assertIn(token, script)
         self.assertNotIn('set_switching_activity', script)
+        self.assertIn('check_timing -verbose', script)
+        self.assertIn('report_disable_timing -nosplit', script)
+        self.assertIn('disabled_timing.rpt', p.REQUIRED)
         self.assertEqual(tkinter.Tcl().call('info', 'complete', script), 1)
 
     def test_sdc_failure_cannot_reach_power_analysis(self):

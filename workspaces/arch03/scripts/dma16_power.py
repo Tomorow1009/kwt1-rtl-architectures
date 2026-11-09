@@ -25,7 +25,7 @@ REQUIRED = ('units.rpt', 'power.rpt', 'power_verbose.rpt', 'power_with_boundary_
             'power_settings.rpt', 'power_hierarchy.rpt', 'power_sram.rpt',
             'activity_coverage_before.rpt', 'activity_coverage_after.rpt',
             'activity_unannotated_before.rpt', 'activity_unannotated_after.rpt',
-            'activity_sources.rpt', 'timing_check.rpt', 'clocks.rpt',
+            'activity_sources.rpt', 'timing_check.rpt', 'disabled_timing.rpt', 'clocks.rpt',
             'power_sysmem_ports.tsv', 'power_component_inventory.tsv')
 
 
@@ -83,6 +83,11 @@ def script(cfg, synthesis, vcd, window):
     text = replace_once(text, 'proc arch03_power_reports {} {',
                         'proc arch03_power_reports {} {\n    set_app_var sh_continue_on_error false')
     text = replace_once(text, '!= 138', '!= 162')
+    # Installed PT T-2022.03-SP5-1 command manuals: retain the actual
+    # no_clock objects and disabled-arc reasons, not only warning totals.
+    text = replace_once(text, 'redirect timing_check.rpt {check_timing}',
+                        'redirect timing_check.rpt {check_timing -verbose}\n'
+                        '    redirect disabled_timing.rpt {report_disable_timing -nosplit}')
     text = replace_once(text, 'redirect units.rpt', macro_guard()+port_guard('power_sysmem_ports.tsv')+
                         component_inventory_script()+'\n    redirect units.rpt')
     text = replace_once(text, 'ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false', MARKER)

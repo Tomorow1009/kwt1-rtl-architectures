@@ -213,6 +213,7 @@ class Dma16SynthesisTests(unittest.TestCase):
                          'timing_min.rpt', 'check_design_mapped.rpt', 'references_mapped.rpt', 'qor.rpt',
                          'hierarchy.rpt', 'mapped_probe_inventory.tsv'):
                 (run/name).write_text('synthetic test artifact, not tool evidence')
+            (run/'check_timing.rpt').write_text('Information: Checking loops...\n')
             (run/'mapped.v').write_text(top())
             result = d.collect_reports(run, {}, {}, d.SYNTH_MARKER)
             self.assertEqual(result['status'], 'reports_ready_review_required')
@@ -265,6 +266,15 @@ proc quit {} {error UNEXPECTED_QUIT}
         for bad in (echo, echo+d.SYNTH_MARKER+'\nError: fail', d.SYNTH_MARKER+'\n'+d.SYNTH_MARKER):
             with self.assertRaises(ValueError):
                 d.soc_synth.require_tool_marker(bad, d.SYNTH_MARKER)
+
+    def test_positive_slack_cannot_hide_a_broken_feedback_arc(self):
+        header = "Information: Checking loops...\n"
+        self.assertFalse(d.require_loop_free_timing(header)['strict_timing_verified'])
+        for report in ('', 'setup 0.001 hold 0.002',
+                       header+'Warning: Timing loops detected. (TIM-209)',
+                       header+'* loop breakpoint', header+'warning (TIM-209)'):
+            with self.assertRaises(ValueError):
+                d.require_loop_free_timing(report)
 
     def test_server_python36_grammar(self):
         ast.parse(Path(d.__file__).read_text(), feature_version=(3, 6))

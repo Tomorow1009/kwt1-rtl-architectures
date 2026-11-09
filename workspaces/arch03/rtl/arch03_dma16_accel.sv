@@ -73,7 +73,9 @@ module arch03_dma16_accel #(
     wire can_start=!active && !core_cancel_q && core_start_ready && error_q==0 && !core_error &&
         layout_q==LAYOUT_ID && (!mode_q[0] || config_ok);
     wire start=fire && mapped && full_write && offset==12'h004 && cmd_wdata==1 && !access_error;
-    wire cancel_request=fire && mapped && full_write && offset==12'h004 && cmd_wdata==2 && !access_error;
+    // A mapped full-word CTRL=2 is always legal. Do not gate this decode
+    // with access_error: debug access checks depend on blocked below.
+    wire cancel_request=fire && mapped && full_write && offset==12'h004 && cmd_wdata==2;
     wire clear_request=fire && mapped && full_write && offset==12'h004 && cmd_wdata==4 && !access_error;
     wire blocked=cancel_q || cancel_request || error_q!=0 || core_error;
     wire debug_push=fire && mapped && full_write && offset==12'h010 && !access_error;

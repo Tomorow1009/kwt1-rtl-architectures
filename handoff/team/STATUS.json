@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "DMA16_IRQ_full14_passed_new_synthesis_running",
+    "phase": "DMA16_cancel_feedback_repair_local_revalidation",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Read existing new synthesis result and review actual constraints/area. No new FileZilla/upload until explicit user resume; clean follow-on624-file package is ready locally.",
+    "next": "Finish revisedRTL regression; commit/package corrected candidate; boardLinuxFileZilla upload; newASIC14 and synthesis serially",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -179,16 +179,18 @@
       "internal_h72_unchanged": "2026-11-12T17:16:08+08:00"
     },
     "filezilla_pause": {
-      "paused": true,
+      "paused": false,
       "reason": "User teammate needs FTP for one file",
       "resume_condition": "User explicitly says uploads may resume",
       "scope": "FileZilla and package uploads only; local work and existing server jobs continue",
-      "last_known": "First DMA16 ZIP fully uploaded/hash verified/unpacked; no new package upload authorized while pause active",
-      "client_closed_verified": true,
+      "last_known": "User explicitly resumed uploads21:18; no parallel sessions or bypass",
+      "client_closed_verified": false,
       "active_transfer": false,
       "queue_empty": true,
-      "last_window_check": "2026-11-09T20:18:00+08:00",
-      "window_check_result": "No FileZilla window; no reopen/reconnect/upload performed"
+      "last_window_check": "2026-11-09T21:42+08:00",
+      "window_check_result": "FileZilla minimized; retries21:24/21:30 returned421; no transfer",
+      "resumed_by_user": "2026-11-09T21:18+08:00",
+      "resume_instruction": "User explicitly allowed FileZilla again"
     },
     "dma16_asic_scope": "First immutable2bd6b0f polling andIRQ smoke plus14 IRQ ASIC cases354816outputs;225770cycles each. Final1200/newgate/PPA/sequence pending",
     "follow_on_package": {
@@ -204,8 +206,11 @@
       "clean_tests": 93,
       "firmware_variants": 4,
       "server_uploaded": false,
-      "board_staged": false,
-      "upload_pause": "User paused FileZilla until explicit resume"
+      "board_staged": true,
+      "upload_pause": null,
+      "board_staging_sha256_verified": true,
+      "superseded": true,
+      "superseded_reason": "Cancel feedback and DC wildcard probe issue; preserve archive but do not upload"
     },
     "sequence_firmware_current": "local_runs/dma16_sequence_firmware_20261109_v6",
     "dma16_irq01": {
@@ -265,16 +270,67 @@
       "final1200_verified": false
     },
     "dma16_synth01": {
-      "state": "running",
+      "state": "report_collection_completed_but_timing_loop_rejected",
       "driver_pid": 7612,
-      "child_pid": 11305,
+      "child_pid": null,
       "started": "2026-11-09T20:59:17.415251",
-      "last_observed": "2026-11-09T21:05:32.213658",
+      "last_observed": "2026-11-09T21:48:50+08:00",
       "stage": "dma16_synth",
       "source_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
       "run": "firstpackage/runs/dma16_synth01/dma16_synth",
       "timing_verified": false,
-      "scoring_area_verified": false
+      "scoring_area_verified": false,
+      "finished": "2026-11-09T21:18:35.199596",
+      "setup_ns": 1.04904e-05,
+      "hold_ns": 0.00150293,
+      "whole_area_um2": 3956891.3469,
+      "latches": 0,
+      "big_macros": 130,
+      "small_macros": 32,
+      "known_added_mm2_rounded": 0.273783044812,
+      "conservative_budget_mm2_rounded": 0.434674847212,
+      "conservative_budget_within_2mm2": true,
+      "loop_warning": "TIM-209; three loop breakpoint arcs under u_arch03_accel",
+      "summary_sha256": "d60e386e8d6498576da5e21c369425513d420e4b1b19a393bc41d85c6e72be20",
+      "summary_transcription_remotely_verified": true,
+      "hash_verified_time": "2026-11-09T21:50:57.351498"
+    },
+    "cancel_feedback_repair": {
+      "status": "local_passed_newASIC_synthesis_pending",
+      "before_rtl_sha256": "4270345c39477220831ef4fda8227dc4f3c8d6df71f66234bfc0ec63b2df9f53",
+      "after_rtl_sha256": "a2dca6fc75d513d4e3992c2b9227289e4ecc3818bb48046af0519b1affce47c3",
+      "scope": "Remove redundant access_error from qualified always-legal CTRL2 cancel decode; preserve drain semantics",
+      "original_results_preserved": true,
+      "new_hardware_asic_verified": false,
+      "gate_probe": "Exact direct-boundary pins separated from DC wildcard descendants; counts/hash retained",
+      "strict_timing_guard": "Reject TIM-209/loop breakpoint/missing loop check in synthesis and gate entry",
+      "receipts": {
+        "protocol15": {
+          "path": "local_runs/dma16_protocol_20261109_214621_159607/summary.json",
+          "sha256": "cd310800c1021c09957c046a90ff6281343a08b8b12e2289f0739aeac96d3ed9",
+          "status": "passed",
+          "cpu_executed": false
+        },
+        "datapath28": {
+          "path": "local_runs/dma16_datapath_20261109_214621_861576/summary.json",
+          "sha256": "818e19420016e5d46db4a17448ec5d086fc4cbc94cabcaff3f793be94d75f303",
+          "status": "passed",
+          "cpu_executed": false
+        },
+        "monitor_metrics2": {
+          "path": "local_runs/dma16_monitor_fixture_20261109_214720_530015/summary.json",
+          "sha256": "bc590a088369c0990fdf3db48e0c29d7a688911f8deb795f2265023d6a171d21",
+          "status": "passed",
+          "cpu_executed": false
+        },
+        "sequence10": {
+          "path": "local_runs/dma16_sequence_fixture_20261109_214721_177343/summary.json",
+          "sha256": "6317a295b8f5df07afa0b8a8916b8335f8a4963d651c29269c8f45f9c9672891",
+          "status": "passed",
+          "cpu_executed": false
+        }
+      },
+      "tools_tests": 109
     }
   }
 }

@@ -8,7 +8,9 @@
 python workspaces/arch03/scripts/package_dma16.py --member <成员/本次标识> --data <旧14case> --tile-data <对应tile16> --firmware <polling产物> --irq-firmware <已核验映射IRQ产物>
 ```
 
-**当前FileZilla按用户要求暂停，等用户明确允许恢复才能上传。** 恢复后按已有授权经开发板Linux FileZilla上传独立目录，校验ZIP并用既有安全解包器核对每个文件。所有运行入口持同一个`.arch02_team_lock`；先读取现有锁和进程，不清除他人/历史锁，不同时启动多个EDA作业。
+**用户于2026-11-09约21:18明确恢复FileZilla。** 按已有授权经开发板Linux FileZilla上传独立目录，校验ZIP并用既有安全解包器核对每个文件。所有运行入口持同一个`.arch02_team_lock`；先读取现有锁和进程，不清除他人/历史锁，不同时启动多个EDA作业。
+
+21:56更新：首包synth01存在TIM-209取消译码组合反馈，不能验收时序；保留原报告。当前仅取消译码移除多余的access_error依赖，15协议、28数据通路任务、正式monitor/metrics及A/B/A夹具复验通过。新候选必须重跑实际ASIC14和综合，不能沿用首包网表。5bdf88b后续包虽已板端核验但未上传，因已知gate wildcard探测问题一并由修正版替代。门级入口新增原始回路报告核验；功耗入口根据已安装PT手册使用check_timing -verbose及report_disable_timing -nosplit，保存具体对象，仍不自动宣称功耗通过。
 
 ```text
 python3 workspaces/arch03/scripts/server_run.py dma16_soc --session dma16_smoke01 --cases layer_01
