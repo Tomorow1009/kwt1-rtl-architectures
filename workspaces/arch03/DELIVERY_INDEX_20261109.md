@@ -6,6 +6,7 @@
 
 | 交付内容 | 工程位置 | 边界 |
 |---|---|---|
+| 系统设计与验证报告草稿 | [DESIGN_REPORT_20261109.md](DESIGN_REPORT_20261109.md) | 结构、数值、真实功能、计时和来源说明；最终时序/面积/功耗仍待统一结果 |
 | 数值接口、矩阵布局、误差定义和复现命令 | [NUMERIC_FORMAT.md](NUMERIC_FORMAT.md)、`scripts/numeric.py` | 任意合法 X/W/b 输入；600 条数据是内部开发集 |
 | FC1 算术和 SRAM 缓冲 | `../arch02/rtl/` | 团队既有 8 路 MAC 基线；不是本轮新发明 |
 | System Bus/ICB 接口和共享存储 | `rtl/`、[README.md](README.md) | 团队架构三集成；共享 SRAM 是团队补齐的平台映射 |
