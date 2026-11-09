@@ -4,6 +4,8 @@
 
 ## 当前要求与停点
 
+**最新：用户已明确要求“同步到云端一下，然后继续”，并确认开发板重新上电。当前暂停已解除。** 先保存并推送暂停期间的小型证据与交接记录，再恢复现有连接工具，重查两项验证原始摘要和协作锁后继续新综合。暂停前两个远端任务均已自然完成，但22:36:25的FREE记录不是当前状态；恢复时必须重新核对。暂停经过保留在下方历史检查点。
+
 用户已明确 PLEASE IMPLEMENT 新版三天计划，撤销此前暂停，开始直接16路MAC＋ICB DMA＋双缓冲；不做8路DMA。H0=2026-11-09T17:16:08+08:00，H28硬冻结=2026-11-10T21:16:08+08:00，内部H72=2026-11-12T17:16:08+08:00，官方精确截止尚未核实。
 
 最新用户补充：提交截止为**2026-11-13晚上**，具体时刻/入口未确认，来源是用户直接答复。内部冻结和72小时交付节点保持不变，不能因截止晚一天就推迟1200回归。
@@ -17,6 +19,40 @@
 已核对原sysmem_icb_*接线/译码，source=0xb0000000位于原O4覆盖范围；恢复原加载源响应路径，禁止新增SRAM私口。DMA源读→共享写ACK→共享读到缓存→结果写ACK全部计时。新版数据46976B，输出50688B，四段191616B；同任务预取允许，跨任务预装禁止。
 
 ## 最新实施检查点（2026-11-09约18:49）
+
+### 用户恢复与云端同步（本节优先于下方暂停记录）
+
+- 已重新读取有效三天计划、AGENTS、交接及JSON检查点。用户明确恢复开发板和工程操作，并先要求云端同步；既有上传范围与FileZilla单连接方案继续有效。
+- 本次待同步仅7份证据/Markdown文档，不含凭据、厂商库或大型运行产物；受测生产RTL仍是fcd445f，不为文档提交重跑已完成14例。两摘要SHA转录尚需服务器assert，保留未复核标记。
+- 云端同步后重建本机VNC中继与板端查看器；不复用旧窗口ID或已停止PID，不清协作锁，不重跑旧1200的37组。新综合仍待实际状态检查后启动。
+
+### 22:40用户暂停交接（最高优先级）
+
+- 生产受测提交仍为`fcd445fb212a81469c900c6aa1cbb544daad08a5`，源码已push。其修复包已三端核验/安全解包/624输入检查，不重传。后续本地只有证据和交接文档修改，尚未再次提交/push；未开始报告生成器开发，不要误记为已实现。
+- `dma16_fix_full01`真实ASIC/E203 IRQ **14例通过，354816输出**。driver119217，started22:24:11.597528，finished22:27:06.519870；各任务225770周期，12层饱和0、extremes6336、rounding4554。新bus_metrics已随实际任务解析通过，阶段延迟/竞争具体数值尚未人工收回。summary完整SHA以服务器原文件为准，截图转录候选`1b7e03944fcab5f17eefdd71bb5a6a739180e2718e8a77ddf9a0148704ec8514`尚未做远端assert复核。
+- 暂停请求到来前已启动`dma16_fix_sequence01`，stage dma16_sequence，cases layer_01/rounding。最后检查实际 **passed**，driver141621，started22:32:12.284209，finished22:34:32.292395；10阶段真实CPU拒绝/取消/原驱动timeout/无复位A/B/A由runner验收。完整summary逐阶段数据与hash尚待恢复后细读。截图转录候选SHA`44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1`尚未远端assert复核。原始证据图`takeover_local/d2_20261109/dma16_pause3_remote_status.png`（位于工作区根目录E:/fpga_race-two下）。
+- 最后远端观察22:36:25.050096：上述两任务自然结束，共享锁FREE；未停止、清锁或重跑任何远端作业。新综合 **未启动**，没有自动后续队列。新RTL严格STA/面积、14门级、12功耗、最终1200真实ASIC/30412800输出、同加载源8路对照及最终报告仍未验收。
+- 板端两个客户端已正常Alt+F4关闭，随后窗口清单无Vncviewer/Filezilla。FileZilla上传成功33秒，之前已Ctrl+D断开，活动队列为空，历史失败与成功队列保留。单连接站点`IC-single-connection`/AskPassword/max_connections=1是有效恢复路径，避免QuickConnect额外传输连接触发421。
+- 本机已核验并停止：36448=`ftp_proxy.py`、32568=`board_link.py relay`。没有本地XSim/编译回归运行，没有活动子代理。旧vnc-relay.pid文件23160已过期，不可凭此PID杀进程；恢复时重新发现/核验身份。没有关闭远端Linux桌面。
+- 恢复顺序：重新接板并启动现有连接工具 → 只读确认两PASS及SHA/metrics/seq详情 → 检查真实共享锁 → 新session综合fcd445f，先检查TIM-209是否消失及所有约束/禁用弧 → 同网表gate14与12活动功耗 → 冻结真实ASIC1200。不得沿用有loop的synth01网表，旧37批量不续跑，旧5bdf候选包不上传。
+- H0/H28/H64/H72和11月13日晚截止原记录保留，暂停没有擅自改排期；恢复时按实际剩余时间复核。用户未要求本次暂停时新云端推送，当前证据已保存本地Markdown/JSON。
+
+### 22:24上传完成及新ASIC启动（最新）
+
+- 22:25已读实际launcher：`dma16_fix_full01` driver **119217**，launcher22:24:11.127045。FileZilla显示上传成功，传输33秒、成功队列1、历史失败1、活动队列空；已正常Ctrl+D断开并最小化，释放FTP名额。服务器回归状态正在读取，不重启。
+- 修复包fcd445f已完整上传到比赛服务器。22:18:55.519353服务器实测16429946字节、SHA`c58499378295ba493ce7bdaff18dcd62b49fe9537252eb351376ef4b358fd7d0`；既有unpack.py全部路径/hash检查后安全解包。22:22:14.983538再次`inputs()`核对624文件、完整提交号正确、真实共享锁False、本账号EDA列表空。
+- FTP故障路径已厘清：普通QuickConnect能列目录，但传输尝试额外连接时421，新包22:09仍不存在。用户明确队友已断开。新建Linux FileZilla站点`IC-single-connection`，沿用原host/port/account，登录模式“询问密码”、传输设置限制并发连接=1，选择断开旧连接并在当前标签连接。随后单连接上传成功，未绕过限制、未开并行账号、未保存新密码。旧失败队列保留；当前须读完成队列后正常断开FTP释放名额。
+- 已向新包请求启动`dma16_fix_full01`，stage dma16_soc、firmware_irq、默认完整14例。launcher已发出，PID/状态正在读取；禁止重复启动。目录为新包/runs/dma16_fix_full01/dma16_soc，driver日志同runs/dma16_fix_full01.driver.log。完成后先读summary/全部输出/metrics，再串行CPU sequence和新综合。
+- 最终数据入口清单服务器22:05:03.485514实测100样本/1200层，固定SHA匹配；仅manifest预检，逐层文件由新batch再次核验。旧37组没有启动。新版真实CPU错误恢复、新综合严格STA/面积、14门级、12功耗、最终1200仍未验收。
+
+### 22:03修正版打包停点（最新）
+
+- 修复提交`fcd445fb212a81469c900c6aa1cbb544daad08a5`已push私人分支。生产RTL唯一行为变更是取消译码去掉多余access_error条件；本地15协议/28数据通路/monitor+metrics/A/B/A复验通过，见下节回执。综合及gate入口均拒绝原始TIM-209；gate probe严格核对直接模块边界、保留DC wildcard内部引脚计数；power新增已安装PT手册确认的verbose时钟/disabled-arc报告。
+- 新包`light-light126-dma16-loopfix-dma16-20261109_215719-fcd445fb212a.zip`，16429946字节、624文件，SHA`c58499378295ba493ce7bdaff18dcd62b49fe9537252eb351376ef4b358fd7d0`。干净路径CRC/所有路径/逐文件hash/四固件/109tests通过；audit=`local_runs/dma16_loopfix_clean_audit_20261109_2200/receipt.json`，SHA`236d079907a542defb2658e5ccaed7e2b8883b2e21661124f1b29f4c709785e3`。新包尚未执行ASIC。
+- 已板端暂存并自动SHA核验：`/home/root/undergrad-dma16-loopfix-20261109/<同名ZIP>`；GUI为`/home/board/undergrad-dma16-loopfix-20261109/`。旧5bdf后续包保留但不上传。当前FileZilla窗口20972102，已选新目录，队列空，22:01重连仍421用户过多；不绕行或开并发连接。VNC18874436当前被FTP遮挡，需要FTP Alt_L F9后查看，操作前重新发现窗口。
+- 新包上传成功后：服务器校验ZIP摘要、安全解包、624输入 → 新session实际ASIC14/IRQ/metrics → 真实CPU10阶段恢复 → 新综合。不要重启原synth01，也不能复用其网表验收fcd445f。原服务器锁最后21:46观察False，下一次启动必须刷新。
+- 最终100样本数据已查交接：服务器`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。新batch会逐项核验并重排；旧37组不续跑。最终1200、新14门级、12功耗、严格时序和系统功耗均仍待完成。
+- 本轮辅助错误保留说明：记录脚本一次因Python3.8 Path.write_text不支持newline参数而未写文件，已改open(newline)成功保存；第一次109tests中的负裕量合成夹具缺少新loop-check头，补齐夹具后通过，未放宽生产检查。WindowsCIM只读进程查询被系统拒绝，改用Get-Process/包回执确认打包完成，未中断进程。
 
 ### 21:39压缩恢复与综合审查（优先于下方历史）
 
