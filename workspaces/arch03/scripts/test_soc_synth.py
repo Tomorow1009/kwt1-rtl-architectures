@@ -32,7 +32,8 @@ proc get_object_name {ports} {return $ports}
 proc set_output_delay {args} {lappend ::delays $args}
 proc puts {args} {}
 ''')
-        lf=('io_pads_aon_pmu_padrst_0_oval','io_pads_aon_pmu_vddpaden_oval','lfxoscen')
+        # Server netlist character 23 is ASCII 111 ('o'), not ASCII 48 ('0').
+        lf=('io_pads_aon_pmu_padrst_o_oval','io_pads_aon_pmu_vddpaden_oval','lfxoscen')
         hf=('gpio_output','uart_output','hfclk_output')
         interp.setvar('ports',lf+hf);interp.setvar('delays','');interp.eval(output_constraints())
         rows=[interp.splitlist(row) for row in interp.splitlist(interp.getvar('delays'))]
@@ -126,6 +127,7 @@ proc puts {args} {}
         interp=tkinter.Tcl()
         interp.eval(r'''
 set compiled 0
+set sh_continue_on_error true
 proc set_app_var {name value} {set ::$name $value}
 proc read_ddc {args} {}
 proc current_design {args} {}
@@ -137,7 +139,11 @@ proc create_clock {args} {}
 proc set_clock_uncertainty {args} {}
 proc all_clocks {} {return {hf_clk lf_clk}}
 proc get_ports {args} {return {}}
-proc source {path} {uplevel 1 $::test_sdc}
+proc source {path} {
+    if {[catch {uplevel 1 $::test_sdc} message]} {
+        if {!$::sh_continue_on_error} {error $message}
+    }
+}
 proc compile {args} {set ::compiled 1}
 proc puts {args} {set ::last_message $args}
 proc exit {code} {error "TASK_EXIT $code"}
@@ -151,6 +157,7 @@ proc quit {} {error UNEXPECTED_QUIT}
             self.assertEqual(interp.call('info','complete',generated),1)
             with self.assertRaisesRegex(tkinter.TclError,'TASK_EXIT 1'):interp.eval(generated)
         self.assertEqual(int(interp.getvar('compiled')),0)
+        self.assertFalse(interp.getboolean(interp.getvar('sh_continue_on_error')))
         self.assertIn('Missing task-mode port io_pads_aon_erst_n_i_ival',str(interp.getvar('last_message')))
 
     def test_partition_counts_area_once_and_does_not_decide_scoring(self):

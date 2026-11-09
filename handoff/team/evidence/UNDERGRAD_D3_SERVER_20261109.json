@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "new_asic_full02_passed_lf_output_synth05_running_power_pending",
+  "status": "asic_full02_passed_synth05_constraint_name_error_new_fix_prepared",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -912,7 +912,7 @@
     "system_power_verified": false,
     "remaining_setup_violations": [
       {
-        "endpoint": "io_pads_aon_pmu_padrst_0_oval",
+        "endpoint": "io_pads_aon_pmu_padrst_o_oval",
         "slack_ns": "-0.74098206"
       },
       {
@@ -1135,7 +1135,7 @@
     "package": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
   },
   "lf_output_synthesis": {
-    "status": "running",
+    "status": "running_with_known_constraint_errors_NOT_usable",
     "session": "d3_synth05",
     "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "driver_pid": 48479,
@@ -1146,6 +1146,14 @@
     "screenshots": [
       "server_synth05_start.png",
       "server_synth05_state.png"
+    ],
+    "usable_for_gate_or_power": false,
+    "error": "Missing/ambiguous LF control output io_pads_aon_pmu_padrst_0_oval; expected three outputs guard and output-delay calls also failed",
+    "root_cause": "Exact official port has lowercase o (ASCII 111 at index 23), not digit 0. DC source defaults sh_continue_on_error=true, so mapping continued; final strict log scan must reject.",
+    "error_screenshots": [
+      "server_synth05_lf_binding_progress.png",
+      "server_lf_port_exact_characters.png",
+      "server_dc_source_error_behavior.png"
     ]
   },
   "latest_powerctx_package": {
@@ -1226,5 +1234,48 @@
     },
     "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports and powerctx packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
+  },
+  "exact_lf_port_preparation": {
+    "status": "local_tests_passed_NOT_server_verified",
+    "changes": [
+      "Correct io_pads_aon_pmu_padrst_o_oval spelling from exact mapped port character metadata",
+      "Set sh_continue_on_error=false before sourcing SDC; Tcl negative test models DC default true and verifies compile is never reached"
+    ],
+    "local_tests": 9,
+    "test_log": "local_runs/d3_lf_port_exact_tests_20261109.log",
+    "python36_syntax": true,
+    "actual_installed_default": true,
+    "manual_screenshot": "server_synth05_error_policy_state.png",
+    "hardware_changed": false,
+    "firmware_changed": false
+  },
+  "synth04_structural_review": {
+    "scope": "diagnostic previous completed mapping, repeat for final netlist",
+    "warnings": {
+      "LINT-1": 4,
+      "LINT-2": 86,
+      "LINT-8": 86,
+      "LINT-28": 3634,
+      "LINT-32": 3564,
+      "LINT-33": 411
+    },
+    "errors": 0,
+    "unconnected_port_directions": {
+      "input": 3521,
+      "output": 113
+    },
+    "top_level_unconnected_ports": 0,
+    "examples": [
+      "arch03_shared_sram cmd_addr[1:0] unused in 32-bit word decoding",
+      "DesignWare arithmetic CI/TC and redundant high bits; unused peripheral/mask/debug ports",
+      "Constant connections and same net on several module pins; not multiple-driver diagnostic"
+    ],
+    "note": "Input direction here is a child module input unused internally; not proof of undriven top-level pins. This count does not replace new full mapped functional verification.",
+    "screenshots": [
+      "server_synth04_structural_warnings.png",
+      "server_structural_pin_examples.png",
+      "server_unconnected_port_directions_fixed.png",
+      "server_structural_top_team_scope.png"
+    ]
   }
 }

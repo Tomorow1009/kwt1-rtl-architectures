@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "New UART/boot-mode ASIC full02 passed all 14 cases, 354816 outputs. Powerctx package uploaded with 400 hashes verified. Corrected LF output synthesis05 running from f03d1c9.",
+  "last_completed_stage": "ASIC full02 passed. Synth05 has known LF output-name error and is unusable; exact lowercase-o fix and DC fail-fast setting locally tested, new package required.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -47,7 +47,7 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Observe powerctx/f03d1c9 d3_synth05: actual LF output clock binding, four CDC first-stage pins, strict setup/hold, latch count, constraint coverage and area",
+    "Observe synth05 final failed state and own lock release; never use this erroneous mapping. Freeze/upload exact LF-name/fail-fast fix and run independent synth06.",
     "After synthesis review, run full 14-case mapped regression with at least layer_01 complete-task VCD; use exact new synthesis summary digest",
     "Run error-free same-config power from powerctx, verifying LC environment, detailed units, unknown transition settings, SRAM sums, boundary nets and mapping",
     "Update final same-config area/performance/energy and provenance; official scoring ownership and submission details remain unresolved"
@@ -96,7 +96,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Only current result/checkpoint documentation after f03d1c9; runtime source is committed and uploaded.",
+  "uncommitted_follow_on": "soc_synth.py/test_soc_synth.py exact lowercase-o port correction and explicit sh_continue_on_error=false, plus diagnostic documentation; 9 focused tests pass.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -851,7 +851,7 @@
     "system_power_verified": false,
     "remaining_setup_violations": [
       {
-        "endpoint": "io_pads_aon_pmu_padrst_0_oval",
+        "endpoint": "io_pads_aon_pmu_padrst_o_oval",
         "slack_ns": "-0.74098206"
       },
       {
@@ -1074,7 +1074,7 @@
     "package": "light-light126-d3-powerctx-arch03-20261109_094133-f03d1c91706d.zip"
   },
   "lf_output_synthesis": {
-    "status": "running",
+    "status": "running_with_known_constraint_errors_NOT_usable",
     "session": "d3_synth05",
     "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "driver_pid": 48479,
@@ -1085,6 +1085,14 @@
     "screenshots": [
       "server_synth05_start.png",
       "server_synth05_state.png"
+    ],
+    "usable_for_gate_or_power": false,
+    "error": "Missing/ambiguous LF control output io_pads_aon_pmu_padrst_0_oval; expected three outputs guard and output-delay calls also failed",
+    "root_cause": "Exact official port has lowercase o (ASCII 111 at index 23), not digit 0. DC source defaults sh_continue_on_error=true, so mapping continued; final strict log scan must reject.",
+    "error_screenshots": [
+      "server_synth05_lf_binding_progress.png",
+      "server_lf_port_exact_characters.png",
+      "server_dc_source_error_behavior.png"
     ]
   },
   "latest_powerctx_package": {
@@ -1166,5 +1174,48 @@
     "scope": "ASIC runtime RTL, firmware, vectors, testbench, official-platform installer and technology preparation identical across repair, lfports and powerctx packages; synthesis constraints and power report collectors intentionally differ.",
     "cpu_execution_implied": false
   },
-  "actual_team_lock_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock"
+  "actual_team_lock_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock",
+  "exact_lf_port_preparation": {
+    "status": "local_tests_passed_NOT_server_verified",
+    "changes": [
+      "Correct io_pads_aon_pmu_padrst_o_oval spelling from exact mapped port character metadata",
+      "Set sh_continue_on_error=false before sourcing SDC; Tcl negative test models DC default true and verifies compile is never reached"
+    ],
+    "local_tests": 9,
+    "test_log": "local_runs/d3_lf_port_exact_tests_20261109.log",
+    "python36_syntax": true,
+    "actual_installed_default": true,
+    "manual_screenshot": "server_synth05_error_policy_state.png",
+    "hardware_changed": false,
+    "firmware_changed": false
+  },
+  "synth04_structural_review": {
+    "scope": "diagnostic previous completed mapping, repeat for final netlist",
+    "warnings": {
+      "LINT-1": 4,
+      "LINT-2": 86,
+      "LINT-8": 86,
+      "LINT-28": 3634,
+      "LINT-32": 3564,
+      "LINT-33": 411
+    },
+    "errors": 0,
+    "unconnected_port_directions": {
+      "input": 3521,
+      "output": 113
+    },
+    "top_level_unconnected_ports": 0,
+    "examples": [
+      "arch03_shared_sram cmd_addr[1:0] unused in 32-bit word decoding",
+      "DesignWare arithmetic CI/TC and redundant high bits; unused peripheral/mask/debug ports",
+      "Constant connections and same net on several module pins; not multiple-driver diagnostic"
+    ],
+    "note": "Input direction here is a child module input unused internally; not proof of undriven top-level pins. This count does not replace new full mapped functional verification.",
+    "screenshots": [
+      "server_synth04_structural_warnings.png",
+      "server_structural_pin_examples.png",
+      "server_unconnected_port_directions_fixed.png",
+      "server_structural_top_team_scope.png"
+    ]
+  }
 }

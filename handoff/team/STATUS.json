@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "new_asic_full02_passed_lf_output_synth05_running_power_pending",
+    "phase": "asic_full02_passed_synth05_constraint_name_error_new_fix_prepared",
     "source_commit": "f03d1c91706d8770cb0d8e8a9a5ea9a187c87bb2",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Observe f03d1c9 d3_synth05; after strict report review run full mapped 14 cases and same-config activity/power. No accepted power or final timing yet.",
+    "next": "Preserve synth05 as unusable due to exact output-name error and source continue-on-error default. Freeze/upload corrected name and fail-fast setting; run synth06 after lock release.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_powerctx_package",
     "server_uploaded": true,
     "clean_package_input_files": 400,

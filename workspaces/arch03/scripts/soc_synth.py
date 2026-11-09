@@ -21,7 +21,7 @@ def output_constraints():
 # This is a 1 ns interface budget in their source domain, not an external
 # receiver specification. Keep every output timed; do not false-path them.
 set lf_outputs [get_ports -quiet __arch03_no_such_port__]
-foreach name {io_pads_aon_pmu_padrst_0_oval io_pads_aon_pmu_vddpaden_oval lfxoscen} {
+foreach name {io_pads_aon_pmu_padrst_o_oval io_pads_aon_pmu_vddpaden_oval lfxoscen} {
     set port [get_ports $name]
     if {[sizeof_collection $port] != 1} {error "Missing/ambiguous LF control output $name"}
     set lf_outputs [add_to_collection $lf_outputs $port]
@@ -114,6 +114,9 @@ def script(run,cfg):
     text=r'''
 proc arch03_collect_reports {} {
 global target_library
+# DC source honors this process setting; its default/startup value may allow
+# subsequent lines after a failed guard. A bad SDC must abort before compile.
+set_app_var sh_continue_on_error false
 set_app_var target_library [list @STANDARD@]
 set_app_var link_library [concat [list *] $target_library [list @DATABASES@]]
 read_ddc linked.ddc
