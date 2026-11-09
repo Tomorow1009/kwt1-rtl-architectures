@@ -13,6 +13,19 @@ from dma16_layout import verify_export
 from dma16_batch import CASES14,source_case
 
 
+def verify_review_document(bundle):
+    """Check the Git-exported bytes, which can differ from Windows CRLF files."""
+    bundle = Path(bundle).resolve()
+    record = bundle/'workspaces/arch03/FROZEN_REVIEW_20261110.json'
+    if not record.exists():
+        return
+    values = json.loads(record.read_text(encoding='utf8'))
+    document = (bundle/values['review_document']).resolve()
+    document.relative_to(bundle)
+    if sha(document) != values['review_document_sha256']:
+        raise ValueError('Packaged review document digest differs; bind canonical LF bytes before packaging')
+
+
 def copy_firmware(source,target,bundle,verifier=verify_firmware):
     meta,_=verifier(source,bundle)
     target.mkdir()
@@ -74,6 +87,7 @@ def main():
             target=folder/rel;target.parent.mkdir(parents=True,exist_ok=True)
             raw=subprocess.check_output(['git','-c','safe.directory='+ROOT.as_posix(),'show',commit+':'+rel],cwd=str(ROOT))
             target.write_bytes(raw)
+    verify_review_document(folder)
     copy_firmware(a.firmware,folder/'firmware',folder)
     if a.irq_firmware:copy_firmware(a.irq_firmware,folder/'firmware_irq',folder)
     if a.mmio8_firmware:copy_firmware(a.mmio8_firmware,folder/'firmware_mmio8',folder,verify_mmio8)

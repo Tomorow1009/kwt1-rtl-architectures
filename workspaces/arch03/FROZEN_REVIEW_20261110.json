@@ -32,6 +32,6 @@
   "official_precision_verified": false,
   "report_exporter_integration_verified": false,
   "review_document": "workspaces/arch03/FROZEN_REVIEW_20261110.md",
-  "review_document_sha256": "949deed2ceda22343018ae51a368542278563268f05d73de08e08af93d00eed7",
+  "review_document_sha256": "aa519fe96fb5ace6deab6ea0682f2d7fceae036ead9c33fc6a261ef5f5b85c34",
   "batch_state_sha256": "764a854321921a0ca06f82394697cfa23200931dc1d0297ffa457ad822d35d93"
 }

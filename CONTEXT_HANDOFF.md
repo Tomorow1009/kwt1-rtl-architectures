@@ -24,6 +24,12 @@
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
 
+- **07:02本地干净包闸门再拦截，未上传97553包：** 97553生成`light-light126-review-correct-dma16-20261110_065806-97553fe93b61.zip`，16603004B、SHA=`5c8395e247ae19d0e74adee89dfc336651d02499fa607c7c41453145d0d86b3a`、667输入；在新`local_runs/dma16_review_correct_clean_audit_20261110_0700`已安全解包/全输入/五固件/40生产文件一致，但新增record↔document核对拒绝，尚未编译scanner/跑干净tests，没有receipt。原因是Windows Python写入Markdown为CRLF（44行），record绑定工作区CRLF SHA，Git包按既有`.gitattributes`导出LF。原97553包/失败目录保留不上传。
+- 已把本地审定Markdown及JSON以显式LF写回，正确LF文档SHA=`aa519fe96fb5ace6deab6ea0682f2d7fceae036ead9c33fc6a261ef5f5b85c34`。`package_dma16.py`新增Git导出后立刻验证record文档原始字节SHA及目录边界，两个新测试覆盖CRLF转LF和路径越界；27个相关测试通过。下一步提交新修正版、再新包/新干净目录（全检查应177），不要继续97553旧包或覆盖其目录。新增改动仅打包/审定工具，生产/固件/批量身份仍不变。
+- 当前刚发出L02 SHA独立断言和L03状态查询，本地VNC工具session待收；L03此前driver292470，不能未读结果就启动L04。服务器最新仍89b；完整审定binding02尚未开始，L01未知对象解释/其他层PT/原8路PPA/最终全回执导出/复现仍待办。GitHub待确认、FileZilla断开。恢复先读本计划/root，再收当前工具输出。
+
+- **06:59续存：** 修正已提交`97553fe`，正在生成`light-light126-review-correct-dma16-...`新包；本地exec session **56137**待收，**尚未干净核验/板端暂存/上传**，不要误用89b宣称审定整合成功。175tests已通过，生产/五固件/668批量脚本保持。下一步先收包元数据，按上一轮`local_runs/dma16_review_clean_audit_20261110_0630`流程在新目录核验（新增反例后175tests），再FileZilla独立上传/服务器输入核验，最后新binding02。当前PT仍89b第三层driver292470，未读完成，不重复启动。
+
 - **06:58最新停点（压缩后优先读取）：** 89b第二层PT已于06:49:14.157641 passed，原summary SHA尚未安全抄录，须从原state读并独立核对；不要重跑第二层。当前唯一EDA是89b新`dma16_power_l03_v1`，**driver292470，launcher06:55:24.759277**，实际完成尚未读取；层04—12未启动。FileZilla断开最小化，GitHub仍待确认。最终1200 passed和首层未知扫描passed保持不变；未知34742对象的功能用途/时段完整解释尚未做，不把扫描工具通过当功耗通过。
 - **面积审定纠错完成，本地待新包：** 89b底层条件检查在原文档139430叶实例处拒绝。06:54重新核对同SHA的无表头TSV全部143118行/143118唯一实例，**139266标准单元＋162 SRAM＋3690虚拟常量实例**，后者有两种引用（logic0=1018、logic1=2672）。早期文档把两种引用误当两个实例；不是网表变化。Decimal重算仍294096.516000＋140700.265612µm²＝0.434796781612mm²。第一次临时诊断跳过首行、第二次误取第四列（库名）被Decimal拒绝；按无表头、第三列面积纠正后完整统计通过。已修本地审定消费者/新增拒绝引用数冒充实例数测试、AREA_REVIEW及三份JSON，旧89b及原EDA产物保持。前面历史“139430唯一实例/两个常量”以本条更正为准。
 - 首层PT正确SHA为`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9`，已纠正8份本地文档；不沿用旧c1daf46e误串。审定record已重算其Markdown SHA。**本地全175tests/0skip已通过，所有本地工具会话已结束**；下一步提交干净修正包、重新核验/上传，在新`review_binding02`执行完整消费者。旧review_binding01未产生decision，保留失败。当前没有上传中的包或挂起VNC工具；不修改生产/固件/668批量runner。

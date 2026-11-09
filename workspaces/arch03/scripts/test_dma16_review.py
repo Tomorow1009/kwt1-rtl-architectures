@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import dma16_review as r
+from package_dma16 import verify_review_document
 
 
 def fixtures():
@@ -32,6 +33,23 @@ def fixtures():
 
 
 class ReviewTests(unittest.TestCase):
+    def test_packaged_document_is_bound_after_git_newline_conversion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); folder = root/'workspaces/arch03'; folder.mkdir(parents=True)
+            doc = folder/'review.md'; doc.write_bytes(b'review\r\n')
+            record = folder/'FROZEN_REVIEW_20261110.json'
+            record.write_text(json.dumps(dict(review_document='workspaces/arch03/review.md', review_document_sha256=r.sha(doc))))
+            doc.write_bytes(b'review\n')
+            with self.assertRaisesRegex(ValueError, 'canonical LF'): verify_review_document(root)
+            record.write_text(json.dumps(dict(review_document='workspaces/arch03/review.md', review_document_sha256=r.sha(doc))))
+            verify_review_document(root)
+
+    def test_review_document_cannot_escape_bundle(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); folder = root/'workspaces/arch03'; folder.mkdir(parents=True)
+            (folder/'FROZEN_REVIEW_20261110.json').write_text(json.dumps(dict(review_document='../outside.md', review_document_sha256='0'*64)))
+            with self.assertRaises(ValueError): verify_review_document(root)
+
     def test_acceptance_is_scoped_and_never_implies_power_or_official_results(self):
         accepted = r.validate(*fixtures())
         self.assertTrue(accepted['timing_verified']); self.assertTrue(accepted['project_area_upper_bound_verified'])

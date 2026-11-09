@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_power_l03_running_review_record_correction_local175tests",
+    "phase": "DMA16_power_l04_launching_review_canonical_LF_fix_local",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -3047,16 +3047,30 @@
       "status": "passed_reports_review_required",
       "driver_pid": 285538,
       "finished": "2026-11-10T06:49:14.157641",
-      "summary_sha256_not_yet_transcribed": true,
-      "system_power_verified": false
+      "system_power_verified": false,
+      "summary_sha256": "634b7ae97247a8decd996e6285aab2c4ac974afc93a4ef1536e7ccd9a5fdb9bb",
+      "summary_sha256_independently_verified": true,
+      "sha_verified_at": "2026-11-10T07:02:00.230889"
     },
     "dma16_power_l03_v1": {
       "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
       "run": "runs/dma16_power_l03_v1/dma16_power",
-      "status": "launched_completion_unobserved",
+      "status": "passed_reports_review_required",
       "driver_pid": 292470,
       "started_launcher": "2026-11-10T06:55:24.759277",
-      "system_power_verified": false
+      "system_power_verified": false,
+      "finished": "2026-11-10T07:00:26.274532",
+      "summary_sha256_not_yet_transcribed": true
+    },
+    "review_correct_package_rejected": {
+      "source_commit": "97553fe93b61c414499a12ef9492de72ddfd3d75",
+      "archive": "light-light126-review-correct-dma16-20261110_065806-97553fe93b61.zip",
+      "sha256": "5c8395e247ae19d0e74adee89dfc336651d02499fa607c7c41453145d0d86b3a",
+      "uploaded": false,
+      "reason": "Review document SHA used Windows CRLF bytes; Git-exported LF bytes differ",
+      "preserved_audit": "local_runs/dma16_review_correct_clean_audit_20261110_0700",
+      "local_fix": "Explicit LF document/record and package-time binding guard",
+      "related_tests": 27
     }
   }
 }
