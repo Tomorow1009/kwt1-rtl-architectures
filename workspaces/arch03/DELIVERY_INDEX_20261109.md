@@ -15,6 +15,7 @@
 | 功能验证及反例 | `tb/`、`scripts/test_*.py`、`scripts/local_*verify.py` | 替身、真实厂商模型、CPU 和门级证据分别标识 |
 | 服务器复现入口与打包 | `scripts/server_run.py`、`scripts/package.py` | 每个配置先提交、打包、核验，再用独立 session 执行 |
 | 整机综合、活动及功耗 | `scripts/soc_synth.py`、`scripts/gate_soc.py`、`scripts/activity_fast.py`、`scripts/soc_power.py` | 报告生成不自动等于时序或功耗验收 |
+| 活动映射、功耗模型和失败运行复核 | [POWER_REVIEW_20261109.md](POWER_REVIEW_20261109.md) | 明确区分翻转覆盖、精确映射、未知值及布局前估算边界 |
 
 上游模型为 ARM-software/keyword-transformer 指定提交 `237e4097afd4f6851e0b82f0a8d65c2dfe8eae30`，KWT-1 `best_weights`；数据来源为 Google Speech Commands V2。未训练、微调或蒸馏模型。E203、标准单元、SRAM 宏和工具仍归其原始来源；厂商库、工具和个人凭据不进入源码包。本轮自主工作是接口/固件和工艺适配的修订、通用数值评估、任务监视器、连续恢复验证及可核验的自动运行流程。团队既有算术核心和共享存储集成单独标识，不混为本轮贡献。
 
@@ -33,6 +34,7 @@
 | 旧配置系统功耗 | `4c8803e` / `d3_power01/asic_power` | 工具运行 679 秒并生成报告；PT-063 启动错误导致验收失败，原报告保留 |
 | UART、任务启动选择和 CDC 修正 | `371316a` 修正包 | UART 对照通过；`d3_synth04` 锁存器 0、hold 转正，3 条 LF 输出 setup 违规仍待修正；新 CPU `d3_full02` 运行中 |
 | 功耗启动环境修正 | `55698a6` / toolenv 包 | 399 文件服务器解包核验通过；环境修复仍须实际工具运行验证 |
+| LF 输出预算及门级平台来源绑定 | `f8fc1d8` / lfports 包 | 399 文件服务器解包核验通过；全量 CPU 结束后串行启动新综合 |
 
 服务器包目录统一位于 `/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/`。包全名、源码提交、ZIP SHA256、摘要 SHA256 和截图索引见服务器证据；不得只凭日期或运行名选取“最新”结果。
 

@@ -78,6 +78,13 @@ proc arch03_power_reports {} {
     redirect units.rpt {report_units}
     redirect timing_check.rpt {check_timing}
     redirect clocks.rpt {report_clock}
+    # Record actual process settings, including any installation startup defaults.
+    # These are modeling assumptions, not evidence that unknown nodes are valid.
+    set settings [open power_settings.rpt w]
+    foreach name {power_analysis_mode power_x_transition_derate_factor power_include_initial_x_transitions} {
+        puts $settings "$name [get_app_var $name]"
+    }
+    close $settings
     # Functional gate simulation without SDF: explicitly invoke zero-delay
     # interpretation. Wire/clock network estimation remains a review item.
     read_vcd -zero_delay -strip_path tb_top/u_e203_soc_top -time {@START@ @END@} @VCD@
@@ -85,6 +92,10 @@ proc arch03_power_reports {} {
     redirect activity_unannotated_before.rpt {report_switching_activity -list_not_annotated -show_pin}
     update_power
     redirect power.rpt {report_power -nosplit -significant_digits 8}
+    # Installed report_power manual: -verbose includes units/operating conditions
+    # and wire-load basis. Keep externally driven boundary-net power separate.
+    redirect power_verbose.rpt {report_power -verbose -nosplit -significant_digits 8}
+    redirect power_with_boundary_nets.rpt {report_power -verbose -include_boundary_nets -nosplit -significant_digits 8}
     redirect power_hierarchy.rpt {report_power -hierarchy -levels 30 -nosplit -significant_digits 8}
     redirect power_sram.rpt {report_power -cell_power -nosplit -significant_digits 8 $memories}
     redirect activity_coverage_after.rpt {report_switching_activity -coverage -hierarchy}
@@ -150,7 +161,8 @@ def estimate(cfg,run,gate,expected_sha,case,call):
     save(run/'source_inputs.json',before)
     text=call(command,run,'power.log')
     require_tool_marker(text,'ARCH03_SYSTEM_POWER_REPORTS_READY system_power_verified=false')
-    required=('units.rpt','power.rpt','power_hierarchy.rpt','power_sram.rpt','activity_coverage_after.rpt',
+    required=('units.rpt','power.rpt','power_verbose.rpt','power_with_boundary_nets.rpt','power_settings.rpt',
+              'power_hierarchy.rpt','power_sram.rpt','activity_coverage_after.rpt',
               'activity_unannotated_after.rpt','activity_sources.rpt','timing_check.rpt','clocks.rpt')
     for name in required:
         if not (run/name).is_file() or not (run/name).stat().st_size:raise ValueError('Missing power artifact '+name)

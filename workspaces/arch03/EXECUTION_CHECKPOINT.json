@@ -42,13 +42,13 @@
     "state": "explicit_user_authorization_received",
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
-    "current_package": "../../local_runs/light-light126-d3-toolenv-arch03-20261109_091306-55698a6f2584.zip",
-    "reason": "Explicit authorization used for 13 verified FileZilla packages. No pending upload approval.",
+    "current_package": "../../local_runs/light-light126-d3-lfports-arch03-20261109_093203-f8fc1d819803.zip",
+    "reason": "Explicit authorization used for 14 verified FileZilla packages; no approval pending.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
     "Finish repaired ASIC full02; preserve exact case receipts and complete-task boot mode evidence",
-    "Freeze/package LF output budget and gate installer provenance checks; after full02 finishes, run independent synth05",
+    "After full02 finishes, run f8fc1d8 lfports package synth05; package already server verified",
     "Review fresh strict setup/hold, coverage and interface assumptions, then complete mapped 14-case functionality plus same-task activity and power",
     "Actual-server test LC environment fix; retain baseline failed power reports and review unknown activity/model limits",
     "Complete scoring ownership, submission details and final reproducible evidence"
@@ -97,7 +97,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "LF output timing budgets and gate platform-preparation provenance checks locally tested; hardware/firmware unchanged; new package pending.",
+  "uncommitted_follow_on": "Power reporting context and diagnostic review locally prepared; LF ports source f8fc1d8 already uploaded/verified. Synth05 can use f8fc1d8 when full02 releases the lock.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -938,7 +938,21 @@
     "screenshots": [
       "server_full02_start.png",
       "server_synth04_lf_domains.png"
-    ]
+    ],
+    "last_observed": "2026-11-09T09:39:50",
+    "observed_pass_cases": [
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10"
+    ],
+    "progress_screenshot": "server_synth04_area_full02_progress.png"
   },
   "lf_output_preparation": {
     "status": "local_tests_passed_NOT_server_verified",
@@ -956,5 +970,80 @@
     "log": "local_runs/d3_lf_output_provenance_tests_20261109.log",
     "review": "1 ns output budget is an explicit source-domain interface assumption, not a supplied external receiver specification. No new false paths or multicycle exceptions.",
     "python36_syntax": true
+  },
+  "latest_lfports_package": {
+    "status": "passed_local_package",
+    "package": {
+      "source_commit": "f8fc1d819803e89a9a2143820028293ec83713c0",
+      "archive": "light-light126-d3-lfports-arch03-20261109_093203-f8fc1d819803.zip",
+      "bytes": 10825049,
+      "sha256": "1d1c8a3c92df743aa301a7dc8e336328f95041cb076fdc36ce91a78f02684219",
+      "files": 399,
+      "board_staging_verified": true,
+      "filezilla_transfer_completed": true,
+      "server_zip_sha256_verified": true,
+      "server_safe_unpack_hashes_verified": true
+    },
+    "bundle": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d3_lfports_clean_20261109\\light-light126-d3-lfports-arch03-20261109_093203-f8fc1d819803",
+    "cases": [
+      "extremes",
+      "layer_01",
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12",
+      "rounding"
+    ],
+    "software_outputs": 354816,
+    "firmware_images_checked": 14,
+    "cpu_executed": false,
+    "server_uploaded": true,
+    "asic_link_verified": false,
+    "transfer_screenshot": "filezilla_lfports_done.png",
+    "unpack_screenshot": "server_lfports_unpack.png"
+  },
+  "power_diagnostic_review": {
+    "status": "diagnostic_failed_run_only",
+    "run": "d3_power01",
+    "exact_mapped_nets": 111966,
+    "exact_mapping_percent": 100,
+    "unannotated_nets": 0,
+    "activity_coverage_percent": 33.99,
+    "activity_coverage_nets": 38059,
+    "activity_coverage_definition": "Nets with more toggles than toggle_limit; default limit 1. This is not netlist annotation success rate.",
+    "net_driver_counts": {
+      "primary_input": 79,
+      "sequential": 13976,
+      "combinational": 95688,
+      "memory": 2208,
+      "clock_gate": 15
+    },
+    "manual_default_x_transition_derate": 0.5,
+    "manual_default_include_initial_x_transitions": false,
+    "actual_run_x_settings_recorded": false,
+    "power_units_verified": false,
+    "system_power_verified": false,
+    "document": "workspaces/arch03/POWER_REVIEW_20261109.md",
+    "screenshots": [
+      "server_power_annotation_summary.png",
+      "server_power_verbose_manual.png",
+      "server_power_x_definition.png"
+    ]
+  },
+  "power_report_preparation": {
+    "status": "local_tests_only_NOT_server_verified",
+    "change": "Detailed units/wire/model report, actual X-handling settings, separate boundary-net-inclusive power report",
+    "focused_tests": 4,
+    "python36_syntax": true,
+    "tcl_syntax_complete": true,
+    "test_log": "local_runs/d3_power_report_context_tests_20261109.log",
+    "hardware_changed": false
   }
 }
