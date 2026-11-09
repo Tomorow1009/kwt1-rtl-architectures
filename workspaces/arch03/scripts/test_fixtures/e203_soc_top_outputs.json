@@ -1,0 +1,29 @@
+{
+  "source": "371316af486ee7aa94a6b1cff6de503d86f1f306/runs/d3_synth04/asic_synth/mapped.v",
+  "netlist_sha256": "2e9dd5d3694c3a35daedc076ae505bfecc09361877fc37e756eb3f0e0ac7c087",
+  "observed": "2026-11-09 Asia/Shanghai",
+  "screenshot": "server_top_port_fixture.png",
+  "scope": "Top-level output declaration names only; bus widths omitted. Captured independently from actual server mapping, not generated from the SDC.",
+  "outputs": [
+    "io_pads_gpioA_o_oval",
+    "io_pads_gpioA_o_oe",
+    "io_pads_gpioB_o_oval",
+    "io_pads_gpioB_o_oe",
+    "hfxoscen",
+    "lfxoscen",
+    "io_pads_jtag_TDO_o_oval",
+    "io_pads_jtag_TDO_o_oe",
+    "io_pads_qspi0_sck_o_oval",
+    "io_pads_qspi0_cs_0_o_oval",
+    "io_pads_qspi0_dq_0_o_oval",
+    "io_pads_qspi0_dq_0_o_oe",
+    "io_pads_qspi0_dq_1_o_oval",
+    "io_pads_qspi0_dq_1_o_oe",
+    "io_pads_qspi0_dq_2_o_oval",
+    "io_pads_qspi0_dq_2_o_oe",
+    "io_pads_qspi0_dq_3_o_oval",
+    "io_pads_qspi0_dq_3_o_oe",
+    "io_pads_aon_pmu_padrst_o_oval",
+    "io_pads_aon_pmu_vddpaden_o_oval"
+  ]
+}

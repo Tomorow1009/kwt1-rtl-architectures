@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Cloud branch verified at 9b7cff5; board/VNC restored; exactport ZIP SHA256 and all 400 inputs verified. Independent d3_synth06 started 10:58:34, driver 113085. Full02 pass and failed synth05 preserved.",
+  "last_completed_stage": "Synth06 failed safely at 11:01:33 before mapping; second LF name lacked _o_. All 20 actual server output names now independently captured and hash-matched; corrected budgets pass 9 focused tests.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -48,7 +48,7 @@
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Monitor d3_synth06; inspect three exact LF outputs, fail-fast SDC, four CDC pins, strict timing and coverage",
+    "Freeze, package, verify and upload port-inventory correction, then independent synth07; preserve failed synth06 and all earlier runs",
     "After valid synthesis, complete mapped 14-case functionality and same-config full-task activity/power",
     "Review final area, units, coverage and energy; finish delivery evidence and unresolved official scoring/submission requirements"
   ],
@@ -65,7 +65,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "d3_synth06 running in remote terminal tab 4; tab 3 remains diagnostic. Shared lock owned by driver 113085. Do not duplicate jobs or remove lock.",
+  "server_readonly_job": "No active EDA after synth06 failed; actual team lock observed released. Diagnostic tab 3 remains SDC cwd; tab 4 reports cwd.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -96,7 +96,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Documentation-only resume/cloud/plan records; frozen runtime remains 57546321d739db04b0850732d3f98297f9823f3d.",
+  "uncommitted_follow_on": "soc_synth.py port correction, independent actual output inventory fixture/test and failure evidence; not yet server verified.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -855,7 +855,7 @@
         "slack_ns": "-0.74098206"
       },
       {
-        "endpoint": "io_pads_aon_pmu_vddpaden_oval",
+        "endpoint": "io_pads_aon_pmu_vddpaden_o_oval",
         "slack_ns": "-0.74098206"
       },
       {
@@ -1311,12 +1311,12 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+    "verified_remote_commit": "5631a289d46d3948eb7662d76884fd8cf19a3fa2",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
   "exactport_synthesis": {
-    "status": "running",
+    "status": "failed",
     "session": "d3_synth06",
     "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
     "driver_pid": 113085,
@@ -1329,11 +1329,35 @@
     "screenshots": [
       "resume_synth06_start.png",
       "resume_synth06_state.png"
+    ],
+    "finished": "2026-11-09T11:01:33.661287",
+    "error": "Missing/ambiguous LF control output io_pads_aon_pmu_vddpaden_oval",
+    "strict_driver_error": "Tool failed soc_synth.log exit=1",
+    "correct_port": "io_pads_aon_pmu_vddpaden_o_oval",
+    "mapped_netlist_created": false,
+    "dc_source_fail_fast_verified": true,
+    "team_lock_released": true,
+    "usable_for_gate_or_power": false,
+    "failure_screenshots": [
+      "server_synth06_lf_binding.png",
+      "server_synth06_failure_fixture_hash.png"
     ]
   },
   "plan_mirror": {
     "path": "IMPLEMENTATION_PLAN_20261109.md",
     "sha256": "3f82eb12865f22ee39bbe0149b1e0b12d76a7f4519100f9902cbc8660a5bd5eb",
     "scope": "Exact copy of user-supplied implementation plan; current evidence takes precedence over prospective completion statements"
+  },
+  "port_inventory_preparation": {
+    "status": "local_tests_passed_NOT_server_run",
+    "hardware_changed": false,
+    "change": "Correct missing _o_ in second LF output; test against independently captured complete actual mapped top output inventory",
+    "output_names": 20,
+    "inventory_sha256": "ac56c79f557b44f5522cc85e22ed1debecc94894799b7f223fe3510e1fc7712d",
+    "source_netlist_sha256": "2e9dd5d3694c3a35daedc076ae505bfecc09361877fc37e756eb3f0e0ac7c087",
+    "fixture": "workspaces/arch03/scripts/test_fixtures/e203_soc_top_outputs.json",
+    "focused_tests": 9,
+    "python36_syntax": true,
+    "test_log": "local_runs/d3_port_inventory_tests_20261109.log"
   }
 }

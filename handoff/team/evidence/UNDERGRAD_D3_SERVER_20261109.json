@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "resumed_exactport_synth06_running_full02_passed",
+  "status": "synth06_fail_fast_confirmed_second_port_correction_prepared",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -927,7 +927,7 @@
         "slack_ns": "-0.74098206"
       },
       {
-        "endpoint": "io_pads_aon_pmu_vddpaden_oval",
+        "endpoint": "io_pads_aon_pmu_vddpaden_o_oval",
         "slack_ns": "-0.74098206"
       },
       {
@@ -1382,12 +1382,12 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "9b7cff537de8a8e37a16e94432e0d6d1c3af455b",
+    "verified_remote_commit": "5631a289d46d3948eb7662d76884fd8cf19a3fa2",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
   "exactport_synthesis": {
-    "status": "running",
+    "status": "failed",
     "session": "d3_synth06",
     "source_commit": "57546321d739db04b0850732d3f98297f9823f3d",
     "driver_pid": 113085,
@@ -1400,6 +1400,30 @@
     "screenshots": [
       "resume_synth06_start.png",
       "resume_synth06_state.png"
+    ],
+    "finished": "2026-11-09T11:01:33.661287",
+    "error": "Missing/ambiguous LF control output io_pads_aon_pmu_vddpaden_oval",
+    "strict_driver_error": "Tool failed soc_synth.log exit=1",
+    "correct_port": "io_pads_aon_pmu_vddpaden_o_oval",
+    "mapped_netlist_created": false,
+    "dc_source_fail_fast_verified": true,
+    "team_lock_released": true,
+    "usable_for_gate_or_power": false,
+    "failure_screenshots": [
+      "server_synth06_lf_binding.png",
+      "server_synth06_failure_fixture_hash.png"
     ]
+  },
+  "port_inventory_preparation": {
+    "status": "local_tests_passed_NOT_server_run",
+    "hardware_changed": false,
+    "change": "Correct missing _o_ in second LF output; test against independently captured complete actual mapped top output inventory",
+    "output_names": 20,
+    "inventory_sha256": "ac56c79f557b44f5522cc85e22ed1debecc94894799b7f223fe3510e1fc7712d",
+    "source_netlist_sha256": "2e9dd5d3694c3a35daedc076ae505bfecc09361877fc37e756eb3f0e0ac7c087",
+    "fixture": "workspaces/arch03/scripts/test_fixtures/e203_soc_top_outputs.json",
+    "focused_tests": 9,
+    "python36_syntax": true,
+    "test_log": "local_runs/d3_port_inventory_tests_20261109.log"
   }
 }

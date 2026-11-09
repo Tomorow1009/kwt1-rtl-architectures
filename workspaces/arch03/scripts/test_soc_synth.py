@@ -32,9 +32,13 @@ proc get_object_name {ports} {return $ports}
 proc set_output_delay {args} {lappend ::delays $args}
 proc puts {args} {}
 ''')
-        # Server netlist character 23 is ASCII 111 ('o'), not ASCII 48 ('0').
-        lf=('io_pads_aon_pmu_padrst_o_oval','io_pads_aon_pmu_vddpaden_oval','lfxoscen')
-        hf=('gpio_output','uart_output','hfclk_output')
+        # Independent actual server output inventory catches spelling errors
+        # that a hand-written copy of the SDC's port list would conceal.
+        fixture=Path(__file__).with_name('test_fixtures')/'e203_soc_top_outputs.json'
+        ports=json.loads(fixture.read_text())['outputs']
+        lf=tuple(p for p in ports if 'aon_pmu' in p or p=='lfxoscen')
+        hf=tuple(p for p in ports if p not in lf)
+        self.assertEqual(len(lf),3)
         interp.setvar('ports',lf+hf);interp.setvar('delays','');interp.eval(output_constraints())
         rows=[interp.splitlist(row) for row in interp.splitlist(interp.getvar('delays'))]
         for kind,value in (('-max','1.0'),('-min','0.0')):
@@ -43,9 +47,11 @@ proc puts {args} {}
             domains={r[3]:set(interp.splitlist(r[4])) for r in selected}
             self.assertEqual(domains,{'hf_clk':set(hf),'lf_clk':set(lf)})
             self.assertTrue(all(r[1]==value for r in selected))
-        interp.setvar('ports',lf[1:]+hf)
-        with self.assertRaisesRegex(tkinter.TclError,'Missing/ambiguous LF control output'):
-            interp.eval(output_constraints())
+        for missing in lf:
+            with self.subTest(missing=missing):
+                interp.setvar('ports',tuple(p for p in ports if p!=missing))
+                with self.assertRaisesRegex(tkinter.TclError,'Missing/ambiguous LF control output'):
+                    interp.eval(output_constraints())
 
     def test_cdc_exceptions_only_reach_four_first_stage_timer_pins(self):
         import tkinter
