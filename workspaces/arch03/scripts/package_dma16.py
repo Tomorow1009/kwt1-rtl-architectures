@@ -13,14 +13,25 @@ from dma16_layout import verify_export
 from dma16_batch import CASES14,source_case
 
 
-def copy_firmware(source,target,bundle):
-    meta,_=verify_firmware(source,bundle)
+def copy_firmware(source,target,bundle,verifier=verify_firmware):
+    meta,_=verifier(source,bundle)
     target.mkdir()
     names=['driver.elf']+[n+suffix for n in meta['images'] for suffix in ('.verilog','.bin')]
     for name in names:shutil.copyfile(str(source/name),str(target/name))
     meta.pop('command',None)
     (target/'manifest.json').write_text(json.dumps(meta,indent=2)+'\n',encoding='utf8')
-    verify_firmware(target,bundle)
+    verifier(target,bundle)
+
+
+def copy_sequence_firmware(source,target,bundle):
+    from build_dma16_sequence import verify_firmware as verify_sequence
+    meta,_=verify_sequence(source,bundle)
+    target.mkdir()
+    for name in ('driver.elf','sequence.verilog','sequence.bin'):
+        shutil.copyfile(str(source/name),str(target/name))
+    meta.pop('command',None)
+    (target/'manifest.json').write_text(json.dumps(meta,indent=2)+'\n',encoding='utf8')
+    verify_sequence(target,bundle)
 
 
 def main():
@@ -29,6 +40,8 @@ def main():
     p.add_argument('--tile-data',required=True,type=Path,help='Independently verified tile16 export of those cases')
     p.add_argument('--firmware',required=True,type=Path)
     p.add_argument('--irq-firmware',type=Path)
+    p.add_argument('--mmio8-firmware',type=Path,help='Original MMIO8 driver with the same real source-loading boundary')
+    p.add_argument('--sequence-firmware',type=Path,help='Program-only polling DMA16 errors/cancel/timeout and A/B/A validation')
     p.add_argument('--member',required=True)
     a=p.parse_args()
     if not re.fullmatch('[A-Za-z0-9_-]{1,60}',a.member):raise ValueError('Member identifier')
@@ -38,6 +51,15 @@ def main():
         source_case(a.data/name);verify_export(a.data/name,a.tile_data/name)
     verify_firmware(a.firmware)
     if a.irq_firmware:verify_firmware(a.irq_firmware)
+    if a.mmio8_firmware:
+        from mmio8_soc import verify_firmware as verify_mmio8
+        verify_mmio8(a.mmio8_firmware)
+    if a.sequence_firmware:
+        from build_dma16_sequence import verify_firmware as verify_sequence
+        sequence,_=verify_sequence(a.sequence_firmware)
+        from build_dma16_sequence import verify_runtime_sources
+        verify_runtime_sources(sequence,a.tile_data/sequence['tasks']['A']['case']/'load32.hex',
+                               a.tile_data/sequence['tasks']['B']['case']/'load32.hex')
     bundle_name=a.member+'-dma16-'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'-'+commit[:12]
     folder=ROOT/'local_runs'/bundle_name;folder.mkdir()
     prefixes=('workspaces/arch02/','workspaces/arch03/',
@@ -50,6 +72,8 @@ def main():
             target.write_bytes(raw)
     copy_firmware(a.firmware,folder/'firmware',folder)
     if a.irq_firmware:copy_firmware(a.irq_firmware,folder/'firmware_irq',folder)
+    if a.mmio8_firmware:copy_firmware(a.mmio8_firmware,folder/'firmware_mmio8',folder,verify_mmio8)
+    if a.sequence_firmware:copy_sequence_firmware(a.sequence_firmware,folder/'firmware_sequence',folder)
     # Only the explicitly validated fourteen cases are inputs to this smoke package.
     for case_name in CASES14:
         shutil.copytree(str(a.data/case_name),str(folder/'validated_data'/case_name))

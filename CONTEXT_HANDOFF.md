@@ -6,6 +6,10 @@
 
 用户已明确 PLEASE IMPLEMENT 新版三天计划，撤销此前暂停，开始直接16路MAC＋ICB DMA＋双缓冲；不做8路DMA。H0=2026-11-09T17:16:08+08:00，H28硬冻结=2026-11-10T21:16:08+08:00，内部H72=2026-11-12T17:16:08+08:00，官方精确截止尚未核实。
 
+最新用户补充：提交截止为**2026-11-13晚上**，具体时刻/入口未确认，来源是用户直接答复。内部冻结和72小时交付节点保持不变，不能因截止晚一天就推迟1200回归。
+
+**FileZilla临时暂停（用户最新要求）：队友需要传文件，在用户明确说“可以传了”之前，禁止恢复FileZilla连接或发起新上传。** 首个DMA16包已经完整上传、哈希核对、安全解包；当前仅退出客户端释放连接。本地开发及已上传包的服务器验证继续，这不是暂停整个实施任务。
+
 当前有效计划为 [DMA16三天计划](workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md)，老师答复记录在 [答疑依据](workspaces/arch03/QA_DMA_LOADING_20261109.md)。旧七天计划和历史证据保留。DMA16核心、搬运、仲裁、布局和正式监视器已通过本地测试；真实E203/厂商宏、新STA、门级及功耗尚待新运行。
 
 本地分工：dma_feasibility负责新增linear16核心和核心测试；evidence_audit负责DMA16引擎/MMIO及协议测试；contest_requirements负责tile16布局和独立数值验证；主代理负责平台源接口核查、仲裁/安装、CPU固件、集成及服务器调度。各代理只改自己新增文件，不提交git；主代理统一集成。
@@ -13,6 +17,47 @@
 已核对原sysmem_icb_*接线/译码，source=0xb0000000位于原O4覆盖范围；恢复原加载源响应路径，禁止新增SRAM私口。DMA源读→共享写ACK→共享读到缓存→结果写ACK全部计时。新版数据46976B，输出50688B，四段191616B；同任务预取允许，跨任务预装禁止。
 
 ## 最新实施检查点（2026-11-09约18:49）
+
+### 20:34实施检查点（优先于下方历史记录）
+
+- dma16_smoke01实际通过：layer_01、25344输出、零饱和、首源cycle993/末ACK226763/225770周期、CPU226351；仿真宿主9.16798612099734秒。结束20:11:24.332854，最后读20:21:54.780747。summary SHA4b32b136f7a5f368d2a2f3f29714e2bc2cd8b05d0c7eea420dea49ab8c9a207c。首包2bd6b0f polling范围；IRQ/14/新PPA未过，不能声明最终500task/s或全新版已验收。
+- 原锁自然释放后启动旧修复8路功耗d3_power07_h0，driver **266936**（先前误抄206936已改JSON），实际started20:23:42.769200，PT child267785。20:31日志实际LC/PT链接成功并在读完整31.25GB VCD，暂未出现早期PT-063；最终结果未读。run为portcheck包/runs/d3_power07_h0/asic_power。不得重启/清锁；它完成后按原首包串行IRQ首层、14例，再新DMA综合。
+- 被动metrics已接dma16_soc/dma16_gate；在TB生成include，绑定实际accel/arb端口，修改后平台TB hash入manifest；门级必须实际probe。生产RTL/installer/source_list不改，metrics不综合。逐例摘要解析完整47904事务/191616B，原window逐周期交叉核对；batch_contract要求完整metrics块，batch每次核对/恢复都重新解析，不只看END标记。ASIC活动改用dma16_activity严格SysMem/新模块审计。
+- 本地真实数据通路+原正式monitor+metrics，pf0/pf1两任务50688输出通过：local_runs/dma16_monitor_fixture_20261109_202649_158872，summary SHA8ac129560fe5c1fb86250318921677e2dc143228040c4919ad364f34251c5b65。最终脚本变更后pf1复核local_runs/dma16_monitor_fixture_20261109_203109_390417，SHAf20c1e8cef4e1ca839ae8c5903f908e672fdc03c805cb2c2e29c89ddffc48b22。两者都是NO_CPU；protocol独立oracle7模式仍保留。相关工具93tests PASS，git diff --check通过。
+- batch解析增加完整metrics后，sequence依赖身份重建到 **v5**，manifest933ba35729318c892ebc5e230c1ff1647c51d913649515fde0f1745dfb86b680；与v4 ELF/boot逐字节相同，ELF5f751362ad33a01f0b4237c84ef36b809708e23f6913741451c19eb0a80b9acd。四套FW再验证通过。后续包选择v5，不能误用v4旧依赖manifest。
+- 实施报告/清单已补真实ASIC首层与剩余缺口。后续约57项新工具/文档/测试尚未提交；准备独立commit和本地包，**FileZilla继续暂停，不能上传或重连，等待用户明确可以传**。上次窗口核对20:18没有FileZilla。
+
+### 20:19压缩恢复补充（历史）
+
+- 已重新读取AGENTS、有效DMA16三天计划、STATUS、执行检查点及各工作线交接。FileZilla继续用户暂停；20:18通过开发板窗口清单重新核对，只有VNC等桌面窗口、没有FileZilla。未重新连接、未上传。等待用户明确允许恢复；本地开发与已有服务器任务继续。
+- 旧修复8路 `d3_gate07_h0` 已完成，最后观察20:07:32.641508为passed、锁释放，结束19:55:48.511351；summary SHA256 `4e735f46f27f643c820f59b386e1e4e04eca5f02b0719a50330a2a40a6e82f8e`。首层25344输出通过，旧BEGIN窗口3890080周期；完整VCD31246581717字节原生扫描通过scope/window，unknown记录34900278、active记录5759095124。完整VCD SHA尚未精确抄回，不猜测；该结果不能证明DMA16或新加载口径。
+- 首包的真实ASIC `dma16_smoke01` 已在20:09:16.557734启动，driver244469，stage dma16_soc，layer_01，默认polling固件。最后观察20:11:09为running、未读最终结果。运行目录为首包/runs/dma16_smoke01/dma16_soc，日志首包/runs/dma16_smoke01.driver.log。不能重启或清其锁；下一步只读检查状态。前次只读helper会话56013已消失，需观察屏幕，不盲目重输旧命令。
+- 新sequence完整10阶段/3任务76032输出及3负测本地通过：local_runs/dma16_sequence_fixture_20261109_200001_072693。它是过程MMIO、NO_CPU；真实E203 trap/mret/timeout仍未验证。runner12项测试及未修改夹具日志交叉核验通过，整体ASIC parser明确拒绝NO_CPU。交叉回执local_runs/dma16_sequence_parser_crosscheck_20261109_v1/receipt.json。v4固件manifest 2d921e2563d7dd70b51d7d29f36b802e208a18445b3c05df2c6a086f6203ff1b。生成TB已补ASIC clock guard需要的四个a3别名。
+- 新被动总线统计模块/解析器已完成，7 RTL模式及5解析测试通过：local_runs/dma16_bus_metrics_20261109_200900_766574/summary.json，SHA daff51a565bf6663f1f1348344e926355cbf84bcd034fdc1be3026d9d1482812。独立事件oracle检查47904事务/191616B、直方图和竞争区间；仅协议夹具，无CPU/MAC。下一步将其加入ASIC/gate仿真observer，使用实际端口binding及原window交叉检查；不得加入综合生产RTL。
+- 新server_run已接mmio8_soc/dma16_gate/dma16_power/dma16_sequence；package支持MMIO8和sequence独立固件；poll、IRQ、MMIO8、sequence四套源码/ELF/镜像均验证。dma16_batch已记录真实宿主时间及剩余量1.2余量估算（不拿芯片周期推算仿真速度），20测试通过；sequence因依赖batch哈希重建到v4，旧版本保留。
+- 中文实施报告、验收清单、交付索引已更新，但新门级、功耗、序列、MMIO8、metrics及batch改动尚未另提交/打包。首包2bd6b0f不可变；FTP暂停期间先本地准备后续包。仍缺新ASIC14、IRQ/WFI、CPU恢复、150MHz新网表/面积、14门级、12全活动功耗及最终1200 ASIC任务。旧PT-063修复实跑待新smoke自然释放锁后串行安排。
+
+### 19:45实施补充（历史，优先于19:20）
+
+- 首包2bd6b0f已经经开发板Linux FileZilla上传。FTP最终断开并记入失败队列，但服务器2026-11-09T19:32:35.329713实测16217831字节与SHA6bd72b192968bfd5783248e5978a2223f476e7b43717183df43583337d0e4a17完全一致；既有unpack.py安全解包成功，随后inputs()核验573文件。不要重传/覆盖此完整包，不把FTP失败UI当作文件损坏。
+- 新bundle绝对路径：/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d。真实平台安装预检runs/dma16_install_preflight01/platform已通过：原baseline ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e、9个modified files；这是安装接线生成，未运行VCS/CPU。
+- 旧门级d3_gate07_h0已经完成VCS、进入全文件native扫描；19:41:15活动子PID151649仍运行，读到VCD位置12030109043字节/总31246581717约38.5%。该扫描实际CPU持续推进，不能停止或跳过。真实锁是/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock，由driver128986持有。此前一次诊断用b.parents[1]查错层级显示LOCK False，已纠正，不能据此启动并行EDA。
+- synth07约束报告显示无违反项，check_timing/结构警告仍继续逐项读；DMA16硬件尚未STA。新smoke应等现有锁自然释放。旧power修复实跑和新smoke随后统一串行，不同时占用。
+- 后续新MMIO8 monitor已修clear凭据：必须成功CTRL2后新idle STATUS，START/新clear/复位失效。local_runs/mmio8_source_fixture_20261109_193147_494985/summary.json 6负测+3任务76032输出通过，733131过程总线cycles，NO E203。mmio8_soc新增12契约测试+layout8合计20通过。root已接server_run mmio8_soc、package --mmio8-firmware，实际ASIC未跑。
+- 新dma16_gate.py/root stage、dma16_power/root stage已接好；gate只读同SHA DDC实际probe五模块及clock/boot端口，严格拒绝缺失，后续仅新增测试固件允许复用同一实际生产RTL网表。source identity不得把无关sw新增误当硬件变更。新gate10tests通过、实际mapped binding未做。所有这些均不在第一包中，需要独立后续提交/运行包。
+- 三工作线继续：contest新增独立DMA16真实CPUsequence固件（5非法START真实trap、装载取消、短timeout恢复、A/B/A）；core与其对齐新source/monitor及NO_CPU夹具；evidence新增被动DMA分阶段总线统计。第一包生产RTL/固件/source/window/monitor保持冻结。新1200、14门级、12活动功耗、IRQ/WFI及CPU错误恢复仍未验收。
+
+### 19:20压缩恢复补充（优先）
+
+- 第一实施提交已完成并push私人分支：2bd6b0f0075d7e0a61809cd7f70fc990e7364e85。首包light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d.zip，16217831字节、573输入文件，SHA6bd72b192968bfd5783248e5978a2223f476e7b43717183df43583337d0e4a17；独立ZIP唯一根/全部entry hash/CRC、干净包6测试通过。板端/home/root/undergrad-dma16-smoke-20261109同名ZIP已SHA核验。GUI路径为/home/board/undergrad-dma16-smoke-20261109。
+- 尚未传到比赛服务器：Linux FileZilla登录收到421用户过多，已约隔数分钟在同一会话正常重试，没有绕行或开启并发连接。FileZilla当前窗口20972102，class Filezilla；已正常启动受限FTP代理。旧VNC仍18874436、relay session22118。目标仍icdesigns0.nicu.cn:18888、/IC/light-light126-undergrad-d2-20261109，密码只经helper --text-file stdin输入，禁止输出内容。
+- FileZilla位于chroot GUI内，host无filezilla可执行文件。启动使用helper exec `busybox chroot /opt/ac820-gui-root /usr/local/bin/ac820-desktop-run filezilla >/tmp/kwt_dma16_filezilla.log 2>&1 </dev/null &`。代理入口F:/linux_fpga_try/tools/start_ftp_link.ps1。不能在截图被FileZilla遮挡时读VNC黑块；helper只设置focus、不raise。最有效切换：FileZilla用Alt_L F9最小化→VNC可见；恢复FileZilla点击主机Xfce4-panel窗口10485764的(216,15)。不要把远端Mate桌面顶栏当本机面板。xdotool不存在，XRaiseWindow尝试未前置，勿再重复。
+- 18:59:47新预检：共享锁空、本比赛账号无EDA；全服务器其他账号有任务，不动。19:04:06.789751启动旧8路synth07的独立gate/activity首层，用原已上传portcheck包，session d3_gate07_h0、driver128986，编译子130399、仿真子153110；19:13:00最后读仍running且ASIC_BOOT/MODE/BOOT_MODE全部日志已出现。这是保底旧边界证据，不是新版加载对照。不得重启或清其锁，完成后读summary并继续旧PT修复实跑。
+- 原门级run：.../bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_gate07_h0/gate_soc；driver日志同bundle/runs/d3_gate07_h0.driver.log。synth07 summary SHA仍3a167b8a0c3f77d5837a91c9aa43264f4c4e2fbec44313e075f84a4ed92e3ed6。
+- 首包已不可变，后续工作在当前worktree新文件中，不能替换首包内容。contest代理新增MMIO8_SOURCE_HANDOFF、原驱动SysMem源加载固件/布局/8单测（无CPU验证），正在新增mmio8_soc；root新增install_mmio8_source和arch03_mmio8_source_monitor，core代理正在做真实8core/arb/router/source的过程MMIO夹具（无E203）。该对照不是8路DMA。
+- core代理新增port-only gate monitor生成器dma16_gate_monitor.py和arch03_dma16_gate_proof.sv，14定向+1真实RTL任务25344输出通过；cycles225770，finished晚15拍但end不变。实际门级需以新mapped_probe绑定5个模块路径，尚未写/执行dma16_gate stage。proof从末ACK之后的新MMIO PENDING/COMPLETION/ERROR/STATUS响应证明排空，不绑fifo_empty常真。
+- evidence代理新增dma16_activity.py/dma16_power.py及10离线测试，实际native完整扫描/unknown保留，未运行PT。约定新gate scope=dma16_whole_soc_mapped_functional_without_SDF、stage=dma16_gate；summary需firmware_sha256/source_inputs_sha256，case需outputs/layout_sha256/task_window/activity；power依赖后续dma16_gate.verify_synthesis。12任务同gate/synth/firmware汇总，缺功耗/覆盖时值null不当0。
+- 下一步：查看gate活动进展，等该锁正常释放后安排旧power；FTP继续适度重试，成功后把已板端核验首包经Linux FileZilla传到授权目录，按ZIP SHA及safe-unpack验573文件，运行dma16_smoke01单层→IRQ→14。新8对照、门级/功耗适配完成后另提交/打新包。后续1200、真实CPU无复位A/B/A/错误恢复、150MHz新STA/面积和12功耗仍缺。
 
 - 以下内容覆盖下方旧暂停/17:50记录的实时状态。旧synth07已读完成，不重跑；远端EDA/锁最后实际观察仍是17:24无任务/无锁，下一次启动前重新查。
 - DMA最终RTL SHA4270345c39477220831ef4fda8227dc4f3c8d6df71f66234bfc0ec63b2df9f53；ABI6b1c53a46e8f490208adbd1d4734d2aead2bbe1ebf0df93cf0e294c7eba87c90。15协议、28真实core/arb/router/shared任务709632输出通过；包括首源请求前X/W失效、无复位新任务、held请求取消排空。最终协议和datapath目录在DMA16_ENGINE_HANDOFF及主JSON。

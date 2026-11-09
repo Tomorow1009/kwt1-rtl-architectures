@@ -1,5 +1,15 @@
 # 本科任务交付索引与复现顺序
 
+## 当前DMA16路线
+
+当前有效实现见[DMA16实施报告](DMA16_IMPLEMENTATION_REPORT.md)、[三天计划](IMPLEMENTATION_PLAN_DMA16_20261109.md)、[DMA16运行命令](DMA16_EXECUTION.md)。程序-only物理启动、原SysMem源读取开始计时、16路MAC/ICB DMA/物理权重双bank及最终1200ASIC任务是当前要求。以下原8路索引和ITCM源输入描述仅为历史基线，不适用于新候选。
+
+新工程入口：`rtl/arch03_linear16.sv`、`rtl/arch03_dma16_accel.sv`、`rtl/arch03_icb_arb2.sv`、`rtl/arch03_icb_memory_router.sv`；数据导出为`dma16_layout.py`，真实ASIC入口为`dma16_soc.py`，无复位恢复为`dma16_sequence_soc.py`，同加载源原驱动对照为`mmio8_soc.py`，最终批量为`dma16_batch.py`。新综合、门级、活动、功耗分别为`dma16_synth.py`、`dma16_gate.py`、`dma16_activity.py`、`dma16_power.py`。是否实际通过只查各新run，不以文件存在为验收依据。
+
+首包2bd6b0f已在服务器核验，后续工具不在首包内。用户临时暂停FTP期间仅准备新的独立包，不上传或覆盖原包。提交截止用户给出11月13日晚上，内部11月12日17:16交付准备不后移。
+
+## 历史8路交付索引
+
 本索引对应 2026-11-09 的实施工作，尚不是最终提交包。实时通过、失败和待验状态以 [验收表](ACCEPTANCE_20261109.md)、[服务器证据](../../handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json) 为准。正式赛题正文第 13—14 页要求提交工程、报告、数值材料及来源说明；最终评测使用同一冻结版本。
 
 ## 工程与来源

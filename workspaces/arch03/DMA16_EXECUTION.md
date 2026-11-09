@@ -8,7 +8,7 @@
 python workspaces/arch03/scripts/package_dma16.py --member <成员/本次标识> --data <旧14case> --tile-data <对应tile16> --firmware <polling产物> --irq-firmware <已核验映射IRQ产物>
 ```
 
-按已有授权经开发板Linux FileZilla上传独立目录，校验ZIP并用既有安全解包器核对每个文件。所有运行入口持同一个`.arch02_team_lock`；先读取现有锁和进程，不清除他人/历史锁，不同时启动多个EDA作业。
+**当前FileZilla按用户要求暂停，等用户明确允许恢复才能上传。** 恢复后按已有授权经开发板Linux FileZilla上传独立目录，校验ZIP并用既有安全解包器核对每个文件。所有运行入口持同一个`.arch02_team_lock`；先读取现有锁和进程，不清除他人/历史锁，不同时启动多个EDA作业。
 
 ```text
 python3 workspaces/arch03/scripts/server_run.py dma16_soc --session dma16_smoke01 --cases layer_01
@@ -31,4 +31,21 @@ python3 workspaces/arch03/scripts/dma16_batch.py run --data /storage2/2026contes
 
 完整时间从首源读VALID发出至最后输出ACK；排空可以稍晚证实但不额外计入末ACK周期。源模型边沿N接受后寄存response，最早N+1握手，单笔在途。VCD在首VALID开始、末ACK结束；现场必须核验文件实际区间。CPU mcycle只交叉核对，IRQ/WFI下不可假定其等于自由运行系统时间。
 
-MMIO8参考安装暂明确拒绝，需另做旧8路加载器与观察器；16路MODE0仅调试，不当新计时口径的正式8路对照。门级观察点还须根据新网表实际层次适配，当前RTL监视器不能自动证明门级可用。
+后续独立入口已经新增，须在包含这些文件的新运行包中执行。第一包`2bd6b0f`不含以下后续入口，不能在其中原地添加脚本。
+
+`--mmio8-firmware`可将已验证的原8路驱动源加载固件打包为`firmware_mmio8`。它仍由CPU搬运，没有8路DMA；本地3任务/76032输出和6项拒绝测试不代表真实CPU执行。
+
+```text
+python3 workspaces/arch03/scripts/server_run.py mmio8_soc --session mmio8_source01 --cases layer_01
+python3 workspaces/arch03/scripts/server_run.py dma16_sequence --session dma16_sequence01 --cases layer_01 rounding
+python3 workspaces/arch03/scripts/server_run.py dma16_gate --session dma16_gate01 --synth-run <实际新DMA16综合目录> --synth-summary-sha256 <其summary摘要> --firmware-root <本包>/firmware_irq --activity-cases layer_01
+python3 workspaces/arch03/scripts/server_run.py dma16_power --session dma16_power01 --gate-run <实际DMA16门级目录> --gate-summary-sha256 <其summary摘要> --cases layer_01
+```
+
+`dma16_gate`先读取同一 mapped.ddc，以只读DC探测实际模块边界，再生成端口监视器；缺少模块或完整位宽时拒绝，不猜内部别名。每个门级任务仍用真实E203及程序-only启动，最终排空由末ACK之后的新MMIO响应证明。`dma16_power`要求完整窗口VCD审计与同配置网表；报告生成不自动表示活动覆盖、功耗单位或模型已经通过审核。首层成功后仍需最终14门级及12独立功耗任务。
+
+`--sequence-firmware`打包独立程序-only序列固件到`firmware_sequence`，严格绑定A/B源payload及shift。`dma16_sequence`不接受activity参数，只验一次真实CPU启动的10阶段：5配置拒绝、装载取消、原驱动短timeout恢复、A/B/A三完整任务；每成功任务各有独立窗口，不能把整段序列当单任务功耗。阶段trap/输出/回执须真实观察，NO_CPU夹具日志一律不能作为ASIC通过。
+
+新版批量每case记录宿主开始/结束UTC、仿真耗时、准备和重核总耗时；state用实际均值估算剩余任务并加20%余量，明确另留编译、排队、门级和功耗时间。芯片cycles不代替宿主耗时。批量脚本或固件/观察器变更后重新构建冻结contract；不更改既有运行的文件或身份。
+
+后续包的dma16_soc/dma16_gate只在TB增加被动bus_metrics模块，不纳入生产RTL或综合输入。模块使用实际accel/arb端口；门级路径必须来自同DDC的probe。四段计数、等待/响应延迟、接受间隔、读写切换和CPU竞争直方图随逐任务摘要保存，并与原window逐周期核对。最终批量contract要求完整统计块，逐任务receipt复核时重新解析；不能只凭结束标记通过。阶段统计包含重叠与计算间隙，不可相加充当总周期。

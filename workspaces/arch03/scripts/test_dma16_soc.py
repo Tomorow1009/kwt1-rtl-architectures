@@ -52,5 +52,18 @@ class IntegrationContractTests(unittest.TestCase):
         for name in ('dma16_soc.py','install_dma16.py','server_run.py'):
             ast.parse(Path(__file__).with_name(name).read_text(),feature_version=(3,6))
 
+    def test_passive_metrics_include_after_monitor_and_duplicate_rejected(self):
+        original='module tb_top;\n`include "arch03_dma16_monitor.svh"\nendmodule\n'
+        patched=soc.add_bus_metrics(original)
+        self.assertLess(patched.index('arch03_dma16_monitor.svh'),patched.index('arch03_dma16_metrics.svh'))
+        self.assertLess(patched.index('arch03_dma16_metrics.svh'),patched.index('endmodule'))
+        for bad in (original+original,original.replace('dma16_monitor','unknown'),patched):
+            with self.assertRaises(ValueError):soc.add_bus_metrics(bad)
+
+    def test_metrics_never_enter_production_source_list(self):
+        self.assertFalse(any('bus_metrics' in str(p) for p in soc.source_list()))
+        code=soc.binding_include(soc.RTL_METRIC_BINDINGS)
+        self.assertIn('.arb_rsp_ready('+soc.RTL_MEM+'.u_arch03_arb.rsp_ready)',code)
+
 
 if __name__=='__main__':unittest.main()

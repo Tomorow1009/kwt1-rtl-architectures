@@ -133,8 +133,24 @@ class BatchTests(unittest.TestCase):
         self.assertFalse(receipt['asic_executed'])
         self.assertFalse(receipt['timing_verified'])
         self.assertEqual(receipt['result']['cycles'], 93)
+        timing=batch.validate_host_timing(receipt)
+        self.assertGreaterEqual(timing['elapsed_seconds'],timing['simulation_seconds'])
+        self.assertGreaterEqual(state['completed'][0]['host_total_seconds'],timing['elapsed_seconds'])
+        self.assertEqual(state['host_budget']['remaining_tasks'],0)
+        self.assertEqual(state['host_budget']['remaining_seconds_with_20_percent_margin'],0)
         with self.assertRaisesRegex(ValueError, 'immutable'):
             batch.run_tasks(self.contract, self.tasks, self.output, dict(fixture=True), resume=True, executor=executor)
+
+    def test_host_timing_does_not_accept_chip_cycles_or_missing_intervals(self):
+        base=dict(started_utc='2026-11-09T00:00:00Z',capture_checked_utc='2026-11-09T00:00:02Z',
+                  elapsed_seconds=2.0,simulation_seconds=1.0)
+        self.assertEqual(batch.validate_host_timing({'host_timing':base}),base)
+        for key,value in [('simulation_seconds',3),('elapsed_seconds',-1),('elapsed_seconds',float('nan')),
+                          ('simulation_seconds',True),('started_utc','unknown')]:
+            changed=dict(base);changed[key]=value
+            with self.subTest(key=key,value=value),self.assertRaises(ValueError):
+                batch.validate_host_timing({'host_timing':changed})
+        with self.assertRaises(ValueError):batch.validate_host_timing({'result':result()})
 
     def test_failure_stops_and_resume_reuses_only_rechecked_prefix(self):
         state = self.failed_second()

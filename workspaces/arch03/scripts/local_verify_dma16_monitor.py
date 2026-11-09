@@ -19,6 +19,7 @@ def main():
     parser.add_argument('--cases',nargs='+',default=['layer_01','extremes','rounding'])
     parser.add_argument('--prefetch',nargs='+',type=int,choices=[0,1],default=[0,1])
     parser.add_argument('--activity',action='store_true',help='Dump the production monitor task window; select exactly one case and prefetch mode')
+    parser.add_argument('--bus-metrics',action='store_true',help='Add passive metrics using the same ASIC binding/instrumentation functions')
     args=parser.parse_args()
     if args.activity and (len(args.cases)!=1 or len(args.prefetch)!=1):
         parser.error('--activity requires exactly one --cases item and one --prefetch item')
@@ -30,13 +31,22 @@ def main():
            A3/'rtl/arch03_linear16.sv',A3/'rtl/arch03_dma16_accel.sv',
            A3/'rtl/arch03_icb_arb2.sv',A3/'rtl/arch03_icb_memory_router.sv',A3/'rtl/arch03_shared_sram.sv',
            A3/'tb/arch03_task_window16.sv',A3/'tb/arch03_dma16_source.sv',A3/'tb/tb_arch03_dma16_monitor_fixture.sv']
+    instrumentation=[]
+    if args.bus_metrics:
+        import dma16_bus_metrics as metrics
+        from dma16_soc import add_bus_metrics, RTL_METRIC_BINDINGS, read_window
+        original=files[-1];generated=folder/original.name
+        generated.write_text(add_bus_metrics(original.read_text()))
+        include=folder/'arch03_dma16_metrics.svh';include.write_text(metrics.binding_include(RTL_METRIC_BINDINGS))
+        files[-1]=generated;files.append(A3/'tb/arch03_dma16_bus_metrics.sv')
+        instrumentation=[original,include,A3/'scripts/dma16_bus_metrics.py',A3/'scripts/dma16_soc.py']
     cfg_path=A2/'arch02/tb/pin_mock_config.json'
     cfg=json.loads(cfg_path.read_text());lines=[]
     for size in ('128','4096'):
         for key,width in [('cen_low',1),('gwen_low',1),('wen_low',1),('ema',3),('emaw',2),('ret1n',1)]:
             lines.append("`define A02_%s_%s %d'd%d"%(size,key.upper(),width,cfg['macros'][size][key]))
     config=folder/'arch02_sram_config.vh';config.write_text('\n'.join(lines)+'\n')
-    hashes={p:sha(p) for p in files+[cfg_path,config,A3/'tb/arch03_dma16_monitor.svh',Path(__file__).resolve()]}
+    hashes={p:sha(p) for p in files+instrumentation+[cfg_path,config,A3/'tb/arch03_dma16_monitor.svh',Path(__file__).resolve()]}
     data_hashes={}
     for name in args.cases:
         task=data/name;layout=json.loads((task/'layout_manifest.json').read_text())
@@ -76,6 +86,8 @@ def main():
             results.append(dict(case=name,prefetch=pf,cycles=observed['cycles'],outputs=25344,
                                 source_earliest_ack_cycles=1,cpu_executed=False,dma_executed=True,
                                 layout_sha256=data_hashes[name],capture_sha256=sha(capture)))
+            if args.bus_metrics:
+                results[-1]['bus_metrics']=metrics.parse_metrics(text,expected_window=read_window(text,observed))
             if args.activity:
                 requested_activity=activity
                 if not activity.is_file():
@@ -99,7 +111,7 @@ def main():
         layout=json.loads((data/name/'layout_manifest.json').read_text())
         for filename,expected_digest in layout['sha256'].items():
             if sha(data/name/filename)!=expected_digest:raise ValueError('Fixture vector content changed: '+filename)
-    report=dict(status='passed',cpu_executed=False,dma_executed=True,backend='pin_mock',
+    report=dict(status='passed',cpu_executed=False,dma_executed=True,backend='pin_mock',bus_metrics=bool(args.bus_metrics),
                 scope='production_source_and_monitor_real_dma_datapath_procedural_MMIO_no_E203',
                 production_monitor_cpu_flag_in_fixture_is_not_evidence=True,tasks=len(results),
                 outputs=len(results)*25344,cases=results,source_sha256={p.relative_to(ROOT).as_posix():h for p,h in hashes.items()})

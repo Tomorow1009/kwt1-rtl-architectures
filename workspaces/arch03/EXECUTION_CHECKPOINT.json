@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "local_DMA16_complete_initial_ASIC_integration_package_preparation",
+    "phase": "first_DMA16_real_ASIC_smoke_passed_old_power_fix_running",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Finish local integration review; commit/package both polling and IRQ; upload via board Linux FileZilla; real fixed-platform ASIC smoke then IRQ and14; new synthesis and evidence.",
+    "next": "Read old baseline power fix outcome under shared lock, then firstpackage IRQ and all14 ASIC. Prepare follow-on metrics/gate/sequence locally; FileZilla remains paused until user resumes.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1535,6 +1535,122 @@
         "sha256": "6f68f7e2ec7a84a652ac6ef517a3f99def090ba63f0b20c93f72841ea5073fa3",
         "status": "passed"
       }
+    },
+    "first_package": {
+      "source_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
+      "archive": "light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d.zip",
+      "bytes": 16217831,
+      "sha256": "6bd72b192968bfd5783248e5978a2223f476e7b43717183df43583337d0e4a17",
+      "files": 573,
+      "hardware_executed": true,
+      "archive_audit_passed": true,
+      "unique_zip_root_verified": true,
+      "clean_package_contract_tests": 6,
+      "board_staging_sha256_verified": true,
+      "board_path": "/home/root/undergrad-dma16-smoke-20261109/light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d.zip",
+      "server_uploaded": true,
+      "upload_error": "Historical 421 before transfer and after full transfer; no retry/overwrite needed for this verified ZIP",
+      "cloud_pushed_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
+      "server_zip_bytes_verified": true,
+      "server_zip_sha256_verified": true,
+      "server_unpacked_verified": true,
+      "server_inputs_verified": 573,
+      "server_sha_observed": "2026-11-09T19:32:35.329713",
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d",
+      "ftp_UI_status": "Disconnected after full transfer; failed queue retained. Server complete length/SHA and safe-unpack establish success.",
+      "platform_install_preflight": {
+        "status": "passed_installation_only",
+        "baseline_sha256": "ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e",
+        "modified_files": 9,
+        "run": "runs/dma16_install_preflight01/platform",
+        "cpu_executed": false
+      }
+    },
+    "baseline_gate_h0": {
+      "session": "d3_gate07_h0",
+      "bundle": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386",
+      "source": "old repaired8 synth07, historical task boundary",
+      "cases": [
+        "layer_01"
+      ],
+      "activity_cases": [
+        "layer_01"
+      ],
+      "driver_pid": 128986,
+      "started": "2026-11-09T19:04:06.789751",
+      "last_observed": "2026-11-09T20:07:32.641508",
+      "state": "passed",
+      "compiler_pid_at_observation": 130399,
+      "simulator_pid_at_observation": 153110,
+      "lock_owned_by_run": false,
+      "new_DMA16_verification": false,
+      "active_child_pid": null,
+      "active_child_command": null,
+      "child_elapsed": "00:18:14",
+      "child_cpu": "00:18:12",
+      "summary_exists": true,
+      "finished": "2026-11-09T19:55:48.511351",
+      "summary_sha256": "4e735f46f27f643c820f59b386e1e4e04eca5f02b0719a50330a2a40a6e82f8e",
+      "full_vcd_bytes": 31246581717,
+      "unknown_value_records": 34900278,
+      "active_value_records": 5759095124
+    },
+    "submission_deadline": {
+      "date": "2026-11-13",
+      "time": "evening, exact time unconfirmed",
+      "source": "user direct reply on2026-11-09",
+      "submission_entry": null,
+      "internal_h72_unchanged": "2026-11-12T17:16:08+08:00"
+    },
+    "filezilla_pause": {
+      "paused": true,
+      "reason": "User teammate needs FTP for one file",
+      "resume_condition": "User explicitly says uploads may resume",
+      "scope": "FileZilla and package uploads only; local work and existing server jobs continue",
+      "last_known": "First DMA16 ZIP fully uploaded/hash verified/unpacked; no new package upload authorized while pause active",
+      "client_closed_verified": true,
+      "active_transfer": false,
+      "queue_empty": true,
+      "last_window_check": "2026-11-09T20:18:00+08:00",
+      "window_check_result": "No FileZilla window; no reopen/reconnect/upload performed"
+    },
+    "first_asic_smoke": {
+      "session": "dma16_smoke01",
+      "stage": "dma16_soc",
+      "source_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
+      "driver_pid": 244469,
+      "started": "2026-11-09T20:09:16.557734",
+      "cases": [
+        "layer_01"
+      ],
+      "state": "passed",
+      "cpu_verified": true,
+      "last_observed": "2026-11-09T20:21:54.780747",
+      "finished": "2026-11-09T20:11:24.332854",
+      "summary_sha256": "4b32b136f7a5f368d2a2f3f29714e2bc2cd8b05d0c7eea420dea49ab8c9a207c",
+      "outputs": 25344,
+      "cycles": 225770,
+      "cpu_cycles": 226351,
+      "first_request_cycle": 993,
+      "final_response_cycle": 226763,
+      "simulation_host_seconds": 9.16798612099734,
+      "saturated": 0,
+      "timing_verified": false,
+      "system_power_verified": false,
+      "irq_verified": false,
+      "all_14_verified": false
+    },
+    "baseline_power_h0": {
+      "session": "d3_power07_h0",
+      "stage": "asic_power",
+      "state": "running",
+      "driver_pid": 266936,
+      "started_launcher": "2026-11-09T20:23:42.378029",
+      "gate_summary_sha256": "4e735f46f27f643c820f59b386e1e4e04eca5f02b0719a50330a2a40a6e82f8e",
+      "source": "old repaired8 baseline; new DMA16 power not yet run",
+      "last_observed": "2026-11-09T20:27:05.478446",
+      "started": "2026-11-09T20:23:42.769200",
+      "child_pid": 267785
     }
   }
 }

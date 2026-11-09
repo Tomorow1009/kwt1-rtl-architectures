@@ -8,12 +8,14 @@ import argparse
 import datetime
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import socket
 import struct
 import subprocess
+import time
 
 DATASET_SHA256 = '0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507'
 SCHEMA = 'arch03-dma16-batch-contract-v1'
@@ -52,6 +54,23 @@ def save(path, value):
 
 def digest_object(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf8')).hexdigest()
+
+
+def utc_now():
+    return datetime.datetime.utcnow().isoformat()+'Z'
+
+
+def validate_host_timing(record):
+    timing = record.get('host_timing', {})
+    for key in ('elapsed_seconds', 'simulation_seconds'):
+        value = timing.get(key)
+        require(type(value) in (int, float) and math.isfinite(value) and value >= 0,
+                'Invalid batch host timing '+key)
+    require(timing['elapsed_seconds'] >= timing['simulation_seconds'], 'Simulation exceeds enclosing host interval')
+    for key in ('started_utc', 'capture_checked_utc'):
+        require(isinstance(timing.get(key), str) and re.fullmatch(
+            r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z', timing[key]), 'Missing host timestamp '+key)
+    return timing
 
 
 def check_hashes(root, hashes):
@@ -220,6 +239,10 @@ def parse_result(text, expected_saturated, required_markers=()):
     for name in ('first_request_cycle', 'final_response_cycle', 'cycles'):
         require(type(result.get(name)) is int and result[name] >= 0, 'Invalid task timing')
     require(result['cycles'] == result['final_response_cycle']-result['first_request_cycle'] > 0, 'Task window mismatch')
+    if 'DMA16_BUS_END schema=dma16_bus_metrics_v1' in required_markers:
+        from dma16_bus_metrics import parse_metrics
+        result['bus_metrics']=parse_metrics(text,expected_window=dict(start_cycle=result['first_request_cycle'],
+            end_cycle=result['final_response_cycle'],cycles=result['cycles']))
     return result
 
 
@@ -301,6 +324,7 @@ def verified_receipt(attempt, source, identity, task):
     record = read(attempt/'receipt.json')
     require(record.get('status') == 'passed' and record['identity_sha256'] == digest_object(identity)
             and record['task'] == task, 'Receipt identity changed')
+    validate_host_timing(record)
     require(set(record['artifacts']) == {'command.json', 'simulation.log', 'capture.csv'}, 'Incomplete receipt artifacts')
     check_hashes(attempt, record['artifacts'])
     prepared = verify_prepared(source, attempt/'data')
@@ -343,9 +367,10 @@ def run_tasks(contract, tasks, output, dataset_identity, resume=False, executor=
             attempt = output/entry['attempt']
             require(sha(attempt/'receipt.json') == entry['receipt_sha256'], 'Completed receipt changed')
             verified_receipt(attempt, tasks[i]['source'], identity, tasks[i])
-        state.update(status='running', started_utc=datetime.datetime.utcnow().isoformat()+'Z')
+        state.update(status='running', started_utc=utc_now())
         save(output/'state.json', state)
         for task in tasks[len(state['completed']):]:
+            task_clock = time.monotonic(); task_started = utc_now()
             require(validate_contract(contract) == frozen, 'Runner or frozen build changed during batch')
             require(sha(Path(task['source'])/'layout.json') == task_hashes[task['key']], 'Source layout changed during batch')
             number = state['attempts'].get(task['key'], 0)+1
@@ -361,7 +386,9 @@ def run_tasks(contract, tasks, output, dataset_identity, resume=False, executor=
                 prepared = prepare_case(task['source'], attempt/'data')
                 command = command_for(contract, attempt/'data', attempt/'capture.csv', prepared['shift'])
                 save(attempt/'command.json', command)
+                simulation_clock = time.monotonic()
                 executor(command, attempt, attempt/'simulation.log', contract['timeout_seconds'])
+                simulation_seconds = time.monotonic()-simulation_clock
                 require(validate_contract(contract) == frozen, 'Runner or frozen build changed during batch')
                 verify_prepared(task['source'], attempt/'data')
                 capture = check_capture(attempt/'capture.csv', attempt/'data')
@@ -371,13 +398,24 @@ def run_tasks(contract, tasks, output, dataset_identity, resume=False, executor=
                     evidence_mode=contract['mode'], asic_executed=contract['mode'] == 'hardware',
                     timing_verified=False, system_power_verified=False, official_precision_verified=False,
                     result=result, capture=capture, prepared_manifest_sha256=sha(attempt/'data/layout_manifest.json'),
+                    host_timing=dict(started_utc=task_started, capture_checked_utc=utc_now(),
+                        elapsed_seconds=time.monotonic()-task_clock, simulation_seconds=simulation_seconds,
+                        scope='Build/source checks, preparation, simulation and capture checks; final receipt re-audit reported in state completed entry'),
                     artifacts={n: sha(attempt/n) for n in ('command.json', 'simulation.log', 'capture.csv')})
                 save(attempt/'receipt.json', record)
                 verified_receipt(attempt, task['source'], identity, task)
-                state['completed'].append(dict(task_key=task['key'], attempt=attempt.relative_to(output).as_posix(), receipt_sha256=sha(attempt/'receipt.json')))
+                state['completed'].append(dict(task_key=task['key'], attempt=attempt.relative_to(output).as_posix(),
+                    receipt_sha256=sha(attempt/'receipt.json'), finished_utc=utc_now(),
+                    host_total_seconds=time.monotonic()-task_clock))
+                measured = [item['host_total_seconds'] for item in state['completed']]
+                remaining = len(tasks)-len(measured)
+                state['host_budget'] = dict(completed_seconds=sum(measured), mean_task_seconds=sum(measured)/len(measured),
+                    remaining_tasks=remaining, remaining_seconds_with_20_percent_margin=1.2*remaining*sum(measured)/len(measured),
+                    scope='Observed host preparation/simulation/re-audit time; excludes compilation, queue waits, gate and power. Not inferred from chip cycles.')
                 save(output/'state.json', state)
             except BaseException as exc:
-                failure = dict(task_key=task['key'], attempt=attempt.relative_to(output).as_posix(), error=str(exc), type=type(exc).__name__)
+                failure = dict(task_key=task['key'], attempt=attempt.relative_to(output).as_posix(), error=str(exc), type=type(exc).__name__,
+                    started_utc=task_started, finished_utc=utc_now(), host_total_seconds=time.monotonic()-task_clock)
                 save(attempt/'failure.json', failure)
                 state['failed_attempts'].append(failure)
                 raise
@@ -385,6 +423,7 @@ def run_tasks(contract, tasks, output, dataset_identity, resume=False, executor=
         state['status'] = 'passed'
         state['outputs'] = len(tasks)*25344
         state['asic_executed'] = contract['mode'] == 'hardware'
+        state['finished_utc'] = utc_now()
         save(output/'state.json', state)
         return state
     except BaseException as exc:

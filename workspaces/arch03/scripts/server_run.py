@@ -172,12 +172,12 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','dma16_gate','dma16_power','dma16_sequence'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
     p.add_argument('--activity-cases',nargs='*',default=[],help='SoC cases to record complete-system VCD over the measured task window')
-    p.add_argument('--firmware-root',type=Path,help='DMA16 firmware directory inside this immutable bundle')
+    p.add_argument('--firmware-root',type=Path,help='Program-only firmware directory inside this immutable bundle')
     p.add_argument('--synth-run',type=Path,help='Completed ASIC synthesis directory for mapped gate verification')
     p.add_argument('--synth-summary-sha256',help='Explicit expected digest of that synthesis summary')
     p.add_argument('--gate-run',type=Path,help='Passed gate verification directory containing audited task activity')
@@ -191,18 +191,18 @@ def main():
         raise ValueError('Gate report re-audit is only for gate_soc')
     if a.gate_reports_from is not None and (a.synth_run is not None or a.synth_summary_sha256 is not None or a.activity_cases):
         raise ValueError('Gate re-audit uses only the original run synthesis/activity provenance')
-    if a.stage=='asic_power' and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
+    if a.stage in ('asic_power','dma16_power') and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
         raise ValueError('Power requires gate run, summary digest and exactly one --cases selection')
-    if a.stage!='asic_power' and (a.gate_run is not None or a.gate_summary_sha256 is not None):
+    if a.stage not in ('asic_power','dma16_power') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
         raise ValueError('Gate activity selection is only for power estimation')
-    if a.stage=='gate_soc' and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
+    if a.stage in ('gate_soc','dma16_gate') and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
         raise ValueError('Gate verification requires synthesis run and summary digest')
-    if a.stage!='gate_soc' and (a.synth_run is not None or a.synth_summary_sha256 is not None):
+    if a.stage not in ('gate_soc','dma16_gate') and (a.synth_run is not None or a.synth_summary_sha256 is not None):
         raise ValueError('Synthesis artifact selection is only for gate verification')
     if len(a.cases)!=len(set(a.cases)):raise ValueError('Duplicate case names would overwrite run artifacts')
-    if a.firmware_root is not None and a.stage not in ('dma16_soc','dma16_build'):
-        raise ValueError('Firmware variant selection is only for DMA16 execution/build')
-    if a.activity_cases and (a.stage not in ('soc','asic_soc','gate_soc','dma16_soc') or not set(a.activity_cases).issubset(a.cases)):
+    if a.firmware_root is not None and a.stage not in ('dma16_soc','dma16_build','mmio8_soc','dma16_gate','dma16_sequence'):
+        raise ValueError('Firmware variant selection is only for program-only execution/build')
+    if a.activity_cases and (a.stage not in ('soc','asic_soc','gate_soc','dma16_soc','mmio8_soc','dma16_gate') or not set(a.activity_cases).issubset(a.cases)):
         raise ValueError('Activity cases must be selected SoC cases')
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,64}',a.session):raise ValueError('Bad session')
     cfg=json.loads((ROOT/'handoff/team/server_config.json').read_text())
@@ -230,6 +230,18 @@ def main():
             if a.stage in ('dma16_soc','dma16_build'):
                 from dma16_soc import verify
                 report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='dma16_build')
+            elif a.stage=='mmio8_soc':
+                from mmio8_soc import verify
+                report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root)
+            elif a.stage=='dma16_sequence':
+                from dma16_sequence_soc import verify
+                report=verify(cfg,run,a.platform,a.cases,call,a.firmware_root)
+            elif a.stage=='dma16_gate':
+                from dma16_gate import verify
+                report=verify(cfg,run,a.synth_run.resolve(),a.synth_summary_sha256,a.cases,call,a.activity_cases,a.firmware_root)
+            elif a.stage=='dma16_power':
+                from dma16_power import estimate
+                report=estimate(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
             elif a.stage=='dma16_synth':
                 from dma16_synth import synth
                 vendor(cfg,run)

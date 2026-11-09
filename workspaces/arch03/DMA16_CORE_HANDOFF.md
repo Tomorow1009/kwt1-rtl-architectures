@@ -93,3 +93,94 @@
 - 本地runner随后增加明确记录的`dcv`兼容文件名发现，只查本轮新建目录；尚未为这项文件名选择再次重跑仿真，已有原始文件已独立审核。不重复生成750MB波形，下一次必要仿真时再验证该分支。边界审计命令为`python workspaces/arch03/scripts/local_audit_dma16_activity.py --vcd <run>/dcv --log <run>/layer_01_pf1.log --output <run>/activity_boundary_audit.json`。
 
 所有结果与工具兼容限制已回报主代理。当前本代理无运行中作业，生产文件冻结不动；无服务器操作或Git提交。
+
+## 门级monitor离线准备（2026-11-09约19:17）
+
+主代理首包固定2bd6b0f后追加任务：只新增门级monitor适配生成器及离线测试，不能改冻结RTL/source/window/monitor/综合，不操作服务器、不提交。先提出接口方案后实施，真实mapped probe由主代理完成。
+
+新增文件：`scripts/dma16_gate_monitor.py`、`tb/arch03_dma16_gate_proof.sv`、`tb/tb_arch03_dma16_gate_proof.sv`、`scripts/local_verify_dma16_gate_monitor.py`。
+
+生成器读取冻结production monitor，只生成独立SVH：DMA与MMIO使用u_arch03_accel真实边界端口；核心使用实际实例u_arch03_accel.core的out_valid/out_ready/out_row/out_column/result/saturated；共享使用u_arch03_shared端口。arb/router以各自cmd/rsp边界被动跟踪单在途及held valid，避开无功能fanout可能被综合删除的transaction_pending和a3_alias。所有DUT内部*_q及A3MEM/A3DMA别名依赖均删除并检查。真实门级五组实例路径必须另行probe；不接受任意Verilog表达式或常真替代。
+
+完成证明来自真实MMIO命令/响应配对：START前PENDING有效mask0x1f1f为0，加idle/start-ready STATUS；CLEAR后重新观察start-ready，不凭空置FIFO空。START后失效旧证明。所有12672输出ACK后新发出的STATUS、COMPLETION、PENDING、ERROR读取分别证明DONE/idle、低6位31、有效pending全0、ERROR0；仅响应延后而命令在末ACK前发出的旧快照不能当新证明。FIFO空没有绑常真。窗口finished因此延后，但end仍原lastDMAACK；后续CPU邮箱流量不会抹掉已成立的MMIO证明，fabric pending另行跟踪。error/取消/未知读数据/协议违例只能拒绝PASS。此正向单任务门级observer不是多任务取消恢复验收器，异常可保持failed而不发布成功窗口。
+
+XSim实际通过：`local_runs/dma16_gate_monitor_offline_20261109_191506_399311/summary.json`，session91976退出0。14项定向覆盖缺少初始PENDING、CLEAR后新STATUS、陈旧PENDING响应、非空FIFO、aborted/core_busy状态、错误响应/非零ERROR/unknown、额外DMA、CANCEL、arb孤立响应、router多在途及CPU mailbox pending。另真实RTL+pin_mock完整layer01/pf1：25344输出逐项一致，cycles225770；start_cycle26/end225796/finished225811，完成证明比末ACK晚15拍而计时不变。源码/布局前后哈希通过。
+
+CLI已生成同目录`port_only_candidate.svh`及JSON manifest，状态明确offline_candidate、gate_simulation_verified=false。调用示例：`python workspaces/arch03/scripts/dma16_gate_monitor.py --bindings <probed-five-instance-paths.json> --output <new-dir>/arch03_dma16_gate_monitor.svh`。门级编译还须加入新增arch03_dma16_gate_proof.sv。当前只支持简单层次标识符；若flatten导致模块/core边界不存在，不得臆测网名，需由主代理依据真实网表决定绑定/保留边界路径。
+
+结果已回报主代理与功耗适配代理。当前无运行中本地作业，生产RTL/source/window/monitor全未修改，无服务器操作/Git提交；真实映射、厂商宏、E203、SDF、门级14case及功耗仍未由本工作证明。
+
+## 同口径原MMIO8源加载本地夹具（2026-11-09约19:22）
+
+主代理追加同加载源8路参考验证，指定新增独立TB/runner，不改冻结DMA16文件或主代理8monitor。新增`tb/tb_arch03_mmio8_source_fixture.sv`和`scripts/local_verify_mmio8_source.py`，保持同名平台层次，使用原arch03_icb_accel/arch02_linear、真实arb/router/shared pin_mock，DMA主设备端绑0，加载源复用已冻结production N+1 ACK模型。
+
+procedural CPU依main_mmio8_source.c与原kwt.c的总线语义执行：CTRL2成功后读ID和STATUS低5位0，mail8 BEGIN；11744次源32读及shared32写；再执行原驱动CTRL2/ID/SHIFT/START和轮询；每个LOAD先实际读取shared半字地址一次，共23488次32位返回；每个OUTPUT读取得坐标/饱和后以SH字节掩码写回，共25344次。VALID在posedge后NBA发出，窗口cycle与实际ns差值一致。没有E203，没有模拟CPU指令周期；原monitor日志硬编码cpu_executed=true不能当CPU证明，runner强制独立NO_CPU标志和summary false。
+
+真实XSim三case（layer01/extremes/rounding）通过，76032输出逐项核对NPZ：`local_runs/mmio8_source_fixture_20261109_191951_524017/summary.json`。session58631退出0，全部case均733131夹具周期；实际周期6.666666ns。每例成功ACK分别source11744、inputwrite11744、inputread23488、outputwrite25344；运行前后生产source、8monitor、RTL和数据哈希一致。数据目录`local_runs/mmio8_source_layout14_20261109_v1`。额外独立NPZ比对这三case的result/saturated/total与正式DMA16数据完全一致。
+
+已向主代理报告8monitor只读严谨性缺口：当前m8_cleared由任意低5位0的STATUS响应置1，没有独立“确实观察到本任务CTRL2成功响应”门槛；本夹具实际做了两次CTRL2，所以正向证据有效。主代理可补seen_clear状态和负测，若改monitor应另跑对应新哈希验证，不能借本次PASS。此问题未由本代理代改。
+
+当前本代理无运行中测试，结果已回报主代理。733131不是E203软件性能，不能与DMA225770直接宣称官方速度提升；下一步真实ASIC CPU、同条件综合/PPA、门级及实际冻结条件由主代理集成。
+
+## MMIO8清状态证据修复与负测（2026-11-09约19:34）
+
+主代理明确授权修改本次新`tb/arch03_mmio8_source_monitor.svh`，修复上节seen_clear缺口，只允许改该monitor及本代理新fixture/runner/交接，不动首包DMA文件。已完成：新增m8_clear_command_seen，仅实际成功CTRL2响应置1；CTRL2/START一旦接受立即撤销旧clear/idle凭据；必须随后真实读取低5位已知零STATUS，才允许BEGIN。error响应比较改用case inequality，未知error不能当成功清除。复位撤销旧凭据；已armed/active/结束待提交的任务复位明确失败，不将取消任务变成成功任务。
+
+最终证据：`local_runs/mmio8_source_fixture_20261109_193147_494985/summary.json`，session55118退出0。6项独立真实RTL负测全部按预期fatal且无成功标记：1未clear仅STATUS0；2clear成功但未重新读STATUS；3旧凭据后再次CTRL2已接受但ACK被反压；4复位后重读STATUS0仍不可复用旧clear；5已armed任务复位；6START已消耗idle凭据。负测专门断言并记录实际STATUS=00000000，case4复位前后均为0，避免依赖默认值推断覆盖。
+
+同一最终编译/哈希下三正向layer01/extremes/rounding全部通过，76032输出，所有ACK计数完整，733131cycle不变，实际时钟6.666666ns。首轮修复（尚未加强STATUS=0日志断言）也已通过，记录保留在`mmio8_source_fixture_20261109_192904_405454`，session36395退出0；以193147最终记录作为完整证据。
+
+最终SHA256：
+- 8monitor `84f4174e81aa8f2759b4f2e5fab2048b7996a5e811f896557cec3756e876c43f`
+- 8fixture `88d7a9b6d2eef9deb9ffd80685605970b5d726e0365cd9be171162b7428a12b4`
+- 8runner `175bd2a88c6fcf14fc500b226d7d1f58e90349e05ac5db00d91bf56fa2ef13d9`
+
+取消/复位范围审核：真实CONTROL2驱动原arch03_icb_accel.abort_q，使core的rst_n失效，之后STATUS证明可观测空闲；本观察器保证成功clear响应和新idle状态都发生在BEGIN之前，替代clear未ACK不算，复位后必须重新获取凭据。原驱动在源复制后另做一次CTRL2仍合法；本监视器是单任务正向验收，不声称任意中途取消、未知注入或连续多任务恢复全覆盖。真实E203、厂商宏、门级、PPA仍未由这些夹具验证。
+
+最后比对首包linear16、DMA16engine、source、window、production DMA16monitor五文件，均与此前冻结哈希完全一致。当前无运行中本地测试，无服务器操作或Git提交；已向主代理回报全部路径、哈希及范围。
+
+## 新任务：DMA16真实CPU sequence配套（准备中）
+
+主代理追加sequence source/monitor和本地真实DMA/core/fabric夹具，只新增sequence TB/runner/交接，不修改首包单任务文件。contest_requirements正在写main_dma16_sequence.c/start_dma16_sequence.S/build_dma16_sequence.py。已只读旧8路ITCM sequence，明确不能复用其数据预填/任务计时/首任务退出逻辑。当前尚未创建sequence代码，无运行中作业。
+
+已与固件代理确认契约v1：polling，无IRQ；metadata ITCM fff0四词为magic53313631、A descriptor=(source_id<<16)|shift、B descriptor、short_timeout默认8192。默认A=source0/layer01/shift12，B=source1/rounding/shift11。固定源地址B0000000，source预读文件plusargs FIRST_LOAD32/SECOND_LOAD32；monitor用DATA_DIR/SECOND_DIR/CAPTURE_PREFIX。CPU先CANCEL/CLEAR等ready，mail[33]成功写ACK才选descriptor，要求无残留DMA/源事务及core.start_ready；mail[32]=phaseid开始阶段。选择源不向硬件预填数据。
+
+阶段1..5为source错位B0000002、input越界A007F000、output=input重叠、input_bytes46972、output_bytes50684；非法START须实际ICB error及CPU store-access-fault cause7，FIRST_ERROR3/error_phase2/error_addr40000004，零DMA。阶段6有效START，source ACK>=32仍初始装载时CANCEL，实际排空/start_ready，保留partial ACK、无输出。阶段7原kwt_dma16_run timeout8192，必须实际source ACK>0且<11744、输出0、TIMEOUT及cancel_drained；若启动开销致source0必须失败不能伪装。阶段8/9/10正常A/B/A，无DUT复位，完整独立窗口和输出逐项核对。
+
+每阶段receipt位于A0020000+(phase-1)*0x100，词0..32：phase,kind(1cfg/2cancel/3timeout/4success),rc,STATUS,COMPLETION,PENDING,FIRST_ERROR,error_addr,error_phase,source_ACK,stage_ACK,load_ACK,out_ACK,load_committed,out_committed,load_halves,out_halves,sat,cycles_lo,cycles_hi,cancel_drained,累计真实guarded_trap数,last_cause,last_epc,last_mtval,descriptor,modified_offset,modified_value,timeout_budget,pre_cancel_source_ACK,pre_cancel_stage_ACK,pre_cancel_STATUS,stats.primary_result。mail[34]=phase commit，需fence保证receipt先写完。最终mail[0]=53313650，失败bad00032，未预期trap bad00001；最终mail1rc/2完成阶段数/3当前phase/4trap数/5magic53313631/6IRQ0/7A_desc/8B_desc/9timeout。
+
+实现建议已发主代理：每阶段MMIO命令/响应配对与寄存器snapshot校验，START尝试只允许本phase；5配置错误计数独立。source选择在CPU shared成功ACK后锁存，当前CPU mailbox自身事务的NBA排空不误当残留DMA。每个有效START后在首source VALID前观察core.cancel端口脉冲和随后start_ready，证明真实PREPARE冷清。复用冻结task_window16重复arm：错误/cancel允许failed完成，成功三次各独立25344结果和饱和核验，不在首任务退出。core负向恢复与trap/timeout的真正CPU执行最终由平台固件验，procedural夹具必须标NO_CPU。
+
+下一步：等固件草稿完成做只读核对，然后新增独立arch03_dma16_sequence_source.sv、arch03_dma16_sequence_monitor.svh、tb_arch03_dma16_sequence_fixture.sv和local runner。禁止改已有single-task source/window/monitor或生产RTL，不操作服务器/提交。
+
+### sequence首轮完成／最终回归待v4
+
+已只读审核固件main/start/builder，未发现须改其代码的问题。v3固件manifest为`local_runs/dma16_sequence_firmware_20261109_v3/manifest.json`，SHA c04056ff804ae88660be2fcdc723aadbb0a53d92af7d2b49fc5220cb20e895cd；ELF5f751362ad33a01f0b4237c84ef36b809708e23f6913741451c19eb0a80b9acd；故障store80000100/resume80000104。实际bank文件CRLF与规范LF哈希区别由build_dma16_sequence.verify_runtime_sources核对token/payload并冻结实际文件SHA，不能把规范LF hash直接当文件hash。
+
+本代理已新增4文件：`tb/arch03_dma16_sequence_source.sv`、`tb/arch03_dma16_sequence_monitor.svh`、`tb/tb_arch03_dma16_sequence_fixture.sv`、`scripts/local_verify_dma16_sequence.py`。真实模块/字节顺序保持首包，新增source两个PC预读bank，只有成功SELECT写响应后且DMA/source/core已排空可切换；每个有效START后首source VALID前必须观察core.cancel脉冲和core.start_ready，证明本次PREPARE。监视器将receipt字段3..17与真实MMIO读响应快照比对，再比独立DMA/core ACK/half/结果/sat计数；最后53313650才结束，不在首任务退出。
+
+首轮实际XSim成功：`local_runs/dma16_sequence_fixture_20261109_195123_557884/summary.json`，session76690退出0，5个真实配置MMIO error零DMA；phase6独立ledger源35/初写34后取消排空；phase7局部tick超时源1348/初写1347排空；成功A/B/A各225770cycle、共76032输出，B rounding的sat4554、两次A的sat0。无DUT复位。窗口失败后字节计数停止，只显示失败前前缀（phase6窗口源34但ledger源35；phase7窗口源1347但ledger源1348），窗口end仍是最后相关ACK；失败阶段完整drain响应以独立ledger/receipt为准。只有成功8..10严格完整四段191616B。已通知root和固件代理，真实CPU runner允许该区别。
+
+夹具没有E203，配置错误响应是真的硬件ICB error，但receipt中的guarded trap值是显式模拟，不能当真实CPU trap；phase7使用本地tick超时并真实cancel，只证明硬件恢复，不证明原C mcycle timeout执行。最终marker在ARCH03_SEQUENCE_NO_CPU下明确cpu_executed=false、actual_CPU_traps_verified=false、actual_driver_timeout_verified=false。
+
+当前源码又增加了最终待验内容：每阶段commit通过后在PHASE_PASS之前输出`DMA16_SEQUENCE_RECEIPT phase=N words=<33个8位hex逗号分隔>`，供真实CPU runner保存与独立复核。三个新负测：partial期间提前切source、receipt错误fault EPC、缺失第32词，均要求明确fatal而不成功。尚未运行此增强版。原首轮summary仅对应加入这些修改之前的hash。
+
+正式plusargs：FIRST_LOAD32/SECOND_LOAD32、DATA_DIR/SECOND_DIR、CAPTURE_PREFIX、FIRST_DESCRIPTOR/SECOND_DESCRIPTOR/EXPECTED_FAULT_EPC（%h）、SHORT_TIMEOUT（%d）。成功CSV `<prefix>__task1.csv`、task2、task3（row,col,result,sat）。日志顺序ARM→DMA16_TASK_WINDOW→DMA16_SEQUENCE_RECEIPT→DMA16_SEQUENCE_PHASE_PASS，最终DMA16_SEQUENCE_PASS。真实CPU runner由contest_requirements新增dma16_sequence_soc.py，不由本代理修改。
+
+下一步等待固件代理v4 manifest（root正在修改dma16_batch计时元数据，v4需绑定新source hash），之后执行最终runner：`python workspaces/arch03/scripts/local_verify_dma16_sequence.py --vivado-bin D:/Xilinx/Vivado/2018.3/bin --data local_runs/dma16_layout_14case_20261109_h0 --firmware-manifest <v4>/manifest.json`。最终跑期间不要修改sequence四文件或builder依赖。当前无运行中本地测试；首包冻结文件未改，无server/git。
+
+### sequence最终冻结验收完成（2026-11-09约20:02）
+
+v4固件身份已固定：`local_runs/dma16_sequence_firmware_20261109_v4/manifest.json`，SHA256 `2d921e2563d7dd70b51d7d29f36b802e208a18445b3c05df2c6a086f6203ff1b`，builder `1929e60be8976c657521e324dee43ff2541e4b9ae236d40aa6516b3f362ce90a`；ELF、程序only boot、guarded EPC与v3逐字节相同，只更新验证工具身份。已绑定v4执行最终回归。
+
+最终XSim全部通过：`local_runs/dma16_sequence_fixture_20261109_200001_072693/summary.json`，session58783退出0。三个独立负测：phase6仍活动时提前SELECT切源、phase1 receipt错误fault EPC、phase1缺少receipt[32]，均精确预期fatal且没有sequence成功标记。随后完整10phase、A/B/A 76032结果/饱和逐项通过，三个完整任务225770cycle；中间rounding/shift11 sat4554，layer01/shift12两次sat0。全部源、数据及v4 manifest前后哈希审计通过。
+
+每phase现在额外输出完整33词receipt，日志顺序明确ARM→WINDOW→RECEIPT→PHASE_PASS。`summary.json.receipts`保存原词数组，PHASE_PASS保存独立总线计数。成功8..10全四段计数严格相同；失败1..7的window字节仅失败前前缀，phase ledger/receipt包含最后排空ACK（该差别已纳入真实CPU runner parser）。新的monitor还明确拒绝unknown MMIO error/read data和未知core idle/ready，不把X当可切源状态。
+
+最终sequence文件SHA256：
+- source `60c2832c66c80ed3c8b67cc7dac1aee6ca43e853fcbbda1f6a966bfe20fd9820`
+- monitor `93259f9e028f092c7b612e5b87a3867fb9abf9314ee37f31d201cbc1ab5604f2`
+- fixture `91ba2a28e04e6ce8dd1cee7f5017a2ae8f6dc64cf9ef9feaa97200218c1636ac`
+- runner `57f88e5fc165756e6a0dbe6d50223e50836527d3bb7987e05dc65e5b39be4fee`
+
+root与contest_requirements均已收到最终路径/hash/marker协议。contest负责`dma16_sequence_soc.py`实际ASIC CPU入口；它可逐阶段用本日志核验解析结构，但最终必须拒绝NO_CPU标记，不得改日志冒充CPU。当前结果仅真实硬件数据通路/错误响应/排空/冷清/A-B-A，无实际E203、guarded trap或原C driver timeout执行证据；无ASIC厂商宏/门级/PPA声明。当前无运行中本地作业，首包单任务文件未改，无服务器操作或Git提交。

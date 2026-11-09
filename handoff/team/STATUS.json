@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "local_DMA16_complete_initial_ASIC_integration_package_preparation",
+    "phase": "first_DMA16_real_ASIC_smoke_passed_old_power_fix_running",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Finish local integration review; commit/package both polling and IRQ; upload via board Linux FileZilla; real fixed-platform ASIC smoke then IRQ and14; new synthesis and evidence.",
+    "next": "Read old baseline power fix outcome under shared lock, then firstpackage IRQ and all14 ASIC. Prepare follow-on metrics/gate/sequence locally; FileZilla remains paused until user resumes.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -140,7 +140,7 @@
     "asic_cpu_smoke_verified": true,
     "asic_matrix_suite_verified": true,
     "asic_cpu_outputs": 354816,
-    "source_commit_scope": "Old ASIC14 runtime 5946c54 unchanged; synth07 completed and read, no current DMA16 ASIC pass. New uncommitted DMA16 local tests listed separately.",
+    "source_commit_scope": "Historical repairedASIC14 remains5946c54; first DMA16 runtime2bd6b0f firstpollinglayer_01 passed. Follow-on observer/tools are separate uncommitted worktree changes.",
     "numeric_preparation_source_commit": "31418b21e7b1ae38bb05397497e3f22998848516",
     "d1_evidence": "evidence/UNDERGRAD_D1_20261109.json",
     "whole_soc_dc_scope": "Old synth07 reports complete, setup/hold positive, full constraint/gate/power review pending; not DMA16 netlist.",
@@ -153,12 +153,12 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": null,
+    "active_session": "d3_power07_h0",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
+      "verified_remote_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
       "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
       "main_merged": false
     },
@@ -167,6 +167,29 @@
     "active_plan": "../../workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md",
     "dma16_h0": "2026-11-09T17:16:08+08:00",
     "dma16_verified": false,
-    "dma16_evidence": "evidence/DMA16_IMPLEMENTATION_20261109.json"
+    "dma16_evidence": "evidence/DMA16_IMPLEMENTATION_20261109.json",
+    "dma16_source_commit": "2bd6b0f0075d7e0a61809cd7f70fc990e7364e85",
+    "dma16_server_uploaded": true,
+    "dma16_asic_verified": true,
+    "submission_deadline": {
+      "date": "2026-11-13",
+      "time": "evening, exact time unconfirmed",
+      "source": "user direct reply on2026-11-09",
+      "submission_entry": null,
+      "internal_h72_unchanged": "2026-11-12T17:16:08+08:00"
+    },
+    "filezilla_pause": {
+      "paused": true,
+      "reason": "User teammate needs FTP for one file",
+      "resume_condition": "User explicitly says uploads may resume",
+      "scope": "FileZilla and package uploads only; local work and existing server jobs continue",
+      "last_known": "First DMA16 ZIP fully uploaded/hash verified/unpacked; no new package upload authorized while pause active",
+      "client_closed_verified": true,
+      "active_transfer": false,
+      "queue_empty": true,
+      "last_window_check": "2026-11-09T20:18:00+08:00",
+      "window_check_result": "No FileZilla window; no reopen/reconnect/upload performed"
+    },
+    "dma16_asic_scope": "First immutable2bd6b0f polling layer_01 only:25344 outputs,225770 full source-to-output cycles; all14/IRQ/PPA/sequence/final1200 unverified"
   }
 }
