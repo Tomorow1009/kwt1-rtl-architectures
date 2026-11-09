@@ -1,6 +1,6 @@
 # 架构三：E203 System Bus 集成
 
-**云端已同步，服务器验证继续运行。** 最新 `5946c54` portcheck 包通过本地干净校验、Linux FileZilla 上传及服务器 402 个输入哈希核验；`d3_synth07` 于 11:18:46 启动，驱动 PID 139120。前次 `synth06` 因第二个 LF 名称漏 `_o_` 立即失败，未生成网表；现已用服务器完整输出清单独立校正。严格时序、完整门级和系统功耗仍待验。计划见 [实施计划](IMPLEMENTATION_PLAN_20261109.md)，实时进度见 [执行检查点](EXECUTION_CHECKPOINT.json)。
+**当前按用户要求暂停。** 开发板 FileZilla 和 VNC 已退出，上传队列为空，本机连接代理已停止。远端 `d3_synth07` 在 11:30:53 最后检查时仍运行（驱动 139120、DC 子进程 141535），未停止远端进程或关闭远端终端；它可能在暂停期间自行完成。`5946c54` portcheck 包的 402 个服务器输入哈希已通过，三个 LF 输出已实际正确绑定。恢复时先回读[实施计划](IMPLEMENTATION_PLAN_20261109.md)和[执行检查点](EXECUTION_CHECKPOINT.json)的 `pause2`，检查原运行结果与共享锁，不重复启动。
 
 2026-11-09 正执行本科组修订计划：600 条开发样本数值评估、真实 CPU 连续恢复、修正配置 ASIC 分支 14 用例（`d3_full02`，354,816 输出）均已通过。旧配置门级首层和完整任务活动审计通过；功耗首轮因 PT-063 被拒绝，环境与详细报告修正包已上传。`d3_synth04` 锁存器为 0、hold 转正；随后 `d3_synth05` 因 LF 输出端口的小写 o 误写成 0 而不可验收。精确名称及 DC 约束出错立即停止修正已本地测试，待新独立综合；严格时序和完整门级/功耗仍未完成。
 
@@ -105,7 +105,7 @@ python3 workspaces/arch03/scripts/server_run.py asic_synth --session synth01
 python3 workspaces/arch03/scripts/server_run.py gate_soc --session gate01 --synth-run <completed-asic_synth-directory> --synth-summary-sha256 <verified-summary-sha256> --cases layer_01
 ```
 
-`tcm` 只验实际 SRAM 功能模型；`asic_link` 只检查完整 SoC 的工艺链接与宏数量，均是新准备入口、尚未服务器运行。`soc --activity-cases layer_01` 可生成该用例全系统同窗口 VCD；使用新固件/监视器，不能拿旧镜像通过新的计时验收。VCD 存在不代表功耗已估算或活动已正确映射。
+`tcm` 检查实际 SRAM 功能模型；`asic_link` 检查完整 SoC 的工艺链接与宏数量，两者已有实际服务器通过记录。`soc --activity-cases layer_01` 可生成该用例全系统同窗口 VCD；固件、监视器和测试输入须与受测包一致。VCD 存在不代表功耗已估算或活动已正确映射。
 
 运行前仍须核对共享桌面、已有 EDA 进程和临时修改；入口复用 `.arch02_team_lock` 目录锁。
 每个阶段只运行一次；失败保留，修复后提交新包/新会话。中断时若子进程仍运行，锁保留，禁止直接重启。
@@ -113,13 +113,21 @@ python3 workspaces/arch03/scripts/server_run.py gate_soc --session gate01 --synt
 
 整机首轮实际 DC 暴露了端口拼写、工具周期舍入、多路径组和虚拟常量分类问题，失败报告均保留。当前综合请求周期为 `6.666666 ns`，仍严格检查工具实际读取值不得大于 `20/3 ns`；不接受将 `6.666667 ns` 视为舍入容差。约束错误会立即退出。DC 的两个逻辑常量源单列零综合面积，不表示物理 tie cell 已插入或免费。
 
-`gate_soc` 要求完整综合阶段及明确摘要哈希，复核网表、SDC、输入及当前 RTL/固件源码匹配。它采用映射后 ITCM 实例路径预装启动镜像、复用实际 CPU 总线写回检查，并支持 `--activity-cases layer_01`。当前此入口只通过本地准备测试，尚未服务器执行；即便门级功能通过，也不会自动认可源综合的负裕量、未约束路径或功耗。该入口没有 SDF，不能当作带延迟时序仿真。
+`gate_soc` 要求完整综合阶段及明确摘要哈希，复核网表、SDC、输入、当前 RTL/固件以及平台安装器和工艺绑定的一致性。它采用映射后 ITCM 实例路径预装启动镜像、复用实际 CPU 总线写回检查，并支持 `--activity-cases layer_01`。历史网表首层已实际通过，当前修正配置仍需完整 14 用例；门级功能通过不会自动认可负裕量、未约束路径或功耗。该入口没有 SDF，不能当作带延迟时序仿真。
 
-系统功耗准备入口 `asic_power --session <new> --gate-run <passed-gate-directory> --gate-summary-sha256 <digest> --cases layer_01` 只接受通过功能检查且带完整窗口 VCD 的门级用例。它校验所有来源，按监视器的纳秒起止时间调用 PrimeTime PX，保留整机/层级/SRAM 功耗和活动未标注清单。状态仍为 `reports_ready_review_required`；当前只有本地脚本验证，没有实际功耗结果或许可证验证。提取寄生参数、时钟网络/线负载假设、未知活动、宏模型及 µW/mW 单位差异都须另行审查，不按零处理缺项。
+完整门级套件省略 `--cases` 时默认运行 12 层、extremes、rounding。为首层同时采集全窗口活动的命令形式为：
 
-`asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1，与初步综合模式一致；这不代替门级、时序或功耗验证。新 `memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零分电源漏电项。共享 SRAM 官方计分归属与物理面积单位仍需独立审查。
+```text
+python3 workspaces/arch03/scripts/server_run.py gate_soc --session <新的唯一会话名> --synth-run <该配置已完成的asic_synth目录> --synth-summary-sha256 <已核对摘要SHA256> --activity-cases layer_01
+```
 
-启用活动记录时，`activity.py` 流式校验 VCD：必须包含 CPU、互连、加速器、共享 SRAM、ITCM/DTCM，且只能有一段与实际任务起止时间一致的 `$dumpon`/`$dumpoff` 区间。截断、错窗口、缺部件或未声明信号会失败；未知值事件单独计数。它只核验波形范围、窗口和完整性，不代表综合网表活动映射覆盖或功耗通过。目前仅用合成 VCD 测试解析器，真实 VCS 波形仍待服务器执行。
+必须先取得对应综合结果并核对共享锁，不能把示例占位符直接执行，也不能重用已有会话。完整活动扫描会读取整个波形，期间仍由驱动持有同一协作锁。
+
+系统功耗入口 `asic_power --session <new> --gate-run <passed-gate-directory> --gate-summary-sha256 <digest> --cases layer_01` 只接受通过功能检查且带完整窗口 VCD 的门级用例。它校验所有来源，按监视器的纳秒起止时间调用 PrimeTime PX，保留整机/层级/SRAM 功耗和活动未标注清单。状态仍为 `reports_ready_review_required`。旧配置已实际取得 PrimePower 许可证并产生报告，但 PT-063 启动错误使该运行不可验收；LC 子进程环境和详细单位/未知跃迁/边界网络报告修正仍待新运行。提取寄生参数、时钟网络/线负载假设、未知活动、宏模型及 µW/mW 单位差异须另行审查，不按零处理缺项。
+
+`asic_soc` 不定义全局 FPGA，使用真实 TCM/共享/加速器 SRAM 功能模型和指定标准单元功能模型。时钟模式观察器在完整任务期间核对 test_mode=0、pllbypass=1、plloutdivby1=1 和启动选择，与稳定任务综合模式一致；修正配置 14 用例已通过，这不代替门级、时序或功耗验证。`memory_technology.json` 固定两份 SRAM Liberty 指纹和功耗组数量：`cell_leakage_power=0` 并不表示零漏电，库中有非零条件漏电项。物理面积单位已经 LEF 交叉核对，共享 SRAM 官方计分归属仍未确定。
+
+启用活动记录时，审计器要求 VCD 包含 CPU、互连、加速器、共享 SRAM、ITCM/DTCM，且只能有一段与实际任务起止时间一致的 `$dumpon`/`$dumpoff` 区间。截断、错窗口、缺部件或未声明信号会失败；未知值记录单独计数。门级入口使用 `activity_fast.py` 和原生完整流扫描器，同时计算完整文件 SHA256；历史 29.86 GB 真实 VCS 波形已通过该审计。它只核验波形范围、窗口和完整性，不代表新网表活动映射或系统功耗通过。
 
 完成同一受测包的 `icb`、`soc`、`dc_accel`、`dc_shared` 后，从包含已提交审计工具的新完整包执行：
 
@@ -131,7 +139,7 @@ python3 workspaces/arch03/scripts/audit.py <受测完整包绝对路径> --sessi
 它独立重算 14 组整数参考，重新检查 ICB/真实 CPU 的全部输出与饱和计数、源码/捕获/综合产物哈希，并以匹配的库重新加载两个块的 DDC 核对链接、锁存器和宏数量。
 输出目录必须不存在；运行使用同一团队锁。`ARCH03_AUDIT_PASS` 仍明确表示 `whole_soc_dc=false physical_signoff=false`，不扩大通过范围。
 
-尚待完成：平台 TCM/时钟/复位的工艺适配与整机 DC、严格 150 MHz 重验、综合后功能、真实 CPU 连续任务及系统功耗。600 样本开发精度已另行完成；官方评测数据在评测后公布，不等待其发布才开发通用工具。旧 100 样本的 1,200 组 E203 批量验证保留为增强项，仍暂停。
+尚待完成：新配置严格 150 MHz 及约束覆盖审核、完整 14 用例门级功能、同窗口系统功耗和最终计分面积归属。工艺组件、修正配置 ASIC CPU 14 用例、连续恢复和 600 样本开发精度已有各自范围的通过记录。官方评测数据在评测后公布，通用输入工具不以其发布为前提。旧 100 样本的 1,200 组 E203 批量验证保留为增强项，仍暂停。
 这些条件通过前 PR 保持草稿，不能合并并宣布完成。
 
 ## 服务器 100 样本批量验证

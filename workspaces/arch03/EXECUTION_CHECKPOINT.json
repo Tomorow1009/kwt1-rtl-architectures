@@ -10,7 +10,7 @@
     "EXECUTION_CHECKPOINT.json"
   ],
   "current_branch": "codex/light-light126/undergrad-d1-numerics",
-  "last_completed_stage": "Portcheck 5946c54: 402 inputs, 14 integer cases and firmware layouts, 9 clean focused tests passed. Linux FileZilla upload and server safe-unpack passed. Synth07 running since 11:18:46, driver 139120.",
+  "last_completed_stage": "USER PAUSED again. Portcheck 5946c54 uploaded and 402 server hashes passed. Synth07 was running at 11:30:53 (driver 139120, DC 141535), three LF outputs bound. Board FileZilla/VNC exited, queue empty, local connection helpers stopped. Remote process/desktop left intact.",
   "completed": [
     "600 development samples, 7200 complete FC1 tasks, all task/layer precision thresholds passed",
     "max layer NRMSE 0.14941871%, max task 0.22915377%, no clipping/saturation",
@@ -44,13 +44,15 @@
     "action": "Upload current and subsequent committed, verified project source/firmware/test packages through Linux FileZilla",
     "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
     "current_package": "../../local_runs/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip",
-    "reason": "User upload authorization and resume remain active. 17 total verified package transfers; latest portcheck server-unpacked and synth07 running.",
+    "reason": "Upload authorization persists, but user has explicitly paused new local/server work. Latest portcheck already uploaded/unpacked; existing remote synth07 left running.",
     "user_response": "允许按上述范围上传并继续服务器验证"
   },
   "next_independent_work": [
-    "Monitor synth07 actual three LF outputs, fail-fast SDC, four CDC pins, strict setup/hold, all constraints and coverage; do not duplicate job",
-    "After valid synthesis, complete mapped 14-case functionality and same-config full-task activity/power",
-    "Review final area, units, coverage and energy; finish delivery evidence and unresolved official scoring/submission requirements"
+    "WAIT for explicit user resume; reread implementation plan and reconcile this checkpoint",
+    "Reconnect board with fresh window inventory and existing fixed-target VNC/FTP helpers as needed",
+    "Inspect preserved d3_synth07 state, final report if finished, and actual IC/.arch02_team_lock; do not duplicate or restart",
+    "Review strict timing/coverage/area; after valid synthesis complete mapped 14 cases and same-config full-window power",
+    "Finalize unified design report and remaining official scoring/submission requirements"
   ],
   "still_unverified": [
     "Strict 150 MHz setup/hold and constraint coverage in new repair configuration",
@@ -65,7 +67,7 @@
     "Observe shared desktop/processes/lock before starting any new server job",
     "Local ICB PASS is not CPU, vendor macro, timing or power acceptance"
   ],
-  "server_readonly_job": "Synth07 driver 139120 owns actual IC/.arch02_team_lock. Remote tab 4 is job terminal (cwd reports package); tab 3 diagnostic (cwd SDC package). Linux VNC and FileZilla are open.",
+  "server_readonly_job": "Remote synth07 left running at 11:30:53; driver 139120, child DC 141535, actual team lock owned. Remote terminal preserved: tab 3 diagnostic cwd SDC bundle, tab 4 job cwd reports bundle. Board VNC/FileZilla closed; all window IDs and helper PIDs must be refreshed on resume.",
   "d2_local_runs": {
     "tcm_pin_mock": "local_runs/tcm_20261109_014118_056334_pin_mock",
     "tcm_behavioral": "local_runs/tcm_20261109_014118_658573_behavioral",
@@ -96,7 +98,7 @@
     "clean_verified": true,
     "server_uploaded": false
   },
-  "uncommitted_follow_on": "Evidence and documentation only; frozen portcheck runtime source 5946c54263868bb701bebe515a285ffb9f238e47.",
+  "uncommitted_follow_on": "Pause checkpoint and README status reconciliation only; no runtime changes beyond frozen 5946c54.",
   "sequence_pending_design": {
     "firmware": "sw/main_sequence.c plus build_sequence_firmware.py; A, B, poison17/abort, timeout1, recovery A; sources at ITCM 0x80010000/0x80020000; shifts at 0x8000fff0/fff4",
     "cases": [
@@ -1315,7 +1317,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+    "verified_remote_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
@@ -1421,6 +1423,45 @@
       "server_synth07_preflight.png",
       "server_synth07_start.png",
       "server_synth07_state.png"
-    ]
+    ],
+    "last_observed": "2026-11-09T11:30:53.840890",
+    "child_pid_at_last_observation": 141535,
+    "left_running_on_user_pause": true,
+    "lf_outputs_actual_bound": true,
+    "lf_binding_screenshot": "server_synth07_bound_progress.png"
+  },
+  "pause2": {
+    "status": "paused_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "requested_scope": "User powering off board; close board FileZilla/VNC and pause local tasks, preserve remote Linux jobs.",
+    "board_vnc_closed": true,
+    "board_filezilla_closed": true,
+    "transfer_queue_empty": true,
+    "board_shutdown_by_assistant": false,
+    "remote_processes_stopped": false,
+    "remote_desktop_preserved": true,
+    "remote_last_checked": "2026-11-09T11:30:53.840890",
+    "remote_session": "d3_synth07",
+    "remote_status_at_last_check": "running",
+    "remote_driver_pid": 139120,
+    "remote_child_pid": 141535,
+    "team_lock_present_at_last_check": true,
+    "local_connection_helpers_stopped": [
+      10044,
+      23248
+    ],
+    "screenshots": [
+      "pause2_server_state.png",
+      "pause2_viewer_closed.png",
+      "pause2_board_apps_closed.png"
+    ],
+    "resume_rule": "Wait for explicit user resume. Reread original implementation plan or exact repository mirror and reconcile checkpoint. Refresh board window IDs and connection helpers. Inspect synth07 state and actual shared lock before any new job; synth07 may finish while paused. Never restart it or clear its lock automatically."
+  },
+  "design_report": {
+    "path": "workspaces/arch03/DESIGN_REPORT_20261109.md",
+    "status": "draft",
+    "cloud_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
+    "final_timing_area_power_pending": true
   }
 }

@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09 Asia/Shanghai",
-  "status": "full02_passed_portcheck_synth07_running",
+  "status": "paused_by_user_synth07_left_running_portcheck_verified",
   "authorization": "User explicitly allowed current and subsequent verified source, firmware and test packages through board Linux FileZilla to this destination, and server validation.",
   "destination": "icdesigns0.nicu.cn:18888 /IC/light-light126-undergrad-d2-20261109",
   "server_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
@@ -1397,7 +1397,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
+    "verified_remote_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
     "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
     "main_merged": false
   },
@@ -1498,6 +1498,45 @@
       "server_synth07_preflight.png",
       "server_synth07_start.png",
       "server_synth07_state.png"
-    ]
+    ],
+    "last_observed": "2026-11-09T11:30:53.840890",
+    "child_pid_at_last_observation": 141535,
+    "left_running_on_user_pause": true,
+    "lf_outputs_actual_bound": true,
+    "lf_binding_screenshot": "server_synth07_bound_progress.png"
+  },
+  "pause2": {
+    "status": "paused_by_explicit_user_request",
+    "date": "2026-11-09",
+    "timezone": "Asia/Shanghai",
+    "requested_scope": "User powering off board; close board FileZilla/VNC and pause local tasks, preserve remote Linux jobs.",
+    "board_vnc_closed": true,
+    "board_filezilla_closed": true,
+    "transfer_queue_empty": true,
+    "board_shutdown_by_assistant": false,
+    "remote_processes_stopped": false,
+    "remote_desktop_preserved": true,
+    "remote_last_checked": "2026-11-09T11:30:53.840890",
+    "remote_session": "d3_synth07",
+    "remote_status_at_last_check": "running",
+    "remote_driver_pid": 139120,
+    "remote_child_pid": 141535,
+    "team_lock_present_at_last_check": true,
+    "local_connection_helpers_stopped": [
+      10044,
+      23248
+    ],
+    "screenshots": [
+      "pause2_server_state.png",
+      "pause2_viewer_closed.png",
+      "pause2_board_apps_closed.png"
+    ],
+    "resume_rule": "Wait for explicit user resume. Reread original implementation plan or exact repository mirror and reconcile checkpoint. Refresh board window IDs and connection helpers. Inspect synth07 state and actual shared lock before any new job; synth07 may finish while paused. Never restart it or clear its lock automatically."
+  },
+  "design_report": {
+    "path": "workspaces/arch03/DESIGN_REPORT_20261109.md",
+    "status": "draft",
+    "cloud_commit": "1f116254bb84eb3d1bd24d196fb0747c677ba9e0",
+    "final_timing_area_power_pending": true
   }
 }

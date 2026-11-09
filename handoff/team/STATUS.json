@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "portcheck_synthesis_running",
+    "phase": "paused_by_user_remote_synth07_left_running",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Monitor synth07 and review strict timing/coverage; then mapped 14-case functionality and same-config full-window power.",
+    "next": "Wait for user resume. Inspect preserved synth07 completion and actual shared lock before continuing; no remote process stopped. Board clients and local connection helpers exited.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -152,7 +152,7 @@
     "whole_task_activity_audit_verified": true,
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
-    "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause",
+    "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
     "active_session": "d3_synth07",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
