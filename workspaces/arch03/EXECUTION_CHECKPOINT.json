@@ -3,6 +3,7 @@
   "timezone": "Asia/Shanghai",
   "user_instruction": "Continue while useful work is possible. After EVERY context compaction, reread the implementation plan and reconcile completed, unverified, and remaining work before acting.",
   "reread_after_compaction": [
+    "../../CONTEXT_HANDOFF.md",
     "../../../2026芯片设计赛道本科组_实施计划_20261109.md",
     "../../AGENTS.md",
     "../../handoff/team/STATUS.json",
@@ -1474,5 +1475,18 @@
     "remote_last_observed": "2026-11-09T11:30:53.840890",
     "previous_cloud_verified_commit": "baefa55354f00af9ff4c04af1ed3f306ca82df43",
     "instruction": "Compare updated plan against recorded completed, unverified and remaining work before resuming. Preserve pause unless user instructs execution."
+  },
+  "before_compaction": {
+    "required": true,
+    "document": "../../CONTEXT_HANDOFF.md",
+    "record": [
+      "completed_with_evidence",
+      "unfinished_failed_and_unverified",
+      "attempted_paths_and_outcomes",
+      "active_plan_and_latest_user_instruction",
+      "frozen_configuration_and_last_observed_remote_state",
+      "next_steps_and_preservation_constraints"
+    ],
+    "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   }
 }
