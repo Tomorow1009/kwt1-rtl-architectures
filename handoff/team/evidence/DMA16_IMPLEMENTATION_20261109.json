@@ -902,9 +902,9 @@
     "driver_pid": 34122,
     "started_launcher": "2026-11-10T00:50:35.105734",
     "started": "2026-11-10T00:50:35.684215",
-    "last_observed": "2026-11-10T03:12:11.764474",
-    "child_pid_last": 143794,
-    "child_log_last": "layer_11.log",
+    "last_observed": "2026-11-10T03:20:26.602751",
+    "child_pid_last": null,
+    "child_log_last": "layer_11_activity_scan.log",
     "expected_cases": 14,
     "expected_activity_cases": 12,
     "completed_cases": 10,
@@ -936,7 +936,7 @@
       "layer_09",
       "layer_10"
     ],
-    "child_cpu_percent_last": 96.2
+    "child_cpu_percent_last": 99.7
   },
   "contention_package": {
     "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -1170,5 +1170,30 @@
     "ftp_disconnected": true,
     "actual_old_sram_format_profile_passed": true,
     "actual_old_report_used_for_new_power": false
+  },
+  "mmio8_report_local": {
+    "status": "local_synthetic_contracts_passed",
+    "module": "workspaces/arch03/scripts/mmio8_report.py",
+    "related_tests": 50,
+    "actual_mmio8_full_export_executed": false,
+    "server_uploaded": false,
+    "production_rtl_firmware_changed": false,
+    "required_cases": 14,
+    "required_activity_layers": 12,
+    "preserves_exact_first_valid_phase": true,
+    "default_dma16_export_unchanged": true
+  },
+  "remaining_run_queue": "workspaces/arch03/FINAL_RUN_QUEUE_20261110.md",
+  "final_batch_contract_rechecked": {
+    "observed": "2026-11-10T03:14:52.583005",
+    "files": 288,
+    "mode": "hardware",
+    "scope": "asic_rtl_functional",
+    "boot_scope": "firmware_only_no_task_inputs",
+    "shifts": [
+      11,
+      12
+    ],
+    "actual_batch_started": false
   }
 }

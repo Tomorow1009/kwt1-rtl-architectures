@@ -1,5 +1,9 @@
 # 原8路同源对照的门级及功耗入口
 
+03:20新增本地报告入口：`mmio8_report.py`要求本版本真实ASIC14、新综合网表门级14、12个完整活动窗口及绑定的功耗摘要，导出JSON、逐层/模块/汇总CSV及中文报告。它使用138宏范围、原8路固件与source布局，比较全部14例输出/饱和，拒绝DMA16/旧BEGIN/预装ITCM证据；能量保留首VALID实际相位，缺层功耗不补零。50项相关测试通过；仍只有本地合成测试，没有实际新MMIO8 PPA或完整导出，尚未上传本次新入口。共享DMA16写出器仅增加可选标题和回执schema，默认行为未改变，生产RTL/固件未变。
+
+入口：`python3 workspaces/arch03/scripts/mmio8_report.py --request <新JSON> --output <不存在目录>`。请求schema为`mmio8-source-report-request-v1`；asic/synthesis/gate各含run及sha256，power为可选数组，history保留failed/stopped/unverified记录。最终1200候选回归不挂在本对照请求上，禁止混用DMA16批量证据。所有批准功耗/能耗及验收标志继续保留null/false，需实际报告和独立审核。
+
 03:13更新：新增数值工具已随80b54d1包完成651输入、五固件和116项干净检查；FileZilla上传成功，服务器03:11:28核验全输入。真实旧PT SRAM报告的138宏profile解析通过，默认162宏profile按预期拒绝。实际MMIO8新综合/门级/功耗尚未运行；旧报告只用于格式检查。当前仍等待DMA16 gate03全14/12活动完成。
 
 02:56更新：代码已本地提交4310d9b，独立648文件包完成CRC/逐文件SHA/五固件/112项干净检查并上传。服务器02:53:37安全解包、02:54:15全部输入核验通过；FileZilla已断开。生产RTL及正式IRQ固件与236包一致。新MMIO8综合/门级/功耗仍未执行；以下“尚未打包上传”只对应初次工具完成时刻。GitHub同步因自动审批要求具体目的地确认仍待用户答复，未绕过。

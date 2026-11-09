@@ -235,7 +235,7 @@ def write_outputs(report, output):
                 entry.update(case=row['case'], module=name, dynamic_w=values['derived_dynamic_w'],
                              total_print_rounding_bound_w=values['rounding_bound_w']['total'], system_power_verified=False)
                 writer.writerow(entry)
-    lines = ['# 架构三 DMA16 冻结配置证据汇总', '',
+    lines = ['# '+report.get('architecture_label', '架构三 DMA16')+' 冻结配置证据汇总', '',
         '本报告由原始运行摘要及文件哈希生成。真实 ASIC 14 例、无 SDF 门级 14 例和 12 个完整活动窗口通过；时序、面积归属及系统功耗仍需独立审核，不能视为最终参评验收。', '',
         '统一计时为首个源请求 valid 至最后结果写响应，包含首请求等待及共享 SRAM 入库；每任务 191,616 B、1,622,016 MAC。声明工艺条件为 SS、0.99 V、125°C，工具周期 6.666666 ns；布局前估算不含提取寄生或物理时钟树。', '',
         '12 任务平均周期：'+aggregate['mean_cycles']+'；名义 150 MHz 吞吐：'+aggregate['nominal_150mhz_tasks_per_second']+' task/s。', '',
@@ -253,7 +253,7 @@ def write_outputs(report, output):
     lines += ['- '+x for x in report['unverified']]
     lines += ['- %s：%s；`%s`。' % (h['status'], h['description'], h['run']) for h in report['history']]
     with (output/'report_zh.md').open('x', encoding='utf8') as stream: stream.write('\n'.join(lines)+'\n')
-    receipt = dict(schema='dma16-evidence-export-receipt-v1', artifacts={p.name: sha(p) for p in output.iterdir() if p.is_file()})
+    receipt = dict(schema=report.get('receipt_schema', 'dma16-evidence-export-receipt-v1'), artifacts={p.name: sha(p) for p in output.iterdir() if p.is_file()})
     with (output/'receipt.json').open('x', encoding='utf8') as stream: json.dump(receipt, stream, indent=2)
 
 
