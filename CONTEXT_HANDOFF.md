@@ -1,6 +1,6 @@
 # 当前工作与上下文交接
 
-更新时间：2026-11-09，北京时间。每次准备压缩上下文前更新本文件；压缩后先重读本文件、AGENTS.md、当前计划和执行检查点。
+更新时间：2026-11-10，北京时间。每次准备压缩上下文前更新本文件；压缩后先重读本文件、AGENTS.md、当前计划和执行检查点。
 
 ## 当前要求与停点
 
@@ -21,6 +21,16 @@
 ## 最新实施检查点（2026-11-09约18:49）
 
 ### 用户恢复与云端同步（本节优先于下方暂停记录）
+
+- **01:04扫描状态复核**：01:03:19.569066直接读取共享owner.json确认gate03 driver34122、实际scanner child **38566**，`layer_01_activity_scan.log`为0字节，进程存在，尚未输出最终审计JSON。先前小字体把38566转录为38564，针对38564的“process ended”查询不代表实际scanner结束；本节纠正，不重启。全文件扫描仍进行，已接受其时间开销；大波形不会采样或跳过。
+
+- **00:58追加**：gate03最后00:57:32.679234仍running，已完成首层VCS并通过新106位端口头审计，正在完整`layer_01_activity_scan.log`（child38564）；VCD8745588450字节，case_progress尚空。不能重启/跳过完整扫描，也不能把这一中间状态称首层全部通过。新竞争工具源码已云端525831d，638包三端核验齐全；目前只有最新证据/报告/交接文档未再次提交。恢复优先核对扫描结果；仍未写正式报告生成器。
+
+- **00:56压缩前停点**：云端最新已push/ls-remote核对`525831d4ca6e65a506f673ebd9a2912072496c03`；生产受测RTL仍fcd445f，正式IRQ固件未改。MMIO8 `mmio8_source02` 14例真实ASIC/E203 **全部通过354816输出**，finished00:48:11.467276。正确摘要SHA `fb712c89750950ffbfb8357222affea0ac0540788e744bbb1b14d38ecf3fc5f5`，00:49:36.693275服务器逐字节assert通过。所有14例3843121周期，12层零饱和、extremes6336/rounding4554；合计53803694周期。150MHz换算39.03077732915513task/s、63.30854532032689MMAC/s。原PR5 kwt.c未改，保守整周期计数仍保留首事件1ns相位的精确elapsed；与DMA16的225770周期比约17.02228，仅为当前同源RTL对照，尚非两版PPA共同验收。
+- **当前远端任务唯一为a53包`dma16_gate03`**：driver34122，launcher00:50:35.105734、started00:50:35.684215；最后00:53:59.780859 running，probe/compile已通过，child36235=layer_01.log，completed=[]。仍使用fcd `dma16_fix_synth01`网表，SHA`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`；默认14例＋layer_01..12全部活动。不要重启/清锁。gate02保留为活动头审计失败，非通过。
+- 新竞争包`light-light126-contention-dma16-20261110_004532-525831d4ca6e.zip`，16472898字节、638文件，SHA`c88f30be27798b5341f8bb1258859e1fe56f8a94e6d4d84eeaf24e3ca95c458b`。干净解包CRC/逐文件hash/五固件/80tests通过，audit=`local_runs/dma16_contention_clean_audit_20261110_0046/receipt.json`，SHA`a56d5107bb4fc1ce30d196979f07d039e6dfd896d79f561924b60750549154fc`。板端`/home/root/undergrad-contention-20261110/<zip>`已核验；FileZilla成功33秒、队列空、Ctrl+D断开并最小化。服务器00:52:03.335143校验zip并安全解包，00:53:59.780859 `inputs()`核对638文件/提交。**尚未执行竞争CPU**；待gate03/首层功耗后串行安排`dma16_contention --cases layer_01 rounding`，用525包的firmware_contention，不挤占当前共享锁。
+- 恢复先重读本计划/AGENTS/本节/JSON，再刷新gate03进度，尤其第一层VCD完整扫描是否通过。若全14＋12活动通过，逐字节核对summary SHA后在a53包先跑`dma16_power`单layer_01，核查实际单位/覆盖/X/verbose no_clock与disabled_timing，再顺序补12层。MMIO8新的`mmio8_synth`尚未运行，不能用旧synth07。最终1200仍未启动，入口必须是fcd修复版实际ASIC14的冻结batch_contract（已验证IRQ固件），不续旧37；如果改生产RTL/FW再重新冻结。
+- 当前仍未实现正式JSON/CSV报告生成器。待完成系统功耗、严格时钟/高扇出与面积归属审核、最终1200/30412800输出、独立竞争实测、MMIO8同源综合/PPA、复现与最终报告。已完成的只是本节所列，不把编译或报告收集标合格。当前无本地编译/仿真进程；本机relay25104/FTP30216继续，板端VNC18874435、FileZilla20972102最小化/已断FTP、panel10485764。没有CUA会话，也没有活动子代理。
 
 - **00:45最新保存**：云端已push/ls-remote核验`a53e4186a13aa3a493fc35571cf98037d0ce9d7e`。新VCD包`light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a.zip`为16441078字节、627文件，SHA`bfddbe51471d1e72a8af97ea0d2735edd5538f93e0ed07695debc4b9b43aacc3`。干净解包/CRC/hash/四固件/67tests通过，audit `local_runs/dma16_vcd_bits_clean_audit_20261110_0034/receipt.json` SHA`23a46264d5fceb544b376aefd4a9abda54934a3766df9e23bea466a27c3ab483`。板端核验后FileZilla上传成功32秒，队列空，Ctrl+D断开并最小化。服务器00:37:24.715634校验zip/安全解包，00:40:53.684894 `inputs()`核验627文件/提交；bundle位于既有base/bundles/同名无zip。
 - 原8路`mmio8_source02`仍running，最后约00:43已经layer_01..layer_10共10例通过，全部3843121周期，第一例源请求phase1ns精确校验已过；共享锁仍True。不要重启或开并行EDA。等其完成读14例摘要/hash后，在a53新包启动gate03（14例＋12活动），同fcd新synth01及原IRQ固件；a53修复未修改生产RTL/网表/固件。

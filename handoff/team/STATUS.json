@@ -97,7 +97,7 @@
     }
   },
   "undergraduate_execution": {
-    "phase": "MMIO8_full14_running_DMA16_gate_activity_fix_local",
+    "phase": "MMIO8_same_source14_passed_DMA16_gate03_running",
     "source_commit": "5946c54263868bb701bebe515a285ffb9f238e47",
     "branch": "codex/light-light126/undergrad-d1-numerics",
     "evidence": "evidence/UNDERGRAD_D3_SERVER_20261109.json",
@@ -112,7 +112,7 @@
     "strict_timing_verified": false,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Ship VCD bit-declaration audit fix; after MMIO8 completes run gate03 full14/activity12, power, final1200; strict timing and system-power review pending.",
+    "next": "Observe gate03 without restart; after full14/activity12 pass verify summary SHA, first layer power review then12. Contention and MMIO8 synthesis queued separately. Final1200 and report exporter still pending.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -153,12 +153,12 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": "mmio8_source02",
+    "active_session": "dma16_gate03",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "a53e4186a13aa3a493fc35571cf98037d0ce9d7e",
+      "verified_remote_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
       "scope": "Committed source and small evidence records; no credentials, vendor libraries or local runtime artifacts",
       "main_merged": false
     },
@@ -620,7 +620,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "a53e4186a13aa3a493fc35571cf98037d0ce9d7e",
+    "cloud_source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -693,21 +693,34 @@
       "ftp_disconnected_after_transfer": true
     },
     "mmio8_source02": {
-      "state": "running",
+      "state": "passed",
       "source_commit": "c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c",
       "bundle": "light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d",
       "driver_pid": 322427,
       "started_launcher": "2026-11-10T00:28:41.633308",
       "started": "2026-11-10T00:28:41.945678",
-      "last_observed": "2026-11-10T00:43:15+08:00",
+      "last_observed": "2026-11-10T00:49:36.693275",
       "child_pid_last": 327331,
       "child_log_last": "compile.log",
       "expected_cases": 14,
-      "completed_cases": 10,
-      "verified": false,
+      "completed_cases": 14,
+      "verified": true,
       "cycles_per_completed_case": 3843121,
       "first_valid_phase_ns": 1,
-      "timing_parser_passed": true
+      "timing_parser_passed": true,
+      "finished": "2026-11-10T00:48:11.467276",
+      "summary_sha256": "fb712c89750950ffbfb8357222affea0ac0540788e744bbb1b14d38ecf3fc5f5",
+      "summary_sha256_verified": true,
+      "outputs": 354816,
+      "total_cycles": 53803694,
+      "average_cycles": 3843121,
+      "task_per_second": 39.03077732915513,
+      "mmac_per_second": 63.30854532032689,
+      "saturation_by_case": {
+        "layer_01_to_12": 0,
+        "extremes": 6336,
+        "rounding": 4554
+      }
     },
     "vcd_bit_declaration_fix": {
       "status": "local_tests_passed_not_server_verified",
@@ -747,6 +760,49 @@
       "handoff": "workspaces/arch03/CONTENTION_HANDOFF.md",
       "performance_firmware_changed": false,
       "production_rtl_changed": false
+    },
+    "dma16_gate03": {
+      "state": "running",
+      "bundle": "light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a",
+      "driver_pid": 34122,
+      "started_launcher": "2026-11-10T00:50:35.105734",
+      "started": "2026-11-10T00:50:35.684215",
+      "last_observed": "2026-11-10T01:03:19.569066",
+      "child_pid_last": 38566,
+      "child_log_last": "layer_01_activity_scan.log",
+      "expected_cases": 14,
+      "expected_activity_cases": 12,
+      "completed_cases": 0,
+      "mapped_module_probe_passed": true,
+      "compile_passed": true,
+      "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+      "first_case_simulator_completed": true,
+      "first_case_header_audit_passed": true,
+      "first_vcd_bytes": 8745588450,
+      "child_log_bytes_last": 0,
+      "child_pid_source": "Actual shared owner.json; earlier 38564 screenshot transcription was incorrect"
+    },
+    "contention_package": {
+      "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
+      "archive": "light-light126-contention-dma16-20261110_004532-525831d4ca6e.zip",
+      "bytes": 16472898,
+      "sha256": "c88f30be27798b5341f8bb1258859e1fe56f8a94e6d4d84eeaf24e3ca95c458b",
+      "files": 638,
+      "clean_contract_tests": 80,
+      "firmware_variants": 5,
+      "local_archive_audit_passed": true,
+      "clean_audit": "local_runs/dma16_contention_clean_audit_20261110_0046/receipt.json",
+      "clean_audit_sha256": "a56d5107bb4fc1ce30d196979f07d039e6dfd896d79f561924b60750549154fc",
+      "server_uploaded": true,
+      "server_zip_bytes_verified": true,
+      "server_zip_sha256_verified": true,
+      "server_unpacked_verified": true,
+      "server_sha_observed": "2026-11-10T00:52:03.335143",
+      "server_inputs_verified": 638,
+      "server_inputs_observed": "2026-11-10T00:53:59.780859",
+      "ftp_transfer_seconds": 33,
+      "ftp_disconnected_after_transfer": true,
+      "contention_cpu_executed": false
     }
   }
 }
