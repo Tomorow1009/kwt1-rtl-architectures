@@ -767,12 +767,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T02:18:24.985283",
-      "child_pid_last": 97116,
-      "child_log_last": "layer_07.log",
+      "last_observed": "2026-11-10T02:35:06.288364",
+      "child_pid_last": 113238,
+      "child_log_last": "layer_08_activity_scan.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 6,
+      "completed_cases": 7,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -780,7 +780,7 @@
       "first_case_header_audit_passed": true,
       "first_vcd_bytes": 8745588450,
       "child_log_bytes_last": null,
-      "child_pid_source": "Current shared owner read; VCS simulation active",
+      "child_pid_source": "Current shared owner; complete native activity scan active",
       "first_case_activity_passed": true,
       "first_case_source_bits": 106,
       "first_case_active_value_records": 1712153505,
@@ -795,9 +795,10 @@
         "layer_03",
         "layer_04",
         "layer_05",
-        "layer_06"
+        "layer_06",
+        "layer_07"
       ],
-      "child_cpu_percent_last": 99.5
+      "child_cpu_percent_last": 100.0
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -919,6 +920,29 @@
       "ftp_disconnected": true,
       "actual_hierarchy_format_passed_then_wrong_architecture_rejected": true,
       "hardware_changed": false
+    },
+    "conservative_area_audit": {
+      "status": "independently_recalculated_under_current_plan_reuse_boundary",
+      "summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+      "all_standard_cells_um2": "294096.516000",
+      "accelerator_sram_um2": "140700.265612",
+      "budget_upper_mm2": "0.434796781612",
+      "project_limit_mm2": "2.00",
+      "within_project_limit": true,
+      "leaf_rows_unique": 139430,
+      "standard_cell_count": 139266,
+      "macro_count": 162,
+      "virtual_constants": 2,
+      "excluded_macro_counts": {
+        "shared": 64,
+        "itcm": 32,
+        "dtcm": 32
+      },
+      "leaf_artifact_sha_verified": true,
+      "observed": "2026-11-10T02:25:44.706690",
+      "physical_signoff": false,
+      "official_scoring_confirmed": false,
+      "handoff": "workspaces/arch03/AREA_REVIEW_20261109.md"
     }
   }
 }
