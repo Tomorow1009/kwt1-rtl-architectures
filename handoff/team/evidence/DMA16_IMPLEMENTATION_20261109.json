@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_gate14_activity12_contention2_passed_power_l01_reports_and_raw_numbers_ready_review_required",
+  "phase": "DMA16_first_power_and_actual_report_ready_final1200_v1_receipt_type_failure_local_fix_tested",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Review actual first PT clocks/disabled arcs/activity/models and current DDC high-fanout nets; exercise actual report export; final1200, remaining11 powers, MMIO8 fresh PPA and reproduction remain.",
+  "next": "Commit/package/upload JSON-stable histogram parser; read-only re-audit preserved failed first receipt; start new final1200_v2. Continue power model/X review, remaining11 powers, fresh MMIO8 PPA and final reviewed exports/reproduction.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -1270,7 +1270,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "27bf49a938c752f77ba815ca5f4a0f43b595d6fb",
+  "current_server_tool_commit": "8c3ad9f5cff79724de30bafeea2c75a82309b08a",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1386,5 +1386,86 @@
     "approved_average_power_w": null,
     "approved_energy_j": null
   },
-  "dma16_contention_verified": true
+  "dma16_contention_verified": true,
+  "timing_audit01": {
+    "state": "passed_diagnostics_ready_review_required",
+    "bundle": "light-light126-timing-audit-dma16-20261110_042604-8c3ad9f5cff7",
+    "driver_pid": 205686,
+    "started": "2026-11-10T04:31:56.623998",
+    "finished": "2026-11-10T04:32:14.234559",
+    "summary_sha256": "2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa",
+    "high_fanout_nets": [
+      "u_e203_subsys_top/core_csr_clk",
+      "u_e203_subsys_top/hfclk",
+      "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+    ],
+    "netlist_modified": false,
+    "physical_signoff": false
+  },
+  "actual_pt_clock_activity_review": {
+    "no_clock_jtag_dtm": 186,
+    "no_clock_jtag_reset_sync": 3,
+    "jtag_TCK_TMS_TDI_case_zero": true,
+    "disabled_arc_flags": {
+      "C": 46683,
+      "p": 12863,
+      "c": 1992,
+      "d": 202
+    },
+    "unexpected_disable_flags": 0,
+    "activity_total_nets": 152987,
+    "activity_exact_mapping": 152986,
+    "activity_implied": 1,
+    "unannotated_nets": 0,
+    "toggle_coverage_nets": 64909,
+    "toggle_coverage_percent": "42.43",
+    "x_transition_derate_factor": "0.5",
+    "include_initial_x_transitions": false,
+    "unknown_value_records": 389025,
+    "system_power_verified": false
+  },
+  "actual_preliminary_export": {
+    "state": "exported_review_required",
+    "bundle": "light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7",
+    "run": "runs/dma16_report_preliminary01",
+    "driver_pid": 206627,
+    "started": "2026-11-10T04:33:22.008999",
+    "observed": "2026-11-10T04:35:30+08:00",
+    "artifacts": [
+      "report.json",
+      "tasks.csv",
+      "modules.csv",
+      "summary.csv",
+      "report_zh.md",
+      "receipt.json"
+    ],
+    "power_layers": 1,
+    "batch_tasks": 0
+  },
+  "final1200_v1": {
+    "state": "failed",
+    "bundle": "light-light126-timing-audit-dma16-20261110_042604-8c3ad9f5cff7",
+    "run": "runs/dma16_final1200_v1",
+    "driver_pid": 209121,
+    "started_launcher": "2026-11-10T04:37:29.879104",
+    "failed_utc": "2026-11-09T20:38:15.026741Z",
+    "completed_tasks": 0,
+    "first_task": "sample_000001_layer_01",
+    "first_capture_outputs_verified": 25344,
+    "first_task_cycles": 225770,
+    "error": "Receipt counters changed",
+    "unique_differing_field": "bus_metrics.histogram_cycle_bins",
+    "cause": "Tuple bins become lists in JSON; fresh parser result differed only by container type",
+    "shared_lock_released": true,
+    "manual_stop": false,
+    "preserve_original_failed_state": true
+  },
+  "batch_receipt_fix": {
+    "status": "local_related_61_tests_passed_not_packaged",
+    "fix": "Return JSON arrays for histogram_cycle_bins; preserve strict counter comparisons",
+    "end_to_end_persist_reaudit_test": true,
+    "tamper_rejection_test": true,
+    "production_rtl_firmware_changed": false,
+    "new_batch_required": true
+  }
 }

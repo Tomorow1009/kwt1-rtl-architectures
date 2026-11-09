@@ -132,7 +132,9 @@ def parse_metrics(text, require_complete=True, expected_window=None):
                 tuple(int(expected_window[k]) for k in ('start_cycle', 'end_cycle', 'cycles')), 'Independent full-task window mismatch')
     return dict(schema=SCHEMA, outcome=outcome, full_task_counts_verified=outcome == 'complete', header=header,
                 phases={p: dict(phases[p], statistics={m: measures[p, m] for m in METRICS}) for p in PHASES},
-                transitions=switches, contention=contention, histogram_cycle_bins=BINS,
+                # Receipts are JSON. Return arrays here so a persisted receipt
+                # compares exactly with a fresh parse (tuples reload as lists).
+                transitions=switches, contention=contention, histogram_cycle_bins=[list(pair) for pair in BINS],
                 note='Passive observations; phase gaps include compute/other traffic; response latency includes response backpressure. CPU-owned wait and simultaneous-VALID competition may overlap. Do not add overlapping statistics to form total task cycles.',
                 timing_verified=False, system_power_verified=False)
 

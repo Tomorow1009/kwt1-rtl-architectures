@@ -1,4 +1,5 @@
 import ast
+import json
 import unittest
 from pathlib import Path
 import dma16_bus_metrics as m
@@ -22,7 +23,33 @@ def fixture():
     return '\n'.join(lines)
 
 
+def complete_fixture():
+    """Coherent parser fixture; no RTL or CPU execution is claimed."""
+    lines = ['DMA16_BUS_HEADER schema=dma16_bus_metrics_v1 outcome=complete started=1 cancelled=0 first_offer_cycle=11413 last_ack_cycle=237183 published_cycle=237184 total_cycles=225770 issued=47904 accepted=47904 successes=47904 errors=0 cancelled_acks=0 committed_bytes=191616 input_words=11744 output_words=12672']
+    for phase, count in zip(m.PHASES, (11744, 11744, 11744, 12672)):
+        lines.append('DMA16_BUS_PHASE phase=%s issued=%d accepted=%d successes=%d errors=0 cancelled_acks=0 committed_bytes=%d' % (phase, count, count, count, count*4))
+        for metric in m.METRICS:
+            n = count-1 if metric == 'accept_gap' else count
+            value = 2 if metric == 'accept_gap' or (metric == 'response_latency' and phase == 'shared_read') else 1
+            hist = [0]*9; hist[value] = n
+            lines.append('DMA16_BUS_STAT phase=%s metric=%s count=%d min=%d max=%d sum=%d hist=%s' %
+                         (phase, metric, n, value, value, n*value, ','.join(map(str, hist))))
+    for transition in m.TRANSITIONS:
+        n = 47903 if transition == 'RW' else 0
+        value = 2 if n else 0; hist = [0]*9; hist[2] = n
+        lines.append('DMA16_BUS_SWITCH transition=%s count=%d min=%d max=%d sum=%d hist=%s' %
+                     (transition, n, value, value, n*value, ','.join(map(str, hist))))
+    lines += ['DMA16_BUS_CONTENTION competing_cycles=0 cpu_grants=0 dma_grants=47904 competing_cpu_grants=0 competing_dma_grants=0 competing_blocked=0 arb_grants=47904 arb_acks=47904 ready_wait_cycles=0 response_backpressure_cycles=0 cpu_owned_wait_cycles=0 initial_global_pending=0 initial_global_cpu=0',
+              'DMA16_BUS_END schema=dma16_bus_metrics_v1']
+    return '\n'.join(lines)
+
+
 class BusMetricsTests(unittest.TestCase):
+    def test_metrics_remain_identical_after_receipt_json_roundtrip(self):
+        for text, complete in ((fixture(), False), (complete_fixture(), True)):
+            parsed = m.parse_metrics(text, require_complete=complete)
+            self.assertEqual(json.loads(json.dumps(parsed)), parsed)
+
     def test_partial_cancel_is_explicit_and_cannot_be_performance_pass(self):
         result = m.parse_metrics(fixture(), require_complete=False)
         self.assertEqual(result['header']['total_cycles'], 3)

@@ -141,6 +141,24 @@ class BatchTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'immutable'):
             batch.run_tasks(self.contract, self.tasks, self.output, dict(fixture=True), resume=True, executor=executor)
 
+    def test_full_bus_metrics_persist_reaudit_and_reject_counter_tampering(self):
+        from test_dma16_bus_metrics import complete_fixture
+        self.contract['required_log_markers'].append('DMA16_BUS_END schema=dma16_bus_metrics_v1')
+        def measured_executor(command, directory, log, timeout):
+            executor(command, directory, log, timeout)
+            metadata = result()
+            metadata.update(first_request_cycle=11413, final_response_cycle=237183, cycles=225770)
+            log.write_text('MOCK_BUILD_FIXTURE\n'+batch.RESULT_PREFIX+json.dumps(metadata)+'\n'+complete_fixture()+'\n', encoding='ascii')
+        state = batch.run_tasks(self.contract, self.tasks, self.output, dict(fixture=True), executor=measured_executor)
+        self.assertEqual(len(state['completed']), 2)
+        self.assertFalse(state['asic_executed'])
+        attempt = self.output/state['completed'][0]['attempt']
+        record = batch.verified_receipt(attempt, self.source, state['identity'], self.tasks[0])
+        record['result']['bus_metrics']['contention']['dma_grants'] += 1
+        batch.save(attempt/'receipt.json', record)
+        with self.assertRaisesRegex(ValueError, 'Receipt counters changed'):
+            batch.verified_receipt(attempt, self.source, state['identity'], self.tasks[0])
+
     def test_host_timing_does_not_accept_chip_cycles_or_missing_intervals(self):
         base=dict(started_utc='2026-11-09T00:00:00Z',capture_checked_utc='2026-11-09T00:00:02Z',
                   elapsed_seconds=2.0,simulation_seconds=1.0)
