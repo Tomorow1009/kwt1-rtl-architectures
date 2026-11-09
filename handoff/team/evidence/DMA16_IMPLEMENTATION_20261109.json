@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_final1200_v2_running_748_passed_verification_matrix_recorded",
+  "phase": "DMA16_final1200_running_task_mode_timing_and_area_reviewed",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -588,7 +588,7 @@
   "active_session": "dma16_final1200_v2",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
-  "strict_timing_verified": false,
+  "strict_timing_verified": true,
   "system_power_verified": false,
   "dma16_fix_sequence01": {
     "state": "passed",
@@ -1270,7 +1270,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "3178c8faab53ed1dd8115f49978f1d9cb70330ee",
+  "current_server_tool_commit": "b60bef16c4dd966a32d73ee52e5497d9fa08466f",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1510,22 +1510,21 @@
     "started_launcher": "2026-11-10T04:56:55.618624",
     "expected_tasks": 1200,
     "expected_outputs": 30412800,
-    "completed_tasks_last_observed": 748,
+    "completed_tasks_last_observed": 1100,
     "contract_origin": "fcd445fb212a/runs/dma16_fix_full01/dma16_soc/batch_contract.json",
     "runtime_parser_sha256": "dede9017ed0bc872a71d01d476eaca7a1c03650af624685a977220366d6bffb5",
     "runtime_runner_sha256": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364",
     "uses_old_37_tasks": false,
     "hardware_firmware_images_changed": false,
     "final_regression_verified": false,
-    "last_observed": "2026-11-10T05:49:32.349551",
-    "outputs_last_observed": 18957312,
+    "last_observed": "2026-11-10T06:16:15.253439",
+    "outputs_last_observed": 27878400,
     "failed_attempts_last_observed": 0,
-    "host_mean_task_seconds_approx": 4.186089,
-    "remaining_tasks_last_observed": 452,
-    "remaining_seconds_with_20_percent_margin_approx": 2270.535,
+    "host_mean_task_seconds_approx": 4.248643,
+    "remaining_tasks_last_observed": 100,
+    "remaining_seconds_with_20_percent_margin_approx": 510,
     "shared_lock_owned": true,
-    "initial_pid_transcription_corrected_from": 214800,
-    "current_attempt_last_observed": "cases/sample_000063_layer_05/attempt_0001"
+    "initial_pid_transcription_corrected_from": 214800
   },
   "unknown_activity_tool_local": {
     "stage": "dma16_unknown_activity",
@@ -1584,8 +1583,43 @@
       "LINT-32": 4549,
       "LINT-33": 502
     },
-    "complete_object_review": false,
-    "scope": "Diagnostic inventory; no automatic timing acceptance"
+    "complete_object_review": true,
+    "scope": "Diagnostic inventory; no automatic timing acceptance",
+    "port_diagnostic": {
+      "bundle": "light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd",
+      "artifact": "runs/dma16_struct_review01/mapped_port_diagnostic.json",
+      "sha256": "999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60",
+      "finished": "2026-11-10T06:03:57.998090",
+      "sha_independently_confirmed": true,
+      "module_count": 1334,
+      "port_warning_count": 4852,
+      "direction_counts": {
+        "input": 4684,
+        "output": 168
+      },
+      "disposition_counts": {
+        "declaration_only": 4852
+      },
+      "timing_verified": false
+    },
+    "review_scope": "All warned ports checked for logical references; all six warning classes reviewed against frozen reports and task-mode function/timing, not physical signoff"
   },
-  "directed_verification_matrix": "workspaces/arch03/VERIFICATION_MATRIX_20261110.md"
+  "directed_verification_matrix": "workspaces/arch03/VERIFICATION_MATRIX_20261110.md",
+  "structural_review_package": {
+    "source_commit": "b60bef16c4dd966a32d73ee52e5497d9fa08466f",
+    "archive": "light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd.zip",
+    "bytes": 16587832,
+    "sha256": "c622483ab6188d70c222126cb74f281745e13cf739aff7d34703dc69aa0e31e4",
+    "files": 663,
+    "clean_tests": 167,
+    "production_files_unchanged": 40,
+    "clean_audit_receipt": "local_runs/dma16_struct_clean_audit_20261110_0559/receipt.json",
+    "clean_audit_sha256": "416999366ab68b678f1425e0352825d55661edc4069e798ef48240e2f29cf20a",
+    "filezilla_transfer_seconds_observed": 33,
+    "unpacked": "2026-11-10T06:02:50.368423",
+    "inputs_verified": "2026-11-10T06:03:14.765282"
+  },
+  "strict_timing_scope": "Stable task-mode synthesis at SS 0.99 V 125 C, 6.666666 ns; no physical signoff or active JTAG/startup claim",
+  "project_area_upper_bound_verified": true,
+  "frozen_review_record": "workspaces/arch03/FROZEN_REVIEW_20261110.json"
 }

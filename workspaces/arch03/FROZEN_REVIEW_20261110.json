@@ -1,0 +1,31 @@
+{
+  "schema": "dma16-frozen-review-v1",
+  "reviewed_date": "2026-11-10",
+  "reviewer": "Codex engineering evidence review",
+  "scope": "SS_0p99V_125C_stable_task_mode_pre_layout",
+  "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
+  "asic_summary_sha256": "1b7e03944fcbaf5f17eefd71bb5a6a739180e2718e8a77ddf9a0148704ec8514",
+  "gate_summary_sha256": "9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc",
+  "timing_diagnostic_summary_sha256": "2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa",
+  "port_diagnostic_sha256": "999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60",
+  "first_power_summary_sha256": "9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1daf46e6bf0bfd9",
+  "decisions": {
+    "task_mode_synthesis_timing": "accepted_for_declared_scope",
+    "project_area_upper_bound": "accepted_for_declared_scope",
+    "system_power": "pending_full_unknown_review_and_12_layers",
+    "final_asic_1200": "running"
+  },
+  "metrics": {
+    "period_ns": "6.666666",
+    "setup_slack_ns": "0.0000290871",
+    "hold_slack_ns": "0.00136402",
+    "area_upper_mm2": "0.434796781612",
+    "project_area_limit_mm2": "2.00"
+  },
+  "physical_signoff": false,
+  "official_scoring_confirmed": false,
+  "official_precision_verified": false,
+  "report_exporter_integration_verified": false,
+  "review_document": "workspaces/arch03/FROZEN_REVIEW_20261110.md",
+  "review_document_sha256": "289529689f5a2fce52995f976c7370944d1d9374128910a6fa4001afcd607e28"
+}

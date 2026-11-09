@@ -2,6 +2,10 @@
 
 ## DMA16当前综合的独立复查（2026-11-10）
 
+06:18审定：全部结构告警已完成分类与用途复核，结合下述时钟、约束、禁用弧、数值及同网表功能证据，接受**声明范围内的稳定任务模式综合时序**。正式依据见[FROZEN_REVIEW](FROZEN_REVIEW_20261110.md)。本节以下“等待审核/false”为当时历史状态，原始工件仍保持原标记；最终报告须另外绑定审定记录，不原地修改旧摘要。
+
+06:11更新：b60包实际结构审计于06:03:57.998090完成，完整解析1334模块（替代初步文本统计1315）。全部4852条LINT-8/28均无声明之外的逻辑引用，方向为4684输入、168输出；没有未解析对象或表达式待判对象。原网表/报告SHA保持不变，完整清单位于b60 `runs/dma16_struct_review01/mapped_port_diagnostic.json`，SHA=`999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60`，独立断言已通过。这解释了端口类告警，其他LINT类别和正式接受记录仍须完成；不改变物理签核范围。
+
 05:58本地新增`dma16_structural_audit.py`：绑定当前综合摘要及mapped.v/check_design_mapped.rpt的实际SHA，逐模块读取端口方向/范围，并检查全部LINT-8/LINT-28对象在去掉头部与声明后的实际逻辑引用。仅声明、表达式仍存在、缺失/未解析对象分别处理；输出完整对象表及其余LINT计数，不自动批准时序。8个定向测试通过，尚未上传或在实际1315模块网表运行。入口为`python3 workspaces/arch03/scripts/dma16_structural_audit.py --synth-run <fcd综合目录> --summary-sha256 1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339 --output <新的JSON>`，只读原工件，不需要启动EDA。
 
 05:52补充：重新核对当前`check_design_mapped.rpt`与综合摘要中的SHA，实际15159行；仅统计Warning行得到LINT-1=4、LINT-2=178、LINT-8=178、LINT-28=4674、LINT-32=4549、LINT-33=502。四个无负载cell来自debug的ndreset/fullreset、AON POR和PLIC flop。178个无负载输入主要出现在综合算术子模块，实际例子有dot64的A[39]/B[39]及DMA地址加法器A[0]；未连接端口涉及238个design，含原平台接口和算术单元未用位。已取得完整报告及模块计数，但查看代表对象不是全部对象审定，不能仅凭告警分类或功能通过自动升级strict_timing_verified。当前只读统计不运行DC、不修改原网表。原始截图`takeover_local/d2_20261109/dma16_lint_inventory.png`、`dma16_lint_examples.png`、`lint_module_inventory.png`留本机。
