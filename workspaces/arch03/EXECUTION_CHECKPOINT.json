@@ -1493,7 +1493,7 @@
     "instruction": "Write/update Markdown before each prepared compaction; also refresh after significant progress and pauses. After compaction read it and the current plan before acting."
   },
   "dma16_execution": {
-    "phase": "DMA16_L01_L03_power_collected_L04_running_review_LF_package_staged",
+    "phase": "DMA16_review_bound_L01_L05_collected_serial_L06_running",
     "h0": "2026-11-09T17:16:08+08:00",
     "freeze_h28": "2026-11-10T21:16:08+08:00",
     "verification_h64": "2026-11-12T09:16:08+08:00",
@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Upload verified d25 LF review package via FileZilla, server verify and fresh binding02. Track L04 then serial L05-L12. Full unknown-object review, per-layer numbers, final1200 re-audit/export, MMIO8 PPA and clean reproduction remain.",
+    "next": "Observe existing serial PT queue only; audit all unknown object uses/times and extract completed-layer numbers. After queue frees lock, final1200 independent audit/report export, MMIO8 fresh PPA and clean server reproduction. Do not start duplicate L05-L12 or retry GitHub push.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1931,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": "dma16_final1200_v2",
+    "active_session": "dma16_power_queue05_12_v1",
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": true,
@@ -2624,7 +2624,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "89b35a37eb7179bdb69df0374a20dd41115ba73e",
+    "current_server_tool_commit": "d25ba8a0142d865f3e1ef69f32ea05fc041c03fb",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -3039,7 +3039,7 @@
       ],
       "production_inputs_modified": false,
       "corrected_local": true,
-      "corrected_package_uploaded": false
+      "corrected_package_uploaded": true
     },
     "dma16_power_l02_v1": {
       "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
@@ -3086,16 +3086,60 @@
       "clean_audit_sha256": "f3d0d35283616a62349b9845f6972b5f26b6c96dbd489621fc37efba9932da55",
       "board_staged_sha_verified": true,
       "board_directory": "/home/root/undergrad-review-lf-20261110",
-      "server_uploaded": false
+      "server_uploaded": true,
+      "server_unpacked": "2026-11-10T07:12:27.502149",
+      "server_inputs_verified": "2026-11-10T07:14:21.839915",
+      "server_lf_document_verified": true,
+      "filezilla_disconnected": true
     },
     "dma16_power_l04_v1": {
       "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
       "run": "runs/dma16_power_l04_v1/dma16_power",
-      "status": "running_last_observed",
+      "status": "passed_reports_review_required",
       "driver_pid": 297135,
       "started_launcher": "2026-11-10T07:03:19.473323",
       "last_owner_observed": "2026-11-10 approximately07:07",
+      "system_power_verified": false,
+      "finished": "2026-11-10T07:08:36.755841",
+      "summary_sha256": "bf86b0e57727ef7308f589e149edd58c98b4a83ff02d3824e5099024b972820f"
+    },
+    "review_binding02": {
+      "bundle": "light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d",
+      "path": "runs/dma16_review_binding02/decision.json",
+      "finished": "2026-11-10T07:19:44.558331",
+      "sha256": "7b78900893c7b4444e33b639e9c374ba1cf825903dfc17458c8764a5244be4fe",
+      "sha256_independently_verified": true,
+      "timing_verified": true,
+      "project_area_upper_bound_verified": true,
+      "system_power_verified": false,
+      "final_report_exported": false
+    },
+    "dma16_power_l05_v1": {
+      "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
+      "run": "runs/dma16_power_l05_v1/dma16_power",
+      "status": "passed_reports_review_required",
+      "driver_pid": 305657,
+      "started": "2026-11-10T07:17:48.131123",
+      "finished": "2026-11-10T07:22:47.675875",
+      "summary_sha256": "5b7ed207a7c329a7eca4aa6a3de3364b700895858736815d4232e935876bdadb",
       "system_power_verified": false
+    },
+    "power_queue05_12_v1": {
+      "bundle": "light-light126-review-export-dma16-20261110_062714-89b35a37eb71",
+      "run": "runs/dma16_power_queue05_12_v1",
+      "driver_pid": 305656,
+      "plan_sha256": "5b79977456218f79fbf2228cfc3c7b34973e056b33de20d95e867845e60d56a1",
+      "plan_sha256_independently_verified": true,
+      "serial": true,
+      "stop_on_first_failure": true,
+      "last_observed": "2026-11-10T07:25:54",
+      "current_session": "dma16_power_l06_v1",
+      "current_owner_pid": 308667,
+      "current_pt_pid": 308948,
+      "passed_observed_layers": [
+        5
+      ],
+      "completed": false
     }
   }
 }
