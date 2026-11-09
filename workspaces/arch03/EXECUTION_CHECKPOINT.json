@@ -2430,7 +2430,7 @@
     "cloud_sync_pending": {
       "local_committed_evidence": "20a0111",
       "last_verified_remote": "73797187d0ae6c3173959ee406311288ce0f954a",
-      "status": "auto_review_rejected_exact_GitHub_destination_confirmation_requested",
+      "status": "auto_review_rejected_again_after_actual_prior_user_message_retrieval_current_confirmation_still_pending",
       "user_reply_received": false,
       "unaffected_server_work_continues": true
     },
@@ -2492,6 +2492,21 @@
       "path": "workspaces/arch03/INNOVATION_DEFENSE_20261110.md",
       "final_submission": false,
       "claims_bound_to_actual_evidence": true
+    },
+    "ref_numbers_package": {
+      "source_commit": "80b54d1f408adb8b97f3fac5ef45f35b9a3e30c9",
+      "archive": "light-light126-ref-numbers-dma16-20261110_030111-80b54d1f408a.zip",
+      "bytes": 16535320,
+      "files": 651,
+      "sha256": "8dbc13c1c22165475ceba00f3a7fb780f7004806eaacdabf8b028c9ca21f7237",
+      "clean_audit": "local_runs/dma16_ref_numbers_clean_audit_20261110_0306/receipt.json",
+      "clean_audit_sha256": "528077a7b416ba1260cb3fa1172756e8166a6e55209d69ed3a1439eadc4ed6d0",
+      "clean_tests": 116,
+      "firmware_variants": 5,
+      "server_uploaded": false,
+      "board_staged": false,
+      "cloud_push_pending": true,
+      "hardware_changed": false
     }
   }
 }
