@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Continue gate03 full14/activity12; use ptformat 236 report tools after real first-layer PT review. Shared EDA remains sequential. Final1200, contention, MMIO8 PPA and complete acceptance/reproduction pending.",
+    "next": "Complete gate03 full14/activity12; verify actual summary and run first DMA16 PT review. Then full12 power, actual CPU contention, final1200, MMIO8 fresh PPA and complete report/reproduction. No concurrent shared EDA.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -2248,12 +2248,12 @@
       "driver_pid": 34122,
       "started_launcher": "2026-11-10T00:50:35.105734",
       "started": "2026-11-10T00:50:35.684215",
-      "last_observed": "2026-11-10T02:58:22.178477",
-      "child_pid_last": 135475,
-      "child_log_last": "layer_10_activity_scan.log",
+      "last_observed": "2026-11-10T03:12:11.764474",
+      "child_pid_last": 143794,
+      "child_log_last": "layer_11.log",
       "expected_cases": 14,
       "expected_activity_cases": 12,
-      "completed_cases": 9,
+      "completed_cases": 10,
       "mapped_module_probe_passed": true,
       "compile_passed": true,
       "synthesis_summary_sha256": "1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339",
@@ -2279,9 +2279,10 @@
         "layer_06",
         "layer_07",
         "layer_08",
-        "layer_09"
+        "layer_09",
+        "layer_10"
       ],
-      "child_cpu_percent_last": 103.0
+      "child_cpu_percent_last": 96.2
     },
     "contention_package": {
       "source_commit": "525831d4ca6e65a506f673ebd9a2912072496c03",
@@ -2482,7 +2483,7 @@
       "status": "implemented_local_contracts_only",
       "related_tests": 31,
       "actual_new_mmio8_power_extracted": false,
-      "server_uploaded": false,
+      "server_uploaded": true,
       "system_power_verified": false,
       "module": "workspaces/arch03/scripts/mmio8_power_numbers.py",
       "default_DMA16_162_macro_guard_preserved": true,
@@ -2503,10 +2504,18 @@
       "clean_audit_sha256": "528077a7b416ba1260cb3fa1172756e8166a6e55209d69ed3a1439eadc4ed6d0",
       "clean_tests": 116,
       "firmware_variants": 5,
-      "server_uploaded": false,
-      "board_staged": false,
+      "server_uploaded": true,
+      "board_staged": true,
       "cloud_push_pending": true,
-      "hardware_changed": false
+      "hardware_changed": false,
+      "server_zip_sha_verified": true,
+      "server_unpacked_observed": "2026-11-10T03:10:45.180232",
+      "server_inputs_verified": 651,
+      "server_inputs_observed": "2026-11-10T03:11:28.229852",
+      "ftp_success_seconds": 33,
+      "ftp_disconnected": true,
+      "actual_old_sram_format_profile_passed": true,
+      "actual_old_report_used_for_new_power": false
     }
   }
 }
