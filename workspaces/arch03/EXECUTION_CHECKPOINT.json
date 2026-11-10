@@ -1502,7 +1502,7 @@
     "source_baseline": "5946c54263868bb701bebe515a285ffb9f238e47",
     "remote_rechecked": true,
     "new_hardware_verified": false,
-    "next": "Observe existing MAC v2 driver142991/scan143321; do not restart or run concurrent heavy jobs. Commit/package/clean-audit the independent X sensitivity tool; no sensitivity job has run. Await actual MAC full-stream result before scheduling remaining MAC layers and PT points. Reference full14/12 gate/PT, clean reproduction and delivery remain. See CONTEXT_CHECKPOINT_20261110_1006.md top.",
+    "next": "Observe the existing serial MAC l02-l12 then MMIO8 gate14/activity12 queue. Complete e9 FileZilla transfer/input verification and real phase comparison. Audit MMIO8 clock/disabled arcs and DMA16 CPU/SRAM/interconnect unknown uses. Do not repeat final1200 or full02. See CONTEXT_CHECKPOINT_20261110_1150.md.",
     "evidence": "../../handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json",
     "local_receipts": {
       "protocol15": {
@@ -1931,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": "dma16_x_queue_remaining_v1",
+    "active_session": "dma16_mac02_12_mmio8_gate_queue_v1",
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": true,
@@ -2101,7 +2101,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
+    "cloud_source_commit": "e9fc57cecc7393fffe14de614eb9b73bdbec3b26",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -2621,7 +2621,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
+    "current_server_tool_commit": "e9fc57cecc7393fffe14de614eb9b73bdbec3b26",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -3172,8 +3172,8 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
-      "verified_date": "2026-11-10 approximately11:14",
+      "verified_remote_commit": "e9fc57cecc7393fffe14de614eb9b73bdbec3b26",
+      "verified_date": "2026-11-10 approximately11:26",
       "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
       "subsequent_same_scope_authorized": true,
       "main_merged": false
@@ -3614,7 +3614,7 @@
       "comparison_actual_readers_observed": "2026-11-10T11:04:06.754693",
       "all_four_points_compared": false
     },
-    "updated_local": "2026-11-10T11:25:00+08:00",
+    "updated_local": "2026-11-10T11:50:00+08:00",
     "x_model_package": {
       "bundle": "light-light126-x-model-dma16-20261110_102408-b85e908fab38",
       "source_commit": "b85e908fab388f07027b7b4e983d36635651ee1c",
@@ -3664,17 +3664,19 @@
         "initial"
       ],
       "last_stage": "dma16_x_initial_l01_v1",
-      "last_observed": "2026-11-10T11:22:57.901781",
+      "last_observed": "2026-11-10T11:30:32.424495",
       "child_driver_pid": 212936,
       "tool_pid": 213156,
-      "status": "running",
+      "status": "completed",
       "stop_on_first_failure": true,
       "system_power_verified": false,
       "zero_finished": "2026-11-10T11:09:28.639448",
       "zero_status": "passed",
       "next_owner_not_yet_read": false,
       "one_finished": "2026-11-10T11:20:12.393155",
-      "one_status": "passed"
+      "one_status": "passed",
+      "finished": "2026-11-10T11:30:16.479150",
+      "completed": 3
     },
     "x_compare_package": {
       "bundle": "light-light126-x-compare-dma16-20261110_105208-a74588d97aaa",
@@ -3736,11 +3738,12 @@
     "x_initial_l01_v1": {
       "bundle": "light-light126-x-model-dma16-20261110_102408-b85e908fab38",
       "run": "runs/dma16_x_initial_l01_v1/dma16_x_sensitivity",
-      "status": "running",
+      "status": "passed",
       "started": "2026-11-10T11:20:12.747228",
       "pid": 212936,
       "child_pid": 213156,
-      "system_power_verified": false
+      "system_power_verified": false,
+      "finished": "2026-11-10T11:30:16.464082"
     },
     "mmio8_timing_package": {
       "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
@@ -3759,7 +3762,7 @@
       "filezilla_disconnected": true
     },
     "mmio8_report_phase_comparison_fix": {
-      "status": "local_only",
+      "status": "committed_clean_tested_upload_in_progress",
       "related_tests": 29,
       "new_tests": 2,
       "asic_cycles": 3843121,
@@ -3772,6 +3775,123 @@
       "energy_uses": "actual_gate_window",
       "hardware_changed": false,
       "server_verified": false
+    },
+    "x_comparison_l01_v1": {
+      "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+      "path": "runs/dma16_x_compare_l01_v1/comparison.json",
+      "finished": "2026-11-10T11:32:05.166608",
+      "sha256": "bc9da5d6231aa44ce0bdf2bda619989ce614bc34217d0bbeb0733ee388a90934",
+      "hash_asserted": "2026-11-10T11:34:51.009392",
+      "points": [
+        "zero",
+        "frozen",
+        "one",
+        "initial"
+      ],
+      "all_reported_total_w": "0.0296837185",
+      "all_reported_energy_j": "0.0000446779497038379161700",
+      "selected_point_energy_spread_j": "0E-25",
+      "frozen_repeat_exactly_reproduced": true,
+      "system_power_verified": false,
+      "physical_error_bound": false,
+      "replaces_frozen_estimate": false
+    },
+    "mmio8_timing_review01": {
+      "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+      "run": "runs/mmio8_timing_review01/mmio8_timing_audit",
+      "status": "passed",
+      "pid": 226469,
+      "started": "2026-11-10T11:34:15.174492",
+      "finished": "2026-11-10T11:34:30.932198",
+      "summary_sha256": "e9df8a749359e800f4218b284f4c17a0682ecf8d257f6067e9943bcd2fcea95f",
+      "hash_independently_asserted": true,
+      "high_fanout_nets": [
+        "u_e203_subsys_top/core_csr_clk",
+        "u_e203_subsys_top/hfclk",
+        "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+      ],
+      "netlist_modified": false,
+      "strict_timing_verified": false
+    },
+    "mac02_12_mmio8_gate_queue_v1": {
+      "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+      "run": "runs/dma16_mac02_12_mmio8_gate_queue_v1",
+      "pid": 232492,
+      "started": "2026-11-10T11:40:10.832432",
+      "free_bytes_at_launch": 2518825304064,
+      "commands": 12,
+      "mac_cases": [
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12"
+      ],
+      "final_gate_session": "mmio8_source_gate_full01",
+      "gate_cases": 14,
+      "gate_activity_cases": 12,
+      "gate_minimum_free_bytes": 536870912000,
+      "stop_on_first_failure": true,
+      "status": "running",
+      "current_session": "dma16_mac_use_l02_v1",
+      "current_started": "2026-11-10T11:40:11.544068",
+      "current_driver_pid": 232496,
+      "current_child_pid": 232863,
+      "last_observed": "2026-11-10T11:46:24.927617",
+      "plan_hash_independently_asserted": true,
+      "plan_sha256": "db8df26da37f6487c0141fe16cecc8b96e4364e211ba1e4fa622fa0fc8c1a7b6",
+      "plan_hash_asserted": "2026-11-10 approximately11:54",
+      "progress_file": "done.json only after all commands complete; in-flight progress is launcher.log and child state.json"
+    },
+    "mmio8_report_phase_package": {
+      "bundle": "light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73",
+      "source_commit": "e9fc57cecc7393fffe14de614eb9b73bdbec3b26",
+      "zip_bytes": 16672116,
+      "zip_sha256": "5fda05b9858c5908fef7da585a51631fe1b5e1bfc59f16dcbf5b9bef811f7fdc",
+      "inputs": 683,
+      "clean_tests": 228,
+      "firmwares": 5,
+      "production_files_unchanged": 40,
+      "audit": "local_runs/mmio8_report_phase_clean_audit_20261110_1127/receipt.json",
+      "audit_sha256": "26201989b3e7f9a6cf30d566d0ba5d46007bb413089cc6829b41f795a3c67ef3",
+      "board_staged_verified": true,
+      "uploaded_via": "board_linux_filezilla",
+      "upload_status": "success_33_seconds_queue_empty_success28",
+      "server_verified": true,
+      "initial_connection_failure": "421 too many users; later listing succeeded, idle timeout, transfer requested once",
+      "filezilla_disconnected": true,
+      "unpacked": "2026-11-10T11:50:16.166838",
+      "inputs_verified": "2026-11-10T11:51:32.267913"
+    },
+    "mmio8_timing_objects_local": {
+      "new_tests": 7,
+      "related_tests": 27,
+      "status": "local_tested_not_server_run",
+      "unclassified_rows_rejected": true,
+      "all_rows_preserved": true,
+      "timing_verified": false
+    },
+    "mmio8_timing_objects_preliminary_observation": {
+      "no_clock_pins": 189,
+      "dtm": 186,
+      "reset_sync": 3,
+      "CK": 182,
+      "CKN": 7,
+      "disabled_arcs": 55719,
+      "disabled_flags": {
+        "C": 40708,
+        "p": 12819,
+        "c": 1991,
+        "d": 201
+      },
+      "formal_derived_json_pending": true,
+      "timing_verified": false
     }
   }
 }

@@ -1,5 +1,13 @@
 # 2026-11-10 10:50 实施检查点
 
+**11:33当前执行点：** 四点均完成。b85 initial于**11:30:16.464082 passed**；三点队列done=11:30:16.479150，11:30:32.424495观察锁释放。ecf已建立`runs/dma16_x_compare_l01_v1/request.json`，四点summary由实际文件SHA绑定，原27bf默认摘要固定；**已经发送`dma16_x_compare.main()`实际比较命令，结果截图`x_comparison_outcome.png`待读取**。当前没有其他新EDA，不要重复四个点或队列。下一步读比较结果/哈希，再启动ecf已核验的短`mmio8_timing_audit`，之后余11层MAC及原8路完整gate/12PT。
+
+原8路报告相位修复已提交并推送、独立ls-remote确认**e9fc57cecc7393fffe14de614eb9b73bdbec3b26**。新包`light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73.zip`，16672116B，SHA=`5fda05b9858c5908fef7da585a51631fe1b5e1bfc59f16dcbf5b9bef811f7fdc`，683输入/**228干净tests**/五固件/40生产不变，audit=`local_runs/mmio8_report_phase_clean_audit_20261110_1127/receipt.json`，SHA=`26201989b3e7f9a6cf30d566d0ba5d46007bb413089cc6829b41f795a3c67ef3`。板端`/home/root/undergrad-mmio-report-phase-20261110`已SHA暂存。**FTP返回421人数过多，尚未上传此包，未点击上传。** FileZilla当前最小化，可能已按默认设置重试；先恢复看实际连接/目的地，再正常重试，不问重复授权、不旁路传输。服务器最新实际工具仍ecf，不影响当前四点比较和8路时序查询。
+
+11:28原8路189无时钟对象全量解析已通过：186在JTAG DTM、3在`u_e203_subsys_top/u_sirv_debug_module/u_jtag_ResetCatchAndSync_3_1/reset_n_catch_reg/reg_{0,1,2}/q_reg/CK`；clock pin计182 CK＋7 CKN。首版只认可/CK而被严格拒绝，实际7个CKN为irReg[0..4]、jtag_DRV_TDO、jtag_TDO负沿寄存器；保留原报告，没有略过对象。实际SDC的TCK/TMS/TDI=0已经观察。**尚未保存该189对象派生JSON，也未全量分类disabled弧；不要把它们记为正式时序批准。** 原8路3687端口结构JSON仍有效、SHA已核验。
+
+本地所有测试/打包/暂存会话均已完成，四点比较命令helper已返回，待观察远端完成。当前工作树只有本条/root进度等证据修改，报告代码修复已经提交e9；最新同范围云同步不需再次确认。压缩后先读计划/root/本检查点/三JSON，再看`x_comparison_outcome.png`，不要从旧zero/one运行状态重启。
+
 **11:25最新增量：** ecf原8路时序包FileZilla33秒成功、success27、空队列后断开最小化；11:19:36.081221安全解包，**11:20:36.891532服务器683输入/完整提交核验通过**。云端仍ecf3cd4，尚未启动其mmio8_timing_audit。当前唯一队列parent188919：one于**11:20:12.393155 passed**；**initial于11:20:12.747228开始，owner212936/pt213156，最后11:22:57.901781仍running**。zero/one数值及SHA后续四点比较完整绑定，勿重跑它们。frozen与zero已观察总功耗/能耗相同，不能提前推断initial或全部未知影响。
 
 **新发现并本地修复原8路报告问题：** 11:21直接以原c5 ASIC和a2首层gate摘要的既有SHA核验原始回执，两者都是3843121周期、end_ns=25639874.102679，但ASIC start_ns=19070.998093、phase=1ns、duration=25620803.104586ns；gate start_ns=19069.998093、phase=0、duration=25620804.104586ns。旧`mmio8_report.join_cases`要求纳秒时长完全相同，会在最终导出拒绝这组合法相位差；还未发生实际完整导出失败，此为提前核对发现，不是硬件失败。
