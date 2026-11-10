@@ -1,5 +1,13 @@
 # 当前工作与上下文交接
 
+**23:15工具入口：** 新icb32_soc/icb32_data/package_icb32及server_run两个阶段已实现，生产monitor fixture两例已通过；准备提交、干净源码构建与新包。真实ASIC/新PPA尚未开始，1200/synth/gate/power新入口仍缺。恢复读[最新检查点23:15增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，原队列仍保持。
+
+**23:08接续：** 新动态源/完整观察器及生产monitor fixture两例通过（34639/38052周期，无E203），源与计时边界和独立datapath一致。新增5文件+小型摘要尚未提交，SoC/batch/package/server入口待做；旧队列保持23:03实际running。恢复必读[最新检查点23:08增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)及有效计划，不重复旧测试。
+
+**23:04远端核查：** 原8路完整gate仍running、原队列持锁；23:03:28 parent212822/232492在，直接activity_scan子进程264277活跃。未重启或并发EDA，FileZilla未开。继续本地新ASIC monitor/source/运行入口；云端6a6f6ea已确认，最新恢复细节见[22:57检查点23:04增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。
+
+**23:01同步已核实：** 新阶段54文件已云端确认`6a6f6ea97c10939fa15869e0d09f734eb3f1e4ed`，原生产fcd保持。新ASIC/PPA仍未做；继续读[22:57检查点及23:01增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，先核查原服务器队列，再实现新SoC入口。
+
 **22:57当前入口：** R4名义及反压各14例通过；本地12层平均34616周期（4333.256task/s折算，无E203/PPA），raw/R1拆分与错误/载荷截断/取消/合成CPU竞争通过。新IRQ固件编译通过，新安装器已写，真实SoC monitor/source/运行入口待实现。全部本地仿真已结束；原服务器22:10状态需重查，VNC relay76458保持。先读[最新完整检查点](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，不继承旧1200/PPA为新PASS。
 
 **22:46当前入口：** R4核心18任务通过；压缩DMA/decoder/R4/turnover共享SRAM首任务37428B、34639周期、25344正确输出（本地pin_mock，无CPU/PPA）。R4全14 jitter1会话66399、R1三例双pf名义6284继续，禁止中途改受测文件。新RTL/ABI已实现未提交，集成错误恢复/新固件/ASIC/PPA待做；见[本轮完整检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。

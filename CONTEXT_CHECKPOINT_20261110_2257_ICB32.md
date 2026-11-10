@@ -2,6 +2,16 @@
 
 用户已批准“按计划开始”，持续执行中。有效计划：[32位ICB压缩与16×4实施计划](workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md)。11/11 18:00冻结，11/12 17:16交付准备，用户提供截止11/13晚上。压缩后先读本文件、有效计划、AGENTS、STATUS和根交接。旧过程/格式/服务器恢复细节见[22:04检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。
 
+**23:01同步增量：** 已提交并推送`6a6f6ea97c10939fa15869e0d09f734eb3f1e4ed`到既有私人分支，`ls-remote`独立确认云端完全一致。首次Windows schannel TLS握手失败，改Git OpenSSL后端重试成功，未关闭证书校验。54文件包含本轮源码/文档/小型证据，无凭据/厂商库/大产物。下方“尚未提交”仅为22:57快照。继续服务器状态核查及新ASIC工具，不以同步结束本任务。
+
+**23:04远端实际状态（覆盖22:10）：** 开发板windows刷新仍Vncviewer18874435、800×450，第三Mate Terminal页已实际观察空闲提示符。23:02读取原ecf队列done.json不存在，锁owner212822、L09 activity_scan、child205531；23:03:28再次实际读取`state.stages`为mmio8_gate/running，ps确认parent212822/232492仍活跃、当时直接子进程已变为activity_scan264277（R、CPU69.5%、elapsed21秒），说明旧队列继续推进，不能把L09旧子PID当当前。未停止/清锁/启动新EDA，FileZilla仍未打开。截图`E:/fpga_race-two/takeover_local/icb32_queue_2303.png`及`icb32_queue_detail_2304.png`。后续先继续本地SoC工具，原服务器队列自然结束后再排新任务。VNC relay76458保持；无本地仿真运行。23:01/23:04两条交接增量尚未再次提交。
+
+**23:08实现增量：** 新`tb/arch03_icb32_source.sv`、`arch03_task_window_icb32.sv`、`arch03_icb32_monitor.svh`已实现动态CODEC_BYTES、原SysMem N+1响应、首源VALID至最后输出ACK/排空、零共享读回、逐编码字成功写入后消费及解码半字逐个核对。新fixture/runner `tb_arch03_icb32_monitor_fixture.sv`/`local_verify_icb32_monitor.py`用实际生产observer/source+真实datapath通过L01压缩34639周期及extremes raw38052周期，目录`local_runs/icb32_monitor_fixture_20261110_230654_140963`，摘要`ICB32_MONITOR_20261110.json`。会话38261已完成。fixture无E203，日志生产observer的cpu_executed=true不作为CPU证据，独立摘要明确false。新增5文件+证据及交接增量尚未提交；原6a6f6ea云端已确认。下一步仍缺`icb32_soc.py`、对应batch/包/服务器入口、动态每例固件元数据和正式E203；不能认为旧dma16_soc硬编码工具可直接使用。现无本地仿真。
+
+**23:10数据工具增量：** 新`scripts/icb32_data.py`已实现标准库独立数据准备/编解码核验、捕获复用校验、ICB32完整窗口解析，并显式拒绝MONITOR_FIXTURE作为CPU证明。正确同源L01/extremes准备、回读、窗口解析通过，目录`local_runs/icb32_data_check_20261110_2310_v2`；首个`...2310`错误把旧核心测试tile8样本（37356B）绑定到新datapath L01（37428B），解析器正确拒绝source_bytes不一致，未改检查放行。准备应使用`local_runs/light-light126-reportfix-dma16-20261110_020049-7dc2617176b6/validated_data`作为服务器14例原tile8数据；其对应`validated_tile16`是本轮datapath用例。旧核心18任务另用172259目录，不能混为同样本PPA对照。新文件仍未提交。下一步真实ASIC compile/每例program-only boot元数据/运行收据，当前仍无新服务器上传或作业。
+
+**23:15工具实施增量：** 新`icb32_soc.py`已写完整真实ASIC编译/每例动态length boot/IRQ及结果校验，`server_run.py`新增icb32_soc/icb32_build阶段并沿用同一共享锁，`package_icb32.py`从已提交LF源重新编译IRQ固件、打包原14例/严格ZIP白名单及逐项哈希，不含缓存。语法/CLI检查和本地固件source/ELF/metadata/IRQ验证通过；这些新服务器功能尚未在真实平台跑。`arch03_tcm_ram.sv`依赖旧`arch03_sram_half`，新compile保留旧shared文件供TCM helper引用，同时新shared_turnover独立模块，无重复命名。尚无新batch1200/synth/gate/power入口。准备再次提交/云同步并实际打包；此时未上传，原队列23:03状态保持，不启动并发EDA。
+
 ## 已完成（新结果均为本地，不是新ASIC/PPA）
 
 - 软件codec600/7200无损回读及全部独立坐标、8项软件定向、21配置RTL decoder通过；B1原16路ACK转发14反压及6名义通过；独立turnover fabric386事务/306同拍交接通过。详情与原始路径见22:04检查点，原模块未改。
