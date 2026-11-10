@@ -1,0 +1,29 @@
+{
+  "schema": "icb32-diagnostic-package-handoff-v1",
+  "source_commit": "49759e108719d53173648fa3de49b267c6169bbe",
+  "archive": "light-light126-icb32-r4-20261111_011258-49759e108719.zip",
+  "archive_bytes": 11158655,
+  "archive_sha256": "ba62ea8ad2b10554a2c211eee33a87e4519d54dd038878d3dc9b259679c538e4",
+  "input_files": 630,
+  "clean_software_checks": {"passed": 17, "scope": "report_codec_synthesis_gate_power_tool_checks_not_hardware", "runtime": "project_Python3.8_with_Tcl", "first_attempt": "Codex_python_Tcl_initialization_error_2_checks_not_executed"},
+  "board_staged_sha256_verified": true,
+  "upload": {"via": "board_Linux_FileZilla", "directory": "/IC/light-light126-undergrad-d2-20261109", "successful_transfers": 1, "queue_empty": true, "disconnected_and_closed": true},
+  "server": {
+    "observed": "2026-11-11T01:23:26+08:00",
+    "root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-icb32-r4-20261111_011258-49759e108719",
+    "archive_hash_safe_unpack": "passed",
+    "all_input_hashes": "passed_630",
+    "firmware_hash_checks": ["IRQ_performance", "polling_contention", "polling_no_reset_sequence"],
+    "CPU_execution_verified": false,
+    "PPA_verified": false
+  },
+  "production_identity_unchanged_from_e65_package": {
+    "firmware_manifest_sha256": "fde6cbea29cda15a066a9f3710d8684ae0ba14f73dfd497a80e0a68b3952849b",
+    "elf_sha256": "8cf32dcdfd842936127292652b21b4f7c2bd0529da73620f1c0949fe213ec233",
+    "shift12_boot_sha256": "725b35d57216573750116af2db555b758ea8175ece8bcbae7b70eeaf466ac64c",
+    "accelerator_sha256": "688ca051a01ee714500001aee78e0a62791103e460b02fe2cc7b5e59e5a583b7",
+    "platform_installer_sha256": "32623054c425f21e1e447d2e6a52cc918cd8b466e01495defe3798a76e0b64c5",
+    "synthesis_driver_sha256": "d4c517ed13f22c1b34a20b7dabda11be6e014c80734b60779300a7aab09f7278"
+  },
+  "limits": ["Server preflight is not ASIC acceptance", "Dedicated polling diagnostics are not performance or IRQ power samples", "e65 ASIC14/synthesis queue remains the only queued EDA successor"]
+}

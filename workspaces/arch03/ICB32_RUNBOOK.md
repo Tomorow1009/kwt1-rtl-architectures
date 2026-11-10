@@ -6,7 +6,9 @@
 
 包由 `scripts/package_icb32.py` 从已提交源码导出并重新编译 IRQ/WFI 固件；数据仍是已有同源 14 例的 tile8 原始格式，每例独立重排和无损编码。ITCM 只含程序与 16B 任务元数据，不含任务输入。服务器先运行 `server_run.inputs()`，再核验固件和新平台副本。
 
-2026-11-10 23:47，c019 包已实际通过服务器 ZIP SHA、安全解包、580 输入、固件 ID 0x4b574604、原平台接线安装预检。尚未运行新 ASIC 仿真或综合。原队列23:45仍在原8路 L10 活动扫描，不能重启或清锁。
+2026-11-11 01:23，49759e1 新包已通过板端 FileZilla 上传、服务器 ZIP SHA 安全解包、630 输入及 IRQ/竞争/序列三套固件哈希核验。新包目录为 `light-light126-icb32-r4-20261111_011258-49759e108719`，SHA256 为 `ba62ea8ad2b10554a2c211eee33a87e4519d54dd038878d3dc9b259679c538e4`。FileZilla 已断开退出。该包仅预检通过，实际新 ASIC、诊断和 PPA 尚未验收。
+
+e65 前包的唯一后继 PID75421 已于00:53启动，目录 `runs/icb32_r4_first01_queue`，等待原串行队列完成后 ASIC14→综合；01:24 实测仍等待，禁止重复启动。原 c019/e65 的预检及历史目录保留；最终运行状态以根交接的带时间记录为准。
 
 ## 顺序执行
 
@@ -35,7 +37,7 @@ python3 workspaces/arch03/scripts/server_run.py icb32_timing_audit --session icb
 python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_final1200 --dataset <既有100样本原始数据根目录>
 ```
 
-批量入口要求原固定数据 manifest SHA `0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`，100个样本各12层；一次新ASIC编译，1200次独立冷启动，逐项25344输出校验，总30412800。每任务保存压缩数据/固件元数据/真实CPU回执及哈希，关闭大波形；不接受旧37任务或原DMA16批量PASS。最终版本仍需自己的门级14、活动功耗12及干净目录复现。
+批量入口要求原固定数据 manifest SHA `0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`，100个样本各12层；历史用户指定根目录为 `/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，执行前重新核对该清单。一次新ASIC编译，1200次独立冷启动，逐项25344输出校验，总30412800。每任务保存压缩数据/固件元数据/真实CPU回执及哈希，关闭大波形；不接受旧37任务或原DMA16批量PASS。最终版本仍需自己的门级14、活动功耗12及干净目录复现。
 
 ## 本地检查范围
 
