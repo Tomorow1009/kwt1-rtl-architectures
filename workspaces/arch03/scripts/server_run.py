@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','dma16_unknown_activity'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','dma16_unknown_activity','dma16_mac_use'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -191,9 +191,9 @@ def main():
         raise ValueError('Gate report re-audit is only for gate_soc')
     if a.gate_reports_from is not None and (a.synth_run is not None or a.synth_summary_sha256 is not None or a.activity_cases):
         raise ValueError('Gate re-audit uses only the original run synthesis/activity provenance')
-    if a.stage in ('asic_power','dma16_power','mmio8_power','dma16_unknown_activity') and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
+    if a.stage in ('asic_power','dma16_power','mmio8_power','dma16_unknown_activity','dma16_mac_use') and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
         raise ValueError('Power/activity audit requires gate run, summary digest and exactly one --cases selection')
-    if a.stage not in ('asic_power','dma16_power','mmio8_power','dma16_unknown_activity') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
+    if a.stage not in ('asic_power','dma16_power','mmio8_power','dma16_unknown_activity','dma16_mac_use') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
         raise ValueError('Gate activity selection is only for power or unknown-activity review')
     if a.stage in ('gate_soc','dma16_gate','mmio8_gate','dma16_timing_audit') and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
         raise ValueError('Gate verification requires synthesis run and summary digest')
@@ -250,6 +250,9 @@ def main():
                 report=estimate(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
             elif a.stage=='dma16_unknown_activity':
                 from dma16_unknown_activity import audit
+                report=audit(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
+            elif a.stage=='dma16_mac_use':
+                from dma16_mac_use import audit
                 report=audit(cfg,run,a.gate_run.resolve(),a.gate_summary_sha256,a.cases[0],call)
             elif a.stage=='mmio8_power':
                 from mmio8_power import estimate

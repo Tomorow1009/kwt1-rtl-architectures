@@ -112,7 +112,7 @@
     "strict_timing_verified": true,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Commit/package/clean-audit strict unannotated table and trailer parser; upload new bundle and run annotation_all12_v3. Existing MMIO8 gate46140/scan55423 remains active; verify completion before first reference PT. Unknown valid-use/time and X sensitivity, reference remaining gate/PT, clean reproduction and delivery remain. Final1200/full02 re-audit already passed.",
+    "next": "Commit and clean-package passive full-stream MAC acceptance diagnostic. MMIO8 first PT driver106327 child107249 remains active; wait for completion before large MAC scan. Unknown CPU/memory/interconnect and X modeling sensitivity, reference full14/12 gate/PT, clean reproduction and final delivery remain. Annotation all12 v3 and final1200/full02 re-audit completed.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -153,13 +153,13 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": "mmio8_source_gate01",
+    "active_session": "mmio8_source_power_l01_v1",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "fd54fd14267df093a991e9e07685462b6b414c44",
-      "verified_date": "2026-11-10 approximately09:09",
+      "verified_remote_commit": "e777a683c039c7f7172edf82615dee4816b77e87",
+      "verified_date": "2026-11-10 approximately09:28",
       "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
       "subsequent_same_scope_authorized": true,
       "main_merged": false
@@ -1142,7 +1142,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "fd54fd14267df093a991e9e07685462b6b414c44",
+    "current_server_tool_commit": "e777a683c039c7f7172edf82615dee4816b77e87",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -1947,6 +1947,67 @@
       "status": "running",
       "log": "layer_01_activity_scan.log",
       "owns_shared_lock": true
+    },
+    "annotation_zero_package": {
+      "source_commit": "e777a683c039c7f7172edf82615dee4816b77e87",
+      "archive": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039.zip",
+      "sha256": "33cf131a88a87dda600f3eb77234fe65c4c6433d47219425e986b5e5f0b4b097",
+      "bytes": 16631907,
+      "files": 672,
+      "clean_tests": 200,
+      "clean_audit_receipt": "local_runs/dma16_annotation_zero_clean_audit_20261110_0930/receipt.json",
+      "clean_audit_sha256": "534a8707a4e4c795e7d6fb2bfa0a646925d492970902370ff1aa51d8507c129e",
+      "production_files_unchanged": 40,
+      "server_uploaded": true,
+      "server_unpacked": "2026-11-10T09:31:33.134764",
+      "server_inputs_verified_at": "2026-11-10T09:32:22.310123"
+    },
+    "annotation_all12_v3": {
+      "bundle": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039",
+      "output": "runs/annotation_all12_v3/annotation.json",
+      "status": "annotation_and_settings_checked_unknown_review_pending",
+      "layers": 12,
+      "finished": "2026-11-10T09:32:25.979277",
+      "sha256": "697793c6f4ab94aebe16414a8dee1ad0723039e1404a052c3767697db0b78ac4",
+      "sha_verified_at": "2026-11-10T09:34:09.308654",
+      "system_power_verified": false
+    },
+    "mmio8_gate_first_layer": {
+      "bundle": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696",
+      "run": "runs/mmio8_source_gate01/mmio8_gate",
+      "status": "passed",
+      "started": "2026-11-10T08:42:24.710930",
+      "finished": "2026-11-10T09:31:05.827774",
+      "outputs": 25344,
+      "cycles": 3843121,
+      "vcd_bytes": 30231391361,
+      "summary_sha256": "b13216142fe97f8341942d53ded9de806fc96cb89feecfe64dc4270f6a4d4dfa",
+      "sha_independently_asserted_before_power_launch": true,
+      "DMA_present": false,
+      "full14_gate_completed": false
+    },
+    "mmio8_power_first_layer": {
+      "bundle": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039",
+      "run": "runs/mmio8_source_power_l01_v1/mmio8_power",
+      "status": "running",
+      "pid": 106327,
+      "launcher_started": "2026-11-10T09:35:34.915404",
+      "system_power_verified": false,
+      "child_pid": 107249,
+      "started": "2026-11-10T09:35:35.465062",
+      "last_observed": "2026-11-10T09:45:15.492324",
+      "owns_shared_lock": true,
+      "prior_pid_transcription_error": 22688
+    },
+    "mac_use_diagnostic": {
+      "status": "local_only",
+      "tests": 8,
+      "related_tests": 51,
+      "server_executed": false,
+      "production_changed": false,
+      "system_power_verified": false,
+      "document": "workspaces/arch03/MAC_VALID_USE_REVIEW_20261110.md",
+      "header_diagnostic": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039/runs/mac_header_v1.json"
     }
   }
 }
