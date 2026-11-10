@@ -13,10 +13,17 @@ def settings():
     return '\n'.join(k+' '+v for k, v in zip(p.SETTINGS, ('averaged', '0.5', 'false')))+'\n'
 
 
-def sources(counts=None):
+def sources(counts=None, probability=None):
     counts = counts or [152986]+[0]*7+[1, 0]
-    return ('Report : Switching Activity\n-include_mapping_types\nDesign : e203_soc_top\n'+p.HEADER+
-            '\nNets '+' '.join(str(n)+'(0.00%)' for n in counts)+' '+str(sum(counts))+'\n')
+    # Actual PT has two distinct tables with identical column headings. Copy
+    # the observed heading independently of the parser constant.
+    heading = ('Object Type Exact Mapping (%) Map File (%) Built-in Mapping (%) SSA (%) SCA (%) '
+               'Clock (%) Default (%) Propagated(%) Implied(%) Annotated(%) Total')
+    def table(title, values):
+        return (title+' Overview Statistics for "e203_soc_top"\n'+heading+
+                '\nNets '+' '.join(str(n)+'(0.00%)' for n in values)+' '+str(sum(values))+'\nNets Driven by\n')
+    return ('Report : Switching Activity\n-include_mapping_types\nDesign : e203_soc_top\n'+
+            table('Switching Activity', counts)+table('Static Probability', probability or counts))
 
 
 def unannotated():
@@ -56,11 +63,22 @@ class PowerActivityReviewTests(unittest.TestCase):
     def test_mapping_columns_and_counts_are_checked_not_percentages(self):
         values = p.sources(sources())
         self.assertEqual((values['exact_mapping'], values['implied'], values['total']), (152986, 1, 152987))
+        self.assertEqual(values['static_probability']['exact_mapping'], 152986)
         for text in (sources().replace('Map File', 'Other Source'), sources()+sources(),
                      sources().replace(' 152987\n', ' 152988\n'), sources().replace('Nets ', 'Pins '),
                      sources().replace('e203_soc_top', 'other_design'), sources().replace('0(0.00%) ', '', 1)):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 p.sources(text)
+
+    def test_real_two_table_shape_is_not_a_duplicate_and_both_are_required(self):
+        text = sources()
+        self.assertEqual(text.count(p.HEADER), 2)
+        self.assertEqual(text.count('Nets Driven by'), 2)
+        self.assertEqual(p.sources(text)['static_probability']['total'], 152987)
+        for bad in (text[:text.index('Static Probability')],
+                    text.replace('Static Probability', 'Switching Activity'),
+                    sources(probability=[152985]+[0]*7+[1, 0])):
+            with self.subTest(text=bad), self.assertRaises(ValueError): p.sources(bad)
 
     def test_explicit_empty_list_required_and_no_uncovered_pin_hidden(self):
         self.assertTrue(p.empty_unannotated(unannotated())['explicit_object_list_empty'])
@@ -107,6 +125,9 @@ class PowerActivityReviewTests(unittest.TestCase):
                 (run/'activity_sources.rpt').write_text(sources(counts))
                 records[str(run)]['artifacts']['activity_sources.rpt'] = p.sha(run/'activity_sources.rpt')
                 with self.assertRaisesRegex(ValueError, 'activity source'): p.build(request)
+                (run/'activity_sources.rpt').write_text(sources(probability=counts))
+                records[str(run)]['artifacts']['activity_sources.rpt'] = p.sha(run/'activity_sources.rpt')
+                with self.assertRaisesRegex(ValueError, 'static probability'): p.build(request)
 
     def test_request_mutation_during_audit_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:

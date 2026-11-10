@@ -38,12 +38,9 @@ def settings(text):
     return result
 
 
-def sources(text):
-    require('-include_mapping_types' in text and re.search(r'(?m)^Design\s*:\s*e203_soc_top\s*$', text),
-            'Wrong activity-source report')
-    lines = [' '.join(line.split()) for line in text.splitlines()]
+def source_table(lines):
     require(lines.count(HEADER) == 1, 'Unreviewed activity-source columns')
-    rows = [line for line in lines if line.startswith('Nets ')]
+    rows = [line for line in lines if line.startswith('Nets ') and line != 'Nets Driven by']
     require(len(rows) == 1, 'Missing or duplicate whole-design Nets row')
     counts = re.findall(r'(\d+)\(\d+(?:\.\d+)?%\)', rows[0])
     tail = re.sub(r'\d+\(\d+(?:\.\d+)?%\)', '', rows[0]).split()
@@ -53,6 +50,23 @@ def sources(text):
     result['total'] = int(tail[1])
     require(result['total'] > 0 and sum(result[k] for k in MAPPING) == result['total'],
             'Activity-source counts do not sum to total')
+    return result
+
+
+def sources(text):
+    require('-include_mapping_types' in text and re.search(r'(?m)^Design\s*:\s*e203_soc_top\s*$', text),
+            'Wrong activity-source report')
+    lines = [' '.join(line.split()) for line in text.splitlines()]
+    switching = 'Switching Activity Overview Statistics for "e203_soc_top"'
+    probability = 'Static Probability Overview Statistics for "e203_soc_top"'
+    require(lines.count(switching) == lines.count(probability) == 1,
+            'Require separate switching and static-probability overview tables')
+    a, b = lines.index(switching), lines.index(probability)
+    require(a < b, 'Unreviewed activity-source section order')
+    result = source_table(lines[a:b])
+    result['static_probability'] = source_table(lines[b:])
+    require(result['total'] == result['static_probability']['total'],
+            'Switching/static-probability design counts differ')
     return result
 
 
@@ -87,6 +101,9 @@ def build(request_path):
                 'Different frozen X settings; keep sensitivity runs separate')
         require(mapping['exact_mapping'] + mapping['implied'] == mapping['total'],
                 'Default, propagated, unannotated or other activity source requires review')
+        probability = mapping['static_probability']
+        require(probability['exact_mapping'] + probability['implied'] == probability['total'],
+                'Default, propagated, unannotated or other static probability requires review')
         unannotated = {phase: empty_unannotated(texts['activity_unannotated_'+phase+'.rpt'])
                       for phase in ('before', 'after')}
         warnings = numeric['warning_occurrences_by_artifact']
