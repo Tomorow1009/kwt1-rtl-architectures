@@ -1,3 +1,5 @@
+**05:32最新接续：** 原gate已完整通过L01–L05；05:31实看L06映射仿真306705/driver209764。后继285397仍waiting_gate、completed=[]，会自动power12→metrics14→final1200，不要手工重复启动。云端0437edb已核。详见[05:10检查点的05:32增量](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)，当前cwd964/最后all_live查询，FileZilla关闭；继续执行。
+
 **05:22最新接续：** 05:21实看原gate209764/L05活动291732正常，4层完整通过，VCD约68.7%；后继285397仍waiting_gate、completed=[]。云端已核502915f，设计报告已补带宽下界。详见[05:10检查点的05:22增量](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)。当前cwd964，最后`icb32_all_live.txt`查询可Up Return，FileZilla关闭。后继将自动power12→metrics14→final1200，不要手工重复启动，持续执行。
 
 **05:10接续：** 原gate已完整通过L01–L04，05:05实际L05活动291732/driver209764。后继285397已核验964及100数据、等待原gate，随后自动power12→metrics14→final1200，禁止手工重复启动。新ICB32设计报告准备稿完成。压缩后先读[05:10检查点](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)、有效计划及STATUS；当时cwd964，最后gate_status查询，FileZilla关闭。新功耗和最终1200仍未完成，持续执行。
