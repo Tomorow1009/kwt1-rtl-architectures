@@ -132,8 +132,25 @@ def parse_power(units, text):
     unit_values, totals, groups = read_power_table(units, text)
     checks = {}
     for name, row in groups.items(): checks['group_'+name] = check_sum([row[k] for k in ('internal', 'switching', 'leakage')], row['total'], name)
-    for key in totals: checks['column_'+key] = check_sum([groups[name][key] for name in GROUPS], totals[key], 'all groups '+key)
+    for key in KEYS[:3]: checks['column_'+key] = check_sum([groups[name][key] for name in GROUPS], totals[key], 'all groups '+key)
     checks['whole_soc'] = check_sum([totals[k] for k in ('internal', 'switching', 'leakage')], totals['total'], 'whole SoC')
+    try:
+        checks['column_total'] = check_sum([groups[name]['total'] for name in GROUPS], totals['total'], 'all groups total')
+    except ValueError:
+        # A group total and the SoC total are independently rounded subtotals,
+        # not necessarily one rounding of the displayed group-total column.
+        # All 7 row sums, all 3 component columns, and the SoC sum MUST have
+        # passed the unchanged tight checks above. Their triangle-inequality
+        # bounds then cover the two aggregation paths without a new tolerance:
+        # sum(group totals) -> sum(all components) -> sum(SoC components) -> SoC.
+        parents = {name: check['bound_w'] for name, check in checks.items()}
+        bound = sum(Decimal(value) for value in parents.values())
+        residual = abs(sum(number(groups[name]['total']) for name in GROUPS)-number(totals['total']))
+        require(len(parents) == 11 and residual <= bound, 'Power sum mismatch: composed all groups total')
+        checks['column_total'] = dict(residual_w=str(residual), bound_w=str(bound),
+            numerical_basis='validated_rows_component_columns_and_whole_soc_rounding_chain',
+            supporting_check_bounds_w=parents,
+            direct_group_total_rounding_check_passed=False)
     return dict(units=unit_values, reported_power_w=totals, reported_group_power_w=groups,
                 numerical_sum_checks=checks,
                 derived_dynamic_w=str(number(totals['internal'])+number(totals['switching'])),

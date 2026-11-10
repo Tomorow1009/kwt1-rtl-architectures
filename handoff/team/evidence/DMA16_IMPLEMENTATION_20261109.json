@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_all12_PT_collected_full_report_and_1200_reaudit_running",
+  "phase": "MMIO8_fresh_reference_synthesis_running_DMA16_report_sum_rounding_fix_local",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Observe foreground report PID8416, no terminal typing while busy, no concurrent heavy work. Verify final report and 1200 independent receipts/output audit. Then fresh MMIO8 synthesis once lock/EDA clear. Continue remaining unknown use/time and all-layer activity review; clean reproduction/delivery pending. Same-scope cloud sync authorized.",
+  "next": "Commit, package and clean-test numeric aggregation fix; upload and verify all12 original PT reports. Preserve failed full01, create fresh full02. Wait for MMIO8 synth17074 to release shared lock before full1200 report re-audit. Unknown use/time, reference gate/PT, clean reproduction/delivery remain.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "dma16_report_full01",
+  "active_session": "mmio8_source_synth01",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": true,
@@ -755,7 +755,7 @@
     "ftp_transfer_seconds": 32,
     "ftp_disconnected_after_transfer": true
   },
-  "cloud_source_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3",
+  "cloud_source_commit": "38ccfc15998453b1aaeb41ec3af5d186c542e57e",
   "dma16_gate02": {
     "state": "failed",
     "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -1109,7 +1109,7 @@
     "status": "resolved_after_current_user_explicit_authorization",
     "user_reply_received": true,
     "authorization_scope": "Current and subsequent project source, handoff and small verification summaries to the named private repository and personal branch",
-    "verified_remote_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3"
+    "verified_remote_commit": "38ccfc15998453b1aaeb41ec3af5d186c542e57e"
   },
   "mmio8_gate_power_local": {
     "status": "local_contracts_and_generated_monitor_fixture_passed",
@@ -1828,7 +1828,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3",
+    "verified_remote_commit": "38ccfc15998453b1aaeb41ec3af5d186c542e57e",
     "verified_date": "2026-11-10 approximately07:44",
     "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
     "subsequent_same_scope_authorized": true,
@@ -1877,12 +1877,41 @@
     "output": "output",
     "started": "2026-11-10T08:03:41.821567",
     "driver_pid": 8416,
-    "status": "running_result_pending",
-    "owns_shared_lock": true,
+    "status": "failed_numeric_guard_preserved",
+    "owns_shared_lock": false,
     "foreground_vnc_terminal_tab": 3,
     "expected_power_layers": 12,
     "expected_batch_tasks": 1200,
     "expected_outputs": 30412800,
-    "system_power_verified": false
+    "system_power_verified": false,
+    "error": "Power sum mismatch: all groups total",
+    "failed_power_case": "layer_06",
+    "batch_reaudit_started": false,
+    "final_output_created": false,
+    "lock_release_observed": "2026-11-10 approximately08:07"
+  },
+  "mmio8_source_synth01": {
+    "bundle": "light-light126-unknown-netlist-dma16-20261110_073951-1aa0ba3de8a9",
+    "run": "runs/mmio8_source_synth01/mmio8_synth",
+    "driver_pid": 17074,
+    "started_launcher": "2026-11-10T08:11:02.108784",
+    "started": "2026-11-10T08:11:02.831326",
+    "last_observed": "2026-11-10T08:12:18.161796",
+    "status": "running",
+    "DMA_present": false,
+    "reference_only": true,
+    "automatic_review": "Initially rejected; approved after rereading explicit user plan and verifying existing MMIO source scope"
+  },
+  "power_sum_chain_fix_local": {
+    "case": "layer_06",
+    "observed_residual_w": "2.262699e-9",
+    "composed_bound_w": "6.302418279692705255001783370e-9",
+    "supporting_independent_checks": 11,
+    "canonical_table_sha256": "f9e24970832e026d1b1623a69c9c44b99baa29b0fa697fb0d4d2d4f0856d33ec",
+    "actual_table_matches_local_fixture": true,
+    "related_tests_passed": 35,
+    "server_verified": false,
+    "original_check_sum_changed": false,
+    "production_modified": false
   }
 }

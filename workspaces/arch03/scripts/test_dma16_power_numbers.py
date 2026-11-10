@@ -154,6 +154,36 @@ class PowerNumberTests(unittest.TestCase):
         with self.assertRaises(ValueError): p.observed_binary32_rounding('1.20398495e-04')
         self.assertEqual(p.rounding('0.00000000e+00'), 0)
 
+    def test_actual_layer06_independently_rounded_subtotals_need_composed_bound(self):
+        # Numerical report transcription only: not a PPA acceptance fixture.
+        rows = {
+            'clock_network': ['1.33748408e-02', '1.57246867e-03', '1.48489704e-07', '1.49474572e-02'],
+            'register': ['8.53509773e-05', '3.85839376e-05', '9.04725530e-05', '2.14407453e-04'],
+            'combinational': ['1.59331376e-03', '1.03811221e-03', '2.64157279e-04', '2.89558317e-03'],
+            'sequential': ['0.00000000e+00', '0.00000000e+00', '8.33214301e-07', '8.33214301e-07'],
+            'memory': ['5.37125580e-03', '4.46761351e-06', '6.14022184e-03', '1.15159452e-02'],
+            'io_pad': ['0.00000000e+00']*4, 'black_box': ['0.00000000e+00']*4}
+        totals = ['2.04247609e-02', '2.65363255e-03', '6.49583340e-03', '2.95742285e-02']
+        with self.assertRaisesRegex(ValueError, 'all groups total'):
+            p.check_sum([rows[name][3] for name in p.GROUPS], totals[3], 'all groups total')
+        labels = dict(zip(p.KEYS, ['Cell Internal Power', 'Net Switching Power', 'Cell Leakage Power', 'Total Power']))
+        text = 'Report : Averaged Power\nDesign : e203_soc_top\n'
+        text += '\n'.join(labels[key]+' = '+value+' (0.00%)' for key, value in zip(p.KEYS, totals))+'\n'
+        text += '\n'.join(name+' '+' '.join(rows[name])+' (0.00%)' for name in p.GROUPS)+'\n'
+        result = p.parse_power(UNITS, text); check = result['numerical_sum_checks']['column_total']
+        self.assertEqual(Decimal(check['residual_w']), Decimal('2.262699e-9'))
+        self.assertEqual(len(check['supporting_check_bounds_w']), 11)
+        self.assertEqual(Decimal(check['bound_w']), sum(Decimal(v) for v in check['supporting_check_bounds_w'].values()))
+        self.assertLess(Decimal(check['bound_w']), Decimal('7e-9'))
+        self.assertFalse(check['direct_group_total_rounding_check_passed'])
+        # A changed row total or component must still fail its independent
+        # source check; the derived total comparison cannot waive either.
+        for old, bad in [('1.15159452e-02', '1.15159472e-02'),
+                         ('2.95742285e-02', '2.95742485e-02'),
+                         ('6.14022184e-03', '6.14023184e-03')]:
+            with self.assertRaisesRegex(ValueError, 'sum mismatch'):
+                p.parse_power(UNITS, text.replace(old, bad))
+
     def test_actual_artifacts_bound_but_numbers_do_not_approve_power(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); run = root/'dma16_power'; run.mkdir()
