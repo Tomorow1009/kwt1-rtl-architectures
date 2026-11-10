@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--prefetch',nargs='+',type=int,choices=[0,1],default=[0,1])
     parser.add_argument('--activity',action='store_true',help='Dump the production monitor task window; select exactly one case and prefetch mode')
     parser.add_argument('--bus-metrics',action='store_true',help='Add passive metrics using the same ASIC binding/instrumentation functions')
+    parser.add_argument('--gate-monitor',action='store_true',help='Test generated port-bound observer on RTL; still no E203 or mapped netlist')
     args=parser.parse_args()
     if args.activity and (len(args.cases)!=1 or len(args.prefetch)!=1):
         parser.error('--activity requires exactly one --cases item and one --prefetch item')
@@ -35,6 +36,12 @@ def main():
            A3/'rtl/arch03_icb_arb2_turnover.sv',A3/'rtl/arch03_icb_memory_router_turnover.sv',A3/'rtl/arch03_shared_sram_turnover.sv',
            A3/'tb/arch03_task_window_icb32.sv',A3/'tb/arch03_icb32_source.sv',A3/'tb/tb_arch03_icb32_monitor_fixture.sv']
     instrumentation=[]
+    if args.gate_monitor:
+        from icb32_gate_monitor import generate,DEFAULT_BINDINGS
+        generated=folder/'arch03_icb32_gate_monitor.svh'
+        generated.write_text(generate((A3/'tb/arch03_icb32_monitor.svh').read_text(),DEFAULT_BINDINGS))
+        instrumentation+=[generated,A3/'scripts/icb32_gate_monitor.py']
+        files.append(A3/'tb/arch03_icb32_gate_proof.sv')
     if args.bus_metrics: raise ValueError('New passive metrics not yet implemented')
     cfg_path=A2/'arch02/tb/pin_mock_config.json'
     cfg=json.loads(cfg_path.read_text());lines=[]
@@ -50,7 +57,8 @@ def main():
             if sha(task/filename)!=digest:raise ValueError('Changed fixture data '+filename)
         data_hashes[name]=sha(task/'layout_manifest.json')
     tool=lambda name:args.vivado_bin/(name+'.bat')
-    run([tool('xvlog'),'--sv','-d','ARCH02_PIN_MOCK','-i',folder,'-i',A3/'tb']+files,folder,'compile.log')
+    extra=['-d','ICB32_GATE_OBSERVER'] if args.gate_monitor else []
+    run([tool('xvlog'),'--sv','-d','ARCH02_PIN_MOCK','-i',folder,'-i',A3/'tb']+extra+files,folder,'compile.log')
     run([tool('xelab'),'tb_arch03_icb32_monitor_fixture','-debug','typical','-s','monitor_fixture'],folder,'elaborate.log')
     (folder/'run.tcl').write_text('run all\nquit\n')
     results=[]
@@ -113,6 +121,7 @@ def main():
         for filename,expected_digest in layout['sha256'].items():
             if sha(data/name/filename)!=expected_digest:raise ValueError('Fixture vector content changed: '+filename)
     report=dict(status='passed',cpu_executed=False,dma_executed=True,backend='pin_mock',bus_metrics=bool(args.bus_metrics),
+                generated_port_observer=args.gate_monitor,mapped_gate_verified=False,
                 scope='production_source_and_monitor_real_dma_datapath_procedural_MMIO_no_E203',
                 production_monitor_cpu_flag_in_fixture_is_not_evidence=True,tasks=len(results),
                 outputs=len(results)*25344,cases=results,source_sha256={p.relative_to(ROOT).as_posix():h for p,h in hashes.items()})

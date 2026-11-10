@@ -1,6 +1,16 @@
 # 32位ICB / C64 接续检查点：2026-11-10 22:57
 
+**23:47恢复与服务器预检（覆盖23:44连接受阻）：** 用户说“再试一下”，新VNC认证成功，实际窗口20971587；FTP已断开。23:45:42实际锁仍原ecf/mmio8_source_gate_full01，owner212822、parent232492，L10 activity_scan child279413，CPU99.7%、elapsed32:38；不启动新EDA。c019新ZIP已使用原bundle的handoff/team/unpack.py核对SHA并安全解包到`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-icb32-r4-20261110_231731-c019d7ce3306`。23:47实际打印`INPUT_HASH_PASS 580`、`FW_HASH_PASS 0x4b574604`、`INSTALL_PASS {'4096x16':128,'128x16':96}`；安装仅新包runs/icb32_preflight/platform，非EDA或功能验证。截图icb32_unpack_2346.png、icb32_preflight_2347.png、icb32_queue_retry_2345.png。当前远端第三终端页空闲在新c019包根。本地新synth三项契约检查通过（首轮测试夹具缺standard_library_member，补独立假库名后通过，不是实际综合）；新batch/门级生成器仍在编写。保持原锁及队列。
+
+**23:44上传/连接增量：** c019新ZIP已经Linux FileZilla成功传输（10,912,739B，21秒，成功1、队列空），随后Ctrl+D正常断开，截图`takeover_local/icb32_fz_upload.png`。尚未服务器SHA/安全解包。系统DNS现返回198.18保留地址，原FTP代理拒绝启动；Google DNS over HTTPS实际查询比赛FTP=58.213.25.66、VNC=58.213.25.70。仅在本地`takeover_local/contest_links_dns.py`包裹既有helper，精确主机替换DNS结果，保持原目标限制，不改系统设置。FTP代理会话10109、VNC relay40071；旧relay76458仅本地退出，未动远端。VNC Viewer两次连接后欢迎头前断流，独立只读RFB握手也返回空；没有恢复桌面或读取队列，不得把23:03状态当实时。已异步询问用户/队友是否也无法VNC，等待不阻碍本地工作。
+
+新`icb32_synth.py`和`icb32_batch.py`已开始本地编写：前者独立128大+96小宏/224总数及同工艺计面积，后者复用固定100样本索引、一次ASIC编译+每任务独立cold boot/动态codec元数据/回执，尚未测试或服务器执行。server_run已加两个阶段、同一锁；当前未提交。编写时发现batch窗口字段应encoded_bytes而非source_bytes，已修，待检查。新gate/power仍待做。原生产不变，不能借原1200/PPA证明新版。上次apply_patch对旧检查点短行匹配失败；本增量已用完整标题锚点保存。
+
 用户已批准“按计划开始”，持续执行中。有效计划：[32位ICB压缩与16×4实施计划](workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md)。11/11 18:00冻结，11/12 17:16交付准备，用户提供截止11/13晚上。压缩后先读本文件、有效计划、AGENTS、STATUS和根交接。旧过程/格式/服务器恢复细节见[22:04检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。
+
+**23:28恢复与打包增量：** 当前源码/云端独立确认`c019d7ce33066d8744fbc656b62d1f8c71f4e4f7`，新入口已提交（覆盖下方23:15待办）。新包`local_runs/light-light126-icb32-r4-20261110_231731-c019d7ce3306.zip`，10,912,739B、580输入、SHA256 `70026e7b1b380bdd5b9da2027a1123886618274c6856550b7e951a0ea8fbb2b8`。从Git导出LF源重新编译IRQ固件，ZIP白名单及哈希通过；包内导出代码本地L01 fixture34639通过，目录包内local_runs/icb32_monitor_fixture_20261110_231900_839128（不在ZIP）。板端`/home/root/undergrad-icb32-r4-20261110-2317/`暂存ZIP，独立sha256sum一致，GUI同目录为`/home/board/undergrad-icb32-r4-20261110-2317/`。尚未FTP上传或新服务器运行。
+
+23:28刷新窗口：FileZilla main18874950、密码对话框18876526，站点已观察为icdesigns0.nicu.cn:18888、既有账号及Ask for password。本机已有凭据文件可用于正常登录，不记录内容。VNC窗口已消失，原因不明，未发远端停止；需helper viewer/login重开再观察，不复用旧ID。原远端最后23:03 mmio8_gate仍running、driver212822/queue232492、scan264277，当时锁保留。FileZilla启动首试chroot内无/bin/su失败，改env直接启动成功；X11组合键应`Control_L a`，不能`ctrl+a`，错误追加路径已更正，当前本地路径正确。relay76458保留，当前无本地仿真。下一步完成FTP单包上传/核验、恢复VNC/读原队列；旧锁释放前不启动新EDA。本轮已重读计划、状态、AGENTS、README、SYNC。
 
 **23:01同步增量：** 已提交并推送`6a6f6ea97c10939fa15869e0d09f734eb3f1e4ed`到既有私人分支，`ls-remote`独立确认云端完全一致。首次Windows schannel TLS握手失败，改Git OpenSSL后端重试成功，未关闭证书校验。54文件包含本轮源码/文档/小型证据，无凭据/厂商库/大产物。下方“尚未提交”仅为22:57快照。继续服务器状态核查及新ASIC工具，不以同步结束本任务。
 

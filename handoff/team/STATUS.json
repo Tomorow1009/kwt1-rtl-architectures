@@ -2504,7 +2504,7 @@
     }
   },
   "icb32_c64_execution": {
-    "status": "implementing_local",
+    "status": "implementing_server_preflight_passed",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md",
     "started": "2026-11-10T22:04:16+08:00",
     "freeze": "2026-11-11T18:00:00+08:00",
@@ -2513,12 +2513,12 @@
     "codec_software": "handoff/team/evidence/ICB32_CODEC_600_20261110.json",
     "decoder_rtl": "handoff/team/evidence/ICB32_DECODER_20261110.json",
     "b1_run": "local_runs/dma16_forward_datapath_20261110_222327_360464",
-    "b1_status": "running_9_layers_observed_passed",
+    "b1_status": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "new_soc_verified": false,
     "new_ppa_verified": false,
-    "remote_last_observed": "2026-11-10T22:10:00+08:00",
-    "remote_status": "original_queue_running_mmio8_layer08_activity; mac_l02_l12_passed",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261110_2257_ICB32.md",
+    "remote_last_observed": "2026-11-10T23:45:42+08:00",
+    "remote_status": "original_queue_running_mmio8_layer10_activity",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261110_2359_ICB32.md",
     "b1": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "b1_nominal_pf1_cycles": 162713,
     "turnover": "arb_router_386_transactions_306_retire_accept_passed_stubs_only",
@@ -2531,7 +2531,16 @@
     "local_12_task_s_150MHz": 4333.256297665819,
     "integrated_recovery": "passed_errors_truncation_cancel_no_reset",
     "synthetic_cpu_contention": "passed_96_accesses_byte_masks_bank_boundary",
-    "firmware": "r4_irq_compiled_only",
-    "next": "independent ASIC integration monitor/source and real E203, then PPA; preserve baseline and remote queue"
+    "firmware": "r4_irq_compiled_and_server_hash_verified_not_executed",
+    "next": "commit and package new PPA/batch tools; old queue must complete before real ASIC14/synthesis",
+    "remote_driver_pid": 212822,
+    "remote_queue_pid": 232492,
+    "remote_child_pid": 279413,
+    "package_commit": "c019d7ce33066d8744fbc656b62d1f8c71f4e4f7",
+    "uploaded_package": "light-light126-icb32-r4-20261110_231731-c019d7ce3306.zip",
+    "uploaded_package_sha256": "70026e7b1b380bdd5b9da2027a1123886618274c6856550b7e951a0ea8fbb2b8",
+    "server_input_hash_count": 580,
+    "server_install_preflight": "passed_new_platform_copy_128large_96small_no_EDA",
+    "port_observer_fixture": "local_pin_mock_L01_34639_extremes_38052_passed_no_E203_no_mapped_netlist"
   }
 }

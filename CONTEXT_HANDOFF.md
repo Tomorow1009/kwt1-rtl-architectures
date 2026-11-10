@@ -1,5 +1,13 @@
 # 当前工作与上下文交接
 
+**23:59最新入口：** 新synth/gate/activity/power/numbers/timing/batch及等待原队列后ASIC14→synth工具已写，端口observer两真实datapath例通过，14软件契约检查通过。新工具未提交/上传/服务器执行；c019包仅服务器预检通过。恢复必读[23:59完整检查点](CONTEXT_CHECKPOINT_20261110_2359_ICB32.md)与有效计划。原队列最后23:45仍L10 activity_scan持锁，VNC已恢复；不要重复旧队列或提前并发EDA。
+
+**23:47已恢复并核验：** 用户要求重试后VNC成功登录（window20971587）。新c019包服务器SHA安全解包、580输入、IRQ固件ID4b574604、原平台新安装128大/96小宏预检全部通过，尚未编译/仿真。23:45:42实际原队列仍mmio8 L10 activity_scan，owner212822/queue232492/child279413，锁保持；不并发EDA。继续本地gate/PPA工具，待队列释放再新ASIC。详情见最新检查点。
+
+**23:44当前状态：** c019新包已Linux FileZilla上传成功（21秒、成功1、队列空）并断开；服务器SHA/解包未做。VNC在RFB欢迎头前断流，当前无法查看原队列；最后23:03 running，不推断已结束。既有连接DNS恢复细节、会话10109/40071见[检查点23:44增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。本地正在补新synth/batch，未提交/实测，原生产保持。
+
+**23:28接续：** 已重读计划/检查点；云端及新包源码为`c019d7ce33066d8744fbc656b62d1f8c71f4e4f7`。580输入、10,912,739B新ZIP已干净构建、ZIP核验、板端SHA核验，本地包内monitor fixture L01=34639通过（无E203）。FileZilla当前正常密码对话框，尚未上传；VNC客户端已退出需恢复，原远端23:03仍running，不能当已结束。详见[检查点23:28增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。
+
 **23:15工具入口：** 新icb32_soc/icb32_data/package_icb32及server_run两个阶段已实现，生产monitor fixture两例已通过；准备提交、干净源码构建与新包。真实ASIC/新PPA尚未开始，1200/synth/gate/power新入口仍缺。恢复读[最新检查点23:15增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，原队列仍保持。
 
 **23:08接续：** 新动态源/完整观察器及生产monitor fixture两例通过（34639/38052周期，无E203），源与计时边界和独立datapath一致。新增5文件+小型摘要尚未提交，SoC/batch/package/server入口待做；旧队列保持23:03实际running。恢复必读[最新检查点23:08增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)及有效计划，不重复旧测试。

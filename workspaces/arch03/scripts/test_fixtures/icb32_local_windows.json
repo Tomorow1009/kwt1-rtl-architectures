@@ -1,0 +1,43 @@
+{
+  "scope": "port_observer_RTL_pin_mock_without_E203",
+  "cpu_executed": false,
+  "mapped_gate_verified": false,
+  "cases": [
+    {
+      "case": "layer_01",
+      "encoded_bytes": 37428,
+      "window_line": "ICB32_TASK_WINDOW finished=1 failed=0 failure_code=0 start_cycle=31 end_cycle=34670 cycles=34639 start_ns=236.666643 end_ns=231163.310217 finished_cycle=34687 finished_ns=231276.643539 source_bytes=37428 input_write_bytes=37428 input_read_bytes=0 output_bytes=50688",
+      "result": {
+        "status": "passed",
+        "outputs": 25344,
+        "cpu_executed": true,
+        "first_request_cycle": 31,
+        "final_response_cycle": 34670,
+        "cycles": 34639,
+        "saturated": 0,
+        "pending_transactions": 0,
+        "all_writes_responded": true
+      },
+      "source_log": "local_runs/icb32_monitor_fixture_20261110_234937_735905/layer_01_pf1.log",
+      "source_log_sha256": "c259a3fcb85898a7e75391fbf4db62cbb12774aaa7a3d4a8ec1917b5203cad21"
+    },
+    {
+      "case": "extremes",
+      "encoded_bytes": 47008,
+      "window_line": "ICB32_TASK_WINDOW finished=1 failed=0 failure_code=0 start_cycle=31 end_cycle=38083 cycles=38052 start_ns=236.666643 end_ns=253916.641275 finished_cycle=38100 finished_ns=254029.974597 source_bytes=47008 input_write_bytes=47008 input_read_bytes=0 output_bytes=50688",
+      "result": {
+        "status": "passed",
+        "outputs": 25344,
+        "cpu_executed": true,
+        "first_request_cycle": 31,
+        "final_response_cycle": 38083,
+        "cycles": 38052,
+        "saturated": 6336,
+        "pending_transactions": 0,
+        "all_writes_responded": true
+      },
+      "source_log": "local_runs/icb32_monitor_fixture_20261110_234937_735905/extremes_pf1.log",
+      "source_log_sha256": "47e5aa3160f35ab8b4328b810be2b3d19b901aa0074b4638c3ffb40e2c827c8d"
+    }
+  ]
+}

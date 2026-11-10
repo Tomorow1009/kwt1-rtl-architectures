@@ -93,6 +93,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None):
     if fw['configuration']['irq_enabled']:firmware_files.append(A3/'irq_mapping.json')
     scripts=[A3/'scripts'/name for name in ('icb32_soc.py','icb32_data.py','icb32_codec.py','install_icb32.py',
         'install_dma16.py','install_platform.py','asic_boot.py','build_icb32_firmware.py','dma16_batch.py',
+        'server_run.py','icb32_batch.py',
         'timing_contract.py','stdcell_verify.py','technology_binding.py')]
     platform_files=[p for p in platform.rglob('*') if p.is_file()]
     headers=[p for root in (A2,A3) for p in root.rglob('*') if p.is_file() and p.suffix in ('.svh','.vh')]
@@ -156,6 +157,7 @@ def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=Fals
         data.require(sha(boot/filename)==digest,'Physical boot changed')
     return dict(case=name,outputs=25344,result=result,task_window=window,capture=captured,
         cpu_cycles=int(cpu[0]),host_elapsed_seconds=elapsed,codec_sha256=sha(task/'codec.json'),
+        layout_sha256=sha(task/'layout_manifest.json'),
         boot_manifest_sha256=sha(boot/'manifest.json'),log_sha256=sha(run/(name+'.log')),
         irq_proof=dict(enabled=bool(enabled),external=external,timer=timer,wfi=wfi,events=events,unhandled=unhandled),
         activity_requested=bool(activity),activity_audited=False)

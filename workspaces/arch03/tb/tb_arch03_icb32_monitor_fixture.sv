@@ -60,6 +60,17 @@ module icb32_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         .src_rsp_err(sysmem_icb_rsp_err),.transaction_pending(a3_router_pending));
     arch03_shared_sram_turnover u_arch03_shared(.clk(clk),.rst_n(rst_n),`FIX_CONNECT(a3_mem_));
     integer shift_arg=12,prefetch_arg=1,encoded_bytes=0;
+    task mmio_read(input [11:0] offset);
+        begin
+            @(negedge clk);expl_axi_icb_cmd_valid=1;expl_axi_icb_cmd_addr=32'h40000000+offset;
+            expl_axi_icb_cmd_read=1;expl_axi_icb_cmd_wmask=0;
+            @(posedge clk);while(!expl_axi_icb_cmd_ready)@(posedge clk);
+            @(negedge clk);expl_axi_icb_cmd_valid=0;
+            while(!expl_axi_icb_rsp_valid)@(negedge clk);
+            if(expl_axi_icb_rsp_err)$fatal(1,"Fixture MMIO read rejected");
+            expl_axi_icb_rsp_ready=1;@(negedge clk);expl_axi_icb_rsp_ready=0;
+        end
+    endtask
     task mmio_write(input [11:0] offset,input [31:0] value);
         begin
             @(negedge clk);expl_axi_icb_cmd_valid=1;expl_axi_icb_cmd_addr=32'h40000000+offset;
@@ -89,9 +100,11 @@ module icb32_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         wait(rst_n);repeat(2)@(negedge clk);
         mailbox_write(0,0);
         mmio_write(12'h034,encoded_bytes);mmio_write(12'h00c,shift_arg);mmio_write(12'h024,prefetch_arg ? 3 : 1);
+        mmio_read(12'h058);mmio_read(12'h008);
         mmio_write(12'h040,7);mmio_write(12'h004,1);
         wait(u_arch03_accel.done_q);repeat(3)@(negedge clk);
         if(u_arch03_accel.error_q || !arch03_dma_irq)$fatal(1,"Fixture DMA completion error");
+        mmio_read(12'h008);mmio_read(12'h058);mmio_read(12'h05c);mmio_read(12'h020);
         mailbox_write(1,0);mailbox_write(2,u_arch03_accel.load_count_q);
         mailbox_write(3,u_arch03_accel.output_count_q);
         // These are explicitly fixture placeholders, not executed CPU cycles.
@@ -125,7 +138,11 @@ module tb_arch03_icb32_monitor_fixture;
         $display("ICB32_MONITOR_FIXTURE_NO_CPU production_monitor_cpu_flag_must_be_ignored=true");
         repeat(5)@(negedge clk);rst_n=1;
     end
+`ifdef ICB32_GATE_OBSERVER
+    `include "arch03_icb32_gate_monitor.svh"
+`else
     `include "arch03_icb32_monitor.svh"
+`endif
 endmodule
 `undef FIX_SOURCE_PORTS
 `undef FIX_SOURCE_CONNECT
