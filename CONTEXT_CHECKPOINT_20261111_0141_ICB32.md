@@ -42,3 +42,18 @@
 - 01:46:19服务器实际空闲884.82GiB；原8路12份VCD合计335.74GiB。历史产物未删。固定`IC/hex/manifest.json`重读SHA为`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`，与最终100样本入口一致；此时只核清单，未重哈所有任务文件。
 - 已新增`workspaces/arch03/ACCEPTANCE_ICB32_20261111.md`，有效计划/旧验收/交付索引增加新版入口，这些文档增量尚未提交。不得把README下方旧状态当当前待办。
 - 后续必须先看正在跑的新综合实际结果和共享锁，再新CPU竞争/序列；当前R4只有ASIC14通过，不能自动批准时序面积功耗，亦不能复用旧1200。
+
+## 01:55增量（准备后续上下文接续）
+
+- 云端及本地HEAD已核`21e55334595aeaca6587e3f7b67cd35de21c9585`，含新版验收、交付索引、`ICB32_INNOVATION_20261111.md`设计/答辩说明；无RTL改动。下面进度记录增量会使工作区再次变脏，按实际git status判断。
+- **服务器最新实际01:54:36.696703**，e65综合子进程128047 elapsed12:22、CPU99.7%、RSS7996672KiB，icb32_synth.log22832B，已处理decoder/dot64/宏适配，正在`arch03_linear16x4_ROW_LANES4`。当前没有metrics/面积/裕量结果，不判断通过或失败。owner125556、唯一queue75421保持；勿并发新EDA。
+- 当前VNC第三终端仍在f95 R1包根，窗口20971587；FileZilla已退出。全部本地构建/仿真完成，无本地任务在跑。正式R4ASIC14回执在e65，不在497/R1；下游诊断用497，R1只有本地14和服务器预检。
+- 继续观察现有综合。通过报告收集后，先读setup/hold/面积/宏数/环路和实际约束；从497包按共享锁顺序执行`server_run.py icb32_contention --session icb32_r4_contention01 --cases layer_01 extremes`及`icb32_sequence --session icb32_r4_sequence01 --cases layer_01 rounding`（这些session尚未启动）。不要把本地恢复fixture算CPU通过。
+- 同网表gate14/12活动、12功耗、最终1200、严格STA范围审定、干净复现继续待办，命令见ICB32_RUNBOOK。R1 ASIC/PPA在主候选后排队。不要因大项排队而结束本轮让用户重复说继续。
+
+## 02:05增量
+
+- 服务器最后**02:04:29.446193**仍running icb32_synth、无error、METRICS_NOT_READY。02:02:41实际日志已经越过新核心，处理平台FIFO/比较器/定时器/时钟门控等模块；这是进度，不是最终时序或面积通过。仍等待同一queue75421、owner125556/child128047，不重启、不另起EDA。
+- README及ICB32_RUNBOOK已更新“R4实际ASIC14通过、综合进行中”，R1对照包状态也写入运行手册，避免后续误读旧的未验证状态。没有新增RTL、固件或重跑测试。
+- 工作区当前只包含后续检查点/状态/README/运行手册的文档增量；云端最后21e5533。正式受测R4仍e65，诊断包仍497，R1仍f95，三者目录与哈希见上文。
+- 下一步保持：等待并读取新综合真实PPA；队列完成且锁正常释放后，从497依次运行实际CPU竞争与序列，然后同网表gate/活动/功耗及最终1200。当前没有等待用户提供的信息。
