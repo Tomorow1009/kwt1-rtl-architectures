@@ -1,0 +1,57 @@
+{
+  "clipping": 0,
+  "code_sha256": {
+    "dma16_layout.py": "c034f438c7a901c5ec3c6a4e75cf203873aee9f79e292546fa728467d11d2a1d",
+    "icb32_codec.py": "c0e70c91301672559880671229911213782f220f096fedcdc9a76a6e9ea93606",
+    "icb32_compression_review.py": "dac6757a84974f499d505a5113508b3ae8c59aa4744c5b98f3590ed29cd59e03",
+    "numeric.py": "8e763ae71e154d057f216c4f84d4dd675a1226d7ca9e38eaf03a95728ff1b2f5"
+  },
+  "coordinate_checks": 165427200,
+  "cpu_executed": false,
+  "elapsed_seconds": 245.0,
+  "evaluation_sha256": "8832e338ecdf383a68266ca32da1b522b77c631df86db7291688dd4830b50934",
+  "hardware_100_sample_set_verified": false,
+  "ideal_transfer_under_30000": 0,
+  "metrics": {
+    "current_control_model_lower_bound": {
+      "max": 34434,
+      "mean": 34182.42222222222,
+      "min": 34118
+    },
+    "encoded_bytes": {
+      "max": 38236,
+      "mean": 37109.51111111111,
+      "min": 35740
+    },
+    "ideal_pure_mac_lower_bound": {
+      "max": 32834,
+      "mean": 32582.422222222223,
+      "min": 32518
+    },
+    "prefix_bytes": {
+      "max": 14420,
+      "mean": 13916.844444444445,
+      "min": 13788
+    },
+    "transactions": {
+      "max": 31790,
+      "mean": 31226.755555555555,
+      "min": 30542
+    }
+  },
+  "official_precision_verified": false,
+  "parameters_sha256": "99a3f2d990203b2bd9f3bdf5dc98974d6a7102027f7d67b9abf19e72ee03a6ad",
+  "raw_fallback_tasks": 0,
+  "rtl_verified": false,
+  "sample_hash_chain": "9ee03f1bfbb67c0f4f9a55efe5f09403d530f4ceac187a1d96f4f6e34d445a9a",
+  "samples": 600,
+  "schema": "arch03-icb32-compression-review-v1",
+  "scope": "internal_development_captures",
+  "software_lossless_verified": true,
+  "tasks": 7200,
+  "tasks_csv_sha256": "54bae65e29f7ac65089cbae22638b2a540a2c790f1db30f07c52e8c654312a80",
+  "original_summary_sha256": "e5fc7691c46418290bb492362d40711c0cb91c888ff5a59e0fddc20296232c62",
+  "original_run": "local_runs/icb32_codec600_20261110_2215",
+  "roundtrip_halfwords": 169113600,
+  "metadata_note": "Original coordinate_checks counted bias halfwords. Corrected semantic coordinate count; original run receipt unchanged. Future script field corrected without repeating unchanged checks."
+}

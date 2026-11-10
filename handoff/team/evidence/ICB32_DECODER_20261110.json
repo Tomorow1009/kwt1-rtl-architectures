@@ -1,0 +1,163 @@
+{
+  "status": "passed",
+  "cpu_executed": false,
+  "dma_executed": false,
+  "scope": "standalone_decoder",
+  "cases": [
+    {
+      "case": "width01",
+      "words": 1457,
+      "expected_error": 0,
+      "encoded_sha256": "cac987baf2e4b4a3beba16ee4a53b1cc9e311e8a18f0dfe3a891e6fc23bf89fc",
+      "log_sha256": "121e056e97bea2fee38a17b5cb355b761901c005f4cdb5346c3f93c39c41ee98"
+    },
+    {
+      "case": "width02",
+      "words": 2167,
+      "expected_error": 0,
+      "encoded_sha256": "34ad0351993da5562956d5a1af630e8c5868457d7771cecc67d497073f61d20c",
+      "log_sha256": "320fae3fe67c77e12e4490c56746ea5017ec86b68a86cb0dfd800e942667ade3"
+    },
+    {
+      "case": "width03",
+      "words": 2877,
+      "expected_error": 0,
+      "encoded_sha256": "12cf96cbb27a4d235b12be36cacb4ff149ec25bd0e8a8c076065e2ba6dac79d0",
+      "log_sha256": "49860b0e2e8d854c09f5667e2d25a5f1b73be424e2c52e8c24fe732a77168bab"
+    },
+    {
+      "case": "width04",
+      "words": 3587,
+      "expected_error": 0,
+      "encoded_sha256": "7d9a620026cd48cc42a21f50d732f4908252936a46782597515e3f2b71933a82",
+      "log_sha256": "4195aad8f0b256f52f1bce2a3aa9360d2b3d3485f77aa47adef05dd8a4196ed6"
+    },
+    {
+      "case": "width05",
+      "words": 4297,
+      "expected_error": 0,
+      "encoded_sha256": "5e2301296c7d5f8475086dccb245295f8f4f30a57a6695991b45f67fee2f75de",
+      "log_sha256": "398522815cbae84241cde9b4df8a3a330c3a9eb2ee9660eae9321fc02d31c738"
+    },
+    {
+      "case": "width06",
+      "words": 5007,
+      "expected_error": 0,
+      "encoded_sha256": "7a0a324491a86cd668c3c2920b3b38c2031e448038fc2e14bdd260cf95d0d9c9",
+      "log_sha256": "16fb1cfd24033057012f23fd1ed3514494c00da4aaafc2a916bb2e09408880dd"
+    },
+    {
+      "case": "width07",
+      "words": 5717,
+      "expected_error": 0,
+      "encoded_sha256": "99d16e0ae78bde9284eb2b0f607205a75b91086094eea9cdaa3958527ac048b1",
+      "log_sha256": "6af171fbc457ef4e12aff2c8f05396c1fdaba1437f4a5829760e88f22d626cdb"
+    },
+    {
+      "case": "width08",
+      "words": 6427,
+      "expected_error": 0,
+      "encoded_sha256": "8f0276dfe6a51fed8cfce0f86d60573c7de6be73f67b5dbb89b1db55ba484e90",
+      "log_sha256": "c23d9b629d023f51723e9e2e54ebe689a53a96a3b5c2c34c7115a4e5856c65e0"
+    },
+    {
+      "case": "width09",
+      "words": 7137,
+      "expected_error": 0,
+      "encoded_sha256": "d54a671a3fad960e17adb0295875cb434192cd00989c0e1cc55179ea931ead5e",
+      "log_sha256": "106f2983cc5cb196ec3fa3d885db99236d52ec58c4fafb95faf41efac350dcfa"
+    },
+    {
+      "case": "width10",
+      "words": 7847,
+      "expected_error": 0,
+      "encoded_sha256": "0c36fb832db8f8ee41a699d7742a2bb4bf005a06796b3e9d198b36bc0aa9457a",
+      "log_sha256": "6c33bda4453a75ec224c244d052c568911299f7ed5c2440b0079b661b04c1da3"
+    },
+    {
+      "case": "width11",
+      "words": 8557,
+      "expected_error": 0,
+      "encoded_sha256": "0cd92a45a93c8b93ed0599923a76d9e86cbb2ba38183daf443907e1fd16fe6e5",
+      "log_sha256": "c97afaf5b66d174d078efa0378c9347feec319189519a19418b3c30543707ffc"
+    },
+    {
+      "case": "width12",
+      "words": 9267,
+      "expected_error": 0,
+      "encoded_sha256": "5329e0d3bff56b763dcf9a8e8ee2b6c2b9ac32b9b7dd9cf230491661f269c0af",
+      "log_sha256": "8b72c11ead0b2a9145c3e402680a4ff05b780b9a1875c24a0db86d59dca6fedd"
+    },
+    {
+      "case": "width13",
+      "words": 9977,
+      "expected_error": 0,
+      "encoded_sha256": "edec15032910e4170220504936361d4c30bae294cf70530ff508d0ec8716c6d6",
+      "log_sha256": "dec1ce04ea1898cffa4708baf2101281d3a469e9f24dac300a4d278a3d4a5419"
+    },
+    {
+      "case": "width14",
+      "words": 10687,
+      "expected_error": 0,
+      "encoded_sha256": "b9ae8b2bf013ed029882b18516934835ef679d777af312edf0e825194ec481ac",
+      "log_sha256": "9a5629c489251d70b126cd6692d439b46d6a0934f647e7ec03b70a78db96ac2a"
+    },
+    {
+      "case": "width15",
+      "words": 11397,
+      "expected_error": 0,
+      "encoded_sha256": "3e9b950372e7d45476676426d39fc1753448d94b7a4131cd616e0c69d9c6f88e",
+      "log_sha256": "709e7767de6c864ffd42f5984b2cda78641956b2625ae3dc71dddf9a01204c7a"
+    },
+    {
+      "case": "width16",
+      "words": 11752,
+      "expected_error": 0,
+      "encoded_sha256": "4636d45f050d52243d103a997a62eb9f54dcca85c0f79ab633cc0ee416c76c31",
+      "log_sha256": "3adbef249f6c45dd8224c57a825e88c5f6b2ffd8a09eb297792c151ac576061c"
+    },
+    {
+      "case": "forced_raw",
+      "words": 11752,
+      "expected_error": 0,
+      "encoded_sha256": "6cf5bd7e35fce1ee50417f2eca442355702fa45ca1c94fc0b0cd3745c1e97ab6",
+      "log_sha256": "2ebe06e4bda2712a4d2c627136425724f050a73f85342f612fa8b07f96512f9d"
+    },
+    {
+      "case": "bad_magic",
+      "words": 6427,
+      "expected_error": 2,
+      "encoded_sha256": "009bfe595b647e5654e041723083d3f36cfb9ece1ebbd94ff725d64e5ce28f00",
+      "log_sha256": "14d68196316d30cc0cea85c835115492a03394b963d5f1bef191c4f605f29b3c"
+    },
+    {
+      "case": "bad_layout",
+      "words": 6427,
+      "expected_error": 2,
+      "encoded_sha256": "04a8e2ae99268a5e27b3f2ec787d047e4f5c43a06f98df8167fec3a6b69f19bc",
+      "log_sha256": "7ac68f6cf0d35e08fa1871e04e86485932d2593985a79a8a96b265c847b7e980"
+    },
+    {
+      "case": "bad_width",
+      "words": 6427,
+      "expected_error": 3,
+      "encoded_sha256": "af06385db925b34f5a6b37e0aa7fb4b402ac1fb7994263905c155caa89b46cab",
+      "log_sha256": "78d904e04dff2272f7170194d33990aab49607ae5bde1e1b6210cd9cca0ab908"
+    },
+    {
+      "case": "bad_count",
+      "words": 6427,
+      "expected_error": 3,
+      "encoded_sha256": "a424834fab1006ef1787a2e41d992bb32caa42cb4863835e7fdc6d8f60192b3a",
+      "log_sha256": "f23c87f40bb1f9305b824b1a1a268acaa45ad9ecb24c1083642559584674b8b5"
+    }
+  ],
+  "source_sha256": {
+    "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\rtl\\arch03_icb32_decoder.sv": "c472e822835ad0419063feab7b0e312066ecfa6e70223ac9624f8af802eefc5b",
+    "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\tb\\tb_arch03_icb32_decoder.sv": "b1a176e59b7acf12af44b68a55ae91b7f0fb19993fad246c8959d03a46ca3f19",
+    "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\scripts\\local_verify_icb32_decoder.py": "baaac255aba3b37b99c36baf47897ca762b27dae1dff4176eb49d00d5c8106d4",
+    "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\scripts\\icb32_codec.py": "c0e70c91301672559880671229911213782f220f096fedcdc9a76a6e9ea93606"
+  },
+  "original_run": "local_runs/icb32_decoder_20261110_2219",
+  "original_summary_sha256": "351f7633196c56bd66f523486c62436f2615fbb5fa0c8ee8ed75de357daff967"
+}

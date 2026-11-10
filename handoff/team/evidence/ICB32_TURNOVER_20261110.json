@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "cpu_executed": false,
+  "dma_executed": false,
+  "protocol_targets": "independent_stubs",
+  "metrics": {
+    "transactions": 386,
+    "cpu": 193,
+    "dma": 193,
+    "ties": 128,
+    "command_stalls": 89,
+    "response_stalls": 608,
+    "memory": 193,
+    "source": 65,
+    "rejected": 128,
+    "target_errors": 44
+  },
+  "source_sha256": {
+    "workspaces/arch03/rtl/arch03_icb_arb2_turnover.sv": "6b44c635d7e3bae1367a137bafc827419170b3d29bd478d37dfbf3e3ed6f6c06",
+    "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv": "d87f17877bd19a1b515c1b978826779038c3a30efcde8eb3509af6af3c72e6f5",
+    "workspaces/arch03/tb/tb_arch03_icb_turnover_fabric.sv": "eb94853cec0fcd573eda3ccc420bcf86ee12b79fcb89fd0e438c57a4dfe84406",
+    "workspaces/arch03/scripts/local_verify_turnover_fabric.py": "3d9207c5c9f414b14fdc8b9c0c1433d01b24616a5125d17661aab9e6f6e6fc16"
+  },
+  "log_sha256": "ca7e0db2b65800f875a122d2bbef2b38399d10b86c9527b9a8f1d3ea702ef6be",
+  "original_run": "local_runs/arch03_turnover_fabric_20261110_222758_918604",
+  "summary_sha256": "13cba6fadcc99f53c29acb757c89181b6ffd8fbea2293cb856b76743d8255012",
+  "same_cycle_retire_accept": 306
+}

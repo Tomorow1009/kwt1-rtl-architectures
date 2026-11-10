@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "cpu_executed": false,
+  "backend": "pin_mock",
+  "dma_executed": true,
+  "scope": "local_icb32_compressed_transport_decoder_r_core_turnover_shared_sram_no_e203",
+  "tasks": 1,
+  "next_task_cache_invalidation_and_cancel": true,
+  "outputs": 25344,
+  "cases": [
+    {
+      "row_lanes": 4,
+      "encoded_bytes": 37428,
+      "raw_fallback": false,
+      "encoded_sha256": "bd06448c43de96b27665befe33802a6f6ec29a73399b9431f8fd845605c41d5b",
+      "case": "layer_01",
+      "cycles": 34639,
+      "prefetch": 1,
+      "jitter": 0,
+      "overlap": 3808,
+      "fifo_max": 24,
+      "saturated": 0,
+      "outputs": 25344,
+      "capture_sha256": "b5544ec83d1164c4efa5e1e183afe14074c5d5ac18e0537125e0ff77e580ef99",
+      "layout_sha256": "ef833afb8ea257b9feb65df86abe61734e4fcd53c585c5ead50851bdf02d030f"
+    }
+  ],
+  "source_sha256": {
+    "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+    "workspaces/arch02/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+    "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+    "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+    "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+    "workspaces/arch03/rtl/arch03_linear16x4.sv": "9f7e97c2a3cfe4f508b330fa12d10d45287b49d0375d51ec7ede51d40136b3b6",
+    "workspaces/arch03/rtl/arch03_icb32_accel.sv": "ca29eb2491db1643bd82d2df6e70c4c7661a40bf1f1bb01ed895303b46bfd161",
+    "workspaces/arch03/rtl/arch03_icb32_decoder.sv": "c472e822835ad0419063feab7b0e312066ecfa6e70223ac9624f8af802eefc5b",
+    "workspaces/arch03/rtl/arch03_icb32_transport.sv": "1a5c81a3fa541684b3865b2ea97e86004e757da3af9cbdf218d8c0542aade42d",
+    "workspaces/arch03/rtl/arch03_icb_arb2_turnover.sv": "6b44c635d7e3bae1367a137bafc827419170b3d29bd478d37dfbf3e3ed6f6c06",
+    "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv": "d87f17877bd19a1b515c1b978826779038c3a30efcde8eb3509af6af3c72e6f5",
+    "workspaces/arch03/rtl/arch03_shared_sram_turnover.sv": "12bed277d704f3772d0ed284e33452a77ca99c719cf403997a0c8bcf9a1a1f3e",
+    "workspaces/arch03/tb/tb_arch03_icb32_datapath.sv": "24687546d4edce6f9823816a7f82f78929580709aaa057de74c12bf7b1d0cc10",
+    "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+    "local_runs/icb32_datapath_20261110_224350_084107/arch02_sram_config.vh": "2c27538c9af6dc5081c6950248808bc97e808733462c06d145646413c51361be",
+    "workspaces/arch03/scripts/local_icb32_datapath_verify.py": "ee2629b6c80541204d77afcf5348ffbb600b20d34615ee1d7bc10c2f1e877ae9"
+  },
+  "original_run": "local_runs/icb32_datapath_20261110_224350_084107",
+  "summary_sha256": "7c4c02e868540693feac90231d601753accdd7c6fddc95cacbf41c0821358326"
+}

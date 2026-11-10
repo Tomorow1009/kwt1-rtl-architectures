@@ -3991,5 +3991,36 @@
       "system_power_verified": false,
       "original_report_unchanged": true
     }
+  },
+  "icb32_c64_execution": {
+    "status": "implementing_local",
+    "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md",
+    "started": "2026-11-10T22:04:16+08:00",
+    "freeze": "2026-11-11T18:00:00+08:00",
+    "delivery_ready": "2026-11-12T17:16:00+08:00",
+    "baseline_hardware": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
+    "codec_software": "handoff/team/evidence/ICB32_CODEC_600_20261110.json",
+    "decoder_rtl": "handoff/team/evidence/ICB32_DECODER_20261110.json",
+    "b1_run": "local_runs/dma16_forward_datapath_20261110_222327_360464",
+    "b1_status": "running_9_layers_observed_passed",
+    "new_soc_verified": false,
+    "new_ppa_verified": false,
+    "remote_last_observed": "2026-11-10T22:10:00+08:00",
+    "remote_status": "original_queue_running_mmio8_layer08_activity; mac_l02_l12_passed",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261110_2257_ICB32.md",
+    "b1": "local_pin_mock_14_jitter_and_6_nominal_passed",
+    "b1_nominal_pf1_cycles": 162713,
+    "turnover": "arb_router_386_transactions_306_retire_accept_passed_stubs_only",
+    "r4_core": "18_tasks_local_pin_mock_passed",
+    "r4_integrated_first": "layer01_37428B_34639cycles_local_pin_mock_no_cpu",
+    "running_local": [],
+    "new_asic_verified": false,
+    "r4_local_14_nominal_and_jitter": "passed",
+    "local_12_mean_cycles": 34616.0,
+    "local_12_task_s_150MHz": 4333.256297665819,
+    "integrated_recovery": "passed_errors_truncation_cancel_no_reset",
+    "synthetic_cpu_contention": "passed_96_accesses_byte_masks_bank_boundary",
+    "firmware": "r4_irq_compiled_only",
+    "next": "independent ASIC integration monitor/source and real E203, then PPA; preserve baseline and remote queue"
   }
 }
