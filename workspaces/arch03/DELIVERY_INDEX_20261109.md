@@ -1,5 +1,15 @@
 # 本科任务交付索引与复现顺序
 
+## 当前ICB32 / 16×4路线
+
+2026-11-11新候选按[32位ICB计划](IMPLEMENTATION_PLAN_ICB32_C64_20261110.md)执行，最新通过范围见[独立验收表](ACCEPTANCE_ICB32_20261111.md)，实际命令见[ICB32运行手册](ICB32_RUNBOOK.md)。原fcd DMA16作为交付退路，下方原DMA16索引保留。
+
+新ABI/压缩格式分别为[ICB32_ABI.md](ICB32_ABI.md)和[ICB32_CODEC_V2.md](ICB32_CODEC_V2.md)。独立实现为`arch03_icb32_accel`、`arch03_linear16x4`、decoder/transport和turnover总线模块；`install_icb32.py`装入原平台副本。`build_icb32_firmware.py`构建仅含程序/元数据的IRQ固件，`package_icb32.py`导出干净源码并重新编译固件。服务器入口依次是`icb32_soc`、`icb32_synth`、诊断、`icb32_gate`、`icb32_power`及最终`icb32_batch`；最终报告由`icb32_report.py`汇总同配置证据。
+
+R4已通过真实ASIC14/354816输出，平均34616周期；同条件R1/R4本地对照见[中文结果](ICB32_LOCAL_COMPARISON_20261111.md)。新面积/时序/功耗、最终1200、同网表门级/活动及干净复现尚未完成，当前这些材料不是最终合格提交包。
+
+本轮结构、收益/代价和答辩边界见[ICB32设计与创新说明](ICB32_INNOVATION_20261111.md)；旧DMA16答辩草稿仍保留其原受测范围。
+
 ## 当前DMA16路线
 
 11月10日11:59更新：四点X建模诊断与比较全部完成，所选设置的报告数值相同，仍不构成物理误差界或系统功耗批准。剩余11层MAC有效采样与原8路完整14门级/12活动已进入唯一串行队列。原8路高扇出查询完成，完整时序对象分类工具已本地通过27相关测试、待服务器执行；见[原8路时序审核](MMIO8_TIMING_REVIEW_20261110.md)。e9报告相位修复已完成GitHub和比赛服务器同步，生产fcd、固件及668最终批量不变。下文“X诊断尚未运行”等为历史。
