@@ -102,6 +102,12 @@ class MacUseTests(unittest.TestCase):
         for bad in (text.replace('$var wire 1 shift_4 shift [4] $end\n','',1),
                     text.replace('$var wire 1 shift_4 shift [4] $end','$var wire 1 shift_3 shift [3] $end',1),
                     text.replace('shift [4]','shift [5]',1),
+                    text.replace('shift [4]','shift [4294967296]',1),
+                    text.replace('shift [4]','shift [0:1]',1),
+                    text.replace('shift [4]','shift [4:]',1),
+                    text.replace('shift [4]','shift [4:3:2]',1),
+                    text.replace('shift [4]','shift [x]',1),
+                    text.replace('lanes[0].mac','lanes[4294967296].mac',1),
                     text.replace('#120\n1clk','#120\n1clk\n0clk\n1clk'),
                     text[:text.rfind('#771')]):
             with self.subTest(): self.scan(bad,True)

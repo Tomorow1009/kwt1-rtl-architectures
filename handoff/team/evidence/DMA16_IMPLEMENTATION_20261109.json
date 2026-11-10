@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Commit and clean-package passive full-stream MAC acceptance diagnostic. MMIO8 first PT driver106327 child107249 remains active; wait for completion before large MAC scan. Unknown CPU/memory/interconnect and X modeling sensitivity, reference full14/12 gate/PT, clean reproduction and final delivery remain. Annotation all12 v3 and final1200/full02 re-audit completed.",
+  "next": "Read CONTEXT_CHECKPOINT_20261110_1006.md. Commit/package/clean-audit GCC4.8-compatible MAC diagnostic; upload new immutable bundle and run dma16_mac_use_l01_v2 after fresh lock check. PT and numeric reference layer01 done. Remaining layers, unknown use/X sensitivity, full14/12 reference gate/PT, clean reproduction and delivery remain.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "mmio8_source_power_l01_v1",
+  "active_session": null,
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": true,
@@ -1275,7 +1275,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "e777a683c039c7f7172edf82615dee4816b77e87",
+  "current_server_tool_commit": "3dcd351871153aadbd4b991a8884be1948727945",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1826,8 +1826,8 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "e777a683c039c7f7172edf82615dee4816b77e87",
-    "verified_date": "2026-11-10 approximately09:28",
+    "verified_remote_commit": "3dcd351871153aadbd4b991a8884be1948727945",
+    "verified_date": "2026-11-10 approximately09:48",
     "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
     "subsequent_same_scope_authorized": true,
     "main_merged": false
@@ -2132,24 +2132,66 @@
   "mmio8_power_first_layer": {
     "bundle": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039",
     "run": "runs/mmio8_source_power_l01_v1/mmio8_power",
-    "status": "running",
+    "status": "passed_reports",
     "pid": 106327,
     "launcher_started": "2026-11-10T09:35:34.915404",
     "system_power_verified": false,
     "child_pid": 107249,
     "started": "2026-11-10T09:35:35.465062",
     "last_observed": "2026-11-10T09:45:15.492324",
-    "owns_shared_lock": true,
-    "prior_pid_transcription_error": 22688
+    "owns_shared_lock": false,
+    "prior_pid_transcription_error": 22688,
+    "finished": "2026-11-10T09:55:52.729450",
+    "summary_sha256": "3321b70941d2667baaf5e143bcaf9db4e53cb01d0ac33f3a34543fe144a48eba"
   },
   "mac_use_diagnostic": {
-    "status": "local_only",
+    "status": "server_v1_failed_local_compatibility_fix",
     "tests": 8,
     "related_tests": 51,
-    "server_executed": false,
+    "server_executed": true,
     "production_changed": false,
     "system_power_verified": false,
     "document": "workspaces/arch03/MAC_VALID_USE_REVIEW_20261110.md",
-    "header_diagnostic": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039/runs/mac_header_v1.json"
+    "header_diagnostic": "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039/runs/mac_header_v1.json",
+    "run": "runs/dma16_mac_use_l01_v1/dma16_mac_use",
+    "bundle": "light-light126-mac-use-dma16-20261110_094741-3dcd35187115",
+    "pid": 129811,
+    "started": "2026-11-10T09:59:12.167053",
+    "finished": "2026-11-10T09:59:40.385600",
+    "error": "MAC_USE_ACTIVITY_AUDIT_ERROR regex_error",
+    "server_compiler": "GCC 4.8.5 20150623 (Red Hat 4.8.5-44)",
+    "full_scan_completed": false,
+    "local_fix": "Strict decimal range parsing replaces unsupported std::regex; overflow and malformed ranges rejected",
+    "corrected_local_tests": 8,
+    "corrected_server_executed": false
+  },
+  "mac_use_package": {
+    "source_commit": "3dcd351871153aadbd4b991a8884be1948727945",
+    "archive": "light-light126-mac-use-dma16-20261110_094741-3dcd35187115.zip",
+    "sha256": "9537abe61269aae66152b675e33aa7d25468c116204c85803d91d1b50f79f0e7",
+    "bytes": 16635627,
+    "files": 676,
+    "clean_tests": 208,
+    "clean_audit_receipt": "local_runs/dma16_mac_use_clean_audit_20261110_0952/receipt.json",
+    "clean_audit_sha256": "3a431d3e368aee6bb95d2f901b2bdc7459a0c06da121fc041c5a184124a97881",
+    "production_files_unchanged": 40,
+    "server_uploaded": true,
+    "server_unpacked": "2026-11-10T09:54:30.266365",
+    "server_inputs_verified_at": "2026-11-10T09:56:16.888624"
+  },
+  "mmio8_power_numbers_l01": {
+    "bundle": "light-light126-mac-use-dma16-20261110_094741-3dcd35187115",
+    "output": "runs/mmio8_power_numbers_l01_v1/numbers.json",
+    "finished": "2026-11-10T09:57:57.095761",
+    "status": "numbers_extracted_review_required",
+    "sha256": "b7176c47b7e574e822e4b7a5fbbd0f7a62c4b3ae1c6b158b8ac2749af6a10711",
+    "sha_verified_at": "2026-11-10T10:03:19.227912",
+    "duration_ns": "25620804.104586",
+    "raw_internal_w": "0.0121767968",
+    "raw_switching_w": "0.00148551364",
+    "raw_leakage_w": "0.00627682032",
+    "raw_total_w": "0.0199391320",
+    "raw_energy_j": "0.0005108565949874820593520",
+    "system_power_verified": false
   }
 }

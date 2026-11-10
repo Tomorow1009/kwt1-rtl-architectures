@@ -10,7 +10,6 @@
 #include <fstream>
 #include <iostream>
 #include <limits>
-#include <regex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -69,17 +68,23 @@ static void observe(const vector<string>& scope,const vector<string>& t) {
     if(path.compare(0,prefix.size(),prefix)!=0)return;
     auto close=path.find(']',prefix.size());need(close!=string::npos,"Malformed MAC lane scope");
     if(path.substr(close)!="].mac")return;
-    unsigned lane=integer(path.substr(prefix.size(),close-prefix.size()));need(lane<16,"Unexpected MAC lane");
+    auto lane_index=integer(path.substr(prefix.size(),close-prefix.size()));need(lane_index<16,"Unexpected MAC lane");
+    unsigned lane=unsigned(lane_index);
     auto found=find(names.begin(),names.end(),t[4]);if(found==names.end())return;
-    unsigned port=found-names.begin(),width=integer(t[2]),low=0,high=width-1;
+    unsigned port=found-names.begin();uint64_t width=integer(t[2]),low=0,high=width-1;
     need(t[1]!="real"&&t[1]!="realtime","Real-valued MAC port");
-    if(t.size()==7){smatch m;need(regex_match(t[5],m,regex("\\[([0-9]+)(:([0-9]+))?\\]")),"Malformed MAC bit range");
-        high=integer(m[1]);low=m[3].matched?integer(m[3]):high;
+    // The contest server uses GCC 4.8.5, whose std::regex throws regex_error.
+    // Parse this tiny numeric grammar explicitly; never relax range checks.
+    if(t.size()==7){const string& range=t[5];
+        need(range.size()>=3&&range.front()=='['&&range.back()==']',"Malformed MAC bit range");
+        string inner=range.substr(1,range.size()-2);auto colon=inner.find(':');
+        need(colon==string::npos||inner.find(':',colon+1)==string::npos,"Malformed MAC bit range");
+        high=integer(inner.substr(0,colon));low=colon==string::npos?high:integer(inner.substr(colon+1));
         need(high>=low&&high-low+1==width,"Unsupported MAC ascending/unequal range");
     }else need(t.size()==6&&width==1&&widths[port]==1,"MAC vector requires explicit bit range");
     need(high<widths[port],"MAC port width exceeded");
     for(unsigned bit=low;bit<=high;++bit){need(!lanes[lane].declared[port][bit],"Duplicate MAC port bit");
-        lanes[lane].declared[port][bit]=true;watches[t[3]].push_back({lane,port,bit,bit-low});}
+        lanes[lane].declared[port][bit]=true;watches[t[3]].push_back({lane,port,bit,unsigned(bit-low)});}
 }
 static void finish_header(){for(auto& lane:lanes)for(auto& port:lane.declared)
     need(all_of(port.begin(),port.end(),[](bool x){return x;}),"Missing MAC lane or port bit");}
