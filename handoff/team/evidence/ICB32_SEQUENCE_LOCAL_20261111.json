@@ -1,0 +1,47 @@
+{
+  "status": "passed_local_only",
+  "run": "local_runs\\icb32_sequence_fixture_20261111_010913_076864",
+  "cpu_executed": false,
+  "asic_cpu_verified": false,
+  "phases": 10,
+  "outputs": 76032,
+  "negative_tests": [
+    {
+      "case": 1,
+      "description": "early_source_selection",
+      "status": "expected_rejection",
+      "process_exit": 0,
+      "log_sha256": "2a3f47c845c25168481260bd59b78623ed5916f6df16aec1ba1007fed0927a8a"
+    },
+    {
+      "case": 2,
+      "description": "wrong_fault_epc_receipt",
+      "status": "expected_rejection",
+      "process_exit": 0,
+      "log_sha256": "dd95b6ff653acb18b47b25928f7bbaba22edf67aff6d01ac046ba481460b60ac"
+    },
+    {
+      "case": 3,
+      "description": "missing_receipt_word",
+      "status": "expected_rejection",
+      "process_exit": 0,
+      "log_sha256": "1392118cc15415a63c73b95b2b7c3db138531c450dd4fd06b6773e27a8cd4646"
+    }
+  ],
+  "cycles": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    79,
+    3988,
+    34639,
+    33914,
+    34639
+  ],
+  "summary_sha256": "4a9c220f5db5da99d058ce331d59fd1eb55428b2129401e256d7897dabebfddb",
+  "fixture_rejected_as_CPU_evidence": true,
+  "prior_failed_run": "local_runs/icb32_sequence_fixture_20261111_010731_266143",
+  "prior_failure": "8192-cycle diagnostic timed out after computation had begun; shortened partial-loading diagnostic to 4096 cycles; RTL unchanged"
+}

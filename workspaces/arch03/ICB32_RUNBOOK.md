@@ -39,6 +39,10 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 
 ## 本地检查范围
 
+真实E203无复位恢复入口：`server_run.py icb32_sequence --session <新会话> --cases layer_01 rounding`，打包增加 `--sequence`（当前仅R4）。10阶段包括5种被硬件拒绝的配置及实际store-access-fault恢复、初载取消、4096周期驱动超时排空、A/B/A；A/B的编码长度独立写入元数据和源选择描述符，不预载硬件数据。新观察器要求共享写ACK后才能消费压缩字、按独立原始半字检查解码、动态计数且无共享读回；完成后检查实际MMIO状态和全部输出。独立polling序列不作IRQ性能/能耗。首次本地8192周期超时已进入计算，不符合此项“初载超时”测试的边界，保留失败并改为4096；没有修改RTL。10阶段本地pin_mock与3类故障拒绝通过，76032输出一致，CPU验收解析器明确拒绝这些NO_CPU记录。详见 `handoff/team/evidence/ICB32_SEQUENCE_LOCAL_20261111.json`；真实E203执行仍待服务器。
+
+真实CPU竞争入口为 `server_run.py icb32_contention --session <新会话> --cases layer_01 extremes`；打包时加 `package_icb32.py --contention` 纳入独立polling固件。CPU仅访问共享SRAM空闲区0xa0040000的128B，逐字写/读/比较；被动观察器要求任务窗口中同时有CPU和DMA请求、双方服务及scratch读写，并检查等待CPU时已接受DMA机会不超过8。该固件不作为IRQ性能或功耗样本，生产IRQ固件和RTL保持原实现。当前仅编译/工具检查，真实CPU竞争必须以服务器新阶段回执为准。
+
 新增 `scripts/icb32_report.py --request <request.json> --output <新目录>` 导出逐层及汇总 JSON/CSV/中文报告。请求 schema 为 `icb32-report-request-v1`，asic/synthesis/gate 均提供对应新阶段目录与 summary SHA256；power 为同格式引用列表，batch 可选。工具重新核对真实输出、压缩布局、完整窗口、新224宏配置、同硬件身份及新1200回执，不导入旧DMA16批量PASS。缺失功耗为空，时序/面积/功耗验收保持待审，5000目标按真实总周期判断。本地3项报告防混用检查通过，不代表实际PPA。
 
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。

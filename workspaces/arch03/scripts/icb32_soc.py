@@ -71,10 +71,22 @@ def verify_frozen(contract):
         data.require(Path(path).is_absolute() and sha(Path(path))==digest,'Frozen input changed: '+path)
 
 
-def compile_design(cfg,run,platform_source,call,firmware=None):
+def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     firmware=(firmware or ROOT/'firmware').resolve();firmware.relative_to(ROOT.resolve())
     fw,base=verify_firmware(firmware)
     platform=run/'platform';manifest=install(platform_source,platform,fw['configuration']['row_lanes'])
+    data.require(diagnostic in (None,'contention'),'Unknown isolated diagnostic')
+    extra_scripts=[]
+    if diagnostic=='contention':
+        from icb32_contention import verify_firmware as verify_contention,monitor
+        verify_contention(firmware)
+        generated=run/'arch03_icb32_contention_monitor.svh'
+        generated.write_text(monitor((A3/'tb/arch03_icb32_monitor.svh').read_text()))
+        tb=platform/'tb/tb_top.v';text=tb.read_text()
+        data.require(text.count('`include "arch03_icb32_monitor.svh"')==1,'Missing positive observer include')
+        tb.write_text(text.replace('`include "arch03_icb32_monitor.svh"','`include "arch03_icb32_contention_monitor.svh"'))
+        manifest['modified_files']['tb/tb_top.v']=sha(tb);save(platform/'platform_manifest.json',manifest)
+        extra_scripts=[generated,A3/'scripts/icb32_contention.py',A3/'scripts/build_icb32_contention.py']
     loader=run/'arch03_asic_boot.svh';loader.write_text(loader_include())
     model=extract_model(cfg,run)
     # Physical TCM still instantiates arch03_sram_half from the original shared
@@ -97,6 +109,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None):
         'timing_contract.py','stdcell_verify.py','technology_binding.py')]
     platform_files=[p for p in platform.rglob('*') if p.is_file()]
     headers=[p for root in (A2,A3) for p in root.rglob('*') if p.is_file() and p.suffix in ('.svh','.vh')]
+    scripts+=extra_scripts
     tracked=files+firmware_files+scripts+platform_files+headers+[loader,run/'arch02_sram_config.vh']
     before={str(p.resolve()):sha(p) for p in tracked};save(run/'source_inputs.json',before)
     started=time.monotonic();log=call(cmd,run,'compile.log')
@@ -163,9 +176,9 @@ def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=Fals
         activity_requested=bool(activity),activity_audited=False)
 
 
-def verify(cfg,run,platform_source,cases,call,activity_cases=(),firmware=None,compile_only=False):
+def verify(cfg,run,platform_source,cases,call,activity_cases=(),firmware=None,compile_only=False,diagnostic=None):
     data.require(not set(activity_cases)-set(cases),'Unselected activity case')
-    contract,receipt,fw,base=compile_design(cfg,run,platform_source,call,firmware)
+    contract,receipt,fw,base=compile_design(cfg,run,platform_source,call,firmware,diagnostic)
     results=[]
     if not compile_only:
         for name in cases:

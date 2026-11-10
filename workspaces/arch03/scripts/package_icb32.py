@@ -25,7 +25,10 @@ def main():
     parser.add_argument('--rows',type=int,choices=(1,4),default=4)
     parser.add_argument('--prefetch',type=int,choices=(0,1),default=1)
     parser.add_argument('--member',required=True)
+    parser.add_argument('--contention',action='store_true',help='Include isolated polling stress firmware, outside performance PPA')
+    parser.add_argument('--sequence',action='store_true',help='Include R4 polling cancel/recovery/A-B-A firmware, outside performance PPA')
     args=parser.parse_args()
+    if args.sequence and args.rows!=4:raise ValueError('This sequence diagnostic is for R4 only')
     if not re.fullmatch('[A-Za-z0-9_-]{1,60}',args.member):raise ValueError('Member identifier')
     if git('status','--porcelain'):raise ValueError('Commit source before making a new immutable package')
     commit=git('rev-parse','HEAD')
@@ -61,10 +64,37 @@ def main():
     meta.pop('command',None)
     (firmware/'manifest.json').write_text(json.dumps(meta,indent=2)+'\n',encoding='utf8')
     verify_firmware(firmware,folder)
+    if args.contention:
+        stress_build=ROOT/'local_runs'/(name+'-contention-build')
+        command=[sys.executable,str(folder/'workspaces/arch03/scripts/build_icb32_contention.py'),
+            '--zig',str(args.zig.resolve()),'--output',str(stress_build),'--rows',str(args.rows)]
+        with (ROOT/'local_runs'/(name+'-contention-build.log')).open('x') as out:
+            subprocess.check_call(command,cwd=str(folder),stdout=out,stderr=subprocess.STDOUT)
+        stress_meta,_=verify_firmware(stress_build,folder)
+        stress=folder/'firmware_contention';stress.mkdir()
+        for filename in ['driver.elf']+[n+suffix for n in stress_meta['images'] for suffix in ('.verilog','.bin')]:
+            shutil.copyfile(str(stress_build/filename),str(stress/filename))
+        stress_meta.pop('command',None)
+        (stress/'manifest.json').write_text(json.dumps(stress_meta,indent=2)+'\n',encoding='utf8')
+        verify_firmware(stress,folder)
+    if args.sequence:
+        from build_icb32_sequence import verify_firmware as verify_sequence
+        sequence_build=ROOT/'local_runs'/(name+'-sequence-build')
+        command=[sys.executable,str(folder/'workspaces/arch03/scripts/build_icb32_sequence.py'),
+            '--zig',str(args.zig.resolve()),'--output',str(sequence_build),'--data',str(args.data.resolve())]
+        with (ROOT/'local_runs'/(name+'-sequence-build.log')).open('x') as out:
+            subprocess.check_call(command,cwd=str(folder),stdout=out,stderr=subprocess.STDOUT)
+        sequence_meta,_=verify_sequence(sequence_build,folder)
+        sequence=folder/'firmware_sequence';sequence.mkdir()
+        for filename in ('driver.elf','sequence.bin','sequence.verilog'):
+            shutil.copyfile(str(sequence_build/filename),str(sequence/filename))
+        sequence_meta.pop('command',None)
+        (sequence/'manifest.json').write_text(json.dumps(sequence_meta,indent=2)+'\n',encoding='utf8')
+        verify_sequence(sequence,folder)
     for case in CASES14:
         shutil.copytree(str(args.data/case),str(folder/'validated_data'/case))
         source_case(folder/'validated_data'/case)
-    allowed_prefixes=prefixes+('firmware/','validated_data/')
+    allowed_prefixes=prefixes+('firmware/','firmware_contention/','firmware_sequence/','validated_data/')
     paths=[]
     for path in sorted(folder.rglob('*')):
         if path.is_file():

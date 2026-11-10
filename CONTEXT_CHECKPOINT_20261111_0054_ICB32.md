@@ -1,5 +1,11 @@
 # ICB32恢复检查点：2026-11-11 00:54
 
+**01:01增量（压缩前）：** 报告工具/暂停恢复记录已提交并推送，云端独立ls-remote为`022274d015e57b85c00640b2ae752b156f45b1ab`；服务器待运行快照仍e65，勿混淆。00:59:37实测新PID75421仍waiting_predecessor；旧driver212822、child72155运行`layer_12_activity_scan.log`。没有新ASIC结果。
+
+本地新增尚未提交的真实CPU竞争工具：`build_icb32_contention.py`、`icb32_contention.py`、`sw/main_icb32_contention.c`；改`icb32_soc.py`仅新增可选独立诊断monitor生成（生产默认不变）、`server_run.py`新增icb32_contention阶段、`package_icb32.py --contention`可把独立polling固件纳入新包、ICB32_RUNBOOK入口。真实CPU在0xa0040000空闲128B逐字写/读/比较，观察器统计任务窗口内双方请求/服务和最多8次DMA机会CPU公平性；不当IRQ/PPA数据。当前R4固件已实际Zig编译、2shift模板和哈希通过，`local_runs/icb32_contention_fw_20261111_0101`；旧0100只CLI调整前构建保留。Python3.6语法和monitor生成模板检查通过，真实CPU/新增monitor尚未在服务器执行，勿写PASS。
+
+下一项独立本地任务是适配真实E203无复位A/B/A及取消/错误恢复入口。已读原`dma16_sequence_soc.py`、`build_dma16_sequence.py`、`main_dma16_sequence.c`和source/monitor前半，尚未新增任何ICB32 sequence文件。原序列有5配置拒绝真实store fault、初载取消、超时排空、A/B/A共10phase；需要改动态编码长度、零共享读回、6bitFIFO掩码、row4core和多元素解码供数，不能机械替换旧11744/46976计数。原完整序列文件均保留，未修改。下一次继续按实际需要读取剩余monitor/check_phase后实现，不重复已有本地pin_mock恢复。
+
 用户已明确“继续”，暂停撤销。有效计划仍为workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md；11/11 18:00实现冻结，11/12 17:16交付准备，11/13晚上用户截止。上下文压缩后重读AGENTS、有效计划、本文件与STATUS，不重做已有本地14例，也不把原fcd硬件1200/PPA算到新RTL。
 
 ## 本轮完成
