@@ -228,6 +228,9 @@ def build(request):
 
 
 def write_outputs(report, output):
+    phases = any('rtl_gate_phase_comparison' in row for row in report['cases'])
+    require(not phases or all('rtl_gate_phase_comparison' in row for row in report['cases']),
+            'Incomplete RTL/gate phase evidence')
     output = Path(output); require(not output.exists(), 'Use a new report directory')
     output.mkdir(parents=True)
     with (output/'report.json').open('x', encoding='utf8') as stream:
@@ -237,8 +240,12 @@ def write_outputs(report, output):
               'raw_energy_j', 'raw_boundary_inclusive_average_power_w', 'raw_boundary_inclusive_energy_j',
               'approved_average_power_w', 'approved_energy_j', 'layout_sha256',
               'activity_sha256', 'active_value_records', 'unknown_value_records', 'power_summary_sha256', 'system_power_verified']
+    if phases:
+        fields += ['asic_duration_ns', 'gate_duration_ns', 'asic_start_phase_ns',
+                   'gate_start_phase_ns', 'gate_minus_asic_duration_ns', 'energy_window', 'cycle_count_equal']
     with (output/'tasks.csv').open('x', encoding='utf-8-sig', newline='') as stream:
-        writer = csv.DictWriter(stream, fields, extrasaction='ignore'); writer.writeheader(); writer.writerows(report['cases'])
+        writer = csv.DictWriter(stream, fields, extrasaction='ignore'); writer.writeheader()
+        writer.writerows(dict(row, **row.get('rtl_gate_phase_comparison', {})) for row in report['cases'])
     aggregate = report['aggregate']
     summary_row = dict(aggregate)
     for key in ('timing_verified', 'project_area_upper_bound_verified', 'system_power_verified', 'physical_signoff'):
@@ -273,6 +280,8 @@ def write_outputs(report, output):
         lines.append('| %s | %s | %s | %s | %s |' % (row['case'], row['cycles'], row['nominal_150mhz_tasks_per_second'],
             row['raw_average_power_w'] if row['raw_average_power_w'] is not None else '未验证',
             row['raw_energy_j'] if row['raw_energy_j'] is not None else '未验证'))
+    if phases:
+        lines += ['', 'RTL 与门级的首请求相位及实际纳秒窗口分别保存在 JSON 和 tasks.csv。两者整数周期必须相等，纳秒差异必须由各自记录的首请求相位解释且小于一个周期。功耗和能耗采用实际门级完整窗口。']
     lines += ['', '原始功耗与能耗不代表模型及活动审核通过；缺项保持为空。上表采用默认不含输入边界网络的口径；包含该网络开关功耗的数值单列在 JSON/CSV 的 boundary_inclusive 字段，不替换默认值。模块分解采用不重叠范围，CPU 扣除其 TCM 子模块，SRAM 明细不能再次加到模块总值。各模块值及显示舍入误差保留在 JSON。', '',
         '100 样本内部回归：%s，%d 个任务、%d 个输出；不是官方 600 样本精度验收。' %
         (report['batch']['status'], report['batch']['tasks'], report['batch']['outputs']), '', '## 原始证据', '']

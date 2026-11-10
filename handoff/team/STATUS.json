@@ -158,8 +158,8 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "a74588d97aaa18cbd72abdefe3b899759d652f4d",
-      "verified_date": "2026-11-10 approximately10:53",
+      "verified_remote_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
+      "verified_date": "2026-11-10 approximately11:14",
       "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
       "subsequent_same_scope_authorized": true,
       "main_merged": false
@@ -622,7 +622,7 @@
       "ftp_transfer_seconds": 32,
       "ftp_disconnected_after_transfer": true
     },
-    "cloud_source_commit": "a74588d97aaa18cbd72abdefe3b899759d652f4d",
+    "cloud_source_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
     "dma16_gate02": {
       "state": "failed",
       "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -1142,7 +1142,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "a74588d97aaa18cbd72abdefe3b899759d652f4d",
+    "current_server_tool_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -2125,7 +2125,7 @@
       "comparison_actual_readers_observed": "2026-11-10T11:04:06.754693",
       "all_four_points_compared": false
     },
-    "updated_local": "2026-11-10T11:12:00+08:00",
+    "updated_local": "2026-11-10T11:25:00+08:00",
     "x_model_package": {
       "bundle": "light-light126-x-model-dma16-20261110_102408-b85e908fab38",
       "source_commit": "b85e908fab388f07027b7b4e983d36635651ee1c",
@@ -2174,16 +2174,18 @@
         "one",
         "initial"
       ],
-      "last_stage": "dma16_x_zero_l01_v1",
-      "last_observed": "2026-11-10T11:10:37.607564",
-      "child_driver_pid": 188920,
-      "tool_pid": 189212,
+      "last_stage": "dma16_x_initial_l01_v1",
+      "last_observed": "2026-11-10T11:22:57.901781",
+      "child_driver_pid": 212936,
+      "tool_pid": 213156,
       "status": "running",
       "stop_on_first_failure": true,
       "system_power_verified": false,
       "zero_finished": "2026-11-10T11:09:28.639448",
       "zero_status": "passed",
-      "next_owner_not_yet_read": true
+      "next_owner_not_yet_read": false,
+      "one_finished": "2026-11-10T11:20:12.393155",
+      "one_status": "passed"
     },
     "x_compare_package": {
       "bundle": "light-light126-x-compare-dma16-20261110_105208-a74588d97aaa",
@@ -2215,7 +2217,7 @@
       "bundle": "light-light126-x-compare-dma16-20261110_105208-a74588d97aaa",
       "run": "runs/mmio8_struct_review01/ports.json",
       "sha256": "0b3918d6b1cc56cf7cba9a93d3b2a7caa86bbb64eeec175988c11c1969e85b57",
-      "independently_asserted": "2026-11-10T11:10:37.607564",
+      "independently_asserted": "2026-11-10T11:10:37",
       "module_count": 1179,
       "port_warnings": 3687,
       "disposition": "all_declaration_only",
@@ -2235,12 +2237,52 @@
       "netlist_modified": false
     },
     "mmio8_timing_audit_local": {
-      "status": "local_only",
+      "status": "uploaded_not_executed",
       "new_tests": 3,
       "related_tests": 26,
       "server_executed": false,
       "readonly_ddc": true,
       "timing_verified": false
+    },
+    "x_initial_l01_v1": {
+      "bundle": "light-light126-x-model-dma16-20261110_102408-b85e908fab38",
+      "run": "runs/dma16_x_initial_l01_v1/dma16_x_sensitivity",
+      "status": "running",
+      "started": "2026-11-10T11:20:12.747228",
+      "pid": 212936,
+      "child_pid": 213156,
+      "system_power_verified": false
+    },
+    "mmio8_timing_package": {
+      "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+      "source_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
+      "zip_bytes": 16662114,
+      "zip_sha256": "b2a21eb5fc1722c7c6d467f4ceafec78d23e92081c573842bd4318228663d0b5",
+      "inputs": 683,
+      "clean_tests": 226,
+      "firmwares": 5,
+      "production_files_unchanged": 40,
+      "audit": "local_runs/mmio8_timing_clean_audit_20261110_1114/receipt.json",
+      "audit_sha256": "0f9783fb1e365c89812c47f34de7f9e8e897813c5e6590df1369d58288dee60e",
+      "unpacked": "2026-11-10T11:19:36.081221",
+      "inputs_verified": "2026-11-10T11:20:36.891532",
+      "uploaded_via": "board_linux_filezilla",
+      "filezilla_disconnected": true
+    },
+    "mmio8_report_phase_comparison_fix": {
+      "status": "local_only",
+      "related_tests": 29,
+      "new_tests": 2,
+      "asic_cycles": 3843121,
+      "gate_cycles": 3843121,
+      "asic_duration_ns": "25620803.104586",
+      "gate_duration_ns": "25620804.104586",
+      "asic_phase_ns": "1.000000",
+      "gate_phase_ns": "0.000000",
+      "source_summaries_rechecked": true,
+      "energy_uses": "actual_gate_window",
+      "hardware_changed": false,
+      "server_verified": false
     }
   }
 }

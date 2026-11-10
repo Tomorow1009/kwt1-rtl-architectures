@@ -16,6 +16,24 @@ LAYERS = common.LAYERS
 REFERENCE = 'original_repaired_MMIO8_same_SysMem_source'
 
 
+def compare_windows(asic, gate):
+    # RTL can issue VALID after its edge; zero-delay mapped logic can issue on
+    # that edge. Preserve both observed intervals instead of changing power's
+    # gate-event window or requiring physically different phases to be equal.
+    ad = Decimal(power.window_values(asic)[2]); gd = Decimal(power.window_values(gate)[2])
+    require(asic['cycles'] == gate['cycles'] and
+            Decimal(asic['period_ns']) == Decimal(gate['period_ns']), 'MMIO8 ASIC/gate cycle count differs')
+    ap = Decimal(asic['start_phase_ns']); gp = Decimal(gate['start_phase_ns'])
+    difference = gd-ad
+    require(abs(difference-(ap-gp)) <= Decimal('0.000004') and
+            abs(difference) < Decimal(gate['period_ns']), 'MMIO8 duration difference is not explained by observed phase')
+    return dict(asic_duration_ns=str(ad), gate_duration_ns=str(gd),
+                asic_start_phase_ns=str(ap), gate_start_phase_ns=str(gp),
+                gate_minus_asic_duration_ns=str(difference),
+                energy_window='actual_gate_first_source_valid_to_final_write_response',
+                cycle_count_equal=True)
+
+
 def indexed_cases(report, gate=False):
     rows = report.get('cases', [])
     require(len(rows) == 14 and {r['case'] for r in rows} == common.CASES,
@@ -64,13 +82,12 @@ def join_cases(asic, gate, synthesis, refs, numbers):
         x, y = a[name], g[name]
         require(x['capture'] == y['capture'] and x['layout_sha256'] == y['layout_sha256'],
                 'MMIO8 ASIC/gate output or saturation differs')
-        require(x['task_window']['cycles'] == y['task_window']['cycles'] and
-                power.window_values(x['task_window'])[2] == power.window_values(y['task_window'])[2],
-                'MMIO8 ASIC/gate exact duration differs')
+        phases = compare_windows(x['task_window'], y['task_window'])
         if name not in LAYERS: continue
         cycles = y['task_window']['cycles']; duration = power.window_values(y['task_window'])[2]
         activity = y['activity']; raw = selected.get(name); watts = raw['reported_power_w'] if raw else None
         rows.append(dict(case=name, cycles=cycles, duration_ns=duration, outputs=25344,
+            rtl_gate_phase_comparison=phases,
             nominal_150mhz_tasks_per_second=str(Decimal(150000000)/cycles),
             nominal_150mhz_mmac_per_second=str(Decimal(150*common.MACS)/cycles),
             tool_period_tasks_per_second=str(Decimal('1e9')/Decimal(duration)),
@@ -98,7 +115,7 @@ def join_cases(asic, gate, synthesis, refs, numbers):
         raw_time_weighted_average_power_w=str(energy/(duration*Decimal('1e-9'))) if energy is not None else None,
         approved_average_power_w=None, approved_energy_per_task_j=None,
         goal_500_tasks_per_second_met_by_cycles=total_cycles <= 12*300000,
-        note='Original MMIO8, no DMA; throughput uses conservative integer cycles, energy uses exact first-VALID phase. Missing power is null.')
+        note='Original MMIO8, no DMA; throughput uses equal conservative cycle counts. RTL/gate observed phases are retained separately; energy uses the exact gate first-VALID window. Missing power is null.')
     aggregate.update(common.boundary_aggregate(rows, duration))
     return rows, aggregate
 

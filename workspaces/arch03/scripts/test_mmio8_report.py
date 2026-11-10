@@ -42,6 +42,33 @@ def fixture():
 
 
 class Mmio8ReportTests(unittest.TestCase):
+    def test_actual_one_ns_rtl_gate_phase_difference_keeps_gate_energy(self):
+        a, g, s, refs, n = fixture()
+        w=g['cases'][0]['task_window'];w['start_phase_ns']='0';w['start_ns']=w['start_edge_ns']
+        g['cases'][0]['activity']['start_ns']=w['start_ns']
+        n[0]['activity']=copy.deepcopy(g['cases'][0]['activity'])
+        duration=Decimal(w['end_ns'])-Decimal(w['start_ns'])
+        n[0]['duration_ns']=str(duration)
+        n[0]['raw_reported_energy_j']=str(Decimal(n[0]['reported_power_w']['total'])*duration*Decimal('1e-9'))
+        rows, totals=r.join_cases(a,g,s,refs,n)
+        phases=rows[0]['rtl_gate_phase_comparison']
+        self.assertEqual(Decimal(phases['gate_minus_asic_duration_ns']),1)
+        self.assertEqual(Decimal(phases['asic_duration_ns']),Decimal('665.666600'))
+        self.assertEqual(Decimal(rows[0]['duration_ns']),Decimal('666.666600'))
+        self.assertEqual(rows[0]['raw_energy_j'],n[0]['raw_reported_energy_j'])
+
+    def test_real_layer01_observed_intervals_and_changed_cycle_rejection(self):
+        a=window();a.update(cycles=3843121,end_cycle=a['start_cycle']+3843121,
+                           start_ns='19070.998093',start_edge_ns='19069.998093',start_phase_ns='1.000000',
+                           end_ns='25639874.102679')
+        g=copy.deepcopy(a);g.update(start_ns='19069.998093',start_phase_ns='0.000000')
+        result=r.compare_windows(a,g)
+        self.assertEqual(result['asic_duration_ns'],'25620803.104586')
+        self.assertEqual(result['gate_duration_ns'],'25620804.104586')
+        g['cycles']+=1;g['end_cycle']+=1
+        g['end_ns']=str(Decimal(g['end_ns'])+Decimal(g['period_ns']))
+        with self.assertRaisesRegex(ValueError,'cycle count'):r.compare_windows(a,g)
+
     def test_energy_preserves_first_valid_phase_and_duration_weighting(self):
         a, g, s, refs, n = fixture(); rows, totals = r.join_cases(a, g, s, refs, n)
         expected = sum(Decimal(x['raw_reported_energy_j']) for x in n)
@@ -102,6 +129,9 @@ class Mmio8ReportTests(unittest.TestCase):
             with (out/'tasks.csv').open(encoding='utf-8-sig', newline='') as stream:
                 values = list(csv.DictReader(stream))
             self.assertEqual(len(values), 12); self.assertEqual(values[0]['raw_energy_j'], '')
+            self.assertEqual(Decimal(values[0]['asic_duration_ns']),Decimal('665.666600'))
+            self.assertEqual(values[0]['energy_window'],'actual_gate_first_source_valid_to_final_write_response')
+            self.assertIn('首请求相位',(out/'report_zh.md').read_text(encoding='utf8'))
             with self.assertRaises(ValueError): r.common.write_outputs(report, out)
 
     def test_request_scope_and_python36(self):

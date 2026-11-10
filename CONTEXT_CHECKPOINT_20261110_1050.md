@@ -1,8 +1,24 @@
 # 2026-11-10 10:50 实施检查点
 
+**11:25最新增量：** ecf原8路时序包FileZilla33秒成功、success27、空队列后断开最小化；11:19:36.081221安全解包，**11:20:36.891532服务器683输入/完整提交核验通过**。云端仍ecf3cd4，尚未启动其mmio8_timing_audit。当前唯一队列parent188919：one于**11:20:12.393155 passed**；**initial于11:20:12.747228开始，owner212936/pt213156，最后11:22:57.901781仍running**。zero/one数值及SHA后续四点比较完整绑定，勿重跑它们。frozen与zero已观察总功耗/能耗相同，不能提前推断initial或全部未知影响。
+
+**新发现并本地修复原8路报告问题：** 11:21直接以原c5 ASIC和a2首层gate摘要的既有SHA核验原始回执，两者都是3843121周期、end_ns=25639874.102679，但ASIC start_ns=19070.998093、phase=1ns、duration=25620803.104586ns；gate start_ns=19069.998093、phase=0、duration=25620804.104586ns。旧`mmio8_report.join_cases`要求纳秒时长完全相同，会在最终导出拒绝这组合法相位差；还未发生实际完整导出失败，此为提前核对发现，不是硬件失败。
+
+新增`compare_windows`分别严格验证两个窗口、要求周期/period一致，差异必须由已观测起始相位解释且小于1周期；保留ASIC/gate时长与相位，能量始终用gate真实窗口。共享`dma16_report.write_outputs`只在存在该证据时增加CSV列及中文说明，默认DMA16内容保持原路径。新增2项测试（真实首层数字、不同周期拒绝、门级能源窗口），与原工具共29tests通过。**修改尚未提交/打包/服务器复验**，涉及mmio8_report.py、test_mmio8_report.py、dma16_report.py；现ecf包仍旧report。不要改或重导出full02，已有默认DMA16报告不受此修复影响。
+
+接续：先完成本修复的提交/干净包（预计228tests，实际待核验）及同范围同步上传；与此同时initial继续。队列结束后用已上传a745/ecf比较器对四点实际报告生成request→comparison（source均b85），再用ecf新mmio8_timing_audit短阶段检查旧8网表。其后必须排余11层MAC完整扫描以及原8路完整14gate/12活动与12PT，不重复单层/1200/full02。原8路189 no_clock/disabled全部分类仍待办。生产fcd/正式固件/668batch无改动。所有本地工具会话截至此条已完成，无挂起上传；VNC空闲查询页，FileZilla断开。
+
+**11:18增量：** 原8路只读高扇出工具已提交并云端ls-remote确认`ecf3cd4afb3c96b9580687b5ab42db60e0372292`。包`light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c.zip`，16662114B，SHA=`b2a21eb5fc1722c7c6d467f4ceafec78d23e92081c573842bd4318228663d0b5`，683输入/226干净tests/五固件/40生产文件不变；clean=`local_runs/mmio8_timing_clean_audit_20261110_1114/receipt.json`，SHA=`0f9783fb1e365c89812c47f34de7f9e8e897813c5e6590df1369d58288dee60e`。板端`/home/root/undergrad-mmio-timing-20261110`已SHA暂存，当前正由FileZilla上传，**成功回执/服务器解包/683输入仍待观察**。不要重复上传；完成后断开最小化。
+
+三点队列最后**11:12:52.894388**：zero stage10:59:00.585559开始、11:09:28.639448 passed；**one stage11:09:28.948502开始，owner200283/pt200523 running**；initial尚未启动。parent仍188919，唯一队列，其他MAC/8路EDA均未启动。下方“zero当前owner”是历史。
+
+原8路PT小报告继续只读：timing_check明确189 no_clock，实际行格式为Clock Pin表，示例属于`u_e203_subsys_top/u_sirv_debug_module/jtag_dtm_gen.u_sirv_jtag_dtm/.../CK`；下一段Information为partial_delay。实际mapped.sdc的TCK/TMS/TDI均set_case_analysis 0。**尚未完整189对象分类或禁用弧计数**，不能凭几个示例套用16路结论。禁用弧表实际为Cell or Port / From / To / Sense / Flag / Reason，行按空白分列，第5项为flag；需检查完整表覆盖再归类。截图`mmio8_no_clock_format.png`、`mmio8_timing_headers.png`。结构SHA独立确认时间统一记11:10:37（微秒此前转抄有误，不作为结果身份）。
+
+下一步：等FileZilla成功→安全解包/输入→重查one/initial队列；空闲后ecf新`mmio8_timing_audit`短查询，再余11层MAC全扫描和原8路14/12完整gate/PPA。四点全部完成时用a745或ecf中的`dma16_x_compare.py`生成request与全四点比较；load_point/load_baseline实际格式已通过，不重跑frozen/zero。保持fcd/668生产冻结及full02不重复。此次本地打包、clean、板端暂存会话均已完成。
+
 **11:12增量：** a745比较包FileZilla33秒成功、success26空队列后断开最小化；11:02:13.024915安全解包，11:02:45.038248核验681输入/完整提交及三点队列plan SHA。11:04:06.754693实际新`load_point/load_baseline`重读成功，5个网表/SDC/库身份及完整活动窗口一致；尚未完整四点比较。三点队列唯一parent188919继续：zero driver188920/pt189212于**11:09:28.639448 passed**，数值total=0.0296837185W、energy=0.0000446779497038379161700J，与默认同；one/initial最新owner待查，勿另启。zero摘要SHA尚未单独读取，后续由四点比较请求绑定。
 
-原8路新结构全分类已完成于a745 `runs/mmio8_struct_review01/ports.json`：1179模块，3687端口全declaration_only，输入3574/输出113，LINT1/2/8/28/32/33=4/88/88/3599/3600/411。SHA=`0b3918d6b1cc56cf7cba9a93d3b2a7caa86bbb64eeec175988c11c1969e85b57`于**11:10:37.607564**独立断言。该只读诊断使用现有generic classify，前后`dma16_report.load_stage(ref,'mmio8_synth')`校核1aa原综合工件，JSON独立mmio8 schema；不修改原网表、不批准时序。PT timing_check尾部已读，disabled表头已读，但189 no_clock具体归类/禁用弧全量原因未完成，不能套用DMA16结果。
+原8路新结构全分类已完成于a745 `runs/mmio8_struct_review01/ports.json`：1179模块，3687端口全declaration_only，输入3574/输出113，LINT1/2/8/28/32/33=4/88/88/3599/3600/411。SHA=`0b3918d6b1cc56cf7cba9a93d3b2a7caa86bbb64eeec175988c11c1969e85b57`于**11:10:37**独立断言。该只读诊断使用现有generic classify，前后`dma16_report.load_stage(ref,'mmio8_synth')`校核1aa原综合工件，JSON独立mmio8 schema；不修改原网表、不批准时序。PT timing_check尾部已读，disabled表头已读，但189 no_clock具体归类/禁用弧全量原因未完成，不能套用DMA16结果。
 
 新增本地`mmio8_timing_audit.py`、3tests及server_run新stage，相关26tests通过；读取原8路DDC并按真实原8路探针查询高扇出，保留原前后身份，不改约束/网表。**尚未提交/打包/服务器运行**，与本段文档/三JSON更新一并待提交。clean helper已加入test_mmio8_timing_audit，下一干净包预计226tests、683输入（仍需实际核验）。生产及668最终batch入口不变。下一步先新包、云同步/干净验证/上传；当前重队列自然结束后先运行短mmio8_timing_audit，再排余11层MAC扫描和8路完整gate/PPA。不要延迟完整对照到最后一天。
 
