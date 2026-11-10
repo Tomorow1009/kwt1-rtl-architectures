@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "phase": "DMA16_L01_L11_power_collected_L12_running_unknown_alias_inventory_passed",
+  "phase": "DMA16_all12_PT_collected_full_report_and_1200_reaudit_running",
   "h0": "2026-11-09T17:16:08+08:00",
   "server_last_observed": "2026-11-10T04:07:24.331056+08:00",
   "synth07": {
@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Finish existing L12 PT queue and verify original states/digests; independently re-audit final1200 and export all12 raw powers with bound timing/area review. Continue all referenced unknown use/time checks and remaining-layer activity review. MMIO8 fresh PPA, clean reproduction and delivery pending. Same-scope GitHub sync now authorized.",
+  "next": "Observe foreground report PID8416, no terminal typing while busy, no concurrent heavy work. Verify final report and 1200 independent receipts/output audit. Then fresh MMIO8 synthesis once lock/EDA clear. Continue remaining unknown use/time and all-layer activity review; clean reproduction/delivery pending. Same-scope cloud sync authorized.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -585,7 +585,7 @@
     "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
     "new_evidence_committed": false
   },
-  "active_session": "dma16_power_queue05_12_v1",
+  "active_session": "dma16_report_full01",
   "dma16_current_asic14_verified": true,
   "dma16_sequence_verified": true,
   "strict_timing_verified": true,
@@ -755,7 +755,7 @@
     "ftp_transfer_seconds": 32,
     "ftp_disconnected_after_transfer": true
   },
-  "cloud_source_commit": "1aa0ba3de8a958079b07b6b391acc9d0e3bf709a",
+  "cloud_source_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3",
   "dma16_gate02": {
     "state": "failed",
     "bundle": "light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb",
@@ -1109,7 +1109,7 @@
     "status": "resolved_after_current_user_explicit_authorization",
     "user_reply_received": true,
     "authorization_scope": "Current and subsequent project source, handoff and small verification summaries to the named private repository and personal branch",
-    "verified_remote_commit": "1aa0ba3de8a958079b07b6b391acc9d0e3bf709a"
+    "verified_remote_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3"
   },
   "mmio8_gate_power_local": {
     "status": "local_contracts_and_generated_monitor_fixture_passed",
@@ -1785,10 +1785,10 @@
     "plan_sha256_independently_verified": true,
     "serial": true,
     "stop_on_first_failure": true,
-    "last_observed": "2026-11-10T07:54:34.773078",
-    "current_session": "dma16_power_l12_v1",
-    "current_owner_pid": 327499,
-    "current_pt_pid": 597,
+    "last_observed": "2026-11-10T08:01:49.403793",
+    "current_session": null,
+    "current_owner_pid": null,
+    "current_pt_pid": null,
     "passed_observed_layers": [
       5,
       6,
@@ -1796,9 +1796,12 @@
       8,
       9,
       10,
-      11
+      11,
+      12
     ],
-    "completed": false
+    "completed": true,
+    "all12_summaries_sha_verified": true,
+    "collection": "1aa0ba3de8a9/runs/dma16_report_full01/power_collection.json"
   },
   "power_numbers_l02_l05_v1": {
     "bundle": "light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d",
@@ -1825,7 +1828,7 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "1aa0ba3de8a958079b07b6b391acc9d0e3bf709a",
+    "verified_remote_commit": "4f17b0a724f9f8fd2f85304868fca1715a1d58a3",
     "verified_date": "2026-11-10 approximately07:44",
     "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
     "subsequent_same_scope_authorized": true,
@@ -1866,5 +1869,20 @@
     "verified": "2026-11-10T07:49:32.060151",
     "alias_expression_count": 45605,
     "alias_declaration_only_count": 2703
+  },
+  "report_full01": {
+    "bundle": "light-light126-unknown-netlist-dma16-20261110_073951-1aa0ba3de8a9",
+    "run": "runs/dma16_report_full01",
+    "request": "request.json",
+    "output": "output",
+    "started": "2026-11-10T08:03:41.821567",
+    "driver_pid": 8416,
+    "status": "running_result_pending",
+    "owns_shared_lock": true,
+    "foreground_vnc_terminal_tab": 3,
+    "expected_power_layers": 12,
+    "expected_batch_tasks": 1200,
+    "expected_outputs": 30412800,
+    "system_power_verified": false
   }
 }
