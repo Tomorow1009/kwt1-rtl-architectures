@@ -307,7 +307,7 @@
     "register_clock_pins_without_clock": 189,
     "no_clock_objects_reviewed": false
   },
-  "next": "Package and clean-audit corrected two-table annotation review; upload to fresh bundle and use annotation_all12_v2. Observe existing MMIO8 gate46140 only; after it finishes audit results and schedule first reference PT. Unknown use/time and X sensitivity, remaining reference gate/PT, clean reproduction and delivery remain. Final1200/full02 re-audit already passed.",
+  "next": "Commit/package/clean-audit strict unannotated table and trailer parser; upload new bundle and run annotation_all12_v3. Existing MMIO8 gate46140/scan55423 remains active; verify completion before first reference PT. Unknown valid-use/time and X sensitivity, reference remaining gate/PT, clean reproduction and delivery remain. Final1200/full02 re-audit already passed.",
   "metrics_integration": {
     "status": "local_real_datapath_pin_model_passed",
     "cpu_executed": false,
@@ -1109,7 +1109,7 @@
     "status": "resolved_after_current_user_explicit_authorization",
     "user_reply_received": true,
     "authorization_scope": "Current and subsequent project source, handoff and small verification summaries to the named private repository and personal branch",
-    "verified_remote_commit": "db8e2719b2a6030208925a8dc99856e20adb711c"
+    "verified_remote_commit": "fd54fd14267df093a991e9e07685462b6b414c44"
   },
   "mmio8_gate_power_local": {
     "status": "local_contracts_and_generated_monitor_fixture_passed",
@@ -1275,7 +1275,7 @@
     "power_accepted": false
   },
   "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-  "current_server_tool_commit": "db8e2719b2a6030208925a8dc99856e20adb711c",
+  "current_server_tool_commit": "fd54fd14267df093a991e9e07685462b6b414c44",
   "dma16_complete_gate_suite_verified": true,
   "dma16_complete_activity_suite_verified": true,
   "pt_expected_absence_fix": {
@@ -1826,8 +1826,8 @@
     "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
     "private": true,
     "branch": "codex/light-light126/undergrad-d1-numerics",
-    "verified_remote_commit": "db8e2719b2a6030208925a8dc99856e20adb711c",
-    "verified_date": "2026-11-10 approximately08:49",
+    "verified_remote_commit": "fd54fd14267df093a991e9e07685462b6b414c44",
+    "verified_date": "2026-11-10 approximately09:09",
     "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
     "subsequent_same_scope_authorized": true,
     "main_merged": false
@@ -1996,10 +1996,10 @@
     "driver_pid": 46140,
     "started_launcher": "2026-11-10T08:42:24.188768",
     "started": "2026-11-10T08:42:24.710930",
-    "last_observed": "2026-11-10T08:47:21.673834",
+    "last_observed": "2026-11-10T09:09:16.781222",
     "status": "running",
-    "child_pid": 49235,
-    "phase": "layer_01_simulation",
+    "child_pid": 55423,
+    "phase": "full_activity_scan",
     "cases": [
       "layer_01"
     ],
@@ -2007,7 +2007,13 @@
       "layer_01"
     ],
     "DMA_present": false,
-    "reference_only": true
+    "reference_only": true,
+    "vcd_bytes": 30231391361,
+    "scanner_read_offset": 12807816195,
+    "functional_outputs_passed": 25344,
+    "functional_cycles": 3843121,
+    "functional_saturated": 0,
+    "stage_completed": false
   },
   "annotation_review_local": {
     "script": "workspaces/arch03/scripts/dma16_power_activity_review.py",
@@ -2041,7 +2047,48 @@
     "diagnostic": "runs/annotation_all12_v1_failure.json",
     "root_cause": "Two distinct switching/static-probability tables share identical headings; Nets Driven by is a category heading",
     "local_fix": "Parse both named sections and validate each table without relaxing columns or counts",
-    "corrected_package_uploaded": false,
+    "corrected_package_uploaded": true,
     "system_power_verified": false
+  },
+  "annotation_tables_package": {
+    "source_commit": "fd54fd14267df093a991e9e07685462b6b414c44",
+    "archive": "light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip",
+    "bytes": 16632892,
+    "sha256": "d56631e998cfaf6ed34803d36e17ef4deaeca0f1789da7021760750c0cc566ce",
+    "files": 672,
+    "clean_tests": 198,
+    "production_files_unchanged": 40,
+    "clean_audit_receipt": "local_runs/dma16_annotation_tables_clean_audit_20261110_0910/receipt.json",
+    "clean_audit_sha256": "a42ed561a50ffcecd110cee3ca2179ea75d80bcad222ac842b236f33ef7a9895",
+    "board_directory": "/home/root/undergrad-annotation-tables-20261110",
+    "board_staged_sha_verified": true,
+    "server_uploaded": true,
+    "server_unpacked": "2026-11-10T09:14:59.391512",
+    "server_inputs_verified": 672
+  },
+  "annotation_all12_v2": {
+    "bundle": "light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d",
+    "status": "failed_preserved",
+    "error": "Nonannotated objects require review",
+    "diagnostic": "runs/annotation_all12_v2_failure.json",
+    "observed_reports": 24,
+    "observed_trailing_marker": "1",
+    "observed_each_table_counts": {
+      "file": 152986,
+      "implied": 1,
+      "not_annotated": 0,
+      "total": 152987
+    },
+    "local_fix": "Require both own report tables and zero unannotated counts before accepting observed single-line 1 marker; preserve marker and reject other text",
+    "related_tests_passed": 35,
+    "system_power_verified": false
+  },
+  "mmio8_gate_last_observation": {
+    "observed_at": "2026-11-10T09:25:37.990186",
+    "driver_pid": 46140,
+    "child_pid": 55423,
+    "status": "running",
+    "log": "layer_01_activity_scan.log",
+    "owns_shared_lock": true
   }
 }

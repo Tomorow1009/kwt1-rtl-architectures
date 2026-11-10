@@ -26,9 +26,16 @@ def sources(counts=None, probability=None):
             table('Switching Activity', counts)+table('Static Probability', probability or counts))
 
 
-def unannotated():
-    return ('Report : Switching Activity\n-list_not_annotated\n-show_pin\nDesign : e203_soc_top\n'
-            'List of nonannotated nets :\n\n')
+def unannotated(counts=None, probability=None, tail='1\n'):
+    counts = counts or [152986]+[0]*7+[1, 0]
+    heading = ('Object Type File (%) SSA (%) SSA Force (%) SSA Force (%) SCA (%) '
+               'Clock (%) Default (%) Propagated(%) Implied(%) Annotated(%) Total')
+    def table(title, values):
+        return (title+' Overview Statistics for "e203_soc_top"\n'+heading+
+                '\nNets '+' '.join(str(n)+'(0.00%)' for n in values)+' '+str(sum(values))+'\n')
+    return ('Report : Switching Activity\n-list_not_annotated\n-show_pin\nDesign : e203_soc_top\n'+
+            table('Switching Activity', counts)+table('Static Probability', probability or counts)+
+            'List of nonannotated nets :\n\n'+tail)
 
 
 def fixture(root):
@@ -86,6 +93,30 @@ class PowerActivityReviewTests(unittest.TestCase):
                      unannotated()+unannotated(), unannotated().replace('-show_pin', '')):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 p.empty_unannotated(text)
+
+    def test_observed_trailer_requires_both_zero_count_tables(self):
+        for tail in ('', '\n', '1\n'):
+            row = p.empty_unannotated(unannotated(tail=tail))
+            self.assertEqual(row['overview']['total'], 152987)
+            self.assertEqual(row['trailing_marker'], tail.strip())
+        bad_counts = [152985]+[0]*7+[1, 1]
+        other_source = [152985, 0, 1]+[0]*5+[1, 0]
+        for text in (unannotated(counts=bad_counts), unannotated(probability=bad_counts),
+                     unannotated(counts=other_source), unannotated(probability=other_source),
+                     unannotated(tail='0\n'), unannotated(tail='1\nError\n'),
+                     unannotated().replace('SSA Force (%)', 'SSA (%)', 1),
+                     unannotated().replace(' 152987\n', ' 152988\n', 1),
+                     unannotated().replace('Static Probability', 'Missing table')):
+            with self.subTest(text=text), self.assertRaises(ValueError): p.empty_unannotated(text)
+
+    def test_unannotated_and_mapping_design_sizes_must_agree(self):
+        with tempfile.TemporaryDirectory() as directory:
+            request, records = fixture(Path(directory)); run = Path(directory)/'layer_12'
+            for name in ('activity_unannotated_before.rpt', 'activity_unannotated_after.rpt'):
+                (run/name).write_text(unannotated(counts=[152985]+[0]*7+[1, 0]))
+                records[str(run)]['artifacts'][name] = p.sha(run/name)
+            with patch.object(p, 'extract', side_effect=lambda run, digest: records[str(run)]):
+                with self.assertRaisesRegex(ValueError, 'design counts differ'): p.build(request)
 
     def test_all_twelve_keep_unknowns_and_do_not_approve_power(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -1,5 +1,13 @@
 # 2026-11-10 09:06 接续检查点
 
+**09:28最新：** 已重新读取AGENTS、计划和状态。实际未标注格式截图`takeover_local/d2_20261109/unannotated_exact_schema.png`核对完成；第三版解析修正与35相关测试通过，待提交/干净包/上传/真实annotation_all12_v3。要求自身两表均零未标注且file/implied覆盖、10列和总数严格一致，再接受独立行1或空尾部；保存标记，不删除原报告。新增加错设计大小与对象名1/非零数量反例。原8路gate46140/scan55423于09:25:37.990186仍running并持锁，不启动新重任务。fd54包已上传核验，三份JSON正在同步纠正旧状态。
+
+**09:20最新，覆盖09:12传输中：** fd54修正版33相关tests/198干净tests包已FileZilla33秒上传成功并断开，09:14:59.391512安全解包，672输入核验通过。真实annotation_all12_v2通过双表解析后，在`empty_unannotated`因清单尾部非空被拒绝，没有通过输出；新诊断保存fd54 `runs/annotation_all12_v2_failure.json`。已只读核对全部24份before/after报告：均有两张统计表、每表零未标注，清单后均为独立行`1`，不是任意文字；需要把“空清单”的判定绑定其自身两张表零未标注计数，并单独保留这个已观察尾部标记。未标注报告不带include_mapping_types，列标题还打印两次SSA Force，须原样校验并分别要求对应值零，不猜语义。正在准备第三版修正，**尚未修改/测试/打包该尾部处理**，不能把第二次失败当PASS。服务器原8路重作业不变，最近09:09仍scan55423；先查当前状态再排任何重任务。FileZilla已断开，VNC第三页空闲，本地无挂起测试/上传会话。
+
+**09:12增量优先：** 双表修正已提交并推送`fd54fd14267df093a991e9e07685462b6b414c44`，ls-remote独立确认。新包`light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip`，16632892B，SHA=`d56631e998cfaf6ed34803d36e17ef4deaeca0f1789da7021760750c0cc566ce`；672输入/198干净tests/5固件/40生产不变。audit=`local_runs/dma16_annotation_tables_clean_audit_20261110_0910/receipt.json`，SHA=`a42ed561a50ffcecd110cee3ca2179ea75d80bcad222ac842b236f33ef7a9895`。已暂存板端`/home/root/undergrad-annotation-tables-20261110`并核对SHA，**FileZilla上传刚启动，尚未看到成功**；下一步先确认成功再解包/输入核验/运行新annotation_all12_v2。下文“修正版未提交/打包”仅为09:06历史状态。本地测试会话48068已结束。
+
+原8路门级09:09:16.781222仍driver46140/child55423扫描layer_01_activity_scan.log，VCD30231391361B中读到12807816195B；首层功能25344输出/3843121周期通过，阶段尚未完成。只读查询终端空闲，不重复启动重作业。下一步其他未完成项保持。
+
 用户要求继续实施三天直接16路MAC＋ICB DMA＋双缓冲计划；最新暂停已解除，开发板上电，FileZilla允许。本次及后续同范围源码/交接/小型证据向私人`Tomorow1009/kwt1-rtl-architectures`、分支`codex/light-light126/undergrad-d1-numerics`同步均已获明确授权；不重复询问，不改main。
 
 压缩后先读AGENTS.md、`workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md`、本文件、根CONTEXT_HANDOFF与三份JSON状态。H28=11月10日21:16:08；H72=11月12日17:16:08；用户截止11月13日晚。不要把当前诊断改成新架构优化。

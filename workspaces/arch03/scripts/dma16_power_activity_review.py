@@ -15,6 +15,12 @@ MAPPING = ('exact_mapping', 'map_file', 'built_in_mapping', 'ssa', 'sca',
            'clock', 'default', 'propagated', 'implied', 'not_annotated')
 HEADER = ('Object Type Exact Mapping (%) Map File (%) Built-in Mapping (%) '
           'SSA (%) SCA (%) Clock (%) Default (%) Propagated(%) Implied(%) Annotated(%) Total')
+# This report omits -include_mapping_types. PT prints SSA Force twice;
+# retain their positions, without guessing distinct meanings for the labels.
+UNANNOTATED_COLUMNS = ('file', 'ssa', 'ssa_force_1', 'ssa_force_2', 'sca',
+                       'clock', 'default', 'propagated', 'implied', 'not_annotated')
+UNANNOTATED_HEADER = ('Object Type File (%) SSA (%) SSA Force (%) SSA Force (%) SCA (%) '
+                      'Clock (%) Default (%) Propagated(%) Implied(%) Annotated(%) Total')
 SETTINGS = ('power_analysis_mode', 'power_x_transition_derate_factor',
             'power_include_initial_x_transitions')
 
@@ -38,24 +44,22 @@ def settings(text):
     return result
 
 
-def source_table(lines):
-    require(lines.count(HEADER) == 1, 'Unreviewed activity-source columns')
+def source_table(lines, header, columns):
+    require(lines.count(header) == 1, 'Unreviewed activity-source columns')
     rows = [line for line in lines if line.startswith('Nets ') and line != 'Nets Driven by']
     require(len(rows) == 1, 'Missing or duplicate whole-design Nets row')
     counts = re.findall(r'(\d+)\(\d+(?:\.\d+)?%\)', rows[0])
     tail = re.sub(r'\d+\(\d+(?:\.\d+)?%\)', '', rows[0]).split()
-    require(len(counts) == len(MAPPING) and len(tail) == 2 and tail[0] == 'Nets'
+    require(len(counts) == len(columns) and len(tail) == 2 and tail[0] == 'Nets'
             and tail[1].isdigit(), 'Malformed activity-source counts')
-    result = dict(zip(MAPPING, (int(x) for x in counts)))
+    result = dict(zip(columns, (int(x) for x in counts)))
     result['total'] = int(tail[1])
-    require(result['total'] > 0 and sum(result[k] for k in MAPPING) == result['total'],
+    require(result['total'] > 0 and sum(result[k] for k in columns) == result['total'],
             'Activity-source counts do not sum to total')
     return result
 
 
-def sources(text):
-    require('-include_mapping_types' in text and re.search(r'(?m)^Design\s*:\s*e203_soc_top\s*$', text),
-            'Wrong activity-source report')
+def overview_tables(text, header, columns):
     lines = [' '.join(line.split()) for line in text.splitlines()]
     switching = 'Switching Activity Overview Statistics for "e203_soc_top"'
     probability = 'Static Probability Overview Statistics for "e203_soc_top"'
@@ -63,11 +67,17 @@ def sources(text):
             'Require separate switching and static-probability overview tables')
     a, b = lines.index(switching), lines.index(probability)
     require(a < b, 'Unreviewed activity-source section order')
-    result = source_table(lines[a:b])
-    result['static_probability'] = source_table(lines[b:])
+    result = source_table(lines[a:b], header, columns)
+    result['static_probability'] = source_table(lines[b:], header, columns)
     require(result['total'] == result['static_probability']['total'],
             'Switching/static-probability design counts differ')
     return result
+
+
+def sources(text):
+    require('-include_mapping_types' in text and re.search(r'(?m)^Design\s*:\s*e203_soc_top\s*$', text),
+            'Wrong activity-source report')
+    return overview_tables(text, HEADER, MAPPING)
 
 
 def empty_unannotated(text):
@@ -75,8 +85,18 @@ def empty_unannotated(text):
             re.search(r'(?m)^Design\s*:\s*e203_soc_top\s*$', text), 'Wrong unannotated report')
     marker = 'List of nonannotated nets :'
     require(text.count(marker) == 1, 'Missing or ambiguous unannotated object list')
-    require(not text.split(marker, 1)[1].strip(), 'Nonannotated objects require review')
-    return dict(explicit_object_list_empty=True)
+    overview, tail = text.split(marker, 1)
+    tables = overview_tables(overview, UNANNOTATED_HEADER, UNANNOTATED_COLUMNS)
+    for row in (tables, tables['static_probability']):
+        require(row['not_annotated'] == 0, 'Nonannotated objects require review')
+        require(row['file'] + row['implied'] == row['total'],
+                'Other activity sources in unannotated report require review')
+    # All 24 actual reports end in a single "1" line. Accept that observed
+    # marker only after BOTH tables prove zero unannotated objects. A real
+    # object named "1" with a nonzero count must still fail.
+    tail = tail.strip()
+    require(tail in ('', '1'), 'Nonannotated objects or unexpected report trailer require review')
+    return dict(explicit_object_list_empty=True, overview=tables, trailing_marker=tail)
 
 
 def build(request_path):
@@ -106,6 +126,8 @@ def build(request_path):
                 'Default, propagated, unannotated or other static probability requires review')
         unannotated = {phase: empty_unannotated(texts['activity_unannotated_'+phase+'.rpt'])
                       for phase in ('before', 'after')}
+        require(all(row['overview']['total'] == mapping['total'] for row in unannotated.values()),
+                'Unannotated/source report design counts differ')
         warnings = numeric['warning_occurrences_by_artifact']
         unknown_codes = sorted({code for counts in warnings.values() for code in counts} - {'PSW-208', 'PTE-003'})
         require(not unknown_codes, 'Additional warning codes require review: '+','.join(unknown_codes))
