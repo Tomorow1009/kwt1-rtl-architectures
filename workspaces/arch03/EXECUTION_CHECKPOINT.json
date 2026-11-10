@@ -1931,7 +1931,7 @@
       "source_cloud_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
       "new_evidence_committed": false
     },
-    "active_session": "mmio8_source_synth01",
+    "active_session": "mmio8_source_gate01",
     "dma16_current_asic14_verified": true,
     "dma16_sequence_verified": true,
     "strict_timing_verified": true,
@@ -2589,13 +2589,11 @@
       "actual_mmio8_asic14_schema_checked": true
     },
     "waveform_storage_observation": {
-      "observed": "2026-11-10T03:29:47.972852",
-      "gate_vcd_files": 12,
-      "gate_vcd_bytes": 102909728001,
-      "filesystem_free_bytes": 2818079457280,
-      "filesystem_total_bytes": 9597106520064,
-      "individual_quota_checked": false,
-      "files_deleted": false
+      "observed": "2026-11-10T08:39:42.532892",
+      "filesystem_free_bytes": 2745875562496,
+      "quota_command": "/bin/quota -s",
+      "quota_output_empty": true,
+      "personal_quota_confirmed": false
     },
     "dma16_power_l01_v1": {
       "state": "failed",
@@ -3174,8 +3172,8 @@
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "38ccfc15998453b1aaeb41ec3af5d186c542e57e",
-      "verified_date": "2026-11-10 approximately07:44",
+      "verified_remote_commit": "a2e2bc68269677122843bd8c0a8364e86b8f5fcc",
+      "verified_date": "2026-11-10 approximately08:19",
       "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
       "subsequent_same_scope_authorized": true,
       "main_merged": false
@@ -3234,7 +3232,11 @@
       "failed_power_case": "layer_06",
       "batch_reaudit_started": false,
       "final_output_created": false,
-      "lock_release_observed": "2026-11-10 approximately08:07"
+      "lock_release_observed": "2026-11-10 approximately08:07",
+      "collection_sha256": "ded415f4767c8d1f0e9ab45848c7daa0018dcca96f67e12303ec0f7965157e89",
+      "collection_sha256_independently_verified": true,
+      "request_sha256": "262e389a59797b7fde4eafc36eca66e9ad627ac0e0a04c39dd7d040af3d87bcb",
+      "request_sha256_independently_verified": true
     },
     "mmio8_source_synth01": {
       "bundle": "light-light126-unknown-netlist-dma16-20261110_073951-1aa0ba3de8a9",
@@ -3242,11 +3244,28 @@
       "driver_pid": 17074,
       "started_launcher": "2026-11-10T08:11:02.108784",
       "started": "2026-11-10T08:11:02.831326",
-      "last_observed": "2026-11-10T08:12:18.161796",
-      "status": "running",
+      "last_observed": "2026-11-10T08:30:18.105774",
+      "status": "passed_reports_review_required",
       "DMA_present": false,
       "reference_only": true,
-      "automatic_review": "Initially rejected; approved after rereading explicit user plan and verifying existing MMIO source scope"
+      "automatic_review": "Initially rejected; approved after rereading explicit user plan and verifying existing MMIO source scope",
+      "child_pid": 20252,
+      "finished": "2026-11-10T08:30:15.335643",
+      "summary_sha256": "0e33c1d045d063829c34e97b7ba10109d446c381c95fa7003449d0bbc6159fc9",
+      "summary_sha256_independently_verified": true,
+      "sha_verified_at": "2026-11-10T08:37:10.857006",
+      "metrics": {
+        "period_ns": "6.666666",
+        "setup_slack_ns": "0.00000905991",
+        "hold_slack_ns": "0.00131008",
+        "max_path_groups": 2,
+        "min_path_groups": 2,
+        "latches": 0,
+        "macro_large": 130,
+        "macro_small": 8,
+        "conservative_budget_mm2": "0.2921861914119108"
+      },
+      "timing_review_completed": false
     },
     "power_sum_chain_fix_local": {
       "case": "layer_06",
@@ -3256,8 +3275,92 @@
       "canonical_table_sha256": "f9e24970832e026d1b1623a69c9c44b99baa29b0fa697fb0d4d2d4f0856d33ec",
       "actual_table_matches_local_fixture": true,
       "related_tests_passed": 35,
-      "server_verified": false,
+      "server_verified": true,
       "original_check_sum_changed": false,
+      "production_modified": false
+    },
+    "power_sum_chain_package": {
+      "source_commit": "a2e2bc68269677122843bd8c0a8364e86b8f5fcc",
+      "archive": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696.zip",
+      "bytes": 16616399,
+      "sha256": "2a800278d4fb4af4df219a668c3231be3e902c6213fe8b30b3a11ba8897f7b74",
+      "files": 669,
+      "clean_tests": 189,
+      "production_files_unchanged": 40,
+      "clean_audit_receipt": "local_runs/dma16_sumchain_clean_audit_20261110_0814/receipt.json",
+      "clean_audit_sha256": "b2c2cffa38f3c7c199b8527bc1634790e692f91eca111abc0c07862dc1bf111b",
+      "board_directory": "/home/root/undergrad-power-sumchain-20261110",
+      "board_staged_sha_verified": true,
+      "server_uploaded": true,
+      "server_verified": true,
+      "filezilla_seconds": 33,
+      "filezilla_disconnected": true,
+      "server_unpacked": "2026-11-10T08:24:33.923508",
+      "server_inputs_verified": "2026-11-10T08:25:22.471402"
+    },
+    "power_numbers_all12_sumchain01": {
+      "bundle": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696",
+      "path": "runs/power_numbers_all12_sumchain01/numbers.json",
+      "started": "2026-11-10T08:28:19.947844",
+      "finished": "2026-11-10T08:28:23.154041",
+      "sha256": "06c867453c7225537188a8d32b815b4947383f4a05339210a3bb2c665126e17e",
+      "sha256_independently_verified": "2026-11-10T08:30:18.105774",
+      "layers": 12,
+      "system_power_verified": false,
+      "initial_command_error": "Missing runs parent before output creation; retried with parents=True",
+      "manual_hash_typo_rejected": "Initial 0 misread as c; independent assertion rejected; corrected using grouped original digest"
+    },
+    "report_full02": {
+      "bundle": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696",
+      "run": "runs/dma16_report_full02",
+      "status": "passed_export_and_batch_reaudit",
+      "driver_pid": 38915,
+      "started": "2026-11-10T08:32:44.175393",
+      "last_observed": "2026-11-10 approximately08:36:31",
+      "request_sha256": "a6f483701cff4fac27f03a11c8cc0f63b59bb318898991448826f938f860b105",
+      "request_sha256_independently_verified": true,
+      "owns_shared_lock": false,
+      "foreground_terminal_tab": 3,
+      "new_readonly_terminal_tab": 5,
+      "power_layers": 12,
+      "batch_reaudit_completed": true,
+      "system_power_verified": false,
+      "initial_history_draft_preserved": "request_history_draft.json",
+      "request_sha_verified_at": "2026-11-10T08:37:10.857006",
+      "finished": "2026-11-10T08:38:53.904490",
+      "output_artifacts_verified_at": "2026-11-10T08:41:17.016627",
+      "batch_tasks": 1200,
+      "batch_outputs": 30412800,
+      "receipt_sha256": "06c246af4de0914e1e304fc77cf1b61413e955a350c59d5d8d0df8c521e84e5c",
+      "receipt_sha256_independently_verified": "2026-11-10T08:43:30.357526",
+      "timing_verified": true,
+      "project_area_upper_bound_verified": true
+    },
+    "mmio8_source_gate01": {
+      "bundle": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696",
+      "run": "runs/mmio8_source_gate01/mmio8_gate",
+      "driver_pid": 46140,
+      "started_launcher": "2026-11-10T08:42:24.188768",
+      "started": "2026-11-10T08:42:24.710930",
+      "last_observed": "2026-11-10T08:47:21.673834",
+      "status": "running",
+      "child_pid": 49235,
+      "phase": "layer_01_simulation",
+      "cases": [
+        "layer_01"
+      ],
+      "activity_cases": [
+        "layer_01"
+      ],
+      "DMA_present": false,
+      "reference_only": true
+    },
+    "annotation_review_local": {
+      "script": "workspaces/arch03/scripts/dma16_power_activity_review.py",
+      "new_tests": 8,
+      "related_tests": 32,
+      "server_run": false,
+      "system_power_verified": false,
       "production_modified": false
     }
   }
