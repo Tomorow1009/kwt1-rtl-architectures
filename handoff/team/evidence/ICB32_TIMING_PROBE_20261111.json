@@ -1,0 +1,21 @@
+{
+  "schema": "icb32-timing-probe-server-receipt-v1",
+  "observed": "2026-11-11T03:07:27+08:00",
+  "bundle": "light-light126-icb32-r4-20261111_011258-49759e108719",
+  "run": "runs/icb32_r4_timing01/icb32_timing_audit",
+  "summary_sha256": "49565632fa09318cd025866883df7dbed1dcfb3e5631ed4030e79011b9647ae1",
+  "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
+  "status": "diagnostics_ready_review_required",
+  "actual_six_module_boundary_probe_passed": true,
+  "netlist_modified": false,
+  "high_fanout_threshold": 1000,
+  "high_fanout_count": 3,
+  "high_fanout_nets": [
+    "u_e203_subsys_top/core_csr_clk",
+    "u_e203_subsys_top/hfclk",
+    "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+  ],
+  "classification": "Existing platform clock nets; identification does not replace full timing/disabled-arc and clock coverage review",
+  "strict_timing_verified": false,
+  "physical_signoff": false
+}

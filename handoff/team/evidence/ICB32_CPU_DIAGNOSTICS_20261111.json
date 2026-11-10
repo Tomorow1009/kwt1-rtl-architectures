@@ -1,0 +1,39 @@
+{
+  "schema": "icb32-real-cpu-diagnostics-v1",
+  "bundle": "light-light126-icb32-r4-20261111_011258-49759e108719",
+  "source_commit": "49759e108719d53173648fa3de49b267c6169bbe",
+  "observed": "2026-11-11T03:05:28+08:00",
+  "hashes_independently_asserted": "2026-11-11T03:06:49+08:00",
+  "contention": {
+    "run": "runs/icb32_r4_contention01/icb32_contention",
+    "status": "passed",
+    "summary_sha256": "dd4ad0628963c932665a4f1cd11b25d3df4d5cec693da080916b02e8d8c250b4",
+    "outputs": 50688,
+    "cases": [
+      {"case": "layer_01", "cycles": 39618, "competing_cycles": 3675, "cpu_grants": 3542, "dma_grants": 31386, "scratch_writes": 1771, "scratch_reads": 1771, "maximum_dma_grants_while_cpu_waits": 1, "checked_scratch_rounds": 56},
+      {"case": "extremes", "cycles": 46487, "competing_cycles": 4430, "cpu_grants": 4147, "dma_grants": 36176, "scratch_writes": 2074, "scratch_reads": 2073, "maximum_dma_grants_while_cpu_waits": 1, "checked_scratch_rounds": 65}
+    ],
+    "finished_server_time": "2026-11-11T02:59:38.374519"
+  },
+  "sequence": {
+    "run": "runs/icb32_r4_sequence01/icb32_sequence",
+    "status": "passed",
+    "summary_sha256": "edc75947ecbf0bddedc0b96b87fde040599abeab68213295f272cef5833399dd",
+    "scope": "icb32_asic_rtl_functional_sequence",
+    "cpu_executed": true,
+    "actual_CPU_traps_verified": true,
+    "actual_driver_timeout_verified": true,
+    "no_reset_ABA_verified": true,
+    "guarded_faults": 5,
+    "phase_cycles": [0, 0, 0, 0, 0, 171, 3939, 34639, 33914, 34639],
+    "phases": 10,
+    "outputs": 76032,
+    "host_simulation_seconds": 8.749228843022138,
+    "finished_server_time": "2026-11-11T03:01:43.261356"
+  },
+  "scope_limit": "Separate real E203 polling diagnostic firmware; not production IRQ performance or energy measurements",
+  "production_IRQ_firmware_modified": false,
+  "new_RTL_modified": false,
+  "gate_verified": false,
+  "system_power_verified": false
+}
