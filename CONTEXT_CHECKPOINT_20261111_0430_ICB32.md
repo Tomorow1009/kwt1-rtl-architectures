@@ -67,3 +67,14 @@
 - **04:45:34.900281实际：原driver209764仍运行，当前L04活动scanner273982。** 旧L03 scanner254612已结束。没有重启、清锁或并发EDA。
 - VNC窗口重新盘点仍20971587，交互cwd已变为**964新包根**。最后命令是`icb32_gate_status.txt`，不再是R1路径或preflight。`../497...`查询仍适用。FileZilla已关闭，继承原FTP/VNC relay，不重复启动。
 - 下一步保持原gate完成后串行12层功耗，再964普通ASIC14计数/干净功能复现及最终1200。新工具包预检通过不等于新计数已在真实ASIC运行。时序完整审阅、系统功耗、R1服务器PPA、最终交付仍待办。
+
+## 05:00增量：串行后继已经实际启动，不能再手工启动相同阶段
+
+- 源码/文档/小证据已同步并独立核云端`e09331dac7f285521acd7bf98522d3c730ec1798`。新`icb32_finalize_queue.py`只调度，不修改964或497快照；4项局部保护检查通过，服务器同4项也通过。首次本地测试只因Windows路径期望写死为POSIX而失败，改测试路径表达后通过，运行工具无需修正。
+- 独立小工具包`light-light126-icb32-ops-20261111_045128-e09331dac7f2.zip`，6330B/4输入，ZIP SHA`cb5129b433e8e00462de450ee9c0a9550609799642573a210edd4a06a67cca53`、manifest SHA`b5ff86370dabada2f02f3da376ad1e892daf75536e86606aa4ba7ee6c9ae1568`。正常Linux FileZilla上传成功，服务器新目录安全解包，04:55:41.328366输入/4测试通过。FileZilla已断开退出。
+- 后继进程**285397**于04:56:04.647646启动；它先核验964输入及固定100数据，状态于04:56:43.020316建立。启动后早查状态文件尚不存在，仅是预检阶段，随后实际确认正常等待，没有重启。
+- **04:58:45.702948实看：`waiting_gate`，completed=[]；唯一锁仍是原gate209764/L04活动273982。** 后继不占EDA许可证，也不清锁。不能看到285397就误判成第二个EDA作业。
+- 绑定原gate启动`2026-11-11T03:08:13.465421`、综合摘要`fd36940...`。原门级全部通过和锁释放后，自动依次执行12层`icb32_r4_finish01_power_l01..12`及数值提取、`icb32_r4_finish01_metrics14`、`icb32_r4_finish01_final1200`；任何失败即停，不重复子阶段。故**不要再手工启动这些阶段**。
+- 后继状态在964包`runs/icb32_r4_finish01_queue/state.json`；launcher在ops包`launcher.log`。完成后生成`report_request.json`，功耗仍false/待审，不自动批准、导出或宣布最终合格。每层实际数值留队列`layer_XX_numbers.json`，可在后续串行作业中只读查看。
+- `takeover_local/icb32_ops_status.txt`为当前最后VNC命令，cwd仍964包根；`icb32_gate_status.txt`看原gate已完成层，`icb32_gate_live.txt`看当前child读VCD进度。动态PID以实看为准，ops_boot里285397只用于本后继。脚本第一次写Set-Content未指明参数名失败，导致一次空Return；已改明确-LiteralPath/-Value并成功，没有重复解包。
+- 下一步等原gate推进，收回完整summary后审核原队列/后继衔接；用新实际功耗报告完成单位/活动/模型及任务时序说明，最终报告重审1200及同配置材料。R1/旧8完整PPA仍后排，主候选完整交付优先。原fcd664退路不变。
