@@ -1,18 +1,18 @@
 {
   "schema": "icb32-partial-gate-progress-v1",
-  "observed": "2026-11-11T06:21:35.199010+08:00",
+  "observed": "2026-11-11T06:51:44.607781+08:00",
   "bundle": "light-light126-icb32-r4-20261111_011258-49759e108719",
   "run": "runs/icb32_r4_gate01/icb32_gate",
   "status": "running",
   "driver_pid": 209764,
   "last_observed_child": {
-    "pid": 30155,
-    "case": "layer_08",
-    "stage": "mapped_simulation"
+    "pid": 58615,
+    "case": "layer_09",
+    "stage": "full_activity_scan"
   },
-  "completed_cases": 7,
+  "completed_cases": 8,
   "required_cases": 14,
-  "completed_full_activity_windows": 7,
+  "completed_full_activity_windows": 8,
   "required_full_activity_windows": 12,
   "completed": [
     {
@@ -187,6 +187,31 @@
         "start_ns": "92949.990705",
         "end_ns": "323423.300991",
         "unknown_value_records": 996131,
+        "unknown_activity_review_required": true
+      }
+    },
+    {
+      "case": "layer_08",
+      "outputs": 25344,
+      "cycles": 34675,
+      "canonical_case_row_sha256": "c8b67c424ed010a6bebcd5ab831217b199a24bcc788e216dfc26f95b676b8faa",
+      "canonicalization": "json.dumps(case_progress row,sort_keys=True,separators=(',',':')).encode()",
+      "row_and_activity_receipt_hashes_independently_asserted": "2026-11-11T06:51:02.475469+08:00",
+      "irq": {
+        "enabled": true,
+        "external": 1,
+        "timer": 4,
+        "wfi": 4,
+        "events": 1,
+        "unhandled": 0
+      },
+      "activity": {
+        "status": "scope_and_window_verified",
+        "bytes": 11970962382,
+        "sha256": "ddbac22e39e6966dfb1c14a4c1e57a9ad1ae859927747dd2c70077cb3fd6a9f2",
+        "start_ns": "92949.990705",
+        "end_ns": "324116.634255",
+        "unknown_value_records": 1017133,
         "unknown_activity_review_required": true
       }
     }
