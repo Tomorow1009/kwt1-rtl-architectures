@@ -1,5 +1,19 @@
 # 2026-11-10 10:50 实施检查点
 
+**11:12增量：** a745比较包FileZilla33秒成功、success26空队列后断开最小化；11:02:13.024915安全解包，11:02:45.038248核验681输入/完整提交及三点队列plan SHA。11:04:06.754693实际新`load_point/load_baseline`重读成功，5个网表/SDC/库身份及完整活动窗口一致；尚未完整四点比较。三点队列唯一parent188919继续：zero driver188920/pt189212于**11:09:28.639448 passed**，数值total=0.0296837185W、energy=0.0000446779497038379161700J，与默认同；one/initial最新owner待查，勿另启。zero摘要SHA尚未单独读取，后续由四点比较请求绑定。
+
+原8路新结构全分类已完成于a745 `runs/mmio8_struct_review01/ports.json`：1179模块，3687端口全declaration_only，输入3574/输出113，LINT1/2/8/28/32/33=4/88/88/3599/3600/411。SHA=`0b3918d6b1cc56cf7cba9a93d3b2a7caa86bbb64eeec175988c11c1969e85b57`于**11:10:37.607564**独立断言。该只读诊断使用现有generic classify，前后`dma16_report.load_stage(ref,'mmio8_synth')`校核1aa原综合工件，JSON独立mmio8 schema；不修改原网表、不批准时序。PT timing_check尾部已读，disabled表头已读，但189 no_clock具体归类/禁用弧全量原因未完成，不能套用DMA16结果。
+
+新增本地`mmio8_timing_audit.py`、3tests及server_run新stage，相关26tests通过；读取原8路DDC并按真实原8路探针查询高扇出，保留原前后身份，不改约束/网表。**尚未提交/打包/服务器运行**，与本段文档/三JSON更新一并待提交。clean helper已加入test_mmio8_timing_audit，下一干净包预计226tests、683输入（仍需实际核验）。生产及668最终batch入口不变。下一步先新包、云同步/干净验证/上传；当前重队列自然结束后先运行短mmio8_timing_audit，再排余11层MAC扫描和8路完整gate/PPA。不要延迟完整对照到最后一天。
+
+所有本地exec会话截至此条均已结束，无挂起上传；FileZilla已断开，VNC第3页空闲。当前工作树新8路工具和证据尚未提交。下一操作应查询三点队列当前owner/进度；若正在one/initial则不启动任何重任务。
+
+**11:00增量：** b85 frozen诊断于**10:52:11.278534 passed**，准确摘要SHA=`68dc61ee3b9b82de2c941696bb00604493419b6b25026b2aba4df0414f86352f`已**10:57:33.784894**独立断言；之前抄错第3组首位导致队列创建前失败，未启动任何任务。10:54:39.730504用原正式27bf PT重新提取比对，总数/分组/模块/SRAM/边界/能耗六字段完全一致，0.0296837185W、0.0000446779497038379161700J。系统功耗仍false。
+
+**当前唯一重队列：b85 `runs/dma16_x_queue_remaining_v1`，parent188919，10:58:59.937100启动，依次zero/one/initial。** plan SHA打印为`c49598b1484a7fd0eaab67ca8d832d2eeb9c43d62f7a782561756f79e7718e79`，尚待独立断言；runner逐项subprocess.run(check=True)，任一失败停止，单stage仍拿共享锁。下一步先查state/owner。勿另开三个点或MAC/8路EDA。runner两次本地命令长度守卫失败，未发服务器；缩短后只建立一个runner/launcher。
+
+新比较工具已提交并推送**a74588d97aaa18cbd72abdefe3b899759d652f4d**，ls-remote独立确认。包`light-light126-x-compare-dma16-20261110_105208-a74588d97aaa.zip`，16654613B，SHA=`b488fd3d2933f9052f79bf860701c75201ec1c0c84c94bfd66f764f168f168ce`，681输入/**223干净tests**/五固件/40生产文件与668相同；audit=`local_runs/dma16_x_compare_clean_audit_20261110_1054/receipt.json`，SHA=`32dce79c4467b6fa772cb261c687bf70d1f6e45445002e7e5d45eded5411c39a`。板端暂存SHA通过，FileZilla已选择正确`/IC/light-light126-undergrad-d2-20261109`并开始上传，**成功回执/解包/681服务器输入尚未观察**。先等传输成功/空队列，再断开最小化；不可重复传输。下方“比较未提交/新包尚未打包”均已被本条覆盖。
+
 继续用户已恢复的三天直接16路DMA计划。压缩后先读AGENTS、根交接、本文件、有效计划及三份状态。开发板已上电、FileZilla允许，私人GitHub同范围后续同步持续授权。不得停在进度汇报；生产fcd、最终批量668保持冻结。
 
 ## 本段新完成
