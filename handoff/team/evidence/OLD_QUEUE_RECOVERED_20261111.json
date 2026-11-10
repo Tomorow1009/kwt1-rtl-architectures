@@ -1,0 +1,35 @@
+{
+  "schema": "previous-serial-queue-recovered-v1",
+  "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+  "queue": "runs/dma16_mac02_12_mmio8_gate_queue_v1",
+  "plan_sha256": "db8df26da37f6487c0141fe16cecc8b96e4364e211ba1e4fa622fa0fc8c1a7b6",
+  "finished": "2026-11-11T01:35:00.026395",
+  "completed_commands": 12,
+  "old_processes_restarted_or_killed": false,
+  "lock_manually_cleared": false,
+  "mac_L02_L12": {
+    "read_back": "2026-11-11T01:39:02+08:00",
+    "directory_pattern": "runs/dma16_mac_use_lNN_v1/dma16_mac_use",
+    "cases": 11,
+    "accepted_macs_each": 1622016,
+    "accepted_outputs_each": 25344,
+    "accepted_samples_unknown_each": 0,
+    "ambiguous_controls_each": 0,
+    "mac_valid_samples_verified_each": true,
+    "system_power_verified": false,
+    "limit": "Known accepted MAC values alone do not establish idle combinational, CPU or full-system power accuracy"
+  },
+  "mmio8_gate": {
+    "run": "runs/mmio8_source_gate_full01/mmio8_gate",
+    "summary_sha256": "06e388e1b744494fc00f224a43caf8de2ebf7e764eb1b655541ce7288a408533",
+    "hash_independently_rechecked": true,
+    "status": "passed",
+    "scope": "mmio8_source_whole_soc_mapped_functional_without_SDF",
+    "cases": 14,
+    "outputs": 354816,
+    "complete_activity_layers": 12,
+    "cycles_each": 3843121,
+    "PPA_complete": false,
+    "remaining": "Complete old8 power comparison and declared-scope timing/power review"
+  }
+}

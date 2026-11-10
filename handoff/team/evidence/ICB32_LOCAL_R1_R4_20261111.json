@@ -1,0 +1,191 @@
+{
+  "schema": "icb32-local-r1-r4-comparison-v1",
+  "scope": "local_pin_mock_datapath_no_CPU_no_PPA",
+  "cpu_executed": false,
+  "asic_verified": false,
+  "source_hardware_sha256": {
+    "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+    "workspaces/arch02/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+    "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+    "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+    "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+    "workspaces/arch03/rtl/arch03_linear16x4.sv": "9f7e97c2a3cfe4f508b330fa12d10d45287b49d0375d51ec7ede51d40136b3b6",
+    "workspaces/arch03/rtl/arch03_icb32_accel.sv": "ca29eb2491db1643bd82d2df6e70c4c7661a40bf1f1bb01ed895303b46bfd161",
+    "workspaces/arch03/rtl/arch03_icb32_decoder.sv": "c472e822835ad0419063feab7b0e312066ecfa6e70223ac9624f8af802eefc5b",
+    "workspaces/arch03/rtl/arch03_icb32_transport.sv": "1a5c81a3fa541684b3865b2ea97e86004e757da3af9cbdf218d8c0542aade42d",
+    "workspaces/arch03/rtl/arch03_icb_arb2_turnover.sv": "6b44c635d7e3bae1367a137bafc827419170b3d29bd478d37dfbf3e3ed6f6c06",
+    "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv": "d87f17877bd19a1b515c1b978826779038c3a30efcde8eb3509af6af3c72e6f5",
+    "workspaces/arch03/rtl/arch03_shared_sram_turnover.sv": "12bed277d704f3772d0ed284e33452a77ca99c719cf403997a0c8bcf9a1a1f3e",
+    "workspaces/arch03/tb/tb_arch03_icb32_datapath.sv": "24687546d4edce6f9823816a7f82f78929580709aaa057de74c12bf7b1d0cc10",
+    "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d"
+  },
+  "runs": [
+    {
+      "path": "local_runs/icb32_datapath_20261111_012652_910910",
+      "summary_sha256": "9e68b8970f3bc58fb3e00cce8a774804afe152e1557cdf3bed4cd84cf7da3b7e"
+    },
+    {
+      "path": "local_runs/icb32_datapath_20261110_225139_667062",
+      "summary_sha256": "5a1ea0208dacdad86f6b467ab1edfd5bc57a7cb1593bfc2cc8ea4b65ed85bddf"
+    }
+  ],
+  "tasks_per_configuration": 14,
+  "outputs_compared": 354816,
+  "prefetch": 1,
+  "jitter": 0,
+  "rows": [
+    {
+      "case": "layer_01",
+      "r1_cycles": 116303,
+      "r4_cycles": 34639,
+      "speedup": 3.3575738329628453,
+      "encoded_bytes": 37428,
+      "transactions": 31386,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_02",
+      "r1_cycles": 116271,
+      "r4_cycles": 34607,
+      "speedup": 3.3597538070332593,
+      "encoded_bytes": 37404,
+      "transactions": 31374,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_03",
+      "r1_cycles": 116267,
+      "r4_cycles": 34603,
+      "speedup": 3.360026587290119,
+      "encoded_bytes": 37436,
+      "transactions": 31390,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_04",
+      "r1_cycles": 116259,
+      "r4_cycles": 34595,
+      "speedup": 3.3605723370429255,
+      "encoded_bytes": 37164,
+      "transactions": 31254,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_05",
+      "r1_cycles": 116251,
+      "r4_cycles": 34587,
+      "speedup": 3.3611183392604156,
+      "encoded_bytes": 36884,
+      "transactions": 31114,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_06",
+      "r1_cycles": 116255,
+      "r4_cycles": 34591,
+      "speedup": 3.360845306582637,
+      "encoded_bytes": 36644,
+      "transactions": 30994,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_07",
+      "r1_cycles": 116235,
+      "r4_cycles": 34571,
+      "speedup": 3.362211101790518,
+      "encoded_bytes": 35772,
+      "transactions": 30558,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_08",
+      "r1_cycles": 116339,
+      "r4_cycles": 34675,
+      "speedup": 3.355126171593367,
+      "encoded_bytes": 36508,
+      "transactions": 30926,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_09",
+      "r1_cycles": 116259,
+      "r4_cycles": 34595,
+      "speedup": 3.3605723370429255,
+      "encoded_bytes": 37084,
+      "transactions": 31214,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_10",
+      "r1_cycles": 116331,
+      "r4_cycles": 34667,
+      "speedup": 3.3556696570225286,
+      "encoded_bytes": 37524,
+      "transactions": 31434,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_11",
+      "r1_cycles": 116295,
+      "r4_cycles": 34631,
+      "speedup": 3.3581184487886575,
+      "encoded_bytes": 37628,
+      "transactions": 31486,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "layer_12",
+      "r1_cycles": 116295,
+      "r4_cycles": 34631,
+      "speedup": 3.3581184487886575,
+      "encoded_bytes": 37756,
+      "transactions": 31550,
+      "saturated": 0,
+      "outputs_equal": true
+    },
+    {
+      "case": "extremes",
+      "r1_cycles": 116749,
+      "r4_cycles": 38052,
+      "speedup": 3.06814359297803,
+      "encoded_bytes": 47008,
+      "transactions": 36176,
+      "saturated": 6336,
+      "outputs_equal": true
+    },
+    {
+      "case": "rounding",
+      "r1_cycles": 112192,
+      "r4_cycles": 33914,
+      "speedup": 3.3081323347290206,
+      "encoded_bytes": 36548,
+      "transactions": 30946,
+      "saturated": 4554,
+      "outputs_equal": true
+    }
+  ],
+  "aggregate": {
+    "layers": 12,
+    "r1_mean_cycles": 116280.0,
+    "r4_mean_cycles": 34616.0,
+    "r1_task_s_at150MHz": 1289.9896800825593,
+    "r4_task_s_at150MHz": 4333.256297665819,
+    "speedup": 3.359140281950543
+  },
+  "limits": [
+    "Pin-mock memories and procedural MMIO; no E203 execution",
+    "Identical encoded data, traffic, testbench and source; row-lane parameter differs",
+    "Area, timing and energy require each configuration own server results"
+  ]
+}
