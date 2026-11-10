@@ -42,7 +42,12 @@ def main():
         generated.write_text(generate((A3/'tb/arch03_icb32_monitor.svh').read_text(),DEFAULT_BINDINGS))
         instrumentation+=[generated,A3/'scripts/icb32_gate_monitor.py']
         files.append(A3/'tb/arch03_icb32_gate_proof.sv')
-    if args.bus_metrics: raise ValueError('New passive metrics not yet implemented')
+    if args.bus_metrics:
+        if args.gate_monitor:raise ValueError('Internal macro metrics are ASIC RTL only, not mapped aliases')
+        import icb32_bus_metrics as metrics
+        generated=folder/'arch03_icb32_metrics_monitor.svh'
+        generated.write_text(metrics.instrument((A3/'tb/arch03_icb32_monitor.svh').read_text(),4))
+        instrumentation+=[generated,A3/'scripts/icb32_bus_metrics.py',A3/'tb/arch03_icb32_metrics.svh']
     cfg_path=A2/'arch02/tb/pin_mock_config.json'
     cfg=json.loads(cfg_path.read_text());lines=[]
     for size in ('128','4096'):
@@ -58,6 +63,7 @@ def main():
         data_hashes[name]=sha(task/'layout_manifest.json')
     tool=lambda name:args.vivado_bin/(name+'.bat')
     extra=['-d','ICB32_GATE_OBSERVER'] if args.gate_monitor else []
+    if args.bus_metrics:extra+=['-d','ICB32_BUS_METRICS']
     run([tool('xvlog'),'--sv','-d','ARCH02_PIN_MOCK','-i',folder,'-i',A3/'tb']+extra+files,folder,'compile.log')
     run([tool('xelab'),'tb_arch03_icb32_monitor_fixture','-debug','typical','-s','monitor_fixture'],folder,'elaborate.log')
     (folder/'run.tcl').write_text('run all\nquit\n')
@@ -96,7 +102,8 @@ def main():
                                 source_earliest_ack_cycles=1,cpu_executed=False,dma_executed=True,
                                 layout_sha256=data_hashes[name],capture_sha256=sha(capture)))
             if args.bus_metrics:
-                results[-1]['bus_metrics']=metrics.parse_metrics(text,expected_window=read_window(text,observed))
+                results[-1]['bus_metrics']=metrics.parse_metrics(text,dict(cycles=observed['cycles'],
+                    encoded_bytes=len(encoded),transfer_transactions=len(encoded)//2+12672))
             if args.activity:
                 requested_activity=activity
                 if not activity.is_file():

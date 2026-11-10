@@ -56,6 +56,10 @@ def check_case(row, run, source, name):
     require(irq['enabled'] is True and irq['external'] > 0 and irq['timer'] > 0 and
             irq['wfi'] > 0 and irq['events'] & 1 and irq['unhandled'] == 0, 'Missing IRQ/WFI proof')
     power.window_values(row['task_window'])
+    if row.get('passive_metrics') is not None:
+        from icb32_bus_metrics import parse_metrics
+        require(parse_metrics(text,row['task_window'])==row['passive_metrics'],
+                'Passive counters differ from actual simulation log')
 
 
 def indexed_cases(report, run, gate=False):
@@ -119,6 +123,12 @@ def join_cases(a, g, s, refs, numbers):
             unknown_value_records=y['activity']['unknown_value_records'],
             power_summary_sha256=raw['power_summary_sha256'] if raw else None,
             system_power_verified=False, asic_window=x['task_window'], gate_window=window)
+        metrics=x.get('passive_metrics')
+        row['passive_metrics']=metrics
+        for key in ('mac_utilization','accepted_transactions_per_cycle','effective_transfer_bytes_per_cycle'):
+            row[key]=metrics[key] if metrics else None
+        for key in ('x_reads','x_writes','w_reads','w_writes'):
+            row[key]=metrics['measured'][key] if metrics else None
         row.update(boundary_fields(raw)); rows.append(row)
     total = sum(r['cycles'] for r in rows); duration = sum(Decimal(r['duration_ns']) for r in rows)
     energy = sum(Decimal(r['raw_energy_j']) for r in rows) if len(selected) == 12 else None
@@ -129,6 +139,8 @@ def join_cases(a, g, s, refs, numbers):
         raw_energy_per_task_j=str(energy/12) if energy is not None else None,
         raw_time_weighted_average_power_w=str(energy/(duration*Decimal('1e-9'))) if energy is not None else None,
         goal_5000_tasks_per_second_met_by_cycles=total <= 360000)
+    aggregate['passive_metrics_layers']=sum(r['passive_metrics'] is not None for r in rows)
+    aggregate['accepted_transactions_per_cycle']=sum(r['transfer_transactions'] for r in rows)/total
     aggregate.update(boundary_aggregate(rows, duration))
     return rows, aggregate
 
@@ -149,7 +161,7 @@ def audit_batch(ref, hardware, firmware_sha):
     require(sha(root/'icb32_build_contract.json') == identity['build_contract_sha256'], 'Batch build changed')
     tasks = index_legacy_dataset(identity['dataset'])
     require(tasks == identity['task_list'] and len(tasks) == len(report['cases']) == 1200, 'Batch task list differs')
-    receipts = []
+    receipts = [];sizes=[];cycles=[];metrics_tasks=0
     for task, entry in zip(tasks, report['cases']):
         path = (root/entry['receipt']).resolve(); path.relative_to(root)
         require(path == root/'cases'/task['key']/'receipt.json' and entry['key'] == task['key'] and
@@ -160,11 +172,17 @@ def audit_batch(ref, hardware, firmware_sha):
                 row['key'] == task['key'] and row['asic_cpu_verified'] is True and
                 row['scope'] == 'asic_rtl_functional', 'Wrong task evidence')
         check_case(row, path.parent, task['source'], 'task')
-        require(entry['cycles'] == row['task_window']['cycles'] and entry['outputs'] == 25344,
+        require(entry['cycles'] == row['task_window']['cycles'] and entry['outputs'] == 25344 and
+                entry['encoded_bytes']==row['task_window']['encoded_bytes'],
                 'Batch aggregate differs from original task')
         receipts.append(dict(key=task['key'], sha256=entry['receipt_sha256']))
+        sizes.append(entry['encoded_bytes']);cycles.append(entry['cycles'])
+        metrics_tasks+=int(row.get('passive_metrics') is not None)
     require(sha(root/'summary.json') == ref['sha256'], 'Batch changed during audit')
     return dict(status='passed_reaudited', tasks=1200, outputs=30412800, receipts=receipts,
+                mean_cycles=sum(cycles)/1200.,min_cycles=min(cycles),max_cycles=max(cycles),
+                encoded_bytes_min=min(sizes),encoded_bytes_mean=sum(sizes)/1200.,encoded_bytes_max=max(sizes),
+                passive_metrics_tasks=metrics_tasks,
                 summary_sha256=ref['sha256'], official_precision_verified=False)
 
 
@@ -210,6 +228,8 @@ def write_outputs(report, output):
     fields = ['case', 'cycles', 'encoded_bytes', 'transfer_bytes', 'transfer_transactions',
               'nominal_150mhz_tasks_per_second', 'nominal_150mhz_mmac_per_second',
               'raw_dynamic_w', 'raw_leakage_w', 'raw_average_power_w', 'raw_energy_j',
+              'mac_utilization','accepted_transactions_per_cycle','effective_transfer_bytes_per_cycle',
+              'x_reads','x_writes','w_reads','w_writes',
               'layout_sha256', 'codec_sha256', 'activity_sha256', 'unknown_value_records']
     for filename, rows, columns in [('tasks.csv', report['cases'], fields),
         ('summary.csv', [report['aggregate']], list(report['aggregate']))]:
@@ -227,7 +247,9 @@ def write_outputs(report, output):
             r['raw_energy_j'] if r['raw_energy_j'] is not None else '缺失'))
     lines += ['', '最终100样本批量：%s，%d任务、%d输出；内部回归不代表官方600样本精度验收。' %
         (report['batch']['status'], report['batch']['tasks'], report['batch']['outputs']), '',
-        '源码、固件、库、布局、编码、网表及活动哈希和模块功耗分量见JSON；缺失功耗保持为空，不计为零。', '', '待审核项目：', '']
+        '源码、固件、库、布局、编码、网表及活动哈希和模块功耗分量见JSON；缺失功耗保持为空，不计为零。', '',
+        '被动计数覆盖%d个性能任务。SRAM读写单位为一次16位宏端口请求；MAC利用率与总线事务率使用完整任务周期。各阶段响应延迟/等待可能重叠，不相加作为总时间，也不据此推断功耗。' % a['passive_metrics_layers'], '',
+        '待审核项目：', '']
     lines += ['- '+item for item in report['unverified']]
     lines += ['', '历史失败、停止与未验路径：', '']
     lines += ['- %s：%s；%s' % (h['status'], h['description'], h['run']) for h in report['history']]

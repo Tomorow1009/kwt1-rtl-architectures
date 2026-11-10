@@ -49,4 +49,8 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 
 新增 `scripts/icb32_report.py --request <request.json> --output <新目录>` 导出逐层及汇总 JSON/CSV/中文报告。请求 schema 为 `icb32-report-request-v1`，asic/synthesis/gate 均提供对应新阶段目录与 summary SHA256；power 为同格式引用列表，batch 可选。工具重新核对真实输出、压缩布局、完整窗口、新224宏配置、同硬件身份及新1200回执，不导入旧DMA16批量PASS。缺失功耗为空，时序/面积/功耗验收保持待审，5000目标按真实总周期判断。本地3项报告防混用检查通过，不代表实际PPA。
 
+04:24补充：`icb32_bus_metrics.py`向新的ASIC测试台插入仿真专用计数，不改DUT或固件，原生产观察器与当前映射门级保持不变。计数覆盖X/W宏端口读写、有效MAC更新、三段接受至响应延迟、ready等待、响应反压、同拍退旧接新及结果反压；SRAM单位是一次16位逻辑宏端口请求。等待和延迟可能重叠，不相加当总周期，不用计数推断功耗。后续新ASIC/最终batch回执和报告导出这些字段，并补100样本编码字节分布；旧e65/497回执没有的字段保持缺失。
+
+新增观察器已用现有本地首层及极值两例通过50688输出，周期仍34639/38052；两例均测得X读101376/写6336、W读409600/写16384、有效MAC1622016。首层全任务MAC利用率73.166%、事务率0.90609/周期；这是无CPU局部测量，R1计数尚未实测，详见[证据](../../handoff/team/evidence/ICB32_PASSIVE_METRICS_LOCAL_20261111.json)。新包尚须真实ASIC14复现，可同时作为干净目录功能复现；不得把本地计数标成服务器结果，也不因此重跑已有同网表gate。
+
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。

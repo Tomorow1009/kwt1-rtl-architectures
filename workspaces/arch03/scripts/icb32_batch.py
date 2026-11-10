@@ -64,7 +64,7 @@ def verify(cfg,run,platform_source,dataset,call):
         data.require(sha(receipt)==entry['receipt_sha256'],'Case receipt changed')
     outputs=sum(r['outputs'] for r in results)
     data.require(len(results)==1200 and outputs==30412800,'Incomplete final batch')
-    cycles=[r['cycles'] for r in results];elapsed=time.monotonic()-started
+    cycles=[r['cycles'] for r in results];sizes=[r['encoded_bytes'] for r in results];elapsed=time.monotonic()-started
     data.require(all(type(c) is int and c>0 for c in cycles) and math.isfinite(elapsed),'Invalid batch measurements')
     return dict(status='passed',schema='arch03-icb32-batch-v2',scope='asic_rtl_functional',
         asic_cpu_verified=True,cpu_executed=True,global_FPGA_defined=False,
@@ -72,6 +72,7 @@ def verify(cfg,run,platform_source,dataset,call):
         batch_identity_sha256=identity_sha,compile_receipt=compile_receipt,cases=results,
         host_elapsed_seconds=elapsed,mean_task_cycles=sum(cycles)/1200.,
         min_task_cycles=min(cycles),max_task_cycles=max(cycles),
+        encoded_bytes_min=min(sizes),encoded_bytes_mean=sum(sizes)/1200.,encoded_bytes_max=max(sizes),
         task_s_at_150MHz=150000000.*1200/sum(cycles),
         official_precision_verified=False,gate_simulation_verified=False,
         timing_verified=False,system_power_verified=False,physical_signoff=False)

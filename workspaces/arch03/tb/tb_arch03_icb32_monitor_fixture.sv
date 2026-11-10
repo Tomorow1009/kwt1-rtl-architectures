@@ -140,6 +140,8 @@ module tb_arch03_icb32_monitor_fixture;
     end
 `ifdef ICB32_GATE_OBSERVER
     `include "arch03_icb32_gate_monitor.svh"
+`elsif ICB32_BUS_METRICS
+    `include "arch03_icb32_metrics_monitor.svh"
 `else
     `include "arch03_icb32_monitor.svh"
 `endif

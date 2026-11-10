@@ -2516,9 +2516,9 @@
     "b1_status": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "new_soc_verified": true,
     "new_ppa_verified": false,
-    "remote_last_observed": "2026-11-11T04:11:45.525833+08:00",
+    "remote_last_observed": "2026-11-11T04:27:44.690936+08:00",
     "remote_status": "icb32_gate_L01_L02_full_pass_L03_activity_scanning",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261111_0340_ICB32.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261111_0430_ICB32.md",
     "b1": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "b1_nominal_pf1_cycles": 162713,
     "turnover": "arb_router_386_transactions_306_retire_accept_passed_stubs_only",
@@ -2532,7 +2532,7 @@
     "integrated_recovery": "passed_errors_truncation_cancel_no_reset",
     "synthetic_cpu_contention": "passed_96_accesses_byte_masks_bank_boundary",
     "firmware": "e65_R4_IRQ_all14_actual_E203_passed",
-    "next": "Follow current gate14/activity12; new 12-layer power/full timing review; final1200 and clean reproduction; R1/old8 comparisons",
+    "next": "Package measurement-only update; keep existing gate; then power12, fresh ASIC14 metrics/clean reproduction, final1200/report; comparisons last",
     "remote_driver_pid": 209764,
     "remote_queue_pid": null,
     "remote_child_pid": 254612,
@@ -2546,7 +2546,7 @@
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
     "successor_queue_started": true,
-    "cloud_commit": "50c7225549a08a09e661790c362c34b328e036b3",
+    "cloud_commit": "49d0b4d52c99a4d101eb0b14577da2de311f49b3",
     "latest_package": "light-light126-icb32-r4-20261111_011258-49759e108719.zip",
     "latest_package_sha256": "ba62ea8ad2b10554a2c211eee33a87e4519d54dd038878d3dc9b259679c538e4",
     "latest_package_status": "FileZilla_success_server_SHA_unpack_630_inputs_three_firmwares_verified",
@@ -2591,6 +2591,8 @@
     "local_codec_scope": "same_R4_pin_mock_no_CPU_no_PPA",
     "gate_completed_cases": 2,
     "gate_completed_activity_windows": 2,
-    "partial_gate_evidence": "handoff/team/evidence/ICB32_GATE_PROGRESS_20261111.json"
+    "partial_gate_evidence": "handoff/team/evidence/ICB32_GATE_PROGRESS_20261111.json",
+    "passive_metrics_tool": "local_R4_two_cases_50688_outputs_and_17_tool_tests_passed_server_not_run",
+    "passive_metrics_evidence": "handoff/team/evidence/ICB32_PASSIVE_METRICS_LOCAL_20261111.json"
   }
 }

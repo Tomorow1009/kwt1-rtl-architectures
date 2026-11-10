@@ -87,6 +87,15 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
         tb.write_text(text.replace('`include "arch03_icb32_monitor.svh"','`include "arch03_icb32_contention_monitor.svh"'))
         manifest['modified_files']['tb/tb_top.v']=sha(tb);save(platform/'platform_manifest.json',manifest)
         extra_scripts=[generated,A3/'scripts/icb32_contention.py',A3/'scripts/build_icb32_contention.py']
+    if diagnostic is None:
+        from icb32_bus_metrics import instrument
+        generated=run/'arch03_icb32_metrics_monitor.svh'
+        generated.write_text(instrument((A3/'tb/arch03_icb32_monitor.svh').read_text(),fw['configuration']['row_lanes']))
+        tb=platform/'tb/tb_top.v';text=tb.read_text()
+        data.require(text.count('`include "arch03_icb32_monitor.svh"')==1,'Missing positive observer include')
+        tb.write_text(text.replace('`include "arch03_icb32_monitor.svh"','`include "arch03_icb32_metrics_monitor.svh"'))
+        manifest['modified_files']['tb/tb_top.v']=sha(tb);save(platform/'platform_manifest.json',manifest)
+        extra_scripts=[generated,A3/'scripts/icb32_bus_metrics.py',A3/'tb/arch03_icb32_metrics.svh']
     loader=run/'arch03_asic_boot.svh';loader.write_text(loader_include())
     model=extract_model(cfg,run)
     # Physical TCM still instantiates arch03_sram_half from the original shared
@@ -129,6 +138,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     for paths in roles.values():
         for p in paths:frozen[str(p.resolve())]=sha(p)
     contract=dict(schema='arch03-icb32-asic-build-v2',scope='asic_rtl_functional',
+        passive_metrics=diagnostic is None,
         global_FPGA_defined=False,files=frozen,roles={k:sorted(set(str(p.resolve()) for p in v)) for k,v in roles.items()},
         executable=str((run/'simv').resolve()),firmware=str(firmware),row_lanes=fw['configuration']['row_lanes'],
         lock_directory=str(Path(cfg['server_root'])/'.arch02_team_lock'),clock_period_ns='6.666666',
@@ -159,6 +169,10 @@ def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=Fals
     markers=MARKERS+['ARCH03_ICB32_SOURCE_READY words=%d scope=PC_file_only no_ITCM_task_data=true'%(info['encoded_bytes']//4)]
     result=data.parse_result(text,captured['saturated'],markers)
     window=data.read_window(text,result,info['encoded_bytes'])
+    metrics=None
+    if contract.get('passive_metrics'):
+        from icb32_bus_metrics import parse_metrics
+        metrics=parse_metrics(text,window)
     cpu=re.findall(r'^ARCH03_ICB32_CPU_CYCLES (\d+)$',text,re.M)
     irq=re.findall(r'^ARCH03_ICB32_IRQ_PROOF enabled=(\d+) external=(\d+) timer=(\d+) wfi=(\d+) events=(\d+) unhandled=(\d+)$',text,re.M)
     data.require(len(cpu)==len(irq)==1,'Missing CPU/IRQ completion proof')
@@ -169,6 +183,7 @@ def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=Fals
     for filename,digest in boot_receipt['files'].items():
         data.require(sha(boot/filename)==digest,'Physical boot changed')
     return dict(case=name,outputs=25344,result=result,task_window=window,capture=captured,
+        passive_metrics=metrics,
         cpu_cycles=int(cpu[0]),host_elapsed_seconds=elapsed,codec_sha256=sha(task/'codec.json'),
         layout_sha256=sha(task/'layout_manifest.json'),
         boot_manifest_sha256=sha(boot/'manifest.json'),log_sha256=sha(run/(name+'.log')),

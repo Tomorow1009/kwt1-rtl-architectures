@@ -1,0 +1,166 @@
+{
+  "schema": "icb32-passive-metrics-local-v1",
+  "observed": "2026-11-11T04:24:04+08:00",
+  "run": "local_runs/icb32_monitor_fixture_20261111_042234_295948",
+  "summary_sha256": "d503171c791bf3078d3c46aec50f829cad7f0a9fbdb23532c4489cd9e1524adb",
+  "status": "local_pin_mock_passed",
+  "cpu_executed": false,
+  "mapped_gate_verified": false,
+  "power_verified": false,
+  "hardware_modified": false,
+  "firmware_modified": false,
+  "tasks": 2,
+  "outputs": 50688,
+  "cases": [
+    {
+      "case": "layer_01",
+      "encoded_bytes": 37428,
+      "prefetch": 1,
+      "cycles": 34639,
+      "outputs": 25344,
+      "source_earliest_ack_cycles": 1,
+      "cpu_executed": false,
+      "dma_executed": true,
+      "layout_sha256": "ef833afb8ea257b9feb65df86abe61734e4fcd53c585c5ead50851bdf02d030f",
+      "capture_sha256": "f6452c210c3baa91cd63e61d30c9c35a8009266684b0f52a1845b8cc009535e7",
+      "bus_metrics": {
+        "schema": "icb32_passive_v1",
+        "measured": {
+          "rows": 4,
+          "cycles": 34639,
+          "encoded_bytes": 37428,
+          "x_reads": 101376,
+          "x_writes": 6336,
+          "w_reads": 409600,
+          "w_writes": 16384,
+          "mac_updates": 1622016,
+          "command_ready_wait": 385,
+          "response_backpressure": 0,
+          "pending_response_wait": 0,
+          "turnovers": 28554,
+          "result_stalls": 0
+        },
+        "phases": {
+          "source_read": {
+            "acks": 9357,
+            "latency_sum": 9357,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          },
+          "shared_write": {
+            "acks": 9357,
+            "latency_sum": 9357,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          },
+          "output_write": {
+            "acks": 12672,
+            "latency_sum": 12672,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          }
+        },
+        "mac_utilization": 0.7316608447126072,
+        "accepted_transactions_per_cycle": 0.9060885129478333,
+        "effective_transfer_bytes_per_cycle": 3.6243540517913333,
+        "sram_unit": "one 16-bit logical macro-port request",
+        "scope": "passive_testbench_outside_SoC_power",
+        "note": "Waits/latencies can overlap. Do not sum them as total task time; no power inferred from counters."
+      }
+    },
+    {
+      "case": "extremes",
+      "encoded_bytes": 47008,
+      "prefetch": 1,
+      "cycles": 38052,
+      "outputs": 25344,
+      "source_earliest_ack_cycles": 1,
+      "cpu_executed": false,
+      "dma_executed": true,
+      "layout_sha256": "522c4f32b6895a16e99502864ab78b36ad0ee087094e8813c3ec10bfa47b04f7",
+      "capture_sha256": "a07c6f779ae33d2f601fbca581e90b30caf6357389498923bb4f1898284f2113",
+      "bus_metrics": {
+        "schema": "icb32_passive_v1",
+        "measured": {
+          "rows": 4,
+          "cycles": 38052,
+          "encoded_bytes": 47008,
+          "x_reads": 101376,
+          "x_writes": 6336,
+          "w_reads": 409600,
+          "w_writes": 16384,
+          "mac_updates": 1622016,
+          "command_ready_wait": 908,
+          "response_backpressure": 0,
+          "pending_response_wait": 0,
+          "turnovers": 34475,
+          "result_stalls": 0
+        },
+        "phases": {
+          "source_read": {
+            "acks": 11752,
+            "latency_sum": 11752,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          },
+          "shared_write": {
+            "acks": 11752,
+            "latency_sum": 11752,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          },
+          "output_write": {
+            "acks": 12672,
+            "latency_sum": 12672,
+            "latency_max": 1,
+            "mean_response_latency_cycles": 1.0
+          }
+        },
+        "mac_utilization": 0.6660359508041628,
+        "accepted_transactions_per_cycle": 0.9506990434142752,
+        "effective_transfer_bytes_per_cycle": 3.802796173657101,
+        "sram_unit": "one 16-bit logical macro-port request",
+        "scope": "passive_testbench_outside_SoC_power",
+        "note": "Waits/latencies can overlap. Do not sum them as total task time; no power inferred from counters."
+      }
+    }
+  ],
+  "source_sha256": {
+    "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+    "workspaces/arch02/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+    "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+    "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+    "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+    "workspaces/arch03/rtl/arch03_linear16x4.sv": "9f7e97c2a3cfe4f508b330fa12d10d45287b49d0375d51ec7ede51d40136b3b6",
+    "workspaces/arch03/rtl/arch03_icb32_accel.sv": "ca29eb2491db1643bd82d2df6e70c4c7661a40bf1f1bb01ed895303b46bfd161",
+    "workspaces/arch03/rtl/arch03_icb32_decoder.sv": "c472e822835ad0419063feab7b0e312066ecfa6e70223ac9624f8af802eefc5b",
+    "workspaces/arch03/rtl/arch03_icb32_transport.sv": "1a5c81a3fa541684b3865b2ea97e86004e757da3af9cbdf218d8c0542aade42d",
+    "workspaces/arch03/rtl/arch03_icb_arb2_turnover.sv": "6b44c635d7e3bae1367a137bafc827419170b3d29bd478d37dfbf3e3ed6f6c06",
+    "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv": "d87f17877bd19a1b515c1b978826779038c3a30efcde8eb3509af6af3c72e6f5",
+    "workspaces/arch03/rtl/arch03_shared_sram_turnover.sv": "12bed277d704f3772d0ed284e33452a77ca99c719cf403997a0c8bcf9a1a1f3e",
+    "workspaces/arch03/tb/arch03_task_window_icb32.sv": "85f7056d21f304a330361803460892b2653ab06478d09023c589429519d74e17",
+    "workspaces/arch03/tb/arch03_icb32_source.sv": "c46d6d7e586137a9181ae9050131972db9ff989b88a282fa80bcd10c7d522959",
+    "workspaces/arch03/tb/tb_arch03_icb32_monitor_fixture.sv": "1fc7f459e19841a546dc638c6f733941715c9283ca79afdde4254fc0612c448a",
+    "local_runs/icb32_monitor_fixture_20261111_042234_295948/arch03_icb32_metrics_monitor.svh": "f7a985b8fc452affb40be4ea6acf69338b6ccf1e35f6b937eafb47033812ffb2",
+    "workspaces/arch03/scripts/icb32_bus_metrics.py": "dc419e748548fdb47dcf1a1b05c59f34be80c66a925372af1df2816abaa02b07",
+    "workspaces/arch03/tb/arch03_icb32_metrics.svh": "2a44095afbd897cef5c41c80eda18ef04712f4a5d523f577c0bb195e8c0973e0",
+    "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+    "local_runs/icb32_monitor_fixture_20261111_042234_295948/arch02_sram_config.vh": "2c27538c9af6dc5081c6950248808bc97e808733462c06d145646413c51361be",
+    "workspaces/arch03/tb/arch03_icb32_monitor.svh": "0fd1690250f8fe807cafb9945b2c6675f3f16b07103540d5ee82e54d7575fa68",
+    "workspaces/arch03/scripts/icb32_codec.py": "c0e70c91301672559880671229911213782f220f096fedcdc9a76a6e9ea93606",
+    "workspaces/arch03/scripts/local_verify_icb32_monitor.py": "1c1f2907204bf96ac5dc35e2865bd687013666d55bb2b5ae5fdc3779a868e0fe"
+  },
+  "failed_attempt": {
+    "run": "local_runs/icb32_monitor_fixture_20261111_042157_287911",
+    "phase": "compile",
+    "reason": "XSim requires a3_encoded_bytes declaration before the inserted reporting task; moved insertion below declarations, no DUT change"
+  },
+  "existing_icb32_tool_tests_passed": 17,
+  "next": "Package this measurement/report-only change; fresh real ASIC14 also serves clean-directory reproduction, then final1200. Existing gate/power keep the frozen mapped netlist.",
+  "limits": [
+    "Counters are local measurements, not E203/PPA acceptance",
+    "R4 compressed and raw-fallback cases checked; R1 instrumentation not yet executed",
+    "SRAM counts are 16-bit logical macro-port requests, not bytes; waits and latency sums overlap",
+    "Current running server package is unchanged and has no new passive-counter receipt"
+  ]
+}
