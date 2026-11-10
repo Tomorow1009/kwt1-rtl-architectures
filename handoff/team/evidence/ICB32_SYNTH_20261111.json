@@ -13,12 +13,16 @@
   "temperature_C": 125,
   "period_ns": 6.666666,
   "lf_period_ns": 66,
-  "setup_slack_ns": 0.0000715256,
+  "setup_slack_ns": 7.15256e-05,
   "hold_slack_ns": 0.000253469,
   "setup_path_groups": 2,
   "hold_path_groups": 2,
   "latches": 0,
-  "macros": {"RAMSP4096X16": 128, "RAMSP128X16": 96, "total": 224},
+  "macros": {
+    "RAMSP4096X16": 128,
+    "RAMSP128X16": 96,
+    "total": 224
+  },
   "whole_system_leaf_area_um2": 4448778.171173114,
   "reported_system_area_um2": 4448778.173395,
   "known_added_mm2": 0.7658783064005987,
@@ -41,5 +45,51 @@
   "system_power_verified": false,
   "physical_signoff": false,
   "queue_completed": true,
-  "team_lock_observed_released": true
+  "team_lock_observed_released": true,
+  "lint1_object_review": {
+    "observed": "2026-11-11T04:11:20.542131+08:00",
+    "warning": "Cells do not drive (LINT-1)",
+    "count": 4,
+    "check_design_mapped_sha256": "f6023d3dacc9c23eedfd86835c58c1af5b883ff822d41ff5c141522469daa108",
+    "report_and_mapped_netlist_hashes_verified_against_synthesis_summary": true,
+    "objects": [
+      {
+        "module": "sirv_debug_csr_PC_SIZE32",
+        "cell": "ndreset_dfflr",
+        "connected_pins": [
+          "lden",
+          "dnxt",
+          "clk",
+          "rst_n"
+        ]
+      },
+      {
+        "module": "sirv_debug_csr_PC_SIZE32",
+        "cell": "fullreset_dfflr",
+        "connected_pins": [
+          "lden",
+          "dnxt",
+          "clk",
+          "rst_n"
+        ]
+      },
+      {
+        "module": "sirv_aon_wrapper",
+        "cell": "u_aon_porrst",
+        "connected_pins": []
+      },
+      {
+        "module": "sirv_plic_man_PLIC_PRIO_WIDTH3_PLIC_IRQ_NUM17_PLIC_IRQ_NUM_LOG26_PLIC_ICB_RSP_FLOP1_PLIC_IRQ_I_FLOP1_PLIC_IRQ_O_FLOP1",
+        "cell": "flop_o_irq.plic_irq_prio_dffr",
+        "connected_pins": [
+          "dnxt",
+          "clk",
+          "rst_n"
+        ]
+      }
+    ],
+    "disposition": "These retained platform instances have no connected output nets. This warning is not evidence of a missing driver on the new datapath. Other warning classes, clock scope and power remain under review.",
+    "netlist_modified": false,
+    "complete_structural_review": false
+  }
 }
