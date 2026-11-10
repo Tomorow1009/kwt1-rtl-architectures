@@ -39,4 +39,6 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 
 ## 本地检查范围
 
+新增 `scripts/icb32_report.py --request <request.json> --output <新目录>` 导出逐层及汇总 JSON/CSV/中文报告。请求 schema 为 `icb32-report-request-v1`，asic/synthesis/gate 均提供对应新阶段目录与 summary SHA256；power 为同格式引用列表，batch 可选。工具重新核对真实输出、压缩布局、完整窗口、新224宏配置、同硬件身份及新1200回执，不导入旧DMA16批量PASS。缺失功耗为空，时序/面积/功耗验收保持待审，5000目标按真实总周期判断。本地3项报告防混用检查通过，不代表实际PPA。
+
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。
