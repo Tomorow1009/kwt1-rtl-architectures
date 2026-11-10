@@ -1,0 +1,29 @@
+{
+  "schema": "icb32-mapped-port-review-receipt-v1",
+  "observed": "2026-11-11T07:08:29.726025+08:00",
+  "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "server_artifact": "runs/icb32_port_review01.json",
+  "server_artifact_sha256": "316ee46a76452e2661d2b0a96e2823ed8373c0341e8797758813190ffec07da3",
+  "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
+  "parser": "workspaces/arch03/scripts/dma16_structural_audit.py:classify",
+  "parser_local_sha256": "9b3855297e10d032499eeac336d09eaa2e555fece2981d6814dc3b0266a83105",
+  "method": "Use the existing pure parser after independently binding the ICB32 summary scope and the mapped.v/check_design_mapped.rpt digests; do not call the DMA16-specific audit entry point. Save a fresh output, then recheck its hash and both input hashes.",
+  "module_count": 2014,
+  "warning_counts": {
+    "LINT-1": 4,
+    "LINT-2": 706,
+    "LINT-8": 706,
+    "LINT-28": 10432,
+    "LINT-32": 9935,
+    "LINT-33": 1000
+  },
+  "port_warning_count": 11138,
+  "direction_counts": {"input": 10598, "output": 540},
+  "disposition_counts": {"declaration_only": 11138},
+  "output_and_input_hashes_rechecked": true,
+  "netlist_modified": false,
+  "eda_started": false,
+  "timing_verified": false,
+  "system_power_verified": false,
+  "remaining": "This resolves unused/unconnected port syntax and logic-use classification. Full task-mode clock/disabled-arc review and the other structural warning classes must still be considered with the actual reports and same-netlist functional results."
+}
