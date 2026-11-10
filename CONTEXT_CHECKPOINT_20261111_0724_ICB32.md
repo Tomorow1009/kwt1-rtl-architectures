@@ -68,3 +68,10 @@
 - 本地Python`E:/fpga_race-two/.venv-kwt/Scripts/python.exe`。`progress_0712.py`已经执行，不重复追加；所有旧progress脚本同理。UTF8长脚本用显式read_text→compile→exec。不运行旧adapt_icb32_sequence生成器以免恢复8192超时。
 - 历史失败保留：旧37组路径、早期功耗/综合/门级工具修复、计数fixture声明次序、诊断ELF调试节身份差异、Windows/POSIX队列测试路径、L04和L08哈希手抄错误（重读后已通过）。本次L09转录无误，未出现新的硬件失败。
 - 本地无仿真/构建长任务，只有远端原gate及等待后继。无需重新跑已通过工具测试，不安装matplotlib，不扩大未知活动诊断。继续推进实际结果。
+
+## 07:36增量：第10层完整通过
+
+- **07:35:47.430150实际：原gate209764完整通过L01–L10，当前L11映射仿真90534，CPU95.8%；后继285397仍waiting_gate、completed=[]且进程存在。** 当前10/14例、10/12活动，最终summary未生成，后继power/metrics/final1200还未启动。
+- L10：25344输出、34667周期，IRQ/WFI及完整活动通过。VCD12300092453B，窗口92949.990705..324063.300927ns，未知记录1013941。row SHA`eef34f338a7ebd86ad0832dc9025df945691bffa4c6af09c8b5d94b2aa07fe4b`，VCD SHA`f957400a4890c7f387fcaad8b6e8c974db30c4629f4eccd6da031fdef0f38ace`，07:35:14.986429独立断言通过。
+- 07:24完整检查点和设计报告来源表已同步并独立核云端`1e7616dee3f4ceaa7888a650ecbd1a2ad7ab9b70`。本增量待提交。工作区没有RTL/固件改动，本地无长任务，旧队列未重启。
+- **终端最后已恢复all_live查询**，cwd964，FileZilla关闭；Up Return现在查完整层与队列，而不是前文finish_live。继续等待原gate自然收尾和唯一后继接续，不手工重复。压缩后读本检查点全部增量、有效计划和STATUS。
