@@ -1,3 +1,5 @@
+**07:24最新恢复入口：** 先读[07:24完整检查点](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)和有效计划。原gate完整通过9/14例、9/12活动；07:23实际L10活动73822/driver209764，后继285397仍waiting_gate，自动power12→metrics14→final1200，禁止手工重复。11138端口告警复核及来源表已补齐，PT时钟/功耗、新1200和最终交付仍缺。最后VNC为finish_live查询、cwd964，FileZilla关闭。云端dff99a7已独立核对，继续执行，不因等待结束。
+
 **07:12最新接续：** 原gate已完整通过L01–L09；07:11实看L10映射仿真71015/driver209764。后继285397仍waiting_gate、completed=[]，自动power12→metrics14→final1200，不手动重复启动。11138条端口告警已全量只读核对，待PT时钟/禁用弧。详见[05:58检查点的07:12增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)。当前cwd964/最后all_live，FileZilla关闭，继续执行。
 
 **06:52最新接续：** 原gate已完整通过L01–L08；06:51实看L09活动58615/driver209764。后继285397仍waiting_gate、completed=[]，自动power12→metrics14→final1200，不要手工重复启动。详见[05:58检查点的06:52增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)。当前cwd964/最后all_live查询，FileZilla关闭；持续执行，功耗和最终1200仍未完成。
