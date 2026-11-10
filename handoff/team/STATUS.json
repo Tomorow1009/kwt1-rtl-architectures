@@ -112,7 +112,7 @@
     "strict_timing_verified": true,
     "system_power_verified": false,
     "old_hex100_resumed": false,
-    "next": "Read CONTEXT_CHECKPOINT_20261110_1006.md. Commit/package/clean-audit GCC4.8-compatible MAC diagnostic; upload new immutable bundle and run dma16_mac_use_l01_v2 after fresh lock check. PT and numeric reference layer01 done. Remaining layers, unknown use/X sensitivity, full14/12 reference gate/PT, clean reproduction and delivery remain.",
+    "next": "Observe existing MAC v2 driver142991/scan143321; do not restart or run concurrent heavy jobs. Commit/package/clean-audit the independent X sensitivity tool; no sensitivity job has run. Await actual MAC full-stream result before scheduling remaining MAC layers and PT points. Reference full14/12 gate/PT, clean reproduction and delivery remain. See CONTEXT_CHECKPOINT_20261110_1006.md top.",
     "package_readiness": "workspaces/arch03/EXECUTION_CHECKPOINT.json latest_portcheck_package",
     "server_uploaded": true,
     "clean_package_input_files": 402,
@@ -153,13 +153,13 @@
     "uart_original_patched_comparison_verified": true,
     "repaired_asic_matrix_suite_verified": true,
     "pause_checkpoint": "workspaces/arch03/EXECUTION_CHECKPOINT.json pause2",
-    "active_session": null,
+    "active_session": "dma16_mac_use_l01_v2",
     "cloud_sync": {
       "repository": "https://github.com/Tomorow1009/kwt1-rtl-architectures",
       "private": true,
       "branch": "codex/light-light126/undergrad-d1-numerics",
-      "verified_remote_commit": "3dcd351871153aadbd4b991a8884be1948727945",
-      "verified_date": "2026-11-10 approximately09:48",
+      "verified_remote_commit": "bb25f0843195de883a12dedb12af0d8e3b0c8105",
+      "verified_date": "2026-11-10 approximately10:07",
       "scope": "Committed project source, handoff and small evidence; excludes credentials, vendor libraries, raw chat and large runtime outputs",
       "subsequent_same_scope_authorized": true,
       "main_merged": false
@@ -1142,7 +1142,7 @@
       "power_accepted": false
     },
     "current_production_source_commit": "fcd445fb212a81469c900c6aa1cbb544daad08a5",
-    "current_server_tool_commit": "3dcd351871153aadbd4b991a8884be1948727945",
+    "current_server_tool_commit": "bb25f0843195de883a12dedb12af0d8e3b0c8105",
     "dma16_complete_gate_suite_verified": true,
     "dma16_complete_activity_suite_verified": true,
     "pt_expected_absence_fix": {
@@ -2050,6 +2050,52 @@
       "raw_total_w": "0.0199391320",
       "raw_energy_j": "0.0005108565949874820593520",
       "system_power_verified": false
+    },
+    "mac_gcc48_package": {
+      "source_commit": "bb25f0843195de883a12dedb12af0d8e3b0c8105",
+      "archive": "light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip",
+      "sha256": "bdf0b13f74761595b7f02d83c633676cfb1afc2953f93208e582516134772c2f",
+      "bytes": 16639480,
+      "files": 676,
+      "clean_tests": 208,
+      "clean_audit_receipt": "local_runs/dma16_mac_gcc48_clean_audit_20261110_1008/receipt.json",
+      "clean_audit_sha256": "aaa14fdc2471c07827227f58704eeceafee88b70d6a5d066d04ca40c969409b0",
+      "production_files_unchanged": 40,
+      "server_uploaded": true,
+      "server_unpacked": "2026-11-10T10:12:44.410399",
+      "server_inputs_verified_at": "2026-11-10T10:13:31.721855"
+    },
+    "mac_use_v2": {
+      "bundle": "light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195",
+      "run": "runs/dma16_mac_use_l01_v2/dma16_mac_use",
+      "pid": 142991,
+      "child_pid": 143321,
+      "status": "running",
+      "launcher_started": "2026-11-10T10:15:24.921109",
+      "started": "2026-11-10T10:15:25.502263",
+      "last_observed": "2026-11-10T10:19:01.414245",
+      "log": "mac_full_scan.json",
+      "owns_shared_lock": true,
+      "system_power_verified": false,
+      "launch_parent_missing_before_popen": true,
+      "scan_read_bytes": 1268646653,
+      "vcd_bytes": 8745588450
+    },
+    "x_sensitivity_diagnostic": {
+      "status": "local_only",
+      "tests": 7,
+      "related_tests": 32,
+      "server_executed": false,
+      "points": [
+        "zero",
+        "frozen",
+        "one",
+        "initial"
+      ],
+      "system_power_verified": false,
+      "physical_error_bound": false,
+      "replaces_frozen_estimate": false,
+      "document": "workspaces/arch03/X_SENSITIVITY_REVIEW_20261110.md"
     }
   }
 }

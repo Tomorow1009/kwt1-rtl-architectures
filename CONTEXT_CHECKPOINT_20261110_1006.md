@@ -1,5 +1,15 @@
 # 2026-11-10 10:06 接续检查点
 
+**10:23增量：** 新增独立`dma16_x_sensitivity.py`、`test_dma16_x_sensitivity.py`（7tests）及`X_SENSITIVITY_REVIEW_20261110.md`；与来源和数值共32tests通过。server_run增加专用stage及`--x-point zero|frozen|one|initial`，该参数不能用于正式功耗阶段。每点全新PT进程、读VCD前设置双方X参数，实际回读/单位/完整模块和162宏/来源表/错误/哈希均检查；新scope/schema不能混入full02，不自动批准系统功耗。**新X工具尚未提交/打包/服务器运行**，不要说敏感性结果已存在。当前工作树还含10:17的记录更新，待统一提交。现MAC v2仍在bb25旧不可变包里运行，不改其工具。
+
+MAC扫描最后10:19:01.414245仍driver142991/child143321，fd3读到1268646653B（总8745588450B）；比原未知扫描慢，须按实际宿主时间估算后续12层，不假设原速度。没有并发重作业。X敏感性必须等锁空闲后串行排队。
+
+**10:17增量，覆盖下方“修正未提交/无重任务”：** 兼容修正提交`bb25f0843195de883a12dedb12af0d8e3b0c8105`已推送并ls-remote确认。包`light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip`，16639480B，SHA=`bdf0b13f74761595b7f02d83c633676cfb1afc2953f93208e582516134772c2f`；676输入/208干净tests/5固件/40生产文件与668一致，audit=`local_runs/dma16_mac_gcc48_clean_audit_20261110_1008/receipt.json`，SHA=`aaa14fdc2471c07827227f58704eeceafee88b70d6a5d066d04ca40c969409b0`。板端`/home/root/undergrad-mac-gcc48-20261110`，FileZilla33秒成功、success24、空队列，已断开最小化。10:12:44.410399安全解包，10:13:31.721855输入核验通过。
+
+**当前唯一重作业：bb25包`runs/dma16_mac_use_l01_v2/dma16_mac_use`，driver142991，launcher10:15:24.921109、stage10:15:25.502263。10:16:15.035173 state/owner确认running，child143321执行mac_full_scan.json。** 首次启动缺runs父目录在Popen之前FileNotFoundError，没有启动作业；补建父目录后才真正启动。不要重复启动或清锁。首轮3dcd regex失败v1保留。新v2尚未看到完成，仍不能称MAC有效采样通过。没有挂起的本地测试/上传会话。
+
+补充只读观察：原平台AON源码位于`rtl/e203/perips/sirv_aon.v`，另一个vsim/install副本不是本轮依据。原文件6920行，6870行明确注释backup register无需reset，待继续检查其实际写使能与未知对象关联。最短scope分类的sirv_aon1958标识，与全部AON引用别名2091条不是同一计数；样例包括Queue_1数据和SYNOPSYS_UNCONNECTED，不能只凭名字批准。未改AON复位/模型，尚未得出复位缺陷结论。
+
 压缩后先读AGENTS.md、本文件、CONTEXT_HANDOFF.md顶部、`workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md`及三份状态JSON。仍在执行用户要求的三天直接16路DMA计划，不能停在进度汇报；用户已恢复、开发板上电，FileZilla允许，本次及后续同范围私人GitHub同步已授权，不再询问。
 
 ## 当前最要紧的事
