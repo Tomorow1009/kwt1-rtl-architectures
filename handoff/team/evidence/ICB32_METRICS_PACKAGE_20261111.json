@@ -1,0 +1,71 @@
+{
+  "status": "hardware_production_firmware_and_runtime_images_unchanged",
+  "reference": "light-light126-icb32-r4-20261111_011258-49759e108719",
+  "package": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "files_compared": 34,
+  "firmware_manifest_sha256": "fde6cbea29cda15a066a9f3710d8684ae0ba14f73dfd497a80e0a68b3952849b",
+  "elf_sha256": "8cf32dcdfd842936127292652b21b4f7c2bd0529da73620f1c0949fe213ec233",
+  "irq_image_sha256": "725b35d57216573750116af2db555b758ea8175ece8bcbae7b70eeaf466ac64c",
+  "hardware_and_runtime_images_identical": true,
+  "diagnostic_sequence_elf_nonloaded_differences": {
+    ".debug_info": {
+      "before": [
+        0,
+        7917,
+        "291fddc1cfa00795f635cbbdc928471456029fddeb2f92a97293803de87f9c90"
+      ],
+      "after": [
+        0,
+        7917,
+        "7c344bce24fa290c5719fe5e178db4d5161f9a755d92a6deb08dc53333661c22"
+      ]
+    },
+    ".debug_line": {
+      "before": [
+        0,
+        6428,
+        "f2f89b21a4336e7d7cb98a5d82f3b08c813426cf412af7b278b37f85812c4396"
+      ],
+      "after": [
+        0,
+        6428,
+        "bbece70b5f95fb770a16ee1aa39f3afaaab7a56a94aab1eb20583d799869ca6e"
+      ]
+    },
+    ".debug_str": {
+      "before": [
+        48,
+        2178,
+        "80b2f2854cbcf698a84110bac154c94b7f9ea072115026c5d49778bc62869355"
+      ],
+      "after": [
+        48,
+        2178,
+        "8710bb94ddc13cf4582a615dc612429c4c6bef29a38da80f02784454c51bf61d"
+      ]
+    },
+    ".symtab": {
+      "before": [
+        0,
+        24016,
+        "10c74428ab0891a3c4a5f9286d2065fe5cdccfd4ec64cb508243da647ef375ee"
+      ],
+      "after": [
+        0,
+        24016,
+        "90fe9086f4d82e2ec1aa52fa6f38f40a019b439c8270b45ae09e8309bd11669f"
+      ]
+    }
+  },
+  "diagnostic_sequence_manifest_changed_field": "elf_sha256",
+  "schema": "icb32-measurement-package-v1",
+  "source_commit": "96443c284a1c865a8718ed7bb93a9e8ebfe48c09",
+  "zip_sha256": "18cf4c4def9fcab43174de974c6ca45851af35b6ac1ea701915bd8c57b41b161",
+  "zip_bytes": 11139802,
+  "files": 636,
+  "server_preflight": "2026-11-11T04:42:01.946139+08:00",
+  "server_preflight_status": "636_inputs_three_firmwares_and_production_identity_passed",
+  "uploaded_by": "board_Linux_FileZilla",
+  "filezilla_closed": true,
+  "server_EDA_started": false
+}

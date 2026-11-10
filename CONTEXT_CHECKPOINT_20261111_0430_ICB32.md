@@ -57,3 +57,13 @@
 - `F:/linux_fpga_try/ac820.ps1`需已有授权提升才能访问板端密钥；不读取/打印凭据。无CUA会话，无completion_summary欠项。单次type≤1000字符，远端交互tcsh：避免嵌套转义双引号和美元符号；之前仅只读查询的缩进正则失败已修复，无远端状态改变。
 - 本地Python是`E:/fpga_race-two/.venv-kwt/Scripts/python.exe`（在父目录）；不要误用repo相对venv。不要重跑旧`adapt_icb32_sequence.py`覆盖4096超时修复。用Python UTF-8编辑JSON，避免PowerShell大小写键丢失。
 - 重要进展及下次压缩前继续更新本文件/新检查点和根交接；压缩后重读计划、AGENTS、STATUS、当前检查点再继续。仅用户明确暂停才关闭板端客户端，远端作业照常。
+
+## 04:46增量：新包已云端/服务器同步，L03完整通过
+
+- 云端已独立核对`96443c284a1c865a8718ed7bb93a9e8ebfe48c09`。由干净提交导出测量包`light-light126-icb32-r4-20261111_043048-96443c284a1c.zip`，11139802B/636文件，SHA`18cf4c4def9fcab43174de974c6ca45851af35b6ac1ea701915bd8c57b41b161`。17工具检查再次通过。
+- 正常板端Linux FileZilla成功上传；随后断开并关闭。服务器安全新解包通过，04:42:01.946139预检636输入、三套固件和生产manifest/ELF全部通过，没有启动新EDA。
+- 34项RTL/生产固件/运行映像比较一致。序列诊断ELF只有非装载debug/symbol节不同，sequence.bin/verilog完全一致；manifest仅elf_sha256变化。不能宣称所有ELF二进制一致。详见`ICB32_METRICS_PACKAGE_20261111.json`。首次过宽身份断言失败已定位为调试元数据，不是DUT变化。
+- L03门级25344输出/34603周期、真实IRQ/WFI及完整活动通过，VCD12584787471B；VCD与规范化回执SHA于04:39:48.090598独立断言，详见`ICB32_GATE_PROGRESS_20261111.json`。当前3/14门级、3/12活动完成。
+- **04:45:34.900281实际：原driver209764仍运行，当前L04活动scanner273982。** 旧L03 scanner254612已结束。没有重启、清锁或并发EDA。
+- VNC窗口重新盘点仍20971587，交互cwd已变为**964新包根**。最后命令是`icb32_gate_status.txt`，不再是R1路径或preflight。`../497...`查询仍适用。FileZilla已关闭，继承原FTP/VNC relay，不重复启动。
+- 下一步保持原gate完成后串行12层功耗，再964普通ASIC14计数/干净功能复现及最终1200。新工具包预检通过不等于新计数已在真实ASIC运行。时序完整审阅、系统功耗、R1服务器PPA、最终交付仍待办。

@@ -53,4 +53,8 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 
 新增观察器已用现有本地首层及极值两例通过50688输出，周期仍34639/38052；两例均测得X读101376/写6336、W读409600/写16384、有效MAC1622016。首层全任务MAC利用率73.166%、事务率0.90609/周期；这是无CPU局部测量，R1计数尚未实测，详见[证据](../../handoff/team/evidence/ICB32_PASSIVE_METRICS_LOCAL_20261111.json)。新包尚须真实ASIC14复现，可同时作为干净目录功能复现；不得把本地计数标成服务器结果，也不因此重跑已有同网表gate。
 
+04:46已完成964测量包的正常FileZilla上传、安全解包及636输入/三固件预检；生产RTL、正式IRQ ELF和所有运行映像与497一致，诊断序列ELF只有非装载调试/符号节不同。见[新包身份](../../handoff/team/evidence/ICB32_METRICS_PACKAGE_20261111.json)。当前497门级队列保持原样继续。
+
+`icb32_finalize_queue.py`是独立的执行工具，不修改已上传运行包。它绑定原gate的PID、启动时间和综合摘要，只有原14例及12活动全部成功、共享锁释放后才串行运行12层功耗、964普通ASIC14和最终1200。每项失败立即停止，独立session不重试、不清锁；每层功耗数值提取检查实际单位、求和及224宏，仍保留`system_power_verified=false`。结束时生成`report_request.json`，不自动导出或批准最终报告。该工具可单独随小型操作包从已提交源码导出并经FileZilla传送，不必再次打包相同DUT/固件。排队进程不占EDA许可证；状态记录在目标包`runs/<session>_queue/state.json`。当前本地4项队列边界检查通过，是否已启动必须查最新检查点及服务器状态。
+
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。
