@@ -39,3 +39,17 @@
 先完成只读进程/空间核对与本地包修复、同步。服务器写入恢复前不启动新EDA/大批量，不删除证据，不重试旧session。空间足够后确认无其它作业/锁，再从同硬件新包建立独立synth02；不要重复已经过的ASIC14，除计划需要的clean14计数复现。新综合通过后才做其自己的诊断/gate/冻结/1200/SAIF。未能满足硬性条件则继续保留R4赛事资格。
 
 现场：板端helper`F:/linux_fpga_try/ac820.ps1`、VNC18874435/class Vncviewer，workspace3 cwd为caad包；FileZilla关闭，无传输，无本地仿真或打包进程。最近本地打包session13741已成功结束。没有CUA会话。服务器可能因空间协调变化，任何状态都必须重新读。
+
+## 03:23本地收回与新包就绪
+
+8d8f26247b7a421bb3cb3ffaad555c8eb3d452ee已推送并ls-remote一致，保存磁盘故障、过期状态说明、ABI恢复和缓存排除修复。新包`light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.zip`，11344790B/705输入，SHA**b2d31c9906a3d7f3640581d19fac568682f61e7fa3655fb59df692ed66c7d837**，manifest SHA**ac83363a9b3ea5cd88976b13f66a12a6543e68607def89b7ce40496eb359f177**。
+
+完整包重新读回、705输入哈希、三固件自身检查全部通过；ZIP内Python缓存为0。所选48个RTL/生产软件/生产固件文件与caad相同，production firmware manifest恢复**11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91**。在新导出包目录单独运行报告2项及队列3项检查全部通过；这些模拟检查不宣称任何新硬件PASS。
+
+本地打包session53681已结束，无本地长期任务。新包**尚未上板、未FileZilla上传、未服务器解包或启动**；当前磁盘不足，保持本地准备状态。证据`handoff/team/evidence/SYSTOLIC_B_FINAL_TOOLS_PACKAGE_20261112.json`。旧04b问题包和全部历史包保留，不上传，不修改其原manifest。下一步仍待共享空间协调，先读实际进程/锁/磁盘再建立新综合session。
+
+## 03:25最后观察
+
+03:24:24.333923再次只读：可用**1.68359375GiB**，仍在下降；同账号无common_shell/dc_shell/pt_shell/simv/vcs，三个原PID全部不存在，未创建validation后继目录，失败综合仍257MiB。空间不足的来源未查明，不推断为本项目或队友操作。异步空间协调尚无答复，本地准备已完成，后续服务器写入受外部空间条件阻塞。
+
+所有type/Return/截图均已完成，无待输入命令；VNC18874435第三工作区/caad包空闲shell，FileZilla关闭；两个本地打包会话均已结束。准备下一次恢复时先读本检查点，不把旧状态文件当运行，不自动删除文件、清锁或同名重跑。恢复目标是足够磁盘后新综合session及其独立验证队列，当前B性能/ASIC14证据和R4退路均保留。

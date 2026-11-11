@@ -2688,8 +2688,8 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T03:18:26+08:00",
-      "free_GiB": 2.5712890625,
+      "time": "2026-11-12T03:24:24+08:00",
+      "free_GiB": 1.68359375,
       "team_lock": "absent",
       "old_L02": {
         "status": "passed",
@@ -2700,7 +2700,7 @@
       "new_B_job_started": true,
       "other_processes_not_yet_audited": false,
       "EDA_processes": [],
-      "free_bytes": 2760900608,
+      "free_bytes": 1807745024,
       "free_inodes": 6743198
     },
     "local_nominal_12layer": {
@@ -2766,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "04b5830e86a1d2414d0f1d6e31df37b2f7ad8b9d",
+    "cloud_commit": "8d8f26247b7a421bb3cb3ffaad555c8eb3d452ee",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2824,7 +2824,7 @@
       "pid": null,
       "session": "systolic_b_v3_validation01_queue",
       "bundle": "light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1",
-      "observed": "2026-11-12T03:18:26+08:00",
+      "observed": "2026-11-12T03:24:24+08:00",
       "status": "process_absent_stale_waiting_state_no_children_created",
       "completed": [],
       "optional_failures": [],
@@ -2852,7 +2852,7 @@
     },
     "native_saif_package_evidence": "handoff/team/evidence/SYSTOLIC_B_SAIF_PACKAGE_20261112.json",
     "report_tool_local": {
-      "status": "implemented_two_checks_passed_not_deployed",
+      "status": "clean_export_five_report_queue_checks_passed_not_deployed",
       "hardware_changed": false,
       "actual_final_export": false
     },
@@ -2861,6 +2861,8 @@
       "deployed": false,
       "started": false,
       "requires_separate_scoped_freeze_review": true
-    }
+    },
+    "final_tools_package_evidence": "handoff/team/evidence/SYSTOLIC_B_FINAL_TOOLS_PACKAGE_20261112.json",
+    "capacity_coordination_pending": true
   }
 }

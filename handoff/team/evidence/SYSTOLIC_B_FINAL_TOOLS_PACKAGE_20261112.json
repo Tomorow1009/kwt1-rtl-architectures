@@ -1,0 +1,21 @@
+{
+  "source_commit": "8d8f26247b7a421bb3cb3ffaad555c8eb3d452ee",
+  "archive": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.zip",
+  "bytes": 11344790,
+  "sha256": "b2d31c9906a3d7f3640581d19fac568682f61e7fa3655fb59df692ed66c7d837",
+  "files": 705,
+  "row_lanes": 5,
+  "hardware_executed": false,
+  "archive_verified": true,
+  "schema": "systolic-b-final-tools-package-v1",
+  "manifest_sha256": "ac83363a9b3ea5cd88976b13f66a12a6543e68607def89b7ce40496eb359f177",
+  "all_inputs_rechecked": true,
+  "python_cache_files_in_archive": 0,
+  "three_firmware_self_checks_passed": true,
+  "production_RTL_SW_firmware_files_identical_to_caad": 48,
+  "production_firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
+  "board_staged": false,
+  "server_uploaded": false,
+  "reason_not_uploaded": "Shared disk full; 03:24 free1.683594GiB below validation budgets",
+  "clean_export_tool_checks": 5
+}
