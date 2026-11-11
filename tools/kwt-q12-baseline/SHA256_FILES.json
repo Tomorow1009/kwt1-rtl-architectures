@@ -1,0 +1,23 @@
+{
+  "_support/check_hex.py": "288ccccae981807d5ce84c9deb7e17242f06dc1b55934bd6802341a0e31cd1f1",
+  "_support/convert_hex.py": "b3edc2a09becaccc4fcbb25a481a657ad23d5a2786d4e54a444902c0176bc481",
+  "_support/export_full.py": "c8de90783cd209838ae1f74bcd5d26f0baba92294a79c72aa17705c87e26b5e8",
+  "_support/protocol_source/arch02/rtl/arch02_linear.sv": "c910fb0e3504d1cac3b57e8004332a4dbdb523b729bedf14700cdd1f704e23a2",
+  "_support/protocol_source/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+  "_support/protocol_source/arch02/scripts/data.py": "023649500a3f4264919c7e0a1f9548040a7cdc77ea0c7f932f5fe32b0096ff59",
+  "_support/protocol_source/arch02/tb/sram_model.sv": "3485c49b67aebc6b50581ccc72cb9955502e6130245385eee6e42d3973557eb6",
+  "_support/protocol_source/arch02/tb/tb_arch02.sv": "4fc2c171245ee3bab6278a9bd5a383a513bd382371480c8f800d28528974b794",
+  "_support/protocol_source/rtl/dot64.sv": "78d4f4385e0a94808409967c3e3d1c862771997eeb3094c2742d67c89a817872",
+  "_support/protocol_source/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+  "_support/protocol_source/scripts/full_matrix_data.py": "e210bdd1ccff927898f07f89ca6fe89758f9f9fce2402dbd5ccbd6e7203ebf69",
+  "_support/protocol_source/scripts/verify_real_hex.py": "1a4142ea7d056c70cea6447ac7d78187af9a3c27988894697ccde3f52a0d436b",
+  "_support/rtl_protocol.json": "78d2d2337a16a6df571c113f5e794b034fc5a22aa6a27aa82011803bd8532cb6",
+  "kwt_to_hex.py": "cdf4ead880e29a3c850170a43e4c242917f8b4d4a0e606b6bd698fce9ac3b7a8",
+  "README.txt": "5ddcf02d8bb5eac8ef4c6e8b6156e4acb760c121afcd1c1290615a9e5376db51",
+  "requirements-lock.txt": "820e7ef16e618b11d49497545182adb31641f9a7c95a70cf2911f016e45c9e6e",
+  "run_kwt_to_hex.ps1": "28dd9e2a39b341344199d6878a3df83058a28d047700274da942877a81bd8017",
+  "samples_100.txt": "a554d6be17262fccff6b21b82ab693061915c7c4e94f8362aedecb9e242a02ea",
+  "smoke_float.log": "1672e1d03d11a32ec8f48408ab02f71e7abd4d3b885dd3fcdee97b7ef75fa1fa",
+  "smoke_raw.log": "a358fdae0a55ac11a32beb730ec842cb92863f5f082efbf5be4b79ada0f3925e",
+  "verification.json": "b88394151d3c764be72efc4fb94a4cfe4b79471c8353a7b570c2ebf7d64aacfa"
+}

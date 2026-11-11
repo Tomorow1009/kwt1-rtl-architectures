@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "rtl_commit": "8aa230695668458673b370bf85f8a397fc507a34",
+  "raw_pipeline": "1 WAV, 12 full FFN1 layers, 304128 outputs",
+  "from_float_pipeline": "12 layers, 304128 outputs; all 48 HEX files byte-identical to raw mode",
+  "prior_data_comparison": "48/48 HEX files match previously validated sample_000001",
+  "default_100_selection": "matches prior 100 utterances exactly",
+  "negative_checks": [
+    {
+      "case": "existing_output_preserved",
+      "exit_code": 2,
+      "message": "usage: kwt_to_hex.py [-h] [--data-root DATA_ROOT] [--model MODEL]\n                     [--audio AUDIO] [--count COUNT]\n                     [--split {training,validation,testing}]\n                     [--sample-list SAMPLE_LIST] [--from-float FROM_FLOAT]\n                     [--rtl-repo RTL_REPO] [--output OUTPUT]\n                     [--threads THREADS]\nkwt_to_hex.py: error: Output already exists; choose a new --output to preserve previous results"
+    },
+    {
+      "case": "incomplete_matrix_rejected",
+      "exit_code": 1,
+      "message": "ERROR: Incomplete float matrix dimensions"
+    },
+    {
+      "case": "changed_rtl_rejected",
+      "exit_code": 1,
+      "message": "ERROR: Local RTL differs from supported protocol; review before conversion: C:\\Users\\Lucien\\Documents\\Codex\\2026-10-23\\https-mp-weixin-qq-com-s\\work\\kwt-tool-negative-fixtures\\changed_repo\\workspaces\\arch02\\arch02\\rtl\\arch02_linear.sv"
+    }
+  ],
+  "rtl_simulation_this_tool_test": "not run; same protocol source as previously simulated data pack"
+}

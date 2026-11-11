@@ -4,6 +4,8 @@
 
 ## 使用哪份工具
 
+Git仓库已归档完整原版工具：[tools/kwt-q12-baseline](../../../tools/kwt-q12-baseline/)。统一入口为`kwt_to_hex.py`，原始转换实现为`_support/convert_hex.py`；随附完整依赖及原始README.txt。不要只下载一个py文件。
+
 推荐完整工具包：`KWT_TO_HEX_TOOL_20261108.zip`，位于原工作区 `outputs/`，约43 KB。
 SHA-256：`fc218e6fe8a858047a892806cd59c9a2c8ee013a995640c0ea803835e3ff2f27`。
 

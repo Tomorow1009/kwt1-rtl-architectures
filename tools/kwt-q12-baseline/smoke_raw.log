@@ -1,0 +1,7 @@
+Extracting 1 WAV samples; batch=1, all 12 full FFN1 matrices.
+Verified 162 variables against official checkpoint
+PASS 1/1 yes/3c4aa5ef_nohash_2.wav: all 304128 float outputs checked
+Complete: C:\Users\Lucien\Documents\Codex\2026-10-23\https-mp-weixin-qq-com-s\work\kwt-tool-smoke-raw\float
+PASS sample 1: 304128 integer outputs; all HEX independently decoded
+DONE: 1 samples, 12 complete matrices, 304128 outputs; max layer NRMSE 0.152996%
+OUTPUT: C:\Users\Lucien\Documents\Codex\2026-10-23\https-mp-weixin-qq-com-s\work\kwt-tool-smoke-raw

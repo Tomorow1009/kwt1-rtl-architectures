@@ -1,0 +1,73 @@
+{
+  "repository": "Tomorow1009/kwt1-rtl-architectures",
+  "commit": "8aa230695668458673b370bf85f8a397fc507a34",
+  "protocol_unchanged_since": "9dcde6bb38929caef610debd0657b6a02392d97e",
+  "branch": "main",
+  "development_path": "workspaces/arch02",
+  "version_baseline": "v2.0.0",
+  "files": [
+    {
+      "repository_path": "workspaces/arch02/arch02/scripts/data.py",
+      "local_path": "protocol_source/arch02/scripts/data.py",
+      "git_blob": "39c5102ada45b7d614d3e56da775d51c748db323"
+    },
+    {
+      "repository_path": "workspaces/arch02/arch02/rtl/arch02_linear.sv",
+      "local_path": "protocol_source/arch02/rtl/arch02_linear.sv",
+      "git_blob": "9bc209f9ebeaa6b0d5317457ab6843ad0a784243"
+    },
+    {
+      "repository_path": "workspaces/arch02/rtl/dot64.sv",
+      "local_path": "protocol_source/rtl/dot64.sv",
+      "git_blob": "31846bdf0010b221618f7d9d795b1fdaa55b8559"
+    },
+    {
+      "repository_path": "workspaces/arch02/rtl/requantize.sv",
+      "local_path": "protocol_source/rtl/requantize.sv",
+      "git_blob": "e30171058cb18fbb5ca1e572ef318f420fa36504"
+    },
+    {
+      "repository_path": "workspaces/arch02/arch02/tb/tb_arch02.sv",
+      "local_path": "protocol_source/arch02/tb/tb_arch02.sv",
+      "git_blob": "2aef6d4248962df261b42fb854f2815077f60850"
+    },
+    {
+      "repository_path": "workspaces/arch02/arch02/tb/sram_model.sv",
+      "local_path": "protocol_source/arch02/tb/sram_model.sv",
+      "git_blob": "a61df620bb471551099de34991f87988cde628e9"
+    },
+    {
+      "repository_path": "workspaces/arch02/arch02/rtl/sram_port.sv",
+      "local_path": "protocol_source/arch02/rtl/sram_port.sv",
+      "git_blob": "37696ed0f46f1c79e1046d4dc88561178ac50489"
+    },
+    {
+      "repository_path": "workspaces/arch02/scripts/full_matrix_data.py",
+      "local_path": "protocol_source/scripts/full_matrix_data.py",
+      "git_blob": "1a538affc75d9ee9d78f4c800f7b7609e6566667"
+    },
+    {
+      "repository_path": "workspaces/arch02/scripts/verify_real_hex.py",
+      "local_path": "protocol_source/scripts/verify_real_hex.py",
+      "git_blob": "5782b8170947d55ab00ef1f6e2fd86383628ac89"
+    }
+  ],
+  "format": {
+    "x_bits": 16,
+    "w_bits": 16,
+    "bias_bits": 40,
+    "total_bits": 41,
+    "result_bits": 16,
+    "x_fraction": 12,
+    "w_fraction": 12,
+    "bias_fraction": 24,
+    "shift": 12,
+    "rounding": "nearest, ties away from zero",
+    "overflow": "saturation"
+  },
+  "load_words": 23488,
+  "output_elements": 25344,
+  "load_order": "X row-major 6336 words; for each of 32 groups: W k-major/lane-minor 512 words, then 8 bias x 3 words LSW first, high byte zero",
+  "output_order": "group -> row -> lane; compare by row*256+column",
+  "scope": "Stream input to arch02_linear; not E203 shared SRAM memory map"
+}
