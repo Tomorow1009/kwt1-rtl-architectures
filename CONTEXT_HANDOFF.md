@@ -1,3 +1,5 @@
+**08:35最新恢复入口：门级14例和活动12层全部通过，首层功耗正在运行。** 原gate209764于08:29:52自然完成，最终摘要95113a35…已独立核对；后继285397自动接手power_l01，实际PT计算136939。先读[08:35完整检查点](CONTEXT_CHECKPOINT_20261111_0835_ICB32.md)及有效计划；不要再使用旧gate扫描PID或重复后继任务。最后VNC为pt_live/cwd964，FileZilla关闭；新功耗、metrics14、1200及最终报告仍待完成，继续执行。
+
 **08:08最新接续：** 原gate已完整通过L01–L11；08:07实际最后L12活动scanner119433/driver209764，约10%。后继285397仍等gate，自动power12→metrics14→final1200，不手动重复。详见[07:24检查点的08:08增量](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)，新增固定L12/整批回执查询入口也在其中。云端ce581da已核；当前最后VNC为gate_live/cwd964，FileZilla关闭，继续执行。
 
 **08:04最新接续：** 原gate已完整通过L01–L11；08:03实际L12映射仿真114063/driver209764。后继285397仍waiting_gate，自动power12→metrics14→final1200，不手动重复。详见[07:24检查点的08:04增量](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)。云端04520ca已核，最后VNC为all_live/cwd964，FileZilla关闭；继续执行，最终功耗/1200/报告仍缺。

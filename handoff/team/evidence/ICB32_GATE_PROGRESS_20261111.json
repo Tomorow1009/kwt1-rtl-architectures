@@ -1,18 +1,18 @@
 {
   "schema": "icb32-partial-gate-progress-v1",
-  "observed": "2026-11-11T08:03:05.427039+08:00",
+  "observed": "2026-11-11T08:28:54.239837+08:00",
   "bundle": "light-light126-icb32-r4-20261111_011258-49759e108719",
   "run": "runs/icb32_r4_gate01/icb32_gate",
   "status": "running",
   "driver_pid": 209764,
   "last_observed_child": {
-    "pid": 114063,
-    "case": "layer_12",
+    "pid": 134671,
+    "case": "extremes",
     "stage": "mapped_simulation"
   },
-  "completed_cases": 11,
+  "completed_cases": 12,
   "required_cases": 14,
-  "completed_full_activity_windows": 11,
+  "completed_full_activity_windows": 12,
   "required_full_activity_windows": 12,
   "completed": [
     {
@@ -289,11 +289,37 @@
         "unknown_value_records": 999821,
         "unknown_activity_review_required": true
       }
+    },
+    {
+      "case": "layer_12",
+      "outputs": 25344,
+      "cycles": 34631,
+      "canonical_case_row_sha256": "4299551f8f4b5aaa39a19a665d7287fea8959ede44c2236556301d8c059eee8c",
+      "canonicalization": "json.dumps(case_progress row,sort_keys=True,separators=(',',':')).encode()",
+      "row_and_activity_receipt_hashes_independently_asserted": "2026-11-11T08:30:02.420780+08:00",
+      "irq": {
+        "enabled": true,
+        "external": 1,
+        "timer": 4,
+        "wfi": 4,
+        "events": 1,
+        "unhandled": 0
+      },
+      "activity": {
+        "status": "scope_and_window_verified",
+        "bytes": 13242033420,
+        "sha256": "a0bd3433614e274f7c0a1410044af7010d3277392fc9208ac1516120bea19cff",
+        "start_ns": "92949.990705",
+        "end_ns": "323823.300951",
+        "unknown_value_records": 1009322,
+        "unknown_activity_review_required": true
+      }
     }
   ],
   "sdf_annotated": false,
   "all_gate_cases_verified": false,
-  "all_activity_windows_verified": false,
+  "all_activity_windows_verified": true,
   "system_power_verified": false,
-  "note": "Partial progress only. The final immutable summary does not yet exist. Unknown records are neither a toggle count nor a coverage percentage."
+  "note": "Historical progress snapshot at 08:28 before the two boundary cases completed. Its twelve detailed rows cover all performance-layer activity. The later immutable 14-case PASS is bound separately by ICB32_GATE14_20261111.json; unknown records are not toggle coverage or power approval.",
+  "final_gate_evidence": "handoff/team/evidence/ICB32_GATE14_20261111.json"
 }
