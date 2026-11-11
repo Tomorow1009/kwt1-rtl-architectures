@@ -38,3 +38,11 @@
 - **当前最后VNC命令为finish_live，可Up Return。** 若本地exec返回session先poll完成再读新截图；screenshot无expect-class。报告解包/预检已完成，不重复；尚无本地长任务。
 - 手抄annotation SHA曾把873eae误写873aee，第一次断言拒绝，逐字符修正后09:07以前已独立验证。一次PowerShell嵌套引号生成查询失败已改apply_patch；一次多文件patch锚点失败分开重做；以上不是硬件失败。旧失败/停止路径全部保留。
 - `progress_0858.py`、`progress_0910.py`已执行，`progress_0922.py`执行后也不可重复。新证据/本检查点待提交；持续同范围Git同步授权有效，未有自动审批拒绝。完成同步后继续工作，不发“等待你指示”的结束答复。
+
+## 09:30增量：最终请求准备命令和串行锁要求
+
+- 本检查点已提交并独立核对云端`1e09f2856d1dbb9a2029398e1ed4012f77994f66`。09:23:46实看仍L05，driver175706/PT wrapper176099；随后09:29截图保存在`takeover_local/icb32_finish_live_0929.png`。原队列继续，不重启。
+- 已准备但**没有执行**三个本地VNC文本：`icb32_final_request_prepare.txt`711字（只在原queue reports_ready后核原request SHA并排他新建reviewed request，加入delivery_sdc）；`icb32_final_request_history.txt`956字（加入旧37批量用户停止和8192诊断前提失败两项已核历史）；`icb32_final_report_launch.txt`682字（新包manifest核验、队列终态后使用新包launch）。全部小于1000字符。原request尚未生成，不能提前执行。
+- 两项历史路径已经再读证据确认：旧`light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_195108-63abe3d0b53d/runs/hex100_soc01`，37组后用户停止且功能TCM；本地`local_runs/icb32_sequence_fixture_20261111_010731_266143`是8192周期超时已进入计算的失败前提，4096修复后真实497序列通过。其它旧失败仍在交付索引/检查点，不当作新R4失败。
+- **最终大报告还须补齐共享锁持有方式再运行。** 新包launch和当前launch文本只检查队列终态，没有原子取得`.arch02_team_lock`；不能仅凭此在队友可能开始工作时启动大型VCD重审。可以用独立操作包装一层轻量锁持有器，复用964 `server_run.call`的child_pid/log记录，并只释放自己PID/host/bundle/session的锁；若子进程仍在或所有权变化则保留，不自动清其他锁。当前未实现/未上传该包装器，也未启动报告。保持单重任务要求，不因工具预检PASS就跳过这一步。
+- 已查看`icb32_batch.py`：按每个任务前后冻结哈希、一次ASIC编译、逐例输出回执、最终1200复核，batch_progress已有整体宿主耗时及剩余20%余量估计，不需要再加一套监测或推测芯片加速比。
