@@ -48,3 +48,13 @@
 - 本地三条unpack/preflight/locked_launch已Python AST/长度检查，193/585/773字符；其中前两条已执行通过，locked_launch未执行。一次内嵌shell引号检查命令失败，改用PowerShell单引号here-string后通过；无硬件改变。
 - 云端994d1157336b9c5474d8707dd2616e61cd0cb58d已于09:56独立ls-remote核对；本增量和小证据待新提交同步。`progress_1012.py`执行后不可重复。当前没有本地长任务，**最后VNC已恢复finish_live**、cwd964、窗口20971587。FileZilla已退出，未有CUA或completion_summary欠项。
 - 下一步继续原L08–L12→metrics14→1200。缺口仍是完整新功耗、最终1200、干净复现、最终汇总/提交；R1/旧8完整PPA次优先。不要新增EDA/大波形扫描与当前原队列抢锁，不重启旧作业。
+
+
+## 10:20增量：功耗8层完成；明确使用查询文本，勿用终端历史执行
+
+- **10:17:29.358582实际：原285397 running L09、completed=8、error=None；driver241591/PT wrapper241973。** L08为70.7083568mW、16.3454135124µJ；10:18:12已核前8层活动来源/设置一致。汇总仍不是12层均值。
+- 云端`0832f077276bdad750be49d9c01946e12d93f915`于10:12独立ls-remote核对通过；本次进度增量待再同步。锁包装器已经服务器4文件/2测试通过，**没有FTP阻塞，不要重复上传**。正式report/request尚未执行，原队列继续。
+- 10:14自动审批拒绝了“Up+Return”历史重执行，原因是历史内容未获确认、可能造成未授权副作用。已向用户说明，无需用户授权；随后读取并重新type明确的`icb32_finish_live.txt`只读查询，审批允许且10:14/10:17正常返回。**后续不再使用Up+Return，统一type已核验查询文本再Return。** 未停止或改变远端作业。
+- `icb32_finish_live.txt`已去掉已结束的旧gate PID209764，只查当前queue/child，873字符。`icb32_power_numbers_live.txt`改为每层总mW/µJ紧凑行及加权均值，并明确COMPLETE_12标记，772字符。`icb32_power_annotation_live.txt`改为SETTINGS顺序的三值tuple，988字符，方便完整12层显示；三者均AST/长度检查。后两种新紧凑版本尚未执行，均只读原小报告，不重扫VCD。
+- 当前最后VNC为旧版annotation_live；状态查询请重新type新版finish_live。FileZilla仍关闭，无本地长任务/无CUA。新报告启动入口仍只用`icb32_final_report_locked_launch.txt`，原prepare/history两步等终态后依次执行。
+- `progress_0954.py`、`progress_1012.py`、`progress_1020.py`均只执行一次，勿重复追加层记录。下一步原L09–L12→metrics14→final1200→reviewed request/locked report→交付；旧候选和官方未验项不变。

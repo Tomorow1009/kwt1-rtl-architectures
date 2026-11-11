@@ -1,3 +1,5 @@
+**10:20最新：功耗8/12完成，原队列L09继续；报告工具已全部服务器就绪。** 先读[09:56检查点的10:20增量](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)及有效计划；metrics14/1200/最终报告仍未执行。终端历史Up+Return曾被自动审批拒绝，已用明确只读文本查询解决，后续统一type查询再Return。当前最后VNC是annotation_live/cwd964，FileZilla关闭；持续原队列，不重复上传或作业。
+
 **10:12最新：功耗7/12完成，原队列L08继续；最终报告锁包装器已上传并服务器核验通过。** FileZilla已退出，所有报告工具就绪，正式导出仍等待原metrics14和1200完成。先读[09:56检查点的10:12增量](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)和有效计划；当前最后VNC是finish_live/cwd964。后续只用locked_launch，不使用旧无锁入口，继续执行。
 
 **09:56最新：功耗6/12完成，原队列L07继续；6层活动来源/设置已核对。** 新标准单元/SRAM模型身份已核，系统功耗仍未审定；最终1200/复现尚未执行。锁包装器09:50重试FTP仍421、未上传，FileZilla已退出。先读[09:56检查点](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)和有效计划，再继续原power12→metrics14→1200。最后VNC是annotation_live；最终报告只用新locked_launch，勿误用旧无锁入口。
