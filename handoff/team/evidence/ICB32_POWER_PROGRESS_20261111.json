@@ -1,11 +1,11 @@
 {
   "schema": "icb32-power-progress-v1",
-  "observed": "2026-11-11T10:17:29.358582+08:00",
+  "observed": "2026-11-11T10:28:04.057916+08:00",
   "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
   "queue": "runs/icb32_r4_finish01_queue",
   "queue_pid": 285397,
-  "running_stage": "icb32_r4_finish01_power_l09",
-  "completed_layers": 8,
+  "running_stage": "icb32_r4_finish01_power_l10",
+  "completed_layers": 9,
   "complete_12_layers": false,
   "system_power_verified": false,
   "source": "Existing queue layer_XX_numbers.json, visible VNC observations; full frozen reports remain on server",
@@ -49,9 +49,14 @@
       "layer": 8,
       "raw_total_w": "0.0707083568",
       "raw_energy_j": "0.0000163454135123918186400"
+    },
+    {
+      "layer": 9,
+      "raw_total_w": "0.0713076741",
+      "raw_energy_j": "0.0000164459249253373430070"
     }
   ],
-  "activity_sources_observed": "2026-11-11T10:18:12+08:00",
+  "activity_sources_observed": "2026-11-11T10:28:46+08:00",
   "activity_layers_reviewed": [
     1,
     2,
@@ -60,7 +65,8 @@
     5,
     6,
     7,
-    8
+    8,
+    9
   ],
   "activity_per_layer": {
     "nets": 362618,
@@ -114,5 +120,12 @@
       "count": 32,
       "each_w": "4.60310002e-05"
     }
+  },
+  "host_timing_observation": {
+    "observed": "2026-11-11T10:26:05.428035+08:00",
+    "completed_pt_stages": 8,
+    "mean_seconds": 799.541791375,
+    "remaining_4_whole_stages_plus_20_percent_seconds": 3837.8005986,
+    "not_overall_completion_eta": true
   }
 }
