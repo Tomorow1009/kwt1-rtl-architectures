@@ -1,0 +1,28 @@
+{
+  "schema": "icb32-locked-export-package-v1",
+  "observed": "2026-11-11T10:09:09+08:00",
+  "source_commit": "ff181611dfaab7923546963e8411a7f1bbb781ee",
+  "package": "light-light126-icb32-export-lock-20261111_093509-ff181611dfaa",
+  "files": 4,
+  "zip_bytes": 4777,
+  "zip_sha256": "aab947a1a6a9939ad432bbc28f1f8b51a9221b3357ba344343a3450a4df8e573",
+  "manifest_sha256": "aa979998df77370f5bd4bcbabe24bacc20a4b4c31a382d6d74d4b0d8381b5380",
+  "transfer": "Linux FileZilla normal existing site, successful upload and empty queue; disconnected and exited",
+  "server_parent": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles",
+  "server_safe_unpack_zip_sha256_verified": true,
+  "server_manifest_and_four_files_verified": true,
+  "server_tool_tests_passed": 2,
+  "tests_scope": "Own lock release, live child and foreign owner retention, unexpected lock content retention",
+  "report_export_started": false,
+  "target_report_package": "light-light126-icb32-report-20261111_091554-cedb648f3b74",
+  "runtime_bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "operation_session": "icb32_r4_export01",
+  "report_output": "runs/icb32_r4_final_report01",
+  "preconditions": [
+    "Original power12, metrics14 and final1200 queue complete with report request hash",
+    "New reviewed request bound to original, with precise delivery SDC and actual history",
+    "No existing operation/output directory; acquire shared team lock atomically"
+  ],
+  "historical_upload_attempts": "421 too many connected users at 09:37 and 09:50; packages unchanged, no partial upload; normal retry succeeded about 10:08",
+  "does_not_approve_hardware_power_or_timing": true
+}

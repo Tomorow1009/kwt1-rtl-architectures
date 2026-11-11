@@ -68,3 +68,6 @@ R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层
 09:22当前队列已完成4层功耗，L05运行中。新报告工具包身份、完整恢复入口见[最新检查点](../../CONTEXT_CHECKPOINT_20261111_0922_ICB32.md)；大报告尚未运行，等待原metrics14和1200结束后再导出。
 
 最终大报告使用独立操作脚本`icb32_export_locked.py --package <新报告工具包> --manifest-sha256 <包manifest SHA> --session <新的操作会话>`。它要求原队列完整结束、原/审阅请求绑定且已补历史与精确SDC，再原子取得同一个`.arch02_team_lock`，记录报告子进程和日志。只释放自己PID/host/bundle/session的锁；子进程仍在或所有权变化时保留供检查。报告输出和操作会话均禁止原地重试。当前本地两项锁归属检查通过，包装器尚未上传，不能直接运行无锁的大报告launch。
+
+
+10:12更新：原唯一队列285397已完成功耗7层、当前L08，仍自动接续metrics14和最终1200。锁包装器ff181包已在10:08正常FileZilla上传，安全解包/manifest/4文件与2项服务器检查通过，见[操作包证据](../../handoff/team/evidence/ICB32_LOCKED_EXPORT_PACKAGE_20261111.json)。正式导出尚未启动；不能提前执行原queue尚未生成的报告请求。新本地入口`takeover_local/icb32_final_report_locked_launch.txt`只启动这个包装器，旧无锁final_report_launch仍禁止使用。

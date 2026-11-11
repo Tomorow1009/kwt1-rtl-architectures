@@ -7,7 +7,7 @@
 - **09:52:22.478346实际：唯一queue285397 running `icb32_r4_finish01_power_l07`，completed=6、error=None，driver198924/PT wrapper199532。** L06为71.4343694mW、16.4733024292µJ；目前不是12层均值。09:54:05轻量核对L01–L06的原活动报告，均362618网exact、未标注0，设置averaged/X0.5/initial-Xfalse。
 - e65真实ASIC14、354816输出及IRQ/WFI；497真实CPU竞争/恢复；同网表门级14、354816输出及12完整活动均已通过。平均34616周期、150MHz折算4333.256task/s，5000未达。新最终1200还未执行，不能继承旧fcd PASS。
 - e65综合DC精确周期6.666666ns，setup+0.0000715256ns、hold+0.000253469ns；224宏，无锁存器/环，新增面积保守上界0.9265616712mm²。稳定任务模式的完整说明和未审范围保留，物理签核不在本轮范围。
-- 09:51:07核对实际新综合的标准单元/SRAM库回执哈希。标准Liberty为5d236b15…；两种SRAM为已固定68bd174a…/a75e37ed…，各80 internal_power组、4非零条件泄漏组、1mW泄漏单位。3个当前DB与原source_inputs全部一致，未启动新EDA。新证据`handoff/team/evidence/ICB32_POWER_PROGRESS_20261111.json`。
+- 09:51:07核对实际新综合的标准单元/SRAM库回执哈希。标准Liberty为5d236b15…；两种SRAM为已固定68bd174a…/a75e37ed…，各80 internal_power组、4非零双电源泄漏组、1mW泄漏单位。3个当前DB与原source_inputs全部一致，未启动新EDA。新证据`handoff/team/evidence/ICB32_POWER_PROGRESS_20261111.json`。
 - 精确交付SDC已在964 `runs/icb32_delivery_sdc01`生成，receipt SHA7777a8850e91d5283cfd3093bd59173fce3285de01f4a583d0ff16d449850dbb、SDC SHA9f49557c4aee558232cdb90f65c50ef6264250eb1f9c61e95747394e0348195d；不要重复导出。原PT使用6.66667ns序列化SDC，历史结果没重算。
 - 当前工具/文档修改只更新交付说明和阶段证据，未改RTL/固件/运行包。新最终报告尚未运行；系统功耗仍false，不能因模型存在或映射完整而自动解除未知活动限制。
 
@@ -37,3 +37,14 @@
 - PowerShell ConvertFrom-Json因实际禁用弧键C/c冲突读失败，已用Python正确读取。一次Alt_L+F2被helper拒绝，改为`--keys Alt_L F2`后成功。一次patch同文件delete/add被拒绝，改建独立locked_launch文件；均未影响服务器或硬件。
 - `progress_0954.py`已执行，不能重复；09:54文档中的观察时间均取09:52实际。新README/设计/功耗/验收/交付索引已同步事实，未重新测试无改动硬件。
 - 后续仍缺：余6层功耗、metrics14、1200、最终报告/交付；R1/旧8完整PPA为次优先，官方600、布局后及物理签核未验证。18:00冻结、11/12 17:16交付准备、用户11/13晚上截止不变。
+
+
+## 10:12增量：功耗7层完成，锁包装器已服务器就绪
+
+- **10:10:19.302199实际：原285397仍running，L08、completed=7、error=None；driver217238/PT wrapper217567。** L07为71.0550174mW、16.3762850726µJ。10:09:55全部已完成7层的活动来源/设置均复核通过；未知状态影响未自动批准。
+- 10:03:20轻量读取首层全部宏泄漏：96小宏各4.88099977e-06W，128大宏各4.60310002e-05W，与固定库默认双电源组吻合；不是0，计数按新网表。证据已加到ICB32_POWER_PROGRESS_20261111.json。还补首层互斥模块表，仅解释构成，不当12层均值。文档泄漏组措辞改为4个非零双电源组（包含默认/条件），未改原库或数值。
+- **FTP障碍已解决。** 10:06现有站点正常连接，10:08上传4777B锁包装器ZIP成功、队列空，Ctrl+D/Q关闭后确认FileZilla窗口消失。10:08服务器安全解包ZIP SHA通过，10:09:09 manifest/4文件SHA和两项锁工具检查通过。包身份仍ff181/aab947a1…/aa979998…，不用重传、不再重复解包。
+- 独立回执`handoff/team/evidence/ICB32_LOCKED_EXPORT_PACKAGE_20261111.json`。当前报告工具cedb、精确SDC、锁包装器全部在服务器准备好，**正式报告尚未启动**。原request/reviewed request均须等queue终态，不得现在执行。届时用`icb32_final_request_prepare.txt`→`icb32_final_request_history.txt`→**`icb32_final_report_locked_launch.txt`**；这三个是依赖顺序，不能并行。旧`icb32_final_report_launch.txt`禁止使用。
+- 本地三条unpack/preflight/locked_launch已Python AST/长度检查，193/585/773字符；其中前两条已执行通过，locked_launch未执行。一次内嵌shell引号检查命令失败，改用PowerShell单引号here-string后通过；无硬件改变。
+- 云端994d1157336b9c5474d8707dd2616e61cd0cb58d已于09:56独立ls-remote核对；本增量和小证据待新提交同步。`progress_1012.py`执行后不可重复。当前没有本地长任务，**最后VNC已恢复finish_live**、cwd964、窗口20971587。FileZilla已退出，未有CUA或completion_summary欠项。
+- 下一步继续原L08–L12→metrics14→1200。缺口仍是完整新功耗、最终1200、干净复现、最终汇总/提交；R1/旧8完整PPA次优先。不要新增EDA/大波形扫描与当前原队列抢锁，不重启旧作业。
