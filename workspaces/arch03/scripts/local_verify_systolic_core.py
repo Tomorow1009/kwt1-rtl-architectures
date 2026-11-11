@@ -36,7 +36,7 @@ def run(argv, cwd, log):
     return text
 
 
-def tile16(source, target):
+def tile16(source, target, layout_id=2):
     layout = json.loads((source / 'layout.json').read_text())
     for name, digest in layout['sha256'].items():
         if sha(source / name) != digest:
@@ -68,11 +68,27 @@ def tile16(source, target):
             new_idx = 6336 + (column >> 4) * 1072 + 1024 + (column & 15) * 3 + part
             if old[old_idx] != words[new_idx] or (part == 2 and words[new_idx] > 255):
                 raise ValueError('Tile16 bias coordinate/padding mismatch')
+    if layout_id == 3:
+        words = words[6336:7408]+words[:6336]+words[7408:]
+        # Check the new stream against original matrix coordinates, independently
+        # of the concatenation above and without round-tripping the encoder.
+        for row in range(99):
+            for k in range(64):
+                if words[1072+row*64+k] != old[row*64+k]:
+                    raise ValueError('V3 X coordinate mismatch')
+        for column in range(256):
+            start=0 if column<16 else 7408+(column//16-1)*1072
+            for k in range(64):
+                if words[start+k*16+column%16] != old[6336+(column//8)*536+k*8+column%8]:
+                    raise ValueError('V3 W coordinate mismatch')
+            for part in range(3):
+                if words[start+1024+(column%16)*3+part] != old[6336+(column//8)*536+512+(column%8)*3+part]:
+                    raise ValueError('V3 bias coordinate mismatch')
     target.mkdir(parents=True)
     (target / 'load.hex').write_text(''.join('%04x\n' % x for x in words), encoding='ascii')
     for name in ('expected.npz', 'total.hex', 'result.hex', 'saturated.hex'):
         shutil.copyfile(source / name, target / name)
-    result = dict(schema='arch03-core-tile16-v1', shift=layout['shift'],
+    result = dict(schema='arch03-core-tile16-v1', layout=layout_id, shift=layout['shift'],
                   load_words=23488, outputs=25344, source_layout_sha256=sha(source / 'layout.json'),
                   sha256={p.name: sha(p) for p in target.iterdir()})
     (target / 'layout.json').write_text(json.dumps(result, indent=2), encoding='utf8')
@@ -83,6 +99,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--vivado-bin', required=True)
     ap.add_argument('--read-latency', type=int, choices=[1,2], default=1)
+    ap.add_argument('--layout', type=int, choices=[2,3], default=2)
     ap.add_argument('--backend', choices=['behavioral', 'pin_mock'], default='pin_mock')
     ap.add_argument('--cases', nargs='+', default=['layer_%02d' % i for i in range(1, 13)] + ['extremes', 'rounding'])
     ap.add_argument('--prefetch', type=int, nargs='+', choices=[0, 1], default=[0, 1])
@@ -99,7 +116,7 @@ def main():
         report = prepare(ROOT / 'architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001', source)
         (folder / 'software.json').write_text(json.dumps(report, indent=2), encoding='utf8')
     for name in sorted(set(args.cases + ['layer_01', 'layer_12'])):
-        tile16(source / name, folder / 'tile16' / name)
+        tile16(source / name, folder / 'tile16' / name, args.layout)
     files = [A2 / 'rtl/requantize.sv', A2 / 'arch02/rtl/sram_port.sv',
              A3 / 'rtl/arch03_systolic5x16.sv', A3 / 'rtl/arch03_linear16x5_systolic.sv', A3 / 'tb/tb_arch03_linear16x5_systolic.sv']
     define = 'ARCH02_BEHAVIORAL'
@@ -139,6 +156,8 @@ def main():
             opts.write_text('linear16\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg OUTPUT_FILE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg JITTER=%d\n-testplusarg REPEATS=%d\n-testplusarg SECOND_DATA_DIR=%s\n-testplusarg SECOND_SHIFT=%d\n' % (
                 task.as_posix(), capture.as_posix(), layout['shift'], prefetch, args.jitter, args.repeats,
                 second.as_posix(), second_layout['shift']), encoding='ascii')
+            with opts.open('a') as output:
+                output.write('-testplusarg LAYOUT=%d\n' % args.layout)
             text = run([tool('xsim'), '-f', opts], folder, tag + '.log')
             matches = re.findall(r'SYSTOLIC_B_CORE_PASS task=(\d+) outputs=25344 cycles=(\d+) prefetch=(\d+) overlap=(\d+) stalls=(\d+)', text)
             if len(matches) != args.repeats or 'SYSTOLIC_B_CORE_SUITE_PASS tasks=%d' % args.repeats not in text:
@@ -167,7 +186,7 @@ def main():
     for path, digest in hashes.items():
         if sha(path) != digest:
             raise ValueError('Source changed during run: ' + path)
-    summary = dict(status='passed', row_lanes=5, read_latency=args.read_latency, cpu_executed=False, dma_executed=False, backend=args.backend,
+    summary = dict(status='passed', row_lanes=5, layout=args.layout, read_latency=args.read_latency, cpu_executed=False, dma_executed=False, backend=args.backend,
                    jitter=args.jitter, tasks=len(results), outputs=25344 * len(results), cases=results,
                    cancel_phases=5, malformed_bias_recovery=True, consecutive_tasks=args.repeats,
                    source_sha256={Path(p).relative_to(ROOT).as_posix(): h for p, h in hashes.items()})

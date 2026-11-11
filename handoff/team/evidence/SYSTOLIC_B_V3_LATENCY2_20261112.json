@@ -1,0 +1,261 @@
+{
+  "scope": "local_pin_mock_no_cpu_no_dma",
+  "production_RTL_changed": false,
+  "summary_path": "local_runs/arch03_systolic_b_20261112_013329_596203_pin_mock/summary.json",
+  "summary_sha256": "0c02c8776c3df7dd276665cc0780a7fb4c617453ea141776f9b6f6f6ab5f6cf6",
+  "summary": {
+    "status": "passed",
+    "row_lanes": 5,
+    "layout": 3,
+    "read_latency": 2,
+    "cpu_executed": false,
+    "dma_executed": false,
+    "backend": "pin_mock",
+    "jitter": 1,
+    "tasks": 18,
+    "outputs": 456192,
+    "cases": [
+      {
+        "case": "layer_01",
+        "task": 0,
+        "prefetch": 0,
+        "cycles": 39572,
+        "overlap": 601,
+        "output_stalls": 15550,
+        "outputs": 25344,
+        "capture": "layer_01_pf0.0.csv",
+        "capture_sha256": "ba9ca58ea90a849f2473c86d28bccf5ac216c7b3787d801827a452c398b8d72e",
+        "layout_sha256": "8834b8e23ab783570b210f9242eb89aa079ad3263197e51ebebe4664207cf769"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 0,
+        "cycles": 39670,
+        "overlap": 606,
+        "output_stalls": 15439,
+        "outputs": 25344,
+        "capture": "layer_01_pf0.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "layer_01",
+        "task": 2,
+        "prefetch": 0,
+        "cycles": 39848,
+        "overlap": 607,
+        "output_stalls": 15815,
+        "outputs": 25344,
+        "capture": "layer_01_pf0.2.csv",
+        "capture_sha256": "ba9ca58ea90a849f2473c86d28bccf5ac216c7b3787d801827a452c398b8d72e",
+        "layout_sha256": "8834b8e23ab783570b210f9242eb89aa079ad3263197e51ebebe4664207cf769"
+      },
+      {
+        "case": "layer_01",
+        "task": 0,
+        "prefetch": 1,
+        "cycles": 32972,
+        "overlap": 4645,
+        "output_stalls": 15806,
+        "outputs": 25344,
+        "capture": "layer_01_pf1.0.csv",
+        "capture_sha256": "ba9ca58ea90a849f2473c86d28bccf5ac216c7b3787d801827a452c398b8d72e",
+        "layout_sha256": "8834b8e23ab783570b210f9242eb89aa079ad3263197e51ebebe4664207cf769"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 1,
+        "cycles": 32943,
+        "overlap": 4624,
+        "output_stalls": 15498,
+        "outputs": 25344,
+        "capture": "layer_01_pf1.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "layer_01",
+        "task": 2,
+        "prefetch": 1,
+        "cycles": 32977,
+        "overlap": 4462,
+        "output_stalls": 15658,
+        "outputs": 25344,
+        "capture": "layer_01_pf1.2.csv",
+        "capture_sha256": "ba9ca58ea90a849f2473c86d28bccf5ac216c7b3787d801827a452c398b8d72e",
+        "layout_sha256": "8834b8e23ab783570b210f9242eb89aa079ad3263197e51ebebe4664207cf769"
+      },
+      {
+        "case": "extremes",
+        "task": 0,
+        "prefetch": 0,
+        "cycles": 39572,
+        "overlap": 601,
+        "output_stalls": 15550,
+        "outputs": 25344,
+        "capture": "extremes_pf0.0.csv",
+        "capture_sha256": "07c5edb62e3d01b331807cdbff36dde36e2af2190e50a45db0d7425d89e54a48",
+        "layout_sha256": "2c184657220e32d6ee7b39af8b5beaaf4384e58812890c06edd0f41676caa066"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 0,
+        "cycles": 39670,
+        "overlap": 606,
+        "output_stalls": 15439,
+        "outputs": 25344,
+        "capture": "extremes_pf0.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "extremes",
+        "task": 2,
+        "prefetch": 0,
+        "cycles": 39848,
+        "overlap": 607,
+        "output_stalls": 15815,
+        "outputs": 25344,
+        "capture": "extremes_pf0.2.csv",
+        "capture_sha256": "07c5edb62e3d01b331807cdbff36dde36e2af2190e50a45db0d7425d89e54a48",
+        "layout_sha256": "2c184657220e32d6ee7b39af8b5beaaf4384e58812890c06edd0f41676caa066"
+      },
+      {
+        "case": "extremes",
+        "task": 0,
+        "prefetch": 1,
+        "cycles": 32972,
+        "overlap": 4645,
+        "output_stalls": 15806,
+        "outputs": 25344,
+        "capture": "extremes_pf1.0.csv",
+        "capture_sha256": "07c5edb62e3d01b331807cdbff36dde36e2af2190e50a45db0d7425d89e54a48",
+        "layout_sha256": "2c184657220e32d6ee7b39af8b5beaaf4384e58812890c06edd0f41676caa066"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 1,
+        "cycles": 32943,
+        "overlap": 4624,
+        "output_stalls": 15498,
+        "outputs": 25344,
+        "capture": "extremes_pf1.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "extremes",
+        "task": 2,
+        "prefetch": 1,
+        "cycles": 32977,
+        "overlap": 4462,
+        "output_stalls": 15658,
+        "outputs": 25344,
+        "capture": "extremes_pf1.2.csv",
+        "capture_sha256": "07c5edb62e3d01b331807cdbff36dde36e2af2190e50a45db0d7425d89e54a48",
+        "layout_sha256": "2c184657220e32d6ee7b39af8b5beaaf4384e58812890c06edd0f41676caa066"
+      },
+      {
+        "case": "rounding",
+        "task": 0,
+        "prefetch": 0,
+        "cycles": 39572,
+        "overlap": 601,
+        "output_stalls": 15550,
+        "outputs": 25344,
+        "capture": "rounding_pf0.0.csv",
+        "capture_sha256": "70ac2410c52d537e601d69cc251b4a70b626880f8694d1a98db6d6e21ba96458",
+        "layout_sha256": "a24b1d4c607dbdaae699654e54cc39fa62a8c853625b0e9f2b59a36d353ac348"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 0,
+        "cycles": 39670,
+        "overlap": 606,
+        "output_stalls": 15439,
+        "outputs": 25344,
+        "capture": "rounding_pf0.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "rounding",
+        "task": 2,
+        "prefetch": 0,
+        "cycles": 39848,
+        "overlap": 607,
+        "output_stalls": 15815,
+        "outputs": 25344,
+        "capture": "rounding_pf0.2.csv",
+        "capture_sha256": "70ac2410c52d537e601d69cc251b4a70b626880f8694d1a98db6d6e21ba96458",
+        "layout_sha256": "a24b1d4c607dbdaae699654e54cc39fa62a8c853625b0e9f2b59a36d353ac348"
+      },
+      {
+        "case": "rounding",
+        "task": 0,
+        "prefetch": 1,
+        "cycles": 32972,
+        "overlap": 4645,
+        "output_stalls": 15806,
+        "outputs": 25344,
+        "capture": "rounding_pf1.0.csv",
+        "capture_sha256": "70ac2410c52d537e601d69cc251b4a70b626880f8694d1a98db6d6e21ba96458",
+        "layout_sha256": "a24b1d4c607dbdaae699654e54cc39fa62a8c853625b0e9f2b59a36d353ac348"
+      },
+      {
+        "case": "layer_12",
+        "task": 1,
+        "prefetch": 1,
+        "cycles": 32943,
+        "overlap": 4624,
+        "output_stalls": 15498,
+        "outputs": 25344,
+        "capture": "rounding_pf1.1.csv",
+        "capture_sha256": "21d37f680f5f033cd4d4558f61a7fea5890d410b8c7000d24f39055907951a75",
+        "layout_sha256": "ad82da0fc3aa438483c3d66bb2e22201c769d632c90874ca6109cbb687855003"
+      },
+      {
+        "case": "rounding",
+        "task": 2,
+        "prefetch": 1,
+        "cycles": 32977,
+        "overlap": 4462,
+        "output_stalls": 15658,
+        "outputs": 25344,
+        "capture": "rounding_pf1.2.csv",
+        "capture_sha256": "70ac2410c52d537e601d69cc251b4a70b626880f8694d1a98db6d6e21ba96458",
+        "layout_sha256": "a24b1d4c607dbdaae699654e54cc39fa62a8c853625b0e9f2b59a36d353ac348"
+      }
+    ],
+    "cancel_phases": 5,
+    "malformed_bias_recovery": true,
+    "consecutive_tasks": 3,
+    "source_sha256": {
+      "workspaces/arch02/rtl/requantize.sv": "7ca0d77fd93b968fe38660bd98f797b9112ede6905a48fbaa7987465c0127e61",
+      "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "workspaces/arch03/rtl/arch03_systolic5x16.sv": "93a49cb8edee67e452b1ed8c055b3c4d0c1c03bd9ae4f9b6cfe2015ab55a3643",
+      "workspaces/arch03/rtl/arch03_linear16x5_systolic.sv": "1757c4fd4c4146667a17d4d73d00aa720025ee0090b33a5e7018b4f83d895c13",
+      "workspaces/arch03/tb/tb_arch03_linear16x5_systolic.sv": "8ff7e6e6f2d286ea7d34a495894a94e8606daf4773869a1b97ada38e3c8cfba3",
+      "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+      "workspaces/arch03/scripts/local_verify_systolic_core.py": "308cfd933b4a1fbb57507481df9cebbbd98c6ae2cdf2ad18b4447b8b3d29ddf1",
+      "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+      "local_runs/arch03_systolic_b_20261112_013329_596203_pin_mock/arch02_sram_config.vh": "2c27538c9af6dc5081c6950248808bc97e808733462c06d145646413c51361be"
+    }
+  },
+  "failed_fixture_attempts": [
+    {
+      "run": "local_runs/arch03_systolic_b_20261112_012715_654959_pin_mock",
+      "status": "actively_stopped_old_v2_cancel_wait"
+    },
+    {
+      "run": "local_runs/arch03_systolic_b_20261112_013224_588739_pin_mock",
+      "status": "failed_old_immediate_error_assertion"
+    }
+  ]
+}

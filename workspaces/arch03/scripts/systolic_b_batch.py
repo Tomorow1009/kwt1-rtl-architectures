@@ -6,6 +6,7 @@ old DMA16/functional-TCM batch PASS can be imported by this entry point.
 """
 import datetime
 import math
+import shutil
 import time
 from pathlib import Path
 
@@ -15,12 +16,25 @@ import systolic_b_data as data
 import systolic_b_soc as soc
 
 
+def storage_guard(run,remaining,observed_max=8*1024*1024):
+    # Per-task receipts include boot images and all integer reference/output
+    # files. Keep 20% headroom plus 2 GiB for unrelated shared-server activity.
+    free=shutil.disk_usage(str(run)).free
+    required=math.ceil(remaining*observed_max*1.2)+2*1024**3
+    receipt=dict(free_bytes=free,remaining_tasks=remaining,
+        maximum_case_bytes=observed_max,margin=1.2,reserve_bytes=2*1024**3,required_bytes=required)
+    save(Path(run)/'storage_budget.json',receipt)
+    data.require(free>=required,'Insufficient space for B batch with 20% margin; evidence retained')
+    return receipt
+
+
 def verify(cfg,run,platform_source,dataset,call):
     run,dataset=Path(run),Path(dataset).resolve()
     data.require(dataset.is_dir(),'Missing pinned 100-sample dataset')
     # Reject the old 37-case batch or any changed sample list before compiling.
     tasks=index_legacy_dataset(dataset)
     data.require(len(tasks)==1200,'Expected exactly 1200 tasks')
+    storage_guard(run,1200)
     contract,compile_receipt,fw,base=soc.compile_design(cfg,run,platform_source,call)
     data.require(contract.get('diagnostic') is None and contract['row_lanes']==5 and
         contract['layout_id'] in (0x00100002,0x00100003) and fw['configuration']['irq_enabled'],
@@ -36,7 +50,7 @@ def verify(cfg,run,platform_source,dataset,call):
         cold_task_boot=True,cross_task_prefetch=False,large_waveforms=False,
         started_utc=datetime.datetime.utcnow().isoformat()+'Z')
     save(run/'batch_identity.json',identity)
-    identity_sha=sha(run/'batch_identity.json');started=time.monotonic();results=[]
+    identity_sha=sha(run/'batch_identity.json');started=time.monotonic();results=[];case_bytes_max=0
     for task in tasks:
         case_run=run/'cases'/task['key'];case_run.mkdir(parents=True,exist_ok=False)
         soc.verify_frozen(contract)
@@ -52,6 +66,8 @@ def verify(cfg,run,platform_source,dataset,call):
             cycles=result['task_window']['cycles'],encoded_bytes=result['task_window']['encoded_bytes'],
             host_seconds=result['host_elapsed_seconds'],
             receipt=str((case_run/'receipt.json').relative_to(run)),receipt_sha256=sha(case_run/'receipt.json')))
+        case_bytes_max=max(case_bytes_max,sum(p.stat().st_size for p in case_run.rglob('*') if p.is_file()))
+        storage_guard(run,1200-len(results),case_bytes_max)
         elapsed=time.monotonic()-started
         remaining=(1200-len(results))*elapsed/len(results)
         save(run/'batch_progress.json',dict(status='running',completed=len(results),failed=0,

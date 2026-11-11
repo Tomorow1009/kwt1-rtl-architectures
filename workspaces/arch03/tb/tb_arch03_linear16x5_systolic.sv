@@ -23,9 +23,9 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
     reg [48:0] held_payload;
     reg [1:0] x_boundary_seen=0;
     reg [15:0] tile_seen=0;
-    integer prefetch_arg=1,jitter=1,shift_arg=12,probes=1,repeats=2,first_shift=12,second_shift=12;
+    integer prefetch_arg=1,jitter=1,shift_arg=12,probes=1,repeats=2,first_shift=12,second_shift=12,layout_arg=2;
     integer cycles=0,words=0,outputs=0,mac_updates=0,overlap=0,stall_cycles=0;
-    integer idx,i,j,fd,task_run,probe,probe_words,blocked=0;
+    integer idx,i,j,fd,task_run,probe,probe_words,blocked=0,settle;
     integer pair,slot,blocks=0,last_reserve=0,continuous_intervals=0;
     string data_dir,first_dir,second_dir,capture_path,output_file;
     reg [8191:0] filename;
@@ -127,7 +127,10 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
             while(n<count) begin
                 if(jitter && rng[4:3]==0) begin load_valid=0;@(negedge clk);end
                 take=jitter ? 1+(rng[6:5]) : 4;
-                if(n<6336) remain=6336-n;
+                if(layout_v3 && n<1024) remain=1024-n;
+                else if(layout_v3 && n<1072) remain=1072-n;
+                else if(layout_v3 && n<7408) remain=7408-n;
+                else if(n<6336) remain=6336-n;
                 else begin phasepos=(n-6336)%1072;remain=phasepos<1024 ? 1024-phasepos : 1072-phasepos;end
                 if(take>remain) take=remain;
                 if(take>count-n) take=count-n;
@@ -161,6 +164,9 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
         if(!$value$plusargs("PREFETCH=%d",prefetch_arg)) prefetch_arg=1;
         if(!$value$plusargs("JITTER=%d",jitter)) jitter=1;
         if(!$value$plusargs("SHIFT=%d",shift_arg)) shift_arg=12;
+        if(!$value$plusargs("LAYOUT=%d",layout_arg)) layout_arg=2;
+        if(layout_arg!=2 && layout_arg!=3)$fatal(1,"Unsupported core layout");
+        layout_v3=layout_arg==3;
         first_shift=shift_arg;first_dir=data_dir;
         if(!$value$plusargs("SECOND_DATA_DIR=%s",second_dir)) second_dir=data_dir;
         if(!$value$plusargs("SECOND_SHIFT=%d",second_shift)) second_shift=shift_arg;
@@ -173,10 +179,10 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
             for(probe=0;probe<5;probe=probe+1) begin
                 begin_task();
                 case(probe)
-                    0: probe_words=17;
-                    1: probe_words=6371;
-                    2: probe_words=7362;
-                    default: probe_words=7408;
+                    0: probe_words=layout_v3 ? 1107 : 17;
+                    1: probe_words=layout_v3 ? 17 : 6371;
+                    2: probe_words=layout_v3 ? 1026 : 7362;
+                    default: probe_words=layout_v3 ? 1392 : 7408;
                 endcase
                 send_words(probe_words);
                 if(probe==3) while(dut.issue_k<32) @(negedge clk);
@@ -185,19 +191,23 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
             end
             if(prefetch_arg) begin
                 begin_task();send_words(8480);
+                for(settle=0;settle<16 && dut.bank_valid!==2'b11;settle=settle+1)@(negedge clk);
                 if(dut.bank_valid!==2'b11) $fatal(1,"SYSTOLIC_B prefetch cancel probe missing valid banks");
                 do_cancel();$display("SYSTOLIC_B_PREFETCH_CANCEL_PASS");
             end
-            begin_task();send_words(7408);while(!out_valid) @(negedge clk);
+            begin_task();send_words(layout_v3 ? 1392 : 7408);while(!out_valid) @(negedge clk);
             rst_n=0;repeat(3) @(negedge clk);
             if(start_ready || load_ready || out_valid || busy || done || error) $fatal(1,"SYSTOLIC_B reset interface active");
             rst_n=1;@(negedge clk);
             if(!start_ready || busy || error) $fatal(1,"SYSTOLIC_B reset recovery");
             $display("SYSTOLIC_B_RESET_PASS");
-            expect_error=1;begin_task();send_words(7362);
+            expect_error=1;begin_task();send_words(layout_v3 ? 1026 : 7362);
             load_valid=1;load_count=1;load_data=16'hff00;
             @(posedge clk);while(!load_ready) @(posedge clk);
             @(negedge clk);load_valid=0;
+            // v3 accepts into an eight-element stash before consuming the
+            // malformed bias. Require bounded rejection after real acceptance.
+            for(settle=0;settle<16 && !error;settle=settle+1)@(negedge clk);
             if(!error || busy || start_ready || out_valid || load_ready) $fatal(1,"SYSTOLIC_B bad-bias rejection");
             repeat(5) @(negedge clk);if(!error) $fatal(1,"SYSTOLIC_B error not sticky");
             do_cancel();expect_error=0;$display("SYSTOLIC_B_BAD_BIAS_PASS");
@@ -216,7 +226,8 @@ module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
             if(words!=23488 || outputs!=25344 || mac_updates!=101376 || blocks!=320 || tile_seen!=16'hffff)
                 $fatal(1,"SYSTOLIC_B count/coverage words=%0d outputs=%0d mac=%0d",words,outputs,mac_updates);
             if(prefetch_arg && overlap==0) $fatal(1,"SYSTOLIC_B no prefetch overlap observed");
-            if(!prefetch_arg && overlap!=0) $fatal(1,"SYSTOLIC_B unexpected prefetch overlap");
+            // v3 overlaps X loading with early computation independently of W prefetch.
+            if(!layout_v3 && !prefetch_arg && overlap!=0) $fatal(1,"SYSTOLIC_B unexpected prefetch overlap");
             if(jitter && stall_cycles==0) $fatal(1,"SYSTOLIC_B no output backpressure exercised");
             $fclose(fd);checking=0;allow_output=0;
             $display("SYSTOLIC_B_CORE_PASS task=%0d outputs=25344 cycles=%0d prefetch=%0d overlap=%0d stalls=%0d",task_run,cycles,prefetch_arg,overlap,stall_cycles);

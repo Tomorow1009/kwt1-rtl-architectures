@@ -2668,7 +2668,7 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "resumed_v3_validation_tools_and_upload",
+    "status": "v3_asic14_passed_synthesis_running",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
@@ -2679,18 +2679,18 @@
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
-    "new_asic_verified": false,
+    "new_asic_verified": true,
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Continue existing ASIC14 PID67766; commit/package independent diagnostic and batch tools without changing RTL. Then new v3 synthesis and SAIF/gate/PPA.",
+    "next": "Commit and upload combined diagnostics/gate/SAIF tools; keep synthesis75738; queue only new B validations after its exact completion, no final1200 before freeze.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T00:58:26+08:00",
-      "free_GiB": 14.411,
-      "team_lock": "absent",
+      "time": "2026-11-12T01:36:40+08:00",
+      "free_GiB": 27.75,
+      "team_lock": "held_by_systolic_b_v3_synth01",
       "old_L02": {
         "status": "passed",
         "pid": 323693,
@@ -2699,7 +2699,13 @@
       },
       "new_B_job_started": true,
       "other_processes_not_yet_audited": false,
-      "EDA_processes": []
+      "EDA_processes": [
+        {
+          "driver_pid": 75738,
+          "child_pid": 79637,
+          "tool": "dc_shell"
+        }
+      ]
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2750,7 +2756,7 @@
     },
     "baseline_v2_asic_verified": true,
     "v3_firmware_compiled_and_verified": true,
-    "current_v3_cpu_executed": false,
+    "current_v3_cpu_executed": true,
     "local_jobs_running": [],
     "local_v3_selected": {
       "mean_cycles": 30502.333333333332,
@@ -2764,7 +2770,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+    "cloud_commit": "c4d8cf0f338fa3ba7f2aa5e3d4e1a3eeb2bfaf7f",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2782,12 +2788,34 @@
     "v3_asic14": {
       "session": "systolic_b_v3_first01",
       "stage": "systolic_b_soc",
-      "pid": 67766,
+      "pid": null,
+      "status": "passed",
+      "observed": "2026-11-12T01:13:08+08:00",
+      "cases": 14,
+      "lock_matches": null,
+      "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+      "finished": "2026-11-12T01:11:55.771680",
+      "outputs": 354816,
+      "mean_cycles": 30502.333333333332,
+      "irq_wfi_all_pass": true,
+      "host_case_seconds": 48.04762985697016,
+      "summary_sha256": "614d9f605996c9dfb302add53254461c62d7ec3c295fdc003c7964b6233a5d5d"
+    },
+    "v3_synthesis": {
+      "session": "systolic_b_v3_synth01",
+      "stage": "systolic_b_synth",
+      "pid": 75738,
       "status": "running",
-      "observed": "2026-11-12T01:09:59.323202+08:00",
-      "cases": 0,
-      "lock_matches": true,
-      "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86"
+      "observed": "2026-11-12T01:31:34+08:00",
+      "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+      "child_pid": 79637
+    },
+    "v3_latency2_local": {
+      "status": "passed",
+      "tasks": 18,
+      "outputs": 456192,
+      "cpu_executed": false,
+      "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_LATENCY2_20261112.json"
     }
   }
 }

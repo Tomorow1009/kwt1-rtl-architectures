@@ -28,7 +28,8 @@ def main():
     global encode,decode
     if args.layout==3:
         from systolic_b_codec import encode,decode
-    if args.gate_monitor or args.activity:raise ValueError("B gate/SAIF paths require separate integration; disabled in this fixture")
+    if args.activity:raise ValueError("B activity requires the independently verified SAIF path")
+    if args.gate_monitor and args.layout!=3:raise ValueError('B gate observer explicitly binds v3 only')
     if args.activity and (len(args.cases)!=1 or len(args.prefetch)!=1):
         parser.error('--activity requires exactly one --cases item and one --prefetch item')
     folder=ROOT/'local_runs'/('systolic_b_monitor_fixture_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
@@ -42,10 +43,10 @@ def main():
            A3/'tb/arch03_task_window_icb32.sv',A3/'tb/arch03_icb32_source.sv',A3/'tb/tb_arch03_systolic_b_monitor_fixture.sv']
     instrumentation=[]
     if args.gate_monitor:
-        from icb32_gate_monitor import generate,DEFAULT_BINDINGS
+        from systolic_b_gate_monitor import generate,DEFAULT_BINDINGS
         generated=folder/'arch03_icb32_gate_monitor.svh'
         generated.write_text(generate((A3/'tb/arch03_systolic_b_monitor.svh').read_text(),DEFAULT_BINDINGS))
-        instrumentation+=[generated,A3/'scripts/icb32_gate_monitor.py']
+        instrumentation+=[generated,A3/'scripts/icb32_gate_monitor.py',A3/'scripts/systolic_b_gate_monitor.py']
         files.append(A3/'tb/arch03_icb32_gate_proof.sv')
     if args.bus_metrics:
         if args.gate_monitor:raise ValueError('Internal macro metrics are ASIC RTL only, not mapped aliases')
