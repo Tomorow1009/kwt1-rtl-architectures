@@ -1,7 +1,7 @@
 {
   "schema": "mmio8-fullpower-progress-v1",
-  "status": "L01_running",
-  "observed": "2026-11-11T14:32:29.085086+08:00",
+  "status": "L01_passed_L02_v2_running",
+  "observed": "2026-11-11T14:58:48.075132+08:00",
   "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
   "source_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
   "manifest_sha256": "1ad974f4f5b13aad37bc2e145d792aa2554d5ae65c73b3b7386626a2aaca01fe",
@@ -12,19 +12,65 @@
   "gate_outputs": 354816,
   "activity_layers": 12,
   "cycles_each": 3843121,
-  "active_session": "mmio8_fullpower_l01_v1",
+  "active_session": "mmio8_fullpower_l02_v2",
   "active_stage": "mmio8_power",
-  "active_case": "layer_01",
-  "driver_pid": 293690,
-  "started": "2026-11-11T14:30:05.733222+08:00",
+  "active_case": "layer_02",
+  "driver_pid": 323693,
+  "started": "2026-11-11T14:57:38.893275+08:00",
   "lock_owner_matches": true,
-  "power_log_bytes_observed": 13352,
-  "free_GiB": 32.3037109375,
-  "launch_minimum_free_GiB": 20,
-  "completed_power_layers": 0,
+  "power_log_bytes_observed": null,
+  "free_GiB": 17.0908203125,
+  "launch_minimum_free_GiB": 4,
+  "completed_power_layers": 1,
   "automatic_successor_queue": false,
   "raw_vcd_regenerated": false,
   "old_evidence_deleted": false,
   "system_power_verified": false,
-  "old_single_layer_power_reused_as_new_full_gate_result": false
+  "old_single_layer_power_reused_as_new_full_gate_result": false,
+  "free_observed": "2026-11-11T14:58:48.075132+08:00",
+  "completed": [
+    {
+      "case": "layer_01",
+      "session": "mmio8_fullpower_l01_v1",
+      "pid": 293690,
+      "started": "2026-11-11T14:30:05.733222",
+      "finished": "2026-11-11T14:46:48.307203",
+      "summary_sha256": "f639d2dfe8c4c6dbd263d5a0851afc5d1e3e883c51ee28a6bbf966101d621f01",
+      "numbers_sha256": "799a02a447102f14e5da0fc40979a4387b15f107a092cb978006769028b54c26",
+      "power_w": {
+        "switching": "1.48551364e-03",
+        "internal": "1.21767968e-02",
+        "leakage": "6.27682032e-03",
+        "total": "1.99391320e-02"
+      },
+      "duration_ns": "25620804.104586",
+      "energy_j": "0.0005108565949874820593520",
+      "sram_counts": {
+        "itcm": 32,
+        "accelerator": 10,
+        "shared": 64,
+        "dtcm": 32
+      },
+      "annotated_nets": 112585,
+      "fully_annotated_leaf_cells": 100018,
+      "invariant_points": 17178,
+      "all_invariant_points_annotated": true
+    }
+  ],
+  "failed_attempts": [
+    {
+      "session": "mmio8_fullpower_l02_v1",
+      "pid": 313115,
+      "status": "failed_before_PT_missing_gate_path",
+      "reason": "Launcher string replacement accidentally changed full01 to nonexistent full02; fixed only session/case fields for v2.",
+      "preserved": true,
+      "lock_released": true
+    }
+  ],
+  "storage_cost_measured_MiB": {
+    "r1_synth_directory": 425,
+    "mmio8_l01_power_directory": 11,
+    "r4_each_power_directory": 16
+  },
+  "space_policy": "Existing-wave power only: 4 GiB free reserve, compared with observed 11-16 MiB per report. No new VCD or deletion. R1 new-wave pilot still requires separately budgeted space."
 }
