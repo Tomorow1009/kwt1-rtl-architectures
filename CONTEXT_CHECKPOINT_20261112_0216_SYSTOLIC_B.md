@@ -85,3 +85,13 @@
 新增`scripts/systolic_b_report.py`准备同配置JSON、逐层与汇总CSV、中文Markdown和哈希回执。重新验证ASIC/gate14输出、真实IRQ/WFI、boot无预加载、完整窗口、源码/平台/固件/库/网表身份；可接自己的1200和合格SAIF/12层功耗，缺项为空。最终1200另逐例核对实际日志/boot/IRQ和原始矩阵误差，未知活动影响、官方600、物理签核不自动批准。功耗区分时间加权平均与层算术平均，避免把不等时长直接平均。
 
 新增2项针对不等时长功耗、缺层不计零和工件改写拒绝的本地检查通过，Python3.6语法通过。该导出工具尚未服务器部署、未生成B最终报告；当前仍缺新综合终态、CPU恢复竞争、gate14、自己的1200和实际SAIF/PPA。生产RTL/固件未改，原716输入caad包及35d队列保持不可变。一次查找误用了不存在的tests目录，仅只读报路径不存在，实际测试位于scripts并已执行。
+
+## 03:02增量：冻结后队列本地准备，原综合继续
+
+69d042b6b2963fafd9d69a7827e5df8c6c1f4163已推送并ls-remote一致，含B报告导出器、两项检查和02:55交接。之后新增`systolic_b_finalize_queue.py`及三个模拟子进程路由检查，尚未提交/上传/启动。脚本只接受独立同配置冻结审阅JSON和已完成的第一验证队列；不自动认可时序或面积。顺序clean ASIC14→自己的1200→已通过tiny的R4 SAIF重放/≤1%核对→B SAIF12→12层功耗，最后准备报告请求，不自动批准或导出。真实batch失败停止后继；可选SAIF失败保留并不把缺功耗记零；已有session拒绝重启，3检查及Python3.6语法通过。测试使用模拟进程，不是服务器执行证据。
+
+冻结请求schema为`systolic-b-finalize-request-v1`；引用asic/synthesis/gate/sequence/contention五个已过阶段的run/sha256，freeze_review(path/sha256)、predecessor_queue(path/sha256)、dataset、bundle_manifest_sha256，合格tiny时另给native_probe/R4_gate/R4_power。独立冻结审阅schema`systolic-b-freeze-review-v1`，必须有eligible_for_final1200、task_mode_timing_verified、project_area_upper_bound_verified都为true，references与五个实际阶段完全一致；现在这些条件未满足，没有创建假审阅或启动最终队列。
+
+02:59:34.048659最新综合：原79637 CPU99.5%、elapsed1:39:29、RSS25928620KiB、日志280239B，正在requantize算术映射；仍没有终态。VNC第三工作区/caad包shell，FileZilla关闭。新增只读查询`takeover_local/b_synth_result.txt`与`b_validation_brief.txt`，均未执行；没有待输入命令。前述b_synth_health_new已执行/截图读完。
+
+本地更新ABI和v3布局文档的旧“尚未集成/未ASIC”表述为实际ASIC14已过，保留PPA和最终1200未验；阶段报告补充已试source credits2/4/6/8仅L01/L12的小范围结果，不误称完整12层。没有新增RTL优化。下一步继续原作业，待实测终态按绑定证据审阅；后继工具待真实tiny兼容性反馈后一起导出新不可变包。

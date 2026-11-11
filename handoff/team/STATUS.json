@@ -2770,7 +2770,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "caad8de19f7c25f2fb5043f52c0cc165ae778c6c",
+    "cloud_commit": "69d042b6b2963fafd9d69a7827e5df8c6c1f4163",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2806,13 +2806,13 @@
       "stage": "systolic_b_synth",
       "pid": 75738,
       "status": "running",
-      "observed": "2026-11-12T02:50:45+08:00",
+      "observed": "2026-11-12T02:59:34+08:00",
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
       "child_pid": 79637,
       "child_cpu_percent": 99.5,
-      "child_RSS_KiB": 25928096,
-      "phase": "mapping_and_timing_optimization",
-      "elapsed": "01:30:40"
+      "child_RSS_KiB": 25928620,
+      "phase": "requantize_arithmetic_mapping",
+      "elapsed": "01:39:29"
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2855,6 +2855,12 @@
       "status": "implemented_two_checks_passed_not_deployed",
       "hardware_changed": false,
       "actual_final_export": false
+    },
+    "finalization_queue_tool": {
+      "local_checks": 3,
+      "deployed": false,
+      "started": false,
+      "requires_separate_scoped_freeze_review": true
     }
   }
 }
