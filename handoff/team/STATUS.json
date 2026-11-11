@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v3_asic14_passed_synthesis_running",
+    "status": "v3_asic14_passed_synthesis_interrupted_disk_full",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0315_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,14 +2683,14 @@
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Keep synthesis75738 and waiting queue103191. Prepare native SAIF R4 L01 replay/crosscheck; do not activate B power before real probe and <=1% crosscheck. Final1200 awaits freeze review.",
+    "next": "Preserve failed synth01/queue01 and stale states; await coordinated disk recovery. Do not relaunch before space/process/lock checks. Fresh synthesis session required because no mapped netlist/reports exist. Fix local packaging provenance; no new upload.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T01:36:40+08:00",
-      "free_GiB": 27.75,
-      "team_lock": "held_by_systolic_b_v3_synth01",
+      "time": "2026-11-12T03:18:26+08:00",
+      "free_GiB": 2.5712890625,
+      "team_lock": "absent",
       "old_L02": {
         "status": "passed",
         "pid": 323693,
@@ -2699,13 +2699,9 @@
       },
       "new_B_job_started": true,
       "other_processes_not_yet_audited": false,
-      "EDA_processes": [
-        {
-          "driver_pid": 75738,
-          "child_pid": 79637,
-          "tool": "dc_shell"
-        }
-      ]
+      "EDA_processes": [],
+      "free_bytes": 2760900608,
+      "free_inodes": 6743198
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2770,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "69d042b6b2963fafd9d69a7827e5df8c6c1f4163",
+    "cloud_commit": "04b5830e86a1d2414d0f1d6e31df37b2f7ad8b9d",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2804,15 +2800,18 @@
     "v3_synthesis": {
       "session": "systolic_b_v3_synth01",
       "stage": "systolic_b_synth",
-      "pid": 75738,
-      "status": "running",
-      "observed": "2026-11-12T02:59:34+08:00",
+      "pid": null,
+      "status": "process_ended_no_mapped_reports_state_stale_running_after_ENOSPC",
+      "observed": "2026-11-12T03:13:50+08:00",
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
-      "child_pid": 79637,
+      "child_pid": null,
       "child_cpu_percent": 99.5,
       "child_RSS_KiB": 25928620,
       "phase": "requantize_arithmetic_mapping",
-      "elapsed": "01:39:29"
+      "elapsed": "01:39:29",
+      "prior_pid": 75738,
+      "prior_child_pid": 79637,
+      "summary_present": false
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2822,14 +2821,15 @@
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_LATENCY2_20261112.json"
     },
     "validation_queue": {
-      "pid": 103191,
+      "pid": null,
       "session": "systolic_b_v3_validation01_queue",
       "bundle": "light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1",
-      "observed": "2026-11-12T02:53:24+08:00",
-      "status": "waiting_synthesis",
+      "observed": "2026-11-12T03:18:26+08:00",
+      "status": "process_absent_stale_waiting_state_no_children_created",
       "completed": [],
       "optional_failures": [],
-      "final1200_started": false
+      "final1200_started": false,
+      "prior_pid": 103191
     },
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",

@@ -38,11 +38,15 @@ def main():
         'architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001/')
     extra=('handoff/team/server_config.json','handoff/team/unpack.py',
            'handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json')
+    exported=set()
     for rel in git('ls-files').splitlines():
         if rel.startswith(prefixes) or rel in extra:
+            if '__pycache__' in Path(rel).parts or Path(rel).suffix in ('.pyc','.pyo'):
+                raise ValueError('Tracked Python cache must not enter a source package')
             target=folder/rel;target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(subprocess.check_output(['git','-c','safe.directory='+ROOT.as_posix(),
                 'show',commit+':'+rel],cwd=str(ROOT)))
+            exported.add(rel)
     verify_review_document(folder)
     # Build in a separate local folder so transient compiler caches cannot be
     # accidentally swept into the competition package.
@@ -91,12 +95,15 @@ def main():
             if variant=='sequence':verify_sequence(destination,folder)
             else:verify_firmware(destination,folder)
             diagnostic_identities[variant]=sha(destination/'manifest.json')
-    allowed_prefixes=prefixes+('firmware/','validated_data/','firmware_contention/','firmware_sequence/')
+    runtime_prefixes=('firmware/','validated_data/','firmware_contention/','firmware_sequence/')
     paths=[]
     for path in sorted(folder.rglob('*')):
         if path.is_file():
             rel=path.relative_to(folder).as_posix()
-            if rel.startswith(allowed_prefixes) or rel in extra:paths.append(path)
+            # Builders import the exported Python sources and may create
+            # __pycache__. Only exact Git exports or explicit runtime assets
+            # belong in the immutable archive, never generated source caches.
+            if rel in exported or rel.startswith(runtime_prefixes):paths.append(path)
     files={p.relative_to(folder).as_posix():sha(p) for p in paths}
     manifest=dict(source_commit=commit,member=args.member,architecture='arch03_systolic_b',row_lanes=args.rows,
         files=files,runtime_layout='arch03-systolic-b-v%d-with-lossless-codec'%args.layout,task_input_boot_bytes=0,
