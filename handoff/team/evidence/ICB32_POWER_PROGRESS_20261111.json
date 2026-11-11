@@ -1,72 +1,89 @@
 {
   "schema": "icb32-power-progress-v1",
-  "observed": "2026-11-11T10:51:57.947332+08:00",
+  "observed": "2026-11-11T11:06:09+08:00",
   "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
   "queue": "runs/icb32_r4_finish01_queue",
   "queue_pid": 285397,
-  "running_stage": "icb32_r4_finish01_power_l12",
-  "completed_layers": 11,
-  "complete_12_layers": false,
+  "running_stage": null,
+  "completed_layers": 12,
+  "complete_12_layers": true,
   "system_power_verified": false,
   "source": "Existing queue layer_XX_numbers.json, visible VNC observations; full frozen reports remain on server",
   "layers": [
     {
       "layer": 1,
       "raw_total_w": "0.0721431449",
-      "raw_energy_j": "0.0000166597743086297358726"
+      "raw_energy_j": "0.0000166597743086297358726",
+      "cycles": 34639
     },
     {
       "layer": 2,
       "raw_total_w": "0.0720979050",
-      "raw_energy_j": "0.000016633946325505201100"
+      "raw_energy_j": "0.0000166339463255052011100",
+      "cycles": 34607
     },
     {
       "layer": 3,
       "raw_total_w": "0.0720774755",
-      "raw_energy_j": "0.0000166273109021120768490"
+      "raw_energy_j": "0.0000166273109021120768490",
+      "cycles": 34603
     },
     {
       "layer": 4,
-      "raw_total_w": "0.0720976420",
-      "raw_energy_j": "0.0000166281183445146659340"
+      "raw_total_w": "0.0720976442",
+      "raw_energy_j": "0.0000166281183445146659340",
+      "cycles": 34595
     },
     {
       "layer": 5,
       "raw_total_w": "0.0718645677",
-      "raw_energy_j": "0.0000165705303632127979734"
+      "raw_energy_j": "0.0000165705303632127979734",
+      "cycles": 34587
     },
     {
       "layer": 6,
-      "raw_total_w": "0.0714343694",
-      "raw_energy_j": "0.0000164733024292389256764"
+      "raw_total_w": "0.0714346394",
+      "raw_energy_j": "0.0000164733024292389256764",
+      "cycles": 34591
     },
     {
       "layer": 7,
       "raw_total_w": "0.0710550174",
-      "raw_energy_j": "0.0000163762850726073289764"
+      "raw_energy_j": "0.0000163762850726073289764",
+      "cycles": 34571
     },
     {
       "layer": 8,
       "raw_total_w": "0.0707083568",
-      "raw_energy_j": "0.0000163454135123918186400"
+      "raw_energy_j": "0.0000163454135123918186400",
+      "cycles": 34675
     },
     {
       "layer": 9,
       "raw_total_w": "0.0713076741",
-      "raw_energy_j": "0.0000164459249253373430070"
+      "raw_energy_j": "0.0000164459249253373430070",
+      "cycles": 34595
     },
     {
       "layer": 10,
       "raw_total_w": "0.0714054257",
-      "raw_energy_j": "0.0000165027443013380715054"
+      "raw_energy_j": "0.0000165027443013380715054",
+      "cycles": 34667
     },
     {
       "layer": 11,
       "raw_total_w": "0.0723220259",
-      "raw_energy_j": "0.0000166972255232299473714"
+      "raw_energy_j": "0.0000166972255232299473714",
+      "cycles": 34631
+    },
+    {
+      "layer": 12,
+      "raw_total_w": "0.0732379556",
+      "raw_energy_j": "0.0000169086892450215730776",
+      "cycles": 34631
     }
   ],
-  "activity_sources_observed": "2026-11-11T10:52:40+08:00",
+  "activity_sources_observed": "2026-11-11T11:07:05+08:00",
   "activity_layers_reviewed": [
     1,
     2,
@@ -78,7 +95,8 @@
     8,
     9,
     10,
-    11
+    11,
+    12
   ],
   "activity_per_layer": {
     "nets": 362618,
@@ -110,7 +128,7 @@
   },
   "compiled_databases": "All three current power DB hashes matched synthesis source_inputs through existing power_databases()",
   "limits": [
-    "Partial layer progress is not the final 12-layer mean.",
+    "All twelve layer numbers are present; prelayout estimate, system_power_verified remains false.",
     "Model presence and exact mapping do not resolve unknown activity influence.",
     "No new EDA or VCD scan was started for this review."
   ],
@@ -139,5 +157,18 @@
     "mean_seconds": 799.541791375,
     "remaining_4_whole_stages_plus_20_percent_seconds": 3837.8005986,
     "not_overall_completion_eta": true
+  },
+  "transcription_corrections": {
+    "observed": "2026-11-11T11:19:36.688793+08:00",
+    "scope": "Original server layer numbers unchanged; corrected local L02 energy last digit and L04/L06 power digit transcriptions; all three server E=P*t assertions passed."
+  },
+  "aggregate": {
+    "total_cycles": 415392,
+    "mean_cycles": 34616,
+    "period_ns": "6.666666",
+    "weighted_mean_mW": "71.81263185379159926045759187",
+    "mean_energy_uJ": "16.5724387710949571661000000",
+    "formula": "sum(E)/sum(t); sum(E)/12",
+    "locally_recomputed_from_observed_raw_numbers": true
   }
 }

@@ -1,0 +1,54 @@
+{
+  "schema": "icb32-metrics14-v1",
+  "observed": "2026-11-11T11:09:03.275730+08:00",
+  "independent_hash_check_observed": "2026-11-11T11:11:48.348269+08:00",
+  "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "run": "runs/icb32_r4_finish01_metrics14/icb32_soc",
+  "summary_sha256": "bb0ee4cf23b31730d72c196bfc5101f3d2f49e7d1dea33b49e366a72de54e576",
+  "queue_reference_and_stage_sha_match": true,
+  "status": "passed",
+  "cases": 14,
+  "checked_outputs": 354816,
+  "cpu_executed": true,
+  "asic_branch": true,
+  "fpga_define": false,
+  "passive_metrics_checked_all_cases": true,
+  "wfi_waits_per_case": 4,
+  "unhandled_interrupts": 0,
+  "layer_cycles": [
+    34639,
+    34607,
+    34603,
+    34595,
+    34587,
+    34591,
+    34571,
+    34675,
+    34595,
+    34667,
+    34631,
+    34631
+  ],
+  "mean_layer_cycles": 34616,
+  "counts_per_case": {
+    "mac_updates": 1622016,
+    "x_reads": 101376,
+    "x_writes": 6336,
+    "w_reads": 409600,
+    "w_writes": 16384
+  },
+  "layer01": {
+    "accepted_to_response_mean_cycles": {
+      "source_read": 1.0,
+      "shared_write": 1.0,
+      "output_write": 1.0
+    },
+    "mac_utilization": 0.7316608447126072,
+    "transactions_per_task_cycle": 0.9060885129478333
+  },
+  "scope": "Clean-directory actual ASIC RTL/E203 14-case functional reproduction with pinned vendor models and same production hardware/firmware; not final1200 or full final report.",
+  "limits": [
+    "Accepted-to-response latency is not initiation interval.",
+    "No new PPA run is implied by passive metrics."
+  ]
+}

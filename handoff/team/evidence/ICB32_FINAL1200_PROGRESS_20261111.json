@@ -1,0 +1,14 @@
+{
+  "observed": "2026-11-11T11:16:49.095754+08:00",
+  "status": "running",
+  "completed": 105,
+  "total": 1200,
+  "failed": 0,
+  "checked_outputs": 2661120,
+  "host_elapsed_seconds": 482.2015115208924,
+  "estimated_remaining_seconds_with_20percent_margin": 6034.407487032882,
+  "driver_pid": 292229,
+  "queue_pid": 285397,
+  "run": "runs/icb32_r4_finish01_final1200/icb32_batch",
+  "estimate_is_not_completion_guarantee": true
+}
