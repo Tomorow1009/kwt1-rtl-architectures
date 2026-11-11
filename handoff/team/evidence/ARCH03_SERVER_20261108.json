@@ -1,0 +1,162 @@
+{
+  "date": "2026-11-08",
+  "member": "light-light126",
+  "source_commit": "91eb48805dc419229b59c9b78088bfb1a9fcaae3",
+  "archive": "light-light126-lenovo-arch03-20261108_172206-91eb48805dc4.zip",
+  "bytes": 9655993,
+  "archive_sha256": "9db4737b3c4aba459ebd0aecce12ee2c262d8542908c48baff77b3e7431ae2f8",
+  "manifest_sha256": "4f93b4d7d0346d400c3653cff7ed691880b881910212baf324c881d410a8018d",
+  "input_files_verified": 293,
+  "uploaded": true,
+  "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_172206-91eb48805dc4",
+  "session": "acceptance01",
+  "transfer": "Linux FileZilla; release directory browsing connection before processing upload queue",
+  "unpack": "ZIP hash and embedded committed unpack.py hash checked, extracted with exclusive creation; unpack manifest checks passed",
+  "unpack_py_sha256": "4e90f02c3465b48f8d198a89c1be1735f8fb30d7c42f957b32fb7f2b7b88ce4f",
+  "icb": {
+    "status": "passed",
+    "cases": 14,
+    "outputs": 354816,
+    "real_outputs": 304128,
+    "summary_sha256": "a539790985a4202dac19a6023986420bed3acbc9af9cde28a98dc31cf488e872",
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_172206-91eb48805dc4/runs/acceptance01/icb",
+    "cpu_executed": false
+  },
+  "soc": {
+    "status": "failed",
+    "reason": "Pinned platform hash has adjacent characters transposed in previous local transcription; rejected before copying platform or VCS compilation",
+    "actual_platform_sha256": "ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e",
+    "platform_files": 163
+  },
+  "dc_accel": {
+    "status": "failed",
+    "pid": 58340,
+    "scope": "block_only",
+    "reason": "DC completed mapping; unsupported design area attribute produced a blank metric. Strict acceptance also requires reviewing timing warning TIM-134.",
+    "metrics_observed": {
+      "RAMSP128X16": 8,
+      "RAMSP4096X16": 2,
+      "max_slack_ns": 0.000171185,
+      "min_slack_ns": 0.00158095,
+      "latches": 0,
+      "total_cell_area_um2": 129773.082115
+    },
+    "design_warning_codes": [
+      "LINT-2",
+      "LINT-8",
+      "LINT-28",
+      "LINT-32",
+      "LINT-33"
+    ],
+    "timing_warning_codes": [
+      "TIM-134"
+    ],
+    "high_fanout_diagnostic": "Read-only DDC inspection found clk only; new acceptance must query the freshly linked netlist and reject other networks."
+  },
+  "physical_signoff": false,
+  "official_precision_verified": false,
+  "server_runtime_inputs_modified": false,
+  "followup_bundles": [
+    {
+      "source_commit": "5048a6450401fb28b8341e8d2ed30126db475df4",
+      "archive": "light-light126-lenovo-arch03-20261108_174936-5048a6450401.zip",
+      "sha256": "a6244acbcbaba401b3f21d5235f32ff71750137fe6ae38ae4bddedbf529ad4a9",
+      "bytes": 9656157,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_174936-5048a6450401",
+      "soc": "failed: VCS parsed platform RTL before the TB-local FPGA define; ASIC TCM/ROM library modules unresolved",
+      "platform_patch_applied": true
+    },
+    {
+      "source_commit": "530db1f89b3dd656cc7e7ccd46226d11a775b07b",
+      "archive": "light-light126-lenovo-arch03-20261108_180302-530db1f89b3d.zip",
+      "sha256": "733a8ced05d19aa3c450cb97c1ba9d7dc234e2dcfe921c22f06765a5cddc4699",
+      "bytes": 9657357,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_180302-530db1f89b3d",
+      "soc": "failed: new platform bus signals were declared after first use; VCS inferred scalar nets and reported IPDW/PCWM/INAV/SIOB. Local fix moves declarations before bus instance, uses typed monitor aliases and rejects these warning classes.",
+      "dc_shared": {
+        "status": "failed_pending_review",
+        "RAMSP4096X16": 64,
+        "RAMSP128X16": 0,
+        "latches": 0,
+        "max_slack_ns": 3.74377,
+        "min_slack_ns": 0.00187597,
+        "total_cell_area_um2": 1763018.98117,
+        "timing_warnings": [],
+        "design_warnings": "Only unused cmd_addr[0:1]; word address uses [18:2], byte selection uses wmask. Exact two-pin review added locally."
+      }
+    },
+    {
+      "source_commit": "f00e7acf7b40e76c1f47e83a58ab725a101b7e3f",
+      "archive": "light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40.zip",
+      "sha256": "276334c4e9604390ab8df300a912a44282d53cca8f5eb71d40d1fe4653103146",
+      "bytes": 9658054,
+      "files": 293,
+      "uploaded": true,
+      "unpack_verified": true,
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_182009-f00e7acf7b40",
+      "soc": {
+        "status": "passed",
+        "cases": 14,
+        "outputs": 354816,
+        "real_outputs": 304128,
+        "cpu_executed": true,
+        "cycles_per_case": 3890166,
+        "saturated": {
+          "real_layers": 0,
+          "extremes": 6336,
+          "rounding": 4554
+        },
+        "summary_sha256": "35fc4c2b69b9018ddb4404965e73788ad9604a93c4728d7d741515b9d4b9c34d"
+      },
+      "dc_accel": {
+        "status": "passed",
+        "scope": "block_only_not_whole_soc",
+        "RAMSP128X16": 8,
+        "RAMSP4096X16": 2,
+        "latches": 0,
+        "setup_slack_ns": 0.000171185,
+        "hold_slack_ns": 0.00158095,
+        "total_cell_area_um2": 129773.082115,
+        "summary_sha256": "e74284595f73171a25aeda5d470aaf9e7458333af7dba683f79bae6ddd08af1b",
+        "ddc_sha256": "956cc9ea5017132c2890a364480ffe874cd432d44d1688c77cb8de883ae26386",
+        "structural_warning_counts": {
+          "LINT-2": 88,
+          "LINT-8": 88,
+          "LINT-28": 904,
+          "LINT-32": 864,
+          "LINT-33": 80
+        },
+        "timing_warning_review": "TIM-134: actual high-fanout net set is clk only; ideal clock, not a physical clock tree"
+      },
+      "dc_shared": {
+        "status": "passed",
+        "scope": "block_only_not_whole_soc",
+        "RAMSP128X16": 0,
+        "RAMSP4096X16": 64,
+        "latches": 0,
+        "setup_slack_ns": 3.74377,
+        "hold_slack_ns": 0.00187597,
+        "total_cell_area_um2": 1763018.98117,
+        "summary_sha256": "09c96b86978a5ead38416eda251f40ac85cb009d3fb5706f890f3f0459849a5d",
+        "ddc_sha256": "17d541ed5da36707382c37ed8cb282305d1c699816a36967903945fc80b1d84e",
+        "structural_warning_review": "Only unused cmd_addr[0] and cmd_addr[1]; word addressing uses [18:2], byte selection uses wmask"
+      },
+      "icb": {
+        "status": "passed",
+        "cases": 14,
+        "outputs": 354816,
+        "real_outputs": 304128,
+        "cpu_executed": false,
+        "summary_sha256": "a539790985a4202dac19a6023986420bed3acbc9af9cde28a98dc31cf488e872"
+      },
+      "acceptance_record": "ARCH03_ACCEPTANCE_20261108.json"
+    }
+  ],
+  "latest_acceptance_record": "ARCH03_ACCEPTANCE_20261108.json"
+}
