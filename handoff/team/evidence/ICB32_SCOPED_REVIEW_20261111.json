@@ -61,5 +61,7 @@
     "Active JTAG, PLL switching, startup/reset-release transients, extracted parasitics and physical clock tree are outside the accepted stable task-mode scope.",
     "Engineering review is separate from the frozen raw summaries and does not turn their historical false flags into claims of new EDA.",
     "Power estimates and final batch acceptance remain independent; no overall complete-delivery acceptance is granted here."
-  ]
+  ],
+  "decision_time_note": "decisions records the 11:28 engineering review; final1200 was then running. See subsequent_batch_evidence for the later PASS; this scope review does not independently approve batch/power.",
+  "subsequent_batch_evidence": "ICB32_FINAL1200_20261111.json"
 }
