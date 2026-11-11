@@ -1,0 +1,29 @@
+{
+  "name": "light-light126-mmio8-power-ops-20261111_150136-72ddb37b1fbe",
+  "source_commit": "72ddb37b1fbe24f3df262c728532c6c36c4041a3",
+  "zip_sha256": "943e4073c6cd9b6b9e4526e727e53c46e7b4d4782f69ed0a3f3d2ef4ba6e531c",
+  "bytes": 4465,
+  "manifest_sha256": "77d23744b565c93a5de2af5c196e291102fa36f9f1b59ac99ec0998da6b1f109",
+  "files": {
+    "mmio8_power_queue.py": "7b4ab0d0f2650a8062b0d2bfa8b758fa49a5c5bc8bf85d13bbfc287f1c7fb841",
+    "request.json": "bba2b00e55649748e227c6f33b290cf317145b6a99744f23e63651445f42de38",
+    "launch.json": "560f2b90dbd67b925cf1f5455df0a49e5feef13bc0c3313ae74b905ab7a1689b",
+    "README.md": "77a062ca0bb6ec0f688e04279b02342e53e303e184cbee8264f3036f82c70b06"
+  },
+  "launch": {
+    "argv": [
+      "python3",
+      "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-mmio8-power-ops-20261111_150136-72ddb37b1fbe/mmio8_power_queue.py",
+      "--request",
+      "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-mmio8-power-ops-20261111_150136-72ddb37b1fbe/request.json"
+    ],
+    "cwd": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
+    "queue_state": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c/runs/mmio8_fullpower_remaining_v1_queue/state.json"
+  },
+  "schema": "mmio8-power-ops-prepared-v1",
+  "status": "prepared_and_board_staged_only_user_wrapup",
+  "competition_server_uploaded": false,
+  "remote_extracted": false,
+  "queue_launched": false,
+  "filezilla_closed": true
+}

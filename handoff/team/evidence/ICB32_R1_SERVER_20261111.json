@@ -88,5 +88,7 @@
     "log_created": false,
     "child_created": false,
     "result": "aborted_before_launch_due_to_free_space"
-  }
+  },
+  "user_has_additional_storage": false,
+  "remaining_gate_power_deferred_for_storage_and_user_wrapup": true
 }

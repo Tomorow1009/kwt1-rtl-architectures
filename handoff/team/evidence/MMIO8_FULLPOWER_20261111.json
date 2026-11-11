@@ -1,7 +1,7 @@
 {
   "schema": "mmio8-fullpower-progress-v1",
-  "status": "L01_passed_L02_v2_running",
-  "observed": "2026-11-11T14:58:48.075132+08:00",
+  "status": "L01_passed_L02_v2_running_wrapup_no_successor",
+  "observed": "2026-11-11T15:04:14.882454+08:00",
   "bundle": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c",
   "source_commit": "ecf3cd4afb3c96b9580687b5ab42db60e0372292",
   "manifest_sha256": "1ad974f4f5b13aad37bc2e145d792aa2554d5ae65c73b3b7386626a2aaca01fe",
@@ -18,8 +18,8 @@
   "driver_pid": 323693,
   "started": "2026-11-11T14:57:38.893275+08:00",
   "lock_owner_matches": true,
-  "power_log_bytes_observed": null,
-  "free_GiB": 17.0908203125,
+  "power_log_bytes_observed": 13352,
+  "free_GiB": 14.18359375,
   "launch_minimum_free_GiB": 4,
   "completed_power_layers": 1,
   "automatic_successor_queue": false,
@@ -27,7 +27,7 @@
   "old_evidence_deleted": false,
   "system_power_verified": false,
   "old_single_layer_power_reused_as_new_full_gate_result": false,
-  "free_observed": "2026-11-11T14:58:48.075132+08:00",
+  "free_observed": "2026-11-11T15:04:14.882454+08:00",
   "completed": [
     {
       "case": "layer_01",
@@ -64,7 +64,9 @@
       "status": "failed_before_PT_missing_gate_path",
       "reason": "Launcher string replacement accidentally changed full01 to nonexistent full02; fixed only session/case fields for v2.",
       "preserved": true,
-      "lock_released": true
+      "lock_released": true,
+      "finished": "2026-11-11T14:54:41.128648",
+      "pt_log_exists": false
     }
   ],
   "storage_cost_measured_MiB": {
@@ -72,5 +74,9 @@
     "mmio8_l01_power_directory": 11,
     "r4_each_power_directory": 16
   },
-  "space_policy": "Existing-wave power only: 4 GiB free reserve, compared with observed 11-16 MiB per report. No new VCD or deletion. R1 new-wave pilot still requires separately budgeted space."
+  "space_policy": "Existing-wave power only: 4 GiB free reserve, compared with observed 11-16 MiB per report. No new VCD or deletion. R1 new-wave pilot still requires separately budgeted space.",
+  "user_requests_wrapup": true,
+  "user_has_additional_storage": false,
+  "l01_numeric_digest_independently_rechecked": true,
+  "l01_numeric_digest_recheck_observed": "2026-11-11T15:08:41+08:00"
 }
