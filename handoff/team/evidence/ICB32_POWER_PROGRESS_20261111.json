@@ -1,0 +1,87 @@
+{
+  "schema": "icb32-power-progress-v1",
+  "observed": "2026-11-11T09:52:22.478346+08:00",
+  "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "queue": "runs/icb32_r4_finish01_queue",
+  "queue_pid": 285397,
+  "running_stage": "icb32_r4_finish01_power_l07",
+  "completed_layers": 6,
+  "complete_12_layers": false,
+  "system_power_verified": false,
+  "source": "Existing queue layer_XX_numbers.json, visible VNC observations; full frozen reports remain on server",
+  "layers": [
+    {
+      "layer": 1,
+      "raw_total_w": "0.0721431449",
+      "raw_energy_j": "0.0000166597743086297358726"
+    },
+    {
+      "layer": 2,
+      "raw_total_w": "0.0720979050",
+      "raw_energy_j": "0.000016633946325505201100"
+    },
+    {
+      "layer": 3,
+      "raw_total_w": "0.0720774755",
+      "raw_energy_j": "0.0000166273109021120768490"
+    },
+    {
+      "layer": 4,
+      "raw_total_w": "0.0720976420",
+      "raw_energy_j": "0.0000166281183445146659340"
+    },
+    {
+      "layer": 5,
+      "raw_total_w": "0.0718645677",
+      "raw_energy_j": "0.0000165705303632127979734"
+    },
+    {
+      "layer": 6,
+      "raw_total_w": "0.0714343694",
+      "raw_energy_j": "0.0000164733024292389256764"
+    }
+  ],
+  "activity_sources_observed": "2026-11-11T09:54:05+08:00",
+  "activity_layers_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "activity_per_layer": {
+    "nets": 362618,
+    "exact_mapping": 362618,
+    "not_annotated": 0,
+    "unannotated_after_empty": true,
+    "settings": {
+      "power_analysis_mode": "averaged",
+      "power_x_transition_derate_factor": "0.5",
+      "power_include_initial_x_transitions": "false"
+    }
+  },
+  "model_review_observed": "2026-11-11T09:51:07+08:00",
+  "model_receipts": "e65 runs/icb32_r4_first01/icb32_synth/technology_verification.json and memory_library_verification.json; hashes matched synthesis summary artifacts",
+  "standard_liberty_sha256": "5d236b1571f5bc791895328fa3f6f94e3873e985ee7963b9ac5e3e849b48949f",
+  "sram_libraries": {
+    "RAMSP128X16": {
+      "sha256": "68bd174a0a8ac7a931e8a81412db97a3912e293a63ce1331d51e18d9e6c78b56",
+      "internal_power_groups": 80,
+      "conditional_leakage_groups": 4,
+      "leakage_power_unit": "1mW"
+    },
+    "RAMSP4096X16": {
+      "sha256": "a75e37ed1d6a8d9ea1193edc1aaa0757ff9359ac382d54821612056984afa807",
+      "internal_power_groups": 80,
+      "conditional_leakage_groups": 4,
+      "leakage_power_unit": "1mW"
+    }
+  },
+  "compiled_databases": "All three current power DB hashes matched synthesis source_inputs through existing power_databases()",
+  "limits": [
+    "Partial layer progress is not the final 12-layer mean.",
+    "Model presence and exact mapping do not resolve unknown activity influence.",
+    "No new EDA or VCD scan was started for this review."
+  ]
+}
