@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -233,7 +233,14 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage in ('icb32_soc','icb32_build'):
+            if a.stage in ('systolic_b_soc','systolic_b_build'):
+                from systolic_b_soc import verify
+                report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='systolic_b_build')
+            elif a.stage=='systolic_b_synth':
+                from systolic_b_synth import synth
+                vendor(cfg,run)
+                report=synth(cfg,run,a.platform,call)
+            elif a.stage in ('icb32_soc','icb32_build'):
                 from icb32_soc import verify
                 report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='icb32_build')
             elif a.stage=='icb32_contention':

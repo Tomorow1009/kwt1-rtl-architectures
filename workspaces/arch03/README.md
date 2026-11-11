@@ -1,3 +1,5 @@
+**Active: direct 5x16 systolic B implementation; A cancelled.** See [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [20:00 checkpoint](../../CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md). Local v2 full14 passed, currently slower than frozen R4. ASIC/PPA pending; historical R4 evidence below remains unchanged.
+
 # 架构三：E203 System Bus 集成
 
 **11月11日本轮收尾：** 先读[实现与探索总结](ICB32_STAGE_REPORT_20261111.md)、[交付入口](ICB32_DELIVERY_20261111.md)和[收尾检查点](../../CONTEXT_CHECKPOINT_20261111_WRAPUP_ICB32.md)。R4自己的1200/30412800、门级14/活动12、干净复现、最终报告及交付准备包已完成；4333.256task/s、71.8126mW、16.5724µJ。系统功耗未知影响仍未审定。按用户要求保存同步并等新计划，现有原8路L02功耗保留，后继队列不启动。下方时间标记为历史。

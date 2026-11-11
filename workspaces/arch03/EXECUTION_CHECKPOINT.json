@@ -4155,5 +4155,46 @@
     "mmio8_successor_queue_started": false,
     "mmio8_power_ops": "prepared_local_and_board_only_not_uploaded",
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
+  },
+  "systolic_b_execution": {
+    "status": "v2_local_functional_passed_server_pending",
+    "h0": "2026-11-11T19:30:41+08:00",
+    "freeze": "2026-11-12T09:30:41+08:00",
+    "functional_convergence": "2026-11-12T08:00:00+08:00",
+    "delivery_ready": "2026-11-13T17:00:00+08:00",
+    "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
+    "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md",
+    "A_cancelled": true,
+    "vnc_workspace4_reserved_for_user_transfer": true,
+    "new_local_rtl_verified": true,
+    "new_asic_verified": false,
+    "new_gate_verified": false,
+    "new_ppa_verified": false,
+    "new_final1200_verified": false,
+    "next": "Commit/package baseline B, inspect live processes; then ASIC14/synthesis, SAIF checks and v3/early start. No old queues.",
+    "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
+    "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
+    "vnc_transfer_completed_user_confirmed": true,
+    "server_last_observation": {
+      "time": "2026-11-11T20:00:01.577083+08:00",
+      "free_GiB": 148.094,
+      "team_lock": "absent",
+      "old_L02": {
+        "status": "passed",
+        "pid": 323693,
+        "finished": "2026-11-11T15:17:11.637795",
+        "summary_sha256": "736f0b5a7f6864410fc92d147a44d5549cde516c22bac1626376b98b6dd752ed"
+      },
+      "new_B_job_started": false,
+      "other_processes_not_yet_audited": true
+    },
+    "local_nominal_12layer": {
+      "cycles": 36862,
+      "tasks_per_second_at_150MHz": 4069.231186587814,
+      "scope": "local_pin_mock_no_E203",
+      "old_R4_reference_cycles": 34616,
+      "faster_than_R4": false
+    }
   }
 }
