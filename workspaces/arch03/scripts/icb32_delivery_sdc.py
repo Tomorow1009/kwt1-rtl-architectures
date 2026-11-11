@@ -29,7 +29,7 @@ def restore_clock(text, measured_period):
     # Intentionally recognize only the actual DC output form; never rewrite
     # arbitrary clocks, generated clocks, constraints, or timing exceptions.
     pattern = (r'(?m)^(create_clock\s+\[get_ports hfextclk\]\s+-name hf_clk\s+-period\s+)'
-               r'(\S+)(\s+-waveform\s+\{0\s+)(\S+)(\}[ \t]*)$')
+               r'(\S+)(\s+-waveform\s+\{0\s+)(\S+)(\}[ \t]*\r?)$')
     found = list(re.finditer(pattern, text))
     require(len(found) == 1, 'Require one recognized HF clock declaration')
     match = found[0]

@@ -59,3 +59,12 @@
 - `takeover_local/icb32_power_annotation_live.txt`951字符可反复只读当前已完成层，复用964已有纯解析器，不扫描VCD。`icb32_sdc_receipt.txt`可读新回执，verify已经通过；不用重复导出/传包。**最后VNC命令为finish_live**，可Up Return读当前队列。
 - 还未改`icb32_report.py`。下一项报告收尾必须避免其现有固定文字造成误导：`declared_conditions.period_ns=6.666666`未说明PT导入舍入差异；固定unverified把CPU竞争/恢复及未来metrics14干净复现列为待验，且复制原synth.required_reviews包含已经完成gate/activity。应保留历史提示并在最终同身份说明中区分实际完成状态；不要自动翻转时序/功耗false。可以修正导出器的条件/文字或生成明确陪同审阅，不需更改RTL或再跑已通过硬件。
 - 本轮progress_0858.py和progress_0910.py已经执行，勿重复。本次增量与SDC证据待提交；无本地长任务。继续原串行链，勿结束等待用户。
+
+## 09:14增量：报告条件说明已修正，待工具包上传
+
+- f35b462已推送，是09:10记录和SDC服务器回执提交；原硬件/运行包仍完全不变。
+- 现已修改`icb32_report.py`：从实际原mapped.sdc及综合摘要绑定提取序列化周期/下降沿，在declared_conditions与中文报告中区别DC/波形精确6.666666和PT原导入6.66667。新增可选`delivery_sdc: {run,sha256}`（SHA为receipt.json），校核同综合及三个输入摘要、精确输出SHA和逐字差异，禁止混入其他SDC修改或伪称重跑时序。
+- 历史synth.required_reviews保留到source_stage_review_prompts，明确这是原阶段快照；独立CPU竞争/恢复/干净复现专用证据未被此导出器再次导入，不能写成未执行。时序、面积官方归属和系统功耗验收仍不自动置true。
+- 新报告/精度工具共8项本地检查通过。第一次新增报告测试因Windows CRLF不匹配原LF正则失败；恢复函数现在明确保留可选CR，新增CRLF字节保持检查后全部通过。已完成的服务器LF输出不变，不需要重新导出或覆盖。
+- **新版报告工具尚未打包/上传/服务器执行**。下一步从本次提交制作独立小报告工具包，包含新icb32_report.py、icb32_delivery_sdc.py、timing_contract.py、相关测试及fixture。其余模块通过PYTHONPATH指向964的workspaces/arch03/scripts；运行新脚本时让新操作包目录优先，不能误导入964旧report。无需重复硬件/固件大包。
+- 原285397仍power_L04，实际刷新见`takeover_local/icb32_finish_live_0915.png`；随后继续余层/metrics14/1200。当前最后VNC仍finish_live，FileZilla关闭。最终request由原队列生成后，复制到新文件补delivery_sdc（964/runs/icb32_delivery_sdc01，receipt SHA7777a8850e91d5283cfd3093bd59173fce3285de01f4a583d0ff16d449850dbb）及history，在新输出目录串行导出。

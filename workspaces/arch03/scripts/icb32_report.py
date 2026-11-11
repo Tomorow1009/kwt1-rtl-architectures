@@ -17,6 +17,7 @@ from icb32_power_numbers import extract, require, sha
 from dma16_report import (read, load_stage, source_inventory, rtl_inventory,
                           platform_inventory, boundary_fields, boundary_aggregate)
 from dma16_batch import index_legacy_dataset, DATASET_SHA256
+from icb32_delivery_sdc import restore_clock
 
 LAYERS = tuple('layer_%02d' % n for n in range(1, 13))
 
@@ -24,6 +25,44 @@ LAYERS = tuple('layer_%02d' % n for n in range(1, 13))
 def configuration_identity(run):
     values = source_inventory(Path(run)/'source_inputs.json')
     return dict(rtl=rtl_inventory(values), platform=platform_inventory(values))
+
+
+def clock_conditions(synthesis, run, has_power):
+    path = Path(run)/'mapped.sdc'
+    require(sha(path) == synthesis['artifacts']['mapped.sdc'], 'Original power SDC changed')
+    _, change = restore_clock(path.read_bytes().decode('ascii'), synthesis['metrics']['period_ns'])
+    return dict(corner='SS', voltage_v='0.99', temperature_c=125, period_ns='6.666666',
+        period_scope='Measured DC constraint and ASIC/gate task waveform',
+        original_mapped_sdc_sha256=sha(path),
+        original_sdc_period_ns=change['original_serialized_period_ns'],
+        original_sdc_falling_edge_ns=change['original_serialized_falling_edge_ns'],
+        power_imported_original_sdc=bool(has_power),
+        note='DC write_sdc serialization may round clock values. Preserve the actual PT import separately from the precise delivery SDC.')
+
+
+def delivery_sdc_evidence(ref, synthesis_ref, synthesis):
+    if ref is None:
+        return dict(status='not_imported', timing_rerun=False)
+    run = Path(ref['run']).resolve(); receipt_path = run/'receipt.json'
+    require(sha(receipt_path) == ref['sha256'], 'Delivery SDC receipt digest mismatch')
+    receipt = read(receipt_path)
+    require(receipt['schema'] == 'icb32-delivery-sdc-v1' and
+            receipt['synthesis_summary_sha256'] == synthesis_ref['sha256'],
+            'Delivery SDC belongs to another synthesis')
+    for name in ('mapped.sdc', 'mapped.v', 'metrics.txt'):
+        require(receipt['inputs_sha256'][name] == synthesis['artifacts'][name],
+                'Delivery SDC frozen input mismatch: '+name)
+    original = (Path(synthesis_ref['run'])/'mapped.sdc').read_bytes().decode('ascii')
+    expected, _ = restore_clock(original, synthesis['metrics']['period_ns'])
+    target = run/'mapped.precise.sdc'
+    require(sha(target) == receipt['delivery_sdc_sha256'] and target.read_bytes() == expected.encode('ascii'),
+            'Delivery SDC differs beyond the reviewed clock precision change')
+    require(receipt['other_constraints_unchanged'] is True and all(receipt[k] is False for k in
+            ('netlist_modified', 'historical_power_sdc_modified', 'timing_rerun', 'timing_verified')),
+            'Unreviewed delivery SDC execution claims')
+    return dict(status='precise_export_rechecked', reference=ref,
+                delivery_sdc_sha256=receipt['delivery_sdc_sha256'], clock_change=receipt['clock_change'],
+                original_reports_unchanged=True, timing_rerun=False, timing_verified=False)
 
 
 def check_case(row, run, source, name):
@@ -203,6 +242,8 @@ def build(request):
     require(sha(grun/'source_inputs.json') == g['source_inputs_sha256'], 'Gate inputs changed')
     source_inventory(grun/'source_inputs.json')
     numbers = [extract(Path(r['run']), r['sha256']) for r in request.get('power', [])]
+    conditions = clock_conditions(s, srun, bool(numbers))
+    delivery = delivery_sdc_evidence(request.get('delivery_sdc'), refs['synthesis'], s)
     rows, aggregate = join_cases(a, g, s, refs, numbers)
     final = audit_batch(request.get('batch'), hardware, g['firmware_sha256'])
     history = request.get('history', [])
@@ -212,11 +253,14 @@ def build(request):
         references=refs, hardware=hardware, firmware_sha256=g['firmware_sha256'],
         library_inputs_sha256=s['link_report']['library_inputs'], area=s['area_summary'],
         area_basis=s['area_basis'], timing_metrics=s['metrics'],
-        declared_conditions=dict(corner='SS', voltage_v='0.99', temperature_c=125, period_ns='6.666666'),
+        declared_conditions=conditions, delivery_sdc=delivery,
         cases=rows, aggregate=aggregate, batch=final, history=history,
         power_references=request.get('power', []),
-        unverified=s['required_reviews']+['Protocol/recovery/contention and clean-directory reproduction',
-            'System power units, models, activity and unknown-state impact review'],
+        source_stage_review_prompts=s['required_reviews'],
+        separate_evidence_scope='Dedicated CPU protocol/recovery/contention and clean-reproduction evidence is maintained separately; omission from this exporter does not mean those runs were not performed.',
+        unverified=['Final task-mode timing review and official scoring-area attribution',
+            'System power models and unknown-state impact review; numerical units/sums are checked here',
+            'Official random-600 accuracy and post-layout physical signoff'],
         verification=dict(asic_14=True, gate_14_without_sdf=True, activity_12=True,
             timing_verified=False, scoring_area_verified=False, system_power_verified=False,
             official_precision_verified=False, physical_signoff=False), exporter_sha256=sha(__file__))
@@ -238,7 +282,9 @@ def write_outputs(report, output):
     a = report['aggregate']
     lines = ['# 架构三 ICB32 冻结配置证据汇总', '',
         '真实 ASIC/E203 14例、无SDF门级14例及12个完整活动窗口已逐项核对。时序、面积归属和系统功耗仍待审核；功耗为布局前估算。', '',
-        '统一SS、0.99V、125°C、6.666666ns。首源VALID至最终结果写ACK，随后证明排空；每任务冷启动。压缩输入传输量逐层记录，为2×编码字节数+50688B，未省略共享SRAM实际写入。', '',
+        'SS、0.99V、125°C；DC实际约束及ASIC/门级任务波形周期6.666666ns。原综合网表SDC的HF周期/下降沿为%s/%sns，PT功耗入口使用该原文件；数值是否齐全见下表。精确交付文件另列，不追改历史报告。' %
+            (report['declared_conditions']['original_sdc_period_ns'], report['declared_conditions']['original_sdc_falling_edge_ns']), '',
+        '首源VALID至最终结果写ACK，随后证明排空；每任务冷启动。压缩输入传输量逐层记录，为2×编码字节数+50688B，未省略共享SRAM实际写入。', '',
         '12层平均周期 %s；150MHz折算 %s task/s；目标为5000 task/s。' % (a['mean_cycles'], a['nominal_150mhz_tasks_per_second']), '',
         '| 层 | 周期 | 编码字节 | 平均功耗W | 能耗J/task |', '|---|---:|---:|---:|---:|']
     for r in report['cases']:
@@ -251,6 +297,10 @@ def write_outputs(report, output):
         '被动计数覆盖%d个性能任务。SRAM读写单位为一次16位宏端口请求；MAC利用率与总线事务率使用完整任务周期。各阶段响应延迟/等待可能重叠，不相加作为总时间，也不据此推断功耗。' % a['passive_metrics_layers'], '',
         '待审核项目：', '']
     lines += ['- '+item for item in report['unverified']]
+    lines += ['', '精确交付SDC：%s；未重新运行时序或覆盖原功耗。' % report['delivery_sdc']['status'], '',
+        'CPU竞争、恢复等专用证据以及干净目录复现说明另见同配置交接材料；本导出器没有再次导入这些专用回执，不将其表述为未执行。', '',
+        '源综合阶段保留的审核提示（历史快照，不能直接当作当前待办）：', '']
+    lines += ['- '+item for item in report['source_stage_review_prompts']]
     lines += ['', '历史失败、停止与未验路径：', '']
     lines += ['- %s：%s；%s' % (h['status'], h['description'], h['run']) for h in report['history']]
     (output/'report_zh.md').write_text('\n'.join(lines)+'\n', encoding='utf8')

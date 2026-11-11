@@ -15,6 +15,8 @@ class DeliveryClockTests(unittest.TestCase):
         self.assertEqual(corrected, self.other+self.line.replace('6.66667', '6.666666').replace('3.33333}', '3.333333}')+'\n')
         self.assertEqual(info['original_serialized_period_ns'], '6.66667')
         self.assertEqual(restore_clock(corrected, '6.666666')[0], corrected)
+        windows=(self.other+self.line+'\n').replace('\n','\r\n')
+        self.assertEqual(restore_clock(windows,'6.666666')[0],corrected.replace('\n','\r\n'))
 
     def test_rejects_changed_or_ambiguous_clock_instead_of_silently_overwriting(self):
         for text, period in ((self.line, '6.666667'),

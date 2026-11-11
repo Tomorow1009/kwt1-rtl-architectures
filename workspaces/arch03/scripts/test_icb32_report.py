@@ -2,12 +2,54 @@
 import copy
 import json
 import unittest
+import tempfile
 from pathlib import Path
 from unittest.mock import patch
 import icb32_report as report
 
 
 class ReportTests(unittest.TestCase):
+    def test_clock_conditions_retain_actual_rounded_power_import(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'mapped.sdc'
+            path.write_text('create_clock [get_ports hfextclk] -name hf_clk -period 6.66667 -waveform {0 3.33333}\n')
+            summary=dict(metrics=dict(period_ns='6.666666'),artifacts={'mapped.sdc':report.sha(path)})
+            values=report.clock_conditions(summary,directory,True)
+            self.assertEqual(values['period_ns'],'6.666666')
+            self.assertEqual(values['original_sdc_period_ns'],'6.66667')
+            self.assertTrue(values['power_imported_original_sdc'])
+            path.write_text(path.read_text().replace('6.66667','6.667'))
+            with self.assertRaisesRegex(ValueError,'SDC changed'):
+                report.clock_conditions(summary,directory,True)
+
+    def test_optional_delivery_does_not_claim_timing_rerun(self):
+        self.assertEqual(report.delivery_sdc_evidence(None,{},{}),
+                         dict(status='not_imported',timing_rerun=False))
+
+    def test_delivery_receipt_cannot_hide_an_extra_constraint_change(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);srun=root/'synth';out=root/'delivery';srun.mkdir();out.mkdir()
+            original='create_clock [get_ports hfextclk] -name hf_clk -period 6.66667 -waveform {0 3.33333}\n'
+            (srun/'mapped.sdc').write_bytes(original.encode('ascii'))
+            precise,change=report.restore_clock(original,'6.666666')
+            target=out/'mapped.precise.sdc';target.write_bytes(precise.encode('ascii'))
+            summary=dict(metrics=dict(period_ns='6.666666'),artifacts={
+                'mapped.sdc':report.sha(srun/'mapped.sdc'),'mapped.v':'b'*64,'metrics.txt':'c'*64})
+            sr=dict(run=str(srun),sha256='a'*64)
+            receipt=dict(schema='icb32-delivery-sdc-v1',synthesis_summary_sha256=sr['sha256'],
+                inputs_sha256=summary['artifacts'],delivery_sdc_sha256=report.sha(target),clock_change=change,
+                other_constraints_unchanged=True,netlist_modified=False,historical_power_sdc_modified=False,
+                timing_rerun=False,timing_verified=False)
+            rp=out/'receipt.json';rp.write_text(json.dumps(receipt));ref=dict(run=str(out),sha256=report.sha(rp))
+            result=report.delivery_sdc_evidence(ref,sr,summary)
+            self.assertEqual(result['status'],'precise_export_rechecked')
+            self.assertFalse(result['timing_verified'])
+            target.write_bytes(target.read_bytes()+b'set_false_path -from [all_inputs]\n')
+            receipt['delivery_sdc_sha256']=report.sha(target)
+            rp.write_text(json.dumps(receipt));ref['sha256']=report.sha(rp)
+            with self.assertRaisesRegex(ValueError,'beyond'):
+                report.delivery_sdc_evidence(ref,sr,summary)
+
     def setUp(self):
         fixture=json.loads((Path(__file__).parent/'test_fixtures/icb32_local_windows.json').read_text())['cases'][0]
         window=report.data.read_window(fixture['window_line'],fixture['result'],fixture['encoded_bytes'])
