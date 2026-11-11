@@ -1,3 +1,7 @@
+**02:55恢复核对：原综合75738/79637及队列103191继续；B报告工具本地检查通过，未部署。** 先读[02:16检查点全部增量至02:55](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。VNC workspace3/caad包空闲shell，FileZilla关闭，无待输入命令；不重复任何launch。自己的1200、gate14、SAIF/PPA仍待实际证据。
+
+**02:44：新caad8de工具包已上传/解包/716输入三固件核验，原综合75738/79637及队列103191继续。** 先读[02:16检查点全部增量至02:44](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。SAIF实际未验、没有新EDA启动；当前VNC workspace3 cwd为caad包，查询旧队列用b_validation_from_caad.txt。FileZilla关闭，无本地任务/待输入命令。不要重复上传、解包或旧作业。
+
 **02:33增量：原综合75738/79637进入高强度映射，队列103191不变。** 先读[02:16检查点全部增量至02:33](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)。37fc276云同步已核；新本地调度两例50688输出/周期不变，生产RTL未改，SAIF实际仍未验。VNC workspace3空闲shell，FileZilla关闭，无本地仿真；下一步提交新工具包，不重复旧作业。
 
 **11月12日02:16：B原综合75738/79637继续，唯一验证队列103191仍等待。** 先读[02:16完整检查点](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。ASIC14已过、4917.6566task/s；新SAIF/浮点汇总草稿本地准备，尚未实际功耗。35d包已服务器核验/云同步，不重传、不重启。VNC workspace3空闲shell，FileZilla关闭。

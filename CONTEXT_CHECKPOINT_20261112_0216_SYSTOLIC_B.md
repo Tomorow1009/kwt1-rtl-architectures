@@ -65,3 +65,23 @@
 新增`systolic_b_structure.py`复用已验证mapped端口解析器，绑定B自己的综合摘要；逐个解析LINT-2驱动层级并比对声明未使用的输入。合成层级正常/错配小检查通过，实际B网表尚未就绪，不宣称结构警告已审完。
 
 02:32:53.010370最新实际服务器观察：原锁systolic_b_v3_synth01，child79637 CPU99.5%、elapsed1:12:48、RSS25925576KiB、日志215971B，Beginning Mapping Optimizations (High effort)。不要重启。VNC仍workspace3、新35d包shell，FileZilla关闭，无本地仿真。下一步提交本轮工具、导出新不可变包（实际tiny未出，部署不等于PASS），原35d队列不修改。
+
+## 02:44增量：新SAIF/调度包已就绪，原队列仍等待
+
+最新工具提交**caad8de19f7c25f2fb5043f52c0cc165ae778c6c**，push及ls-remote一致。新包`light-light126-systolic-b-v3-20261112_023413-caad8de19f7c.zip`，11408516B/716输入，SHA**c9954967656ee51489780766da05df2b5427cf5b10e0dbbd84274a81d08af62c**，manifest SHA**55c408734dc559eb84fb3a797ce196ec6c2350d288677eb49684361313234009**。本地/板端/服务器全部输入和三固件核验通过；本轮明确比较的arch03 RTL+生产firmware共26文件，与63da包相同（未计arch02等，不能混作早前30项）。
+
+已FileZilla上传成功11.5MB界面显示/22秒（精确字节见上），空队列后Ctrl+D/Ctrl+Q退出。板端源`/home/root/systolic_b_saif_caad8de/`，GUI对应`/home/board/systolic_b_saif_caad8de/`。服务器解包UNPACK_HASH_PASS，02:42:57确认NEW_B_716_SAIF_TOOLS_FIRMWARE_PASS716及manifest相符。证据`handoff/team/evidence/SYSTOLIC_B_SAIF_PACKAGE_20261112.json`。**勿重复上传、解包，尚未启动任何新SAIF/功耗作业。**
+
+当前VNC18874435/workspace3的cwd已经切至新caad8de包。新只读`takeover_local/b_validation_from_caad.txt`已输入并Return执行；02:43:44.934642观察原35d队列103191仍waiting_synthesis，completed/optional_failures空，无error，锁75738/79637/systolic_b_v3_synth01。原队列仍在35d包，不在新caad包；今后查它用from_caad文件，原b_validation_live相对目录已不适用。`b_synth_health_new.txt`根据锁绝对路径，可在新包使用。
+
+本次FileZilla首次用ctrl+s字符串被板端拒绝，未发送按键；实际helper需`--keys Control_L s`（组合按住），后正常。密码只用既有text-file输入，没有读取/输出凭据。新FZ曾复用窗口ID20972102，但现已关闭，不能继续用该ID。所有type会话已结束、无未完成输入或Return、无本地仿真/打包任务。
+
+后续：继续原综合与35d队列。实际tiny通过后，从caad包按server_run native_saif_r4_replay → native_saif_r4_crosscheck → systolic_b_saif → systolic_b_power使用新独立session/明确来源摘要；全部同原共享锁，不能与原队列争抢或重启。当前tiny/R4核对/B活动功耗均未通过。还需新B结构警告/时序审阅、最终1200、clean ASIC14收集新增调度统计、最终报告/干净复现。没有改变冻结时间或生产硬件。
+
+## 02:55增量：恢复核对与B报告导出工具
+
+重读AGENTS、有效B计划、本检查点、根交接及STATUS，重新列举板端窗口并观察第三工作区，连接正常、空闲shell、FileZilla关闭。02:50:45.443738原综合锁仍systolic_b_v3_synth01、child79637，99.5%CPU、elapsed1:30:40、RSS25928096KiB、日志239855B，正在映射/时序优化。02:53:24.804011原103191队列仍waiting_synthesis，completed/optional_failures空，error为null。没有重启或新增EDA。
+
+新增`scripts/systolic_b_report.py`准备同配置JSON、逐层与汇总CSV、中文Markdown和哈希回执。重新验证ASIC/gate14输出、真实IRQ/WFI、boot无预加载、完整窗口、源码/平台/固件/库/网表身份；可接自己的1200和合格SAIF/12层功耗，缺项为空。最终1200另逐例核对实际日志/boot/IRQ和原始矩阵误差，未知活动影响、官方600、物理签核不自动批准。功耗区分时间加权平均与层算术平均，避免把不等时长直接平均。
+
+新增2项针对不等时长功耗、缺层不计零和工件改写拒绝的本地检查通过，Python3.6语法通过。该导出工具尚未服务器部署、未生成B最终报告；当前仍缺新综合终态、CPU恢复竞争、gate14、自己的1200和实际SAIF/PPA。生产RTL/固件未改，原716输入caad包及35d队列保持不可变。一次查找误用了不存在的tests目录，仅只读报路径不存在，实际测试位于scripts并已执行。

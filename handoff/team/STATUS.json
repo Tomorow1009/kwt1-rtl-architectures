@@ -2770,7 +2770,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "37fc276a8699001f87ebd9f1a2e4df18d6721f9b",
+    "cloud_commit": "caad8de19f7c25f2fb5043f52c0cc165ae778c6c",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2806,12 +2806,13 @@
       "stage": "systolic_b_synth",
       "pid": 75738,
       "status": "running",
-      "observed": "2026-11-12T02:32:53+08:00",
+      "observed": "2026-11-12T02:50:45+08:00",
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
       "child_pid": 79637,
       "child_cpu_percent": 99.5,
-      "child_RSS_KiB": 25925576,
-      "phase": "Beginning Mapping Optimizations (High effort)"
+      "child_RSS_KiB": 25928096,
+      "phase": "mapping_and_timing_optimization",
+      "elapsed": "01:30:40"
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2824,7 +2825,7 @@
       "pid": 103191,
       "session": "systolic_b_v3_validation01_queue",
       "bundle": "light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1",
-      "observed": "2026-11-12T02:16:09+08:00",
+      "observed": "2026-11-12T02:53:24+08:00",
       "status": "waiting_synthesis",
       "completed": [],
       "optional_failures": [],
@@ -2833,7 +2834,7 @@
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
     "native_saif_tools_local": {
-      "status": "draft_local_tests_passed_not_server_executed",
+      "status": "deployed_716_input_bundle_no_actual_SAIF_yet",
       "probe_deployed_in_waiting_queue": true,
       "R4_full_window_crosscheck": false,
       "B_activity12": false,
@@ -2848,6 +2849,12 @@
       "evidence": "handoff/team/evidence/SYSTOLIC_B_SCHEDULE_LOCAL_20261112.json",
       "source_RTL_changed": false,
       "server_collected": false
+    },
+    "native_saif_package_evidence": "handoff/team/evidence/SYSTOLIC_B_SAIF_PACKAGE_20261112.json",
+    "report_tool_local": {
+      "status": "implemented_two_checks_passed_not_deployed",
+      "hardware_changed": false,
+      "actual_final_export": false
     }
   }
 }
