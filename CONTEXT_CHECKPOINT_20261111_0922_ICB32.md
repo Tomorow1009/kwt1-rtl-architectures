@@ -53,3 +53,14 @@
 - `test_icb32_export_locked.py`两项本地检查通过：外人所有权、活跃子进程和意外锁目录内容均不得被清除，自己已完成才可释放。包装器尚未提交/打包/上传；原16KB报告工具包不用重传，可把这两个新脚本做独立小操作包，launcher指向已上传cedb报告包和相同964运行包。
 - 仍未启动大报告，`takeover_local/icb32_final_report_launch.txt`是旧无锁直接入口，**禁止直接使用**，待新包装器上传后替换成包装器的后台启动。prepare/history两个请求文件仍可按前述终态条件使用，尚未执行。
 - 最新截图`takeover_local/icb32_finish_live_0935.png`记录09:33实际状态，原队列不改；FileZilla关闭、当前最后VNC仍finish_live。压缩后继续先读计划/检查点，再上传包装器及持续当前原队列。
+
+
+## 09:40增量：功耗5层完成；锁包装器包受FTP421暂阻
+
+- **09:38:44.427857实际：原queue285397 running L06、completed=5、error=None，driver185674/PT wrapper186236。** L05为71.8645677mW、16.5705303632127979734µJ；尚不是12层均值。
+- 新包装器已提交并push到ff181611dfaab7923546963e8411a7f1bbb781ee，本地及干净包2项锁检查通过。独立小包`light-light126-icb32-export-lock-20261111_093509-ff181611dfaa`，4文件/4777B，ZIP SHA`aab947a1a6a9939ad432bbc28f1f8b51a9221b3357ba344343a3450a4df8e573`，manifest SHA`aa979998df77370f5bd4bcbabe24bacc20a4b4c31a382d6d74d4b0d8381b5380`。
+- 包在本地repo/local_runs，回执`takeover_local/icb32_export_lock_package_current.json`，板端`/home/root/icb32_export_lock_0935/<同名zip>`已SHA核对，GUI对应`/home/board/icb32_export_lock_0935/`。**未上传服务器、未解包、未启动包装器或大报告。**
+- 09:37正常FileZilla站点登录收到421 There are too many connected users，自动一次重试仍421，09:38已Ctrl+Q关闭。当前不再占FTP连接，不开旁路；稍后用同一现有站点重试，不需要再次打包或改ZIP。上一次cedb报告包和4638精确SDC均已先前正常成功，只有新锁包装器包暂缓。未重复询问用户、无自动审批拒绝。
+- FileZilla覆盖VNC时一次截图0939为黑遮挡，关闭FileZilla后0939_clear已真实读到L06；不能依据遮挡截图推测任务状态。当前最后VNC仍finish_live，窗口20971587；无本地长任务，原代理/relay保持。
+- 新包装器launch.json已固定：调用自身icb32_export_locked.py，--package指cedb报告包、--manifest-sha256=4436e191...，--session=icb32_r4_export01，cwd=964。未来终态后再后台启动，control state在964/runs/icb32_r4_export01/state.json、report.log；正式输出仍964/runs/icb32_r4_final_report01。上传后先4文件哈希及2项服务器工具测试，不能提前启动正式报告。
+- `takeover_local/progress_0940.py`执行后勿重复。接下来继续原队列，稍后重试锁包装器FTP；保持当前报告与SDC事实，不把工具准备当最终验收完成。
