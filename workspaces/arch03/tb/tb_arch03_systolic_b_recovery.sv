@@ -133,7 +133,10 @@ module tb_arch03_systolic_b_recovery;
             if(dut.error_q || dut.core_error || dut.decoder_error)$fatal(1,"Recovery clear failed");
         end
     endtask
+    integer layout_arg=2,prefetch_arg=1;
     initial begin
+        if(!$value$plusargs("LAYOUT=%d",layout_arg))layout_arg=2;
+        if(!$value$plusargs("PREFETCH=%d",prefetch_arg))prefetch_arg=1;
         if(!$value$plusargs("DATA_DIR=%s",data_dir))$fatal(1,"DATA_DIR");
         if(!$value$plusargs("ENCODED_FILE=%s",encoded_file))$fatal(1,"ENCODED_FILE");
         if(!$value$plusargs("ENCODED_BYTES=%d",encoded_bytes))$fatal(1,"ENCODED_BYTES");
@@ -143,6 +146,7 @@ module tb_arch03_systolic_b_recovery;
         $sformat(filename,"%s/result.hex",data_dir);$readmemh(filename,expected);
         $sformat(filename,"%s/saturated.hex",data_dir);$readmemh(filename,expected_sat);
         repeat(4)@(negedge clk);rst_n=1;
+        write_reg(12'h03c,32'h00100000+layout_arg);write_reg(12'h024,prefetch_arg ? 3 : 1);
         write_reg(12'h034,encoded_bytes);write_reg(12'h00c,shift_arg);write_reg(12'h040,7);
         // Invalid size, alignment, overlap and legacy layout must reject START.
         for(probe=0;probe<5;probe=probe+1)begin
@@ -156,7 +160,7 @@ module tb_arch03_systolic_b_recovery;
             expect_mmio_error=1;write_reg(12'h004,1);expect_mmio_error=0;
             if(dut.error_q!=3 || dut.active || dma_cmd_valid)$fatal(1,"Invalid config issued DMA");
             clear_fault();write_reg(12'h034,encoded_bytes);write_reg(12'h028,32'hb0000000);
-            write_reg(12'h030,32'ha000c000);write_reg(12'h03c,32'h00100002);
+            write_reg(12'h030,32'ha000c000);write_reg(12'h03c,32'h00100000+layout_arg);
         end
         $display("ICB32_CONFIG_REJECT_PASS count=5");
         // Inject source/staging/output response errors; every accepted command

@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--data',required=True,type=Path)
     parser.add_argument('--zig',required=True,type=Path)
     parser.set_defaults(rows=5)
+    parser.add_argument('--layout',type=int,choices=(2,3),default=3)
     parser.add_argument('--prefetch',type=int,choices=(0,1),default=1)
     parser.add_argument('--member',required=True)
     args=parser.parse_args()
@@ -30,7 +31,7 @@ def main():
     if git('status','--porcelain'):raise ValueError('Commit source before making a new immutable package')
     commit=git('rev-parse','HEAD')
     for name in CASES14:source_case(args.data/name)
-    name=args.member+'-systolic-b-v2-'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'-'+commit[:12]
+    name=args.member+'-systolic-b-v%d-'%args.layout+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'-'+commit[:12]
     folder=ROOT/'local_runs'/name;folder.mkdir()
     prefixes=('workspaces/arch02/','workspaces/arch03/',
         'architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001/')
@@ -48,7 +49,7 @@ def main():
     command=[sys.executable,str(folder/'workspaces/arch03/scripts/build_systolic_b_firmware.py'),
         '--zig',str(args.zig.resolve()),'--output',str(build_folder),'--rows',str(args.rows),
         '--prefetch',str(args.prefetch),'--irq-config',str(folder/'workspaces/arch03/irq_mapping.json'),
-        '--shifts','11','12']
+        '--layout',str(args.layout),'--shifts','11','12']
     log=ROOT/'local_runs'/(name+'-firmware-build.log')
     with log.open('w') as out:
         subprocess.check_call(command,cwd=str(folder),stdout=out,stderr=subprocess.STDOUT)
@@ -72,7 +73,7 @@ def main():
             if rel.startswith(allowed_prefixes) or rel in extra:paths.append(path)
     files={p.relative_to(folder).as_posix():sha(p) for p in paths}
     manifest=dict(source_commit=commit,member=args.member,architecture='arch03_systolic_b',row_lanes=args.rows,
-        files=files,runtime_layout='arch03-systolic-b-v2-with-icb32-lossless-codec',task_input_boot_bytes=0,
+        files=files,runtime_layout='arch03-systolic-b-v%d-with-lossless-codec'%args.layout,task_input_boot_bytes=0,
         firmware_irq=True,input_data_format='original14 coordinate-checked tile16 then lossless encode per task',
         platform_dependency='pinned official external source; strict ASIC installer checks full RTL fingerprint',
         cpu_execution_verified=False,timing_verified=False,official_precision_verified=False)

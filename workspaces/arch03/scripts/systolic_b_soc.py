@@ -14,7 +14,7 @@ from install_systolic_b import install
 from asic_boot import prepare as physical_boot,loader_include,image_bytes
 from build_systolic_b_firmware import elf_image,metadata_image,irq_config
 from stdcell_verify import extract_model
-import icb32_data as data
+import systolic_b_data as data
 
 MARKERS=[
     'ARCH03_ASIC_BOOT_READY bytes=262144 macros=32 scope=initial_ITCM_only',
@@ -26,19 +26,19 @@ def source_list():
     return [A2/'rtl/requantize.sv',
         A2/'arch02/rtl/sram_port.sv',A2/'arch02/rtl/sram_macro_adapter.sv']+[
         A3/'rtl'/name for name in ('arch03_systolic5x16.sv','arch03_linear16x5_systolic.sv','arch03_systolic_b_accel.sv',
-        'arch03_icb32_decoder.sv','arch03_icb32_transport.sv','arch03_icb_arb2_turnover.sv',
+        'arch03_icb32_decoder.sv','arch03_systolic_b_decoder.sv','arch03_systolic_b_transport.sv','arch03_icb_arb2_turnover.sv',
         'arch03_icb_memory_router_turnover.sv','arch03_shared_sram_turnover.sv')]
 
 
 def verify_firmware(firmware,source_root=ROOT):
     firmware,source_root=Path(firmware),Path(source_root)
     meta=data.read(firmware/'manifest.json')
-    data.require(meta.get('run_mode')=='single_cpu_systolic_b_v2' and
+    data.require(meta.get('run_mode')=='single_cpu_systolic_b_v2_v3' and
         meta.get('physical_boot_policy')=='firmware_only_no_task_inputs','Wrong ICB32 firmware mode')
     cfg=meta['configuration'];rows=cfg['row_lanes']
     data.require(cfg['mode']==1 and rows == 5,'Wrong ICB32 configuration')
     expected_id='0x4b575305'
-    data.require(meta['peripheral_id']==expected_id and meta['numeric_layout_id']=='0x00100002','Wrong ABI identity')
+    data.require(meta['peripheral_id']==expected_id and meta['numeric_layout_id']=='0x%08x'%cfg['default_layout'] and cfg['default_layout'] in (0x00100002,0x00100003) and meta['supported_layout_ids']==['0x00100002','0x00100003'],'Wrong ABI identity')
     mapping=cfg['irq_mapping']
     if cfg['irq_enabled']:
         data.require(mapping==irq_config(source_root/'workspaces/arch03/irq_mapping.json'),'IRQ mapping differs')
@@ -49,8 +49,8 @@ def verify_firmware(firmware,source_root=ROOT):
     elf=firmware/'driver.elf';data.require(sha(elf)==meta['elf_sha256'],'ELF changed')
     base,segments=elf_image(elf.read_bytes());data.require(segments==meta['segments'],'ELF segment metadata differs')
     for name,record in meta['images'].items():
-        data.require(name=='shift_%02d'%record['shift'] and record['row_lanes']==rows,'Boot template name/rows')
-        want=metadata_image(base,record['shift'],record['encoded_bytes'],rows)
+        data.require(name=='shift_%02d'%record['shift'] and record['row_lanes']==rows and record['layout']==cfg['default_layout'],'Boot template name/rows')
+        want=metadata_image(base,record['shift'],record['encoded_bytes'],rows,record['layout'])
         path,binary=firmware/(name+'.verilog'),firmware/(name+'.bin')
         data.require(sha(path)==record['sha256'] and image_bytes(path)==want and
             sha(binary)==record['binary_sha256'] and binary.read_bytes()==want,'Boot template changed')
@@ -61,7 +61,7 @@ def verify_firmware(firmware,source_root=ROOT):
 
 
 def verify_frozen(contract):
-    data.require(contract['schema']=='arch03-systolic-b-asic-build-v2' and
+    data.require(contract['schema']=='arch03-systolic-b-asic-build-v3' and
         contract['scope']=='asic_rtl_functional' and contract['global_FPGA_defined'] is False,
         'Not a genuine ASIC ICB32 build contract')
     for role in ('rtl','platform','firmware','monitor','libraries','executable','compile_receipt'):
@@ -100,7 +100,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     firmware_files=[p for p in firmware.iterdir() if p.is_file() and p.suffix in ('.elf','.bin','.verilog','.json')]
     firmware_files += [ROOT/rel for rel in fw['source_sha256']]
     if fw['configuration']['irq_enabled']:firmware_files.append(A3/'irq_mapping.json')
-    scripts=[A3/'scripts'/name for name in ('systolic_b_soc.py','icb32_data.py','icb32_codec.py','install_systolic_b.py',
+    scripts=[A3/'scripts'/name for name in ('systolic_b_soc.py','systolic_b_data.py','systolic_b_codec.py','icb32_data.py','icb32_codec.py','install_systolic_b.py',
         'install_icb32.py','install_dma16.py','install_platform.py','asic_boot.py','build_systolic_b_firmware.py','dma16_batch.py',
         'server_run.py','icb32_batch.py',
         'timing_contract.py','stdcell_verify.py','technology_binding.py')]
@@ -125,11 +125,11 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     frozen=dict(before)
     for paths in roles.values():
         for p in paths:frozen[str(p.resolve())]=sha(p)
-    contract=dict(schema='arch03-systolic-b-asic-build-v2',scope='asic_rtl_functional',
+    contract=dict(schema='arch03-systolic-b-asic-build-v3',scope='asic_rtl_functional',
         passive_metrics=True,
         global_FPGA_defined=False,files=frozen,roles={k:sorted(set(str(p.resolve()) for p in v)) for k,v in roles.items()},
         executable=str((run/'simv').resolve()),firmware=str(firmware),row_lanes=fw['configuration']['row_lanes'],
-        lock_directory=str(Path(cfg['server_root'])/'.arch02_team_lock'),clock_period_ns='6.666666',
+        layout_id=fw['configuration']['default_layout'],lock_directory=str(Path(cfg['server_root'])/'.arch02_team_lock'),clock_period_ns='6.666666',
         boot_policy='per_task_firmware_only_shift_length_metadata',required_markers=MARKERS)
     for path,digest in before.items():data.require(sha(Path(path))==digest,'Compile input changed '+path)
     verify_frozen(contract);save(run/'systolic_b_build_contract.json',contract)
@@ -137,9 +137,9 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
 
 
 def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=False):
-    task=run/(name+'_data');info=data.prepare_case(source,task,force_raw)
+    task=run/(name+'_data');info=data.prepare_case(source,task,force_raw,contract['layout_id'])
     data.verify_prepared(source,task)
-    image=metadata_image(base,info['shift'],info['encoded_bytes'],contract['row_lanes'])
+    image=metadata_image(base,info['shift'],info['encoded_bytes'],contract['row_lanes'],info['layout'])
     boot_image=run/(name+'_firmware.verilog')
     boot_image.write_bytes(''.join('%02x\n'%value for value in image).encode('ascii'))
     boot=run/(name+'_boot');boot_receipt=physical_boot(boot_image,boot)
@@ -148,7 +148,7 @@ def run_case(contract,fw,base,source,run,name,call,activity=False,force_raw=Fals
     save(boot/'manifest.json',boot_receipt)
     capture=run/(name+'.csv')
     cmd=[contract['executable'],'+BOOT_DIR='+str(boot.resolve()),'+LOAD32='+str((task/'codec32.hex').resolve()),
-        '+CODEC_BYTES='+str(info['encoded_bytes']),'+DATA_DIR='+str(task.resolve()),
+        '+CODEC_BYTES='+str(info['encoded_bytes']),'+LAYOUT='+str(info['layout']),'+DATA_DIR='+str(task.resolve()),
         '+CAPTURE='+str(capture.resolve()),'+SHIFT='+str(info['shift'])]
     if activity:cmd+=['+ACTIVITY='+str((run/(name+'.vcd')).resolve())]
     save(run/(name+'_command.json'),cmd)

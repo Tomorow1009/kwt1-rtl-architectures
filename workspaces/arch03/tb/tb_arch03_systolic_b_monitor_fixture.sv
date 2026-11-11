@@ -59,7 +59,7 @@ module icb32_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         .src_rsp_valid(sysmem_icb_rsp_valid),.src_rsp_ready(sysmem_icb_rsp_ready),.src_rsp_rdata(sysmem_icb_rsp_rdata),
         .src_rsp_err(sysmem_icb_rsp_err),.transaction_pending(a3_router_pending));
     arch03_shared_sram_turnover u_arch03_shared(.clk(clk),.rst_n(rst_n),`FIX_CONNECT(a3_mem_));
-    integer shift_arg=12,prefetch_arg=1,encoded_bytes=0;
+    integer shift_arg=12,prefetch_arg=1,encoded_bytes=0,layout_arg=32'h00100002;
     task mmio_read(input [11:0] offset);
         begin
             @(negedge clk);expl_axi_icb_cmd_valid=1;expl_axi_icb_cmd_addr=32'h40000000+offset;
@@ -94,12 +94,13 @@ module icb32_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         end
     endtask
     initial begin
+        if(!$value$plusargs("LAYOUT=%d",layout_arg))layout_arg=32'h00100002;
         if(!$value$plusargs("CODEC_BYTES=%d",encoded_bytes))$fatal(1,"CODEC_BYTES");
         if(!$value$plusargs("SHIFT=%d",shift_arg))shift_arg=12;
         if(!$value$plusargs("PREFETCH=%d",prefetch_arg))prefetch_arg=1;
         wait(rst_n);repeat(2)@(negedge clk);
         mailbox_write(0,0);
-        mmio_write(12'h034,encoded_bytes);mmio_write(12'h00c,shift_arg);mmio_write(12'h024,prefetch_arg ? 3 : 1);
+        mmio_write(12'h03c,layout_arg);mmio_write(12'h034,encoded_bytes);mmio_write(12'h00c,shift_arg);mmio_write(12'h024,prefetch_arg ? 3 : 1);
         mmio_read(12'h058);mmio_read(12'h008);
         mmio_write(12'h040,7);mmio_write(12'h004,1);
         wait(u_arch03_accel.done_q);repeat(3)@(negedge clk);
@@ -109,7 +110,7 @@ module icb32_fixture_mems(input wire clk,rst_n,`FIX_SOURCE_PORTS);
         mailbox_write(3,u_arch03_accel.output_count_q);
         // These are explicitly fixture placeholders, not executed CPU cycles.
         mailbox_write(4,0);mailbox_write(5,0);mailbox_write(6,u_arch03_accel.saturated_count_q);
-        mailbox_write(7,32'h4b575305);mailbox_write(8,32'h00100002);
+        mailbox_write(7,32'h4b575305);mailbox_write(8,layout_arg);
         mailbox_write(32,encoded_bytes);mailbox_write(33,5);
         $display("ICB32_MONITOR_FIXTURE_READY_TO_CHECK cpu_executed=false dma_executed=true");
         mailbox_write(0,32'h4b575450);

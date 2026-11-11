@@ -48,8 +48,20 @@ reg [31:0] a3_mem_addr,a3_mem_data;
 reg [3:0] a3_mem_mask;
 integer a3_outputs=0,a3_input_words=0,a3_core_outputs=0,a3_sats=0;
 integer a3_file,a3_i,a3_index,a3_lane,a3_encoded_bytes=0,a3_encoded_words=0;
+integer a3_layout=32'h00100002;
 reg [15:0] a3_raw_stream[0:23487];
 reg [15:0] a3_value;
+function [15:0] a3_stream_half(input integer n);
+    integer canonical;
+    begin
+        canonical=n;
+        if(a3_layout==32'h00100003)begin
+            if(n<1072)canonical=6336+n;
+            else if(n<7408)canonical=n-1072;
+        end
+        a3_stream_half=a3_raw_stream[canonical];
+    end
+endfunction
 initial begin
     if(!$value$plusargs("DATA_DIR=%s",a3_dir))$fatal(1,"Missing DATA_DIR");
     if(!$value$plusargs("CAPTURE=%s",a3_capture))$fatal(1,"Missing CAPTURE");
@@ -57,6 +69,8 @@ initial begin
     $readmemh({a3_dir,"/result.hex"},a3_expected);
     $readmemh({a3_dir,"/saturated.hex"},a3_sat_expected);
     if(!$value$plusargs("CODEC_BYTES=%d",a3_encoded_bytes))$fatal(1,"Missing CODEC_BYTES");
+    if(!$value$plusargs("LAYOUT=%d",a3_layout))a3_layout=32'h00100002;
+    if(a3_layout!=32'h00100002 && a3_layout!=32'h00100003)$fatal(1,"Unsupported observer layout");
     if(a3_encoded_bytes<32 || a3_encoded_bytes>47008 || a3_encoded_bytes%4)$fatal(1,"Invalid encoded length");
     a3_encoded_words=a3_encoded_bytes/4;
     $readmemh(a3_load_path,a3_expected_input,0,a3_encoded_words-1);
@@ -86,7 +100,7 @@ always @(posedge a3_mon_clk) begin
         end
         if(`A3DMA.load_fire) begin
             for(a3_lane=0;a3_lane<`A3DMA.core_load_count;a3_lane=a3_lane+1)
-                if(`A3DMA.core_load_data[a3_lane*16+:16]!==a3_raw_stream[`A3DMA.load_count_q+a3_lane])
+                if(`A3DMA.core_load_data[a3_lane*16+:16]!==a3_stream_half(`A3DMA.load_count_q+a3_lane))
                     $fatal(1,"Decoder halfword differs from original layout");
         end
         if(`A3DMA.core_out_valid && `A3DMA.core_out_ready)begin
@@ -138,7 +152,7 @@ always @(posedge a3_mon_clk) begin
                         if(a3_source_acks!=a3_encoded_words || a3_input_acks!=a3_encoded_words || a3_read_acks!=0 || a3_output_acks!=12672)
                             $fatal(1,"ICB32 three-stage transaction counts incomplete");
                         if(a3_mail[32]!=a3_encoded_bytes || (a3_mail[33]!=5) ||
-                           a3_mail[8]!=32'h00100002 || a3_mail[7]!=32'h4b575305)$fatal(1,"ICB32 firmware metadata/identity");
+                           a3_mail[8]!=a3_layout || a3_mail[7]!=32'h4b575305)$fatal(1,"ICB32 firmware metadata/identity");
                         if(a3_mail[30]==1 && (a3_mail[22]==0 || a3_mail[23]==0 || a3_mail[24]==0 ||
                            a3_mail[25]!=0 || (a3_mail[21]&1)==0))
                             $fatal(1,"IRQ firmware did not prove real external/timer interrupts and WFI");

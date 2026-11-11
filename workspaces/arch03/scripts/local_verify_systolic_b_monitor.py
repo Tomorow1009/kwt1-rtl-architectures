@@ -23,7 +23,11 @@ def main():
     parser.add_argument('--activity',action='store_true',help='Dump the production monitor task window; select exactly one case and prefetch mode')
     parser.add_argument('--bus-metrics',action='store_true',help='Add passive metrics using the same ASIC binding/instrumentation functions')
     parser.add_argument('--gate-monitor',action='store_true',help='Test generated port-bound observer on RTL; still no E203 or mapped netlist')
+    parser.add_argument('--layout',type=int,choices=(2,3),default=2)
     args=parser.parse_args()
+    global encode,decode
+    if args.layout==3:
+        from systolic_b_codec import encode,decode
     if args.gate_monitor or args.activity:raise ValueError("B gate/SAIF paths require separate integration; disabled in this fixture")
     if args.activity and (len(args.cases)!=1 or len(args.prefetch)!=1):
         parser.error('--activity requires exactly one --cases item and one --prefetch item')
@@ -33,7 +37,7 @@ def main():
     files=[A2/'rtl/requantize.sv',A2/'arch02/rtl/sram_port.sv',
            A2/'arch02/rtl/sram_macro_adapter.sv',A2/'arch02/tb/pin_mock.sv',
            A3/'rtl/arch03_systolic5x16.sv',A3/'rtl/arch03_linear16x5_systolic.sv',A3/'rtl/arch03_systolic_b_accel.sv',
-           A3/'rtl/arch03_icb32_decoder.sv',A3/'rtl/arch03_icb32_transport.sv',
+           A3/'rtl/arch03_icb32_decoder.sv', A3/'rtl/arch03_systolic_b_decoder.sv',A3/'rtl/arch03_systolic_b_transport.sv',
            A3/'rtl/arch03_icb_arb2_turnover.sv',A3/'rtl/arch03_icb_memory_router_turnover.sv',A3/'rtl/arch03_shared_sram_turnover.sv',
            A3/'tb/arch03_task_window_icb32.sv',A3/'tb/arch03_icb32_source.sv',A3/'tb/tb_arch03_systolic_b_monitor_fixture.sv']
     instrumentation=[]
@@ -55,7 +59,7 @@ def main():
         for key,width in [('cen_low',1),('gwen_low',1),('wen_low',1),('ema',3),('emaw',2),('ret1n',1)]:
             lines.append("`define A02_%s_%s %d'd%d"%(size,key.upper(),width,cfg['macros'][size][key]))
     config=folder/'arch02_sram_config.vh';config.write_text('\n'.join(lines)+'\n')
-    hashes={p:sha(p) for p in files+instrumentation+[cfg_path,config,A3/'tb/arch03_systolic_b_monitor.svh',A3/'scripts/icb32_codec.py',Path(__file__).resolve()]}
+    hashes={p:sha(p) for p in files+instrumentation+[cfg_path,config,A3/'tb/arch03_systolic_b_monitor.svh',A3/'scripts/icb32_codec.py',A3/'scripts/systolic_b_codec.py',Path(__file__).resolve()]}
     data_hashes={}
     for name in args.cases:
         task=data/name;layout=json.loads((task/'layout_manifest.json').read_text())
@@ -78,8 +82,8 @@ def main():
         load_path.write_text(''.join('%08x\n'%x[0] for x in struct.iter_unpack('<I',encoded)))
         for pf in args.prefetch:
             tag=name+'_pf%d'%pf;capture=folder/(tag+'.csv');options=folder/(tag+'.options')
-            option_text='monitor_fixture\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg LOAD32=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg CODEC_BYTES=%d\n'%(
-                task.as_posix(),load_path.as_posix(),capture.as_posix(),layout['numeric_format']['shift'],pf,len(encoded))
+            option_text='monitor_fixture\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg LOAD32=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg CODEC_BYTES=%d\n-testplusarg LAYOUT=%d\n'%(
+                task.as_posix(),load_path.as_posix(),capture.as_posix(),layout['numeric_format']['shift'],pf,len(encoded),0x00100000+args.layout)
             activity=folder/(tag+'.vcd')
             if args.activity:option_text+='-testplusarg ACTIVITY=%s\n'%activity.as_posix()
             options.write_text(option_text)
@@ -128,7 +132,7 @@ def main():
         layout=json.loads((data/name/'layout_manifest.json').read_text())
         for filename,expected_digest in layout['sha256'].items():
             if sha(data/name/filename)!=expected_digest:raise ValueError('Fixture vector content changed: '+filename)
-    report=dict(status='passed',cpu_executed=False,dma_executed=True,backend='pin_mock',bus_metrics=bool(args.bus_metrics),
+    report=dict(layout=args.layout,status='passed',cpu_executed=False,dma_executed=True,backend='pin_mock',bus_metrics=bool(args.bus_metrics),
                 generated_port_observer=args.gate_monitor,mapped_gate_verified=False,
                 scope='production_source_and_monitor_real_dma_datapath_procedural_MMIO_no_E203',
                 production_monitor_cpu_flag_in_fixture_is_not_evidence=True,tasks=len(results),

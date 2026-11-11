@@ -1,11 +1,11 @@
 `timescale 1ns/1ps
-// B/v2: cold full-X load, 60 X macros + 32 W macros, 80 output-stationary PEs.
+// B: v2 cold full-X or v3 W0/first-five-row early start. 60 X + 32 W macros.
 // The two result slots are reserved before k=0; no accepted wavefront can be
 // blocked by output backpressure. A block tag follows every SRAM response/PE.
 module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
     input wire clk,rst_n,
     input wire start_valid,output wire start_ready,
-    input wire cancel,prefetch_enable,input wire [4:0] shift,
+    input wire cancel,prefetch_enable,layout_v3,input wire [4:0] shift,
     input wire load_valid,output wire load_ready,
     input wire [63:0] load_data,input wire [2:0] load_count,
     output wire out_valid,input wire out_ready,
@@ -16,7 +16,18 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
     localparam L_IDLE=0,L_X=1,L_W=2,L_B=3,L_FINISHED=4;
     reg [2:0] load_state;
     reg active,flush_q,prefetch_q,x_valid,compute_finished;
+    reg v3_q;
+    reg [19:0] x_group_valid;
     reg [1:0] bank_valid;
+    reg [3:0] bank_tile[0:1];
+    // Eight decoded halves absorb arbitrary 1..4-element decoder vectors.
+    // Only a conflict-free prefix is consumed; the vector is not indivisible.
+    reg [15:0] stash[0:7];
+    reg [3:0] stash_count;
+    reg [14:0] accepted_halves;
+    reg [2:0] consume;
+    wire [2:0] store_count=v3_q ? consume : load_count;
+    wire [63:0] store_data=v3_q ? {stash[3],stash[2],stash[1],stash[0]} : load_data;
     reg [12:0] x_index;
     reg [4:0] x_group;
     reg [2:0] x_row_bank;
@@ -45,16 +56,29 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
     wire enabled=rst_n && !cancel && !flush_q && active && !error;
     wire load_bank=load_tile[0],compute_bank=compute_tile[0];
     wire load_slot_available=!bank_valid[load_bank] && (prefetch_q || load_tile==compute_tile);
-    wire count_ok=load_count>=1 && load_count<=4 &&
-        ((load_state==L_X && {1'b0,x_index}+load_count<=6336) ||
-         (load_state==L_W && {1'b0,w_index}+load_count<=1024) ||
-         (load_state==L_B && {1'b0,b_index}+load_count<=48));
+    wire count_ok=store_count>=1 && store_count<=4 &&
+        ((load_state==L_X && {1'b0,x_index}+store_count<=6336) ||
+         (load_state==L_W && {1'b0,w_index}+store_count<=1024) ||
+         (load_state==L_B && {1'b0,b_index}+store_count<=48));
+    wire ingress_ok=load_count>=1 && load_count<=4 && accepted_halves+load_count<=23488;
     assign start_ready=rst_n && !cancel && !flush_q && !active && !error;
-    assign load_ready=enabled && (load_state==L_X ||
-        ((load_state==L_W || load_state==L_B) && load_slot_available));
+    assign load_ready=enabled && (v3_q ? stash_count<=4 && accepted_halves<23488 :
+        (load_state==L_X || ((load_state==L_W || load_state==L_B) && load_slot_available)));
     wire load_fire=load_valid && load_ready;
-    wire store=load_fire && count_ok;
-    wire issue_read=enabled && !compute_finished && x_valid && bank_valid[compute_bank] &&
+    wire store=(v3_q ? enabled && consume!=0 : load_fire) && count_ok;
+    localparam RESPONSE_DEPTH=READ_LATENCY+2;
+    localparam RPW=$clog2(RESPONSE_DEPTH);
+    reg [RPW:0] response_credit,response_count;
+    reg [RPW-1:0] response_head,response_tail;
+    reg [79:0] queued_x[0:RESPONSE_DEPTH-1];
+    reg [255:0] queued_w[0:RESPONSE_DEPTH-1];
+    reg [5:0] queued_k[0:RESPONSE_DEPTH-1];
+    reg [4:0] queued_group[0:RESPONSE_DEPTH-1];
+    reg [8:0] queued_block[0:RESPONSE_DEPTH-1];
+    reg queued_bank[0:RESPONSE_DEPTH-1];
+    wire issue_read=enabled && !compute_finished &&
+        (v3_q ? x_group_valid[compute_group] : x_valid) && bank_valid[compute_bank] &&
+        bank_tile[compute_bank]==compute_tile && response_credit<RESPONSE_DEPTH &&
         (issue_k!=0 || !occupied[issue_block[0]]);
     wire reserve=issue_read && issue_k==0;
     wire [15:0] x_q[0:59],w_q[0:31];
@@ -69,17 +93,24 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
     reg [8:0] response_block[0:READ_LATENCY-1];
     reg [READ_LATENCY-1:0] response_bank;
     wire response=response_valid[READ_LATENCY-1];
-    wire [5:0] read_k=response_k[READ_LATENCY-1];
-    wire [4:0] read_group=response_group[READ_LATENCY-1];
-    wire [8:0] read_block=response_block[READ_LATENCY-1];
-    wire read_bank=response_bank[READ_LATENCY-1];
+    wire [5:0] port_k=response_k[READ_LATENCY-1];
+    wire [4:0] port_group=response_group[READ_LATENCY-1];
+    wire [8:0] port_block=response_block[READ_LATENCY-1];
+    wire port_bank=response_bank[READ_LATENCY-1];
+    wire [5:0] read_k=queued_k[response_head];
+    wire [4:0] read_group=queued_group[response_head];
+    wire [8:0] read_block=queued_block[response_head];
+    wire read_bank=queued_bank[response_head];
     wire [4:0] row_mask=read_group==19 ? 5'b01111 : 5'b11111;
-    wire [79:0] array_x;
-    wire [255:0] array_w;
+    wire [79:0] port_x;
+    wire [255:0] port_w;
+    wire [79:0] array_x=queued_x[response_head];
+    wire [255:0] array_w=queued_w[response_head];
     wire [4:0] x_response;
     wire [15:0] w_response;
-    wire response_complete=(&(x_response | ~row_mask)) && (&w_response);
-    wire array_feed=enabled && response && response_complete;
+    wire [4:0] port_rows=port_group==19 ? 5'b01111 : 5'b11111;
+    wire response_complete=(&(x_response | ~port_rows)) && (&w_response);
+    wire array_feed=enabled && response_count!=0;
     wire [79:0] pe_valid;
     wire [3199:0] pe_sum;
     wire [719:0] pe_block;
@@ -96,6 +127,28 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
     assign busy=enabled;
     wire pop=out_valid && out_ready;
     wire pop_last=pop && emit_index==(slot_four[read_slot] ? 7'd62 : 7'd78);
+
+    integer sj,remaining,sk,srb,sg;
+    reg prefix_open,conflict;
+    always @* begin
+        consume=0;remaining=0;sk=0;srb=0;sg=0;prefix_open=1;conflict=0;
+        case(load_state)
+            L_X:remaining=6336-x_index;
+            L_W:if(load_slot_available)remaining=1024-w_index;
+            L_B:if(load_slot_available)remaining=48-b_index;
+            default:remaining=0;
+        endcase
+        for(sj=0;sj<4;sj=sj+1)begin
+            sk=x_k+sj;srb=x_row_bank+(sk>=64);sg=x_group;
+            if(srb==5)begin srb=0;sg=x_group+1;end
+            // Read has priority on each actual macro, not on the whole row.
+            conflict=load_state==L_X && issue_read && (sg>>3)==compute_group[4:3] &&
+                (sk & 3)==issue_k[1:0] && (srb<4 || compute_group!=19);
+            if(prefix_open && sj<stash_count && sj<remaining && !conflict)consume=consume+1'b1;
+            else prefix_open=0;
+        end
+        if(!v3_q || !enabled)consume=0;
+    end
 
     genvar g,r,c;
     generate
@@ -115,9 +168,9 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
                     element_rb={1'b0,x_row_bank}+element_k[6];
                     element_group=x_group;
                     if(element_rb==5)begin element_rb=0;element_group=x_group+1'b1;end
-                    if(store && load_state==L_X && j<load_count &&
+                    if(store && load_state==L_X && j<store_count &&
                        element_rb==RB && element_k[1:0]==SUB && element_group[4:3]==SEG)begin
-                        writing=1;wa={element_group[2:0],element_k[5:2]};wd=load_data[j*16+:16];
+                        writing=1;wa={element_group[2:0],element_k[5:2]};wd=store_data[j*16+:16];
                     end
                 end
             end
@@ -138,9 +191,9 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
                 writing=0;wa=0;wd=0;idx=0;
                 for(j=0;j<4;j=j+1)begin
                     idx={1'b0,w_index}+j;
-                    if(store && load_state==L_W && j<load_count &&
+                    if(store && load_state==L_W && j<store_count &&
                        load_bank==(g/16) && idx[3:0]==(g%16))begin
-                        writing=1;wa={1'b0,idx[9:4]};wd=load_data[j*16+:16];
+                        writing=1;wa={1'b0,idx[9:4]};wd=store_data[j*16+:16];
                     end
                 end
             end
@@ -150,13 +203,13 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
                 .addr(writing ? wa : {1'b0,issue_k}),.wdata(wd),.rdata(w_q[g]),.rvalid(w_v[g]));
         end
         for(r=0;r<5;r=r+1)begin:read_rows
-            wire [5:0] selected=r*12+{read_k[1:0],1'b0}+read_k[1:0]+read_group[4:3];
-            assign array_x[r*16+:16]=x_q[selected];
+            wire [5:0] selected=r*12+{port_k[1:0],1'b0}+port_k[1:0]+port_group[4:3];
+            assign port_x[r*16+:16]=x_q[selected];
             assign x_response[r]=x_v[selected];
         end
         for(c=0;c<16;c=c+1)begin:read_columns
-            assign array_w[c*16+:16]=read_bank ? w_q[16+c] : w_q[c];
-            assign w_response[c]=read_bank ? w_v[16+c] : w_v[c];
+            assign port_w[c*16+:16]=port_bank ? w_q[16+c] : w_q[c];
+            assign w_response[c]=port_bank ? w_v[16+c] : w_v[c];
         end
         for(g=0;g<80;g=g+1)begin:convert
             wire signed [39:0] sum=pe_sum[g*40+:40];
@@ -172,11 +225,55 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
         .in_block(read_block),.in_rows(row_mask),.in_x(array_x),.in_w(array_w),
         .result_valid(pe_valid),.result_sum(pe_sum),.result_block(pe_block),.error(array_error));
 
+    integer qi;
+    always @(posedge clk or negedge rst_n)begin
+        if(!rst_n)begin
+            stash_count<=0;accepted_halves<=0;
+            response_credit<=0;response_count<=0;response_head<=0;response_tail<=0;
+            for(qi=0;qi<8;qi=qi+1)stash[qi]<=0;
+            for(qi=0;qi<RESPONSE_DEPTH;qi=qi+1)begin
+                queued_x[qi]<=0;queued_w[qi]<=0;queued_k[qi]<=0;
+                queued_group[qi]<=0;queued_block[qi]<=0;queued_bank[qi]<=0;
+            end
+        end else if(cancel || (start_valid && start_ready))begin
+            stash_count<=0;accepted_halves<=0;
+            response_credit<=0;response_count<=0;response_head<=0;response_tail<=0;
+        end else if(enabled)begin
+            if(load_fire && ingress_ok)accepted_halves<=accepted_halves+load_count;
+            if(v3_q)begin
+                stash_count<=stash_count-consume+((load_fire && ingress_ok) ? load_count : 0);
+                for(qi=0;qi<8;qi=qi+1)begin
+                    if(qi+consume<stash_count)stash[qi]<=stash[qi+consume];
+                end
+                if(load_fire && ingress_ok)begin
+                    for(qi=0;qi<4;qi=qi+1)if(qi<load_count)
+                        stash[stash_count-consume+qi]<=load_data[qi*16+:16];
+                end
+            end
+            case({issue_read,array_feed})
+                2'b10:response_credit<=response_credit+1'b1;
+                2'b01:response_credit<=response_credit-1'b1;
+            endcase
+            case({response,array_feed})
+                2'b10:response_count<=response_count+1'b1;
+                2'b01:response_count<=response_count-1'b1;
+            endcase
+            if(response)begin
+                queued_x[response_tail]<=port_x;queued_w[response_tail]<=port_w;
+                queued_k[response_tail]<=port_k;queued_group[response_tail]<=port_group;
+                queued_block[response_tail]<=port_block;queued_bank[response_tail]<=port_bank;
+                response_tail<=response_tail==RESPONSE_DEPTH-1 ? 0 : response_tail+1'b1;
+            end
+            if(array_feed)response_head<=response_head==RESPONSE_DEPTH-1 ? 0 : response_head+1'b1;
+        end
+    end
+
     integer i,j,bi,which;
     reg [6:0] next_x_k;
     always @(posedge clk or negedge rst_n)begin
         if(!rst_n)begin
             active<=0;flush_q<=0;prefetch_q<=0;x_valid<=0;compute_finished<=0;bank_valid<=0;
+            v3_q<=0;x_group_valid<=0;bank_tile[0]<=0;bank_tile[1]<=0;
             load_state<=L_IDLE;x_index<=0;x_group<=0;x_row_bank<=0;x_k<=0;
             w_index<=0;b_index<=0;load_tile<=0;compute_tile<=0;compute_group<=0;compute_row<=0;
             issue_k<=0;issue_block<=0;shift_q<=0;occupied<=0;slot_ready<=0;
@@ -202,11 +299,13 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
             end
             if(cancel)begin
                 active<=0;prefetch_q<=0;x_valid<=0;bank_valid<=0;load_state<=L_IDLE;
+                v3_q<=0;x_group_valid<=0;
                 occupied<=0;slot_ready<=0;response_valid<=0;read_slot<=0;emit_index<=0;error<=0;
                 arrived[0]<=0;arrived[1]<=0;
             end else if(start_valid && start_ready)begin
                 active<=1;prefetch_q<=prefetch_enable;shift_q<=shift;compute_finished<=0;
-                x_valid<=0;bank_valid<=0;load_state<=L_X;
+                v3_q<=layout_v3;x_group_valid<=0;
+                x_valid<=0;bank_valid<=0;load_state<=layout_v3 ? L_W : L_X;
                 x_index<=0;x_group<=0;x_row_bank<=0;x_k<=0;w_index<=0;b_index<=0;
                 load_tile<=0;compute_tile<=0;compute_group<=0;compute_row<=0;issue_k<=0;issue_block<=0;
                 occupied<=0;slot_ready<=0;slot_four<=0;slot_final<=0;read_slot<=0;emit_index<=0;
@@ -215,31 +314,37 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
                 if(store)begin
                     case(load_state)
                         L_X:begin
-                            next_x_k={1'b0,x_k}+load_count;
+                            next_x_k={1'b0,x_k}+store_count;
                             x_k<=next_x_k[5:0];
                             if(next_x_k[6])begin
-                                if(x_row_bank==4)begin x_row_bank<=0;x_group<=x_group+1'b1;end
+                                if(x_row_bank==4)begin
+                                    x_row_bank<=0;x_group<=x_group+1'b1;x_group_valid[x_group]<=1;
+                                end
                                 else x_row_bank<=x_row_bank+1'b1;
                             end
-                            if(x_index+load_count==6336)begin x_valid<=1;load_state<=L_W;w_index<=0;end
-                            else x_index<=x_index+load_count;
+                            if(x_index+store_count==6336)begin
+                                x_valid<=1;x_group_valid[19]<=1;load_state<=L_W;w_index<=0;
+                                if(v3_q)load_tile<=1;
+                            end
+                            else x_index<=x_index+store_count;
                         end
-                        L_W:if({1'b0,w_index}+load_count==1024)begin load_state<=L_B;b_index<=0;end
-                            else w_index<=w_index+load_count;
+                        L_W:if({1'b0,w_index}+store_count==1024)begin load_state<=L_B;b_index<=0;end
+                            else w_index<=w_index+store_count;
                         L_B:begin
                             for(j=0;j<4;j=j+1)begin
                                 bi=b_index+j;
-                                if(j<load_count)case(bi%3)
-                                    0:biases[load_bank*16+bi/3][15:0]<=load_data[j*16+:16];
-                                    1:biases[load_bank*16+bi/3][31:16]<=load_data[j*16+:16];
-                                    2:biases[load_bank*16+bi/3][39:32]<=load_data[j*16+:8];
+                                if(j<store_count)case(bi%3)
+                                    0:biases[load_bank*16+bi/3][15:0]<=store_data[j*16+:16];
+                                    1:biases[load_bank*16+bi/3][31:16]<=store_data[j*16+:16];
+                                    2:biases[load_bank*16+bi/3][39:32]<=store_data[j*16+:8];
                                 endcase
                             end
-                            if(b_index+load_count==48)begin
-                                bank_valid[load_bank]<=1;
+                            if(b_index+store_count==48)begin
+                                bank_valid[load_bank]<=1;bank_tile[load_bank]<=load_tile;
                                 if(load_tile==15)load_state<=L_FINISHED;
+                                else if(v3_q && load_tile==0)load_state<=L_X;
                                 else begin load_tile<=load_tile+1'b1;load_state<=L_W;w_index<=0;end
-                            end else b_index<=b_index+load_count;
+                            end else b_index<=b_index+store_count;
                         end
                     endcase
                 end
@@ -286,10 +391,10 @@ module arch03_linear16x5_systolic #(parameter READ_LATENCY=1)(
                         if(slot_final[read_slot])begin active<=0;done<=1;end
                     end else emit_index<=emit_index+7'd2;
                 end
-                if(array_error || (response && !response_complete))error<=1;
-                if(load_fire && !count_ok)error<=1;
+                if(array_error || (response && (!response_complete || (response_count==RESPONSE_DEPTH && !array_feed))))error<=1;
+                if(load_fire && (!ingress_ok || (!v3_q && !count_ok)))error<=1;
                 if(store && load_state==L_B)begin
-                    for(j=0;j<4;j=j+1)if(j<load_count && (b_index+j)%3==2 && load_data[j*16+8+:8]!=0)error<=1;
+                    for(j=0;j<4;j=j+1)if(j<store_count && (b_index+j)%3==2 && store_data[j*16+8+:8]!=0)error<=1;
                 end
             end
         end

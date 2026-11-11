@@ -39,3 +39,37 @@
 ## 保留的失败尝试
 
 array runner相对__file__改resolve；首个cached core调用误指不存在prepared/tile8在编译前失败；文档默认GBK读取失败改UTF8；复制面积测试时误将RAMSP4096改4092只影响测试夹具，已修正3项通过。20:01一次大段中文PowerShell→Python stdin更新检查点因UTF8解码失败，整段未执行，改apply_patch保存此文档。没有发生RTL数值失败。所有失败目录保留。
+
+## 提交、云同步及上传增量
+
+基础B已提交 **e11c317c960b18fb60ecbaddf9449f2ff00448be**，38文件。已正常push指定私人分支，并ls-remote独立确认相同SHA；不是仅本地提交。完整小型本地摘要已入库handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json。
+
+首个不可变包local_runs/light-light126-systolic-b-v2-20261111_200441-e11c317c960b.zip已生成并逐文件校验：**11172059B、655文件、SHA fe3c47b4276ccb91bddd084b90e58133cc5b8300e5b45f0871437e6a8bf1330b**。从Git导出LF字节重编IRQ固件，包内不含库/凭据/聊天。package session99731已结束。
+
+已板端upload并独立SHA核对，暂存/opt/ac820-gui-root/root/同名ZIP；复制到/home/root/systolic_b_v2_e11c317/，GUI路径/home/board/systolic_b_v2_e11c317/。BusyBox cp不支持-n第一次失败（仅mkdir成功），改先test目标不存在再cp正常，无覆盖。
+
+Linux FileZilla已打开并经现有IC-single-connection站点成功登录；主窗口**23069254、1198×645、class Filezilla**。密码仅用现有受保护文件内部输入，未输出。远端明确选择**/IC/light-light126-undergrad-d2-20261109/**。已选本地唯一11.2MB新包并按Return发起上传，**当前尚未截图确认传输完成**，不要重复发起。下一步先截图检查队列/成功项，成功后Ctrl+D/Q正常断开关闭，再核服务器包SHA并安全解包。
+
+VNC最后仍工作区3shell /storage1/admin_public_dir，但现在被FileZilla覆盖，关闭后重新观察焦点再输入。还没有在服务器解包或运行B。文件传输涉及的本地exec70359已正常结束，没有本地pending session。下一轮继续先读本计划和此检查点。
+
+## 20:16增量：上传/安全解包/655输入和固件核验通过
+
+FileZilla实际成功11.2MB、22秒、队列空，已Ctrl+D/Q关闭并windows确认消失。服务器经原已校验unpack.py安全解包，回执UNPACK_HASH_PASS，目录为上述根的bundles/light-light126-systolic-b-v2-20261111_200441-e11c317c960b。**不要重复上传或解包。**
+
+工作区3 shell现cwd为新B包。已实际运行server_run.inputs和systolic_b_soc.verify_firmware：655文件及IRQ固件ID4b575305均通过，LOCK False。随后的ps列表解析因空行IndexError失败，未启动任何作业。已输入并按Return执行修正版b_process_tools.txt（加len>1），**下一步截图读取结果**，再启动B自己的systolic_b_soc/新session。尚无ASIC作业身份。工具查询和包验证均只读，未清锁或停止其它任务。
+
+根交接指向本检查点；当前只新增检查点文档未提交，e11c317受测硬件不改。所有本地仿真和打包session均已结束，VNC20971587工作区3，没有FileZilla窗口，无CUA会话欠completion_summary。
+
+## 20:19增量：首个B真实ASIC14已启动，禁止重复
+
+20:17实际只读检查EDA_PIDS=[]、LOCK=False。工具VCS=/eda/synopsys/vcs/vcs_2020.03-SP2-6/bin/vcs，DC=/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell，LC=/eda/synopsys/lib_compiler/lib_compiler_2022.03-SP5/bin/lc_shell；PT路径未核。
+
+已执行b_asic14_launch.txt，启动 **PID87707 / session systolic_b_v2_first01 / stage systolic_b_soc**。包根为上述e11c317，运行目录runs/systolic_b_v2_first01/systolic_b_soc，launcher日志runs/systolic_b_v2_first01_launcher.log。20:19截图实际看到锁owner PID87707/host RDserver04/bundle新B/session匹配，尚无child_pid，launcher tail为空；state内容因屏幕滚动未读到，不据此宣称编译或案例通过。
+
+下一步用紧凑字段查询state、PID存活/CPU和实际日志，不要重启或改运行包。本地v3尚未开始。当前VNC工作区3为新B包shell，原查询已结束；没有前台监控或悬空工具session。FileZilla保持关闭。
+
+## 20:24增量：B真实ASIC14通过，新综合99451已启动
+
+原systolic_b_v2_first01于20:20:50.929163自然完成。独立重读summary及state并核对摘要一致：14例、354816输出、IRQ/WFI全部通过，12层平均36862周期（150MHz折算4069.2311866task/s），各例仿真宿主耗时合计45.297351秒，不含编译。截图b_asic14_verified.png保留摘要，完整SHA以服务器原文件为准，尚未回传完整JSON。此证据仅对应e11c317 B/v2，不转移至未来v3。
+
+确认旧锁释放后已启动新session **systolic_b_v2_synth01 / systolic_b_synth / PID99451**。包仍为不可变e11c317。20:24:19截图b_synth_started.png明确B_SYNTH_STARTED 99451。运行目录runs/systolic_b_v2_synth01/systolic_b_synth，launcher为runs/systolic_b_v2_synth01_launcher.log。不得重启综合。下一步读取原作业状态，继续本地v3与SAIF准备。B CPU竞争/恢复、1200、门级、功耗仍待办；旧R4不重跑。

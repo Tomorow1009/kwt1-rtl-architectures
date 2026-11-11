@@ -2,7 +2,7 @@
 // Actual DMA16 + actual linear16 + actual shared-SRAM RTL. The source is a
 // handshake-respecting test device holding offline packet bytes, not answers.
 // Uses the actual new arbiter/router; the CPU input is idle, not an E203 model.
-module tb_arch03_systolic_b_datapath;
+module tb_arch03_systolic_b_datapath #(parameter SOURCE_CREDITS=3);
     localparam ROW_LANES=5;
     reg clk=0,rst_n=0,cmd_valid=0,cmd_read=0,rsp_ready=0;
     reg [31:0] cmd_addr=0,cmd_wdata=0;
@@ -32,7 +32,7 @@ module tb_arch03_systolic_b_datapath;
     wire response_gate=(!jitter || tick%7!=0) && last_delay==0;
     assign src_cmd_ready=command_gate && !source_pending;
     assign mem_cmd_ready=command_gate && shared_ready;
-    arch03_systolic_b_accel dut(.*);
+    arch03_systolic_b_accel #(.SOURCE_CREDITS(SOURCE_CREDITS)) dut(.*);
     arch03_icb_arb2_turnover arb(
         .clk(clk),.rst_n(rst_n),.cpu_cmd_valid(1'b0),.cpu_cmd_ready(),.cpu_cmd_addr(32'b0),
         .cpu_cmd_read(1'b1),.cpu_cmd_wdata(32'b0),.cpu_cmd_wmask(4'b0),
@@ -62,7 +62,7 @@ module tb_arch03_systolic_b_datapath;
         .rsp_ready(mem_rsp_ready && response_gate),.rsp_rdata(shared_rsp_data),.rsp_err(shared_rsp_err));
     reg [15:0] packet[0:23487],expected[0:25343];
     reg [31:0] encoded[0:11751];
-    integer encoded_bytes=0,encoded_words=0,v;
+    integer encoded_bytes=0,encoded_words=0,v,layout_arg=2;
     string encoded_file;
     reg expected_sat[0:25343],seen[0:25343];
     reg pending=0,saved_read;
@@ -73,8 +73,38 @@ module tb_arch03_systolic_b_datapath;
     reg [68:0] held_payload;
     integer start_cycle=0,end_cycle=0,initial_writes=0,reads=0,writes=0,output_words=0;
     integer i,idx,fd,source_words=0,sat_count=0,overlap=0,max_fifo=0,cycles;
+    integer first_issue=-1,last_block_cycle=-1,block_gaps=0,blocks_issued=0,write_conflicts=0;
+    integer missing_group=0,missing_weight=0,result_blocked=0,credit_blocked=0;
+    integer header_wait=0;
+    genvar bg;
+    generate
+        for(bg=0;bg<60;bg=bg+1)begin:check_x_ports
+            always @(posedge clk)if(rst_n && dut.core.x_banks[bg].writing && dut.core.x_banks[bg].reading)
+                $fatal(1,"B X macro simultaneous write/read %0d",bg);
+        end
+        for(bg=0;bg<32;bg=bg+1)begin:check_w_ports
+            always @(posedge clk)if(rst_n && dut.core.weight_banks[bg].writing && dut.core.weight_banks[bg].reading)
+                $fatal(1,"B W macro simultaneous write/read %0d",bg);
+        end
+        for(bg=0;bg<80;bg=bg+1)begin:check_pe_count
+            always @(posedge clk)if(rst_n && dut.core.pe_valid[bg] &&
+                dut.core.array.rows[bg/16].columns[bg%16].pe.accepted_count!==7'd64)
+                $fatal(1,"B output has wrong MAC count %0d",bg);
+        end
+    endgenerate
     string data_dir,capture_path;
     reg [8191:0] filename;
+    function [15:0] stream_half(input integer n);
+        integer canonical;
+        begin
+            canonical=n;
+            if(layout_arg==3)begin
+                if(n<1072)canonical=6336+n;
+                else if(n<7408)canonical=n-1072;
+            end
+            stream_half=packet[canonical];
+        end
+    endfunction
     always #3.333333 clk=~clk;
     // Master valid is registered. Observe its issuing edge after NBA updates,
     // including a request held for ready; clock-sampling on the next edge would
@@ -117,13 +147,32 @@ module tb_arch03_systolic_b_datapath;
         if(dut.error_q!=0)$fatal(1,"DMA16 engine error code=%0d phase=%0d addr=%h",dut.error_q,dut.error_phase_q,dut.error_addr_q);
         if(dut.tr_output_count>max_fifo)max_fifo=dut.tr_output_count;
         if(dut.core.issue_read && dut.core.load_fire)overlap=overlap+1;
+        if(started && !ended && dut.core.enabled && !dut.core.compute_finished)begin
+            if(!(layout_arg==3 ? dut.core.x_group_valid[dut.core.compute_group] : dut.core.x_valid))missing_group=missing_group+1;
+            if(!dut.core.bank_valid[dut.core.compute_bank])missing_weight=missing_weight+1;
+            if(dut.core.issue_k==0 && dut.core.occupied[dut.core.issue_block[0]])result_blocked=result_blocked+1;
+            if(dut.core.response_credit>=dut.core.RESPONSE_DEPTH)credit_blocked=credit_blocked+1;
+            if(layout_arg==3 && dut.core.stash_count!=0 && dut.core.consume==0 && dut.core.load_state==1)write_conflicts=write_conflicts+1;
+        end
+        if(dut.core.issue_read)begin
+            if(layout_arg==3 && !dut.core.x_group_valid[dut.core.compute_group])$fatal(1,"Read before X group committed");
+            if(dut.core.bank_tile[dut.core.compute_bank]!=dut.core.compute_tile)$fatal(1,"Wrong weight tile tag");
+            if(first_issue<0)begin
+                first_issue=tick-start_cycle;
+                if(layout_arg==3 && dut.core.x_valid)$fatal(1,"v3 failed first-five-row early start");
+            end
+        end
+        if(dut.core.reserve)begin
+            if(last_block_cycle>=0)block_gaps=block_gaps+(tick-last_block_cycle-64);
+            last_block_cycle=tick;blocks_issued=blocks_issued+1;
+        end
         if(dut.committed_valid && dut.committed_ready) begin
             if(dut.decoded_words>=initial_writes || dut.committed_data!==encoded[dut.decoded_words])
                 $fatal(1,"Decoder consumed uncommitted or wrong encoded word");
         end
         if(dut.load_fire) begin
             for(v=0;v<dut.core_load_count;v=v+1)
-                if(dut.core_load_data[v*16+:16]!==packet[dut.load_count_q+v])
+                if(dut.core_load_data[v*16+:16]!==stream_half(dut.load_count_q+v))
                     $fatal(1,"Decompressed core stream mismatch halfword=%0d",dut.load_count_q+v);
         end
         if(dut.output_fire) begin
@@ -180,6 +229,7 @@ module tb_arch03_systolic_b_datapath;
         if(!$value$plusargs("ENCODED_FILE=%s",encoded_file))$fatal(1,"ENCODED_FILE required");
         if(!$value$plusargs("ENCODED_BYTES=%d",encoded_bytes))$fatal(1,"ENCODED_BYTES required");
         encoded_words=encoded_bytes/4;
+        if(!$value$plusargs("LAYOUT=%d",layout_arg))layout_arg=2;
         $readmemh(encoded_file,encoded,0,encoded_words-1);
         if(!$value$plusargs("DATA_DIR=%s",data_dir))$fatal(1,"DATA_DIR required");
         if(!$value$plusargs("CAPTURE=%s",capture_path))capture_path="dma_capture.csv";
@@ -195,7 +245,7 @@ module tb_arch03_systolic_b_datapath;
         for(i=0;i<25344;i=i+1)if((^expected[i])===1'bx || expected_sat[i]===1'bx)$fatal(1,"Missing reference output");
         fd=$fopen(capture_path,"w");if(!fd)$fatal(1,"Capture open failed");
         repeat(4)@(negedge clk);rst_n=1;
-        write_reg(12'h034,encoded_bytes);write_reg(12'h03c,32'h00100002);write_reg(12'h00c,shift_arg);write_reg(12'h024,prefetch ? 3 : 1);write_reg(12'h040,7);write_reg(12'h004,1);
+        write_reg(12'h034,encoded_bytes);write_reg(12'h03c,32'h00100000+layout_arg);write_reg(12'h00c,shift_arg);write_reg(12'h024,prefetch ? 3 : 1);write_reg(12'h040,7);write_reg(12'h004,1);
         wait(dut.done_q);repeat(4)@(negedge clk);
         for(i=0;i<25344;i=i+1)if(!seen[i])$fatal(1,"Missing actual output");
         if(reads!=encoded_words || writes!=encoded_words+12672 || initial_writes!=encoded_words || source_words!=encoded_words ||
@@ -209,6 +259,8 @@ module tb_arch03_systolic_b_datapath;
         $fclose(fd);
         $display("ARCH03_SYSTOLIC_B_DATAPATH_PASS outputs=25344 cycles=%0d prefetch=%0d jitter=%0d overlap=%0d fifo_max=%0d saturated=%0d cpu_executed=false",end_cycle-start_cycle,prefetch,jitter,overlap,max_fifo,sat_count);
         $display("ICB32_TASK_METRICS bytes=%0d turns=%0d rows=%0d",encoded_bytes,dut.turnovers,ROW_LANES);
+        if(blocks_issued!=320)$fatal(1,"Wrong block count %0d",blocks_issued);
+        $display("B_PIPELINE layout=%0d first_issue=%0d block_gaps=%0d missing_x=%0d missing_w=%0d result_blocked=%0d credit_blocked=%0d x_write_conflicts=%0d",layout_arg,first_issue,block_gaps,missing_group,missing_weight,result_blocked,credit_blocked,write_conflicts);
         // No reset: the completed core still has X valid. A second START must
         // invalidate it before issuing any new hardware loading request. Hold
         // that request, then cancel and drain it through the actual fabric.

@@ -1,4 +1,4 @@
-**Active: direct 5x16 systolic B implementation; A cancelled.** See [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [20:00 checkpoint](../../CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md). Local v2 full14 passed, currently slower than frozen R4. ASIC/PPA pending; historical R4 evidence below remains unchanged.
+**Active: direct 5x16 systolic B/v3, credits3, local14 passed (30502.33 cycles / 4917.66 task/s).** See [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [21:08 checkpoint](../../CONTEXT_CHECKPOINT_20261111_2055_SYSTOLIC_B.md). New v3 IRQ firmware/tools ready, ASIC/PPA pending. Older e11 B/v2 ASIC14 passed and original synthesis99451 continues; R4 frozen evidence remains unchanged.
 
 # 架构三：E203 System Bus 集成
 

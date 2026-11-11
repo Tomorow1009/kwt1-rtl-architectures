@@ -1,7 +1,8 @@
 `timescale 1ns/1ps
-// B/v2: same MMIO controls, independent systolic capability ID.
+// B/v2 and v3: same MMIO controls, independent systolic capability ID.
 // DMA accepts paired results; legacy debug OUTPUT still returns one halfword.
 module arch03_systolic_b_accel #(
+    parameter SOURCE_CREDITS=3,
     parameter [31:0] BASE_ADDR=32'h40000000,SHARED_BASE=32'ha0000000,SHARED_BYTES=32'h80000
 )(
     input wire clk,rst_n,
@@ -52,11 +53,28 @@ module arch03_systolic_b_accel #(
     wire [2:0] decoder_count;
     wire [3:0] decoder_error_code;
     wire [31:0] decoder_accepted_bytes,decoder_halfwords;
+    wire use_v3=layout_q==32'h00100003;
+    wire v2_in_ready,v2_valid,v2_busy,v2_done,v2_error;
+    wire v3_in_ready,v3_valid,v3_busy,v3_done,v3_error;
+    wire [63:0] v2_data,v3_data;
+    wire [2:0] v2_count,v3_count;
+    wire [3:0] v2_error_code,v3_error_code;
+    wire [31:0] v2_bytes,v3_bytes,v2_halves,v3_halves;
+    assign committed_ready=use_v3 ? v3_in_ready : v2_in_ready;
+    assign decoder_valid=use_v3 ? v3_valid : v2_valid;
+    assign decoder_data=use_v3 ? v3_data : v2_data;
+    assign decoder_count=use_v3 ? v3_count : v2_count;
+    assign decoder_busy=use_v3 ? v3_busy : v2_busy;
+    assign decoder_done=use_v3 ? v3_done : v2_done;
+    assign decoder_error=use_v3 ? v3_error : v2_error;
+    assign decoder_error_code=use_v3 ? v3_error_code : v2_error_code;
+    assign decoder_accepted_bytes=use_v3 ? v3_bytes : v2_bytes;
+    assign decoder_halfwords=use_v3 ? v3_halves : v2_halves;
     wire [32:0] source_end={1'b0,source_q}+{1'b0,input_bytes_q};
     wire [32:0] input_end={1'b0,input_q}+{1'b0,input_bytes_q};
     wire [32:0] output_end={1'b0,output_q}+{1'b0,output_bytes_q};
     wire [32:0] shared_end={1'b0,SHARED_BASE}+{1'b0,SHARED_BYTES};
-    wire config_ok=layout_q==LAYOUT_ID && input_bytes_q>=32 && input_bytes_q<=47008 && input_bytes_q[1:0]==0 &&
+    wire config_ok=(layout_q==LAYOUT_ID || use_v3) && input_bytes_q>=32 && input_bytes_q<=47008 && input_bytes_q[1:0]==0 &&
         output_bytes_q==OUTPUT_BYTES && source_q>=32'hb0000000 && source_end<=33'h0b000c000 &&
         source_q[1:0]==0 && input_q[1:0]==0 && output_q[1:0]==0 &&
         input_q>=SHARED_BASE && input_end<=shared_end && output_q>=SHARED_BASE && output_end<=shared_end &&
@@ -90,17 +108,24 @@ module arch03_systolic_b_accel #(
     assign irq=|(irq_enable_q & irq_status_q);
     arch03_linear16x5_systolic core(
         .clk(clk),.rst_n(rst_n),.cancel(core_cancel_q),.prefetch_enable(mode_q[1]),
+        .layout_v3(mode_q[0] && use_v3),
         .start_valid(core_start_valid),.start_ready(core_start_ready),.shift(shift_q),
         .load_valid(core_load_valid),.load_ready(core_load_ready),.load_data(core_load_data),.load_count(core_load_count),
         .out_valid(core_out_valid),.out_ready(core_out_ready),.out_row(core_row),.out_column(core_col),
         .result(core_result),.saturated(core_sat),.busy(core_busy),.done(core_done),.error(core_error));
     arch03_icb32_decoder decoder(
-        .clk(clk),.rst_n(rst_n),.start(launch_dma),.cancel(core_cancel_q),.encoded_bytes(input_bytes_q),
-        .in_valid(committed_valid),.in_ready(committed_ready),.in_data(committed_data),
-        .out_valid(decoder_valid),.out_ready(decoder_ready),.out_data(decoder_data),.out_count(decoder_count),
-        .busy(decoder_busy),.done(decoder_done),.error(decoder_error),.error_code(decoder_error_code),
-        .accepted_bytes(decoder_accepted_bytes),.decoded_halfwords(decoder_halfwords));
-    arch03_icb32_transport transport(
+        .clk(clk),.rst_n(rst_n),.start(launch_dma && !use_v3),.cancel(core_cancel_q),.encoded_bytes(input_bytes_q),
+        .in_valid(committed_valid && !use_v3),.in_ready(v2_in_ready),.in_data(committed_data),
+        .out_valid(v2_valid),.out_ready(decoder_ready && !use_v3),.out_data(v2_data),.out_count(v2_count),
+        .busy(v2_busy),.done(v2_done),.error(v2_error),.error_code(v2_error_code),
+        .accepted_bytes(v2_bytes),.decoded_halfwords(v2_halves));
+    arch03_systolic_b_decoder decoder_v3(
+        .clk(clk),.rst_n(rst_n),.start(launch_dma && use_v3),.cancel(core_cancel_q),.encoded_bytes(input_bytes_q),
+        .in_valid(committed_valid && use_v3),.in_ready(v3_in_ready),.in_data(committed_data),
+        .out_valid(v3_valid),.out_ready(decoder_ready && use_v3),.out_data(v3_data),.out_count(v3_count),
+        .busy(v3_busy),.done(v3_done),.error(v3_error),.error_code(v3_error_code),
+        .accepted_bytes(v3_bytes),.decoded_halfwords(v3_halves));
+    arch03_systolic_b_transport #(.SOURCE_CREDITS(SOURCE_CREDITS)) transport(
         .clk(clk),.rst_n(rst_n),.start(launch_dma),.cancel(cancel_request || state_q==DRAIN),
         .source_addr(source_q),.input_addr(input_q),.encoded_bytes(input_bytes_q),
         .output_valid(tr_output_valid),.output_ready(tr_output_ready),.output_addr(result_address),.output_data(core_result),
@@ -149,7 +174,7 @@ module arch03_systolic_b_accel #(
                 12'h068:read_value=0; // No shared readback in this ABI.
                 12'h06c:read_value=output_acks_q;
                 12'h070:read_value=saturated_count_q;
-                12'h074:read_value=32'h0003053f;
+                12'h074:read_value=32'h000405ff;
                 12'h078:read_value=decoder_accepted_bytes;
                 12'h07c:read_value=decoder_halfwords;
                 12'h080:read_value=offered_cycles;

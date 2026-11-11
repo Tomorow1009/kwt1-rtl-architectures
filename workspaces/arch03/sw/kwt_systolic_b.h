@@ -14,6 +14,7 @@
 #define KWT_ICB32_MAX_INPUT_BYTES 47008u
 #define KWT_ICB32_OUTPUT_BYTES 50688u
 #define KWT_ICB32_LAYOUT 0x00100002u
+#define KWT_SYSTOLIC_LAYOUT_V3 0x00100003u
 #define KWT_ICB32_INPUT_HALVES 23488u
 #define KWT_ICB32_OUTPUT_HALVES 25344u
 #ifndef KWT_ICB32_USE_IRQ
@@ -51,7 +52,7 @@ enum kwt_icb32_result {
 };
 struct kwt_icb32_config {
     uint32_t source, input, output, shift, encoded_bytes;
-    uint32_t dma_mode, prefetch;
+    uint32_t dma_mode, prefetch, layout;
 };
 struct kwt_icb32_stats {
     uint64_t cycles;

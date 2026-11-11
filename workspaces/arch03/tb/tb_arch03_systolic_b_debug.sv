@@ -46,9 +46,9 @@ module tb_arch03_systolic_b_debug;
         for(i=0;i<25344;i=i+1)seen[i]=0;
         repeat(4)@(negedge clk);rst_n=1;
         access(1,0,0,0,value);if(value!=32'h4b575305)$fatal(1,"B identity");
-        access(1,12'h074,0,0,value);if(value!=32'h0003053f)$fatal(1,"B capabilities");
-        // Explicitly reject v3 until the new decoder is actually implemented.
-        access(0,12'h03c,32'h00100003,0,value);access(0,4,1,1,value);
+        access(1,12'h074,0,0,value);if(value!=32'h000405ff)$fatal(1,"B capabilities");
+        // Unknown layouts are rejected, even though v2 and v3 are supported.
+        access(0,12'h03c,32'h00100004,0,value);access(0,4,1,1,value);
         access(1,12'h020,0,0,value);if(value!=3)$fatal(1,"Unsupported layout accepted");
         access(0,4,4,0,value);access(0,12'h03c,32'h00100002,0,value);
         access(0,12'h024,2,0,value);access(0,12'h00c,shift_arg,0,value);
@@ -71,7 +71,7 @@ module tb_arch03_systolic_b_debug;
         access(1,12'h01c,0,0,value);if(value!=25344)$fatal(1,"DEBUG output count");
         access(1,12'h070,0,0,value);if(value!=sats)$fatal(1,"DEBUG saturation count");
         for(i=0;i<25344;i=i+1)if(!seen[i])$fatal(1,"DEBUG missing coordinate");
-        $display("SYSTOLIC_B_DEBUG_PASS outputs=25344 held_cycles=%0d no_dma=true v3_rejected=true cpu_executed=false",held_cycles);
+        $display("SYSTOLIC_B_DEBUG_PASS outputs=25344 held_cycles=%0d no_dma=true unknown_layout_rejected=true cpu_executed=false",held_cycles);
         $finish;
     end
     initial begin #10000000;$fatal(1,"DEBUG timeout");end

@@ -15,18 +15,22 @@ def main():
     parser.add_argument('--vivado-bin', required=True, type=Path)
     parser.set_defaults(rows=5)
     parser.add_argument('--raw', action='store_true')
+    parser.add_argument('--layout',type=int,choices=(2,3),default=2)
     parser.add_argument('--data', required=True, type=Path)
     parser.add_argument('--cases', nargs='+', default=['layer_%02d' % x for x in range(1, 13)] + ['extremes', 'rounding'])
     parser.add_argument('--prefetch', type=int, nargs='+', choices=[0, 1], default=[0, 1])
     parser.add_argument('--jitter', type=int, choices=[0, 1], default=1)
     args = parser.parse_args()
+    global encode,decode,describe
+    if args.layout==3:
+        from systolic_b_codec import encode,decode,describe
     folder = ROOT / 'local_runs' / ('systolic_b_recovery_' + datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     folder.mkdir(parents=True)
     data = args.data.resolve()
     files = [A2 / 'rtl/requantize.sv', A2 / 'arch02/rtl/sram_port.sv',
              A2 / 'arch02/rtl/sram_macro_adapter.sv', A2 / 'arch02/tb/pin_mock.sv',
              A3 / 'rtl/arch03_systolic5x16.sv', A3 / 'rtl/arch03_linear16x5_systolic.sv', A3 / 'rtl/arch03_systolic_b_accel.sv',
-             A3 / 'rtl/arch03_icb32_decoder.sv', A3 / 'rtl/arch03_icb32_transport.sv',
+             A3 / 'rtl/arch03_icb32_decoder.sv', A3 / 'rtl/arch03_systolic_b_decoder.sv', A3 / 'rtl/arch03_systolic_b_transport.sv',
              A3 / 'rtl/arch03_icb_arb2_turnover.sv', A3 / 'rtl/arch03_icb_memory_router_turnover.sv',
              A3 / 'rtl/arch03_shared_sram_turnover.sv', A3 / 'tb/tb_arch03_systolic_b_recovery.sv']
     cfg_path = A2 / 'arch02/tb/pin_mock_config.json'
@@ -37,7 +41,7 @@ def main():
             lines.append("`define A02_%s_%s %d'd%d" % (size, key.upper(), width, cfg['macros'][size][key]))
     config = folder / 'arch02_sram_config.vh'
     config.write_text('\n'.join(lines) + '\n')
-    before = {p: sha(p) for p in files + [cfg_path, config, Path(__file__).resolve(), A3 / 'scripts/icb32_codec.py']}
+    before = {p: sha(p) for p in files + [cfg_path, config, Path(__file__).resolve(), A3 / 'scripts/icb32_codec.py', A3 / 'scripts/systolic_b_codec.py']}
     data_hashes = {}
     for name in args.cases:
         task = data / name
@@ -66,8 +70,8 @@ def main():
             tag = name + '_pf%d' % pf
             capture = folder / (tag + '.csv')
             options = folder / (tag + '.options')
-            options.write_text('icb32_recovery\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg JITTER=%d\n-testplusarg ENCODED_FILE=%s\n-testplusarg ENCODED_BYTES=%d\n' %
-                               (task.as_posix(), capture.as_posix(), layout['numeric_format']['shift'], pf, args.jitter, encoded_path.as_posix(), len(encoded)))
+            options.write_text('icb32_recovery\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg JITTER=%d\n-testplusarg ENCODED_FILE=%s\n-testplusarg ENCODED_BYTES=%d\n-testplusarg LAYOUT=%d\n' %
+                               (task.as_posix(), capture.as_posix(), layout['numeric_format']['shift'], pf, args.jitter, encoded_path.as_posix(), len(encoded),args.layout))
             text = run([tool('xsim'), '-f', options], folder, tag + '.log')
             if 'ICB32_RECOVERY_SUITE_PASS outputs=25344 no_reset=true' not in text: raise ValueError('Recovery missing completion')
             if text.count('ICB32_RESPONSE_ERROR_PASS kind=')!=3 or text.count('ICB32_CANCEL_RECOVERY_PASS phase=')!=4: raise ValueError('Recovery missing directed checks')
@@ -79,7 +83,7 @@ def main():
     for name, digest in data_hashes.items():
         if sha(data / name / 'layout_manifest.json') != digest:
             raise ValueError('Vector layout changed during run')
-    report = dict(status='passed', cpu_executed=False, backend='pin_mock', dma_executed=True,
+    report = dict(layout=args.layout,status='passed', cpu_executed=False, backend='pin_mock', dma_executed=True,
                   scope='local_systolic_b_fault_cancel_and_recovery_no_e203', tasks=len(rows),
                   next_task_cache_invalidation_and_cancel=True,
                   outputs=len(rows)*25344, cases=rows,

@@ -17,14 +17,14 @@ int main(void) {
     struct kwt_icb32_config cfg;
     struct kwt_icb32_stats stats;
     cfg.source=KWT_ICB32_SOURCE;cfg.input=KWT_ICB32_INPUT;cfg.output=KWT_ICB32_OUTPUT;
-    cfg.shift=metadata[0];cfg.encoded_bytes=metadata[1];cfg.dma_mode=KWT_ICB32_DEFAULT_MODE;cfg.prefetch=KWT_ICB32_DEFAULT_PREFETCH;
+    cfg.shift=metadata[0];cfg.encoded_bytes=metadata[1];cfg.layout=metadata[2];cfg.dma_mode=KWT_ICB32_DEFAULT_MODE;cfg.prefetch=KWT_ICB32_DEFAULT_PREFETCH;
     mail[0]=0;
     int rc=kwt_icb32_run(&cfg,KWT_ICB32_TIMEOUT_CYCLES,KWT_ICB32_CANCEL_TIMEOUT_CYCLES,&stats);
     /* Existing completion fields retained. Firmware cycles are diagnostic;
      * official task time comes from the passive first-request/last-ACK window. */
     mail[1]=(uint32_t)rc;mail[2]=stats.input_words;mail[3]=stats.output_words;
     mail[4]=(uint32_t)stats.cycles;mail[5]=(uint32_t)(stats.cycles>>32);mail[6]=stats.saturated;
-    mail[7]=KWT_ICB32_ID_VALUE;mail[8]=KWT_ICB32_LAYOUT;
+    mail[7]=KWT_ICB32_ID_VALUE;mail[8]=cfg.layout;
     mail[9]=stats.status;mail[10]=stats.completion;mail[11]=stats.pending;
     mail[12]=stats.first_error;mail[13]=stats.error_addr;mail[14]=stats.error_phase;
     mail[15]=stats.source_acks;mail[16]=stats.stage_acks;mail[17]=stats.load_acks;mail[18]=stats.output_acks;

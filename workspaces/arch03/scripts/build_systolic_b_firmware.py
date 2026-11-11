@@ -80,13 +80,14 @@ def elf_image(raw):
     return image, segments
 
 
-def metadata_image(base, shift, encoded_bytes=47008, row_lanes=5):
+def metadata_image(base, shift, encoded_bytes=47008, row_lanes=5, layout=0x00100002):
+    require(layout in (0x00100002,0x00100003), "Unsupported B layout")
     require(type(encoded_bytes) is int and 32 <= encoded_bytes <= 47008 and encoded_bytes%4==0, "Invalid encoded length")
     require(row_lanes == 5, "Invalid row lanes")
     require(type(shift) is int and 0 <= shift <= 31 and len(base) == 262144, 'Invalid boot shift/image')
     require(not any(base[0xfff0:]), 'Base image contains forbidden metadata/input bytes')
     result = bytearray(base)
-    struct.pack_into('<4I', result, 0xfff0, shift, encoded_bytes, 0x00100002, row_lanes)
+    struct.pack_into('<4I', result, 0xfff0, shift, encoded_bytes, layout, row_lanes)
     require(not any(result[0x10000:]), 'Task inputs must never enter the ITCM boot image')
     return result
 
@@ -121,7 +122,7 @@ def self_test():
     return dict(status='passed', checks=8, scope='ELF_and_boot_boundary_only', cpu_executed=False)
 
 
-def build(zig, output, shifts, mode=1, prefetch=1, timeout=100000000, cancel_timeout=1000000, interrupt=None, row_lanes=5, encoded_bytes=47008):
+def build(zig, output, shifts, mode=1, prefetch=1, timeout=100000000, cancel_timeout=1000000, interrupt=None, row_lanes=5, encoded_bytes=47008, layout=0x00100002):
     zig, output = Path(zig).resolve(), Path(output).resolve()
     require(not output.exists(), 'Firmware output exists; use a new directory')
     require(shifts and len(set(shifts)) == len(shifts) and all(type(s) is int and 0 <= s <= 31 for s in shifts), 'Invalid unique shifts')
@@ -153,22 +154,22 @@ def build(zig, output, shifts, mode=1, prefetch=1, timeout=100000000, cancel_tim
     base, segments = elf_image(elf.read_bytes())
     images = {}
     for shift in shifts:
-        image = metadata_image(base, shift, encoded_bytes, row_lanes)
+        image = metadata_image(base, shift, encoded_bytes, row_lanes, layout)
         name = 'shift_%02d' % shift
         binary, text = output/(name+'.bin'), output/(name+'.verilog')
         binary.write_bytes(image)
         text.write_bytes(''.join('%02x\n' % byte for byte in image).encode('ascii'))
-        images[name] = dict(shift=shift, encoded_bytes=encoded_bytes, row_lanes=row_lanes, image_bytes=len(image), sha256=sha(text), binary_sha256=sha(binary),
+        images[name] = dict(layout=layout,shift=shift, encoded_bytes=encoded_bytes, row_lanes=row_lanes, image_bytes=len(image), sha256=sha(text), binary_sha256=sha(binary),
             firmware_only=True, metadata_offset=0xfff0, task_input_region_start=0x10000,
             task_input_region_nonzero_bytes=sum(v != 0 for v in image[0x10000:]))
     require(before == {p.relative_to(ROOT).as_posix(): sha(p) for p in sources}, 'Firmware source changed during build')
-    report = dict(run_mode='single_cpu_systolic_b_v2', status='compiled_only', compiler_sha256=sha(zig),
+    report = dict(run_mode='single_cpu_systolic_b_v2_v3', status='compiled_only', compiler_sha256=sha(zig),
         compiler_version=subprocess.check_output([str(zig), 'version'], env=environment).decode().strip(),
         command=command, elf_sha256=sha(elf), source_sha256=before, segments=segments, images=images,
-        configuration=dict(row_lanes=row_lanes, default_encoded_bytes=encoded_bytes, mode=mode, prefetch=prefetch, irq_enabled=interrupt is not None,
+        configuration=dict(default_layout=layout,row_lanes=row_lanes, default_encoded_bytes=encoded_bytes, mode=mode, prefetch=prefetch, irq_enabled=interrupt is not None,
                            timeout_cycles=timeout, cancel_timeout_cycles=cancel_timeout, irq_mapping=interrupt),
         physical_boot_policy='firmware_only_no_task_inputs', task_source_address='0xb0000000',
-        numeric_layout_id='0x00100002', peripheral_id='0x4b575305', cpu_executed=False,
+        numeric_layout_id='0x%08x'%layout,supported_layout_ids=['0x00100002','0x00100003'], peripheral_id='0x4b575305', cpu_executed=False,
         interrupts_executed=False, timer_wakeup_verified=False, rtl_verified=False,
         timing_verified=False, system_power_verified=False)
     save(output/'manifest.json', report)
@@ -183,6 +184,7 @@ def main():
     parser.add_argument('--mode', type=int, choices=(1,), default=1)
     parser.add_argument('--rows', type=int, choices=(5,), default=5)
     parser.add_argument('--encoded-bytes', type=int, default=47008)
+    parser.add_argument('--layout',type=int,choices=(2,3),default=2)
     parser.add_argument('--prefetch', type=int, choices=(0, 1), default=1)
     parser.add_argument('--timeout-cycles', type=int, default=100000000)
     parser.add_argument('--cancel-timeout-cycles', type=int, default=1000000)
@@ -194,7 +196,7 @@ def main():
     require(args.zig is not None and args.output is not None, 'Build needs --zig and --output')
     interrupt = irq_config(args.irq_config) if args.irq_config else None
     result = build(args.zig, args.output, args.shifts, args.mode, args.prefetch,
-                   args.timeout_cycles, args.cancel_timeout_cycles, interrupt, args.rows, args.encoded_bytes)
+                   args.timeout_cycles, args.cancel_timeout_cycles, interrupt, args.rows, args.encoded_bytes,0x00100000+args.layout)
     print('ICB32_FIRMWARE_BUILT images=%d irq=%s cpu_executed=false input_preloaded=false' %
           (len(result['images']), result['configuration']['irq_enabled']))
 

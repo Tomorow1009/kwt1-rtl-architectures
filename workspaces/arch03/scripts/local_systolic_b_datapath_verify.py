@@ -15,18 +15,23 @@ def main():
     parser.add_argument('--vivado-bin', required=True, type=Path)
     parser.set_defaults(rows=5)
     parser.add_argument('--raw', action='store_true')
+    parser.add_argument('--layout',type=int,choices=[2,3],default=2)
+    parser.add_argument('--source-credits',type=int,choices=[1,2,3,4,6,8,16],default=3)
     parser.add_argument('--data', required=True, type=Path)
     parser.add_argument('--cases', nargs='+', default=['layer_%02d' % x for x in range(1, 13)] + ['extremes', 'rounding'])
     parser.add_argument('--prefetch', type=int, nargs='+', choices=[0, 1], default=[0, 1])
     parser.add_argument('--jitter', type=int, choices=[0, 1], default=1)
     args = parser.parse_args()
+    global encode,decode,describe
+    if args.layout==3:
+        from systolic_b_codec import encode,decode,describe
     folder = ROOT / 'local_runs' / ('systolic_b_datapath_' + datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
     folder.mkdir(parents=True)
     data = args.data.resolve()
     files = [A2 / 'rtl/requantize.sv', A2 / 'arch02/rtl/sram_port.sv',
              A2 / 'arch02/rtl/sram_macro_adapter.sv', A2 / 'arch02/tb/pin_mock.sv',
              A3 / 'rtl/arch03_systolic5x16.sv', A3 / 'rtl/arch03_linear16x5_systolic.sv', A3 / 'rtl/arch03_systolic_b_accel.sv',
-             A3 / 'rtl/arch03_icb32_decoder.sv', A3 / 'rtl/arch03_icb32_transport.sv',
+             A3 / 'rtl/arch03_icb32_decoder.sv', A3 / 'rtl/arch03_systolic_b_decoder.sv', A3 / 'rtl/arch03_systolic_b_transport.sv',
              A3 / 'rtl/arch03_icb_arb2_turnover.sv', A3 / 'rtl/arch03_icb_memory_router_turnover.sv',
              A3 / 'rtl/arch03_shared_sram_turnover.sv', A3 / 'tb/tb_arch03_systolic_b_datapath.sv']
     cfg_path = A2 / 'arch02/tb/pin_mock_config.json'
@@ -37,7 +42,7 @@ def main():
             lines.append("`define A02_%s_%s %d'd%d" % (size, key.upper(), width, cfg['macros'][size][key]))
     config = folder / 'arch02_sram_config.vh'
     config.write_text('\n'.join(lines) + '\n')
-    before = {p: sha(p) for p in files + [cfg_path, config, Path(__file__).resolve(), A3 / 'scripts/icb32_codec.py']}
+    before = {p: sha(p) for p in files + [cfg_path, config, Path(__file__).resolve(), A3 / 'scripts/icb32_codec.py', A3 / 'scripts/systolic_b_codec.py']}
     data_hashes = {}
     for name in args.cases:
         task = data / name
@@ -50,7 +55,7 @@ def main():
         data_hashes[name] = sha(task / 'layout_manifest.json')
     tool = lambda name: args.vivado_bin / (name + '.bat')
     run([tool('xvlog'), '--sv', '-d', 'ARCH02_PIN_MOCK', '-i', folder] + files, folder, 'compile.log')
-    (folder / 'elaborate.options').write_text('tb_arch03_systolic_b_datapath\n-debug typical\n-s icb32_datapath\n')
+    (folder / 'elaborate.options').write_text('tb_arch03_systolic_b_datapath\n-generic_top SOURCE_CREDITS=%d\n-debug typical\n-s icb32_datapath\n' % args.source_credits)
     run([tool('xelab'), '-f', folder / 'elaborate.options'], folder, 'elaborate.log')
     (folder / 'run.tcl').write_text('run all\nquit\n')
     rows = []
@@ -66,8 +71,8 @@ def main():
             tag = name + '_pf%d' % pf
             capture = folder / (tag + '.csv')
             options = folder / (tag + '.options')
-            options.write_text('icb32_datapath\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg JITTER=%d\n-testplusarg ENCODED_FILE=%s\n-testplusarg ENCODED_BYTES=%d\n' %
-                               (task.as_posix(), capture.as_posix(), layout['numeric_format']['shift'], pf, args.jitter, encoded_path.as_posix(), len(encoded)))
+            options.write_text('icb32_datapath\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg CAPTURE=%s\n-testplusarg SHIFT=%d\n-testplusarg PREFETCH=%d\n-testplusarg JITTER=%d\n-testplusarg ENCODED_FILE=%s\n-testplusarg ENCODED_BYTES=%d\n-testplusarg LAYOUT=%d\n' %
+                               (task.as_posix(), capture.as_posix(), layout['numeric_format']['shift'], pf, args.jitter, encoded_path.as_posix(), len(encoded), args.layout))
             text = run([tool('xsim'), '-f', options], folder, tag + '.log')
             matches = re.findall(r'ARCH03_SYSTOLIC_B_DATAPATH_PASS outputs=25344 cycles=(\d+) prefetch=(\d+) jitter=(\d+) overlap=(\d+) fifo_max=(\d+) saturated=(\d+) cpu_executed=false', text)
             if len(matches) != 1:
@@ -84,7 +89,10 @@ def main():
             cycles, pf_read, jitter, overlap, fifo_max, saturated = map(int, matches[0])
             metrics = re.findall(r'ICB32_TASK_METRICS bytes=(\d+) turns=(\d+) rows=(\d+)', text)
             if len(metrics)!=1 or int(metrics[0][0])!=len(encoded) or int(metrics[0][2])!=args.rows: raise ValueError('Missing transport metrics')
-            rows.append(dict(transactions=len(encoded)//2+12672, turnovers=int(metrics[0][1]), row_lanes=args.rows, encoded_bytes=len(encoded), raw_fallback=describe(encoded)['raw'], encoded_sha256=sha(encoded_path), case=name, cycles=cycles, prefetch=pf_read, jitter=jitter, overlap=overlap,
+            pipeline=re.findall(r'B_PIPELINE layout=(\d+) first_issue=(\d+) block_gaps=(\d+) missing_x=(\d+) missing_w=(\d+) result_blocked=(\d+) credit_blocked=(\d+) x_write_conflicts=(\d+)',text)
+            if len(pipeline)!=1:raise ValueError('Missing B pipeline statistics')
+            detail=dict(zip(('layout','first_issue','block_gaps','missing_x','missing_w','result_blocked','credit_blocked','x_write_conflicts'),map(int,pipeline[0])))
+            rows.append(dict(pipeline=detail,transactions=len(encoded)//2+12672, turnovers=int(metrics[0][1]), row_lanes=args.rows, encoded_bytes=len(encoded), raw_fallback=describe(encoded)['raw'], encoded_sha256=sha(encoded_path), case=name, cycles=cycles, prefetch=pf_read, jitter=jitter, overlap=overlap,
                              fifo_max=fifo_max, saturated=saturated, outputs=25344,
                              capture_sha256=sha(capture), layout_sha256=data_hashes[name]))
             print('PASS ICB32 datapath ' + tag + ' cycles=' + str(cycles), flush=True)
@@ -94,8 +102,8 @@ def main():
     for name, digest in data_hashes.items():
         if sha(data / name / 'layout_manifest.json') != digest:
             raise ValueError('Vector layout changed during run')
-    report = dict(status='passed', cpu_executed=False, backend='pin_mock', dma_executed=True,
-                  scope='local_systolic_b_v2_transport_decoder_turnover_shared_sram_no_e203', tasks=len(rows),
+    report = dict(status='passed',source_credits=args.source_credits, cpu_executed=False, backend='pin_mock', dma_executed=True,
+                  scope='local_systolic_b_transport_decoder_turnover_shared_sram_no_e203',layout=args.layout, tasks=len(rows),
                   next_task_cache_invalidation_and_cancel=True,
                   outputs=len(rows)*25344, cases=rows,
                   source_sha256={p.relative_to(ROOT).as_posix(): h for p, h in before.items()})

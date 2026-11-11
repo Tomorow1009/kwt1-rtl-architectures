@@ -2,7 +2,7 @@
 module tb_arch03_linear16x5_systolic #(parameter READ_LATENCY=1);
     reg clk=0;always #5 clk=~clk;
     reg rst_n=0,start_valid=0,cancel=0,prefetch_enable=1;
-    reg load_valid=0,out_ready=0;
+    reg load_valid=0,out_ready=0,layout_v3=0;
     reg [4:0] shift=12;
     reg [63:0] load_data=0;
     reg [2:0] load_count=1;

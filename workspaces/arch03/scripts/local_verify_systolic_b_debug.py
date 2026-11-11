@@ -18,7 +18,7 @@ def main():
     files=[A2/'rtl/requantize.sv',A2/'arch02/rtl/sram_port.sv',
         A2/'arch02/rtl/sram_macro_adapter.sv',A2/'arch02/tb/pin_mock.sv']
     files += [A3/'rtl'/n for n in ['arch03_systolic5x16.sv','arch03_linear16x5_systolic.sv',
-        'arch03_systolic_b_accel.sv','arch03_icb32_decoder.sv','arch03_icb32_transport.sv']]
+        'arch03_systolic_b_accel.sv','arch03_icb32_decoder.sv','arch03_systolic_b_decoder.sv','arch03_systolic_b_transport.sv']]
     files += [A3/'tb/tb_arch03_systolic_b_debug.sv']
     cfg_path=A2/'arch02/tb/pin_mock_config.json';cfg=json.loads(cfg_path.read_text())
     lines=[]
@@ -40,7 +40,7 @@ def main():
         opts.write_text('debug_b\n-tclbatch run.tcl\n-testplusarg DATA_DIR=%s\n-testplusarg SHIFT=%d\n'%
                        (task.as_posix(),layout['numeric_format']['shift']))
         text=run([tool('xsim'),'-f',opts],folder,name+'.log')
-        m=re.findall(r'SYSTOLIC_B_DEBUG_PASS outputs=25344 held_cycles=(\d+) no_dma=true v3_rejected=true cpu_executed=false',text)
+        m=re.findall(r'SYSTOLIC_B_DEBUG_PASS outputs=25344 held_cycles=(\d+) no_dma=true unknown_layout_rejected=true cpu_executed=false',text)
         if len(m)!=1 or int(m[0])<1:raise ValueError('Missing scalar/hold/debug proof')
         results.append(dict(case=name,outputs=25344,held_cycles=int(m[0]),log_sha256=sha(folder/(name+'.log')),
                             layout_sha256=sha(task/'layout_manifest.json')))
@@ -48,7 +48,7 @@ def main():
     for f,digest in hashes.items():
         if sha(f)!=digest:raise ValueError('Source changed '+str(f))
     report=dict(status='passed',cpu_executed=False,dma_executed=False,scope='B_scalar_MMIO_pair_adapter',
-        cases=results,outputs=len(results)*25344,v3_rejected=True,
+        cases=results,outputs=len(results)*25344,unknown_layout_rejected=True,
         source_sha256={f.relative_to(ROOT).as_posix():v for f,v in hashes.items()})
     (folder/'summary.json').write_text(json.dumps(report,indent=2)+'\n')
     print('LOCAL_SYSTOLIC_B_DEBUG_PASS '+str(folder),flush=True)

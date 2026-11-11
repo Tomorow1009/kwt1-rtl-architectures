@@ -2668,22 +2668,22 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v2_local_functional_passed_server_pending",
+    "status": "v3_selected3_local_verified_prepare_new_asic_package",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261111_2055_SYSTOLIC_B.md",
     "A_cancelled": true,
-    "vnc_workspace4_reserved_for_user_transfer": true,
+    "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
     "new_asic_verified": false,
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Commit/package baseline B, inspect live processes; then ASIC14/synthesis, SAIF checks and v3/early start. No old queues.",
+    "next": "Commit/push/package current B/v3; upload new immutable bundle and run ASIC after original synthesis releases lock. SAIF tiny fixture and B CPU recovery/contention/gate/batch remain.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2706,6 +2706,50 @@
       "scope": "local_pin_mock_no_E203",
       "old_R4_reference_cycles": 34616,
       "faster_than_R4": false
+    },
+    "tested_commit": "e11c317c960b18fb60ecbaddf9449f2ff00448be",
+    "asic14": {
+      "session": "systolic_b_v2_first01",
+      "stage": "systolic_b_soc",
+      "finished": "2026-11-11T20:20:50.929163",
+      "cases": 14,
+      "outputs": 354816,
+      "irq_wfi_all_pass": true,
+      "mean_cycles": 36862,
+      "host_case_seconds": 45.29735123645514
+    },
+    "synthesis": {
+      "session": "systolic_b_v2_synth01",
+      "stage": "systolic_b_synth",
+      "pid": 99451,
+      "observed": "2026-11-11T20:55:05.966585+08:00",
+      "status": "running",
+      "child_pid": 108110
+    },
+    "v3_local_full14_passed": true,
+    "v3_selected_source_credits": 3,
+    "v3_selected_credits_full14_pending": false,
+    "v3_firmware_pending": false,
+    "local_v3_initial": {
+      "mean_cycles": 35316.833333333336,
+      "source_credits": 16,
+      "cases": 14,
+      "outputs": 354816,
+      "summary": "local_runs/systolic_b_datapath_20261111_204614_747656/summary.json",
+      "scope": "local_pin_mock_no_E203"
+    },
+    "baseline_v2_asic_verified": true,
+    "v3_firmware_compiled_and_verified": true,
+    "current_v3_cpu_executed": false,
+    "local_jobs_running": [],
+    "local_v3_selected": {
+      "mean_cycles": 30502.333333333332,
+      "tasks_per_second_at_150MHz": 4917.656572721213,
+      "source_credits": 3,
+      "cases": 14,
+      "outputs": 354816,
+      "scope": "local_pin_mock_no_E203",
+      "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_INTEGRATION_20261111.json"
     }
   }
 }

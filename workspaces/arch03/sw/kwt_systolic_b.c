@@ -169,6 +169,7 @@ void kwt_icb32_trap(uint32_t cause,uint32_t epc,uint32_t value) {
 
 static int valid_config(const struct kwt_icb32_config *c) {
     if(!c || c->shift>31 || c->dma_mode!=1 || c->encoded_bytes<32 || c->encoded_bytes>KWT_ICB32_MAX_INPUT_BYTES || (c->encoded_bytes&3u) || c->prefetch>1 || ((c->source|c->input|c->output)&3u)) return 0;
+    if(c->layout!=KWT_ICB32_LAYOUT && c->layout!=KWT_SYSTOLIC_LAYOUT_V3) return 0;
     uint64_t se=(uint64_t)c->source+c->encoded_bytes;
     uint64_t ie=(uint64_t)c->input+c->encoded_bytes,oe=(uint64_t)c->output+KWT_ICB32_OUTPUT_BYTES;
     return c->source>=0xb0000000u && se<=0xb000c000ull && c->input>=KWT_ICB32_INPUT && c->output>=KWT_ICB32_INPUT &&
@@ -197,7 +198,7 @@ int kwt_icb32_run(const struct kwt_icb32_config *c,uint64_t timeout,uint64_t can
     reg_write(K16_SHIFT,c->shift);reg_write(K16_MODE,c->dma_mode|(c->prefetch<<1));
     reg_write(K16_SOURCE_BASE,c->source);reg_write(K16_INPUT_BASE,c->input);reg_write(K16_OUTPUT_BASE,c->output);
     reg_write(K16_INPUT_BYTES,c->encoded_bytes);reg_write(K16_OUTPUT_BYTES,KWT_ICB32_OUTPUT_BYTES);
-    reg_write(K16_LAYOUT,KWT_ICB32_LAYOUT);fence_io();
+    reg_write(K16_LAYOUT,c->layout);fence_io();
 #if KWT_ICB32_USE_IRQ
     if(c->dma_mode) {
         rc=irq_setup();
