@@ -46,3 +46,10 @@
 - 两项历史路径已经再读证据确认：旧`light-light126-arch03-20261108/bundles/light-light126-lenovo-arch03-20261108_195108-63abe3d0b53d/runs/hex100_soc01`，37组后用户停止且功能TCM；本地`local_runs/icb32_sequence_fixture_20261111_010731_266143`是8192周期超时已进入计算的失败前提，4096修复后真实497序列通过。其它旧失败仍在交付索引/检查点，不当作新R4失败。
 - **最终大报告还须补齐共享锁持有方式再运行。** 新包launch和当前launch文本只检查队列终态，没有原子取得`.arch02_team_lock`；不能仅凭此在队友可能开始工作时启动大型VCD重审。可以用独立操作包装一层轻量锁持有器，复用964 `server_run.call`的child_pid/log记录，并只释放自己PID/host/bundle/session的锁；若子进程仍在或所有权变化则保留，不自动清其他锁。当前未实现/未上传该包装器，也未启动报告。保持单重任务要求，不因工具预检PASS就跳过这一步。
 - 已查看`icb32_batch.py`：按每个任务前后冻结哈希、一次ASIC编译、逐例输出回执、最终1200复核，batch_progress已有整体宿主耗时及剩余20%余量估计，不需要再加一套监测或推测芯片加速比。
+
+## 09:34增量：最终报告锁包装器已本地完成
+
+- 新增`workspaces/arch03/scripts/icb32_export_locked.py`，在验证新报告包manifest/8文件、queue终态、原request SHA与reviewed request（非空history+delivery_sdc）、全路径归属和PYTHONPATH后，原子创建既有team lock。独立控制目录记录state/report.log/child_pid，报告结束后核原输入未变及最终receipt/report SHA；只在子进程已结束且pid/host/bundle/session均仍归本进程时释放自己的锁。已有/遗留/其他人锁一律不清，失败不重试，子进程仍活跃则留锁供检查。
+- `test_icb32_export_locked.py`两项本地检查通过：外人所有权、活跃子进程和意外锁目录内容均不得被清除，自己已完成才可释放。包装器尚未提交/打包/上传；原16KB报告工具包不用重传，可把这两个新脚本做独立小操作包，launcher指向已上传cedb报告包和相同964运行包。
+- 仍未启动大报告，`takeover_local/icb32_final_report_launch.txt`是旧无锁直接入口，**禁止直接使用**，待新包装器上传后替换成包装器的后台启动。prepare/history两个请求文件仍可按前述终态条件使用，尚未执行。
+- 最新截图`takeover_local/icb32_finish_live_0935.png`记录09:33实际状态，原队列不改；FileZilla关闭、当前最后VNC仍finish_live。压缩后继续先读计划/检查点，再上传包装器及持续当前原队列。

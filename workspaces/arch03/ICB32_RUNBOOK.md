@@ -66,3 +66,5 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。
 
 09:22当前队列已完成4层功耗，L05运行中。新报告工具包身份、完整恢复入口见[最新检查点](../../CONTEXT_CHECKPOINT_20261111_0922_ICB32.md)；大报告尚未运行，等待原metrics14和1200结束后再导出。
+
+最终大报告使用独立操作脚本`icb32_export_locked.py --package <新报告工具包> --manifest-sha256 <包manifest SHA> --session <新的操作会话>`。它要求原队列完整结束、原/审阅请求绑定且已补历史与精确SDC，再原子取得同一个`.arch02_team_lock`，记录报告子进程和日志。只释放自己PID/host/bundle/session的锁；子进程仍在或所有权变化时保留供检查。报告输出和操作会话均禁止原地重试。当前本地两项锁归属检查通过，包装器尚未上传，不能直接运行无锁的大报告launch。
