@@ -1,6 +1,6 @@
 {
   "schema": "icb32-r1-server-comparison-v1",
-  "status": "ASIC14_passed_synthesis_running",
+  "status": "ASIC14_and_synthesis_collected_gate_not_started_space_budget",
   "observed": "2026-11-11T13:39:18.034372+08:00",
   "started": "2026-11-11T13:29:07.205308+08:00",
   "bundle": "light-light126-icb32-r1-20261111_012941-f95e940862ca",
@@ -58,5 +58,35 @@
     "r4_vcd_total_GiB": 139.17784879915416,
     "r4_max_vcd_GiB": 12.33260465785861,
     "decision": "After synthesis passes, measure one R1 gate/activity layer before scheduling all 12; preserve previous raw evidence."
+  },
+  "synthesis_completed": true,
+  "synthesis_finished": "2026-11-11T14:15:03.555558+08:00",
+  "synthesis_observed": "2026-11-11T14:17:23.681320+08:00",
+  "synthesis_summary_sha256": "8622be54321234d81764149989fc42e68ab6ca5b81be18c32abbb5f81e723d0a",
+  "synthesis_summary_matches_stage": true,
+  "period_ns": "6.666666",
+  "lf_period_ns": "66",
+  "setup_slack_ns": "0.0000495911",
+  "hold_slack_ns": "0.000432789",
+  "macro_count": 224,
+  "large_macros": 128,
+  "small_macros": 96,
+  "latches": 0,
+  "combinational_loops_detected": false,
+  "known_added_mm2": "0.4580073527998128",
+  "conservative_budget_mm2": "0.6186546479997178",
+  "whole_system_leaf_area_um2": "4140871.147976652",
+  "task_mode_timing_review_accepted": false,
+  "system_power_verified": false,
+  "gate_session_planned": "icb32_r1_gatepilot01",
+  "gate_launch_precheck": {
+    "observed": "2026-11-11T14:22:00.671183+08:00",
+    "minimum_free_GiB": 50,
+    "actual_free_GiB": 37.0048828125,
+    "team_lock_present": false,
+    "session_created": false,
+    "log_created": false,
+    "child_created": false,
+    "result": "aborted_before_launch_due_to_free_space"
   }
 }

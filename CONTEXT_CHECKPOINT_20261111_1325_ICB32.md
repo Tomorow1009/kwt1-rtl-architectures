@@ -46,3 +46,21 @@
 - 13:37:28实际剩余磁盘135.405GiB；R4的12份VCD共139.178GiB、最大12.333GiB。完整门级总阶段5.36h不能简单按芯片周期推R1宿主耗时；R4单例仿真约202–299秒，其他时间含扫描/导出。**R1综合通过后先运行layer_01门级/活动试测，在容量/耗时明确后决定全12安排；不得盲启完整12活动，不删除/挪走历史证据。** 此探测只读stat/summary。R1门级尚未启动，也未准备launch文件。
 - 已执行`icb32_r1_asic_verify.txt`、`icb32_r1_synth_launch.txt`。`icb32_r1_compare_status.txt`已改为读取实际case_progress；当前VNC最后为该status，仍shell/cwd964。
 - 云端最新独立确认为`a0c241ba586333b7ebb0f274e0350fafe567ee34`（交付包与R1启动信息）；本增量、R1 ASIC PASS/综合/预算待同步。本机一次utf8-sig编码名拼写和一次PowerShell管道编码错误均在写文件前被拦下，改正/改用文件编辑继续；无服务器作业失败。
+
+## 13:45压缩前保存
+
+本检查点13:39增量与R1实际ASIC14证据已提交并独立确认云端`693341c949f25dd39c7c96b8be7bb6ec9f232cf6`。工作继续，不以进度答复结束。13:43:08.195889实际综合仍running/PID203950/锁匹配；13:45只读查看`icb32_synth.log`尾部，正在处理decoder、requantize、dot64及SRAM适配模块，OPT-1206常量寄存器移除属于优化信息，尚无最终综合报告。完整综合通过情况仍待state/summary核验。
+
+最后VNC命令是`takeover_local/icb32_r1_synth_phase.txt`，已执行并返回shell；截图为`takeover_local/icb32_r1_synth_phase_1346.png`（实际屏幕13:45）。其他恢复条件不变：cwd964、窗口20971587、FileZilla关闭。无尚在运行的本机exec会话；不再输入Return重复命令。下一步读取原R1状态；综合通过后核对真实面积/时序/224宏与同条件，再准备仅layer_01的独立gate/activity试测。这个gate入口还没有创建或执行。135GiB空间预算仍是全12排程前的必要判断，不能按R4的芯片加速比推断仿真或存储比例。
+
+13:53补充：13:50:48.386277原stage仍running/锁匹配；13:53:11.465535实际DC子进程212679（common_shell_ex）CPU99.7%、RSS约2.98GB，日志88174字节，13:52:44更新，已到`Beginning Mapping Optimizations (High effort)`。仍不是综合完成。新准备只读`icb32_r1_synth_verify.txt`（尚未执行），只在stage通过后用来读取摘要、max/min、面积与宏数量；gate launcher仍未创建。最后VNC查询为缩到6行的synth_phase，截图`icb32_r1_synth_phase_1354.png`，shell已返回。无本机exec遗留。
+
+已异步向用户询问最终提交入口、附件格式/大小、队名及署名，属于可选补充信息，不是权限请求，也不阻塞当前验证；尚未收到回复，不重复询问。用户给出的11月13日晚上截止不变。压缩后继续同一综合与资源受限的对照计划，不能重新跑已交付R4或把缺失R1 PPA写成通过。
+
+## 14:10压缩前最新状态与补充材料
+
+14:07:52.266402实际R1综合仍running、PID203950、锁归属匹配，无阶段错误；14:10查询日志仍在持续优化`core/rows[0].lanes[..].mac/accumulator_reg[..]/D`等路径，中间优化数值不当最终时序/面积结果。最后VNC为synth_phase查询，已回到shell，截图`icb32_r1_synth_phase_1411.png`；无本机exec遗留。`icb32_r1_synth_verify.txt`仍未执行，gate没有创建或启动。通过条件必须读最终summary里的setup/hold、224宏及预算，stage收集报告成功本身不等于时序通过。
+
+当前未提交文档修订包括本检查点/根交接，以及ICB32_INNOVATION、ICB32_DESIGN_REPORT、ACCEPTANCE：把R1从仅本地更新为真实ASIC14通过；创新说明补三条实际CPU路径225770→116280→34616周期，分段1.941606×和3.359140×，总体6.522128×。功耗没有按这些比例推算，R1 PPA仍待完成。原R4归档928559f保持原样，不因这些运行记录重打包。
+
+另只读重读了旧8路证据，作为后续安排参考：ecf3包`light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c/runs/mmio8_source_gate_full01/mmio8_gate`已经14例/354816输出/12活动通过，SHA`06e388e1b744494fc00f224a43caf8de2ebf7e764eb1b655541ce7288a408533`，每任务3843121周期；完整旧8功耗仍缺。它已有波形，无需新跑gate，若R1全12活动容量不够可安排这一原计划剩余工作，但**现在不并发启动**。旧首层MMIO8功耗19.939132mW属于较早单层gate，不能直接拼入新的全14gate报告；参考`MMIO8_GATE_POWER_HANDOFF.md`及OLD_QUEUE_RECOVERED证据。所有尚缺项目继续如实标注。
