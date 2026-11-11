@@ -25,8 +25,9 @@ def install(source, destination, row_lanes=5):
     for path in (mems, tb):
         manifest['modified_files'][path.relative_to(destination).as_posix()] = sha(path)
     spec = manifest.pop('icb32')
-    spec.update(variant='systolic_b_v2', row_lanes=5, processing_elements=80,
-                pair_output=True, peripheral_id='0x4b575305', capability='0x0003053f',
+    spec.update(variant='systolic_b_v2_v3', row_lanes=5, processing_elements=80,
+                pair_output=True, peripheral_id='0x4b575305', capability='0x000405ff',
+                supported_layout_ids=['0x00100002','0x00100003'],
                 x_macro_mapping='row%5,k%4,segment=floor(floor(row/5)/8)',
                 sram_macros={'4096x16':128,'128x16':92},
                 accelerator_macros={'4096x16':0,'128x16':92},

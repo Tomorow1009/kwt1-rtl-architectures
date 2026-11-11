@@ -25,6 +25,7 @@ def main():
     parser.set_defaults(rows=5)
     parser.add_argument('--layout',type=int,choices=(2,3),default=3)
     parser.add_argument('--prefetch',type=int,choices=(0,1),default=1)
+    parser.add_argument('--diagnostics',action='store_true',help='Include separately compiled CPU contention and v3 recovery firmware')
     parser.add_argument('--member',required=True)
     args=parser.parse_args()
     if not re.fullmatch('[A-Za-z0-9_-]{1,60}',args.member):raise ValueError('Member identifier')
@@ -65,7 +66,32 @@ def main():
     for case in CASES14:
         shutil.copytree(str(args.data/case),str(folder/'validated_data'/case))
         source_case(folder/'validated_data'/case)
-    allowed_prefixes=prefixes+('firmware/','validated_data/')
+    diagnostic_identities={}
+    if args.diagnostics:
+        from build_systolic_b_sequence import verify_firmware as verify_sequence
+        for variant in ('contention','sequence'):
+            diagnostic_build=ROOT/'local_runs'/(name+'-'+variant+'-build')
+            command=[sys.executable,str(folder/'workspaces/arch03/scripts'/('build_systolic_b_'+variant+'.py')),
+                '--zig',str(args.zig.resolve()),'--output',str(diagnostic_build)]
+            if variant=='contention':command += ['--layout',str(args.layout)]
+            else:command += ['--data',str(folder/'validated_data')]
+            with (ROOT/'local_runs'/(name+'-'+variant+'-build.log')).open('w') as out:
+                subprocess.check_call(command,cwd=str(folder),stdout=out,stderr=subprocess.STDOUT)
+            if variant=='sequence':
+                diagnostic,_=verify_sequence(diagnostic_build,folder)
+                filenames=['driver.elf','sequence.bin','sequence.verilog']
+            else:
+                diagnostic,_=verify_firmware(diagnostic_build,folder)
+                if diagnostic.get('performance_firmware') is not False:raise ValueError('Diagnostic firmware misclassified')
+                filenames=['driver.elf']+[n+suffix for n in diagnostic['images'] for suffix in ('.verilog','.bin')]
+            destination=folder/('firmware_'+variant);destination.mkdir()
+            for filename in filenames:shutil.copyfile(str(diagnostic_build/filename),str(destination/filename))
+            diagnostic.pop('command',None)
+            (destination/'manifest.json').write_text(json.dumps(diagnostic,indent=2)+'\n',encoding='utf8')
+            if variant=='sequence':verify_sequence(destination,folder)
+            else:verify_firmware(destination,folder)
+            diagnostic_identities[variant]=sha(destination/'manifest.json')
+    allowed_prefixes=prefixes+('firmware/','validated_data/','firmware_contention/','firmware_sequence/')
     paths=[]
     for path in sorted(folder.rglob('*')):
         if path.is_file():
@@ -74,7 +100,8 @@ def main():
     files={p.relative_to(folder).as_posix():sha(p) for p in paths}
     manifest=dict(source_commit=commit,member=args.member,architecture='arch03_systolic_b',row_lanes=args.rows,
         files=files,runtime_layout='arch03-systolic-b-v%d-with-lossless-codec'%args.layout,task_input_boot_bytes=0,
-        firmware_irq=True,input_data_format='original14 coordinate-checked tile16 then lossless encode per task',
+        firmware_irq=True,diagnostic_firmware=diagnostic_identities,
+        input_data_format='original14 coordinate-checked tile16 then lossless encode per task',
         platform_dependency='pinned official external source; strict ASIC installer checks full RTL fingerprint',
         cpu_execution_verified=False,timing_verified=False,official_precision_verified=False)
     manifest_path=folder/'manifest.json';manifest_path.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf8')

@@ -97,3 +97,11 @@ session64478已完成，`systolic_b_datapath_20261111_205544_253173`：14例3548
 **所有已启动本地仿真均已结束，当前没有本地exec长任务。** 新v3 READ_LATENCY2加载重叠、实际CPU恢复/竞争、B1200、gate/SAIF/PPA仍待做；latency2已通过的是v2核心，不偷换为v3通路。下一步先保存提交/云同步/新包，原综合保持串行。
 
 VNC最后已执行`b_synth_health.txt`，截图`takeover_local/b_synth_health.png`已生成但**尚未读图**。下一步先view此图。新的`b_saif_usage.txt`已在本地准备，未type；它读取VCS saif.tcl 255..280行Usage/Start帮助。SAIF定位最新：文件366行，_manSaifUsage256、Start271、Stop281、Reset290、Report299、Region331、Examples344。仅只读定位，尚未跑SAIF。最后终端无待执行输入，workspace3 shell，FileZilla关闭。
+
+## 21:12增量：新v3已提交/云核对/打包，开始板端暂存
+
+新提交 **63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86**（36文件）已push团队私人原分支，并ls-remote独立确认。原R4文件未修改，e11运行包不变。
+
+不可变新包`light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip`，**11197550B / 663文件 / SHA3433af44f5f80ec6c3b2d78a2a90accbf16d67dcd1312af981ef4045f391d0f2**。package从已提交LF源码重编IRQ固件并核验全部归档条目，session81354已结束。已发起ac820 upload到`/opt/ac820-gui-root/root/`同名包；**尚待查看该tool结果及板端SHA**。FileZilla仍未打开，新v3尚未上传比赛服务器/解包/运行。
+
+21:09:28原综合健康查询已读：driver99451运行45:25、DC108110运行39:50、CPU99.7%、MEM3.1%，log23763B/mtime20:31:06，尾部仍Processing B核心。没有停止或重启；不能因日志长时间静默判断完成或失败。最后VNC为已执行的SAIF Usage查询，workspace3 shell，无待输入命令。

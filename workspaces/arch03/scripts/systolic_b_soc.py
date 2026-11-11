@@ -75,15 +75,24 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     firmware=(firmware or ROOT/'firmware').resolve();firmware.relative_to(ROOT.resolve())
     fw,base=verify_firmware(firmware)
     platform=run/'platform';manifest=install(platform_source,platform,fw['configuration']['row_lanes'])
-    data.require(diagnostic is None,'B diagnostic runner has not yet been integrated')
+    data.require(diagnostic in (None,'contention'),'Unknown B diagnostic')
+    if diagnostic=='contention':
+        from systolic_b_contention import verify_firmware as verify_contention
+        verify_contention(firmware)
     from systolic_b_bus_metrics import instrument
     generated=run/'arch03_systolic_b_metrics_monitor.svh'
-    generated.write_text(instrument((A3/'tb/arch03_systolic_b_monitor.svh').read_text(),5))
+    observer=instrument((A3/'tb/arch03_systolic_b_monitor.svh').read_text(),5)
+    if diagnostic=='contention':
+        from systolic_b_contention import monitor as contention_monitor
+        observer=contention_monitor(observer)
+    generated.write_text(observer)
     tb=platform/'tb/tb_top.v';text=tb.read_text()
     data.require(text.count('`include "arch03_systolic_b_monitor.svh"')==1,'Missing B observer include')
     tb.write_text(text.replace('`include "arch03_systolic_b_monitor.svh"','`include "arch03_systolic_b_metrics_monitor.svh"'))
     manifest['modified_files']['tb/tb_top.v']=sha(tb);save(platform/'platform_manifest.json',manifest)
     extra_scripts=[generated,A3/'scripts/systolic_b_bus_metrics.py',A3/'tb/arch03_systolic_b_metrics.svh']
+    if diagnostic=='contention':
+        extra_scripts += [A3/'scripts/systolic_b_contention.py',A3/'scripts/build_systolic_b_contention.py']
     loader=run/'arch03_asic_boot.svh';loader.write_text(loader_include())
     model=extract_model(cfg,run)
     # Physical TCM still instantiates arch03_sram_half from the original shared
@@ -102,7 +111,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     if fw['configuration']['irq_enabled']:firmware_files.append(A3/'irq_mapping.json')
     scripts=[A3/'scripts'/name for name in ('systolic_b_soc.py','systolic_b_data.py','systolic_b_codec.py','icb32_data.py','icb32_codec.py','install_systolic_b.py',
         'install_icb32.py','install_dma16.py','install_platform.py','asic_boot.py','build_systolic_b_firmware.py','dma16_batch.py',
-        'server_run.py','icb32_batch.py',
+        'server_run.py','systolic_b_batch.py',
         'timing_contract.py','stdcell_verify.py','technology_binding.py')]
     platform_files=[p for p in platform.rglob('*') if p.is_file()]
     headers=[p for root in (A2,A3) for p in root.rglob('*') if p.is_file() and p.suffix in ('.svh','.vh')]
@@ -126,7 +135,7 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     for paths in roles.values():
         for p in paths:frozen[str(p.resolve())]=sha(p)
     contract=dict(schema='arch03-systolic-b-asic-build-v3',scope='asic_rtl_functional',
-        passive_metrics=True,
+        passive_metrics=True,diagnostic=diagnostic,
         global_FPGA_defined=False,files=frozen,roles={k:sorted(set(str(p.resolve()) for p in v)) for k,v in roles.items()},
         executable=str((run/'simv').resolve()),firmware=str(firmware),row_lanes=fw['configuration']['row_lanes'],
         layout_id=fw['configuration']['default_layout'],lock_directory=str(Path(cfg['server_root'])/'.arch02_team_lock'),clock_period_ns='6.666666',

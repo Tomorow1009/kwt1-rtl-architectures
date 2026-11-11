@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v3_selected3_local_verified_prepare_new_asic_package",
+    "status": "resumed_v3_validation_tools_and_upload",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261111_2055_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,13 +2683,13 @@
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Commit/push/package current B/v3; upload new immutable bundle and run ASIC after original synthesis releases lock. SAIF tiny fixture and B CPU recovery/contention/gate/batch remain.",
+    "next": "Continue existing ASIC14 PID67766; commit/package independent diagnostic and batch tools without changing RTL. Then new v3 synthesis and SAIF/gate/PPA.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-11T20:00:01.577083+08:00",
-      "free_GiB": 148.094,
+      "time": "2026-11-12T00:58:26+08:00",
+      "free_GiB": 14.411,
       "team_lock": "absent",
       "old_L02": {
         "status": "passed",
@@ -2697,8 +2697,9 @@
         "finished": "2026-11-11T15:17:11.637795",
         "summary_sha256": "736f0b5a7f6864410fc92d147a44d5549cde516c22bac1626376b98b6dd752ed"
       },
-      "new_B_job_started": false,
-      "other_processes_not_yet_audited": true
+      "new_B_job_started": true,
+      "other_processes_not_yet_audited": false,
+      "EDA_processes": []
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2721,10 +2722,19 @@
     "synthesis": {
       "session": "systolic_b_v2_synth01",
       "stage": "systolic_b_synth",
-      "pid": 99451,
-      "observed": "2026-11-11T20:55:05.966585+08:00",
-      "status": "running",
-      "child_pid": 108110
+      "pid": null,
+      "observed": "2026-11-12T00:58:26+08:00",
+      "status": "passed_reports_ready_review_required",
+      "child_pid": null,
+      "finished": "2026-11-11T22:14:48.271183",
+      "conservative_budget_mm2": 1.0857945895010312,
+      "whole_soc_area_um2": 4608011.089621,
+      "small_macros": 92,
+      "large_macros": 128,
+      "latches": 0,
+      "combinational_loops": false,
+      "timing_verified": false,
+      "scoring_area_verified": false
     },
     "v3_local_full14_passed": true,
     "v3_selected_source_credits": 3,
@@ -2750,6 +2760,34 @@
       "outputs": 354816,
       "scope": "local_pin_mock_no_E203",
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_INTEGRATION_20261111.json"
+    },
+    "paused_at": "2026-11-11T21:52:00+08:00",
+    "desktop_clients_closed": false,
+    "local_relays_stopped": false,
+    "cloud_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+    "v3_package": {
+      "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
+      "bytes": 11197550,
+      "inputs": 663,
+      "sha256": "3433af44f5f80ec6c3b2d78a2a90accbf16d67dcd1312af981ef4045f391d0f2",
+      "board_staged_sha_verified": true,
+      "board_gui_directory": "/home/board/systolic_b_v3_63da6ba/",
+      "ftp_uploaded": true,
+      "server_unpacked": true,
+      "status": "server663_inputs_IRQ_verified_ASIC14_launch_executed"
+    },
+    "resumed_at": "2026-11-12T00:48:52+08:00",
+    "local_diagnostics_evidence": "handoff/team/evidence/SYSTOLIC_B_DIAGNOSTICS_LOCAL_20261112.json",
+    "filezilla_disconnected": true,
+    "v3_asic14": {
+      "session": "systolic_b_v3_first01",
+      "stage": "systolic_b_soc",
+      "pid": 67766,
+      "status": "running",
+      "observed": "2026-11-12T01:09:59.323202+08:00",
+      "cases": 0,
+      "lock_matches": true,
+      "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86"
     }
   }
 }

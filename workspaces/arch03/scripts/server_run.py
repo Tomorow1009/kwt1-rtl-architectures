@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','systolic_b_batch','systolic_b_contention','systolic_b_sequence','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -187,8 +187,8 @@ def main():
     p.add_argument('--gate-reports-from',type=Path,help='Re-audit completed gate captures/VCD in a preserved failed run; no VCS rerun')
     p.add_argument('--x-point',choices=['zero','frozen','one','initial'],help='Separate diagnostic only; never changes frozen power stage')
     a=p.parse_args()
-    if (a.stage=='icb32_batch') != (a.dataset is not None):
-        raise ValueError('Dataset is required only for icb32_batch')
+    if (a.stage in ('icb32_batch','systolic_b_batch')) != (a.dataset is not None):
+        raise ValueError('Dataset is required only for a final ASIC batch')
     if (a.stage=='dma16_x_sensitivity') != (a.x_point is not None):
         raise ValueError('X point is required only for dma16_x_sensitivity')
     if a.synth_reports_from is not None and a.stage!='asic_synth':
@@ -206,7 +206,7 @@ def main():
     if a.stage not in ('gate_soc','dma16_gate','icb32_gate','icb32_timing_audit','mmio8_gate','dma16_timing_audit','mmio8_timing_audit') and (a.synth_run is not None or a.synth_summary_sha256 is not None):
         raise ValueError('Synthesis artifact selection is only for gate verification')
     if len(a.cases)!=len(set(a.cases)):raise ValueError('Duplicate case names would overwrite run artifacts')
-    if a.firmware_root is not None and a.stage not in ('dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_contention','icb32_sequence','mmio8_soc','dma16_gate','icb32_gate','mmio8_gate','dma16_sequence','dma16_contention'):
+    if a.firmware_root is not None and a.stage not in ('systolic_b_soc','systolic_b_build','systolic_b_contention','systolic_b_sequence','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_contention','icb32_sequence','mmio8_soc','dma16_gate','icb32_gate','mmio8_gate','dma16_sequence','dma16_contention'):
         raise ValueError('Firmware variant selection is only for program-only execution/build')
     if a.activity_cases and (a.stage not in ('soc','asic_soc','gate_soc','dma16_soc','icb32_soc','mmio8_soc','dma16_gate','icb32_gate','mmio8_gate') or not set(a.activity_cases).issubset(a.cases)):
         raise ValueError('Activity cases must be selected SoC cases')
@@ -236,6 +236,15 @@ def main():
             if a.stage in ('systolic_b_soc','systolic_b_build'):
                 from systolic_b_soc import verify
                 report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='systolic_b_build')
+            elif a.stage=='systolic_b_batch':
+                from systolic_b_batch import verify
+                report=verify(cfg,run,a.platform,a.dataset,call)
+            elif a.stage=='systolic_b_contention':
+                from systolic_b_contention import verify
+                report=verify(cfg,run,a.platform,a.cases,call,a.firmware_root)
+            elif a.stage=='systolic_b_sequence':
+                from systolic_b_sequence_soc import verify
+                report=verify(cfg,run,a.platform,a.cases,call,a.firmware_root)
             elif a.stage=='systolic_b_synth':
                 from systolic_b_synth import synth
                 vendor(cfg,run)
