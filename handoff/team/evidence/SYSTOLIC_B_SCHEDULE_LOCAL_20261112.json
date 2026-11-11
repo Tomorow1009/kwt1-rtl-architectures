@@ -1,0 +1,83 @@
+{
+  "schema": "systolic-b-scheduler-local-v1",
+  "run": "local_runs/systolic_b_monitor_fixture_20261112_023105_608860",
+  "summary_sha256": "eeabede76034893fa89e6bc2015bdcaa7ffa46fa41bd9731eb09959a47b93db9",
+  "tasks": 2,
+  "outputs": 50688,
+  "cpu_executed": false,
+  "hardware_changed": false,
+  "production_cycles_unchanged": true,
+  "cases": [
+    {
+      "case": "layer_01",
+      "cycles": 31339,
+      "schedule": {
+        "blocks": 320,
+        "feeds": 20480,
+        "results": 25344,
+        "supply_empty": 9793,
+        "x_wait": 6420,
+        "w_wait": 5083,
+        "slot_wait": 0,
+        "credit_wait": 0,
+        "intervals": 304,
+        "interval_sum": 24866,
+        "interval_min": 64,
+        "interval_max": 352,
+        "tile_intervals": 15,
+        "tile_interval_sum": 5343,
+        "first_feed_ns": "6996.665967",
+        "last_feed_ns": "208809.979119",
+        "first_result_ns": "7423.332591",
+        "last_result_ns": "208936.645773",
+        "first_output_ns": "7563.332577",
+        "last_output_ns": "209156.645751",
+        "first_feed_wait_cycles": "1011",
+        "compute_result_tail_cycles": "19",
+        "final_write_tail_cycles": "37",
+        "within_tile_mean_start_interval": 81.79605263157895,
+        "tile_change_mean_start_interval": 356.2,
+        "waits_may_overlap": true,
+        "core_ii64_only_for_ready_unblocked_conditions": true
+      }
+    },
+    {
+      "case": "extremes",
+      "cycles": 38337,
+      "schedule": {
+        "blocks": 320,
+        "feeds": 20480,
+        "results": 25344,
+        "supply_empty": 16383,
+        "x_wait": 7016,
+        "w_wait": 11883,
+        "slot_wait": 0,
+        "credit_wait": 0,
+        "intervals": 304,
+        "interval_sum": 25054,
+        "interval_min": 64,
+        "interval_max": 362,
+        "tile_intervals": 15,
+        "tile_interval_sum": 11745,
+        "first_feed_ns": "9716.665695",
+        "last_feed_ns": "255463.307787",
+        "first_result_ns": "10143.332319",
+        "last_result_ns": "255589.974441",
+        "first_output_ns": "10283.332305",
+        "last_output_ns": "255809.974419",
+        "first_feed_wait_cycles": "1419",
+        "compute_result_tail_cycles": "19",
+        "final_write_tail_cycles": "37",
+        "within_tile_mean_start_interval": 82.41447368421052,
+        "tile_change_mean_start_interval": 783.0,
+        "waits_may_overlap": true,
+        "core_ii64_only_for_ready_unblocked_conditions": true
+      }
+    }
+  ],
+  "failed_attempt": {
+    "run": "local_runs/systolic_b_monitor_fixture_20261112_023014_192885",
+    "reason": "Local wrapper passed only cycle/count fields; new timestamp audit requires complete existing window. RTL/output check passed before parser KeyError."
+  },
+  "server_schedule_metrics_collected": false
+}

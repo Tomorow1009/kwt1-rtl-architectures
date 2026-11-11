@@ -108,8 +108,8 @@ def main():
                                 source_earliest_ack_cycles=1,cpu_executed=False,dma_executed=True,
                                 layout_sha256=data_hashes[name],capture_sha256=sha(capture)))
             if args.bus_metrics:
-                results[-1]['bus_metrics']=metrics.parse_metrics(text,dict(cycles=observed['cycles'],
-                    encoded_bytes=len(encoded),transfer_transactions=len(encoded)//2+12672))
+                from systolic_b_data import read_window as read_metric_window
+                results[-1]['bus_metrics']=metrics.parse_metrics(text,read_metric_window(text,observed,len(encoded)))
             if args.activity:
                 requested_activity=activity
                 if not activity.is_file():

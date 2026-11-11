@@ -53,3 +53,15 @@
 9项本地SAIF/新旧功耗入口测试通过；8个脚本Python3.6语法、4种缺少来源参数在读取配置/拿锁前拒绝均通过。一次新测试期望字符串拼写不符实际Tcl守卫，改为实际路径后通过；另两次本地替换脚本因PowerShell转义/相对cwd错误失败，未产生修改，之后已正确更新。没有实际SAIF/功耗PASS。这些新工具尚未打包部署，原35d队列保持不可变。
 
 下一步先提交/云同步工具及证据；等原综合和tiny真实结论，必要时修兼容性再导出新不可变工具包。当前VNC最后命令是已完成的`b_reference_sse.txt`，shell就绪；FileZilla关闭，无本地长期任务。
+
+## 02:33增量：云同步、调度统计通过，原综合进入高强度优化
+
+37fc276a8699001f87ebd9f1a2e4df18d6721f9b已push并ls-remote一致；它包含SAIF/精度/报告工具及此前证据，生产硬件不变。随后新增被动调度计数和结构警告解析，尚待本轮提交/新包。
+
+本地`local_runs/systolic_b_monitor_fixture_20261112_023105_608860`两例50688输出通过，session89826已结束，L01/extremes保持31339/38337周期。L01：320块/20480次feed/25344结果，supply_empty9793，X等6420/W等5083（重叠，不相加），slot/credit等0，304个tile内间隔平均81.7961、最小64/最大352；15次换tile平均356.2；首feed距首源1011周期，最后feed至结果被观察19周期，最终写ACK再37周期。详见SYSTOLIC_B_SCHEDULE_LOCAL_20261112.json。19拍包含结果观察寄存器，不能直接称末四行阵列内部传播跨度。
+
+第一次023014 run硬件L01已过，但本地wrapper仅传cycle/count而新解析器需要完整window，KeyError start_ns，保留失败目录；改为读取原完整计时回执后两例通过。8种故意破坏实际调度计数均被拒绝。只改TB/parser/local wrapper，生产RTL未改。后续clean ASIC14需采新统计，旧14仍有效但没有这些新字段。旧基础metrics解析保持兼容。
+
+新增`systolic_b_structure.py`复用已验证mapped端口解析器，绑定B自己的综合摘要；逐个解析LINT-2驱动层级并比对声明未使用的输入。合成层级正常/错配小检查通过，实际B网表尚未就绪，不宣称结构警告已审完。
+
+02:32:53.010370最新实际服务器观察：原锁systolic_b_v3_synth01，child79637 CPU99.5%、elapsed1:12:48、RSS25925576KiB、日志215971B，Beginning Mapping Optimizations (High effort)。不要重启。VNC仍workspace3、新35d包shell，FileZilla关闭，无本地仿真。下一步提交本轮工具、导出新不可变包（实际tiny未出，部署不等于PASS），原35d队列不修改。

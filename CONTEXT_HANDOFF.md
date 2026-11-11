@@ -1,3 +1,5 @@
+**02:33增量：原综合75738/79637进入高强度映射，队列103191不变。** 先读[02:16检查点全部增量至02:33](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)。37fc276云同步已核；新本地调度两例50688输出/周期不变，生产RTL未改，SAIF实际仍未验。VNC workspace3空闲shell，FileZilla关闭，无本地仿真；下一步提交新工具包，不重复旧作业。
+
 **11月12日02:16：B原综合75738/79637继续，唯一验证队列103191仍等待。** 先读[02:16完整检查点](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。ASIC14已过、4917.6566task/s；新SAIF/浮点汇总草稿本地准备，尚未实际功耗。35d包已服务器核验/云同步，不重传、不重启。VNC workspace3空闲shell，FileZilla关闭。
 
 **11月12日01:52：新B验证队列103191已唯一启动，等待原综合75738。** 先读[01:04检查点全部增量至01:52](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md)及有效B计划。35d8ae1已云同步、705输入/三固件包已FileZilla上传并服务器核验；不要重传或重启。B/v3 ASIC14与latency2本地18任务已过；CPU恢复/竞争、SAIF小试、时序诊断和gate14将由新队列串行执行，不自动最终1200。VNC18874435/workspace3在新35d8ae1包，FileZilla关闭，无本地仿真。最新只读队列截图b_validation_waiting_0152.png需读取。

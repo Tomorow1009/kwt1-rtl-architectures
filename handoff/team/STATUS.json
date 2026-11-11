@@ -2770,7 +2770,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "35d8ae1b20a1a8ba417e9971c631d50e00173a4e",
+    "cloud_commit": "37fc276a8699001f87ebd9f1a2e4df18d6721f9b",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2806,11 +2806,12 @@
       "stage": "systolic_b_synth",
       "pid": 75738,
       "status": "running",
-      "observed": "2026-11-12T02:19:35+08:00",
+      "observed": "2026-11-12T02:32:53+08:00",
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
       "child_pid": 79637,
-      "child_cpu_percent": 99.4,
-      "child_RSS_KiB": 25923916
+      "child_cpu_percent": 99.5,
+      "child_RSS_KiB": 25925576,
+      "phase": "Beginning Mapping Optimizations (High effort)"
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2839,6 +2840,14 @@
       "B_power12": false,
       "local_tests": 9,
       "hardware_RTL_changed": false
+    },
+    "scheduler_metrics_local": {
+      "tasks": 2,
+      "outputs": 50688,
+      "cpu_executed": false,
+      "evidence": "handoff/team/evidence/SYSTOLIC_B_SCHEDULE_LOCAL_20261112.json",
+      "source_RTL_changed": false,
+      "server_collected": false
     }
   }
 }

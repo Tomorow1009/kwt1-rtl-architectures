@@ -1,4 +1,4 @@
-**Active: direct 5x16 systolic B/v3, credits3, actual ASIC/E20314 passed (30502.33 cycles / 4917.66 task/s at 150MHz).** See [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [current checkpoint](../../CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md). New v3 synthesis75738 continues; own1200, actual CPU recovery/contention, mapped gate and PPA remain pending. Older v2 synthesis finished; it cannot qualify v3. R4 frozen evidence remains unchanged.
+**Active: direct 5x16 systolic B/v3, credits3, actual ASIC/E20314 passed (30502.33 cycles / 4917.66 task/s at 150MHz).** See [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [current checkpoint](../../CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md). New v3 synthesis75738 continues; own1200, actual CPU recovery/contention, mapped gate and PPA remain pending. Older v2 synthesis finished; it cannot qualify v3. R4 frozen evidence remains unchanged.
 
 # 架构三：E203 System Bus 集成
 
