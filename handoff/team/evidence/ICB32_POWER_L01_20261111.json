@@ -1,0 +1,83 @@
+{
+  "schema": "icb32-power-first-layer-review-v1",
+  "observed": "2026-11-11T08:53:58.582134+08:00",
+  "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+  "power_run": "runs/icb32_r4_finish01_power_l01/icb32_power",
+  "power_summary_sha256": "18190f6d4021de0ba55ae2b2be00a456f89217a6efbd0c0e3412831617f2d00c",
+  "numbers_file": "runs/icb32_r4_finish01_queue/layer_01_numbers.json",
+  "numbers_sha256": "a09b654b0165eddd107e37686852722692c806fbbe74fb8938177f89273a7d3b",
+  "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
+  "gate_summary_sha256": "95113a35bf2941e985d8d1b8cbad7d88c0d56f07d3c1f533f0fcf549fb2efc7f",
+  "case": "layer_01",
+  "cycles": 34639,
+  "duration_ns": "230926.643574",
+  "reported_power_w": {
+    "internal": "5.14801964e-02",
+    "switching": "1.33940009e-02",
+    "leakage": "7.26894895e-03",
+    "total": "7.21431449e-02"
+  },
+  "raw_energy_j": "0.0000166597743086297358726",
+  "boundary_inclusive_total_w": "7.21453205e-02",
+  "sram_counts": {"shared": 64, "accelerator": 96, "itcm": 32, "dtcm": 32},
+  "actual_settings": {
+    "power_analysis_mode": "averaged",
+    "power_x_transition_derate_factor": "0.5",
+    "power_include_initial_x_transitions": "false"
+  },
+  "activity": {
+    "unknown_value_records": 996956,
+    "nets": 362618,
+    "exact_mapping": 362618,
+    "default": 0,
+    "propagated": 0,
+    "implied": 0,
+    "not_annotated": 0,
+    "static_probability_same_counts": true,
+    "unannotated_list_before_and_after_empty": true,
+    "toggle_coverage_active_nets": 216834,
+    "toggle_coverage_reported_percent": 59.80,
+    "toggle_coverage_is_not_mapping_coverage": true
+  },
+  "warnings": {"power.log": {"PSW-208": 774}, "activity_coverage_before.rpt": {"PSW-208": 774}, "timing_check.rpt": {"PTE-003": 1}},
+  "timing_object_review": {
+    "file": "runs/icb32_l01_timing_objects01.json",
+    "sha256": "3388fbc7c7b242e1f43eb29fbec781d25b8f94a0c9cb0642a1b534ed4423d418",
+    "no_clock_count": 189,
+    "no_clock_groups": {"static_jtag_dtm": 186, "static_jtag_reset_sync": 3},
+    "no_clock_pin_types": {"CK": 182, "CKN": 7},
+    "disabled_arc_count": 78973,
+    "disabled_arc_flags": {"p": 14199, "C": 62570, "c": 1997, "d": 207},
+    "user_loop_or_false_net_flags": false
+  },
+  "annotation_review": {
+    "file": "runs/icb32_l01_annotation01.json",
+    "sha256": "873eae618eba1e8266ed19f9279d220ac0f7df2ec8add62fc72a73f28740061c"
+  },
+  "four_receipt_hashes_independently_asserted": "2026-11-11T08:53:58.582134+08:00",
+  "sdc": {
+    "original_mapped_sdc_sha256": "b11e22fbe4c880848101243646703323270d68ff0677449f4d5f4b7e08f78f48",
+    "actual_dc_period_ns": "6.666666000000",
+    "serialized_hf_period_ns": "6.66667",
+    "serialized_falling_edge_ns": "3.33333",
+    "lf_period_ns": "66",
+    "false_path_commands": 1,
+    "only_false_endpoints": "lfextclk to u_tim0..3/u_in_stage/r_ls_clk_sync_reg[0]/D",
+    "clock_groups_or_multicycle_exceptions": false,
+    "static_jtag_tck_tms_tdi": 0,
+    "static_pll_bypass_div1_and_bootrom_deglitch": 1,
+    "delivery_precision_fix": "workspaces/arch03/scripts/icb32_delivery_sdc.py",
+    "delivery_precision_export_executed_on_server": false
+  },
+  "complete_12_layer_power": false,
+  "system_power_verified": false,
+  "strict_timing_verified": false,
+  "physical_signoff": false,
+  "limits": [
+    "First layer only; do not describe this as twelve-layer mean or mix with old DMA16 power.",
+    "Pre-layout power with complete mapped functional activity, no SDF or extracted parasitics.",
+    "Exact mapping and empty unannotated lists do not bound the effect of unknown values.",
+    "Original DC synthesis used the strict clock. PT imported the rounded serialized SDC; original runs remain unchanged.",
+    "Detailed module/SRAM breakdown, units and numerical sum checks remain in the bound server numbers file."
+  ]
+}
