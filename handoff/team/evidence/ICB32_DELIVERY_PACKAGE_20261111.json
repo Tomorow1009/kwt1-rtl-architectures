@@ -1,0 +1,15 @@
+{
+  "schema": "icb32-delivery-preparation-receipt-v1",
+  "archive": "icb32-r4-delivery-preparation-20261111_132750-928559fea8ab.zip",
+  "bytes": 11519662,
+  "sha256": "dcbd8ef42ff293d44f92654772f7b394fcbce52528b51002eef72ee813abd289",
+  "files": 117,
+  "documentation_commit": "928559fea8ab8d01636ad1dbac2060f1f2be7025",
+  "archive_verified": true,
+  "officially_submitted": false,
+  "cloud_documentation_head_verified": "928559fea8ab8d01636ad1dbac2060f1f2be7025",
+  "source_archive_sha256": "18cf4c4def9fcab43174de974c6ca45851af35b6ac1ea701915bd8c57b41b161",
+  "original_source_inputs_rechecked": 636,
+  "server_artifacts_embedded": false,
+  "scope": "Team handoff preparation; server report/netlist/SDC/VCD references remain separate; no official upload"
+}
