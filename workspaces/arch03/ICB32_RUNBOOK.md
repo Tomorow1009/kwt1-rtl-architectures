@@ -4,7 +4,7 @@
 
 交付SDC由`scripts/icb32_delivery_sdc.py --synthesis <原icb32_synth目录> --summary-sha256 <原摘要SHA> --output <新目录>`导出。该工具只恢复被DC序列化舍入的HF周期和下降沿，核对实际metrics为6.666666ns，其余约束不变，原文件不覆盖。09:05小操作包已正常上传、解包及5文件哈希核验，服务器成功导出到964包`runs/icb32_delivery_sdc01`，09:07回执独立哈希通过；不是新增综合或原功耗已重跑的证据。
 
-09:14报告工具更新：`icb32_report.py`现在分别记录DC/波形精确周期、原SDC序列化周期与下降沿，保留历史综合审核提示为`source_stage_review_prompts`，不再把已完成的门级/活动或单独CPU诊断误列为未执行。请求可新增`delivery_sdc: {run, sha256}`，其中SHA是交付目录`receipt.json`的SHA；导出器绑定同综合输入并逐字检查除了精度修复之外没有其他约束变化。8项相关本地工具检查通过，新增工具尚未上传，不能直接调用964旧导出器期待这些字段。后继队列仍按原样生成基础request，结束后在新请求副本补入交付引用及历史失败记录，使用独立新版报告工具，不改运行包。
+09:14报告工具更新：`icb32_report.py`现在分别记录DC/波形精确周期、原SDC序列化周期与下降沿，保留历史综合审核提示为`source_stage_review_prompts`，不再把已完成的门级/活动或单独CPU诊断误列为未执行。请求可新增`delivery_sdc: {run, sha256}`，其中SHA是交付目录`receipt.json`的SHA；导出器绑定同综合输入并逐字检查除了精度修复之外没有其他约束变化。8项相关本地工具检查通过，新增工具已通过独立报告小包上传，09:20服务器8文件哈希及8项检查通过；必须执行新包中的report并用PYTHONPATH绑定964其余依赖，不能直接调用964旧导出器期待这些字段。后继队列仍按原样生成基础request，结束后在新请求副本补入交付引用及历史失败记录，使用独立新版报告工具，不改运行包。
 
 当前有效要求为 IMPLEMENTATION_PLAN_ICB32_C64_20261110.md。本文记录工具入口，不是运行通过证明。原 fcd DMA16 仍为交付退路。
 
@@ -64,3 +64,5 @@ python3 workspaces/arch03/scripts/server_run.py icb32_batch --session icb32_r4_f
 `icb32_finalize_queue.py`是独立的执行工具，不修改已上传运行包。它绑定原gate的PID、启动时间和综合摘要，只有原14例及12活动全部成功、共享锁释放后才串行运行12层功耗、964普通ASIC14和最终1200。每项失败立即停止，独立session不重试、不清锁；每层功耗数值提取检查实际单位、求和及224宏，仍保留`system_power_verified=false`。结束时生成`report_request.json`，不自动导出或批准最终报告。该工具可单独随小型操作包从已提交源码导出并经FileZilla传送，不必再次打包相同DUT/固件。排队进程不占EDA许可证；状态记录在目标包`runs/<session>_queue/state.json`。当前本地4项队列边界检查通过，是否已启动必须查最新检查点及服务器状态。
 
 R4完整datapath两套14例、错误恢复及合成CPU竞争通过；12名义层平均34616周期、4333.256 task/s只是无E203的pin_mock折算。生成的端口观察器又通过L01压缩34639与extremes原始回退38052周期，目录 `local_runs/icb32_monitor_fixture_20261110_234937_735905`。这两例不是映射网表验证。新版ASIC、综合、门级、功耗、1200及最终报告均以实际新运行回执为准。
+
+09:22当前队列已完成4层功耗，L05运行中。新报告工具包身份、完整恢复入口见[最新检查点](../../CONTEXT_CHECKPOINT_20261111_0922_ICB32.md)；大报告尚未运行，等待原metrics14和1200结束后再导出。

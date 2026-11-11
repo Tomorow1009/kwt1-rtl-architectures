@@ -1,0 +1,19 @@
+{
+  "schema": "icb32-report-tools-server-preflight-v1",
+  "observed": "2026-11-11T09:20:17+08:00",
+  "source_commit": "cedb648f3b740d625d1c8857dda769f352eec6d8",
+  "package": "light-light126-icb32-report-20261111_091554-cedb648f3b74",
+  "zip_bytes": 16942,
+  "files": 8,
+  "zip_sha256": "e939852693dc8ee09834e80b536e5c234d33f5e129aa07646e729f54a33bde54",
+  "manifest_sha256": "4436e191de57d60ae8ebc08883c2d8a2bc9aca68d01c9f4ade413fc86bf6d037",
+  "local_clean_package_tests": 8,
+  "server_tests": 8,
+  "server_tests_passed": true,
+  "server_zip_and_all_file_hashes_passed": true,
+  "transfer": "Linux FileZilla success, queue empty; disconnected and closed",
+  "runtime_dependencies": "light-light126-icb32-r4-20261111_043048-96443c284a1c/workspaces/arch03/scripts via PYTHONPATH",
+  "final_report_started": false,
+  "purpose": "Accurate original PT clock/precise delivery SDC attribution; preserve historical review prompts separately from current unverified scope.",
+  "limits": "Tool preflight only, not new hardware or final-report acceptance. Wait for original power12, metrics14 and final1200 queue before the large serial evidence export."
+}
