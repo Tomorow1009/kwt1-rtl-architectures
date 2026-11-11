@@ -279,7 +279,7 @@ def parse_hierarchy(text, totals):
 
 
 def parse_sram(text, profile='icb32'):
-    require(profile == 'icb32', 'Unknown SRAM power inventory profile')
+    require(profile in ('icb32','systolic_b'), 'Unknown SRAM power inventory profile')
     require(re.search(r'(?m)^\s*Design\s*:\s*e203_soc_top\s*$', text) and '-cell_power' in text,
             'Not the complete SoC SRAM cell report')
     pattern = (r'^\s*(\S+)\s+'+r'\s+'.join(['('+POWER_NUMBER+')']*4)+
@@ -301,7 +301,7 @@ def parse_sram(text, profile='icb32'):
         cells[path] = dict(owner=role, reported_power_w=values, attributes=match.group(6), numerical_sum_check=check)
         counts[role] = counts.get(role, 0)+1
         for key in KEYS: sums[(role, key)] = sums.get((role, key), Decimal(0))+number(values[key])
-    expected = {'itcm': 32, 'dtcm': 32, 'shared': 64, 'accelerator': 96}
+    expected = {'itcm': 32, 'dtcm': 32, 'shared': 64, 'accelerator': 96 if profile=='icb32' else 92}
     require(counts == expected, 'Incomplete '+profile+' SRAM cell coverage')
     return dict(cell_count=len(cells), counts=counts, cells=cells,
                 summed_cell_power_w={role: {key: str(sums[(role, key)]) for key in KEYS} for role in counts},

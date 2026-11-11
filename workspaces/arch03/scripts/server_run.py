@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','systolic_b_batch','systolic_b_contention','systolic_b_sequence','systolic_b_gate','systolic_b_saif_probe','systolic_b_timing_audit','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','systolic_b_batch','systolic_b_contention','systolic_b_sequence','systolic_b_gate','systolic_b_saif_probe','systolic_b_timing_audit','native_saif_r4_replay','native_saif_r4_crosscheck','systolic_b_saif','systolic_b_power','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -185,8 +185,29 @@ def main():
     p.add_argument('--gate-summary-sha256',help='Explicit expected digest of that gate summary')
     p.add_argument('--synth-reports-from',type=Path,help='Re-audit a marker-only failed synthesis into a new run; no mapping rerun')
     p.add_argument('--gate-reports-from',type=Path,help='Re-audit completed gate captures/VCD in a preserved failed run; no VCS rerun')
+    p.add_argument('--native-probe-run',type=Path,help='Passed native VCS/PT SAIF tiny probe')
+    p.add_argument('--native-probe-sha256')
+    p.add_argument('--native-replay-run',type=Path,help='Passed R4 full-window native SAIF replay')
+    p.add_argument('--native-replay-sha256')
+    p.add_argument('--reference-power-run',type=Path,help='Frozen R4 L01 VCD power reference')
+    p.add_argument('--reference-power-sha256')
+    p.add_argument('--saif-qualification-run',type=Path,help='Passed frozen R4 SAIF/VCD cross-check')
+    p.add_argument('--saif-qualification-sha256')
+    p.add_argument('--saif-activity-run',type=Path,help='Passed B native-SAIF activity replay')
+    p.add_argument('--saif-activity-sha256')
     p.add_argument('--x-point',choices=['zero','frozen','one','initial'],help='Separate diagnostic only; never changes frozen power stage')
     a=p.parse_args()
+    if a.stage in ('native_saif_r4_replay','native_saif_r4_crosscheck') and a.cases!=['layer_01']:
+        raise ValueError('Native SAIF qualification is restricted to explicit --cases layer_01')
+    for target,values in (
+        ('native_saif_r4_replay',(a.native_probe_run,a.native_probe_sha256)),
+        ('native_saif_r4_crosscheck',(a.native_replay_run,a.native_replay_sha256,
+                                    a.reference_power_run,a.reference_power_sha256)),
+        ('systolic_b_saif',(a.saif_qualification_run,a.saif_qualification_sha256)),
+        ('systolic_b_power',(a.saif_activity_run,a.saif_activity_sha256))):
+        if a.stage==target:
+            if any(v is None for v in values):raise ValueError('Missing required native-SAIF evidence for '+target)
+        elif any(v is not None for v in values):raise ValueError('Native-SAIF evidence options used for wrong stage')
     if (a.stage in ('icb32_batch','systolic_b_batch')) != (a.dataset is not None):
         raise ValueError('Dataset is required only for a final ASIC batch')
     if (a.stage=='dma16_x_sensitivity') != (a.x_point is not None):
@@ -197,9 +218,13 @@ def main():
         raise ValueError('Gate report re-audit is only for gate_soc')
     if a.gate_reports_from is not None and (a.synth_run is not None or a.synth_summary_sha256 is not None or a.activity_cases):
         raise ValueError('Gate re-audit uses only the original run synthesis/activity provenance')
-    if a.stage in ('asic_power','dma16_power','icb32_power','mmio8_power','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity') and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
+    if a.stage in ('native_saif_r4_replay','asic_power','dma16_power','icb32_power','mmio8_power','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity') and (a.gate_run is None or a.gate_summary_sha256 is None or len(a.cases)!=1):
         raise ValueError('Power/activity audit requires gate run, summary digest and exactly one --cases selection')
-    if a.stage not in ('asic_power','dma16_power','icb32_power','mmio8_power','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
+    if a.stage=='systolic_b_saif' and (a.gate_run is None or a.gate_summary_sha256 is None):
+        raise ValueError('B native SAIF needs its own passed mapped gate run and digest')
+    if a.stage=='systolic_b_power' and len(a.cases)!=1:
+        raise ValueError('B native power needs exactly one performance layer')
+    if a.stage not in ('systolic_b_saif','native_saif_r4_replay','asic_power','dma16_power','icb32_power','mmio8_power','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity') and (a.gate_run is not None or a.gate_summary_sha256 is not None):
         raise ValueError('Gate activity selection is only for power or unknown-activity review')
     if a.stage in ('systolic_b_timing_audit','systolic_b_saif_probe','systolic_b_gate','gate_soc','dma16_gate','icb32_gate','icb32_timing_audit','mmio8_gate','dma16_timing_audit','mmio8_timing_audit') and a.gate_reports_from is None and (a.synth_run is None or a.synth_summary_sha256 is None):
         raise ValueError('Gate verification requires synthesis run and summary digest')
@@ -233,7 +258,21 @@ def main():
         record=dict(status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),run=str(run))
         state['stages'][a.stage]=record;save(state_path,state)
         try:
-            if a.stage in ('systolic_b_soc','systolic_b_build'):
+            if a.stage=='native_saif_r4_replay':
+                from native_saif_replay import verify
+                report=verify(cfg,run,a.gate_run,a.gate_summary_sha256,a.native_probe_run,a.native_probe_sha256,call)
+            elif a.stage=='native_saif_r4_crosscheck':
+                from native_saif_crosscheck import verify
+                report=verify(cfg,run,a.native_replay_run,a.native_replay_sha256,
+                              a.reference_power_run,a.reference_power_sha256,call)
+            elif a.stage=='systolic_b_saif':
+                from systolic_b_saif import verify
+                report=verify(cfg,run,a.gate_run,a.gate_summary_sha256,
+                              a.saif_qualification_run,a.saif_qualification_sha256,a.cases,call)
+            elif a.stage=='systolic_b_power':
+                from systolic_b_power import estimate
+                report=estimate(cfg,run,a.saif_activity_run,a.saif_activity_sha256,a.cases[0],call)
+            elif a.stage in ('systolic_b_soc','systolic_b_build'):
                 from systolic_b_soc import verify
                 report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='systolic_b_build')
             elif a.stage=='systolic_b_batch':

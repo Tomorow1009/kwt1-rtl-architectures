@@ -2675,7 +2675,7 @@
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,7 +2683,7 @@
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Commit and upload combined diagnostics/gate/SAIF tools; keep synthesis75738; queue only new B validations after its exact completion, no final1200 before freeze.",
+    "next": "Keep synthesis75738 and waiting queue103191. Prepare native SAIF R4 L01 replay/crosscheck; do not activate B power before real probe and <=1% crosscheck. Final1200 awaits freeze review.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2770,7 +2770,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "c4d8cf0f338fa3ba7f2aa5e3d4e1a3eeb2bfaf7f",
+    "cloud_commit": "35d8ae1b20a1a8ba417e9971c631d50e00173a4e",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2806,9 +2806,11 @@
       "stage": "systolic_b_synth",
       "pid": 75738,
       "status": "running",
-      "observed": "2026-11-12T01:31:34+08:00",
+      "observed": "2026-11-12T02:19:35+08:00",
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
-      "child_pid": 79637
+      "child_pid": 79637,
+      "child_cpu_percent": 99.4,
+      "child_RSS_KiB": 25923916
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2816,6 +2818,27 @@
       "outputs": 456192,
       "cpu_executed": false,
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_LATENCY2_20261112.json"
+    },
+    "validation_queue": {
+      "pid": 103191,
+      "session": "systolic_b_v3_validation01_queue",
+      "bundle": "light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1",
+      "observed": "2026-11-12T02:16:09+08:00",
+      "status": "waiting_synthesis",
+      "completed": [],
+      "optional_failures": [],
+      "final1200_started": false
+    },
+    "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
+    "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
+    "native_saif_tools_local": {
+      "status": "draft_local_tests_passed_not_server_executed",
+      "probe_deployed_in_waiting_queue": true,
+      "R4_full_window_crosscheck": false,
+      "B_activity12": false,
+      "B_power12": false,
+      "local_tests": 9,
+      "hardware_RTL_changed": false
     }
   }
 }

@@ -1,4 +1,6 @@
-**11月12日01:40：B/v3 ASIC14已过，latency2本地18任务456192输出全过；新综合75738仍运行。** 先读[01:04检查点全部增量至01:40](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md)及有效B计划。可用空间27.75GiB，不删历史证据。新门级/SAIF/时序/空间预算工具及新B串行验证队列尚未提交上传，队列未启动；c4d包仍只在本地。无本地仿真，VNC18874435 workspace3、FileZilla关闭。下一步提交/同步/打包/上传，再唯一排队新验证；不自动最终1200，不重复旧作业。
+**11月12日02:16：B原综合75738/79637继续，唯一验证队列103191仍等待。** 先读[02:16完整检查点](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。ASIC14已过、4917.6566task/s；新SAIF/浮点汇总草稿本地准备，尚未实际功耗。35d包已服务器核验/云同步，不重传、不重启。VNC workspace3空闲shell，FileZilla关闭。
+
+**11月12日01:52：新B验证队列103191已唯一启动，等待原综合75738。** 先读[01:04检查点全部增量至01:52](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md)及有效B计划。35d8ae1已云同步、705输入/三固件包已FileZilla上传并服务器核验；不要重传或重启。B/v3 ASIC14与latency2本地18任务已过；CPU恢复/竞争、SAIF小试、时序诊断和gate14将由新队列串行执行，不自动最终1200。VNC18874435/workspace3在新35d8ae1包，FileZilla关闭，无本地仿真。最新只读队列截图b_validation_waiting_0152.png需读取。
 
 **01:14: B/v3 ASIC14 PASSED354816 outputs/IRQ-WFI,30502.3333 mean cycles. New v3 synthesis PID75738 launched once.** Read [01:04 checkpoint through01:14](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md) and B plan. Do not restart runs. Tool commit c4d8cf0 cloud matched; diagnostic ZIP11357606B/698 inputs local only, unchanged35 runtime files. VNC18874435 workspace3; FileZilla closed; no local jobs. Current SAIF report-help query has been typed, not Return yet. Continue SAIF/tool work while sole synthesis runs.
 

@@ -116,3 +116,19 @@ systolic_b_batch加入空间前置和逐例复核：初始按每例8MiB、余量
 新增`systolic_b_validation_queue.py`只等待指定pid/started的当前B综合，通过后按同一共享锁串行运行新B真实CPU恢复、竞争、小SAIF、只读时序诊断、gate14。失败不覆盖旧run；SAIF小试失败保留独立失败记录但不阻塞功能gate；不会自动启动最终1200或批准PPA。该队列目前仅源码准备，**没有上传或启动**。
 
 下一步提交本轮验证工具、同步云端、导出新不可变含三固件包，通过已授权FileZilla上传；核验后记录综合精确started，再唯一启动新B验证队列。保留c4d本地包，勿将它误记已上传。正式RTL仍63da6ba冻结候选。
+
+## 01:50增量：35d8ae1新包已服务器核验，准备唯一队列
+
+本轮工具提交 **35d8ae1b20a1a8ba417e9971c631d50e00173a4e**，已push并ls-remote一致。导出包`light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1.zip`，11377937B/705输入，SHA`eff31c13bd682c03db525187db54cbac964eb134e753df216c7ca3dee6f650d9`，manifest SHA`b2efb14665212853e63da2a040b3c1bff862e076cb50fb174de021d17c3c9840`。30个生产RTL/固件文件与63da6ba包逐个相同（本轮统计未计脚本，和前35项口径不同）。三固件及全部输入本地核验通过。
+
+板端`/home/root/systolic_b_validation_35d8ae1/`已SHA核验，FileZilla上传11.4MB/22秒成功、空队列，已断开关闭。01:48 UNPACK_HASH_PASS，01:49:52实际服务器输出NEW_B_705_THREE_FIRMWARE_PASS705及manifest相符。旧c4d包没有上传。本轮打包第一次漏--member而argparse退出，未生成任何包；补齐后正常完成。
+
+当前VNC18874435/workspace3，cwd新35d8ae1包。原综合仍旧63da6ba包`systolic_b_v3_synth01`，PID75738，精确started **2026-11-12T01:14:15.533251**，01:40:57仍running。新的`takeover_local/b_validation_launch.txt`正在输入；需等待type完成后Return。预期queue session `systolic_b_v3_validation01_queue`，此刻尚未执行/无PID，不能说已启动。它只排sequence/contention/SAIFtiny/timing/gate14，不排最终1200。不要重复上传/解包/原综合。
+
+## 01:52增量：新队列已启动，禁止重复
+
+`b_validation_launch.txt`已Return执行，实际输出 **NEW_B_VALIDATION_QUEUE_PID103191 2026-11-12 01:51:02.310665**。队列目录`35d8ae1包/runs/systolic_b_v3_validation01_queue`，launcher同包runs/systolic_b_v3_validation01_launcher.log。随后`b_validation_live.txt`只读查询已执行，截图`takeover_local/b_validation_waiting_0152.png`需查看。没有待输入命令或未结束本地会话。
+
+新队列只等精确75738/01:14:15.533251的综合，然后独立sequence、contention两例、SAIFtiny、timing、gate14；不会启动最终1200，不做正式功耗批准。原综合/队列均不得重启。FileZilla已关闭，VNC继续workspace3；暂无CUA会话。
+
+SAIF后续工作入口：已有安装VCS原生region/start/stop/report及PT read_saif手册。小试脚本native_saif_probe.py已随705包部署，但要等综合释放共享锁后才执行。下一步在小试结论出来前可准备完整窗口SAIF读写及R4 L01交叉核对工具，不提前称兼容。R4 gate包49759e108719/run icb32_r4_gate01/icb32_gate，summary SHA95113a35bf2941e985d8d1b8cbad7d88c0d56f07d3c1f533f0fcf549fb2efc7f；其L01窗口92949.990705..323876.634279ns，原VCD12595749229B，原功耗964包icb32_r4_finish01_power_l01/icb32_power，summary SHA18190f6d4021de0ba55ae2b2be00a456f89217a6efbd0c0e3412831617f2d00c，整机0.0721431449W。完整R4证据保留不重跑1200，只允许本计划要求的L01活动方式交叉核对。

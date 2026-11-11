@@ -1,0 +1,107 @@
+{
+  "scope": "real_ASIC_RTL_E203_not_silicon_measurement",
+  "tested_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "session": "systolic_b_v3_first01",
+  "stage": "systolic_b_soc",
+  "summary_sha256": "614d9f605996c9dfb302add53254461c62d7ec3c295fdc003c7964b6233a5d5d",
+  "observed": "2026-11-12T02:00:02+08:00",
+  "cases": [
+    {
+      "case": "layer_01",
+      "cycles": 31339,
+      "encoded_bytes": 33012,
+      "transactions": 29178
+    },
+    {
+      "case": "layer_02",
+      "cycles": 30735,
+      "encoded_bytes": 31804,
+      "transactions": 28574
+    },
+    {
+      "case": "layer_03",
+      "cycles": 30423,
+      "encoded_bytes": 31180,
+      "transactions": 28262
+    },
+    {
+      "case": "layer_04",
+      "cycles": 30491,
+      "encoded_bytes": 31316,
+      "transactions": 28330
+    },
+    {
+      "case": "layer_05",
+      "cycles": 30079,
+      "encoded_bytes": 30492,
+      "transactions": 27918
+    },
+    {
+      "case": "layer_06",
+      "cycles": 29775,
+      "encoded_bytes": 29884,
+      "transactions": 27614
+    },
+    {
+      "case": "layer_07",
+      "cycles": 29423,
+      "encoded_bytes": 29180,
+      "transactions": 27262
+    },
+    {
+      "case": "layer_08",
+      "cycles": 29511,
+      "encoded_bytes": 29356,
+      "transactions": 27350
+    },
+    {
+      "case": "layer_09",
+      "cycles": 29419,
+      "encoded_bytes": 29172,
+      "transactions": 27258
+    },
+    {
+      "case": "layer_10",
+      "cycles": 30215,
+      "encoded_bytes": 30764,
+      "transactions": 28054
+    },
+    {
+      "case": "layer_11",
+      "cycles": 31383,
+      "encoded_bytes": 33100,
+      "transactions": 29222
+    },
+    {
+      "case": "layer_12",
+      "cycles": 33235,
+      "encoded_bytes": 36804,
+      "transactions": 31074
+    }
+  ],
+  "extremes": {
+    "cycles": 38337,
+    "encoded_bytes": 47008,
+    "transactions": 36176
+  },
+  "rounding": {
+    "cycles": 33707,
+    "encoded_bytes": 34796,
+    "transactions": 30070
+  },
+  "outputs": 354816,
+  "mean_cycles": 30502.333333333332,
+  "mean_encoded_bytes": 31338.666666666668,
+  "mean_transactions": 28341.333333333332,
+  "clock_Hz": 150000000,
+  "task_s": 4917.656572721213,
+  "MACs_per_task": 1622016,
+  "full_window_useful_MAC_fraction": 0.6647098036215809,
+  "transaction_per_cycle": 0.929152960975663,
+  "ideal_one_transaction_per_cycle_limit_task_s": 5292.623259315017,
+  "R4_reference_cycles": 34616,
+  "throughput_improvement_fraction": 0.1348639994754499,
+  "system_power_verified": false,
+  "new_final1200_verified": false,
+  "new_gate_verified": false
+}
