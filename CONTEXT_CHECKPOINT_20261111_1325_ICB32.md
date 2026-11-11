@@ -38,3 +38,11 @@
 - **R1 launch已执行一次，成功PID187418。** 13:30:09.236138实际state为icb32_soc running、started13:29:07.205308、errorNone、捕获0（编译阶段），锁PID/session/bundle完全匹配。`icb32_r1_compare01`是独立R1 session；禁止重复launch。当前没有其他本项目服务器作业。
 - 下一步用`takeover_local/icb32_r1_compare_status.txt`读取原状态，实际ASIC14通过后读摘要/逐例窗口/IRQ并绑定SHA，再启动同session尚未执行的icb32_synth。尚无R1综合或gate/power。R1是对照，不重复1200；不要调用包含final1200的R4 finalize队列。
 - VNC仍20971587/第三终端shell/cwd964，最后命令是R1状态查询，FileZilla关闭。全部新R1进程/哈希与交付包回执已落本地记录，本增量待同步。
+
+## 13:39增量：R1实际ASIC14通过，综合运行，先测活动体积
+
+- R1 ASIC14已13:33:02.951083自然通过，354816输出、真实ASIC/E203、无全局FPGA、IRQ/WFI全部通过。13:35:23.168106摘要SHA与stage断言一致：`1980d8eb8ead959d0a3ec099f0fb3d4461924210abf6a785b60a85fac67286f6`。12层均值116280周期，与本地相同；同通路R4加速3.359140倍现有真实CPU证据。14周期已存ICB32_R1_SERVER_20261111.json。
+- **synth_launch已执行一次成功。** R1同独立session icb32_r1_compare01，综合PID203950，started13:36:24.382957；13:39:18.034372实际synth running/errorNone，锁PID/session/bundle匹配。原ASIC187418已结束，禁止重复ASIC或synth。
+- 13:37:28实际剩余磁盘135.405GiB；R4的12份VCD共139.178GiB、最大12.333GiB。完整门级总阶段5.36h不能简单按芯片周期推R1宿主耗时；R4单例仿真约202–299秒，其他时间含扫描/导出。**R1综合通过后先运行layer_01门级/活动试测，在容量/耗时明确后决定全12安排；不得盲启完整12活动，不删除/挪走历史证据。** 此探测只读stat/summary。R1门级尚未启动，也未准备launch文件。
+- 已执行`icb32_r1_asic_verify.txt`、`icb32_r1_synth_launch.txt`。`icb32_r1_compare_status.txt`已改为读取实际case_progress；当前VNC最后为该status，仍shell/cwd964。
+- 云端最新独立确认为`a0c241ba586333b7ebb0f274e0350fafe567ee34`（交付包与R1启动信息）；本增量、R1 ASIC PASS/综合/预算待同步。本机一次utf8-sig编码名拼写和一次PowerShell管道编码错误均在写文件前被拦下，改正/改用文件编辑继续；无服务器作业失败。

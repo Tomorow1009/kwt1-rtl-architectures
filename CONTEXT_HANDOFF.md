@@ -1,3 +1,5 @@
+**13:39 current: R1 ASIC14 passed 354816 outputs / 116280 mean cycles; synthesis PID203950 running with matching lock.** Read [latest checkpoint and 13:39 increment](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md) and the active ICB32 plan. R4 final export and delivery snapshot are complete. Free disk135.405GiB vs R4 VCD139.178GiB: after R1 synthesis, measure one gate/activity layer before scheduling full12. Do not restart existing jobs or delete history.
+
 **13:30最新：R4最终报告和11.52MB交付准备包已完成，云端928559f已确认；R1真实对照已启动。** 先读[13:25检查点及13:30增量](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md)。R1独立session icb32_r1_compare01、PID187418，13:30实际ASIC14 running/锁匹配；不能重复launch。继续原任务通过后再做R1综合，R4最终1200/报告/交付快照不重跑。
 
 **13:25最新：R4最终1200及同配置报告已经完成独立重审。** 先读[13:25检查点](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md)和当前32位计划。wrapper121468/child121471已结束并正常释放自锁，不重启报告或仿真。下一步提交/同步并运行交付准备打包器，再串行补R1真实对照；R1刚完成607输入预检但尚未启动。详细哈希、路径、未验证项和恢复入口均在新检查点。

@@ -3993,7 +3993,7 @@
     }
   },
   "icb32_c64_execution": {
-    "status": "R4_delivery_snapshot_verified_R1_ASIC14_running",
+    "status": "R4_delivery_ready_R1_ASIC14_passed_synthesis_running",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md",
     "started": "2026-11-10T22:04:16+08:00",
     "freeze": "2026-11-11T18:00:00+08:00",
@@ -4005,8 +4005,8 @@
     "b1_status": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "new_soc_verified": true,
     "new_ppa_verified": false,
-    "remote_last_observed": "2026-11-11T13:30:09.236138+08:00",
-    "remote_status": "R1_ASIC14_running_matching_lock",
+    "remote_last_observed": "2026-11-11T13:39:18.034372+08:00",
+    "remote_status": "R1_synthesis_running_matching_lock",
     "checkpoint": "CONTEXT_CHECKPOINT_20261111_1325_ICB32.md",
     "b1": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "b1_nominal_pf1_cycles": 162713,
@@ -4021,8 +4021,8 @@
     "integrated_recovery": "passed_errors_truncation_cancel_no_reset",
     "synthetic_cpu_contention": "passed_96_accesses_byte_masks_bank_boundary",
     "firmware": "e65_R4_IRQ_all14_actual_E203_passed",
-    "next": "Monitor R1 ASIC14; on pass read real summary then start R1 synthesis in same independent session. Do not repeat R4 export or delivery snapshot.",
-    "remote_driver_pid": 187418,
+    "next": "Read R1 synthesis; if qualified, measure single-layer gate/activity storage/time before full12. Preserve all earlier evidence.",
+    "remote_driver_pid": 203950,
     "remote_queue_pid": 285397,
     "remote_child_pid": null,
     "package_commit": "e65e8dc8c4c0f5c7ba94dfc792e382565c9f0d53",
@@ -4035,7 +4035,7 @@
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
     "successor_queue_started": true,
-    "cloud_commit": "928559fea8ab8d01636ad1dbac2060f1f2be7025",
+    "cloud_commit": "a0c241ba586333b7ebb0f274e0350fafe567ee34",
     "latest_package": "light-light126-icb32-r4-20261111_043048-96443c284a1c.zip",
     "latest_package_sha256": "18cf4c4def9fcab43174de974c6ca45851af35b6ac1ea701915bd8c57b41b161",
     "latest_package_status": "FileZilla_success_server_SHA_unpack_636_inputs_three_firmwares_production_identity_verified",
@@ -4060,8 +4060,8 @@
     "r1_package_sha256": "f0d484804f02e37d158bc5da874c65de60b284f3f176b375372eab035801bec1",
     "r1_server_preflight": "rechecked_607_inputs_20261111_131903",
     "remote_owner_last_observed": "2026-11-11T01:54:36.696703+08:00",
-    "server_free_gib": 884.82,
-    "server_disk_observed": "2026-11-11T01:46:19+08:00",
+    "server_free_gib": 135.4052734375,
+    "server_disk_observed": "2026-11-11T13:37:28.189426+08:00",
     "fixed100_manifest_rechecked": true,
     "acceptance": "workspaces/arch03/ACCEPTANCE_ICB32_20261111.md",
     "innovation_notes": "workspaces/arch03/ICB32_INNOVATION_20261111.md",
@@ -4137,6 +4137,9 @@
     "final_receipt_sha256": "2e54dc4378b1d59ee13ba236eb4b3093daa44d2a8a769830201fa295d94d004d",
     "r1_server_evidence": "handoff/team/evidence/ICB32_R1_SERVER_20261111.json",
     "r1_session": "icb32_r1_compare01",
-    "delivery_package_evidence": "handoff/team/evidence/ICB32_DELIVERY_PACKAGE_20261111.json"
+    "delivery_package_evidence": "handoff/team/evidence/ICB32_DELIVERY_PACKAGE_20261111.json",
+    "r1_asic14_verified": true,
+    "r1_asic14_summary_sha256": "1980d8eb8ead959d0a3ec099f0fb3d4461924210abf6a785b60a85fac67286f6",
+    "r1_asic14_mean_cycles": 116280
   }
 }
