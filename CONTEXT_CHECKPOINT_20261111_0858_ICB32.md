@@ -47,3 +47,15 @@
 - 本轮另有一次本地PowerShell嵌套引号ParseError，导致查询文件没生成；随后用apply_patch新建修复。服务器未改。一次多文件patch因尾锚不匹配被拒，分开应用后已恢复，没有代码丢失。
 - 新进度脚本`takeover_local/progress_0858.py`执行后不可重复；本地无仿真长任务。Git最后已确认abbf06f，本轮新增功耗/时序/SDC文件待提交；同范围持续Git同步已授权。
 - 先继续原队列，不以“已记好进度”结束本轮。
+
+
+## 09:10增量：精确交付SDC已完成，功耗进入L04
+
+- **09:09:23.353851实际：原队列285397 running L04，completed=3，error=None；driver165722、PT wrapper166150。** L03总功耗72.0774755mW、16.627310902112076849µJ。09:08轻量复核已完成三层活动sources/settings/unannotated_after，均362618 exact、0 not_annotated、averaged/0.5/false。原队列不改，后面仍metrics14及final1200。
+- 云端4638ed924e0715cb14cd91ceb4d78e7187d18048已独立核对，随后正常导出源码小操作包`light-light126-icb32-sdc-20261111_090010-4638ed924e07`，5文件/5400B，ZIP SHA02542b6dea091c1e222929d6b0dd0139899b2a1b66aeffd58722ceeccb17fe78，manifest d4a678a332aa1a56237678a99efaae91fbd91d4cc8e2f6fac9f475b15ce4ad9b。干净包两项工具检查通过（非硬件重测）。
+- 板端暂存`/home/root/icb32_sdc_0900`，GUI为`/home/board/icb32_sdc_0900`。正常FileZilla IC-single-connection上传至原授权目录，5.4KB/1秒成功，队列空；已Ctrl+D/Q并窗口确认退出。开发板VNC保持20971587，原代理/relay保留。
+- 09:04服务器ZIP安全解包、5文件及manifest核验通过；09:05通过原summary/stage/metrics/netlist/SDC绑定，成功导出964的`runs/icb32_delivery_sdc01/mapped.precise.sdc`。原文件未变，未启动EDA。**不要再次执行sdc_run或原地覆盖输出。**
+- 新SDC SHA`9f49557c4aee558232cdb90f65c50ef6264250eb1f9c61e95747394e0348195d`，receipt SHA`7777a8850e91d5283cfd3093bd59173fce3285de01f4a583d0ff16d449850dbb`，09:07:17.360819独立断言通过。服务器与本地证据`ICB32_DELIVERY_SDC_20261111.json`保存精确6.666666/3.333333、其他约束不变、无timing_rerun；不能误写原PT已用精确SDC。
+- `takeover_local/icb32_power_annotation_live.txt`951字符可反复只读当前已完成层，复用964已有纯解析器，不扫描VCD。`icb32_sdc_receipt.txt`可读新回执，verify已经通过；不用重复导出/传包。**最后VNC命令为finish_live**，可Up Return读当前队列。
+- 还未改`icb32_report.py`。下一项报告收尾必须避免其现有固定文字造成误导：`declared_conditions.period_ns=6.666666`未说明PT导入舍入差异；固定unverified把CPU竞争/恢复及未来metrics14干净复现列为待验，且复制原synth.required_reviews包含已经完成gate/activity。应保留历史提示并在最终同身份说明中区分实际完成状态；不要自动翻转时序/功耗false。可以修正导出器的条件/文字或生成明确陪同审阅，不需更改RTL或再跑已通过硬件。
+- 本轮progress_0858.py和progress_0910.py已经执行，勿重复。本次增量与SDC证据待提交；无本地长任务。继续原串行链，勿结束等待用户。

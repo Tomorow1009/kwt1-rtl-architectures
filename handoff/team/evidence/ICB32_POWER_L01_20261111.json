@@ -19,7 +19,12 @@
   },
   "raw_energy_j": "0.0000166597743086297358726",
   "boundary_inclusive_total_w": "7.21453205e-02",
-  "sram_counts": {"shared": 64, "accelerator": 96, "itcm": 32, "dtcm": 32},
+  "sram_counts": {
+    "shared": 64,
+    "accelerator": 96,
+    "itcm": 32,
+    "dtcm": 32
+  },
   "actual_settings": {
     "power_analysis_mode": "averaged",
     "power_x_transition_derate_factor": "0.5",
@@ -36,18 +41,39 @@
     "static_probability_same_counts": true,
     "unannotated_list_before_and_after_empty": true,
     "toggle_coverage_active_nets": 216834,
-    "toggle_coverage_reported_percent": 59.80,
+    "toggle_coverage_reported_percent": 59.8,
     "toggle_coverage_is_not_mapping_coverage": true
   },
-  "warnings": {"power.log": {"PSW-208": 774}, "activity_coverage_before.rpt": {"PSW-208": 774}, "timing_check.rpt": {"PTE-003": 1}},
+  "warnings": {
+    "power.log": {
+      "PSW-208": 774
+    },
+    "activity_coverage_before.rpt": {
+      "PSW-208": 774
+    },
+    "timing_check.rpt": {
+      "PTE-003": 1
+    }
+  },
   "timing_object_review": {
     "file": "runs/icb32_l01_timing_objects01.json",
     "sha256": "3388fbc7c7b242e1f43eb29fbec781d25b8f94a0c9cb0642a1b534ed4423d418",
     "no_clock_count": 189,
-    "no_clock_groups": {"static_jtag_dtm": 186, "static_jtag_reset_sync": 3},
-    "no_clock_pin_types": {"CK": 182, "CKN": 7},
+    "no_clock_groups": {
+      "static_jtag_dtm": 186,
+      "static_jtag_reset_sync": 3
+    },
+    "no_clock_pin_types": {
+      "CK": 182,
+      "CKN": 7
+    },
     "disabled_arc_count": 78973,
-    "disabled_arc_flags": {"p": 14199, "C": 62570, "c": 1997, "d": 207},
+    "disabled_arc_flags": {
+      "p": 14199,
+      "C": 62570,
+      "c": 1997,
+      "d": 207
+    },
     "user_loop_or_false_net_flags": false
   },
   "annotation_review": {
@@ -67,7 +93,8 @@
     "static_jtag_tck_tms_tdi": 0,
     "static_pll_bypass_div1_and_bootrom_deglitch": 1,
     "delivery_precision_fix": "workspaces/arch03/scripts/icb32_delivery_sdc.py",
-    "delivery_precision_export_executed_on_server": false
+    "delivery_precision_export_executed_on_server": true,
+    "delivery_precision_export_evidence": "handoff/team/evidence/ICB32_DELIVERY_SDC_20261111.json"
   },
   "complete_12_layer_power": false,
   "system_power_verified": false,
