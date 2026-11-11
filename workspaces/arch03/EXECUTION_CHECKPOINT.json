@@ -4005,8 +4005,8 @@
     "b1_status": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "new_soc_verified": true,
     "new_ppa_verified": false,
-    "remote_last_observed": "2026-11-11T11:16:49.095754+08:00",
-    "remote_status": "final1200_running_105_passed_zero_failed",
+    "remote_last_observed": "2026-11-11T11:31:04.607624+08:00",
+    "remote_status": "final1200_running_291_passed_zero_failed",
     "checkpoint": "CONTEXT_CHECKPOINT_20261111_1120_ICB32.md",
     "b1": "local_pin_mock_14_jitter_and_6_nominal_passed",
     "b1_nominal_pf1_cycles": 162713,
@@ -4035,7 +4035,7 @@
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
     "successor_queue_started": true,
-    "cloud_commit": "42216334f43deca045884d25cf764110399592b2",
+    "cloud_commit": "fd91f9e77b82bd77182f2924810029829e0f5253",
     "latest_package": "light-light126-icb32-r4-20261111_043048-96443c284a1c.zip",
     "latest_package_sha256": "18cf4c4def9fcab43174de974c6ca45851af35b6ac1ea701915bd8c57b41b161",
     "latest_package_status": "FileZilla_success_server_SHA_unpack_636_inputs_three_firmwares_production_identity_verified",
@@ -4123,6 +4123,9 @@
     "clean_asic14_reproduction": "passed_964_clean_directory",
     "power_weighted_mean_mW": "71.81263185379159926045759187",
     "power_mean_energy_uJ": "16.5724387710949571661000000",
-    "final1200_progress_evidence": "handoff/team/evidence/ICB32_FINAL1200_PROGRESS_20261111.json"
+    "final1200_progress_evidence": "handoff/team/evidence/ICB32_FINAL1200_PROGRESS_20261111.json",
+    "task_mode_timing_verified": true,
+    "project_area_upper_bound_verified": true,
+    "scoped_review_evidence": "handoff/team/evidence/ICB32_SCOPED_REVIEW_20261111.json"
   }
 }

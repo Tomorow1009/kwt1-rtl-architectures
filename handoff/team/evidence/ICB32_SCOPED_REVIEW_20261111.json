@@ -1,0 +1,65 @@
+{
+  "schema": "icb32-scoped-engineering-review-v1",
+  "observed": "2026-11-11T11:28:24.051386+08:00",
+  "scope": "SS_0p99V_125C_stable_task_mode_synthesis_pre_layout",
+  "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
+  "asic_summary_sha256": "e5d009732e822cb5cf730e85b652a160f5022ba0197a9e6ff60960d76121d604",
+  "gate_summary_sha256": "95113a35bf2941e985d8d1b8cbad7d88c0d56f07d3c1f533f0fcf549fb2efc7f",
+  "clean_metrics14_summary_sha256": "bb0ee4cf23b31730d72c196bfc5101f3d2f49e7d1dea33b49e366a72de54e576",
+  "decisions": {
+    "task_mode_synthesis_timing": "accepted_for_declared_scope",
+    "project_area_upper_bound": "accepted_for_declared_scope",
+    "system_power": "numbers_available_unknown_activity_influence_review_incomplete",
+    "final1200": "running_not_accepted_yet"
+  },
+  "metrics": {
+    "period_ns": "6.666666",
+    "setup_slack_ns": "0.0000715256",
+    "hold_slack_ns": "0.000253469",
+    "project_area_upper_mm2": "0.926561671200504",
+    "project_area_limit_mm2": "2.00"
+  },
+  "basis": {
+    "mapped_check_timing": "All final generated-clock, loop, input-delay and unconstrained-endpoint checks completed; only three identified platform clock high-fanout warnings remain with declared synthesis fanout model 1000.",
+    "clock_objects": "All 189 PT no_clock pins belong to static JTAG DTM or its reset synchronizer; JTAG TCK/TMS/TDI fixed to zero in this task mode.",
+    "disabled_arcs": "78973 arcs exhaustively inventoried: propagated constants, conditional/default arcs, case analysis; no user/loop/false-net flags.",
+    "exceptions": "Only four original LF timer first-stage CDC D pins are excepted. No clock-group/multicycle or SysMem data-path exception. HF source interface is 1 ns input/output and 0 ns minimum as declared.",
+    "structure": "LINT-1 four unused original platform output instances explained; all 11138 LINT-8/28 ports declaration-only; all 706 LINT-2 nets resolve one-to-one to those unused input ports. LINT-32 constant-connected pins and LINT-33 shared-net notices are not missing/multiple-driver failures; retained full original report, same-netlist 14-case function passes, zero latches and no combinational loops.",
+    "area": "Current 224-macro netlist independently inventoried. Conservative bound includes every SoC standard cell and all 96 accelerator SRAM macros, excluding only 128 reused TCM/shared macros. Units and unchanged library geometry checked; no added inline logic exemption.",
+    "sdc_precision": "DC timing used exact period. PT power imported rounded 6.66667 ns original SDC. Separate delivery SDC restores 6.666666/3.333333 only; no historical report or netlist was altered and no PT rerun is claimed."
+  },
+  "lint2": {
+    "bundle": "light-light126-icb32-r4-20261111_043048-96443c284a1c",
+    "file": "runs/icb32_lint2_01.json",
+    "sha256": "8a67d41bf37ecff3e16986c8f6e134782f7d7eb3617358c907974d891b576371",
+    "resolved_hierarchical_drivers": 706,
+    "matching_declaration_only_input_ports": 706,
+    "extra": 0,
+    "missing": 0,
+    "original_mapped_netlist_and_structural_report_hashes_rechecked": true,
+    "port_review_sha256": "316ee46a76452e2661d2b0a96e2823ed8373c0341e8797758813190ffec07da3"
+  },
+  "related_evidence": [
+    "ICB32_SYNTH_20261111.json",
+    "ICB32_TIMING_PROBE_20261111.json",
+    "ICB32_PORT_REVIEW_20261111.json",
+    "ICB32_POWER_L01_20261111.json",
+    "ICB32_GATE14_20261111.json",
+    "ICB32_DELIVERY_SDC_20261111.json",
+    "ICB32_METRICS14_20261111.json"
+  ],
+  "task_mode_timing_verified": true,
+  "project_area_upper_bound_verified": true,
+  "system_power_verified": false,
+  "official_scoring_confirmed": false,
+  "official_precision_verified": false,
+  "physical_signoff": false,
+  "original_stage_summaries_modified": false,
+  "eda_started": false,
+  "limits": [
+    "Very small positive setup/hold margins apply only to declared synthesis conditions, not physical implementation margin.",
+    "Active JTAG, PLL switching, startup/reset-release transients, extracted parasitics and physical clock tree are outside the accepted stable task-mode scope.",
+    "Engineering review is separate from the frozen raw summaries and does not turn their historical false flags into claims of new EDA.",
+    "Power estimates and final batch acceptance remain independent; no overall complete-delivery acceptance is granted here."
+  ]
+}

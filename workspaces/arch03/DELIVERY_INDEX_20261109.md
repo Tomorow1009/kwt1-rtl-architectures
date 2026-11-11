@@ -6,13 +6,13 @@
 
 新ABI/压缩格式分别为[ICB32_ABI.md](ICB32_ABI.md)和[ICB32_CODEC_V2.md](ICB32_CODEC_V2.md)。独立实现为`arch03_icb32_accel`、`arch03_linear16x4`、decoder/transport和turnover总线模块；`install_icb32.py`装入原平台副本。`build_icb32_firmware.py`构建仅含程序/元数据的IRQ固件，`package_icb32.py`导出干净源码并重新编译固件。服务器入口依次是`icb32_soc`、`icb32_synth`、诊断、`icb32_gate`、`icb32_power`及最终`icb32_batch`；最终报告由`icb32_report.py`汇总同配置证据。
 
-R4已通过真实ASIC14/354816输出、CPU竞争和无复位恢复，平均34616周期。新综合已完成，新增面积保守上界0.926562mm²、setup/hold为正、224个SRAM宏、无锁存器或组合环；完整时序范围仍待审定。当前同网表14例门级及12层活动已全部通过，新功耗已完成L01–L06（09:52观测），完整12层功耗、最终1200和干净复现尚未完成，这些材料还不是最终合格提交包。
+R4已通过真实ASIC14/354816输出、CPU竞争和无复位恢复，平均34616周期。新综合已完成，新增面积保守上界0.926562mm²、setup/hold为正、224个SRAM宏、无锁存器或组合环；声明的稳定任务模式综合时序及项目面积上界已接受。当前同网表14例门级、12层活动及964干净目录ASIC14计数复现已通过，十二层布局前平均71.8126mW/16.5724µJ已获得，最终1200仍在运行，这些材料还不是最终合格提交包。
 
 对照材料分别为[同搬运R1/R4](ICB32_LOCAL_COMPARISON_20261111.md)和[固定R4的raw/编码](ICB32_LOCAL_CODEC_COMPARISON_20261111.md)，两项均为本地逐输出比较，不混称完整服务器PPA。实际受测源码、独立包和运行摘要见[ASIC14](../../handoff/team/evidence/ICB32_ASIC14_20261111.json)、[新综合](../../handoff/team/evidence/ICB32_SYNTH_20261111.json)、[真实CPU诊断](../../handoff/team/evidence/ICB32_CPU_DIAGNOSTICS_20261111.json)；后续文档提交不改变这些受测身份。
 
 本轮结构、收益/代价和答辩边界见[ICB32设计与创新说明](ICB32_INNOVATION_20261111.md)；旧DMA16答辩草稿仍保留其原受测范围。
 
-新候选的[系统设计与验证报告准备稿](ICB32_DESIGN_REPORT_20261111.md)已按当前RTL、ABI、codec及实际ASIC/综合证据整理，明确PPA、最终1200和交付尚未完成。后续使用同配置实际报告补齐结果，不用旧DMA16报告充当新架构的设计说明。
+新候选的[系统设计与验证报告准备稿](ICB32_DESIGN_REPORT_20261111.md)已按当前RTL、ABI、codec及实际ASIC/综合证据整理，明确功耗未知活动影响、最终1200和交付收尾尚未完成。后续使用同配置实际报告补齐结果，不用旧DMA16报告充当新架构的设计说明。
 
 当前网表的时序范围与结构告警复核见[ICB32时序记录](ICB32_TIMING_REVIEW_20261111.md)：11138条未用/未连接端口已逐项核对，首层PrimeTime时钟和禁用弧已按新实际对象核对，精确交付SDC已独立导出且原报告不变，不继承旧fcd审定。
 
@@ -22,11 +22,11 @@ R4已通过真实ASIC14/354816输出、CPU竞争和无复位恢复，平均34616
 
 | 赛题交付项 | 本候选文件或生成入口 | 当前缺口 |
 |---|---|---|
-| RTL、E203驱动、验证工程 | `rtl/arch03_icb32*`、`rtl/arch03_linear16x4.sv`、ICB32固件与`server_run.py`；`package_icb32.py`干净导出 | 最终冻结包和独立目录复现回执 |
+| RTL、E203驱动、验证工程 | `rtl/arch03_icb32*`、`rtl/arch03_linear16x4.sv`、ICB32固件与`server_run.py`；`package_icb32.py`干净导出 | 生产身份已冻结并完成964独立ASIC14复现；最终交付文件清单待收齐 |
 | 数值格式、软件模型、参数转换 | [原数值格式](NUMERIC_FORMAT.md)、[codec v2](ICB32_CODEC_V2.md)、`icb32_data.py`及原Q12参考模型 | 保持原模型来源、shift、布局和全部输入哈希；不能将内部样本称官方验收 |
 | SDC、综合网表、面积与时序 | e65包`runs/icb32_r4_first01/icb32_synth`中的实际产物；[摘要](../../handoff/team/evidence/ICB32_SYNTH_20261111.json) | 最终时钟范围和例外说明；复用面积单列，新逻辑不豁免 |
 | 功能报告与最终批量 | 新ASIC14、真实CPU诊断、497包当前gate及后续`icb32_batch` | gate14已通过，仍待候选自己的1200任务/30412800输出 |
-| VCD、功耗、吞吐与能耗 | 同gate的12个完整窗口；`icb32_power`和`icb32_report.py` | 新12层实际功耗及模型/活动解释；不得引用旧29.627mW填补 |
+| VCD、功耗、吞吐与能耗 | 同gate的12个完整窗口；`icb32_power`和`icb32_report.py` | 十二层实际功耗已完成；未知活动影响说明与最终同配置报告待收尾 |
 | 同条件创新对照和答辩 | 两项局部对照与[创新说明](ICB32_INNOVATION_20261111.md)，历史B0完整证据保留 | R1及原8路服务器PPA按剩余时间排队，未完成项目明确列出 |
 | 模型、数据、脚本、工具版本校验 | 独立包manifest、各阶段summary/source_inputs、最终report JSON/CSV/中文说明 | 最后一次同配置汇总、文件清单和交付位置 |
 

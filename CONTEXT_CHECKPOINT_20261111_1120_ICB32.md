@@ -32,3 +32,12 @@
 - STATUS/EXECUTION、验收表、设计及功耗说明已更新，两个新增证据为METRICS14及FINAL1200_PROGRESS。不涉及RTL更改或重测。
 - 板端helper `F:/linux_fpga_try/ac820.ps1`，恢复先windows。11:16确认VNC20971587、800×450；FileZilla关闭。最后VNC命令是**power246_exact**精确核对，不是实时进度。查询统一type已核文本再Return，禁止Up+Return历史重执行。
 - 下一步明确type `icb32_finish_live.txt`检查原批量，完善报告材料；不要误启动旧队列。无本地长任务、无CUA会话。所有服务器操作仍走板端VNC，文件上传仍仅FileZilla，私有Git同范围同步已授权。
+
+## 11:35增量：稳定任务模式时序/面积审阅完成，批量291通过
+
+- 11:31:04.607624实际：原285397/292229继续final1200，291/1200、7375104输出、零失败，completed stages13/errorNone，宿主1337.0145秒；含20%余量预计剩余5011.7367秒（约84分钟）。未手工重启，report request和最终导出仍未执行。
+- 706条LINT-2已沿当前2014模块真实层级逐条解析driver pin，集合与706个此前已证实只有声明的LINT-8输入完全相等，多余/缺失0。独立保存964/runs/icb32_lint2_01.json，SHA **8a67d41bf37ecff3e16986c8f6e134782f7d7eb3617358c907974d891b576371**。11:28:24.051386再核集合和原mapped.v/check_design_mapped.rpt SHA全部通过，无新EDA。
+- 依据新网表完整check_timing、实际SDC/189静态JTAG对象/全部禁用弧、结构告警及同网表14例功能，已在`handoff/team/evidence/ICB32_SCOPED_REVIEW_20261111.json`接受**声明的稳定任务模式综合时序和项目面积保守上界**。新增`task_mode_timing_verified=true`及`project_area_upper_bound_verified=true`；原始阶段摘要/宽泛strict字段不改。系统功耗未知活动仍false，官方面积归属/精度及物理签核不批准。该独立审阅需在最终交付索引中与原报告一同提供，不改原历史数据。
+- 11:32:16.247669十二层分量汇总：internal51.2389631887mW、switch13.3048352474mW、leak7.2688340783mW；模块总量按原层级舍入为accel47.7916409079、CPU无TCM1.87、ITCM/DTCM各1.49、shared9.4258332611、arb0.0255499456、router0.0498167153、other9.6697910239mW。已补功耗说明。只读原小JSON，不重扫VCD、不新跑功耗。
+- 当前云端已独立核对 **fd91f9e77b82bd77182f2924810029829e0f5253**（含12层功耗/metrics14及11:20检查点），本增量和独立审阅待同步。验收/运行手册/交付索引/设计/创新/时序说明已消除当前顶部的过期待办；历史段落仍保留。
+- 一次LINT2查询首次超过板端1000字符限制，在输入前被helper拒绝，没有远端命令执行；缩到935后成功，再964字符保存回执、713字符核验。后续每条先检查长度≤1000，type成功后才Return。最后VNC为 **power12_modules** 汇总，不是实时进度；FileZilla仍关闭，无本地长任务。下一步明确输入finish_live，继续原批量→reviewed request/history→locked export，所有后继包都已服务器就绪，无需上传。
