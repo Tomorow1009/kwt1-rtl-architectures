@@ -33,7 +33,7 @@ VNC cwd为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-unde
 2. `icb32_final_request_history.txt`：写旧37任务用户停止及8192诊断前提错误/后续4096修复历史，不改原request。
 3. **`icb32_final_report_locked_launch.txt`**：启动ff181锁包装器，原子取得共享锁，session`icb32_r4_export01`，输出`runs/icb32_r4_final_report01`；状态/日志在`runs/icb32_r4_export01`，外层`runs/icb32_r4_export01_launch.log`。**禁止旧无锁icb32_final_report_launch.txt。**
 
-报告包：`light-light126-icb32-report-20261111_091554-cedb648f3b74`，manifest4436e191de57d60ae8ebc08883c2d8a2bc9aca68d01c9f4ade413fc86bf6d037，8文件/8检查服务器通过。执行此新report，PYTHONPATH绑定964/scripts；不能误用964旧report。
+报告包：`light-light126-icb32-report-20261111_091554-cedb648f3b74`，manifest4436e191de57d60ae8ebc08883c2d8a2bc9aca68d01c9f4ade413fc86bf6d037，8文件/8检查服务器通过。执行此新report，PYTHONPATH绑定964包根下的`workspaces/arch03/scripts`；不能误用964旧report。
 
 锁包装器：`light-light126-icb32-export-lock-20261111_093509-ff181611dfaa`，manifest aa979998df77370f5bd4bcbabe24bacc20a4b4c31a382d6d74d4b0d8381b5380，4文件/2检查服务器通过。10:08已上传核验，旧FTP421早已解决。wrapper只释放自己PID/host/bundle/session锁，遇现存目录/锁不清除，不原地重试。
 
@@ -51,3 +51,15 @@ VNC cwd为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-unde
 当前剩余最后114任务、全回执/12活动同配置锁内汇总、交付收尾及真实限制说明。原fcd完整功能/1200退路不变；R1/原8完整PPA次优先，不为了新对照挤占最终链。官方600、布局后时序/功耗及物理签核未验证。硬冻结11/11 18:00、交付准备11/12 17:16、用户截止11/13晚上不变。
 
 云端最后独立确认 **833342d696146f508d655c56cdc356f7c17a70d5**；本检查点及九成进度准备同步。远端服务器到本机不另开回传通道，大产物保留服务器目录/哈希；小型源码/证据继续已授权私人分支同步。不要因等待而结束本轮，原queue终态后继续完成报告。
+
+## 13:00增量：最终1200通过，锁内报告已经启动，禁止重复上述入口
+
+**12:50 monitor已正常退出，原queue reports_ready_review_required，completed14、errorNone。12:51:15.615841独立断言通过真实ASIC/E203 1200任务/30412800输出/failed0/compile1，摘要SHA同时匹配stage与queue。** SHA为`3bb0290586f7b92e5a392cb8f7e735ec483b8b302cc285a39fff2e63ebc01bc2`，其转录值再次在服务器断言一致。详见新`ICB32_FINAL1200_20261111.json`。
+
+- 100样本完整批量平均34618.74333333333周期，min34555/max34883，150MHz折算4332.912912398226task/s。编码字节min35740/mean37108.153333333335/max38260。实际循环及最终检查宿主6069.931639275979秒，不含初始编译；不与芯片时间混用。12层PPA均值仍34616周期，不拼接两种统计。
+- 12:52:03实际共享锁不存在、全部新输出路径均不存在，原request SHA通过。**prepare已执行并成功；history已执行并成功；locked_launch已执行并成功。** 不要再次执行这三条排他创建命令。
+- **报告wrapper PID121468、child121471、session icb32_r4_export01。12:59:06.608369实际running/errorNone、child80.8%CPU，协作锁PID/child/session完全匹配，receipt尚不存在。** 输出964/runs/icb32_r4_final_report01；状态/日志在964/runs/icb32_r4_export01/state.json和report.log，外层launch.log保持原文件。
+- 原request SHA`b5bb478ea7eea473ae8c8f228d06cbb5e2a896751f7a66cde5148ab3b7016c1e`；reviewed副本SHA`ae7637ea33a9bc72308dd2c28458042825ecb517921564e4d97ab91b3709913f`。副本有精确SDC和两项真实历史；原request未改。
+- VNC已回到**shell提示符**（原monitor结束），窗口仍20971587/800×450/放大一次。当前最后命令为batch_hashes_short，不是实时状态。下一步明确输入`takeover_local/icb32_export_live.txt`（818字符）观察已有报告进程，不重启；打字后Return并至少等5秒再截图，若截图仍命令行则等显示刷新，不盲目重复Return。
+- 12:57紧凑统计查询截图一度显示旧命令行，后续刷新确认查询已正常完成，无失败或作业重启。请求/报告是新产物，原网表/SDC/仿真回执没变。FileZilla继续关闭，无新EDA、无CUA会话。
+- 云端 **93471fe1836c948e409d3854a8b1f7eb4bf64bc8** 已独立确认；本增量、完整批量证据及PYTHONPATH书写澄清待同步。接下来等锁内报告完成并核对receipt/report/CSV/中文说明及身份，再做交付收尾；完整批量已经通过，不要写回“待1200”。系统功耗未知影响仍保持未批准。
