@@ -1,3 +1,5 @@
+**08:58: B source candidate frozen; synth183038/queue184658 continue.** Read [08:30 checkpoint through08:58](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md). Cleanup+recovery synced dfb1bcd. Exact ZIP/Git RTL and firmware-source identity checked; no new hardware acceptance. Latest08:52 lock matches, free170.09GiB. VNC workspace3/new8d bundle idle shell; no pending command. Do not duplicate jobs.
+
 **08:49: Authorized cleanup completed; B synth02 PID183038 and queue184658 now running.** Read [current checkpoint including08:49](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Deleted only obsolete MMIO8 L09-L12 VCDs (112.42GiB), with receipt; R4/B protected. New705-input bundle verified. No duplicate launches. VNC workspace3/new8d bundle idle shell; FileZilla closed.
 
 **08:43: User authorized targeted obsolete-wave cleanup, then continuing B.** Read [current checkpoint](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Prior no-deletion restriction is superseded only for explicitly inventoried obsolete project waves. R4 and current B protected. New tool package uploaded; fresh synthesis not started yet.

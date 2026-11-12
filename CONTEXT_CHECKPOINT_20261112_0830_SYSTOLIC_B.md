@@ -32,3 +32,12 @@ FileZilla20972102已登录既有站点，正在上传新包；截图b_final_uplo
 - 新唯一后继队列 **184658**，开始08:47:09.711761，`runs/systolic_b_v3_validation02_queue`；准确绑定183038和上述开始时间/manifest，等待综合完成后sequence/contention/tinySAIF/timing/gate14串行。没有最终1200自动启动。launch已执行，不可重复。
 - 旧synth01、validation01失败现场均原样保留。R4波形/功耗/1200、固定hex均未动。
 - 现场VNC18874435/workspace3、新8d包空闲shell，FZ已关闭。b_cleanup_receipt_query已Return并读取截图，没有待输入命令。本地无长期进程。下一步检查新进程/锁归属、保存同步并在等待综合期间准备交付说明；不得重复旧EDA。
+
+## 08:58：同步与实现候选冻结
+
+- dfb1bcdfd0d0f85b6643d434788026934b378770已push且ls-remote一致，包含清理/恢复记录。当前新源码候选记录尚待下一次提交。
+- 08:52:57综合日志正在处理脉动delay/5×16/core模块；实际owner.json锁PID183038、session synth02和新8d包匹配，队列184658仍waiting_synthesis、无completed/失败；可用170.0869140625GiB。查询b_synth02_brief已完整执行，shell空闲。
+- 已检查报告器、后继队列、SAIF捕获/解析及B gate字段的衔接；无代码变动，无新增硬件测试结论。报告器始终把工程审阅单列，不能把数值导出当自动验收。
+- `handoff/team/evidence/SYSTOLIC_B_SOURCE_FREEZE_20261112.json`固定实现候选：8d包25个RTL源文件逐字节等于当前Git和生产63da Git blob，7个生产固件来源与manifest相符。初次用Windows工作树字节比较因CRLF与Git导出LF不同停止，确认差异仅换行；最终依据实际ZIP与Git blob逐字节比较，未放宽服务器输入哈希。没有修改任何RTL或生产固件。
+- 候选记录schema是`source-candidate-freeze`，**不是**最终队列所需的`freeze-review`；eligible_for_final1200、时序/面积/系统功耗仍false。硬冻结前已固定结构，后继只待当前候选实际证据。R4仍是当前交付退路，不把未完成PPA写成通过。
+- 当前仍有新综合183038与后继184658，不能再次launch；旧synth01/validation01保留过期state，不是活跃进程。没有新的最终1200/gate/SAIF结果。下一步继续观察原综合，审阅新网表并完成队列后再决定自己的1200；待结果期间整理最终材料即可，不追加结构优化。
