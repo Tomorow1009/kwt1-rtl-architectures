@@ -2766,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "60df7725e729edab7f8550bc5b9545f2c77b7711",
+    "cloud_commit": "610e25f2c2444cf6d9cea53e02892e614bb6d168",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2940,19 +2940,77 @@
       "base_bundle_inputs_modified": false
     },
     "mapped_repair": {
-      "session": "systolic_b_v3_drc05",
-      "status": "reports_complete_not_accepted",
-      "pid": 253324,
-      "finished": "2026-11-12T14:33:35.246720",
-      "summary_sha256": "55fcf35b3d2d01ea782f7f543bc00b1ae49078e9f1b9c66534ab33c1e8765bbe",
-      "remaining_classes": [
-        "max_transition",
-        "max_capacitance"
+      "schema": "systolic-b-mapped-drive-repair-evidence-v1",
+      "tool_commit": "610e25f2c2444cf6d9cea53e02892e614bb6d168",
+      "bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+      "run": "runs/systolic_b_v3_drc06/systolic_b_synth",
+      "summary_sha256": "b81780033ef65998c43a874b559e54da0d958524a040eff374b1e8f1a4824ced",
+      "finished": "2026-11-12T15:02:00.609042",
+      "pid": 279581,
+      "source_RTL_and_task_constraints_unchanged": true,
+      "sizing_history": [
+        [
+          "U32684",
+          "BUFV2RD_12TR40",
+          "BUFV4RD_12TR40"
+        ],
+        [
+          "U32686",
+          "BUFV2RD_12TR40",
+          "BUFV4RD_12TR40"
+        ],
+        [
+          "U32433",
+          "BUFV2RD_12TR40",
+          "BUFV4RD_12TR40"
+        ],
+        [
+          "U30602",
+          "AOI22V2_12TR40",
+          "AOI22V4_12TR40"
+        ],
+        [
+          "U3777",
+          "NOR3CV2_12TR40",
+          "NOR3CV4_12TR40"
+        ],
+        [
+          "U3778",
+          "NOR3CV2_12TR40",
+          "NOR3CV4_12TR40"
+        ],
+        [
+          "U3776",
+          "NOR3CV2_12TR40",
+          "NOR3CV4_12TR40"
+        ]
       ],
-      "multiport_violations_remaining": false,
-      "accelerator_area_upper_mm2": 1.098423737500962,
-      "strict_timing_verified": false,
-      "raw_violated_string_count_not_unique_net_count": 72
+      "reported_constraint_violations": 0,
+      "period_ns": "6.666666000000",
+      "lf_period_ns": "66.000000000000",
+      "setup_ns": "0.00010252",
+      "hold_ns": "0.00249085",
+      "small_SRAM_macros": 92,
+      "large_SRAM_macros": 128,
+      "latches": 0,
+      "whole_area_um2": "4621311.195906",
+      "project_area_upper_mm2": "1.099094695900963",
+      "timing_review_complete": false,
+      "new_gate14_verified": false,
+      "own1200_verified": false,
+      "power_verified": false,
+      "resource_observation": {
+        "time": "2026-11-12T15:04:58.338438",
+        "free_GiB": 376.26953125,
+        "lock": false,
+        "EDA": []
+      },
+      "failures_preserved": [
+        "drc03 duplicate library identity",
+        "drc04 four transitions and two multiport nets",
+        "drc05 three upstream transition/cap nets; multiport cleared",
+        "inspect02 optional nonexistent cell patterns UID109"
+      ]
     },
     "saif_unit_diagnostics": {
       "session": "systolic_b_v3_saif_units01",
@@ -2968,7 +3026,7 @@
       "status": "delta_transfer_in_progress_not_launched",
       "source_RTL_changed": false
     },
-    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1438_SYSTOLIC_B.md",
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
       "schema": "systolic-b-native-saif-tiny-probe-evidence-v1",
       "observed_server_date": "2026-11-12",

@@ -1,0 +1,54 @@
+# B 检查点：2026-11-12 15:06
+
+任务 ACTIVE，不暂停。继续直接5×16脉动B计划，生产RTL/固件63da6ba/v3/credits3冻结；R4保底。不开发A或新编码。用户要求自主继续，压缩后重读AGENTS、有效B计划、本检查点、STATUS。11/13 17:00收尾。此前两次用户授权清理279.506GiB已完成，不重复；R4/B和小证据保护。
+
+## 关键新结果：DRC06约束清零
+
+ced包`light-light126-systolic-b-v3-20261112_114355-ced0e139a01e`下 `runs/systolic_b_v3_drc06/systolic_b_synth`。
+
+- driver279581，14:55:42.201039→15:02:00.609042；报告已完成，不重启。
+- summary SHA **b81780033ef65998c43a874b559e54da0d958524a040eff374b1e8f1a4824ced**。
+- 实际完整report_constraint写明 **This design has no violated constraints**。
+- 周期6.666666ns，LF66ns；setup **+0.00010252ns**，hold **+0.00249085ns**；两组路径、0锁存器、92小宏+128大宏。
+- 整机面积4621311.195906µm²，项目计入面积保守上界 **1.099094695900963mm²**。布局前/任务模式，仍需同网表结构/时序审核与新gate，不称物理签核。
+- 源RTL、固件、原task_mode约束未改。累计仅等价升驱动7个标准单元：3×BUFV2RD→BUFV4RD、AOI22V2→V4、3×NOR3CV2→V4。替换前核pin方向/函数，防增量优化降回。原库路径仍8d synth02/libs，避免DDC记忆身份冲突。
+- 证据 `handoff/team/evidence/SYSTOLIC_B_DRC06_20261112.json` 已本地保存，尚未提交。
+
+## 正在运行：新的14例门级
+
+**PID294410，session systolic_b_v3_drc06_gate01，15:05:54唯一启动。** 路径ced `runs/systolic_b_v3_drc06_gate01/systolic_b_gate`，显式绑定上述新综合SHA，默认14例，无大波形、无SDF。使用ced原server_run入口，不是ops编译入口。尚未读取第一阶段实时state，不能推断已通过。
+
+下一步先执行只读 `takeover_local/b_drc06_gate_live.txt` 查看state/回执；禁止再发b_drc06_gate_launch。原synth02 gate14通过不属于新网表，不能借用。
+
+启动前15:04:58.338438实际检查无EDA、无锁，free376.26953125GiB。锁必须用server_config.server_root/.arch02_team_lock；以前临时脚本的../../.arch02_team_lock位置错误，仅这些临时False输出无效，ops实际锁一直正确。
+
+## SAIF已完成与待办
+
+正式tiny probe04通过，ced `runs/systolic_b_v3_saif_probe04/systolic_b_saif_probe`，PID251446，14:24:57.106218结束。
+summary SHA **5b89541639df84d147f76b407bfd13c906b9fdf7bcbee912650cef716687a25b**。VCS 12..72ns完整60ns/1fs，PT从文件注释得到概率.333333、翻转率.0666667/ns，核对4次翻转。X/Z合并TX，分离测量false。证据SYSTOLIC_B_SAIF_PROBE_20261112.json已提交。
+
+R4完整SAIF请求已部署并哈希核验：`operations/r4_saif_replay01_request.json`，SHA **bded7b37bb6755ae9c45f0a5ff7987bd8a2ae580b8e9692316adba9fe6384f5f**。指向冻结R4 gate95113a...及probe04。**尚未启动重放**。`b_610_r4_replay_launch.txt`仅准备，必须等当前gate释放锁再启动，不与其并发。完成重放后才能PT与原R4 L01 VCD≤1%交叉核对，继而B活动12/功耗12。
+
+## 工具与同步
+
+最新已云同步并ls-remote核对 **610e25f2c2444cf6d9cea53e02892e614bb6d168**。8工具已8条差分完整部署至 `operations/systolic_b_tools_610e25f`，manifest **f6e7739acb7a1ca1d7e71689791239e01fcd97d99ba373f161c9bf683b5da54c**。禁止重传/append。0d、60、ee及之前bf/e6目录全保留。
+
+610 ops支持带hash请求的native_saif_r4_replay/crosscheck及B saif/power，复用同锁、新session、原bundle.inputs、全部ops源hash和请求/引用摘要检查。新入口10项相关本地工具保护测试通过。base ced仍是旧SAIF解析器，**不能直接用原base server_run去做SAIF；要用610 ops覆盖的新版模块**。Gate/CPU batch原base工具可继续。
+
+FTP421，用户确认无队友使用；FZ关闭。不增加新传输通道，采用已授权VNC新个人小工具副本。完整2b/62 ZIP仍仅板端暂存且有旧工具问题，不执行。源包ced709输入/manifest39b127636ecaf61d2cd950efd2f83ef923cacf5274c6f4b3d363cbdb9a51155d保持未改。
+
+## 已通过和仍缺
+
+B自己的ASIC14/354816输出/IRQ-WFI、无复位CPU恢复76032输出、两例CPU竞争通过；原synth02门级14通过；平均30502.3333周期/4917.6566 task/s（150MHz折算）。最终自己的1200/30412800尚未跑。新7000不可能由当前28341事务下界保证，不改计时。
+
+仍缺：DRC06新gate14、最终结构/时序clock/例外审核、单独冻结review、干净ASIC14、自己的1200、R4完整SAIF交叉核对、B活动12/系统功耗12、最终R4/B报告。systolic_b_finalize_queue要求精确asic/synth/gate/sequence/contention及freeze-review，当前gate未完成不批准。报告中的功耗未知影响维持未验证，不当零。
+
+R4自身1200/30412800、gate/activity/报告保留，不重跑1200；4333.256task/s、71.8126mW、16.5724µJ，system_power_verified=false。R4各大回执/波形及dataset SHA见1350/1438和更早检查点。
+
+失败路径全部保留：DRC03重复库身份失败；04四transition/两multiport未修完；05多端口清除，但三上游transition/cap违规；72个VIOLATED字符串包含引脚重复，非72独立net。inspect02因可选型号无quiet UID109失败，但已生成可读driver表；新工具quiet修正。SAIF早期单位/注释/ANSI/属性错误逐一有保留目录，最终04才通过。
+
+## 当前桌面和下一操作
+
+VNC18874435工作区3，ced包shell，FZ关闭；不要工作区4。最后门级launch已执行并截图确认PID294410。无待Return/本地exec session。当前门级在后台，不能把shell输入当其stdin。
+
+本地未提交：本检查点/根交接、DRC06证据与STATUS、B验收清单更新。先保存同步这些小记录，同时继续只读门级观察和最终结构报告准备。每次新EDA必须核真实锁与进程，不能清锁或重复旧队列。

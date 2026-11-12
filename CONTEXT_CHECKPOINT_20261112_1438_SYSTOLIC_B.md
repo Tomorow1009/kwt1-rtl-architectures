@@ -1,5 +1,15 @@
 # B 进度与恢复：2026-11-12 14:38
 
+## 14:59增量：原DRC06继续运行
+
+610e25f2c2444cf6d9cea53e02892e614bb6d168已push并ls-remote核对；新8工具通过8段命令已部署完毕，manifest f6e7739acb7a1ca1d7e71689791239e01fcd97d99ba373f161c9bf683b5da54c，operations/systolic_b_tools_610e25f。禁止重复append/重传。
+
+**唯一DRC06 PID279581，14:55:42.201039开始**，ced runs/systolic_b_v3_drc06/systolic_b_synth；14:58:33实际still running，无Error，已成功将U3777/U3778/U3776 NOR3CV2→NOR3CV4，进入增量映射。没有终态/新时序结果，不能重启。原source05 SHA55fcf35b3d2d01ea782f7f543bc00b1ae49078e9f1b9c66534ab33c1e8765bbe。
+
+R4 SAIF请求已写入独立operations/r4_saif_replay01_request.json并SHA核验，bded7b37bb6755ae9c45f0a5ff7987bd8a2ae580b8e9692316adba9fe6384f5f。指向冻结R4 gate95113a...和probe04 5b895...，**只准备请求，未启动重放**。b_610_r4_replay_launch.txt已备好，必须等DRC06完成并核真实锁后再发；当前绝不能执行。
+
+本地B验收清单已更新SAIF小试通过和DRC待验，尚未提交。当前VNC工作区3/ced shell，FZ关闭。b_drc05_warning_samples查询已完成并读取：DRC05 LINT28=12796、LINT32=12048、LINT33=1186、LINT2/8各244、LINT1=4。LINT32为子模块pin连接logic1/0；LINT33为同一net接多个pin。4个LINT1是平台ndreset_dfflr、fullreset_dfflr、u_aon_porrst及PLIC irq0 flop，无驱动输出；和原平台类别一致。新最终网表还需独立结构核对与gate，不能照搬这些计数。无待输入/本地session；不向运行EDA stdin发任何输入。新B gate/1200/功耗仍待。
+
 ## 14:50增量
 
 ee621bf已push，八工具通过7条短命令部署并核验，operations/systolic_b_tools_ee621bf，manifest be92e8b86f3b89e862f2f3692abda730d75692e8e041ac98650970422650944b。不可重复部署/append。
