@@ -4,6 +4,22 @@
 
 本子任务最近已重读根`CONTEXT_CHECKPOINT_20261113_0530_N1.md`：根05:30记录8个旧输入ZIP的重复上传件已在完整保留/核验后删除，新0f62包已FTP上传成功，但当时仍待服务器解包/runtime核验、尚无batch02。这条根回执优先于本文05:10上传失败/清理待办的历史描述。此后实时进程、锁及启动状态仍只由根查询；本子任务没有远端操作。
 
+## 06:05后恢复优先读本节
+
+已再读根`CONTEXT_CHECKPOINT_20261113_0600_N1.md`：N1 batch02唯一18736运行于0f62 OPS，根05:57观察176任务/4460544输出+total、零失败；不得重复启动。最新云同步0a175676daaed8582fd8e6a9fa57cea5db9d0bb1，tracked已允许继续更新。完整1200/门级/SAIF/功耗/float100未验，仍只N1。
+
+B0现成小查询实际结果：
+
+- 最终原报告SHA `677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a` 已机器HASH_MATCH=True/True、DIFF空，禁止再用_v1/_v2/_v3错误常量；不重跑身份。
+- 06:00:41 no-load overlap_v4成功：LOCAL2234/PROVEN1253/HIT0/REMAINING2234。06:03:26两侧原名前2例同u_e203_subsys_top根，分别dcsr_r位和u_e203_subsys_main/inspect_pc位，无简单前缀差异；不人为normalize造匹配，不豁免2234项。
+- 06:01:53 macro identity_v4成功：原report→gate→source_inputs完整SHA链通过，唯一模型`/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP4096X16/verilog/RAMSP4096X16.v`。原gate为ced包的runs/systolic_b_v3_drc06_gate02/systolic_b_gate。后继查询从已核清单动态核实际模型SHA，不再手抄长pin。
+- 06:04:26实际库function：BUFV2RD Z=I；NOR2BV2 ZN=!((!A1)|B1)；NOR2V2 ZN=!(A1|A2)。故n11=n15&!n14，n779=n780=n9=!(read_pending|n11)，只定这段真实消费控制关系，未批准整个未知影响。
+- 06:05:40 Q模型索引MODEL_PIN_MATCH=True、1768行、47候选。Q输出220行含RET1N/pre_charge_st/Q_int，readWrite从258行开始；不能从索引Q_int=X推出所有写为X。
+
+下一只读两段已准备、尚未执行：`takeover_local/b0_shared_model_readwrite_a.txt`956字符/958B/SHA `b3ed409e51fe232f14dd4e813d9e50f2611a068d940c2d1ff28517ce4351b0a1`，读258–286并核原compile_command SHA/实际+define；`b0_shared_model_readwrite_b.txt`840/842B/SHA `b92dbf4af32e431c1a414c0c26e1dd89e894fd7cf5af2d04c778e593aa0b11f3`，读287–321。均完整动态身份链、ASCII/shlex/Python3.6通过，仅略空行和整行//注释，保留所有条件/原行号。原readWrite源码未完整读，不提前结论。
+
+没有新PT/仿真/原SAIF扫描。控制扫描唯一/tmp输出目录与known reviewops/unknown_l01.driver.log路径已告知requirements代理做归档准备；其他未见确切路径的driver不猜。所有后续query只输出终端，截图留本地takeover_local。
+
 ## 完成与冻结
 
 - 原B0报告完整12层功耗已经存在，准确加权69.8370733610964mW、14.20128985110165µJ/task；未知影响尚未批准，不能称没有功耗或已经系统功耗验收。
@@ -92,6 +108,22 @@ no-load overlap05:41:36及macro identity05:42:26均在某条assert停止，未�
 后续依实际cell/Liberty function及64实例覆盖，解释宏控制的确定性连接；bank_q缺名追实际cell，而非把缺名当0。无论接线如何，未解析n*/T*、局部无引用2234条的全局连接、真实有负载未知的模型影响仍是独立待办。L01局部结果不自动继承其余11层。
 
 ## 文件所有权及限制
+
+**06:32工作状态更新：**根批准后已新增`b0_controls_remaining11.py`及其test，原scan/probe/unknown工具不动。7项fixture和Python3.6语法通过，源文件SHA `f12e89c6acdb207704288ed832b818931030ca9a22c60bea1cf9e24e70c4beaa`，test SHA `d7088fad23fac32f837346272458af28852b79967a51381b46e00ca2c22711df`；requirements_plan_audit正在独立只读审阅，文件暂冻结，未远端部署/运行。严格只采L02–L12，每源一次，绑定既有L01小回执，不重读L01波形，不生成unknown清单，不启动VCS/PT；每层失败保留，初始空间2GiB＋120MiB，默认所有功耗验收标志false。入口参数见B0_SELECTED_CONTROL_PROBE，不能将fixture通过当实际通过。
+
+06:32:46宏模式实际查询完成，亲读`b0_macro_address_mode_0634.png`：64例一组，A=addr、EMA=010、EMAW=00，原身份和覆盖断言通过。只更新有限连接/模式结论，未批准联合时序、全局未知影响或功耗。根明确停止新增手工逐门查询；下一步为审阅后的remaining11控制包装、后续一次固定集合PT连接审查，不继续手工追所有n*。
+
+remaining11包装独立只读审阅现已完成，无阻断；工具f12e89c6/test d7088fad未再修改。nice由根启动器设置；SIGKILL/KeyboardInterrupt可能只保留request/前缀，必须最终summary和11例身份齐全才算完成，不能用没有failure.json推断成功。新工具尚未在真实服务器执行。根另派本子任务只读核n1_report最终汇总依赖，不改报告/root检查点/STATUS，不开启作业或N2。
+
+**N1汇总只读审阅已完成：**`n1_report.py`入口只有request/output；request schema为arch03-n1-report-request-v1，必填asic/synthesis/gate各run/SHA，batch02、activity、12项power、precision及baseline另列。build会重审1200原receipt/五列total33/result/sat/codec/boot/log/IRQ/window，门级保持四列result/sat且不观察total；固定12必须同硬件/固件/布局/窗口，SAIF与功耗逐层同源。精度要求原完整FLOAT ZIP、DATA100 inventory/root manifest/顺序同实际1200；fixed12从ASIC运行所属包默认validated_data及real_sample_001取原NPZ，`verified`只表复算一致，仍要检查三百分比阈值字段。没有发现SHIFT12或total41旧parser混入；旧通用模块仅作身份/窗口/数值报表解析。导出是读取全部capture/HEX/SAIF的审计而不是再仿真，建议完整证据到齐后一次导出；原source_inputs绝对路径、库、固件、可执行文件及归档前原件必须保持可访问。独立时序/面积/恢复竞争及B0/N1未知影响review不在build准入参数内，allowed=false仍需独立阶段review关闭。baseline只给数字比率，不自动核实际PT时钟/负载同条件，后续须明确原B0导入周期与N1精确6.666666ns的条件边界。本子任务未修改report、未新建验证框架或启动任何作业。
+
+同一轮实际声明补查已完成：亲读`b0_actual_decl_and_pending_0633.png`的06:31:49结果，633非port实际net、821 output、780 input，无MISSING，原身份和2234条数均通过。这关闭了旧分类“未匹配名称可能被当internal”的具体问题，但仍不证明全局零负载。宏A/EMA/EMAW新查询已交根，`b0_macro_address_mode_query.txt`967字符，SHA `752bdd5e417efa7e73338044adc56289bf0b38a5c730007ac22afdbd14f4707c`，当时图中只有尚未执行的命令，等待实际结果。所有源码、原报告、活动不修改。
+
+**06:18恢复增量（后于上述历史待办）：**原report SHA已在05:55机器双重匹配并固定为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`，无须再重复身份诊断。06:00实际no-load交集为2234局部未知对1253已证无负载，命中0；两边同toproot，不能强行改前缀。06:01实际原模型身份链通过；06:12–06:14实际编译定义ARM_UD_MODEL/functional及模型readWrite两段已亲读，正常写更新mem而Q保持，正常读更新Q，异常控制/地址分支另列。06:17实际port候选633internal/821output/780input，尚待实际nets声明复核。详细有限结论已同步`B0_SELECTED_CONTROL_PROBE_20261113.md`，系统功耗仍未验。
+
+新ignored查询`b0_local_decl_actual_query.txt`为999字符，SHA `148bc3a00f59f89d2de197992b0d234ff20e293130bef9a9c0a212da2125cb81`；原index_netlist/网表/unknown gzip哈希及2234数量绑定，规范化位选和转义名后显式列MISSING，而不是将未识别名当internal。本地语法/引号已核，根尚未回传实际结果。后续L02–L12控制补证只提出复用冻结scan的独立薄包装方案，未实现/启动；不重扫L01或完整unknown清单，不运行EDA。下一实际步骤优先完成这条声明分类复核，再做有限宏正常写条件/读消费边界，不遍历所有未知逐门追踪。
+
+恢复时读根最新检查点：06:00检查点报告N1 batch02唯一PID18736已运行、截至05:57完成176任务/4460544输出与total、零失败，只是成功前缀；不得把此前65任务失败批次或历史B0结果挪作N1完整1200。N1硬件9305和新OPS0f62保持冻结，本子任务没有操作远端或开发N2。
 
 本子任务只更新自有B0说明/只读工具；正式工具均已冻结。当前新增实际说明在`B0_SELECTED_CONTROL_PROBE_20261113.md`，总体闭环在`B0_UNKNOWN_TOOL_AND_CLOSURE_20261113.md`。根代理持有root handoff/server/package，其他代理持有N1硬件/报告，不覆盖。
 

@@ -1,0 +1,265 @@
+{
+  "schema": "n1-scoped-timing-drc-area-readonly-review-v1",
+  "status": "bounded_static_reports_reviewed_four_current_high_fanout_nets_and_same_netlist_gate_pending",
+  "observed_through": "2026-11-13T06:16:45+08:00",
+  "production_rtl_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "synthesis_summary_sha256": "cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31",
+  "mapped_sha256": "59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e",
+  "scope": "Same SS_0p99V_125C stable-task pre-layout DC scope as B0; no N1 acceptance imported from B0",
+  "observation_method": "Independent read of actual root-captured server screenshots. No child server/EDA operation or source/constraint modification.",
+  "check_timing": {
+    "sha256": "f3b968241c0211cd20c32496ea3366222309b49ae3ccf572b2150a2e46d7d56c",
+    "bytes": 509,
+    "full_text_shown": true,
+    "checks": [
+      "generated_clocks",
+      "loops",
+      "no_input_delay",
+      "unconstrained_endpoints",
+      "pulse_clock_cell_type",
+      "no_driving_cell",
+      "partial_input_delay"
+    ],
+    "warning_count": 1,
+    "warnings_complete": true,
+    "warning": "TIM-134: Design e203_soc_top contains 4 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets.",
+    "high_fanout_count": 4,
+    "actual_net_names_verified": false,
+    "other_warning_or_error_in_this_report": false,
+    "strict_timing_pass": false
+  },
+  "mapped_sdc": {
+    "sha256": "773e089a556e68a74ac7ad46cf02e9c62a709fdd8974a6e40cd31bd48137af1b",
+    "create_clock_count": 2,
+    "false_path_count": 1,
+    "case_analysis_count": 12,
+    "Tcl_continuations_joined_for_display": 10,
+    "HF_serialized_period_ns": "6.66667",
+    "HF_serialized_falling_edge_ns": "3.33333",
+    "LF_serialized_period_ns": "66",
+    "LF_serialized_falling_edge_ns": "33",
+    "false_path_from": "lfextclk",
+    "false_path_to": [
+      "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_tim0/u_in_stage/r_ls_clk_sync_reg[0]/D",
+      "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_tim1/u_in_stage/r_ls_clk_sync_reg[0]/D",
+      "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_tim2/u_in_stage/r_ls_clk_sync_reg[0]/D",
+      "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_perips/u_perips_apb_pwm/u_tim3/u_in_stage/r_ls_clk_sync_reg[0]/D"
+    ],
+    "selected_command_categories_with_zero_matches": [
+      "set_multicycle_path",
+      "set_clock_groups",
+      "set_disable_timing",
+      "set_clock_gating_check",
+      "set_ideal_network",
+      "set_propagated_clock"
+    ],
+    "case_values_and_SysMem_IO_actual_detail_pending": false,
+    "full_all_modes_timing_verified": false,
+    "actual_case_analysis": {
+      "ports": {
+        "io_pads_jtag_TCK_i_ival": 0,
+        "io_pads_jtag_TMS_i_ival": 0,
+        "io_pads_jtag_TDI_i_ival": 0,
+        "io_pads_aon_erst_n_i_ival": 1,
+        "io_pads_dbgmode0_n_i_ival": 1,
+        "io_pads_dbgmode1_n_i_ival": 1,
+        "io_pads_dbgmode2_n_i_ival": 1,
+        "io_pads_bootrom_n_i_ival": 0,
+        "io_pads_aon_pmu_dwakeup_n_i_ival": 1
+      },
+      "pins": {
+        "u_e203_subsys_top/u_sirv_aon_top/u_sirv_aon_wrapper/bootrom_deglitch/io_q": 1,
+        "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/pllbypass": 1,
+        "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_hclkgen/plloutdivby1": 1
+      },
+      "count": 12,
+      "matches_declared_stable_task_mode": true
+    },
+    "actual_SysMem_IO": {
+      "set_input_delay -clock hf_clk -max 1": 35,
+      "set_input_delay -clock hf_clk -min 0": 35,
+      "set_input_transition -max 0.1": 35,
+      "set_input_transition -min 0.1": 35,
+      "set_load -pin_load 0.01": 71,
+      "set_output_delay -clock hf_clk -max 1": 71,
+      "set_output_delay -clock hf_clk -min 0": 71
+    },
+    "raw_SysMem_IO_rows": 353,
+    "SysMem_direction_counts": {
+      "input_bits": 35,
+      "output_bits": 71,
+      "total_bits": 106
+    },
+    "actual_case_IO_observed_at": "2026-11-13T06:16:45+08:00",
+    "scope_limit": "Actual serialized case values and per-constraint SysMem bit coverage only; not all-mode timing acceptance."
+  },
+  "clock_precision": {
+    "measured_DC_period_ns": "6.666666000000",
+    "serialized_HF_period_delta_ns": "0.000004",
+    "serialized_HF_falling_edge_delta_ns": "-0.000003",
+    "existing_N1_power_flow": "n1_power.precise_clock uses the fixed synthesis metrics and restore_clock to write a new mapped.precise.sdc. Only the one recognized HF line changes; original mapped.sdc stays intact.",
+    "corrected_HF_period_ns": "6.666666",
+    "corrected_HF_falling_edge_ns": "3.333333",
+    "actual_PT_enforcement": "Tcl compares HF/LF to 6.666666/66 within 1e-12; Python rechecks power_clock.txt using Decimal exact equality.",
+    "actual_PT_receipt_available": false,
+    "requires_resynthesis_for_serialization": false,
+    "requires_tool_change": false
+  },
+  "area": {
+    "units": "um^2",
+    "leaf_count": 348866,
+    "macro_count": 220,
+    "groups_observed_values_as_printed": {
+      "platform_other": {
+        "standard_count": 72089,
+        "standard_area_um2": "158719.0079999049",
+        "macro_count": 0,
+        "macro_area_um2": "0"
+      },
+      "itcm": {
+        "standard_count": 650,
+        "standard_area_um2": "1123.9031999999977",
+        "macro_count": 32,
+        "macro_area_um2": "880554.1249929008"
+      },
+      "dtcm": {
+        "standard_count": 643,
+        "standard_area_um2": "850.668000000011",
+        "macro_count": 32,
+        "macro_area_um2": "880554.1249929008"
+      },
+      "dma_arbiter": {
+        "standard_count": 181,
+        "standard_area_um2": "293.6639999999953",
+        "macro_count": 0,
+        "macro_area_um2": "0"
+      },
+      "dma_router": {
+        "standard_count": 212,
+        "standard_area_um2": "276.1080000000001",
+        "macro_count": 0,
+        "macro_area_um2": "0"
+      },
+      "shared": {
+        "standard_count": 1511,
+        "standard_area_um2": "2124.9143999999865",
+        "macro_count": 64,
+        "macro_area_um2": "1761108.2499839996"
+      },
+      "accelerator": {
+        "standard_count": 268783,
+        "standard_area_um2": "541471.7280005957",
+        "macro_count": 92,
+        "macro_area_um2": "246288.69429999957"
+      }
+    },
+    "whole_leaf_sum_um2": "4473365.18786784",
+    "whole_DC_report_um2": "4473365.187497",
+    "whole_leaf_minus_DC_report_um2": "0.00037084",
+    "known_added_mm2": "0.7904551087005953",
+    "conservative_project_mm2": "0.9511486879005002",
+    "project_limit_mm2": "1.20",
+    "library_geometry_basis_status": "identical_library_geometry_proof_reused",
+    "budget_rule": "All SoC standard cells plus 92 accelerator SRAM macros; excludes only 32 ITCM+32 DTCM+64 shared reused large macros.",
+    "printed_group_column_scope": "Standard cells and SRAM; virtual logical-constant counts were not printed. Do not compare their subtotal directly with all leaf_count.",
+    "numerical_limit_met": true,
+    "official_area_verified": false,
+    "physical_signoff": false
+  },
+  "actions": {
+    "repeat_synthesis": false,
+    "repeat_DRC_DC_with_zero_targets": false,
+    "one_current_timing_audit_required_after_existing_batch_and_original_lock_release": true,
+    "reason": "N1 has four actual high-fanout nets; B0 historical three-clock explanation cannot be copied.",
+    "reuse_normal_N1_L01_PT_reports": true,
+    "PT_reports_to_review": [
+      "timing_check.rpt",
+      "disabled_timing.rpt",
+      "clocks.rpt",
+      "power_clock.txt",
+      "power_clock_input.json"
+    ],
+    "same_netlist_gate14_required": true,
+    "next_serial_order_after_current_batch_and_shared_lock_release": [
+      "One actual N1 timing_audit to classify all four high-fanout nets",
+      "Same frozen mapped-netlist gate14",
+      "Normal activity12/power12 and associated PT clock/disabled-arc review"
+    ],
+    "additional_bounded_static_report_queries": false
+  },
+  "acceptance": {
+    "constraint_full_report_SHA_and_clean_marker_verified_here": true,
+    "stable_case_values_SysMem_actual_constraints_verified_here": true,
+    "four_high_fanout_net_scope_verified": false,
+    "same_netlist_gate14_verified_here": false,
+    "PT_clock_and_disabled_arc_scope_verified": false,
+    "strict_task_mode_timing_accepted": false,
+    "N1_stage_accepted": false
+  },
+  "evidence": [
+    {
+      "observed_server_time": "2026-11-13T06:07:28+08:00",
+      "command_local_file": "takeover_local/n1_check_timing_report_query.txt",
+      "command_sha256": "bd5af402fba57f004df449482e8ab8663155eb6412e225023fbbcfb2f8c2b215",
+      "command": "python3 -B -c 'from pathlib import Path;import json,hashlib,re;r=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth\");h=lambda b:hashlib.sha256(b).hexdigest();b=(r/\"summary.json\").read_bytes();assert h(b)==\"cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31\";s=json.loads(b);b=(r/\"check_timing.rpt\").read_bytes();assert h(b)==s[\"artifacts\"][\"check_timing.rpt\"];t=b.decode();lines=t.splitlines();w=[x.strip() for x in lines if re.search(r\"Warning:|Error:|TIM-\",x)];print(json.dumps(dict(sha=h(b),bytes=len(b),checks=[x.strip() for x in lines if \"Checking \" in x],warning_lines=len(w),warnings=w[:8],warnings_complete=len(w)<=8,full_report=t if len(t)<1200 else None,strict_timing_pass=False)))'",
+      "screenshot_local_file": "takeover_local/n1_check_timing_0608.png",
+      "screenshot_sha256": "e2cd4a0d48e1fbb2de518ad575c7d482116e093951cdaed6c9101ef7102d6b1a"
+    },
+    {
+      "observed_server_time": "2026-11-13T06:08:25+08:00",
+      "command_local_file": "takeover_local/n1_mapped_sdc_exceptions_query.txt",
+      "command_sha256": "8ed98fe0b30557adf1611d8a6a5f6aad95762d0b9d74157b247148fe93536021",
+      "command": "python3 -B -c 'from pathlib import Path;import json,hashlib,re,collections;r=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth\");h=lambda b:hashlib.sha256(b).hexdigest();b=(r/\"summary.json\").read_bytes();assert h(b)==\"cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31\";s=json.loads(b);b=(r/\"mapped.sdc\").read_bytes();assert h(b)==s[\"artifacts\"][\"mapped.sdc\"];t=b.decode();n=t.count(chr(92)+chr(10));t=t.replace(chr(92)+chr(10),\" \");keys=r\"set_(?:false_path|multicycle_path|clock_groups|disable_timing|clock_gating_check|ideal_network|propagated_clock)|create_clock\";x=re.findall(r\"(?m)^\\s*((?:\"+keys+r\")[^\\n]*)\",t);print(json.dumps(dict(sha=h(b),counts=dict(collections.Counter(v.split()[0]for v in x)),commands=x,case_analysis_count=len(re.findall(r\"(?m)^\\s*set_case_analysis\\b\",t)),continuations_joined=n,scope=\"raw_command_lines_only_no_acceptance\")))'",
+      "screenshot_local_file": "takeover_local/n1_sdc_scope_0609.png",
+      "screenshot_sha256": "206b38efd88f3e0e33490d6998c909108aed68e5271570fae78bc04b763f3f5c"
+    },
+    {
+      "observed_server_time": "2026-11-13T06:09:37+08:00",
+      "command_local_file": "takeover_local/n1_area_groups_query.txt",
+      "command_sha256": "1842533188b086333a13d779e0b4f9a5b978c8470ed2211e196d328eeb06352e",
+      "command": "python3 -B -c 'from pathlib import Path;import json,hashlib;r=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth\");b=(r/\"summary.json\").read_bytes();assert hashlib.sha256(b).hexdigest()==\"cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31\";s=json.loads(b);a=s[\"area_summary\"];print(json.dumps(dict(units=a[\"units\"],leaf_count=a[\"leaf_count\"],macro_count=a[\"macro_count\"],whole=a[\"whole_system_library_area\"],known_mm2=a[\"known_added_mm2\"],conservative_mm2=a[\"conservative_budget_mm2\"],limit=a[\"project_budget_mm2\"],groups={k:[v[\"standard_cell_count\"],v[\"standard_cell_area\"],v[\"sram_count\"],v[\"sram_area\"]]for k,v in a[\"groups\"].items()},columns=[\"standard_count\",\"standard_um2\",\"macro_count\",\"macro_um2\"],area_basis_status=s[\"area_basis\"][\"status\"],official_area_verified=False)))'",
+      "screenshot_local_file": "takeover_local/n1_area_groups_0610.png",
+      "screenshot_sha256": "943e6acde5692795509cf5261fa240185eebe055e89dc9faa38955b8c4733406"
+    },
+    {
+      "observed_server_time": "2026-11-13T06:15:40+08:00",
+      "command_local_file": "takeover_local/n1_constraints_full_report_query.txt",
+      "command_sha256": "cb9ce1d3c56ac332e470f95dfb40b6eb2b49ba3846f8f07ab706f8c398f7fb63",
+      "command": "python3 -B -c 'from pathlib import Path;import json,hashlib,re;r=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth\");h=lambda b:hashlib.sha256(b).hexdigest();b=(r/\"summary.json\").read_bytes();assert h(b)==\"cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31\";s=json.loads(b);b=(r/\"constraints.rpt\").read_bytes();assert h(b)==s[\"artifacts\"][\"constraints.rpt\"];t=b.decode();print(json.dumps(dict(sha=h(b),bytes=len(b),clean_markers=t.count(\"This design has no violated constraints\"),VIOLATED_tokens=len(re.findall(r\"\\bVIOLATED\\b\",t)),errors=len(re.findall(r\"Error:|Fatal:\",t)),full_report=t if len(t)<=1400 else None,complete_text_shown=len(t)<=1400,strict_timing_pass=False)))'",
+      "screenshot_local_file": "takeover_local/n1_constraints_complete_0616.png",
+      "screenshot_sha256": "80231eff82f064b46df9d46318633773f21183b5198699a89b6e55bbd5c66dbb"
+    },
+    {
+      "observed_server_time": "2026-11-13T06:16:45+08:00",
+      "command_local_file": "takeover_local/n1_sdc_cases_sysmem_query.txt",
+      "command_sha256": "ce5fb92d5be6f01898cf6c6d5e7927bfe297211537c5c250405e00b739a6a5c1",
+      "command": "python3 -B -c 'from pathlib import Path;import json,hashlib,re;r=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth\");h=lambda b:hashlib.sha256(b).hexdigest();b=(r/\"summary.json\").read_bytes();assert h(b)==\"cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31\";s=json.loads(b);b=(r/\"mapped.sdc\").read_bytes();assert h(b)==s[\"artifacts\"][\"mapped.sdc\"];t=b.decode().replace(chr(92)+chr(10),\" \");C=[x.strip()for x in t.splitlines()if x.strip().startswith(\"set_case_analysis\")];R=[x.strip()for x in t.splitlines()if \"sysmem_icb_\"in x and re.match(r\"\\s*set_(input_delay|output_delay|input_transition|load)\\b\",x)];P={x.split(\"[get_ports\")[0].strip()for x in R};print(json.dumps(dict(cases=C,IO={p:len(set(re.findall(r\"sysmem_icb_\\w+(?:\\[\\d+\\])?\",\" \".join(x for x in R if x.startswith(p+\" \")))))for p in sorted(P)},raw_IO_rows=len(R),accepted=False)))'",
+      "screenshot_local_file": "takeover_local/n1_sdc_sysmem_cases_0617.png",
+      "screenshot_sha256": "053e6cd2ac83cdcfcd612445d43ebe40d87af37d47e699d6aa49223204984bcd"
+    }
+  ],
+  "source_review": {
+    "workspaces/arch03/scripts/soc_synth.py": "4ab266122907c435715c85937e561fe6fa7e6322022efd4c8c4de04b7b6659de",
+    "workspaces/arch03/scripts/n1_synth.py": "25e93ff39e151d8b6eebaa2ff6934f4a2520701019153ea400ec1e346c4085a3",
+    "workspaces/arch03/scripts/n1_timing_audit.py": "d1c61e59a1ec8fa0511742da81c55eae94b1c6c48b0824340b8076b9781efe64",
+    "workspaces/arch03/scripts/n1_drc_audit.py": "488c3dcd006e6526eee56c545faa49ae7f33d3f2efb0566c1e01e46b97a7ca7e",
+    "workspaces/arch03/scripts/n1_gate.py": "ef9fc5403bd1c3d32714905228aaea6c971a85e664f61bd08d919dc79c7d2e09",
+    "workspaces/arch03/scripts/n1_power.py": "52c050f421ae650808b256cf3ddb7fa62b279dc776b648a643ed7035b970c91a",
+    "workspaces/arch03/scripts/icb32_delivery_sdc.py": "75b94353d7c9d37809e90e40869c49f2b366dffbd0993e2b12c14a5a9e981e75",
+    "workspaces/arch03/scripts/icb32_power.py": "fa2715e52b0d898062343deaf5b664ad8798a67537c4b820eeacddda24ac32be",
+    "handoff/team/evidence/SYSTOLIC_B_DRC06_SCOPE_INVENTORY_20261112.json": "072a1c931d7e49f723f45e9ef147cace74db6501e5d7eb230593b29b5780f1d5",
+    "handoff/team/evidence/SYSTOLIC_B_FREEZE_REVIEW_20261112.json": "e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54"
+  },
+  "constraints_report": {
+    "artifact": "constraints.rpt",
+    "sha256_identity": "Exact SHA from synthesis summary cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31 artifacts[constraints.rpt]; actual query asserted hash equality before reading text. Digest not retranscribed from small-font screenshot.",
+    "bytes": 253,
+    "clean_markers": 1,
+    "VIOLATED_tokens": 0,
+    "errors": 0,
+    "full_text_shown": true,
+    "statement": "This design has no violated constraints.",
+    "observed_server_time": "2026-11-13T06:15:40+08:00",
+    "strict_timing_pass": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "b0-remaining11-controls-independent-review-v1",
+  "status": "no_blocking_findings_in_frozen_scope",
+  "review_mode": "read-only static review; no server operations or repeat full fixture run",
+  "tool": {
+    "file": "workspaces/arch03/scripts/b0_controls_remaining11.py",
+    "sha256": "f12e89c6acdb207704288ed832b818931030ca9a22c60bea1cf9e24e70c4beaa"
+  },
+  "test": {
+    "file": "workspaces/arch03/scripts/test_b0_controls_remaining11.py",
+    "sha256": "d7088fad23fac32f837346272458af28852b79967a51381b46e00ca2c22711df"
+  },
+  "scanner_sha256": "b1c6df556c7df0f2b8e13c1be6c2ba8babb4b994f50c2d99b5f78af24d7bc963",
+  "author_reported_tests": {
+    "tests": 7,
+    "passed": 7,
+    "host_seconds": 4.99,
+    "rerun_by_reviewer": false
+  },
+  "root_static_review": "Root independently read complete wrapper and approved frozen input-only scope",
+  "findings": [
+    "Exactly L02-L12 distinct cases; fixed ordered scan; L01 reused through pinned small receipt, not rescan.",
+    "Inventory/report/activity/state/L01 receipt hashes and source/output identity close after collection; each SAIF full native audit and SHA must equal original.",
+    "Fixed scanner plus native_saif_activity/saif_syntax/icb32_power/soc_power/icb32_synth dependency SHA set must equal L01; paths may differ with deployment.",
+    "Fresh output and exclusive bounded files; ordinary failures retain completed prefix and selected partial; no existing power or activity file overwritten.",
+    "All system_power_verified/full_control_cone_audited/joint_timing_proved flags remain false; completeness means receipt coverage only."
+  ],
+  "limitations": [
+    "SIGKILL or KeyboardInterrupt may leave request/completed prefix without failure.json; absence of final summary is not completion.",
+    "Low OS priority is a launcher obligation; wrapper does not set nice itself.",
+    "No actual remaining11 server data or new power conclusion observed by this reviewer."
+  ],
+  "dependencies_import_order": [
+    "explicit frozen0f62 scripts",
+    "independent evidenceops directory"
+  ],
+  "no_eda": true,
+  "no_new_waveform": true,
+  "original_reports_modified": false,
+  "system_power_verified": false,
+  "next_stage_started": false
+}

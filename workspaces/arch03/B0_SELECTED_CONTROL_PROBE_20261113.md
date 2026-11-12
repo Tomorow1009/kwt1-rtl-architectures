@@ -91,3 +91,48 @@ RET1N = 1'b1
 后续消费锥查询已运行但原截图上半driver部分未保留下可读结果。亲读`vnc_after_minimize_0525.png`（实际钟05:21:23）仅确认小写n9引用总数3：BUFV2RD_12TR40 U392的I=n9/Z=n779，U394的I=n9/Z=n780，以及NOR2V2_12TR40 U398的A1=read_pending/A2=n11/ZN=n9。当前没有证据补写其余driver或BUF/NOR的实际Liberty function。更短的`b0_shared_control_frontier_query.txt`只列n9/n11/n779/n780/n1082/n792实际驱动，待根在N1恢复后读；不扩大为新的SAIF扫描。
 
 05:40:46该frontier已实际完成：除上述三条外，INV2 U39从n793驱动n792，INV2 U73从n13驱动n1082，NOR2BV2 U227的A1=n15/B1=n14/ZN=n11，共6条。只有INV2实际function已被此前读取，其他门函数仍待查。随后宏模型身份/no-load交集两个只读命令在首reportSHA断言停止；05:50逐行分组核对确认是本地手抄常量错误（05:46的_v2仍误抄后半并失败），原inventory pin与实际报告相等，报告没有改变。正确原报告SHA为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`；旧失败命令/截图保留，生成_v3命令但尚无实际结果，_v1/_v2失败文件均保留。完整恢复入口及新命令SHA见B0_REVIEW_CHECKPOINT_CONTROL_MAPPED_20261113.md。
+
+## 06:00–06:05实际推进（优先于上述历史待办）
+
+- 现成no-load证明与局部未知精确交集已读：LOCAL2234、PROVEN1253、HIT0、REMAINING2234。两边名称同为u_e203_subsys_top起始层级，预览分别为dcsr_r位和子模块inspect_pc位；不增减前缀强造匹配，2234项仍无全局无负载豁免。
+- 原report→gate summary→source_inputs身份链通过，唯一实际4096模型为`/storage1/admin_public_dir/SRAM_Lib_2025/RAMSP4096X16/verilog/RAMSP4096X16.v`。模型索引再按源输入清单的原SHA验证成功，1768行，47条Q赋值/task候选。没有复制整个厂商模型，候选索引不代表已经解释其全部行为。
+- 固定5d236…库实际函数已读：BUFV2RD的Z=I；NOR2BV2的ZN=`!((!A1)|B1)`；NOR2V2的ZN=`!(A1|A2)`。结合实际端口，n11=n15&!n14，n779=n780=n9=!(read_pending|n11)。这只确定该消费控制片段，不证明整个bank_data路径无活动或功耗为零；没有按门名猜极性。
+- 模型实际Q输出赋值含RET1N/pre_charge_st及Q_int，readWrite从258行开始。下一只读258–286与287–321的真实分支，并核原compile_command的实际定义；索引中出现Q_int=X不能推成所有写均输出X，也不能用本地behavioral代替真实模型。
+
+## 06:12–06:18实际模型与声明分类补证
+
+本代理亲读`b0_readwrite_a_zoom_0613.png`、`b0_readwrite_b_top_0615.png`和`b0_readwrite_b_0614.png`。原gate的compile_command按原source_inputs哈希通过，实际定义为`+define+ARM_UD_MODEL`及`+define+functional`。实际4096模型在有效保持/使能/地址条件下：GWEN已知为0的分支写入mem，不给Q_int赋值；GWEN已知为1的分支读出数据并更新Q_int。因此正常写保持Q，正常读更新Q。RET1N未知、相关模式/控制未知、地址异常、GWEN未知等独立异常分支仍可能产生X，不能将异常分支当成正常写行为，也不能遗漏这些条件。该结论来自原模型正文及原编译定义，不是本地behavioral推测。
+
+L01的read_pending整窗为0、共享Q保持全X，与正常写期间未初始化Q保持的解释相容。但这不是其余11层的控制证据，也不自动说明所有共享读mux、未知状态相关泄漏或AON未知不影响功耗。现有L01 probe已覆盖cmd_addr全部32位且未知为0，后续最小边界是实际64宏A/EMA/EMAW接线分组及bank选择/输出消费控制；不扩展为无边界逐门查询。
+
+06:17:48的局部声明候选分类为internal633、output821、input780，NO_GLOBAL_WAIVER=True。原查询仅对port表未命中的名称使用internal标签，因此633目前只是候选，不能先称真实wire/reg。新的`takeover_local/b0_local_decl_actual_query.txt`（999字符，SHA `148bc3a00f59f89d2de197992b0d234ff20e293130bef9a9c0a212da2125cb81`）绑定原index_netlist、网表及未知gzip身份，按resolve_alias相同规则区分独立位选和转义标识，再要求名称存在于实际nets声明；不存在者显式列MISSING，实际声明存在且不在ports者才列internal。本地仅验证ASCII、shell参数及Python3.6语法，尚无该新查询服务器结果。即使633候选全部证实，1601端口仍须跨层连接审核，633非port声明也尚未取得全局无负载豁免。
+
+## 后续控制补证的限定方案（尚未执行）
+
+冻结control工具的`scan()`可直接复用完整native/window/SHA比对，但`collect()`两处固定筛选L01，因此原CLI不能直接采其余11层。建议仅新增薄包装，读取已完成L02–L12未知inventory及原report/activity/state，精确限定这11层、每层对原SAIF单遍、独立新输出/失败保留、记录原工具及依赖哈希；完整原native对象仍必须逐字段相等。复用已完成L01回执，不再扫描L01、不重建任何unknown JSONL、不改原工具或SAIF、不启动仿真或PT。每层继续显式列缺失macro pin、已选控制未知、条件子记录及联合时序限制；任一层read_pending非零都需独立读路径审查，不能继承L01结论。该方案目前只有接口核对，没有新包装、新扫描或新功耗批准。
+
+## 06:32独立包装已准备，真实扫描尚未运行
+
+根代理批准后新增`b0_controls_remaining11.py`，原probe及unknown工具未修改。包装严格接受且仅接受L02–L12完整十一例，绑定原report/activity/state、各层完整native回执、已完成L01控制summary及其selector/依赖SHA；运行时调用原`scan()`逐层顺序单读。L01只读取既有小summary，不读取原SAIF。每层独立新目录、成功摘要、失败前缀及partial保留；总结果中的`full12_receipt_coverage`只表示旧L01与新11份控制回执齐全，`system_power_verified`、全控制锥和联合时间证明仍为false。
+
+成本上限为11×256MiB源读取、初始空间要求2GiB＋120MiB，实际输出仍受每份8MiB限额；推荐私有/tmp、单worker及低优先级。宿主时间暂按原L01约两分钟级×11规划，不能在未实际运行前承诺精确时长。它不使用EDA许可证、不启动VCS/PT、不重新生成未知清单，也不回写旧报告。
+
+新7项小fixture全部通过：各SAIF只读一次且不读L01、所有源不改；缺宏pin仍明确；错误层集合、L01合同/依赖不符拒绝；中途源SHA/统计不符保留前缀及partial；依赖变更、空间不足、错误inventory SHA留失败回执；旧输出不能覆盖。两个新Python文件通过3.6语法核验。测试只验证包装合同，不是实际B0控制或功耗通过，独立代码审阅正在进行。
+
+```text
+python3 -B b0_controls_remaining11.py
+  --inventory <project>/operations/b0_unknown_l02_l12_20261113_0326/summary.json
+  --inventory-sha256 ddf61c38beeed4261d9a87604d4870979d960072ae3b8713823b53fc328d5643
+  --l01-control /tmp/s4_21usr_n1_20261113_0210/b0_control_l01_20261113_0403/summary.json
+  --l01-control-sha256 2c06372156a5f80e50e6c0634002f6686dc1768966d65bde32cc7a51b0060f7d
+  --scope-root <original project root>
+  --output <new private absolute directory>
+```
+
+上述为参数说明，不是已经执行的命令。实际导入的原probe必须仍为SHA b1c6df556c7df0f2b8e13c1be6c2ba8babb4b994f50c2d99b5f78af24d7bc963；其余依赖逐SHA与L01原回执匹配，路径迁移不能掩盖文件变化。
+
+06:31:49的实际声明查询结果已亲读`b0_actual_decl_and_pending_0633.png`：633 internal、821 output、780 input，无MISSING，所有原工具/网表/gzip身份和数量断言通过。因此633已证明是实际nets声明且不在ports，另外1601确为实际端口方向；此前候选分类没有因为名称匹配差异丢项。仍须区分本模块零表达式引用与全局电气无负载，不继承1253默认网的证明，也不据此批准功耗。图中另一个宏地址/模式查询当时只有输入行，尚无结果，不能记成已执行。
+
+06:32:46该宏地址/模式查询实际完成，已亲读`b0_macro_address_mode_0634.png`：全部64宏只有一组，A连接各适配器addr，EMA固定010、EMAW固定00；三个pin的64实例覆盖及原网表/parser哈希断言均通过。结合此前CLK/RET1N及CEN/GWEN/WEN实际映射，已补齐这组宏接线和固定模式条件。A到addr是实际连接事实，不自动替代所有地址和控制的联合时间证明。自此停止新增手工逐门查询，下一有界动作仅为剩余11层selected-control及资源允许后的固定2234项实际全局连接查询；系统功耗未知影响仍未闭合。
+
+独立只读审阅已完成，工具f12e89c6…及test d7088fad…未发现阻断，未重复运行fixture。低优先级由启动器设置，包装本身不设置nice。普通异常有failure回执；SIGKILL或KeyboardInterrupt可能只留下request和已完成前缀，不能将没有failure.json当成成功，必须核最终summary及完整11例身份。上述633/821/780均是声明/别名项分类，不是独立物理网络数量。

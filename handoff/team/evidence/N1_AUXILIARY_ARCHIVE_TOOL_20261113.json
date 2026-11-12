@@ -1,0 +1,53 @@
+{
+  "schema": "arch03-n1-auxiliary-archive-local-tools-v1",
+  "status": "local_tests_passed_root_static_review_no_blocker_deployment_pending",
+  "files": {
+    "n1_archive_auxiliary.py": {
+      "bytes": 15654,
+      "sha256": "864afdd62b297fdaf3314bba3a2bab68766b7170d28750abc7c0093784f987fd",
+      "python36_grammar": true
+    },
+    "test_n1_archive_auxiliary.py": {
+      "bytes": 12711,
+      "sha256": "563f0aa2109a91e35c6fcf5bd08a292e10d3e352df15538ff2eb444dbeae2615",
+      "python36_grammar": true
+    }
+  },
+  "dependencies": {
+    "n1_archive_runtime.py": "6bfd21fbf42dbce160829f99c8eff2d3075c75857f2ccbe74fec67e141de09f9",
+    "n1_paths.py": "fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d"
+  },
+  "command": "E:/fpga_race-two/.venv-kwt/Scripts/python.exe -B -m unittest test_n1_archive_auxiliary -v",
+  "cwd": "workspaces/arch03/scripts",
+  "tests": 17,
+  "passed": 17,
+  "failed": 0,
+  "host_seconds": 2.828,
+  "exit_code": 0,
+  "actual_python": "3.8.20",
+  "history": [
+    "First15 tests:14 pass,1 fixture error because it reused a preserved existing destination; fresh destination used, production guard unchanged.",
+    "Added initial-owner fsync failure case:16 tests passed in2.872s.",
+    "Final root/membership guards added:16 tests passed in2.783s.",
+    "Root authorized exact evidenceops_0640 and remaining11_0640 directory names only; unchanged guards; added directory/type/near-name test;17 passed2.828s."
+  ],
+  "test_scope": "Real small files, tar/gzip roundtrip and NTFS live/dangling symlinks; Linux account/proc/fsync-directory/device facts are fixtures.",
+  "production_rtl_modified": false,
+  "frozen_runtime_archiver_modified": false,
+  "source_deleted": false,
+  "remote_operations": false,
+  "server_deployed": false,
+  "server_archive_executed": false,
+  "hardware_acceptance": false,
+  "next_stage_started": false,
+  "independent_review": "Root reviewed original helper and independently reran16 tests PASS2.854s; final delta only two explicitly authorized directory names plus targeted regression, pending root final delta check",
+  "tool_output_cell": "b0210f",
+  "previous_source_sha256": "165331a2ced792a960ae15d59e20e1be830b423676cefee6d9b7b9ad82988904",
+  "previous_test_sha256": "7ff53bc79dbab419c94c01af6981f94a22ccc117134f06a74efe3626a5ba26c8",
+  "root_test_rerun_before_name_delta": {
+    "tests": 16,
+    "passed": 16,
+    "host_seconds": 2.854,
+    "source_sha256": "165331a2ced792a960ae15d59e20e1be830b423676cefee6d9b7b9ad82988904"
+  }
+}

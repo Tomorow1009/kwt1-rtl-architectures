@@ -1,0 +1,116 @@
+{
+  "schema": "n1-audio-source-index-readonly-v1",
+  "date": "2026-11-13",
+  "scope": "Bounded existing-file metadata and extraction-source review; no TensorFlow import/inference",
+  "server_join_executed": false,
+  "complete100_wav_verified": false,
+  "float_source_recovered": false,
+  "n1_precision_accepted": false,
+  "server_manifest": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex_short_all/manifest.json",
+    "bytes": 694870,
+    "sha256": "9900a9bd1addbdeb256020ba9a04f4615791fbd5a624abd411364098c382c97e",
+    "download_attempt": "FTP550_permission_denied; no alternate download channel"
+  },
+  "local_csv": {
+    "path": "E:\\fpga_race-two\\model_data\\outputs\\all_speech_dot00\\samples.csv",
+    "bytes": 12174413,
+    "sha256": "1aea9aa75107cde96e2adad290f2d8f8fafb78be89f009f8e6ae9f514fcba09d"
+  },
+  "local_index": {
+    "path": "E:\\fpga_race-two\\takeover_local\\n1_float_source_index_20261113_v1\\audio_index.json.gz",
+    "bytes": 403722,
+    "sha256": "4f73b8ac8c02c6a1ba91a83e4dbd84992972bf110328eb84e8b670189f5bc201"
+  },
+  "index_decoded": {
+    "bytes": 4230951,
+    "sha256": "3ab4f4743dd40dd1f5b090688cb572e569c536755976134baefe1acf483111b7",
+    "count": 105829,
+    "index_base": 0,
+    "fields": [
+      "paths",
+      "splits"
+    ],
+    "splits": {
+      "training": 84843,
+      "testing": 11005,
+      "validation": 9981
+    }
+  },
+  "tools": {
+    "n1_audio_path_join.py": {
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\scripts\\n1_audio_path_join.py",
+      "bytes": 5598,
+      "sha256": "ef95082713e1c7fa930431bc9b690074948318221af7386d01bdf602d90752d5"
+    },
+    "test_n1_audio_path_join.py": {
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\scripts\\test_n1_audio_path_join.py",
+      "bytes": 3316,
+      "sha256": "d6e9fcce9249dade779b045874fed42404ea212074869accff837f7915bf10d1"
+    }
+  },
+  "local_checks": {
+    "tests": 9,
+    "passed": 9,
+    "seconds": 4.077,
+    "scope": "Synthetic fixtures only, no original server manifest"
+  },
+  "first_known_wav": {
+    "path": "E:\\fpga_race-two\\data2\\speech_commands_v0.02\\down\\90645155_nohash_0.wav",
+    "bytes": 17792,
+    "sha256": "0c150dd68724cc63c1d42e7fff54bf53244f33bf4739a5f8dce428ac260d4070"
+  },
+  "upstream_receipt": {
+    "path": "E:\\fpga_race-two\\model_data\\upstream_verification.json",
+    "bytes": 10206,
+    "sha256": "c32351a0eea6220c1f5ce017bb25fe0406af46c057f99a843c100b72052201b4"
+  },
+  "upstream_rehash": {
+    "files": 36,
+    "matching": 36,
+    "commit": "237e4097afd4f6851e0b82f0a8d65c2dfe8eae30",
+    "scope": "Named files from existing receipt only"
+  },
+  "installed_metadata_only": {
+    "python": "3.8.20",
+    "tensorflow": "2.4.0",
+    "tensorflow-addons": "0.12.1",
+    "numpy": "1.19.5",
+    "protobuf": "3.20.3",
+    "tensorflow_imported": false
+  },
+  "source_files": {
+    "model_data/requirements-lock.txt": {
+      "path": "E:\\fpga_race-two\\model_data\\requirements-lock.txt",
+      "bytes": 856,
+      "sha256": "8389cd8a215cde56f249b02576fbbcc1fa54ca92374c1fa822c086eef574c40b"
+    },
+    "model_data/scripts/extract_kwt.py": {
+      "path": "E:\\fpga_race-two\\model_data\\scripts\\extract_kwt.py",
+      "bytes": 14824,
+      "sha256": "4458577d6c2a05df430ccb252bf77d5b7814676f2415cd20c269857068180016"
+    },
+    "model_data/scripts/batch_runtime.py": {
+      "path": "E:\\fpga_race-two\\model_data\\scripts\\batch_runtime.py",
+      "bytes": 6495,
+      "sha256": "7a1c117523bbdc08f399bbcbe4849192f384a433d6c2050af00b2a6e610f4958"
+    },
+    "kwt1-rtl-architectures/workspaces/arch03/scripts/full_matrix_eval.py": {
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\workspaces\\arch03\\scripts\\full_matrix_eval.py",
+      "bytes": 15933,
+      "sha256": "6296cdaddddc5d086ab111d5fd8ead446df97d782e9bc10ff604a763c71f5606"
+    }
+  },
+  "shared_float_weights": {
+    "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\d1_full_matrix_600_20261109\\parameters.npz",
+    "bytes": 751859,
+    "sha256": "99a3f2d990203b2bd9f3bdf5dc98974d6a7102027f7d67b9abf19e72ee03a6ad"
+  },
+  "not_done": [
+    "No original target100 float tensors",
+    "No complete target100 audio byte identity yet",
+    "No original target100 extraction batch/thread/flags/source hashes",
+    "No TensorFlow execution",
+    "No change to n1_precision fixed ZIP checks"
+  ]
+}
