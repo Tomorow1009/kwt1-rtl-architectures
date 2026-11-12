@@ -2668,7 +2668,7 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "DRC06_scoped_review_passed_final02_clean14_running_SAIF_unqualified",
+    "status": "DRC06_scoped_review_passed_own1200_running_SAIF_defaults_under_review",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
@@ -2683,19 +2683,18 @@
     "new_gate_verified": true,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Continue original final02 clean14 then own1200. Investigate SAIF1060 default nets read-only; no concurrent EDA. Activity/power remain unqualified; never restart final01 or final02.",
+    "next": "Continue unique final02 batch; after lock release inspect exact default-net connectivity before SAIF qualification. Do not start duplicate simulation or power activity.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T17:21:26.472005+08:00",
+      "time": "2026-11-12T17:34:16.532936+08:00",
       "queue_pid": 149529,
-      "child_pid": 150171,
-      "stage": "systolic_b_soc",
+      "child_pid": 156788,
+      "stage": "systolic_b_batch",
       "status": "running",
       "foreground": "VNC workspace3 ced shell; window18874436",
-      "last_prelaunch_free_GiB": 145.755859375,
-      "last_prelaunch_resource_time": "2026-11-12T17:12:55+08:00"
+      "free_bytes": 116890009600
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -3161,17 +3160,37 @@
       "exact_mapping_nets": 361558,
       "default_nets": 1060,
       "total_nets": 362618,
-      "comparison_generated": false
+      "comparison_generated": false,
+      "diagnostic": {
+        "status": "unqualified_read_only_numeric_comparison",
+        "all1060_reported_no_driver": true,
+        "absent_in_SAIF": 1060,
+        "no_local_expression": 1049,
+        "complex_identifiers": 11,
+        "port_identifiers_in_local_inventory": 0,
+        "VCD_total_W": "0.0721431449",
+        "SAIF_total_W": "0.0721531361",
+        "CPU_relative_difference": 0.005344759358288772,
+        "global_connectivity_review_pending": true
+      }
     },
     "final_functional_queue": {
       "session": "systolic_b_final02",
       "pid": 149529,
       "request_sha256": "99e5b3330e4f89d8e94ea723cc936876da4ea3dffcf4d7431fe83c1f471d9f39",
       "freeze_review_sha256": "e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54",
-      "clean14_running": true,
-      "own1200_started": false,
+      "clean14_running": false,
+      "own1200_started": true,
       "activity_power_scheduled": false,
-      "failed_predecessor": "final01: wrong63-character transcription of predecessor queue SHA; no EDA started"
+      "failed_predecessor": "final01: wrong63-character transcription of predecessor queue SHA; no EDA started",
+      "clean14_passed": true,
+      "clean14_summary_sha256": "1aecb2205f4bdc2de4c556e17d44659075c49fa71f78b46ceee7c4f09101bce",
+      "batch_child_pid": 156788,
+      "completed_observed": 97,
+      "failed_observed": 0,
+      "outputs_observed": 2458368,
+      "observed": "2026-11-12T17:34:16.532936+08:00",
+      "remaining_seconds_including_20percent_margin": 7039.411758845872
     }
   }
 }

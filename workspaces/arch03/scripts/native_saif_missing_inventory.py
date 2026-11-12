@@ -51,12 +51,14 @@ def inventory(report,netlist,saif):
     pattern=r'(?m)^[ \t]*('+ident+r')[ \t]+('+ident+r')[ \t]*\('
     inst={name:{i.lstrip('\\'):ref.lstrip('\\') for ref,i in re.findall(pattern,m['logic'])} for name,m in mapped.items()}
     for path,row in rows.items():
-        design='e203_soc_top';parts=path.split('/')
-        for part in parts[:-1]:
-            require(part in inst.get(design,{}),'Unresolved mapped hierarchy: '+path)
-            design=inst[design][part]
+        design='e203_soc_top';remaining=path
+        while '/' in remaining:
+            matches=[name for name in inst.get(design,{}) if remaining.startswith(name+'/')]
+            if not matches:break
+            part=max(matches,key=len)
+            remaining=remaining[len(part)+1:];design=inst[design][part]
         require(design in mapped,'Leaf module absent: '+path)
-        row.update(design=design,leaf=parts[-1],local_usage=local_uses(mapped[design],parts[-1]),saif_records=[])
+        row.update(design=design,leaf=remaining,local_usage=local_uses(mapped[design],remaining),saif_records=[])
     stack=[]
     with Path(saif).open(encoding='ascii') as stream:
         for token in tokens(stream):

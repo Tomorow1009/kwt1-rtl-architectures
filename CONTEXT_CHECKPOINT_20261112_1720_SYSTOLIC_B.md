@@ -1,5 +1,15 @@
 # B 检查点：2026-11-12 17:20
 
+## 17:38增量
+
+17:34:16实际final02仍running，已进入 **systolic_b_batch，child156788**；clean14已通过，summary **1aecb2205f4bdc2de4c556e17d44659075c49fa71f78b46ceee7c4f09101bce**。B批量已完成97/1200、2458368输出、零失败，host515.883秒；含20%余量剩余7039.412秒。实际free116890009600B，按当前案例最大2733881B估所需5766048540B。空间因共享盘其它写入持续下降，不能把145GiB作为实时值。
+
+R4默认1060项全部实际`<No-Driver>`，报告尾行明确1060 nets，未看到工具Warning；仍不是无负载证明。新增只读`native_saif_missing_inventory.py`已提交1a4caef760fc4da6323c8cbf31087bf9662bc8ff并云验证。第一版609eaf2f...清单因映射转义实例路径`core/rem_183_I2/u_div/AInv[0]`不能解析而失败，未生成JSON。第二版支持最长实际实例前缀，剩余复杂标识保留requires_review；本地夹具通过，尚未提交改动。
+
+独立服务器工具`operations/native_saif_missing_368ae0dce140.py` SHA **368ae0dce140cd484826e1fb0c82ad64fd85c5429ad56a7aba5a86864d03380c**已部署。第二诊断执行中，输出目标ced`runs/r4_saif_missing_inventory02.json`；只读解析92MB SAIF，不是EDA。**17:38截图尚无终态/prompt；后续`b_saif_numeric_diagnostic.txt`已输入但尚未Return。** 下次先观察屏幕，等解析结束并核shell再执行这个待输入命令；不要重复输入或启动清单。
+
+当前云1a4caef；新的解析器修正/本增量待同步。VNC18874436/workspace3；功能队列149529/156788不受只读诊断影响。B12层活动/功耗仍未验，不能借R4数值。
+
 任务 ACTIVE，继续直接5×16脉动B；A取消，R4冻结保底。有效计划为`workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md`。生产RTL/固件63da6ba/v3/credits3未变，硬冻结后仅修复工具、映射及证据。压缩后重读本文件、AGENTS、计划和STATUS。
 
 ## 当前唯一队列：final02已通过预检查并开始clean14
