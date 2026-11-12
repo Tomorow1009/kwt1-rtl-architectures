@@ -1,0 +1,26 @@
+{
+  "schema": "systolic-b-SAIF-unit-diagnostic-package-v1",
+  "source_commit": "2b39c6d347b33112fc4210ad77bffedbd01bab54",
+  "archive": "light-light126-systolic-b-v3-20261112_122414-2b39c6d347b3.zip",
+  "bytes": 11360106,
+  "sha256": "eb47f16b049684172051540467328cc9887d4b8e0fae29302a0e3fc5e4d7562f",
+  "manifest_sha256": "67968c24b0d8856ae0ca9ccf4e99915d28e3cca3a58bb1e85e7fdc3a0fe360b5",
+  "inputs": 710,
+  "all_archive_inputs_rechecked": true,
+  "board_staged_sha_verified": true,
+  "server_uploaded": false,
+  "server_unpacked": false,
+  "hardware_changed": false,
+  "production_firmware_identical": true,
+  "contention_firmware_identical": true,
+  "sequence_load_images_identical": true,
+  "sequence_elf_nonallocated_differences": [
+    ".debug_info",
+    ".debug_line",
+    ".debug_str",
+    ".symtab"
+  ],
+  "sequence_manifest_sha256": "1117d483779817e7b2de20ae1b1f18617f7b2efeddddf0f805f20ea504d7deac",
+  "native_SAIF_qualified": false,
+  "diagnostics_started": false
+}

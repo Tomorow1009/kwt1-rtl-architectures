@@ -184,6 +184,8 @@ def main():
     p.add_argument('--gate-run',type=Path,help='Passed gate verification directory containing audited task activity')
     p.add_argument('--gate-summary-sha256',help='Explicit expected digest of that gate summary')
     p.add_argument('--synth-reports-from',type=Path,help='Re-audit a marker-only failed synthesis into a new run; no mapping rerun')
+    p.add_argument('--synth-drc-from',type=Path,help='Fresh B synthesis run repairing a pinned mapped design at identical task constraints')
+    p.add_argument('--synth-drc-sha256',help='Required original B synthesis summary digest for DRC repair')
     p.add_argument('--gate-reports-from',type=Path,help='Re-audit completed gate captures/VCD in a preserved failed run; no VCS rerun')
     p.add_argument('--native-probe-run',type=Path,help='Passed native VCS/PT SAIF tiny probe')
     p.add_argument('--native-probe-sha256')
@@ -197,6 +199,9 @@ def main():
     p.add_argument('--saif-activity-sha256')
     p.add_argument('--x-point',choices=['zero','frozen','one','initial'],help='Separate diagnostic only; never changes frozen power stage')
     a=p.parse_args()
+    if a.synth_drc_from is not None or a.synth_drc_sha256 is not None:
+        if a.stage!='systolic_b_synth' or a.synth_drc_from is None or a.synth_drc_sha256 is None:
+            raise ValueError('Mapped DRC repair requires B synthesis and both original evidence fields')
     if a.stage in ('native_saif_r4_replay','native_saif_r4_crosscheck') and a.cases!=['layer_01']:
         raise ValueError('Native SAIF qualification is restricted to explicit --cases layer_01')
     for target,values in (
@@ -297,9 +302,13 @@ def main():
                 from systolic_b_timing_audit import audit
                 report=audit(cfg,run,a.synth_run,a.synth_summary_sha256,call)
             elif a.stage=='systolic_b_synth':
-                from systolic_b_synth import synth
                 vendor(cfg,run)
-                report=synth(cfg,run,a.platform,call)
+                if a.synth_drc_from is not None:
+                    from systolic_b_drc_repair import repair
+                    report=repair(cfg,run,a.synth_drc_from,a.synth_drc_sha256,call)
+                else:
+                    from systolic_b_synth import synth
+                    report=synth(cfg,run,a.platform,call)
             elif a.stage in ('icb32_soc','icb32_build'):
                 from icb32_soc import verify
                 report=verify(cfg,run,a.platform,a.cases,call,a.activity_cases,a.firmware_root,a.stage=='icb32_build')

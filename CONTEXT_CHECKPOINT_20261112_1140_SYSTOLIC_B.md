@@ -53,8 +53,34 @@ result_ready和structure_ready均已执行；前者已读取，后者失败无JS
 - 当前VNC18874435/workspace3、新ced包空闲shell，FZ关闭，没有本地待续exec/仿真/待Return命令。最新查询`b_gate03_progress.txt`已完成，但输出被大量FILES挤出case名称；下次用紧凑`[(x['case'],x['cycles'])...]`读进度。`b_saif03_head.txt`/failure/help查询均已执行，相关截图已读。
 - 尚待：门级14终态、实际check_timing/结构/高扇出/例外审阅，自己的1200，SAIF/R4交叉核验/B活动12功耗12和最终报告。优先继续固定配置验证，不重综合、不重复队列。云ced已核；本地后续parser修复、清理和部署记录尚待提交同步。
 
-## 12:26：小型SAIF兼容性诊断工具本地准备
+## 12:24：小型SAIF兼容性诊断工具本地准备
 
 新增`systolic_b_saif_units`阶段（`native_saif_units.py`），使用统一server_run协作锁，编译同一独立小夹具，每个候选时间单位写独立子目录/日志并检查实际0/1/X/Z驻留及翻转。仅诊断VCS参数，不调用PT，不自动授予SAIF/系统功耗资格；后续仍须正式小试及R4全窗口交叉核验。不会在当前gate占锁时运行。
 
 本地结构/队列/SAIF解析相关6项检查通过，CLI帮助已确认新阶段接入；**未上传/未运行此新诊断**。正式probe及整机SAIF请求尚未改动，不能猜测有效单位。下一步提交包含结构统计表修复与诊断工具的新包，上传后先重审原网表；等原gate结束后串行小试。不要重新运行已通过的CPU诊断或综合。
+
+## 12:28：诊断包已板端暂存，尚未FTP上传
+
+- 2b39c6d347b33112fc4210ad77bffedbd01bab54已提交/push且ls-remote一致。当前本地只有新包证据/本段文档未提交。上述小工具提交时间为12:24:13，原段标题误写12:26已更正。
+- 新包`light-light126-systolic-b-v3-20261112_122414-2b39c6d347b3.zip`，11360106B，ZIP SHA eb47f16b049684172051540467328cc9887d4b8e0fae29302a0e3fc5e4d7562f；710输入，manifest67968c24b0d8856ae0ca9ccf4e99915d28e3cca3a58bb1e85e7fdc3a0fe360b5。全部输入/无缓存核验；67受保护RTL/SW/固件比较仍仅sequence ELF调试/符号四个非分配节不同，实际加载镜像、生产和contention全部相同。
+- 已板端暂存并SHA核验：`/home/root/systolic_b_units_2b39c6d/`，GUI映射`/home/board/systolic_b_units_2b39c6d/`。**没有FTP上传、服务器解包或新EDA启动。**证据`SYSTOLIC_B_SAIF_UNITS_PACKAGE_20261112.json`。
+- 原gate12:24:56已完成9/14例L01–L09，周期逐层与ASIC一致，无错误；原117191继续，不能重跑。当前前台VNC仍为ced包空闲shell。
+- 已通过桌面Alt+F2打开appfinder20972260，输入filezilla并Return，正在打开正确配置FileZilla。下一步读取最新窗口清单；原VNC workspace3不变。原队列继续，先完成新包传输再串行安排小型诊断，不能操作workspace4。
+
+## 12:38 接续记录：gate14完成，但4项max_transition超限阻止时序批准
+
+validation03在12:32:45观察已为validation_complete_review_required，14个功能门级任务/354816输出全部通过，周期与ASIC一致；无SDF。gate摘要SHA55c668a8bf8b8d0437d142ee929d2953b06f92a52c480074f7326aa616f32ca5，队列状态SHAd0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbf9789a83f650c7c6b3。原作业已完成，不重复启动。
+
+12:33–12:34实际constraints.rpt发现4项max_transition违规：要求约1.35ns，实际约1.37ns，每项约-0.02ns、合计约-0.09ns。示例core/n5271。setup/hold虽为正，不能批准完整时序，不能启动以已批准时序为前提的最终队列。需查安装DC官方compile手册，再在全新目录做原约束下的映射修复；若网表改变，必须重跑新网表gate14。RTL/固件仍63da冻结，不增架构或编码功能，不放宽限制。
+
+2b39诊断包12:31 FTP尝试返回421用户过多，FileZilla已关闭；仅本地和板端暂存，未上传/解包/运行。可合并必要修复工具后发新包。正式结构审计仍被旧解析器阻塞，SAIF小试仍失败，自己的1200及功耗未验。旧失败和两次清理清单保留。
+
+最后VNC18874435/workspace3/ced包空闲shell。b_dc_compile_doc_find已执行，截图已读：官方compile手册在/eda/synopsys/dc/dc_2022.03-SP5-5/doc/syn/man/cat2/compile.2。没有本地运行任务/待Return命令。操作前重新查进程/锁/空间；所有历史PID只作历史记录。硬冻结已过，仅修已知问题和补证据。R4保持交付退路。
+
+## 12:48 增量：独立映射修复工具准备，尚未服务器执行
+
+12:43:20实际无EDA/无协作锁，可用227.953125GiB。已读取安装DC compile.2：only_design_rule仅修设计规则，不进行mapping optimization。新工具systolic_b_drc_repair使用显式原摘要哈希，核对同B RTL、安装器、原约束逐字相同，复制原mapped.ddc至新repair_seed；保留全部原输入来源并新增本包/数据库核验。经标准server_run锁在全新systolic_b_synth阶段运行compile -incremental_mapping -only_design_rule，不放宽约束，不修改旧目录，新网表须新gate及PPA。
+
+12项相关本地工具检查通过，包括拒绝改动输入、既有输出、约束变化及保留报告/宏约束；不是实际DC修复通过。实际check_timing已单独读：3条高扇出网TIM-134，其余列出的generated clocks/loops/input delay/unconstrained endpoints/pulse/no-driving/partial-delay检查没有新告警；高扇出对象为已读三条时钟，仍按稳定任务模式范围审核。
+
+下一步提交并打含结构修复/SAIF单位诊断/DRC修复的新工具包；2b包FTP421失败保持历史，不重复部署它。当前VNC仍workspace3/ced空闲shell，FileZilla关闭，无本地进程或待输入命令。功能RTL和固件未改。

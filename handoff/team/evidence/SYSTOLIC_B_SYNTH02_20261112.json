@@ -5,7 +5,7 @@
   "run": "runs/systolic_b_v3_synth02/systolic_b_synth",
   "summary_sha256": "3e0f88eeb4855a15f8743f820f587cd90df7e52a748d112e8fd5ba788dd86d03",
   "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
-  "status": "reports_ready_review_required",
+  "status": "reports_reviewed_max_transition_repair_required",
   "period_ns": "6.666666",
   "setup_slack_ns": "0.0002141",
   "hold_slack_ns": "0.00249085",
@@ -22,5 +22,11 @@
   "task_mode_timing_verified": false,
   "project_area_upper_bound_verified": false,
   "system_power_verified": false,
-  "physical_signoff": false
+  "physical_signoff": false,
+  "max_transition_review": {
+    "observed": "2026-11-12T12:34:00+08:00",
+    "violating_nets": 4,
+    "approx_worst_slack_ns": -0.02,
+    "complete_timing_accepted": false
+  }
 }

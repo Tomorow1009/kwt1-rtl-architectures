@@ -1,3 +1,5 @@
+**11月12日12:48：B ASIC14/门级14均已通过；综合4项max_transition违规尚待修复，时序未批准。** [当前检查点](../../CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md)记录原队列终态、279.51GiB授权清理及新修复工具。新工具尚未服务器运行，自己的1200/功耗待验，R4保留。
+
 **Active: direct 5x16 systolic B/v3, credits3; ASIC/E20314 passed (30502.33 cycles / 4917.66 task/s at150MHz).** Read [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [B reproduction runbook](SYSTOLIC_B_RUNBOOK.md), and [latest checkpoint](../../CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md). Authorized obsolete MMIO8 wave cleanup released112.42GiB; R4/B evidence retained. Fresh synth02 PID183038 and validation02 queue184658 are running as last observed08:52 on Nov12; inspect live state before actions, never duplicate launches. Source candidate frozen; own1200, mapped gate, timing/area and SAIF/power still require their own evidence. R4 remains delivery fallback.
 
 # 架构三：E203 System Bus 集成
