@@ -3361,5 +3361,33 @@
       "included_in_current_backup": false,
       "next": "Read its existing result, do not restart. Initial shell/import failures preserved."
     }
+  },
+  "narrow_execution": {
+    "status": "N1_implementation_started",
+    "branch": "codex/light-light126/arch03-n1-n2-d1-d2-20261113",
+    "h0": "2026-11-13T00:49:49+08:00",
+    "base_commit": "cd4a63ad4a4c7ab5e07b471bf70d7fd2fbc6bc5f",
+    "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261113_0055_N1.md",
+    "phase_order": [
+      "N1",
+      "N2",
+      "D1",
+      "D2"
+    ],
+    "area_limit_mm2": 1.2,
+    "layout_id": "0x00100004",
+    "numeric_format": "0x000e0c20",
+    "B0_preserved": true,
+    "full_float_source_available": false,
+    "new_server_jobs_started": false,
+    "new_hardware_verified": false,
+    "current_work": [
+      "independent narrow RTL",
+      "new-format data adapter",
+      "10000-block independent stress test",
+      "firmware and SoC integration"
+    ],
+    "next": "Finish N1 only; no N2 RTL until all N1 acceptance complete."
   }
 }
