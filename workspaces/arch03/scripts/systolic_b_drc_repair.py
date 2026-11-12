@@ -12,6 +12,50 @@ from asic_link import sha
 import systolic_b_synth as synth
 
 
+def inspect(cfg, run, original, digest, call):
+    """Read-only driver/library diagnosis of the actual DRC04 mapped design."""
+    from systolic_b_gate import verify_synthesis, probe_script, PROBE_MARKER
+    from soc_synth import require_tool_marker
+    run, original = Path(run).resolve(), Path(original).resolve()
+    verify_synthesis(original, digest, cfg)
+    before = {str(original/n): sha(original/n) for n in ('summary.json', 'mapped.ddc', 'mapped.v')}
+    text = probe_script(original)
+    anchor = '    set out [open mapped_port_probe.tsv w]'
+    extra = r'''
+    set out [open driver_inventory.tsv w]
+    set prefix u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core
+    foreach {instance expected} {U32684 BUFV2RD_12TR40 U32686 BUFV2RD_12TR40 U32433 BUFV2RD_12TR40 U30602 AOI22V2_12TR40} {
+        set cell [get_cells $prefix/$instance]
+        if {[sizeof_collection $cell]!=1 || [get_attribute $cell ref_name] ne $expected} {error "Unexpected DRC driver $instance"}
+        puts $out "driver\t$instance\t$expected"
+        foreach attr {dont_touch dont_size size_only} {
+            if {[catch {get_attribute $cell $attr} value]} {set value unavailable}
+            puts $out "attribute\t$instance\t$attr\t$value"
+        }
+        foreach_in_collection pin [get_pins -of_objects $cell] {
+            if {[get_attribute $pin direction] eq "out"} {
+                puts $out "output\t[get_object_name $pin]\t[get_object_name [get_nets -of_objects $pin]]"
+            }
+        }
+    }
+    foreach pattern {*/BUFV*12TR40 */AOI22V*12TR40} {
+        foreach_in_collection cell [get_lib_cells $pattern] {
+            puts $out "candidate\t[get_object_name $cell]\t[get_attribute $cell area]"
+        }
+    }
+    close $out
+'''
+    if text.count(anchor)!=1:raise ValueError('Unexpected probe template')
+    tcl=run/'driver_inspect.tcl';tcl.write_text(text.replace(anchor,extra+anchor))
+    log=call([cfg['tools']['dc_shell'],'-f',tcl],run,'driver_inspect.log')
+    require_tool_marker(log,PROBE_MARKER)
+    for name,value in before.items():
+        if sha(Path(name))!=value:raise ValueError('Read-only DRC input changed')
+    return dict(status='driver_diagnostics_ready',netlist_modified=False,
+        synthesis_run=str(original),synthesis_summary_sha256=digest,
+        artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})
+
+
 def repair_script(run, cfg, original=None):
     text = synth.script(run, cfg)
     if original is not None:

@@ -120,7 +120,10 @@ def verify(cfg,run,synthesis,expected_sha,call):
     if re.search(r'(?im)^\s*(Error-|Error:|Fatal:)',log):raise ValueError('SAIF probe capture failed')
     activity=run/'native.saif';receipt=parse_small_saif(activity.read_text())
     save(run/'capture_receipt.json',receipt)
-    net=run/'probe.v';net.write_text('module saif_fixture(input clk,probe,toggle,output copied);assign copied=probe;endmodule\n')
+    # This installed PT netlist reader rejects ANSI-style port declarations.
+    # Use the same classic declarations as the accepted mapped SoC netlists.
+    net=run/'probe.v';net.write_text('module saif_fixture(clk,probe,toggle,copied);\n'
+        'input clk,probe,toggle;\noutput copied;\nassign copied=probe;\nendmodule\n')
     tcl=run/'read_saif.tcl'
     tcl.write_text('''proc probe_saif {} {
 set_app_var power_enable_analysis true

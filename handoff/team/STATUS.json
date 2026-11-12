@@ -2688,8 +2688,8 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T12:43:20+08:00",
-      "free_GiB": 227.953125,
+      "time": "2026-11-12T13:28:55+08:00",
+      "free_GiB": 413.0087890625,
       "team_lock": "absent",
       "old_L02": {
         "status": "passed",
@@ -2766,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
+    "cloud_commit": "bf55a29fcc022e33dd3f78d3f3a5e0a83a24564a",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2940,12 +2940,15 @@
       "base_bundle_inputs_modified": false
     },
     "mapped_repair": {
-      "session": "systolic_b_v3_drc03",
-      "pid": 180611,
-      "status": "failed",
-      "error": "OPT-128 duplicate standard library file identities between original and copied DB paths",
-      "new_mapped_gate_pass": false,
-      "next_session_not_started": "systolic_b_v3_drc04"
+      "session": "systolic_b_v3_drc04",
+      "status": "reports_complete_not_accepted",
+      "finished": "2026-11-12T13:42:34.753709",
+      "summary_sha256": "dd960574b5ac119192055932b7fadcf7e245fa97446d4370d8b6a49d4e990ca4",
+      "transition_violations": 4,
+      "multiport_net_violations": 2,
+      "accelerator_area_upper_mm2": 1.0975813687009695,
+      "strict_timing_verified": false,
+      "previous_failure": "drc03 duplicate library file identities"
     },
     "saif_unit_diagnostics": {
       "session": "systolic_b_v3_saif_units01",
@@ -2954,6 +2957,27 @@
       "generated_FS_from_1e_15": true,
       "native_saif_qualified": false,
       "actual_unknown_representation": "VCS combined TX for X or Z"
+    },
+    "next_tools": {
+      "directory": "operations/systolic_b_tools_bf55a29",
+      "manifest_sha256": "484ec4c551ed1a0adf16d10b4f4b9a2cef957d11eeca18789be75892ef094103",
+      "status": "delta_transfer_in_progress_not_launched",
+      "source_RTL_changed": false
+    },
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1350_SYSTOLIC_B.md",
+    "native_saif_probe_latest": {
+      "session": "systolic_b_v3_saif_probe02",
+      "status": "failed_PT_ANSI_port_syntax",
+      "VCS_capture_and_parse_passed": true,
+      "PT_annotation_verified": false,
+      "local_fix": "classic_port_declaration_prepared",
+      "R4_crosscheck_verified": false
+    },
+    "resource_observation": {
+      "time": "2026-11-12T13:58:16.509474",
+      "free_GiB": 405.94140625,
+      "lock": false,
+      "EDA": []
     }
   }
 }

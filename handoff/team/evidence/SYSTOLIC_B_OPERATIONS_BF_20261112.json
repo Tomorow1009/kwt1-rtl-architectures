@@ -1,0 +1,36 @@
+{
+  "relative": "../../operations/systolic_b_tools_bf55a29",
+  "name": "systolic_b_tools_bf55a29",
+  "manifest_sha256": "484ec4c551ed1a0adf16d10b4f4b9a2cef957d11eeca18789be75892ef094103",
+  "payload_sha256": "c4f8cf80d80b60d750d93f11cc67d1162e8c728b62c09be839f7abdef5ce62cb",
+  "source_commit": "bf55a29fcc022e33dd3f78d3f3a5e0a83a24564a",
+  "commands": 11,
+  "files": {
+    "schema": "systolic-b-small-operations-v1",
+    "source_commit": "bf55a29fcc022e33dd3f78d3f3a5e0a83a24564a",
+    "files": {
+      "systolic_b_ops.py": "cb1769859c41b893aa55bf4b2bacad096d0f5b76ae9ec57426a9e935ff18bd8a",
+      "systolic_b_drc_repair.py": "08cefbc8e11f93fdd80e988c1c19f6b95706dedaf6e73a10e7f12f7dc511537c",
+      "native_saif_units.py": "25491a85b9b50f82fdcdc4d1c6f074171e1bb637d2d7998d69f3e63e910f4a67",
+      "systolic_b_structure.py": "8a3f6430bc9070a8fae88ce6adb968d0091df511e9d137dada8369f8eaa94f1e",
+      "native_saif_probe.py": "df4c5e44f1bcb0c230c3cbdf7011c5e1250539629856395da060fb9b130d7d90",
+      "native_saif_activity.py": "6b658b9410cf06d6ba6a4ee13fe671de39d99c7cb191d0a418d0b83d02856aff",
+      "native_saif_replay.py": "b0694d4295493ebf66f1a90d8edd8696402ae150a583a8586db09d037d176461",
+      "saif_syntax.py": "4e5cbb5e16842f5c516f5449c92bfd2bd2ca674d8048f7c87cc6599739cb2a55"
+    }
+  },
+  "schema": "systolic-b-vnc-operations-deployment-v1",
+  "status": "deployed_eight_source_hashes_verified",
+  "observed": "2026-11-12T13:33:51+08:00",
+  "base_bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "base_inputs_modified": false,
+  "actual_FS_capture_reparse": {
+    "status": "window_dwell_and_known_toggle_passed",
+    "duration_ns": 60,
+    "timescale_ns": "0.000001",
+    "unknown_representation": "VCS_combined_TX_X_or_Z",
+    "X_and_Z_separately_measured": false,
+    "source_saif_sha256": "2ef071d379dd85c4fec762eabb47f39d74c0f803422eecbd3912a5fe7f8139a6"
+  },
+  "formal_VCS_PT_passed": false
+}

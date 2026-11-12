@@ -23,7 +23,7 @@ def main():
     p.add_argument('--bundle',required=True,type=Path)
     p.add_argument('--bundle-sha256',required=True)
     p.add_argument('--ops-sha256',required=True)
-    p.add_argument('--stage',choices=['systolic_b_saif_units','systolic_b_synth','systolic_b_saif_probe'],required=True)
+    p.add_argument('--stage',choices=['systolic_b_saif_units','systolic_b_synth','systolic_b_saif_probe','systolic_b_drc_inspect'],required=True)
     p.add_argument('--session',required=True)
     p.add_argument('--synth-run',type=Path)
     p.add_argument('--synth-sha256')
@@ -38,7 +38,7 @@ def main():
     bundle=a.bundle.resolve()
     if sha(bundle/'manifest.json')!=a.bundle_sha256:raise ValueError('Bundle manifest changed')
     if not re.fullmatch('[A-Za-z0-9_-]{1,64}',a.session):raise ValueError('Invalid session')
-    if a.stage in ('systolic_b_synth','systolic_b_saif_probe') and (a.synth_run is None or a.synth_sha256 is None):
+    if a.stage in ('systolic_b_synth','systolic_b_saif_probe','systolic_b_drc_inspect') and (a.synth_run is None or a.synth_sha256 is None):
         raise ValueError('Repair/probe requires pinned original synthesis')
     if a.stage=='systolic_b_saif_units' and (a.synth_run is not None or a.synth_sha256 is not None):
         raise ValueError('Unexpected synthesis fields')
@@ -67,6 +67,9 @@ def main():
             elif a.stage=='systolic_b_saif_probe':
                 from native_saif_probe import verify
                 report=verify(cfg,run,a.synth_run,a.synth_sha256,base.call)
+            elif a.stage=='systolic_b_drc_inspect':
+                from systolic_b_drc_repair import inspect
+                report=inspect(cfg,run,a.synth_run,a.synth_sha256,base.call)
             else:
                 from systolic_b_drc_repair import repair
                 base.vendor(cfg,run)
