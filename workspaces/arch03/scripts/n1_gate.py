@@ -21,6 +21,7 @@ from soc_power import power_databases, tcl_path
 from soc_synth import require_tool_marker
 from timing_contract import TB_HALF_PERIOD_NS, validate_period
 import n1_data as data
+from n1_paths import allowed_run
 
 # run_case only handles physical boot, dynamic source and result checking. It
 # does not confer the ASIC-RTL build scope on this separately compiled netlist.
@@ -270,7 +271,7 @@ def parse_probe(text, frozen_probe):
 
 
 def verify_synthesis(synthesis, expected_sha, cfg):
-    synthesis = Path(synthesis).resolve(); synthesis.relative_to(Path(cfg['server_root']).resolve())
+    synthesis = allowed_run(synthesis,cfg,'N1 synthesis')
     summary_path = synthesis/'summary.json'
     if not re.fullmatch('[a-f0-9]{64}', expected_sha) or sha(summary_path) != expected_sha:
         raise ValueError('ICB32 synthesis summary digest mismatch')
@@ -414,7 +415,7 @@ endmodule
 
 
 def verify(cfg,run,synthesis,expected_sha,cases,call,activity_cases=(),firmware=None):
-    run,synthesis=Path(run),Path(synthesis).resolve()
+    run,synthesis=allowed_run(run,cfg,'N1 gate output'),allowed_run(synthesis,cfg,'N1 synthesis')
     data.require(not activity_cases,'N1 gate activity requires the separately validated SAIF path')
     data.require(cases and len(cases)==len(set(cases)) and set(cases)<=set(data.CASES14) and
                  set(activity_cases)<=set(cases),'Invalid gate case selection')
@@ -442,7 +443,7 @@ def verify(cfg,run,synthesis,expected_sha,cases,call,activity_cases=(),firmware=
     tracked+=[p for p in firmware.iterdir() if p.is_file() and p.suffix in ('.elf','.bin','.verilog')]
     tracked+=[ROOT/rel for rel in fw['source_sha256']]
     if fw['configuration']['irq_enabled']:tracked.append(A3/'irq_mapping.json')
-    tracked+=[A3/'scripts'/n for n in ('n1_gate.py','n1_gate_monitor.py','icb32_gate_monitor.py','icb32_activity.py',
+    tracked+=[A3/'scripts'/n for n in ('n1_gate.py','n1_paths.py','n1_gate_monitor.py','icb32_gate_monitor.py','icb32_activity.py',
         'n1_soc.py','n1_data.py','n1_codec.py','systolic_b_data.py','systolic_b_codec.py','icb32_codec.py','build_n1_firmware.py','dma16_batch.py',
         'activity_fast.py','activity_scan.cpp','gate_soc.py','asic_boot.py','stdcell_verify.py','timing_contract.py')]
     before={str(p.resolve()):sha(p) for p in tracked};save(run/'source_inputs.json',before)

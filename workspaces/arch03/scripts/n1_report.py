@@ -4,12 +4,18 @@ Read-only evidence collection, no EDA and no automatic timing/power approval.
 Optional missing evidence stays explicit; a preliminary export is not delivery.
 """
 import argparse
+import ast
 import csv
 from decimal import Decimal
 import json
+import math
 from pathlib import Path
 import re
+import struct
+import zipfile
 import n1_data as data
+import n1_precision as precision_tools
+from n1_drc_audit import constraints_inventory
 import n1_soc as soc
 from n1_bus_metrics import parse_metrics
 import n1_gate as gate_tools
@@ -142,12 +148,204 @@ def audit_batch(run, report, hardware, firmware_sha):
         saturations+=row['capture']['saturated']
     return dict(status='new100_integer_bit_exact_float_precision_pending',samples=100,tasks=1200,
         outputs=30412800,total_outputs=30412800,integer_bit_exact=True,saturated=saturations,
+        batch_run=str(run.resolve()),batch_identity_sha256=report['batch_identity_sha256'],
+        batch_summary_sha256=sha(run/'summary.json'),dataset=str(dataset.resolve()),
         dataset_manifest_sha256=identity['dataset_manifest_sha256'],
         dataset_inventory_sha256=identity['dataset_inventory_sha256'],
         maximum_layer_nrmse_percent=None,maximum_task_nrmse_percent=None,
         float_reference_recomputed_this_run=False,fresh_float_reference_verified=False,
         reference_error_metrics_reused_under_bit_exact_proof=False,official_precision_verified=False,
         reason='Requires fresh full matrices from this exact new100 sample order; no Q12 SSE/NRMSE reuse')
+
+
+def precision_pending(batch):
+    return dict(status='same_data_float100_audit_not_completed',integer_bit_exact=batch.get('tasks')==1200,
+        fresh_float_reference_verified=False,official_precision_verified=False,
+        maximum_layer_nrmse_percent=None,maximum_task_nrmse_percent=None,
+        quantization_clipping_count=None,saturation_count=batch.get('saturated'),
+        reason='Full100 fresh FLOAT audit and the same own ASIC1200 must both be present; fixed12 is a separate scope')
+
+
+def audit_precision(ref,batch):
+    """Join a pinned fresh software audit to already rechecked own ASIC1200.
+
+    A software PASS alone cannot reach this path. The input ZIP, source HEX,
+    original sample order, audit code and every task identity are rechecked.
+    This joins the new audit's SSE, never B0/Q12 error statistics.
+    """
+    if ref is None:return precision_pending(batch)
+    require(batch.get('integer_bit_exact') is True and batch.get('tasks')==1200 and
+        batch.get('outputs')==batch.get('total_outputs')==30412800,'Precision requires own N1 ASIC1200 first')
+    run=Path(ref['run']).resolve();summary_path=run/'summary.json';identity_path=run/'identity.json'
+    require(re.fullmatch('[a-f0-9]{64}',ref['sha256']) and sha(summary_path)==ref['sha256'],
+        'Fresh precision summary digest changed')
+    result=read(summary_path);identity=read(identity_path)
+    require(sha(identity_path)==result['identity_sha256'] and identity.get('status')=='running' and
+        all(result.get(key)==value for key,value in identity.items() if key!='status'),
+        'Fresh precision identity changed')
+    require(result.get('schema')==precision_tools.SCHEMA and result.get('status')=='passed' and
+        result.get('fixture') is False and result.get('samples')==100 and result.get('tasks')==1200 and
+        result.get('outputs')==30412800 and result.get('numeric_format')==data.FORMAT and
+        result.get('numeric_format_id')==0x000e0c20 and result.get('layout_id')==0x00100004 and
+        result.get('integer_reference_hex_verified') is True and result.get('internal_precision_verified') is True and
+        result.get('cpu_executed') is False and result.get('rtl_integer_match_required') is True and
+        result.get('official_precision_verified') is False and result.get('integer_mismatches')==0 and
+        result.get('hex_byte_mismatches')==0,'Wrong/incomplete fresh N1 precision scope')
+    require(result.get('float_archive_sha256')==precision_tools.ARCHIVE_SHA and
+        result.get('dataset_inventory_sha256')==data.DATA100_INVENTORY_SHA==batch['dataset_inventory_sha256'] and
+        result.get('dataset_manifest_sha256')==batch['dataset_manifest_sha256'] and
+        result.get('converter_commit')==data.PR_COMMIT and result.get('converter_sha256')==data.CONVERTER_SHA and
+        sha(data.CONVERTER)==data.CONVERTER_SHA and result.get('audit_script_sha256')==sha(precision_tools.__file__) and
+        result.get('data_script_sha256')==sha(data.__file__),'Fresh precision source/tool identity differs')
+    batch_run=Path(batch['batch_run']);batch_identity=read(batch_run/'batch_identity.json')
+    require(sha(batch_run/'batch_identity.json')==batch['batch_identity_sha256'] and
+        sha(batch_run/'summary.json')==batch['batch_summary_sha256'],'Actual ASIC1200 evidence changed after audit')
+    dataset=Path(batch['dataset']).resolve();archive=Path(ref.get('archive',result['float_archive'])).resolve()
+    require(Path(batch_identity['dataset']).resolve()==dataset and
+        sha(dataset/'manifest.json')==batch['dataset_manifest_sha256'] and
+        sha(dataset/'SHA256_FILES.json')==data.DATA100_INVENTORY_SHA and
+        archive.is_file() and not archive.is_symlink() and sha(archive)==precision_tools.ARCHIVE_SHA,
+        'Fresh precision archive/actual dataset changed')
+    # A relocated audit copy is allowed only when its entire fixed inventory is
+    # identical to the actual CPU source. Never trust a similarly named folder.
+    tasks=data.index_dataset(dataset)
+    require(tasks==batch_identity['task_list'],'Precision and actual ASIC task order differ')
+    rows=result['cases'];provenance=result['samples_provenance']
+    require(len(rows)==1200 and len(provenance)==100 and
+        [row['sample'] for row in provenance]==list(range(1,101)),'Incomplete/reordered precision sample set')
+    archive_stamp=precision_tools.stamp(archive)
+    with zipfile.ZipFile(str(archive)) as zipped:
+        names=zipped.namelist()
+        require(len(names)==len(set(names)),'Ambiguous precision archive members')
+        weights_sha=precision_tools.digest_bytes(zipped.read(precision_tools.ARCHIVE_ROOT+'shared_weights.npz'))
+        require(weights_sha==result['weights_sha256'],'Fresh precision weights changed')
+        for sample in provenance:
+            prefix=precision_tools.ARCHIVE_ROOT+'sample_%03d/'%sample['sample']
+            source_raw=zipped.read(prefix+'source.json');source=json.loads(source_raw.decode('utf-8-sig'))
+            require(precision_tools.digest_bytes(zipped.read(prefix+'float_tensors.npz'))==sample['sample_float_sha256'] and
+                precision_tools.digest_bytes(source_raw)==sample['source_json_sha256'] and
+                all(sample[key]==source[key] for key in ('wav','split','wav_sha256')),
+                'Fresh precision original sample provenance changed')
+    for task,row in zip(tasks,rows):
+        require((row['sample'],row['layer'])==(task['sample'],task['layer']) and row['outputs']==25344 and
+            row.get('integer_mismatches')==row.get('hex_byte_mismatches')==0 and
+            row['source_layout_sha256']==task['source_layout_sha256']==sha(Path(task['source'])/'layout.json'),
+            'Fresh precision task differs from actual ASIC coordinates/order')
+        source=read(Path(task['source'])/'layout.json')
+        require(row['source_hex_sha256']=={name:source['files'][name]['sha256'] for name in data.FILES} and
+            row['sample_float_sha256']==provenance[task['sample']-1]['sample_float_sha256'] and
+            row['weights_sha256']==weights_sha,'Fresh precision HEX/FLOAT task identities differ')
+        require(all(type(row[k]) in (int,float) and math.isfinite(row[k]) and row[k]>=0
+            for k in ('sse','reference_energy','nrmse_percent','max_abs_error')) and
+            set(row['clipping'])=={'x','w','b'} and all(type(v) is int and v>=0 for v in row['clipping'].values()) and
+            type(row['saturated']) is int and 0<=row['saturated']<=25344,'Invalid precision error/count statistics')
+        expected=100*math.sqrt(row['sse']/25344)/max(math.sqrt(row['reference_energy']/25344),1e-8)
+        require(math.isclose(row['nrmse_percent'],expected,rel_tol=1e-12,abs_tol=1e-13),
+            'Fresh task NRMSE differs from SSE/reference energy')
+    layers=precision_tools.aggregate(rows)
+    clipping={key:sum(row['clipping'][key] for row in rows) for key in ('x','w','b')}
+    saturated=sum(row['saturated'] for row in rows)
+    require(layers==result['layer_aggregate'] and all(layer['tasks']==100 and layer['within_limit'] for layer in layers) and
+        result['precision_limit_percent']==precision_tools.THRESHOLD_PERCENT and clipping==result['clipping'] and
+        saturated==result['saturated']==batch['saturated'] and
+        result['max_layer_nrmse_percent']==max(row['nrmse_percent'] for row in layers) and
+        result['max_task_nrmse_percent']==max(row['nrmse_percent'] for row in rows),
+        'Fresh precision aggregate/saturation differs from actual1200')
+    require(sha(summary_path)==ref['sha256'] and sha(identity_path)==result['identity_sha256'] and
+        precision_tools.stamp(archive)==archive_stamp and
+        sha(dataset/'manifest.json')==batch['dataset_manifest_sha256'] and
+        sha(batch_run/'summary.json')==batch['batch_summary_sha256'],'Evidence changed during precision join')
+    return dict(status='own_N1_ASIC1200_and_same_data_fresh_FLOAT_precision_verified',
+        samples=100,tasks=1200,outputs=30412800,total_outputs=30412800,integer_bit_exact=True,
+        fresh_float_reference_verified=True,float_reference_recomputed_in_precision_run=True,
+        float_reference_recomputed_in_report_export=False,official_precision_verified=False,
+        reference_error_metrics_reused_from_B0=False,reference=ref,identity_sha256=result['identity_sha256'],
+        float_archive_sha256=precision_tools.ARCHIVE_SHA,dataset_manifest_sha256=batch['dataset_manifest_sha256'],
+        dataset_inventory_sha256=data.DATA100_INVENTORY_SHA,batch_identity_sha256=batch['batch_identity_sha256'],
+        maximum_layer_nrmse_percent=result['max_layer_nrmse_percent'],maximum_task_nrmse_percent=result['max_task_nrmse_percent'],
+        quantization_clipping_count=clipping,saturation_count=saturated,layer_aggregate=layers,
+        internal_three_percent_layer_threshold_passed=True,
+        scope='New100 precision only; does not approve timing, area, system power or N2')
+
+
+def read_float_npz(path,name,shape):
+    """Small strict standard-library reader; report export does not need NumPy."""
+    with zipfile.ZipFile(str(path)) as zipped:
+        require(len(zipped.namelist())==len(set(zipped.namelist())),'Duplicate fixed12 NPZ member')
+        raw=zipped.read(name+'.npy')
+    require(raw[:6]==b'\x93NUMPY' and raw[6:8] in (b'\x01\x00',b'\x02\x00'),'Unsupported fixed12 NPY format')
+    length_size=2 if raw[6]==1 else 4;start=8+length_size
+    size=int.from_bytes(raw[8:start],'little')
+    require(0<size<=4096 and len(raw)>=start+size,'Invalid fixed12 NPY header')
+    header=ast.literal_eval(raw[start:start+size].decode('latin1'))
+    require(header.get('fortran_order') is False and header.get('shape')==shape and
+        header.get('descr') in ('<f4','<f8','>f4','>f8'),'Wrong fixed12 float shape/dtype/order')
+    width=int(header['descr'][2:]);count=math.prod(shape) if hasattr(math,'prod') else __import__('functools').reduce(lambda a,b:a*b,shape,1)
+    payload=raw[start+size:]
+    require(len(payload)==count*width,'Truncated fixed12 NPY payload')
+    values=struct.unpack(header['descr'][0]+str(count)+('f' if width==4 else 'd'),payload)
+    require(all(math.isfinite(value) for value in values),'Nonfinite fixed12 FLOAT')
+    return values
+
+
+def fixed12_precision(run,asic_cases,source_root=None,float_root=None):
+    """Independently retain the fixed B0-comparison input proof, never full100."""
+    bundle=Path(run).parents[2]
+    source_root=Path(source_root) if source_root is not None else bundle/'validated_data'
+    float_root=Path(float_root) if float_root is not None else bundle/'architectures/arch01_serial_mac/v1.3.0/KWT1/model_data/outputs/real_sample_001'
+    missing=[name for name in LAYERS if not (source_root/name/'conversion_audit.json').is_file() or
+             not (float_root/name/'float_tensors.npz').is_file()]
+    if missing:return dict(status='fixed12_float_evidence_not_available',tasks=12,verified=False,missing=missing,
+                           scope='Separate fixed performance samples; cannot satisfy full100 precision')
+    require(sha(data.CONVERTER)==data.CONVERTER_SHA,'Fixed12 converter identity changed')
+    rows=[]
+    for index,name in enumerate(LAYERS,1):
+        folder=source_root/name;original=float_root/name/'float_tensors.npz';audit=read(folder/'conversion_audit.json')
+        require(audit.get('status')=='passed' and audit.get('fresh_float_reference') is True and
+            audit.get('layer')==index and audit.get('outputs')==25344 and audit.get('mismatches')==0 and
+            audit['source_float_sha256']==sha(original),'Fixed12 fresh conversion identity changed')
+        meta,words,raw_result,saturation=data.source_case(folder);x,w,bias=data.decode_group8(words)
+        clipping={}
+        for key,field,shape,bits,fraction,actual in (
+            ('x','X',(99,64),14,10,[v for row in x for v in row]),
+            ('w','W',(64,256),12,12,[v for row in w for v in row]),('b','b',(256,),32,22,bias)):
+            values=read_float_npz(original,field,shape);low,high=-(1<<(bits-1)),(1<<(bits-1))-1
+            converted=[];count=0
+            for value in values:
+                scaled=max(low-1,min(high+1,math.ldexp(value,fraction)))
+                rounded=int(math.copysign(math.floor(abs(scaled)+.5),scaled))
+                encoded=max(low,min(high,rounded));count+=encoded!=rounded;converted.append(encoded)
+            require(converted==actual,'Fixed12 fresh quantization coordinates differ: '+key)
+            clipping[key]=count
+        y=read_float_npz(original,'Y_float',(99,256))
+        decoded=[value-65536 if value&32768 else value for value in raw_result]
+        sse=math.fsum((value/4096.-reference)**2 for value,reference in zip(decoded,y))
+        energy=math.fsum(value*value for value in y)
+        error=100*math.sqrt(sse/25344)/max(math.sqrt(energy/25344),1e-8)
+        require(clipping==audit['clipping'] and sum(saturation)==audit['saturated']==asic_cases[name]['capture']['saturated'] and
+            math.isclose(sse,audit['sse'],rel_tol=1e-11,abs_tol=1e-15) and
+            math.isclose(energy,audit['reference_energy'],rel_tol=1e-11,abs_tol=1e-15) and
+            math.isclose(error,audit['error']['nrmse_percent'],rel_tol=1e-11,abs_tol=1e-13),
+            'Fixed12 fresh error or actual ASIC saturation differs')
+        rows.append(dict(case=name,outputs=25344,sse=sse,reference_energy=energy,nrmse_percent=error,
+            clipping=clipping,saturated=sum(saturation),float_sha256=audit['source_float_sha256'],
+            conversion_audit_sha256=sha(folder/'conversion_audit.json'),source_layout_sha256=sha(folder/'layout.json'),
+            source_hex_sha256={key:meta['files'][key]['sha256'] for key in data.FILES}))
+    return dict(status='fixed12_fresh_quantization_and_error_rechecked',tasks=12,outputs=304128,verified=True,
+        maximum_task_nrmse_percent=max(row['nrmse_percent'] for row in rows),cases=rows,
+        internal_three_percent_task_threshold_passed=all(row['nrmse_percent']<=3. for row in rows),
+        official_precision_verified=False,full100_precision_satisfied=False,
+        scope='Same original fixed B0 performance FLOAT inputs, independent of new100 acceptance')
+
+
+def frozen_drc_inventory(synthesis,run):
+    path=Path(run)/'constraints.rpt'
+    require(synthesis.get('artifacts',{}).get('constraints.rpt')==sha(path),
+        'Frozen constraint report identity changed')
+    result=constraints_inventory(path.read_text())
+    result.update(report_sha256=synthesis['artifacts']['constraints.rpt'],source=str(path),
+        strict_timing_verified=False,scope='Frozen report inventory; detailed scoped STA/DRC review remains separate')
+    return result
 
 
 def selection(aggregate, area, baseline_ref=None):
@@ -293,28 +491,38 @@ def build(request):
             'Final1200 belongs to different N1 hardware/firmware')
         batch=audit_batch(brun,b,hardware,g['firmware_sha256'])
         batch['mean_cycles']=b['mean_task_cycles'];batch['host_elapsed_seconds']=b['host_elapsed_seconds']
+    precision=audit_precision(request.get('precision'),batch)
+    fixed_precision=fixed12_precision(arun,left)
+    if precision['fresh_float_reference_verified']:
+        batch.update(status='new100_integer_and_same_data_float_precision_verified',
+            fresh_float_reference_verified=True,maximum_layer_nrmse_percent=precision['maximum_layer_nrmse_percent'],
+            maximum_task_nrmse_percent=precision['maximum_task_nrmse_percent'],
+            reason='Fresh N1 precision joined to this actual ASIC1200; official600 remains unverified')
+    drc=frozen_drc_inventory(s,srun)
+    unverified=['Independent scoped timing/area review is separate from numerical report collection',
+        'Unknown activity/model influence and pre-layout estimation limits','Official random600 and physical signoff']
+    if not precision['fresh_float_reference_verified']:
+        unverified.append('Fresh same-sample float100 recomputation; no old Q12 SSE/NRMSE reuse')
     return dict(schema='arch03-n1-evidence-export-v1',status='evidence_exported_stage_unaccepted',
         stage='N1',numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,row_lanes=5,
         gate_internal_total_observable=False,
         selection=selection(aggregate,s['area_summary'],request.get('baseline')),
-        precision=dict(status='same_data_float100_audit_not_completed',integer_bit_exact=batch.get('tasks')==1200,
-            fresh_float_reference_verified=False,official_precision_verified=False,
-            maximum_layer_nrmse_percent=None,maximum_task_nrmse_percent=None,
-            quantization_clipping_count=None,saturation_count=batch.get('saturated')),
+        precision=precision,fixed12_precision=fixed_precision,
         stage_handoff=dict(next_stage='N2',allowed=False,reason='Numerical collection does not replace independent precision, timing, area and system-power review'),
         references=refs,activity_reference=activity_ref,power_references=request.get('power',[]),
+        batch_reference=request.get('batch'),precision_reference=request.get('precision'),
         production_hardware=hardware,firmware_sha256=g['firmware_sha256'],netlist_sha256=s['artifacts']['mapped.v'],
         libraries_sha256=s['link_report']['library_inputs'],area=s['area_summary'],area_basis=s['area_basis'],
-        timing_metrics=s['metrics'],conditions=conditions,
+        timing_metrics=s['metrics'],drc_inventory=drc,conditions=conditions,
         cases=rows,aggregate=aggregate,batch=batch,history=request.get('history',[]),
         verification=dict(asic14=True,gate14_without_SDF=True,final1200=batch.get('tasks')==1200,
             activity12=len(act)==12,power12_numbers=len(powers)==12,
+            internal100_precision_verified=precision['fresh_float_reference_verified'],
+            fixed12_precision_verified=fixed_precision['verified'],
             task_mode_timing_verified=False,project_area_reviewed=False,system_power_verified=False,
             official_precision_verified=False,physical_signoff=False),
-        unverified=['Independent scoped timing/area review is separate from numerical report collection',
-            'Unknown activity/model influence and pre-layout estimation limits',
-            'Fresh same-sample float100 recomputation; no old Q12 SSE/NRMSE reuse',
-            'Official random600 and physical signoff'],exporter_sha256=sha(__file__))
+        unverified=unverified,exporter_sha256=sha(__file__),
+        precision_auditor_sha256=sha(precision_tools.__file__),drc_parser_sha256=sha(__import__('n1_drc_audit').__file__))
 
 
 def write(report,output):
@@ -327,6 +535,8 @@ def write(report,output):
         with (output/name).open('x',encoding='utf-8-sig',newline='') as out:
             writer=csv.DictWriter(out,columns,extrasaction='ignore');writer.writeheader();writer.writerows(rows)
     a=report['aggregate'];b=report['batch']
+    precision=report['precision']
+    layer_error=precision['maximum_layer_nrmse_percent'];task_error=precision['maximum_task_nrmse_percent']
     lines=['# N1缩位5×16脉动配置证据报告','',
         '本报告复核ASIC/E203的total33/result/sat及无SDF门级result/sat。门级不观察内部total，不用参考值伪造第五列。功耗为布局前估算。独立时序、面积归属和未知活动影响审核另行记录；本导出不自动授予验收。','',
         'SS、0.99V、125°C；DC与任务周期6.666666ns。计时从首源VALID至最终写ACK并证明排空，没有省略真实共享SRAM写入。','',
@@ -340,6 +550,13 @@ def write(report,output):
     lines+=['','完整活动%d/12，功耗数值%d/12。时间加权平均功耗W：%s；平均J/task：%s。'%
         (a['activity_layers'],a['power_layers'],a['raw_time_weighted_power_w'],a['raw_energy_per_task_j']),
         '内部最终批量：%s，%d任务、%d输出；不代表官方600样本精度验收。'%(b['status'],b['tasks'],b['outputs']),
+        '同批100条浮点精度：%s；最大逐层NRMSE：%s，最大逐任务NRMSE：%s。'%
+            (precision['status'],'未验证' if layer_error is None else '%.10f%%'%layer_error,
+             '未验证' if task_error is None else '%.10f%%'%task_error),
+        '固定12性能任务的独立浮点核验：%s；不能替代完整100条。'%report['fixed12_precision']['status'],
+        '冻结综合约束报告：违例记录%d，解析完整=%s，明确无违例标记=%s；严格时序审核仍独立。'%
+            (report['drc_inventory']['violation_record_count'],report['drc_inventory']['extraction_complete'],
+             report['drc_inventory']['explicit_no_violations']),
         '源码、固件、布局、数据、库、网表及活动身份、模块功耗、SRAM、未知驻留及全部计数见JSON。重叠等待不相加作为总周期，缺失功耗不作零。','',
         '项目面积上限1.20mm²；全部PPA来自N1自身配置。B0独立保留，不转移PASS。缺同批100样本浮点精度或未知活动审核时，N1未验收，不进入N2。','',
         '历史失败/停止路径：']

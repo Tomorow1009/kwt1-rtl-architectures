@@ -8,11 +8,12 @@ import re
 import shutil
 import socket
 import server_run as common
+import n1_paths
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('stage', choices=('status', 'soc', 'build', 'batch', 'synth', 'contention', 'sequence', 'gate', 'timing_audit', 'saif', 'power'))
+    p.add_argument('stage', choices=('status', 'soc', 'build', 'batch', 'synth', 'contention', 'sequence', 'gate', 'timing_audit', 'drc_audit', 'structure', 'saif', 'power'))
     p.add_argument('--session', required=True)
     p.add_argument('--platform', type=Path, default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases', nargs='+', default=['extremes', 'rounding'] + ['layer_%02d' % n for n in range(1, 13)])
@@ -26,12 +27,17 @@ def main():
     p.add_argument('--saif-qualification-sha256')
     p.add_argument('--saif-activity-run', type=Path)
     p.add_argument('--saif-activity-sha256')
+    p.add_argument('--runtime-root',type=Path)
+    p.add_argument('--runtime-manifest-sha256')
+    p.add_argument('--runtime-evidence',nargs=2,action='append',default=[],metavar=('BUNDLE','MANIFEST_SHA256'),
+                   help='Explicit same-private-root sibling bundle identity; may be repeated')
     a = p.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,64}', a.session):
         raise ValueError('Invalid unique N1 session')
     if len(a.cases) != len(set(a.cases)):
         raise ValueError('Duplicate cases would overwrite evidence')
     cfg = json.loads((common.ROOT/'handoff/team/server_config.json').read_text())
+    cfg = n1_paths.configure(cfg,common.ROOT,a.runtime_root,a.runtime_manifest_sha256,a.runtime_evidence)
     session = common.ROOT/'runs'/a.session
     lock = Path(cfg['server_root'])/'.arch02_team_lock'
     if a.stage == 'status':
@@ -47,7 +53,7 @@ def main():
     if a.firmware_root is not None and a.stage not in ('soc', 'build', 'contention', 'sequence', 'gate'):
         raise ValueError('Firmware override only supports CPU compile/run')
     for selected, path, digest, allowed in (
-        ('synthesis', a.synth_run, a.synth_summary_sha256, ('gate', 'timing_audit')),
+        ('synthesis', a.synth_run, a.synth_summary_sha256, ('gate', 'timing_audit', 'drc_audit', 'structure')),
         ('gate', a.gate_run, a.gate_summary_sha256, ('saif',)),
         ('SAIF qualification', a.saif_qualification_run, a.saif_qualification_sha256, ('saif',)),
         ('SAIF activity', a.saif_activity_run, a.saif_activity_sha256, ('power',))):
@@ -59,6 +65,7 @@ def main():
     if a.stage == 'power' and len(a.cases) != 1:
         raise ValueError('Each N1 power stage covers exactly one fixed performance task')
     common.inputs()
+    n1_paths.recheck(cfg)
     # Per-stage budget, 20% growth margin plus 2 GiB shared-server reserve.
     # The 1200-task runner additionally budgets all remaining case artifacts.
     expected_gib = 4 if a.stage in ('synth', 'saif') else 1
@@ -74,6 +81,9 @@ def main():
         stage_name = 'n1_' + a.stage
         run = session/stage_name
         run.mkdir(parents=True, exist_ok=False)
+        if cfg.get('runtime_roots'):
+            n1_paths.allowed_run(run,cfg,'N1 output')
+            common.save(run/'runtime_storage_receipt.json',n1_paths.receipt(cfg))
         common.save(run/'storage_preflight.json',dict(free_bytes=free_bytes,required_bytes=required_bytes,estimated_stage_bytes=expected_gib*1024**3,margin=1.2,reserve_bytes=2*1024**3))
         record = dict(status='running', pid=os.getpid(), started=datetime.datetime.now().isoformat(), run=str(run))
         state = dict(schema='arch03-n1-server-state-v1', stages={stage_name: record})
@@ -97,6 +107,13 @@ def main():
             elif a.stage == 'timing_audit':
                 from n1_timing_audit import audit
                 report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, common.call)
+            elif a.stage == 'drc_audit':
+                from n1_drc_audit import audit
+                report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, common.call)
+            elif a.stage == 'structure':
+                from n1_structure import audit
+                n1_paths.allowed_run(a.synth_run,cfg,'N1 structural synthesis')
+                report = audit(a.synth_run,a.synth_summary_sha256)
             elif a.stage == 'saif':
                 from n1_saif import verify
                 report = verify(cfg, run, a.gate_run, a.gate_summary_sha256, a.saif_qualification_run, a.saif_qualification_sha256, a.cases, common.call)
@@ -108,6 +125,10 @@ def main():
                 common.vendor(cfg, run)
                 report = synth(cfg, run, a.platform, common.call)
             common.inputs()
+            n1_paths.recheck(cfg)
+            if cfg.get('runtime_roots'):
+                report['runtime_storage']=dict(receipt_sha256=common.sha(run/'runtime_storage_receipt.json'),
+                    durable_archive_required=True,temporary_storage_is_final_delivery=False)
             common.save(run/'summary.json', report)
             record.update(status='passed', summary_sha256=common.sha(run/'summary.json'))
         except BaseException as exc:

@@ -18,6 +18,7 @@ from native_saif_activity import audit
 from n1_gate import verify_synthesis,SCOPE,check_capture,parse_result
 from n1_soc import MARKERS
 import n1_data as data
+from n1_paths import allowed_run
 
 LAYERS=tuple('layer_%02d'%i for i in range(1,13))
 
@@ -26,7 +27,7 @@ def read(path):return json.loads(Path(path).read_text())
 
 
 def qualification(path,digest,cfg):
-    path=Path(path).resolve();path.relative_to(Path(cfg['server_root']).resolve())
+    path=allowed_run(path,cfg,'SAIF qualification')
     if sha(path/'summary.json')!=digest:raise ValueError('SAIF qualification digest mismatch')
     report=read(path/'summary.json')
     state=read(path.parent/'state.json')['stages']['native_saif_r4_crosscheck']
@@ -50,7 +51,8 @@ def storage_guard(run,remaining,maximum_bytes):
 
 
 def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
-    run,gate=Path(run),Path(gate).resolve();gate.relative_to(Path(cfg['server_root']).resolve())
+    run,gate=Path(run),allowed_run(gate,cfg,'N1 gate evidence')
+    allowed_run(run,cfg,'N1 SAIF output')
     if tuple(cases)!=LAYERS:
         raise ValueError('N1 SAIF requires all twelve fixed layers in order')
     method=qualification(qualified,qualified_sha,cfg)
@@ -74,6 +76,8 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
     verify_synthesis(synthesis,report['synthesis_summary_sha256'],cfg)
     if sha(gate/'source_inputs.json')!=report['source_inputs_sha256']:raise ValueError('N1 gate input receipt changed')
     before=read(gate/'source_inputs.json');verify_inputs(before)
+    tool_inputs={str(Path(__file__).with_name(name)):stream_sha(Path(__file__).with_name(name))
+                 for name in ('n1_saif.py','n1_paths.py','n1_gate.py')}
     # Pilot size is measured from R4, with a 2x allowance for the N1
     # design. Re-estimate from actual N1 files after every completed capture.
     maximum=max(2*method['activity']['bytes'],128*1024**2)
@@ -116,7 +120,7 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
                     max(r['activity']['bytes'] for r in results))
         storage_guard(run,len(cases)-len(results),maximum)
         print('N1_NATIVE_SAIF_CASE_PASS',case,'bytes',activity['bytes'],flush=True)
-    verify_inputs(before);qualification(qualified,qualified_sha,cfg)
+    verify_inputs(before);verify_inputs(tool_inputs);qualification(qualified,qualified_sha,cfg)
     verify_synthesis(synthesis,report['synthesis_summary_sha256'],cfg)
     return dict(status='N1_native_saif_function_and_complete_windows_passed',schema='arch03-n1-native-saif-v1',
         numeric_format='0x000e0c20',layout_id=0x00100004,
@@ -126,5 +130,6 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
         synthesis_run=str(synthesis),synthesis_summary_sha256=report['synthesis_summary_sha256'],
         firmware_sha256=report['firmware_sha256'],source_inputs_sha256=report['source_inputs_sha256'],
         source_netlist_unchanged=True,debug_visibility_only=True,new_VCD_created=False,
+        tool_inputs_sha256=tool_inputs,
         system_power_verified=False,physical_signoff=False,
         artifacts={p.name:stream_sha(p) for p in run.iterdir() if p.is_file()})

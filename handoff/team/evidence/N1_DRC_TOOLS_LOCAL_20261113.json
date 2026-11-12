@@ -1,0 +1,20 @@
+{
+  "schema": "n1-drc-tools-local-evidence-v1",
+  "date": "2026-11-13",
+  "scope": "offline parser and Tcl collection fixture; no real DC or hardware acceptance",
+  "command": "E:/fpga_race-two/.venv-kwt/Scripts/python.exe -m unittest test_n1_drc_audit -v",
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "server_started": false,
+  "hardware_modified": false,
+  "frozen_n1_synth_modified": false,
+  "strict_timing_verified": false,
+  "drc_verified": false,
+  "files": {
+    "workspaces/arch03/scripts/n1_drc_audit.py": "07cd32bd80575a4793de3f086a672b2b40886675afc187a3ca134a8cc08d8294",
+    "workspaces/arch03/scripts/test_n1_drc_audit.py": "a48cc0234aee7e4f09395f9f53e75db8719856e6a1c27b863c0a12a8df64d90d",
+    "workspaces/arch03/N1_SYNTH_READONLY_AUDIT_20261113.md": "6f3e09ade6266fb703b6bc006e6e17cf4cebe5e0e9219357db006aa5d0479c96"
+  },
+  "next": "root reads original ASIC14 completion; fresh N1 synthesis; original constraints and actual driver audit under shared lock"
+}

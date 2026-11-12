@@ -9,6 +9,7 @@ from server_run import sha, save
 from n1_gate import probe_script, parse_probe, verify_synthesis, PROBE_MARKER
 from soc_power import power_databases
 from soc_synth import require_tool_marker
+from n1_paths import allowed_run
 
 
 def script(synthesis):
@@ -48,12 +49,12 @@ def parse_high_fanout(text):
 
 
 def audit(cfg, run, synthesis, expected_sha, call):
-    run = Path(run).resolve(); synthesis = Path(synthesis).resolve()
+    run=allowed_run(run,cfg,'N1 timing output');synthesis=allowed_run(synthesis,cfg,'N1 synthesis')
     verify_synthesis(synthesis, expected_sha, cfg)
     tracked = [synthesis/n for n in ('mapped.ddc', 'mapped.v', 'mapped.sdc',
                                     'summary.json', 'mapped_probe_inventory.tsv')]
     tracked += power_databases(synthesis)
-    tracked += [Path(__file__), Path(__file__).with_name('n1_gate.py')]
+    tracked += [Path(__file__), Path(__file__).with_name('n1_gate.py'), Path(__file__).with_name('n1_paths.py')]
     before = {str(p): sha(p) for p in tracked}
     tcl = run/'timing_audit.tcl'
     tcl.write_text(script(synthesis)); before[str(tcl)] = sha(tcl)

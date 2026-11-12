@@ -1,12 +1,14 @@
 """Local logic/Tcl checks only; no N1 netlist, VCS/PT run or PPA acceptance."""
 import copy
 from decimal import Decimal
+import io
 import json
 from pathlib import Path
 import tempfile
 import tkinter
 import unittest
 from unittest.mock import patch
+import zipfile
 
 import n1_power as power
 import n1_report as report
@@ -130,6 +132,20 @@ class N1PowerToolsTests(unittest.TestCase):
             report.stage(ref,'n1_synth');artifact.write_text('changed')
             with self.assertRaisesRegex(ValueError,'artifact'):report.stage(ref,'n1_synth')
 
+    def test_frozen_DRC_report_is_hashed_and_never_approves_strict_timing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'constraints.rpt';path.write_text('max_transition\nnet_a 0.20 0.25 -0.05 (VIOLATED)\n')
+            synthesis={'artifacts':{'constraints.rpt':report.sha(path)}}
+            result=report.frozen_drc_inventory(synthesis,folder)
+            self.assertEqual(result['by_section'],{'max_transition':1})
+            self.assertEqual(result['violation_record_count'],1)
+            self.assertFalse(result['strict_timing_verified'])
+            path.write_text('This design has no violated constraints\n')
+            with self.assertRaisesRegex(ValueError,'constraint report identity'):report.frozen_drc_inventory(synthesis,folder)
+            synthesis['artifacts']['constraints.rpt']=report.sha(path)
+            clean=report.frozen_drc_inventory(synthesis,folder)
+            self.assertTrue(clean['explicit_no_violations']);self.assertFalse(clean['strict_timing_verified'])
+
     def test_SAIF_requires_all_twelve_layers_before_tool_call(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)
@@ -165,6 +181,166 @@ class N1PowerToolsTests(unittest.TestCase):
                 self.assertEqual(receipt['required_bytes'],Space.free)
                 Space.free-=1
                 with self.assertRaisesRegex(ValueError,'Insufficient'):saif.storage_guard(folder,10,100)
+
+
+class N1PrecisionJoinTests(unittest.TestCase):
+    """Metadata/identity fixtures mock the separately tested HEX inventory audit.
+
+    These tests never create a production100 or CPU PASS. Real numeric fixtures
+    live in test_n1_precision; here all 1200 task bindings must survive a join.
+    """
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.root=Path(self.tmp.name);self.run=self.root/'precision';self.run.mkdir()
+        self.batch_run=self.root/'batch';self.batch_run.mkdir()
+        self.dataset=self.root/'dataset';self.dataset.mkdir()
+        self.source=self.dataset/'fixture_source';self.source.mkdir()
+        report.data.save(self.source/'layout.json',{'files':{name:{'sha256':str(i)*64}
+            for i,name in enumerate(report.data.FILES,1)}})
+        report.data.save(self.dataset/'manifest.json',{'fixture':True})
+        report.data.save(self.dataset/'SHA256_FILES.json',{'fixture':True})
+        self.inventory_sha=report.sha(self.dataset/'SHA256_FILES.json')
+        self.archive=self.root/'fixture_float.zip';weights=b'fixture shared weight matrices'
+        weights_sha=report.precision_tools.digest_bytes(weights);provenance=[]
+        with zipfile.ZipFile(str(self.archive),'w') as zipped:
+            prefix=report.precision_tools.ARCHIVE_ROOT
+            zipped.writestr(prefix+'shared_weights.npz',weights)
+            for sample in range(1,101):
+                raw=('fixture FLOAT sample %d'%sample).encode('ascii')
+                source=dict(wav='fixture_%03d.wav'%sample,split='fixture',wav_sha256='a'*64)
+                source_raw=json.dumps(source).encode('ascii')
+                zipped.writestr(prefix+'sample_%03d/float_tensors.npz'%sample,raw)
+                zipped.writestr(prefix+'sample_%03d/source.json'%sample,source_raw)
+                provenance.append(dict(sample=sample,sample_float_sha256=report.precision_tools.digest_bytes(raw),
+                    source_json_sha256=report.precision_tools.digest_bytes(source_raw),**source))
+        self.archive_sha=report.sha(self.archive);rows=[];self.tasks=[]
+        source_layout_sha=report.sha(self.source/'layout.json')
+        for sample in range(1,101):
+            for layer in range(1,13):
+                self.tasks.append(dict(key='sample_%03d_layer_%02d'%(sample,layer),sample=sample,layer=layer,
+                    source=str(self.source),source_layout_sha256=source_layout_sha))
+                rows.append(dict(sample=sample,layer=layer,outputs=25344,sse=.000001,reference_energy=1.,
+                    nrmse_percent=.1,max_abs_error=.001,clipping=dict(x=0,w=0,b=0),saturated=0,
+                    integer_mismatches=0,hex_byte_mismatches=0,source_layout_sha256=source_layout_sha,
+                    source_hex_sha256={name:str(i)*64 for i,name in enumerate(report.data.FILES,1)},
+                    sample_float_sha256=provenance[sample-1]['sample_float_sha256'],weights_sha256=weights_sha))
+        self.identity=dict(schema=report.precision_tools.SCHEMA,status='running',numeric_format=report.data.FORMAT,
+            numeric_format_id=0x000e0c20,layout_id=0x00100004,samples=100,tasks=1200,outputs=30412800,
+            dataset=str(self.dataset),float_archive=str(self.archive),
+            dataset_manifest_sha256=report.sha(self.dataset/'manifest.json'),dataset_inventory_sha256=self.inventory_sha,
+            float_archive_sha256=self.archive_sha,converter_commit=report.data.PR_COMMIT,
+            converter_sha256=report.data.CONVERTER_SHA,audit_script_sha256=report.sha(report.precision_tools.__file__),
+            data_script_sha256=report.sha(report.data.__file__),cpu_executed=False,rtl_integer_match_required=True,
+            official_precision_verified=False,fixture=False)
+        self.summary=dict(self.identity);self.summary.update(status='passed',weights_sha256=weights_sha,
+            integer_reference_hex_verified=True,internal_precision_verified=True,max_layer_nrmse_percent=.1,
+            max_task_nrmse_percent=.1,precision_limit_percent=3.,layer_aggregate=report.precision_tools.aggregate(rows),
+            cases=rows,samples_provenance=provenance,clipping=dict(x=0,w=0,b=0),saturated=0,
+            integer_mismatches=0,hex_byte_mismatches=0)
+        self.summary['max_layer_nrmse_percent']=max(row['nrmse_percent'] for row in self.summary['layer_aggregate'])
+        report.data.save(self.batch_run/'batch_identity.json',dict(dataset=str(self.dataset),task_list=self.tasks))
+        report.data.save(self.batch_run/'summary.json',dict(fixture=True))
+        self.batch=dict(integer_bit_exact=True,tasks=1200,outputs=30412800,total_outputs=30412800,saturated=0,
+            dataset=str(self.dataset),dataset_manifest_sha256=self.identity['dataset_manifest_sha256'],
+            dataset_inventory_sha256=self.inventory_sha,batch_run=str(self.batch_run),
+            batch_identity_sha256=report.sha(self.batch_run/'batch_identity.json'),
+            batch_summary_sha256=report.sha(self.batch_run/'summary.json'))
+        self.addCleanup(patch.stopall)
+        patch.object(report.precision_tools,'ARCHIVE_SHA',self.archive_sha).start()
+        patch.object(report.data,'DATA100_INVENTORY_SHA',self.inventory_sha).start()
+        patch.object(report.data,'index_dataset',return_value=self.tasks).start()
+
+    def ref(self,summary=None,identity=None):
+        summary=copy.deepcopy(summary or self.summary);identity=copy.deepcopy(identity or self.identity)
+        report.data.save(self.run/'identity.json',identity)
+        summary['identity_sha256']=report.sha(self.run/'identity.json')
+        report.data.save(self.run/'summary.json',summary)
+        return dict(run=str(self.run),sha256=report.sha(self.run/'summary.json'))
+
+    def test_full_join_binds_own1200_without_granting_other_gates(self):
+        result=report.audit_precision(self.ref(),self.batch)
+        self.assertTrue(result['fresh_float_reference_verified'])
+        self.assertEqual(result['batch_identity_sha256'],self.batch['batch_identity_sha256'])
+        self.assertFalse(result['official_precision_verified'])
+        self.assertFalse(result['reference_error_metrics_reused_from_B0'])
+        self.assertFalse(result['float_reference_recomputed_in_report_export'])
+        selected=report.selection({'power_layers':0},dict(units='um^2',conservative_budget_mm2=1.))
+        self.assertFalse(selected['eligible_for_next_hardware_stage'])
+        self.assertFalse(selected['relative_power_admission_passed'])
+
+    def test_absent_precision_stays_pending_even_after_integer1200(self):
+        result=report.audit_precision(None,self.batch)
+        self.assertTrue(result['integer_bit_exact']);self.assertFalse(result['fresh_float_reference_verified'])
+        self.assertIsNone(result['maximum_layer_nrmse_percent'])
+        self.assertIsNone(result['quantization_clipping_count'])
+
+    def test_software_only_or_total_incomplete_cannot_join(self):
+        for key,value in (('integer_bit_exact',False),('tasks',1199),('total_outputs',0)):
+            bad=dict(self.batch);bad[key]=value
+            with self.assertRaisesRegex(ValueError,'own N1 ASIC1200'):report.audit_precision(self.ref(),bad)
+
+    def test_old_format_partial_fixture_and_tool_identity_rejected(self):
+        for key,value in (('layout_id',0x00100003),('samples',30),('fixture',True),
+                          ('numeric_format_id',0x00101028),('converter_sha256','0'*64),
+                          ('audit_script_sha256','0'*64),('data_script_sha256','0'*64),
+                          ('dataset_manifest_sha256','0'*64),('official_precision_verified',True)):
+            summary=copy.deepcopy(self.summary);identity=copy.deepcopy(self.identity)
+            summary[key]=identity[key]=value
+            with self.subTest(key=key):
+                with self.assertRaises(ValueError):report.audit_precision(self.ref(summary,identity),self.batch)
+
+    def test_each_coordinate_source_and_error_statistic_is_joined(self):
+        for kind in ('reordered','duplicated','source_layout','source_hex','float_sample','weights','sse','nan','clipping'):
+            summary=copy.deepcopy(self.summary);row=summary['cases'][0]
+            if kind=='reordered':summary['cases'][0],summary['cases'][1]=summary['cases'][1],summary['cases'][0]
+            if kind=='duplicated':summary['cases'][1]=copy.deepcopy(row)
+            if kind=='source_layout':row['source_layout_sha256']='0'*64
+            if kind=='source_hex':row['source_hex_sha256']['total.hex']='0'*64
+            if kind=='float_sample':row['sample_float_sha256']='0'*64
+            if kind=='weights':row['weights_sha256']='0'*64
+            if kind=='sse':row['sse']*=2
+            if kind=='nan':row['sse']=float('nan')
+            if kind=='clipping':row['clipping']['x']=-1
+            with self.subTest(kind=kind):
+                with self.assertRaises(ValueError):report.audit_precision(self.ref(summary),self.batch)
+
+    def test_aggregate_and_real_saturation_must_match(self):
+        for kind in ('layer','maximum','saturation'):
+            summary=copy.deepcopy(self.summary);batch=copy.deepcopy(self.batch)
+            if kind=='layer':summary['layer_aggregate'][0]['nrmse_percent']=1.
+            if kind=='maximum':summary['max_task_nrmse_percent']=0.
+            if kind=='saturation':batch['saturated']=1
+            with self.subTest(kind=kind):
+                with self.assertRaisesRegex(ValueError,'aggregate/saturation'):report.audit_precision(self.ref(summary),batch)
+
+    def test_actual_batch_archive_and_pinned_report_mutation_rejected(self):
+        ref=self.ref()
+        with (self.run/'summary.json').open('a') as out:out.write(' ')
+        with self.assertRaisesRegex(ValueError,'summary digest'):report.audit_precision(ref,self.batch)
+        ref=self.ref()
+        with (self.batch_run/'summary.json').open('a') as out:out.write(' ')
+        with self.assertRaisesRegex(ValueError,'ASIC1200 evidence'):report.audit_precision(ref,self.batch)
+        self.batch['batch_summary_sha256']=report.sha(self.batch_run/'summary.json')
+        with self.archive.open('ab') as out:out.write(b'changed')
+        with self.assertRaisesRegex(ValueError,'archive/actual dataset'):report.audit_precision(ref,self.batch)
+
+    def test_fixed12_reader_accepts_float32_and_rejects_shape_order_or_truncation(self):
+        import numpy as np
+        for value in (np.arange(6,dtype=np.float32).reshape(2,3),np.arange(6,dtype='>f8').reshape(2,3)):
+            path=self.root/'small.npz';np.savez(str(path),Y_float=value)
+            self.assertEqual(report.read_float_npz(path,'Y_float',(2,3)),tuple(range(6)))
+            with self.assertRaisesRegex(ValueError,'shape/dtype'):report.read_float_npz(path,'Y_float',(3,2))
+        stream=io.BytesIO();np.save(stream,np.asfortranarray(np.ones((2,3))),allow_pickle=False)
+        with zipfile.ZipFile(str(path),'w') as zipped:zipped.writestr('Y_float.npy',stream.getvalue())
+        with self.assertRaisesRegex(ValueError,'shape/dtype'):report.read_float_npz(path,'Y_float',(2,3))
+        stream=io.BytesIO();np.save(stream,np.zeros((2,3)),allow_pickle=False)
+        with zipfile.ZipFile(str(path),'w') as zipped:zipped.writestr('Y_float.npy',stream.getvalue()[:-1])
+        with self.assertRaisesRegex(ValueError,'Truncated'):report.read_float_npz(path,'Y_float',(2,3))
+
+    def test_fixed12_missing_evidence_never_completes100(self):
+        result=report.fixed12_precision(self.root/'x/y/z',{},self.root/'missing',self.root/'absent')
+        self.assertFalse(result['verified']);self.assertEqual(len(result['missing']),12)
+        self.assertFalse(report.precision_pending(self.batch)['fresh_float_reference_verified'])
 
 
 if __name__=='__main__':unittest.main()

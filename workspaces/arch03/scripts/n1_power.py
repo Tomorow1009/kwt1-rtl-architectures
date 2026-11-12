@@ -17,6 +17,7 @@ from n1_gate import verify_synthesis
 from n1_synth import macro_guard
 from soc_power import power_databases,power_invocation,tcl_path
 from icb32_delivery_sdc import restore_clock
+from n1_paths import allowed_run
 
 
 
@@ -71,8 +72,8 @@ def precise_clock(synthesis,run):
 
 
 def estimate(cfg,run,activity_run,activity_sha,case,call):
-    run,activity_run=Path(run),Path(activity_run).resolve()
-    activity_run.relative_to(Path(cfg['server_root']).resolve())
+    run,activity_run=Path(run),allowed_run(activity_run,cfg,'N1 SAIF evidence')
+    allowed_run(run,cfg,'N1 power output')
     if case not in LAYERS:raise ValueError('N1 power needs a performance layer')
     if sha(activity_run/'summary.json')!=activity_sha:raise ValueError('N1 SAIF receipt digest mismatch')
     report=json.loads((activity_run/'summary.json').read_text())
@@ -100,6 +101,7 @@ def estimate(cfg,run,activity_run,activity_sha,case,call):
     command,environment=power_invocation(cfg,tcl);save(run/'power_environment.json',environment)
     tracked=[tcl,precise_sdc,run/'power_clock_input.json',run/'power_environment.json',synthesis/'mapped.v',synthesis/'mapped.sdc',
         synthesis/'summary.json',activity_run/'summary.json']+power_databases(synthesis)
+    tracked += [Path(__file__).with_name(name) for name in ('n1_power.py','n1_paths.py','n1_saif.py','n1_gate.py')]
     before={str(p):sha(p) for p in tracked};save(run/'source_inputs.json',before)
     text=call(command,run,'power.log');components=collect_reports(run,before,text)
     measured=dict(line.split() for line in (run/'power_clock.txt').read_text().splitlines())
