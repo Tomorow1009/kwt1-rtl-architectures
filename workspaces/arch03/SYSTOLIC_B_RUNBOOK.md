@@ -4,6 +4,12 @@
 
 ## 当前作业，接手时先检查
 
+**11月12日18:33：当前唯一作业是final02批量149529/156788，已761任务、19286784输出、零失败；clean14、DRC06 gate14及范围限定的时序/面积审核均已通过。** 当前恢复入口为[18:33检查点](../../CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md)。下方16:18及更早运行身份均为历史，不得重启。
+
+现已部署的新16文件工具为`operations/systolic_b_tools_4b58ff0`，manifest SHA `bf8e214e70ac92b17b3ecc0c41497995ac0b1d0aa5c483a9662b0225b08f6289`；ced709输入仍不变。R4 replay01已完成，crosscheck01因1060默认活动网络未通过。新crosscheck02必须在原batch释放锁后，对每个实际缺失对象核实direct和leaf连接均为空，再检查全部主要模块≤1%；没有连接证明不能豁免默认活动。
+
+final02为功能专用队列，不会自动重采R4或启动B功耗。实际batch完成、R4方法通过后，使用新`systolic_b_power_queue.py`绑定已完成队列及其report_request，接续B activity12和power12；不重复ASIC14、1200或门级14。新接续请求目前尚未生成，不能执行占位命令宣称验证。
+
 **11月12日16:18：下两段08:45状态是历史。** synth02已完成，validation02因入口参数失败，validation03已完成恢复/竞争/原网表门级；不得续跑。当前候选是ced包中的`runs/systolic_b_v3_drc06/systolic_b_synth`（摘要b8178003…4824ced），约束违规清零；当前唯一EDA为新`runs/systolic_b_v3_drc06_gate02/systolic_b_gate`，driver79264。先读[最新检查点](../../CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md)，实际锁位置是server_config.server_root下`.arch02_team_lock`。
 
 FTP421时经已授权VNC部署的小工具副本位于团队目录`operations/systolic_b_tools_52f37cc`，13文件manifest SHA `8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435`。原ced包709输入未改；gate02使用已核验d48副本，最终功耗使用52副本。不得用ced原SAIF工具覆盖后续修复。直接从ops调用最终队列或报告时，需`env PYTHONPATH=workspaces/arch03/scripts python3 <ops脚本> ...`。

@@ -10,7 +10,7 @@
 **18:33:05.778119实际观察：final02 driver149529，batch child156788，running，无error。761/1200任务、19,286,784输出、零失败。** 宿主约4041.77秒，含20%余量剩余2797.90秒。实际free104467529728B，剩余439任务预算3587990855B。约19:12能跑完是按当前速度估算，终态必须重新读取。
 
 - 队列`runs/systolic_b_final02_queue/state.json`，批量`runs/systolic_b_final02_final1200/systolic_b_batch`。
-- clean14已通过，SHA **1aecb2205f4bdc2de4c556e17d44659075c49fa71f78b46ceee7c4f09101bce**。
+- clean14已通过，SHA **1aecb2205f4bdc2de4c556e17d446590075c49fa71f78b46ceee7c4f09101bce**。
 - final02 request SHA **99e5b3330e4f89d8e94ea723cc936876da4ea3dffcf4d7431fe83c1f471d9f39**，冻结review **e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54**。
 - 本队列只执行clean14→own1200→report_request，不执行未合格SAIF。完成后status应`reports_ready_review_required`，不是系统功耗PASS。
 - final01在启动EDA前因手抄旧队列hash少一字符失败，无队列目录；旧请求/日志保留，不重跑。原validation03正确SHA **d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbcf9789a83f650c7c6b3**，不是旧63字符版本。
@@ -63,3 +63,11 @@ manifest **bf8e214e70ac92b17b3ecc0c41497995ac0b1d0aa5c483a9662b0225b08f6289**。
 VNC窗口fresh **18874436**、workspace3、ced空闲shell。最后批量查询已结束，**没有待输入命令、没有悬挂exec**。FileZilla关闭；FTP421且用户确认没有队友连接，不再询问。workspace4不用。开发板relay原进程14084/31004存在，pid文件25104过时，不盲重开中继。若窗口BadWindow/End of stream，先枚举再用既有viewer恢复，不复用旧ID，不重启服务器任务。
 
 新增接续/连接工具均已部署但未实际验收；尚缺最终1200终态、精度/报告独立复核、R4真实连接证明、B activity12/power12及交付审计。官方随机600、布局后时序/功耗及物理签核不在当前已验范围。继续原任务，不能把当前进度写成全部完成。
+
+## 18:51增量：实际CPU统计与批量进展
+
+- 18:49:41.965838批量仍149529/156788，950/1200、24,076,800输出、零失败；free93395615744B，剩余250例含20%时间余量1590.82秒。原队列未重启，后继仍未运行。
+- 18:45干净ASIC14摘要与原队列reference自动匹配，提取真实CPU12层调度：首feed平均933.6667拍、供数空拍9033.6667、X等待6340.6667、W等待4248.3333（后两项重叠）；slot/credit等待0；同tile启动平均81.78947，换tile305.71111；结果尾19、写ACK尾37；已接受源读/共享写/输出写响应延迟均1拍。
+- 新证据`handoff/team/evidence/SYSTOLIC_B_CLEAN14_SCHEDULE_20261112.json`；新交付索引`workspaces/arch03/SYSTOLIC_B_DELIVERY_20261112.md`。尚未填B功耗或最终1200 PASS。
+- clean14手抄摘要旧值只有63字符，导致第一次只读统计断言失败；实际64字符为`1aecb2205f4bdc2de4c556e17d446590075c49fa71f78b46ceee7c4f09101bce`。已修正本检查点和STATUS；新查询读取并匹配服务器reference，不改任何实际结果或请求。首次本地文档编辑因PowerShell管道中文编码失败，无写入；随后ASCII脚本及apply_patch成功。
+- 23330b2已经云同步；新的统计/交付/文档修改待提交。无生产RTL、固件、编码或服务器输入变化。VNC18874436仍workspace3/ced空闲shell，无待Return或本地挂起exec。

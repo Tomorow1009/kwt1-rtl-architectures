@@ -1,0 +1,33 @@
+{
+  "schema": "systolic-b-observed-clean14-schedule-v1",
+  "observed": "2026-11-12T18:45:03+08:00",
+  "source": "Actual completed clean ASIC RTL/E203 14-case summary; source digest matched original final02 queue reference before extraction",
+  "bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "run": "runs/systolic_b_final02_clean14/systolic_b_soc",
+  "summary_sha256": "1aecb2205f4bdc2de4c556e17d446590075c49fa71f78b46ceee7c4f09101bce",
+  "performance_cases": 12,
+  "per_task": {"blocks": 320, "feeds": 20480, "results": 25344, "within_tile_intervals": 304, "tile_change_intervals": 15},
+  "mean_cycles": 30502.333333333332,
+  "mean_schedule": {
+    "first_feed_wait_cycles": 933.6666666666666,
+    "supply_empty": 9033.666666666666,
+    "x_wait": 6340.666666666667,
+    "w_wait": 4248.333333333333,
+    "slot_wait": 0.0,
+    "credit_wait": 0.0,
+    "within_tile_mean_start_interval": 81.78947368421053,
+    "tile_change_mean_start_interval": 305.71111111111117,
+    "compute_result_tail_cycles": 19.0,
+    "final_write_tail_cycles": 37.0
+  },
+  "accepted_request_to_response_mean_cycles": {"source_read": 1.0, "shared_write": 1.0, "output_write": 1.0},
+  "interpretation": [
+    "The inclusive feed count spans 20479 intervals; first wait + 20479 + supply_empty + result tail + final write tail equals complete measured task cycles.",
+    "X/W wait counters overlap; do not add them to each other or to the complete task time.",
+    "Response latency starts at accepted request and does not replace first VALID or arbitration wait timing.",
+    "Zero slot/credit wait applies to these 12 measured tasks, not an assertion that backpressure can never occur.",
+    "II64 is a ready/unblocked core property; measured whole-SoC within-tile interval is approximately81.7895 cycles.",
+    "No power result inferred from passive counters; final own1200 was still running at observation."
+  ],
+  "prior_transcription_correction": "Earlier local notes omitted the first0 of the second SHA half, producing63hex characters. This query read and matched the server queue reference; no server input or result changed."
+}

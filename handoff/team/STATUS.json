@@ -2688,13 +2688,13 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T18:33:05.778119+08:00",
+      "time": "2026-11-12T18:49:41.965838+08:00",
       "queue_pid": 149529,
       "child_pid": 156788,
       "stage": "systolic_b_batch",
       "status": "running",
       "foreground": "VNC workspace3 ced shell; window18874436",
-      "free_bytes": 104467529728
+      "free_bytes": 93395615744
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -3184,13 +3184,13 @@
       "activity_power_scheduled": false,
       "failed_predecessor": "final01: wrong63-character transcription of predecessor queue SHA; no EDA started",
       "clean14_passed": true,
-      "clean14_summary_sha256": "1aecb2205f4bdc2de4c556e17d44659075c49fa71f78b46ceee7c4f09101bce",
+      "clean14_summary_sha256": "1aecb2205f4bdc2de4c556e17d446590075c49fa71f78b46ceee7c4f09101bce",
       "batch_child_pid": 156788,
-      "completed_observed": 761,
+      "completed_observed": 950,
       "failed_observed": 0,
-      "outputs_observed": 19286784,
-      "observed": "2026-11-12T18:33:05.778119+08:00",
-      "remaining_seconds_including_20percent_margin": 2797.903653468968
+      "outputs_observed": 24076800,
+      "observed": "2026-11-12T18:49:41.965838+08:00",
+      "remaining_seconds_including_20percent_margin": 1590.8236545770626
     },
     "SAIF_connectivity_tool": {
       "status": "deployed_16files_local_checks_passed_actual_PT_not_started",
@@ -3215,6 +3215,8 @@
       "bytes": 60375122403,
       "cumulative_bytes": 360492854889,
       "R4_B_preserved": true
-    }
+    },
+    "clean14_schedule_evidence": "evidence/SYSTOLIC_B_CLEAN14_SCHEDULE_20261112.json",
+    "delivery_index": "workspaces/arch03/SYSTOLIC_B_DELIVERY_20261112.md"
   }
 }
