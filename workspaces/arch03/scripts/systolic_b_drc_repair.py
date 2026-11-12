@@ -49,7 +49,7 @@ def inspect(cfg, run, original, digest, call):
         }
     }
     foreach pattern {*/BUFV1_* */BUFV1RD_* */BUFV1R0_* */BUFV1RQ_* */BUFV2_* */BUFV2RD_* */BUFV2R0_* */BUFV2RQ_* */BUFV4_* */BUFV4RD_* */BUFV4R0_* */BUFV4RQ_*} {
-        foreach_in_collection cell [get_lib_cells $pattern] {
+        foreach_in_collection cell [get_lib_cells -quiet $pattern] {
             puts $out "candidate\t[get_object_name $cell]\t[get_attribute $cell area]"
             foreach_in_collection pin [get_lib_pins [get_object_name $cell]/*] {
                 set direction [get_attribute $pin direction]
@@ -79,6 +79,7 @@ def inspect(cfg, run, original, digest, call):
 
 
 DRC04_SHA = 'dd960574b5ac119192055932b7fadcf7e245fa97446d4370d8b6a49d4e990ca4'
+DRC05_SHA = '55fcf35b3d2d01ea782f7f543bc00b1ae49078e9f1b9c66534ab33c1e8765bbe'
 
 
 def repair_script(run, cfg, original=None, targeted=False, library_directory=None):
@@ -130,6 +131,13 @@ foreach {instance expected replacement} {
 close $sized
 compile -incremental_mapping -map_effort high
 '''
+        if targeted == 'upstream':
+            sizing=synth.replace_once(sizing, ''' U32684 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U32686 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U32433 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U30602 AOI22V2_12TR40 AOI22V4_12TR40''', ''' U3777 NOR3CV2_12TR40 NOR3CV4_12TR40
+ U3778 NOR3CV2_12TR40 NOR3CV4_12TR40
+ U3776 NOR3CV2_12TR40 NOR3CV4_12TR40''')
         text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high', sizing)
     else:
         text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high',
@@ -157,7 +165,7 @@ def repair(cfg, run, original, digest, call):
     if any((run/name).exists() for name in ('repair_seed.ddc', 'libs', 'summary.json', 'mapped.v')):
         raise ValueError('Mapped DRC repair requires a fresh run')
     prior, _ = verify_synthesis(original, digest, cfg)
-    targeted = digest == DRC04_SHA
+    targeted = 'upstream' if digest == DRC05_SHA else digest == DRC04_SHA
     library_directory = Path(prior.get('mapped_repair', {}).get('compile_library_directory', str(original/'libs')))
     library_directory.resolve().relative_to(Path(cfg['server_root']).resolve()) if 'server_root' in cfg else None
     if (original/'task_mode.sdc').read_text() != synth.constraints():
@@ -203,7 +211,8 @@ def repair(cfg, run, original, digest, call):
         original_task_constraints_sha256=sha(original/'task_mode.sdc'),
         task_constraints_unchanged=True, rtl_changed=False, original_run_modified=False,
         command='targeted equivalent-cell sizing; compile -incremental_mapping -map_effort high' if targeted else 'compile -incremental_mapping -only_design_rule',
-        targeted_drc04_drivers=targeted, compile_library_directory=str(library_directory),
+        targeted_profile='DRC05_upstream_NOR3' if targeted=='upstream' else ('DRC04_four_drivers' if targeted else None),
+        compile_library_directory=str(library_directory),
         copied_library_databases_sha256_identical=True,
         inherited_gate_pass=False, requires_new_gate_and_ppa=True)
     (run/'repair_provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')

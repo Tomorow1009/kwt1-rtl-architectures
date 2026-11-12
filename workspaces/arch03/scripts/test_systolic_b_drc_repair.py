@@ -33,6 +33,10 @@ class RepairTests(unittest.TestCase):
             self.assertIn('compile -incremental_mapping -map_effort high',targeted)
             self.assertNotIn('set_max_transition',targeted)
             self.assertIn('source task_mode.sdc',targeted)
+            upstream=repair.repair_script(root,{'standard_library_member':'standard.db'},original,'upstream')
+            self.assertIn('U3777 NOR3CV2_12TR40 NOR3CV4_12TR40',upstream)
+            self.assertNotIn('U32684',upstream)
+            self.assertNotIn('set_max_transition',upstream)
 
     def test_copy_rejects_changed_input_and_existing_output(self):
         with tempfile.TemporaryDirectory() as directory:

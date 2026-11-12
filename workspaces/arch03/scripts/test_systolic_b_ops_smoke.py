@@ -6,9 +6,24 @@ import unittest
 from unittest.mock import patch
 import native_saif_units as units
 import systolic_b_drc_repair as repair
+import systolic_b_ops as ops
 
 
 class OperationsSmoke(unittest.TestCase):
+    def test_activity_request_binds_paths_and_digests_before_execution(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);gate=root/'gate';probe=root/'probe'
+            for path in (gate,probe):path.mkdir();(path/'summary.json').write_text('{}')
+            request={name:dict(run=str(path),sha256=ops.sha(path/'summary.json')) for name,path in [('gate',gate),('probe',probe)]}
+            with patch('native_saif_replay.verify',return_value={'fixture_only':True}) as verify:
+                self.assertEqual(ops.activity_operation('native_saif_r4_replay',request,{'server_root':str(root)},root/'new',None),{'fixture_only':True})
+                verify.assert_called_once()
+            (gate/'summary.json').write_text('{"changed":true}')
+            with patch('native_saif_replay.verify') as verify:
+                with self.assertRaisesRegex(ValueError,'Changed activity reference'):
+                    ops.activity_operation('native_saif_r4_replay',request,{'server_root':str(root)},root/'new',None)
+                verify.assert_not_called()
+
     def test_units_bookkeeping_accepts_path_hashes(self):
         with tempfile.TemporaryDirectory() as directory:
             run=Path(directory)

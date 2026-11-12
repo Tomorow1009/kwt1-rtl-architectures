@@ -1,5 +1,17 @@
 # B 进度与恢复：2026-11-12 14:38
 
+## 14:50增量
+
+ee621bf已push，八工具通过7条短命令部署并核验，operations/systolic_b_tools_ee621bf，manifest be92e8b86f3b89e862f2f3692abda730d75692e8e041ac98650970422650944b。不可重复部署/append。
+
+inspect02 PID266412于14:44:46.218811结束，**status failed**：查询不存在的BUF可选规格没有用quiet，产生UID109；实际driver_inventory.tsv已产生，不能称整轮通过。其可读数据：n298364由U3777 NOR3CV2驱动，n298366=U3778 NOR3CV2，n298367=U3776 NOR3CV2。DRC05实际网表已有NOR3CV0/1/2/4/6/8实例，证明V4存在。BUFV2RD输入cap .000960、BUFV4RD .001599，BUFV4RQ .000871；这些是库原始数值。备选低输入cap缓冲规格仅诊断，未实施。
+
+下一定向DRC06本地拟从DRC05摘要55fc...复制，只将上述三个NOR3CV2等价升NOR3CV4，仍核pin方向/函数、原8d库身份、原task_mode约束，保护已修的四个下游驱动。尚未提交/部署/启动；不要用旧60工具启动06。只读候选查询已加quiet，不再将不存在的可选型号作EDA错误。
+
+本地systolic_b_ops扩展带hash请求的R4 SAIF重放/交叉核对及B活动/功耗入口，复用同一锁/新session/原base.inputs；防路径越界和引用摘要改变，运行后复核request。10项相关保护检查通过，只是工具检查。新ops和测试未提交部署。正式1200仍禁止提前批准。
+
+当前VNC工作区3/ced空闲shell，FZ关闭，无已知EDA，无本地持续session/待Return。最后b_inspect02_compact查询完成。下一步提交同步新工具、小差分新目录，先新DRC06；完成后按实测决定R4 SAIF与新gate次序，禁止并发EDA。
+
 任务 ACTIVE，继续直接B计划；63da6ba/v3/credits3生产源冻结，不加架构；R4保底。用户已授权旧验证大文件清理并要求继续；两次清理279.506GiB已完成不重复。VNC工作区3，禁止工作区4。FTP421用户确认无队友使用，未再尝试FileZilla。
 
 先读AGENTS、IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md、本检查点、1350检查点和STATUS。旧完整ZIP62/2b未上传且含旧工具问题，不执行；ced包输入未变。所有ops副本/失败目录保留。
