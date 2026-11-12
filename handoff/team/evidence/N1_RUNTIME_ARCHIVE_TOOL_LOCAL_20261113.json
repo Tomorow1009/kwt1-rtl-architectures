@@ -1,0 +1,20 @@
+{
+  "schema": "arch03-n1-archive-tool-local-check-v1",
+  "status": "passed",
+  "command": "E:/fpga_race-two/.venv-kwt/Scripts/python.exe -m unittest test_n1_archive_runtime -v",
+  "working_directory": "E:/fpga_race-two/kwt1-rtl-architectures/workspaces/arch03/scripts",
+  "exit_code": 0,
+  "tests": 21,
+  "reported_duration_seconds": 10.207,
+  "record_basis": "Observed exec session 4124 and completion output; no additional test rerun",
+  "tool_sha256": "6bfd21fbf42dbce160829f99c8eff2d3075c75857f2ccbe74fec67e141de09f9",
+  "test_sha256": "4020d0b92f77ccaf1d75a953ab18d2a5da9c808e18afe24fc9c7881d6dd836d9",
+  "unchanged_runtime_validator_sha256": "fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d",
+  "new_scope": "Reject live/dangling runs-root symlink and non-directory before traversing; retain explicit B0 readonly auxiliary binding",
+  "actual_runs_root_symlink_fixture": true,
+  "actual_runs_root_dangling_symlink_fixture": true,
+  "runs_link_metadata_mocked": false,
+  "real_server_archive_executed": false,
+  "hardware_or_power_acceptance_implied": false,
+  "limitations": "Windows small-data fixtures mock Linux permissions and process state; real runs symlinks were created only in new disposable fixture directories. Existing remote OPS and receipts were not modified"
+}

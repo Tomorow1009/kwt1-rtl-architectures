@@ -1,0 +1,46 @@
+{
+  "schema": "b0-existing-unknown-inventory-observed-v1",
+  "observed_at": "2026-11-13T03:30:40+08:00",
+  "source_commit": "1f86fc70d41ebafb1fd072811616f73fd40ca2fb",
+  "tool_sha256": "c57ed783754a6411bc3d43139dcf90a420d7c5a2f87ca050b12b98e75b20056d",
+  "new_simulation_or_eda": false,
+  "original_activity_modified": false,
+  "system_power_verified": false,
+  "layer_01": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/b0_unknown_l01_20261113_0319",
+    "status": "complete_existing_unknown_inventory_review_required",
+    "summary_sha256": "1a8c943829995ed0e42bdfe8801279065654f1e5314e771be8c726858376387f",
+    "unknown_gzip_bytes": 1237128,
+    "unknown_gzip_sha256": "8a579a7775b139ca4e6d560119bc273061e4ccf1d222b13ce99acaa7e74a5e19",
+    "unknown_declarations": 41406,
+    "fully_unknown_declarations": 18620,
+    "conditional_records": 0,
+    "scope": "complete_top_level_no_conditional_subrecords",
+    "original_native_receipt_statistics_window_and_sha_match": true,
+    "mapped_expression_requires_time_review": {
+      "partial_unknown": 22786,
+      "fully_unknown": 16386
+    },
+    "mapped_local_declaration_only_global_alias_review_required": {
+      "partial_unknown": 0,
+      "fully_unknown": 2234
+    },
+    "no_load_waivers_issued": 0,
+    "timescale_ns": "0.000001",
+    "duration_ns": "208926.645774",
+    "committed_data32_each_unknown_ticks": 14666652,
+    "committed_data32_each_unknown_ns": "14.666652",
+    "committed_valid_ready_unknown_ticks": 0,
+    "unknown_time_position_verified": false,
+    "unknown_power_impact_verified": false
+  },
+  "remaining_layers": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/b0_unknown_l02_l12_20261113_0326",
+    "pid": 226051,
+    "last_observed_at": "2026-11-13T03:29:48+08:00",
+    "status": "running",
+    "completed_observed": ["layer_02"],
+    "active_partial_observed": "layer_03"
+  },
+  "limits": "This inventory does not approve unknown-state power impact. SAIF residence totals do not establish time ordering or valid qualification. Mapped local declarations are not automatically globally disconnected nets."
+}

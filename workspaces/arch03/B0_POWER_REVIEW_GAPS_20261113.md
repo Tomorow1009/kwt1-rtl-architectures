@@ -80,7 +80,7 @@ python3 -B <新operations目录>/b0_power_review_inventory.py
 
 - PWR-601是“Running averaged power analysis”，PWR-602是“Running power calculation with 4 threads”，均为Information，不是功耗错误或未知告警。
 - PTE-016也是Information：hf_clk由显示6.667ns扩展到共同base660.000ns并增加196edges；lf_clk原周期为66.000ns，增加18edges。不能把共同base误当实际主时钟降频。精确导入周期仍由原clock回执约束；PTE-003通用警告仍需实际disabled_timing对象/flags解释，不能凭通用文字断言存在组合环。
-- L01设置为averaged、initial-X=false、X-transition derate=0.5。switch/static两表均total451386、exact450133、implied0、default1253。1253个默认声明有本B0逐网直接/叶连接均0的证明，活动值未改。独立proof的精确SHA因屏幕手抄位数不全，等待根代理按8字符分组读取；不保存或猜补不完整指纹，原inventory02中的完整字段保留。
+- L01设置为averaged、initial-X=false、X-transition derate=0.5。switch/static两表均total451386、exact450133、implied0、default1253。1253个默认声明有本B0逐网直接/叶连接均0的证明，活动值未改。独立proof的精确SHA已由根代理按8字符分组核实为`d894ec7e5f9c3b33e6c99a800cd24df6fd66ba68882f63ffac15784849c4a445`，证据截图为本地`r4_archive_postcondition.png`；此前不完整手抄串作废，原inventory02中的完整字段保留。这只证明1253个默认声明的连接性质，不豁免已映射信号的未知活动。
 - SRAM实际为加速器92、DTCM32、ITCM32、共享64。小宏每个leakage为4.88099977e-6W，大宏为4.60310002e-5W，均非0。128宏默认双rail为(0.001589+0.003292)mW；4096宏为(0.014038+0.031993)mW。4096的0.014038曾跨截图行，不能误抄为0.004038。
 - 默认双rail按92/128累加为0.006341020W；实际220宏报告累加0.00634102000444W，差4.44e-12W属展示舍入。该证据核对单位与实际默认组解释；其他条件组、宏端口活动和整机unknown影响仍须按实际状态审查。
 - L01原统计仍为618149声明、41406未知、18620全窗口未知，reported TX ticks4116111454435490；未把这些计数改为功耗误差比例。

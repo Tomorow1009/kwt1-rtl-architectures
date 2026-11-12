@@ -1,6 +1,6 @@
 {
   "schema": "arch03-n1-server-progress-v1",
-  "observed_at": "2026-11-13T02:12:42+08:00",
+  "observed_at": "2026-11-13T03:29:48+08:00",
   "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
   "bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-n1-v4-20261113_013211-9305c6948c76",
   "bundle_zip_sha256": "6e0aa086526f10485f41260c7c9a623515edd3f35b08941720a9f8e5bb3eb772",
@@ -56,7 +56,11 @@
     "session": "n1_synth01",
     "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
     "shared_original_team_lock": true,
-    "permanent_archive_required": true
+    "permanent_archive_required": true,
+    "child_pid": 174746,
+    "observed_at": "2026-11-13T03:29:48+08:00",
+    "child_cpu_percent": 99.7,
+    "child_rss_kib": 25466528
   },
   "r4_l01_archive_previous_attempt": {
     "status": "failed_space_reserve_original_retained",
