@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v3_asic14_passed_fresh_synth02_running_after_authorized_cleanup",
+    "status": "v3_synth02_complete_validation02_entry_failed_tool_fix_local",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,7 +2683,7 @@
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Continue the unique synth02 PID183038 and validation02 queue PID184658; do not restart. Review actual new timing/area/gate before final1200. R4 protected. Four obsolete MMIO8 raw waves deleted with receipt; regenerate if needed.",
+    "next": "Commit/package tool fixes, deploy new immutable bundle, start unique validation03 against completed8d synth02. No resynthesis. Retain failedvalidation02. Review new actual results before final1200.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2769,7 +2769,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "67cfe9a9a707746772fe578d1221f99ca94679cf",
+    "cloud_commit": "b79e1f52504f123505ab408df018c9e0a8d2b4d5",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2803,19 +2803,28 @@
     "v3_synthesis": {
       "session": "systolic_b_v3_synth02",
       "stage": "systolic_b_synth",
-      "pid": 183038,
-      "status": "running",
-      "observed": "2026-11-12T09:31:41+08:00",
+      "pid": null,
+      "status": "passed_reports_ready_review_required",
+      "observed": "2026-11-12T11:39:06+08:00",
       "started": "2026-11-12T08:45:21.455160",
       "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
       "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
       "prior_failed_session_preserved": "systolic_b_v3_synth01",
-      "child_pid": 192693,
+      "child_pid": null,
       "child_user_CPU_seconds": 2397.58,
       "child_system_CPU_seconds": 27.44,
       "child_state": "R",
       "last_log_observation": "2026-11-12T10:09:41+08:00",
-      "log_phase": "Beginning Mapping Optimizations (High effort)"
+      "log_phase": "Beginning Mapping Optimizations (High effort)",
+      "summary_sha256": "3e0f88eeb4855a15f8743f820f587cd90df7e52a748d112e8fd5ba788dd86d03",
+      "setup_slack_ns": 0.0002141,
+      "hold_slack_ns": 0.00249085,
+      "conservative_budget_mm2": 1.0991231047009615,
+      "whole_soc_area_um2": 4621339.604708,
+      "small_macros": 92,
+      "large_macros": 128,
+      "latches": 0,
+      "combinational_loops": false
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2825,15 +2834,18 @@
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_LATENCY2_20261112.json"
     },
     "validation_queue": {
-      "pid": 184658,
+      "pid": null,
       "session": "systolic_b_v3_validation02_queue",
       "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
-      "observed": "2026-11-12T10:09:41+08:00",
-      "status": "waiting_synthesis",
+      "observed": "2026-11-12T11:39:06+08:00",
+      "status": "failed",
       "completed": [],
       "optional_failures": [],
       "final1200_started": false,
-      "prior_failed_queue_preserved": "systolic_b_v3_validation01_queue"
+      "prior_failed_queue_preserved": "systolic_b_v3_validation01_queue",
+      "failed_stage": "systolic_b_sequence",
+      "error": "Sequence cases must exactly match firmware A/B order",
+      "simulation_started": false
     },
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
@@ -2871,10 +2883,17 @@
     "cleanup_evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_20261112.json",
     "source_freeze_evidence": "handoff/team/evidence/SYSTOLIC_B_SOURCE_FREEZE_20261112.json",
     "implementation_frozen_validation_pending": true,
-    "foreground_readonly_monitor": true,
+    "foreground_readonly_monitor": false,
     "requirements_recheck": "handoff/team/evidence/SYSTOLIC_B_REQUIREMENTS_RECHECK_20261112.json",
     "hard_freeze_elapsed": true,
     "official_delivery_fallback": "R4",
-    "source_candidate": "63da_B_v3_credits3_fixed_before_hard_freeze"
+    "source_candidate": "63da_B_v3_credits3_fixed_before_hard_freeze",
+    "local_validation_tool_fixes": {
+      "sequence_manifest_case_selection": true,
+      "structural_named_port_parser": true,
+      "targeted_tests_passed": 5,
+      "deployed": false,
+      "hardware_changed": false
+    }
   }
 }

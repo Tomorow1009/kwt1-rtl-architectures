@@ -65,7 +65,10 @@ def main():
             raise ValueError('Preliminary timing/area failed; review before scheduling B gate')
         state['synthesis_summary_sha256']=digest
         common=['--synth-run',str(synthesis),'--synth-summary-sha256',digest]
-        stages=[('systolic_b_sequence','sequence',[],False),
+        from build_systolic_b_sequence import verify_firmware
+        sequence,_=verify_firmware(ROOT/'firmware_sequence')
+        sequence_cases=[sequence['tasks'][key]['case'] for key in ('A','B')]
+        stages=[('systolic_b_sequence','sequence',['--cases']+sequence_cases,False),
                 ('systolic_b_contention','contention',['--cases','layer_01','extremes'],False),
                 ('systolic_b_saif_probe','saif_probe',common,True),
                 ('systolic_b_timing_audit','timing',common,False),

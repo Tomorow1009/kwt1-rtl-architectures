@@ -11,7 +11,12 @@ def no_load_drivers(text,mapped,ports):
     instances={}
     for name,module in mapped.items():
         values={}
-        for reference,instance in re.findall(r'(?m)^\s*(\S+)\s+(\S+)\s*\(',module['logic']):
+        # Named pin continuations such as '.clk(clk), .rst(rst)' are not
+        # instances. Restrict both leading tokens to Verilog identifiers,
+        # including DC's escaped identifiers, and keep whitespace on one line.
+        identifier=r'(?:[A-Za-z_$][A-Za-z_0-9$]*|\\\S+)'
+        pattern=r'(?m)^[ \t]*('+identifier+r')[ \t]+('+identifier+r')[ \t]*\('
+        for reference,instance in re.findall(pattern,module['logic']):
             instance=instance.lstrip('\\');reference=reference.lstrip('\\')
             require(instance not in values,'Duplicate mapped instance '+instance)
             values[instance]=reference
