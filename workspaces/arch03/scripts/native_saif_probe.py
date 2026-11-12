@@ -10,6 +10,7 @@ from pathlib import Path
 from server_run import sha,save
 from soc_power import power_databases,power_invocation,tcl_path
 from soc_synth import require_tool_marker
+from saif_syntax import without_comments,integer_ticks
 
 
 FIXTURE='''`timescale 1ns/1ps
@@ -34,6 +35,7 @@ endmodule
 
 def parse_small_saif(text):
     # Restricted to this tiny probe. Whole-system activity needs streaming.
+    text=''.join(without_comments(text.splitlines(True)))
     tokens=re.findall(r'"(?:\\.|[^"\\])*"|\(|\)|[^\s()]+',text)
     stack=[];root=None
     for token in tokens:
@@ -56,7 +58,9 @@ def parse_small_saif(text):
     scale=one(root,'TIMESCALE');units={'fs':Decimal('0.000001'),'ps':Decimal('.001'),'ns':Decimal(1)}
     if len(scale)!=3 or scale[2] not in units:raise ValueError('Unsupported SAIF time unit')
     unit_ns=Decimal(scale[1])*units[scale[2]]
-    duration=int(one(root,'DURATION')[1])
+    duration=integer_ticks(one(root,'DURATION')[1],positive=True)
+    programs=[n for n in root if isinstance(n,list) and n and n[0]=='PROGRAM_NAME']
+    vcs_region=len(programs)==1 and len(programs[0])==2 and programs[0][1].strip('"').startswith('VCS ')
     if duration*unit_ns!=60:raise ValueError('SAIF duration is not the exact 12..72 ns window')
     signals={}
     def scan(node,path=()):
@@ -64,9 +68,11 @@ def parse_small_saif(text):
         if node and node[0] in ('PORT','NET'):
             for signal in node[1:]:
                 if not isinstance(signal,list):continue
-                metrics={p[0]:int(p[1]) for p in signal[1:] if isinstance(p,list) and len(p)==2}
-                if {'T0','T1','TX','TZ','TC'}<=set(metrics):
-                    if sum(metrics[k] for k in ('T0','T1','TX','TZ'))!=duration:
+                metrics={p[0]:integer_ticks(p[1]) for p in signal[1:] if isinstance(p,list) and len(p)==2}
+                if {'T0','T1','TX','TC'}<=set(metrics):
+                    if 'TZ' not in metrics and not vcs_region:
+                        raise ValueError('Missing TZ without reviewed VCS producer semantics')
+                    if sum(metrics.get(k,0) for k in ('T0','T1','TX','TZ'))!=duration:
                         raise ValueError('SAIF dwell-time sum mismatch')
                     key='/'.join(path+(signal[0].strip('"'),))
                     if key in signals and signals[key]!=metrics:raise ValueError('Conflicting SAIF signal')
@@ -82,11 +88,15 @@ def parse_small_saif(text):
     for name,expected in [('probe',dict(T0=30,T1=10,TX=10,TZ=10)),
                           ('toggle',dict(T0=40,T1=20,TX=0,TZ=0))]:
         counts=selected[name]['counts']
+        if 'TZ' not in counts:
+            expected=dict(T0=expected['T0'],T1=expected['T1'],TX=expected['TX']+expected['TZ'])
         if any(counts[k]*unit_ns!=v for k,v in expected.items()):
             raise ValueError('Native SAIF dwell mismatch for '+name)
     if selected['toggle']['counts']['TC']!=4:raise ValueError('Known toggle count differs from 4')
     return dict(status='tiny_window_dwell_and_toggle_passed',start_ns=12,end_ns=72,
-        duration_ns=60,timescale_ns=str(unit_ns),signals=selected)
+        duration_ns=60,timescale_ns=str(unit_ns),signals=selected,
+        unknown_representation='VCS_combined_TX_X_or_Z' if any('TZ' not in x['counts'] for x in selected.values()) else 'separate_TX_TZ',
+        X_and_Z_separately_measured=all('TZ' in x['counts'] for x in selected.values()))
 
 
 def verify(cfg,run,synthesis,expected_sha,call):
@@ -101,7 +111,7 @@ def verify(cfg,run,synthesis,expected_sha,call):
     sv=run/'probe.sv';sv.write_text(FIXTURE)
     ucli=run/'capture.tcl'
     ucli.write_text('saif -region r1 -depth 0 tb_saif.dut\nrun 12ns\nsaif -start r1\n'
-                   'run 60ns\nsaif -stop r1\nsaif -report native.saif -region r1 -tres 1ps\nquit\n')
+                   'run 60ns\nsaif -stop r1\nsaif -report native.saif -region r1 -tres 1e-15\nquit\n')
     cmd=[cfg['tools']['vcs'],'-full64','-sverilog','-debug_access+all','-top','tb_saif','-o',run/'simv',sv]
     save(run/'compile_command.json',[str(p) for p in cmd])
     log=call(cmd,run,'compile.log')

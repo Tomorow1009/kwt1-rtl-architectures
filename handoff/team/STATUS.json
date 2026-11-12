@@ -2675,7 +2675,7 @@
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1320_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,7 +2683,7 @@
     "new_gate_verified": true,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Review actual four max_transition violations and installed DC repair documentation. New independent mapped repair only at unchanged constraints; repeat gate for any changed netlist. Final1200 not approved; SAIF/structure diagnostics still pending.",
+    "next": "Deploy committed fixes into a new operations directory, use original verified library paths for fresh DRC04. Formal tiny SAIF VCS/PT and structural review still pending; keep all failed runs. No new RTL or queue restarts.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2766,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "27b9358",
+    "cloud_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2934,10 +2934,26 @@
     },
     "ftp_status": "421_no_teammate_or_board_FileZilla_connection_remaining",
     "vnc_operations_overlay": {
-      "status": "typing_new_exact_hash_directory_not_executed_yet",
-      "source_commit": "27b9358",
-      "manifest_sha256": "dc1209b5552e6b90813951cfc5bc93df7459b7a3238df42651fc709e4bcca770",
+      "status": "deployed_hash_verified_four_tools",
+      "source_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
+      "manifest_sha256": "8d6756834afff64c3ae453c45b5fc1894c3f65d3fec0cec000312ddeea8bfe86",
       "base_bundle_inputs_modified": false
+    },
+    "mapped_repair": {
+      "session": "systolic_b_v3_drc03",
+      "pid": 180611,
+      "status": "failed",
+      "error": "OPT-128 duplicate standard library file identities between original and copied DB paths",
+      "new_mapped_gate_pass": false,
+      "next_session_not_started": "systolic_b_v3_drc04"
+    },
+    "saif_unit_diagnostics": {
+      "session": "systolic_b_v3_saif_units01",
+      "status": "diagnostics_completed_no_qualification",
+      "summary_sha256": "a8af5c6ab790b734bb91e1b25ed2f3695ad2ffa8839c3bc00c1a6a744f593879",
+      "generated_FS_from_1e_15": true,
+      "native_saif_qualified": false,
+      "actual_unknown_representation": "VCS combined TX for X or Z"
     }
   }
 }

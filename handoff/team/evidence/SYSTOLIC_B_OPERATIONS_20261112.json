@@ -1,0 +1,31 @@
+{
+  "relative": "../../operations/systolic_b_tools_e6b211e",
+  "name": "systolic_b_tools_e6b211e",
+  "manifest_sha256": "8d6756834afff64c3ae453c45b5fc1894c3f65d3fec0cec000312ddeea8bfe86",
+  "payload_sha256": "0870f6da6b9357733f694e5fd228356b1e0a0a34e7564645107a899ec9c9ab89",
+  "source_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
+  "commands": 16,
+  "files": {
+    "schema": "systolic-b-small-operations-v1",
+    "source_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
+    "files": {
+      "systolic_b_ops.py": "709aff8d5e39f24378efd0a04fc9809e57331d0dd277d6d377866be2c087a52a",
+      "systolic_b_drc_repair.py": "7518eb81b0fb57b265546aa2da795e7b1e6162bc3dd1fafc71359e717ed5e39d",
+      "native_saif_units.py": "25491a85b9b50f82fdcdc4d1c6f074171e1bb637d2d7998d69f3e63e910f4a67",
+      "systolic_b_structure.py": "6dccbc875cadcef35af9172d2a0f9a8b0c16517ad1caf8ec4bf920e80629dfa6"
+    }
+  },
+  "schema": "systolic-b-vnc-operations-deployment-v1",
+  "status": "deployed_four_source_hashes_verified",
+  "base_bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "base_manifest_sha256": "39b127636ecaf61d2cd950efd2f83ef923cacf5274c6f4b3d363cbdb9a51155d",
+  "base_inputs_modified": false,
+  "tool_bookkeeping_smoke_and_guard_tests": 7,
+  "hardware_RTL_changed": false,
+  "FTP_status": "421",
+  "original_ops27_deployed": false,
+  "original_ops27_failure": "shell unmatched quote on overlong command; path absence confirmed",
+  "observed": "2026-11-12T13:11:06+08:00",
+  "deployment_method": "VNC terminal chunked append with size checks, payload SHA, manifest SHA, every source SHA",
+  "actual_old_ops27_directory_exists": false
+}

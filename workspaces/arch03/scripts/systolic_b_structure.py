@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 from dma16_structural_audit import classify,modules,sha,require
+import dma16_structural_audit as structural_parser
 
 
 def no_load_drivers(text,mapped,ports):
@@ -58,7 +59,7 @@ def audit(run,digest):
         not re.search(r'\(LINT-(?:2|8|28)\)',line)]
     result.update(schema='systolic-b-structural-inventory-v1',synthesis_run=str(run),
         synthesis_summary_sha256=digest,inputs_sha256=tracked,auditor_sha256=sha(__file__),
-        parser_sha256=sha(Path(__file__).with_name('dma16_structural_audit.py')),
+        parser_sha256=sha(Path(structural_parser.__file__)),
         netlist_modified=False,eda_started=False,timing_verified=False,
         remaining_review='Inspect unresolved ports, other warning classes, clocks and exceptions with same-netlist functional evidence')
     require(all(sha(p)==h for p,h in tracked.items()),'B structural input changed during audit')

@@ -12,8 +12,17 @@ from asic_link import sha
 import systolic_b_synth as synth
 
 
-def repair_script(run, cfg):
+def repair_script(run, cfg, original=None):
     text = synth.script(run, cfg)
+    if original is not None:
+        # DDC remembers the original library file identities. Compiling with
+        # byte-identical copies under a second path causes DC OPT-106/OPT-128
+        # for fixed technology cells. Keep the original verified DB paths for
+        # this compile; fresh local copies still support downstream reporting.
+        old = str(Path(run)/'libs')
+        new = str(Path(original)/'libs')
+        if text.count(old)!=3:raise ValueError('Expected exact three DB paths in repair template')
+        text=text.replace(old,new)
     text = synth.replace_once(text, 'read_ddc linked.ddc', 'read_ddc repair_seed.ddc')
     text = synth.replace_once(text, 'compile -map_effort high\n', '')
     text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high',
@@ -76,12 +85,14 @@ def repair(cfg, run, original, digest, call):
     sdc = run/'task_mode.sdc'
     sdc.write_text(synth.constraints())
     tcl = run/'systolic_b_drc_repair.tcl'
-    tcl.write_text(repair_script(run, cfg))
+    tcl.write_text(repair_script(run, cfg, original))
     provenance = dict(schema='systolic-b-mapped-drc-repair-v1', original_run=str(original),
         original_summary_sha256=digest, original_mapped_ddc_sha256=sha(run/'repair_seed.ddc'),
         original_task_constraints_sha256=sha(original/'task_mode.sdc'),
         task_constraints_unchanged=True, rtl_changed=False, original_run_modified=False,
         command='compile -incremental_mapping -only_design_rule',
+        compile_library_directory=str(original/'libs'),
+        copied_library_databases_sha256_identical=True,
         inherited_gate_pass=False, requires_new_gate_and_ppa=True)
     (run/'repair_provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
     current_inputs[str(Path(__file__).resolve())] = sha(Path(__file__))

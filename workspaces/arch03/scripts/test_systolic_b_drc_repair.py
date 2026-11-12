@@ -23,6 +23,10 @@ class RepairTests(unittest.TestCase):
             self.assertIn('!= 220', text)
             self.assertIn('report_constraint -all_violators', text)
             self.assertNotIn('set_max_transition', text)
+            original=root/'prior'
+            repaired=repair.repair_script(root,{'standard_library_member':'standard.db'},original)
+            self.assertEqual(repaired.count(str(original/'libs')),3)
+            self.assertNotIn('{'+str(root/'libs'),repaired)
 
     def test_copy_rejects_changed_input_and_existing_output(self):
         with tempfile.TemporaryDirectory() as directory:

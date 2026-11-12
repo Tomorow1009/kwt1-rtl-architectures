@@ -23,6 +23,23 @@ def fixture():
     return '(SAIFILE (DATE "multi\nline") (TIMESCALE 1 fs) (DURATION 199999980000) (INSTANCE tb_top (INSTANCE u_e203_soc_top (PORT %s)%s%s)))'%(ports,cpu,mem)
 
 class ActivityTests(unittest.TestCase):
+    def test_actual_vcs_comment_duration_and_combined_XZ(self):
+        text='/* generated\n with saif_region */'+fixture().replace('(SAIFILE ',
+            '(SAIFILE (PROGRAM_NAME "VCS Q-2020.03-SP2-6_Full64") ').replace(
+            '(DURATION 199999980000)','(DURATION 199999980000.00)').replace('(TZ 0)','')
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder)/'actual_format.saif';p.write_text(text)
+            result=audit(p,WINDOW)
+            self.assertEqual(result['statistics']['unknown_declarations'],8)
+            self.assertGreater(result['statistics']['unknown_ticks'],0)
+            self.assertIsNone(result['statistics']['TZ_ticks'])
+            self.assertIsNone(result['statistics']['TX_ticks'])
+            self.assertFalse(result['X_and_Z_separately_measured'])
+            for invalid in (text.replace('199999980000.00','199999980000.01'),
+                            text.replace('VCS Q-','unknown Q-'),text+'/* truncated'):
+                p.write_text(invalid)
+                with self.assertRaises(ValueError):audit(p,WINDOW)
+
     def test_scope_counts_and_exact_window(self):
         with tempfile.TemporaryDirectory() as folder:
             p=Path(folder)/'test.saif';text=fixture();p.write_text(text)

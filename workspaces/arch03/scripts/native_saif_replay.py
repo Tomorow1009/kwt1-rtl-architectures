@@ -49,7 +49,7 @@ def capture_commands(gate,run,row):
     # original first-VALID/final-ACK/drain window and all original outputs.
     script=('saif -region soc -depth 0 tb_top.u_e203_soc_top\n'
             'run '+start+'ns\nsaif -start soc\nrun '+duration+'ns\n'
-            'saif -stop soc\nsaif -report '+case+'.saif -region soc -tres 1fs\n'
+            'saif -stop soc\nsaif -report '+case+'.saif -region soc -tres 1e-15\n'
             'run\nquit\n')
     return compile_command,runtime,script
 

@@ -10,6 +10,7 @@ from decimal import Decimal
 from pathlib import Path
 from icb32_synth import SYSMEM
 from icb32_power import window_values
+from saif_syntax import without_comments,integer_ticks
 
 TOKENS=re.compile(r'\(|\)|"(?:\\.|[^"\\])*"|[^\s()"]+')
 COMPONENTS=dict(cpu='u_e203_cpu_top',itcm='u_e203_itcm_ram',dtcm='u_e203_dtcm_ram',
@@ -18,7 +19,7 @@ COMPONENTS=dict(cpu='u_e203_cpu_top',itcm='u_e203_itcm_ram',dtcm='u_e203_dtcm_ra
 
 def tokens(stream):
     pending=''
-    for line in stream:
+    for line in without_comments(stream):
         pending+=line
         # Multiline quoted metadata is allowed; a malformed huge token is not.
         if len(pending)>1024*1024:raise ValueError('Excessively long SAIF record')
@@ -43,11 +44,11 @@ def audit(path,window):
     start,end,duration=window_values(window);duration=Decimal(duration)
     stats=dict(declarations=0,toggle_count=0,unknown_declarations=0,
         fully_unknown_declarations=0,conditional_records=0,
-        T0_ticks=0,T1_ticks=0,TX_ticks=0,TZ_ticks=0)
+        T0_ticks=0,T1_ticks=0,TX_ticks=0,TZ_ticks=0,combined_XZ_declarations=0,unknown_ticks=0)
     groups={name:dict(declarations=0,toggle_count=0,unknown_declarations=0,unknown_examples=[])
             for name in COMPONENTS}
     observed_modules={name:set() for name in ('u_arch03_accel','u_arch03_arb','u_arch03_router','u_arch03_shared')}
-    ports=set();scopes=set();stack=[];scale=None;ticks=None;root_seen=False;root_closed=False
+    ports=set();scopes=set();stack=[];scale=None;ticks=None;root_seen=False;root_closed=False;vcs_region=False
     units=dict(fs=Decimal('.000001'),ps=Decimal('.001'),ns=Decimal(1),us=Decimal(1000))
     def observe(node,frames):
         if not node or not isinstance(node[0],str) or scale is None or ticks is None:
@@ -66,10 +67,15 @@ def audit(path,window):
                 counts[entry[0]]=int(entry[1])
             elif entry[0] in ('COND','IOPATH'):conditional+=1
             else:raise ValueError('Unreviewed SAIF metric '+str(entry[0]))
-        if not {'T0','T1','TX','TZ','TC'}<=set(counts):raise ValueError('Incomplete signal residence/toggle counts')
+        if not {'T0','T1','TX','TC'}<=set(counts):raise ValueError('Incomplete signal residence/toggle counts')
+        if 'TZ' not in counts:
+            if not vcs_region:raise ValueError('Missing TZ without reviewed VCS producer semantics')
+            stats['combined_XZ_declarations']+=1
+            counts['TZ']=0  # Arithmetic placeholder only; final report labels combined TX and null separated totals.
         if sum(counts[k] for k in ('T0','T1','TX','TZ'))!=ticks:
             raise ValueError('Signal dwell duration mismatch '+full)
         unknown=counts['TX']+counts['TZ']
+        stats['unknown_ticks']+=unknown
         stats['declarations']+=1;stats['toggle_count']+=counts['TC']
         stats['unknown_declarations']+=int(unknown>0)
         stats['fully_unknown_declarations']+=int(unknown==ticks)
@@ -110,9 +116,12 @@ def audit(path,window):
                     scale=Decimal(node[1])*units[node[2]]
                     if not scale.is_finite() or scale<=0:raise ValueError('Invalid SAIF scale value')
                 elif parent[0]=='SAIFILE' and node[0]=='DURATION':
-                    if ticks is not None or len(node)!=2 or not re.fullmatch(r'[1-9][0-9]*',node[1]):
+                    if ticks is not None or len(node)!=2:
                         raise ValueError('Invalid SAIF duration')
-                    ticks=int(node[1])
+                    ticks=integer_ticks(node[1],positive=True)
+                elif parent[0]=='SAIFILE' and node[0]=='PROGRAM_NAME':
+                    if len(node)!=2:raise ValueError('Invalid SAIF producer')
+                    vcs_region=node[1].strip('"').startswith('VCS ')
                 elif parent[0]!='SAIFILE':parent.append(node)
             elif stack:
                 stack[-1].append(token)
@@ -128,6 +137,10 @@ def audit(path,window):
         raise ValueError('Missing/ambiguous component activity hierarchy')
     expected={name if width==1 else name+'[%d]'%bit for name,(_,width) in SYSMEM.items() for bit in range(width)}
     if ports!=expected:raise ValueError('SAIF source port bits differ from original 32-bit ICB interface')
+    stats['reported_TX_ticks']=stats['TX_ticks']
+    stats['separately_reported_TZ_ticks']=stats['TZ_ticks']
+    if stats['combined_XZ_declarations']:
+        stats['TX_ticks']=None;stats['TZ_ticks']=None
     return dict(status='saif_scope_duration_and_residence_verified',file=Path(path).name,
         bytes=size,sha256=digest.hexdigest(),scope='tb_top.u_e203_soc_top',strip_path=next(iter(scopes)),
         start_ns=start,end_ns=end,duration_ns=str(duration),timescale_ns=str(scale),
@@ -135,4 +148,6 @@ def audit(path,window):
         module_paths={k:sorted(v) for k,v in observed_modules.items()},
         declaration_counts_include_aliases=True,component_counts_overlap=True,
         timestamps_require_matching_replay_receipt=True,unknown_activity_review_required=True,
+        unknown_representation='VCS_combined_TX_X_or_Z' if stats['combined_XZ_declarations'] else 'separate_TX_TZ',
+        X_and_Z_separately_measured=not bool(stats['combined_XZ_declarations']),
         system_power_verified=False)
