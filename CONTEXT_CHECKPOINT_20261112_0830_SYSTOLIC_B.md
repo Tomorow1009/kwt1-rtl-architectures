@@ -24,7 +24,7 @@ FileZilla20972102已登录既有站点，正在上传新包；截图b_final_uplo
 
 ## 08:49：清理完成，新的唯一综合与后继队列已经启动
 
-- 08:42:42.206619仅删除旧ecf3门级L09/L10/L11/L12四个VCD，共120709954758B（112.41990585GiB）；路径解析/非链接/大小/summary SHA/fuser无人占用通过，执行前保存清单。输出/日志/活动扫描/摘要/网表/输入全部保留。此四层后续原始活动复查或功耗需要重生波形，不能称原VCD仍可用。证据`handoff/team/evidence/SERVER_WAVE_CLEANUP_20261112.json`。
+- 08:42:42.206619仅删除旧ecf3门级L09/L10/L11/L12四个VCD，共120705994578B（112.41621764GiB；09:03独立重读修正先前合计转录）；路径解析/非链接/大小/summary SHA/fuser无人占用通过，执行前保存清单。输出/日志/活动扫描/摘要/网表/输入全部保留。此四层后续原始活动复查或功耗需要重生波形，不能称原VCD仍可用。证据`handoff/team/evidence/SERVER_WAVE_CLEANUP_20261112.json`。
 - 远端清单`ecf3.../runs/mmio8_source_gate_full01/authorized_cleanup_20261112.json` SHA **8939b88472f6a8ae1ae5312d4eb47e3c06da6faafa078ec651c194cd3519d80c**。已确认四路径不存在。清理后截图实际可用**172.50390625GiB**；前一评论误读175.30已更正。08:46时171.9609375GiB，属共享盘动态值。
 - 新8d8f262 ZIP已FileZilla成功上传，队列空/成功1项，22秒；已断开并关闭FZ。新独立包安全解包通过，705输入和三固件检查通过，manifest **ac83363a9b3ea5cd88976b13f66a12a6543e68607def89b7ce40496eb359f177**。不得重传或重复解包。
 - 新包cwd`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a`。
@@ -41,3 +41,14 @@ FileZilla20972102已登录既有站点，正在上传新包；截图b_final_uplo
 - `handoff/team/evidence/SYSTOLIC_B_SOURCE_FREEZE_20261112.json`固定实现候选：8d包25个RTL源文件逐字节等于当前Git和生产63da Git blob，7个生产固件来源与manifest相符。初次用Windows工作树字节比较因CRLF与Git导出LF不同停止，确认差异仅换行；最终依据实际ZIP与Git blob逐字节比较，未放宽服务器输入哈希。没有修改任何RTL或生产固件。
 - 候选记录schema是`source-candidate-freeze`，**不是**最终队列所需的`freeze-review`；eligible_for_final1200、时序/面积/系统功耗仍false。硬冻结前已固定结构，后继只待当前候选实际证据。R4仍是当前交付退路，不把未完成PPA写成通过。
 - 当前仍有新综合183038与后继184658，不能再次launch；旧synth01/validation01保留过期state，不是活跃进程。没有新的最终1200/gate/SAIF结果。下一步继续观察原综合，审阅新网表并完成队列后再决定自己的1200；待结果期间整理最终材料即可，不追加结构优化。
+
+## 09:10：只读监视器运行，复现与创新材料已备
+
+- 46e44a37a4788206f2495c4377389f5bb8320a3a已push且远端一致，包含源码候选固定记录。未修改生产硬件，未启动额外EDA。
+- 09:05:16实际owner锁为driver183038、child **192693**（common_shell_ex，状态R），累计用户CPU83605 ticks、系统810 ticks，SC_CLK_TCK=100；验证队列184658为sleep等待。实际进程仍推进，不是旧state假运行。
+- 第一版`b_synth02_monitor.txt`因远端shell嵌套引号报`Unmatched '.`，未启动监视器，不影响原作业。第二版`b_synth02_monitor_v2.txt`为单行生成器，已成功运行，每30秒显示原综合/队列/空间，结束或失败自行退出。
+- **当前VNC18874435/workspace3是前台只读监视器，不是空闲shell。不要直接向其中type新命令。** 只截图观察；如必须输入只读查询，先Ctrl+C结束本监视器，不能向183038/192693/184658发信号。FZ已关闭，无本地exec会话或仿真任务。
+- 09:08:08.780993最新：synth183038 running，queue184658 waiting_synthesis，completed=[]、optional_failures=[]、error=None；可用**167.701171875GiB**。目前无新门级/功耗/1200结果。
+- 新增`workspaces/arch03/SYSTOLIC_B_RUNBOOK.md`，绑定8d包、三固件、独立ASIC/综合/gate、最终1200/SAIF方法与回执要求；新增`SYSTOLIC_B_INNOVATION_20261112.md`，整理R4/B整体差异、实际带宽下界和答辩范围。README入口更新；本地Markdown链接/差异检查通过，尚未新打包，不需要中断当前不可变包。
+- 清理合计本地转录曾把120705994578误写120709954758；09:03:52按原清单逐项重印并核算，实际**120,705,994,578B=112.41621764190495GiB**，约112.42GiB。原服务器清单/哈希和四个文件大小未变，本地JSON及上文已修正；不是追加删除。
+- 下一步继续等当前综合/队列实际结束，不能为了等待重复测试或启另一份综合。预计原同配置6193秒量级，08:45开始约10:30附近才收回；这是估计，不是完成承诺。到硬冻结09:30仍保留已固定的63da实现和R4交付资格；B的PPA及最终批量必须待实际证明。

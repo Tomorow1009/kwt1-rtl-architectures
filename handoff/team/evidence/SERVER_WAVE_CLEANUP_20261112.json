@@ -13,13 +13,25 @@
   "receipt": "runs/mmio8_source_gate_full01/authorized_cleanup_20261112.json",
   "receipt_sha256": "8939b88472f6a8ae1ae5312d4eb47e3c06da6faafa078ec651c194cd3519d80c",
   "deleted": [
-    {"file": "layer_09.vcd", "bytes": 29798812728},
-    {"file": "layer_10.vcd", "bytes": 29927388119},
-    {"file": "layer_11.vcd", "bytes": 30261455404},
-    {"file": "layer_12.vcd", "bytes": 30718338327}
+    {
+      "file": "layer_09.vcd",
+      "bytes": 29798812728
+    },
+    {
+      "file": "layer_10.vcd",
+      "bytes": 29927388119
+    },
+    {
+      "file": "layer_11.vcd",
+      "bytes": 30261455404
+    },
+    {
+      "file": "layer_12.vcd",
+      "bytes": 30718338327
+    }
   ],
-  "deleted_bytes": 120709954758,
-  "deleted_GiB": 112.41990584693849,
+  "deleted_bytes": 120705994578,
+  "deleted_GiB": 112.41621764190495,
   "free_GiB_before_inventory": 61.619140625,
   "free_GiB_after_deletion": 172.50390625,
   "free_space_is_shared_and_changes_independently": true,
@@ -29,6 +41,17 @@
   "sizes_rechecked": true,
   "fuser_returncode_before_deletion": 1,
   "no_active_user_EDA_observed_before_deletion": true,
-  "preserved": ["all source and firmware inputs", "all mapped netlists and constraints", "all summaries and raw output CSVs", "all logs and activity scan receipts", "MMIO8 L01-L08 raw waveforms", "all R4 final evidence", "all current B evidence", "fixed 100-sample dataset and vendor libraries"],
-  "effect": "The historical MMIO8 gate functional result remains recorded. Direct raw-wave re-audit or new power analysis of MMIO8 L09-L12 requires regeneration from retained inputs. Those four VCDs must not be reported as still available. No R4 or B PASS is changed or inherited."
+  "preserved": [
+    "all source and firmware inputs",
+    "all mapped netlists and constraints",
+    "all summaries and raw output CSVs",
+    "all logs and activity scan receipts",
+    "MMIO8 L01-L08 raw waveforms",
+    "all R4 final evidence",
+    "all current B evidence",
+    "fixed 100-sample dataset and vendor libraries"
+  ],
+  "effect": "The historical MMIO8 gate functional result remains recorded. Direct raw-wave re-audit or new power analysis of MMIO8 L09-L12 requires regeneration from retained inputs. Those four VCDs must not be reported as still available. No R4 or B PASS is changed or inherited.",
+  "exact_sum_rechecked_server_time": "2026-11-12T09:03:52+08:00",
+  "local_transcription_correction": "Earlier local total120709954758 was transposed. Server receipt and four individual sizes unchanged; sum120705994578 independently reprinted."
 }
