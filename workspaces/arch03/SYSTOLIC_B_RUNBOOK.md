@@ -1,35 +1,35 @@
 # 5×16脉动B复现与结果收回
 
-本手册对应生产硬件`63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86`、v3布局`0x00100003`、source credits=3和IRQ/WFI固件。源码候选已固定，验收状态以[独立验收表](ACCEPTANCE_SYSTOLIC_B_20261111.md)为准。当前已有ASIC14通过；下列待运行步骤不能当作已有结果。
+本手册对应生产硬件`63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86`、v3布局`0x00100003`、source credits=3和IRQ/WFI固件。验收状态以[独立验收表](ACCEPTANCE_SYSTOLIC_B_20261111.md)为准。已完成自己的1200任务、ASIC14、DRC06同网表gate14和干净目录ASIC14；活动12和功耗12仍在进行。下列复现命令只供新环境使用，不能在现有运行目录重复启动。
 
 ## 当前作业，接手时先检查
 
-**11月12日19:22：原final02的B1200已通过30412800输出/零失败，队列和锁正常结束；crosscheck02也已实际通过。** 下一步在核空间/进程后生成power接续请求并唯一启动activity12→power12。见[19:22检查点](../../CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md)。不要重跑任何已完成的ASIC、批量、gate或R4捕获；下文18:33及更早状态属于历史。
+**11月12日20:34：唯一运行队列为power_final01，driver320367/activity child320434；L01–L03活动已完成，剩余9层继续，尚无B功耗数值。** 请求`operations/b_power_final01_request.json`已核验并执行，SHA为`e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0`。不要重新生成或启动。当前恢复入口为[20:26检查点及增量](../../CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md)。
 
-**11月12日18:33：当前唯一作业是final02批量149529/156788，已761任务、19286784输出、零失败；clean14、DRC06 gate14及范围限定的时序/面积审核均已通过。** 当前恢复入口为[18:33检查点](../../CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md)。下方16:18及更早运行身份均为历史，不得重启。
+原final02于19:13结束：1200任务、30,412,800输出、零失败。R4 crosscheck02于19:18通过，主要模块及整机SAIF/VCD差≤1%；1060默认声明逐个证实直接及叶连接均为空。失败的crosscheck01保留，不能把数值接近当作跳过连接审核的理由。
 
-现已部署的新16文件工具为`operations/systolic_b_tools_4b58ff0`，manifest SHA `bf8e214e70ac92b17b3ecc0c41497995ac0b1d0aa5c483a9662b0225b08f6289`；ced709输入仍不变。R4 replay01已完成，crosscheck01因1060默认活动网络未通过。新crosscheck02必须在原batch释放锁后，对每个实际缺失对象核实direct和leaf连接均为空，再检查全部主要模块≤1%；没有连接证明不能豁免默认活动。
+实际接续及最终报告使用16文件工具`operations/systolic_b_tools_4b58ff0`，manifest SHA `bf8e214e70ac92b17b3ecc0c41497995ac0b1d0aa5c483a9662b0225b08f6289`。受测基础包`light-light126-systolic-b-v3-20261112_114355-ced0e139a01e`的709输入manifest SHA为`39b127636ecaf61d2cd950efd2f83ef923cacf5274c6f4b3d363cbdb9a51155d`，从未修改。
 
-final02为功能专用队列，不会自动重采R4或启动B功耗。实际batch完成、R4方法通过后，使用新`systolic_b_power_queue.py`绑定已完成队列及其report_request，接续B activity12和power12；不重复ASIC14、1200或门级14。新接续请求目前尚未生成，不能执行占位命令宣称验证。
+power_final01只接续activity12→power_l01..12→最终report_request，不重复ASIC14、1200、门级14或R4捕获。终态后再调用同ops的`systolic_b_report.py`，使用实际生成的请求和新的输出目录。工具将独立复核输出、浮点误差来源及完整窗口；报告导出本身不自动批准时序、面积或未知活动影响。
 
-**11月12日16:18：下两段08:45状态是历史。** synth02已完成，validation02因入口参数失败，validation03已完成恢复/竞争/原网表门级；不得续跑。当前候选是ced包中的`runs/systolic_b_v3_drc06/systolic_b_synth`（摘要b8178003…4824ced），约束违规清零；当前唯一EDA为新`runs/systolic_b_v3_drc06_gate02/systolic_b_gate`，driver79264。先读[最新检查点](../../CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md)，实际锁位置是server_config.server_root下`.arch02_team_lock`。
+DRC06综合及其gate02均已完成。实际协作锁位于`server_config.server_root`下`.arch02_team_lock`。恢复时先核对队列、实际进程、锁和空间，不能因旧状态文件仍写running就重启作业。
 
-FTP421时经已授权VNC部署的小工具副本位于团队目录`operations/systolic_b_tools_52f37cc`，13文件manifest SHA `8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435`。原ced包709输入未改；gate02使用已核验d48副本，最终功耗使用52副本。不得用ced原SAIF工具覆盖后续修复。直接从ops调用最终队列或报告时，需`env PYTHONPATH=workspaces/arch03/scripts python3 <ops脚本> ...`。
+FTP421期间已经通过授权VNC部署上述工具，当前无需重传。gate02使用已核验d48副本，最终功能队列使用52f37cc副本，当前功耗和报告使用4b58ff0副本；这些来源分别保留。直接从ops调用时使用`env PYTHONPATH=workspaces/arch03/scripts python3 <ops脚本> ...`，不要用旧包工具覆盖新修复。
 
-R4 SAIF replay01已完成，摘要f7d542dd…3d21a；跨方法PT请求`operations/r4_saif_crosscheck01_request.json`已部署但未启动。合格后最终队列用`saif_qualification`引用实际结果，避免再次重放R4。新B功耗导入独立`mapped.precise.sdc`，实际HF周期必须6.666666ns；历史R4导入6.66667ns的舍入事实保留披露。
+R4 replay01摘要为f7d542dd…3d21a，crosscheck02摘要为a0a9bc62…c662d26，已由接续请求绑定，无需重放。B功耗导入独立`mapped.precise.sdc`，实际HF周期必须6.666666ns；历史R4导入6.66667ns的舍入事实保留披露。
 
-11月12日08:45启动的新综合为`systolic_b_v3_synth02`，driver183038；后继`systolic_b_v3_validation02_queue`为184658。它绑定同一综合开始时间`2026-11-12T08:45:21.455160`，按锁串行运行恢复、竞争、SAIF小试、时序诊断和gate14。读最新检查点，核对实际进程、锁、空间和状态后继续；不要重复执行本页示例启动相同阶段。
+早期运行及失败身份见[阶段报告](SYSTOLIC_B_PROGRESS_20261112.md)和根目录带日期检查点；不续跑validation01/02或旧8路/R1追加队列。
 
-旧synth01及validation01因磁盘满退出，状态文件保存失败而停留在running/waiting。没有最终网表可恢复，不是可续跑的综合。用户授权后已清理旧MMIO8 L09–L12四个VCD，其他证据保留，详见[清理回执](../../handoff/team/evidence/SERVER_WAVE_CLEANUP_20261112.json)。这不影响R4或B的输入。
+旧synth01及validation01因磁盘满退出，状态文件保存失败而停留在running/waiting，没有最终网表。用户授权的五次旧波形清理已完成，累计524880555968B，保留全部R4/B及旧小型结果、源码和重建输入。旧原始波形若再审计需要重生成；详见[第五次回执](../../handoff/team/evidence/SERVER_WAVE_CLEANUP_FIFTH_20261112.json)及此前四次清单。不要重复执行清理。
 
 ## 固定包与输入
 
-工具包：`light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.zip`，11,344,790字节，705项输入。
+当前本地交付工具包：`light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.zip`，11,397,311字节，722项输入，尚未上传或取得该新包的服务器复现。实际受测服务器基础包仍为上文ced709包。详见[新包身份核对](../../handoff/team/evidence/SYSTOLIC_B_DELIVERY_PACKAGE_20261112.json)：诊断sequence ELF容器哈希不同，但入口、全部加载段和boot镜像相同；不能称全部文件字节相同。
 
 | 内容 | SHA-256 |
 |---|---|
-| ZIP | `b2d31c9906a3d7f3640581d19fac568682f61e7fa3655fb59df692ed66c7d837` |
-| 包manifest | `ac83363a9b3ea5cd88976b13f66a12a6543e68607def89b7ce40496eb359f177` |
+| ZIP | `4654aa32bd8d89fc8d58f2228d01cf998c2924924f2817fa3d8fa6be423ba479` |
+| 包manifest | `47f6350037218b6d712cf3c24f5fa0e2f0759c262826ee9b68c1c044bca736c2` |
 | 生产固件manifest | `11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91` |
 | 生产ELF | `78599ba8a6f1bdf1a4002a4cb1ee1e53bad84bce88798f6e41a22e6189108827` |
 
@@ -53,8 +53,8 @@ from server_run import inputs
 from systolic_b_soc import verify_firmware
 from build_systolic_b_sequence import verify_firmware as verify_sequence
 manifest = inputs()
-assert len(manifest['files']) == 705
-assert hashlib.sha256(Path('manifest.json').read_bytes()).hexdigest() == 'ac83363a9b3ea5cd88976b13f66a12a6543e68607def89b7ce40496eb359f177'
+assert len(manifest['files']) == 722
+assert hashlib.sha256(Path('manifest.json').read_bytes()).hexdigest() == '47f6350037218b6d712cf3c24f5fa0e2f0759c262826ee9b68c1c044bca736c2'
 verify_firmware(Path('firmware'))
 verify_firmware(Path('firmware_contention'))
 verify_sequence(Path('firmware_sequence'))
@@ -98,7 +98,7 @@ python3 workspaces/arch03/scripts/server_run.py systolic_b_gate --session b_repr
 
 ## 最终批量、SAIF和功耗
 
-当前执行的`systolic_b_validation_queue.py`完成后，仅生成`validation_complete_review_required`。它不会自动授予时序或面积合格。源码候选记录`source-candidate-freeze`也不能用作最终队列要求的`freeze-review`。
+已完成的`systolic_b_validation_queue.py`仅生成`validation_complete_review_required`。它不会自动授予时序或面积合格。源码候选记录`source-candidate-freeze`也不能用作最终队列要求的`freeze-review`。
 
 独立审阅实际ASIC、综合、gate、sequence和contention五个摘要后，准备绑定各自路径与SHA的`freeze_review`和最终请求。已有`systolic_b_finalize_queue.py`核验全部来源后按以下顺序执行：
 
@@ -108,7 +108,7 @@ python3 workspaces/arch03/scripts/server_run.py systolic_b_gate --session b_repr
 4. 原生SAIF与既有VCD功耗对照：整机及主要模块差≤1%，否则保留失败并停止该功耗路径。
 5. B同网表12层完整SAIF、活动范围/驻留审核和12层系统功耗。
 
-固定内部100样本数据目录为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA为`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。批量入口逐例保存输出、CPU/IRQ/WFI、窗口和来源回执，空间按实测例大小加20%余量及2GiB保留检查。旧R4的原始VCD仍保留，SAIF方法尚未实测通过。
+固定内部100样本数据目录为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA为`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。批量已逐例保存输出、CPU/IRQ/WFI、窗口和来源回执。空间按实测例大小加20%余量及2GiB保留检查。R4原始VCD仍保留，SAIF方法已实测通过。
 
 最终队列命令接口：
 
@@ -134,9 +134,9 @@ python3 workspaces/arch03/scripts/systolic_b_finalize_queue.py --request <实际
 |---|---|
 | RTL、驱动、布局和参数转换 | 固定包、[B接口](SYSTOLIC_B_ABI.md)、[v3布局](SYSTOLIC_B_LAYOUT_V3.md)、`scripts/systolic_b_codec.py`。ABI末尾旧开发状态不覆盖最新验收表 |
 | 软件数值模型与浮点误差 | `scripts/numeric.py`、`scripts/evaluate.py`、`scripts/systolic_b_precision.py`。Q12数学规则沿用[数值说明](NUMERIC_FORMAT.md)；该旧文档的8路LOAD/ITCM加载示例不是B传输路径 |
-| 实际ASIC和综合前后功能一致性 | B自己的ASIC14已通过；同网表gate14、最终1200与干净目录复现等待本轮实际结果 |
-| SDC、综合网表、时序和面积 | 等当前synth02的实际工件与独立审阅；源代码宏数与旧v2结果不能代替 |
-| SAIF/VCD、整机功耗和能耗 | 原生SAIF小试、R4同窗口交叉核对、B活动12/功耗12均待；不提交空占位功耗为零 |
+| 实际ASIC和综合前后功能一致性 | B自己的ASIC14、同DRC06网表gate14、最终1200及干净ASIC14均已通过；最终报告独立复核待完成 |
+| SDC、综合网表、时序和面积 | DRC06实际工件及范围限定审核已完成，面积上界1.0990947mm²、任务模式150MHz通过；无物理签核 |
+| SAIF/VCD、整机功耗和能耗 | 原生SAIF小试、R4同窗口交叉核对通过；B活动3/12，其后功耗12待完成；缺值不记零 |
 | 创新对照及答辩 | [B创新说明](SYSTOLIC_B_INNOVATION_20261112.md)、R4完整交付证据；B新增PPA齐备后补同配置对照表 |
 | 版本与校验值 | 包manifest、源码候选记录、每阶段summary/state、报告receipt及实际库/网表/活动哈希 |
 

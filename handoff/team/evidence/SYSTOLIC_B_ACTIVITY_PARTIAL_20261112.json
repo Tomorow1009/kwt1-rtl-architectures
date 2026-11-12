@@ -1,0 +1,30 @@
+{
+  "schema": "systolic-b-partial-native-saif-observation-v1",
+  "observed": "2026-11-12T20:40:44.190386+08:00",
+  "run": "runs/systolic_b_power_final01_activity12/systolic_b_saif",
+  "bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "completed_cases": ["layer_01", "layer_02", "layer_03"],
+  "first_case": "layer_01",
+  "first_duration_ns": "208926.645774",
+  "first_timescale_ns": "0.000001",
+  "first_declarations": 618149,
+  "first_unknown_declarations": 41406,
+  "first_fully_unknown_declarations": 18620,
+  "unknown_representation": "VCS_combined_TX_X_or_Z",
+  "declaration_counts_include_aliases": true,
+  "component_counts_overlap": true,
+  "first_component_declarations_and_unknown": {
+    "cpu": [58670, 10502],
+    "itcm": [2968, 768],
+    "dtcm": [2873, 1664],
+    "accelerator": [466168, 17083],
+    "shared": [5745, 2208],
+    "interconnect": [478268, 19316]
+  },
+  "source": "Read-only existing case_progress.json observation; no new simulation or activity modification.",
+  "unknown_effect_on_power_approved": false,
+  "activity12_complete": false,
+  "B_power_numbers_available": false,
+  "system_power_verified": false,
+  "note": "Counts are declarations, not distinct physical nets or a power-error fraction. Functional correctness does not quantify the effect of unknown activity. Final complete report must bind every layer and its file hash."
+}

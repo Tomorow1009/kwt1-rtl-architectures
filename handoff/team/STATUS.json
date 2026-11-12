@@ -2763,7 +2763,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "f56b642e28a0c3b18abe906b3ccd169e57e94c72",
+    "cloud_commit": "8f52e26ba769f6550502146f0eea5492fb3df86e",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -3222,22 +3222,23 @@
       "queue_pid": 320367,
       "child_pid": 320434,
       "request_sha256": "e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0",
-      "activity_cases_completed": 3,
-      "observed": "2026-11-12T20:34:04.308726+08:00",
+      "activity_cases_completed": 4,
+      "observed": "2026-11-12T20:42:52.914095+08:00",
       "initial_storage_required_bytes": 4872908231,
       "initial_storage_free_bytes": 117758230528,
-      "active_case": "layer_04",
+      "active_case": "layer_05",
       "first_SAIF_bytes": 114841176,
       "first_case_outputs": 25344,
       "first_case_cycles": 31339,
       "first_case_host_capture_and_audit_seconds": 831.358975,
       "remaining_capture_estimate_seconds_with_20percent_margin": 10973.93847,
-      "free_bytes_observed": 147345089536,
-      "remaining_storage_budget_bytes": 3390740552,
+      "free_bytes_observed": 143933833216,
+      "remaining_storage_budget_bytes": 3252652093,
       "case_SAIF_bytes": {
         "layer_01": 114841176,
         "layer_02": 114816275,
-        "layer_03": 114795630
+        "layer_03": 114795630,
+        "layer_04": 114796107
       }
     },
     "wave_cleanup_third": {
@@ -3299,6 +3300,7 @@
       "bytes": 102909728001,
       "cumulative_bytes": 524880555968,
       "R4_B_preserved": true
-    }
+    },
+    "partial_activity_evidence": "handoff/team/evidence/SYSTOLIC_B_ACTIVITY_PARTIAL_20261112.json"
   }
 }
