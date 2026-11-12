@@ -1,0 +1,37 @@
+{
+  "schema": "systolic-b-own-asic1200-observed-v1",
+  "observed": "2026-11-12T19:16:42+08:00",
+  "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "run": "runs/systolic_b_final02_final1200/systolic_b_batch",
+  "status": "passed",
+  "finished": "2026-11-12T19:13:30.024913",
+  "summary_sha256": "017e7ca728e0c6f647660ef981f8d00541b552c0a38dec103809d9cc0c67fb09",
+  "source_schema": "arch03-systolic-b-batch-v3",
+  "samples": 100,
+  "tasks": 1200,
+  "checked_outputs": 30412800,
+  "failed": 0,
+  "asic_cpu_verified": true,
+  "cpu_executed": true,
+  "mean_task_cycles": 30503.34,
+  "host_elapsed_seconds": 6467.2296481919475,
+  "firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
+  "queue": {
+    "run": "runs/systolic_b_final02_queue",
+    "status": "reports_ready_review_required",
+    "finished": "2026-11-12T19:13:30.060546",
+    "report_request_sha256": "67b1e150943f6c0d35a08811b31d0067d93a1c3bc6b076c5f15aefbc777e3fb2",
+    "child_pid": null,
+    "lock_released_observed_at": "2026-11-12T19:14:44.992286"
+  },
+  "verification_method": "Read actual batch summary, match its SHA to original completed queue reference, and read actual stage passed state. All output checking was performed by the real ASIC/E203 batch. Final exporter independent per-receipt re-audit remains pending.",
+  "independent_final_report_reaudit_complete": false,
+  "official_precision_verified": false,
+  "B_activity_and_power_complete": false,
+  "notes": [
+    "This is B own new1200, not reused R4 evidence or resumed historical37.",
+    "The1200 mean30503.34 cycles differs from the fixed12-layer performance mean30502.333333; do not mix their task sets.",
+    "Internal100 sample precision is not official random600 acceptance."
+  ]
+}

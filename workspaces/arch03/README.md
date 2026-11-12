@@ -1,4 +1,8 @@
-**11月12日12:48：B ASIC14/门级14均已通过；综合4项max_transition违规尚待修复，时序未批准。** [当前检查点](../../CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md)记录原队列终态、279.51GiB授权清理及新修复工具。新工具尚未服务器运行，自己的1200/功耗待验，R4保留。
+**当前入口（11月12日19:22）：** 直接5×16脉动B已完成自己的真实ASIC/E2031200任务、30,412,800输出，零失败；ASIC14、CPU恢复/竞争、DRC06同网表功能门级14和声明任务模式时序/面积审核已通过。SAIF/VCD方法对照已通过，B自己的活动与功耗仍待完成。12层完整平均30502.3333周期、150MHz折算4917.6566task/s，面积保守上界1.0990947mm²。见[B交付索引](SYSTOLIC_B_DELIVERY_20261112.md)、[实施计划](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md)、[复现手册](SYSTOLIC_B_RUNBOOK.md)和[最新检查点](../../CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md)。R4及其全部交付证据保留；更早37组停止记录不是当前批量状态。
+
+以下按日期保留历史，不覆盖上述进度或实际运行终态；不得据旧PID重启队列。
+
+**11月12日12:48：B ASIC14/门级14均已通过；综合4项max_transition违规尚待修复，时序未批准。** [历史检查点](../../CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md)记录原队列终态、279.51GiB授权清理及新修复工具。当时自己的1200/功耗待验，R4保留。
 
 **Active: direct 5x16 systolic B/v3, credits3; ASIC/E20314 passed (30502.33 cycles / 4917.66 task/s at150MHz).** Read [B plan](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md), [B acceptance](ACCEPTANCE_SYSTOLIC_B_20261111.md), [B reproduction runbook](SYSTOLIC_B_RUNBOOK.md), and [latest checkpoint](../../CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md). Authorized obsolete MMIO8 wave cleanup released112.42GiB; R4/B evidence retained. Fresh synth02 PID183038 and validation02 queue184658 are running as last observed08:52 on Nov12; inspect live state before actions, never duplicate launches. Source candidate frozen; own1200, mapped gate, timing/area and SAIF/power still require their own evidence. R4 remains delivery fallback.
 

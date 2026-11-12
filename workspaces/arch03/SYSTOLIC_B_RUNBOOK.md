@@ -4,6 +4,8 @@
 
 ## 当前作业，接手时先检查
 
+**11月12日19:22：原final02的B1200已通过30412800输出/零失败，队列和锁正常结束；crosscheck02也已实际通过。** 下一步在核空间/进程后生成power接续请求并唯一启动activity12→power12。见[19:22检查点](../../CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md)。不要重跑任何已完成的ASIC、批量、gate或R4捕获；下文18:33及更早状态属于历史。
+
 **11月12日18:33：当前唯一作业是final02批量149529/156788，已761任务、19286784输出、零失败；clean14、DRC06 gate14及范围限定的时序/面积审核均已通过。** 当前恢复入口为[18:33检查点](../../CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md)。下方16:18及更早运行身份均为历史，不得重启。
 
 现已部署的新16文件工具为`operations/systolic_b_tools_4b58ff0`，manifest SHA `bf8e214e70ac92b17b3ecc0c41497995ac0b1d0aa5c483a9662b0225b08f6289`；ced709输入仍不变。R4 replay01已完成，crosscheck01因1060默认活动网络未通过。新crosscheck02必须在原batch释放锁后，对每个实际缺失对象核实direct和leaf连接均为空，再检查全部主要模块≤1%；没有连接证明不能豁免默认活动。
@@ -85,6 +87,14 @@ python3 workspaces/arch03/scripts/server_run.py systolic_b_gate --session b_repr
 ```
 
 综合必须来自B新网表，核实92个内部小宏、128个复用大宏、无锁存器/组合环、声明条件下setup/hold及项目面积≤2mm²。严格范围审阅需要查看约束、结构告警、时钟与例外，不能仅以一行正裕量代替。门级是同网表功能仿真，不含SDF；工具直接禁止B gate通过`--activity-cases`产生大VCD。
+
+### 当前DRC06映射的复现边界
+
+上述从RTL开始的`systolic_b_synth`命令只产生新的综合结果，**不会自动得到已受测DRC06的零违规结论**。当前合格映射经过独立、保留历史输入的DRC04→05→06修复链：先执行仅设计规则增量优化，再对四个实测驱动及其三个上游NOR3作等价升驱动。脚本检查旧单元身份、库引脚方向与逻辑函数，不改变原任务约束。
+
+当前最终DRC06来自同ced包`runs/systolic_b_v3_drc05/systolic_b_synth`，该种子摘要SHA为`55fcf35b3d2d01ea782f7f543bc00b1ae49078e9f1b9c66534ab33c1e8765bbe`。精确重放这一修复使用新session调用已核验ops的`systolic_b_synth`阶段，并以`--synth-run`、`--synth-sha256`绑定该原种子。入口为`operations/systolic_b_tools_4b58ff0/systolic_b_ops.py`，其`--bundle`、`--bundle-sha256`和`--ops-sha256`见本页当前作业段。原种子、原编译库路径和摘要均须可读且哈希一致；不复制厂商库到提交包。
+
+修复脚本的两种定向方案显式绑定原DRC04/05摘要，因此不能把全新综合摘要改名后直接冒充原种子，也不能据源码相同而借用原DRC06 PASS。新综合网表需要自己的约束、面积、门级与功耗审核。当前干净目录复现是独立重新编译的真实ASIC/E20314；受测DRC06网表另有自己的14例功能门级。它们不等于从任意新版工具或布局条件自动复现相同时序。
 
 ## 最终批量、SAIF和功耗
 
