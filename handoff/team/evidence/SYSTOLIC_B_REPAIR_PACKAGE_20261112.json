@@ -1,0 +1,73 @@
+{
+  "status": "hardware_production_firmware_and_runtime_images_unchanged",
+  "reference": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "package": "light-light126-systolic-b-v3-20261112_124724-62faf496be31",
+  "files_compared": 39,
+  "firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
+  "elf_sha256": "78599ba8a6f1bdf1a4002a4cb1ee1e53bad84bce88798f6e41a22e6189108827",
+  "irq_image_sha256": "2bf8bb0f8e2fb9d310bdcee925221edc9decc3b2a2f875c3483781f67e4e79b2",
+  "hardware_and_runtime_images_identical": true,
+  "diagnostic_sequence_elf_nonloaded_differences": {
+    ".debug_info": {
+      "before": [
+        0,
+        7951,
+        "2c78545c8bb34110f6839c9c60a14646ebb2fe19adbe6e3270dc0e4b887c5611"
+      ],
+      "after": [
+        0,
+        7951,
+        "7ec6134dcaaa792ab199a87df59515b22c3e5061e821789a09307479603cb5b9"
+      ]
+    },
+    ".debug_line": {
+      "before": [
+        0,
+        6513,
+        "c0c20e189207e83291488624cb0f4d7785dd5086cc736f25474186ba5db885ec"
+      ],
+      "after": [
+        0,
+        6513,
+        "a286620306415cd90777cca05125ef7831ea3fad74166ad2f9baa1b6edd868ff"
+      ]
+    },
+    ".debug_str": {
+      "before": [
+        48,
+        2210,
+        "cd5339b40495cae06842f3ab067ca860ca51e7ebf8a9469438bc2ba039513f25"
+      ],
+      "after": [
+        48,
+        2210,
+        "7f8f354f55cb810a32cc6b2bfe794b5072c6c3947bba896e334274656fcca3ef"
+      ]
+    },
+    ".symtab": {
+      "before": [
+        0,
+        24080,
+        "f29760d722a140ee5dc3d63fb51f1897b711a7ec9282448be6b818f924d3a511"
+      ],
+      "after": [
+        0,
+        24080,
+        "cfa815ddb749134c015e7b6b2e61e500f2993dd4efcbe6cd25f8591ab5db73ce"
+      ]
+    }
+  },
+  "diagnostic_sequence_manifest_changed_field": "elf_sha256",
+  "schema": "systolic-b-repair-tool-package-v1",
+  "source_commit": "62faf496be3101dfbff287d299ce74886da417c9",
+  "zip_bytes": 11364003,
+  "inputs": 712,
+  "zip_sha256": "b9eb6819561e502b092706cbbd25d5128f3b891478b5532d72c3681f07816462",
+  "manifest_sha256": "17f72b859ef15ea3d8561a6ae293e691a19d2f551197e80fb868c89e8b2b64eb",
+  "archive_all_inputs_verified": true,
+  "board_staged_verified": true,
+  "ftp_uploaded": false,
+  "server_unpacked": false,
+  "actual_repair_started": false,
+  "local_tool_tests": 12
+}
