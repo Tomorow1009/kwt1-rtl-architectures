@@ -42,3 +42,21 @@ N1实际ASIC/E203、1200任务、综合/150MHz/1.20mm²、同网表门级14、�
 - N1全部本地RTL/数据/压力/诊断实现已就绪；N1 gate/structure/timing工具12检查和7个observer fixture通过，SAIF/power/report准备12检查通过。全部明确未真实EDA，未进入N2。
 - 根n1_server已接soc/build/batch/synth/contention/sequence/gate/timing_audit/saif/power，实际state与目录名统一n1_前缀以匹配报告。4项锁、失败保存、前置证据和stage名称测试通过。门级只核实际result/sat，total_checked=false；真实ASIC14/1200仍严格total33。
 - 下一步提交实现并从Git导出新的N1独立包（含IRQ/竞争/恢复固件），通过既有FileZilla上传和校验。当前未上传、未启动N1服务器正式作业。VNC18874436/workspace3为空闲shell，无待Return，FileZilla未开。
+
+## 01:43增量（覆盖上方包/传输状态）
+
+- N1实现冻结提交`9305c6948c764fed01fe86b20bb3db94170299ab`，已push至个人新分支并用ls-remote复核一致。B0冻结未变。
+- 包`light-light126-n1-v4-20261113_013211-9305c6948c76.zip`，8816232B，763文件，SHA`6e0aa086526f10485f41260c7c9a623515edd3f35b08941720a9f8e5bb3eb772`。通过开发板FileZilla上传成功；服务器原unpack工具逐项哈希通过，解到同名新bundle。**不得重传/重复解包。**
+- FileZilla曾因重连密码弹窗打断批量路径输入出现一次530，已用既有秘密文件在实际密码对话框登录解决，无凭据输出。成功传输后FileZilla已关闭；VNC继续workspace3。当前终端cwd已切到新N1包，旧ced包不再是cwd。
+- 新包status在01:41显示SESSION_NOT_STARTED、锁未显示（不存在）、free13493075968B。N1正式作业仍未启动。
+- **自动审批拒绝R4 L01归档后删除raw动作**：理由是概括清理授权未具体覆盖R4基线。整条launch工具调用被拒绝，未输入VNC、没有进程或归档run。不得绕过或重试删除；用户具体授权问题已发，等待回复。先保留R4原始VCD，利用现有空间推进N1。
+- 最后已在新N1包VNC输入并Return：逐项核4800HEX的`n1_data.index_dataset`只读审计，输出`runs/data100_identity01.json`，先打印N1_DATA100_AUDIT_START。需截图读取其结果；若仍运行不要重复输入。没有挂起的local exec session。
+
+## 01:50增量（覆盖上方审批与正式作业状态）
+
+- 压缩后已重读AGENTS、计划、根交接和本检查点。用户具体批准R4 L01无损归档，完整解压SHA/字节数与无人使用检查通过后才删重复raw；此前拒绝已由这项新授权解决。
+- 100条实际4800HEX文件集合/大小/哈希核验通过，1200层。服务器回执`runs/data100_identity01.json`，SHA`38fe007403c63075239a3a8b0b27fba47b614329a4bffce6cd807bcb6665542b`；不是硬件或完整float精度PASS。
+- 01:47预检无共享锁、无EDA/旧queue，free10913579008B。01:48:24唯一`n1_asic14_01`启动PID130549，stage`n1_soc`，01:49仍running/编译，尚未用例PASS。日志`runs/n1_asic14_01.driver.log`；不得重复启动。
+- 已批准的唯一R4 L01归档`runs/r4_l01_archive01`启动PID131387（01:48:48）。预算required7234289376B通过，singleworker/nice19/ionice3。01:49状态仍原始核验阶段，未确认压缩/删raw完成。后续必须读取receipt.json，不能重启/误报释放空间。
+- 01:49 free10044309504B，受其他共享用户影响继续下降。新N1包路径：`.../bundles/light-light126-n1-v4-20261113_013211-9305c6948c76`。VNC窗口18874436/workspace3为空闲shell，FileZilla已关闭。
+- 并行代理仅做N1：B0未知功耗证据梳理、缺失float来源/精度重审工具、N1综合与旧DRC06整合风险审查。N2仍未实施。下一步读取现有ASIC14与归档进度，后续CPU恢复/竞争和综合串行推进；不得重复旧B0队列。

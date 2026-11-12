@@ -1,0 +1,69 @@
+{
+  "schema": "arch03-n1-server-progress-v1",
+  "observed_at": "2026-11-13T02:12:42+08:00",
+  "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-n1-v4-20261113_013211-9305c6948c76",
+  "bundle_zip_sha256": "6e0aa086526f10485f41260c7c9a623515edd3f35b08941720a9f8e5bb3eb772",
+  "data100_identity": {
+    "status": "file_identity_passed",
+    "tasks": 1200,
+    "hex_files": 4800,
+    "inventory_sha256": "ae052bc1e543930abece8202a5b1439dcbd50dd4f5d7d09fb8f049eb30eeb997",
+    "receipt": "runs/data100_identity01.json",
+    "receipt_sha256": "38fe007403c63075239a3a8b0b27fba47b614329a4bffce6cd807bcb6665542b",
+    "scope": "file set, lengths, hashes and numeric metadata; not a hardware or float accuracy result"
+  },
+  "asic14": {
+    "status": "passed",
+    "run": "runs/n1_asic14_01/n1_soc",
+    "summary_sha256": "56fb13bcd320ad1895506ed30399205ad31c30e1dfa0d95d75e944e051bde58b",
+    "cases": 14,
+    "outputs": 354816,
+    "fields": [
+      "total_signed33",
+      "result_signed16",
+      "saturated"
+    ],
+    "irq_wfi_verified": true,
+    "global_FPGA_defined": false,
+    "fixed12_mean_full_cycles": 29711,
+    "fixed12_task_s_at_150MHz": 5048.635185621487,
+    "performance_scope": "RTL simulation with complete first-source-VALID through final successful output ACK and drain; frequency conversion, not chip measurement"
+  },
+  "sequence": {
+    "status": "passed",
+    "session": "n1_sequence_01",
+    "outputs": 76032,
+    "summary_sha256": "ea69582933628c305e3e9502b91dddeff373b0233b1157851bc353f3ba6b52da"
+  },
+  "r4_l01_archive": {
+    "status": "failed_space_reserve_original_retained",
+    "session": "r4_l01_archive01",
+    "pid": 131387,
+    "explicitly_authorized": true,
+    "raw_removed_verified": false,
+    "failed_partial_bytes_removed": 3240049537
+  },
+  "batch1200_verified": false,
+  "mapped_gate_verified": false,
+  "timing_verified": false,
+  "area_verified": false,
+  "system_power_verified": false,
+  "full100_float_precision_verified": false,
+  "n1_stage_accepted": false,
+  "n2_started": false,
+  "contention": {
+    "status": "passed",
+    "session": "n1_contention_01",
+    "outputs": 50688,
+    "summary_sha256": "0727e713fb9de027f6ebc6d6078a161b65de5c67d54dd45b78ebd053309c4761"
+  },
+  "synthesis": {
+    "status": "running",
+    "pid": 169157,
+    "session": "n1_synth01",
+    "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
+    "shared_original_team_lock": true,
+    "permanent_archive_required": true
+  }
+}

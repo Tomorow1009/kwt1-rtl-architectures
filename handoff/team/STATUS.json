@@ -3363,12 +3363,12 @@
     }
   },
   "narrow_execution": {
-    "status": "N1_local_validation_passed_server_space_limited",
+    "status": "N1_asic14_sequence_contention_passed_synthesis_running",
     "branch": "codex/light-light126/arch03-n1-n2-d1-d2-20261113",
     "h0": "2026-11-13T00:49:49+08:00",
     "base_commit": "cd4a63ad4a4c7ab5e07b471bf70d7fd2fbc6bc5f",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261113_0120_N1.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261113_0215_N1.md",
     "phase_order": [
       "N1",
       "N2",
@@ -3380,18 +3380,32 @@
     "numeric_format": "0x000e0c20",
     "B0_preserved": true,
     "full_float_source_available": false,
-    "new_server_jobs_started": false,
+    "new_server_jobs_started": true,
     "new_hardware_verified": false,
     "current_work": [
-      "independent narrow RTL",
-      "new-format data adapter",
-      "10000-block independent stress test",
-      "firmware and SoC integration"
+      "real ASIC/E203 fourteen cases",
+      "approved lossless R4 L01 archival",
+      "full100 float precision preparation",
+      "B0 unknown-activity impact review"
     ],
     "next": "Finish N1 only; no N2 RTL until all N1 acceptance complete.",
     "array_random_blocks_passed": 10000,
     "array_outputs_passed": 794560,
     "local_dma14_outputs_passed": 354816,
-    "local_cpu_executed": false
+    "local_cpu_executed": false,
+    "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+    "data100_file_identity_passed": true,
+    "server_observed_at": "2026-11-13T02:12:42+08:00",
+    "server_session": "n1_synth01",
+    "server_pid": 169157,
+    "archive_session": "r4_l01_archive01",
+    "archive_pid": 131387,
+    "archive_explicitly_authorized": true,
+    "archive_completed": false,
+    "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
+    "archive_status": "first_attempt_failed_space_original_retained",
+    "asic14_verified": true,
+    "sequence_verified": true,
+    "contention_verified": true
   }
 }
