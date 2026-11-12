@@ -1,0 +1,33 @@
+{
+  "schema": "authorized-obsolete-wave-cleanup-observed-v1",
+  "observed": "2026-11-12T19:40:26.113199+08:00",
+  "authorization": "User explicitly authorized deleting previously verified large files unlikely to be needed, then continuing B. Applies to these obsolete project waves; all R4/B protected.",
+  "status": "deleted_independently_confirmed",
+  "receipt_run": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/authorized_cleanup_20261112_fourth.json",
+  "receipt_sha256": "0c8310269eee5ba94ef8931082ecfde9ef3048cd3f44e72abee91ab761445df5",
+  "files": [
+    {
+      "relative_to_bundles": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696/runs/mmio8_source_gate01/mmio8_gate/layer_01.vcd",
+      "bytes": 30231391361,
+      "summary_sha256": "b13216142fe97f8341942d53ded9de806fc96cb89feecfe64dc4270f6a4d4dfa",
+      "stage_passed": true
+    },
+    {
+      "relative_to_bundles": "light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_gate07_h0/gate_soc/layer_01.vcd",
+      "bytes": 31246581717,
+      "summary_sha256": "4e735f46f27f643c820f59b386e1e4e04eca5f02b0719a50330a2a40a6e82f8e",
+      "stage_passed": true
+    }
+  ],
+  "bytes_removed": 61477937078,
+  "cumulative_four_cleanups_bytes": 421970791967,
+  "all_target_files_absent": true,
+  "retained_summary_source_inputs_and_output_csv_hashes_verified": true,
+  "no_open_handles_before_delete": true,
+  "strict_resolved_project_path_size_and_receipt_checks": true,
+  "R4_B_and_vendor_libraries_untouched": true,
+  "free_bytes_after_observed": 127573950464,
+  "free_space_note": "Shared free-space change also includes concurrent activity by other users; only listed bytes are attributed to this cleanup.",
+  "reproduction_impact": "These two raw VCDs require regeneration for a future raw waveform/power re-audit. Historical summary, captured outputs, sources, logs, netlists and rebuilding inputs are retained. No old VCD availability claim.",
+  "not_deleted": "Old d3_activity01 layer01 had no expected summary.json; not qualified for this cleanup and retained."
+}

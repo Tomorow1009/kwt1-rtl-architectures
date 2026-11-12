@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "own1200_and_SAIF_method_passed_B_power_pending",
+    "status": "own1200_and_SAIF_method_passed_B_activity12_running",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1950_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,19 +2683,18 @@
     "new_gate_verified": true,
     "new_ppa_verified": false,
     "new_final1200_verified": true,
-    "next": "Sync completed evidence, inspect storage and real lock, generate unique power continuation request, run B activity12 then power12; final independent report audit pending.",
+    "next": "Continue unique power_final01 activity12 then power12, monitor actual disk and host time; final independent report and precision audit remain. Do not repeat completed runs or cleanup.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T19:21:22+08:00",
-      "queue_pid": null,
-      "child_pid": null,
-      "stage": null,
-      "status": "idle_after_crosscheck02_pass",
+      "time": "2026-11-12T19:48:59.519791+08:00",
+      "queue_pid": 320367,
+      "child_pid": 320434,
+      "stage": "systolic_b_saif",
+      "status": "running",
       "foreground": "VNC workspace3 ced shell; window18874436",
-      "free_bytes": null,
-      "lock_exists": false,
+      "free_bytes": 115593969664,
       "last_disk_observation": {
         "time": "2026-11-12T19:17:20.448357+08:00",
         "free_bytes": 43889197056
@@ -3213,12 +3212,20 @@
       "source_commit": "4b58ff0abdff071165194574c569693b15d711f3"
     },
     "power_continuation": {
-      "status": "deployed_not_started",
+      "status": "running_activity12",
       "local_checks_passed": 3,
-      "request_generated": false,
+      "request_generated": true,
       "own1200_repeated": false,
       "operations_directory": "operations/systolic_b_tools_4b58ff0",
-      "runner_sha256": "e9779c72bae7652cade03ed2f26644a0a2ebbb493c9c269a1bc9bb0c53c90366"
+      "runner_sha256": "e9779c72bae7652cade03ed2f26644a0a2ebbb493c9c269a1bc9bb0c53c90366",
+      "session": "systolic_b_power_final01",
+      "queue_pid": 320367,
+      "child_pid": 320434,
+      "request_sha256": "e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0",
+      "activity_cases_completed": 0,
+      "observed": "2026-11-12T19:48:59.519791+08:00",
+      "initial_storage_required_bytes": 4872908231,
+      "initial_storage_free_bytes": 117758230528
     },
     "wave_cleanup_third": {
       "status": "deleted_independently_confirmed",
@@ -3261,6 +3268,14 @@
       "physical_signoff": false,
       "limits": "This qualifies SAIF as the activity transport method against frozen R4 L01; it does not provide B power or approve unknown-state/model impact.",
       "evidence": "handoff/team/evidence/SYSTOLIC_B_SAIF_METHOD_20261112.json"
+    },
+    "wave_cleanup_fourth": {
+      "status": "deleted_independently_confirmed",
+      "evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_FOURTH_20261112.json",
+      "receipt_sha256": "0c8310269eee5ba94ef8931082ecfde9ef3048cd3f44e72abee91ab761445df5",
+      "bytes": 61477937078,
+      "cumulative_bytes": 421970791967,
+      "R4_B_preserved": true
     }
   }
 }
