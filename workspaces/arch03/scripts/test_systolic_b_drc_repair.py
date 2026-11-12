@@ -27,6 +27,12 @@ class RepairTests(unittest.TestCase):
             repaired=repair.repair_script(root,{'standard_library_member':'standard.db'},original)
             self.assertEqual(repaired.count(str(original/'libs')),3)
             self.assertNotIn('{'+str(root/'libs'),repaired)
+            targeted=repair.repair_script(root,{'standard_library_member':'standard.db'},original,True)
+            self.assertIn('size_cell $cell $newname',targeted)
+            self.assertIn('Sizing function mismatch',targeted)
+            self.assertIn('compile -incremental_mapping -map_effort high',targeted)
+            self.assertNotIn('set_max_transition',targeted)
+            self.assertIn('source task_mode.sdc',targeted)
 
     def test_copy_rejects_changed_input_and_existing_output(self):
         with tempfile.TemporaryDirectory() as directory:

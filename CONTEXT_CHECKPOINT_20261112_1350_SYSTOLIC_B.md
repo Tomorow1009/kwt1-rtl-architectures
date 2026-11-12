@@ -1,5 +1,15 @@
 # B 接续检查点：2026-11-12 13:50
 
+## 14:18增量
+
+0d49b5a40a94f7fcd758f32413e828539b3c7c3d已推送并ls-remote核对；operations/systolic_b_tools_0d49b5a八工具已13条短命令全部部署，manifest f3de6248fbd4c5a8193c583c162a4c9620ffcb0aa2e186c334e7806fca900824，禁止重复。13:58:16无锁/无EDA、405.9414GiB。
+
+SAIF probe03经典端口语法已经修好，VCS和PT read_saif实际执行，但小试查询失败：PT端口没有static_probability/toggle_rate属性。已阅读安装版本官方get_switching_activity文档，改为返回对象/值/注释来源列表，待提交和新probe04；仍不能称SAIF资格通过。failed03目录保留。
+
+只读drc_inspect01 PID237866于14:10:34.976405 passed，summary b f10不带空格完整为bf101b36b56129d269fbb588391cbc839970cb1ef4e29678585e5f76b5bc9c2c。四驱动dont_touch/dont_size/size_only均未设；库中存在BUFV4RD_12TR40及AOI22V4_12TR40。新本地DRC05拟只针对这四实例等价升驱动，检查端口/函数相同，防止增量优化重新降驱动，保留原约束；新映射必须新gate。DRC04 DDC仍记忆8d库身份，新的compile必须沿mapped_repair.compile_library_directory绑定8d，不能改为04副本路径。7项本地工具保护检查通过，尚未部署下一修复。
+
+当前无EDA、VNC工作区3/ced shell、FZ关闭。最新只读文档查询已完成。一次本地截图命令误写不存在脚本，仅该末尾截图失败；远端文档查询已执行，随后截图已补读，无远端副作用。下一步提交新工具差分，probe04与drc05串行执行。
+
 任务 ACTIVE，继续直接B计划。源冻结63da6ba/v3/credits3，不增架构。R4保底。用户授权清理完成后继续；FTP421用户确认没有队友使用，不重复询问。工作区3，禁止工作区4。
 
 ## 已完成

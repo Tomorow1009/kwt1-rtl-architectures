@@ -56,7 +56,10 @@ def inspect(cfg, run, original, digest, call):
         artifacts={p.name:sha(p) for p in run.iterdir() if p.is_file()})
 
 
-def repair_script(run, cfg, original=None):
+DRC04_SHA = 'dd960574b5ac119192055932b7fadcf7e245fa97446d4370d8b6a49d4e990ca4'
+
+
+def repair_script(run, cfg, original=None, targeted=False, library_directory=None):
     text = synth.script(run, cfg)
     if original is not None:
         # DDC remembers the original library file identities. Compiling with
@@ -64,13 +67,51 @@ def repair_script(run, cfg, original=None):
         # for fixed technology cells. Keep the original verified DB paths for
         # this compile; fresh local copies still support downstream reporting.
         old = str(Path(run)/'libs')
-        new = str(Path(original)/'libs')
+        new = str(library_directory or Path(original)/'libs')
         if text.count(old)!=3:raise ValueError('Expected exact three DB paths in repair template')
         text=text.replace(old,new)
     text = synth.replace_once(text, 'read_ddc linked.ddc', 'read_ddc repair_seed.ddc')
     text = synth.replace_once(text, 'compile -map_effort high\n', '')
-    text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high',
-                              'compile -incremental_mapping -only_design_rule')
+    if targeted:
+        # Only the four exact, inspected DRC04 drivers are changed. Verify
+        # matching pin directions/functions before selecting higher drive.
+        sizing = r'''
+set prefix u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core
+set sized [open targeted_sizing.tsv w]
+foreach {instance expected replacement} {
+ U32684 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U32686 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U32433 BUFV2RD_12TR40 BUFV4RD_12TR40
+ U30602 AOI22V2_12TR40 AOI22V4_12TR40
+} {
+ set cell [get_cells $prefix/$instance]
+ if {[sizeof_collection $cell]!=1 || [get_attribute $cell ref_name] ne $expected} {error "Targeted driver mismatch $instance"}
+ set old [get_lib_cells */$expected]
+ set new [get_lib_cells */$replacement]
+ if {[sizeof_collection $old]!=1 || [sizeof_collection $new]!=1} {error "Ambiguous sizing library $instance"}
+ set oldname [get_object_name $old]
+ set newname [get_object_name $new]
+ set pins [get_lib_pins $oldname/*]
+ if {[sizeof_collection $pins]!=[sizeof_collection [get_lib_pins $newname/*]]} {error "Sizing pin count mismatch"}
+ foreach_in_collection pin $pins {
+  set name [lindex [split [get_object_name $pin] /] end]
+  set other [get_lib_pins $newname/$name]
+  if {[sizeof_collection $other]!=1 || [get_attribute $pin direction] ne [get_attribute $other direction]} {error "Sizing pin direction mismatch"}
+  if {[get_attribute $pin direction] eq "out" && [get_attribute $pin function] ne [get_attribute $other function]} {error "Sizing function mismatch"}
+ }
+ size_cell $cell $newname
+ if {[get_attribute $cell ref_name] ne $replacement} {error "Sizing failed $instance"}
+ # Do not allow the incremental pass to undo this measured drive correction.
+ set_dont_touch $cell true
+ puts $sized "$instance\t$expected\t$replacement"
+}
+close $sized
+compile -incremental_mapping -map_effort high
+'''
+        text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high', sizing)
+    else:
+        text = synth.replace_once(text, 'compile -incremental_mapping -map_effort high',
+                                  'compile -incremental_mapping -only_design_rule')
     text = synth.replace_once(text, 'redirect check_design_mapped.rpt',
                               'redirect hierarchy.rpt {report_hierarchy}\nredirect check_design_mapped.rpt')
     return text
@@ -94,6 +135,9 @@ def repair(cfg, run, original, digest, call):
     if any((run/name).exists() for name in ('repair_seed.ddc', 'libs', 'summary.json', 'mapped.v')):
         raise ValueError('Mapped DRC repair requires a fresh run')
     prior, _ = verify_synthesis(original, digest, cfg)
+    targeted = digest == DRC04_SHA
+    library_directory = Path(prior.get('mapped_repair', {}).get('compile_library_directory', str(original/'libs')))
+    library_directory.resolve().relative_to(Path(cfg['server_root']).resolve()) if 'server_root' in cfg else None
     if (original/'task_mode.sdc').read_text() != synth.constraints():
         raise ValueError('Repair must retain the exact original task constraints')
     old_root = original.parents[2]
@@ -119,6 +163,8 @@ def repair(cfg, run, original, digest, call):
     # The full original provenance remains immutable and is checked again at
     # completion. Fresh aliases bind the current bundle for downstream audits.
     for database in power_databases(original):
+        if not (library_directory/database.name).is_file() or sha(library_directory/database.name)!=sha(database):
+            raise ValueError('Original compile library identity/digest mismatch')
         target = run/'libs'/database.name
         checked_copy(database, target, sha(database))
         current_inputs[str(target)] = sha(target)
@@ -129,13 +175,13 @@ def repair(cfg, run, original, digest, call):
     sdc = run/'task_mode.sdc'
     sdc.write_text(synth.constraints())
     tcl = run/'systolic_b_drc_repair.tcl'
-    tcl.write_text(repair_script(run, cfg, original))
+    tcl.write_text(repair_script(run, cfg, original, targeted, library_directory))
     provenance = dict(schema='systolic-b-mapped-drc-repair-v1', original_run=str(original),
         original_summary_sha256=digest, original_mapped_ddc_sha256=sha(run/'repair_seed.ddc'),
         original_task_constraints_sha256=sha(original/'task_mode.sdc'),
         task_constraints_unchanged=True, rtl_changed=False, original_run_modified=False,
-        command='compile -incremental_mapping -only_design_rule',
-        compile_library_directory=str(original/'libs'),
+        command='targeted equivalent-cell sizing; compile -incremental_mapping -map_effort high' if targeted else 'compile -incremental_mapping -only_design_rule',
+        targeted_drc04_drivers=targeted, compile_library_directory=str(library_directory),
         copied_library_databases_sha256_identical=True,
         inherited_gate_pass=False, requires_new_gate_and_ppa=True)
     (run/'repair_provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')

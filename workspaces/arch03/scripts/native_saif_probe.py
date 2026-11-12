@@ -135,10 +135,19 @@ if {![link_design]} {error "SAIF probe link failed"}
 read_saif -strip_path tb_saif/dut @SAIF@
 redirect units.rpt {report_units}
 redirect activity.rpt {report_switching_activity -coverage -hierarchy}
-set probability [get_attribute [get_ports toggle] static_probability]
-set rate [get_attribute [get_ports toggle] toggle_rate]
+set probability_record [get_switching_activity -static_probability [get_ports toggle]]
+set rate_record [get_switching_activity -toggle_rate [get_ports toggle]]
+# Installed PT documents an object/value/annotation-source list. Preserve
+# the source; do not fall back to default activity when annotation is absent.
+if {[llength $probability_record]==1} {set probability_record [lindex $probability_record 0]}
+if {[llength $rate_record]==1} {set rate_record [lindex $rate_record 0]}
+if {[llength $probability_record]!=3 || [llength $rate_record]!=3} {error "Unexpected PT activity record"}
+set probability [lindex $probability_record 1]
+set rate [lindex $rate_record 1]
 set out [open annotation.tsv w]
 puts $out "toggle\\t$probability\\t$rate"
+puts $out "probability_record\\t$probability_record"
+puts $out "rate_record\\t$rate_record"
 close $out
 if {abs($probability-1.0/3.0)>0.00001} {error "SAIF probability annotation mismatch"}
 if {abs($rate-4.0/60.0)>0.00001} {error "SAIF toggle rate or time unit mismatch"}
