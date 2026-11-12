@@ -14,8 +14,13 @@
   "three_firmware_self_checks_passed": true,
   "production_RTL_SW_firmware_files_identical_to_caad": 48,
   "production_firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
-  "board_staged": false,
-  "server_uploaded": false,
-  "reason_not_uploaded": "Shared disk full; 03:24 free1.683594GiB below validation budgets",
-  "clean_export_tool_checks": 5
+  "board_staged": true,
+  "server_uploaded": true,
+  "clean_export_tool_checks": 5,
+  "server_unpacked": true,
+  "server_all_705_inputs_rechecked": true,
+  "server_three_firmware_checks_passed": true,
+  "server_preflight_observed": "2026-11-12T08:44:00+08:00",
+  "FileZilla_disconnected": true,
+  "previous_upload_blocker": "Shared disk full; 03:24 free1.683594GiB below validation budgets"
 }

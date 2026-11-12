@@ -1,3 +1,7 @@
+**08:49: Authorized cleanup completed; B synth02 PID183038 and queue184658 now running.** Read [current checkpoint including08:49](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Deleted only obsolete MMIO8 L09-L12 VCDs (112.42GiB), with receipt; R4/B protected. New705-input bundle verified. No duplicate launches. VNC workspace3/new8d bundle idle shell; FileZilla closed.
+
+**08:43: User authorized targeted obsolete-wave cleanup, then continuing B.** Read [current checkpoint](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Prior no-deletion restriction is superseded only for explicitly inventoried obsolete project waves. R4 and current B protected. New tool package uploaded; fresh synthesis not started yet.
+
 **03:25：磁盘阻塞仍在，03:24可用仅1.683594GiB；原综合及队列均已退出，无最终网表。8d8f262新705输入工具包本地核验完成，未上传。** 先读[03:15检查点全部增量至03:25](CONTEXT_CHECKPOINT_20261112_0315_SYSTOLIC_B.md)及有效B计划。空间协调问题待答，建议16GiB；不删证据、不重试旧session。VNC workspace3/caad包空闲shell，FileZilla关闭，无本地任务或待输入命令。旧state仍running/waiting是过期状态。
 
 **03:15关键变化：服务器磁盘满，原B综合75738/79637已中止且无最终网表，103191队列也已退出；旧state仍running/waiting是保存失败后的过期状态。** 必须先读[03:15检查点](CONTEXT_CHECKPOINT_20261112_0315_SYSTOLIC_B.md)及有效B计划，不重复旧session、不删证据。03:13可用约3.215GiB，空间协调问题已发；继续本地包修复。VNC workspace3/caad包，FileZilla关闭。当前只读b_disk_processes命令已Return执行，截图结果待读。
