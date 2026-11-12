@@ -36,14 +36,6 @@
     "outputs": 76032,
     "summary_sha256": "ea69582933628c305e3e9502b91dddeff373b0233b1157851bc353f3ba6b52da"
   },
-  "r4_l01_archive": {
-    "status": "failed_space_reserve_original_retained",
-    "session": "r4_l01_archive01",
-    "pid": 131387,
-    "explicitly_authorized": true,
-    "raw_removed_verified": false,
-    "failed_partial_bytes_removed": 3240049537
-  },
   "batch1200_verified": false,
   "mapped_gate_verified": false,
   "timing_verified": false,
@@ -65,5 +57,21 @@
     "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
     "shared_original_team_lock": true,
     "permanent_archive_required": true
+  },
+  "r4_l01_archive_previous_attempt": {
+    "status": "failed_space_reserve_original_retained",
+    "session": "r4_l01_archive01",
+    "pid": 131387,
+    "explicitly_authorized": true,
+    "raw_removed_verified": false,
+    "failed_partial_bytes_removed": 3240049537
+  },
+  "r4_l01_archive": {
+    "status": "completed_returned_archive",
+    "session": "r4_l01_archive02",
+    "explicitly_authorized": true,
+    "raw_removed_verified": true,
+    "evidence": "handoff/team/evidence/R4_L01_STAGED_ARCHIVE_20261113.json",
+    "observed_at": "2026-11-13T03:10:40+08:00"
   }
 }

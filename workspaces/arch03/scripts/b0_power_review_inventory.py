@@ -51,7 +51,9 @@ class Reader:
         require(path.is_file(), 'Missing evidence file: ' + str(path))
         size = path.stat().st_size
         require(size <= self.max_file_bytes, 'File exceeds bounded read: ' + str(path))
-        require(self.bytes_read + size <= self.max_total_bytes, 'Small-file read budget exceeded')
+        require(self.bytes_read + size <= self.max_total_bytes,
+                'Small-file read budget exceeded: consumed=%d next=%d maximum=%d path=%s' %
+                (self.bytes_read, size, self.max_total_bytes, path))
         raw = path.read_bytes()
         self.bytes_read += len(raw)
         require(len(raw) == size, 'File changed while reading: ' + str(path))
@@ -111,6 +113,69 @@ def excerpts(raw):
         excerpt_truncated=len(found) > 20)
 
 
+def plan_reads(report_path, scope_root, max_file_bytes=16 * 1024 * 1024):
+    """Bind only the export JSON, then stat the explicit small-file whitelist.
+
+    No glob/recursive traversal, artifact reads, SAIF reads or SHA rescan. The
+    estimate includes the complete closing hash pass; it never changes a limit.
+    Optional files absent from stage artifacts can make this conservative.
+    """
+    reader = Reader(scope_root, max_file_bytes, 2 * max_file_bytes)
+    report_path = reader.path(report_path)
+    receipt = reader.json(report_path.parent / 'receipt.json')
+    require(receipt['schema'] == 'systolic-b-export-receipt-v1', 'Wrong export receipt')
+    report = reader.json(report_path, receipt['artifacts']['report.json'])
+    require(report['schema'] == 'systolic-b-evidence-export-v1', 'Not a B0 export')
+    require(len(report['power_references']) == 12, 'Missing fixed12 power references')
+    paths = {}
+
+    def add(path, role):
+        path = reader.path(path)
+        key = str(path)
+        item = paths.setdefault(key, dict(path=key, roles=[], initial_read_count=0))
+        item['roles'].append(role)
+        item['initial_read_count'] += 1
+
+    add(report_path, 'export')
+    add(report_path.parent / 'receipt.json', 'export_receipt')
+    for role, ref in [('activity', report['activity_reference']),
+                      ('synthesis', report['references']['synthesis'])]:
+        run = reader.path(ref['run'])
+        add(run / 'summary.json', role + '_summary')
+        add(run.parent / 'state.json', role + '_state')
+    srun = reader.path(report['references']['synthesis']['run'])
+    for name in ('technology_verification.json', 'memory_library_verification.json'):
+        add(srun / name, 'optional_model_receipt')
+    for ref in report['power_references']:
+        run = reader.path(ref['run'])
+        add(run / 'summary.json', 'power_summary')
+        add(run.parent / 'state.json', 'power_state')
+        for name in SMALL_REPORTS:
+            add(run / name, 'power_named_small_artifact')
+    for item in paths.values():
+        path = Path(item['path'])
+        item['exists'] = path.is_file()
+        item['bytes'] = path.stat().st_size if item['exists'] else None
+        item['closing_hash_read_count'] = 1 if item['exists'] else 0
+        item['planned_hash_read_bytes'] = ((item['initial_read_count'] + 1) * item['bytes']
+                                          if item['exists'] else 0)
+        item['within_single_file_limit'] = item['bytes'] is None or item['bytes'] <= max_file_bytes
+    unique = sum(item['bytes'] or 0 for item in paths.values())
+    planned = sum(item['planned_hash_read_bytes'] for item in paths.values())
+    return dict(schema='b0-power-inventory-size-plan-v1', status='stat_only_no_artifact_content_read',
+        report=str(report_path), report_sha256=receipt['artifacts']['report.json'],
+        files=sorted(paths.values(), key=lambda item: (-(item['bytes'] or 0), item['path'])),
+        unique_small_file_bytes=unique, planned_two_pass_hash_read_bytes=planned,
+        candidate_explicit_total_limit_bytes=planned + max(1024 * 1024, (planned + 9) // 10),
+        max_single_file_bytes=max_file_bytes,
+        all_existing_files_within_single_file_limit=all(item['within_single_file_limit'] for item in paths.values()),
+        size_plan_control_bytes_read=reader.bytes_read, no_limit_was_changed=True,
+        no_eda_or_simulation_started=True, no_files_written=True, no_large_wave_read=True,
+        system_power_verified=False,
+        note='Only receipt/report content is read; all other explicit small paths are stat only. '
+             'Budget includes the closing full SHA pass. Missing optional/unfrozen files may overestimate later reads.')
+
+
 def inspect(report_path, scope_root, max_file_bytes=16 * 1024 * 1024,
             max_total_bytes=128 * 1024 * 1024):
     reader = Reader(scope_root, max_file_bytes, max_total_bytes)
@@ -154,7 +219,8 @@ def inspect(report_path, scope_root, max_file_bytes=16 * 1024 * 1024,
         require(power['task_window'] == act['task_window'] and
                 power['activity'] == act['activity'] == row['activity'], 'Mixed power/activity window')
         require(power['numbers'] == row['power'], 'Exported numbers changed')
-        numeric = json.loads(reader.artifact(run, power, 'numbers.json').decode('utf8'))
+        numeric_raw = reader.artifact(run, power, 'numbers.json')
+        numeric = json.loads(numeric_raw.decode('utf8'))
         require(numeric == power['numbers'], 'numbers.json differs from frozen summary')
         require(Decimal(numeric['duration_ns']) == Decimal(row['duration_ns']), 'Duration differs')
         require(Decimal(numeric['average_power_w']) == Decimal(row['raw_average_power_w']) and
@@ -170,7 +236,7 @@ def inspect(report_path, scope_root, max_file_bytes=16 * 1024 * 1024,
             if filename not in power['artifacts']:
                 raw_reports[filename] = dict(status='missing_frozen_small_artifact')
                 continue
-            raw = reader.artifact(run, power, filename)
+            raw = numeric_raw if filename == 'numbers.json' else reader.artifact(run, power, filename)
             raw_reports[filename] = dict(bytes=len(raw), sha256=digest(raw))
             if filename != 'numbers.json':
                 raw_reports[filename].update(excerpts(raw))
@@ -226,9 +292,12 @@ def main():
     parser.add_argument('--scope-root', required=True, type=Path)
     parser.add_argument('--max-file-bytes', type=int, default=16 * 1024 * 1024)
     parser.add_argument('--max-total-bytes', type=int, default=128 * 1024 * 1024)
+    parser.add_argument('--size-plan', action='store_true',
+                        help='Read only export JSON, stat named small evidence, print two-pass budget; no limit change')
     args = parser.parse_args()
     try:
-        value = inspect(args.report, args.scope_root, args.max_file_bytes, args.max_total_bytes)
+        value = (plan_reads(args.report, args.scope_root, args.max_file_bytes) if args.size_plan else
+                 inspect(args.report, args.scope_root, args.max_file_bytes, args.max_total_bytes))
     except (ValueError, KeyError, TypeError, OSError) as error:
         print(json.dumps(dict(schema='b0-read-only-power-review-inventory-v1',
             status='inventory_rejected', system_power_verified=False, error=str(error)), indent=2))

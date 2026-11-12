@@ -159,6 +159,27 @@ class ReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'read budget'):
             review.inspect(self.path, self.root, max_total_bytes=16)
 
+    def test_size_plan_matches_actual_two_pass_reads_without_reading_artifacts(self):
+        original = review.Reader.read
+        def guarded(reader, path, expected=None):
+            self.assertIn(Path(path), (self.path, self.path.parent / 'receipt.json'))
+            return original(reader, path, expected)
+        with patch.object(review.Reader, 'read', guarded):
+            plan = review.plan_reads(self.path, self.root)
+        result = self.inspect()
+        self.assertEqual(plan['planned_two_pass_hash_read_bytes'], result['bytes_read'])
+        self.assertGreater(plan['candidate_explicit_total_limit_bytes'], result['bytes_read'])
+        self.assertTrue(plan['no_limit_was_changed'])
+        self.assertFalse(plan['system_power_verified'])
+
+    def test_size_plan_reports_oversize_without_reading_it(self):
+        artifact = Path(self.report['power_references'][0]['run']) / 'power.log'
+        with artifact.open('r+b') as stream:stream.truncate(17 * 1024 * 1024)
+        plan = review.plan_reads(self.path, self.root)
+        self.assertFalse(plan['all_existing_files_within_single_file_limit'])
+        row = next(item for item in plan['files'] if item['path'] == str(artifact.resolve()))
+        self.assertFalse(row['within_single_file_limit'])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

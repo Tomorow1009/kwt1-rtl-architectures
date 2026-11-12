@@ -24,8 +24,14 @@
     "technology_verification.json"
   ],
   "layer_01_tool_message_codes_observed": {
-    "power.log": {"PWR-601": 1, "PWR-602": 1},
-    "timing_check.rpt": {"PTE-003": 1, "PTE-016": 2}
+    "power.log": {
+      "PWR-601": 1,
+      "PWR-602": 1
+    },
+    "timing_check.rpt": {
+      "PTE-003": 1,
+      "PTE-016": 2
+    }
   },
   "message_classification": {
     "PWR-601": "Information: averaged power analysis",
@@ -47,5 +53,7 @@
   "unknown_state_influence_review_complete": false,
   "physical_signoff": false,
   "temporary_receipt_requires_durable_archive": true,
-  "limits": "Actual fixed12 source identity and weighted aggregate rechecked. Library receipt presence is not complete model approval; connected unknown-state influence remains unresolved. A prior documentation transcription of raw_time_weighted_power_w was corrected from original total energy and duration."
+  "limits": "Actual fixed12 source identity and weighted aggregate rechecked. Library receipt presence is not complete model approval; connected unknown-state influence remains unresolved. A prior documentation transcription of raw_time_weighted_power_w was corrected from original total energy and duration.",
+  "original_B0_report_sha256": "677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a",
+  "layer_01_isolated_defaults_proof_sha256": "d894ec7e5f9c3b33e6c99a800cd24df6fd66ba68882f63ffac15784849c4a445"
 }
