@@ -1,0 +1,25 @@
+{
+  "files": {
+    "docs/data/x14-w12-b32/CONVERTER_X14_W12_B32.md": {
+      "bytes": 5647,
+      "sha256": "ad6da4a361b7186227870c36f84a8fc8e5c2bd6f4dbcd398e842c44a38e2d82f"
+    },
+    "docs/data/x14-w12-b32/DATA100_X14_W12_B32.md": {
+      "bytes": 6478,
+      "sha256": "7549d1960d54cda4900a798e87240a37d3a47f76ab37ef667d270ec009251242"
+    },
+    "docs/data/x14-w12-b32/DATA30_X14_W12_B32.md": {
+      "bytes": 4090,
+      "sha256": "b5fa038fa7739ea886a507f758781b128171c409550eeb50023ac82b4b5faefa"
+    },
+    "tools/kwt-x14-w12-b32/convert_kwt1_x14_w12_b32.py": {
+      "bytes": 13083,
+      "sha256": "c99301b68185f599b95e4b4b3cbe5e62db27128dcf3cf04e4725bdb9a5620c35"
+    }
+  },
+  "import_method": "GitHub fetch_file base64 decoded to original bytes",
+  "original_files_modified": false,
+  "source_commit": "50c1261f3f7fafe1531e05e023aadd926cefa24a",
+  "source_pr": 9,
+  "source_repository": "Tomorow1009/kwt1-rtl-architectures"
+}

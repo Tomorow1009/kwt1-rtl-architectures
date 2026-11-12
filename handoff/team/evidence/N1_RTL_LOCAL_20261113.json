@@ -1,0 +1,140 @@
+{
+  "schema": "arch03-n1-local-rtl-evidence-v1",
+  "observed_at": "2026-11-13T01:15:27.195771+08:00",
+  "status": "local_functional_passed_server_stage_not_accepted",
+  "numeric_format": "0x000e0c20",
+  "layout": "0x00100004",
+  "version": "0x4b575306",
+  "capability": "0x000505bf",
+  "shift": 10,
+  "source_commit": null,
+  "source_commit_note": "Uncommitted working-tree source, identified by hashes; root agent will commit.",
+  "hardware": {
+    "pe": 80,
+    "x_bits": 14,
+    "w_bits": 12,
+    "product_bits": 26,
+    "accumulator_bits": 32,
+    "bias_bits": 32,
+    "total_bits": 33,
+    "result_bits": 16,
+    "icb_bits": 32,
+    "source_credits": 3,
+    "output_fifo_words": 32,
+    "x_macros128x16": 60,
+    "w_macros128x16": 32
+  },
+  "local_fixed12": {
+    "mean_cycles": 29711.0,
+    "task_per_s_at_150mhz": 5048.635185621487,
+    "cycles": [
+      30547,
+      29943,
+      29619,
+      29699,
+      29287,
+      28983,
+      28631,
+      28727,
+      28639,
+      29423,
+      30591,
+      32443
+    ],
+    "encoded_bytes": [
+      31428,
+      30220,
+      29572,
+      29732,
+      28908,
+      28300,
+      27596,
+      27788,
+      27612,
+      29180,
+      31516,
+      35220
+    ],
+    "read_latency": 1,
+    "prefetch": 1,
+    "jitter": 0,
+    "scope": "Full source VALID through final output write ACK in local DMA/fabric/SRAM pin mock; not E203 or ASIC result."
+  },
+  "cpu_executed": false,
+  "vendor_macros_verified": false,
+  "server_asic14_verified": false,
+  "server_1200_verified": false,
+  "area_mm2": null,
+  "power_mw": null,
+  "energy_uj_per_task": null,
+  "timing_verified": false,
+  "n2_allowed": false,
+  "evidence": {
+    "array_pressure": {
+      "path": "local_runs/n1_systolic_array_20261113_010306_915102/summary.json",
+      "sha256": "1c90ab97c0b0b61b2a3c52714b7bce5c6c166c67f3dad516c49227e6440780e5",
+      "status": "passed",
+      "outputs": 794560,
+      "random_blocks": 10000,
+      "directed_blocks": 32,
+      "cpu_executed": false
+    },
+    "datapath14": {
+      "path": "local_runs/n1_datapath_20261113_011023_922304/summary.json",
+      "sha256": "905ed0e5c65cb1c86493888032144f61abcc4b3c4fb56a0875629d0f31ed1373",
+      "status": "passed",
+      "tasks": 14,
+      "outputs": 354816,
+      "cpu_executed": false,
+      "case_count": 14
+    },
+    "datapath_aba_latency12": {
+      "path": "local_runs/n1_datapath_20261113_010850_998983/summary.json",
+      "sha256": "3cd765760b8f1ef70d211c2ee60cd99f9f93b4c17996a3a8b79f771727e73527",
+      "status": "passed",
+      "tasks": 6,
+      "outputs": 152064,
+      "cpu_executed": false,
+      "case_count": 6
+    },
+    "datapath_raw_prefetch_off": {
+      "path": "local_runs/n1_datapath_20261113_011341_886250/summary.json",
+      "sha256": "ab0c369504072621399fc555b1662bc19b99f96acd2cb860a38992033bbd444f",
+      "status": "passed",
+      "tasks": 1,
+      "outputs": 25344,
+      "cpu_executed": false,
+      "case_count": 1
+    },
+    "datapath_jitter_smoke": {
+      "path": "local_runs/n1_datapath_20261113_010726_111331/summary.json",
+      "sha256": "b653d885f7c5d1812ab1ca87240fccab6eb3700b34484c153ddbeea78095624a",
+      "status": "passed",
+      "tasks": 1,
+      "outputs": 25344,
+      "cpu_executed": false,
+      "case_count": 1
+    },
+    "decoder": {
+      "path": "local_runs/n1_decoder_20261113_010956_544455/summary.json",
+      "sha256": "8673f1599c3a75fe5fd7b6ecd0671e71f4cabef64f88d6f70d11a5f3bd2dd32b",
+      "status": "passed",
+      "cpu_executed": false,
+      "case_count": 17
+    },
+    "direct_core_ingress": {
+      "path": "local_runs/n1_load_guards_20261113_011159_483032/summary.json",
+      "sha256": "ac8ee51c4f50013470f3e1cce7a181cfb2f83e6fa76e1ff4da343a078f5fc154",
+      "status": "passed",
+      "tests": 9,
+      "cpu_executed": false
+    }
+  },
+  "rtl_sha256": {
+    "workspaces/arch03/rtl/arch03_n1_accel.sv": "04a0f08b07ff13b0fc6a64b8a01641e1deb73fe9b61be3659f332fe6141f8baa",
+    "workspaces/arch03/rtl/arch03_n1_decoder.sv": "ca82d521a7f8639c7dc3047c347acfc703ee8528e391bde22e5fcb23f1a8b15c",
+    "workspaces/arch03/rtl/arch03_n1_linear16x5.sv": "667533acab0a497f1abd3c2e05ae2bc490fec39a340164763781ce099ccc01d2",
+    "workspaces/arch03/rtl/arch03_n1_requantize.sv": "ce5cb6d8d08d4afc0d51c26323a459bac97289fd75a72c25de2eff8587792206",
+    "workspaces/arch03/rtl/arch03_n1_systolic5x16.sv": "862c0b0c864044d84e8245df25bd0803069df1a485723e2d776ee5302d4ded33"
+  }
+}

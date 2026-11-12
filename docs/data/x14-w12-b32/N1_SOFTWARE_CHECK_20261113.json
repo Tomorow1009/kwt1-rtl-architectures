@@ -1,0 +1,48 @@
+{
+  "additional_validation": {
+    "batch_identity_execution_test": "N1_INTEGRATION_CHECK_20261113.json",
+    "reason": "Fixed sha(Path(__file__)) before any server execution; data and codec identities unchanged"
+  },
+  "command": [
+    "E:\\fpga_race-two\\.venv-kwt\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "workspaces/arch03/scripts",
+    "-p",
+    "test_n1_data.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "fields_checked": [
+    "total",
+    "result",
+    "saturated"
+  ],
+  "fixed12_clipping": {
+    "b": 0,
+    "w": 0,
+    "x": 0
+  },
+  "fixed12_max_nrmse_percent": 0.1425636423408142,
+  "fixed12_mean_encoded_bytes": 29756.0,
+  "fixed12_saturated": 0,
+  "full100_executed": false,
+  "local14_manifest_sha256": "d40cc53a7e04fedd443d7501d510553115c9c994221050847186c82c095d390c",
+  "log_sha256": "b37c601ea8efd6f55d6667c0ab770cf04e56bec1ec23f52b001a4f70ed0a54db",
+  "official_precision_verified": false,
+  "outputs": 354816,
+  "ppa_verified": false,
+  "rtl_executed": false,
+  "schema": "arch03-n1-data-software-check-v1",
+  "source_sha256": {
+    "workspaces/arch03/scripts/n1_batch.py": "d8809037d3cf2cc8f9e069b82676e7a734c632221280bd5f0c724e30ef303ab1",
+    "workspaces/arch03/scripts/n1_codec.py": "78dbc9d7d3826167e23c4c04e440adf068660cd4db7060f4d821aef16346218b",
+    "workspaces/arch03/scripts/n1_data.py": "8386170804db998a94ee486ccad5be50fd62f5579cfaf8b900fbbda575859b4f",
+    "workspaces/arch03/scripts/test_n1_data.py": "668682d46bb8ae2a7c5a6fc01fa0743d339e3d95305ee1849f7828ac86d29f9b"
+  },
+  "status": "passed",
+  "tasks": 14,
+  "tests": 14
+}

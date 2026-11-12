@@ -1,0 +1,52 @@
+{
+  "asic_verified": false,
+  "command": [
+    "E:\\fpga_race-two\\.venv-kwt\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "workspaces/arch03/scripts",
+    "-p",
+    "test_n1_integration.py",
+    "-v"
+  ],
+  "cpu_executed": false,
+  "fixed_batch_bug": "server_run.sha requires Path(__file__), not string __file__",
+  "fixture_directory": "local_runs\\n1_monitor_fixture_20261113_011657_478498",
+  "log": "local_runs\\n1_integration_report_20261113_011655\\unittest.log",
+  "log_sha256": "3f13f35eaf1803079f73005d3b8b873cd2b73f1493972980aa891fedc13239eb",
+  "monitor_scenarios": 7,
+  "monitor_test_values": [
+    -3221094400,
+    3220570175
+  ],
+  "ppa_verified": false,
+  "rejections": [
+    "wrong total",
+    "duplicate total",
+    "stale slot ownership",
+    "invalid fifth tail row",
+    "missing total before write ACK",
+    "duplicate output write ACK"
+  ],
+  "schema": "arch03-n1-integration-review-v1",
+  "scope": "firmware identity, extracted C config validator, Python boundaries, two-output passive observer fixture; NOT ASIC/E203 verification",
+  "source_sha256": {
+    "workspaces/arch03/scripts/build_n1_firmware.py": "6fc01b69b245b825693d726aa8efb2bc5f6a8fe3b92cc3194c10b1863586ac2c",
+    "workspaces/arch03/scripts/install_n1.py": "e9a82050e058e645ab328f3178c041533af1f1df5864ab3813b2ce766cbb4195",
+    "workspaces/arch03/scripts/n1_batch.py": "d8809037d3cf2cc8f9e069b82676e7a734c632221280bd5f0c724e30ef303ab1",
+    "workspaces/arch03/scripts/n1_bus_metrics.py": "dd190e34e2ab7ca6ae2e19eac71e1538d5db6a3a29fe8c7698ed6d768ea48955",
+    "workspaces/arch03/scripts/n1_server.py": "d6698b6178d4314e8b0633f14c568fa1f739905b83f58c9e691491da2937aff0",
+    "workspaces/arch03/scripts/n1_soc.py": "fbdcd2bd8e639803ca8a717f6f831c6e445e069a4f8a132e0d4f01fd0f8c81a3",
+    "workspaces/arch03/scripts/n1_synth.py": "406f015079e0ac30283a04fb18ee9ae4b4356f4b86330acb06b30293683630cb",
+    "workspaces/arch03/scripts/test_n1_integration.py": "c28a483325f52aec6c4abb633d9167a5d42f6561357c2187c99f667c8cfa5a89",
+    "workspaces/arch03/sw/kwt_n1.c": "c89f0db6866d94f2f2b3082cd08481da9469fadada6e1a7d752570142e292179",
+    "workspaces/arch03/sw/kwt_n1.h": "0d827dbbbcac3f1c42f93a78f0f2cc16ff4d8aac91043e1d62e6a6e96c8b222c",
+    "workspaces/arch03/sw/main_n1.c": "172bcba8bbf50a89054fc7987629475065baaeaaf04ad8664050b5d15f4ddde0",
+    "workspaces/arch03/tb/arch03_n1_metrics.svh": "49aca7ecba9f75d9806476a95ef88dfd40139ae9a09c7f051f3b13c954aedbcf",
+    "workspaces/arch03/tb/arch03_n1_monitor.svh": "08b94092e964b1af1d6263e996aa64ca6a2c4d6e2e4f5d5937284e4d8e2dba2d"
+  },
+  "status": "passed",
+  "tests": 10
+}
