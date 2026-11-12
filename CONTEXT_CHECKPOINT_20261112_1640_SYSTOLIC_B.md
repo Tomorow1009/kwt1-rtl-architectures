@@ -1,5 +1,19 @@
 # B 检查点：2026-11-12 16:40
 
+## 16:57增量：SAIF方法未通过，改为先完成独立功能批量
+
+**crosscheck01 PID118517已于16:41:18.729387 failed**，原PT正常结束（约69秒），报告生成，但审核`Other activity sources in unannotated report require review`停止，没有summary/方法合格。真实表有362618 nets，其中361558 exact/file、**1060 default**，switching和static probability一致，无propagated/implied/not_annotated。默认对象也出现在nonannotated列表，样本有PLIC rsp_rdata_targ、inspect_pc、AON未用read、decoder/add_129/carry等，显示`<No-Driver>`。不能把default当file或静态零；是否全部未驱动/无负载、为何原生SAIF未覆盖仍须读实际对象/捕获信息。compare.json未生成，尚无≤1%结论。只读query b_crosscheck01_missing_objects.png头部被截，只看到部分对象，不能声称全部1060均无驱动。
+
+16:44 VNC窗口失效，未发送mapping查询。已有隧道仍在线，开发板viewer重开/经已保存凭据正常登录，16:49确认原工作区3/ced shell，窗口重新枚举后仍18874435；无新远程通道、未重启服务器。现FZ关闭。主机relay14084/31004仍在，start_link的旧pid文件25104过时，**不要据此重复启动中继**。
+
+16:41:49实际free **184.2138671875GiB**，不再使用15:04的376GiB当实时值。空间足够无大波形1200/未来SAIF，按每阶段实测余量继续检查。
+
+为避免功耗方法拖延已具备资格的功能回归，采用计划允许的无大波形路径：独立时序/面积/新gate14评审后先cleanASIC14与own1200，活动/功耗不在这一队列启动。冻结review **e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54**；最终功能请求 **89442d0f8a52f6f2a860bb4bf62008390a5f5d1e09f37f2fd2c6684e53723bed**，schema仍finalize-request-v1但无native_probe/saif_qualification。显式保留crosscheck失败。两文件已本地保存在takeover_local与handoff/team/evidence。源码/网表不改，完整计时不改。
+
+本地生成b_final_install_00..07共8条，3504B压缩载荷。**当前部署进行中，尚未启动**；00..02已执行，03..05工具会话须先收尾，06..07未执行。最终目标operations/b_freeze_review01.json与b_finalize01_request.json，新payload不得重复append。准备b_final01_launch.txt，session systolic_b_final01，输出queue在runs/systolic_b_final01_queue；只有部署hash通过并核实际锁/进程后执行一次。
+
+SAIF docs实际原生选项仅-region/depth/exclude、start/stop/reset/report，不能猜不存在的-all。原VCS Tcl路径/查询在b_saif_syntax.txt，最新截图b_saif_syntax1654.png。没有启动第二SAIF/功耗或对旧文件填补默认活动；先查原因。B后续activity/power需要方法重新合格，不能借旧失败作PASS。
+
 任务 ACTIVE。直接5×16脉动B，A取消，生产RTL/固件63da6ba/v3/credits3冻结，R4保底。用户授权持续实施与同范围GitHub/服务器同步；无需逐步确认。11/13 17:00前收尾。压缩后读AGENTS、本检查点、有效B计划和STATUS，再核对真实作业。不要重跑旧批次或再次清理。
 
 ## 新完成：DRC06自己的门级14全部通过

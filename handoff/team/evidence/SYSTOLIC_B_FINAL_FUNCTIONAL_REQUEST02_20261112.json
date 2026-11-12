@@ -1,0 +1,68 @@
+{
+  "schema": "systolic-b-finalize-request-v1",
+  "bundle_manifest_sha256": "39b127636ecaf61d2cd950efd2f83ef923cacf5274c6f4b3d363cbdb9a51155d",
+  "asic": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9/runs/systolic_b_v3_first01/systolic_b_soc",
+    "sha256": "614d9f605996c9dfb302add53254461c62d7ec3c295fdc003c7964b6233a5d5d"
+  },
+  "synthesis": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_drc06/systolic_b_synth",
+    "sha256": "b81780033ef65998c43a874b559e54da0d958524a040eff374b1e8f1a4824ced"
+  },
+  "gate": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_drc06_gate02/systolic_b_gate",
+    "sha256": "7c1a3ade96aa9a6bcb307d291b216667a7c6ff9595632e08bfb0f6d69289de99"
+  },
+  "sequence": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_validation03_sequence/systolic_b_sequence",
+    "sha256": "3219d1b6d7b93474d315dfe2895ddb8b71f3f8c352c987e8521741dc75bbb53e"
+  },
+  "contention": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_validation03_contention/systolic_b_contention",
+    "sha256": "95ac18a1fbdd205b26e3c8a9ca13c332356a7088b8c07e2167d9291c3495cebe"
+  },
+  "freeze_review": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/b_freeze_review01.json",
+    "sha256": "e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54"
+  },
+  "predecessor_queue": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_validation03_queue/state.json",
+    "sha256": "d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbcf9789a83f650c7c6b3"
+  },
+  "dataset": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex",
+  "operations": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/systolic_b_tools_52f37cc",
+    "sha256": "8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435"
+  },
+  "history": [
+    {
+      "status": "preserved_history",
+      "description": "Original synth01 disk full; fresh synth02 completed"
+    },
+    {
+      "status": "preserved_history",
+      "description": "DRC03 duplicate library identity;04/05 residual design-rule violations;06 cleared"
+    },
+    {
+      "status": "preserved_history",
+      "description": "gate01 stopped before simulation on identical provenance copies;gate02 independent verification"
+    },
+    {
+      "status": "preserved_history",
+      "description": "timing01 relative DDC path;timing02 read-only absolute path passed"
+    },
+    {
+      "status": "preserved_history",
+      "description": "SAIF earlier unit/ANSI/property failures preserved; only qualified final pilot used"
+    },
+    {
+      "status": "unverified",
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_r4_crosscheck01/native_saif_r4_crosscheck",
+      "description": "R4 SAIF PT completed but 1060 default-source nets block method qualification. Continue clean ASIC14 and own1200 without activity/power; qualify method separately before B power."
+    },
+    {
+      "status": "failed_preflight",
+      "description": "final01 never started EDA: predecessor queue digest transcription omitted one c; actual immutable queue completed, original state re-read and exact64-character digest used in final02."
+    }
+  ]
+}

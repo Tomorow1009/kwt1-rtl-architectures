@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "DRC06_gate14_passed_R4_SAIF_PT_crosscheck_running",
+    "status": "DRC06_scoped_review_passed_final02_clean14_running_SAIF_unqualified",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1640_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1720_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,17 +2683,19 @@
     "new_gate_verified": true,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Read original crosscheck01 PID118517. Once method qualified, bind scoped freeze review then own clean14/1200/activity12/power12. Never restart gate02.",
+    "next": "Continue original final02 clean14 then own1200. Investigate SAIF1060 default nets read-only; no concurrent EDA. Activity/power remain unqualified; never restart final01 or final02.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T16:38:50+08:00",
-      "team_lock": "crosscheck01_owned",
-      "EDA_processes": [
-        "crosscheck01 driver118517"
-      ],
-      "foreground": "VNC workspace3 ced shell"
+      "time": "2026-11-12T17:21:26.472005+08:00",
+      "queue_pid": 149529,
+      "child_pid": 150171,
+      "stage": "systolic_b_soc",
+      "status": "running",
+      "foreground": "VNC workspace3 ced shell; window18874436",
+      "last_prelaunch_free_GiB": 145.755859375,
+      "last_prelaunch_resource_time": "2026-11-12T17:12:55+08:00"
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2845,7 +2847,7 @@
       "prior_failed_queue_preserved": "systolic_b_v3_validation02_queue",
       "stage": null,
       "child_pid": null,
-      "state_sha256": "d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbf9789a83f650c7c6b3",
+      "state_sha256": "d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbcf9789a83f650c7c6b3",
       "finished": "2026-11-12T12:29:55.383784"
     },
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
@@ -3151,8 +3153,25 @@
       "started": true,
       "pid": 118517,
       "session": "systolic_b_r4_crosscheck01",
-      "status": "running",
-      "observed": "2026-11-12T16:38:50+08:00"
+      "status": "failed",
+      "observed": "2026-11-12T16:38:50+08:00",
+      "finished": "2026-11-12T16:41:18.729387",
+      "activity_method_qualified": false,
+      "error": "Other activity sources in unannotated report require review",
+      "exact_mapping_nets": 361558,
+      "default_nets": 1060,
+      "total_nets": 362618,
+      "comparison_generated": false
+    },
+    "final_functional_queue": {
+      "session": "systolic_b_final02",
+      "pid": 149529,
+      "request_sha256": "99e5b3330e4f89d8e94ea723cc936876da4ea3dffcf4d7431fe83c1f471d9f39",
+      "freeze_review_sha256": "e41a5c0107eb4071d8b9454d3d4370d06793978532c4670eb8cc584bd7522c54",
+      "clean14_running": true,
+      "own1200_started": false,
+      "activity_power_scheduled": false,
+      "failed_predecessor": "final01: wrong63-character transcription of predecessor queue SHA; no EDA started"
     }
   }
 }

@@ -1,0 +1,65 @@
+{
+  "schema": "systolic-b-freeze-review-v1",
+  "references": {
+    "asic": {
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9/runs/systolic_b_v3_first01/systolic_b_soc",
+      "sha256": "614d9f605996c9dfb302add53254461c62d7ec3c295fdc003c7964b6233a5d5d"
+    },
+    "synthesis": {
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_drc06/systolic_b_synth",
+      "sha256": "b81780033ef65998c43a874b559e54da0d958524a040eff374b1e8f1a4824ced"
+    },
+    "gate": {
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_drc06_gate02/systolic_b_gate",
+      "sha256": "7c1a3ade96aa9a6bcb307d291b216667a7c6ff9595632e08bfb0f6d69289de99"
+    },
+    "sequence": {
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_validation03_sequence/systolic_b_sequence",
+      "sha256": "3219d1b6d7b93474d315dfe2895ddb8b71f3f8c352c987e8521741dc75bbb53e"
+    },
+    "contention": {
+      "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_validation03_contention/systolic_b_contention",
+      "sha256": "95ac18a1fbdd205b26e3c8a9ca13c332356a7088b8c07e2167d9291c3495cebe"
+    }
+  },
+  "scope": "SS_0p99V_125C_stable_task_mode_DC_synthesis_pre_layout",
+  "reviewed": "2026-11-12T16:54:11.155240",
+  "eligible_for_final1200": true,
+  "task_mode_timing_verified": true,
+  "project_area_upper_bound_verified": true,
+  "system_power_verified": false,
+  "official_precision_verified": false,
+  "physical_signoff": false,
+  "metrics": {
+    "period_ns": "6.666666",
+    "setup_ns": "0.00010252",
+    "hold_ns": "0.00249085",
+    "project_area_upper_mm2": "1.099094695900963",
+    "constraint_violations": 0,
+    "small_macros": 92,
+    "large_macros": 128,
+    "latches": 0
+  },
+  "timing_diagnostic": {
+    "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_v3_drc06_timing02/systolic_b_timing_audit",
+    "sha256": "bfd0007c4846649c7f3ea018a5dbad480e10f8c406f309c3089b016d0c7da3b6"
+  },
+  "structure": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_drc06_structure01.json",
+    "sha256": "12f843804ca02d61ae5f260e30c556c1fe0cf89c2d98586ae6acbdb219ec73fd"
+  },
+  "basis": {
+    "timing": "No violated constraints or final combinational loops; check_timing only flags three known platform clock nets with synthesis fanout model1000. Actual DDC inventory identifies core_csr_clk, hfclk, AON crossing_clock.",
+    "exceptions": "Only four original LF timer first-stage synchronizer D pins; no multicycle, asynchronous clock groups, user disable-timing or SysMem false paths.",
+    "structure": "13040 declaration-only warned ports; all244 no-load drivers match unused ports; four unused original platform instances; constant/shared-net notices retained with functional same-netlist gate14.",
+    "area": "All SoC standard cells plus92 accelerator SRAM macros counted; excludes only128 reused TCM/shared macros. Thus newly added DMA/bridge/arbiter/FIFO/control cannot escape the conservative bound.",
+    "function": "Own ASIC14, CPU recovery76032 outputs, two contention cases and this exact repaired mapped gate14 pass; gate has no SDF. Own1200 remains pending.",
+    "precision": "DC exact6.666666ns; historical mapped SDC rounded6.66667ns preserved. New B PT must import separate exact SDC and report measured clocks."
+  },
+  "limits": [
+    "Extremely small positive setup/hold margins are synthesis-condition results, not physical margin.",
+    "PLL switching, active JTAG, startup/reset release, physical clocks and parasitics are outside this stable task mode.",
+    "Power activity/model impact and official600 precision remain independent unverified items.",
+    "The mapped repair is tied to the recorded seed and equivalent cell identities; historical inputs and failed attempts remain intact."
+  ]
+}
