@@ -2766,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "bf55a29fcc022e33dd3f78d3f3a5e0a83a24564a",
+    "cloud_commit": "60df7725e729edab7f8550bc5b9545f2c77b7711",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2940,15 +2940,19 @@
       "base_bundle_inputs_modified": false
     },
     "mapped_repair": {
-      "session": "systolic_b_v3_drc04",
+      "session": "systolic_b_v3_drc05",
       "status": "reports_complete_not_accepted",
-      "finished": "2026-11-12T13:42:34.753709",
-      "summary_sha256": "dd960574b5ac119192055932b7fadcf7e245fa97446d4370d8b6a49d4e990ca4",
-      "transition_violations": 4,
-      "multiport_net_violations": 2,
-      "accelerator_area_upper_mm2": 1.0975813687009695,
+      "pid": 253324,
+      "finished": "2026-11-12T14:33:35.246720",
+      "summary_sha256": "55fcf35b3d2d01ea782f7f543bc00b1ae49078e9f1b9c66534ab33c1e8765bbe",
+      "remaining_classes": [
+        "max_transition",
+        "max_capacitance"
+      ],
+      "multiport_violations_remaining": false,
+      "accelerator_area_upper_mm2": 1.098423737500962,
       "strict_timing_verified": false,
-      "previous_failure": "drc03 duplicate library file identities"
+      "raw_violated_string_count_not_unique_net_count": 72
     },
     "saif_unit_diagnostics": {
       "session": "systolic_b_v3_saif_units01",
@@ -2964,14 +2968,36 @@
       "status": "delta_transfer_in_progress_not_launched",
       "source_RTL_changed": false
     },
-    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1350_SYSTOLIC_B.md",
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1438_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
-      "session": "systolic_b_v3_saif_probe02",
-      "status": "failed_PT_ANSI_port_syntax",
-      "VCS_capture_and_parse_passed": true,
-      "PT_annotation_verified": false,
-      "local_fix": "classic_port_declaration_prepared",
-      "R4_crosscheck_verified": false
+      "schema": "systolic-b-native-saif-tiny-probe-evidence-v1",
+      "observed_server_date": "2026-11-12",
+      "tool_commit": "60df7725e729edab7f8550bc5b9545f2c77b7711",
+      "operations_directory": "operations/systolic_b_tools_60df772",
+      "operations_manifest_sha256": "7a839b60e16b738a5dc078b0f0d5036b845ecda39940d3b8600a22f6e194f262",
+      "base_bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+      "run": "runs/systolic_b_v3_saif_probe04/systolic_b_saif_probe",
+      "pid": 251446,
+      "finished": "2026-11-12T14:24:57.106218",
+      "summary_sha256": "5b89541639df84d147f76b407bfd13c906b9fdf7bcbee912650cef716687a25b",
+      "status": "tiny_native_saif_vcs_pt_passed",
+      "capture_start_ns": 12,
+      "capture_end_ns": 72,
+      "duration_ns": 60,
+      "timescale_ns": "0.000001",
+      "PT_toggle_static_probability": 0.333333,
+      "PT_toggle_rate_per_ns": 0.0666667,
+      "PT_activity_source": "file",
+      "unknown_representation": "VCS_combined_TX_X_or_Z",
+      "X_and_Z_separately_measured": false,
+      "R4_complete_window_crosscheck_verified": false,
+      "B_activity_power_verified": false,
+      "system_power_verified": false,
+      "failures_preserved": [
+        "Original named timescale 1ps/1fs rejected; actual scientific notation 1e-15 accepted",
+        "probe02: installed PT rejected ANSI ports",
+        "probe03: static_probability/toggle_rate get_attribute not defined on ports; installed official get_switching_activity used in probe04"
+      ]
     },
     "resource_observation": {
       "time": "2026-11-12T13:58:16.509474",

@@ -20,6 +20,16 @@ def inspect(cfg, run, original, digest, call):
     verify_synthesis(original, digest, cfg)
     before = {str(original/n): sha(original/n) for n in ('summary.json', 'mapped.ddc', 'mapped.v')}
     text = probe_script(original)
+    prior=json.loads((original/'summary.json').read_text())
+    remembered=prior.get('mapped_repair',{}).get('compile_library_directory')
+    if remembered:
+        # Read-only DDC queries must also avoid loading duplicate library
+        # identities. The immutable report identifies the compile DB paths.
+        from soc_power import power_databases
+        for database in power_databases(original):
+            source=Path(remembered)/database.name
+            if sha(source)!=sha(database):raise ValueError('Inspect library identity changed')
+            text=text.replace(str(database),str(source))
     anchor = '    set out [open mapped_port_probe.tsv w]'
     extra = r'''
     set out [open driver_inventory.tsv w]
@@ -38,9 +48,21 @@ def inspect(cfg, run, original, digest, call):
             }
         }
     }
-    foreach pattern {*/BUFV*12TR40 */AOI22V*12TR40} {
+    foreach pattern {*/BUFV1_* */BUFV1RD_* */BUFV1R0_* */BUFV1RQ_* */BUFV2_* */BUFV2RD_* */BUFV2R0_* */BUFV2RQ_* */BUFV4_* */BUFV4RD_* */BUFV4R0_* */BUFV4RQ_*} {
         foreach_in_collection cell [get_lib_cells $pattern] {
             puts $out "candidate\t[get_object_name $cell]\t[get_attribute $cell area]"
+            foreach_in_collection pin [get_lib_pins [get_object_name $cell]/*] {
+                set direction [get_attribute $pin direction]
+                if {$direction eq "in"} {
+                    puts $out "input_cap\t[get_object_name $pin]\t[get_attribute $pin capacitance]"
+                }
+            }
+        }
+    }
+    foreach name {n298364 n298366 n298367} {
+        set net [get_nets $prefix/$name]
+        foreach_in_collection pin [get_pins -of_objects $net -filter "direction == out"] {
+            puts $out "upstream\t$name\t[get_object_name $pin]\t[get_attribute [get_cells -of_objects $pin] ref_name]"
         }
     }
     close $out
