@@ -19,6 +19,39 @@ from icb32_report import configuration_identity
 from dma16_report import read
 from systolic_b_report import stage,require
 
+ACTIVITY_STAGES=('native_saif_r4_replay','native_saif_r4_crosscheck','systolic_b_saif','systolic_b_power')
+
+
+def checked_operations(request,root):
+    value=request['operations'];directory=Path(value['path']).resolve();directory.relative_to(root)
+    manifest=directory/'manifest.json'
+    require(sha(manifest)==value['sha256'],'Operations manifest changed')
+    files=read(manifest)['files']
+    require('systolic_b_ops.py' in files,'Missing operations runner')
+    for name,digest in files.items():
+        source=(directory/name).resolve();source.relative_to(directory)
+        require(sha(source)==digest,'Operations source changed: '+name)
+    return directory,value['sha256']
+
+
+def activity_request(stage_name,extra):
+    def value(flag):
+        require(extra.count(flag)==1,'Missing/duplicate activity flag '+flag)
+        index=extra.index(flag)+1;require(index<len(extra),'Missing activity value')
+        return extra[index]
+    def ref(run,digest):return dict(run=value(run),sha256=value(digest))
+    result=dict(schema='systolic-b-activity-operation-v1',stage=stage_name)
+    if stage_name=='native_saif_r4_replay':
+        result.update(gate=ref('--gate-run','--gate-summary-sha256'),probe=ref('--native-probe-run','--native-probe-sha256'))
+    elif stage_name=='native_saif_r4_crosscheck':
+        result.update(replay=ref('--native-replay-run','--native-replay-sha256'),baseline_power=ref('--reference-power-run','--reference-power-sha256'))
+    elif stage_name=='systolic_b_saif':
+        result.update(gate=ref('--gate-run','--gate-summary-sha256'),qualification=ref('--saif-qualification-run','--saif-qualification-sha256'))
+    elif stage_name=='systolic_b_power':
+        result.update(activity=ref('--saif-activity-run','--saif-activity-sha256'),case=value('--cases'))
+    else:raise ValueError('Unknown activity stage')
+    return result
+
 
 def preflight(request,cfg):
     require(request['schema']=='systolic-b-finalize-request-v1','Wrong finalization request')
@@ -64,6 +97,11 @@ def preflight(request,cfg):
         from native_saif_replay import verify_probe
         verify_probe(request['native_probe']['run'],request['native_probe']['sha256'],cfg)
         require(request.get('R4_gate') and request.get('R4_power'),'Missing original R4 qualification references')
+    if request.get('saif_qualification'):
+        from systolic_b_saif import qualification
+        qualified=request['saif_qualification'];qualification(qualified['run'],qualified['sha256'],cfg)
+    if request.get('native_probe') or request.get('saif_qualification'):
+        checked_operations(request,root)
     return reports
 
 
@@ -92,6 +130,15 @@ def main():
         inputs()
         command=[sys.executable,str(ROOT/'workspaces/arch03/scripts/server_run.py'),
             stage_name,'--session',session]+list(extra)
+        if stage_name in ACTIVITY_STAGES:
+            operations,ops_sha=checked_operations(request,Path(cfg['server_root']).resolve())
+            operation_file=output/(suffix+'_operation.json')
+            require(not operation_file.exists(),'Activity request already exists; no retry')
+            save(operation_file,activity_request(stage_name,list(extra)))
+            command=[sys.executable,str(operations/'systolic_b_ops.py'),
+                '--bundle',str(ROOT),'--bundle-sha256',request['bundle_manifest_sha256'],
+                '--ops-sha256',ops_sha,'--stage',stage_name,'--session',session,
+                '--request',str(operation_file),'--request-sha256',sha(operation_file)]
         state.update(status='running',command=command);save(output/'state.json',state)
         with (output/(suffix+'_launcher.log')).open('x') as log:
             child=subprocess.Popen(command,cwd=str(ROOT),stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT)
@@ -112,15 +159,17 @@ def main():
         batch=execute('systolic_b_batch','final1200',['--dataset',request['dataset']])
         report=dict(schema='systolic-b-report-request-v1',asic=clean,synthesis=request['synthesis'],
             gate=request['gate'],batch=batch,power=[],history=list(request.get('history',[])))
-        if request.get('native_probe'):
+        if request.get('native_probe') or request.get('saif_qualification'):
             try:
-                g=request['R4_gate'];probe=request['native_probe'];original=request['R4_power']
-                replay=execute('native_saif_r4_replay','r4_saif',[
-                    '--cases','layer_01','--gate-run',g['run'],'--gate-summary-sha256',g['sha256'],
-                    '--native-probe-run',probe['run'],'--native-probe-sha256',probe['sha256']])
-                qualified=execute('native_saif_r4_crosscheck','r4_crosscheck',[
-                    '--cases','layer_01','--native-replay-run',replay['run'],'--native-replay-sha256',replay['sha256'],
-                    '--reference-power-run',original['run'],'--reference-power-sha256',original['sha256']])
+                qualified=request.get('saif_qualification')
+                if qualified is None:
+                    g=request['R4_gate'];probe=request['native_probe'];original=request['R4_power']
+                    replay=execute('native_saif_r4_replay','r4_saif',[
+                        '--cases','layer_01','--gate-run',g['run'],'--gate-summary-sha256',g['sha256'],
+                        '--native-probe-run',probe['run'],'--native-probe-sha256',probe['sha256']])
+                    qualified=execute('native_saif_r4_crosscheck','r4_crosscheck',[
+                        '--cases','layer_01','--native-replay-run',replay['run'],'--native-replay-sha256',replay['sha256'],
+                        '--reference-power-run',original['run'],'--reference-power-sha256',original['sha256']])
                 g=request['gate']
                 activity=execute('systolic_b_saif','activity12',[
                     '--cases']+['layer_%02d'%i for i in range(1,13)]+[

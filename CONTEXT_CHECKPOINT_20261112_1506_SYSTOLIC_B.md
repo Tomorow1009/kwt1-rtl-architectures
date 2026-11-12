@@ -1,5 +1,23 @@
 # B 检查点：2026-11-12 15:06
 
+## 15:32增量：R4重放继续，本地最终队列适配
+
+15:24:40原R4重放314119/child317388继续，csv114688B；15:27:16已有11933/25344行，仍在完整230926.643574ns窗口的VCS run中，无SAIF文件或回执。debug+完整统计明显慢于普通功能仿真，按实测估预算，不以芯片加速比推算。一次ps参数显示不完整，不能据此推CPU数值；实际输出文件增长证明前进。
+
+d48新9文件ops已部署验证，gate02命令已备但**未启动**。当前唯一EDA仍原R4 replay，不能并发。
+
+本地systolic_b_finalize_queue已适配：活动步骤使用hash-bound ops/request而非ced旧SAIF模块；可提供已完成saif_qualification，避免重复R4重放；验证失败不掩盖已经完成的own1200，功耗保留未验。4项替身子进程流程检查通过（不是硬件PASS）。新finalize队列及测试尚未提交/部署，未来需要新工具副本，不能用旧base finalize启动带SAIF的正式队列。正式gate/冻结review仍未满足，最终队列不批准。
+
+当前VNC工作区3/ced shell，FZ关闭；正在读取DRC06 check_timing/loop静态报告，不启动EDA。需收尾本地exec和读截图后继续。未修改RTL、网表、约束或当前运行目录输入。
+
+## 15:24增量
+
+云端d48c638a3bfba1292e6712506e2ff4e5b185b688已push及ls-remote核对。9文件新ops已7条差分命令全部部署，operations/systolic_b_tools_d48c638，manifest **2a681669db15eb66e609f64fba898ce53ee9743386551801d4d314f9b3417848**；不得重复append。新增gate模块从server_run导入原ROOT/A3，因此数据/固件仍绑定ced；source_inputs同时记录实际overlay模块hash与SRAM来源核对回执。8项gate/来源/ops测试通过。
+
+**新gate02尚未启动**，准备命令takeover_local/b_d48_gate02_launch.txt，绑定DRC06 SHA b817...。等待当前R4 replay01 PID314119；15:18:25观察已编译完、child317388正在实际仿真，输出csv32768B，未有SAIF回执。不并发EDA。原gate01 failed前仿真记录保留，不重启。
+
+当前只读b_r4_replay_live第二次查询已执行，截图b_r4_replay_live2.png待读；若exec返回session需先write_stdin收尾。VNC工作区3/ced shell，FZ关闭，后续不误发任何launch。
+
 ## 15:15增量：门级入口失败，R4 SAIF重放已启动
 
 **DRC06 gate01 PID294410已于15:08:18.564130失败，仿真尚未开始。** 错误Missing/ambiguous traced synthesis SRAM configuration：修复链source_inputs保留原synth02、drc04/05/06四份同源arch02_sram_config.vh，旧检查器只允许一份。实际四文件存在、哈希逐项一致并与回执匹配，非数据或存储时序改变。失败目录保留，不能重跑01。
