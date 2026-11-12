@@ -1,5 +1,15 @@
 # B 检查点：2026-11-12 15:06
 
+## 16:21增量：52f37cc工具已同步部署
+
+提交**52f37cc029c505102d99741c33a814f26373fb01**已push/ls-remote一致。13文件新ops目录`operations/systolic_b_tools_52f37cc`部署完成，manifest **8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435**，10条差分命令已全部执行并最终hash核对，禁止重复append。新增power/report/timing工具仅改工具，不改当前gate02/d48或历史输入。
+
+16:18:05 gate02/PID79264前5层通过，L06进行中（child101312），无错误。R4 PT请求已部署，launch b_c307_crosscheck_launch.txt仍未执行。gate02结束后查真实锁再启动。不要用新的工具目录去重启已有门级。
+
+本地准备`takeover_local/build_b_final_request.py`，**尚未调用，未生成冻结批准或最终请求**。它需实际读取成功gate02和R4 crosscheck两个SHA后才可调用；正式输出分别b_freeze_review01.json/b_finalize01_request.json。它绑定63da ASIC、DRC06、新gate02、原恢复/竞争、前validation03队列和52工具。不能填占位hash或提前启动own1200。最终队列运行时PYTHONPATH应指ced base scripts；新ops负责SAIF/功耗，原base负责cleanASIC14/own1200。
+
+进度、创新说明与复现手册已本地更新到新映射，尚未提交；保留此前历史状态和失败路径。当前VNC工作区3/ced shell，FZ关闭；唯一EDA仍gate02，需先收取下一截图确认进度。
+
 ## 16:12增量：原门级继续，功耗工具精确周期修复
 
 16:11:48 gate02/PID79264前两层PASS、L03进行中，无错误。编译和SRAM来源链检查已通过；当前子进程88593。不重启该批次。R4 PT请求已部署，但尚未启动。

@@ -4,6 +4,12 @@
 
 ## 当前作业，接手时先检查
 
+**11月12日16:18：下两段08:45状态是历史。** synth02已完成，validation02因入口参数失败，validation03已完成恢复/竞争/原网表门级；不得续跑。当前候选是ced包中的`runs/systolic_b_v3_drc06/systolic_b_synth`（摘要b8178003…4824ced），约束违规清零；当前唯一EDA为新`runs/systolic_b_v3_drc06_gate02/systolic_b_gate`，driver79264。先读[最新检查点](../../CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md)，实际锁位置是server_config.server_root下`.arch02_team_lock`。
+
+FTP421时经已授权VNC部署的小工具副本位于团队目录`operations/systolic_b_tools_52f37cc`，13文件manifest SHA `8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435`。原ced包709输入未改；gate02使用已核验d48副本，最终功耗使用52副本。不得用ced原SAIF工具覆盖后续修复。直接从ops调用最终队列或报告时，需`env PYTHONPATH=workspaces/arch03/scripts python3 <ops脚本> ...`。
+
+R4 SAIF replay01已完成，摘要f7d542dd…3d21a；跨方法PT请求`operations/r4_saif_crosscheck01_request.json`已部署但未启动。合格后最终队列用`saif_qualification`引用实际结果，避免再次重放R4。新B功耗导入独立`mapped.precise.sdc`，实际HF周期必须6.666666ns；历史R4导入6.66667ns的舍入事实保留披露。
+
 11月12日08:45启动的新综合为`systolic_b_v3_synth02`，driver183038；后继`systolic_b_v3_validation02_queue`为184658。它绑定同一综合开始时间`2026-11-12T08:45:21.455160`，按锁串行运行恢复、竞争、SAIF小试、时序诊断和gate14。读最新检查点，核对实际进程、锁、空间和状态后继续；不要重复执行本页示例启动相同阶段。
 
 旧synth01及validation01因磁盘满退出，状态文件保存失败而停留在running/waiting。没有最终网表可恢复，不是可续跑的综合。用户授权后已清理旧MMIO8 L09–L12四个VCD，其他证据保留，详见[清理回执](../../handoff/team/evidence/SERVER_WAVE_CLEANUP_20261112.json)。这不影响R4或B的输入。
