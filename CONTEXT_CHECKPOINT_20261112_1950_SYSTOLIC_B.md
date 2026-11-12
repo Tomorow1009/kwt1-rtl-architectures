@@ -51,3 +51,19 @@
 VNC fresh18874436、**workspace3**、ced空闲shell；最后只读进度查询已执行并读图。**无待Return、无悬挂functions exec、无前台monitor**。FileZilla关闭，FTP421不再重复问用户；workspace4不用。不要因过期relay pid重开开发板网络。
 
 代码/功能/方法证据已云同步f6f704c；本增量、清理回执及启动状态待同步。原有ABI参与固件manifest，不能编辑。当前任务继续，不以“已同步”结束后续工作。
+
+## 20:04增量：采集实际运行及交付包准备
+
+- 19:55:55.770782真实进程树：queue320367、activity320434、simv322040；simv约99.7%CPU、已运行7:05，19:59再次约99.6%/10:33。第一层实际采集进行中，尚无完成层；compile已结束，不能再写“仍编译”。L01窗口为93003.324033ns开始、运行208926.645774ns，编码33012B。最后20:00前VNC查询结束返回ced shell，无待输入。
+- 第四次清理总字节曾在本地转录把73078写成37078，总和断言捕获；按两份实际文件大小重新求和，正确**61477973078B/57.255824GiB**、四次累计**421970827967B/392.990958GiB**。服务器原始receipt一直正确，本检查点、STATUS及证据已修正。修正提交f56b642e28a0c3b18abe906b3ccd169e57e94c72已push/ls-remote确认；云头不再是f6f704c。
+- 本地完成新源码/固件包`local_runs/light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.zip`，11397311B/722文件，ZIP SHA`4654aa32bd8d89fc8d58f2228d01cf998c2924924f2817fa3d8fa6be423ba479`，manifest SHA`47f6350037218b6d712cf3c24f5fa0e2f0759c262826ee9b68c1c044bca736c2`。新包**仅本地，未上传/未以此包重新服务器运行**，不替代ced+ops当前受测身份。
+- 与ced比较187项生产RTL/软件/固件/数据，185项字节相同；差异仅诊断sequence ELF容器及manifest内elf_sha。独立解析ELF32 RISC-V入口与全部PT_LOAD段完全相同，sequence.bin/verilog完全相同，其余manifest字段完全相同；生产固件manifest仍11d860ca…aa16b91。不得写“所有固件文件字节完全相同”。首次严格全文件比较的差异已如实记录，没有重编硬件或继承新包PASS。
+- 新证据`handoff/team/evidence/SYSTOLIC_B_DELIVERY_PACKAGE_20261112.json`尚未提交；本增量尚未提交。本地package进程8454已正常完成，无本地运行任务。不必重复打包或上传到受测目录。
+
+## 20:07增量：第一层完整SAIF已通过
+
+20:04:50.893466原320367/320434队列继续，无error，case_progress已有**layer_01、25344输出、31339完整周期**。SAIF **114841176B**；首层包括其它输出的最大案例体积115169610B，剩11层空间预算3667722500B（仍含20%+2GiB）。20:07实时free88021663744B。
+
+实际mtime观察：L01 capture脚本19:48:51.277409，首case_progress20:02:42.636384；L02脚本20:02:42.641384。因此首层采集加审核约831.36秒/13.86分钟（不含此前约83秒编译），剩11层按20%余量约3.05小时，再加12次PT和独立报告；不能把这个估算写成终态。L01严格窗口93003.324033→301929.969807ns。20:07仍无B功耗数字，activity1/12不是完整活动PASS。
+
+最新VNC18874436/workspace3/ced shell空闲，`b_saif_first_case_budget.txt`查询已执行并读图，无待输入。`b_power_final01_progress.txt`、`b_power_child_process.txt`可读原运行；后者按队列动态child取真实子进程，避免单靠名字/用户名筛选推断空闲。当前没有第五次清理，后续旧dma16_gate03波形只查到历史本地记录，未远端逐项审核或删除。

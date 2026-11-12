@@ -1,0 +1,26 @@
+{
+  "schema": "systolic-b-delivery-source-package-identity-v1",
+  "source_commit": "f56b642e28a0c3b18abe906b3ccd169e57e94c72",
+  "archive": "light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.zip",
+  "archive_sha256": "4654aa32bd8d89fc8d58f2228d01cf998c2924924f2817fa3d8fa6be423ba479",
+  "archive_bytes": 11397311,
+  "manifest_files": 722,
+  "manifest_sha256": "47f6350037218b6d712cf3c24f5fa0e2f0759c262826ee9b68c1c044bca736c2",
+  "frozen_base": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "compared_production_and_firmware_and_data_files": 187,
+  "byte_identical_files": 185,
+  "changed_files": [
+    "firmware_sequence/driver.elf",
+    "firmware_sequence/manifest.json"
+  ],
+  "production_RTL_software_firmware_and_data_identical": true,
+  "sequence_boot_images_byte_identical": true,
+  "sequence_ELF_entry_and_all_PT_LOAD_segments_identical": true,
+  "sequence_manifest_difference_only_ELF_hash": true,
+  "firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
+  "local_archive_verified": true,
+  "new_package_uploaded": false,
+  "new_package_server_reproduced": false,
+  "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "note": "Current operation tools/documentation packaged. Diagnostic sequence ELF container hash differs outside verified loaded segments; original tested package remains immutable. No new-bundle server PASS claimed."
+}

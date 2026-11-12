@@ -1,6 +1,6 @@
 # 架构三 B 交付索引（验收进行中）
 
-更新于2026年11月12日19:22。**本页是交付材料入口，不是最终提交回执。** B自己的1200任务已全部通过；SAIF/VCD方法对照也已通过。B完整活动和功耗尚未取得，R4继续保留。
+更新于2026年11月12日20:34。**本页是交付材料入口，不是最终提交回执。** B自己的1200任务已全部通过；SAIF/VCD方法对照也已通过。B同网表活动已完成3/12层，原队列继续采集，完整活动和功耗尚未取得，R4继续保留。
 
 ## 固定配置与已取得结果
 
@@ -32,6 +32,7 @@
 | 干净目录实际CPU调度统计 | [12层调度证据](../../handoff/team/evidence/SYSTOLIC_B_CLEAN14_SCHEDULE_20261112.json) |
 | B自己的最终1200 | [真实ASIC/E203终态证据](../../handoff/team/evidence/SYSTOLIC_B_ASIC1200_20261112.json) |
 | 原生SAIF方法对照 | [R4同窗口VCD/SAIF核对](../../handoff/team/evidence/SYSTOLIC_B_SAIF_METHOD_20261112.json)：整机及主要模块差异≤1%，1060默认声明已逐个证明无实际连接 |
+| 本地源码/固件交付包 | [包及生产输入核对](../../handoff/team/evidence/SYSTOLIC_B_DELIVERY_PACKAGE_20261112.json)：722文件、ZIP已校验，尚未上传或取得新包服务器复现 |
 | 运行命令与哈希规则 | [复现手册](SYSTOLIC_B_RUNBOOK.md) |
 | 已实现功能、历史尝试与失败路径 | [阶段报告](SYSTOLIC_B_PROGRESS_20261112.md) |
 | 创新及答辩 | [创新说明](SYSTOLIC_B_INNOVATION_20261112.md) |

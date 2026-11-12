@@ -2675,7 +2675,7 @@
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1950_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2688,13 +2688,13 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T19:48:59.519791+08:00",
+      "time": "2026-11-12T20:07:24+08:00",
       "queue_pid": 320367,
       "child_pid": 320434,
       "stage": "systolic_b_saif",
       "status": "running",
       "foreground": "VNC workspace3 ced shell; window18874436",
-      "free_bytes": 115593969664,
+      "free_bytes": 88021663744,
       "last_disk_observation": {
         "time": "2026-11-12T19:17:20.448357+08:00",
         "free_bytes": 43889197056
@@ -2763,7 +2763,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "219fed903ff471c29e23ee7a418725252c2ed216",
+    "cloud_commit": "f56b642e28a0c3b18abe906b3ccd169e57e94c72",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -3022,7 +3022,7 @@
       "source_RTL_changed": false,
       "manifest_sha256": "8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435"
     },
-    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1640_SYSTOLIC_B.md",
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
       "schema": "systolic-b-native-saif-tiny-probe-evidence-v1",
       "observed_server_date": "2026-11-12",
@@ -3222,10 +3222,23 @@
       "queue_pid": 320367,
       "child_pid": 320434,
       "request_sha256": "e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0",
-      "activity_cases_completed": 0,
-      "observed": "2026-11-12T19:48:59.519791+08:00",
+      "activity_cases_completed": 3,
+      "observed": "2026-11-12T20:34:04.308726+08:00",
       "initial_storage_required_bytes": 4872908231,
-      "initial_storage_free_bytes": 117758230528
+      "initial_storage_free_bytes": 117758230528,
+      "active_case": "layer_04",
+      "first_SAIF_bytes": 114841176,
+      "first_case_outputs": 25344,
+      "first_case_cycles": 31339,
+      "first_case_host_capture_and_audit_seconds": 831.358975,
+      "remaining_capture_estimate_seconds_with_20percent_margin": 10973.93847,
+      "free_bytes_observed": 147345089536,
+      "remaining_storage_budget_bytes": 3390740552,
+      "case_SAIF_bytes": {
+        "layer_01": 114841176,
+        "layer_02": 114816275,
+        "layer_03": 114795630
+      }
     },
     "wave_cleanup_third": {
       "status": "deleted_independently_confirmed",
@@ -3275,6 +3288,16 @@
       "receipt_sha256": "0c8310269eee5ba94ef8931082ecfde9ef3048cd3f44e72abee91ab761445df5",
       "bytes": 61477973078,
       "cumulative_bytes": 421970827967,
+      "R4_B_preserved": true
+    },
+    "delivery_source_package": "handoff/team/evidence/SYSTOLIC_B_DELIVERY_PACKAGE_20261112.json",
+    "cloud_commit_note": "Last independently verified remote head before this evidence-only update.",
+    "wave_cleanup_fifth": {
+      "status": "deleted_independently_confirmed",
+      "evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_FIFTH_20261112.json",
+      "receipt_sha256": "45ffee0f7659bc842ae39143d7fe78713680ec5ba9377cc49ec07269aef48c29",
+      "bytes": 102909728001,
+      "cumulative_bytes": 524880555968,
       "R4_B_preserved": true
     }
   }
