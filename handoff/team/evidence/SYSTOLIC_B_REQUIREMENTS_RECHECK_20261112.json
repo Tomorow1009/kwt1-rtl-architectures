@@ -1,0 +1,39 @@
+{
+  "schema": "local-contest-image-recheck-v1",
+  "observed": "2026-11-12T09:15:00+08:00",
+  "source": "User-provided local contest guide images; no new organizer clarification inferred",
+  "files": [
+    {
+      "file": "赛题图片11.webp",
+      "printed_page": 10,
+      "sha256": "75e19ccc730e1b7ae33ed7db04a76efaeaebb007412a950d75ec0d2d184fce2b"
+    },
+    {
+      "file": "赛题图片12.webp",
+      "printed_page": 11,
+      "sha256": "0bf4ebe270d0660feb0b97da35d66c4845ec4ac41ced269e1684b294a6ddd5c7"
+    },
+    {
+      "file": "赛题图片13.webp",
+      "printed_page": 12,
+      "sha256": "c7ea43c7079c45c2a94a10074020f2687a408640b0245138a664e4b0c004343c"
+    },
+    {
+      "file": "赛题图片14.webp",
+      "printed_page": 13,
+      "sha256": "5379d4c2ab1d96941493ea172a853a00583a644f7964f3fc6a4135065614bd08"
+    }
+  ],
+  "official_area_limit_mm2": 2.25,
+  "team_stricter_limit_mm2": 2.0,
+  "undergraduate_function_numeric_points": 40,
+  "SoC_synthesis_reproducibility_points": 20,
+  "innovation_points": 20,
+  "efficiency_requires_all_hard_gates": true,
+  "official_performance_tasks": 12,
+  "official_precision_samples": 600,
+  "current_tasks_are_internal": true,
+  "postlayout_signoff_required_by_these_pages": false,
+  "missing_activity_or_SRAM_model_may_be_zeroed": false,
+  "submission_destination_not_requested_again": true
+}
