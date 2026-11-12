@@ -1,5 +1,15 @@
 # B 检查点：2026-11-12 18:00
 
+## 18:05新工具部署增量
+
+18:08:52实际批量已**488/1200、12,367,872输出、零失败**，driver149529/child156788继续；free72,303,509,504B，剩余712任务预算4,483,796,020B，含20%余量剩余4534.78285秒。工具15文件安装已完成；当前没有新PT、没有新增删除。
+
+本地新增`systolic_b_power_queue.py`，仅接续已完成final02的activity12/power12，要求实际1200/30412800、完整原队列摘要/报告请求和已合格R4方法；不重跑ASIC/gate/batch。3项检查通过（首次负向夹具误共用Python dict导致未触发失配，改为独立引用后通过；非硬件失败）。该队列代码尚未部署、没有请求或启动。准备把它加入下一份16文件ops，从已完整部署0b082fd差分生成，勿从52重复生成旧段。
+
+**18:07:35安装回执已核：00..12全部完成，OPS_DELTA_VERIFIED 15文件，manifest与e8234702…b1cf47一致。** 不得重复任何append/安装。新的crosscheck02启动文本已准备在`takeover_local/b_crosscheck02_launch_after_batch.txt`（927字符），但**尚未执行**；内置要求原final02状态reports_ready_review_required才启动。复用原相同hash请求，使用新0b082fd ops，不重新采R4 SAIF。最新`b_final02_progress.txt`已Return，截图`b_final02_progress1809.png`待读；无本地工具会话、无待输入命令。
+
+新工具/检查点提交 **0b082fd444a2c64ec89488fbac27b0803edd5f3d**已push/ls-remote核验。新的15文件ops `operations/systolic_b_tools_0b082fd`，manifest **e823470281aa0e191aa1219d31492458f6d2473361b835a47734790a8eb1cf47**；payload6368B，SHA58b7c6e8f62014af6349726de4adc3ea6025b48251c333492aaf48b4d0fb20cb。13条命令`b_delta_chunk_00..12`：**00..05已执行**，当前预期3100B；06..12尚未执行。截图`b_ops0b_chunk05.png`待读。不重新生成/append已完成段；没有新PT启动，原batch149529/156788继续。
+
 任务ACTIVE，有效计划`workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md`，直接B，A取消，R4保底。63da6ba/v3/credits3硬件冻结不变。先读AGENTS、本文件、计划、STATUS，再继续原作业。11/13 17:00收尾，勿启动新架构。
 
 ## 唯一原队列必须继续
