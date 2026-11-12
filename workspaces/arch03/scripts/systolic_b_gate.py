@@ -278,11 +278,20 @@ def verify_gate_memory_config(synthesis, run):
     inputs = json.loads((synthesis/'source_inputs.json').read_text())
     matches = [(Path(name), digest) for name, digest in inputs.items()
                if Path(name).name == 'arch02_sram_config.vh']
-    if len(matches) != 1:
+    if not matches or len({digest for _,digest in matches})!=1:
         raise ValueError('Missing/ambiguous traced synthesis SRAM configuration')
-    original, digest = matches[0]
-    if sha(original) != digest or sha(run/'arch02_sram_config.vh') != digest:
+    # A mapped repair retains its ancestors' exact inputs as well as its own
+    # newly generated vendor include. Every traced copy must agree; do not
+    # arbitrarily select one or ignore a differing historical configuration.
+    current=(synthesis/'arch02_sram_config.vh').resolve()
+    if current not in {path.resolve() for path,_ in matches}:
+        raise ValueError('Current synthesis SRAM configuration is not traced')
+    digest=matches[0][1]
+    if any(sha(path)!=value for path,value in matches) or sha(run/'arch02_sram_config.vh')!=digest:
         raise ValueError('Gate SRAM model configuration differs from synthesized hardware')
+    save(run/'memory_configuration_receipt.json',dict(sha256=digest,
+        identical_traced_inputs=[str(path.resolve()) for path,_ in matches],
+        gate_configuration=str((run/'arch02_sram_config.vh').resolve())))
 
 
 def testbench(netlist, probe):
@@ -346,7 +355,7 @@ def verify(cfg,run,synthesis,expected_sha,cases,call,activity_cases=(),firmware=
     files=[synthesis/'mapped.v']+modules+[tb,model]+vendor(cfg,run)
     verify_gate_memory_config(synthesis,run)
     tracked=files+[loader,monitor,firmware/'manifest.json',synthesis/'summary.json',
-        run/'arch02_sram_config.vh',run/'mapped_binding_receipt.json',run/'mapped_port_probe.tsv',
+        run/'arch02_sram_config.vh',run/'memory_configuration_receipt.json',Path(__file__),run/'mapped_binding_receipt.json',run/'mapped_port_probe.tsv',
         run/'mapped_probe.tcl',run/'mapped_probe.log',run/'probe_command.json',A3/'tb/arch03_systolic_b_monitor.svh']
     tracked+=[p for p in firmware.iterdir() if p.is_file() and p.suffix in ('.elf','.bin','.verilog')]
     tracked+=[ROOT/rel for rel in fw['source_sha256']]

@@ -1,5 +1,15 @@
 # B 检查点：2026-11-12 15:06
 
+## 15:15增量：门级入口失败，R4 SAIF重放已启动
+
+**DRC06 gate01 PID294410已于15:08:18.564130失败，仿真尚未开始。** 错误Missing/ambiguous traced synthesis SRAM configuration：修复链source_inputs保留原synth02、drc04/05/06四份同源arch02_sram_config.vh，旧检查器只允许一份。实际四文件存在、哈希逐项一致并与回执匹配，非数据或存储时序改变。失败目录保留，不能重跑01。
+
+本地修复verify_gate_memory_config：允许多份但要求所有记录digest同一值、每一实际文件匹配、当前综合自己的include必须在追踪清单中、当前gate include也同SHA；保存memory_configuration_receipt，实际overlay gate模块hash写入source_inputs。ops新增gate14入口。6项针对同源副本、历史篡改、不同有效配置、缺当前配置及请求保护检查通过。尚未提交部署，新gate02不得使用旧610工具；新副本将含9文件（新增gate模块）。不修改DRC06网表或原约束。
+
+15:11实际核真实锁已释放。**R4完整SAIF replay01 PID314119于15:13:24唯一启动**，ced runs/systolic_b_r4_saif_replay01/native_saif_r4_replay，610 ops及请求bded7b37...。当前唯一EDA，未读取实时回执；不重复launch，不与新gate02并发。下一步查原重放进展，同时本地提交部署gate工具修正，等锁释放后再新gate02。
+
+云端390331c已push（记录DRC06清零和门级启动）；之后本次失败/新重放与工具修正仍本地未提交。当前VNC工作区3/ced shell，FZ关闭，无待Return/本地exec session；最后重放launch已完成。原“gate14正在运行”段落已由此增量取代。
+
 任务 ACTIVE，不暂停。继续直接5×16脉动B计划，生产RTL/固件63da6ba/v3/credits3冻结；R4保底。不开发A或新编码。用户要求自主继续，压缩后重读AGENTS、有效B计划、本检查点、STATUS。11/13 17:00收尾。此前两次用户授权清理279.506GiB已完成，不重复；R4/B和小证据保护。
 
 ## 关键新结果：DRC06约束清零

@@ -3062,6 +3062,26 @@
       "free_GiB": 405.94140625,
       "lock": false,
       "EDA": []
+    },
+    "new_gate_attempt": {
+      "session": "systolic_b_v3_drc06_gate01",
+      "pid": 294410,
+      "status": "failed_before_simulation",
+      "finished": "2026-11-12T15:08:18.564130",
+      "error": "Missing/ambiguous traced synthesis SRAM configuration",
+      "actual_configuration_copies": 4,
+      "all_actual_digests_identical": true,
+      "local_fix_tests_passed": 8
+    },
+    "R4_SAIF_replay": {
+      "session": "systolic_b_r4_saif_replay01",
+      "pid": 314119,
+      "status": "running_as_last_observed",
+      "observed": "2026-11-12T15:18:25",
+      "child_pid": 317388,
+      "compile_completed": true,
+      "outputs_completed": false,
+      "request_sha256": "bded7b37bb6755ae9c45f0a5ff7987bd8a2ae580b8e9692316adba9fe6384f5f"
     }
   }
 }
