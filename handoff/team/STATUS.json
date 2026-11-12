@@ -2675,7 +2675,7 @@
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_2136_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2763,7 +2763,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "8f52e26ba769f6550502146f0eea5492fb3df86e",
+    "cloud_commit": "315a8f67538b209869345491591497b5639c4acf",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -3022,7 +3022,7 @@
       "source_RTL_changed": false,
       "manifest_sha256": "8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435"
     },
-    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md",
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_2136_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
       "schema": "systolic-b-native-saif-tiny-probe-evidence-v1",
       "observed_server_date": "2026-11-12",
@@ -3222,17 +3222,17 @@
       "queue_pid": 320367,
       "child_pid": 320434,
       "request_sha256": "e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0",
-      "activity_cases_completed": 4,
-      "observed": "2026-11-12T20:42:52.914095+08:00",
+      "activity_cases_completed": 7,
+      "observed": "2026-11-12T21:32:46.799102+08:00",
       "initial_storage_required_bytes": 4872908231,
       "initial_storage_free_bytes": 117758230528,
-      "active_case": "layer_05",
+      "active_case": "layer_08",
       "first_SAIF_bytes": 114841176,
       "first_case_outputs": 25344,
       "first_case_cycles": 31339,
       "first_case_host_capture_and_audit_seconds": 831.358975,
       "remaining_capture_estimate_seconds_with_20percent_margin": 10973.93847,
-      "free_bytes_observed": 143933833216,
+      "free_bytes_observed": 68205674496,
       "remaining_storage_budget_bytes": 3252652093,
       "case_SAIF_bytes": {
         "layer_01": 114841176,
@@ -3301,6 +3301,18 @@
       "cumulative_bytes": 524880555968,
       "R4_B_preserved": true
     },
-    "partial_activity_evidence": "handoff/team/evidence/SYSTOLIC_B_ACTIVITY_PARTIAL_20261112.json"
+    "partial_activity_evidence": "handoff/team/evidence/SYSTOLIC_B_ACTIVITY_PARTIAL_20261112.json",
+    "space_candidate_not_deleted": "handoff/team/evidence/SERVER_WAVE_CLEANUP_CANDIDATE_20261112.json",
+    "foreground_lossless_archive_verification": false,
+    "R4_lossless_copy": {
+      "run": "runs/r4_l02_lossless_archive01",
+      "case": "layer_02",
+      "compression_pid": 134929,
+      "status": "lossless_verified_original_retained",
+      "original_file_retained": true,
+      "other_R4_layers_untouched": true,
+      "original_bytes": 12567832939,
+      "archive_bytes": 766947572
+    }
   }
 }

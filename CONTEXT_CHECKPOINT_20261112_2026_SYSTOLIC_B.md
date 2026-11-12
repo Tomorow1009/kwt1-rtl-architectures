@@ -6,6 +6,12 @@
 
 **20:42:52.914095增量：已4/12层，新增L04 SAIF114796107B。** 原320367/320434继续，无error，实际free143933833216B，剩8层预算3252652093B。文档中旧运行入口和“待1200/待SAIF方法”已纠正，runbook改为当前722文件本地交付包哈希，并明确它尚未上服务器；旧ced受测包不变。最后b_power_final01_progress已执行，终端空闲，没有前台监视器。后续仍待活动12→power12→同4b58ff0报告工具独立审核。没有新RTL、EDA或上传。
 
+**20:47:40.480519增量：GitHub已push及ls-remote核对315a8f67538b209869345491591497b5639c4acf。** 队列仍activity4/12、power0/12、320367/320434，无error，free135403667456B。现在VNC18874436/workspace3前台运行`b_power_final01_monitor.txt`只读监视器，每30秒显示原队列/层数/空间；不是空闲shell。它在队列终态或free<12GiB时退出，必要时Control_L c只停这个监视器。不要向它输入shell命令。无待Return或本地exec，新监视器不创建/停止任何EDA。当前仅等待已有验证，不增架构或重跑已通过任务。
+
+**21:10增量：只读监视器已用Control_L c停止，服务器EDA未动，VNC目前是ced空闲shell。** 21:08只读case_progress已6/12层；21:10 free102209945600B。查明旧4c8803e/d3_activity01无summary是原活动后处理被中止，371316a/d3_activity02后来已独立完整复核passed（摘要完整值见候选JSON）。原层波形29860998380B、非软链；复核目录软链确实指向它，旧原始小文件与复核保存哈希相同，fuser=1。**尚未删除、没有第六次删除脚本或回执。** 已存`SERVER_WAVE_CLEANUP_CANDIDATE_20261112.json`，如空间继续恶化可按现有授权重新检查后精确清理；要记录旧复核软链也将需重建。R4/B仍保护。最后b_old_activity_preflight已执行，截图读完，无待Return。
+
+**21:12:44.956306增量：同一只读监视器已恢复前台运行，不是空闲shell。** B activity6/12、power0/12，queue320367/activity320434，无error，free98517909504B。VNC18874436/workspace3，最后Return和截图均完成；没有本地exec。当前候选清理仅只读发现、未生成服务器receipt/执行脚本、未删除。若恢复时空间明显下降，先检查实际占用，必要时根据candidate JSON重新核验后记录精确删除，不要重复前五次。剩余活动/功耗结束后使用实际最终report_request调用4b58ff0报告工具，不能继承R4功耗。
+
 **任务ACTIVE，继续执行，不要结束于同步。** 用户最新要求“把本版完成情况同步GitHub，再继续工作”已完成同步；原要求是直接5×16脉动B，A取消，R4保护。生产63da6ba/v3/credits3冻结，11/13 17:00前交付收尾。有效计划`workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md`。压缩后先读AGENTS、计划、本文件、STATUS；细节见[19:50含20:07增量](CONTEXT_CHECKPOINT_20261112_1950_SYSTOLIC_B.md)和[19:22已完成证据](CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md)。
 
 ## 唯一实际运行任务
