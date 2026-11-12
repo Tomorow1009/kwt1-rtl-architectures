@@ -1,0 +1,65 @@
+{
+  "schema": "arch03-n1-duplicate-upload-zip-cleanup-observation-v1",
+  "status": "duplicate_shared_zip_removed_retained_verified",
+  "scope": "One exact redundant upload ZIP only; not a result/archive cleanup",
+  "authorization_basis": "Existing user authorization to remove previously verified, unlikely-needed redundant files; root agent executed this one-file cleanup",
+  "source": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/light-light126-n1-v4-20261113_022722-41b0846ce719.zip",
+  "retained_server_copy": "/tmp/s4_21usr_n1_20261113_0210/retained_ops_upload_20261113_0428.zip",
+  "retained_local_copy": "E:/fpga_race-two/kwt1-rtl-architectures/local_runs/light-light126-n1-v4-20261113_022722-41b0846ce719.zip",
+  "bytes": 8891173,
+  "sha256": "17d2e972e0452daf70505a69613423979bc0f1c9f10a50d6fc6ba676dc0a65e3",
+  "manifest_sha256": "0837b78df4867df055ecf4f115bcd2b8ec58d1e48acf698850de8c9eed58f64e",
+  "source_commit": "41b0846ce71990d1dbf29fcd22baff32febc6c48",
+  "unpacked_runtime_bundle_retained": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_022722-41b0846ce719",
+  "server_receipt": "/tmp/s4_21usr_n1_20261113_0210/duplicate_ops_zip_receipt_0428.json",
+  "server_receipt_sha256": null,
+  "first_attempt": {
+    "screenshot_clock_server_local": "2026-11-13T04:27:36",
+    "command_issue": "Initial fuser -- invocation rejected by installed fuser; root agent identified the unsupported invocation",
+    "observed_stderr": "No process specification given followed by usage text",
+    "observed_returncode": 1,
+    "empty_stderr_guard_passed": false,
+    "outcome": "AssertionError before copy or deletion",
+    "source_deleted": false,
+    "failure_preserved": true,
+    "screenshot": "E:/fpga_race-two/takeover_local/retain_ops_zip_0428.png",
+    "screenshot_sha256": "8ee46bd64e164c278b69e69110c015f76858265e833c045b2e354ad5c582ced4"
+  },
+  "successful_retry": {
+    "copied_at_server_local": "2026-11-13T04:28:28.922132",
+    "finished_at_server_local": "2026-11-13T04:29:29.203111",
+    "fuser_invocation": "fuser <exact source path>; no --",
+    "fuser_returncode": 1,
+    "fuser_stdout_empty": true,
+    "fuser_stderr_empty": true,
+    "checks": [
+      "Exact expected source path, regular file and not symlink",
+      "Source ZIP actual size and SHA match preserved local identity",
+      "Fresh /tmp retained copy created and its complete SHA matches",
+      "Immediately before removal, source and retained ZIP size and SHA checked again",
+      "Immediately before removal, fuser returncode 1 and empty stdout/stderr required",
+      "Retained ZIP file descriptor fsync completed before unlink of source"
+    ],
+    "exact_duplicate_source_unlinked": true,
+    "free_after_bytes": 1558183936,
+    "free_space_causality": "Free-after is the shared-filesystem observation, not bytes freed by this 8,891,173-byte deletion; other concurrent changes cannot be inferred",
+    "copy_screenshot": "E:/fpga_race-two/takeover_local/retain_ops_zip_retry_0429.png",
+    "copy_screenshot_sha256": "b8eb561fde18fe42f55479a8130c961292b1d2fd2a54d1b5d5ecb18290e88952",
+    "removal_screenshot": "E:/fpga_race-two/takeover_local/remove_dup_ops_0430.png",
+    "removal_screenshot_sha256": "553d02323168fc84d03042c6fe543b2c9bc76e66889d82aec8fff227425daa72"
+  },
+  "record_evidence": {
+    "screenshots_visually_inspected_by_record_agent": true,
+    "local_zip_actual_sha_and_manifest_checked": true,
+    "record_agent_executed_server_commands": false,
+    "original_server_receipt_not_downloaded_for_this_record": true
+  },
+  "limits": {
+    "r4_or_b0_archives_removed": false,
+    "eda_or_simulation_results_removed": false,
+    "local_zip_removed": false,
+    "runtime_evidence_archived_by_this_action": false,
+    "temporary_storage_is_final_delivery": false,
+    "hardware_acceptance_implied": false
+  }
+}
