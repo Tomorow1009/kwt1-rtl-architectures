@@ -94,8 +94,9 @@ def estimate(cfg,run,activity_run,activity_sha,case,call):
     numeric=extract_reports(run,'systolic_b')
     mapping=numeric['sources']
     for table in (mapping,mapping['static_probability']):
-        if table['exact_mapping']+table['implied']!=table['total']:
-            raise ValueError('B activity uses default/propagated/unannotated values; inspect reports')
+        isolated=numeric['isolated_defaults']['count']
+        if table['default']!=isolated or table['exact_mapping']+table['implied']+isolated!=table['total']:
+            raise ValueError('B activity has a gap outside independently proven unconnected declarations')
     duration=window_values(row['task_window'])[2]
     numeric['duration_ns']=duration
     numeric['average_power_w']=numeric['reported_power_w']['total']

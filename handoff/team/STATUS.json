@@ -2675,7 +2675,7 @@
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1720_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1800_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2688,13 +2688,13 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T17:34:16.532936+08:00",
+      "time": "2026-11-12T17:52:52.637721+08:00",
       "queue_pid": 149529,
       "child_pid": 156788,
       "stage": "systolic_b_batch",
       "status": "running",
       "foreground": "VNC workspace3 ced shell; window18874436",
-      "free_bytes": 116890009600
+      "free_bytes": 83616595968
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -3186,11 +3186,16 @@
       "clean14_passed": true,
       "clean14_summary_sha256": "1aecb2205f4bdc2de4c556e17d44659075c49fa71f78b46ceee7c4f09101bce",
       "batch_child_pid": 156788,
-      "completed_observed": 97,
+      "completed_observed": 307,
       "failed_observed": 0,
-      "outputs_observed": 2458368,
-      "observed": "2026-11-12T17:34:16.532936+08:00",
-      "remaining_seconds_including_20percent_margin": 7039.411758845872
+      "outputs_observed": 7780608,
+      "observed": "2026-11-12T17:52:52.637721+08:00",
+      "remaining_seconds_including_20percent_margin": 5687.950921972488
+    },
+    "SAIF_connectivity_tool": {
+      "status": "local_11_checks_passed_not_deployed_not_PT_verified",
+      "policy": "Only exact default nets with both direct and leaf PT connection collections empty may be excluded from the load-bearing denominator. Raw counts preserved; no activity assigned.",
+      "next": "After final02 releases lock, run unique crosscheck02 with new ops; never retry01 in place."
     }
   }
 }

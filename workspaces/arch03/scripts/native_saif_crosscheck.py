@@ -1,7 +1,7 @@
 """Compare frozen R4 L01 native-SAIF power against its existing VCD power.
 
-Requires identical task window, libraries/netlist, settings, mapped activity
-coverage and <=1% whole-system/main-module total-power difference. A pass only
+Requires identical task window, libraries/netlist, settings, load-bearing
+activity coverage and <=1% whole-system/main-module total-power difference. A pass only
 qualifies the activity transport method; it does not approve unknown activity.
 """
 import json
@@ -11,10 +11,11 @@ from pathlib import Path
 from server_run import sha,save
 import icb32_power as power
 import icb32_power_numbers as numbers
-from dma16_power_activity_review import settings,sources,empty_unannotated
+from dma16_power_activity_review import settings,sources
 from native_saif_activity import audit
 from native_saif_replay import verify_inputs
 from soc_power import power_invocation,power_databases,tcl_path
+from native_saif_isolated import tcl_inventory,review as review_annotation,comparable_sources
 
 
 def script(cfg,synthesis,saif,window,strip_path):
@@ -24,7 +25,10 @@ def script(cfg,synthesis,saif,window,strip_path):
     start,end,_=power.window_values(window)
     old='read_vcd -zero_delay -strip_path tb_top/u_e203_soc_top -time {%s %s} %s'%(start,end,tcl_path(saif))
     if text.count(old)!=1:raise ValueError('Original power activity command changed')
-    return text.replace(old,'read_saif -strip_path '+strip_path+' '+tcl_path(saif))
+    text=text.replace(old,'read_saif -strip_path '+strip_path+' '+tcl_path(saif))
+    marker='redirect activity_unannotated_before.rpt {report_switching_activity -list_not_annotated -show_pin}'
+    if text.count(marker)!=1:raise ValueError('Annotation inventory insertion changed')
+    return text.replace(marker,marker+'\n'+tcl_inventory())
 
 
 def extract_reports(run,sram_profile='icb32'):
@@ -40,15 +44,14 @@ def extract_reports(run,sram_profile='icb32'):
     result['sram']=numbers.parse_sram(texts['power_sram.rpt'],sram_profile)
     result['settings']=settings(texts['power_settings.rpt'])
     result['sources']=sources(texts['activity_sources.rpt'])
-    result['unannotated_before']=empty_unannotated(texts['activity_unannotated_before.rpt'])
-    result['unannotated_after']=empty_unannotated(texts['activity_unannotated_after.rpt'])
+    result.update(review_annotation(run,result['sources'],texts['activity_unannotated_before.rpt'],texts['activity_unannotated_after.rpt']))
     return result
 
 
 def compare(reference,native):
     if reference['base_units']!=native['base_units'] or reference['settings']!=native['settings']:
         raise ValueError('Native SAIF changed process units or X/analysis settings')
-    if reference['sources']!=native['sources']:raise ValueError('Native SAIF mapped activity coverage differs')
+    mapping=comparable_sources(reference,native)
     if set(reference['modules'])!=set(native['modules']):raise ValueError('Native SAIF component set differs')
     rows={}
     for name in ['whole_soc']+sorted(reference['modules']):
@@ -63,7 +66,8 @@ def compare(reference,native):
                         VCD_components_w=left,SAIF_components_w=right)
     return dict(status='within_one_percent' if all(r['within_one_percent'] for r in rows.values()) else 'difference_requires_review',
         allowed_relative_difference='0.01',rows=rows,
-        mapping_and_settings_equal=True,passed=all(r['within_one_percent'] for r in rows.values()))
+        mapping_and_settings_equal=mapping['raw_mapping_equal'],mapping_review=mapping,
+        load_bearing_mapping_and_settings_equal=True,passed=all(r['within_one_percent'] for r in rows.values()))
 
 
 def verify(cfg,run,replay,replay_sha,baseline,baseline_sha,call):
