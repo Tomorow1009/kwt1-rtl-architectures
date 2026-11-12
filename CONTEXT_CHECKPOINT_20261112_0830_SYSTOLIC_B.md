@@ -70,3 +70,17 @@ FileZilla20972102已登录既有站点，正在上传新包；截图b_final_uplo
 - 已开始重新输入同一只读monitor_v2，下一步待该type会话完成后Return并确认恢复；严禁重复synth/validation launch。固定后等待当前结果，实际PPA/gate/SAIF/1200仍待。
 
 **09:34恢复入口确认：上条type会话80480已结束、Return已执行，monitor_v2已恢复并截图核对。09:33:08.463045综合183038 running，队列184658 waiting_synthesis，无completed/失败/error，可用250.9501953125GiB。当前终端仍是前台只读监视器，不是shell；FZ关闭，没有本地待续exec会话。继续当前综合及后继，不启动重复任务。**
+
+## 09:58：压缩后重读与继续观察
+
+- 已重读AGENTS、有效B计划、交接与本检查点、STATUS；云端最后已核对提交67cfe9a9a707746772fe578d1221f99ca94679cf。源配置没有变化。旧本地截图循环cell2078已不存在，没有需要恢复的仿真/输入会话。
+- 09:38–09:40综合由常量寄存器优化进入Implementation Selection；09:55–09:57正在处理DesignWare算术单元。09:57:40.899293原synth183038仍running，原queue184658仍waiting_synthesis，completed=[]、error=None、optional_failures=[]；可用213.599609375GiB。日志阶段变化说明原综合继续推进，但不代表时序或面积已通过。
+- 窗口重新枚举确认VNC18874435/workspace3仍是前台monitor_v2；FileZilla关闭，无新EDA、无新删除。仅截图观察，不向监视器输入shell命令。当前仍缺实际新综合最终报告、sequence/contention、SAIF小试、timing/gate14、最终1200和12层功耗。
+- 重新核对finalize队列的前置条件：五份实际PASS引用、另行冻结审阅以及validation02的真实完成终态缺一不可。源码候选固定记录不能替代这些条件。已准备的result_ready/structure_ready仍未执行；R4继续作为交付退路。
+
+## 10:10：进入高强度映射优化
+
+- 10:09:41.692831原综合183038仍running，日志已到`Beginning Mapping Optimizations (High effort)`；原queue184658等待综合、无completed/失败/error。可用180.6171875GiB；共享盘仍在被其它未归因写入消耗，留意后续余量。本轮没有追加删除。
+- 静态重核现有约束仍为6.666666ns/0.1ns uncertainty、任务稳定模式、四个原LF定时器第一级CDC例外；全部SysMem端口仍按HF接口约束。新实际check_timing、结构清单和门级结果尚未生成，不能直接复用R4的时序审阅。
+- 已确认门级观察器独立校验v3 decoder全部端口，使用冻结status_interface清单补充旧标签，不依赖优化前内部别名；无需修改当前代码。没有新测试或新综合启动。
+- 现场仍为前台只读monitor，FZ关闭，无本地长任务/待输入命令。继续等待原综合和唯一队列；prepared result/structure命令仍未执行。

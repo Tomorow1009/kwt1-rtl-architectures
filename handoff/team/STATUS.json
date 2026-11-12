@@ -2702,7 +2702,9 @@
       "EDA_processes": [
         183038,
         192693
-      ]
+      ],
+      "monitor_time": "2026-11-12T10:09:41+08:00",
+      "monitor_free_GiB": 180.6171875
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2767,7 +2769,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "2e91dedbe3e65246f9127956a41108e97751348c",
+    "cloud_commit": "67cfe9a9a707746772fe578d1221f99ca94679cf",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2811,7 +2813,9 @@
       "child_pid": 192693,
       "child_user_CPU_seconds": 2397.58,
       "child_system_CPU_seconds": 27.44,
-      "child_state": "R"
+      "child_state": "R",
+      "last_log_observation": "2026-11-12T10:09:41+08:00",
+      "log_phase": "Beginning Mapping Optimizations (High effort)"
     },
     "v3_latency2_local": {
       "status": "passed",
@@ -2824,7 +2828,7 @@
       "pid": 184658,
       "session": "systolic_b_v3_validation02_queue",
       "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
-      "observed": "2026-11-12T09:23:39+08:00",
+      "observed": "2026-11-12T10:09:41+08:00",
       "status": "waiting_synthesis",
       "completed": [],
       "optional_failures": [],
@@ -2834,7 +2838,7 @@
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
     "native_saif_tools_local": {
-      "status": "deployed_716_input_bundle_no_actual_SAIF_yet",
+      "status": "deployed_705_input_final_tools_bundle_no_actual_SAIF_yet",
       "probe_deployed_in_waiting_queue": true,
       "R4_full_window_crosscheck": false,
       "B_activity12": false,
