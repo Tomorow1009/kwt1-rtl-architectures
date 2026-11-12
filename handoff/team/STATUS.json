@@ -2668,40 +2668,33 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v3_gate14_passed_max_transition_4_violations_blocks_timing_approval",
+    "status": "drc06_constraints_clear_gate02_running_R4_SAIF_crosscheck_pending",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1320_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
     "new_asic_verified": true,
-    "new_gate_verified": true,
+    "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Deploy committed fixes into a new operations directory, use original verified library paths for fresh DRC04. Formal tiny SAIF VCS/PT and structural review still pending; keep all failed runs. No new RTL or queue restarts.",
+    "next": "Finish original gate02 PID79264; then run the prepared R4 native SAIF PT cross-check serially. Review/freeze this exact mapping before own1200. No new RTL.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T13:28:55+08:00",
-      "free_GiB": 413.0087890625,
-      "team_lock": "absent",
-      "old_L02": {
-        "status": "passed",
-        "pid": 323693,
-        "finished": "2026-11-11T15:17:11.637795",
-        "summary_sha256": "736f0b5a7f6864410fc92d147a44d5549cde516c22bac1626376b98b6dd752ed"
-      },
-      "new_B_job_started": false,
-      "other_processes_not_yet_audited": false,
-      "EDA_processes": [],
-      "monitor_time": "2026-11-12T12:18:29+08:00",
-      "monitor_free_GiB": 232.6357421875
+      "time": "2026-11-12T16:07:25+08:00",
+      "team_lock": "gate02_owned",
+      "EDA_processes": [
+        "gate02 PID79264; layer_01 child83989"
+      ],
+      "new_B_job_started": true,
+      "foreground": "VNC workspace3 ced bundle shell"
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2766,7 +2759,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "610e25f2c2444cf6d9cea53e02892e614bb6d168",
+    "cloud_commit": "c307c3d6dbdeaca94b2050fb1c41451d4a5926fa",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2859,7 +2852,7 @@
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
     "native_saif_tools_local": {
-      "status": "tiny_native_capture_failed_tres_1ps_unit_diagnostics_pending",
+      "status": "tiny_and_full_R4_replay_passed_PT_crosscheck_pending",
       "probe_deployed_in_waiting_queue": false,
       "R4_full_window_crosscheck": false,
       "B_activity12": false,
@@ -2934,9 +2927,9 @@
     },
     "ftp_status": "421_no_teammate_or_board_FileZilla_connection_remaining",
     "vnc_operations_overlay": {
-      "status": "deployed_hash_verified_four_tools",
-      "source_commit": "e6b211eed7830cb339308a5b244fb37966ebb5b4",
-      "manifest_sha256": "8d6756834afff64c3ae453c45b5fc1894c3f65d3fec0cec000312ddeea8bfe86",
+      "status": "c307_deployed_hash_verified_10_tools",
+      "source_commit": "c307c3d6dbdeaca94b2050fb1c41451d4a5926fa",
+      "manifest_sha256": "d855f9f4b4b5108625fa00327c41f4fd300acee2d91545e113eb822245729691",
       "base_bundle_inputs_modified": false
     },
     "mapped_repair": {
@@ -3021,10 +3014,8 @@
       "actual_unknown_representation": "VCS combined TX for X or Z"
     },
     "next_tools": {
-      "directory": "operations/systolic_b_tools_bf55a29",
-      "manifest_sha256": "484ec4c551ed1a0adf16d10b4f4b9a2cef957d11eeca18789be75892ef094103",
-      "status": "delta_transfer_in_progress_not_launched",
-      "source_RTL_changed": false
+      "status": "local_exact_B_power_clock_fix_pending_deployment",
+      "production_RTL_changed": false
     },
     "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
@@ -3064,24 +3055,67 @@
       "EDA": []
     },
     "new_gate_attempt": {
-      "session": "systolic_b_v3_drc06_gate01",
-      "pid": 294410,
-      "status": "failed_before_simulation",
+      "session": "systolic_b_v3_drc06_gate02",
+      "pid": 79264,
+      "status": "running",
       "finished": "2026-11-12T15:08:18.564130",
       "error": "Missing/ambiguous traced synthesis SRAM configuration",
       "actual_configuration_copies": 4,
       "all_actual_digests_identical": true,
-      "local_fix_tests_passed": 8
+      "local_fix_tests_passed": 8,
+      "observed": "2026-11-12T16:07:25+08:00",
+      "previous_failure": "gate01 stopped before simulation on duplicate identical SRAM provenance; preserved"
     },
     "R4_SAIF_replay": {
       "session": "systolic_b_r4_saif_replay01",
-      "pid": 314119,
-      "status": "running_as_last_observed",
-      "observed": "2026-11-12T15:18:25",
-      "child_pid": 317388,
+      "pid": null,
+      "status": "passed_function_window_activity_audit",
+      "observed": "2026-11-12T16:01:25+08:00",
+      "child_pid": null,
       "compile_completed": true,
-      "outputs_completed": false,
-      "request_sha256": "bded7b37bb6755ae9c45f0a5ff7987bd8a2ae580b8e9692316adba9fe6384f5f"
+      "outputs_completed": true,
+      "request_sha256": "bded7b37bb6755ae9c45f0a5ff7987bd8a2ae580b8e9692316adba9fe6384f5f",
+      "finished": "2026-11-12T15:41:08.962232",
+      "summary_sha256": "f7d542dd8e741c008c37c8f50385de451742a4e9125da685228056698e23d21a",
+      "outputs": 25344,
+      "cycles": 34639,
+      "activity_bytes": 94632798,
+      "activity_sha256": "378a012cba19532df1a3cf57892f2959df6dee5c38501b1ecefda722a6d01cfb",
+      "VCS_cpu_seconds": 1489.81,
+      "PT_crosscheck_verified": false
+    },
+    "timing_diagnostic_latest": {
+      "session": "systolic_b_v3_drc06_timing02",
+      "status": "passed_readonly_diagnostic",
+      "finished": "2026-11-12T15:54:23.668453",
+      "summary_sha256": "bfd0007c4846649c7f3ea018a5dbad480e10f8c406f309c3089b016d0c7da3b6",
+      "nets": [
+        "u_e203_subsys_top/core_csr_clk",
+        "u_e203_subsys_top/hfclk",
+        "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+      ],
+      "physical_signoff": false
+    },
+    "structure_latest": {
+      "run": "runs/systolic_b_drc06_structure01.json",
+      "sha256": "12f843804ca02d61ae5f260e30c556c1fe0cf89c2d98586ae6acbdb219ec73fd",
+      "module_count": 2222,
+      "declaration_only_ports": 13040,
+      "no_load_matched": 244,
+      "unresolved_no_load": 0,
+      "warning_counts": {
+        "LINT-1": 4,
+        "LINT-2": 244,
+        "LINT-8": 244,
+        "LINT-28": 12796,
+        "LINT-32": 12048,
+        "LINT-33": 1186
+      }
+    },
+    "R4_SAIF_crosscheck": {
+      "request_sha256": "bcc2cc0fe8b62f0e960cf651405fd8d6b1551040f12fd184e436db8462928346",
+      "request_deployed": true,
+      "started": false
     }
   }
 }

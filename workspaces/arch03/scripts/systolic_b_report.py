@@ -19,6 +19,7 @@ from native_saif_replay import verify_inputs
 from icb32_power import stream_sha as sha,window_values
 from icb32_report import configuration_identity,clock_conditions
 from dma16_report import read
+from icb32_delivery_sdc import restore_clock
 
 LAYERS=tuple('layer_%02d'%i for i in range(1,13))
 MACS=1622016
@@ -141,6 +142,15 @@ def build(request):
             raw['layout_sha256']==right[name]['layout_sha256'] and
             raw['task_window']==act[name]['task_window'] and raw['activity']==act[name]['activity'],
             'Mixed B power/window provenance')
+        power_run=Path(ref['run']);clock=raw['power_clock']
+        precise,_=restore_clock((srun/'mapped.sdc').read_bytes().decode('ascii'),s['metrics']['period_ns'])
+        require((power_run/'mapped.precise.sdc').read_bytes()==precise.encode('ascii') and
+            sha(power_run/'mapped.precise.sdc')==clock['imported_sdc_sha256'] and
+            clock['original_sdc_sha256']==sha(srun/'mapped.sdc') and
+            Decimal(clock['measured']['hf_period_ns'])==Decimal('6.666666') and
+            Decimal(clock['measured']['lf_period_ns'])==Decimal('66') and
+            clock['original_sdc_modified'] is False and clock['other_constraints_unchanged'] is True,
+            'Power did not import the frozen exact clock')
         numbers=extract_reports(Path(ref['run']),'systolic_b')
         duration=window_values(raw['task_window'])[2]
         numbers.update(duration_ns=duration,average_power_w=numbers['reported_power_w']['total'])
@@ -168,6 +178,10 @@ def build(request):
             system_power_verified=False)
         rows.append(row)
     aggregate=aggregate_rows(rows)
+    conditions=clock_conditions(s,srun,False)
+    conditions.update(power_imported_original_sdc=False,power_imported_precise_sdc=bool(powers),
+        power_period_ns='6.666666' if powers else None,
+        note='B PT imports a separate exact 6.666666 ns SDC; original rounded DC export is preserved. Historical R4 PT used its original 6.66667 ns export; disclose this serialization difference in comparisons.')
     batch=dict(status='not_run',tasks=0,outputs=0,official_precision_verified=False)
     if request.get('batch'):
         ref=request['batch'];b=stage(ref,'systolic_b_batch');brun=Path(ref['run'])
@@ -189,7 +203,7 @@ def build(request):
         references=refs,activity_reference=activity_ref,power_references=request.get('power',[]),
         production_hardware=hardware,firmware_sha256=g['firmware_sha256'],netlist_sha256=s['artifacts']['mapped.v'],
         libraries_sha256=s['link_report']['library_inputs'],area=s['area_summary'],area_basis=s['area_basis'],
-        timing_metrics=s['metrics'],conditions=clock_conditions(s,srun,bool(powers)),
+        timing_metrics=s['metrics'],conditions=conditions,
         cases=rows,aggregate=aggregate,batch=batch,history=request.get('history',[]),
         verification=dict(asic14=True,gate14_without_SDF=True,final1200=batch.get('tasks')==1200,
             activity12=len(act)==12,power12_numbers=len(powers)==12,

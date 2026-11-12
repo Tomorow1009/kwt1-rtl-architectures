@@ -48,7 +48,7 @@ def parse_high_fanout(text):
 
 
 def audit(cfg, run, synthesis, expected_sha, call):
-    run = Path(run); synthesis = Path(synthesis)
+    run = Path(run).resolve(); synthesis = Path(synthesis).resolve()
     verify_synthesis(synthesis, expected_sha, cfg)
     tracked = [synthesis/n for n in ('mapped.ddc', 'mapped.v', 'mapped.sdc',
                                     'summary.json', 'mapped_probe_inventory.tsv')]

@@ -1,5 +1,57 @@
 # B 检查点：2026-11-12 15:06
 
+## 16:12增量：原门级继续，功耗工具精确周期修复
+
+16:11:48 gate02/PID79264前两层PASS、L03进行中，无错误。编译和SRAM来源链检查已通过；当前子进程88593。不重启该批次。R4 PT请求已部署，但尚未启动。
+
+新网表mapped.sdc实际只保留四个LF timer第一同步级D例外（tim0..3/r_ls_clk_sync_reg[0]/D），没有多周期、clock_groups或disable_timing命令；DC实际周期6.666666ns，而write_sdc序列化为6.66667ns。B功耗工具新增独立mapped.precise.sdc，复用严格restore_clock仅恢复HF周期/下降沿，保留原文件；PT实际读入周期另存power_clock.txt并断言HF6.666666/LF66ns。报告明确区分新B精确SDC与历史R4原舍入SDC，不冒充旧R4已经重测。5项功耗/报告工具检查通过；硬件/网表/原约束未改变。这些修复尚未部署，需新ops目录。
+
+本地timing_audit相对路径修复已语法检查；timing02实际用绝对路径完成，不需要为这一行修复重跑。STATUS已校正当前新网表门级/1200/功耗均未完成，旧synth02门级PASS仅作历史。下一步同步工具并部署新独立副本，等待原gate02，再R4 PT交叉核对。
+
+## 16:03增量：DRC06时序诊断完成，新门级已启动
+
+16:05核实：**gate02 PID79264，启动16:02:46**，16:04仍running/mapped_probe子进程79454，尚无仿真PASS。新结构清单SHA **12f843804ca02d61ae5f260e30c556c1fe0cf89c2d98586ae6acbdb219ec73fd**，2222模块；LINT-1=4、2=244、8=244、28=12796、32=12048、33=1186；全部13040端口提示仅声明，244无负载网与相应未用端口一一匹配，无extra/missing。4个LINT1为原平台ndreset/fullreset/porrst/PLIC irq0实例，不是新B漏接。
+
+R4交叉核对请求已部署并验证SHA bcc2cc0f...，**launch仍未执行**，须等gate02结束和真实锁释放。不要重复安装请求。
+
+timing01 PID47376于15:47:38.474456失败：工具把相对mapped.ddc路径放入新运行目录解释；不是网表问题。失败目录保留，本地timing_audit入口补Path.resolve，尚未提交/部署。
+
+timing02 PID62215使用绝对综合路径，于15:54:23.668453 passed；summary SHA **bfd0007c4846649c7f3ea018a5dbad480e10f8c406f309c3089b016d0c7da3b6**。三个高扇出网络为u_e203_subsys_top/core_csr_clk、u_e203_subsys_top/hfclk、u_e203_subsys_top/u_sirv_aon_top/crossing_clock，均为平台时钟网络；不声明物理签核。
+
+16:00执行静态结构清单b_drc06_structure_run，输出runs/systolic_b_drc06_structure01.json，待读结果。16:01:25实际LOCK False、EDA []。随后b_d48_gate02_launch已执行，**不得重复启动**，PID从b_gate02_launch.png读取。使用d48新gate工具和DRC06 b817...网表；旧gate01的配置来源错误已修复，但不能继承旧网表PASS。
+
+R4 replay01已正式通过，仍待PT交叉核对；请求和launch只在本地准备，尚未部署/启动。final1200尚未批准。当前VNC工作区3/ced shell，FZ关闭。不要操作workspace4，不再清理历史文件。
+
+## 15:48增量
+
+15:45实际R4回执outputs25344/window34639，SAIF SHA **378a012cba19532df1a3cf57892f2959df6dee5c38501b1ecefda722a6d01cfb**；scope tb_top.u_e203_soc_top、106源端口bits，全部输出/时窗审计通过；真实锁False/EDA[]。
+
+随后**DRC06 timing01 PID47376于15:47:24唯一启动**，ced runs/systolic_b_v3_drc06_timing01/systolic_b_timing_audit。只读，不修改网表。当前正在收终态及high_fanout.tsv，截图b_drc06_timing_result.png待读；gate02依旧未启动。
+
+R4 PT crosscheck请求已本地生成，但**未部署/未启动**：b_r4_crosscheck_request_install.txt，目标operations/r4_saif_crosscheck01_request.json，SHA **bcc2cc0fe8b62f0e960cf651405fd8d6b1551040f12fd184e436db8462928346**；launch b_c307_crosscheck_launch.txt使用c307十工具，引用replayf7d542...与原power18190...。完成当前只读EDA、启动gate02后可准备请求文件，但绝不并行启动PT。
+
+本地未提交为检查点/根交接/STATUS更新；所有源码已c307云同步。当前VNC workspace3/ced shell，FZ关闭，最后只读timing结果查询已执行，先收尾工具session再操作。
+
+## 15:44增量：R4完整重放正式通过
+
+replay01 PID314119已于 **15:41:08.962232 passed**，summary SHA **f7d542dd8e741c008c37c8f50385de451742a4e9125da685228056698e23d21a**。25344真实输出与原csv/窗口全部相同，SAIF94632798B。阶段只证明重放功能/窗口/活动审计，**尚未做PT≤1%功耗交叉核对，不是SAIF方法最终资格或B功耗通过**。原sim317388在15:39:50结束，CPU1489.810s。临时行计数误减1已说明，不影响正式check_capture。
+
+下一步核真实锁后启动已准备DRC06 timing01（只读DC），接着新gate02；两者都尚未启动。然后R4交叉核对请求需要绑定本replay SHA和原R4 L01 power18190f6d4021de0ba55ae2b2be00a456f89217a6efbd0c0e3412831617f2d00c，使用610/d48/c307 ops的native_saif_r4_crosscheck，不能用ced旧SAIF模块。
+
+最后回执/资源query b_r4_replay_receipt_resources已执行，图片同名.png需读；本地exec可能需收尾，之后无待Return。c307工具及云端已确认，最终队列仍未批准。当前只读静态报告显示DRC06无组合环，check_timing仅TIM134三个高扇出网络提示，实际归属待timing01读取。
+
+## 15:42增量：完整R4 SAIF仿真已结束，审计回执待收
+
+15:40:57实看R4 sim317388已结束，CPU1490秒约24.8分钟；日志15:39:50完成，完整34639周期、IRQ/WFI完成，window all_writes_responded=true/pending0。生成layer_01.saif **94632798B**。此时driver314119仍在Python后处理，尚未读取最终PASS/摘要；不得推断资格已过。临时进度脚本sum(lines)-1显示25343，文件可能无header，不能据此报缺一个输出；正式data.check_capture和哈希才裁决。
+
+后续12层按每层约25分钟量级估算仿真，不用芯片速度比例；SAIF单层约90.25MiB，存储明显足够，实际B仍需首例重新预算。当前无B功耗数值。
+
+最终流程工具c307c3d6dbdeaca94b2050fb1c41451d4a5926fa已push，第一次ls-remote TLS握手失败后重试成功确认。10文件ops已8条差分完成部署，目录operations/systolic_b_tools_c307c3d，manifest **d855f9f4b4b5108625fa00327c41f4fd300acee2d91545e113eb822245729691**。禁止重复append。新finalize可用已完成saif_qualification避免重放，活动通过ops/request，不能用ced旧finalize跑SAIF。直接从ops调用finalize时需要base scripts在PYTHONPATH（其导入ROOT来自base server_run）；正式请求与冻结review仍未准备/批准。
+
+d48 gate02已准备未启动；新DRC06 timing01只读DC命令b_drc06_timing_launch.txt、structure01静态命令b_drc06_structure_run.txt也仅准备未执行。下一步收原R4终态/真实锁，随后先新时序诊断和gate02，再安排R4 PT交叉核对（或按资源串行顺序），绝不并发。
+
+最后b_r4_replay_live查询已Return执行，截图b_r4_replay_finalcheck.png待读；可能有本地exec session需先收尾。VNC工作区3/ced shell，FZ关闭，无其他新作业。
+
 ## 15:32增量：R4重放继续，本地最终队列适配
 
 15:24:40原R4重放314119/child317388继续，csv114688B；15:27:16已有11933/25344行，仍在完整230926.643574ns窗口的VCS run中，无SAIF文件或回执。debug+完整统计明显慢于普通功能仿真，按实测估预算，不以芯片加速比推算。一次ps参数显示不完整，不能据此推CPU数值；实际输出文件增长证明前进。
