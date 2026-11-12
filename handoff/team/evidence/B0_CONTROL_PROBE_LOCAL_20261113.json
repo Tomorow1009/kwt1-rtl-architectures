@@ -1,0 +1,15 @@
+{
+  "schema": "b0-control-probe-local-review-v1",
+  "tests": 9,
+  "local_fixture_status": "passed",
+  "python36_syntax_checked": true,
+  "independent_review": "n1_rtl_audit; final WEN/mask missing-coverage fix reviewed",
+  "source_sha256": {
+    "tool": "b1c6df556c7df0f2b8e13c1be6c2ba8babb4b994f50c2d99b5f78af24d7bc963",
+    "test": "0c0c3b2439483dcfeca007d42532f0b16a80f1d66b6ce1721b5c538e75b1044a"
+  },
+  "original_unknown_tool_unchanged": true,
+  "remote_executed": false,
+  "system_power_verified": false,
+  "record_basis": "implementer test results and independent code review; root verified frozen file hashes; no duplicate test rerun"
+}

@@ -1,5 +1,16 @@
 # N1持续执行检查点（2026-11-13 03:32）
 
+## 03:55增量（优先于下方03:32状态）
+
+- 原N1综合仍运行：03:52:25 state=running/error无，DC174746累计1:33:39、CPU99.7%、RSS25471612KiB；日志230874B，mtime03:51:46，已进入优化表格输出，尚无mapped.v。原169157/174746和锁保持，不重复启动。
+- B0剩余11层完整清单已完成，03:47:28观察summary=true/failure=false；其SHA为ddf61c38beeed4261d9a87604d4870979d960072ae3b8713823b53fc328d5643（03:51断言核对成功，不能用早先肉眼漏字串）。L02..12 unknown依次41396/41410/41402/41404/41272/41406/41281/41399/41218/41403/41411；各层full18620，COND均0。03:51:45核两份summary的report/netlist/activity/tool/dependencies完全相同且case并集恰12，合计496471未知声明、gzip15791726B；含别名，不是唯一物理网络。无需重复该扫描。功耗影响仍未通过。
+- 辅助旧B0inventory01实际SHA分组读出f63069bbd38c3e535cbea95c4e71a6bca229cb7d62311e496eee621d33188fd3；inventory02仍ca3a4bc43cd7d3871f9837349a04fff1d8133f2cc354f88ab8c459dd1936a1fe。真正归档前再次工具自动核SHA。
+- 归档工具及进度已commit/push并ls-remote核对0f3a46d3f3fb21c4f7a1a02ee9f71657a8e6edb2。独立小包light-light126-n1-archiveops-20261113_033430-0f3a46d3f3fb已03:40:10上传/独立解包通过，位于同private runtime根；ZIP8729B/SHA58e341cf6a88c2815ae687b9b7026cac47e98248720e2c87cb92ac48ad3c4a45，manifest43ddf12e8cec6ccbd02414d22ca9ed6427df6524c357efb4c44c2e861d6e66e4，tool6bfd21fbf42dbce160829f99c8eff2d3075c75857f2ccbe74fec67e141de09f9。工具已部署但归档未运行，必须等指定源全终态和原锁空闲。FZ已关闭。
+- 新B0控制驻留工具b0_saif_control_probe.py仅本地，原8项fixture后补WEN/mask存在性守卫，9项fixture/Python3.6语法通过，n1_rtl独立增量快审中，未冻结/部署。最新候选tool SHAb1c6df556c7df0f2b8e13c1be6c2ba8babb4b994f50c2d99b5f78af24d7bc963；不能使用前290e版本。只做一次L01 SAIF读取并绑定原native全统计，读取shared/AON具名控制与宏端口；缺失明确列出，不能把累计驻留当联合时序/功耗豁免。n2_d1代理独占相关新文件，不覆盖。
+- 新浮点源排查已关闭替代路径：本地旧600虽有完整float，但仅validation；服务器hex_short_all manifest实读training83/testing13/validation4。W/b SHA99a3f2d990203b2bd9f3bdf5dc98974d6a7102027f7d67b9abf19e72ee03a6ad相同，不能补至少96条X/Y。原FLOAT ZIP仍缺，异步问题继续待用户，不重复搜索；新docs/data/x14-w12-b32/N1_FLOAT_SOURCE_SEARCH_20261113.md待同步。
+- 03:52共享free3665821696B，私有/tmp757145153536B。旧csrc小缓存路径之前已核仅约9MB并关闭，不重搜或盲删受保护资料。正式作业继续私有/tmp，新小控制扫描也可输出独立/tmp分析目录，最终另做持久归档。
+- VNC18874436/workspace3仍共享9305cwd空闲shell；最后综合查询已执行，无待Return/本地exec session。未启动N1自己的1200，等待原EDA终态/锁释放；未进入N2。
+
 先读AGENTS、CONTEXT_HANDOFF、IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113及本检查点；03:01检查点保留详细历史。用户要求持续推进，未暂停。仅N1；未完成全部验收不能进N2。
 
 ## 已完成

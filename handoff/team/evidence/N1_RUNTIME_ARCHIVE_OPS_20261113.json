@@ -1,0 +1,33 @@
+{
+  "archive": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-n1-archiveops-20261113_033430-0f3a46d3f3fb.zip",
+  "archive_verified": true,
+  "bytes": 8729,
+  "dependency_bundle": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_022722-41b0846ce719",
+  "dependency_manifest_sha256": "0837b78df4867df055ecf4f115bcd2b8ec58d1e48acf698850de8c9eed58f64e",
+  "dependency_validator_sha256": "fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d",
+  "every_member_bytes_and_sha256_verified": true,
+  "exact_file_set_verified": true,
+  "manifest_bytes": 1489,
+  "manifest_sha256": "43ddf12e8cec6ccbd02414d22ca9ed6427df6524c357efb4c44c2e861d6e66e4",
+  "members": {
+    "light-light126-n1-archiveops-20261113_033430-0f3a46d3f3fb/manifest.json": {
+      "bytes": 1489,
+      "sha256": "43ddf12e8cec6ccbd02414d22ca9ed6427df6524c357efb4c44c2e861d6e66e4"
+    },
+    "light-light126-n1-archiveops-20261113_033430-0f3a46d3f3fb/n1_archive_runtime.py": {
+      "bytes": 23337,
+      "sha256": "6bfd21fbf42dbce160829f99c8eff2d3075c75857f2ccbe74fec67e141de09f9"
+    }
+  },
+  "production_record_written": false,
+  "schema": "arch03-n1-runtime-archive-ops-deployed-v1",
+  "server_archive_started": false,
+  "server_uploaded": true,
+  "sha256": "58e341cf6a88c2815ae687b9b7026cac47e98248720e2c87cb92ac48ad3c4a45",
+  "source_commit": "0f3a46d3f3fb21c4f7a1a02ee9f71657a8e6edb2",
+  "zip_crc_verified": true,
+  "server_deployed_at": "2026-11-13T03:40:10+08:00",
+  "server_path": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-archiveops-20261113_033430-0f3a46d3f3fb",
+  "server_zip_manifest_file_hashes_verified": true,
+  "filezilla_closed_after_upload": true
+}

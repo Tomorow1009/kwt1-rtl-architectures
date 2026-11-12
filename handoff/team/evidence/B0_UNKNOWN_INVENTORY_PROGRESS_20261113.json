@@ -1,6 +1,6 @@
 {
   "schema": "b0-existing-unknown-inventory-observed-v1",
-  "observed_at": "2026-11-13T03:30:40+08:00",
+  "observed_at": "2026-11-13T03:51:45+08:00",
   "source_commit": "1f86fc70d41ebafb1fd072811616f73fd40ca2fb",
   "tool_sha256": "c57ed783754a6411bc3d43139dcf90a420d7c5a2f87ca050b12b98e75b20056d",
   "new_simulation_or_eda": false,
@@ -36,11 +36,47 @@
   },
   "remaining_layers": {
     "run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/b0_unknown_l02_l12_20261113_0326",
-    "pid": 226051,
-    "last_observed_at": "2026-11-13T03:29:48+08:00",
-    "status": "running",
-    "completed_observed": ["layer_02"],
-    "active_partial_observed": "layer_03"
+    "pid": null,
+    "last_observed_at": "2026-11-13T03:47:28+08:00",
+    "status": "complete_existing_unknown_inventory_review_required",
+    "completed_observed": [
+      "layer_02",
+      "layer_03",
+      "layer_04",
+      "layer_05",
+      "layer_06",
+      "layer_07",
+      "layer_08",
+      "layer_09",
+      "layer_10",
+      "layer_11",
+      "layer_12"
+    ],
+    "summary_sha256": "ddf61c38beeed4261d9a87604d4870979d960072ae3b8713823b53fc328d5643",
+    "unknown_counts": [
+      41396,
+      41410,
+      41402,
+      41404,
+      41272,
+      41406,
+      41281,
+      41399,
+      41218,
+      41403,
+      41411
+    ],
+    "fully_unknown_each": 18620,
+    "conditional_records_each": 0,
+    "compressed_bytes": 14554598
   },
-  "limits": "This inventory does not approve unknown-state power impact. SAIF residence totals do not establish time ordering or valid qualification. Mapped local declarations are not automatically globally disconnected nets."
+  "limits": "This inventory does not approve unknown-state power impact. SAIF residence totals do not establish time ordering or valid qualification. Mapped local declarations are not automatically globally disconnected nets.",
+  "combined12": {
+    "same_report_netlist_activity_tool_dependencies_verified": true,
+    "exact_cases_union_verified": true,
+    "unknown_declarations": 496471,
+    "compressed_bytes": 15791726,
+    "counts_include_aliases": true,
+    "power_impact_approved": false
+  }
 }
