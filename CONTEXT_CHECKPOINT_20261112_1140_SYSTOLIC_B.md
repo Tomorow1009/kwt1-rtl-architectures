@@ -1,5 +1,13 @@
 # 2026-11-12 11:40 起：B综合完成，修复验证工具
 
+**13:06补充：** 27b小工具的9351字符单行分11次输入后，远端shell返回`Unmatched '`，没有执行Python/EDA；该长行方式失败，不重复。接下来用每条不足1000字符的独立append命令写入新临时载荷，最后校验完整SHA再展开新目录。另在执行前发现并修复两处`sha`实参应为Path而非str（DRC自身模块、SAIF单位诊断终态）；新增真实文件记账/替身EDA流程测试，合计7项相关检查通过。27b旧工具不可运行；新修复提交及新的operations目录待建立。完整62包仍仅板端暂存，不能上传后直接运行这些旧记账路径。当前VNC已回ced空闲shell，无待输入命令、无服务器新作业。
+
+**13:02最新增量（正文后续为历史）：** 新62faf49完整包已本地/板端核验，712输入，ZIP SHA b9eb6819561e502b092706cbbd25d5128f3b891478b5532d72c3681f07816462，manifest17f72b859ef15ea3d8561a6ae293e691a19d2f551197e80fb868c89e8b2b64eb；FTP再次421，未上传。用户确认没有队友在用。开发板ps无FileZilla，仅VNC，未改变代理/目标。
+
+为继续工作，新增小型`systolic_b_ops.py`入口，27b9358已提交推送。计划通过VNC正常终端在server_root下新operations目录写入已提交四个小工具和哈希清单，逐字核验；复用当前ced不可变包依赖、全部输入检查、原协作锁和新session，不修改旧包输入。此时**尚未部署/运行**，本地语法/CLI已检查；DRC工具此前12项检查通过。新映射需新gate/PPA，不能继承旧网表PASS。首次文档更新因PowerShell管道编码失败未写入，本段用补丁补记；小工具和包证据提交成功。
+
+已独立读真实CPU：sequence10阶段/76032输出，异常、超时、no-reset ABA均True，host9.629578209秒；phase7预期超时返回-1，整段status passed。contention L01/extremes各25344输出、35625/43786周期，全部写回应答完成，contention_verified/cpu_executed均True。validation03确切完成2026-11-12T12:29:55.383784。最后VNC18874435/workspace3/ced空闲shell，无待Return命令、无本地长期作业，FileZilla关闭。
+
 继续直接5×16脉动B计划，A取消，63da/Bv3/credits3已冻结，R4保留交付退路。重读AGENTS、有效计划、本检查点及08:30检查点。仍仅按授权删除旧MMIO8 L09–L12四VCD（112.42GiB）；R4/B受保护。
 
 ## 新综合完成，不得重跑

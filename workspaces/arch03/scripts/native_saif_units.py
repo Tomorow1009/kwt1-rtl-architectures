@@ -40,7 +40,7 @@ def diagnose(cfg, run, call):
             row.update(status='failed',error=str(error))
         row['artifacts']={x.name:sha(x) for x in trial.iterdir() if x.is_file()}
         results.append(row);save(run/'trial_progress.json',results)
-    if any(sha(path)!=digest for path,digest in frozen.items()):
+    if any(sha(Path(path))!=digest for path,digest in frozen.items()):
         raise ValueError('Time-unit diagnostic fixture changed')
     return dict(status='timeunit_diagnostics_complete_review_required',
         scope='isolated_VCS_tiny_fixture_not_PT_or_system_power',trials=results,

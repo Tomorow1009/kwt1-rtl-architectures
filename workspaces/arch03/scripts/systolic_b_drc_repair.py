@@ -84,7 +84,7 @@ def repair(cfg, run, original, digest, call):
         command='compile -incremental_mapping -only_design_rule',
         inherited_gate_pass=False, requires_new_gate_and_ppa=True)
     (run/'repair_provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
-    current_inputs[str(Path(__file__).resolve())] = sha(__file__)
+    current_inputs[str(Path(__file__).resolve())] = sha(Path(__file__))
     current_inputs[str(run/'arch02_sram_config.vh')] = sha(run/'arch02_sram_config.vh')
     (run/'source_inputs.json').write_text(json.dumps(current_inputs, indent=2)+'\n')
     before.update(current_inputs)

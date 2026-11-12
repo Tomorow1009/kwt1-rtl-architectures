@@ -2688,21 +2688,18 @@
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
     "server_last_observation": {
-      "time": "2026-11-12T09:31:41+08:00",
-      "free_GiB": 251.244140625,
-      "team_lock": "owner183038_session_synth02_bundle8d_verified",
+      "time": "2026-11-12T12:43:20+08:00",
+      "free_GiB": 227.953125,
+      "team_lock": "absent",
       "old_L02": {
         "status": "passed",
         "pid": 323693,
         "finished": "2026-11-11T15:17:11.637795",
         "summary_sha256": "736f0b5a7f6864410fc92d147a44d5549cde516c22bac1626376b98b6dd752ed"
       },
-      "new_B_job_started": true,
+      "new_B_job_started": false,
       "other_processes_not_yet_audited": false,
-      "EDA_processes": [
-        183038,
-        192693
-      ],
+      "EDA_processes": [],
       "monitor_time": "2026-11-12T12:18:29+08:00",
       "monitor_free_GiB": 232.6357421875
     },
@@ -2769,7 +2766,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "2b39c6d347b33112fc4210ad77bffedbd01bab54",
+    "cloud_commit": "27b9358",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2856,13 +2853,14 @@
       "prior_failed_queue_preserved": "systolic_b_v3_validation02_queue",
       "stage": null,
       "child_pid": null,
-      "state_sha256": "d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbf9789a83f650c7c6b3"
+      "state_sha256": "d0a35dfd75df95199ec9a18a3cce323ea379f4620bfcbf9789a83f650c7c6b3",
+      "finished": "2026-11-12T12:29:55.383784"
     },
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
     "native_saif_tools_local": {
-      "status": "deployed_705_input_final_tools_bundle_no_actual_SAIF_yet",
-      "probe_deployed_in_waiting_queue": true,
+      "status": "tiny_native_capture_failed_tres_1ps_unit_diagnostics_pending",
+      "probe_deployed_in_waiting_queue": false,
       "R4_full_window_crosscheck": false,
       "B_activity12": false,
       "B_power12": false,
@@ -2914,6 +2912,32 @@
       "outputs": 354816,
       "sdf_annotated": false,
       "summary_sha256": "55c668a8bf8b8d0437d142ee929d2953b06f92a52c480074f7326aa616f32ca5"
+    },
+    "v3_cpu_diagnostics_independent_review": {
+      "sequence_outputs": 76032,
+      "sequence_host_seconds": 9.629578209016472,
+      "phases": 10,
+      "actual_CPU_traps_verified": true,
+      "actual_driver_timeout_verified": true,
+      "no_reset_ABA_verified": true,
+      "contention_cases": {
+        "layer_01": {
+          "outputs": 25344,
+          "cycles": 35625
+        },
+        "extremes": {
+          "outputs": 25344,
+          "cycles": 43786
+        }
+      },
+      "all_writes_responded": true
+    },
+    "ftp_status": "421_no_teammate_or_board_FileZilla_connection_remaining",
+    "vnc_operations_overlay": {
+      "status": "typing_new_exact_hash_directory_not_executed_yet",
+      "source_commit": "27b9358",
+      "manifest_sha256": "dc1209b5552e6b90813951cfc5bc93df7459b7a3238df42651fc709e4bcca770",
+      "base_bundle_inputs_modified": false
     }
   }
 }
