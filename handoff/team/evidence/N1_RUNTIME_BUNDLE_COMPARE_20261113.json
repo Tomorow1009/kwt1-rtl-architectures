@@ -1,0 +1,24 @@
+{
+  "schema": "n1-runtime-bundle-comparison-v1",
+  "production_source": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "tools_source": "41b0846ce71990d1dbf29fcd22baff32febc6c48",
+  "compared_files": 136,
+  "differing_files": [
+    "firmware_sequence/driver.elf",
+    "firmware_sequence/manifest.json"
+  ],
+  "sequence_bin_identical": true,
+  "sequence_verilog_identical": true,
+  "sequence_manifest_only_difference": "elf_sha256",
+  "diagnostic_new_ELF_server_executed": false,
+  "old_sequence_receipt_remains_bound_to_old_ELF": true,
+  "all_RTL_main_firmware_and_inputs_identical": true,
+  "base_manifest_sha256": "73a356cabb06e68a07fccdb6bdb6f6f2d55dc35fe42b4515671e2571e653ca6d",
+  "new_manifest_sha256": "0837b78df4867df055ecf4f115bcd2b8ec58d1e48acf698850de8c9eed58f64e",
+  "new_archive_sha256": "17d2e972e0452daf70505a69613423979bc0f1c9f10a50d6fc6ba676dc0a65e3",
+  "server_uploaded": true,
+  "server_manifest_verified_files": 781,
+  "runtime_linux_identity_verified": true,
+  "observed_at": "2026-11-13T02:39:07+08:00",
+  "runtime_bundle": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_022722-41b0846ce719"
+}

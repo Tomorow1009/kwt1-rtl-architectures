@@ -13,7 +13,7 @@
 - [x] 完整datapath：1/2拍SRAM、末四行、背压、取消、复位、无复位连续任务。（本地证据；不代表ASIC/PPA通过）
 - [x] 固定性能12层与极值/舍入共14例真实ASIC/E203通过，354816输出total/result/sat一致；SHIFT10、IRQ/WFI及实际写ACK计时通过。summary SHA56fb13bcd320ad1895506ed30399205ad31c30e1dfa0d95d75e944e051bde58b。
 - [ ] 新100条数据按一层→一条12层→全量逐项验证（原始group8接入同一N1路径）。
-- [ ] 实际IRQ/WFI、恢复、CPU竞争与最终写ACK排空。
+- [x] 实际IRQ/WFI、恢复、CPU竞争与最终写ACK排空：sequence十阶段76032输出，contention两例50688输出；独立服务器回执见N1_SERVER_PROGRESS_20261113.json。
 - [ ] 自己的100×12=1200任务、30412800输出total/result/sat逐项一致。
 - [ ] 同一冻结配置综合、220宏、无非预期锁存/组合环、150MHz setup/hold和≤1.20mm²。
 - [ ] 同网表14例功能门级（无SDF）。

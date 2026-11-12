@@ -3383,10 +3383,10 @@
     "new_server_jobs_started": true,
     "new_hardware_verified": false,
     "current_work": [
-      "real ASIC/E203 fourteen cases",
-      "approved lossless R4 L01 archival",
-      "full100 float precision preparation",
-      "B0 unknown-activity impact review"
+      "N1 synthesis original169157/174746",
+      "R4 approved staged archive186061 raw retained",
+      "N1 full100 batch and mapped audit preparation",
+      "B0 read-only power inventory budget investigation"
     ],
     "next": "Finish N1 only; no N2 RTL until all N1 acceptance complete.",
     "array_random_blocks_passed": 10000,
@@ -3395,17 +3395,21 @@
     "local_cpu_executed": false,
     "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
     "data100_file_identity_passed": true,
-    "server_observed_at": "2026-11-13T02:12:42+08:00",
+    "server_observed_at": "2026-11-13T02:45:10+08:00",
     "server_session": "n1_synth01",
     "server_pid": 169157,
-    "archive_session": "r4_l01_archive01",
-    "archive_pid": 131387,
+    "archive_session": "r4_l01_archive02",
+    "archive_pid": 186061,
     "archive_explicitly_authorized": true,
     "archive_completed": false,
     "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
-    "archive_status": "first_attempt_failed_space_original_retained",
+    "archive_status": "compressing_to_separate_tmp_original_retained",
     "asic14_verified": true,
     "sequence_verified": true,
-    "contention_verified": true
+    "contention_verified": true,
+    "tools_commit": "41b0846ce71990d1dbf29fcd22baff32febc6c48",
+    "archive_temporary_directory": "/tmp/s4_21usr-r4-l01-20261113_0233",
+    "runtime_tools_deployed": true,
+    "runtime_linux_identity_passed": true
   }
 }

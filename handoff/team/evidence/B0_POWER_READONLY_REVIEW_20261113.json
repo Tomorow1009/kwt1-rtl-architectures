@@ -1,0 +1,51 @@
+{
+  "schema": "b0-read-only-power-review-observed-v1",
+  "observed_at": "2026-11-13T02:49:16+08:00",
+  "production_hardware": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "tools_source": "41b0846ce71990d1dbf29fcd22baff32febc6c48",
+  "inventory_path": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_022722-41b0846ce719/runs/b0_inventory02/inventory.json",
+  "inventory_sha256": "ca3a4bc43cd7d3871f9837349a04fff1d8133f2cc354f88ab8c459dd1936a1fe",
+  "status": "read_only_inventory_collected_review_required",
+  "bytes_read": 418724302,
+  "stat_scope_files": 272,
+  "stat_scope_bytes": 206165590,
+  "stat_largest_file_bytes": 13773448,
+  "per_file_read_limit_bytes": 16777216,
+  "total_read_limit_bytes": 536870912,
+  "aggregate": {
+    "duration_ns": "2440186.422648",
+    "energy_j": "0.0001704154782132198078564",
+    "raw_time_weighted_power_w": "0.06983707336109641885320248724",
+    "raw_energy_per_task_j": "0.0000142012898511016506547"
+  },
+  "aggregate_independently_recomputed_with_decimal": true,
+  "model_receipts_present": [
+    "memory_library_verification.json",
+    "technology_verification.json"
+  ],
+  "layer_01_tool_message_codes_observed": {
+    "power.log": {"PWR-601": 1, "PWR-602": 1},
+    "timing_check.rpt": {"PTE-003": 1, "PTE-016": 2}
+  },
+  "message_classification": {
+    "PWR-601": "Information: averaged power analysis",
+    "PWR-602": "Information: power calculation with four threads",
+    "PTE-016": "Information: clocks expanded to common base period",
+    "PTE-003": "Warning: disabled timing arcs require actual flags/objects review; generic wording alone does not prove a loop"
+  },
+  "previous_attempt": {
+    "run": "runs/b0_inventory01",
+    "status": "inventory_rejected",
+    "reason": "Small-file read budget exceeded",
+    "cause": "Original 128 MiB cumulative guard includes full closing SHA rereads; fixed small reports occupy about 206 MB.",
+    "preserved": true
+  },
+  "new_eda_run": false,
+  "large_wave_read": false,
+  "original_evidence_modified": false,
+  "system_power_verified": false,
+  "unknown_state_influence_review_complete": false,
+  "physical_signoff": false,
+  "temporary_receipt_requires_durable_archive": true,
+  "limits": "Actual fixed12 source identity and weighted aggregate rechecked. Library receipt presence is not complete model approval; connected unknown-state influence remains unresolved. A prior documentation transcription of raw_time_weighted_power_w was corrected from original total energy and duration."
+}

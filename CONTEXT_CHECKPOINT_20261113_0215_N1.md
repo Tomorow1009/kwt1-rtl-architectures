@@ -48,3 +48,31 @@
 4. Full100浮点源仍缺：`KWT1_WORST100_ORIGINAL_FLOAT.zip`预期SHA edb98e1dcb02a9e142a62161b2769b54cffae1cf2ba143d0210c776b46ec36d9，异步问题仍待用户路径。PR#9无新链接，本机和已搜服务器目录未发现；ALL_SPEECH只有单坐标不可替代。可继续全部N1整数/硬件，精度未验不能N2。
 5. B0功耗已存在69.8371mW/14.2013µJ；新只读工具尚未在服务器跑。未知连接信号影响/模型条件仍待审，SAIF驻留不能证明valid时间相关性；不转移旧DMA16敏感度PASS。
 6. 当前新N1尚无自己的1200、综合结果、门级/活动/功耗或阶段完整PASS。所有缺项保持false/null，不填0、不借B0结果、不进入N2。
+
+## 02:35增量：工具冻结、部署失败保留与新归档启动
+
+- 记录/暂存归档工具提交`3b5cf866b3377336343f7ae1a6688fc2c4066539`已push并ls-remote核对；N1精度/DRC/私有runtime工具提交`41b0846ce71990d1dbf29fcd22baff32febc6c48`也已核对远端。生产RTL仍9305c69，无新增N2。
+- 全部代理已完成：runtime边界55项联合检查、staged archive19检查、B0只读inventory11检查；具体脚本/恢复说明见各代理文档。新runtime支持必须提供根/OPS manifest SHA及显式BASE兄弟包/manifestSHA，原共享锁不变。工具尚未在正式Linux路径入口验收，不把本地测试当部署PASS。
+- 新完整工具包`light-light126-n1-v4-20261113_022722-41b0846ce719.zip`，8891173B/781文件，SHA`17d2e972e0452daf70505a69613423979bc0f1c9f10a50d6fc6ba676dc0a65e3`，**仅在本地，未上传**。新manifest SHA`0837b78df4867df055ecf4f115bcd2b8ec58d1e48acf698850de8c9eed58f64e`；原9305 manifest SHA`73a356cabb06e68a07fccdb6bdb6f6f2d55dc35fe42b4515671e2571e653ca6d`。
+- 136项生产RTL/运行数据/固件比较：除sequence driver.elf与其manifest ELF哈希外均相同，sequence.bin及sequence.verilog亦逐字节相同，manifest唯一字段差是elf_sha256。保留旧sequence回执与旧ELF绑定，不宣称新ELF已服务器运行；正常IRQ固件及RTL完全相同，可同源关联既有综合。比较回执`handoff/team/evidence/N1_RUNTIME_BUNDLE_COMPARE_20261113.json`尚未提交。
+- 小ops ZIP`light-light126-n1-ops-20261113_021749-3b5cf866b337.zip`25424B，SHA`f268b0fda7b2ed6df0c232280ea50ab7087a5e7e4dc51ce96c053281d33fa8d6`，含归档与B0只读工具。已传开发板并核SHA，**FTP上传因共享盘满返回553，未成功。** 不误记已上传，不反复重试满盘。FileZilla已关闭。
+- FileZilla启动经验：必须`HOME=/root`再进入`/opt/ac820-gui-root`；否则继承宿主/home/root会开启空白profile。原配置本地路径/home/board/n1_upload_20261113。Ctrl-R需要先读密码弹窗，再用现有secret文件输入，绝不向未确认窗口填密码。
+- 已采用既有VNC小工具文本恢复方式部署**仅两个归档脚本**到`/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-archiveops-3b5cf866b337`。18段全部完成，无待输入part；packed SHA`ee44495616078a69efbe80f32500b3cdc773d1a1e39b1db85f602946c20670ee`、payload SHA`a24893b741972ebd082d93baa72f0d702081197edd4c404e6d7829b5a348ac38`均已服务器验证；两个源码SHA为原archive922c7ade…8570和staged f8e964ef…c42b，与已提交LF字节完全一致。不要再次粘贴/创建这些文件。
+- 第二次归档已从共享9305 cwd启动，临时目录`/tmp/s4_21usr-r4-l01-20261113_0233`，输出固定共享9305 `runs/r4_l01_archive02`。driver log位于上述archiveops目录`archive02.driver.log`。PID186061，02:34:39已确认compressing_to_separate_tmp_original_retained、original_removed=false；不是完成/删raw成功。 原archive01不重启；恢复复制只能用同base cwd、同临时目录和--resume-copy，不可重新压缩或再次删raw。
+- 02:32综合169157仍running，已由link171418转入实际synth child174746，日志`icb32_synth.log`。02:32:52共享free1072693248B、/tmp free769787482112B。正式EDA仍只有这一个，不重复启动。
+- 当前VNC18874436/workspace3仍共享9305 cwd、FileZilla关闭。新archive02启动和02:34状态截图均已读，全部chunk/helper exec已结束，无待输入；原synth169157/child174746继续，archive186061继续。
+
+
+## 02:36传输准备增量
+
+02:34共享free521142272B、tmp769396137984B。新41b整包已放开发板/home/root/n1_runtime_tools_20261113并核SHA；Linux FileZilla正重开准备上传，尚未观察成功。仅此目录里一个新ZIP，勿误传旧9305包。VNC仍共享9305 cwd，归档和综合后台继续。
+
+## 02:45增量：新工具部署身份通过，原任务继续
+
+- `41b0846`完整OPS包已通过开发板Linux FileZilla上传；02:38服务器ZIP SHA和781项manifest文件全部核验通过，解包到私有runtime根下独立兄弟目录`light-light126-n1-v4-20261113_022722-41b0846ce719`。原9305包不变。FileZilla已关闭，未恢复旧上传任务。
+- 02:39运行新OPS的`n1_server.py status --session n1_runtime_check01`，显式绑定OPS及BASE manifest SHA，Linux真实owner/权限/路径和文件身份核验通过。输出SESSION NOT STARTED是该只读检查session未启动，不是综合停止；原共享锁仍指向PID169157、child174746。/tmp free767319125248B。
+- 02:43原综合169157/174746仍在运行，DC子进程约99.7% CPU；原归档186061约99.6% CPU。02:45归档receipt仍为`compressing_to_separate_tmp_original_retained`，error=null、original_removed=false。不得重复启动或宣称已删原始波形。
+- 新B0只读inventory首次命令在创建OPS/runs父目录前失败，未启动进程、未写原报告；补齐父目录后唯一PID193812运行，结果`inventory_rejected: Small-file read budget exceeded`。输出在OPS的`runs/b0_inventory01/inventory.json`，保留失败；没有新功耗PASS。正在核查小文件累计预算，不读大波形、不盲目取消预算。
+- 02:45共享盘free1107296256B、/tmp free764734582784B。原综合/归档继续，所有临时证据仍需最终完整归档回共享存储。
+- 真实ASIC14、CPU恢复和竞争均已通过，验收清单补勾恢复/竞争项；全量新1200、综合/门级/活动/PPA及同批float100仍未验。固定12平均29711周期/5048.635185621487task/s是150MHz折算，不是芯片实测。
+- VNC18874436/workspace3目前共享9305 cwd的空闲shell；最后02:45只读查询已完成，无待Return或后台GUI输入。代理只做本地N1结构/批量入口和B0未知活动审查，未操作远端、未开发N2。
