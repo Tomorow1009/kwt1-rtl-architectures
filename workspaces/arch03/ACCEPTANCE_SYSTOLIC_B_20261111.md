@@ -1,5 +1,7 @@
 # 5×16脉动B独立验收
 
+[11月12日22:15收尾交接：实现、结果、探索路径、远端作业与VNC释放](SYSTOLIC_B_STAGE_HANDOFF_20261112.md)。本次交接取代下方旧进度；等待用户新计划，不启动新工作。
+
 **11月12日20:34：B自己的真实ASIC/E2031200任务、30412800输出已终态通过，零失败；R4 SAIF/VCD方法crosscheck02通过，整机及所有主要模块差≤1%，1060默认声明逐个证实direct/leaf连接均为空。** B活动已完成3/12层，原power_final01继续；完整活动/功耗及最终报告独立复审待完成。见[最新检查点](../../CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md)、[1200证据](../../handoff/team/evidence/SYSTOLIC_B_ASIC1200_20261112.json)和[SAIF方法证据](../../handoff/team/evidence/SYSTOLIC_B_SAIF_METHOD_20261112.json)。下方带时间记录保留历史。
 
 **11月12日18:55：DRC06任务模式时序/面积已完成独立范围审核，同网表门级14及干净ASIC14通过。B自己的1200批量正在运行，最新1012任务/25648128输出、零失败，不是最终PASS。R4 SAIF交叉核对因1060默认活动网络未通过，B活动/功耗未启用。** 继续唯一final02队列149529/批量156788。见[当前检查点](../../CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md)、[冻结评审](../../handoff/team/evidence/SYSTOLIC_B_FREEZE_REVIEW_20261112.json)和[交付索引](SYSTOLIC_B_DELIVERY_20261112.md)。下方按时间保留的段落属于历史，不可当作实时状态。

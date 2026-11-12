@@ -2668,14 +2668,14 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "own1200_and_SAIF_method_passed_B_activity12_running",
+    "status": "user_requested_handoff_remote_jobs_continue",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
     "delivery_ready": "2026-11-13T17:00:00+08:00",
     "base_commit": "ff967d1462bbaee7eba65c4ce9e005c9e9c2e2ee",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261112_2136_SYSTOLIC_B.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261112_2215_SYSTOLIC_B.md",
     "A_cancelled": true,
     "vnc_workspace4_reserved_for_user_transfer": false,
     "new_local_rtl_verified": true,
@@ -2683,7 +2683,7 @@
     "new_gate_verified": true,
     "new_ppa_verified": false,
     "new_final1200_verified": true,
-    "next": "Continue unique power_final01 activity12 then power12, monitor actual disk and host time; final independent report and precision audit remain. Do not repeat completed runs or cleanup.",
+    "next": "Wait for new user plan and VNC availability. Existing B power queue and R4 lossless archive continue. On resumption inspect original jobs, then final report; no duplicate runs.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2761,9 +2761,9 @@
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_INTEGRATION_20261111.json"
     },
     "paused_at": "2026-11-11T21:52:00+08:00",
-    "desktop_clients_closed": false,
+    "desktop_clients_closed": true,
     "local_relays_stopped": false,
-    "cloud_commit": "315a8f67538b209869345491591497b5639c4acf",
+    "cloud_commit": "3892a585d0bce76877b5650edbbdc1b3d420a00c",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -3022,7 +3022,7 @@
       "source_RTL_changed": false,
       "manifest_sha256": "8fa64e620192e45ce99b4faef3bda698ae4d1405821992eae04093cc5c799435"
     },
-    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_2136_SYSTOLIC_B.md",
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261112_2215_SYSTOLIC_B.md",
     "native_saif_probe_latest": {
       "schema": "systolic-b-native-saif-tiny-probe-evidence-v1",
       "observed_server_date": "2026-11-12",
@@ -3222,17 +3222,17 @@
       "queue_pid": 320367,
       "child_pid": 320434,
       "request_sha256": "e99f9e51d8ddbff5c3921e01d15aac99a7b851018884857089044ccded5479d0",
-      "activity_cases_completed": 7,
-      "observed": "2026-11-12T21:32:46.799102+08:00",
+      "activity_cases_completed": 10,
+      "observed": "2026-11-12T22:01:00+08:00",
       "initial_storage_required_bytes": 4872908231,
       "initial_storage_free_bytes": 117758230528,
-      "active_case": "layer_08",
+      "active_case": "layer_11_inferred_from_completed_order",
       "first_SAIF_bytes": 114841176,
       "first_case_outputs": 25344,
       "first_case_cycles": 31339,
       "first_case_host_capture_and_audit_seconds": 831.358975,
       "remaining_capture_estimate_seconds_with_20percent_margin": 10973.93847,
-      "free_bytes_observed": 68205674496,
+      "free_bytes_observed": 75417780224,
       "remaining_storage_budget_bytes": 3252652093,
       "case_SAIF_bytes": {
         "layer_01": 114841176,
@@ -3302,17 +3302,39 @@
       "R4_B_preserved": true
     },
     "partial_activity_evidence": "handoff/team/evidence/SYSTOLIC_B_ACTIVITY_PARTIAL_20261112.json",
-    "space_candidate_not_deleted": "handoff/team/evidence/SERVER_WAVE_CLEANUP_CANDIDATE_20261112.json",
     "foreground_lossless_archive_verification": false,
     "R4_lossless_copy": {
       "run": "runs/r4_l02_lossless_archive01",
       "case": "layer_02",
       "compression_pid": 134929,
-      "status": "lossless_verified_original_retained",
-      "original_file_retained": true,
+      "status": "lossless_archived_raw_duplicate_removed",
+      "original_file_retained": false,
       "other_R4_layers_untouched": true,
       "original_bytes": 12567832939,
-      "archive_bytes": 766947572
+      "archive_bytes": 7669475725,
+      "bytes_saved": 4898357214,
+      "archive_sha256": "37c2821975c43230ee4afe9a0e80be417fdfba058b044050e2bd5b35e782cd5a",
+      "restore_required_for_original_path": true
+    },
+    "vnc_client_closed": true,
+    "vnc_reconnect_requires_user_availability_confirmation": true,
+    "stage_handoff": "workspaces/arch03/SYSTOLIC_B_STAGE_HANDOFF_20261112.md",
+    "R4_lossless_archive_remaining": {
+      "pid": 166071,
+      "run": "runs/r4_waves_lossless_archive02",
+      "status": "running",
+      "last_observed": "2026-11-12T22:01:00+08:00",
+      "completed_observed": 0,
+      "errors_observed": [],
+      "workers": 2,
+      "tool_sha256": "3b07a92182eb243824cb9fac537584d6558b2750078100558bb591b014f450dc",
+      "L01_L02_untouched_by_this_job": true
+    },
+    "wave_cleanup_sixth": {
+      "status": "deleted_independently_confirmed",
+      "evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_SIXTH_20261112.json",
+      "bytes": 29860998380,
+      "cumulative_bytes": 554741554348
     }
   }
 }

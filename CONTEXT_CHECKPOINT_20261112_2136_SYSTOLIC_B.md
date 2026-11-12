@@ -1,6 +1,8 @@
 # B恢复检查点：2026年11月12日21:36
 
-**21:40后增量：L02前台还原校验已经成功，屏幕打印`ARCHIVE_VERIFIED 12567832939 766947572 True`，VNC已返回空闲shell。** 原R4 L02仍在，尚未移除。`runs/r4_l02_lossless_archive01/verified.json`现已存在，实际hash字段还未读回。新增本地存储工具`workspaces/arch03/scripts/archive_verified_r4_waves.py`：仅L03–L12，最多两个nice19/ionice3低优先级归档worker，每文件源hash、完整解压hash和字节数核对、落盘receipt后才可移除重复raw，L01/L02排除。两个本地小型检查（无损还原与错误hash保留原始文件）通过，Windows测试只mock Linux fuser/uid；**工具尚未提交、部署或运行，不存在L03–L12归档作业**。下一步先同步工具，再决定部署；不得把本地准备写成服务器完成。
+**21:52实测增量：B activity9/12、320434继续，无error，free60626567168B。** 再次读取L02 verified.json确认压缩体积是**7669475725B**，此前截图抄成766947572少一位已纠正（包括用户进展说明）；原始12567832939B，还原SHA校验结论没有改变。可回收4898357214B，不是11.8GB。新工具已提交并push/ls-remote核对**3892a585d0bce76877b5650edbbdc1b3d420a00c**，6个分片和finish全部部署完成；`../../operations/archive_verified_r4_waves_3892a58.py`为7871B，SHA **3b07a92182eb243824cb9fac537584d6558b2750078100558bb591b014f450dc**，服务器已打印ARCHIVE_TOOL_VERIFIED7871。**工具尚未启动；不要重新append分片或重建工具。** L02原文件仍在，旧D3候选也未删。VNC18874436/workspace3空闲shell，无前台任务或待Return。
+
+**21:40后增量：L02前台还原校验已经成功，屏幕打印`ARCHIVE_VERIFIED 12567832939 7669475725 True`，VNC已返回空闲shell。** 原R4 L02仍在，尚未移除。`runs/r4_l02_lossless_archive01/verified.json`现已存在，实际hash字段还未读回。新增本地存储工具`workspaces/arch03/scripts/archive_verified_r4_waves.py`：仅L03–L12，最多两个nice19/ionice3低优先级归档worker，每文件源hash、完整解压hash和字节数核对、落盘receipt后才可移除重复raw，L01/L02排除。两个本地小型检查（无损还原与错误hash保留原始文件）通过，Windows测试只mock Linux fuser/uid；**工具尚未提交、部署或运行，不存在L03–L12归档作业**。下一步先同步工具，再决定部署；不得把本地准备写成服务器完成。
 
 任务ACTIVE，用户要求同步本版已完成情况到GitHub后继续工作。直接5×16脉动B，A取消，生产63da6ba/v3/credits3冻结；不加RTL或编码特性。压缩后先读AGENTS、`workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md`、本文件及[20:26完整检查点](CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md)。那里保存全部1200、DRC06、gate、SAIF方法与队列哈希。
 

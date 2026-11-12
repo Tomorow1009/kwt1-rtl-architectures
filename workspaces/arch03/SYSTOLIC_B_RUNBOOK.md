@@ -1,5 +1,7 @@
 # 5×16脉动B复现与结果收回
 
+[11月12日22:15收尾交接：实现、结果、探索路径、远端作业与VNC释放](SYSTOLIC_B_STAGE_HANDOFF_20261112.md)。本次交接取代下方旧进度；等待用户新计划，不启动新工作。
+
 本手册对应生产硬件`63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86`、v3布局`0x00100003`、source credits=3和IRQ/WFI固件。验收状态以[独立验收表](ACCEPTANCE_SYSTOLIC_B_20261111.md)为准。已完成自己的1200任务、ASIC14、DRC06同网表gate14和干净目录ASIC14；活动12和功耗12仍在进行。下列复现命令只供新环境使用，不能在现有运行目录重复启动。
 
 ## 当前作业，接手时先检查
@@ -108,7 +110,7 @@ python3 workspaces/arch03/scripts/server_run.py systolic_b_gate --session b_repr
 4. 原生SAIF与既有VCD功耗对照：整机及主要模块差≤1%，否则保留失败并停止该功耗路径。
 5. B同网表12层完整SAIF、活动范围/驻留审核和12层系统功耗。
 
-固定内部100样本数据目录为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA为`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。批量已逐例保存输出、CPU/IRQ/WFI、窗口和来源回执。空间按实测例大小加20%余量及2GiB保留检查。R4原始VCD仍保留，SAIF方法已实测通过。
+固定内部100样本数据目录为`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA为`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。批量已逐例保存输出、CPU/IRQ/WFI、窗口和来源回执。空间按实测例大小加20%余量及2GiB保留检查。R4波形内容保留，部分原始VCD正在无损归档，复审前须按收尾记录还原原路径并核对哈希。SAIF方法已实测通过。
 
 最终队列命令接口：
 

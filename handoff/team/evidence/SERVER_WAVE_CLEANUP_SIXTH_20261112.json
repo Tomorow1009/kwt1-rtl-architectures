@@ -1,0 +1,23 @@
+{
+  "schema": "authorized-obsolete-wave-cleanup-observed-v1",
+  "observed": "2026-11-12T22:01:00+08:00",
+  "status": "deleted_independently_confirmed",
+  "receipt_run": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/authorized_cleanup_20261112_sixth.json",
+  "receipt_sha256": "cebd6ec5e2111b82e908c92a7b5ddbe42b942015c2d349713ef32589ee683efa",
+  "source": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0/runs/d3_activity01/gate_soc/layer_01.vcd",
+  "bytes_removed": 29860998380,
+  "cumulative_six_obsolete_wave_deletions_bytes": 554741554348,
+  "independent_reaudit_run": "light-light126-d3-repair-arch03-20261109_075555-371316af486e/runs/d3_activity02/gate_soc",
+  "independent_reaudit_summary_sha256": "cc75446e2f0c01ca4e57bd13af697be0f8a82f6b9d94566a40111f2e19f2d72f",
+  "independent_reaudit_stage_passed": true,
+  "raw_absent_confirmed": true,
+  "retained_original_and_reaudit_artifact_hashes_match": true,
+  "exact_resolved_directory_regular_file_size_owner_mtime_checked": true,
+  "no_open_handles_checked_twice": true,
+  "receipt_persisted_before_removal": true,
+  "historical_wave_sha256": "ace2f38409d9abd0ee4306db555f59cef09f7c3286ce0b801943d9c895d75a86",
+  "reproduction_impact": "Original old D3 raw VCD and its d3_activity02 symbolic reference now require regeneration. Original outputs, logs, source inputs, independent complete-wave audit and reconstruction inputs remain. This deletion does not touch R4 or B; R4 lossless archival is a separate operation.",
+  "free_bytes_observed": 75417780224,
+  "current_B": {"activity_cases_completed": 10, "child_pid": 320434, "status": "running", "error": null},
+  "current_lossless_archive": {"pid": 166071, "status": "running", "completed_cases": 0, "errors": []}
+}

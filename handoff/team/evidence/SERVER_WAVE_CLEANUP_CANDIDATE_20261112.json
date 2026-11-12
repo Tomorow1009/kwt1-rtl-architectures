@@ -1,7 +1,8 @@
 {
   "schema": "obsolete-wave-readonly-candidate-v1",
   "observed": "2026-11-12T21:10:00+08:00",
-  "status": "read_only_candidate_not_deleted",
+  "status": "historical_preflight_later_deleted_in_sixth_cleanup",
+  "superseded_by": "SERVER_WAVE_CLEANUP_SIXTH_20261112.json",
   "path_relative_to_bundles": "light-light126-d3-reports-arch03-20261109_071327-4c8803e509a0/runs/d3_activity01/gate_soc/layer_01.vcd",
   "bytes": 29860998380,
   "historical_verified_sha256": "ace2f38409d9abd0ee4306db555f59cef09f7c3286ce0b801943d9c895d75a86",
@@ -18,5 +19,5 @@
   "free_bytes_observed": 102209945600,
   "reason_old_origin_has_no_summary": "Original simulation finished, but slow activity postprocessing was interrupted; d3_activity02 later independently verified original inputs, boot, all25344 outputs and the full VCD without rerunning simulation.",
   "potential_deletion_impact": "Both the origin raw VCD path and d3_activity02 symlink would become unavailable until regeneration. Keep both reports, source inputs, logs, outputs and rebuilding inputs. R4/B remain protected.",
-  "next": "Only if needed, repeat resolved-path, state, retained-hash and fuser checks immediately before a separately recorded authorized deletion. No sixth deletion or prepared deletion script currently exists."
+  "next": "Sixth cleanup has now completed after repeated checks. Do not repeat the deletion. This file preserves the earlier read-only preflight."
 }
