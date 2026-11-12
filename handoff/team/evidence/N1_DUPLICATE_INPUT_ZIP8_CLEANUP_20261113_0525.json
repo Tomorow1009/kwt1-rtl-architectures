@@ -1,0 +1,150 @@
+{
+  "schema": "n1-duplicate-input-zip8-cleanup-audit-v1",
+  "status": "exact_duplicate_zip8_removed_retained_verified",
+  "scope": "Eight exact redundant November 10 uploaded input ZIPs only; no run directories or R4/B0 evidence removed",
+  "execution": "Executed and reviewed remotely by root; this audit agent only read screenshots and local retained verification",
+  "authorization": "Existing explicit user authorization to remove previously verified, unlikely-to-be-needed files; root reviewed copy receipt before the separate remove command",
+  "source_root": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109",
+  "private_directory": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340",
+  "manifest_sha256": "201d2cc6388b7ae4fb519b735100ee714ad5c2e13cab4364dedca8f1fc7f5ace",
+  "retention_tool_sha256": "08659b1bcc1952b14567419e611d19033b18032bb17d17f63e09a937c8fa0511",
+  "manifest_bytes": 2514,
+  "tool_bytes": 3068,
+  "tool_newline_identity": "LF text as decoded in executed bootstrap; local PowerShell-written source has CRLF",
+  "copy_receipt_sha256": "cded38d6c2afe89cbeeedb5c7e58e02925c75bebb7f393f16fed5381467bab53",
+  "copied_receipt_path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/copied.json",
+  "removal_receipt_path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/removed.json",
+  "removed_files": 8,
+  "removed_bytes": 133216003,
+  "finished": "2026-11-13T05:25:18.281713",
+  "timezone": "Asia/Shanghai",
+  "observed_free_after_bytes": 10719592448,
+  "free_space_causality": "Shared free space is a point-in-time observation; its full change cannot be attributed to removal of these 133216003 bytes",
+  "retained_local_files": [
+    {
+      "b": 16674768,
+      "h": "13d07ac8f4fd02f2a75c76a972834ac3a2fee2e9878b469cc2c6e4c56a76b7af",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-mmio-objects-dma16-20261110_120027-4231c41f539d.zip",
+      "n": "light-light126-mmio-objects-dma16-20261110_120027-4231c41f539d.zip"
+    },
+    {
+      "b": 16672116,
+      "h": "5fda05b9858c5908fef7da585a51631fe1b5e1bfc59f16dcbf5b9bef811f7fdc",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73.zip",
+      "n": "light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73.zip"
+    },
+    {
+      "b": 16662114,
+      "h": "b2a21eb5fc1722c7c6d467f4ceafec78d23e92081c573842bd4318228663d0b5",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c.zip",
+      "n": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c.zip"
+    },
+    {
+      "b": 16654613,
+      "h": "b488fd3d2933f9052f79bf860701c75201ec1c0c84c94bfd66f764f168f168ce",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-x-compare-dma16-20261110_105208-a74588d97aaa.zip",
+      "n": "light-light126-x-compare-dma16-20261110_105208-a74588d97aaa.zip"
+    },
+    {
+      "b": 16644393,
+      "h": "475375b33f3ed516d6f24b2b21066cc05dbadd0c1e5991fcba038715051e77a9",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-x-model-dma16-20261110_102408-b85e908fab38.zip",
+      "n": "light-light126-x-model-dma16-20261110_102408-b85e908fab38.zip"
+    },
+    {
+      "b": 16639480,
+      "h": "bdf0b13f74761595b7f02d83c633676cfb1afc2953f93208e582516134772c2f",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip",
+      "n": "light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip"
+    },
+    {
+      "b": 16635627,
+      "h": "9537abe61269aae66152b675e33aa7d25468c116204c85803d91d1b50f79f0e7",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-mac-use-dma16-20261110_094741-3dcd35187115.zip",
+      "n": "light-light126-mac-use-dma16-20261110_094741-3dcd35187115.zip"
+    },
+    {
+      "b": 16632892,
+      "h": "d56631e998cfaf6ed34803d36e17ef4deaeca0f1789da7021760750c0cc566ce",
+      "l": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip",
+      "n": "light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip"
+    }
+  ],
+  "retained_remote_files": [
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-mmio-objects-dma16-20261110_120027-4231c41f539d.zip",
+      "bytes": 16674768,
+      "sha256": "13d07ac8f4fd02f2a75c76a972834ac3a2fee2e9878b469cc2c6e4c56a76b7af"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73.zip",
+      "bytes": 16672116,
+      "sha256": "5fda05b9858c5908fef7da585a51631fe1b5e1bfc59f16dcbf5b9bef811f7fdc"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c.zip",
+      "bytes": 16662114,
+      "sha256": "b2a21eb5fc1722c7c6d467f4ceafec78d23e92081c573842bd4318228663d0b5"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-x-compare-dma16-20261110_105208-a74588d97aaa.zip",
+      "bytes": 16654613,
+      "sha256": "b488fd3d2933f9052f79bf860701c75201ec1c0c84c94bfd66f764f168f168ce"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-x-model-dma16-20261110_102408-b85e908fab38.zip",
+      "bytes": 16644393,
+      "sha256": "475375b33f3ed516d6f24b2b21066cc05dbadd0c1e5991fcba038715051e77a9"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip",
+      "bytes": 16639480,
+      "sha256": "bdf0b13f74761595b7f02d83c633676cfb1afc2953f93208e582516134772c2f"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-mac-use-dma16-20261110_094741-3dcd35187115.zip",
+      "bytes": 16635627,
+      "sha256": "9537abe61269aae66152b675e33aa7d25468c116204c85803d91d1b50f79f0e7"
+    },
+    {
+      "path": "/tmp/s4_21usr_n1_20261113_0210/zip8_20261113_051340/light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip",
+      "bytes": 16632892,
+      "sha256": "d56631e998cfaf6ed34803d36e17ef4deaeca0f1789da7021760750c0cc566ce"
+    }
+  ],
+  "local_verification": {
+    "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\zip8_retention_20261113_051340\\local_verification.json",
+    "sha256": "7bd05677d9e71dcc9ea194a3302928f78d0f6e31793e55ab170f11f5ed3aca5b",
+    "scope": "Before cleanup: local receipt, actual ZIP SHA/size, exact member set and every member hash, CRC, unchanged ZIP stat"
+  },
+  "remote_verification": {
+    "source_and_retained_sha_size": true,
+    "source_stat_stable": true,
+    "fuser_idle_required": true,
+    "private_directory_0700": true,
+    "source_resolve_and_uid_guard": true,
+    "retained_copy_fsync": true,
+    "copied_receipt_review_before_delete": true,
+    "per_file_preflight_recheck_and_intent": true,
+    "unlink_exact_manifest_basenames_only": true,
+    "no_run_directory_deletion": true
+  },
+  "screenshots": [
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\zip8_copy_0529.png",
+      "bytes": 146154,
+      "sha256": "4c8a8d2d1f8fe900b15c8342c02b4795f123f463e7e28e046e34e461cc901c09"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\zip8_removed_0530.png",
+      "bytes": 132893,
+      "sha256": "61762e55e7cc337c7f635f7fefb8c196c00562d340b647c4422fd2de4706cdc8"
+    }
+  ],
+  "limitations": [
+    "Screenshots show terminal identities and completion receipt; the audit has not downloaded server copied.json or removed.json.",
+    "The /tmp copies are temporary retention, not a durable final archive; local original ZIPs remain available.",
+    "This cleanup is storage maintenance and does not confer any new hardware verification PASS.",
+    "The new OPS upload, batch100_02 launch and Linux ProcessLedger execution were still pending when this cleanup completed."
+  ]
+}

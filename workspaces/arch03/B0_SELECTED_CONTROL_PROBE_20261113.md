@@ -1,5 +1,7 @@
 # B0 L01控制驻留补读工具
 
+**05:55–05:56最新：**原报告最终SHA`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`已八组join/实际HASH_MATCH=True/DIFF空确认，_v1/_v2/_v3均为手抄失败，原报告未变。L01 proof d894…和1253/1253/1253计数已读；未知gzip原SHA通过，41406总条/2234局部条/2234唯一名/重复0。后续只执行model/overlap_v4，尚无交集或模型结论；不重跑原报告身份。
+
 2026-11-13，仅B0/N1证据审核。原unknown工具、受测硬件、活动及报告保持冻结；不实施N2或启动EDA。
 
 ## 已观察的原因与范围
@@ -79,3 +81,13 @@ RET1N = 1'b1
 这些是实际映射及实际库函数的组合推导，不再依据单元名称猜测。L01原控制probe已记录全部64适配器的clk/cs/we/mask且TX/TZ均0，故可确认这64个shared宏上述控制输入在该窗口的已知性。原SAIF未记录1280个宏leaf pin这一事实保持不变；本结论不是直接leaf活动注释证明，也不恢复联合时序、读写事件数或毛刺波形。未读取的其他11层控制驻留不能继承L01结论。
 
 系统功耗仍未验收。N5至N9真实bank状态、未知bank_data/N*如何被实际read mux消费、AON与其余有负载未知锥，以及未知活动的功耗影响仍需独立闭合。下一最小查询优先从已有L01未知gzip按完整shared scope精确读取N5至N9及read_pending：清单包含者返回实际驻留，清单不含只能表述“未知清单无此声明”，不能冒充已得到T0/T1或宣布常量，不重扫原SAIF。
+
+05:09:13该未知gzip查询已经执行，本代理亲读`b0_bank_knownness_0510.png`。原gzip完整SHA及41406行数均核通过，`UNKNOWN_MATCH=[]`，N5至N9及read_pending全部`ABSENT_FROM_UNKNOWN`。这与独立控制probe的read_pending全0不矛盾；前者只列未知，不能证明五个新名是否存在于原SAIF及其T0/T1。没有再次读取原SAIF。
+
+下一步已准备两个独立只读短命令，尚无实际服务器结果：`takeover_local/b0_shared_control_drivers_query.txt`只列小写n9、n1082、n792的实际驱动与n9消费者（计数及前10条）；`b0_shared_model_identity_query.txt`从已核原report→gate summary→source_inputs定位4096厂商Verilog模型路径/SHA。只有读取实际模型后才解释写时Q保持或置X行为，本地behavioral不能替代厂商模型。即使读消费被禁用，也不能将全部bank_data及组合节点自动记为零功耗。
+
+本地只读再次确认main_systolic_b.c、kwt_systolic_b.c、arch03_shared_sram_turnover.sv与B0生产63da的git diff为空。原正式B驱动明确要求load_acks=0、source_acks=stage_acks=encoded_bytes/4、output_acks=12672；主程序只写shared mailbox而不读结果。这支持正常性能任务预期无加速器shared再读的解释，不能替代实际mapped窗口的电气/活动证据；另外CPU竞争用例的scratch读不移用于本功耗窗口。
+
+后续消费锥查询已运行但原截图上半driver部分未保留下可读结果。亲读`vnc_after_minimize_0525.png`（实际钟05:21:23）仅确认小写n9引用总数3：BUFV2RD_12TR40 U392的I=n9/Z=n779，U394的I=n9/Z=n780，以及NOR2V2_12TR40 U398的A1=read_pending/A2=n11/ZN=n9。当前没有证据补写其余driver或BUF/NOR的实际Liberty function。更短的`b0_shared_control_frontier_query.txt`只列n9/n11/n779/n780/n1082/n792实际驱动，待根在N1恢复后读；不扩大为新的SAIF扫描。
+
+05:40:46该frontier已实际完成：除上述三条外，INV2 U39从n793驱动n792，INV2 U73从n13驱动n1082，NOR2BV2 U227的A1=n15/B1=n14/ZN=n11，共6条。只有INV2实际function已被此前读取，其他门函数仍待查。随后宏模型身份/no-load交集两个只读命令在首reportSHA断言停止；05:50逐行分组核对确认是本地手抄常量错误（05:46的_v2仍误抄后半并失败），原inventory pin与实际报告相等，报告没有改变。正确原报告SHA为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`；旧失败命令/截图保留，生成_v3命令但尚无实际结果，_v1/_v2失败文件均保留。完整恢复入口及新命令SHA见B0_REVIEW_CHECKPOINT_CONTROL_MAPPED_20261113.md。

@@ -1,5 +1,21 @@
 # N1运行工具修复与恢复检查点（2026-11-13 04:58）
 
+## 05:10上传阻塞增量（优先于下文未冻结描述）
+
+### 05:11数值连接解析增量
+
+- 新query8_total33_order已实际执行：counts=[80,80,80,80]，failed75，首3均B侧仅提取到convert[i].bias[30:0]。这表示严格位名模式未匹配，可能涉及最高符号位映射为buffer/别名，**尚不能判硬件错误，也不能忽略后放PASS**。n1_rtl_audit代理正在按实际B token/驱动准备最小补查。截图n1_total33_order_0513.png实际钟05:11:04。原长query8预览与新摘要都保留，RTL未改。
+- root末个服务器命令已结束，VNC3空闲。八个旧重复输入ZIP保留/清理命令仍待requirements代理，尚未执行任何复制或删除；新OPS仍FTP未成功，不能启动batch02。
+
+- 新工具已commit/push并ls-remote独立核对：**0f62e41207909904efd544992013c1244b0fd63b**。807文件完整包已生成：`light-light126-n1-v4-20261113_045945-0f62e4120790.zip`，9007722B，SHA`a9e14702e3092292826f1e37fc28fbc08064f2b0444ca744dd83217ba79920ce`，manifestSHA`1c55d5515de4258c77537e52387809ea04a33a334a4fefee8e2600ec2b7209e0`。本地及板端`/home/root/n1_ops_20261113_0502`已实际核ZIP SHA。
+- root与独立代理均核新旧完整ZIP及所有成员：107 RTL/TB、4主IRQ固件、94数据文件全部同41b；诊断8文件只有sequence ELF及其manifest变化，bin/verilog一致，旧sequence PASS仍绑定旧ELF。新小证据N1_PROCESS_FIX_PACKAGE_IDENTITY_20261113_0505.json已生成，未再提交。
+- 05:00:51共享free34603008B/private748401012736B、原锁无/EDA[]。FileZilla已正常连正确现有站点，但上传返回553 Could not create file、显示786.3KB后失败。**05:08:20实际VNC核新ZIP不存在，无partial可删；共享free1048576B。新包尚未部署，batch02尚未启动。** FZ已AltF4关闭，无FTP占用，VNC3空闲。
+- 已只读核server project根的8个旧11/10 DMA16/MMIO输入ZIP（不是R4/B0证据），与本地最大8个ZIP名/大小一致，共133216003B。requirements_plan_audit代理正在逐包核本地receipt、完整ZIP/全部成员，准备ignored精确manifest及≤5条分段VNC命令：先复制private/tmp、核SHA/字节/无占用→rootreview后仅删除8个重复源ZIP并保存回执。**尚未写服务器manifest、尚未复制或删除任何这8个文件**，不得按已清理操作。不要重复删已完成的OPS41b单ZIP。
+- 这8个固定包为：mmio-objects 20261110_120027-4231c41f539d；mmio-report-phase 112517-e9fc57cecc73；mmio-timing 111311-ecf3cd4afb3c；x-compare 105208-a74588d97aaa；x-model 102408-b85e908fab38；mac-gcc48 100643-bb25f0843195；mac-use 094741-3dcd35187115；annotation-tables 090821-fd54fd14267d，完整名称见takeover_local/old_upload_inventory_0509.png。本地local_runs全部保留。
+- B0已有unknown gzip查N5..N9/read_pending已05:09执行，SHA/41406行核通过，UNKNOWN_MATCH=[]，全部ABSENT_FROM_UNKNOWN；不等于原SAIF有记录且驻留已知。read_pending恒0仍只引用先前558probe。B0完整功耗未知影响未验，不重扫SAIF。
+- n1_rtl代理新`takeover_local/n1_mapped_query8_total33_order.txt`978chars已准备（全80A/B/SUM位序摘要），**未执行**；旧query8长滚动输出不可当PASS。query7 sign_drivers仍未执行。
+- 当前无待Return/tool session。下一步先收requirements代理8ZIP保留/清理命令并审阅，实际回收空间后重连FZ仅传0f62新ZIP；之后立即服务器SHA/独立private解包/actual runtime identity检查，再唯一新batch02。
+
 恢复必须先读AGENTS、CONTEXT_HANDOFF、有效IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113、本检查点及04:30检查点的04:48失败增量。用户要求持续推进，没有暂停；仍仅N1，不能进入N2/D1。
 
 ## 当前主线

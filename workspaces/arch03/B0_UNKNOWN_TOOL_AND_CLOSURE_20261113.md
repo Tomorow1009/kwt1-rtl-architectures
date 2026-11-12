@@ -1,10 +1,12 @@
 # B0完整未知清单工具及功耗审查闭环
 
+**05:55最终身份纠正：**原B0报告SHA为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`。八组join已在服务器取得HASH_MATCH=True/True、DIFF=[]，与原inventory pin一致；_v1/_v2/_v3转录失败均保留，报告没有改变。下文05:46/05:50尝试以本条最终机器匹配为准，不重跑已完成活动或报告身份。
+
 2026-11-13，N1阶段配套审查。目标是用实际证据关闭B0功耗缺口，形成可公平比较的B0/N1基准；不是永久保留一个没有后续动作的false，也不通过降低要求改变旧PASS。本文件不启动远端/EDA，不实施N2/D1。
 
 ## 已有小项已核对，剩余问题定位到实际unknown集合
 
-原B0最终report SHA：`677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a`。12层完整原报告、模型回执和小报告的inventory02已完成；精确加权功耗为0.06983707336109641885320248724W，14.20128985110165µJ/task，布局前范围不变。
+原B0最终report SHA：`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`。12层完整原报告、模型回执和小报告的inventory02已完成；精确加权功耗为0.06983707336109641885320248724W，14.20128985110165µJ/task，布局前范围不变。05:50用实际8字符逐行分组、原inventory pin和03:08截图核对（05:46的_v2纠错仍失败，另保留），发现早期手抄SHA有误，已在本页更正；这是转录纠错，不是原报告变化。旧失败查询和截图保留。
 
 已确认L01的1253个默认声明全部实际零连接，标准/宏模型回执存在，92/128宏默认双rail泄漏与实际报告在舍入内一致；PWR601/602及PTE016都是Information。PTE003的实际禁用弧对象仍待解释。这些信息见`B0_POWER_REVIEW_GAPS_20261113.md`的实际补读，不得等同整机unknown已经无影响。
 
@@ -23,7 +25,7 @@
 CLI合同（由根代理在新ops部署核验后决定执行）：
 
 ```text
-PYTHONPATH=<9305原包>/workspaces/arch03/scripts python3 -B <新ops>/b0_saif_unknown_inventory.py --report <ced包>/runs/systolic_b_backup_report01/report.json --report-sha256 677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a --scope-root <原项目server_root> --output <新的/tmp/分析目录>
+PYTHONPATH=<9305原包>/workspaces/arch03/scripts python3 -B <新ops>/b0_saif_unknown_inventory.py --report <ced包>/runs/systolic_b_backup_report01/report.json --report-sha256 677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a --scope-root <原项目server_root> --output <新的/tmp/分析目录>
 ```
 
 默认12层；加`--cases layer_01`可先核实际网表语法/单层，报告`full12_collected=false`。映射解析先于SAIF扫描，真实网表出现不支持语法时保留错误，不绕过或猜测。工具完成是清单/映射收集，不自动批准功耗。

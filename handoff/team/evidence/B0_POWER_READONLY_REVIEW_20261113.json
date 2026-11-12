@@ -54,6 +54,16 @@
   "physical_signoff": false,
   "temporary_receipt_requires_durable_archive": true,
   "limits": "Actual fixed12 source identity and weighted aggregate rechecked. Library receipt presence is not complete model approval; connected unknown-state influence remains unresolved. A prior documentation transcription of raw_time_weighted_power_w was corrected from original total energy and duration.",
-  "original_B0_report_sha256": "677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a",
-  "layer_01_isolated_defaults_proof_sha256": "d894ec7e5f9c3b33e6c99a800cd24df6fd66ba68882f63ffac15784849c4a445"
+  "original_B0_report_sha256": "677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a",
+  "layer_01_isolated_defaults_proof_sha256": "d894ec7e5f9c3b33e6c99a800cd24df6fd66ba68882f63ffac15784849c4a445",
+  "report_sha_transcription_correction": {
+    "previous": "677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a",
+    "correct": "677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a",
+    "evidence": "takeover_local/b0_report_join_proof_pass_0556.png",
+    "observed_at": "2026-11-13T05:55:16+08:00",
+    "inventory_and_actual_equal": true,
+    "source_report_modified": false,
+    "machine_hash_comparison_passed": true,
+    "case_count": 12
+  }
 }

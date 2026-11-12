@@ -1,0 +1,254 @@
+{
+  "schema": "n1-process-fix-ops-deployment-v1",
+  "status": "batch02_running_39_cases_observed_process_ledger_live_identity_verified_not_final_acceptance",
+  "source_commit": "0f62e41207909904efd544992013c1244b0fd63b",
+  "production_source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "bundle": "light-light126-n1-v4-20261113_045945-0f62e4120790",
+  "zip_bytes": 9007722,
+  "zip_sha256": "a9e14702e3092292826f1e37fc28fbc08064f2b0444ca744dd83217ba79920ce",
+  "manifest_sha256": "1c55d5515de4258c77537e52387809ea04a33a334a4fefee8e2600ec2b7209e0",
+  "manifest_files": 807,
+  "zip_members": 808,
+  "runtime_root": "/tmp/s4_21usr_n1_20261113_0210",
+  "dataset": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex_short_all",
+  "dataset_inventory_sha256": "ae052bc1e543930abece8202a5b1439dcbd50dd4f5d7d09fb8f049eb30eeb997",
+  "session": "n1_batch100_02",
+  "driver_pid": 18736,
+  "observed_launch_clock": "2026-11-13T05:36:50+08:00",
+  "launch_clock_scope": "Screenshot desktop clock, not a fabricated runner started timestamp",
+  "extraction": {
+    "observed_clock": "2026-11-13T05:33:05+08:00",
+    "result": "N1_NEW_OPS_EXTRACTED",
+    "full_uploaded_zip_sha256_and_bytes_verified": true,
+    "private_root_uid_mode_canonical": true,
+    "exclusive_new_bundle": true,
+    "only_normal_members_under_exact_bundle": true
+  },
+  "runtime_validation": {
+    "observed_clock": "2026-11-13T05:33:46+08:00",
+    "result": "SESSION_NOT_STARTED",
+    "actual_n1_paths_configure": true,
+    "complete_manifest_and_ownership_verified": true
+  },
+  "preflight": {
+    "timestamp": "2026-11-13T05:34:19.775825",
+    "timezone": "Asia/Shanghai",
+    "shared_free_bytes": 9077522432,
+    "private_free_bytes": 746456555520,
+    "shared_lock_exists": false,
+    "same_user_eda": []
+  },
+  "prelaunch_recheck": {
+    "observed_clock": "2026-11-13T05:36:01+08:00",
+    "result": "SESSION_NOT_STARTED",
+    "private_free_bytes": 746440257536
+  },
+  "rejected_attempt": {
+    "source": "Root operator account, not inferred from screenshot",
+    "description": "Automatic approval review rejected a prepared Return action; root cleared the unsubmitted input and rechecked SESSION_NOT_STARTED before the one observed launch",
+    "observed_launcher_count": 1
+  },
+  "process_fix": {
+    "n1_process_sha256": "69c0b9396449fde7048e88ec5c58d36770422c9fb24871728988eb8d429eed93",
+    "n1_server_sha256": "1367c37b18cbb3041be5efef8d86e06eab6075768cfa65f9b35c38551a6877bb",
+    "local_tests_passed": 32,
+    "independent_review": "No blocking findings at frozen hashes",
+    "linux_process_ledger_identity_review": "actual owner dictionary, raw owner SHA and frozen process tool identity match; shared updates false",
+    "linux_child_reaping_review": "actual previous child31453 exited with wait_completed=true and rc0; latest child31504 running; server fault injection not performed"
+  },
+  "commands": [
+    {
+      "name": "extract",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\extract.txt",
+      "sha256": "22f0260ea1ee9ee7e9c191dc1e89eb2f6204de4191053f94a8e4354871fc2173",
+      "characters": 852,
+      "kind": "root_executed_deployment_or_launch"
+    },
+    {
+      "name": "status",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\status.txt",
+      "sha256": "c0a1ac9f5f369578b8d3adef507b5a3d60a062fba7cac3d51e2a3bbeb827077e",
+      "characters": 423,
+      "kind": "read_only"
+    },
+    {
+      "name": "preflight",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\preflight.txt",
+      "sha256": "cc2d2710b0ddc401ff3495dc33c4e3ada887f8976bc86371600d9d05610d1c2c",
+      "characters": 698,
+      "kind": "read_only"
+    },
+    {
+      "name": "launch",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\launch.txt",
+      "sha256": "eff7e12b8fb34411be9898546477eadea0f5d54761649d78ccc94f7fca0c1773",
+      "characters": 742,
+      "kind": "root_executed_deployment_or_launch"
+    },
+    {
+      "name": "monitor",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\monitor.txt",
+      "sha256": "575587aebbc6f99e1d28a0f4ddf992cc38629985fdea4f6d76519fc35ddd49e8",
+      "characters": 813,
+      "kind": "read_only"
+    },
+    {
+      "name": "owner_identity",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\owner_identity.txt",
+      "sha256": "44b039d5045cf4a5cf5704ee370087749d714622374418ff1ff20570a6ce5b07",
+      "characters": 665,
+      "kind": "read_only"
+    },
+    {
+      "name": "monitor_compact",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\monitor_compact.txt",
+      "sha256": "2d966d9ff9ab8324dff32d47b2592ceae0880d33cfb5298e8bf699865bda12ae",
+      "characters": 959,
+      "kind": "read_only"
+    },
+    {
+      "name": "owner_compact",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\owner_compact.txt",
+      "sha256": "39065f2327028429fedc5a25fe274abea7dae610ff631fb89e8a5bd8397ec2e7",
+      "characters": 845,
+      "kind": "read_only"
+    },
+    {
+      "name": "log_compact",
+      "path": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_batch100_02_launch_20261113_0525\\log_compact.txt",
+      "sha256": "85a269db4a6af992e7becc8a5fccc21e29fd582e6f81eb9ebbfe0f611ae43915",
+      "characters": 534,
+      "kind": "read_only"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_newops_extracted_0533.png",
+      "sha256": "c121f7a517c3441f074c825e7a73f6dbd009e363c5f0b5594b44928e5177322d"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_newops_runtime_0534.png",
+      "sha256": "5e50e8ae6274ab9f3ad3bd890555eb261b980568ade63420b19a80ed2463942b"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_batch02_preflight_0534.png",
+      "sha256": "e27bf124e874ea0e5328d0e0e5c2bb924d0fdb7da6c10d509be039e4ea5955cc"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_batch02_notstarted_0536.png",
+      "sha256": "4dc78d064a6a01f8f95106772ff01d91dedddfb480612c58d521206c159ff15b"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_batch02_launch_actual_0537.png",
+      "sha256": "cd6baa11bb2db720778bb7811cbb7a2202de3989476033634cd8dd6f56d7bec3"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_batch02_owner_0539.png",
+      "sha256": "757adaf70085b774ba0bce8631e8f5fa9e718edd963c7b4e4869edd8195e32dc"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_batch02_monitor_0539.png",
+      "sha256": "467fd23712a5687164a9abc216fc45d79cac9cc0af3e849d898148d69f919928"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_monitor_short_0543.png",
+      "sha256": "6fca0e0de6dfccbb0f72a0e25caf3e79e72d67a72b339861c4c258530ab6c4f2"
+    },
+    {
+      "path": "E:\\fpga_race-two\\takeover_local\\n1_owner_short_0544.png",
+      "sha256": "71c6a8704597306efbd99cedf03d6610428c6191962ad58f30ac09b6a08859da"
+    }
+  ],
+  "scope": {
+    "new_hardware_pass": false,
+    "batch1200_complete": false,
+    "compiled_linux_stage_status_reviewed": true,
+    "old_failed65_reused": false,
+    "production_rtl_modified": false,
+    "next_stage_started": false
+  },
+  "limitations": [
+    "Actual running stage, full owner/ledger/tool identity and one reaped child are now observed; this does not establish complete1200 or server fault-injection coverage.",
+    "Batch02 must complete and independently re-audit all 1200 cases and 30412800 native total/result/saturation outputs.",
+    "Runtime under /tmp is temporary; final durable archive is still required.",
+    "Full100 float precision, strict timing, same-netlist gate and power remain separate acceptance gates."
+  ],
+  "linux_observation_0539": {
+    "evidence_scope": "Visible terminal tail only; prior full state/progress/owner dictionary scrolled outside screenshot",
+    "owner_observed_clock": "2026-11-13T05:38:46+08:00",
+    "shared_owner_updates_after_acquisition": false,
+    "driver_proc_present": true,
+    "owner_sha256": "0c36f2761e4f7ad1244830533124fc3df104e551c17ed7ad2665cae8d5cd8694",
+    "recorded_current_owner_sha_agree": true,
+    "full_owner_identity_comparison": "pending compact query",
+    "log_observed_clock": "2026-11-13T05:39:30+08:00",
+    "compile_child_pid": 20695,
+    "observed_case_pass_logs": [
+      {
+        "key": "sample_001_layer_01",
+        "completed": 1,
+        "cycles": 30547,
+        "host_seconds": 3.36463209008798
+      },
+      {
+        "key": "sample_001_layer_02",
+        "completed": 2,
+        "cycles": 29947,
+        "host_seconds": 3.77495080789196
+      }
+    ],
+    "next_child_pid": 26685,
+    "next_child_case": "sample_001_layer_03",
+    "complete_batch_pass": false,
+    "latest_state_and_progress": "pending compact query",
+    "child_wait_completed_fields": "pending compact query"
+  },
+  "compact_output_contract": {
+    "maximum_total_lines": 14,
+    "full_paths_printed": false,
+    "full_json_printed": false,
+    "new_launch_permitted": false,
+    "command_validation": "Python 3.6 grammar only; not remotely executed by this agent"
+  },
+  "linux_observation_0544": {
+    "monitor_timestamp": "2026-11-13T05:43:19.839074",
+    "timezone": "Asia/Shanghai",
+    "state": "running",
+    "driver_pid": 18736,
+    "stage_started": "2026-11-13T05:36:45.043281",
+    "completed": 39,
+    "failed": 0,
+    "checked_outputs": 988416,
+    "checked_totals": 988416,
+    "estimated_remaining_seconds_with_20percent_margin_rounded": 8889,
+    "previous_child": {
+      "pid": 31453,
+      "status": "exited",
+      "wait_completed": true,
+      "returncode": 0
+    },
+    "latest_child": {
+      "pid": 31504,
+      "status": "running",
+      "wait_completed": null,
+      "returncode": null
+    },
+    "last_case": {
+      "key": "sample_004_layer_03",
+      "cycles": 29631,
+      "host_seconds_displayed": 3.42
+    },
+    "owner_observed_clock": "2026-11-13T05:44:08+08:00",
+    "owner": {
+      "pid": 18736,
+      "session": "n1_batch100_02",
+      "owner_dict_matches_identity": true,
+      "owner_sha_matches_identity": true,
+      "shared_owner_updates_after_acquisition": false,
+      "driver_proc_present": true,
+      "process_tool_sha_matches_frozen": true
+    },
+    "complete_batch_pass": false,
+    "server_enospc_injection_performed": false
+  }
+}

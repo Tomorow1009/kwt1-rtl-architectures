@@ -1,5 +1,7 @@
 # B0功耗只读审查：已知证据、剩余缺口和最小读取入口
 
+**05:55最终身份纠正：**原B0报告SHA为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`。八组join已在服务器取得HASH_MATCH=True/True、DIFF=[]，原inventory pin与实际报告一致；_v1/_v2/_v3手工转录失败全部保留，报告没有改变。下文05:46/05:50纠错尝试均以本条最终机器匹配为准。原报告身份无需再次核跑。
+
 记录时间：2026-11-13 01:57（Asia/Shanghai）。本次为N1阶段的B0对照证据整理；不实施N2，不重跑B0的1200、门级、SAIF或PT。最新状态以根检查点为准，本文件不宣称服务器实时状态。
 
 ## 已确认的基线与本次范围
@@ -76,7 +78,7 @@ python3 -B <新operations目录>/b0_power_review_inventory.py
 
 ## 实际补读（2026-11-13 03:08截图后）
 
-根代理已读取inventory02，原B0最终report SHA为`677a1ae11042ffe6aab981b1b0f124b29f604e6dc0d9bb29e96d9f04f4f68a1a`。本代理亲读本地`b0_power_actual_warnings.png`、`b0_power_compact.png`、`b0_power_models.png`及`b0_report_exact_sha.png`，补充如下；它们关闭的是明确的小项，不是完整未知影响验收。
+根代理已读取inventory02，原B0最终report SHA为`677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a`。本代理亲读本地`b0_power_actual_warnings.png`、`b0_power_compact.png`、`b0_power_models.png`及`b0_report_exact_sha.png`，补充如下；它们关闭的是明确的小项，不是完整未知影响验收。05:50再按实际8字符逐行分组及inventory pin核对后更正早期手抄错误（05:46的_v2尝试仍误抄后半并失败）；原报告未改变，失败的只读assert查询保留。
 
 - PWR-601是“Running averaged power analysis”，PWR-602是“Running power calculation with 4 threads”，均为Information，不是功耗错误或未知告警。
 - PTE-016也是Information：hf_clk由显示6.667ns扩展到共同base660.000ns并增加196edges；lf_clk原周期为66.000ns，增加18edges。不能把共同base误当实际主时钟降频。精确导入周期仍由原clock回执约束；PTE-003通用警告仍需实际disabled_timing对象/flags解释，不能凭通用文字断言存在组合环。
