@@ -1,0 +1,30 @@
+{
+  "schema": "authorized-obsolete-wave-cleanup-local-receipt-v1",
+  "status": "deleted_independently_confirmed",
+  "authorization": "User authorized deletion of validated, likely-unused large project files, then continuing B work.",
+  "observed": "2026-11-12T18:31:13.253937+08:00",
+  "server_receipt": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c/runs/mmio8_source_gate_full01/authorized_cleanup_20261112_third.json",
+  "server_receipt_sha256": "ebe665444c666b1e0d3b67ff6bedc09fee2aade8a4525d6f524682bb5a00d4d5",
+  "original_summary_sha256": "06e388e1b744494fc00f224a43caf8de2ebf7e764eb1b655541ce7288a408533",
+  "original_stage_status": "passed",
+  "files": [
+    {"file": "layer_01.vcd", "bytes": 30231391361},
+    {"file": "layer_02.vcd", "bytes": 30143731042}
+  ],
+  "total_bytes": 60375122403,
+  "total_GiB": 56.228714439086616,
+  "cumulative_three_cleanups_bytes": 360492854889,
+  "free_GiB_before": 46.6591796875,
+  "free_GiB_after": 98.3662109375,
+  "free_space_shared_and_changes_independently": true,
+  "both_wave_paths_absent": true,
+  "retained_independently_observed": ["summary.json", "source_inputs.json", "layer_01.csv", "layer_02.csv"],
+  "exact_resolved_parent_and_names_rechecked": true,
+  "symlinks_rejected": true,
+  "sizes_rechecked": true,
+  "fuser_exit_1_immediately_before_deletion": true,
+  "R4_B_inputs_and_evidence_untouched": true,
+  "B_batch_continued_without_interruption": true,
+  "remaining_original_MMIO8_full01_large_VCDs": 0,
+  "reproduction_impact": "All12 original MMIO8 full01 VCD files were removed across three authorized cleanups. Historical small logs, numeric outputs, power reports, source and replay inputs remain. Any future raw-wave audit or new power analysis of those layers requires regeneration; the deleted VCDs are not claimed available. R4/B evidence is unchanged."
+}
