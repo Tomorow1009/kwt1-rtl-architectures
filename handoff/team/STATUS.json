@@ -3273,8 +3273,8 @@
       "status": "deleted_independently_confirmed",
       "evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_FOURTH_20261112.json",
       "receipt_sha256": "0c8310269eee5ba94ef8931082ecfde9ef3048cd3f44e72abee91ab761445df5",
-      "bytes": 61477937078,
-      "cumulative_bytes": 421970791967,
+      "bytes": 61477973078,
+      "cumulative_bytes": 421970827967,
       "R4_B_preserved": true
     }
   }

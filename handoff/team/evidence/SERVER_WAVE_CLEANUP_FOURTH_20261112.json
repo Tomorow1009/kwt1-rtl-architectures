@@ -19,8 +19,8 @@
       "stage_passed": true
     }
   ],
-  "bytes_removed": 61477937078,
-  "cumulative_four_cleanups_bytes": 421970791967,
+  "bytes_removed": 61477973078,
+  "cumulative_four_cleanups_bytes": 421970827967,
   "all_target_files_absent": true,
   "retained_summary_source_inputs_and_output_csv_hashes_verified": true,
   "no_open_handles_before_delete": true,
