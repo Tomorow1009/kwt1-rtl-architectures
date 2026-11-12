@@ -172,7 +172,7 @@ def read_task_window(text):
                 input_words=loads,output_words=outputs,boundary='begin_marker_response_to_last_output_write_response')
 def main():
     global LOCK
-    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','systolic_b_batch','systolic_b_contention','systolic_b_sequence','systolic_b_gate','systolic_b_saif_probe','systolic_b_timing_audit','native_saif_r4_replay','native_saif_r4_crosscheck','systolic_b_saif','systolic_b_power','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['status','systolic_b_soc','systolic_b_build','systolic_b_synth','systolic_b_batch','systolic_b_contention','systolic_b_sequence','systolic_b_gate','systolic_b_saif_probe','systolic_b_saif_units','systolic_b_timing_audit','native_saif_r4_replay','native_saif_r4_crosscheck','systolic_b_saif','systolic_b_power','icb','soc','sequence','tcm','stdcell','asic_boot','asic_soc','gate_soc','asic_power','uart_compare','dc_accel','dc_shared','asic_link','asic_synth','dma16_soc','dma16_build','icb32_soc','icb32_build','icb32_synth','icb32_contention','icb32_sequence','icb32_batch','icb32_gate','icb32_power','icb32_timing_audit','dma16_synth','mmio8_soc','mmio8_synth','mmio8_gate','mmio8_power','dma16_gate','dma16_power','dma16_sequence','dma16_contention','dma16_timing_audit','mmio8_timing_audit','dma16_unknown_activity','dma16_mac_use','dma16_x_sensitivity'])
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--cases',nargs='+',default=['layer_%02d'%n for n in range(1,13)]+['extremes','rounding'])
@@ -290,6 +290,9 @@ def main():
             elif a.stage=='systolic_b_saif_probe':
                 from native_saif_probe import verify
                 report=verify(cfg,run,a.synth_run,a.synth_summary_sha256,call)
+            elif a.stage=='systolic_b_saif_units':
+                from native_saif_units import diagnose
+                report=diagnose(cfg,run,call)
             elif a.stage=='systolic_b_timing_audit':
                 from systolic_b_timing_audit import audit
                 report=audit(cfg,run,a.synth_run,a.synth_summary_sha256,call)

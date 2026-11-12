@@ -1,0 +1,26 @@
+{
+  "schema": "systolic-b-synthesis-server-receipt-v1",
+  "observed": "2026-11-12T11:39:06+08:00",
+  "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
+  "run": "runs/systolic_b_v3_synth02/systolic_b_synth",
+  "summary_sha256": "3e0f88eeb4855a15f8743f820f587cd90df7e52a748d112e8fd5ba788dd86d03",
+  "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "status": "reports_ready_review_required",
+  "period_ns": "6.666666",
+  "setup_slack_ns": "0.0002141",
+  "hold_slack_ns": "0.00249085",
+  "macros": {
+    "RAMSP128X16": 92,
+    "RAMSP4096X16": 128
+  },
+  "latches": 0,
+  "combinational_loops_detected": false,
+  "whole_soc_area_um2": "4621339.604708",
+  "known_added_mm2": "0.9383510023010567",
+  "conservative_budget_mm2": "1.0991231047009615",
+  "budget_limit_mm2": "2.00",
+  "task_mode_timing_verified": false,
+  "project_area_upper_bound_verified": false,
+  "system_power_verified": false,
+  "physical_signoff": false
+}

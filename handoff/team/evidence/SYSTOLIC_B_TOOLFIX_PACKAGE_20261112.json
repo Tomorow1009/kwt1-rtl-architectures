@@ -1,0 +1,35 @@
+{
+  "schema": "systolic-b-validation-toolfix-package-v1",
+  "source_commit": "ced0e139a01ee810ea4f98e43cd703ff6fccf2f0",
+  "archive": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e.zip",
+  "bytes": 11358423,
+  "sha256": "9995decabb854511e5e92e392b8319207f79731681f44cf1c7ed91406d12b579",
+  "manifest_sha256": "39b127636ecaf61d2cd950efd2f83ef923cacf5274c6f4b3d363cbdb9a51155d",
+  "files": 709,
+  "all_inputs_rechecked": true,
+  "board_staged_sha_verified": true,
+  "server_uploaded": true,
+  "server_unpacked": true,
+  "local_regression_tests": 5,
+  "production_hardware_changed": false,
+  "production_firmware_identical": true,
+  "contention_firmware_identical": true,
+  "sequence_load_images_identical": true,
+  "sequence_elf_difference_nonallocated_sections": [
+    ".debug_info",
+    ".debug_line",
+    ".debug_str",
+    ".symtab"
+  ],
+  "sequence_manifest_difference": [
+    "elf_sha256"
+  ],
+  "sequence_firmware_manifest_sha256": "97ec7c557782cde45d93cd313c5e7c20cdbf491791fb1856e4182806d7241c0d",
+  "production_firmware_manifest_sha256": "11d860ca0269f962a71250e72925c730def0da79d931a79e3102c82ddaa16b91",
+  "original_synth02_reused": true,
+  "validation03_started": true,
+  "server_709_inputs_three_firmware_passed": true,
+  "validation03_pid": 102905,
+  "validation03_start": "2026-11-12T12:03:36.100240",
+  "FileZilla_closed": true
+}

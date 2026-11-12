@@ -1,0 +1,48 @@
+{
+  "schema": "authorized-obsolete-wave-cleanup-local-receipt-v1",
+  "server_receipt": "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c/runs/mmio8_source_gate_full01/authorized_cleanup_20261112_second.json",
+  "server_receipt_sha256": "c923e1708ea0bda863c7ddbc2bb07d833c582450073d47286689426c754be6a4",
+  "status": "deleted_independently_confirmed",
+  "files": [
+    {
+      "file": "layer_03.vcd",
+      "bytes": 30138948121
+    },
+    {
+      "file": "layer_04.vcd",
+      "bytes": 30114630322
+    },
+    {
+      "file": "layer_05.vcd",
+      "bytes": 29944774583
+    },
+    {
+      "file": "layer_06.vcd",
+      "bytes": 29823628528
+    },
+    {
+      "file": "layer_07.vcd",
+      "bytes": 29743355027
+    },
+    {
+      "file": "layer_08.vcd",
+      "bytes": 29646401327
+    }
+  ],
+  "total_bytes": 179411737908,
+  "total_GiB": 167.090201664716,
+  "free_GiB_after": 234.6123046875,
+  "original_summary_sha256": "06e388e1b744494fc00f224a43caf8de2ebf7e764eb1b655541ce7288a408533",
+  "cpu_gate_passed_verified": true,
+  "fuser_exit_1_no_open_files": true,
+  "exact_paths_sizes_symlinks_rechecked_at_deletion": true,
+  "R4_B_preserved": true,
+  "remaining_original_MMIO8_waves": [
+    "layer_01.vcd",
+    "layer_02.vcd"
+  ],
+  "reproduction_impact": "Old MMIO8 L03-L12 raw activity or new power analyses require waveform regeneration. Original outputs, logs, summaries, netlists and source inputs retained.",
+  "combined_first_and_second_bytes": 300117732486,
+  "finished": "2026-11-12T12:08:35.577864",
+  "all_six_paths_absent": true
+}

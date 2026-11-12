@@ -14,6 +14,7 @@ class StructureTests(unittest.TestCase):
         mapped={'top':{'logic':logic},'leaf':{'logic':''}}
         report="\n".join("Warning: In design 'top', net '%s' driven by pin '%s/out' has no loads. (LINT-2)"%
             pair for pair in [('n0','u0'),('n1','bank[1].u1')])
+        report+='\n  Unloaded nets (LINT-2)                         2\n'
         ports=[dict(design='leaf',port='out',warning='LINT-8',disposition='declaration_only')]
         result=no_load_drivers(report,mapped,ports)
         self.assertTrue(result['matches_declaration_only_unloaded_ports'])

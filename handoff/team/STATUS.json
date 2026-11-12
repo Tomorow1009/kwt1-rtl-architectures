@@ -2668,7 +2668,7 @@
     "mmio8_power_ops_evidence": "handoff/team/evidence/MMIO8_POWER_OPS_PREPARED_20261111.json"
   },
   "systolic_b_execution": {
-    "status": "v3_synth02_complete_validation02_entry_failed_tool_fix_local",
+    "status": "v3_sequence_contention_timing_diagnostics_passed_gate14_running_SAIF_probe_failed",
     "h0": "2026-11-11T19:30:41+08:00",
     "freeze": "2026-11-12T09:30:41+08:00",
     "functional_convergence": "2026-11-12T08:00:00+08:00",
@@ -2683,7 +2683,7 @@
     "new_gate_verified": false,
     "new_ppa_verified": false,
     "new_final1200_verified": false,
-    "next": "Commit/package tool fixes, deploy new immutable bundle, start unique validation03 against completed8d synth02. No resynthesis. Retain failedvalidation02. Review new actual results before final1200.",
+    "next": "Keep original validation03/gate14 running. Review actual timing and structure. Fix SAIF timescale compatibility using installed docs and isolated diagnostics. Final1200 still not started. No resynthesis or repeat cleanup.",
     "array_local_summary": "local_runs/systolic_array_20261111_193632_505682/summary.json",
     "local_evidence": "handoff/team/evidence/SYSTOLIC_B_LOCAL_20261111.json",
     "vnc_transfer_completed_user_confirmed": true,
@@ -2703,8 +2703,8 @@
         183038,
         192693
       ],
-      "monitor_time": "2026-11-12T10:09:41+08:00",
-      "monitor_free_GiB": 180.6171875
+      "monitor_time": "2026-11-12T12:18:29+08:00",
+      "monitor_free_GiB": 232.6357421875
     },
     "local_nominal_12layer": {
       "cycles": 36862,
@@ -2769,7 +2769,7 @@
     "paused_at": "2026-11-11T21:52:00+08:00",
     "desktop_clients_closed": false,
     "local_relays_stopped": false,
-    "cloud_commit": "b79e1f52504f123505ab408df018c9e0a8d2b4d5",
+    "cloud_commit": "ced0e139a01ee810ea4f98e43cd703ff6fccf2f0",
     "v3_package": {
       "name": "light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
       "bytes": 11197550,
@@ -2834,18 +2834,23 @@
       "evidence": "handoff/team/evidence/SYSTOLIC_B_V3_LATENCY2_20261112.json"
     },
     "validation_queue": {
-      "pid": null,
-      "session": "systolic_b_v3_validation02_queue",
-      "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
-      "observed": "2026-11-12T11:39:06+08:00",
-      "status": "failed",
-      "completed": [],
-      "optional_failures": [],
+      "pid": 102905,
+      "session": "systolic_b_v3_validation03_queue",
+      "bundle": "light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+      "observed": "2026-11-12T12:18:29+08:00",
+      "status": "running",
+      "completed": [
+        "systolic_b_sequence",
+        "systolic_b_contention",
+        "systolic_b_timing_audit"
+      ],
+      "optional_failures": [
+        "systolic_b_saif_probe: SAIF_REGION_INVALID_TIMESCALE at -tres 1ps"
+      ],
       "final1200_started": false,
-      "prior_failed_queue_preserved": "systolic_b_v3_validation01_queue",
-      "failed_stage": "systolic_b_sequence",
-      "error": "Sequence cases must exactly match firmware A/B order",
-      "simulation_started": false
+      "prior_failed_queue_preserved": "systolic_b_v3_validation02_queue",
+      "stage": "systolic_b_gate",
+      "child_pid": 117191
     },
     "v3_validation_package_evidence": "handoff/team/evidence/SYSTOLIC_B_VALIDATION_PACKAGE_20261112.json",
     "asic14_metrics_evidence": "handoff/team/evidence/SYSTOLIC_B_ASIC14_METRICS_20261112.json",
@@ -2892,8 +2897,10 @@
       "sequence_manifest_case_selection": true,
       "structural_named_port_parser": true,
       "targeted_tests_passed": 5,
-      "deployed": false,
-      "hardware_changed": false
-    }
+      "deployed": true,
+      "hardware_changed": false,
+      "structural_summary_table_followup_deployed": false
+    },
+    "second_cleanup_evidence": "handoff/team/evidence/SERVER_WAVE_CLEANUP_SECOND_20261112.json"
   }
 }

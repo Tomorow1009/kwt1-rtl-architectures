@@ -23,7 +23,8 @@ def no_load_drivers(text,mapped,ports):
         instances[name]=values
     rows=[]
     for line in text.splitlines():
-        if '(LINT-2)' not in line:continue
+        # check_design also repeats the code in its final count table.
+        if not line.startswith('Warning:') or '(LINT-2)' not in line:continue
         match=re.fullmatch(r"Warning: In design '([^']+)', net '(.*?)' driven by pin '(.*?)' has no loads\. \(LINT-2\)",line)
         require(match is not None,'Unreviewed LINT-2 format')
         design,net,pin=match.groups();target=design
