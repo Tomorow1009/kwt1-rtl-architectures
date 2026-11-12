@@ -1,0 +1,65 @@
+{
+  "schema": "systolic-b-scoped-inventory-v1",
+  "observed": "2026-11-12T16:25:14+08:00",
+  "synthesis_summary_sha256": "b81780033ef65998c43a874b559e54da0d958524a040eff374b1e8f1a4824ced",
+  "timing_diagnostic_summary_sha256": "bfd0007c4846649c7f3ea018a5dbad480e10f8c406f309c3089b016d0c7da3b6",
+  "structural_inventory_sha256": "12f843804ca02d61ae5f260e30c556c1fe0cf89c2d98586ae6acbdb219ec73fd",
+  "mapped_sdc_sha256": "434c30c3036ac7403e7cd18dc1f3a27e6b6b83975a3f9a8a3c97461c60623cf5",
+  "high_fanout_threshold": 1000,
+  "high_fanout_nets": [
+    "u_e203_subsys_top/core_csr_clk",
+    "u_e203_subsys_top/hfclk",
+    "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+  ],
+  "other_check_timing_warnings": [],
+  "exceptions": {
+    "false_path_source": "lfextclk",
+    "false_path_endpoints": "Four original tim0..3 u_in_stage/r_ls_clk_sync_reg[0]/D first synchronizer stages",
+    "multicycle_paths": false,
+    "clock_groups": false,
+    "user_set_disable_timing": false,
+    "SysMem_false_paths": false
+  },
+  "structure": {
+    "modules": 2222,
+    "declaration_only_warned_ports": 13040,
+    "no_load_driver_ports": 244,
+    "no_load_matches_unused_ports": true,
+    "unresolved_no_load": 0,
+    "warning_counts": {"LINT-1": 4, "LINT-2": 244, "LINT-8": 244, "LINT-28": 12796, "LINT-32": 12048, "LINT-33": 1186},
+    "unused_instances": ["debug ndreset_dfflr", "debug fullreset_dfflr", "AON u_aon_porrst", "PLIC irq0 priority flop"],
+    "remaining_warning_kinds": "constant-connected pins and shared-net inputs; preserve full reports and require same-netlist functional gate14"
+  },
+  "area": {
+    "unit": "um^2",
+    "leaf_instances": 416529,
+    "whole_reported": 4621311.195906,
+    "conservative_project_upper_mm2": 1.099094695900963,
+    "groups": {
+      "accelerator": {"standard_area": 689338.2552, "standard_count": 336489, "sram_area": 246288.6943, "sram_count": 92},
+      "dma_arbiter": {"standard_area": 293.664, "standard_count": 181, "sram_area": 0, "sram_count": 0},
+      "dma_router": {"standard_area": 276.108, "standard_count": 212, "sram_area": 0, "sram_count": 0},
+      "dtcm": {"standard_area": 849.3912, "standard_count": 643, "sram_area": 880554.12499, "sram_count": 32},
+      "itcm": {"standard_area": 1108.2624, "standard_count": 636, "sram_area": 880554.12499, "sram_count": 32},
+      "platform_other": {"standard_area": 158814.4488, "standard_count": 72053, "sram_area": 0, "sram_count": 0},
+      "shared": {"standard_area": 2125.872, "standard_count": 1512, "sram_area": 1761108.24998, "sram_count": 64}
+    },
+    "group_values_display_rounded": true,
+    "bound_includes_all_standard_cells": true,
+    "excluded_only_reused_SRAM_macros": 128,
+    "library_geometry_proof": "same pinned standard and SRAM library hashes, independent current instance inventory"
+  },
+  "SysMem": {"groups": 10, "bits": 106, "input_bits": 35, "output_bits": 71, "clock": "hf_clk", "max_delay_ns": 1, "min_delay_ns": 0, "input_transition_ns": 0.1, "output_load_library_units": 0.01, "external_receiver_specification_verified": false},
+  "exact_DC_period_ns": "6.666666",
+  "serialized_original_sdc_period_ns": "6.66667",
+  "new_B_power_requires_separate_precise_sdc": true,
+  "same_netlist_gate14_status_at_observation": "running",
+  "eligible_for_final1200": false,
+  "system_power_verified": false,
+  "official_area_attribution_confirmed": false,
+  "physical_signoff": false,
+  "notes": [
+    "Inventory is separate from final freeze approval and does not import old gate PASS.",
+    "Setup and hold are very small positive synthesis margins under declared task mode; not a physical margin claim."
+  ]
+}
