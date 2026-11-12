@@ -56,3 +56,26 @@ PYTHONPATH=<现41b包>/workspaces/arch03/scripts python3 -B <新独立ops>/b0_sa
 后继已准备两条不足1000字符且本地Python3.6语法检查通过的只读查询：将全部64宏按五类控制pin表达式分组；将全部64adapter移除宏实例后的完整逻辑分组，作为控制锥的保守超集。只输出前八组及每组全文长度；显示截断不当完整证据。bank状态另需在实际cell实例/选择锥追溯，不修改RTL或启动EDA。
 
 04:24:49全部64macro表达式分组已完成（亲读`b0_macro_groups_0425.png`）：63个为上述接线，1个GWEN=n3、WEN高8=n5/低8=n4；CEN=n2、CLK=clk、RET1N=1'b1均相同。网名差异尚不说明功能差异。该结果明确给出全部64 shared宏RET1N常量1、CLK直连各自adapter clk；结合已选adapter clk有记录且unknown0，可解释这两类引脚的已知性。CEN/GWEN/WEN仍待完整adapter逻辑及真实库function核对；1280宏引脚原本未记录这一事实不改写，也不因此批准系统功耗。
+
+04:50:08 adapter完整逻辑查询完成（亲读`b0_adapter_logic_result_0451.png`）：全部64分成33/30/1三组，每组226字符全部显示，各只有5个INV2_12TR40/NAND2CV2_12TR40组合门。宏控制端口的已知性可在实际Liberty function确认后按已知cs/we/mask进行逻辑推导，但当前不凭单元名字认定取反/NAND语义。若实际function符合预期，三组的n编号或语句顺序不改变同一控制布尔关系；该条件式不作为已验结论。
+
+已保存固定只读Liberty查询`E:/fpga_race-two/takeover_local/b0_adapter_liberty_query.txt`，970字符/971B，SHA f66a5994b64396bb40228e14fdc092ab68e83fdce33eac68cd9d81d9cbaefbd6。从原synthesis summary的link_report.library_inputs按已绑定标准库SHA 5d236b1571f5bc791895328fa3f6f94e3873e985ee7963b9ac5e3e849b48949f唯一定位并核完整文件，再只读两种cell的pin/direction/function。ASCII、shell引号、Python3.6语法及合成字段提取fixture已核；尚无该查询实际服务器结果，未运行PT/EDA。
+
+## 04:55–04:57实际映射与Liberty补证
+
+根代理执行后，本代理亲读`takeover_local/b0_bank_state_result_0456.png`及`b0_adapter_liberty_0457.png`。04:55:19实际网表共有8条含bank_q/read_pending的语句：5个`DRNQV2_12TR40 bank_q_reg[4:0]`保留，Q分别连接N9至N5，D分别n72至n76，CK=clk、RDN=n792；`read_pending_reg`同类触发器D=n1082、Q=read_pending、CK=clk、RDN=n792。其余为含read_pending的NOR2V2与AOI211V2逻辑。因此旧bank_q网名缺失是映射改名，不能说寄存器消失或恒0；N5至N9的实际驻留、状态选择/数据消费仍需追溯。
+
+04:56:35实际标准Liberty完整SHA核对通过，仍为`5d236b1571f5bc791895328fa3f6f94e3873e985ee7963b9ac5e3e849b48949f`。实际pin定义为：INV2_12TR40的I=input、ZN=output、function=`(!I)`；NAND2CV2_12TR40的A1/A2=input、ZN=output、function=`(!(A1&A2))`。结合全部64适配器的完整五门逻辑及宏控制接线，三种文本组归为同一实际关系：
+
+```text
+CEN = !cs
+GWEN = !(cs & we)
+WEN[15:8] = !(mask[1] & cs & we)
+WEN[7:0]  = !(mask[0] & cs & we)
+CLK = adapter.clk
+RET1N = 1'b1
+```
+
+这些是实际映射及实际库函数的组合推导，不再依据单元名称猜测。L01原控制probe已记录全部64适配器的clk/cs/we/mask且TX/TZ均0，故可确认这64个shared宏上述控制输入在该窗口的已知性。原SAIF未记录1280个宏leaf pin这一事实保持不变；本结论不是直接leaf活动注释证明，也不恢复联合时序、读写事件数或毛刺波形。未读取的其他11层控制驻留不能继承L01结论。
+
+系统功耗仍未验收。N5至N9真实bank状态、未知bank_data/N*如何被实际read mux消费、AON与其余有负载未知锥，以及未知活动的功耗影响仍需独立闭合。下一最小查询优先从已有L01未知gzip按完整shared scope精确读取N5至N9及read_pending：清单包含者返回实际驻留，清单不含只能表述“未知清单无此声明”，不能冒充已得到T0/T1或宣布常量，不重扫原SAIF。

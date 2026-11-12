@@ -1,0 +1,62 @@
+{
+  "schema": "arch03-n1-process-ledger-fix-local-evidence-v1",
+  "status": "local_checks_passed_independent_review_complete",
+  "scope": "N1 operation reliability only; no production RTL or acceptance requirement change",
+  "cause": "Legacy common.call started a child before updating shared owner.tmp; ENOSPC during that update could escape without waiting for the accepted child",
+  "files_sha256_git_lf": {
+    "workspaces/arch03/scripts/n1_process.py": "69c0b9396449fde7048e88ec5c58d36770422c9fb24871728988eb8d429eed93",
+    "workspaces/arch03/scripts/n1_server.py": "1367c37b18cbb3041be5efef8d86e06eab6075768cfa65f9b35c38551a6877bb",
+    "workspaces/arch03/scripts/test_n1_process.py": "96165c785c87bf828f0b668999c6a46c116d9e08fe2f45f05787b2e4f9ed6fb3",
+    "workspaces/arch03/scripts/test_n1_paths.py": "92a8695018ccfa03976d6d6f3792ec614dc83beefdf95e45a2d1808fea514588"
+  },
+  "unchanged_files_sha256": {
+    "workspaces/arch03/scripts/server_run.py": "111ef598ac0da3b78b76b489b8d30806809d1bb52d1b5249b6bf052c64e1f4b4",
+    "workspaces/arch03/scripts/n1_paths.py": "fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d"
+  },
+  "test_environment": {
+    "python": "3.8.20 (MSC v.1929 64 bit AMD64)",
+    "platform": "Windows local disposable fixtures",
+    "real_small_subprocesses_used": true,
+    "storage_faults_injected": true,
+    "linux_runtime_permissions_are_fixture_simulated": true,
+    "python36_ast_grammar_checked": true,
+    "python36_interpreter_execution_claimed": false
+  },
+  "history": [
+    {"suite": "initial process checks", "tests": 17, "status": "passed", "seconds": 2.024},
+    {"suite": "process checks with log-close and main integration", "tests": 21, "status": "passed", "seconds": 2.756},
+    {"suite": "existing runtime plus three main checks before fixture adaptation", "tests": 14, "passed": 13, "errors": 1,
+     "reason": "Old runtime fixture omitted newly required n1_process dependency; production manifest guard correctly rejected it"},
+    {"suite": "final process and runtime checks", "tests": 32, "status": "passed", "seconds": 6.193, "exit_code": 0}
+  ],
+  "final_command": "E:/fpga_race-two/.venv-kwt/Scripts/python.exe -B -m unittest test_n1_process test_n1_paths -v",
+  "working_directory": "E:/fpga_race-two/kwt1-rtl-architectures/workspaces/arch03/scripts",
+  "final_output_basis": "Observed exec chunk ac623e: Ran 32 tests in 6.193s; OK; exit 0",
+  "independent_review": {
+    "reviewer": "/root/n1_rtl_audit",
+    "mode": "read-only source and fixture review; no duplicate test run",
+    "final_status": "no_blocking_findings",
+    "latest_fixture_change_reviewed": true
+  },
+  "invariants": {
+    "original_shared_team_lock_remains_unique": true,
+    "shared_owner_written_once_per_acquisition": true,
+    "owner_binds_driver_host_bundle_session_token_and_private_ledger": true,
+    "private_intent_before_spawn": true,
+    "accepted_child_waited_before_exception_or_release": true,
+    "common_active_child_kept_until_reaped": true,
+    "foreign_or_partial_owner_not_auto_removed": true,
+    "new_dependency_required_in_frozen_manifest": true,
+    "old_failed_batch_not_promoted_or_resumed_as_pass": true
+  },
+  "server_deployed": false,
+  "server_retested": false,
+  "hardware_revalidated_by_this_check": false,
+  "next_hardware_stage_allowed_by_this_check": false,
+  "limitations": [
+    "SIGKILL, power loss and default OS termination cannot guarantee Python finally; retained lock and ledger require explicit reviewed recovery",
+    "The ledger describes directly accepted subprocesses, not proof of absence of unrelated or detached jobs",
+    "A persistently unwritable private ledger remains a failed stage even when its child eventually exits successfully",
+    "Initial incomplete owner metadata is intentionally preserved for manual review, not automatically treated as a stale lock"
+  ]
+}

@@ -9,6 +9,8 @@ import shutil
 import socket
 import server_run as common
 import n1_paths
+import n1_process
+from n1_process import ProcessLedger
 
 
 def main():
@@ -64,7 +66,12 @@ def main():
             raise ValueError('Unexpected %s selection for stage' % selected)
     if a.stage == 'power' and len(a.cases) != 1:
         raise ValueError('Each N1 power stage covers exactly one fixed performance task')
-    common.inputs()
+    packaged = common.inputs()
+    process_relative = 'workspaces/arch03/scripts/n1_process.py'
+    process_file = common.ROOT/process_relative
+    if (Path(n1_process.__file__).resolve() != process_file.resolve() or
+            packaged['files'].get(process_relative) != common.sha(process_file)):
+        raise ValueError('N1 process ledger dependency is absent or differs from this frozen bundle')
     n1_paths.recheck(cfg)
     # Per-stage budget, 20% growth margin plus 2 GiB shared-server reserve.
     # The 1200-task runner additionally budgets all remaining case artifacts.
@@ -73,10 +80,8 @@ def main():
     free_bytes = shutil.disk_usage(str(common.ROOT)).free
     if free_bytes < required_bytes:
         raise ValueError('Insufficient stage space: free=%d required=%d' % (free_bytes, required_bytes))
-    lock.mkdir()  # Never clear, steal, or infer ownership of a pre-existing lock.
-    common.LOCK = lock
-    owner = dict(pid=os.getpid(), host=socket.gethostname(), bundle=str(common.ROOT), session=a.session)
-    common.save(lock/'owner.json', owner)
+    processes = ProcessLedger(common,lock,session)
+    processes.acquire()  # Initial owner only; later child updates are stage-local.
     try:
         stage_name = 'n1_' + a.stage
         run = session/stage_name
@@ -84,6 +89,7 @@ def main():
         if cfg.get('runtime_roots'):
             n1_paths.allowed_run(run,cfg,'N1 output')
             common.save(run/'runtime_storage_receipt.json',n1_paths.receipt(cfg))
+        processes.initialize()
         common.save(run/'storage_preflight.json',dict(free_bytes=free_bytes,required_bytes=required_bytes,estimated_stage_bytes=expected_gib*1024**3,margin=1.2,reserve_bytes=2*1024**3))
         record = dict(status='running', pid=os.getpid(), started=datetime.datetime.now().isoformat(), run=str(run))
         state = dict(schema='arch03-n1-server-state-v1', stages={stage_name: record})
@@ -91,39 +97,39 @@ def main():
         try:
             if a.stage in ('soc', 'build'):
                 from n1_soc import verify
-                report = verify(cfg, run, a.platform, a.cases, common.call, firmware=a.firmware_root, compile_only=a.stage == 'build')
+                report = verify(cfg, run, a.platform, a.cases, processes.call, firmware=a.firmware_root, compile_only=a.stage == 'build')
             elif a.stage == 'contention':
                 from n1_contention import verify
-                report = verify(cfg, run, a.platform, a.cases, common.call, a.firmware_root)
+                report = verify(cfg, run, a.platform, a.cases, processes.call, a.firmware_root)
             elif a.stage == 'sequence':
                 from n1_sequence_soc import verify
-                report = verify(cfg, run, a.platform, a.cases, common.call, a.firmware_root)
+                report = verify(cfg, run, a.platform, a.cases, processes.call, a.firmware_root)
             elif a.stage == 'batch':
                 from n1_batch import verify
-                report = verify(cfg, run, a.platform, a.dataset, common.call)
+                report = verify(cfg, run, a.platform, a.dataset, processes.call)
             elif a.stage == 'gate':
                 from n1_gate import verify
-                report = verify(cfg, run, a.synth_run, a.synth_summary_sha256, a.cases, common.call, (), a.firmware_root)
+                report = verify(cfg, run, a.synth_run, a.synth_summary_sha256, a.cases, processes.call, (), a.firmware_root)
             elif a.stage == 'timing_audit':
                 from n1_timing_audit import audit
-                report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, common.call)
+                report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, processes.call)
             elif a.stage == 'drc_audit':
                 from n1_drc_audit import audit
-                report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, common.call)
+                report = audit(cfg, run, a.synth_run, a.synth_summary_sha256, processes.call)
             elif a.stage == 'structure':
                 from n1_structure import audit
                 n1_paths.allowed_run(a.synth_run,cfg,'N1 structural synthesis')
                 report = audit(a.synth_run,a.synth_summary_sha256)
             elif a.stage == 'saif':
                 from n1_saif import verify
-                report = verify(cfg, run, a.gate_run, a.gate_summary_sha256, a.saif_qualification_run, a.saif_qualification_sha256, a.cases, common.call)
+                report = verify(cfg, run, a.gate_run, a.gate_summary_sha256, a.saif_qualification_run, a.saif_qualification_sha256, a.cases, processes.call)
             elif a.stage == 'power':
                 from n1_power import estimate
-                report = estimate(cfg, run, a.saif_activity_run, a.saif_activity_sha256, a.cases[0], common.call)
+                report = estimate(cfg, run, a.saif_activity_run, a.saif_activity_sha256, a.cases[0], processes.call)
             else:
                 from n1_synth import synth
                 common.vendor(cfg, run)
-                report = synth(cfg, run, a.platform, common.call)
+                report = synth(cfg, run, a.platform, processes.call)
             common.inputs()
             n1_paths.recheck(cfg)
             if cfg.get('runtime_roots'):
@@ -139,10 +145,7 @@ def main():
             common.save(session/'state.json', state)
         print('ARCH03_N1_STAGE_PASS', a.stage, run, flush=True)
     finally:
-        current = json.loads((lock/'owner.json').read_text())
-        if (common.ACTIVE_CHILD is None or common.ACTIVE_CHILD.poll() is not None) and all(current.get(k) == owner[k] for k in ('pid', 'host', 'bundle', 'session')):
-            (lock/'owner.json').unlink()
-            lock.rmdir()
+        processes.release()
 
 
 if __name__ == '__main__':

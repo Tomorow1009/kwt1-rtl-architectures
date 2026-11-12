@@ -1,5 +1,14 @@
 # N1 综合完成后的持续执行检查点（2026-11-13 04:30）
 
+## 04:48重要失败增量（优先于所有running记录）
+
+- **batch100_01已失败，不能再当running。** state实际finished04:41:07.153847，error共享`.arch02_team_lock/owner.tmp` ENOSPC；04:46读取确认。成功前缀65任务/1647360输出及total，progress残留running/failed0不代表全批通过。elapsed403.6619004928507s，原估计剩余含20%=8458.269361096347s，仅供重新预算，不作完成保证。
+- 真实原因：旧server_run.call先Popen，再用共享owner.tmp更新child_pid；共享盘被写满后此写失败，使driver没wait新子进程，finally因此保留锁。当前requirements_plan_audit代理仅修改N1工具，新增n1_process.py/测试及n1_server接入，计划sharedowner仅初始一次写/后续private ledger/任何Popen后异常都wait后报错；不改旧server_run、RTL或测试数据。必须测试独立审核、冻结新包后才启动新的完整batch02。
+- 04:46:26同用户ps命令含n1_batch100_01无进程；04:47:38精确275224/287728也不存在。第66任务sample_006_layer_06已运行到$finish/VCS退出04:41:10，task.csv494718B，但无正式receipt，不能算第66已验。原driver失败记录/65PASS/66原始输出全部保留。
+- 残留原锁仅owner.json350B，SHA`d97bf037dfd2499137292f6f13e37dfbc4586e99374ee7845efa398bec51fa9d`；owner pid275224/hostRDserver04/OPS/sessionn1_batch100_01/child_pid287728/logsample_006_layer_05。root已核是本作业自己留下的锁，**尚未释放**。正在准备经人工核验后保存owner/state/进程回执、再次确认所有相关进程已退，才释放自身锁；不能通用自动清锁或删除他人锁。
+- 04:41/04:42/04:43三条实际mapped检查各80/failed0：乘法A14/B12/TC1/PRODUCTproduct、product[25:0]与accumulator[31:0]、每PE实际accumulator_reg索引恰0..31且无重漏；寄存器refs DRNQV0_12TR40/DRNQV2_12TR40。n1_rtl_audit代理正保存独立证据及必要sum/bias33连接补查，不把宽度静态证明当功能PASS。
+- 最新GitHub已push且ls-remote确认`07ce5e1358fe56fa1a886372af745bb56a37aea8`，受测RTL9305没改。此失败增量在同步后新增，下一次需同步。B0宏控制两份ASCII查询已准备但未执行，SAIF不重扫。VNC3空闲shared9305cwd，无待输入/Return/session；FileZilla关闭。
+
 ## 04:32执行增量（优先于下文待执行描述）
 
 ### 04:39只读增量

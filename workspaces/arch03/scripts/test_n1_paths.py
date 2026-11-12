@@ -135,6 +135,12 @@ class RuntimePathTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'registration identity'):paths.recheck(cfg)
 
     def test_new_runtime_runner_uses_the_original_single_lock(self):
+        process_relative='workspaces/arch03/scripts/n1_process.py'
+        process_file=self.ops/process_relative
+        process_file.write_bytes(Path(runner.n1_process.__file__).read_bytes())
+        manifest=json.loads((self.ops/'manifest.json').read_text())
+        manifest['files'][process_relative]=paths.digest(process_file)
+        (self.ops/'manifest.json').write_text(json.dumps(manifest))
         evidence_digest=paths.digest(self.base/'manifest.json')
         argv=['n1_server.py','soc','--session','runtime_fixture','--runtime-root',str(self.private),
             '--runtime-manifest-sha256',paths.digest(self.ops/'manifest.json'),
@@ -143,10 +149,13 @@ class RuntimePathTests(unittest.TestCase):
             self.assertEqual(cfg['server_root'],str(self.shared))
             self.assertEqual(len(cfg['runtime_roots']),2)
             self.assertTrue((self.shared/'.arch02_team_lock/owner.json').is_file())
+            owner=json.loads((self.shared/'.arch02_team_lock/owner.json').read_text())
+            self.assertEqual(owner['child_ledger'],str(run.parent/'process_ledger'))
             self.assertFalse((self.private/'.arch02_team_lock').exists())
             self.assertTrue((run/'runtime_storage_receipt.json').is_file())
             return dict(status='fixture_only',cpu_executed=False)
         with patch.object(runner.common,'ROOT',self.ops),patch.object(runner.common,'ACTIVE_CHILD',None), \
+             patch.object(runner.n1_process,'__file__',str(process_file)), \
              patch.object(sys,'argv',argv),patch.dict(sys.modules,{'n1_soc':types.SimpleNamespace(verify=verify)}), \
              patch.object(runner.shutil,'disk_usage',return_value=types.SimpleNamespace(free=40*1024**3)):
             runner.main()

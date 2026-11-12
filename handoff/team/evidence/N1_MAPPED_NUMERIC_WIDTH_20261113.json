@@ -1,0 +1,128 @@
+{
+  "schema": "n1-mapped-numeric-width-readonly-evidence-v1",
+  "date": "2026-11-13",
+  "status": "scoped_mapped_width_checks_passed_remaining_cones_require_review",
+  "production_rtl_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "synthesis_summary_sha256": "cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31",
+  "mapped_verilog_sha256": "59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e",
+  "structure_summary_sha256": "95a3bde42e44fe1aabcbb0b450a683acbfc3d5b298a423b4607daab0a7158652",
+  "synthesis_run": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth",
+  "structure_run": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_022722-41b0846ce719/runs/n1_structure03/n1_structure",
+  "observation_method": "Independent visual read of parent-captured server screenshots; commands and immutable target SHA included. No child remote execution.",
+  "structural_boundary_context": {
+    "reachable_counts": {
+      "pe": 80,
+      "array": 1,
+      "requantize": 80
+    },
+    "mapped_sum_bits": 32,
+    "mapped_total_bits": 33,
+    "numeric_module_definitions": 161,
+    "pe_definitions": 80,
+    "unique_pe_body_hashes": 80,
+    "definition_instance_bijection_independently_checked": false,
+    "numeric_function_verified": false
+  },
+  "checks": [
+    {
+      "id": "actual_signed_multiplier_connections",
+      "checked_pe_definitions": 80,
+      "failed": 0,
+      "first3_failures": [],
+      "contract": {
+        "direct_DW02_mult_instances_per_PE": 1,
+        "A": "x_in[13:0]",
+        "B": "w_in[11:0]",
+        "TC": "1'b1",
+        "PRODUCT": "product"
+      },
+      "observed_server_time": "2026-11-13T04:41:22+08:00",
+      "query_local_file": "takeover_local/n1_mapped_query4.txt",
+      "query_file_sha256": "e0fc3d3fefb2a94c4d58371d558479a7e03688b5abadc87079d50cfbf592c2f8",
+      "query": "python3 -B -c 'from pathlib import Path;import re,json,hashlib;p=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth/mapped.v\");b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==\"59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e\";a={k:v for k,v in re.findall(r\"(?ms)^\\s*module\\s+(\\S+)\\s*\\(.*?\\);(.*?)^\\s*endmodule\\b\",b.decode()) if k.startswith(\"arch03_n1_systolic_pe\") and \"_DW\" not in k};assert len(a)==80,(\"PE_COUNT\",len(a));f=lambda v:[re.sub(r\"\\s+\",\"\",c) for r,i,c in re.findall(r\"(?ms)^\\s*(\\S+)\\s+(\\S+)\\s*\\((.*?)\\);\",v) if \"_DW02_mult\" in r];e=\".A(x_in[13:0]),.B(w_in[11:0]),.TC(1\"+chr(39)+\"b1),.PRODUCT(product)\";bad=[(k,f(v)) for k,v in a.items() if f(v)!=[e]];print(json.dumps(dict(checked=len(a),failed=len(bad),first3=bad[:3],numeric_function_verified=False),sort_keys=True))'",
+      "screenshot_local_file": "takeover_local/n1_mapped_query4_0442.png",
+      "screenshot_sha256": "3440bc9d9d38c5874265f013705743803bc7801ca99ef551adbbfad5f09f94b6"
+    },
+    {
+      "id": "product_and_accumulator_declarations",
+      "checked_pe_definitions": 80,
+      "failed": 0,
+      "first3_failures": [],
+      "contract": {
+        "product": "wire [25:0]",
+        "accumulator": "wire [31:0]",
+        "each_declaration_count": 1
+      },
+      "observed_server_time": "2026-11-13T04:42:24+08:00",
+      "query_local_file": "takeover_local/n1_mapped_query5.txt",
+      "query_file_sha256": "209a5df79c657ba5d0662c54aa63227a95caef51e49137857eb36d9ddaa04ddc",
+      "query": "python3 -B -c 'from pathlib import Path;import re,json,hashlib;p=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth/mapped.v\");b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==\"59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e\";a={k:v for k,v in re.findall(r\"(?ms)^\\s*module\\s+(\\S+)\\s*\\(.*?\\);(.*?)^\\s*endmodule\\b\",b.decode()) if k.startswith(\"arch03_n1_systolic_pe\") and \"_DW\" not in k};assert len(a)==80,(\"PE_COUNT\",len(a));f=lambda v,n:re.findall(r\"\\bwire\\s+\\[\\s*(\\d+)\\s*:\\s*(\\d+)\\s*\\]\\s+\"+n+r\"\\s*;\",v);bad=[(k,f(v,\"product\"),f(v,\"accumulator\")) for k,v in a.items() if f(v,\"product\")!=[(\"25\",\"0\")] or f(v,\"accumulator\")!=[(\"31\",\"0\")]];print(json.dumps(dict(checked=len(a),failed=len(bad),first3=bad[:3],numeric_function_verified=False),sort_keys=True))'",
+      "screenshot_local_file": "takeover_local/n1_mapped_query5_0443.png",
+      "screenshot_sha256": "9d2016c801cd92b0d114cbc7baa42369cb4f888ec59a27bd2b0eaa73919a3d3c"
+    },
+    {
+      "id": "actual_accumulator_register_indices",
+      "checked_pe_definitions": 80,
+      "failed": 0,
+      "first3_failures": [],
+      "contract": {
+        "per_PE_sorted_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "missing_or_duplicate_indices": 0
+      },
+      "actual_reference_types": [
+        "DRNQV0_12TR40",
+        "DRNQV2_12TR40"
+      ],
+      "observed_server_time": "2026-11-13T04:43:12+08:00",
+      "query_local_file": "takeover_local/n1_mapped_query6.txt",
+      "query_file_sha256": "4727ef8c24adcb46ed7feae2e16eae0b468b933adf2bf51e0b22a2934af53d6a",
+      "query": "python3 -B -c 'from pathlib import Path;import re,json,hashlib;p=Path(\"/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth/mapped.v\");b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==\"59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e\";a={k:v for k,v in re.findall(r\"(?ms)^\\s*module\\s+(\\S+)\\s*\\(.*?\\);(.*?)^\\s*endmodule\\b\",b.decode()) if k.startswith(\"arch03_n1_systolic_pe\") and \"_DW\" not in k};assert len(a)==80,(\"PE_COUNT\",len(a));f=lambda v:re.findall(r\"(?m)^\\s*(\\S+)\\s+\\\\?accumulator_reg\\[(\\d+)\\]\\s*\\(\",v);bad=[(k,sorted(int(n) for r,n in f(v))) for k,v in a.items() if sorted(int(n) for r,n in f(v))!=list(range(32))];print(json.dumps(dict(checked=len(a),failed=len(bad),first3=bad[:3],refs=sorted({r for v in a.values() for r,n in f(v)}),numeric_function_verified=False),sort_keys=True))'",
+      "screenshot_local_file": "takeover_local/n1_mapped_query6_0444.png",
+      "screenshot_sha256": "30091406776d46d5456cc2703972ddee63aca0c0348916e4e7cf05be692ac248"
+    }
+  ],
+  "limitations": {
+    "full80_formal_DW_ports_independently_checked": false,
+    "product_sign_extension_into_actual_adder_checked": false,
+    "sum_bias32_to_total33_actual_cone_checked": false,
+    "accumulator_D_Q_and_enable_cone_checked": false,
+    "lint32_33_waiver_granted": false,
+    "numeric_function_verified": false,
+    "full_N1_stage_accepted": false,
+    "timing_or_power_acceptance_granted": false,
+    "note": "First-three previews do not cover every formal arithmetic child. Mapped width checks do not substitute for real RTL total/result/sat and same-netlist gate result/sat verification."
+  }
+}
