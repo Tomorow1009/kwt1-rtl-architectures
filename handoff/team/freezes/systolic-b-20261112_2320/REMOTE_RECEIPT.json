@@ -1,0 +1,15 @@
+{
+  "schema": "arch03-b-server-backup-receipt-v1",
+  "status": "verified",
+  "finished": "2026-11-12T23:53:26.796964",
+  "directory": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/systolic-b-20261112_2320",
+  "manifest_sha256": "443a49be5abd11b5ab8d5c5bef744ae1c6cef5908ffd933041d06e086193aea9",
+  "archive_sha256": "dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50",
+  "archive_bytes": 1261445859,
+  "source_bytes": 7006124866,
+  "verified_files": 63653,
+  "excluded_files": 2467,
+  "source_modified": false,
+  "source_deleted": false,
+  "restore": "Extract to a NEW empty directory. Check every path/size/SHA256 against manifest.json. Vendor libraries and symlink targets are external dependencies."
+}

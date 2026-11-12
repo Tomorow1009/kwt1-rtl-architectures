@@ -1,0 +1,236 @@
+{
+  "schema": "arch03-b-local-freeze-v1",
+  "created": "2026-11-12T23:25:01.563543+08:00",
+  "snapshot_commit": "39a23bb1790f56ad6122fd87ca3500b3b05aa9f0",
+  "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+  "branch": "codex/light-light126/undergrad-d1-numerics",
+  "planned_tag": "arch03-b-backup-20261112-2320",
+  "backup_directory": "E:\\fpga_race-two\\backups\\systolic-b-20261112_2320",
+  "source_worktree_clean_at_capture": true,
+  "packages": [
+    {
+      "path": "packages/light-light126-systolic-b-v2-20261111_200441-e11c317c960b.zip",
+      "bytes": 11172059,
+      "sha256": "fe3c47b4276ccb91bddd084b90e58133cc5b8300e5b45f0871437e6a8bf1330b",
+      "source_commit": "e11c317c960b18fb60ecbaddf9449f2ff00448be",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
+      "bytes": 11197550,
+      "sha256": "3433af44f5f80ec6c3b2d78a2a90accbf16d67dcd1312af981ef4045f391d0f2",
+      "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_011055-c4d8cf0f338f.zip",
+      "bytes": 11357606,
+      "sha256": "8693e18fdc255676ec049728845d3068b5baf282cb9b12e24f5df229f6ab17e1",
+      "source_commit": "c4d8cf0f338fa3ba7f2aa5e3d4e1a3eeb2bfaf7f",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1.zip",
+      "bytes": 11377937,
+      "sha256": "eff31c13bd682c03db525187db54cbac964eb134e753df216c7ca3dee6f650d9",
+      "source_commit": "35d8ae1b20a1a8ba417e9971c631d50e00173a4e",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_023413-caad8de19f7c.zip",
+      "bytes": 11408516,
+      "sha256": "c9954967656ee51489780766da05df2b5427cf5b10e0dbbd84274a81d08af62c",
+      "source_commit": "caad8de19f7c25f2fb5043f52c0cc165ae778c6c",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_030634-04b5830e86a1.zip",
+      "bytes": 11421995,
+      "sha256": "a625606a3163fd53f75e03382931c57eec906f5d0c040b3096371ca5eae47275",
+      "source_commit": "04b5830e86a1d2414d0f1d6e31df37b2f7ad8b9d",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.zip",
+      "bytes": 11344790,
+      "sha256": "b2d31c9906a3d7f3640581d19fac568682f61e7fa3655fb59df692ed66c7d837",
+      "source_commit": "8d8f26247b7a421bb3cb3ffaad555c8eb3d452ee",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e.zip",
+      "bytes": 11358423,
+      "sha256": "9995decabb854511e5e92e392b8319207f79731681f44cf1c7ed91406d12b579",
+      "source_commit": "ced0e139a01ee810ea4f98e43cd703ff6fccf2f0",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_122414-2b39c6d347b3.zip",
+      "bytes": 11360106,
+      "sha256": "eb47f16b049684172051540467328cc9887d4b8e0fae29302a0e3fc5e4d7562f",
+      "source_commit": "2b39c6d347b33112fc4210ad77bffedbd01bab54",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_124724-62faf496be31.zip",
+      "bytes": 11364003,
+      "sha256": "b9eb6819561e502b092706cbbd25d5128f3b891478b5532d72c3681f07816462",
+      "source_commit": "62faf496be3101dfbff287d299ce74886da417c9",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.zip",
+      "bytes": 11397311,
+      "sha256": "4654aa32bd8d89fc8d58f2228d01cf998c2924924f2817fa3d8fa6be423ba479",
+      "source_commit": "f56b642e28a0c3b18abe906b3ccd169e57e94c72",
+      "scope": "Exact generated package; acceptance must be read from evidence, not inferred from inclusion"
+    }
+  ],
+  "local_generated_directories": 44,
+  "local_generated_files": 3839,
+  "local_generated_uncompressed_bytes": 363650672,
+  "files": [
+    {
+      "path": "bundle-verify.txt",
+      "bytes": 292,
+      "sha256": "f117cceb2f793f765dce85846bce1d1e394c9477310234e4dfa39fff15dd8945"
+    },
+    {
+      "path": "history-39a23bb.bundle",
+      "bytes": 10831984,
+      "sha256": "d59361d90453e35948067229bceef4ebcf227b6a4b75a878ea14edb445f51d16"
+    },
+    {
+      "path": "local-generated-runs.zip",
+      "bytes": 97246833,
+      "sha256": "eb56951cc627139f4e6c89eb34a2c034d57e757c2e1c74d48cd4bb49e32b4d77"
+    },
+    {
+      "path": "LOCAL_GENERATED_FILES.json",
+      "bytes": 845791,
+      "sha256": "368df13e4a8f452ef74cdbf55dbd262e35401aaa3752922077082550904b2291"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v2-20261111_200441-e11c317c960b.receipt.json",
+      "bytes": 347,
+      "sha256": "48cdc6a5ae41b57ee3ba3acf26c01d1f1b7b83dd4595c3bebdcc38b12b54f11f"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v2-20261111_200441-e11c317c960b.zip",
+      "bytes": 11172059,
+      "sha256": "fe3c47b4276ccb91bddd084b90e58133cc5b8300e5b45f0871437e6a8bf1330b"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.receipt.json",
+      "bytes": 347,
+      "sha256": "e2efb7a73da0b317645a0809a5c7bc1df41ca12e1dbbbf49780b9b4894df6606"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261111_211137-63da6ba0d6d9.zip",
+      "bytes": 11197550,
+      "sha256": "3433af44f5f80ec6c3b2d78a2a90accbf16d67dcd1312af981ef4045f391d0f2"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_011055-c4d8cf0f338f.receipt.json",
+      "bytes": 347,
+      "sha256": "6637b3558f64ad3321fd201a2641326cebf50002d0ae3b34df39714fb948d719"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_011055-c4d8cf0f338f.zip",
+      "bytes": 11357606,
+      "sha256": "8693e18fdc255676ec049728845d3068b5baf282cb9b12e24f5df229f6ab17e1"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1.receipt.json",
+      "bytes": 347,
+      "sha256": "36ebc993a4b4128d70a7ade2e4b75cf36e72d56444d889efbe581085510377f8"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_014002-35d8ae1b20a1.zip",
+      "bytes": 11377937,
+      "sha256": "eff31c13bd682c03db525187db54cbac964eb134e753df216c7ca3dee6f650d9"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_023413-caad8de19f7c.receipt.json",
+      "bytes": 347,
+      "sha256": "2b679a93160ce11b81167d64693f865a44e3865ab441a4d2dceb67c74f76de21"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_023413-caad8de19f7c.zip",
+      "bytes": 11408516,
+      "sha256": "c9954967656ee51489780766da05df2b5427cf5b10e0dbbd84274a81d08af62c"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_030634-04b5830e86a1.receipt.json",
+      "bytes": 547,
+      "sha256": "a1008a184b6c4b47df692d1a3c7e9b5cd4b81b5c000e4657bc89787bdb6164c6"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_030634-04b5830e86a1.zip",
+      "bytes": 11421995,
+      "sha256": "a625606a3163fd53f75e03382931c57eec906f5d0c040b3096371ca5eae47275"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.receipt.json",
+      "bytes": 347,
+      "sha256": "42dbd3bf5b14119fbe3410b04cc0efcb3b4a89f1e1848ee62294aa300514a7db"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a.zip",
+      "bytes": 11344790,
+      "sha256": "b2d31c9906a3d7f3640581d19fac568682f61e7fa3655fb59df692ed66c7d837"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e.receipt.json",
+      "bytes": 347,
+      "sha256": "384705c07cc4ac8558c08f6ed494b342881c4ebb3c7fa08215002a9c92fea253"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e.zip",
+      "bytes": 11358423,
+      "sha256": "9995decabb854511e5e92e392b8319207f79731681f44cf1c7ed91406d12b579"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_122414-2b39c6d347b3.receipt.json",
+      "bytes": 347,
+      "sha256": "441d2fbefd5bc540a408d3978ab4372bb9eebaae3c00cfec3478bdd3b98c562b"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_122414-2b39c6d347b3.zip",
+      "bytes": 11360106,
+      "sha256": "eb47f16b049684172051540467328cc9887d4b8e0fae29302a0e3fc5e4d7562f"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_124724-62faf496be31.receipt.json",
+      "bytes": 347,
+      "sha256": "e856c6d8d6c5ff98e5b5d8d8bd565ba6c71a402b73c93e9de8c045c5609cefc8"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_124724-62faf496be31.zip",
+      "bytes": 11364003,
+      "sha256": "b9eb6819561e502b092706cbbd25d5128f3b891478b5532d72c3681f07816462"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.receipt.json",
+      "bytes": 347,
+      "sha256": "73e01bf536805ca447203a318fbe1c1ca1c82db6e2da68ad359272a44e89213f"
+    },
+    {
+      "path": "packages/light-light126-systolic-b-v3-20261112_195820-f56b642e28a0.zip",
+      "bytes": 11397311,
+      "sha256": "4654aa32bd8d89fc8d58f2228d01cf998c2924924f2817fa3d8fa6be423ba479"
+    },
+    {
+      "path": "source-39a23bb.zip",
+      "bytes": 20834627,
+      "sha256": "2695acf32cb1c932dad78a2df058cd7000f7f5160fcbefa740eb21a36e698241"
+    }
+  ],
+  "remote_artifacts_included": false,
+  "notes": [
+    "This is a local same-disk copy; GitHub source/tag sync is recorded separately.",
+    "Historical failures are preserved and do not become PASS.",
+    "Remote netlists, server results and activity are frozen separately.",
+    "No credentials, Git config, chat archive, or vendor library files are copied."
+  ]
+}
