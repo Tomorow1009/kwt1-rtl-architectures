@@ -10,6 +10,26 @@ import t80_resume_evidence as resume
 
 
 class ResumeGuard(unittest.TestCase):
+    def test_new_clone_accepts_only_pinned_activity_tool_changes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source=Path(directory)/'source';target=Path(directory)/'target'
+            name='workspaces/arch03/scripts/t80_window.py'
+            for root,body in ((source,'old'),(target,'fixed')):
+                (root/name).parent.mkdir(parents=True);(root/name).write_text(body)
+                (root/'hardware.sv').write_text('same hardware')
+                files={n:resume.common.sha(root/n) for n in (name,'hardware.sv')}
+                (root/'manifest.json').write_text(json.dumps(dict(files=files)))
+            old=dict(bundle=str(source),bundle_manifest_sha256=resume.common.sha(source/'manifest.json'))
+            req=dict(bundle=str(target),bundle_manifest_sha256=resume.common.sha(target/'manifest.json'))
+            resume.verify_tool_only_clone(old,req)
+            (target/'hardware.sv').write_text('changed hardware')
+            manifest=json.loads((target/'manifest.json').read_text())
+            manifest['files']['hardware.sv']=resume.common.sha(target/'hardware.sv')
+            (target/'manifest.json').write_text(json.dumps(manifest))
+            req['bundle_manifest_sha256']=resume.common.sha(target/'manifest.json')
+            with self.assertRaisesRegex(ValueError,'non-activity source'):
+                resume.verify_tool_only_clone(old,req)
+
     def test_only_terminal_queue_with_exact_completed_gate_prefix(self):
         with tempfile.TemporaryDirectory() as directory:
             q=Path(directory)

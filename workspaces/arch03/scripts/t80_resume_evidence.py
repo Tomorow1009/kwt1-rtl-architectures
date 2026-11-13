@@ -27,6 +27,22 @@ def read(path):return json.loads(Path(path).read_text())
 def pid_present(pid):return Path('/proc/%d'%pid).exists()
 
 
+def verify_tool_only_clone(old,req):
+    if old['bundle_manifest_sha256']==req['bundle_manifest_sha256']:return
+    source=Path(old['bundle']);target=Path(req['bundle'])
+    need(common.sha(source/'manifest.json')==old['bundle_manifest_sha256'],'Original manifest changed')
+    need(common.sha(target/'manifest.json')==req['bundle_manifest_sha256'],'New manifest changed')
+    a=read(source/'manifest.json')['files'];b=read(target/'manifest.json')['files']
+    need(set(a)==set(b),'Tool-only clone changed file set')
+    allowed={'workspaces/arch03/scripts/'+n for n in ('t80_window.py','t80_saif.py','t80_power.py',
+        'native_saif_replay.py','native_saif_activity.py','native_saif_crosscheck.py','icb32_power.py')}
+    changed={n for n in a if a[n]!=b[n]}
+    need(changed and changed<=allowed,'Continuation changed non-activity source')
+    for name in a:
+        need(common.sha(source/name)==a[name] and common.sha(target/name)==b[name],
+             'Tool-only clone file mismatch '+name)
+
+
 def reference(run,stage):
     run=Path(run);row=read(run.parent/'state.json')['stages'][stage]
     digest=common.sha(run/'summary.json')
@@ -41,7 +57,7 @@ def original(req):
     need(s['status']=='failed' and s.get('child_pid') is None,'Original queue must have failed and drained')
     need(not pid_present(s['pid']),'Original queue PID still exists; inspect before continuing')
     old=read(q/'request.json')
-    need(old['bundle_manifest_sha256']==req['bundle_manifest_sha256'],'Runtime clone differs from original')
+    verify_tool_only_clone(old,req)
     expected=['t80_contention','t80_sequence','t80_synth','t80_timing_audit','t80_drc_audit','t80_structure','t80_gate']
     need([r['stage'] for r in s['completed']]==expected,'Only resume immediately after completed gate14')
     for item in s['completed']:

@@ -40,8 +40,8 @@ def identifier(value):
     return re.sub(r'\\(.)',r'\1',value)
 
 
-def audit(path,window):
-    start,end,duration=window_values(window);duration=Decimal(duration)
+def audit(path,window,window_reader=window_values):
+    start,end,duration=window_reader(window);duration=Decimal(duration)
     stats=dict(declarations=0,toggle_count=0,unknown_declarations=0,
         fully_unknown_declarations=0,conditional_records=0,
         T0_ticks=0,T1_ticks=0,TX_ticks=0,TZ_ticks=0,combined_XZ_declarations=0,unknown_ticks=0)

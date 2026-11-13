@@ -7,7 +7,8 @@ import json
 from decimal import Decimal
 from pathlib import Path
 from server_run import sha,save
-from icb32_power import stream_sha,window_values,quiet_absence_checks,collect_reports
+from icb32_power import stream_sha,quiet_absence_checks,collect_reports
+from t80_window import window_values
 import icb32_power as original
 from native_saif_crosscheck import script as native_script,extract_reports as native_extract_reports
 from native_saif_activity import audit
@@ -36,7 +37,7 @@ def extract_reports(run):
 
 
 def script(cfg,synthesis,saif,window,strip_path,precise_sdc):
-    text=native_script(cfg,synthesis,saif,window,strip_path)
+    text=native_script(cfg,synthesis,saif,window,strip_path,window_reader=window_values)
     old=quiet_absence_checks(original.macro_guard())
     if text.count(old)!=1 or text.count('!= 224')!=1:raise ValueError('Original power macro guard changed')
     text=text.replace(old,quiet_absence_checks(macro_guard())).replace('!= 224','!= 220')
@@ -87,7 +88,7 @@ def estimate(cfg,run,activity_run,activity_sha,case,call):
     matches=[row for row in report['cases'] if row['case']==case]
     if len(matches)!=1:raise ValueError('Missing/duplicate N1 activity case')
     row=matches[0];saif=activity_run/row['activity']['file']
-    activity=audit(saif,row['task_window'])
+    activity=audit(saif,row['task_window'],window_reader=window_values)
     if activity!=row['activity']:raise ValueError('N1 SAIF changed since capture')
     # Only this case's large activity needs rereading, while all small scripts,
     # outputs and receipts remain bound by the immutable capture summary.
@@ -101,7 +102,8 @@ def estimate(cfg,run,activity_run,activity_sha,case,call):
     command,environment=power_invocation(cfg,tcl);save(run/'power_environment.json',environment)
     tracked=[tcl,precise_sdc,run/'power_clock_input.json',run/'power_environment.json',synthesis/'mapped.v',synthesis/'mapped.sdc',
         synthesis/'summary.json',activity_run/'summary.json']+power_databases(synthesis)
-    tracked += [Path(__file__).with_name(name) for name in ('t80_power.py','t80_paths.py','t80_saif.py','t80_gate.py')]
+    tracked += [Path(__file__).with_name(name) for name in ('t80_power.py','t80_paths.py','t80_saif.py','t80_gate.py',
+        't80_window.py','native_saif_activity.py','native_saif_crosscheck.py','icb32_power.py')]
     before={str(p):sha(p) for p in tracked};save(run/'source_inputs.json',before)
     text=call(command,run,'power.log');components=collect_reports(run,before,text)
     measured=dict(line.split() for line in (run/'power_clock.txt').read_text().splitlines())

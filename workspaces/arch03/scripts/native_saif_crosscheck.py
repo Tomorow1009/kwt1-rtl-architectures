@@ -18,11 +18,11 @@ from soc_power import power_invocation,power_databases,tcl_path
 from native_saif_isolated import tcl_inventory,review as review_annotation,comparable_sources
 
 
-def script(cfg,synthesis,saif,window,strip_path):
+def script(cfg,synthesis,saif,window,strip_path,window_reader=power.window_values):
     if strip_path not in ('tb_top/u_e203_soc_top','u_e203_soc_top'):
         raise ValueError('Unreviewed SAIF strip path')
-    text=power.script(cfg,synthesis,saif,window)
-    start,end,_=power.window_values(window)
+    text=power.script(cfg,synthesis,saif,window,window_reader=window_reader)
+    start,end,_=window_reader(window)
     old='read_vcd -zero_delay -strip_path tb_top/u_e203_soc_top -time {%s %s} %s'%(start,end,tcl_path(saif))
     if text.count(old)!=1:raise ValueError('Original power activity command changed')
     text=text.replace(old,'read_saif -strip_path '+strip_path+' '+tcl_path(saif))

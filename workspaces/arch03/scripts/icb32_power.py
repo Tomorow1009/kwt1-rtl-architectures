@@ -90,8 +90,8 @@ def quiet_absence_checks(guard):
         '[get_cells -quiet -hierarchical -filter "ref_name =~ $forbidden*"]')
 
 
-def script(cfg, synthesis, vcd, window):
-    window_values(window)
+def script(cfg, synthesis, vcd, window, window_reader=window_values):
+    window_reader(window)
     text = soc_power.script(cfg, synthesis, vcd, window)
     text = replace_once(text, 'proc arch03_power_reports {} {',
                         'proc arch03_power_reports {} {\n    set_app_var sh_continue_on_error false')

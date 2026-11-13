@@ -25,7 +25,7 @@ def verify_inputs(receipts):
         if stream_sha(Path(name))!=digest:raise ValueError('Frozen activity input changed: '+name)
 
 
-def capture_commands(gate,run,row):
+def capture_commands(gate,run,row,window_reader=window_values):
     gate,run=Path(gate),Path(run);case=row['case']
     original=read(gate/'compile_command.json')
     if (original.count('-o')!=1 or original.count('-top')!=1 or
@@ -44,7 +44,7 @@ def capture_commands(gate,run,row):
         if arg.startswith('+CAPTURE='):arg='+CAPTURE='+str(run/(case+'.csv'))
         runtime.append(arg)
     runtime+=['-ucli','-i',str(run/'capture.tcl')]
-    start,end,duration=window_values(row['task_window'])
+    start,end,duration=window_reader(row['task_window'])
     # The observer independently rechecks that this replay has exactly the
     # original first-VALID/final-ACK/drain window and all original outputs.
     script=('saif -region soc -depth 0 tb_top.u_e203_soc_top\n'
