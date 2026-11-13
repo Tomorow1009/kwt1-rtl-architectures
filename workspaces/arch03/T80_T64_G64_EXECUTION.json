@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-13T19:55:00+08:00",
-  "phase": "T80_synthesis_running_T64_server_preflight_passed",
-  "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
-  "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
+  "updated": "2026-11-13T20:14:00+08:00",
+  "phase": "T80_gate_running_G64_cancelled_T64_deferred",
+  "plan": "workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md",
+  "plan_sha256": "4e0b63fa0c419883a2af16e86054dcabed3f8a90dc55909d6fc70192fd1d0e00",
   "history_head": "70de850",
   "numeric_hardware_baseline": "9305c6948c764fed01fe86b20bb3db94170299ab",
   "branch": "codex/light-light126/n1-t80-t64-g64-20261113",
@@ -11,7 +11,7 @@
     "T64",
     "G64"
   ],
-  "current_stage": "T80_server_evidence",
+  "current_stage": "T80_gate",
   "full100_authorized": false,
   "formal_samples": 20,
   "formal_tasks": 240,
@@ -54,10 +54,11 @@
     "local_recovery10_phases_3negative_76032_outputs_PASS"
   ],
   "next": [
-    "report_T80_preliminary_synthesis_immediately_when_complete",
-    "preflight_delivered_review_operations",
-    "complete_T80_report_review",
-    "start_T64_formal_tests_after_T80_required_evidence"
+    "protect_original_synthesis",
+    "verify_safe_dispatcher_handoff",
+    "report_preliminary_final_netlist",
+    "qualify_combined_gate_SAIF_L01",
+    "complete_T80_evidence"
   ],
   "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
   "last_server_observation": {
@@ -163,14 +164,13 @@
     "name": "t80_finish02",
     "pid": 14008,
     "started": "2026-11-13T18:22:51.269828",
-    "last_observed": "2026-11-13T19:55:45.042179+08:00",
-    "stage": "t80_synth",
+    "last_observed": "2026-11-13T20:10:49.980968+08:00",
+    "stage": "t80_gate",
     "status": "running",
     "bundle": "light-light126-t80-v4-9196556-delta03",
     "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
     "operations": "light-light126-t80-finishops-9196556",
-    "child_pid": 23158,
-    "dc_pid": 29185,
+    "child_pid": 151885,
     "detail": "Beginning Mapping Optimizations (High effort)",
     "latest_log_observed": "2026-11-13T19:54:56+08:00"
   },
@@ -236,7 +236,7 @@
     "server_hardware_executed": false,
     "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
   },
-  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1955.md",
+  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_PRIORITY_2014.md",
   "review_operations_prepared": {
     "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
     "files": 8,
@@ -273,5 +273,22 @@
     "production_hardware_unchanged": true,
     "queue_started": false,
     "preflight_observed": "2026-11-13T19:36:44+08:00"
+  },
+  "previous_plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
+  "G64_cancelled": true,
+  "T64_deferred_for_T80": true,
+  "synthesis_preliminary": "handoff/team/evidence/T80_SYNTH_PRELIMINARY_20261113.json",
+  "handoff_attempt": {
+    "status": "aborted_before_signal_dc_already_exited",
+    "parent_paused": false,
+    "source_changed": false
+  },
+  "runtime_fallback": {
+    "root": "/tmp/s4_21usr_t80_20261113_2012",
+    "bundle": "light-light126-t80-v4-9196556-delta03",
+    "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
+    "source_copy_verified": true,
+    "path_preflight_passed": false,
+    "job_started": false
   }
 }
