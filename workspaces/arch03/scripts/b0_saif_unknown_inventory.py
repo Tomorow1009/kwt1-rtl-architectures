@@ -1,4 +1,4 @@
-"""Read existing B0 SAIF and mapped.v; emit every unknown declaration.
+"""Read existing B0 or N1 SAIF and mapped.v; emit every unknown declaration.
 
 Inputs remain unchanged. No simulation, PT run, activity assignment, or power
 approval. Output is a new directory containing compressed JSONL and receipts.
@@ -252,30 +252,47 @@ def scan(path, window, expected, index, emit):
                 unknown_effect_on_power_approved=False, system_power_verified=False)
 
 
+def profile_contract(report):
+    """Bind the inventory to this export's own stages, never a predecessor PASS."""
+    if report.get('schema') == 'systolic-b-evidence-export-v1':
+        return ('B0', 'systolic_b_synth', 'systolic_b_saif',
+                'B_native_saif_function_and_complete_windows_passed')
+    require(report.get('schema') == 'arch03-n1-evidence-export-v1' and
+            report.get('stage') == 'N1' and report.get('numeric_format') == '0x000e0c20' and
+            report.get('layout_id') == 0x00100004 and report.get('shift') == 10 and
+            report.get('row_lanes') == 5, 'Not a supported B0 or N1 export identity')
+    return ('N1', 'n1_synth', 'n1_saif', 'N1_native_saif_function_and_complete_windows_passed')
+
+
 def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
     code_identity = dependencies()
     scope = Path(scope_root).resolve();report_path = scoped(report_path, scope)
-    require(re.fullmatch('[0-9a-f]{64}', report_sha), 'Pin the actual B0 export report SHA')
+    require(re.fullmatch('[0-9a-f]{64}', report_sha), 'Pin the actual export report SHA')
     report = small(report_path, report_sha)
-    require(report['schema'] == 'systolic-b-evidence-export-v1', 'Not a B0 export')
+    profile, synth_stage, activity_stage, activity_status = profile_contract(report)
     export_receipt = small(report_path.parent / 'receipt.json')
     require(export_receipt['artifacts']['report.json'] == report_sha, 'Export receipt differs')
     selected = tuple(cases)
     require(selected and len(set(selected)) == len(selected) and set(selected) <= set(LAYERS), 'Invalid case list')
     arun = scoped(report['activity_reference']['run'], scope)
     activity = small(arun / 'summary.json', report['activity_reference']['sha256'])
-    state = small(arun.parent / 'state.json')['stages']['systolic_b_saif']
+    state = small(arun.parent / 'state.json')['stages'][activity_stage]
     require(state['status'] == 'passed' and state['summary_sha256'] == report['activity_reference']['sha256'],
             'Activity stage not frozen passed')
     srun = scoped(report['references']['synthesis']['run'], scope)
     synthesis = small(srun / 'summary.json', report['references']['synthesis']['sha256'])
-    synthesis_state = small(srun.parent / 'state.json')['stages']['systolic_b_synth']
+    synthesis_state = small(srun.parent / 'state.json')['stages'][synth_stage]
     require(synthesis_state['status'] == 'passed' and
             synthesis_state['summary_sha256'] == report['references']['synthesis']['sha256'],
             'Synthesis stage not frozen passed')
-    require(activity['status'] == 'B_native_saif_function_and_complete_windows_passed' and
+    require(activity['status'] == activity_status and
             activity['synthesis_summary_sha256'] == report['references']['synthesis']['sha256'] and
-            activity['firmware_sha256'] == report['firmware_sha256'], 'Mixed B0 activity identity')
+            activity['firmware_sha256'] == report['firmware_sha256'], 'Mixed activity identity')
+    if profile == 'N1':
+        require(activity.get('numeric_format') == report['numeric_format'] and
+                activity.get('layout_id') == report['layout_id'] and
+                activity.get('gate_summary_sha256') == report['references']['gate']['sha256'],
+                'Mixed N1 format or gate identity')
     netlist = scoped(srun / 'mapped.v', scope)
     require(synthesis['artifacts']['mapped.v'] == report['netlist_sha256'] and
             netlist.stat().st_size <= LIMIT_NETLIST and sha(netlist) == report['netlist_sha256'], 'Wrong/oversize mapped netlist')
@@ -287,11 +304,12 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
     require(output.is_absolute() and output.resolve() == output and not output.exists() and output.parent.is_dir(),
             'Use a fresh absolute output directory; no overwrite/resume')
     output.mkdir(mode=0o700)
-    receipt = dict(schema='b0-complete-saif-unknown-map-v1', status='collecting_existing_activity',
+    receipt = dict(schema=profile.lower()+'-complete-saif-unknown-map-v1', status='collecting_existing_activity',
         report=str(report_path), report_sha256=report_sha, activity_summary_sha256=report['activity_reference']['sha256'],
         netlist=str(netlist), netlist_sha256=report['netlist_sha256'], cases=[], selected_cases=list(selected),
         system_power_verified=False, no_eda_or_simulation_started=True, source_activity_modified=False,
-        only_existing_B0_activity_used=True, physical_power_bound_proved=False,
+        only_existing_B0_activity_used=profile == 'B0', only_existing_N1_activity_used=profile == 'N1',
+        physical_power_bound_proved=False,
         tool_sha256=code_identity['tool']['sha256'], parser_sha256=code_identity['native_saif_activity']['sha256'],
         runtime_dependencies=code_identity,
         numeric_contract=dict(SYSMEM={key:list(value) for key,value in native.SYSMEM.items()},
@@ -326,7 +344,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
             os.link(str(partial), str(final));partial.unlink()
             result.update(case=name, unknown_file=final.name, unknown_file_sha256=sha(final), unknown_file_bytes=final.stat().st_size)
             save(output / (name + '.json'), result);receipt['cases'].append(result)
-            print('B0_EXISTING_SAIF_UNKNOWN_COLLECTED', name, result['unknown_rows'], flush=True)
+            print(profile+'_EXISTING_SAIF_UNKNOWN_COLLECTED', name, result['unknown_rows'], flush=True)
         require(sha(netlist) == report['netlist_sha256'] and sha(report_path) == report_sha and
                 sha(arun / 'summary.json') == report['activity_reference']['sha256'] and
                 sha(srun / 'summary.json') == report['references']['synthesis']['sha256'],
@@ -355,7 +373,7 @@ def main():
     parser.add_argument('--cases', nargs='+', choices=LAYERS, default=LAYERS)
     args = parser.parse_args()
     result = collect(args.report, args.report_sha256, args.scope_root, args.output, args.cases)
-    print('B0_UNKNOWN_MAP', result['status'], 'full12=' + str(result['full12_collected']), 'system_power_verified=false')
+    print('SAIF_UNKNOWN_MAP', result['status'], 'full12=' + str(result['full12_collected']), 'system_power_verified=false')
     return 0
 
 

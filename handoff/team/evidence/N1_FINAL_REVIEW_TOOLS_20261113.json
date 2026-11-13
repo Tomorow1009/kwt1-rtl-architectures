@@ -1,0 +1,31 @@
+{
+  "schema": "n1-final-review-tools-v1",
+  "prepared_at": "2026-11-13T10:12:38.279817",
+  "status": "local_ready_not_deployed_or_launched",
+  "production_rtl_changed": false,
+  "tests": {
+    "suite": "test_b0_saif_unknown_inventory",
+    "passed": 17,
+    "new_scope": "N1 binds its own format, activity, synthesis and gate identity; no B0 PASS transfer"
+  },
+  "files": {
+    "workspaces/arch03/scripts/b0_saif_unknown_inventory.py": "0a30965e732d350886f61ff0a31a41cffd60148434524a80320dd33d9ba90d96",
+    "workspaces/arch03/scripts/test_b0_saif_unknown_inventory.py": "f1ef236185d4deedd6ccc1359f3cb869eac72d705836b54a6305ee082746f9c1"
+  },
+  "export_launcher": {
+    "local_file": "local_runs\\n1_final_export_launch_20261113.py",
+    "sha256": "e4308e158a7bba448735d71a50c938933fc841f965aa30e6b3dd6846c13ca33d",
+    "code": "\"\"\"Launch the existing read-only N1 exporter once, only after its queue ends.\"\"\"\nfrom pathlib import Path\nimport hashlib\nimport json\nimport os\nimport subprocess\nimport sys\n\nroot = Path('/tmp/s4_21usr_n1_20261113_0210')\nbundle = root/'light-light126-n1-v4-20261113_045945-0f62e4120790'\nqueue = bundle/'runs/n1_acceptance01'\nsha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()\nassert sha(queue/'request.json') == '53028caf11703f75c159e19de43627f12cf7a63cde6e14b886c71937a424b944'\ncfg = json.loads((queue/'request.json').read_text())\nstate = json.loads((queue/'state.json').read_text())\nassert state['status'] == 'numbers_ready_independent_review_required'\nassert state['child_pid'] is None and len(state['completed']) == 13\ntry:\n    os.kill(state['pid'], 0)\nexcept ProcessLookupError:\n    pass\nelse:\n    raise RuntimeError('Original queue driver has not exited')\nops = Path(cfg['precision_operations'])\nrequest = ops/'final_request01.json'\nassert json.loads(request.read_text())['queue_provenance']['state_sha256'] == sha(queue/'state.json')\nassert sha(ops/'manifest.json') == cfg['precision_operations_manifest_sha256']\nfor name, item in json.loads((ops/'manifest.json').read_text())['files'].items():\n    assert sha(ops/name) == item['sha256']\nserver = json.loads((bundle/'handoff/team/server_config.json').read_text())\nassert not (Path(server['server_root'])/'.arch02_team_lock').exists()\nassert not (ops/'final_report01').exists()\ncontrol = ops/'final_export_control01'\ncontrol.mkdir()\nworker = '''import datetime,hashlib,json,os,sys,traceback\nfrom pathlib import Path\nos.environ['OPENBLAS_NUM_THREADS']='1'\nsys.path[:0]=PATHS\nimport n1_report as report\nops=Path(OPS)\ncontrol=ops/'final_export_control01'\nstate=dict(schema='n1-final-export-state-v1',status='running',pid=os.getpid(),started=datetime.datetime.now().isoformat(),n2_allowed=False)\ndef save():\n    p=control/'state.json.tmp'\n    p.write_text(json.dumps(state,indent=2)+'\\\\n')\n    p.replace(control/'state.json')\nsave()\ntry:\n    request=ops/'final_request01.json'\n    digest=report.sha(request)\n    result=report.build(json.loads(request.read_text()))\n    assert report.sha(request)==digest\n    result['request_sha256']=digest\n    report.write(result,ops/'final_report01')\n    state.update(status='exported_independent_review_required',report_sha256=report.sha(ops/'final_report01/report.json'),receipt_sha256=report.sha(ops/'final_report01/receipt.json'))\n    print('N1_FINAL_EXPORT_COMPLETE independent_review_required=true',flush=True)\nexcept BaseException as exc:\n    state.update(status='failed',error=str(exc))\n    traceback.print_exc()\n    raise\nfinally:\n    state['finished']=datetime.datetime.now().isoformat()\n    save()\n'''.replace('PATHS', repr([cfg['numpy_root'], str(ops/'scripts'), str(bundle/'workspaces/arch03/scripts')])).replace('OPS', repr(str(ops)))\n(control/'worker.py').write_text(worker)\nwith (control/'driver.log').open('x') as log:\n    child = subprocess.Popen([sys.executable,'-B','-u',str(control/'worker.py')],stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)\n(control/'launch.json').write_text(json.dumps(dict(pid=child.pid,worker_sha256=sha(control/'worker.py'),request_sha256=sha(request)),indent=2)+'\\n')\nprint('N1_FINAL_EXPORT_LAUNCHED',child.pid,str(control),flush=True)\n",
+    "command_chunks": "takeover_local/n1_final_export_launch_00.txt through 06.txt",
+    "python36_syntax_checked": true,
+    "shell_single_quote_roundtrip_checked": true,
+    "status": "prepared_only"
+  },
+  "remaining": [
+    "Wait original SAIF and continuation queue, no duplicate work",
+    "Export original precision and power artifacts once",
+    "Read actual N1 unknown inventory and complete scoped review",
+    "N1 acceptance before N2"
+  ],
+  "n2_started": false
+}

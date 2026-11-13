@@ -1,5 +1,14 @@
 # N1执行检查点（2026-11-13 10:00）
 
+## 10:12 增量
+
+- 云端已独立核对为 `012743cd74ebe0e0eda6b44ba5126b73d4eec5a6`，工作在原个人分支。
+- 实际10:12:02.109023：原SAIF driver186577仍运行，L01–L10完成；L11 child314052已退出0并wait，但L11最终PASS行尚未出现，先不记成完成11层。最后已确认L10 SAIF97292306字节。
+- 新增最终只读导出启动脚本准备：`local_runs/n1_final_export_launch_20261113.py`，SHA `e4308e158a7bba448735d71a50c938933fc841f965aa30e6b3dd6846c13ca33d`。VNC命令为`n1_final_export_launch_00.txt`至`06.txt`共7片，已检查Python3.6语法和单引号编码回环。**未运行**；仍须先执行原final_request准备、确认队列13子项结束且原driver退出/锁空闲。
+- 启动脚本只调用已部署的原`n1_report`，控制记录为精度OPS02内`final_export_control01`，输出为`final_report01`。不会自动批准N2。
+- 现有B0未知活动清单工具增加N1独立身份支持，本地17检查通过。N1必须匹配自己的格式、布局、shift、行数、活动、综合和门级身份；不借B0结论。尚未部署/运行，后续在最终N1导出完成后用于真实未知活动审阅。没有RTL改动，也没有重跑任何已完成硬件任务。
+- 工具代码/测试SHA和导出脚本完整文本记录在 `handoff/team/evidence/N1_FINAL_REVIEW_TOOLS_20261113.json`。旧B0工具和证据留在原运行包内不改。
+
 ## 恢复原则
 
 用户要求持续推进，完成N1精度和功耗验收后直接进入N2，并同步GitHub。有效计划仍为`workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md`。先读AGENTS、CONTEXT_HANDOFF、本文、计划和STATUS的`narrow_execution`；完整老路径和SHA见09:00/09:25/09:35检查点。**N1仍未验收；N2/D1/D2没有开始实现。**

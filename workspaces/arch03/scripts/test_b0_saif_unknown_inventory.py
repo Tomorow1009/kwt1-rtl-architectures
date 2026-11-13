@@ -169,27 +169,32 @@ endmodule
 
     def test_collector_pins_inputs_and_publishes_complete_jsonl_only(self):
         root = Path(self.directory.name)
+        n1 = getattr(self, 'n1_fixture', False)
+        synth_stage = 'n1_synth' if n1 else 'systolic_b_synth'
+        activity_stage = 'n1_saif' if n1 else 'systolic_b_saif'
         def write(path, value):
             path.parent.mkdir(parents=True, exist_ok=True)
             tool.save(path, value)
             return tool.sha(path)
-        srun = root/'synthesis'/'systolic_b_synth';srun.mkdir(parents=True)
+        srun = root/'synthesis'/synth_stage;srun.mkdir(parents=True)
         mapped = srun/'mapped.v';mapped.write_bytes(b'fixture mapped input')
         ss = write(srun/'summary.json', dict(artifacts={'mapped.v':tool.sha(mapped)}))
-        write(srun.parent/'state.json', dict(stages={'systolic_b_synth':dict(status='passed',summary_sha256=ss)}))
-        arun = root/'activity'/'systolic_b_saif';arun.mkdir(parents=True)
+        write(srun.parent/'state.json', dict(stages={synth_stage:dict(status='passed',summary_sha256=ss)}))
+        arun = root/'activity'/activity_stage;arun.mkdir(parents=True)
         cases = []
         for name in tool.LAYERS:
             path = arun/(name+'.saif');path.write_bytes(self.path.read_bytes())
             expected = dict(self.expected, file=path.name)
             cases.append(dict(case=name,activity=expected,task_window=self.window))
-        acts = write(arun/'summary.json', dict(status='B_native_saif_function_and_complete_windows_passed',
-            synthesis_summary_sha256=ss, firmware_sha256='1'*64, cases=cases))
-        write(arun.parent/'state.json',dict(stages={'systolic_b_saif':dict(status='passed',summary_sha256=acts)}))
+        acts = write(arun/'summary.json', dict(status=('N1' if n1 else 'B')+'_native_saif_function_and_complete_windows_passed',
+            synthesis_summary_sha256=ss, firmware_sha256='1'*64, cases=cases,
+            numeric_format='0x000e0c20',layout_id=0x00100004,gate_summary_sha256='2'*64))
+        write(arun.parent/'state.json',dict(stages={activity_stage:dict(status='passed',summary_sha256=acts)}))
         report = root/'export'/'report.json'
-        report_sha = write(report,dict(schema='systolic-b-evidence-export-v1',
+        report_sha = write(report,dict(schema='arch03-n1-evidence-export-v1' if n1 else 'systolic-b-evidence-export-v1',
+            stage='N1',numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,row_lanes=5,
             activity_reference=dict(run=str(arun),sha256=acts),
-            references=dict(synthesis=dict(run=str(srun),sha256=ss)),
+            references=dict(synthesis=dict(run=str(srun),sha256=ss),gate=dict(sha256='2'*64)),
             netlist_sha256=tool.sha(mapped),firmware_sha256='1'*64))
         write(report.parent/'receipt.json',dict(artifacts={'report.json':report_sha}))
         before = {str(p):tool.sha(p) for p in root.rglob('*') if p.is_file()}
@@ -198,6 +203,8 @@ endmodule
             got = tool.collect(report,report_sha,root,output,cases=('layer_01',))
         self.assertFalse(got['full12_collected'])
         self.assertFalse(got['system_power_verified'])
+        self.assertEqual(got['only_existing_N1_activity_used'], n1)
+        self.assertEqual(got['only_existing_B0_activity_used'], not n1)
         self.assertEqual(set(got['runtime_dependencies']), set(tool.DEPENDENCIES)|{'tool'})
         self.assertEqual(got['runtime_dependencies'], tool.dependencies())
         lines = gzip.decompress((output/'layer_01.unknown.jsonl.gz').read_bytes()).splitlines()
@@ -215,6 +222,19 @@ endmodule
                 tool.collect(report,report_sha,root,low,cases=('layer_01',))
         self.assertTrue((low/'failure.json').is_file())
         self.assertFalse(list(low.glob('*.unknown*')))
+
+    def test_n1_collector_binds_own_stages_and_retains_unknowns(self):
+        self.n1_fixture = True
+        self.test_collector_pins_inputs_and_publishes_complete_jsonl_only()
+
+    def test_n1_identity_cannot_be_changed_by_schema_alone(self):
+        report = dict(schema='arch03-n1-evidence-export-v1',stage='N1',numeric_format='0x000e0c20',
+                      layout_id=0x00100004,shift=10,row_lanes=5)
+        self.assertEqual(tool.profile_contract(report)[0], 'N1')
+        for key, value in [('stage','B'),('numeric_format','Q12'),('layout_id',0x00100003),
+                           ('shift',12),('row_lanes',4)]:
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError,'export identity'):
+                tool.profile_contract(dict(report, **{key:value}))
 
     def test_dependency_change_is_rejected(self):
         identity = tool.dependencies()
