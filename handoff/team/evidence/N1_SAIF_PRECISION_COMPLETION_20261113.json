@@ -1,0 +1,60 @@
+{
+  "schema": "n1-saif-precision-completion-v1",
+  "observed_at": "2026-11-13T10:33:48+08:00",
+  "production_rtl_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "runtime_commit": "0f62e41207909904efd544992013c1244b0fd63b",
+  "saif": {
+    "status": "passed",
+    "summary_sha256": "d5b0fed6071615249570fc43edd136bb10f1e2e0b1e2ff1cdf26a7f26b7e5631",
+    "cases": 12,
+    "total_bytes": 1167698294,
+    "finished": "2026-11-13T10:23:56.399648+08:00"
+  },
+  "precision": {
+    "status": "passed",
+    "summary_sha256": "c812e7f41f787f81622ef9b0baf2b9a093cdac8b77674bf69fb7a3652a581b1f",
+    "run": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_045945-0f62e4120790/runs/n1_acceptance01_precision/n1_precision",
+    "started": "2026-11-13T10:24:13.398628+08:00",
+    "finished": "2026-11-13T10:29:17.128598+08:00",
+    "samples": 100,
+    "tasks": 1200,
+    "outputs": 30412800,
+    "internal_precision_verified": true,
+    "max_layer_nrmse_percent": 0.1933721614699203,
+    "max_task_nrmse_percent": 0.20953408931848963,
+    "integer_mismatches": 0,
+    "hex_byte_mismatches": 0,
+    "clipping": {
+      "x": 0,
+      "w": 0,
+      "b": 0
+    },
+    "saturated": 0,
+    "source_mode": "exact_original_npz_members",
+    "official_precision_verified": false,
+    "final_independent_ASIC_receipt_join_pending": true
+  },
+  "queue": {
+    "pid": 237710,
+    "observed_at": "2026-11-13T10:31:21.320635+08:00",
+    "current": "power01",
+    "child_pid": 31478,
+    "completed_children": 1
+  },
+  "stage_accepted": false,
+  "next_hardware_stage_started": false,
+  "evidence": [
+    {
+      "file": "takeover_local/n1_saif_final_1028.png",
+      "sha256": "d260de92d0c54f1b9fd8a9cf693e904745823353cf21134a196bb7961db69494"
+    },
+    {
+      "file": "takeover_local/n1_precision_final_1033.png",
+      "sha256": "acfb99eb3ee900b3f726ad3a1934388704cdd7f3e6bbed96cf012b90ed8d45a0"
+    },
+    {
+      "file": "takeover_local/n1_queue_1033.png",
+      "sha256": "524f79ecfc643274bfdaff22bef5c9062021402e788189f44e077393264a6571"
+    }
+  ]
+}

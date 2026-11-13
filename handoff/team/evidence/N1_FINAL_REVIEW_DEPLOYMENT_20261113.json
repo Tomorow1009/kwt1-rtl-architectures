@@ -1,0 +1,28 @@
+{
+  "schema": "n1-final-review-deployment-v1",
+  "observed_deployed_at": "2026-11-13T10:19:28.171185+08:00",
+  "source_commit": "04825e4585e445e19969a594b6247fbfe80cedae",
+  "zip": "light-light126-n1-review-final-04825e4585e4.zip",
+  "zip_bytes": 11374,
+  "zip_sha256": "3059abffcf3b763334c13764761392e0d1dbfe22c9df5fc824530e3c5b42b154",
+  "manifest_sha256": "0df8b77ef30c32e4817afe91827900ccaf2e7837ae81aea7dcd91ed753a178e4",
+  "server_directory": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845/review_tools_04825e4",
+  "members_and_archive_hash_verified": true,
+  "source_import_verified": true,
+  "inventory_run_started": false,
+  "final_export_run_started": false,
+  "evidence": [
+    {
+      "file": "takeover_local/n1_review_fz_after.png",
+      "sha256": "f22935a70b597faea586a403483f5ef932b7bcdf10861a9228147514a9f3e001"
+    },
+    {
+      "file": "takeover_local/n1_review_deployed.png",
+      "sha256": "2245097134d5dbc2a884c4f6394603832c9c4ddb10b7b66d151318fffd490ac3"
+    },
+    {
+      "file": "takeover_local/n1_review_import.png",
+      "sha256": "9f09a5177c7d0ae27ed9ec67a5abc795d559e4631496e8a5a446027ba952ebb0"
+    }
+  ]
+}
