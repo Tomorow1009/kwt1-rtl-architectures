@@ -274,6 +274,54 @@ class N1PrecisionJoinTests(unittest.TestCase):
         self.assertIsNone(result['maximum_layer_nrmse_percent'])
         self.assertIsNone(result['quantization_clipping_count'])
 
+    def test_recovered_member_join_requires_original_manifest_and_explicit_mode(self):
+        recovered=report.recovered_precision
+        original_archive=self.archive
+        new_archive=self.root/'recovered_members.zip'
+        entries=[];provenance=[]
+        with zipfile.ZipFile(str(original_archive)) as source, zipfile.ZipFile(str(new_archive),'w') as out:
+            old_root=report.precision_tools.ARCHIVE_ROOT
+            weights=source.read(old_root+'shared_weights.npz')
+            out.writestr(recovered.ROOT+'shared_weights.npz',weights)
+            for item in self.summary['samples_provenance']:
+                number=item['sample']
+                member='sample_%03d/float_tensors.npz'%number
+                out.writestr(recovered.ROOT+member,source.read(old_root+member))
+                entry=dict(sample=number,original_rank=number,sample_sha256=item['sample_float_sha256'],
+                           **{k:item[k] for k in ('wav','split','wav_sha256')})
+                entries.append(entry)
+                provenance.append(dict(sample=number,sample_float_sha256=item['sample_float_sha256'],
+                    source_manifest_entry_sha256=recovered.source_entry_sha(entry),
+                    **{k:item[k] for k in ('wav','split','wav_sha256')}))
+        weights_sha=report.precision_tools.digest_bytes(weights)
+        report.data.save(self.dataset/'manifest.json',dict(archive_sha256=self.archive_sha,
+                         weights_sha256=weights_sha,samples=entries))
+        manifest_sha=report.sha(self.dataset/'manifest.json')
+        self.batch['dataset_manifest_sha256']=manifest_sha
+        identity=dict(self.identity,schema=recovered.SCHEMA,source_mode=recovered.SOURCE_MODE,
+            original_float_archive_verified=False,original_float_archive_expected_sha256=self.archive_sha,
+            recovered_original_members_verified=True,float_archive=str(new_archive),
+            float_archive_sha256=report.sha(new_archive),dataset_manifest_sha256=manifest_sha,
+            audit_script_sha256=report.sha(recovered.__file__),
+            numeric_audit_script_sha256=report.sha(report.precision_tools.__file__))
+        summary=dict(self.summary);summary.update(identity)
+        summary.update(status='passed',samples_provenance=provenance)
+        ref=self.ref(summary,identity)
+        # A recovered container cannot be silently interpreted as the old ZIP.
+        with self.assertRaises(ValueError):report.audit_precision(ref,self.batch)
+        ref.update(source_mode=recovered.SOURCE_MODE,archive_sha256=report.sha(new_archive))
+        with patch.object(recovered,'MANIFEST_SHA',manifest_sha), \
+             patch.object(recovered,'WEIGHTS_SHA',weights_sha), \
+             patch.object(recovered,'ORIGINAL_ARCHIVE_SHA',self.archive_sha):
+            result=report.audit_precision(ref,self.batch)
+            self.assertTrue(result['fresh_float_reference_verified'])
+            self.assertTrue(result['recovered_original_members_verified'])
+            self.assertFalse(result['original_float_archive_verified'])
+            self.assertFalse(result['official_precision_verified'])
+            with new_archive.open('ab') as handle:handle.write(b'changed container')
+            with self.assertRaisesRegex(ValueError,'archive/actual dataset'):
+                report.audit_precision(ref,self.batch)
+
     def test_software_only_or_total_incomplete_cannot_join(self):
         for key,value in (('integer_bit_exact',False),('tasks',1199),('total_outputs',0)):
             bad=dict(self.batch);bad[key]=value

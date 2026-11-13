@@ -15,6 +15,7 @@ import struct
 import zipfile
 import n1_data as data
 import n1_precision as precision_tools
+import n1_recovered_precision as recovered_precision
 from n1_drc_audit import constraints_inventory
 import n1_soc as soc
 from n1_bus_metrics import parse_metrics
@@ -174,6 +175,12 @@ def audit_precision(ref,batch):
     This joins the new audit's SSE, never B0/Q12 error statistics.
     """
     if ref is None:return precision_pending(batch)
+    source_mode=ref.get('source_mode','original_archive')
+    require(source_mode in ('original_archive',recovered_precision.SOURCE_MODE),'Unknown precision source mode')
+    recovered=source_mode==recovered_precision.SOURCE_MODE
+    audit_tools=recovered_precision if recovered else precision_tools
+    archive_sha=ref.get('archive_sha256') if recovered else precision_tools.ARCHIVE_SHA
+    require(re.fullmatch('[a-f0-9]{64}',archive_sha or ''),'Explicit recovered container SHA required')
     require(batch.get('integer_bit_exact') is True and batch.get('tasks')==1200 and
         batch.get('outputs')==batch.get('total_outputs')==30412800,'Precision requires own N1 ASIC1200 first')
     run=Path(ref['run']).resolve();summary_path=run/'summary.json';identity_path=run/'identity.json'
@@ -183,7 +190,7 @@ def audit_precision(ref,batch):
     require(sha(identity_path)==result['identity_sha256'] and identity.get('status')=='running' and
         all(result.get(key)==value for key,value in identity.items() if key!='status'),
         'Fresh precision identity changed')
-    require(result.get('schema')==precision_tools.SCHEMA and result.get('status')=='passed' and
+    require(result.get('schema')==audit_tools.SCHEMA and result.get('status')=='passed' and
         result.get('fixture') is False and result.get('samples')==100 and result.get('tasks')==1200 and
         result.get('outputs')==30412800 and result.get('numeric_format')==data.FORMAT and
         result.get('numeric_format_id')==0x000e0c20 and result.get('layout_id')==0x00100004 and
@@ -191,12 +198,18 @@ def audit_precision(ref,batch):
         result.get('cpu_executed') is False and result.get('rtl_integer_match_required') is True and
         result.get('official_precision_verified') is False and result.get('integer_mismatches')==0 and
         result.get('hex_byte_mismatches')==0,'Wrong/incomplete fresh N1 precision scope')
-    require(result.get('float_archive_sha256')==precision_tools.ARCHIVE_SHA and
+    require(result.get('float_archive_sha256')==archive_sha and
         result.get('dataset_inventory_sha256')==data.DATA100_INVENTORY_SHA==batch['dataset_inventory_sha256'] and
         result.get('dataset_manifest_sha256')==batch['dataset_manifest_sha256'] and
         result.get('converter_commit')==data.PR_COMMIT and result.get('converter_sha256')==data.CONVERTER_SHA and
-        sha(data.CONVERTER)==data.CONVERTER_SHA and result.get('audit_script_sha256')==sha(precision_tools.__file__) and
+        sha(data.CONVERTER)==data.CONVERTER_SHA and result.get('audit_script_sha256')==sha(audit_tools.__file__) and
         result.get('data_script_sha256')==sha(data.__file__),'Fresh precision source/tool identity differs')
+    if recovered:
+        require(result.get('source_mode')==source_mode and result.get('original_float_archive_verified') is False and
+            result.get('original_float_archive_expected_sha256')==precision_tools.ARCHIVE_SHA and
+            result.get('recovered_original_members_verified') is True and
+            result.get('numeric_audit_script_sha256')==sha(precision_tools.__file__),
+            'Recovered FLOAT provenance/numeric audit identity differs')
     batch_run=Path(batch['batch_run']);batch_identity=read(batch_run/'batch_identity.json')
     require(sha(batch_run/'batch_identity.json')==batch['batch_identity_sha256'] and
         sha(batch_run/'summary.json')==batch['batch_summary_sha256'],'Actual ASIC1200 evidence changed after audit')
@@ -204,7 +217,7 @@ def audit_precision(ref,batch):
     require(Path(batch_identity['dataset']).resolve()==dataset and
         sha(dataset/'manifest.json')==batch['dataset_manifest_sha256'] and
         sha(dataset/'SHA256_FILES.json')==data.DATA100_INVENTORY_SHA and
-        archive.is_file() and not archive.is_symlink() and sha(archive)==precision_tools.ARCHIVE_SHA,
+        archive.is_file() and not archive.is_symlink() and sha(archive)==archive_sha,
         'Fresh precision archive/actual dataset changed')
     # A relocated audit copy is allowed only when its entire fixed inventory is
     # identical to the actual CPU source. Never trust a similarly named folder.
@@ -214,18 +227,25 @@ def audit_precision(ref,batch):
     require(len(rows)==1200 and len(provenance)==100 and
         [row['sample'] for row in provenance]==list(range(1,101)),'Incomplete/reordered precision sample set')
     archive_stamp=precision_tools.stamp(archive)
-    with zipfile.ZipFile(str(archive)) as zipped:
-        names=zipped.namelist()
-        require(len(names)==len(set(names)),'Ambiguous precision archive members')
-        weights_sha=precision_tools.digest_bytes(zipped.read(precision_tools.ARCHIVE_ROOT+'shared_weights.npz'))
-        require(weights_sha==result['weights_sha256'],'Fresh precision weights changed')
-        for sample in provenance:
-            prefix=precision_tools.ARCHIVE_ROOT+'sample_%03d/'%sample['sample']
-            source_raw=zipped.read(prefix+'source.json');source=json.loads(source_raw.decode('utf-8-sig'))
-            require(precision_tools.digest_bytes(zipped.read(prefix+'float_tensors.npz'))==sample['sample_float_sha256'] and
-                precision_tools.digest_bytes(source_raw)==sample['source_json_sha256'] and
-                all(sample[key]==source[key] for key in ('wav','split','wav_sha256')),
-                'Fresh precision original sample provenance changed')
+    if recovered:
+        manifest=recovered_precision.verified_manifest(dataset)
+        require(recovered_precision.verify_members(archive,archive_sha,manifest)==provenance,
+                'Recovered original member provenance changed')
+        weights_sha=recovered_precision.WEIGHTS_SHA
+        require(weights_sha==result['weights_sha256'],'Recovered original weights changed')
+    else:
+        with zipfile.ZipFile(str(archive)) as zipped:
+            names=zipped.namelist()
+            require(len(names)==len(set(names)),'Ambiguous precision archive members')
+            weights_sha=precision_tools.digest_bytes(zipped.read(precision_tools.ARCHIVE_ROOT+'shared_weights.npz'))
+            require(weights_sha==result['weights_sha256'],'Fresh precision weights changed')
+            for sample in provenance:
+                prefix=precision_tools.ARCHIVE_ROOT+'sample_%03d/'%sample['sample']
+                source_raw=zipped.read(prefix+'source.json');source=json.loads(source_raw.decode('utf-8-sig'))
+                require(precision_tools.digest_bytes(zipped.read(prefix+'float_tensors.npz'))==sample['sample_float_sha256'] and
+                    precision_tools.digest_bytes(source_raw)==sample['source_json_sha256'] and
+                    all(sample[key]==source[key] for key in ('wav','split','wav_sha256')),
+                    'Fresh precision original sample provenance changed')
     for task,row in zip(tasks,rows):
         require((row['sample'],row['layer'])==(task['sample'],task['layer']) and row['outputs']==25344 and
             row.get('integer_mismatches')==row.get('hex_byte_mismatches')==0 and
@@ -260,7 +280,8 @@ def audit_precision(ref,batch):
         fresh_float_reference_verified=True,float_reference_recomputed_in_precision_run=True,
         float_reference_recomputed_in_report_export=False,official_precision_verified=False,
         reference_error_metrics_reused_from_B0=False,reference=ref,identity_sha256=result['identity_sha256'],
-        float_archive_sha256=precision_tools.ARCHIVE_SHA,dataset_manifest_sha256=batch['dataset_manifest_sha256'],
+        float_archive_sha256=archive_sha,source_mode=source_mode,original_float_archive_verified=not recovered,
+        recovered_original_members_verified=recovered,dataset_manifest_sha256=batch['dataset_manifest_sha256'],
         dataset_inventory_sha256=data.DATA100_INVENTORY_SHA,batch_identity_sha256=batch['batch_identity_sha256'],
         maximum_layer_nrmse_percent=result['max_layer_nrmse_percent'],maximum_task_nrmse_percent=result['max_task_nrmse_percent'],
         quantization_clipping_count=clipping,saturation_count=saturated,layer_aggregate=layers,
@@ -553,6 +574,9 @@ def write(report,output):
         '同批100条浮点精度：%s；最大逐层NRMSE：%s，最大逐任务NRMSE：%s。'%
             (precision['status'],'未验证' if layer_error is None else '%.10f%%'%layer_error,
              '未验证' if task_error is None else '%.10f%%'%task_error),
+        '浮点来源模式：%s；原ZIP容器验证：%s；恢复的原NPZ成员核验：%s。'%
+            (precision.get('source_mode','未验证'),precision.get('original_float_archive_verified',False),
+             precision.get('recovered_original_members_verified',False)),
         '固定12性能任务的独立浮点核验：%s；不能替代完整100条。'%report['fixed12_precision']['status'],
         '冻结综合约束报告：违例记录%d，解析完整=%s，明确无违例标记=%s；严格时序审核仍独立。'%
             (report['drc_inventory']['violation_record_count'],report['drc_inventory']['extraction_complete'],

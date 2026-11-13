@@ -1,5 +1,23 @@
 # N1验收推进检查点（2026-11-13 07:55）
 
+## 08:12最新增量（优先于下方历史状态）
+
+### 08:31后续结果
+
+- **gate14全部通过**：08:11:56.626113至08:26:38.135991，14例354816输出；summary SHA **a804235fd382cc5c7acd3bf088bb4fa3b6f14bc2ef4565727b8bb3b0b4d79fba**。08:30:51实际文件SHA与state匹配、CPU=true、SDF=false、锁已释放、private653060173824B。不重复运行。
+- **完整100条FLOAT内容已精确恢复**：固定同一profile08:19执行一次`n1_float_recover100.py`，100个NPZ共142487371B。08:27:31服务器将全部NPZ SHA、排名、WAV/split/音频SHA以及共享W/b与原manifest比较，checked100/mismatches0/inputs_stable=true。记录`handoff/team/evidence/N1_FLOAT100_SOURCE_RECOVERY_20261113.json` SHA **988e5e96a42eea61c2c348626b24f1252556da166f48653d30218452af905f89**。原ZIP容器未取得；内容身份通过不等于精度已验收。
+- 恢复运行目录`local_runs/n1_float100_recovery_20261113_0824`（目录名称时间不作为实际启动时间）。summary SHA **bfbecc01704c791c96789975d29221c677a7f885c60c96d34ca56d85232ecc02**，candidate_hashes34248B SHA **f43e42d4df5c94516e14c8a82ddde49cfa3398dd50d1e6ce8f5f06be8a6f13b5**，后者已由FileZilla上传原独立项目根，FZ已关闭。完整浮点142MB尚未上传。
+- 新恢复脚本SHA **3ae886e73a506704d16f85d881532b083fb69788a840197ad56d714fe4fe701a**，5个选择/顺序/路径/缺失哈希检查通过。软件核算需新的显式`exact_original_npz_members`入口，继续保留原ZIP严格入口，不冒充取得原ZIP。
+- 新活动采集`n1_saif12_01`启动命令已按两段完整输入；误请求不存在part3仅在本机读文件报错，无输入/服务器副作用。随后只按一次Return启动；以`n1_saif12_launch_0833.png`实际PID为准，不重复启动。后续power12尚未启动。
+
+- **门级14已启动一次**：`n1_gate14_01/n1_gate`，driver **161539**，08:11:55启动截图`takeover_local/n1_gate14_launch_0811.png`。仍为0f62 OPS、9305生产硬件与综合；不要重复启动。下一步收该原作业终态，再串行SAIF12、power12。
+- timing诊断151031已完成，07:58:58.729249至07:59:36.582569；summary SHA **2ebc69c279fed69b4b78f5f85e72b9a2dd9e9cc0a304df87196ffffd3a982758**。冻结DDC实际≥1000扇出仅3个时钟网，原综合日志TIM134计4条，保留两者差异。诊断不等于物理签核；不重跑零目标drc。
+- WAV hashlist已于08:03上传到原项目根，08:04:45服务器原manifest逐条比对100/100、mismatches0、inputs_stable=true。FileZilla已关闭。实际proof入库`handoff/team/evidence/N1_WAV_SOURCE_JOIN_20261113.json`，SHA **2e0b51f371dbbd92531fddabb0e14c1eba74b9f0eedebb6eb55dc44432bc0aba**。
+- **原始浮点第1条已精确恢复**：08:10运行一次`n1_float_single_probe.py --mode probe`，输出`local_runs/n1_float_sample001_trial_20261113_0810`。NPZ1424872B SHA **275444a4f5d895cd0fdf8a10a23705fb784ba7151a6d4980aa4ff50793f8533e**与服务器原sample001清单完全相同；两次推理逐位相同、162模型变量核对通过。result SHA **007797d05edaa035bbcb655ff2d52a86d51105f8a3f05b36e21f93b0a4cf2d8a**。下一步固定同一profile恢复其余99条，并在服务器逐项比对原NPZ SHA；目前仍不是100条精度PASS。
+- 原FLOAT ZIP容器仍未取得，不伪造原ZIP哈希、不放宽原严格入口。后续恢复源需独立记录100个NPZ及共享W/b与原manifest的完整身份，再重新量化/重算NRMSE。
+- 最新云端已独立核验 **7050fbc01ae7b54df2205abb4d1902a4474cbe24**；生产9305与运行0f62不变。N2/D1/D2未启动。B0剩余11控制summary已齐但内容/最终SHA复核待做，系统功耗审核仍未通过。
+- 08:09实际private可用710235693056B，原锁空闲后才启动gate；shared07:57恢复约11GB，无新删除。最终/tmp结果尚未归档，须等待正式队列终态后做持久备份。
+
 ## 08:00最新增量
 
 - 实际batch finished **07:51:46.415505**，summary529448B SHA **7d4b2b7c68fafbf0b45b0a85c4de4cac9785fd9879d9382e3bbcf0ee0662c507**，与state完全匹配。07:57:26原lock目录不存在、driver18736不存在，shared可用已恢复11048845312B/private722142699520B；**没有新清理或删除**。
