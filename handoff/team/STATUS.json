@@ -3563,8 +3563,8 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T20:33:00+08:00",
-    "phase": "T80_activity_tools_fix_deploying",
+    "updated": "2026-11-13T20:47:10+08:00",
+    "phase": "T80_SAIF_running_L01_passed",
     "plan": "workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md",
     "plan_sha256": "16413516ce0c2667a8410bf1ba301b6475d7deb39e1c355395edbc8f1fcd0faf",
     "history_head": "70de850",
@@ -3575,7 +3575,7 @@
       "T64",
       "G64"
     ],
-    "current_stage": "T80_activity_resume_preflight",
+    "current_stage": "T80_saif",
     "full100_authorized": false,
     "formal_samples": 20,
     "formal_tasks": 240,
@@ -3625,8 +3625,8 @@
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
-      "time": "2026-11-13T20:28:55+08:00",
-      "team_lock_expected_owner": null,
+      "time": "2026-11-13T20:43:24.034967+08:00",
+      "team_lock_expected_owner": "t80_finish03_saif",
       "same_account_eda_processes": "none before queue launch at18:03:15",
       "last_free_bytes": 7335837696,
       "free_observed_time": "2026-11-13T20:22:54+08:00",
@@ -3637,9 +3637,9 @@
       "dc_pid": 29185,
       "dc_state": "completed",
       "dc_cpu_percent": 99.7,
-      "tmp_free_bytes": 246422388736,
+      "tmp_free_bytes": 162679791616,
       "current_synth_directory_KiB": 261464,
-      "queue_pid_present": false
+      "queue_pid_present": true
     },
     "local14": {
       "tasks": 14,
@@ -3725,20 +3725,17 @@
       "summary_sha256": "34985a7070e03c6db33fdb74b00b5e00526bc7f96a9319616864fe6ade1f02b4"
     },
     "server_queue": {
-      "name": "t80_finish02",
-      "pid": 14008,
-      "started": "2026-11-13T18:22:51.269828",
-      "last_observed": "2026-11-13T20:28:55+08:00",
+      "name": "t80_finish03",
+      "pid": 183563,
+      "child_pid": 183576,
+      "status": "running",
       "stage": "t80_saif",
-      "status": "failed",
-      "bundle": "light-light126-t80-v4-9196556-delta03",
-      "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
-      "operations": "light-light126-t80-finishops-9196556",
-      "child_pid": null,
-      "detail": "Old three-transfer window validator rejected four-transfer T80 window",
-      "latest_log_observed": "2026-11-13T19:54:56+08:00",
-      "finished": "2026-11-13T20:22:45.012957",
-      "state_sha256": "5e3e269e207cf5783a1e230baf443e7cb6a68dc9f8efd03a4e63e81eab5af289"
+      "started": "2026-11-13T20:36:32.019510",
+      "last_observed": "2026-11-13T20:43:24.034967+08:00",
+      "bundle": "/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4",
+      "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
+      "operations": "/tmp/s4_21usr_t80_20261113_2012/ops-cef81d4",
+      "request_sha256": "e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888"
     },
     "T64_local": {
       "rtl_created": true,
@@ -3802,7 +3799,7 @@
       "server_hardware_executed": false,
       "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
     },
-    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_ACTIVITY_FIX_2033.md",
+    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_SAIF_L01_2047.md",
     "review_operations_prepared": {
       "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
       "files": 8,
@@ -3865,12 +3862,49 @@
     },
     "activity_fix": {
       "commit": "cef81d4",
-      "deployment_in_progress": true,
-      "exec_session": 28932,
-      "job_started": false,
+      "deployment_in_progress": false,
+      "exec_session": null,
+      "job_started": true,
       "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
       "test_count": 16,
-      "extra_clone_guard_test": true
-    }
+      "extra_clone_guard_test": true,
+      "server_preflight_passed": true,
+      "preflight_only_print_failure": "common.sha string versus Path corrected without source or request mutation"
+    },
+    "previous_failed_queue_t80_finish02": {
+      "name": "t80_finish02",
+      "pid": 14008,
+      "started": "2026-11-13T18:22:51.269828",
+      "last_observed": "2026-11-13T20:28:55+08:00",
+      "stage": "t80_saif",
+      "status": "failed",
+      "bundle": "light-light126-t80-v4-9196556-delta03",
+      "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
+      "operations": "light-light126-t80-finishops-9196556",
+      "child_pid": null,
+      "detail": "Old three-transfer window validator rejected four-transfer T80 window",
+      "latest_log_observed": "2026-11-13T19:54:56+08:00",
+      "finished": "2026-11-13T20:22:45.012957",
+      "state_sha256": "5e3e269e207cf5783a1e230baf443e7cb6a68dc9f8efd03a4e63e81eab5af289"
+    },
+    "saif_progress": {
+      "passed": [
+        "layer_01"
+      ],
+      "saif_bytes": 97722100,
+      "cycles": 116752,
+      "outputs": 25344,
+      "simulation_cpu_seconds": 405.33,
+      "last_observed": "2026-11-13T20:47:10+08:00",
+      "complete12": false
+    },
+    "review_operations_pending": {
+      "directory": "/tmp/s4_21usr_t80_20261113_2012/ops-review-cfbca86",
+      "manifest_sha256": "f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81",
+      "transfer_exec_session": 84865,
+      "deployment_in_progress": true,
+      "lines": 11
+    },
+    "synthesis_review_progress": "handoff/team/evidence/T80_SYNTH_REVIEW_PROGRESS_20261113.json"
   }
 }

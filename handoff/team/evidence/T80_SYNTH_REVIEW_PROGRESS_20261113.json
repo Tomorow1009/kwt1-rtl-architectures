@@ -1,0 +1,50 @@
+{
+  "schema": "t80-synth-review-progress-v1",
+  "observed_at": "2026-11-13T20:43:02+08:00",
+  "hardware_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+  "synthesis_summary_sha256": "c485b3f77cd7c4f9d7911c5e2052babbc2d8c83811b94ec72c608ffed027f341",
+  "mapped_netlist_sha256": "6a9ab02be889d4aecb55576a71c51ce68f324fc8a0897430e0dbe40a1373eff2",
+  "constraints": {
+    "explicit_no_violations": true,
+    "violation_record_count": 0,
+    "extraction_complete": true,
+    "unparsed": [],
+    "driver_query_complete": true
+  },
+  "high_fanout": {
+    "threshold": 1000,
+    "count": 3,
+    "nets": [
+      "u_e203_subsys_top/core_csr_clk",
+      "u_e203_subsys_top/hfclk",
+      "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+    ]
+  },
+  "ports": {
+    "declaration_only": 11319,
+    "expression_present_requires_review": 0
+  },
+  "no_load": {
+    "count": 243,
+    "unique_driver_ports": 243,
+    "matches_declaration_only_unloaded_ports": true,
+    "extra": [],
+    "missing": []
+  },
+  "remaining_warning_classes": {
+    "LINT-32": 10741,
+    "LINT-33": 1341,
+    "LINT-1": 4
+  },
+  "numeric_instances": {
+    "pe": 80,
+    "array": 1,
+    "requantize": 80
+  },
+  "strict_timing_review_complete": false,
+  "remaining": [
+    "Review actual LINT-1/32/33 objects and clock/IO task assumptions",
+    "12 actual full-window activities and powers",
+    "Unknown activity and model impact review"
+  ]
+}
