@@ -134,6 +134,44 @@ def auxiliary_receipts(bundles,bindings):
     return records
 
 
+def completed_queue(session,state):
+    """Archive the serial observer's own terminal schema, without granting PASS."""
+    require(state.get('status') in ('numbers_ready_independent_review_required','failed') and
+        state.get('finished') and state.get('child_pid') is None and
+        state.get('n2_allowed') is False and state.get('system_power_verified') is False,
+        'N1 continuation queue has not safely ended')
+    request_path=paths._plain(session/'request.json')
+    require(paths.digest(request_path)==state.get('request_sha256'),'Queue request digest changed')
+    request=json.loads(request_path.read_text())
+    require(request.get('schema')=='arch03-n1-acceptance-continuation-v1' and
+        request.get('bundle')==str(session.parent.parent),'Queue bundle/schema differs')
+    rows=state.get('completed')
+    require(isinstance(rows,list) and len(rows)<=13,'Invalid queue completed prefix')
+    expected=[('precision','n1_precision')]+[('power%02d'%i,'n1_power') for i in range(1,13)]
+    for index,row in enumerate(rows):
+        label,kind=expected[index]
+        require(row.get('label')==label and row.get('stage')==kind,'Queue completed order differs')
+        suffix='_precision' if index==0 else '_p%02d'%index
+        run=session.parent/(session.name+suffix)/kind
+        ref=row.get('reference',{})
+        require(ref.get('run')==str(run),'Queue child escaped its session')
+        summary=paths._plain(run/'summary.json')
+        child=json.loads(paths._plain(run.parent/'state.json').read_text())
+        record=child.get('stages',{}).get(kind,{})
+        require(child.get('schema')=='arch03-n1-server-state-v1' and
+            record.get('status')=='passed' and record.get('finished') and
+            record.get('summary_sha256')==ref.get('sha256')==paths.digest(summary),
+            'Queue completed child identity differs')
+    if state['status']=='numbers_ready_independent_review_required':
+        require(len(rows)==13,'Completed queue lacks precision or power layers')
+    else:
+        require(isinstance(state.get('error'),str) and state['error'].strip(),'Failed queue lacks reason')
+    return dict(bundle=session.parent.parent.name,session=session.name,kind='serial_observer_queue',
+        status=state['status'],completed_children=len(rows),state_sha256=paths.digest(session/'state.json'),
+        request_sha256=state['request_sha256'],system_power_verified=False,
+        acceptance_not_inferred_from_archive=True)
+
+
 def terminal_states(bundles,bindings=None):
     auxiliary=auxiliary_receipts(bundles,[] if bindings is None else bindings)
     records=[];consumed=set()
@@ -153,6 +191,8 @@ def terminal_states(bundles,bindings=None):
                 records.append(auxiliary[session]);consumed.add(session);continue
             require(not state_path.is_symlink() and state_path.is_file(),'Session lacks terminal state: '+str(session))
             state=json.loads(state_path.read_text())
+            if state.get('schema')=='arch03-n1-acceptance-queue-state-v1':
+                records.append(completed_queue(session,state));continue
             require(state.get('schema')=='arch03-n1-server-state-v1' and state.get('stages'),
                 'Unknown runtime session state: '+str(session))
             for stage,row in state['stages'].items():

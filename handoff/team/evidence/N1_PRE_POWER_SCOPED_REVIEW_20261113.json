@@ -1,0 +1,71 @@
+{
+  "schema": "n1-pre-power-scoped-review-v1",
+  "reviewed_at": "2026-11-13T09:41:00+08:00",
+  "production_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "mapped_sha256": "59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e",
+  "synthesis_sha256": "cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31",
+  "status": "static_scope_reviewed_pending_PT_and_power",
+  "high_fanout": {
+    "summary_sha256": "2ebc69c279fed69b4b78f5f85e72b9a2dd9e9cc0a304df87196ffffd3a982758",
+    "threshold": 1000,
+    "count": 3,
+    "nets": [
+      "u_e203_subsys_top/core_csr_clk",
+      "u_e203_subsys_top/hfclk",
+      "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+    ],
+    "original_log_count": 4,
+    "original_log_retained": true,
+    "interpretation": "Fresh frozen-DDC query identifies three platform clock nets at the explicit >=1000 threshold. Original synthesis TIM-134 count4 is retained; this inventory does not identify a fourth net or establish physical clock timing."
+  },
+  "structure": {
+    "summary_sha256": "95a3bde42e44fe1aabcbb0b450a683acbfc3d5b298a423b4607daab0a7158652",
+    "declaration_only_ports": 11324,
+    "no_load_driver_ports": 262,
+    "all_no_load_ports_match_unloaded_declarations": true,
+    "extra": [],
+    "missing": [],
+    "numeric_instances": {
+      "pe": 80,
+      "array": 1,
+      "requantize": 80
+    },
+    "other_warnings": {
+      "LINT-32": 10735,
+      "LINT-33": 1340,
+      "LINT-1": 4
+    },
+    "warning_meanings": {
+      "LINT-32": "submodule pin connected to logic1 or logic0",
+      "LINT-33": "same net connected to more than one submodule pin",
+      "LINT-1": "four original platform unused cells: debug ndreset_dfflr/fullreset_dfflr, AON u_aon_porrst, PLIC irq1.prio_dffr"
+    }
+  },
+  "gate14_sha256": "a804235fd382cc5c7acd3bf088bb4fa3b6f14bc2ef4565727b8bb3b0b4d79fba",
+  "sdf": false,
+  "scoped_area_upper_bound_mm2": "0.9511486879005002",
+  "area_rule": "All SoC standard cells plus92 internal macros; excludes only128 reused TCM/shared macros. Thus new interface/arbiter/FIFO/control are included.",
+  "area_upper_bound_reviewed": true,
+  "official_area_attribution_verified": false,
+  "strict_timing_accepted": false,
+  "next_stage_allowed": false,
+  "remaining": [
+    "Actual N1 PT clock and disabled-arc scope",
+    "N1/B0 unknown activity and model influence",
+    "Final formal precision/power report"
+  ],
+  "evidence": [
+    {
+      "local_file": "takeover_local/n1_timing_review_0810.png",
+      "sha256": "f761c22127af51c05f52d40808c08e20c8a92aa0ac56957be2c15cd363121c8f"
+    },
+    {
+      "local_file": "takeover_local/n1_structure_final_counts_0942.png",
+      "sha256": "243b9a97d682d4c96a1ba956faf8421ddf8dc9eb3bd2332e42da242c0755c3cf"
+    },
+    {
+      "local_file": "takeover_local/n1_structure_warnings_0945.png",
+      "sha256": "c43e86ec6a9da675b284f79a9a7f35022a1f0bda7ba175652894f0dff7a5426c"
+    }
+  ]
+}

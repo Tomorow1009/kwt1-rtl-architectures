@@ -133,6 +133,52 @@ class N1ArchiveTests(unittest.TestCase):
         self.assertEqual(result['member_counts']['regular'],len(before))
         self.assert_lock_released()
 
+    def queue_fixture(self,completed=13,status='numbers_ready_independent_review_required'):
+        session=self.f.ops/'runs/n1_acceptance01';session.mkdir()
+        request=dict(schema='arch03-n1-acceptance-continuation-v1',bundle=str(self.f.ops))
+        (session/'request.json').write_text(json.dumps(request))
+        state=dict(schema='arch03-n1-acceptance-queue-state-v1',status=status,finished='fixture',
+            child_pid=None,n2_allowed=False,system_power_verified=False,completed=[],
+            request_sha256=archive.paths.digest(session/'request.json'))
+        if status=='failed':state['error']='fixture child failure preserved'
+        for i in range(completed):
+            label,kind,suffix=('precision','n1_precision','_precision') if i==0 else (
+                'power%02d'%i,'n1_power','_p%02d'%i)
+            run=session.parent/(session.name+suffix)/kind;run.mkdir(parents=True)
+            (run/'summary.json').write_text(json.dumps(dict(fixture=label)))
+            digest=archive.paths.digest(run/'summary.json')
+            (run.parent/'state.json').write_text(json.dumps(dict(schema='arch03-n1-server-state-v1',
+                stages={kind:dict(status='passed',finished='fixture',summary_sha256=digest)})))
+            state['completed'].append(dict(label=label,stage=kind,reference=dict(run=str(run),sha256=digest)))
+        (session/'state.json').write_text(json.dumps(state))
+        return session,state
+
+    def test_terminal_observer_queue_roundtrip_does_not_grant_acceptance(self):
+        session,state=self.queue_fixture();before=self.snapshot()
+        archive.archive(self.request)
+        self.assertEqual(before,self.snapshot())
+        records=json.loads((self.target/'manifest.json').read_text())['terminal_states']
+        queue=[r for r in records if r.get('kind')=='serial_observer_queue'][0]
+        self.assertEqual(queue['completed_children'],13)
+        self.assertFalse(queue['system_power_verified']);self.assertTrue(queue['acceptance_not_inferred_from_archive'])
+
+    def test_queue_running_incomplete_or_changed_child_cannot_archive(self):
+        session,state=self.queue_fixture()
+        for changed in (dict(state,status='running'),dict(state,child_pid=123),
+                        dict(state,n2_allowed=True),dict(state,completed=state['completed'][:-1]),
+                        dict(state,request_sha256='0'*64)):
+            with self.subTest(changed=changed['status']),self.assertRaises(ValueError):
+                archive.completed_queue(session,changed)
+        child=Path(state['completed'][0]['reference']['run'])/'summary.json'
+        child.write_text('changed')
+        with self.assertRaisesRegex(ValueError,'child identity'):archive.completed_queue(session,state)
+
+    def test_failed_queue_preserves_completed_prefix_and_failure(self):
+        session,state=self.queue_fixture(2,'failed')
+        result=archive.completed_queue(session,state)
+        self.assertEqual(result['status'],'failed');self.assertEqual(result['completed_children'],2)
+        self.assertFalse(result['system_power_verified'])
+
     def test_running_or_unknown_stage_stops_before_destination(self):
         state_path=self.f.base/'runs/session/state.json';state=json.loads(state_path.read_text())
         state['stages']['n1_synth']['status']='running';state_path.write_text(json.dumps(state))

@@ -1,0 +1,84 @@
+{
+  "schema": "b0-power-model-and-disabled-arcs-review-v1",
+  "observed_at": "2026-11-13T09:42:52+08:00",
+  "inventory_sha256": "ca3a4bc43cd7d3871f9837349a04fff1d8133f2cc354f88ab8c459dd1936a1fe",
+  "baseline_report_sha256": "677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a",
+  "model_identity": "Both fixed SS/.99V/125C SRAM Liberty receipts bind80 internal-power groups and four nonzero leakage groups, covering VDDPE and VDDCE.",
+  "RET1N_high_default_rail_leakage_mW": {
+    "RAMSP128X16": {
+      "VDDPE": "0.001589",
+      "VDDCE": "0.003292",
+      "sum": "0.004881"
+    },
+    "RAMSP4096X16": {
+      "VDDPE": "0.014038",
+      "VDDCE": "0.031993",
+      "sum": "0.046031"
+    }
+  },
+  "all12_identical_actual_per_cell_leakage_w": {
+    "accelerator": {
+      "4.88099977e-06": 92
+    },
+    "itcm": {
+      "4.60310002e-05": 32
+    },
+    "dtcm": {
+      "4.60310002e-05": 32
+    },
+    "shared": {
+      "4.60310002e-05": 64
+    }
+  },
+  "leakage_interpretation": "Actual values match the sum of both default rail groups after mW-to-W conversion, within tool numeric display precision. Neither macro is treated as zero leakage.",
+  "shared_L01_internal_power_w": "0.0044477349983",
+  "shared_L01_total_power_w": "0.0073937190982",
+  "shared_L01_net_switching_power_w": "0",
+  "zero_switching_note": "Separate net-switching term is zero in this report; actual SRAM internal write power and leakage are nonzero and retained. Do not substitute zero for total SRAM power.",
+  "disabled_timing": {
+    "layers_rehashed": 12,
+    "rows_each": 77806,
+    "flags_each": {
+      "p": 14128,
+      "C": 61492,
+      "c": 1985,
+      "d": 201
+    },
+    "actual_tool_legend": {
+      "p": "propagated constant",
+      "C": "conditional arc",
+      "c": "case-analysis",
+      "d": "default conditional arc",
+      "l": "loop breaking",
+      "L": "db inherited loop breaking",
+      "u": "user-defined",
+      "U": "user-defined library arcs"
+    },
+    "loop_breaking_or_user_disabled_rows": 0,
+    "interpretation": "All rows parsed from each complete original table. PTE-003 is explained by constant/case/conditional exclusions in this task-mode analysis; no l/L/u/U rows found. This is not all-mode or physical timing signoff."
+  },
+  "system_power_verified": false,
+  "remaining": [
+    "Mapped unknown-state influence outside proven idle shared read path",
+    "Actual N1 comparison and its own model/clock/activity audit",
+    "Pre-layout clock/wire estimates, no extracted physical parasitics"
+  ],
+  "evidence": [
+    {
+      "path": "takeover_local/b0_models_compact_0952.png",
+      "sha256": "b4a57f86c94b7ddef7fe4ebd1b3b06d4d6cbc2b75784cd2c99a47a82199bcef7"
+    },
+    {
+      "path": "takeover_local/b0_leakage_actual_0955.png",
+      "sha256": "b8d0994589cfdcd182349ef8691b7eda2f28c5b56178a3bec48ad1fe2b405926"
+    },
+    {
+      "path": "takeover_local/b0_disabled_flags_0956.png",
+      "sha256": "016d35058fad0c99b42ef2e0fe83eb05678c916fe282b3bb2fc3b07363896ebd"
+    },
+    {
+      "path": "takeover_local/b0_all_disabled_0959.png",
+      "sha256": "21c8b7a9cea0ce86a3fba6f876477fca47c94472e6a5c8ff479d12bde725fce3"
+    }
+  ]
+}

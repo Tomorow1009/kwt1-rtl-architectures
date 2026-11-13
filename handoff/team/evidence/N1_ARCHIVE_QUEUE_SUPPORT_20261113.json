@@ -1,0 +1,21 @@
+{
+  "schema": "n1-archive-queue-support-local-v1",
+  "status": "local_tested_not_deployed",
+  "changed_files": {
+    "workspaces/arch03/scripts/n1_archive_runtime.py": "fe02e6774de23bdccf4cc817823de1728bbfdac08110ebb76c423617265df616",
+    "workspaces/arch03/scripts/n1_archive_auxiliary.py": "35aa58afc2ee37653643465321236c07175f82bba088fd67bcef636f0e894627",
+    "workspaces/arch03/scripts/test_n1_archive_runtime.py": "82d0750f49c2a0098308268d742d31d31a1758f4c4d672b608c2bea22f2f7456"
+  },
+  "runtime_tests_passed": 24,
+  "auxiliary_tests_passed_after_pin_update": 17,
+  "tested": [
+    "completed13-child queue full archive roundtrip",
+    "running/incomplete/changed-child rejection",
+    "failed queue prefix retained",
+    "original existing archive roundtrip, mutation, ownership, space and link safeguards"
+  ],
+  "initial_test_failure": "Auxiliary helper pin update used repo-relative path from scripts cwd and failed before writing;17 auxiliary tests then rejected stale pin. Corrected exact helper SHA and all17 passed. Runtime24 tests passed.",
+  "server_archive_run": false,
+  "source_deleted": false,
+  "scope": "Recognizes serial-observer terminal schema; never grants stage acceptance."
+}
