@@ -1,0 +1,35 @@
+{
+  "name": "light-light126-n1-archiveops-fe65a94dc736",
+  "zip": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-n1-archiveops-fe65a94dc736\\light-light126-n1-archiveops-fe65a94dc736.zip",
+  "bytes": 17399,
+  "sha256": "bf8e5ae82da537c56b1bd8d0c721540aae015382473ca54119d54bc9c7235a12",
+  "manifest_sha256": "0138db31e048709dccb84fd4b9fc29eb2e728b1eea95ec448b3cf31b17115394",
+  "source_commit": "fe65a94dc7360892bfe3f7d4c052cb4e4efd6add",
+  "members": {
+    "n1_archive_runtime.py": {
+      "bytes": 25955,
+      "sha256": "fe02e6774de23bdccf4cc817823de1728bbfdac08110ebb76c423617265df616"
+    },
+    "n1_archive_auxiliary.py": {
+      "bytes": 15952,
+      "sha256": "35aa58afc2ee37653643465321236c07175f82bba088fd67bcef636f0e894627"
+    },
+    "n1_paths.py": {
+      "bytes": 8183,
+      "sha256": "fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d"
+    }
+  },
+  "server_deployed": true,
+  "schema": "n1-archive-final-ops-deployment-v1",
+  "server_directory": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-archiveops-fe65a94dc736",
+  "deployed_at": "2026-11-13T09:52:36.210387+08:00",
+  "runtime_import_dependencies_passed": true,
+  "archive_started": false,
+  "source_deleted": false,
+  "filezilla_closed": true,
+  "evidence": {
+    "n1_archive_fz_uploaded.png": "c81fcce4c57dcdd727a7c3b214e7f0eda39765088ecb96b9f5d6aec343a8d852",
+    "n1_archive_deployed.png": "769558942bc68d6f895c8b0aafaeadd0246fe41e0b4316f78d2a165d2f2316f0",
+    "n1_archive_smoke.png": "ecb7abac15557f81aaa35af1e20da8f549b898e3aa1c7adc3d8c9a62fa6046e7"
+  }
+}

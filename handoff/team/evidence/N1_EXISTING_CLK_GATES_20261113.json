@@ -1,0 +1,15 @@
+{
+  "schema": "n1-existing-clk-gates-inventory-v1",
+  "observed_at": "2026-11-13T09:55:54+08:00",
+  "synthesis_summary_sha256": "cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31",
+  "mapped_sha256": "59c75a4930d82a417e8ac77386751f9cb53c7813964e329729ed9f2a3bfdc82e",
+  "query": "Existing leaf_area.tsv rows whose text contains CLKLAN; source summary and leaf table hashes verified",
+  "cells": {
+    "CLKLANAQV4_12TR40": 15
+  },
+  "accelerator_matches": 0,
+  "summed_library_area_um2": "67.032",
+  "scope": "Existing library family only; does not establish arbitrary clock-expression coverage, clock gating effectiveness or N2 acceptance",
+  "n2_implemented": false,
+  "screenshot_sha256": "1abb26b91b70d352e273b02d38dd26846402c4795cd96969ddd8cec0c1be73b4"
+}
