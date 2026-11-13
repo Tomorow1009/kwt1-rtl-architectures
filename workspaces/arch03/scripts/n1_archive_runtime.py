@@ -134,15 +134,38 @@ def auxiliary_receipts(bundles,bindings):
     return records
 
 
-def completed_queue(session,state):
+def completed_queue(session,state,request_binding=None):
     """Archive the serial observer's own terminal schema, without granting PASS."""
     require(state.get('status') in ('numbers_ready_independent_review_required','failed') and
         state.get('finished') and state.get('child_pid') is None and
         state.get('n2_allowed') is False and state.get('system_power_verified') is False,
         'N1 continuation queue has not safely ended')
     request_path=paths._plain(session/'request.json')
-    require(paths.digest(request_path)==state.get('request_sha256'),'Queue request digest changed')
     request=json.loads(request_path.read_text())
+    copy_digest=paths.digest(request_path)
+    original_request=None
+    if copy_digest!=state.get('request_sha256'):
+        # The observer preserves a canonical atomic_save copy but pins the
+        # original CLI file's bytes. An explicit original identity must prove
+        # both the original hash and complete JSON equality; never waive it.
+        require(isinstance(request_binding,dict) and
+            set(request_binding)=={'session','request','sha256'} and
+            request_binding['session']==str(session),
+            'Queue request digest changed; explicit original binding required')
+        require(request_binding['sha256']==state.get('request_sha256'),
+            'Queue original binding differs from recorded request SHA')
+        source=paths._owned(Path(request_binding['request']),session.parent.parent.parent,paths._identity())
+        require(source.is_file() and paths.digest(source)==request_binding['sha256'],
+            'Queue original request bytes changed')
+        require(json.loads(source.read_text())==request,
+            'Queue copied request content differs from pinned original')
+        original_request=dict(path=str(source),sha256=request_binding['sha256'],
+            copied_request_sha256=copy_digest,parsed_JSON_identical=True)
+    elif request_binding is not None:
+        require(request_binding.get('session')==str(session) and
+            request_binding.get('sha256')==copy_digest and
+            paths.digest(paths._owned(Path(request_binding['request']),session.parent.parent.parent,paths._identity()))==copy_digest,
+            'Unnecessary queue request binding has a different identity')
     require(request.get('schema')=='arch03-n1-acceptance-continuation-v1' and
         request.get('bundle')==str(session.parent.parent),'Queue bundle/schema differs')
     rows=state.get('completed')
@@ -168,13 +191,23 @@ def completed_queue(session,state):
         require(isinstance(state.get('error'),str) and state['error'].strip(),'Failed queue lacks reason')
     return dict(bundle=session.parent.parent.name,session=session.name,kind='serial_observer_queue',
         status=state['status'],completed_children=len(rows),state_sha256=paths.digest(session/'state.json'),
-        request_sha256=state['request_sha256'],system_power_verified=False,
+        request_sha256=state['request_sha256'],original_request_binding=original_request,
+        copied_request_sha256=copy_digest,system_power_verified=False,
         acceptance_not_inferred_from_archive=True)
 
 
-def terminal_states(bundles,bindings=None):
+def terminal_states(bundles,bindings=None,queue_bindings=None):
     auxiliary=auxiliary_receipts(bundles,[] if bindings is None else bindings)
-    records=[];consumed=set()
+    queue_bindings=[] if queue_bindings is None else queue_bindings
+    require(isinstance(queue_bindings,list),'Queue request bindings must be a list')
+    requests={}
+    for item in queue_bindings:
+        require(isinstance(item,dict) and set(item)=={'session','request','sha256'},'Invalid queue request binding')
+        session=Path(item['session'])
+        require(session.parent.name=='runs' and session.parent.parent in bundles and
+            session not in requests,'Unregistered or duplicate queue request binding')
+        requests[session]=item
+    records=[];consumed=set();used_requests=set()
     for bundle in bundles:
         runs=bundle/'runs'
         # lstat before exists/iterdir: even a dangling symlink is an unsafe root.
@@ -192,7 +225,9 @@ def terminal_states(bundles,bindings=None):
             require(not state_path.is_symlink() and state_path.is_file(),'Session lacks terminal state: '+str(session))
             state=json.loads(state_path.read_text())
             if state.get('schema')=='arch03-n1-acceptance-queue-state-v1':
-                records.append(completed_queue(session,state));continue
+                records.append(completed_queue(session,state,requests.get(session)))
+                if session in requests:used_requests.add(session)
+                continue
             require(state.get('schema')=='arch03-n1-server-state-v1' and state.get('stages'),
                 'Unknown runtime session state: '+str(session))
             for stage,row in state['stages'].items():
@@ -206,6 +241,7 @@ def terminal_states(bundles,bindings=None):
                     state_sha256=paths.digest(state_path),summary_sha256=row.get('summary_sha256'),
                     acceptance_not_inferred_from_archive=True))
     require(consumed==set(auxiliary),'Unused auxiliary run binding')
+    require(used_requests==set(requests),'Unused queue request binding')
     return records
 
 
@@ -364,14 +400,14 @@ def archive(request):
     target=destination(request['destination'],root,paths._identity())
     lock,lock_identity,owner=acquire_lock(cfg,target.name);created=False
     try:
-        auxiliary=request.get('auxiliary_runs',[])
-        terminal=terminal_states(bundles,auxiliary);before_uses=no_open_users(bundles);rows=inventory(cfg)
+        auxiliary=request.get('auxiliary_runs',[]);queue_bindings=request.get('queue_request_bindings',[])
+        terminal=terminal_states(bundles,auxiliary,queue_bindings);before_uses=no_open_users(bundles);rows=inventory(cfg)
         print('N1_ARCHIVE_IDLE_INVENTORY',len(rows),'members','source_regular_bytes',
               sum(row['bytes'] for row in rows if row['kind']=='regular'),flush=True)
         predicted=stream_archive(rows,Sink())
         required=(predicted*6+4)//5+RESERVE;free=shutil.disk_usage(str(target.parent)).free
         require(free>=required,'Insufficient shared archive space: need 1.2x exact gzip bytes plus 2GiB')
-        require(inventory(cfg)==rows and terminal_states(bundles,auxiliary)==terminal,'Source changed during archive size preflight')
+        require(inventory(cfg)==rows and terminal_states(bundles,auxiliary,queue_bindings)==terminal,'Source changed during archive size preflight')
         no_open_users(bundles)
         target.mkdir(mode=0o700);created=True;sync_dir(target.parent)
         save(target/'state.json',dict(status='archiving',started_utc=now(),source_modified=False,source_deleted=False))
@@ -396,7 +432,7 @@ def archive(request):
             size=stream_archive(rows,Sink(stream,target));stream.flush();os.fsync(stream.fileno())
         require(size==predicted and partial.stat().st_size==predicted,'Deterministic gzip byte estimate changed')
         counts=verify_archive(partial,rows);archive_sha=paths.digest(partial)
-        require(inventory(cfg)==rows and terminal_states(bundles,auxiliary)==terminal,'Source changed during archive verification')
+        require(inventory(cfg)==rows and terminal_states(bundles,auxiliary,queue_bindings)==terminal,'Source changed during archive verification')
         after_uses=no_open_users(bundles);paths.recheck(cfg)
         require(all(paths.digest(Path(name))==value for name,value in tool_identity.items()),'Archiver tools changed during execution')
         final=target/'runtime-evidence.tar.gz';require(not final.exists(),'Archive final name exists')

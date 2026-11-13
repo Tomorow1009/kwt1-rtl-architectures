@@ -25,7 +25,7 @@ SCHEMA = 'arch03-n1-auxiliary-archive-v1'
 REQUEST_SCHEMA = 'arch03-n1-auxiliary-archive-request-v1'
 RUNTIME = Path('/tmp/s4_21usr_n1_20261113_0210')
 OPERATIONS = Path(paths.SERVER_ROOT)/'light-light126-undergrad-d2-20261109/operations'
-HELPER_SHA = 'fe02e6774de23bdccf4cc817823de1728bbfdac08110ebb76c423617265df616'
+HELPER_SHA = '4a4a12d8032a7e209b11187f7ceae3b85d76d546f5d91dae1a6a8952e2c93569'
 PATHS_SHA = 'fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d'
 ALLOW = {
     'b0_control_l01_20261113_0403': 'directory',

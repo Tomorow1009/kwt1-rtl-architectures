@@ -179,6 +179,36 @@ class N1ArchiveTests(unittest.TestCase):
         self.assertEqual(result['status'],'failed');self.assertEqual(result['completed_children'],2)
         self.assertFalse(result['system_power_verified'])
 
+    def test_queue_canonical_copy_needs_pinned_original_and_equal_content(self):
+        session,state=self.queue_fixture(2,'failed')
+        source=self.f.private/'original_queue_request.json'
+        source.write_bytes((session/'request.json').read_bytes())
+        copied=json.loads(source.read_text())
+        (session/'request.json').write_text(json.dumps(copied,indent=2,sort_keys=True)+'\n')
+        with self.assertRaisesRegex(ValueError,'explicit original binding'):
+            archive.completed_queue(session,state)
+        binding=dict(session=str(session),request=str(source),sha256=state['request_sha256'])
+        result=archive.completed_queue(session,state,binding)
+        self.assertTrue(result['original_request_binding']['parsed_JSON_identical'])
+        self.assertNotEqual(result['request_sha256'],result['copied_request_sha256'])
+        self.request['queue_request_bindings']=[binding]
+        archive.archive(self.request)
+        manifest=json.loads((self.target/'manifest.json').read_text())
+        record=next(r for r in manifest['terminal_states'] if r.get('kind')=='serial_observer_queue')
+        self.assertEqual(record['original_request_binding']['path'],str(source))
+
+    def test_queue_binding_rejects_different_hash_or_JSON(self):
+        session,state=self.queue_fixture(2,'failed')
+        source=self.f.private/'original_queue_request.json'
+        source.write_bytes((session/'request.json').read_bytes())
+        copied=json.loads(source.read_text());copied['extra']='changed'
+        (session/'request.json').write_text(json.dumps(copied,indent=2))
+        binding=dict(session=str(session),request=str(source),sha256=state['request_sha256'])
+        with self.assertRaisesRegex(ValueError,'content differs'):
+            archive.completed_queue(session,state,binding)
+        with self.assertRaisesRegex(ValueError,'binding differs'):
+            archive.completed_queue(session,state,dict(binding,sha256='0'*64))
+
     def test_running_or_unknown_stage_stops_before_destination(self):
         state_path=self.f.base/'runs/session/state.json';state=json.loads(state_path.read_text())
         state['stages']['n1_synth']['status']='running';state_path.write_text(json.dumps(state))
