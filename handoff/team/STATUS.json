@@ -3363,12 +3363,12 @@
     }
   },
   "narrow_execution": {
-    "status": "N1_SAIF12_precision100_passed_power12_running",
+    "status": "N1_precision_passed_power02_complete_shared_NFS_full",
     "branch": "codex/light-light126/arch03-n1-n2-d1-d2-20261113",
     "h0": "2026-11-13T00:49:49+08:00",
     "base_commit": "cd4a63ad4a4c7ab5e07b471bf70d7fd2fbc6bc5f",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1030_N1.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1045_N1.md",
     "phase_order": [
       "N1",
       "N2",
@@ -3383,9 +3383,9 @@
     "new_server_jobs_started": true,
     "new_hardware_verified": false,
     "current_work": [
-      "Monitor original SAIF and already-running serial precision/power queue",
-      "Complete N1/B0 power influence and scoped timing/area review",
-      "Export final evidence once and preserve durable archives before N2"
+      "Recover only power03 through12 in fresh sessions",
+      "Join completed N1 evidence and review unknown power impact",
+      "Accept N1 before N2"
     ],
     "next": "Finish N1 only; no N2 RTL until all N1 acceptance complete.",
     "array_random_blocks_passed": 10000,
@@ -3396,7 +3396,7 @@
     "data100_file_identity_passed": true,
     "server_observed_at": "2026-11-13T10:31:21.320635+08:00",
     "server_session": "n1_acceptance01_p01",
-    "server_pid": 31478,
+    "server_pid": null,
     "archive_session": "r4_l01_archive02",
     "archive_pid": null,
     "archive_explicitly_authorized": true,
@@ -3410,7 +3410,7 @@
     "archive_temporary_directory": "/tmp/s4_21usr-r4-l01-20261113_0233",
     "runtime_tools_deployed": true,
     "runtime_linux_identity_passed": true,
-    "cloud_commit": "04825e4585e445e19969a594b6247fbfe80cedae",
+    "cloud_commit": "b9fc9d6569fcf0168611b6e2152e1a3e19627611",
     "B0_readonly_inventory": "handoff/team/evidence/B0_POWER_READONLY_REVIEW_20261113.json",
     "archive_observed_at": "2026-11-13T03:10:40+08:00",
     "archive_evidence": "handoff/team/evidence/R4_L01_STAGED_ARCHIVE_20261113.json",
@@ -3424,7 +3424,7 @@
     "B0_control_probe_last_observed": "2026-11-13T04:24:49+08:00",
     "B0_control_probe_status": "selected_control_residence_collected_review_required",
     "B0_control_probe_summary_sha256": "2c06372156a5f80e50e6c0634002f6686dc1768966d65bde32cc7a51b0060f7d",
-    "shared_free_bytes_observed": 9036627968,
+    "shared_free_bytes_observed": 18874368,
     "synthesis_completed": true,
     "synthesis_summary_sha256": "cc7f26115f3158fb69f4575f28b5dfde4dd8e5b3aeefda2a927928ad8418db31",
     "synthesis_conservative_budget_mm2": 0.9511486879005002,
@@ -3496,8 +3496,8 @@
     },
     "acceptance_queue_pid": 237710,
     "acceptance_queue_session": "n1_acceptance01",
-    "acceptance_queue_observed_at": "2026-11-13T10:31:21.320635+08:00",
-    "acceptance_queue_status": "running_power01",
+    "acceptance_queue_observed_at": "2026-11-13T10:45:05.678328+08:00",
+    "acceptance_queue_status": "original_and_first_recovery_failed_ENOSPC",
     "acceptance_queue_deployment": "handoff/team/evidence/N1_ACCEPTANCE_QUEUE_DEPLOYMENT_20261113.json",
     "local_float100_numeric_probe": "handoff/team/evidence/N1_LOCAL_FLOAT100_NUMERIC_PROBE_20261113.json",
     "local_float100_max_layer_nrmse_percent": 0.1933721614699203,
@@ -3519,6 +3519,8 @@
     "precision_summary_sha256": "c812e7f41f787f81622ef9b0baf2b9a093cdac8b77674bf69fb7a3652a581b1f",
     "precision_finished": "2026-11-13T10:29:17.128598+08:00",
     "final_ASIC_precision_join_complete": false,
-    "saif_precision_completion": "handoff/team/evidence/N1_SAIF_PRECISION_COMPLETION_20261113.json"
+    "saif_precision_completion": "handoff/team/evidence/N1_SAIF_PRECISION_COMPLETION_20261113.json",
+    "power_recovery_evidence": "handoff/team/evidence/N1_POWER_RECOVERY_STORAGE_20261113.json",
+    "power_completed_cases": 2
   }
 }

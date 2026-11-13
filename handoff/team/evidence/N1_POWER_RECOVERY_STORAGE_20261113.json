@@ -1,0 +1,170 @@
+{
+  "schema": "n1-power-recovery-storage-v1",
+  "observed_at": "2026-11-13T11:05:09+08:00",
+  "original_queue": {
+    "session": "n1_acceptance01",
+    "pid": 237710,
+    "status": "failed",
+    "current": "power03",
+    "finished": "2026-11-13T10:35:46.296408",
+    "reason": "ENOSPC during shared lock mkdir",
+    "state_sha256": "4fe0eaf9d00d31293e99d3ee1f27ac945b1bedb014e0023aeb834d09d1ce2f2d",
+    "preserved": true
+  },
+  "passed_prefix": [
+    "precision",
+    "power01",
+    "power02"
+  ],
+  "cleanup": {
+    "candidate_local_identity": {
+      "light-light126-annotation-review-dma16-20261110_084850-db8e2719b2a6.zip": {
+        "bytes": 16629994,
+        "sha256": "7935ce6d3788c896525f6bd1723f294aa8a632586f649bfbe63e241bf9ab23e6"
+      },
+      "light-light126-annotation-tables-dma16-20261110_090821-fd54fd14267d.zip": {
+        "bytes": 16632892,
+        "sha256": "d56631e998cfaf6ed34803d36e17ef4deaeca0f1789da7021760750c0cc566ce"
+      },
+      "light-light126-annotation-zero-dma16-20261110_092724-e777a683c039.zip": {
+        "bytes": 16631907,
+        "sha256": "33cf131a88a87dda600f3eb77234fe65c4c6433d47219425e986b5e5f0b4b097"
+      },
+      "light-light126-batch-identity-dma16-20261110_045000-66838470bb12.zip": {
+        "bytes": 16560820,
+        "sha256": "a1ab4af4868ea010639ce474b6484c171b468e05bc336917594d65ab8088226c"
+      },
+      "light-light126-contention-dma16-20261110_004532-525831d4ca6e.zip": {
+        "bytes": 16472898,
+        "sha256": "c88f30be27798b5341f8bb1258859e1fe56f8a94e6d4d84eeaf24e3ca95c458b"
+      },
+      "light-light126-mac-gcc48-dma16-20261110_100643-bb25f0843195.zip": {
+        "bytes": 16639480,
+        "sha256": "bdf0b13f74761595b7f02d83c633676cfb1afc2953f93208e582516134772c2f"
+      },
+      "light-light126-mac-use-dma16-20261110_094741-3dcd35187115.zip": {
+        "bytes": 16635627,
+        "sha256": "9537abe61269aae66152b675e33aa7d25468c116204c85803d91d1b50f79f0e7"
+      },
+      "light-light126-mmio-gate-dma16-20261110_024809-4310d9b7cb34.zip": {
+        "bytes": 16522096,
+        "sha256": "88d25cdcfdddc3a60fc5228305151a490bd6f6e741bcc7e2ab7cd0ce3d6d449c"
+      },
+      "light-light126-mmio-objects-dma16-20261110_120027-4231c41f539d.zip": {
+        "bytes": 16674768,
+        "sha256": "13d07ac8f4fd02f2a75c76a972834ac3a2fee2e9878b469cc2c6e4c56a76b7af"
+      },
+      "light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d.zip": {
+        "bytes": 16441116,
+        "sha256": "07c08efeff205d76949f81e8a90830e23a2063b8a996831739b171161a82f410"
+      },
+      "light-light126-mmio-report-phase-dma16-20261110_112517-e9fc57cecc73.zip": {
+        "bytes": 16672116,
+        "sha256": "5fda05b9858c5908fef7da585a51631fe1b5e1bfc59f16dcbf5b9bef811f7fdc"
+      },
+      "light-light126-mmio-timing-dma16-20261110_111311-ecf3cd4afb3c.zip": {
+        "bytes": 16662114,
+        "sha256": "b2a21eb5fc1722c7c6d467f4ceafec78d23e92081c573842bd4318228663d0b5"
+      },
+      "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696.zip": {
+        "bytes": 16616399,
+        "sha256": "2a800278d4fb4af4df219a668c3231be3e902c6213fe8b30b3a11ba8897f7b74"
+      },
+      "light-light126-ptformat-dma16-20261110_021151-2363d009ed9f.zip": {
+        "bytes": 16498088,
+        "sha256": "510a98a9fb42a586db32a9cb340379455537779ff0880ee6ad21f0db61d523cc"
+      },
+      "light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7.zip": {
+        "bytes": 16544198,
+        "sha256": "a13d9e9e0ad5f82b0a3081f531638f38c815398285376d9668fd9312898d44ff"
+      },
+      "light-light126-receipt-fix-dma16-20261110_044410-197429560e54.zip": {
+        "bytes": 16556517,
+        "sha256": "6c148e4da4e73f33fe0fb692291b4489786dd8e2ac8545dc791f371f3dfd7278"
+      },
+      "light-light126-ref-export-dma16-20261110_032204-414bc5631438.zip": {
+        "bytes": 16545313,
+        "sha256": "06cb7083b785c069439d59029adce6d5aedc1a304f47d9f70cd355a5ac7d5d0a"
+      },
+      "light-light126-ref-numbers-dma16-20261110_030111-80b54d1f408a.zip": {
+        "bytes": 16535320,
+        "sha256": "8dbc13c1c22165475ceba00f3a7fb780f7004806eaacdabf8b028c9ca21f7237"
+      },
+      "light-light126-report-dma16-20261110_014431-29992c76aa07.zip": {
+        "bytes": 16492249,
+        "sha256": "d054c7c2a7f405351ba3fc6efd563e4958f9ee81e0050357a9fa3cab38d6624f"
+      },
+      "light-light126-reportfix-dma16-20261110_020049-7dc2617176b6.zip": {
+        "bytes": 16498625,
+        "sha256": "7713a0535dfedfb32ca2e9f0bd07ffad8d8454b981d23ff10d0577f6bf48bee7"
+      },
+      "light-light126-review-correct-dma16-20261110_065806-97553fe93b61.zip": {
+        "bytes": 16603004,
+        "sha256": "5c8395e247ae19d0e74adee89dfc336651d02499fa607c7c41453145d0d86b3a"
+      },
+      "light-light126-review-export-dma16-20261110_062714-89b35a37eb71.zip": {
+        "bytes": 16599863,
+        "sha256": "4f5ca45777aeaf83e4a610e182ee1d53657e6bc6ce20d4310228d5915c936f52"
+      },
+      "light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d.zip": {
+        "bytes": 16597053,
+        "sha256": "aa669fd81b9a597b92cf537d8a0ab8e5a0f289a8661c51897bef383f82ad8bbf"
+      },
+      "light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd.zip": {
+        "bytes": 16587832,
+        "sha256": "c622483ab6188d70c222126cb74f281745e13cf739aff7d34703dc69aa0e31e4"
+      },
+      "light-light126-timing-audit-dma16-20261110_042604-8c3ad9f5cff7.zip": {
+        "bytes": 16555314,
+        "sha256": "cd49279f3349e6eea51942f23da76f721cfee059baf8081d892bdfba6e2bc74a"
+      },
+      "light-light126-unknown-audit-dma16-20261110_053139-3178c8faab53.zip": {
+        "bytes": 16575930,
+        "sha256": "0b56714fa2f7563c5fae840e3eeb44b5230ddab187fbbdbd3b1fca17081684bb"
+      },
+      "light-light126-unknown-netlist-dma16-20261110_073951-1aa0ba3de8a9.zip": {
+        "bytes": 16613737,
+        "sha256": "eb76e93a17906709ddfe3fc66497ccf7fdd7fcb14d4cd7dab8bea3ed0007d417"
+      },
+      "light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a.zip": {
+        "bytes": 16441078,
+        "sha256": "bfddbe51471d1e72a8af97ea0d2735edd5538f93e0ed07695debc4b9b43aacc3"
+      },
+      "light-light126-x-compare-dma16-20261110_105208-a74588d97aaa.zip": {
+        "bytes": 16654613,
+        "sha256": "b488fd3d2933f9052f79bf860701c75201ec1c0c84c94bfd66f764f168f168ce"
+      },
+      "light-light126-x-model-dma16-20261110_102408-b85e908fab38.zip": {
+        "bytes": 16644393,
+        "sha256": "475375b33f3ed516d6f24b2b21066cc05dbadd0c1e5991fcba038715051e77a9"
+      }
+    },
+    "removed_server_files": 20,
+    "removed_bytes": 330959830,
+    "copy_sha256": "fea888258d31a869e5e03c83459e089408987700ceb57f15756566e108ae3c40",
+    "remove_sha256": "72ea365c32e53f89991d62e726e2bb1096fd9851ef23b703a38f9b493d232604",
+    "finished": "2026-11-13T10:57:07.702076",
+    "free_bytes": 331350016,
+    "retained_root": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845/retained_dma16_zip_1055",
+    "all_runtime_results_preserved": true,
+    "copy_sha256_status": "transcription_pending_short_server_recheck"
+  },
+  "recovery_tool": {
+    "original_sha256": "12dc3f05d5df9f639437e8739f2811484a1033f52cd313bbee937abeeb584630",
+    "first_attempt": "stopped before any child: bound raw request digest to formatted queue copy",
+    "corrected_sha256": "de1c6cb715399d8d7b4162eb695461a5f2c24c4e643974c6e40f31c9c738ee46",
+    "checks": "original request byte hash plus semantic equality of saved copy",
+    "runtime_dir": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845/recovery_tools_1100",
+    "final_sha256": "57b59160e4c06ec76630550356be2be8b969338a4351ec3fd574c8bb8e01d158",
+    "final_runtime_dir": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845/recovery_tools_1103",
+    "second_attempt": "stopped before children due to a 63-character manually transcribed state hash",
+    "third_attempt": "original identities passed; first new p03 child stopped ENOSPC on shared lock mkdir; no power run created"
+  },
+  "screenshots": {
+    "n1_zip20_removed_done.png": "839b6a4c34490bb33bb7f27d5196c6db5eae9c51b008aa7f0082411e8c2f8ef9",
+    "n1_request_identity.png": "82cf03fc30875ca4529f50f147c03ac4340d0a00e4c9b45d09196c9c8c13e8e1",
+    "n1_recovery_fixed.png": "6e7191e6b42e8145a9dd04edbb371018d86327912d236e47d959a758466a741b"
+  },
+  "n2_started": false,
+  "continuation_status": "failed_shared_filesystem_ENOSPC_preserved"
+}
