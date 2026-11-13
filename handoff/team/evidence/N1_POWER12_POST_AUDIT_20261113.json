@@ -1,0 +1,45 @@
+{
+  "schema": "n1-power12-post-audit-observation-v1",
+  "observed_at": "2026-11-13T12:08:21+08:00",
+  "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "runtime_commit": "0f62e41207909904efd544992013c1244b0fd63b",
+  "server_report": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845/power12_post_audit.json",
+  "server_report_sha256": "25431a40ada4589e21c745d349eafbf5a6dc443be66690d8010512a554bbd471",
+  "power_layers": 12,
+  "time_weighted_average_power_w_rounded": 0.06177734894060393,
+  "energy_per_task_j_rounded": 1.2236444205517346e-05,
+  "clock_period_ns": "6.666666",
+  "lf_clock_ns": "66",
+  "disabled_flags_each": {
+    "C": 72460,
+    "c": 12145,
+    "d": 201,
+    "p": 60113
+  },
+  "loop_breaking_or_user_disabled_rows": 0,
+  "system_power_verified": false,
+  "N2_allowed": false,
+  "remaining": [
+    "Independent ASIC/FLOAT final report export",
+    "Connected unknown-state influence and final scope review"
+  ],
+  "failed_readonly_query": "First compact query referenced an inventory-only condensed leakage field; raised KeyError without writing output. Second query derived histograms from actual per-cell numbers.",
+  "screenshots": [
+    {
+      "path": "takeover_local/n1_power12_post_audit.png",
+      "sha256": "84c34f90e6907e0e40ace9c30d899491649f675f4fe698ffa85c133fc9050715"
+    },
+    {
+      "path": "takeover_local/n1_power12_post_audit_v2.png",
+      "sha256": "be4d18673084d785469b1a05ac134fa7a2a1d3985421a906c9f44722853ca7d1"
+    },
+    {
+      "path": "takeover_local/n1_b0_connected_result.png",
+      "sha256": "6b05ce4a5730d1f13f25378cef301b4ee926e8f5a124ad01ae9794bc09c8425c"
+    },
+    {
+      "path": "takeover_local/b0_connected_categories.png",
+      "sha256": "b6a2c76e0170aa934729ef8f2c794e9ecc649129ad5284d48297d3bb430a740a"
+    }
+  ]
+}
