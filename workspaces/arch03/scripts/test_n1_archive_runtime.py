@@ -38,7 +38,7 @@ class N1ArchiveTests(unittest.TestCase):
             destination=str(self.target))
         self.real_no_open=archive.no_open_users
         for name,value in (('BACKUPS',self.backups),('sync_dir',lambda path:None),
-            ('no_open_users',lambda roots:dict(owned_processes_inspected=0,open_runtime_uses=0,fixture=True))):
+            ('no_open_users',lambda roots,**kw:dict(owned_processes_inspected=0,open_runtime_uses=0,fixture=True))):
             p=patch.object(archive,name,value);p.start();self.addCleanup(p.stop)
         p=patch.object(archive,'destination',return_value=self.target);p.start();self.addCleanup(p.stop)
         self.destination_patch=p
@@ -365,14 +365,23 @@ class N1ArchiveTests(unittest.TestCase):
         roots=[Path('/tmp/mock_n1')]
         targets={str(process/'cwd'):'/unrelated',str(process/'exe'):'/usr/bin/python3',str(fd/'1'):'/unrelated/log'}
         with patch.object(archive,'PROC_ROOT',proc),patch.object(archive.os,'readlink',side_effect=lambda name:targets[name]):
-            self.assertEqual(scan(roots)['open_runtime_uses'],0)
+            self.assertEqual(scan(roots)['observed_open_runtime_uses'],0)
+            self.assertTrue(scan(roots)['idle_proven'])
             targets[str(fd/'1')]='/tmp/mock_n1/driver.log'
             with self.assertRaisesRegex(ValueError,'still in use'):scan(roots)
+            with self.assertRaisesRegex(ValueError,'still in use'):scan(roots,copy_only=True)
             targets[str(fd/'1')]='/unrelated/log'
             (process/'maps').write_text('7f00-7f01 r-xp 0000 08:01 1 /tmp/mock_n1/simv\n')
             with self.assertRaisesRegex(ValueError,'still in use'):scan(roots)
         with patch.object(archive,'PROC_ROOT',proc),patch.object(archive.os,'readlink',side_effect=PermissionError(errno.EACCES,'denied')):
             with self.assertRaisesRegex(ValueError,'Cannot prove runtime idle'):scan(roots)
+            result=scan(roots,copy_only=True)
+            self.assertFalse(result['idle_proven']);self.assertFalse(result['all_owned_processes_observed'])
+            self.assertFalse(result['source_deletion_authorized'])
+            self.assertEqual(result['inaccessible_owned_processes'],[dict(pid=os.getpid(),errno=errno.EACCES,
+                visibility='protected_process_not_inspected')])
+        with patch.object(archive,'PROC_ROOT',proc),patch.object(archive.os,'readlink',side_effect=OSError(errno.EIO,'bad I/O')):
+            with self.assertRaisesRegex(ValueError,'Cannot prove runtime idle'):scan(roots,copy_only=True)
 
 
 if __name__=='__main__':unittest.main()

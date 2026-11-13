@@ -29,7 +29,7 @@ class AuxiliaryArchiveTests(unittest.TestCase):
                             entries=[dict(name=self.source.name,tree_sha256=None)])
         for obj,name,value in ((aux,'RUNTIME',self.f.private),(aux,'OPERATIONS',self.operations),
             (aux.base,'sync_dir',lambda p:None),
-            (aux.base,'no_open_users',lambda p:dict(fixture=True,open_runtime_uses=0)),
+            (aux.base,'no_open_users',lambda p,**kw:dict(fixture=True,open_runtime_uses=0)),
             (aux.shutil,'disk_usage',lambda p:types.SimpleNamespace(free=100*1024**3))):
             h=patch.object(obj,name,value);h.start();self.addCleanup(h.stop)
 

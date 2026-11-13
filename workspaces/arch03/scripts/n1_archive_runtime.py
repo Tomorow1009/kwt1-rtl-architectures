@@ -58,14 +58,16 @@ def _under(path,roots):
     return any(path==root or root in path.parents for root in roots)
 
 
-def no_open_users(roots):
+def no_open_users(roots,copy_only=False):
     """One /proc sweep of this private-directory owner's actual open uses.
 
     Covers descriptors, mapped files, cwd and executables. The account-private
-    0700 roots exclude ordinary other-account users. Unknown/unreadable own
-    process information fails closed; process-exit races alone are harmless.
+    0700 roots exclude ordinary other-account users. Strict mode fails on
+    unreadable processes. Copy-only mode records protected processes as unknown;
+    it does NOT prove idle and cannot authorize deleting or moving any source.
+    Complete before/after file identities and archive readback are still required.
     """
-    uid=paths._identity();uses=[];inspected=0
+    uid=paths._identity();uses=[];inspected=0;inaccessible=[]
     for process in PROC_ROOT.iterdir():
         if not process.name.isdigit():continue
         try:
@@ -86,10 +88,18 @@ def no_open_users(roots):
                     target=fields[5][:-10] if fields[5].endswith(' (deleted)') else fields[5]
                     if _under(Path(target),roots):uses.append(dict(pid=int(process.name),kind='mapped',path=target))
         except OSError as error:
-            if error.errno not in (errno.ENOENT,errno.ESRCH):raise ValueError('Cannot prove runtime idle: '+str(error))
+            if error.errno in (errno.ENOENT,errno.ESRCH):continue
+            if copy_only and error.errno in (errno.EACCES,errno.EPERM):
+                inaccessible.append(dict(pid=int(process.name),errno=error.errno,
+                    visibility='protected_process_not_inspected'))
+                continue
+            raise ValueError('Cannot prove runtime idle: '+str(error))
     require(not uses,'Runtime files are still in use: '+json.dumps(uses[:20],sort_keys=True))
-    return dict(owned_processes_inspected=inspected,open_runtime_uses=0,
-        scope='own-account /proc fd/cwd/exe/maps; private0700 source; shared team lock held')
+    return dict(owned_processes_seen=inspected,owned_processes_inspected=inspected-len(inaccessible),
+        observed_open_runtime_uses=0,inaccessible_owned_processes=inaccessible,
+        all_owned_processes_observed=not inaccessible,idle_proven=not inaccessible,
+        copy_only=copy_only,source_deletion_authorized=False,
+        scope='accessible own-account /proc fd/cwd/exe/maps; private0700 source; shared team lock held')
 
 
 def auxiliary_receipts(bundles,bindings):
@@ -401,14 +411,16 @@ def archive(request):
     lock,lock_identity,owner=acquire_lock(cfg,target.name);created=False
     try:
         auxiliary=request.get('auxiliary_runs',[]);queue_bindings=request.get('queue_request_bindings',[])
-        terminal=terminal_states(bundles,auxiliary,queue_bindings);before_uses=no_open_users(bundles);rows=inventory(cfg)
+        copy_only=request.get('allow_incomplete_process_visibility_for_copy_only',False)
+        require(type(copy_only) is bool,'Copy-only process visibility flag must be boolean')
+        terminal=terminal_states(bundles,auxiliary,queue_bindings);before_uses=no_open_users(bundles,copy_only=copy_only);rows=inventory(cfg)
         print('N1_ARCHIVE_IDLE_INVENTORY',len(rows),'members','source_regular_bytes',
               sum(row['bytes'] for row in rows if row['kind']=='regular'),flush=True)
         predicted=stream_archive(rows,Sink())
         required=(predicted*6+4)//5+RESERVE;free=shutil.disk_usage(str(target.parent)).free
         require(free>=required,'Insufficient shared archive space: need 1.2x exact gzip bytes plus 2GiB')
         require(inventory(cfg)==rows and terminal_states(bundles,auxiliary,queue_bindings)==terminal,'Source changed during archive size preflight')
-        no_open_users(bundles)
+        no_open_users(bundles,copy_only=copy_only)
         target.mkdir(mode=0o700);created=True;sync_dir(target.parent)
         save(target/'state.json',dict(status='archiving',started_utc=now(),source_modified=False,source_deleted=False))
         manifest=dict(schema=SCHEMA,runtime_identity=paths.receipt(cfg),files=rows,terminal_states=terminal,
@@ -433,7 +445,7 @@ def archive(request):
         require(size==predicted and partial.stat().st_size==predicted,'Deterministic gzip byte estimate changed')
         counts=verify_archive(partial,rows);archive_sha=paths.digest(partial)
         require(inventory(cfg)==rows and terminal_states(bundles,auxiliary,queue_bindings)==terminal,'Source changed during archive verification')
-        after_uses=no_open_users(bundles);paths.recheck(cfg)
+        after_uses=no_open_users(bundles,copy_only=copy_only);paths.recheck(cfg)
         require(all(paths.digest(Path(name))==value for name,value in tool_identity.items()),'Archiver tools changed during execution')
         final=target/'runtime-evidence.tar.gz';require(not final.exists(),'Archive final name exists')
         os.rename(str(partial),str(final));sync_dir(target)

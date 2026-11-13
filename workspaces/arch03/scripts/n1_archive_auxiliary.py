@@ -25,7 +25,7 @@ SCHEMA = 'arch03-n1-auxiliary-archive-v1'
 REQUEST_SCHEMA = 'arch03-n1-auxiliary-archive-request-v1'
 RUNTIME = Path('/tmp/s4_21usr_n1_20261113_0210')
 OPERATIONS = Path(paths.SERVER_ROOT)/'light-light126-undergrad-d2-20261109/operations'
-HELPER_SHA = '4a4a12d8032a7e209b11187f7ceae3b85d76d546f5d91dae1a6a8952e2c93569'
+HELPER_SHA = '8a1162f15b3e7c561c11ecc403e5a0bca806078fb47ee080374ff678f7cfb5db'
 PATHS_SHA = 'fe301e1e5f87852103c537b8191c7064f1b8c44a8979f1977901bf26ed16e39d'
 ALLOW = {
     'b0_control_l01_20261113_0403': 'directory',
@@ -85,8 +85,11 @@ def destination(path, root, uid):
 
 
 def validate(request, need_identities=False):
-    require(set(request) == {'schema', 'runtime_root', 'destination', 'entries'} and
+    require(set(request) in ({'schema', 'runtime_root', 'destination', 'entries'},
+            {'schema', 'runtime_root', 'destination', 'entries', 'allow_incomplete_process_visibility_for_copy_only'}) and
             request['schema'] == REQUEST_SCHEMA, 'Unknown auxiliary request schema or keys')
+    require(type(request.get('allow_incomplete_process_visibility_for_copy_only',False)) is bool,
+            'Copy-only process visibility flag must be boolean')
     require(Path(request['runtime_root']) == RUNTIME, 'Only the exact existing N1 private root is allowed')
     uid = paths._identity(); root, _ = paths._root(RUNTIME, uid)
     target = destination(request['destination'], root, uid)
@@ -196,13 +199,14 @@ def release(identity):
 def process(request, mode):
     require(mode in ('plan', 'identities', 'archive'), 'Unknown auxiliary mode')
     tools = dependencies(); root, target, uid, names = validate(request, mode == 'archive')
+    copy_only=request.get('allow_incomplete_process_visibility_for_copy_only',False)
     idle_lock(); roots = [root/name for name in names]
     if mode != 'archive':
-        if mode == 'identities': base.no_open_users(roots)
+        if mode == 'identities': base.no_open_users(roots,copy_only=copy_only)
         rows = scan(root, names, uid, mode == 'identities')
         if mode == 'identities':
             require(scan(root, names, uid, False) == [dict(row, sha256=None) for row in rows], 'Sources changed after identity scan')
-            base.no_open_users(roots)
+            base.no_open_users(roots,copy_only=copy_only)
         idle_lock()
         return dict(schema=SCHEMA, mode=mode, status='bounded_read_only_plan' if mode == 'plan' else 'identities_ready_for_review',
                     source_modified=False, source_deleted=False, archive_created=False, complete=True,
@@ -215,14 +219,14 @@ def process(request, mode):
     identity = acquire(request); created = False
     try:
         check_lock(identity)
-        before_users = base.no_open_users(roots); rows = scan(root, names, uid, True)
+        before_users = base.no_open_users(roots,copy_only=copy_only); rows = scan(root, names, uid, True)
         actual = tree_identities(rows, names)
         require(actual == {e['name']: e['tree_sha256'] for e in request['entries']}, 'Reviewed auxiliary tree identity differs')
         predicted = base.stream_archive(rows, base.Sink())
         required = (predicted*6+4)//5+base.RESERVE
         require(shutil.disk_usage(str(OPERATIONS)).free >= required, 'Auxiliary archive needs 20% margin plus 2GiB')
         require(scan(root, names, uid, True) == rows, 'Auxiliary source changed during exact budget')
-        base.no_open_users(roots)
+        base.no_open_users(roots,copy_only=copy_only)
         check_lock(identity)
         target.mkdir(mode=0o700); created = True; base.sync_dir(target.parent)
         base.save(target/'state.json', dict(schema=SCHEMA, status='archiving', source_deleted=False))
@@ -240,7 +244,7 @@ def process(request, mode):
         require(size == predicted and partial.stat().st_size == predicted, 'Deterministic auxiliary archive size changed')
         counts = base.verify_archive(partial, rows); archive_sha = paths.digest(partial)
         require(scan(root, names, uid, True) == rows, 'Auxiliary source changed during archive verification')
-        after_users = base.no_open_users(roots)
+        after_users = base.no_open_users(roots,copy_only=copy_only)
         require(dependencies() == tools, 'Auxiliary archive tools changed')
         check_lock(identity)
         final = target/'auxiliary-evidence.tar.gz'; require(not final.exists(), 'Archive output exists')
