@@ -1,0 +1,38 @@
+{
+  "status": "observed_completed_ASIC12_counters_not_PPA_acceptance",
+  "observed_at": "2026-11-13T19:39:05+08:00",
+  "source": "Read-only VNC query of retained server summary; source SHA checked before aggregation",
+  "server_run": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01/runs/t80_soc01/t80_soc",
+  "summary_sha256": "f9e27c7f2ef18b830c9f50dbb5ccf7374a483a747cabf4856c109eea2513dd18",
+  "hardware_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+  "tasks": 12,
+  "mean_cycles": 112569.0,
+  "nominal_150MHz_task_per_second": 1332.5160568184847,
+  "accepted_transactions_per_cycle": 0.31082269541347973,
+  "mac_utilization": 0.18011353036804092,
+  "mean_wait_counters": {
+    "command_ready_wait": 77480.0,
+    "pending_response_wait": 77417.0,
+    "turnovers": 34965.0,
+    "result_stalls": 22388.583333333332
+  },
+  "transaction_weighted_response_latency_cycles": {
+    "source_read": 3.0,
+    "shared_write": 3.0,
+    "shared_read": 4.0,
+    "output_write": 3.0
+  },
+  "mean_schedule_counters": {
+    "within_tile_mean_start_interval": 198.15433114035088,
+    "tile_change_mean_start_interval": 3169.7499999999995,
+    "first_feed_wait_cycles": 4446.333333333333,
+    "final_write_tail_cycles": 255.5,
+    "supply_empty": 87369.16666666667,
+    "slot_wait": 15112.333333333334
+  },
+  "limitations": [
+    "All counters are passive RTL observations, not silicon measurements.",
+    "Wait counters overlap; never add them to derive total task cycles.",
+    "No area, strict timing or system power acceptance is granted by these counters."
+  ]
+}

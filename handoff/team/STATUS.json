@@ -3563,7 +3563,7 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T19:27:00+08:00",
+    "updated": "2026-11-13T19:42:00+08:00",
     "phase": "T80_synthesis_running_T64_server_preflight_passed",
     "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
     "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
@@ -3625,18 +3625,20 @@
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
-      "time": "2026-11-13T19:26:07.864091+08:00",
+      "time": "2026-11-13T19:37:07.127849+08:00",
       "team_lock_expected_owner": "t80_finish02_synth",
       "same_account_eda_processes": "none before queue launch at18:03:15",
-      "last_free_bytes": 22661824512,
-      "free_observed_time": "2026-11-13T19:26:07.864091+08:00",
+      "last_free_bytes": 19545456640,
+      "free_observed_time": "2026-11-13T19:39:35.204177+08:00",
       "batch_completed_at_least": 240,
       "batch_failed_observed": 0,
       "checked_outputs": 6082560,
       "checked_totals": 6082560,
       "dc_pid": 29185,
       "dc_state": "R",
-      "dc_cpu_percent": 99.7
+      "dc_cpu_percent": 99.7,
+      "tmp_free_bytes": 246422388736,
+      "current_synth_directory_KiB": 261464
     },
     "local14": {
       "tasks": 14,
@@ -3725,14 +3727,15 @@
       "name": "t80_finish02",
       "pid": 14008,
       "started": "2026-11-13T18:22:51.269828",
-      "last_observed": "2026-11-13T19:26:07.864091+08:00",
+      "last_observed": "2026-11-13T19:40:35.304067+08:00",
       "stage": "t80_synth",
       "status": "running",
       "bundle": "light-light126-t80-v4-9196556-delta03",
       "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
       "operations": "light-light126-t80-finishops-9196556",
       "child_pid": 23158,
-      "dc_pid": 29185
+      "dc_pid": 29185,
+      "detail": "Beginning Mapping Optimizations (High effort)"
     },
     "T64_local": {
       "rtl_created": true,
@@ -3796,7 +3799,7 @@
       "server_hardware_executed": false,
       "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
     },
-    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1927.md",
+    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1942.md",
     "review_operations_prepared": {
       "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
       "files": 8,
@@ -3805,9 +3808,22 @@
       "deployment_in_progress": false,
       "exec_session": null,
       "server_receipt_observed": "2026-11-13T19:20:11+08:00",
-      "preflight_passed": false
+      "preflight_passed": true,
+      "preflight_observed": "2026-11-13T19:29:49+08:00"
     },
     "new_hardware_verified_scope": "T80 ASIC/E203 numerical and bus function only; T64 only local tests and server input preflight",
-    "execution_priority_supplement": "workspaces/arch03/T80_RESULT_PRIORITY_20261113.md"
+    "execution_priority_supplement": "workspaces/arch03/T80_RESULT_PRIORITY_20261113.md",
+    "T64_priority_operations": {
+      "commit": "fbfdc2e8838c68a941eeb6f1e7b44655abe4651c",
+      "directory": "light-light126-t64-finishops-fbfdc2e",
+      "manifest_sha256": "6917b611b2145d665bd6b1abd98ef65014a67b77431cec7c65e0ff3736d9ff9b",
+      "files": 3,
+      "server_delivered": true,
+      "preflight_passed": true,
+      "production_hardware_unchanged": true,
+      "queue_started": false,
+      "preflight_observed": "2026-11-13T19:36:44+08:00"
+    },
+    "asic12_counters_evidence": "handoff/team/evidence/T80_ASIC12_COUNTERS_20261113.json"
   }
 }
