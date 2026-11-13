@@ -1,0 +1,117 @@
+{
+  "schema": "t80-power12-displayed-results-snapshot-v1",
+  "observed_at": "2026-11-13T22:34:19.520239+08:00",
+  "status": "twelve_power_reports_observed_final_impact_review_pending",
+  "source": "Read-only review of a preserved server terminal screenshot; displayed decimal values, not a new EDA run",
+  "source_screenshot": "takeover_local/t80_power_watch_2234.png",
+  "source_screenshot_sha256": "086ce8c9504c766998fd01247caa5a375202b3a454649ced039bf1d4bc43f6d0",
+  "production_hardware_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+  "queue": "t80_finish03",
+  "queue_status": "reports_ready_review_required",
+  "completed_stages": 21,
+  "queue_error": null,
+  "nominal_frequency_hz": 150000000,
+  "period_ns": "6.666666",
+  "cases": [
+    {
+      "case": "layer_01",
+      "cycles": 116752,
+      "average_power_w": "0.0501254834",
+      "duration_s": "0.000778346588832",
+      "energy_j": "0.0000390149990179450413888"
+    },
+    {
+      "case": "layer_02",
+      "cycles": 113732,
+      "average_power_w": "0.0502292328",
+      "duration_s": "0.000758213257512",
+      "energy_j": "0.0000380844702236165967936"
+    },
+    {
+      "case": "layer_03",
+      "cycles": 112106,
+      "average_power_w": "0.0502437986",
+      "duration_s": "0.000747373258596",
+      "energy_j": "0.0000375508714839231427656"
+    },
+    {
+      "case": "layer_04",
+      "cycles": 112512,
+      "average_power_w": "0.0502531491",
+      "duration_s": "0.000750079924992",
+      "energy_j": "0.0000376938783075397923072"
+    },
+    {
+      "case": "layer_05",
+      "cycles": 110446,
+      "average_power_w": "0.0503219143",
+      "duration_s": "0.000736306593036",
+      "energy_j": "0.0000370523572732825688148"
+    },
+    {
+      "case": "layer_06",
+      "cycles": 108926,
+      "average_power_w": "0.0503468513",
+      "duration_s": "0.000726173260716",
+      "energy_j": "0.0000365605371753045835308"
+    },
+    {
+      "case": "layer_07",
+      "cycles": 107166,
+      "average_power_w": "0.0503912009",
+      "duration_s": "0.000714439928556",
+      "energy_j": "0.0000360014859708470429004"
+    },
+    {
+      "case": "layer_08",
+      "cycles": 107646,
+      "average_power_w": "0.0503532333",
+      "duration_s": "0.000717639928236",
+      "energy_j": "0.0000361354907318625654588"
+    },
+    {
+      "case": "layer_09",
+      "cycles": 107206,
+      "average_power_w": "0.0503889248",
+      "duration_s": "0.000714706595196",
+      "energy_j": "0.0000360132968793952852608"
+    },
+    {
+      "case": "layer_10",
+      "cycles": 111126,
+      "average_power_w": "0.0502546728",
+      "duration_s": "0.000740839925916",
+      "energy_j": "0.0000372306680740848202848"
+    },
+    {
+      "case": "layer_11",
+      "cycles": 116972,
+      "average_power_w": "0.0501167029",
+      "duration_s": "0.000779813255352",
+      "energy_j": "0.0000390816692359580189208"
+    },
+    {
+      "case": "layer_12",
+      "cycles": 126238,
+      "average_power_w": "0.0498352200",
+      "duration_s": "0.000841586582508",
+      "energy_j": "0.0000419406524883343317600"
+    }
+  ],
+  "mean_cycles": 112569,
+  "nominal_task_per_second": "1332.516056818484662740186019",
+  "weighted_average_power_w": "0.05023146049291279126580141957",
+  "mean_energy_j": "0.0000376966980718411491822",
+  "aggregation": "sum(P_i*t_i)/sum(t_i); mean energy=sum(P_i*t_i)/12",
+  "numeric_limit": "Derived from displayed per-layer power values and the fixed12 cycles. Prefer the eventual full precision frozen report.",
+  "scope": "Whole SoC, task-window activity, pre-layout estimate",
+  "system_power_verified": false,
+  "strict_timing_verified": false,
+  "official_precision_verified": false,
+  "stage_accepted": false,
+  "pending": [
+    "Final timing/model/activity impact review",
+    "Published detailed first20 precision result",
+    "Final report and durable output archive"
+  ]
+}
