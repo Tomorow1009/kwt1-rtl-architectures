@@ -1,0 +1,12 @@
+{
+  "scope": "input-only backup; running outputs remain on server",
+  "files": 833,
+  "production_hardware": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+  "activity_tools": "cef81d4",
+  "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
+  "archive_sha256": "1f6742d40f171ccb06f979f6a31ad39fec18b31c4a20dd53101cd3ec263298ed",
+  "archive_bytes": 8989696,
+  "archive": "E:\\fpga_race-two\\kwt1-t80-t64-g64\\local_runs\\t80_input_backup_cef81d4\\t80-hardware876b883-activitycef81d4-inputs.zip",
+  "whole_stage_accepted": false,
+  "all_members_readback_verified": true
+}
