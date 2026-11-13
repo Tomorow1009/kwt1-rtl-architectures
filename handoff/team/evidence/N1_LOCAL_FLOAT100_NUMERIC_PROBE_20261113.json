@@ -1,0 +1,224 @@
+{
+  "schema": "n1-local-float100-numeric-probe-v1",
+  "status": "software_numeric_passed_server_hex_join_pending",
+  "started": "2026-11-13T09:24:33.559923",
+  "finished": "2026-11-13T09:25:20.358812",
+  "samples": 100,
+  "tasks": 1200,
+  "outputs": 30412800,
+  "source_proof_sha256": "988e5e96a42eea61c2c348626b24f1252556da166f48653d30218452af905f89",
+  "archive_sha256": "5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2",
+  "script_sha256": "04245be0c442273ec7c4eb492ef56af4f97ae6b5b8b3e978abc50619474e7162",
+  "independent_reference_sha256": "a66c493290be5d181c9b122a569edd365fbcb859826ff53fa37f243331e4042c",
+  "converter_sha256": "c99301b68185f599b95e4b4b3cbe5e62db27128dcf3cf04e4725bdb9a5620c35",
+  "max_layer_nrmse_percent": 0.1933721614699203,
+  "max_task_nrmse_percent": 0.20953408931848963,
+  "clipping": {
+    "x": 0,
+    "w": 0,
+    "b": 0
+  },
+  "saturated": 0,
+  "layer_aggregate": [
+    {
+      "layer": 1,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.8980511088971754,
+      "reference_energy": 981655.4165680102,
+      "nrmse_percent": 0.0956469207831924,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 2,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.8602719442007815,
+      "reference_energy": 1020783.9646269706,
+      "nrmse_percent": 0.09180175001563784,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 3,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.9433645838400314,
+      "reference_energy": 645331.1669228578,
+      "nrmse_percent": 0.12090616991287131,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 4,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.9115898925044871,
+      "reference_energy": 510960.22765426186,
+      "nrmse_percent": 0.13356916230966132,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 5,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.8502553191415904,
+      "reference_energy": 394208.4017771954,
+      "nrmse_percent": 0.14686277860210695,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 6,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.915172160049291,
+      "reference_energy": 330306.89980996505,
+      "nrmse_percent": 0.16645336422712673,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 7,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.8978521584785552,
+      "reference_energy": 240113.69317164828,
+      "nrmse_percent": 0.1933721614699203,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 8,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.8857784564749958,
+      "reference_energy": 353420.46651047387,
+      "nrmse_percent": 0.15831304738990587,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 9,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.852093106493603,
+      "reference_energy": 385857.4317047742,
+      "nrmse_percent": 0.14860386029665695,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 10,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 0.935834228431306,
+      "reference_energy": 518704.64631704893,
+      "nrmse_percent": 0.13431960119892636,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 11,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 1.0139351638322933,
+      "reference_energy": 820362.2947476336,
+      "nrmse_percent": 0.11117374788468333,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    },
+    {
+      "layer": 12,
+      "tasks": 100,
+      "outputs": 2534400,
+      "sse": 1.024645794444276,
+      "reference_energy": 1541010.739175511,
+      "nrmse_percent": 0.0815425048815403,
+      "precision_limit_percent": 3.0,
+      "within_limit": true,
+      "clipping": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturated": 0
+    }
+  ],
+  "server_original_hex_verified": false,
+  "rtl_precision_join_verified": false,
+  "n1_stage_accepted": false,
+  "summary_sha256": "9fb94d7a41e12c3c7c3dc25ba6424622086af5cee9bd2fbf2ce6454ef1885d8d",
+  "local_run": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\n1_float100_numeric_probe_20261113_0925",
+  "independent_models_match": true,
+  "source_script_text": "import os\nos.environ['OPENBLAS_NUM_THREADS']='1'\nfrom pathlib import Path\nimport sys,json,hashlib,datetime,math,zipfile\nr=Path(__file__).resolve().parents[2]\nsys.path.insert(0,str(r/'workspaces/arch03/scripts'))\nimport n1_data as data\nimport n1_precision as numeric\nimport numpy as np\nh=lambda raw:hashlib.sha256(raw).hexdigest()\nout=Path(__file__).parent\nproof_path=r/'handoff/team/evidence/N1_FLOAT100_SOURCE_RECOVERY_20261113.json'\nassert h(proof_path.read_bytes())=='988e5e96a42eea61c2c348626b24f1252556da166f48653d30218452af905f89'\nproof=json.loads(proof_path.read_text());assert proof['passed'] and proof['checked']==100\narchive=r/'local_runs/n1_precision_delivery_20261113_0840/n1-recovered-float100-20261113.zip'\nassert h(archive.read_bytes())=='5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2'\nconverter=data.converter_module();rows=[];root='n1-recovered-float100-20261113/'\nstarted=datetime.datetime.now().isoformat()\nwith zipfile.ZipFile(str(archive)) as z:\n raw=z.read(root+'shared_weights.npz');assert h(raw)==proof['shared_weights_sha256'];w,b=converter.arrays(raw,weights=True)\n for sample in proof['samples']:\n  sn=sample['sample'];raw=z.read(root+'sample_%03d/float_tensors.npz'%sn);assert h(raw)==sample['sample_float_sha256'];x,y=converter.arrays(raw)\n  for li in range(12):\n   xq,xc=converter.quantize(x[li],10,14);wq,wc=converter.quantize(w[li],12,12);bq,bc=converter.quantize(b[li],22,32)\n   result,mn,mx=numeric.independent_reference(xq,wq,bq);other=converter.reference(xq,wq,bq)\n   assert all(np.array_equal(result[k],other[k]) for k in result)\n   delta=result['result'].astype(np.float64)/4096.-y[li];sse=float(np.sum(delta*delta,dtype=np.float64));energy=float(np.sum(y[li]*y[li],dtype=np.float64));error=100*math.sqrt(sse/25344)/max(math.sqrt(energy/25344),1e-8)\n   hashes={k+'.hex':h(converter.encode(result[k],bits)) for k,bits in [('total',33),('result',16),('saturated',1)]}\n   hashes['load.hex']=h(converter.encode(np.asarray(converter.pack(xq,wq,bq)),16))\n   rows.append(dict(sample=sn,layer=li+1,outputs=25344,sse=sse,reference_energy=energy,nrmse_percent=error,clipping=dict(x=xc,w=wc,b=bc),saturated=int(result['saturated'].sum()),accumulator_min=mn,accumulator_max=mx,derived_hex_sha256=hashes))\n  if sn%10==0:print('LOCAL_NUMERIC_PROBE',sn,flush=True)\nlayers=numeric.aggregate(rows)\nreport=dict(schema='n1-local-float100-numeric-probe-v1',status='software_numeric_passed_server_hex_join_pending',started=started,finished=datetime.datetime.now().isoformat(),samples=100,tasks=1200,outputs=30412800,source_proof_sha256=h(proof_path.read_bytes()),archive_sha256=h(archive.read_bytes()),script_sha256=h(Path(__file__).read_bytes()),independent_reference_sha256=h(Path(numeric.__file__).read_bytes()),converter_sha256=h(data.CONVERTER.read_bytes()),max_layer_nrmse_percent=max(v['nrmse_percent'] for v in layers),max_task_nrmse_percent=max(v['nrmse_percent'] for v in rows),clipping={k:sum(v['clipping'][k] for v in rows) for k in ('x','w','b')},saturated=sum(v['saturated'] for v in rows),layer_aggregate=layers,cases=rows,server_original_hex_verified=False,rtl_precision_join_verified=False,n1_stage_accepted=False)\n(out/'summary.json').write_text(json.dumps(report,indent=2)+'\\n')\nprint(json.dumps({k:v for k,v in report.items() if k not in ('cases','layer_aggregate')},indent=2))\n",
+  "reproduction": "Write source_script_text to local_runs/n1_float100_numeric_probe_REPLAY/run.py in the same repository and run its recorded Python environment; inputs keep their recorded paths. This is a numerical probe, not the formal server HEX join."
+}

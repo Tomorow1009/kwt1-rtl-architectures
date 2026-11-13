@@ -1,0 +1,38 @@
+{
+  "name": "light-light126-n1-queueops-20261113_091833",
+  "local_zip": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-n1-queueops-20261113_091833\\light-light126-n1-queueops-20261113_091833.zip",
+  "bytes": 4236,
+  "sha256": "61c306f2e23b8be0c77e4572e9b64a6f39d40da01a6e70c76298400ec10c6b3c",
+  "manifest_sha256": "da964f9fc151680348e5b05f4793c5c03a815666d69abe5ed6895fc2b6434dfe",
+  "files": {
+    "n1_acceptance_queue.py": {
+      "bytes": 8105,
+      "sha256": "c211b117ad1c9e117e989c66543f9bbd2a8b2ed2680772b47fa3a8e1e3ac5ef2"
+    },
+    "request.json": {
+      "bytes": 1595,
+      "sha256": "53028caf11703f75c159e19de43627f12cf7a63cde6e14b886c71937a424b944"
+    }
+  },
+  "schema": "n1-acceptance-queue-deployment-v1",
+  "source_commit": "b87494a7c8f72c78e708d7dd0567d9ba7fd678ab",
+  "observed_at": "2026-11-13T09:23:32.154951+08:00",
+  "pid": 237710,
+  "started": "2026-11-13T09:22:09.356991",
+  "status": "waiting_original_saif",
+  "formal_child_pid": null,
+  "completed": [],
+  "original_team_lock_owner": 186577,
+  "original_activity_session": "n1_saif12_01",
+  "queue_session": "n1_acceptance01",
+  "server_deployed": true,
+  "all_member_hashes_verified": true,
+  "n1_stage_accepted": false,
+  "n2_allowed": false,
+  "final_report_started": false,
+  "screenshots": {
+    "n1_queue_deployed_0921.png": "2568bfaadd21824e495575e760a8e362d13ffb8cb4c4434d4b56fe5dea7b80cb",
+    "n1_queue_launched_0922.png": "2719c66114c1a74ed6c417bea621098a7b77e64cec806b99723c22c4b713b837",
+    "n1_queue_compact_0924.png": "adaf0f3658f4d0fc43fe97149d71b9ee06c9f946cba206ef18c5463b69999cc6"
+  }
+}
