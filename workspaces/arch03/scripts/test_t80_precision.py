@@ -8,6 +8,7 @@ from unittest.mock import patch
 import t80_precision as numeric
 import t80_precision_join as join
 import t80_precision_stage as stage
+import t80_finish_queue as queue
 
 
 class PrecisionTests(unittest.TestCase):
@@ -48,6 +49,22 @@ class PrecisionTests(unittest.TestCase):
             self.assertNotIn('summary_sha256', record)
             self.assertFalse((root/'.arch02_team_lock').exists())
             self.assertTrue((batch/'summary.json').exists())
+
+    def test_observer_refuses_replaced_batch_and_full100(self):
+        with tempfile.TemporaryDirectory() as temp:
+            run = Path(temp)/'session/t80_batch20'
+            run.mkdir(parents=True)
+            request = dict(batch_run=str(run), batch_pid=123, batch_started='original')
+            record = dict(run=str(run), pid=999, started='original', status='running')
+            stage.common.save(run.parent/'state.json', {'stages': {'t80_batch20': record}})
+            with self.assertRaisesRegex(ValueError, 'identity changed'):
+                queue.observe_batch(request)
+            stage.common.save(run/'summary.json', dict(schema='arch03-t80-first20-batch-v4',
+                tasks=1200, checked_outputs=30412800, checked_totals=30412800, failed=0))
+            record.update(pid=123, status='passed', summary_sha256=stage.common.sha(run/'summary.json'))
+            stage.common.save(run.parent/'state.json', {'stages': {'t80_batch20': record}})
+            with self.assertRaisesRegex(ValueError, 'Wrong T80 batch scope'):
+                queue.observe_batch(request)
 
 
 if __name__ == '__main__':

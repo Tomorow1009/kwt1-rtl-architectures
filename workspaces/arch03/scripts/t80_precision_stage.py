@@ -20,7 +20,8 @@ def operations_identity(expected):
     join.require(re.fullmatch('[a-f0-9]{64}', expected or '') and common.sha(path) == expected,
                  'T80 precision operations manifest changed')
     files = join.read(path)['files']
-    join.require(set(files) == {'scripts/t80_precision_stage.py', 'scripts/t80_precision_join.py'},
+    join.require(set(files) == {'scripts/t80_precision_stage.py', 'scripts/t80_precision_join.py',
+                               'scripts/t80_finish_queue.py'},
                  'Unexpected precision operations members')
     for relative, record in files.items():
         source = root/relative
