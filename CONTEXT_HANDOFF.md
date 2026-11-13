@@ -7,7 +7,7 @@
 ## 原T80队列
 
 - 生产RTL876b883，当前工具/观察器运行包`PROJECT/bundles/light-light126-t80-v4-9196556-delta03`，833文件，manifest fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d。
-- 唯一正式队列`t80_finish02`，PID14008，child23158，实际DC29185。原ops仍`light-light126-t80-finishops-9196556`，没有更换或编辑。19:44:26实读DC R态、99.5%CPU、CPU时间1:13:20。19:52:59查询输出在19:54:56截图读到，仍为映射时序优化迭代，尚无最终summary。
+- 唯一正式队列`t80_finish02`，PID14008，child23158，实际DC29185。原ops仍`light-light126-t80-finishops-9196556`，没有更换或编辑。19:44:26实读DC R态、99.5%CPU、CPU时间1:13:20。19:54:56截图读到最新日志为映射时序优化迭代；最后完整可见队列state仍为19:42:28的running/t80_synth，尚未观察到最终summary。
 - 原计划队列仍自动依次执行synth→timing/drc/structure→gate14→SAIF12→power12→precision。不要重启或插入新EDA，也不要改运行目录。综合完成立即读初步结果，不等最终功耗。
 - 已通过：ASIC14、真实CPU竞争/恢复、前20条240任务/6082560输出及total/sat。固定12平均112569周期、150MHz折算1332.5160568task/s；PPA与同批新浮点精度关联待完成。
 - 已从原summary逐项SHA核验后读出实际计数：源读/共享写/共享读/输出写延迟3/3/4/3拍，MAC利用率18.0114%，成功事务0.310823/拍。详`T80_MEASURED_TRANSPORT_20261113.md`及`T80_ASIC12_COUNTERS_20261113.json`。等待可重叠，不相加作总时间。
@@ -1327,3 +1327,6 @@ PROJECT=`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-underg
 - **exec61820正在VNC工作区3传输26行，尚无服务器完成回执。此时不可并发向VNC打字。** `local_runs/t64_priority_ops_4bbd0af/transfer_state.json`记录进度，`local_runs/transfer_t64_safe.ps1`为执行脚本。先poll61820并观察完成，再验证新ops；旧fbfdc2e ops不动。
 - 19:46:46最新截图仍为DC映射优化的中间迭代，不能把其面积/负裕量当最终结果；原T80继续。
 - d7969bd已推送；4bbd0af及本增量尚待推送。旧8路文件仍无任何删除。
+
+
+19:56增量：19:55:45.042179实读原队列仍running/t80_synth，driver14008、child23158、completed=2、error=None，共享free17054040064B。该状态比前述日志截图更新，未出现最终摘要。
