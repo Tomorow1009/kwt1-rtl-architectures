@@ -154,8 +154,13 @@ def main():
     import server_run as common
     from n1_process import ProcessLedger, atomic_save, now
     from soc_power import power_databases
-    cfg = n1_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
-        req['runtime_root'], req['bundle_manifest_sha256'], req['runtime_evidence'])
+    profile = 'N1'
+    if req.get('transport_stage') is not None:
+        import transport_review_contract as contract
+        profile, cfg = contract.configure(req, common)
+    else:
+        cfg = n1_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
+            req['runtime_root'], req['bundle_manifest_sha256'], req['runtime_evidence'])
     common.inputs()
     require(re.fullmatch(r'[a-zA-Z0-9_-]+', req['session']), 'Invalid session')
     session = common.ROOT/'runs'/req['session'];require(not session.exists(), 'Preserve old session')
@@ -166,20 +171,22 @@ def main():
         except OSError as error:
             if error.errno != 28 or lock.exists():raise
             print('WAIT_INITIAL_SHARED_LOCK_STORAGE', flush=True);time.sleep(30)
-    state = dict(schema='arch03-n1-server-state-v1', status='running', started=now(),
+    state = dict(schema='arch03-'+profile.lower()+'-server-state-v1', status='running', started=now(),
         pid=os.getpid(), jobs=[], stages={}, system_power_verified=False,
         request_sha256=a.request_sha256, source_sha256=sha(__file__))
     stage = None
     try:
         session.mkdir();ledger.initialize();atomic_save(session/'request.json', req)
         for job in req['jobs']:
-            require(job['name'] in ('B0', 'N1') and job['name'] not in [x['name'] for x in state['jobs']], 'Invalid job name')
-            stage = 'n1_unknown_' + job['name'].lower()
+            require(job['name'] in (('B0', 'N1') if profile == 'N1' else (profile,)) and
+                    job['name'] not in [x['name'] for x in state['jobs']], 'Invalid job name')
+            stage = profile.lower()+'_unknown_' + job['name'].lower()
             state['stages'][stage] = dict(status='running', started=now())
             atomic_save(session/'state.json', state)
             run = session/stage;run.mkdir();synthesis = Path(job['synthesis']['run'])
             summary = synthesis/'summary.json';require(sha(summary) == job['synthesis']['sha256'], 'Synthesis changed')
             report = read(summary);inputs = {str(summary):sha(summary)}
+            if profile != 'N1':contract.synthesis_identity(report, profile)
             for name in ('mapped.ddc', 'mapped.v'):
                 require(sha(synthesis/name) == report['artifacts'][name], 'Mapped input changed')
                 inputs[str(synthesis/name)] = report['artifacts'][name]

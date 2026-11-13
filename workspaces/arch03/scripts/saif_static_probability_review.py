@@ -55,8 +55,13 @@ def run(args):
     from native_saif_replay import verify_inputs
     require(sha(args.request) == args.request_sha256, 'Request identity changed')
     req = read(args.request)
-    cfg = n1_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
-        req['runtime_root'], req['bundle_manifest_sha256'], req['runtime_evidence'])
+    profile = 'N1'
+    if req.get('transport_stage') is not None:
+        import transport_review_contract as contract
+        profile, cfg = contract.configure(req, common)
+    else:
+        cfg = n1_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
+            req['runtime_root'], req['bundle_manifest_sha256'], req['runtime_evidence'])
     common.inputs()
     require(re.fullmatch('[A-Za-z0-9_-]+', req['session']), 'Unsafe session')
     session = common.ROOT/'runs'/req['session'];require(not session.exists(), 'Preserve old session')
@@ -67,20 +72,22 @@ def run(args):
         except OSError as error:
             if error.errno != 28 or lock.exists():raise
             print('WAIT_SHARED_LOCK_STORAGE', flush=True);time.sleep(30)
-    state = dict(schema='arch03-n1-server-state-v1', pid=os.getpid(), status='running',
+    state = dict(schema='arch03-'+profile.lower()+'-server-state-v1', pid=os.getpid(), status='running',
         started=now(), request_sha256=args.request_sha256, source_sha256=sha(__file__), stages={},
         system_power_verified=False, physical_error_bound=False)
     stage = None
     try:
         session.mkdir();ledger.initialize();atomic_save(session/'request.json', req)
         for job in req['jobs']:
-            name = job['name'];require(name in ('B0', 'N1'), 'Unknown comparison configuration')
+            name = job['name'];require(name in (('B0', 'N1') if profile == 'N1' else (profile,)),
+                                      'Unknown comparison configuration')
             path = Path(job['report']);require(sha(path) == job['sha256'], 'Original report changed')
             report = read(path);refs = report['power_references']
+            if profile != 'N1':contract.report_identity(report, profile)
             require(len(refs) == 12, 'Need complete fixed twelve-layer power set')
             case_rows = []
             for expected, ref in zip(LAYERS, refs):
-                stage = 'n1_saif_sp_'+name.lower()+'_'+expected
+                stage = profile.lower()+'_saif_sp_'+name.lower()+'_'+expected
                 require(stage not in state['stages'], 'Repeated diagnostic stage')
                 state['stages'][stage] = dict(status='running', started=now())
                 atomic_save(session/'state.json', state)

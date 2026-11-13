@@ -1,4 +1,4 @@
-"""Read existing B0 or N1 SAIF and mapped.v; emit every unknown declaration.
+"""Read frozen B0/N1/T80/T64 SAIF and mapped.v; emit every unknown declaration.
 
 Inputs remain unchanged. No simulation, PT run, activity assignment, or power
 approval. Output is a new directory containing compressed JSONL and receipts.
@@ -257,6 +257,14 @@ def profile_contract(report):
     if report.get('schema') == 'systolic-b-evidence-export-v1':
         return ('B0', 'systolic_b_synth', 'systolic_b_saif',
                 'B_native_saif_function_and_complete_windows_passed')
+    for name, rows in (('T80', 5), ('T64', 4)):
+        prefix = name.lower()
+        if report.get('schema') == 'arch03-'+prefix+'-evidence-export-v1':
+            require(report.get('stage') == name and report.get('numeric_format') == '0x000e0c20' and
+                    report.get('layout_id') == 0x00100004 and report.get('shift') == 10 and
+                    report.get('row_lanes') == rows, 'Wrong '+name+' frozen numerical identity')
+            return (name, prefix+'_synth', prefix+'_saif',
+                    name+'_native_saif_function_and_complete_windows_passed')
     require(report.get('schema') == 'arch03-n1-evidence-export-v1' and
             report.get('stage') == 'N1' and report.get('numeric_format') == '0x000e0c20' and
             report.get('layout_id') == 0x00100004 and report.get('shift') == 10 and
@@ -288,11 +296,11 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
     require(activity['status'] == activity_status and
             activity['synthesis_summary_sha256'] == report['references']['synthesis']['sha256'] and
             activity['firmware_sha256'] == report['firmware_sha256'], 'Mixed activity identity')
-    if profile == 'N1':
+    if profile in ('N1', 'T80', 'T64'):
         require(activity.get('numeric_format') == report['numeric_format'] and
                 activity.get('layout_id') == report['layout_id'] and
                 activity.get('gate_summary_sha256') == report['references']['gate']['sha256'],
-                'Mixed N1 format or gate identity')
+                'Mixed '+profile+' format or gate identity')
     netlist = scoped(srun / 'mapped.v', scope)
     require(synthesis['artifacts']['mapped.v'] == report['netlist_sha256'] and
             netlist.stat().st_size <= LIMIT_NETLIST and sha(netlist) == report['netlist_sha256'], 'Wrong/oversize mapped netlist')
@@ -309,6 +317,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
         netlist=str(netlist), netlist_sha256=report['netlist_sha256'], cases=[], selected_cases=list(selected),
         system_power_verified=False, no_eda_or_simulation_started=True, source_activity_modified=False,
         only_existing_B0_activity_used=profile == 'B0', only_existing_N1_activity_used=profile == 'N1',
+        activity_configuration=profile,
         physical_power_bound_proved=False,
         tool_sha256=code_identity['tool']['sha256'], parser_sha256=code_identity['native_saif_activity']['sha256'],
         runtime_dependencies=code_identity,

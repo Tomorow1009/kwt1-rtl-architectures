@@ -56,6 +56,19 @@ def index():
 
 
 class UnknownTests(unittest.TestCase):
+    def test_new_transport_profiles_bind_their_own_stages(self):
+        for name, rows in (('T80', 5), ('T64', 4)):
+            report = dict(schema='arch03-'+name.lower()+'-evidence-export-v1', stage=name,
+                          numeric_format='0x000e0c20', layout_id=0x00100004, shift=10, row_lanes=rows)
+            self.assertEqual(tool.profile_contract(report),
+                             (name, name.lower()+'_synth', name.lower()+'_saif',
+                              name+'_native_saif_function_and_complete_windows_passed'))
+            for key, wrong in (('stage','N1'),('row_lanes',9-rows),('shift',16),
+                               ('numeric_format','old'),('layout_id',0x00100003)):
+                invalid = dict(report);invalid[key] = wrong
+                with self.assertRaisesRegex(ValueError, 'frozen numerical identity'):
+                    tool.profile_contract(invalid)
+
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory(prefix='b0_unknown_fixture_')
         self.path = Path(self.directory.name)/'layer_01.saif'
