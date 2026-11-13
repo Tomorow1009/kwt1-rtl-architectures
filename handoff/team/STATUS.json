@@ -3363,12 +3363,12 @@
     }
   },
   "narrow_execution": {
-    "status": "paused_by_user_N2_local14_and_array_pass",
+    "status": "N2_resumed_local14_pass_server_pending",
     "branch": "codex/light-light126/arch03-n1-n2-d1-d2-20261113",
     "h0": "2026-11-13T00:49:49+08:00",
     "base_commit": "cd4a63ad4a4c7ab5e07b471bf70d7fd2fbc6bc5f",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1435_N2_PAUSED.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1505_N2_RESUME.md",
     "phase_order": [
       "N1",
       "N2",
@@ -3383,9 +3383,11 @@
     "new_server_jobs_started": true,
     "new_hardware_verified": true,
     "current_work": [
-      "Paused by user; do not resume until instructed"
+      "Sync current results and resume checkpoint",
+      "Recheck server lock/process/space before fresh archive",
+      "Finish N2 local protocol and actual ICG mapping checks"
     ],
-    "next": "On resume: read latest plan/checkpoint, inspect locks/space; finish N2 integration audit and local latency2/recovery tests, then new ASIC/synth package. N1 archive03 not launched.",
+    "next": "Finish N1 durable copy-only archive and N2 own ASIC/synthesis preparation; do not enter D1 before stage closure.",
     "array_random_blocks_passed": 10000,
     "array_outputs_passed": 794560,
     "local_dma14_outputs_passed": 354816,
@@ -3408,7 +3410,7 @@
     "archive_temporary_directory": "/tmp/s4_21usr-r4-l01-20261113_0233",
     "runtime_tools_deployed": true,
     "runtime_linux_identity_passed": true,
-    "cloud_commit": "a02fd56",
+    "cloud_commit": "313147f899287543215f43b9056df9fbbe5c2699",
     "B0_readonly_inventory": "handoff/team/evidence/B0_POWER_READONLY_REVIEW_20261113.json",
     "archive_observed_at": "2026-11-13T03:10:40+08:00",
     "archive_evidence": "handoff/team/evidence/R4_L01_STAGED_ARCHIVE_20261113.json",
@@ -3551,11 +3553,13 @@
     "N2_server_verified": false,
     "N2_local_progress": "handoff/team/evidence/N2_LOCAL_PROGRESS_20261113_1435.json",
     "runtime_archive_pid": null,
-    "paused_by_user": true,
+    "paused_by_user": false,
     "paused_at": "2026-11-13T14:37:00+08:00",
     "board_VNC_closed": true,
     "board_FileZilla_closed": true,
     "remote_jobs_stopped": false,
-    "local_jobs_running": false
+    "local_jobs_running": false,
+    "resumed_at": "2026-11-13T15:02:00+08:00",
+    "progress_report": "workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md"
   }
 }

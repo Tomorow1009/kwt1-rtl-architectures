@@ -1,3 +1,5 @@
+**2026-11-13 15:05 progress:** [N1 accepted results and N2 work remaining](PROGRESS_N1_N2_20261113_1505.md). N1: 5048.635 task/s, 0.951149 mm2, 61.77735 mW / 12.23644 uJ in declared pre-layout model scope. N2 local array/datapath14 passed; actual ASIC/PPA pending. Older entries below are historical.
+
 **当前入口（2026-11-13 02:45）：** 正执行[N1→N2→D1→D2计划](IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md)。N1真实ASIC14、恢复、CPU竞争通过；固定12平均29711周期/5048.635task/s（150MHz折算）。新综合运行中，自己的1200/门级/功耗/完整浮点精度未验，未进入N2。B0及历史备份保留，状态以[根交接](../../CONTEXT_HANDOFF.md)和[N1清单](N1_ACCEPTANCE_20261113.md)为准。下方停止/等待和旧待办是历史记录。
 
 **当前入口（11月12日19:22）：** 直接5×16脉动B已完成自己的真实ASIC/E2031200任务、30,412,800输出，零失败；ASIC14、CPU恢复/竞争、DRC06同网表功能门级14和声明任务模式时序/面积审核已通过。SAIF/VCD方法对照已通过，B自己的活动与功耗仍待完成。12层完整平均30502.3333周期、150MHz折算4917.6566task/s，面积保守上界1.0990947mm²。见[B交付索引](SYSTOLIC_B_DELIVERY_20261112.md)、[实施计划](IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md)、[复现手册](SYSTOLIC_B_RUNBOOK.md)和[最新检查点](../../CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md)。R4及其全部交付证据保留；更早37组停止记录不是当前批量状态。
