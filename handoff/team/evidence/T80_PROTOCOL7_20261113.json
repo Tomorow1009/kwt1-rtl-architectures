@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "cases": 7,
+  "cpu_executed": false,
+  "model": "isolated_protocol_slave",
+  "fields": [
+    "different_read_payload",
+    "ready_wait",
+    "response_wait",
+    "all_four_error_phases",
+    "cancel_held_read",
+    "no_reset_restart",
+    "final_ack_and_drain"
+  ],
+  "source_sha256": {
+    "workspaces/arch03/rtl/arch03_t80_transport.sv": "d97ad50e3048beeb9c16bc26fb2f1bbb67d8d69eff44aeea7cd5f42848224ecd",
+    "workspaces/arch03/tb/tb_arch03_t80_transport.sv": "6f9eff353c572a2e385c12caf264ce2f6a4f90c86e661c5840c048db09edf854",
+    "workspaces/arch03/scripts/local_verify_t80_transport.py": "34f4ab4207e3c7b4633f91611e3056875c5d05cddd857d92c82f1b125e3ee7a7"
+  }
+}

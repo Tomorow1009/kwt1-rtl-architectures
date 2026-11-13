@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "N1_standalone_array_and_requant_only",
+  "full_10000_random_stress_passed": true,
+  "random_blocks": 10000,
+  "directed_blocks": 32,
+  "random_outputs": 792000,
+  "outputs": 794560,
+  "seed": 2016717297,
+  "seed_hex": "0x7834a9f1",
+  "sum_total_result_saturation_checked": true,
+  "exactly64_MAC_per_valid_output": true,
+  "continuous_II": 64,
+  "global_pause_cycles": 201275,
+  "partial_block_cancels": 11,
+  "partial_block_resets": 11,
+  "tag_wrap": true,
+  "cpu_executed": false,
+  "sram_tested": false,
+  "output_fifo_backpressure_tested": false,
+  "PPA_verified": false,
+  "host_seconds": 245.7613275051117,
+  "simulation_cycles": 845244,
+  "source_sha256": {
+    "workspaces\\arch03\\rtl\\arch03_n1_systolic5x16.sv": "18061346a98aeb50e5cd422815ee7e0856950c206dbc8768f5b8e1a60f3d5c62",
+    "workspaces\\arch03\\rtl\\arch03_n1_requantize.sv": "f3d01532c435a276fa0d92b7d5dab88f26a444eb68626adcfb25838ca420c34e",
+    "workspaces\\arch03\\tb\\tb_arch03_n1_systolic5x16.sv": "9784a51905e26213246ca349b1f4f2bbc6a13ea2807f49790f1e1691e430bb0d",
+    "workspaces\\arch03\\scripts\\local_verify_t80_array.py": "696cac71364f10b839d25b1d990fcdfe111d577bf1f27db6359ceaf94036b6de"
+  },
+  "vector_manifest_sha256": "dbbbcd9cf0b95ac908cb10b8bdfc4137c934f6759a282a080ea3e7562b936142",
+  "tool_directory": "D:\\Xilinx\\Vivado\\2018.3\\bin",
+  "tool_version": "Vivado2018.3 configured; see compile/elaboration/simulation logs"
+}

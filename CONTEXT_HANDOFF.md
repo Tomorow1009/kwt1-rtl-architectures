@@ -1,3 +1,69 @@
+# T80实施检查点 — 2026-11-13T16:51:17.644660+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。
+工作区E:/fpga_race-two/kwt1-t80-t64-g64；分支codex/light-light126/n1-t80-t64-g64-20261113。
+
+## 已完成
+
+- 新计划原文已保存；从70de850独立开发，计算RTL仍是9305c694的N1，未使用N2门控RTL。
+- T80独立transport：每字源读→共享写成功→同址共享读→解码FIFO；无写ACK数据转发。保留额度3、FIFO容量和全部数值/缓存规则。
+- install_t80把公平仲裁移到原mem_fab上游；O4只接单入口router。已通过5项Python接线/计时契约检查，但尚未在实际服务器平台安装或编译。
+- 新ID4b575308、cap000705bf、layout00100004、SHIFT10；独立IRQ固件已编译并核哈希，不等于CPU已执行。
+- 本地14例354816输出的total/result/saturated通过；固定12层本地平均45384.917周期。这里只包含实际SRAM RTL、仲裁/路由与pin_mock，尚未执行原mem_fab或E203，不当作正式吞吐。
+- 独立transport7例通过：源/共享写/共享读/输出写4类错误，读请求被反压时取消排空，无复位重启；读响应故意与源数据不同，证明解码消费真实读响应。
+- T80新增四段计时/原总线逐笔路径观察器、ASIC入口、综合入口和只允许前20条240任务的批量入口。
+
+## 正在运行和未验证
+
+- session38407已完成：10000随机+32定向块、794560输出，sum/total/result/sat、64次MAC、暂停、标签回绕、11次取消及11次局部复位通过。证据T80_ARRAY10000_20261113.json。
+- session7466：两拍SRAM、jitter、prefetch0/1、无复位A/B/A，尚未读取终态。
+- 新SoC观察器、安装器只做本地静态契约检查；尚未真实E203/原mem_fab验证。
+- 所有T80正式20条精度、ASIC、门级、面积、时序、SAIF/功耗都未验收；T64/G64未开始。
+- t80_server暂提供soc/build/synth/batch20，后续T80门级/活动/功耗与CPU恢复竞争入口还需适配。绝不把旧N1 PASS用于新配置。
+
+## 失败与保留
+
+- 首次protocol测试7例仿真通过，但报告导出因__file__相对路径失败；改为resolve后在新目录完整重跑通过。旧失败目录保留。
+- VNC只读查询首次超过helper1000字限制未输入；分段后成功。没有因此启动远端任务。
+- 原N1归档03尚未启动，不恢复旧N2/D1/D2队列。
+
+## 现场和下一步
+
+服务器最后只读观察2026-11-13 16:44:16：无团队锁、同账户EDA进程为空、共享可用26851334208B；VNC工作区3，未动工作区4。尚未上传T80包或启动服务器作业。
+下一步读取本地两个作业终态，完善T80契约/保护，提交打包并按原FileZilla路径上传。先真实ASIC首层再14及固定前20条，串行综合/门级/活动功耗。保持同12性能任务和同库条件。
+每次恢复先读本文件、原文计划和T80_T64_G64_EXECUTION.json；未经明确批准不得跑完整100条。
+
+---
+
+# T80/T64/G64 新计划开始 — 2026-11-13
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md（用户原文完整保留）。
+
+## 已完成
+
+- 从70de850建立独立工作区 E:/fpga_race-two/kwt1-t80-t64-g64 和个人分支 codex/light-light126/n1-t80-t64-g64-20261113；原工作区未提交的答疑审阅保持不动。
+- 新代码以9305c6948c764fed01fe86b20bb3db94170299ab的N1计算/数值实现为依据；不从N2门控实现派生。
+- 读取新计划、旧终止检查点和答疑核查，并视觉检查答疑第3/4页。N1原仲裁在O4之后，需移到原mem_fab上游；所有四类DMA事务经过原分路器。
+- N1历史1200任务和PPA结果保留，不能充当T80或最新总线要求的PASS。
+
+## 当前任务与未完成
+
+1. T80：原32位System Bus上游公平CPU/DMA仲裁；成功共享写ACK后才能对同址发读；解码器只消费共享读响应。保持80 PE、N1编码、缓存、源额度3和FIFO容量。
+2. T80独立数值/协议、本地14、真实E203固定前20条240任务、同网表功能门级、固定12任务SAIF/PPA、同批浮点精度和报告。
+3. T64：在冻结T80上改64 PE、25块末块3行；保留五行物理缓存容量并解决跨组映射；独立验收。
+4. 仅T64完整验收后进入G64真实工艺ICG；不恢复原N2/D1/D2路线。
+5. 各版本均禁止自动完整100条；三版对照后再按计划申请。既有归档03从未启动，不自动恢复。
+
+## 现场与失败路径
+
+- 新任务尚未连接服务器或启动作业。旧观察仅为15:13:58：无团队锁/EDA进程；不能当作实时状态。
+- 本机项目venv没有pypdf；使用已有PDF第3/4页渲染核对总线条款，不安装依赖影响工程。
+- 原N1归档01/02失败证据、N2本地代码/测试及所有历史结果保持。
+
+恢复时先读本检查点、原文计划和T80_T64_G64_EXECUTION.json，核对代码与实际运行回执，再继续。
+
+---
+
 **2026-11-13 15:05 RESUMED BY USER:** Read [resume checkpoint](CONTEXT_CHECKPOINT_20261113_1505_N2_RESUME.md) and [current results](workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md). User requested GitHub sync then continuation. N1 model-scope acceptance complete; N2 local array and datapath14 pass, server/PPA pending. Board responds after reboot; remote lock/process/space not yet rechecked. Archive03 NOT launched. No duplicate old jobs.
 
 **2026-11-13 14:37 PAUSED BY USER / BOARD SAFE TO POWER OFF:** Read [pause checkpoint](CONTEXT_CHECKPOINT_20261113_1435_N2_PAUSED.md). N1 accepted declared pre-layout model. N2 local10000+32 array and full datapath14 PASS; own ASIC/vendor/PPA pending. All local tests ended. VNC/FZ absence confirmed after Exit viewer; workspace4 untouched. Remote jobs not stopped; own archive02 already failed/dead, team lock absent14:33:58. Copy-only archive fix43tests passed locally, NOT deployed; no archive03/no source deletion. Do not resume until instructed.

@@ -3561,5 +3561,66 @@
     "progress_report": "workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md",
     "terminated_by_user": true,
     "terminated_at": "2026-11-13T15:18:00+08:00"
+  },
+  "t80_t64_g64_execution": {
+    "updated": "2026-11-13T16:51:54.673543+08:00",
+    "phase": "t80_local_validation_and_server_preparation",
+    "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
+    "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
+    "history_head": "70de850",
+    "numeric_hardware_baseline": "9305c6948c764fed01fe86b20bb3db94170299ab",
+    "branch": "codex/light-light126/n1-t80-t64-g64-20261113",
+    "stages": [
+      "T80",
+      "T64",
+      "G64"
+    ],
+    "current_stage": "T80",
+    "full100_authorized": false,
+    "formal_samples": 20,
+    "formal_tasks": 240,
+    "formal_outputs": 6082560,
+    "server_rechecked": true,
+    "server_jobs_started": [],
+    "new_hardware_verified": false,
+    "completed": [
+      "read_user_plan",
+      "isolated_worktree_preserving_concurrent_changes",
+      "read_original_bus_QA_pages3_4"
+    ],
+    "next": [
+      "implement_original_mem_fab_upstream_arbitration",
+      "implement_shared_readback_transport",
+      "validate_real_read_provenance_and_protocol",
+      "run_separate_T80_numeric_stress_and_ASIC_PPA"
+    ],
+    "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
+    "last_server_observation": {
+      "time": "2026-11-13T16:44:16.425061+08:00",
+      "team_lock_exists": false,
+      "same_account_eda_processes": [],
+      "shared_free_bytes": 26851334208
+    },
+    "local14": {
+      "tasks": 14,
+      "outputs": 354816,
+      "total_result_sat": true,
+      "mean_fixed12_local_cycles": 45384.916666666664,
+      "cpu_executed": false,
+      "original_mem_fab_executed": false,
+      "evidence": "handoff/team/evidence/T80_LOCAL14_20261113.json"
+    },
+    "protocol": {
+      "cases": 7,
+      "passed": true,
+      "evidence": "handoff/team/evidence/T80_PROTOCOL7_20261113.json"
+    },
+    "active_local_jobs": [
+      {
+        "session": 7466,
+        "scope": "two-cycle SRAM jitter prefetch0/1 no-reset ABA"
+      }
+    ],
+    "random10000": "passed; handoff/team/evidence/T80_ARRAY10000_20261113.json"
   }
 }
