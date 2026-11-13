@@ -1,0 +1,21 @@
+{
+  "checked": 100,
+  "evidence_file": "E:\\fpga_race-two\\takeover_local\\n1_wav_source_join_0804.png",
+  "evidence_sha256": "d8eab0e8efc12c31b26a05a7e63397330fd9693f3cfe250c184265934ab137a3",
+  "full_float_source_recovered": false,
+  "inputs_stable": true,
+  "mismatches": 0,
+  "n1_precision_accepted": false,
+  "observed_server_time": "2026-11-13T08:04:45+08:00",
+  "original_npz_identity_observed": "2026-11-13T08:05:23+08:00",
+  "original_npz_identity_screenshot_sha256": "75c63b9a0527a3354dca684d3ab1cdd62b77d7f5bb431c18c9038952a44dce7b",
+  "passed": true,
+  "query_sha256": "46685a8d10cd967abcfa7e9c863e6af54fc3d2d026bd83d7514961b645edd5bb",
+  "remote_hashlist": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/n1_selected100_wav_hashes_20261113_0648.json",
+  "sample_001_float_npz_sha256": "275444a4f5d895cd0fdf8a10a23705fb784ba7151a6d4980aa4ff50793f8533e",
+  "schema": "n1-wav-source-join-receipt-v1",
+  "scope": "Exact100 WAV/rank/path/split hashes joined to original manifest; not FLOAT matrix or hardware precision acceptance",
+  "server_manifest_sha256": "9900a9bd1addbdeb256020ba9a04f4615791fbd5a624abd411364098c382c97e",
+  "source_identity_query_sha256": "553ed2b5b4a5e1f541a11f5ba9bd9da31c24324957e22fccd1b5ed9a86be13a3",
+  "wav_hashlist_sha256": "5da67b0f6acc1cf89ca6d14166845606731c1442e00d6c083a2fc540c9541b3c"
+}

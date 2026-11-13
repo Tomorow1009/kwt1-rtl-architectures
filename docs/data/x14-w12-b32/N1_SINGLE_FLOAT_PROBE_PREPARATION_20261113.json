@@ -1,0 +1,30 @@
+{
+  "schema": "n1-single-float-probe-preparation-v1",
+  "files": {
+    "workspaces/arch03/scripts/n1_float_single_probe.py": {
+      "bytes": 12321,
+      "sha256": "a90cd0b806797eaef91518c14d45d6412e70a7c7625aee0dfa9b205a1ab36665"
+    },
+    "workspaces/arch03/scripts/test_n1_float_single_probe.py": {
+      "bytes": 3180,
+      "sha256": "5ab9e44d4640fd9ff5ff6c949f0140d9897cb4e4b55dc71b167976ae3dc985c9"
+    },
+    "docs/data/x14-w12-b32/N1_SINGLE_FLOAT_PROBE_PREPARATION_20261113.md": {
+      "bytes": 4838,
+      "sha256": "e2c3075ebe2ce9eaa3096acc629c2a9e7b0a21a7572d3789a5a698c844c2c098"
+    }
+  },
+  "tool_tests": {
+    "passed": 9,
+    "seconds": 0.053,
+    "scope": "Synthetic proof/serialization fixtures only"
+  },
+  "real_prepare_executed": false,
+  "real_probe_executed": false,
+  "tensorflow_imported": false,
+  "original_npz_serialization_confirmed": false,
+  "original_inference_batch_confirmed": false,
+  "sample_001_float_recovered": false,
+  "complete100_recovered": false,
+  "n1_precision_accepted": false
+}
