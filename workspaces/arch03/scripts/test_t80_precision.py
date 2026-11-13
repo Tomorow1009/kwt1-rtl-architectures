@@ -12,6 +12,33 @@ import t80_finish_queue as queue
 
 
 class PrecisionTests(unittest.TestCase):
+    def test_prior_contention_requires_identical_hardware_and_actual_cpu(self):
+        with tempfile.TemporaryDirectory() as temp:
+            old = Path(temp)/'old'
+            new = Path(temp)/'new'
+            run = old/'runs/contention/t80_contention'
+            run.mkdir(parents=True)
+            new.mkdir()
+            observer = 'workspaces/arch03/tb/arch03_t80_sequence_monitor.svh'
+            for root, version in ((old, 'old observer'), (new, 'fixed observer')):
+                (root/observer).parent.mkdir(parents=True)
+                (root/observer).write_text(version)
+                (root/'hardware.sv').write_text('frozen hardware')
+                stage.common.save(root/'manifest.json', {'files':
+                    {name: stage.common.sha(root/name) for name in (observer, 'hardware.sv')}})
+            stage.common.save(run/'summary.json', {'contention_verified': True, 'cpu_executed': True})
+            digest = stage.common.sha(run/'summary.json')
+            stage.common.save(run.parent/'state.json', {'stages': {'t80_contention':
+                {'status': 'passed', 'summary_sha256': digest}}})
+            request = {'prior_contention': {'run': str(run), 'sha256': digest}}
+            with patch.object(queue.common, 'ROOT', new):
+                self.assertEqual(queue.prior_contention(request)['sha256'], digest)
+                manifest = json.loads((new/'manifest.json').read_text())
+                manifest['files']['hardware.sv'] = '0'*64
+                stage.common.save(new/'manifest.json', manifest)
+                with self.assertRaisesRegex(ValueError, 'hardware, firmware or tools changed'):
+                    queue.prior_contention(request)
+
     def test_full100_and_old_path_are_rejected(self):
         for schema, count in [('arch03-n1-batch-v4', 240), ('arch03-t80-first20-batch-v4', 1200)]:
             with self.assertRaisesRegex(ValueError, 'ASIC240 is incomplete'):

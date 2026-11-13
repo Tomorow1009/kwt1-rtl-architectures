@@ -43,6 +43,34 @@ def observe_batch(request):
     return ref
 
 
+def prior_contention(request):
+    """Reuse only the completed, identical hardware/firmware contention run.
+
+    The sole permitted bundle difference is the passive recovery observer.
+    A changed DUT, installer, stimulus or firmware requires a fresh test.
+    """
+    prior = request.get('prior_contention')
+    if prior is None:
+        return None
+    run = Path(prior['run']).resolve()
+    ref = completed(run, 't80_contention')
+    require(ref['sha256'] == prior['sha256'], 'Prior contention summary changed')
+    old_bundle = run.parents[2]
+    old = read(old_bundle/'manifest.json')['files']
+    current = read(common.ROOT/'manifest.json')['files']
+    observer = 'workspaces/arch03/tb/arch03_t80_sequence_monitor.svh'
+    require(set(old) == set(current), 'Prior contention bundle file set changed')
+    require({p: h for p, h in old.items() if p != observer} ==
+            {p: h for p, h in current.items() if p != observer},
+            'Prior contention hardware, firmware or tools changed')
+    require(all(common.sha(old_bundle/p) == digest for p, digest in old.items()),
+            'Prior contention bundle bytes changed')
+    result = read(run/'summary.json')
+    require(result.get('contention_verified') is True and result.get('cpu_executed') is True,
+            'Prior run does not establish actual CPU contention')
+    return ref
+
+
 def run_child(command, run, stage, queue, state, lock):
     run = Path(run)
     require(not run.parent.exists(), 'Preserve existing stage '+str(run))
@@ -75,6 +103,7 @@ def execute(request, queue):
     require(request['queue_sha256'] == common.sha(Path(__file__)), 'Queue source changed')
     require(Path(request['operations']).resolve() == Path(ops['root']).resolve(), 'Wrong operations root')
     observe_batch(request)
+    prior = prior_contention(request)
     queue.mkdir(parents=True, exist_ok=False)
     atomic_save(queue/'request.json', request)
     state = dict(status='waiting_existing_batch', pid=os.getpid(), started=datetime.datetime.now().isoformat(),
@@ -94,7 +123,12 @@ def execute(request, queue):
             session = prefix+'_'+suffix
             command = [sys.executable, '-B', '-u', script, name, '--session', session]+list(extra)
             return run_child(command, common.ROOT/'runs'/session/('t80_'+name), 't80_'+name, queue, state, lock)
-        stage('contention', 'contention', ['--cases', 'layer_01'])
+        if prior is None:
+            stage('contention', 'contention', ['--cases', 'layer_01'])
+        else:
+            state['completed'].append(dict(stage='t80_contention', reference=prior,
+                                           reused_identical_hardware=True))
+            atomic_save(queue/'state.json', state)
         stage('sequence', 'sequence', ['--cases', 'layer_01', 'rounding'])
         synthesis = stage('synth', 'synth')
         synth_args = ['--synth-run', synthesis['run'], '--synth-summary-sha256', synthesis['sha256']]

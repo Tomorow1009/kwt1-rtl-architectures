@@ -3,6 +3,13 @@
 `define S16M u_e203_soc_top.u_e203_subsys_top.u_e203_subsys_main.u_e203_subsys_mems
 `define S16A `S16M.u_arch03_accel
 wire s16_clk=`S16A.clk,s16_rst_n=`S16A.rst_n;
+// The original O4 path carries CPU AND DMA traffic after upstream arbitration.
+// Observe CPU ownership before that arbiter; retain the fixture's direct port.
+`ifdef ARCH03_SEQUENCE_NO_CPU
+`define S16CPU(name) `S16M.a3_cpu_``name
+`else
+`define S16CPU(name) `S16M.mem_icb_``name
+`endif
 wire s16_start=`S16A.cmd_valid && `S16A.cmd_ready && !`S16A.cmd_read &&
  `S16A.cmd_addr==32'h40000004 && `S16A.cmd_wmask==15 && `S16A.cmd_wdata==1;
 wire s16_cancel=`S16A.cmd_valid && `S16A.cmd_ready && !`S16A.cmd_read &&
@@ -316,9 +323,12 @@ always @(posedge s16_clk)if(s16_rst_n)begin
   if(s16_mmio_pending)$fatal(1,"Sequence MMIO multiple outstanding");
   s16_mmio_pending=1;s16_mmio_read=`S16A.cmd_read;s16_mmio_addr=`S16A.cmd_addr;s16_mmio_data=`S16A.cmd_wdata;s16_mmio_mask=`S16A.cmd_wmask;
  end
- if(`S16M.a3_cpu_rsp_valid && `S16M.a3_cpu_rsp_ready)begin
-  if(!s16_cpu_pending || `S16M.a3_cpu_rsp_err!==1'b0)$fatal(1,"Sequence unowned/error CPU memory response");
+ if(`S16CPU(rsp_valid) && `S16CPU(rsp_ready))begin
+  if(!s16_cpu_pending)$fatal(1,"Sequence unowned CPU memory response");
   s16_cpu_pending=0;
+  // ROM/other original mem_fab slaves are not the shared-memory receipt path.
+  if(s16_cpu_addr[31:28]==4'ha || s16_cpu_addr[31:28]==4'hb)begin
+  if(`S16CPU(rsp_err)!==1'b0)$fatal(1,"Sequence error CPU shared-memory response");
   if(s16_cpu_read || s16_cpu_mask!==15 || s16_cpu_addr[1:0]!=0)$fatal(1,"Sequence CPU may only write aligned mail/receipt words");
   if(s16_cpu_addr>=32'ha0020000 && s16_cpu_addr<32'ha0020a00)begin
    if(s16_committed || ((s16_cpu_addr-32'ha0020000)>>8)!=s16_phase-1 || s16_cpu_addr[7:2]>32)
@@ -350,11 +360,12 @@ always @(posedge s16_clk)if(s16_rst_n)begin
     $finish;
    end
   end else $fatal(1,"Unexpected sequence CPU shared-memory traffic");
+  end
  end
- if(`S16M.a3_cpu_cmd_valid && `S16M.a3_cpu_cmd_ready)begin
+ if(`S16CPU(cmd_valid) && `S16CPU(cmd_ready))begin
   if(s16_cpu_pending)$fatal(1,"Sequence CPU multiple outstanding");
-  s16_cpu_pending=1;s16_cpu_addr=`S16M.a3_cpu_cmd_addr;s16_cpu_read=`S16M.a3_cpu_cmd_read;
-  s16_cpu_data=`S16M.a3_cpu_cmd_wdata;s16_cpu_mask=`S16M.a3_cpu_cmd_wmask;
+  s16_cpu_pending=1;s16_cpu_addr=`S16CPU(cmd_addr);s16_cpu_read=`S16CPU(cmd_read);
+  s16_cpu_data=`S16CPU(cmd_wdata);s16_cpu_mask=`S16CPU(cmd_wmask);
  end
 end
 initial begin #1000000000;$fatal(1,"N1 sequence timeout phase=%0d completed=%0d",s16_phase,s16_completed);end
@@ -420,3 +431,4 @@ endtask
 `endif
 `undef S16A
 `undef S16M
+`undef S16CPU
