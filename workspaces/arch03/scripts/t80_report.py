@@ -319,7 +319,8 @@ def build(request):
         gate_internal_total_observable=False,
         selection=selection(aggregate,s['area_summary']),
         precision=precision,fixed12_precision=fixed_precision,
-        stage_handoff=dict(next_stage='T64',allowed=False,reason='Numerical collection does not replace independent precision, timing, area and system-power review'),
+        stage_handoff=dict(next_stage=None,allowed=False,T64_deferred=True,G64_cancelled=True,
+            reason='T80 completion only; numerical collection does not replace independent precision, timing, area and system-power review'),
         references=refs,activity_reference=activity_ref,power_references=request.get('power',[]),
         batch_reference=request.get('batch'),precision_reference=request.get('precision'),
         production_hardware=hardware,firmware_sha256=g['firmware_sha256'],netlist_sha256=s['artifacts']['mapped.v'],
@@ -373,7 +374,7 @@ def write(report,output):
             (report['drc_inventory']['violation_record_count'],report['drc_inventory']['extraction_complete'],
              report['drc_inventory']['explicit_no_violations']),
         '源码、固件、布局、数据、库、网表及活动身份、模块功耗、SRAM、未知驻留及全部计数见JSON。重叠等待不相加作为总周期，缺失功耗不作零。','',
-        '项目面积上限1.20mm²；全部PPA来自T80自身配置。历史N1/B0证据独立保留，不转移PASS。缺同批20样本浮点精度或未知活动审核时，T80未验收，不进入T64。','',
+        '项目面积上限1.20mm²；全部PPA来自T80自身配置。历史N1/B0证据独立保留，不转移PASS。缺同批20样本浮点精度或未知活动审核时，T80未验收。T64暂停、G64取消，当前仅完成T80。','',
         '历史失败/停止路径：']
     lines+=['- '+json.dumps(item,ensure_ascii=False) for item in report['history']]
     (output/'report_zh.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
