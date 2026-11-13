@@ -3563,7 +3563,7 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T20:47:10+08:00",
+    "updated": "2026-11-13T20:57:00+08:00",
     "phase": "T80_SAIF_running_L01_passed",
     "plan": "workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md",
     "plan_sha256": "16413516ce0c2667a8410bf1ba301b6475d7deb39e1c355395edbc8f1fcd0faf",
@@ -3637,7 +3637,7 @@
       "dc_pid": 29185,
       "dc_state": "completed",
       "dc_cpu_percent": 99.7,
-      "tmp_free_bytes": 162679791616,
+      "tmp_free_bytes": 160438259712,
       "current_synth_directory_KiB": 261464,
       "queue_pid_present": true
     },
@@ -3731,7 +3731,7 @@
       "status": "running",
       "stage": "t80_saif",
       "started": "2026-11-13T20:36:32.019510",
-      "last_observed": "2026-11-13T20:43:24.034967+08:00",
+      "last_observed": "2026-11-13T20:53:58.534710+08:00",
       "bundle": "/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4",
       "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
       "operations": "/tmp/s4_21usr_t80_20261113_2012/ops-cef81d4",
@@ -3799,7 +3799,7 @@
       "server_hardware_executed": false,
       "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
     },
-    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_SAIF_L01_2047.md",
+    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_SAIF_L02_2057.md",
     "review_operations_prepared": {
       "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
       "files": 8,
@@ -3889,21 +3889,32 @@
     },
     "saif_progress": {
       "passed": [
-        "layer_01"
+        "layer_01",
+        "layer_02"
       ],
       "saif_bytes": 97722100,
       "cycles": 116752,
       "outputs": 25344,
       "simulation_cpu_seconds": 405.33,
-      "last_observed": "2026-11-13T20:47:10+08:00",
-      "complete12": false
+      "last_observed": "2026-11-13T20:53:58.534710+08:00",
+      "complete12": false,
+      "bytes_by_case": {
+        "layer_01": 97722100,
+        "layer_02": 97710598
+      },
+      "cycles_by_case": {
+        "layer_01": 116752,
+        "layer_02": 113732
+      }
     },
     "review_operations_pending": {
       "directory": "/tmp/s4_21usr_t80_20261113_2012/ops-review-cfbca86",
       "manifest_sha256": "f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81",
-      "transfer_exec_session": 84865,
-      "deployment_in_progress": true,
-      "lines": 11
+      "transfer_exec_session": null,
+      "deployment_in_progress": false,
+      "lines": 11,
+      "preflight_passed": true,
+      "preflight_observed": "2026-11-13T20:49:57+08:00"
     },
     "synthesis_review_progress": "handoff/team/evidence/T80_SYNTH_REVIEW_PROGRESS_20261113.json"
   }
