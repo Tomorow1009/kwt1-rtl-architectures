@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-13T17:20:38.769364+08:00",
-  "phase": "t80_server_preflight_and_formal_tools",
+  "updated": "2026-11-13T17:30:08.144129+08:00",
+  "phase": "t80_asic14_passed_batch20_running",
   "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
   "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
   "history_head": "70de850",
@@ -17,8 +17,24 @@
   "formal_tasks": 240,
   "formal_outputs": 6082560,
   "server_rechecked": true,
-  "server_jobs_started": [],
-  "new_hardware_verified": false,
+  "server_jobs_started": [
+    {
+      "session": "t80_soc01",
+      "pid": 236597,
+      "status": "passed",
+      "started": "2026-11-13T17:21:38.709458",
+      "cases": 14,
+      "outputs": 354816,
+      "totals": 354816
+    },
+    {
+      "session": "t80_batch20_01",
+      "pid": 247023,
+      "status": "running",
+      "started": "2026-11-13T17:27:35.377905"
+    }
+  ],
+  "new_hardware_verified": true,
   "completed": [
     "read_user_plan",
     "isolated_worktree_preserving_concurrent_changes",
@@ -33,20 +49,23 @@
     "server_reconstructed807_SHA_match_171919",
     "T80_gate_SAIF_power_timing_structure_tools_prepared",
     "CPU_contention_and_sequence_firmware_compiled",
-    "first20_float_precision_entry_prepared"
+    "first20_float_precision_entry_prepared",
+    "real_ASIC_E203_14_cases_354816_outputs_and_totals_original_bus_route_PASS",
+    "local_recovery10_phases_3negative_76032_outputs_PASS"
   ],
   "next": [
-    "read_fresh_server_preflight",
-    "T80_real_E203_first_layer_then_remaining13",
-    "server_verify_new_formal_tools",
-    "T80_first20_and_PPA"
+    "finish_existing_T80_batch20_no_duplicate_start",
+    "deliver_extended_tools_and_diagnostic_FW",
+    "T80_CPU_recovery_contention_then_synth_gate_SAIF_power",
+    "join_first20_precision"
   ],
   "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
   "last_server_observation": {
-    "time": "2026-11-13T16:44:16.425061+08:00",
-    "team_lock_exists": false,
-    "same_account_eda_processes": [],
-    "shared_free_bytes": 26851334208
+    "time": "2026-11-13T17:29:23+08:00",
+    "team_lock_expected_owner": "T80 batch20 PID247023",
+    "same_account_eda_processes": "not queried in this snapshot",
+    "last_free_bytes": 43665850368,
+    "free_observed_time": "2026-11-13T17:20:22+08:00"
   },
   "local14": {
     "tasks": 14,
@@ -76,5 +95,28 @@
     "delta_manifest_sha256": "882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749",
     "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01"
   },
-  "server_deployment_notes": "VNC here-document in tcsh required quoted terminator; 807-file reconstruction completed and printed matching manifest before trailing unquoted terminator caused NameError. Fresh independent input verification pending. No hardware job launched yet."
+  "server_deployment_notes": "VNC here-document in tcsh required quoted terminator; 807-file reconstruction completed and printed matching manifest before trailing unquoted terminator caused NameError. Fresh independent input verification pending. No hardware job launched yet.",
+  "asic14": {
+    "source_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+    "same_float_fixed12_cycles": [
+      116752,
+      113732,
+      112106,
+      112512,
+      110446,
+      108926,
+      107166,
+      107646,
+      107206,
+      111126,
+      116972,
+      126238
+    ],
+    "mean_cycles": 112569,
+    "task_s_at_150MHz": 1332.5160568184847,
+    "original_system_bus_executed": true,
+    "hardware_measurement": false,
+    "source": "VNC original server summary output; full report retained on server",
+    "screen": "E:/fpga_race-two/takeover_local/t80_soc14_done.png"
+  }
 }

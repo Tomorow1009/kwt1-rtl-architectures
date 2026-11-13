@@ -358,6 +358,12 @@ always @(posedge s16_clk)if(s16_rst_n)begin
  end
 end
 initial begin #1000000000;$fatal(1,"N1 sequence timeout phase=%0d completed=%0d",s16_phase,s16_completed);end
+`ifdef ARCH03_SEQUENCE_NO_CPU
+// This local fixture has no original platform bus; do not claim route proof.
+task t80_report_route; begin
+ $display("T80_SEQUENCE_LOCAL_ONLY original_mem_fab_executed=false");
+end endtask
+`else
 // Passive proof of the four DMA paths through the original mem_fab pins.
 // a3_bus_* connects only to the original i_icb_*; a3_cpu_* is original O4.
 reg t80_route_pending=0,t80_route_forwarded=0,t80_route_served=0;
@@ -411,5 +417,6 @@ task t80_report_route;
     end
 endtask
 
+`endif
 `undef S16A
 `undef S16M

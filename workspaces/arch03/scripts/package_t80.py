@@ -25,11 +25,9 @@ def main():
     parser.set_defaults(rows=5)
     parser.add_argument('--layout',type=int,choices=(4,),default=4)
     parser.add_argument('--prefetch',type=int,choices=(0,1),default=1)
-    parser.add_argument('--diagnostics',action='store_true',help='Include separately compiled CPU contention and v3 recovery firmware')
+    parser.add_argument('--diagnostics',action='store_true',help='Include separately compiled CPU contention and T80 recovery firmware')
     parser.add_argument('--member',required=True)
     args=parser.parse_args()
-    if args.diagnostics:
-        raise ValueError('T80 diagnostic firmware is not yet implemented; use only the verified stage entry')
     if not re.fullmatch('[A-Za-z0-9_-]{1,60}',args.member):raise ValueError('Member identifier')
     if git('status','--porcelain'):raise ValueError('Commit source before making a new immutable package')
     commit=git('rev-parse','HEAD')
@@ -73,6 +71,30 @@ def main():
         shutil.copytree(str(args.data/case),str(folder/'validated_data'/case))
         source_case(folder/'validated_data'/case)
     diagnostic_identities={}
+    if args.diagnostics:
+        from build_t80_sequence import verify_firmware as verify_sequence
+        for variant in ('contention','sequence'):
+            diagnostic_build=ROOT/'local_runs'/(name+'-'+variant+'-build')
+            command=[sys.executable,str(folder/'workspaces/arch03/scripts'/('build_t80_'+variant+'.py')),
+                '--zig',str(args.zig.resolve()),'--output',str(diagnostic_build)]
+            if variant=='contention':command += ['--layout',str(args.layout)]
+            else:command += ['--data',str(folder/'validated_data')]
+            with (ROOT/'local_runs'/(name+'-'+variant+'-build.log')).open('w') as out:
+                subprocess.check_call(command,cwd=str(folder),stdout=out,stderr=subprocess.STDOUT)
+            if variant=='sequence':
+                diagnostic,_=verify_sequence(diagnostic_build,folder)
+                filenames=['driver.elf','sequence.bin','sequence.verilog']
+            else:
+                diagnostic,_=verify_firmware(diagnostic_build,folder)
+                if diagnostic.get('performance_firmware') is not False:raise ValueError('Diagnostic firmware misclassified')
+                filenames=['driver.elf']+[n+suffix for n in diagnostic['images'] for suffix in ('.verilog','.bin')]
+            destination=folder/('firmware_'+variant);destination.mkdir()
+            for filename in filenames:shutil.copyfile(str(diagnostic_build/filename),str(destination/filename))
+            diagnostic.pop('command',None)
+            (destination/'manifest.json').write_text(json.dumps(diagnostic,indent=2)+'\n',encoding='utf8')
+            if variant=='sequence':verify_sequence(destination,folder)
+            else:verify_firmware(destination,folder)
+            diagnostic_identities[variant]=sha(destination/'manifest.json')
     runtime_prefixes=('firmware/','validated_data/','firmware_contention/','firmware_sequence/')
     paths=[]
     for path in sorted(folder.rglob('*')):
