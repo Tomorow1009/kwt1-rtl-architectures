@@ -3563,8 +3563,8 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T21:51:19.460786+08:00",
-    "phase": "T80_SAIF_running_L01_to_L11_passed",
+    "updated": "2026-11-13T22:18:25.100876+08:00",
+    "phase": "T80_SAIF12_passed_power7_of12",
     "plan": "workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md",
     "plan_sha256": "16413516ce0c2667a8410bf1ba301b6475d7deb39e1c355395edbc8f1fcd0faf",
     "history_head": "70de850",
@@ -3575,7 +3575,7 @@
       "T64",
       "G64"
     ],
-    "current_stage": "T80_saif",
+    "current_stage": "T80_power",
     "full100_authorized": false,
     "formal_samples": 20,
     "formal_tasks": 240,
@@ -3625,7 +3625,7 @@
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
-      "time": "2026-11-13T21:51:19.460786+08:00",
+      "time": "2026-11-13T22:18:25.100876+08:00",
       "team_lock_expected_owner": "t80_finish03_saif",
       "same_account_eda_processes": "none before queue launch at18:03:15",
       "last_free_bytes": 7335837696,
@@ -3637,7 +3637,7 @@
       "dc_pid": 29185,
       "dc_state": "completed",
       "dc_cpu_percent": 99.7,
-      "tmp_free_bytes": 153597235200,
+      "tmp_free_bytes": 151077998592,
       "current_synth_directory_KiB": 261464,
       "queue_pid_present": true
     },
@@ -3727,11 +3727,11 @@
     "server_queue": {
       "name": "t80_finish03",
       "pid": 183563,
-      "child_pid": 183576,
+      "child_pid": 297128,
       "status": "running",
-      "stage": "t80_saif",
+      "stage": "t80_power",
       "started": "2026-11-13T20:36:32.019510",
-      "last_observed": "2026-11-13T21:51:19.460786+08:00",
+      "last_observed": "2026-11-13T22:18:25.100876+08:00",
       "bundle": "/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4",
       "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
       "operations": "/tmp/s4_21usr_t80_20261113_2012/ops-cef81d4",
@@ -3799,7 +3799,7 @@
       "server_hardware_executed": false,
       "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
     },
-    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_L11_2153.md",
+    "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_POWER7_2220.md",
     "review_operations_prepared": {
       "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
       "files": 8,
@@ -3899,14 +3899,15 @@
         "layer_08",
         "layer_09",
         "layer_10",
-        "layer_11"
+        "layer_11",
+        "layer_12"
       ],
       "saif_bytes": 97722100,
       "cycles": 116752,
       "outputs": 25344,
       "simulation_cpu_seconds": 405.33,
       "last_observed": "2026-11-13T21:51:19.460786+08:00",
-      "complete12": false,
+      "complete12": true,
       "bytes_by_case": {
         "layer_01": 97722100,
         "layer_02": 97710598,
@@ -3918,7 +3919,8 @@
         "layer_08": 97680213,
         "layer_09": 97696360,
         "layer_10": 97706491,
-        "layer_11": 97727287
+        "layer_11": 97727287,
+        "layer_12": 97750415
       },
       "cycles_by_case": {
         "layer_01": 116752,
@@ -3931,26 +3933,45 @@
         "layer_08": 107646,
         "layer_09": 107206,
         "layer_10": 111126,
-        "layer_11": 116972
-      }
+        "layer_11": 116972,
+        "layer_12": 126238
+      },
+      "summary_sha256": "2fee667759ed46e95e672716ef4ccea60c1155fa63c0bc27323d72be5f49a35d"
     },
     "review_operations_pending": {
-      "directory": "/tmp/s4_21usr_t80_20261113_2012/ops-review-0391b09",
-      "manifest_sha256": "ad9ac1898a93771a367b1963a92a020fb24d7d627aea051023cf20d0ccd8162b",
+      "directory": "/tmp/s4_21usr_t80_20261113_2012/ops-review-b80b171",
+      "manifest_sha256": "b4cef85bf45ad4bfc49bf328cc10e9ca75072615e5063696e8c03d275085f884",
       "transfer_exec_session": null,
       "deployment_in_progress": false,
       "lines": 11,
       "preflight_passed": true,
-      "preflight_observed": "2026-11-13T21:45:31+08:00"
+      "preflight_observed": "2026-11-13T22:06:39+08:00"
     },
     "synthesis_review_progress": "handoff/team/evidence/T80_SYNTH_REVIEW_PROGRESS_20261113.json",
     "input_backup": "handoff/team/evidence/T80_INPUT_BACKUP_20261113.json",
     "archive_tool_prepared": {
       "commit": "66186a6",
-      "server_deployed": false,
+      "server_deployed": true,
       "copy_only": true,
       "source_deletion_allowed": false,
-      "local_readback_test_passed": true
+      "local_readback_test_passed": true,
+      "manifest_sha256": "348023da60fa760f2e091237b035f11cd404dbbe5c26fa46af3f898ea5255d91",
+      "preflight_passed": true,
+      "job_started": false
+    },
+    "power_progress": {
+      "last_observed": "2026-11-13T22:18:25.100876+08:00",
+      "layers": 7,
+      "raw_power_w": [
+        "0.0501254834",
+        "0.0502292328",
+        "0.0502437986",
+        "0.0502531491",
+        "0.0503219143",
+        "0.0503468513",
+        "0.0503912009"
+      ],
+      "system_power_verified": false
     }
   }
 }
