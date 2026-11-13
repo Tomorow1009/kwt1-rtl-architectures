@@ -1,0 +1,24 @@
+{
+  "schema": "b0-selected-control11-terminal-review-v1",
+  "observed_at": "2026-11-13T08:42:01+08:00",
+  "run": "/tmp/s4_21usr_n1_20261113_0210/b0_control_l02_l12_20261113_0640/review",
+  "summary_sha256": "b7f704f1bc678f2d6e90732ddaeed6051f393693169b5530fdd69ed1fe463991",
+  "actual_summary_and_all11_child_sha_rechecked": true,
+  "cases": 11,
+  "selected_per_case": 558,
+  "selected_unknown_records_each": 0,
+  "required_missing_each": 1356,
+  "shared_read_pending_T1_each_ns": 0,
+  "shared_read_pending_unknown_each_ns": 0,
+  "source_activity_unchanged": true,
+  "new_EDA": false,
+  "system_power_verified": false,
+  "joint_control_timing_proved": false,
+  "uncovered_macro_activity_is_not_zero": true,
+  "screenshot_sha256": "dafa2fbc2c7bdf538dd2ba8d0fc81726b49988be3de34885bb52389300658986",
+  "notes": [
+    "L01 collected earlier independently; this read only remaining11 summaries",
+    "Macro pins absent from activity require mapped-control interpretation; selected knownness does not approve complete system power",
+    "Default server Python3.6.8 has no NumPy; unrelated to the successfully checked control summaries"
+  ]
+}

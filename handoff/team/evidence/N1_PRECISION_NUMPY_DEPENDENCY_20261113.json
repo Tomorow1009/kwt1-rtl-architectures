@@ -1,0 +1,15 @@
+{
+  "schema": "n1-private-numeric-dependency-v1",
+  "filename": "numpy-1.19.5-cp36-cp36m-manylinux2010_x86_64.whl",
+  "bytes": 14835495,
+  "sha256": "a4646724fba402aa7504cd48b4b50e783296b5e10a524c7a6da62e4a8ac9698d",
+  "source": "https://pypi.org/project/numpy/1.19.5/#files",
+  "download_url": "https://files.pythonhosted.org/packages/14/32/d3fa649ad7ec0b82737b92fefd3c4dd376b0bb23730715124569f38f3a08/numpy-1.19.5-cp36-cp36m-manylinux2010_x86_64.whl",
+  "server_python": "3.6.8",
+  "server_glibc": "2.17",
+  "server_machine": "x86_64",
+  "purpose": "Isolated fresh precision audit only; no system/EDA library changes",
+  "local_installed": false,
+  "server_deployed": false,
+  "official_hash_verified": true
+}
