@@ -26,3 +26,11 @@
 5. 所有新工作先在独立目录；T64后续使用已通过预检的fix02与新fbfdc2e ops。G64不得提前。
 
 当前工作树`E:/fpga_race-two/kwt1-t80-t64-g64`，个人分支codex/light-light126/n1-t80-t64-g64-20261113。最近已推送4ab1517，fbfdc2e及本检查点/指标报告待同步。PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。共享锁仍在上级IC/.arch02_team_lock。
+
+## 19:47增量：未来队列满盘收尾修复
+
+- 新提交4bbd0afa078c48c07e7c774fae9bdfbdaae75c7b修复未来T80/T64队列在Popen之后、状态写入ENOSPC时仍必须等待已接受子进程的问题。3个场景分别测试两种队列通过。只改本地/新operations，不替换当前正在执行的T80队列。
+- 新T64 operations准备为`light-light126-t64-finishops-4bbd0af`，3文件，manifest c8d77f164f4f1c798f85741ae1dd6ffe3be5c8691193e5a6071cb131f0e45028。本地身份预检通过。
+- **exec61820正在VNC工作区3传输26行，尚无服务器完成回执。此时不可并发向VNC打字。** `local_runs/t64_priority_ops_4bbd0af/transfer_state.json`记录进度，`local_runs/transfer_t64_safe.ps1`为执行脚本。先poll61820并观察完成，再验证新ops；旧fbfdc2e ops不动。
+- 19:46:46最新截图仍为DC映射优化的中间迭代，不能把其面积/负裕量当最终结果；原T80继续。
+- d7969bd已推送；4bbd0af及本增量尚待推送。旧8路文件仍无任何删除。

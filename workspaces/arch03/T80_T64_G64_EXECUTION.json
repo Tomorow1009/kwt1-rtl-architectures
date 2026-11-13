@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T19:42:00+08:00",
+  "updated": "2026-11-13T19:55:00+08:00",
   "phase": "T80_synthesis_running_T64_server_preflight_passed",
   "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
   "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
@@ -163,7 +163,7 @@
     "name": "t80_finish02",
     "pid": 14008,
     "started": "2026-11-13T18:22:51.269828",
-    "last_observed": "2026-11-13T19:40:35.304067+08:00",
+    "last_observed": "2026-11-13T19:52:59+08:00",
     "stage": "t80_synth",
     "status": "running",
     "bundle": "light-light126-t80-v4-9196556-delta03",
@@ -235,7 +235,7 @@
     "server_hardware_executed": false,
     "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
   },
-  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1942.md",
+  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1955.md",
   "review_operations_prepared": {
     "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
     "files": 8,
@@ -250,6 +250,19 @@
   "new_hardware_verified_scope": "T80 ASIC/E203 numerical and bus function only; T64 only local tests and server input preflight",
   "execution_priority_supplement": "workspaces/arch03/T80_RESULT_PRIORITY_20261113.md",
   "T64_priority_operations": {
+    "commit": "4bbd0afa078c48c07e7c774fae9bdfbdaae75c7b",
+    "directory": "light-light126-t64-finishops-4bbd0af",
+    "manifest_sha256": "c8d77f164f4f1c798f85741ae1dd6ffe3be5c8691193e5a6071cb131f0e45028",
+    "files": 3,
+    "server_delivered": true,
+    "preflight_passed": true,
+    "preflight_observed": "2026-11-13T19:52:24+08:00",
+    "production_hardware_unchanged": true,
+    "queue_started": false,
+    "post_spawn_write_failure_drain_fixed": true
+  },
+  "asic12_counters_evidence": "handoff/team/evidence/T80_ASIC12_COUNTERS_20261113.json",
+  "T64_previous_priority_operations": {
     "commit": "fbfdc2e8838c68a941eeb6f1e7b44655abe4651c",
     "directory": "light-light126-t64-finishops-fbfdc2e",
     "manifest_sha256": "6917b611b2145d665bd6b1abd98ef65014a67b77431cec7c65e0ff3736d9ff9b",
@@ -259,6 +272,5 @@
     "production_hardware_unchanged": true,
     "queue_started": false,
     "preflight_observed": "2026-11-13T19:36:44+08:00"
-  },
-  "asic12_counters_evidence": "handoff/team/evidence/T80_ASIC12_COUNTERS_20261113.json"
+  }
 }
