@@ -67,6 +67,7 @@ def run_child(command, run, stage, queue, state, lock):
 
 
 def execute(request, queue):
+    require(request['schema'] == 't80-complete-current-stage-v1', 'Wrong T80 queue request schema')
     require(str(common.ROOT) == request['bundle'], 'Wrong frozen T80 bundle import')
     require(common.sha(common.ROOT/'manifest.json') == request['bundle_manifest_sha256'], 'Bundle changed')
     common.inputs()
@@ -74,7 +75,7 @@ def execute(request, queue):
     require(request['queue_sha256'] == common.sha(__file__), 'Queue source changed')
     require(Path(request['operations']).resolve() == Path(ops['root']).resolve(), 'Wrong operations root')
     observe_batch(request)
-    queue.mkdir(exist_ok=False)
+    queue.mkdir(parents=True, exist_ok=False)
     atomic_save(queue/'request.json', request)
     state = dict(status='waiting_existing_batch', pid=os.getpid(), started=datetime.datetime.now().isoformat(),
                  child_pid=None, completed=[], full100_allowed=False, t64_started=False)
