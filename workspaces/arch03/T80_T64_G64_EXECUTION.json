@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-13T18:50:16.101561+08:00",
-  "phase": "T80_synthesis_running_T64_package_deploying",
+  "updated": "2026-11-13T19:10:39.083615+08:00",
+  "phase": "T80_synthesis_running_T64_server_preflight_passed",
   "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
   "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
   "history_head": "70de850",
@@ -54,21 +54,25 @@
     "local_recovery10_phases_3negative_76032_outputs_PASS"
   ],
   "next": [
-    "finish_and_verify_T64_deployment_without_other_VNC_input",
-    "observe_existing_T80_queue",
-    "review_T80_PPA_precision_before_new_server_stage"
+    "finish_review_operations_transfer_31899",
+    "inspect_existing_T80_synthesis_and_queue",
+    "complete_T80_report_review",
+    "start_T64_formal_tests_only_after_T80_required_evidence"
   ],
   "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
   "last_server_observation": {
-    "time": "2026-11-13T18:35:25.095956+08:00",
+    "time": "2026-11-13T19:08:08.734274+08:00",
     "team_lock_expected_owner": "t80_finish02_synth",
     "same_account_eda_processes": "none before queue launch at18:03:15",
-    "last_free_bytes": 34212937728,
-    "free_observed_time": "2026-11-13T18:35:25.095956+08:00",
+    "last_free_bytes": 27936161792,
+    "free_observed_time": "2026-11-13T19:04:10.414108+08:00",
     "batch_completed_at_least": 240,
     "batch_failed_observed": 0,
     "checked_outputs": 6082560,
-    "checked_totals": 6082560
+    "checked_totals": 6082560,
+    "dc_pid": 29185,
+    "dc_state": "R",
+    "dc_cpu_percent": 99.7
   },
   "local14": {
     "tasks": 14,
@@ -157,12 +161,14 @@
     "name": "t80_finish02",
     "pid": 14008,
     "started": "2026-11-13T18:22:51.269828",
-    "last_observed": "2026-11-13T18:35:25.095956+08:00",
+    "last_observed": "2026-11-13T19:03:01.473475+08:00",
     "stage": "t80_synth",
     "status": "running",
     "bundle": "light-light126-t80-v4-9196556-delta03",
     "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
-    "operations": "light-light126-t80-finishops-9196556"
+    "operations": "light-light126-t80-finishops-9196556",
+    "child_pid": 23158,
+    "dc_pid": 29185
   },
   "T64_local": {
     "rtl_created": true,
@@ -204,12 +210,12 @@
     "summary_sha256": "7943123a4ad0b4ed6d4739562947c4962757866c4de5219fe4aca99b6e0c5aa2"
   },
   "T64_package": {
-    "bundle": "light-light126-t64-v4-65d2507-delta01",
-    "files": 874,
+    "bundle": "light-light126-t64-v4-65d2507-fix02",
+    "files": 875,
     "full_package_verified": true,
     "hardware_commit": "e2e83ce121963d499ea67914b4c34a05a0c58f27",
     "line_count": 141,
-    "manifest_sha256": "367eb3d21e0dcacc230f821be609805d9b1789bc3dd9ebca432e9f977f60c8ff",
+    "manifest_sha256": "6632a4f266d48f50fd8a9e542cb6e03f05653d7ade3153903b38c3282c3339c1",
     "operations": "light-light126-t64-finishops-65d2507",
     "operations_manifest_sha256": "437a29f65ed61f1f389445ddd16fc457151b87f34fade3ca8548b44c338100f9",
     "operator_sha256": "c3a44946f746b9bf9f89bddb049483b0156b3400f40a094816921f9ada557b35",
@@ -217,17 +223,23 @@
     "payload_characters": 95212,
     "production_hardware_unchanged": true,
     "source_commit": "65d25073a1afcf4fc37da29c2d40ffc56f7e122a",
-    "server_delivery_in_progress": true,
-    "server_verified": false,
-    "exec_session": 60646,
+    "server_delivery_in_progress": false,
+    "server_verified": true,
+    "exec_session": null,
     "last_transfer_line_observed": 71,
-    "total_transfer_lines": 141
+    "total_transfer_lines": 141,
+    "server_preflight_at": "2026-11-13T19:07:08.365340+08:00",
+    "server_hardware_executed": false,
+    "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
   },
-  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1850.md",
+  "last_checkpoint": "CONTEXT_CHECKPOINT_20261113_T80_T64_1910.md",
   "review_operations_prepared": {
     "commit": "d61159749f6e661c4397e5697bd5fa386e90e7e0",
     "files": 8,
     "deployed": false,
-    "manifest_sha256": "669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3"
-  }
+    "manifest_sha256": "669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3",
+    "deployment_in_progress": true,
+    "exec_session": 31899
+  },
+  "new_hardware_verified_scope": "T80 ASIC/E203 numerical and bus function only; T64 only local tests and server input preflight"
 }
