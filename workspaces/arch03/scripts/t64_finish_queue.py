@@ -132,13 +132,16 @@ def execute(request, queue):
         stage('sequence', 'sequence', ['--cases', 'layer_01', 'rounding'])
         synthesis = stage('synth', 'synth')
         synth_args = ['--synth-run', synthesis['run'], '--synth-summary-sha256', synthesis['sha256']]
-        for name in ('timing_audit', 'drc_audit', 'structure'):
-            stage(name, name, synth_args)
+        # The gate entry performs its required mapped-port and synthesis
+        # checks. Supplemental diagnostics must not delay the full activity
+        # capture; retain every diagnostic before final reporting.
         gate = stage('gate', 'gate', synth_args)
         layers = ['layer_%02d'%n for n in range(1, 13)]
         activity = stage('saif', 'saif', ['--gate-run', gate['run'], '--gate-summary-sha256', gate['sha256'],
             '--saif-qualification-run', request['qualification_run'],
             '--saif-qualification-sha256', request['qualification_sha256'], '--cases']+layers)
+        for name in ('timing_audit', 'drc_audit', 'structure'):
+            stage(name, name, synth_args)
         for number, layer in enumerate(layers, 1):
             stage('power', 'p%02d'%number, ['--saif-activity-run', activity['run'],
                 '--saif-activity-sha256', activity['sha256'], '--cases', layer])

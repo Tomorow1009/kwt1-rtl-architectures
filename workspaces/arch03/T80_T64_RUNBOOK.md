@@ -31,7 +31,9 @@ python3 -B workspaces/arch03/scripts/t64_server.py batch20 --session t64_batch20
 
 第二条须在第一条通过、原共享锁空闲后执行。`batch20`只选原清单前20条、240任务，逐项核对6082560个输出和total/saturated，不运行全部100条。每个入口自行检查空间并占用原`.arch02_team_lock`。
 
-`t64_finish_queue.py`使用显式request锁定原batch PID、开始时间、目录、包及operations哈希；只接续这一次原批量，不重启批量。按顺序运行竞争、恢复、综合、timing/drc/structure、门级14、SAIF12、逐层功耗和同批浮点精度。任一失败即保留现场退出，不在同目录重跑。
+`t64_finish_queue.py`使用显式request锁定原batch PID、开始时间、目录、包及operations哈希；只接续这一次原批量，不重启批量。按顺序运行竞争、恢复、综合、门级14（含必需端口核对）、SAIF12、timing/drc/structure补充诊断、逐层功耗和同批浮点精度。任一失败即保留现场退出，不在同目录重跑。
+
+上述T64顺序由19:27后的新operations实现，须部署并核验新operations身份后使用；已经接收的65d2507 operations仍为旧顺序。当前运行的T80 operations完全不改动。两种顺序都要求全部诊断完成，不减少最终验收项目。
 
 T80使用对应`t80_*`入口。当前已经存在`t80_finish02`，不得按本说明重建同名或重复功能队列。
 
