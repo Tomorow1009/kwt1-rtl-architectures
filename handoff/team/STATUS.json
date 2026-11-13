@@ -3363,12 +3363,12 @@
     }
   },
   "narrow_execution": {
-    "status": "N2_resumed_local14_pass_server_pending",
+    "status": "terminated_by_user_awaiting_new_plan",
     "branch": "codex/light-light126/arch03-n1-n2-d1-d2-20261113",
     "h0": "2026-11-13T00:49:49+08:00",
     "base_commit": "cd4a63ad4a4c7ab5e07b471bf70d7fd2fbc6bc5f",
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1505_N2_RESUME.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261113_1518_TERMINATED.md",
     "phase_order": [
       "N1",
       "N2",
@@ -3383,18 +3383,16 @@
     "new_server_jobs_started": true,
     "new_hardware_verified": true,
     "current_work": [
-      "Sync current results and resume checkpoint",
-      "Recheck server lock/process/space before fresh archive",
-      "Finish N2 local protocol and actual ICG mapping checks"
+      "Task terminated; await new plan"
     ],
-    "next": "Finish N1 durable copy-only archive and N2 own ASIC/synthesis preparation; do not enter D1 before stage closure.",
+    "next": "Do not resume old queues or phase work. Read new plan and concurrent bus-requirements review first.",
     "array_random_blocks_passed": 10000,
     "array_outputs_passed": 794560,
     "local_dma14_outputs_passed": 354816,
     "local_cpu_executed": false,
     "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
     "data100_file_identity_passed": true,
-    "server_observed_at": "2026-11-13T14:33:58.107452+08:00",
+    "server_observed_at": "2026-11-13T15:13:58.438059+08:00",
     "server_session": "n1_saif_static_01",
     "server_pid": null,
     "archive_session": "r4_l01_archive02",
@@ -3410,7 +3408,7 @@
     "archive_temporary_directory": "/tmp/s4_21usr-r4-l01-20261113_0233",
     "runtime_tools_deployed": true,
     "runtime_linux_identity_passed": true,
-    "cloud_commit": "313147f899287543215f43b9056df9fbbe5c2699",
+    "cloud_commit": "5b0d137b71ffe2e1653ec4c6763d045856caa503",
     "B0_readonly_inventory": "handoff/team/evidence/B0_POWER_READONLY_REVIEW_20261113.json",
     "archive_observed_at": "2026-11-13T03:10:40+08:00",
     "archive_evidence": "handoff/team/evidence/R4_L01_STAGED_ARCHIVE_20261113.json",
@@ -3548,7 +3546,7 @@
     "system_power_verification_scope": "pre_layout_model_and_activity_review_only",
     "N1_stage_accepted": true,
     "N2_started": true,
-    "runtime_archive_status": "archive02_failed_protected_proc_no_source_changes_copy_only_fix_tested_not_deployed",
+    "runtime_archive_status": "archive03_prepared_locally_NOT_launched_task_terminated",
     "N2_local_array_summary": "local_runs/n2_icg_array_20261113_135826_622626/summary.json",
     "N2_server_verified": false,
     "N2_local_progress": "handoff/team/evidence/N2_LOCAL_PROGRESS_20261113_1435.json",
@@ -3560,6 +3558,8 @@
     "remote_jobs_stopped": false,
     "local_jobs_running": false,
     "resumed_at": "2026-11-13T15:02:00+08:00",
-    "progress_report": "workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md"
+    "progress_report": "workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md",
+    "terminated_by_user": true,
+    "terminated_at": "2026-11-13T15:18:00+08:00"
   }
 }
