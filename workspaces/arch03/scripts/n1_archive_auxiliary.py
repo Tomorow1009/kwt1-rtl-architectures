@@ -39,6 +39,11 @@ ALLOW = {
     'light-light126-n1-archiveops-3b5cf866b337': 'directory',
     'light-light126-n1-evidenceops-20261113_0640': 'directory',
     'b0_control_l02_l12_20261113_0640': 'directory',
+    'light-light126-n1-precisionops-20261113_0840': 'directory',
+    'light-light126-n1-precisionops02-20261113_090845': 'directory',
+    'light-light126-n1-queueops-20261113_091833': 'directory',
+    'n1_precision_inputs_20261113_0840': 'directory',
+    'n1_numpy1195_20261113_0905': 'directory',
 }
 MAX_ENTRIES = 10000
 MAX_BYTES = 2*1024**3

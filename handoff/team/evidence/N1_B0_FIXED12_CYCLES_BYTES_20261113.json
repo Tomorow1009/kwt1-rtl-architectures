@@ -1,0 +1,113 @@
+{
+  "schema": "n1-b0-fixed12-transport-observation-v1",
+  "source_table_sha256": "4eee81fb161925eab28a67d3c20417c370e07e544ae6456d1fcc644064b3fc1b",
+  "rows": [
+    [
+      1,
+      31339,
+      30547,
+      33012,
+      31428
+    ],
+    [
+      2,
+      30735,
+      29943,
+      31804,
+      30220
+    ],
+    [
+      3,
+      30423,
+      29619,
+      31180,
+      29572
+    ],
+    [
+      4,
+      30491,
+      29699,
+      31316,
+      29732
+    ],
+    [
+      5,
+      30079,
+      29287,
+      30492,
+      28908
+    ],
+    [
+      6,
+      29775,
+      28983,
+      29884,
+      28300
+    ],
+    [
+      7,
+      29423,
+      28631,
+      29180,
+      27596
+    ],
+    [
+      8,
+      29511,
+      28727,
+      29356,
+      27788
+    ],
+    [
+      9,
+      29419,
+      28639,
+      29172,
+      27612
+    ],
+    [
+      10,
+      30215,
+      29423,
+      30764,
+      29180
+    ],
+    [
+      11,
+      31383,
+      30591,
+      33100,
+      31516
+    ],
+    [
+      12,
+      33235,
+      32443,
+      36804,
+      35220
+    ]
+  ],
+  "columns": [
+    "layer",
+    "B0_cycles",
+    "N1_cycles",
+    "B0_encoded_bytes",
+    "N1_encoded_bytes"
+  ],
+  "B0_mean_cycles": 30502.333333333332,
+  "N1_mean_cycles": 29711.0,
+  "B0_mean_encoded_bytes": 31338.666666666668,
+  "N1_mean_encoded_bytes": 29756.0,
+  "throughput_gain_percent": 2.6634355401478738,
+  "area_upper_bound_reduction_percent": 13.460715309735294,
+  "cycle_reduction_equals_half_byte_reduction_all": true,
+  "server_table_hash_join_verified": true,
+  "observed_at": "2026-11-13T09:27:52+08:00",
+  "B0_report_sha256": "677a1ae11042ffe6aab98fb1b0f124b29f604e6dc0d9bb29e96d9f04f4f6a81a",
+  "N1_asic_summary_sha256": "56fb13bcd320ad1895506ed30399205ad31c30e1dfa0d95d75e944e051bde58b",
+  "source_screenshot_sha256": "b4e48ff1522354e29062e37d348ef8fef0e76e00179f83306bb79be9bbc21196",
+  "causal_limit": "All twelve observed cycle reductions equal half the encoded-byte reduction. This supports transport-limited overall improvement, not an isolated MAC-width throughput attribution.",
+  "average_transaction_lower_bound_cycles": 27550.0,
+  "mean_cycles_above_transaction_lower_bound": 2161.0,
+  "observation_time_source": "VNC screenshot clock"
+}
