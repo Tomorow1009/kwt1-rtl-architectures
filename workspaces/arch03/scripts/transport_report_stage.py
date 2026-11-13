@@ -55,7 +55,10 @@ def run(args):
     manifest = json.loads((common.ROOT/'manifest.json').read_text())
     require(manifest['architecture'] == 'arch03_'+name and
             manifest['row_lanes'] == {'T80':5,'T64':4}[args.stage], 'Wrong report bundle')
-    cfg = paths.configure(json.loads((common.ROOT/'handoff/team/server_config.json').read_text()), common.ROOT)
+    cfg = paths.configure(json.loads((common.ROOT/'handoff/team/server_config.json').read_text()), common.ROOT,
+                          args.runtime_root, args.runtime_manifest_sha256)
+    paths.allowed_run(args.queue, cfg, 'Report queue')
+    paths.allowed_run(args.asic_run, cfg, 'Report ASIC evidence')
     require(re.fullmatch('[A-Za-z0-9_-]{1,48}',args.session), 'Unsafe report session')
     session = common.ROOT/'runs'/args.session
     require(not session.exists(), 'Preserve previous report session')
@@ -100,7 +103,8 @@ def run(args):
                 import b0_saif_unknown_inventory as inventory
                 state['status']='collecting_existing_unknown_activity';atomic_save(session/'state.json',state)
                 inventory.collect(output/'report.json',state['report_sha256'],
-                                  Path(cfg['server_root']),session/'unknown_inventory',inventory.LAYERS)
+                                  Path(cfg['server_root']),session/'unknown_inventory',inventory.LAYERS,
+                                  path_validator=lambda path: paths.allowed_run(path,cfg,'Unknown inventory input'))
                 state.update(status='report_and_unknown_inventory_ready_review_required',
                              unknown_inventory_sha256=common.sha(session/'unknown_inventory/summary.json'))
             require(common.sha(queue_path)==args.queue_sha256,'Original queue state changed during export')
@@ -123,6 +127,8 @@ def main():
     p.add_argument('--asic-sha256',required=True)
     p.add_argument('--session',required=True)
     p.add_argument('--unknown-inventory',action='store_true')
+    p.add_argument('--runtime-root',type=Path)
+    p.add_argument('--runtime-manifest-sha256')
     run(p.parse_args())
 
 

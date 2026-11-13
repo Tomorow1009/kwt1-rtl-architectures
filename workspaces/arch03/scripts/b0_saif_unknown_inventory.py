@@ -17,6 +17,7 @@ import shutil
 import sys
 
 import native_saif_activity as native
+import t80_window
 from saif_syntax import integer_ticks
 from dma16_unknown_netlist import index_netlist, resolve_alias
 
@@ -29,7 +30,7 @@ LIMIT_OUTPUT_CASE = 256 * 1024**2
 RESERVE_BYTES = 2 * 1024**3
 OUTPUT_CHECK_BYTES = 4 * 1024**2
 DEPENDENCIES = ('native_saif_activity', 'saif_syntax', 'dma16_unknown_netlist',
-                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth')
+                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth', 't80_window')
 
 
 def require(value, message):
@@ -114,12 +115,12 @@ def mapped_signal(instance, leaf, index):
     return result
 
 
-def scan(path, window, expected, index, emit):
+def scan(path, window, expected, index, emit, window_reader=native.window_values):
     """Streaming parser matching the frozen native audit, plus unknown output."""
     path = Path(path)
     before = stamp(path)
     require(before[2] == expected['bytes'] and before[2] <= LIMIT_SAIF, 'SAIF size differs/exceeds explicit limit')
-    start, end, duration = native.window_values(window);duration = Decimal(duration)
+    start, end, duration = window_reader(window);duration = Decimal(duration)
     stats = dict(declarations=0, toggle_count=0, unknown_declarations=0, fully_unknown_declarations=0,
                  conditional_records=0, T0_ticks=0, T1_ticks=0, TX_ticks=0, TZ_ticks=0,
                  combined_XZ_declarations=0, unknown_ticks=0)
@@ -272,9 +273,11 @@ def profile_contract(report):
     return ('N1', 'n1_synth', 'n1_saif', 'N1_native_saif_function_and_complete_windows_passed')
 
 
-def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
+def collect(report_path, report_sha, scope_root, output, cases=LAYERS, path_validator=None):
     code_identity = dependencies()
-    scope = Path(scope_root).resolve();report_path = scoped(report_path, scope)
+    scope = Path(scope_root).resolve()
+    scope_path = path_validator or (lambda path: scoped(path,scope))
+    report_path = scope_path(report_path)
     require(re.fullmatch('[0-9a-f]{64}', report_sha), 'Pin the actual export report SHA')
     report = small(report_path, report_sha)
     profile, synth_stage, activity_stage, activity_status = profile_contract(report)
@@ -282,12 +285,12 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
     require(export_receipt['artifacts']['report.json'] == report_sha, 'Export receipt differs')
     selected = tuple(cases)
     require(selected and len(set(selected)) == len(selected) and set(selected) <= set(LAYERS), 'Invalid case list')
-    arun = scoped(report['activity_reference']['run'], scope)
+    arun = scope_path(report['activity_reference']['run'])
     activity = small(arun / 'summary.json', report['activity_reference']['sha256'])
     state = small(arun.parent / 'state.json')['stages'][activity_stage]
     require(state['status'] == 'passed' and state['summary_sha256'] == report['activity_reference']['sha256'],
             'Activity stage not frozen passed')
-    srun = scoped(report['references']['synthesis']['run'], scope)
+    srun = scope_path(report['references']['synthesis']['run'])
     synthesis = small(srun / 'summary.json', report['references']['synthesis']['sha256'])
     synthesis_state = small(srun.parent / 'state.json')['stages'][synth_stage]
     require(synthesis_state['status'] == 'passed' and
@@ -301,7 +304,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
                 activity.get('layout_id') == report['layout_id'] and
                 activity.get('gate_summary_sha256') == report['references']['gate']['sha256'],
                 'Mixed '+profile+' format or gate identity')
-    netlist = scoped(srun / 'mapped.v', scope)
+    netlist = scope_path(srun / 'mapped.v')
     require(synthesis['artifacts']['mapped.v'] == report['netlist_sha256'] and
             netlist.stat().st_size <= LIMIT_NETLIST and sha(netlist) == report['netlist_sha256'], 'Wrong/oversize mapped netlist')
     net_stamp = stamp(netlist);index = index_netlist(netlist.read_text(encoding='utf8'))
@@ -331,7 +334,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
         require(receipt['output_budget']['free_bytes'] >= receipt['output_budget']['required_free_bytes'],
                 'Insufficient initial bounded output budget plus 2GiB reserve; no SAIF scanned')
         for name in selected:
-            row = rows[name];expected = row['activity'];path = scoped(arun / expected['file'], scope)
+            row = rows[name];expected = row['activity'];path = scope_path(arun / expected['file'])
             require(path.parent == arun and path.suffix == '.saif', 'Unsafe SAIF basename')
             partial = output / (name + '.unknown.jsonl.gz.partial')
             with partial.open('xb') as raw:
@@ -345,7 +348,8 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS):
                             output_guard(output);unchecked[0] = 0
                         packed.write(payload);unchecked[0] += len(payload)
                         require(raw.tell() <= LIMIT_OUTPUT_CASE, 'Per-case output cap reached; partial retained')
-                    result = scan(path, row['task_window'], expected, index, emit)
+                    reader = t80_window.window_values if profile == 'T80' else native.window_values
+                    result = scan(path, row['task_window'], expected, index, emit,window_reader=reader)
                 raw.flush();os.fsync(raw.fileno())
             require(partial.stat().st_size <= LIMIT_OUTPUT_CASE, 'Completed compressed output exceeds cap')
             output_guard(output)

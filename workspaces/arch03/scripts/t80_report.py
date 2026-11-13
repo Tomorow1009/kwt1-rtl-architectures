@@ -23,7 +23,8 @@ import t80_gate as gate_tools
 from t80_power import extract_reports
 from native_saif_activity import audit as activity_audit
 from native_saif_replay import verify_inputs
-from icb32_power import stream_sha as sha,window_values
+from icb32_power import stream_sha as sha
+from t80_window import window_values
 from icb32_report import configuration_identity,clock_conditions
 from dma16_report import read
 from icb32_delivery_sdc import restore_clock
@@ -230,7 +231,7 @@ def build(request):
         for name,row in act.items():
             require(row['task_window']==right[name]['task_window'] and
                 row['layout_sha256']==right[name]['layout_sha256'],'Activity layout/window differs')
-            actual=activity_audit(Path(activity_ref['run'])/row['activity']['file'],row['task_window'])
+            actual=activity_audit(Path(activity_ref['run'])/row['activity']['file'],row['task_window'],window_reader=window_values)
             require(actual==row['activity'],'Activity audit differs')
     powers={}
     for ref in request.get('power',[]):
