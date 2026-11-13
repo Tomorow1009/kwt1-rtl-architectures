@@ -1,9 +1,23 @@
 import copy
+from pathlib import Path
+import tempfile
 import unittest
 import transport_report_stage as report
 
 
 class CompletedQueueContract(unittest.TestCase):
+    def test_queue_is_session_not_stage_and_cannot_escape_bundle(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle=Path(directory).resolve()/'bundle'
+            queue=bundle/'runs'/'t80_finish03'
+            queue.mkdir(parents=True)
+            self.assertEqual(report.verify_queue_path(queue,bundle),queue)
+            stage=queue/'t80_saif';stage.mkdir()
+            foreign=Path(directory).resolve()/'foreign'/'runs'/'t80_finish03'
+            foreign.mkdir(parents=True)
+            for rejected in (stage,foreign,queue.parent,queue.parent/'missing'):
+                with self.assertRaises(ValueError):report.verify_queue_path(rejected,bundle)
+
     def queue(self, stage):
         names=('contention','sequence','synth','timing_audit','drc_audit','structure','gate','saif','precision')
         records=[dict(stage=stage.lower()+'_'+name,reference=dict(run='/run/'+name,sha256='a'*64))

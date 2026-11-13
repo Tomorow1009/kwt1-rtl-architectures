@@ -35,6 +35,19 @@ def completed_references(state, stage):
     return grouped
 
 
+def verify_queue_path(queue, bundle):
+    """A queue is runs/session, not the runs/session/stage evidence shape."""
+    queue, bundle = Path(queue).absolute(), Path(bundle).absolute()
+    require(queue.parent == bundle/'runs' and
+            re.fullmatch('[A-Za-z0-9_-]{1,64}', queue.name),
+            'Report queue must be a direct session of the verified bundle')
+    require(queue.is_dir() and queue.resolve() == queue and bundle.resolve() == bundle,
+            'Report queue must be an existing canonical directory')
+    require(queue.stat().st_uid == queue.parent.stat().st_uid == bundle.stat().st_uid,
+            'Report queue owner differs from the verified bundle')
+    return queue
+
+
 def run(args):
     import server_run as common
     from n1_process import ProcessLedger, atomic_save, now
@@ -57,7 +70,7 @@ def run(args):
             manifest['row_lanes'] == {'T80':5,'T64':4}[args.stage], 'Wrong report bundle')
     cfg = paths.configure(json.loads((common.ROOT/'handoff/team/server_config.json').read_text()), common.ROOT,
                           args.runtime_root, args.runtime_manifest_sha256)
-    paths.allowed_run(args.queue, cfg, 'Report queue')
+    verify_queue_path(args.queue, common.ROOT)
     paths.allowed_run(args.asic_run, cfg, 'Report ASIC evidence')
     require(re.fullmatch('[A-Za-z0-9_-]{1,48}',args.session), 'Unsafe report session')
     session = common.ROOT/'runs'/args.session
