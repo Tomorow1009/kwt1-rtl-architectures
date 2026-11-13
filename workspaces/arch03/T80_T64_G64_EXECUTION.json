@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T17:30:08.144129+08:00",
+  "updated": "2026-11-13T17:41:57.331361+08:00",
   "phase": "t80_asic14_passed_batch20_running",
   "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
   "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
@@ -61,11 +61,13 @@
   ],
   "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
   "last_server_observation": {
-    "time": "2026-11-13T17:29:23+08:00",
+    "time": "2026-11-13T17:36:42+08:00",
     "team_lock_expected_owner": "T80 batch20 PID247023",
     "same_account_eda_processes": "not queried in this snapshot",
     "last_free_bytes": 43665850368,
-    "free_observed_time": "2026-11-13T17:20:22+08:00"
+    "free_observed_time": "2026-11-13T17:20:22+08:00",
+    "batch_completed_at_least": 50,
+    "batch_failed_observed": 0
   },
   "local14": {
     "tasks": 14,
@@ -95,7 +97,7 @@
     "delta_manifest_sha256": "882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749",
     "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01"
   },
-  "server_deployment_notes": "VNC here-document in tcsh required quoted terminator; 807-file reconstruction completed and printed matching manifest before trailing unquoted terminator caused NameError. Fresh independent input verification pending. No hardware job launched yet.",
+  "server_deployment_notes": "delta01 independently verified all807 files at17:20:22; real ASIC14 passed; first20 batch running. delta02 separately reconstructed833 exact files locally and currently being sent through visible VNC; server acceptance pending.",
   "asic14": {
     "source_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
     "same_float_fixed12_cycles": [
@@ -118,5 +120,21 @@
     "hardware_measurement": false,
     "source": "VNC original server summary output; full report retained on server",
     "screen": "E:/fpga_race-two/takeover_local/t80_soc14_done.png"
+  },
+  "extended_package": {
+    "commit": "aa1d15b53a79690002569a2ef8291c0a06bd4794",
+    "zip": "light-light126-t80-v4-20261113_173111-aa1d15b53a79.zip",
+    "bytes": 9386985,
+    "sha256": "db3e7cad7f7d0a8c7c8a944853f3321c0bdb35e2b393315e13057eb1eb70d30d",
+    "files": 923,
+    "runtime_subset_files": 833,
+    "runtime_subset_manifest_sha256": "8f0f675ab510ba43de8e5275e9dba5d0f88e861a7c0562ae52220ce1ca7c6e0a",
+    "server_delivered": false,
+    "production_rtl_unchanged_from": "876b883d95199f2d1889019cbfec4c93c42d1be5"
+  },
+  "precision_tools": {
+    "own_first20_float_and_ASIC_join_prepared": true,
+    "scope_and_lock_tests": 4,
+    "server_executed": false
   }
 }

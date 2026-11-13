@@ -7,6 +7,7 @@ import base64
 import hashlib
 import importlib.util
 import json
+import sys
 from pathlib import Path, PurePosixPath
 
 
@@ -57,14 +58,34 @@ def apply(recipe, base, destination):
     spec = importlib.util.spec_from_file_location('t80_pinned_builder', str(builder_path))
     builder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(builder)
-    metadata = json.loads(contents['firmware/manifest.json'])
-    config = metadata['configuration']
-    image, _ = builder.elf_image(contents['firmware/driver.elf'])
-    image = builder.metadata_image(image, 10, config['default_encoded_bytes'],
-                                   config['row_lanes'], config['default_layout'])
+    images = {}
     for relative, patch in recipe['patch'].items():
         if 'firmware_from_elf' not in patch:
             continue
+        folder = patch['firmware_from_elf']
+        if folder is True:
+            folder = 'firmware'
+        if folder not in ('firmware', 'firmware_contention', 'firmware_sequence') or not relative.startswith(folder+'/'):
+            raise ValueError('Invalid derived firmware folder')
+        if folder not in images:
+            metadata = json.loads(contents[folder+'/manifest.json'])
+            config = metadata['configuration']
+            base_image, _ = builder.elf_image(contents[folder+'/driver.elf'])
+            if folder == 'firmware_sequence':
+                script = destination/'workspaces/arch03/scripts/build_t80_sequence.py'
+                sequence_spec = importlib.util.spec_from_file_location('t80_pinned_sequence', str(script))
+                sequence = importlib.util.module_from_spec(sequence_spec)
+                sys.path.insert(0, str(script.parent))
+                try:
+                    sequence_spec.loader.exec_module(sequence)
+                finally:
+                    sys.path.pop(0)
+                images[folder] = sequence.metadata_image(base_image, metadata['tasks']['A'],
+                    metadata['tasks']['B'], config['short_timeout_cycles'])
+            else:
+                images[folder] = builder.metadata_image(base_image, 10, config['default_encoded_bytes'],
+                    config['row_lanes'], config['default_layout'])
+        image = images[folder]
         raw = bytes(image) if relative.endswith('.bin') else ''.join('%02x\n' % b for b in image).encode('ascii')
         if sha(raw) != patch['sha256']:
             raise ValueError('Firmware reconstruction mismatch: '+relative)

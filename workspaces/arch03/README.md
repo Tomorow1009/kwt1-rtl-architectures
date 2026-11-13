@@ -1,3 +1,5 @@
+**当前入口（2026-11-13）：** 执行[T80→T64→G64](N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md)。T80真实共享读回ASIC14已通过，前20条240任务回归进行中；新PPA未验。旧N1/N2条目仅为历史，见[当前检查点](../../CONTEXT_CHECKPOINT_20261113_T80_EXTENDED.md)。
+
 **2026-11-13 15:05 progress:** [N1 accepted results and N2 work remaining](PROGRESS_N1_N2_20261113_1505.md). N1: 5048.635 task/s, 0.951149 mm2, 61.77735 mW / 12.23644 uJ in declared pre-layout model scope. N2 local array/datapath14 passed; actual ASIC/PPA pending. Older entries below are historical.
 
 **当前入口（2026-11-13 02:45）：** 正执行[N1→N2→D1→D2计划](IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md)。N1真实ASIC14、恢复、CPU竞争通过；固定12平均29711周期/5048.635task/s（150MHz折算）。新综合运行中，自己的1200/门级/功耗/完整浮点精度未验，未进入N2。B0及历史备份保留，状态以[根交接](../../CONTEXT_HANDOFF.md)和[N1清单](N1_ACCEPTANCE_20261113.md)为准。下方停止/等待和旧待办是历史记录。
