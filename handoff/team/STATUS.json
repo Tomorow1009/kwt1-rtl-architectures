@@ -3563,8 +3563,8 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T17:55:12.568406+08:00",
-    "phase": "t80_asic14_passed_batch20_running",
+    "updated": "2026-11-13T18:26:06.953737+08:00",
+    "phase": "T80_synthesis_running_T64_local_validation_complete",
     "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
     "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
     "history_head": "70de850",
@@ -3575,7 +3575,7 @@
       "T64",
       "G64"
     ],
-    "current_stage": "T80",
+    "current_stage": "T80_server_evidence",
     "full100_authorized": false,
     "formal_samples": 20,
     "formal_tasks": 240,
@@ -3594,7 +3594,7 @@
       {
         "session": "t80_batch20_01",
         "pid": 247023,
-        "status": "running",
+        "status": "passed",
         "started": "2026-11-13T17:27:35.377905"
       }
     ],
@@ -3618,22 +3618,21 @@
       "local_recovery10_phases_3negative_76032_outputs_PASS"
     ],
     "next": [
-      "finish_existing_T80_batch20_no_duplicate_start",
-      "deliver_extended_tools_and_diagnostic_FW",
-      "T80_CPU_recovery_contention_then_synth_gate_SAIF_power",
-      "join_first20_precision"
+      "observe_existing_T80_synth_and_queue",
+      "freeze_package_T64_after_tool_review",
+      "T80_PPA_and_precision_review_before_new_server_stage"
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
-      "time": "2026-11-13T17:53:15+08:00",
-      "team_lock_expected_owner": "T80 batch20 PID247023",
-      "same_account_eda_processes": "not queried in this snapshot",
-      "last_free_bytes": 44608520192,
-      "free_observed_time": "2026-11-13T17:53:15+08:00",
-      "batch_completed_at_least": 178,
+      "time": "2026-11-13T18:05:18+08:00",
+      "team_lock_expected_owner": "T80 finish queue child contention",
+      "same_account_eda_processes": "none before queue launch at18:03:15",
+      "last_free_bytes": 50544508928,
+      "free_observed_time": "2026-11-13T18:03:15+08:00",
+      "batch_completed_at_least": 240,
       "batch_failed_observed": 0,
-      "checked_outputs": 4511232,
-      "checked_totals": 4511232
+      "checked_outputs": 6082560,
+      "checked_totals": 6082560
     },
     "local14": {
       "tasks": 14,
@@ -3663,7 +3662,7 @@
       "delta_manifest_sha256": "882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749",
       "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01"
     },
-    "server_deployment_notes": "delta02 independently verified833 files at17:53:15. New three-script operations package is being sent through visible VNC; existing batch remains active. No queue started yet.",
+    "server_deployment_notes": "delta02 verified833 files; e249649 operations verified; recovered original FLOAT archive, NumPy1.19.5, R4 SAIF qualification preflight passed18:02:39. Earlier4dd preflight string/Path hash mismatch fixed without launching any job.",
     "asic14": {
       "source_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
       "same_float_fixed12_cycles": [
@@ -3703,9 +3702,70 @@
       "own_first20_float_and_ASIC_join_prepared": true,
       "scope_and_lock_tests": 5,
       "server_executed": false,
-      "ops_commit": "4dd2a1dc00df23d0dd05083ce3afc6f2de63f552",
-      "ops_manifest_sha256": "d0380127559db2099e4a5dfb4bb8032fa83b0150e329198e0b71be99f6fe00e3",
-      "server_deployment_in_progress": true
+      "ops_commit": "e249649e4bcef47663a79f88ef06530bc4f4eaa3",
+      "ops_manifest_sha256": "dce16eae7080bd373caf6e492c527b0b5bc5223bc1e79e81b3fc01ef9b30178c",
+      "server_deployment_in_progress": false
+    },
+    "local_work": "T64 derived from functionally frozen T80; no G64 before complete T64 acceptance",
+    "batch20": {
+      "status": "passed",
+      "tasks": 240,
+      "outputs": 6082560,
+      "totals": 6082560,
+      "failed": 0,
+      "mean_task_cycles": 112568.75,
+      "host_elapsed_seconds": 1978.422608182067,
+      "summary_sha256": "34985a7070e03c6db33fdb74b00b5e00526bc7f96a9319616864fe6ade1f02b4"
+    },
+    "server_queue": {
+      "name": "t80_finish02",
+      "pid": 14008,
+      "started": "2026-11-13T18:22:51.269828",
+      "last_observed": "2026-11-13T18:25:26+08:00",
+      "stage": "t80_synth",
+      "status": "running",
+      "bundle": "light-light126-t80-v4-9196556-delta03",
+      "manifest_sha256": "fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d",
+      "operations": "light-light126-t80-finishops-9196556"
+    },
+    "T64_local": {
+      "rtl_created": true,
+      "array10000_passed": true,
+      "array_outputs": 635648,
+      "first_layer_jitter_passed": true,
+      "server_verified": false,
+      "PPA_verified": false,
+      "local14_outputs": 354816,
+      "latency_ABA_outputs": 304128,
+      "recovery_outputs": 76032,
+      "firmware_compiled": [
+        "IRQ",
+        "contention",
+        "sequence"
+      ],
+      "server_tools_prepared": true
+    },
+    "retention": "Do not delete, overwrite, or archive-and-delete any old 8-lane server data",
+    "previous_failed_queue": {
+      "name": "t80_finish01",
+      "pid": 306658,
+      "started": "2026-11-13T18:04:10.827144",
+      "last_observed": "2026-11-13T18:05:18+08:00",
+      "stage": "t80_sequence",
+      "status": "failed",
+      "operations": "light-light126-t80-finishops-e249649",
+      "operations_manifest_sha256": "dce16eae7080bd373caf6e492c527b0b5bc5223bc1e79e81b3fc01ef9b30178c",
+      "request_sha256": "a51ca9d59bd8108f316c80bf8254f70cd8cbbda0f046c0ccca2ae3201a43da4d",
+      "finished": "2026-11-13T18:08:20.803679",
+      "reason": "O4 DMA classified as CPU by recovery observer"
+    },
+    "sequence": {
+      "status": "passed",
+      "real_cpu": true,
+      "phases": 10,
+      "outputs": 76032,
+      "total_outputs": 76032,
+      "summary_sha256": "7943123a4ad0b4ed6d4739562947c4962757866c4de5219fe4aca99b6e0c5aa2"
     }
   }
 }
