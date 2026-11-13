@@ -58,7 +58,7 @@ def execute(cfg, session, archive, archive_sha, dataset, batch_run, batch_sha, o
                        source_mode=numeric.SOURCE_MODE, archive_sha256=archive_sha)
             report = join.audit_precision(ref, batch)
             report.update(schema='arch03-t80-first20-precision-join-v1', batch=batch,
-                          auditor_sha256=common.sha(join.__file__), timing_verified=False,
+                          auditor_sha256=common.sha(Path(join.__file__)), timing_verified=False,
                           system_power_verified=False, operations=ops)
             common.inputs()
             t80_paths.recheck(cfg)

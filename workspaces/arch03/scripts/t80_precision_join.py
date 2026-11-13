@@ -9,7 +9,8 @@ import t80_gate as gate_tools
 from t80_window import read_window
 from t80_bus_metrics import parse_metrics
 from native_saif_replay import verify_inputs
-from server_run import sha, save
+from server_run import save
+from icb32_power import stream_sha as sha
 from t80_batch import select_first20
 
 def read(path):return json.loads(Path(path).read_text())

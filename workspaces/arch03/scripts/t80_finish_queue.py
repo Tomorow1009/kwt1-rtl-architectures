@@ -72,7 +72,7 @@ def execute(request, queue):
     require(common.sha(common.ROOT/'manifest.json') == request['bundle_manifest_sha256'], 'Bundle changed')
     common.inputs()
     ops = operations_identity(request['operations_manifest_sha256'])
-    require(request['queue_sha256'] == common.sha(__file__), 'Queue source changed')
+    require(request['queue_sha256'] == common.sha(Path(__file__)), 'Queue source changed')
     require(Path(request['operations']).resolve() == Path(ops['root']).resolve(), 'Wrong operations root')
     observe_batch(request)
     queue.mkdir(parents=True, exist_ok=False)
