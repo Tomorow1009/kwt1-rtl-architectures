@@ -48,6 +48,17 @@ def verify_queue_path(queue, bundle):
     return queue
 
 
+def evidence_path(path, paths, cfg):
+    """The inventory reads both registered stages and files inside them."""
+    path = Path(path).absolute()
+    if path.is_file():
+        require(not path.is_symlink(), 'Unknown inventory input must not be a symlink')
+        parent = paths.allowed_run(path.parent, cfg, 'Unknown inventory stage')
+        require(path.resolve() == parent/path.name, 'Unknown inventory file escaped its stage')
+        return path.resolve()
+    return paths.allowed_run(path, cfg, 'Unknown inventory stage')
+
+
 def run(args):
     import server_run as common
     from n1_process import ProcessLedger, atomic_save, now
@@ -117,7 +128,7 @@ def run(args):
                 state['status']='collecting_existing_unknown_activity';atomic_save(session/'state.json',state)
                 inventory.collect(output/'report.json',state['report_sha256'],
                                   Path(cfg['server_root']),session/'unknown_inventory',inventory.LAYERS,
-                                  path_validator=lambda path: paths.allowed_run(path,cfg,'Unknown inventory input'))
+                                  path_validator=lambda path: evidence_path(path,paths,cfg))
                 state.update(status='report_and_unknown_inventory_ready_review_required',
                              unknown_inventory_sha256=common.sha(session/'unknown_inventory/summary.json'))
             require(common.sha(queue_path)==args.queue_sha256,'Original queue state changed during export')

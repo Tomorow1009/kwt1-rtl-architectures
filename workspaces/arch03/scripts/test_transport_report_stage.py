@@ -1,11 +1,25 @@
 import copy
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 import transport_report_stage as report
 
 
 class CompletedQueueContract(unittest.TestCase):
+    def test_unknown_inventory_accepts_files_only_inside_registered_stages(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve();stage=root/'runs'/'session'/'t80_saif'
+            stage.mkdir(parents=True);wave=stage/'layer_01.saif';wave.write_bytes(b'fixture')
+            outside=root/'other.saif';outside.write_bytes(b'not registered')
+            def allowed(path,cfg,label):
+                if path!=stage:raise ValueError('Unregistered stage')
+                return path
+            paths=SimpleNamespace(allowed_run=allowed)
+            self.assertEqual(report.evidence_path(stage,paths,{}),stage)
+            self.assertEqual(report.evidence_path(wave,paths,{}),wave)
+            with self.assertRaises(ValueError):report.evidence_path(outside,paths,{})
+
     def test_queue_is_session_not_stage_and_cannot_escape_bundle(self):
         with tempfile.TemporaryDirectory() as directory:
             bundle=Path(directory).resolve()/'bundle'
