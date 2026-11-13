@@ -3563,7 +3563,7 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T17:41:57.331361+08:00",
+    "updated": "2026-11-13T17:55:12.568406+08:00",
     "phase": "t80_asic14_passed_batch20_running",
     "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
     "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
@@ -3625,13 +3625,15 @@
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
-      "time": "2026-11-13T17:36:42+08:00",
+      "time": "2026-11-13T17:53:15+08:00",
       "team_lock_expected_owner": "T80 batch20 PID247023",
       "same_account_eda_processes": "not queried in this snapshot",
-      "last_free_bytes": 43665850368,
-      "free_observed_time": "2026-11-13T17:20:22+08:00",
-      "batch_completed_at_least": 50,
-      "batch_failed_observed": 0
+      "last_free_bytes": 44608520192,
+      "free_observed_time": "2026-11-13T17:53:15+08:00",
+      "batch_completed_at_least": 178,
+      "batch_failed_observed": 0,
+      "checked_outputs": 4511232,
+      "checked_totals": 4511232
     },
     "local14": {
       "tasks": 14,
@@ -3661,7 +3663,7 @@
       "delta_manifest_sha256": "882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749",
       "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01"
     },
-    "server_deployment_notes": "delta01 independently verified all807 files at17:20:22; real ASIC14 passed; first20 batch running. delta02 separately reconstructed833 exact files locally and currently being sent through visible VNC; server acceptance pending.",
+    "server_deployment_notes": "delta02 independently verified833 files at17:53:15. New three-script operations package is being sent through visible VNC; existing batch remains active. No queue started yet.",
     "asic14": {
       "source_commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
       "same_float_fixed12_cycles": [
@@ -3693,13 +3695,17 @@
       "files": 923,
       "runtime_subset_files": 833,
       "runtime_subset_manifest_sha256": "8f0f675ab510ba43de8e5275e9dba5d0f88e861a7c0562ae52220ce1ca7c6e0a",
-      "server_delivered": false,
-      "production_rtl_unchanged_from": "876b883d95199f2d1889019cbfec4c93c42d1be5"
+      "server_delivered": true,
+      "production_rtl_unchanged_from": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+      "server_verified_at": "2026-11-13T17:53:15.093653+08:00"
     },
     "precision_tools": {
       "own_first20_float_and_ASIC_join_prepared": true,
-      "scope_and_lock_tests": 4,
-      "server_executed": false
+      "scope_and_lock_tests": 5,
+      "server_executed": false,
+      "ops_commit": "4dd2a1dc00df23d0dd05083ce3afc6f2de63f552",
+      "ops_manifest_sha256": "d0380127559db2099e4a5dfb4bb8032fa83b0150e329198e0b71be99f6fe00e3",
+      "server_deployment_in_progress": true
     }
   }
 }
