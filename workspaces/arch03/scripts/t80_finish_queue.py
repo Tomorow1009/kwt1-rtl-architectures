@@ -78,14 +78,20 @@ def run_child(command, run, stage, queue, state, lock):
     atomic_save(queue/'state.json', state)
     while lock.exists():
         time.sleep(20)
+    child = None
     with (queue/(run.parent.name+'.log')).open('x') as log:
-        child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
-        state.update(status='running', child_pid=child.pid)
-        atomic_save(queue/'state.json', state)
-        code, interruptions = ProcessLedger.drain(None, child)
-    state['child_pid'] = None
-    if interruptions:
-        raise interruptions[0]
+        try:
+            child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+            state.update(status='running', child_pid=child.pid)
+            atomic_save(queue/'state.json', state)
+        finally:
+            # Future queue exports only: do not replace an executing operator.
+            # Even ENOSPC after Popen must not leave an untracked EDA child.
+            if child is not None:
+                code, interruptions = ProcessLedger.drain(None, child)
+                state['child_pid'] = None
+                if interruptions:
+                    raise interruptions[0]
     require(code == 0, 'T80 child failed; preserve '+str(run))
     ref = completed(run, stage)
     state['completed'].append(dict(stage=stage, reference=ref))

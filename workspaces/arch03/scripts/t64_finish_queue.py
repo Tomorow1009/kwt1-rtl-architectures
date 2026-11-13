@@ -78,14 +78,20 @@ def run_child(command, run, stage, queue, state, lock):
     atomic_save(queue/'state.json', state)
     while lock.exists():
         time.sleep(20)
+    child = None
     with (queue/(run.parent.name+'.log')).open('x') as log:
-        child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
-        state.update(status='running', child_pid=child.pid)
-        atomic_save(queue/'state.json', state)
-        code, interruptions = ProcessLedger.drain(None, child)
-    state['child_pid'] = None
-    if interruptions:
-        raise interruptions[0]
+        try:
+            child = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT)
+            state.update(status='running', child_pid=child.pid)
+            atomic_save(queue/'state.json', state)
+        finally:
+            # A shared-disk write can fail after Popen succeeds. Always reap
+            # the accepted child before propagating that bookkeeping error.
+            if child is not None:
+                code, interruptions = ProcessLedger.drain(None, child)
+                state['child_pid'] = None
+                if interruptions:
+                    raise interruptions[0]
     require(code == 0, 'T64 child failed; preserve '+str(run))
     ref = completed(run, stage)
     state['completed'].append(dict(stage=stage, reference=ref))

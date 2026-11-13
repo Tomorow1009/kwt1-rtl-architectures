@@ -35,6 +35,8 @@ python3 -B workspaces/arch03/scripts/t64_server.py batch20 --session t64_batch20
 
 上述T64顺序由19:27后的新operations实现，须部署并核验新operations身份后使用；已经接收的65d2507 operations仍为旧顺序。当前运行的T80 operations完全不改动。两种顺序都要求全部诊断完成，不减少最终验收项目。
 
+后续队列包装器还修复了子进程启动后状态落盘失败时的收尾：即使共享盘返回ENOSPC，也必须等待已接受的子进程退出，再传播错误，不把失败记录成PASS。满盘、子进程非零退出与正常退出三个场景已分别对T80/T64执行本地注入检查。此修改只适用于新operations，绝不覆盖运行中的T80队列；没有引入VCS/PT并行或改变协作锁。
+
 T80使用对应`t80_*`入口。当前已经存在`t80_finish02`，不得按本说明重建同名或重复功能队列。
 
 ## 收集与审查
