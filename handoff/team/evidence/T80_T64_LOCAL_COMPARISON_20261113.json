@@ -1,0 +1,157 @@
+{
+  "schema": "t80-t64-local-comparison-v1",
+  "scope": "pin_mock_no_E203_no_original_mem_fab",
+  "official_performance": false,
+  "PPA_measured": false,
+  "inputs": {
+    "handoff\\team\\evidence\\T80_LOCAL14_20261113.json": "f9f56147d452650cd6f3278c408eea6179722c779724d113b94a48436b2f1d16",
+    "handoff\\team\\evidence\\T64_LOCAL14_20261113.json": "0fcdaf0b5eea16c414529d563584bc4ba62bc8cfa617f86bed601946a0b671e3"
+  },
+  "cases": [
+    {
+      "case": "layer_01",
+      "encoded_bytes": 31428,
+      "source_words": 7857,
+      "transaction_lower_bound": 36243,
+      "shared_read_2cycle_optimistic_bound": 44100,
+      "local_t80_cycles": 47183,
+      "local_t64_cycles": 47971,
+      "encoded_sha256": "8fca26c38b13749cca6bfdccfa84bda557185902bf5b2646048053fb0e8ef437",
+      "source_layout_sha256": "c2a0c7410b7d1e9d3f976fef306d78e375ceb581bb9b681e22f6dc09b2f067e6"
+    },
+    {
+      "case": "layer_02",
+      "encoded_bytes": 30220,
+      "source_words": 7555,
+      "transaction_lower_bound": 35337,
+      "shared_read_2cycle_optimistic_bound": 42892,
+      "local_t80_cycles": 46025,
+      "local_t64_cycles": 46470,
+      "encoded_sha256": "b1e2fe404dd1d1cf07509e0ebde22c54e495d73fa0b5899d8885075e6c10a46d",
+      "source_layout_sha256": "fab091cace23e119b738aa1a31135403b7e419ad77dcdbaa32743098118e0c41"
+    },
+    {
+      "case": "layer_03",
+      "encoded_bytes": 29572,
+      "source_words": 7393,
+      "transaction_lower_bound": 34851,
+      "shared_read_2cycle_optimistic_bound": 42244,
+      "local_t80_cycles": 45224,
+      "local_t64_cycles": 45983,
+      "encoded_sha256": "0c1e7b3ed7a8cbf3cfc2e2ccd77d772ed991faf672cba09818c791a6c33afb9c",
+      "source_layout_sha256": "17e7f7a4ead2585e19e1ae2839e84c5c5fc3c1fa11bb1f632ccae045e4a8f2ad"
+    },
+    {
+      "case": "layer_04",
+      "encoded_bytes": 29732,
+      "source_words": 7433,
+      "transaction_lower_bound": 34971,
+      "shared_read_2cycle_optimistic_bound": 42404,
+      "local_t80_cycles": 45216,
+      "local_t64_cycles": 46193,
+      "encoded_sha256": "0f1a9ce5199994c65981cc62c2f601614b76fe9f7c79ae98bfbb9c811209efe3",
+      "source_layout_sha256": "09c305742a8da90b4a39b77ab7a8cef7b10547400af49f5354a21704ea2cc2f6"
+    },
+    {
+      "case": "layer_05",
+      "encoded_bytes": 28908,
+      "source_words": 7227,
+      "transaction_lower_bound": 34353,
+      "shared_read_2cycle_optimistic_bound": 41580,
+      "local_t80_cycles": 44425,
+      "local_t64_cycles": 45152,
+      "encoded_sha256": "d746508290a792bc1f8a9aa5fd9b710e02fb2f7608abc181c7eb17eb84e44245",
+      "source_layout_sha256": "7feac9d77851f02a2014f47dce0ef4b29ee5dda1bd5818e8f2c95d1e230f0a9e"
+    },
+    {
+      "case": "layer_06",
+      "encoded_bytes": 28300,
+      "source_words": 7075,
+      "transaction_lower_bound": 33897,
+      "shared_read_2cycle_optimistic_bound": 40972,
+      "local_t80_cycles": 43813,
+      "local_t64_cycles": 44487,
+      "encoded_sha256": "2e65e591e0e8427678b42bc199e5cb9c632805e84a6d867bc38df9cd318d3c06",
+      "source_layout_sha256": "6b6c43e5d9a6e2460b527aadd3d53458e1a869aa85a6885eb5296b42c2f54fca"
+    },
+    {
+      "case": "layer_07",
+      "encoded_bytes": 27596,
+      "source_words": 6899,
+      "transaction_lower_bound": 33369,
+      "shared_read_2cycle_optimistic_bound": 40268,
+      "local_t80_cycles": 43082,
+      "local_t64_cycles": 43747,
+      "encoded_sha256": "f59e56a93be496cbadd4d3bb2544e039cfe419b085511dc5951e012beaef06c5",
+      "source_layout_sha256": "515db919abc23a191fc1ae781fa4aac27ca3e806f02c2ae0e5168d0efeb8d901"
+    },
+    {
+      "case": "layer_08",
+      "encoded_bytes": 27788,
+      "source_words": 6947,
+      "transaction_lower_bound": 33513,
+      "shared_read_2cycle_optimistic_bound": 40460,
+      "local_t80_cycles": 43292,
+      "local_t64_cycles": 43948,
+      "encoded_sha256": "d9c7dcb58891d4d216cda890189251ed757c374dc571d06b4d0875f0a92faf6a",
+      "source_layout_sha256": "70700cb42afffdc38af45cc78b3e130fb1b1dc27109391c1ad1b910a007a29f1"
+    },
+    {
+      "case": "layer_09",
+      "encoded_bytes": 27612,
+      "source_words": 6903,
+      "transaction_lower_bound": 33381,
+      "shared_read_2cycle_optimistic_bound": 40284,
+      "local_t80_cycles": 43105,
+      "local_t64_cycles": 43791,
+      "encoded_sha256": "5d6a0ed87f3ec8f11802b282a5a331e221106e5e6482b044d70326c7c4266903",
+      "source_layout_sha256": "fbd970e5e4cc27ab1a92e9a43ec2086f9df3c6f41ccfc46eebd30c6cfeba280c"
+    },
+    {
+      "case": "layer_10",
+      "encoded_bytes": 29180,
+      "source_words": 7295,
+      "transaction_lower_bound": 34557,
+      "shared_read_2cycle_optimistic_bound": 41852,
+      "local_t80_cycles": 44883,
+      "local_t64_cycles": 45616,
+      "encoded_sha256": "e5f8510fd3265d1dbb4e977c05a60ac9f0f882a89004fb5188ab7107a32355c7",
+      "source_layout_sha256": "a3fafbcdf51e9c8e7bb707e233cd46bf7f680166ff686043d5256bd90e10b5dd"
+    },
+    {
+      "case": "layer_11",
+      "encoded_bytes": 31516,
+      "source_words": 7879,
+      "transaction_lower_bound": 36309,
+      "shared_read_2cycle_optimistic_bound": 44188,
+      "local_t80_cycles": 47278,
+      "local_t64_cycles": 47845,
+      "encoded_sha256": "5941452fb6d700943a04575cd309df11b791a9c7ee38f1b965d11ce8564d1856",
+      "source_layout_sha256": "7ad819ffa50eccf8d4ac8e1400512f9c567b82632c6b9254d4f81f65a805c150"
+    },
+    {
+      "case": "layer_12",
+      "encoded_bytes": 35220,
+      "source_words": 8805,
+      "transaction_lower_bound": 39087,
+      "shared_read_2cycle_optimistic_bound": 47892,
+      "local_t80_cycles": 51093,
+      "local_t64_cycles": 51713,
+      "encoded_sha256": "d43365fd17b5cb38e0d6338b2c4d99d4c5118ca15d42ab5ea0cbfc2ac5bb3c09",
+      "source_layout_sha256": "e9ee6685075ded7f463c92db85b3214ac3d38d9af4b83c2a2634ddbc118f3f3c"
+    }
+  ],
+  "mean_t80_local_cycles": 45384.916666666664,
+  "mean_t64_local_cycles": 46076.333333333336,
+  "t64_local_cycle_increase_fraction": 0.015234503386771348,
+  "mean_encoded_bytes": 29756.0,
+  "mean_minimum_transactions": 34989.0,
+  "optimistic_single_transaction_per_cycle_task_s": 4287.061647946497,
+  "mean_shared_read_2cycle_optimistic_bound": 42428.0,
+  "shared_read_2cycle_optimistic_task_s": 3535.401150183841,
+  "theoretical_compute_cycles": {
+    "T80": 20480,
+    "T64": 25600
+  },
+  "conclusion": "Local only; unchanged bus transactions. No actual T64 performance/area/power conclusion."
+}
