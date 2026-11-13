@@ -3563,8 +3563,8 @@
     "terminated_at": "2026-11-13T15:18:00+08:00"
   },
   "t80_t64_g64_execution": {
-    "updated": "2026-11-13T16:51:54.673543+08:00",
-    "phase": "t80_local_validation_and_server_preparation",
+    "updated": "2026-11-13T17:20:38.769364+08:00",
+    "phase": "t80_server_preflight_and_formal_tools",
     "plan": "workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md",
     "plan_sha256": "d6bfc034e5f218113c23bded347d5d6a49ca02239daae84d8ca331aa9a3ee48a",
     "history_head": "70de850",
@@ -3586,13 +3586,24 @@
     "completed": [
       "read_user_plan",
       "isolated_worktree_preserving_concurrent_changes",
-      "read_original_bus_QA_pages3_4"
+      "read_original_bus_QA_pages3_4",
+      "T80_shared_readback_and_upstream_installer",
+      "local14_outputs354816",
+      "array10000_random_plus32_directed",
+      "protocol7",
+      "latency2_jitter_no_reset_aba_outputs152064",
+      "source876b883_pushed",
+      "exact_delta_reconstruction807_files_locally_verified",
+      "server_reconstructed807_SHA_match_171919",
+      "T80_gate_SAIF_power_timing_structure_tools_prepared",
+      "CPU_contention_and_sequence_firmware_compiled",
+      "first20_float_precision_entry_prepared"
     ],
     "next": [
-      "implement_original_mem_fab_upstream_arbitration",
-      "implement_shared_readback_transport",
-      "validate_real_read_provenance_and_protocol",
-      "run_separate_T80_numeric_stress_and_ASIC_PPA"
+      "read_fresh_server_preflight",
+      "T80_real_E203_first_layer_then_remaining13",
+      "server_verify_new_formal_tools",
+      "T80_first20_and_PPA"
     ],
     "retained_history": "N1 numeric/PPA evidence remains historical; does not establish compliance with latest original-System-Bus route",
     "last_server_observation": {
@@ -3615,12 +3626,20 @@
       "passed": true,
       "evidence": "handoff/team/evidence/T80_PROTOCOL7_20261113.json"
     },
-    "active_local_jobs": [
-      {
-        "session": 7466,
-        "scope": "two-cycle SRAM jitter prefetch0/1 no-reset ABA"
-      }
-    ],
-    "random10000": "passed; handoff/team/evidence/T80_ARRAY10000_20261113.json"
+    "active_local_jobs": [],
+    "random10000": "passed; handoff/team/evidence/T80_ARRAY10000_20261113.json",
+    "package": {
+      "commit": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+      "zip": "light-light126-t80-v4-20261113_165244-876b883d9519.zip",
+      "sha256": "65464b46f8fde02de54db95b61f64d77152a47b96481b75ccab07bfe48908945",
+      "bytes": 9270205,
+      "board_staged": true,
+      "server_delivered": true,
+      "ftp_status": "421 too many users",
+      "delta_files": 807,
+      "delta_manifest_sha256": "882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749",
+      "server_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01"
+    },
+    "server_deployment_notes": "VNC here-document in tcsh required quoted terminator; 807-file reconstruction completed and printed matching manifest before trailing unquoted terminator caused NameError. Fresh independent input verification pending. No hardware job launched yet."
   }
 }

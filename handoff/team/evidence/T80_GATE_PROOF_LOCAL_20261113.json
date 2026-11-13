@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "scope": "standalone_observer_test_not_DUT_or_mapped_SoC",
+  "time": "2026-11-13T17:16:53.682092+08:00",
+  "cases": [
+    "CPU_MMIO_does_not_block_DMA_proof",
+    "accepted_DMA_waits_for_response",
+    "late_DMA_rejected"
+  ],
+  "marker": "T80_GATE_PROOF_PASS",
+  "files": {
+    "workspaces/arch03/tb/arch03_t80_gate_proof.sv": "cccfebf3b2c293bc9b9999b16d7636960b8bffffdc3ea423bdc6f83cd0fd35ce",
+    "workspaces/arch03/tb/tb_arch03_t80_gate_proof.sv": "99f89b233d60ec45c2077b8d6229ba837a3b63a2dff44ff84d0952f223e3e2ae",
+    "local_runs/t80_gate_proof_20261113_171204/0.log": "195ff699e656ff8f372bb332f94785adce5daa3e535741397bc2e092a989005b",
+    "local_runs/t80_gate_proof_20261113_171204/1.log": "22a031132336257281cdbfc1552155390c9af47912627d98bb7623e79e113869",
+    "local_runs/t80_gate_proof_20261113_171204/2.log": "c80bc4ef8304df444d5470150ba4e4950a39e74d25d8c0f3b9239c80a0a610fa",
+    "local_runs/t80_gate_proof_20261113_171204/webtalk.log": "a8c7642df3d4474027a1ad0e0bf9b1cf113935217b00ddd09223567fe11209fc",
+    "local_runs/t80_gate_proof_20261113_171204/webtalk_57820.backup.log": "4ea455b5911953d8eb1b0a1bbff9dedb683a61a2698c2e9d0f2870f6ab3e998c",
+    "local_runs/t80_gate_proof_20261113_171204/xelab.log": "1fefaf0bad563fb91d28c633f81e69a546a03d91523feb06e5610f2700bf9d4b",
+    "local_runs/t80_gate_proof_20261113_171204/xsim.log": "4ebb96dfe02120cfc09136a99d2cbb9e002b00fc1de0178f76004a5f0c33a3da",
+    "local_runs/t80_gate_proof_20261113_171204/xvlog.log": "8135c010629e8f301ab85309f52894d33a9323f39f8666bcc7b3b57430fe29dc"
+  }
+}

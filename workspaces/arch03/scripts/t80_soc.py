@@ -77,16 +77,24 @@ def compile_design(cfg,run,platform_source,call,firmware=None,diagnostic=None):
     firmware=(firmware or ROOT/'firmware').resolve();firmware.relative_to(ROOT.resolve())
     fw,base=verify_firmware(firmware)
     platform=run/'platform';manifest=install(platform_source,platform,fw['configuration']['row_lanes'])
-    data.require(diagnostic is None,'Unknown N1 diagnostic')
+    data.require(diagnostic in (None,'contention'),'Unknown T80 diagnostic')
+    if diagnostic=='contention':
+        from t80_contention import verify_firmware as verify_contention
+        verify_contention(firmware)
     from t80_bus_metrics import instrument
     generated=run/'arch03_t80_metrics_monitor.svh'
     observer=instrument((A3/'tb/arch03_t80_monitor.svh').read_text(),5)
+    if diagnostic=='contention':
+        from t80_contention import monitor as contention_monitor
+        observer=contention_monitor(observer)
     generated.write_text(observer)
     tb=platform/'tb/tb_top.v';text=tb.read_text()
     data.require(text.count('`include "arch03_t80_monitor.svh"')==1,'Missing B observer include')
     tb.write_text(text.replace('`include "arch03_t80_monitor.svh"','`include "arch03_t80_metrics_monitor.svh"'))
     manifest['modified_files']['tb/tb_top.v']=sha(tb);save(platform/'platform_manifest.json',manifest)
     extra_scripts=[generated,A3/'scripts/t80_bus_metrics.py',A3/'tb/arch03_t80_metrics.svh']
+    if diagnostic=='contention':
+        extra_scripts += [A3/'scripts/t80_contention.py',A3/'scripts/build_t80_contention.py']
     loader=run/'arch03_asic_boot.svh';loader.write_text(loader_include())
     model=extract_model(cfg,run)
     # Physical TCM still instantiates arch03_sram_half from the original shared
