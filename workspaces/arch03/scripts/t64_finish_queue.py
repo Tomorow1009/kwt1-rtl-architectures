@@ -107,7 +107,7 @@ def execute(request, queue):
     queue.mkdir(parents=True, exist_ok=False)
     atomic_save(queue/'request.json', request)
     state = dict(status='waiting_existing_batch', pid=os.getpid(), started=datetime.datetime.now().isoformat(),
-                 child_pid=None, completed=[], full100_allowed=False, t64_started=False)
+                 child_pid=None, completed=[], full100_allowed=False, g64_started=False)
     atomic_save(queue/'state.json', state)
     lock = Path(read(common.ROOT/'handoff/team/server_config.json')['server_root'])/'.arch02_team_lock'
     prefix = queue.name

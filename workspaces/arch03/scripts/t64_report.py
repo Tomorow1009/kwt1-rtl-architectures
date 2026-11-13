@@ -318,7 +318,7 @@ def build(request):
         gate_internal_total_observable=False,
         selection=selection(aggregate,s['area_summary']),
         precision=precision,fixed12_precision=fixed_precision,
-        stage_handoff=dict(next_stage='T64',allowed=False,reason='Numerical collection does not replace independent precision, timing, area and system-power review'),
+        stage_handoff=dict(next_stage='G64',allowed=False,reason='Numerical collection does not replace independent precision, timing, area and system-power review'),
         references=refs,activity_reference=activity_ref,power_references=request.get('power',[]),
         batch_reference=request.get('batch'),precision_reference=request.get('precision'),
         production_hardware=hardware,firmware_sha256=g['firmware_sha256'],netlist_sha256=s['artifacts']['mapped.v'],
