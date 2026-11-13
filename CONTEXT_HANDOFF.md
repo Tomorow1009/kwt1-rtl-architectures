@@ -1,3 +1,9 @@
+**2026-11-13 12:47 FOREGROUND OLD BUILD RETENTION:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1247_N1.md). VNC3 running verifiedcopyof76oldbuildfiles/172MB; originalsnotdeleted. ExistingSAIFdiagnostic187134 waitingENOSPClock, noPTyet, do notduplicate. N1globalquerycomplete, finalprecision/powernumberscomplete. NoN2.
+
+**12:40 storage update:** ExistingSAIFdiagnostic187134 waits before sharedlock creation (ENOSPC), noPTstarted. Do NOT duplicate. N1globalquerycomplete. Inspectold_build_inventory.json for backed-up obsolete buildfiles before cleanup; none removedyet. Read1236checkpointincrement.
+
+**2026-11-13 12:36 N1 POWER REVIEW ACTIVE:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1236_N1.md). Finalreport/FLOAT1200/unknown12 complete. NewN1linkedquery185005 andsame-SAIF static-probability diagnostic187134 launched; inspectstates, do notduplicate. OriginalN1weighted61.77735mW/12.23644uJ remains unacceptedpendingimpactreview. NoN2. VNC18874435/workspace3idle/FZclosed.
+
 **2026-11-13 12:20 N1 FINAL REPORT EXPORTED:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1220_N1.md). ASIC/FLOAT1200 join passed; weighted61.77735mW/12.23644uJ, still power-review pending. Original118695 collectingN1unknown12. B0 linked-query completed; new actualSAIF all-state diagnostic prepared/notrun. NoN2. VNC18874435/workspace3idle/FZclosed.
 
 **2026-11-13 11:55 N1 POWER12 COMPLETE:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1155_N1.md). All12 power cases finished; final export118695 running at11:52. Do not repeat power, SAIF or precision. New linked-unknown query tool locally tested, not deployed/run. N2 awaits independent acceptance. VNC18874435/workspace3idle, FZclosed.
