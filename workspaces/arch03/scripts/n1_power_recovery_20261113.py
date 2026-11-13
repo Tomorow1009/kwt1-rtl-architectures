@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 
 ROOT = Path('/tmp/s4_21usr_n1_20261113_0210')
 BUNDLE = ROOT/'light-light126-n1-v4-20261113_045945-0f62e4120790'
@@ -30,12 +31,43 @@ def validate_prefix(state):
             'Unexpected original completed prefix')
 
 
+def storage_wait_child(q, command, output, state, label, run, kind, lock):
+    """Retry only pre-stage mkdir ENOSPC, preserving every reaped attempt log."""
+    attempt = 0
+    while True:
+        attempt += 1
+        attempt_label = label + '_attempt%03d' % attempt
+        try:
+            ref = q.run_child(command, output, state, attempt_label, run, kind, lock)
+            state['completed'][-1]['label'] = label
+            q.atomic_save(output/'state.json', state)
+            return ref
+        except ValueError:
+            logfile = output/(attempt_label+'.driver.log')
+            text = logfile.read_text() if logfile.is_file() else ''
+            safe = (state.get('child_pid') is None and not Path(run).parent.exists()
+                and not lock.exists() and 'self.lock.mkdir()' in text
+                and 'OSError: [Errno 28] No space left on device:' in text
+                and '/.arch02_team_lock' in text)
+            if not safe:raise
+            state.setdefault('storage_wait_attempts', []).append(dict(label=attempt_label,
+                log_sha256=sha(logfile), ended=q.now(), stage_created=False, child_reaped=True))
+            state.update(status='waiting_shared_storage', current=label)
+            q.atomic_save(output/'state.json', state)
+            print('N1_WAIT_SHARED_STORAGE', attempt_label, flush=True)
+            time.sleep(30)
+
+
 def main():
     require(sha(QUEUEOPS/'request.json') == REQUEST_SHA, 'Original request changed')
     require(read(QUEUE/'request.json') == read(QUEUEOPS/'request.json'), 'Saved request differs semantically')
     require(sha(QUEUE/'state.json') == STATE_SHA, 'Original failed state changed')
     old = read(QUEUE/'state.json');validate_prefix(old)
     require(not Path('/proc/%d' % old['pid']).exists(), 'Original queue is still alive')
+    previous = read(OPS/'power_recovery01/state.json')
+    require(previous['status'] == 'failed' and previous['child_pid'] is None
+            and previous['completed'] == old['completed']
+            and not Path('/proc/%d' % previous['pid']).exists(), 'Previous recovery is not terminal')
     require(sha(QUEUEOPS/'n1_acceptance_queue.py') ==
             'c211b117ad1c9e117e989c66543f9bbd2a8b2ed2680772b47fa3a8e1e3ac5ef2', 'Queue tool changed')
     req = read(QUEUE/'request.json')
@@ -54,14 +86,15 @@ def main():
         if row['stage'] == 'n1_power':
             require(summary['case'] == 'layer_'+row['label'][-2:], 'Wrong prefix power case')
     for i in range(3, 13):
-        require(not (BUNDLE/'runs'/('n1_acceptance02_p%02d' % i)).exists(), 'Preserve existing recovery session')
+        require(not (BUNDLE/'runs'/('n1_acceptance03_p%02d' % i)).exists(), 'Preserve existing recovery session')
     require(sha(OPS/'manifest.json') == req['precision_operations_manifest_sha256'], 'Precision tools changed')
     for name, meta in read(OPS/'manifest.json')['files'].items():
         require(sha(OPS/name) == meta['sha256'], 'Precision member changed')
-    output = OPS/'power_recovery01';output.mkdir()
+    output = OPS/'power_recovery02';output.mkdir()
     state = dict(schema='n1-power-recovery-v1', status='starting', pid=os.getpid(), started=q.now(),
         original_queue=str(QUEUE), original_state_sha256=STATE_SHA, original_request_sha256=REQUEST_SHA,
         runner_sha256=sha(__file__), completed=old['completed'], child_pid=None,
+        previous_recovery_sha256=sha(OPS/'power_recovery01/state.json'),
         activity_reference=activity, n2_allowed=False, system_power_verified=False)
     q.atomic_save(output/'state.json', state)
     lock = Path(cfg['server_root'])/'.arch02_team_lock'
@@ -69,14 +102,14 @@ def main():
         for i in range(3, 13):
             require(sha(QUEUE/'state.json') == STATE_SHA, 'Original state changed during recovery')
             require(q.observed_activity(req) == activity, 'Activity changed during recovery')
-            session = 'n1_acceptance02_p%02d' % i
+            session = 'n1_acceptance03_p%02d' % i
             cmd = [sys.executable, '-B', '-u', str(BUNDLE/'workspaces/arch03/scripts/n1_server.py'),
                 'power', '--session', session, '--runtime-root', req['runtime_root'],
                 '--runtime-manifest-sha256', req['bundle_manifest_sha256'],
                 '--runtime-evidence', req['synthesis_bundle'], req['synthesis_bundle_manifest_sha256'],
                 '--saif-activity-run', activity['run'], '--saif-activity-sha256', activity['sha256'],
                 '--cases', 'layer_%02d' % i]
-            q.run_child(cmd, output, state, 'power%02d' % i, BUNDLE/'runs'/session/'n1_power', 'n1_power', lock)
+            storage_wait_child(q, cmd, output, state, 'power%02d' % i, BUNDLE/'runs'/session/'n1_power', 'n1_power', lock)
         state.update(status='numbers_ready_independent_review_required', finished=q.now())
     except BaseException as exc:
         state.update(status='failed', error=str(exc), finished=q.now())
