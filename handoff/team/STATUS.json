@@ -3394,7 +3394,7 @@
     "local_cpu_executed": false,
     "source_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
     "data100_file_identity_passed": true,
-    "server_observed_at": "2026-11-13T08:57:24.419562+08:00",
+    "server_observed_at": "2026-11-13T09:07:35.410809+08:00",
     "server_session": "n1_saif12_01",
     "server_pid": 186577,
     "archive_session": "r4_l01_archive02",
@@ -3410,7 +3410,7 @@
     "archive_temporary_directory": "/tmp/s4_21usr-r4-l01-20261113_0233",
     "runtime_tools_deployed": true,
     "runtime_linux_identity_passed": true,
-    "cloud_commit": "d390d879e489d38f0187c0db229e141cfbdc6ad6",
+    "cloud_commit": "701a476c5900666b75d1d5680f5f23f490567059",
     "B0_readonly_inventory": "handoff/team/evidence/B0_POWER_READONLY_REVIEW_20261113.json",
     "archive_observed_at": "2026-11-13T03:10:40+08:00",
     "archive_evidence": "handoff/team/evidence/R4_L01_STAGED_ARCHIVE_20261113.json",
@@ -3477,15 +3477,23 @@
     "original_float_zip_available": false,
     "float100_source_identity_evidence": "handoff/team/evidence/N1_FLOAT100_SOURCE_RECOVERY_20261113.json",
     "float100_precision_verified": false,
-    "saif_completed_cases": 2,
-    "saif_current_case": "layer_03",
-    "saif_current_child_pid": 198325,
+    "saif_completed_cases": 3,
+    "saif_current_case": "layer_04",
+    "saif_current_child_pid": 204780,
     "B0_control_remaining11_evidence": "handoff/team/evidence/B0_CONTROL_REMAINING11_REVIEW_20261113.json",
     "precision_dependency": "private_numpy1195_smoke_passed",
     "precision_tools_commit": "d390d879e489d38f0187c0db229e141cfbdc6ad6",
     "precision_upload3_verified": true,
     "precision_runtime_deployed": true,
     "precision_run_started": false,
-    "precision_deployment_evidence": "handoff/team/evidence/N1_PRECISION_DEPLOYMENT_20261113.json"
+    "precision_deployment_evidence": "handoff/team/evidence/N1_PRECISION_DEPLOYMENT_20261113.json",
+    "precision_stage_tools_commit": "701a476c5900666b75d1d5680f5f23f490567059",
+    "precision_stage_deployment_evidence": "handoff/team/evidence/N1_PRECISION_STAGE_DEPLOYMENT_20261113.json",
+    "space_snapshot": {
+      "observed_at": "2026-11-13T09:13:13+08:00",
+      "private_free_GiB": 522.179,
+      "shared_free_GiB": 0.005,
+      "approximate_display": true
+    }
   }
 }

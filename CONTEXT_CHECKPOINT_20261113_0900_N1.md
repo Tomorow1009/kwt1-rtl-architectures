@@ -1,5 +1,15 @@
 # N1恢复检查点（2026-11-13 09:00）
 
+## 09:20准备增量（正式精度/功耗仍未启动）
+
+- 新precisionops02包 `light-light126-n1-precisionops02-20261113_090845` 已经FTP上传、私有目录解包并逐文件SHA核验，3脚本共19831B ZIP；ZIP SHA `bdb238887de565a1461849a0c95c3bdee3974de158ac65348a62efd4f9c1a5f8`，manifest SHA `6acb84a3292dc7d40f3071cc30291ce0af6f23cfa9f998b17679a44a87e1a71e`。原两个脚本未变；新增`n1_precision_stage.py`，SHA `d31e7ffc2a643cd60dfc014e39194e0480f7128a76aec52b6b69c19b02d4b7b4`，使用原ProcessLedger锁。
+- 09:13:54服务器烟测：NumPy1.19.5、operations_identity与common.ROOT=原0f62均通过。证据`N1_PRECISION_STAGE_DEPLOYMENT_20261113.json`。FileZilla已关闭；VNC3为干净提示符。
+- 当前SAIF仍原driver186577；09:07:35.410809已完成L01-L03，L04 child204780。未重跑任何任务。
+- 09:13可用空间：private约522.179GiB，shared约0.005GiB；原正式N1作业均在private，最终持久归档仍待。没有新删除。
+- 代码`701a476c5900666b75d1d5680f5f23f490567059`已push；此增量和验收清单更新待下一提交。
+- 新`n1_acceptance_queue.py`已本地写好：等待原SAIF精确身份完成，然后仅N1精度、power12串行。队列＋精度生命周期9测试通过。**队列尚未提交/打包/部署/启动**，不要误报运行中。计划会话`n1_acceptance01`（尚不存在）；若部署，使用它派生的`_precision`与`_p01..12`，不用早先准备但未运行的`n1_precision100_01`手动入口。
+- B0进一步只读：L01全程未知记录TC非零数量0；主要是闲置接口/未读输出，部分未知含FIFO初始数据。此结果不是功耗通过，也没有修改SAIF。完整未知影响审核待结合连接/使能和实际功耗完成。
+
 ## 09:01增量（优先于下方上传中描述）
 
 三份文件现已上传成功，FileZilla已关闭。**09:00:29.610646服务器逐项核验全部大小及SHA通过**，shared剩余1741684736B；没有删除任何新文件。截图`takeover_local/n1_precision_upload3_verified_0903.png`。尚未解包或启动精度。新的本地部署命令为`n1_precision_ops_deploy_0903`（两段）与`n1_precision_inputs_copy_0903`（两段），均在takeover_local；必须先检查并仅执行一次，不能当已经部署。

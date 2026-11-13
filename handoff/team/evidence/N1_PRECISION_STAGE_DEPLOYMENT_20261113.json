@@ -1,0 +1,36 @@
+{
+  "name": "light-light126-n1-precisionops02-20261113_090845",
+  "local_zip": "E:\\fpga_race-two\\kwt1-rtl-architectures\\local_runs\\light-light126-n1-precisionops02-20261113_090845\\light-light126-n1-precisionops02-20261113_090845.zip",
+  "bytes": 19831,
+  "sha256": "bdb238887de565a1461849a0c95c3bdee3974de158ac65348a62efd4f9c1a5f8",
+  "manifest_sha256": "6acb84a3292dc7d40f3071cc30291ce0af6f23cfa9f998b17679a44a87e1a71e",
+  "files": {
+    "scripts/n1_precision_stage.py": {
+      "bytes": 4994,
+      "sha256": "d31e7ffc2a643cd60dfc014e39194e0480f7128a76aec52b6b69c19b02d4b7b4"
+    },
+    "scripts/n1_recovered_precision.py": {
+      "bytes": 9956,
+      "sha256": "61a5099fe0d3f8ded611a83067aa035d053ed61dbd6e0204e84553c42f18c585"
+    },
+    "scripts/n1_report.py": {
+      "bytes": 43738,
+      "sha256": "6245fbdc5b6b4db022903964d729cd58a76fc614f942adf94cc7c9519dd044a9"
+    }
+  },
+  "schema": "n1-precision-stage-deployment-v1",
+  "observed_at": "2026-11-13T09:13:54+08:00",
+  "source_commit": "701a476c5900666b75d1d5680f5f23f490567059",
+  "server_root": "/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-precisionops02-20261113_090845",
+  "server_deployed": true,
+  "all_member_hashes_verified": true,
+  "private_numpy_version": "1.19.5",
+  "frozen_common_root_verified": true,
+  "formal_precision_started": false,
+  "stage_lifecycle_tests": 4,
+  "shared_lock_preserved": true,
+  "screenshots": {
+    "n1_ops02_deployed_0912.png": "bc4150edef19de9a236619c002be4b4951237f4db5caef25cb6356206fa423f0",
+    "n1_precision02_preflight_0915.png": "89ea32a36ab1213d6e2a17b126940d6bf65e961f06a20b439a5dc52f6c3f9966"
+  }
+}
