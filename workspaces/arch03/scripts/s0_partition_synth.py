@@ -107,21 +107,28 @@ proc s0_export {suffix destination} {
 '''
 
 
-def block_script(origin, run, block, reference):
+def block_script(origin, run, block, reference, removed_map_only=(), seed=None):
     require(block in BLOCKS and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_$]*', reference), 'Invalid block identity')
     small, large = (92, 0) if block == 'accelerator' else (0, 64)
+    for name in removed_map_only:
+        require(re.fullmatch(r'U[0-9]+',name), 'Unexpected removed mapped-cell name')
+    absent=''.join('if {[sizeof_collection [get_cells -quiet '+name+']] != 0} {error "Removed map-only cell exists in original RTL: '+name+'"}\n'
+                   for name in removed_map_only)
+    seeded=('read_ddc '+tcl_path(seed)+'\ncurrent_design '+reference+'\nif {![link]} {error "Recovery seed unresolved"}\n') if seed else ''
+    optimization=('set_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n' if seed else
+                  'compile -map_effort high\nset_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n')
     body = ('source '+tcl_path(run/'libraries.tcl')+'\nread_ddc '+tcl_path(origin/'linked.ddc')+'\n'+FIND_BLOCK+
         'set pair [s0_block '+BLOCKS[block]+']\n'
         'if {[lindex $pair 1] ne "'+reference+'"} {error "Characterized reference differs from linked RTL"}\n'
         'current_design '+reference+'\n'
-        'if {![link]} {error "S0 block unresolved references"}\n'
+        'if {![link]} {error "S0 block unresolved references"}\n'+absent+seeded+
         'source '+tcl_path(run/'characterization'/(block+'.characterized.tcl'))+'\n'
         'if {[get_object_name [current_design]] ne "'+reference+'"} {error "Boundary script changed current design"}\n'
         'if {[sizeof_collection [get_clocks hf_clk]] != 1 || abs([get_attribute [get_clocks hf_clk] period]-6.666666)>0.0000001} {error "Bad characterized clock"}\n'
         'set memories [get_cells -hierarchical -filter "ref_name == RAMSP128X16 || ref_name == RAMSP4096X16"]\n'
         'set_dont_touch $memories true\n'
-        'set_fix_multiple_port_nets -all -buffer_constants\n'
-        'compile -map_effort high\nset_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n'
+        'set_fix_multiple_port_nets -all -buffer_constants\n'+
+        optimization+
         'if {[sizeof_collection [get_cells -hierarchical -filter "ref_name == RAMSP128X16"]] != '+str(small)+
         ' || [sizeof_collection [get_cells -hierarchical -filter "ref_name == RAMSP4096X16"]] != '+str(large)+
         '} {error "Block macro count changed"}\n'
@@ -274,7 +281,23 @@ def restore_clock_precision(exported, native):
     return ''.join(lines)
 
 
-def execute(cfg, run, origin, call):
+def remove_mapped_only_directives(text):
+    """Drop only old mapped-cell map-only directives; prove absence in RTL later.
+
+    Clock/port/load/timing commands are retained byte-for-byte. Unknown forms
+    are rejected, not silently dropped. The raw exported script is preserved.
+    """
+    lines=[];removed=[]
+    for line in text.splitlines(keepends=True):
+        if re.match(r'\s*set_map_only\b',line):
+            match=re.fullmatch(r'[ \t]*set_map_only\s+\[get_cells\s+(U[0-9]+)\][ \t]*(?:\r?\n)?',line)
+            require(match and match.group(1) not in removed,'Unsupported or duplicate exported map-only directive')
+            removed.append(match.group(1))
+        else:lines.append(line)
+    return ''.join(lines),removed
+
+
+def execute(cfg, run, origin, call, recovery=None):
     run=Path(run); origin=Path(origin).resolve()
     require(not any(run.iterdir()), 'S0 requires a new empty run')
     before = verify_origin(origin, ROOT)
@@ -289,6 +312,12 @@ def execute(cfg, run, origin, call):
     linked_inputs[str((run/'arch02_sram_config.vh').resolve())]=digest(run/'arch02_sram_config.vh')
     for name in ('s0_partition_synth.py','partition_synth_contract.py','s0_server.py'):
         path=Path(__file__).with_name(name).resolve();linked_inputs[str(path)]=digest(path)
+    if recovery is not None:
+        from s0_recovery import verify_seed
+        recovered=verify_seed(recovery['run'],recovery['state_sha256'])
+        linked_inputs.update(recovered['inputs'])
+        path=Path(__file__).with_name('s0_recovery.py').resolve();linked_inputs[str(path)]=digest(path)
+        save(run/'recovery_seed.json',recovered)
     save(run/'source_inputs.json',linked_inputs)
     (run/'tool_version.tcl').write_text('puts "S0_TOOL_VERSION_READY"\nquit\n')
     version = call([cfg['tools']['dc_shell'], '-f', run/'tool_version.tcl'], run, 'tool_version.txt')
@@ -304,17 +333,21 @@ def execute(cfg, run, origin, call):
     soc_synth.require_tool_marker(log, 'S0_CHARACTERIZATION_READY not_mapping_or_acceptance=true')
     identities = characterize_inventory(character/'characterized_blocks.tsv')
     save(run/'boundaries.json', identities)
-    precision_receipt = {}
+    precision_receipt = {};removed_map_only={}
     for block in BLOCKS:
         exported = character/(block+'.characterized.tcl')
         original = character/(block+'.characterized.raw.tcl')
         native = character/(block+'.native_clocks.tsv')
         raw = exported.read_text()
         exact = restore_clock_precision(raw, native.read_text())
-        original.write_text(raw); exported.write_text(exact)
+        clean,removed=remove_mapped_only_directives(exact)
+        removed_map_only[block]=removed
+        original.write_text(raw); exported.write_text(clean)
         precision_receipt[block] = dict(raw_sha256=digest(original), exact_sha256=digest(exported),
             native_clock_sha256=digest(native), boundary_delays_modified=False,
-            operation='restore only create_clock period/waveform from native characterized attributes')
+            removed_mapped_only_cells=removed,
+            removed_cells_must_be_absent_in_original_linked_RTL=True,
+            operation='restore native clock text precision; remove only absent old mapped-cell set_map_only directives')
     save(run/'clock_serialization.json', precision_receipt)
     library_hashes = {str(p): digest(p) for p in (origin/'libs').glob('*.db')}
     timing = {}; fingerprints = {}
@@ -324,7 +357,13 @@ def execute(cfg, run, origin, call):
         dependencies = {'original_link':digest(origin/'linked.ddc'), 'boundary_environment':digest(origin/'mapped.ddc')}
         if block == 'cpu_soc':
             dependencies.update({name:digest(run/'blocks'/name/'mapped.ddc') for name in BLOCKS})
-        script = cpu_script(origin,run) if block == 'cpu_soc' else block_script(origin,run,block,identities[block]['reference'])
+        seed=Path(recovered['seed_ddc']) if recovery is not None and block=='accelerator' else None
+        if seed:
+            require(removed_map_only[block]==recovered['no_op_cells'],'Recovery differs from original no-op error inventory')
+            dependencies['unaccepted_recovery_seed_ddc']=digest(seed)
+            dependencies['recovery_receipt']=digest(run/'recovery_seed.json')
+        script = cpu_script(origin,run) if block == 'cpu_soc' else block_script(
+            origin,run,block,identities[block]['reference'],removed_map_only[block],seed)
         (dest/'compile.tcl').write_text(script)
         # The effective generated compiler script is also a cache dependency.
         dependencies['mapping_script']=digest(dest/'compile.tcl')
@@ -363,6 +402,10 @@ def execute(cfg, run, origin, call):
         partition_area={k:v for k,v in attribution.items() if k!='rows'},block_mapping_seconds=timing,
         block_cache_reused=False,original_unmapped_link_reused=True,child_definitions_checked=True,
         stage_accepted=False)
+    if recovery is not None:
+        report['incremental_recovery']=dict(seed_sha256=digest(Path(recovered['seed_ddc'])),
+            failed_run=recovered['failed_run'],failed_state_sha256=recovered['failed_state_sha256'],
+            fresh_compile_and_reports=True,old_failed_state_unchanged=True)
     verify_origin(origin,ROOT)
     report['artifacts']={p.name:digest(p) for p in run.iterdir() if p.is_file()}
     return report

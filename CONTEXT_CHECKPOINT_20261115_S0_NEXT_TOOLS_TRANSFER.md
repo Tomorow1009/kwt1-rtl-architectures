@@ -1,5 +1,11 @@
 # S0后继工具传输检查点
 
+**20:58最新，覆盖下方running记录：** synth03在20:49:56.234720失败退出；父75787/DC76822消失，20:57:58原锁False、EDA[]、/tmp 98,378,182,656B、shared 1,048,576B。Bash空闲，watcher91575已自行退出；没有未完输入。加速器完整映射约4438秒并写出mapped.ddc/v/sdc，但日志两条CMD-036使运行器正确拒绝；CPU及最终链接未执行。
+
+只读定位：旧mapped顶层characterize写出`set_map_only [get_cells U2055]`及`U2048`，在原linked RTL中无对应单元。两条UID-95及两条CMD-036之外未见其他Error，S0_BLOCK_MAPPED accelerator marker存在。**未把失败seed标为通过。** 本地加入s0_recovery.py，固定失败包manifest及状态哈希、原输入、完整日志和输出；只允许此精确错误形态。新块脚本先在原linked RTL证明对象确实不存在，再加载seed并以清理后的相同端口/时钟预算重新incremental compile，重新生成全套报告。原失败目录和文件不修改。20项恢复/分块/来源/报告/复制/队列测试通过；新默认block_script与05c旧版生成文本逐字一致。尚未部署恢复包/启动synth04。
+
+审核依赖：7156303候选缺4个模块，未部署；e55c1c8候选851文件通过静态闭包134模块/Python3.6语法及源字节核对，同样未部署。其新增S0未知清单profile26项测试通过。下一次新综合包应包含恢复工具和全部审核依赖；不要传旧候选。现服务器774收尾工具仍保持，但617cf17的固定synth03 launcher**不可再运行**，新综合成功后另建新身份launcher。
+
 **20:46:54最新观察：** 原synth03父75787/DC76822仍running/error=None，accelerator首轮优化已完成并进入`Beginning Pass 1 Mapping (Incremental)`（hold修复），DC已运行1:09:18/CPU1:09:05。中间面积约0.79mm²不能当最终面积，CPU及顶层尚未完成；TIM-134提示两条高扇出网，须用最终时序审核核对。前台仍watcher91575，没有未完输入或传输。新S0功耗审核profile本地补齐：未知活动清单/四段窗口/新分块网表身份，26项相关检查通过，尚未部署；运行05c和后继774包不改。617启动脚本仍未传输或运行。S1–S4未开始。
 
 **20:34:49当前恢复状态：** synth03原父75787/DC76822继续running，accelerator已输出`Beginning Mapping Optimizations (High effort)`；57:13 elapsed/57:04 CPU、99.7%，error=None。shared_sram已完成，CPU/SoC与最终链接尚未开始。当前前台只读watcher91575；本轮只读截图cell g2:525已结束，无未完输入/传输。后继774包的845文件/manifest/import均已完成，S0_FINISH_LAUNCH_20261115.py仅本地已提交617cf17，未部署或执行。**不要重复启动任何综合或收尾队列；先截图读取原作业终态。**

@@ -22,6 +22,7 @@ def main():
     p.add_argument('--runtime-root',required=True,type=Path)
     p.add_argument('--runtime-manifest-sha256',required=True)
     p.add_argument('--runtime-evidence',nargs=2,action='append',default=[])
+    p.add_argument('--recovery-run',type=Path);p.add_argument('--recovery-state-sha256')
     p.add_argument('--synth-run',type=Path);p.add_argument('--synth-sha256')
     p.add_argument('--gate-run',type=Path);p.add_argument('--gate-sha256')
     p.add_argument('--qualification-run',type=Path);p.add_argument('--qualification-sha256')
@@ -33,6 +34,14 @@ def main():
         common.ROOT,a.runtime_root,a.runtime_manifest_sha256,a.runtime_evidence)
     t80_paths.allowed_run(a.origin,cfg,'Original T80 synthesis')
     manifest=common.inputs()
+    recovery=None
+    if a.recovery_run is not None or a.recovery_state_sha256 is not None:
+        require(a.stage=='synth' and a.recovery_run is not None and
+                re.fullmatch('[a-f0-9]{64}',a.recovery_state_sha256 or ''),'Invalid S0 recovery request')
+        t80_paths.allowed_run(a.recovery_run,cfg,'S0 unaccepted recovery seed')
+        from s0_recovery import verify_seed
+        verify_seed(a.recovery_run,a.recovery_state_sha256)
+        recovery=dict(run=str(a.recovery_run),state_sha256=a.recovery_state_sha256)
     for module in ('s0_server.py','s0_partition_synth.py','s0_validation.py','partition_synth_contract.py','n1_process.py'):
         name='workspaces/arch03/scripts/'+module
         require(manifest['files'].get(name)==common.sha(common.ROOT/name),'Unfrozen S0 tool '+name)
@@ -66,7 +75,7 @@ def main():
         common.save(session/'storage_preflight.json',dict(free_bytes=free,required_bytes=required,margin=1.2))
         record.update(status='running',run=str(run));atomic_save(session/'state.json',state)
         if a.stage=='synth':
-            report=mapping.execute(cfg,run,a.origin,ledger.call)
+            report=mapping.execute(cfg,run,a.origin,ledger.call,recovery)
         elif a.stage=='capability':
             text='''
 set_app_var sh_continue_on_error false

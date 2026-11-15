@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**20:58恢复重要：原synth03已失败退出，当前没有EDA。** 20:49:56.234720回执failed，原75787/DC76822均退出、原锁不存在（20:57:58只读核查）。失败原因是characterize导出的`set_map_only [get_cells U2055/U2048]`引用旧映射单元，在原unmapped RTL中不存在，产生两条CMD-036；DC仍写出加速器mapped.ddc但不能据此记PASS，CPU未执行。正在本地准备新目录增量恢复：仅移除这两条无效优化指令、在原RTL中先证明对象不存在，再以未验收DDC为seed重新增量编译和全部检查。旧失败包不改。最新审核工具e55c1c8本地851文件候选尚未部署；7156303已push。收尾617 launcher不再适用，**不要运行**。详见S0_NEXT_TOOLS_TRANSFER检查点最上方。
+
 **20:46:54最新进展：** 原S0 synth03父75787/DC76822仍running，accelerator首轮优化完成、进入incremental hold修复。共享块已完成，CPU及最终链接仍待。前台只读watcher91575；无未完输入。S0未知活动审核profile本地完成、26项检查通过，尚未部署；新旧网表身份明确隔离。原05c映射及774收尾包不改，收尾queue尚未启动。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部。T80桌面和旧8路仍保护，S1–S4未开始。
 
 **20:34:49最新进展：** S0原75787/DC76822已进入accelerator高强度映射优化，仍99.7%CPU、无错误。当前前台只读watcher91575；所有输入/观察exec结束。共享SRAM DDC已完成，CPU及最终链接、gate/SAIF/PT仍待；后继774工具已部署，launcher仅本地准备。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部；继续原作业，不重复启动，不动T80桌面或旧8路。

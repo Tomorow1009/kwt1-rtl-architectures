@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_accelerator_incremental_hold_mapping",
+    "current_stage": "S0_failed_exported_map_only_recovery_preparation",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4295,9 +4295,9 @@
     },
     "synth_attempt03": {
       "pid": 75787,
-      "observed_at": "2026-11-15T20:46:54+08:00",
-      "status": "running",
-      "error": null,
+      "observed_at": "2026-11-15T20:57:58+08:00",
+      "status": "failed",
+      "error": "Two exported set_map_only commands refer to absent old mapped cells U2055/U2048 (CMD-036); exit0 rejected",
       "source_commit": "05c923fe178230f0550d79dfd4b4ae3fcfc0c79f",
       "session": "s0_synth03",
       "characterization_completed": true,
@@ -4307,12 +4307,16 @@
       ],
       "current_block": "accelerator",
       "final_netlist_ready": false,
-      "foreground_readonly_watcher_pid": 91575,
+      "foreground_readonly_watcher_pid": null,
       "dc_pid": 76822,
       "dc_cpu_percent": 99.7,
       "dc_elapsed_seconds": 4158,
       "dc_cpu_seconds": 4145,
-      "latest_log": "Beginning Pass 1 Mapping (Incremental)"
+      "latest_log": "Beginning Pass 1 Mapping (Incremental)",
+      "finished": "2026-11-15T20:49:56.23472",
+      "unaccepted_seed_block": "accelerator",
+      "lock_released": true,
+      "state_sha256": "83a9b896cb541a0631f7888ea796a10a5dcd7fe863b2fdeb91756a57e0e3783d"
     },
     "next_tools_transfer": {
       "session_id": 39807,
@@ -4327,9 +4331,11 @@
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
     "s0_finish_started": false,
-    "finish_launcher_prepared": "handoff/team/evidence/S0_FINISH_LAUNCH_20261115.py",
+    "finish_launcher_prepared": "obsolete fixed synth03 launcher; do not execute",
     "finish_launcher_deployed": false,
     "s0_review_profile_tests_passed": 26,
-    "s0_review_profile_deployed": false
+    "s0_review_profile_deployed": false,
+    "s0_recovery_tests_passed": 20,
+    "s0_recovery_deployed": false
   }
 }
