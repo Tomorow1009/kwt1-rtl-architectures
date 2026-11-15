@@ -4144,11 +4144,11 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_TRANSFER_1836.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
-    "stage": "S0_partition_design",
+    "stage": "S0_server_preflight",
     "final_pe": 32,
     "area_limit_mm2": 1.0,
     "formal_samples": 20,
@@ -4157,7 +4157,7 @@
     "new_hardware_started": false,
     "t80_desktop_modified": false,
     "old8_modified": false,
-    "old_t64_dispatch": "suspended; arrange safe drain and stop, never resume subsequent stages",
+    "old_t64_dispatch": "retired after original DC completed; no successor dispatched",
     "stages": [
       "S0",
       "P80",
@@ -4169,8 +4169,8 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_tools_development",
-    "new_eda_started": false,
+    "current_stage": "S0_synthesis_launcher_transfer",
+    "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
     "s0_mapping_server_verified": false,
@@ -4182,13 +4182,68 @@
       "payload_sha256": "6c038eefd6301d99fbfcf65a69471e2c9bcba46887ee0241d948f15807b957c2",
       "runtime_root": "/tmp/s4_21usr_t80_20261115_1830",
       "bundle": "light-light126-t80-s0-c6aa1e2",
-      "purpose": "new complete S0 tools in explicit Bash terminal"
+      "purpose": "new complete S0 tools in explicit Bash terminal",
+      "status": "completed_server_verified",
+      "manifest_sha256": "fbd6c78675276aad5fffca577c80987bf596846743dd46ba45e672fad28da0e8",
+      "files": 841
     },
     "acceptance": "workspaces/arch03/ACCEPTANCE_T80_P80_C32_G32_20261115.md",
     "old_queue_retired": true,
     "first_transfer_executed": false,
     "first_transfer_reason": "tcsh quoted heredoc terminator differed; old input left unexecuted",
     "ftp_connected": false,
-    "ftp_proxy_error": "DNS public address guard rejected result"
+    "ftp_proxy_error": "DNS public address guard rejected result",
+    "capability_attempt01": {
+      "session": "s0_cap01",
+      "status": "failed_before_DC",
+      "reason": "ENOSPC creating unchanged shared team lock",
+      "pid": 53897
+    },
+    "storage": {
+      "duplicate_files": 421,
+      "scope": "only two unused T64 input bundles",
+      "paths_and_bytes_preserved": true,
+      "observed_shared_free_bytes": 5242880,
+      "observed_at": "2026-11-15T18:50:59+08:00",
+      "script": "evidence/S0_STORAGE_PREPARE_20261115.py",
+      "r4_compiler_cache": {
+        "script": "evidence/S0_R4_CACHE_ARCHIVE_20261115.py",
+        "files": 38,
+        "original_bytes": 48122849,
+        "archive_sha256": "09351c22679151e1d7dbd7c856877f481ff8c1e058799fa38cb3701dd476a4e8",
+        "archive_returned_to_shared": true,
+        "archive_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-icb32-r4-20261111_011258-49759e108719/runs/icb32_r4_gate01/icb32_gate/csrc_regular_files_20261115.tar.gz",
+        "results_modified": false,
+        "protected_t80_modified": false,
+        "old8_modified": false,
+        "free_bytes_after": 41943040
+      }
+    },
+    "capability_attempt02": {
+      "session": "s0_cap02",
+      "status": "failed_before_DC",
+      "reason": "ENOSPC creating unchanged shared team lock",
+      "pid": 56333
+    },
+    "capability_attempt03": {
+      "session": "s0_cap03",
+      "pid": 60453,
+      "status": "failed_before_DC_ENOSPC"
+    },
+    "capability_attempt04": {
+      "session": "s0_cap04",
+      "pid": 62910,
+      "status": "DC_marker_observed",
+      "mapping_started": false,
+      "tool_elapsed_seconds": 5
+    },
+    "synth_launcher": {
+      "script": "evidence/S0_R4_BATCH_CACHE_SYNTH_20261115.py",
+      "sha256": "55ef4b2bf15769b990f804b0bd0e965fba6b02528fc6d933193644ae3fa45958",
+      "input_session": 6057,
+      "lines": 11,
+      "target_session": "s0_synth01",
+      "automatically_launches_after_archive": true
+    }
   }
 }
