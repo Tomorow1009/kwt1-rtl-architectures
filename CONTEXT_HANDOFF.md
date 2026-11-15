@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**19:23当前唯一操作：exec57781传输31行S0修复包并自动启动synth02，勿并发输入或重复启动。** [检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部含全部身份和恢复顺序。修复0bf4af3已push，当前服务器旧c6 synth01已失败且无EDA；新包0bf4af3预期manifest93be0a4c…，正在准备。全部T80桌面与旧8路数据保持，S1–S4未开始。先收完传输并截图，再查新state。
+
 **19:16先读[最新S0检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部。** synth01已取锁但在dc_shell -version退出1时停止，未映射；锁自然释放、没有当前S0 EDA。本地已修版本读取和安装手册命令语法，11项检查通过，尚未部署。安装工具导出时钟会舍入，下一步实现仅恢复原生period/waveform序列化精度，绝不放宽6.666666守卫。d497c19已推送；所有输入结束，VNC新Bash空闲，服务器c6包和桌面T80不改。
 
 **19:09先读[服务器预检检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)最上方。** cap04实际DC能力检查已执行5秒并输出完成marker。当前输入exec6057正在传输旧R4 batch编译缓存归档及立即启动S0 synth01的脚本，11行；收完截图后只读新state/PID，不要再手动启动synth。原结果全部保留，桌面T80与旧8路未动；S1–S4尚未开始。

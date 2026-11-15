@@ -1,5 +1,11 @@
 # S0服务器预检接续
 
+**19:23当前活动，恢复必读：** 修复已提交并推送0bf4af395a6830b17b4666ae6affd5994381ec95。exec57781正在VNC新Bash输入31行完整差分引导，状态local_runs/s0_fix_0bf4af3/transfer_state.json；没有其他键盘输入。该引导会从旧c6输入payload恢复新overlay，逐字重建已在本地独立执行验证通过（167,522B），然后生成新包、核验manifest、归档旧R4竞争测试普通编译缓存并自动启动s0_synth02。**未输入结束前不得向VNC发送其他命令；结束后不要重复手动启动。**
+
+新包=/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-0bf4af3；ops=同root/ops-0bf4af3。新manifest预期93be0a4c5e6e16ebe575d73fa7249e2002c0e1a0db41c371f47302236a2d7475；payload SHA7f2688856e3c3ebbf106690f2b76de1a4752892eed1a5f7f7dc7bda83d3fe167；delta SHA1d465aa099d96ccd4f5b50d53bc9df2d7e2e5d62317879177f15cccd109a7a89。启动脚本handoff/team/evidence/S0_R4_CONTENTION_CACHE_SYNTH02_20261115.py，实际传输SHA5c946de61cb322ccd00aed7a6bc4e6a40ffe8bba3f0df7d8af731b5a4e89d413，待下一次文档提交。只有旧R4 contention01/icb32_contention/csrc普通缓存参与归档，原所有结果和符号链接不动。新stage PID将保存在ops/s0_synth02_launcher.json；日志ops/s0_synth02.log；状态新bundle/runs/s0_synth02/state.json。完成截图takeover_local/s0_fix_0bf4af3.png，先确认包准备回执、归档和启动PID，再查询state/日志。此时尚未看到服务器新包或启动成功。
+
+当前完整完成项：新计划/独立分支；S0工具；16项工具覆盖中本次改动相关12项重测通过；8项原兼容检查前次通过；原T80来源校验及新c6包841核验；cap04真实DC能力检查通过。未完成：S0真实characterize、三块映射、顶层链接/时序/面积、新gate14/SAIF12/PT12。S1–S4完全未开始；不修改T80桌面/旧8路，不恢复T64/G64。失败路径：原tcsh未闭合输入不动；FTP公共地址守卫失败不绕过；cap01–03共享盘ENOSPC；synth01的-version非零退出。所有失败目录均保留。
+
 **19:19本地修复完成：** s0_partition_synth和partition_synth_contract已改为正常退出Tcl会话读取版本、精确命令选项，并新增原生clock TSV→仅恢复create_clock period/waveform序列化精度的实现；原始导出另存raw，任何大于舍入误差的差异或未知/缺失/重复时钟均拒绝，不改端口时序预算。两个新增测试，相关12项检查通过。下一步提交后生成基于c6包输入的差分overlay，新包新session重试；服务器c6包不可修改。当前VNC新Bash空闲，全部输入结束，cap04过、synth01失败且无在途EDA。空间仍需旧可再生缓存归档与启动连续操作，不能普通GUI先释放再慢慢启动。
 
 **19:16最新结论：** 正式s0_synth01/PID64154于19:09:16.856580启动，19:09:20.175020失败并自然释放原锁，尚未characterize或映射。原因是安装DC的`-version`打印正确版本T-2022.03-SP5-5却退出1；保留tool_version.txt及失败state。本地已修改s0_partition_synth.py：从正常退出的DC Tcl会话启动banner读取完整版本及patch后缀，不放宽ProcessLedger非零退出检查；6项映射测试通过。按安装自带官方手册将characterize改为准确`-constraints`，write_script明确`-format dctcl -nosplit -output`；11项相关检查通过。**这些新工具还未提交/部署，不可改服务器c6冻结包。**

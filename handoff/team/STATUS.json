@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_tool_compatibility_fix_ready_to_package",
+    "current_stage": "S0_corrected_bundle_transfer",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4254,6 +4254,17 @@
       "finished": "2026-11-15T19:09:20.175020",
       "lock_released": true
     },
-    "latest_changed_tool_tests_passed": 12
+    "latest_changed_tool_tests_passed": 12,
+    "fix_transfer": {
+      "input_session": 57781,
+      "lines": 31,
+      "source_commit": "0bf4af395a6830b17b4666ae6affd5994381ec95",
+      "bundle": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-0bf4af3",
+      "manifest_sha256": "93be0a4c5e6e16ebe575d73fa7249e2002c0e1a0db41c371f47302236a2d7475",
+      "session": "s0_synth02",
+      "automatically_launches_after_verified_package_and_cache_archive": true,
+      "status": "transfer_in_progress",
+      "mapping_server_verified": false
+    }
   }
 }
