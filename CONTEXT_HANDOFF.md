@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**21:30当前恢复入口：[S0恢复运行检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_RUNNING.md)。synth05已成功持锁运行，父126260；21:29:58子126956正在shared_sram映射，error=None，characterize已完成。前台只读watcher127118，全部传输结束。** 仅N1已通过竞争测试35份普通编译缓存10,651,781B完成无损回读归档，压缩包已返回原目录、全部结果保留；桌面T80及旧8路未动。旧synth03工具失败、synth04空间失败和两次归档前保护拒绝均保留，不重复执行。新综合a5ce90a包852文件；最新b0a2548已push，S1–S4未开始。
+
+**21:22当前输入exec1192：14行可恢复N1编译缓存归档＋synth05启动器；不要并发输入或重跑。** e2db114已push，实际归档及新EDA结果尚待收完截图。恢复先读[增量恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部。旧synth03/04失败保留，T80桌面及旧8路不动。
+
 **21:20：synth04预检通过但在取原锁时ENOSPC，DC未启动；所有输入结束，Bash空闲。** 正准备对已核验N1竞争测试csrc普通编译缓存35文件/10.65MB做无损回读归档后立即新session synth05；只完成本地夹具检查，尚未执行清理。见[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部。不重复synth03/04，不清锁、不碰T80桌面或旧8路。
 
 **21:14更新：a5ce90a新包852文件/清单服务器验证通过，33855传输结束。现在唯一输入exec16016传输12行恢复启动器，结束后会自动严格预检并尝试新synth04；未观察真实启动结果。** 先读[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部，收完输入后核对PID/state，不重复启动、不输入其他VNC命令。b58251a已push，T80桌面及旧8路保持，S1–S4未开始。

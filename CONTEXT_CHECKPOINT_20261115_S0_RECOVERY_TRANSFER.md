@@ -1,5 +1,7 @@
 # S0 synth03失败后增量恢复准备 — 2026-11-15 21:05
 
+**21:22当前唯一输入exec1192**：14行`local_runs/s0_recovery_launch_e2db114/transfer.ps1`，完成后自动运行已测试的N1竞争csrc归档并尝试synth05。源e2db114已push，脚本SHAcd0261c40066cd2b013409d0d8bc1efa171fc2a48e806d72ab257dfebcc43f74。服务器目标ops-a5ce90a/s0_recovery_launch_e2db114.py。不要并发输入或重跑；先收完最后截图takeover_local/s0_recovery_launch_e2db114.png，核对归档回执和synth05实际PID/state。尚未观察实际归档或新EDA成功。
+
 **21:20当前：所有输入33855/16016均已结束。新包852文件核验及服务器verify_seed严格预检实际通过；synth04父120765启动后在原共享锁mkdir时ENOSPC失败，DC未启动。VNC当前Bash空闲，无EDA，旧失败03及新失败04均保留。** 已只读选中旧N1已通过的竞争测试普通csrc缓存35文件/10,651,815B：`IC/light-light126-undergrad-d2-20261109/bundles/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_contention01/n1_contention/csrc`。本地准备S0_RECOVERY_SPACE_LAUNCH_20261115.py，只对该缓存tar.gz全成员SHA/大小回读后去掉重复普通文件，保留目录/符号链接/原结果，并把压缩包返回原stage；随后新session=s0_synth05。临时35文件夹具完整归档/回读/结果不变检查通过，实际清理及synth05**尚未执行**。桌面T80和旧8路不涉及。
 
 **21:14当前状态：exec33855已70/70结束，服务器S0_INPUTS_PREPARED确认852文件与6d40f4d6…清单相符，S0_NEXT_TOOLS_READY确认没有自动EDA。现在唯一输入exec16016，正在传输12行`local_runs/s0_recovery_launch_b58251a/transfer.ps1`。它结束后会自动执行新synth04启动器的严格预检，全部通过才起新作业。不要并发输入或再次启动。** 启动器SHA3d4faf1840f98de5116ba471c4e6d63b7463be4d1edcb2cf67e1e3e3d319a153，源提交b58251a已push；服务器脚本ops-a5ce90a/s0_recovery_launch_b58251a.py。先收完截图`takeover_local/s0_recovery_launch_b58251a.png`，再查s0_synth04实际PID/state，尚未观察启动成功。
