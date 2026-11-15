@@ -1,0 +1,39 @@
+{
+  "changed": [
+    "workspaces/arch03/scripts/t64_precision_join.py",
+    "workspaces/arch03/scripts/t64_batch.py",
+    "workspaces/arch03/scripts/b0_saif_unknown_inventory.py"
+  ],
+  "commit": "b9155b49df9303b5324047aecd0ce18d300bbed2",
+  "files": 880,
+  "firmware_unchanged": true,
+  "hardware_unchanged": true,
+  "lines": 10,
+  "manifest_sha256": "c80e6f3355832f6a072cc25353c94f5e8825e49ca274b82510361b8201170804",
+  "ops_manifest_sha256": "6f0874cbcd5bd2ac3cc98f06de9aaf9188599f57c85a41fc401a30af77f9de78",
+  "server_deployment_pending": false,
+  "first_copy_server_ready_observed": "2026-11-15T15:13:26+08:00",
+  "local_changed_tests": 54,
+  "server_files_not_deleted": true,
+  "t80_desktop_unchanged": true,
+  "source_hardware_commit": "e2e83ce121963d499ea67914b4c34a05a0c58f27",
+  "server_deployment_verified": "2026-11-15T15:15:10+08:00",
+  "server_bundle": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-b9155b4",
+  "formal_started": true,
+  "formal_stage": "t64_soc",
+  "session": "t64_soc01",
+  "launcher_observed_pid": 261262,
+  "launched": "2026-11-15T15:17:25.720099+08:00",
+  "first_launch_failure": "t64_soc01: ENOSPC at original shared lock mkdir before simulation; original log retained",
+  "formal_entered": false,
+  "storage_dedup": {
+    "scope": "validated_data files only in T64 delta01 input copy, linked to byte-identical T64 fix02 members",
+    "files": 42,
+    "allocated_bytes_reclaimed": 6995968,
+    "free_bytes_observed": 7340032,
+    "all_paths_bytes_manifest_retained": true,
+    "no_T80_or_old8_operation": true,
+    "script_sha256": "2374171605297bd1d99db3f1ab820df58598b94eb269a3369c8e9c0bfa4b7ef2",
+    "receipt": "/tmp/s4_21usr_t64_20261115_1510/ops-b9155b4/duplicate_storage_receipt.json"
+  }
+}

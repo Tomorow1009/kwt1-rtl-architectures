@@ -1,5 +1,11 @@
 # 恢复T64→G64，保护桌面T80 — 2026-11-15
 
+**15:32最新覆盖：** b9155b4正式工具包已880文件/三类固件服务器预检通过；85和最终小增量传输均结束。t64_soc01（15:17:25 PID261262）及t64_soc02两次均在原共享锁mkdir处ENOSPC，未进入编译/仿真，原launch日志保留。共享盘空余反复被占满；15:21已对旧T64 delta01的42个validated_data重复文件做硬链接去重，6,995,968B重复块释放，**所有原路径/内容/manifest都保留**，T80与旧8路没有操作；随后7MB又耗尽。只读旧R4/B/N1波形扫描结果0，已归档R4不得重复归档。
+
+正在传输并启动新的顺序包装器，exec **15345**，`local_runs/transfer_pipeline.ps1`，状态 `local_runs/t64_pipeline_transfer/transfer_state.json`（11行，恢复时先读取）。该脚本在校验FLOAT/SAIF资格后，仅去重旧T64 delta01/fix02中相同的固件副本，保留全部路径和字节，然后立即串行运行 **t64_soc03→t64_batch20_01→t64_finish01**，减少释放空间到建锁及阶段间人工等待。脚本SHA **016dfbb037e43d50d981fb653d43847768792c4a4000b78132a72e6a5f5eb7d4**，已保存 `handoff/team/evidence/T64_START_PIPELINE_20261115.py`。不修改硬件、固件或已有阶段工具；仍用原锁和20条约束。
+
+包装器目标 `/tmp/s4_21usr_t64_20261115_1510/ops-b9155b4/t64_start_pipeline.py`，主日志同目录`t64_start_pipeline.log`；控制状态为最终bundle的`runs/t64_start01/state.json`。传输结束先截图确认启动PID，再读日志/状态；不要再手动启动soc/batch或旧finish队列。若preflight失败，保持失败记录后修新的包装器，不能直接重跑。包装器尚未观察到实际启动结果。板端转发91027仍保持；VNC18874435/workspace3。早前exec2790、64983、35249、57997、74820均结束。原检查点15:12及下方内容为较早记录。
+
 **恢复首先读 `CONTEXT_CHECKPOINT_20261115_T64_RESUME.md`：** 本轮已完成工具85baa0e、四行精度3f2072c及未知活动b9155b4修正。可见VNC传输exec2790进行中，板端转发91027长期运行；不要重复输入。最终正式包应为b9155b4（880文件、manifest c80e6f3355832f6a072cc25353c94f5e8825e49ca274b82510361b8201170804），不是先传的85副本。尚未开始T64正式验证。实时锁/空间最后观察及路径详检查点。本轮没有删除服务器文件。
 
 最新用户明确恢复T64/G64，并要求桌面T80版本不动。有效补充计划为 `workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md`，技术基础仍为 `N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`。下方T80优先/取消记录属于历史。
