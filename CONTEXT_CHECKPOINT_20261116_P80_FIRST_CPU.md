@@ -1,5 +1,18 @@
 # P80首个真实CPU任务通过；共享空间与串行队列恢复
 
+## 04:35更新：03身份失败与04建锁失败；正在传入05
+
+以下覆盖04:18状态。当前唯一VNC输入exec95957，入口local_runs/p80_b0_cache_sweep05_transfer_20261116/transfer.ps1共19行。先收完输入和归档终态，不并发键入、不重跑。
+
+- N1 sequence缓存02已完成：35普通文件/7,193,225B，归档SHA aebb47bf12cc63bde45408a3671c16078733f027e10814b4a94e99cb22045269；原stage持久tar和P80根receipt保留。
+- sweep03父314814因手工manifest转录多写一字符在身份检查失败，未取锁/未启EDA；旧脚本与失败保留。正确64字符manifest为7017da04075aea98b7a9dfe414e41621d3974fb43709d542d42ac6b0f43920fc；服务器原包始终正确。
+- sweep04父317100在04:23:25再次原共享锁mkdir ENOSPC，未启EDA。其JSON仍starting/current=None/completed=[]仅因acquire异常未记入，launcher.log证明已失败，不当作live。
+- 04:30:23只读清单确认B0包light-light126-systolic-b-v3-20261112_113543-cede0e139a01e的runs/systolic_b_power_final01_activity12/systolic_b_saif已passed；其csrc40普通文件/80,788,435B为本次归档03唯一目标。不是旧八路，也不是桌面T80。尚未观察归档03完成。
+- 新控制器05修正建锁异常记录，一把原共享锁连续持有，串行跑深度4/2/8各14；SHA6473175d150bd33df198650b476829601458dba93062ff6e8202e2f0421f971e。归档03脚本SHA04ba69992d366f0ed2c7ec5e925c5d67b587b76fcc19bd4496de264c6298d6e7。来源d75cb76，尚未push。
+- 成功归档完整tar成员核验、持久副本与原结果核对后立即启动新sweep05；不重跑03/04。状态根p80_sweep05.json，coordinator在142包/runs/p80_sweep05_coordinator，三个阶段p80_fixed_d4_05/d2_05/d8_05。
+- 首层真实CPU PASS维持80471周期/25344输出；三深度14、恢复/竞争/240、PPA仍待，854 ops89行尚未部署。T80桌面/旧八路不动。
+
+
 记录时间：2026-11-16 04:18（北京时间）。恢复先读AGENTS、根交接、本文件和`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`。
 
 ## 固定要求与已完成阶段

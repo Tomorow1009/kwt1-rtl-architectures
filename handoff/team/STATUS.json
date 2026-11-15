@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_SERVER_PREP.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FIRST_CPU.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -5667,10 +5667,10 @@
         }
       ]
     },
-    "current_local_sessions": {
-      "9206": "14-line N1 ASIC14 regular compiler cache verified archive; then fresh P80 sweep02; no second VNC input"
-    },
-    "last_server_observation": "2026-11-16T04:04:04+08:00 N1 ASIC14 csrc35 regular files10643394 bytes passed; Bash idle before archive input. Shared free1048576B/tmp92038000640B as of04:01:54",
+    "current_local_sessions": [
+      95957
+    ],
+    "last_server_observation": "2026-11-16T04:30:23+08:00 Bash idle; sweep04 failed at shared lock ENOSPC before EDA. B0 completed SAIF csrc40/80788435 bytes inventoried only; new input95957 in progress.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5736,9 +5736,49 @@
     "p80_space_recovery": {
       "script": "handoff/team/evidence/P80_CACHE_SPACE_RECOVERY_20261116.py",
       "script_sha256": "18ec144d92c98cd7c1f840002a6a7e7ac24942df95f1054fc613de332da9b66f",
+      "status": "completed",
+      "result_observed": true,
+      "source_kind": "completed_N1_ASIC14_regular_compiler_cache_only",
+      "archive_sha256": "2aa12ed47a2c7abbe76da8e382aece92d298cd27ab6ebeb93c0febd24ef538c4"
+    },
+    "p80_space_recovery02": {
+      "status": "completed",
+      "files": 35,
+      "bytes": 7193225,
+      "archive_sha256": "aebb47bf12cc63bde45408a3671c16078733f027e10814b4a94e99cb22045269"
+    },
+    "p80_sweep02": {
+      "status": "failed_after_pilot",
+      "pid": 306726,
+      "pilot": {
+        "status": "passed",
+        "cycles": 80471,
+        "outputs": 25344,
+        "encoded_bytes": 31428,
+        "depth": 4,
+        "queue_peak": 3
+      },
+      "error": "ENOSPC reacquiring original shared lock for fixed14"
+    },
+    "p80_sweep03": {
+      "status": "failed_before_EDA",
+      "pid": 314814,
+      "error": "controller manifest transcription extra character; frozen bundle unchanged"
+    },
+    "p80_sweep04": {
+      "status": "failed_before_EDA",
+      "pid": 317100,
+      "error": "ENOSPC acquiring original shared lock",
+      "stale_queue_status": "starting",
+      "evidence": "p80_sweep04.launcher.log"
+    },
+    "p80_space_recovery03": {
       "status": "visible_transfer_in_progress",
-      "result_observed": false,
-      "source_kind": "completed_N1_ASIC14_regular_compiler_cache_only"
+      "source_kind": "completed_B0_SAIF_regular_compiler_cache",
+      "files": 40,
+      "bytes": 80788435,
+      "protected_T80_modified": false,
+      "old8_modified": false
     }
   }
 }
