@@ -4630,15 +4630,15 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T00:51:43+08:00",
+      "observed_at": "2026-11-16T01:01:04+08:00",
       "status": "running",
-      "stage": "power_layer_04",
-      "completed": 8,
+      "stage": "power_layer_07",
+      "completed": 11,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 219643,
-      "foreground_readonly_watcher": 219856,
+      "child_pid": 223699,
+      "foreground_readonly_watcher": 224035,
       "child_tool": "pt_shell",
       "sram_provenance_checked": true,
       "current_case": null,
@@ -4665,7 +4665,10 @@
       "power_cases_passed": [
         "layer_01",
         "layer_02",
-        "layer_03"
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06"
       ]
     },
     "new_final_netlist_ready": true,
@@ -4798,6 +4801,17 @@
         "d": 16792
       },
       "model_scope": "pre_layout_stable_task_mode"
-    }
+    },
+    "s0_power_log_review": {
+      "observed_at": "2026-11-16T00:59:53+08:00",
+      "cases": 6,
+      "all_completed_summary_and_log_hashes_checked": true,
+      "stdout_log_warning_error_fatal_prefix_lines": [],
+      "redirected_report_warnings_reviewed_separately": true,
+      "screenshot": "s0_power_warnings_query03.png",
+      "screenshot_sha256": "4a736d526320a163ef3634e19e8bf2c6c6fc4c8bd99bba05fb3109b582ca229b",
+      "previous_query_attempts": "01 Bash quoting error before Python; 02 overescaped regex invalid for warning classification; only query03 used"
+    },
+    "s1_readonly_preparation": "workspaces/arch03/S1_PREPARATION_20261116.md"
   }
 }

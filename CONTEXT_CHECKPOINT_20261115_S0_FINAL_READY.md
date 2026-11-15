@@ -1,5 +1,10 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日01:01:04实查：finish03父172535仍正常，前六层功耗完成、power_layer_07子223699运行/completed11。当前前台只读watcher224035。后台export193002、检查等待218088保持；20654及此前输入全部结束。d673646已push。S0未冻结，S1仅只读准备说明，未改RTL/TB；保护目录不动。**
+
+- 已完成前六层`summary.json`及`power.log`按哈希核对，日志stdout没有Warning:/Error:/Fatal:前缀行；这不等于redirect到文件的时序警告不存在，后者由逐层完整表另审。有效截图`s0_power_warnings_query03.png`。前一次查询Bash引号错误未执行Python，第二次正则过度转义不能用作证据；只有第三次明确字符串前缀查询有效。原文件/队列未变。
+- 新`workspaces/arch03/S1_PREPARATION_20261116.md`记录仲裁/运输队列、信用、取消排空和观察器边界，只是只读准备；强调已有8项未呈现描述符与新增2/4/8已接受元信息队列不同、真实原mem_fab路径不改。
+
 **11月16日00:51:43实查：finish03父172535无错误，前三层功耗完成，power_layer_04子219643运行、completed=8。前台只读watcher219856。新增检查等待器218088已部署并等待原export193002；全部6857/89467/27517/1638/82627输入结束。dfa13b0已push。S0未冻结/S1未开始，桌面T80和旧八路不动。**
 
 - 新等待器源dfa13b0，`ops-66b9496/S0_COMPLETE_REVIEW_20261116.py` SHA8f3299cc60796e8f679d3b05d83507afec726e7d439939730e9cb8272a375878；builder SHA04665592cd0edcf63b828722e4f4d815b2dedef7cb1498eab514b94d7a8ad6c0。控制`ops-66b9496/s0_review01_control`，driver同ops下`s0_review01_driver.log`；00:47:42.194031开始。不要重启。原17阶段及报告/未知清单完成后才查询一次连接并执行只读别名/事实汇总，不自动验收或归档。
