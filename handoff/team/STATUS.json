@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_cached_block_relink_preparation",
+    "current_stage": "S0_relink_launcher_transfer",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4481,8 +4481,19 @@
       "tests_passed": 23,
       "python36_syntax_passed": true,
       "all_three_mapping_scripts_unchanged_from_9ffb2a9": true,
-      "deployed": false,
-      "executed": false
+      "deployed": true,
+      "executed": false,
+      "manifest_sha256": "5dd2d2153435037c34026456879cd840fa6253c6dcf3c500d6c177b9c0ad67ab",
+      "source_commit": "0e31e5b1977583070dbe4ba22e045455d5088834",
+      "files": 853,
+      "modules": 137
+    },
+    "synth08_launcher": {
+      "transfer_session": 45059,
+      "source_commit": "c21429d",
+      "sha256": "dbe1aacac49078762629dc58c89fd3a1d237e3f72a036744305edfd9f0f9da62",
+      "status": "transfer_in_progress",
+      "mapping_repeated": false
     }
   }
 }
