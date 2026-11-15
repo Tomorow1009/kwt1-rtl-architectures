@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4336,6 +4336,17 @@
     "s0_review_profile_tests_passed": 26,
     "s0_review_profile_deployed": false,
     "s0_recovery_tests_passed": 20,
-    "s0_recovery_deployed": false
+    "s0_recovery_deployed": false,
+    "recovery_transfer": {
+      "lines": 70,
+      "files": 852,
+      "auto_launches_EDA": false,
+      "session_id": 33855,
+      "status": "transferring",
+      "manifest_sha256": "6d40f4d67fc94a3b10fe3e1ece27076cf7affc33297602078721397165ca8d78",
+      "source_commit": "a5ce90ae4a967f0fddb12e3185fda5444ef9964f"
+    },
+    "recovery_launcher_prepared": "handoff/team/evidence/S0_RECOVERY_LAUNCH_20261115.py",
+    "recovery_launcher_executed": false
   }
 }
