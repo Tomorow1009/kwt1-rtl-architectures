@@ -1,5 +1,7 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:27:38最新实查：gate14全部完成，354,816输出逐坐标/result/saturated及写回核对通过，queue completed=2、stage=saif。父172535，SAIF VCS子180054运行54秒（1471 modules done），error=None；前台只读watcher177140。gate路径为66b9496/runs/s0_finish03_gate/t80_s0_gate，SAIF路径为同包runs/s0_finish03_saif/t80_s0_saif。全部输入结束，无半截命令；不重跑gate或综合。严格无SDF，internal total在门级不可观测的边界仍明确保留。**
+
 **23:24:37最新实查：gate已逐例通过12/14（extremes、rounding、L01–L10），当前L11 simv178996；父172535，completed stage仍1，error=None。前台watcher已替换为177140（旧173225仅Ctrl+C退出），命令`local_runs/s0_finish03_case_watch_command.txt`现在显示case_progress回执及当前日志；98978输入已结束。尚未获得完整gate summary，不重跑。已有1bbd126已push。**
 
 **后续归档注意（只读检查所得，未执行）：**现有`t80_archive_runtime.py`固定旧T80队列schema及`session/t80_kind`目录，不直接接受S0的`t80_s0_kind`。最终持久归档需按S0实际终态适配，保留已核验tar写入/完整回读原语；现/tmp包含多份历史失败包，不能盲套旧入口。归档前重新查空间与终态，不动桌面T80或旧八路。当前未新增清理、压缩或备份操作。
