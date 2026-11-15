@@ -4000,7 +4000,7 @@
   },
   "t64_g64_resume_20261115": {
     "plan": "workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md",
-    "stage": "T64_contention_repair_queue",
+    "stage": "T64_synthesis_running",
     "protected_desktop": "/storage2/2026contest/server4/s4_21usr/Desktop/T80_Delivery_20261113",
     "t80_desktop_modified": false,
     "old8_modified": false,
@@ -4009,14 +4009,14 @@
     "formal_samples": 20,
     "formal_tasks": 240,
     "full100_authorized": false,
-    "server_observed": "2026-11-15T17:12:52.029129+08:00",
+    "server_observed": "2026-11-15T17:17:54.711807+08:00",
     "server_lock": "t64_serial03",
     "server_eda_processes": [],
     "shared_free_bytes": 1048576,
     "tmp_free_GiB": 93.53,
     "t64_formal_started": true,
     "g64_started": false,
-    "next": "Monitor fresh serial03; reuse ASIC14 and batch240; G64 after T64 full acceptance",
+    "next": "Read final synthesis metrics when ready; continue same-netlist gate/SAIF/power; no G64 before T64 acceptance",
     "tool_source": "35521631b9fdedff03ec6e7c50f1558e38b2aafd",
     "server_bundle": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-3552163",
     "manifest_sha256": "81f861731d29df3252c775e8bc1dcab8628b2f2f79c71fa504827c9e7d2ed763",
@@ -4037,7 +4037,7 @@
     ],
     "supervisor": "t64_singlelock_queue.py",
     "supervisor_sha256": "016dfbb037e43d50d981fb653d43847768792c4a4000b78132a72e6a5f5eb7d4",
-    "supervisor_status": "running t64_contention",
+    "supervisor_status": "running t64_synth",
     "content_preserving_hardlink_dedup": {
       "scope": "old T64 validated_data input copies",
       "files": 42,
@@ -4090,11 +4090,11 @@
       "deployed": false,
       "executed": false
     },
-    "visible_readonly_watcher_pid": 325493,
+    "visible_readonly_watcher_pid": 3636,
     "vnc_foreground": "readonly watcher; Control_L c only watcher before shell commands",
     "last_observed": "2026-11-15T16:47:13+08:00",
-    "current_status": "running_t64_contention",
-    "current_stage": "contention",
+    "current_status": "running_t64_synth",
+    "current_stage": "synth",
     "batch_tasks_completed": 240,
     "batch_failed": 0,
     "batch_checked_outputs": 6082560,
@@ -4109,6 +4109,24 @@
       "all_paths_and_bytes_preserved": true,
       "shared_free_after": 4194304
     },
-    "reused_unchanged_production_batch": true
+    "reused_unchanged_production_batch": true,
+    "contention": {
+      "status": "passed",
+      "server_run": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-3552163/runs/t64_serial03_contention/t64_contention",
+      "checked_scratch_rounds": 225,
+      "competing_cycles": 29946,
+      "cpu_grants": 14603,
+      "dma_grants": 36243,
+      "scratch_writes": 7189,
+      "scratch_reads": 7189,
+      "maximum_dma_grants_while_cpu_waits": 0,
+      "diagnostic_cycles": 167650,
+      "performance_measurement": false
+    },
+    "sequence": {
+      "status": "passed",
+      "server_run": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-3552163/runs/t64_serial03_sequence/t64_sequence",
+      "scope": "actual E203 recovery and no-reset ABA"
+    }
   }
 }

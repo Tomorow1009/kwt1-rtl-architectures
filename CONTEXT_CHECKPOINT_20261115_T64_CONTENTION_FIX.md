@@ -1,5 +1,13 @@
 # T64批量通过与竞争固件修复 — 2026-11-15 16:58
 
+## 17:14竞争通过
+
+17:15:24.549548实读queue325056 running/t64_sequence/error=None、completed1。新只读watcher **3636** 在前台，39078输入完成；旧325493已结束。自动每30秒更新。恢复必须按当前3636观察器判断，不能把旧PID当实时。
+
+17:14:35截图已显示T64_SINGLELOCK_STAGE_PASS contention；真实CPU225轮scratch，competing29946、cpu_grants14603、dma_grants36243、scratch_writes/reads各7189，fair_max0。完整layer01的诊断窗口167650周期，**不是性能固件周期**。sim宿主9.116230098996311秒，原输出文件保留，最终摘要hash以queue引用为准。接续sequence，无重启。截图t64_watch_interrupt_readonly.png。
+
+仅以Control_L c退出前台只读watcher325493，后台325056不动；正在重新打开缩短日志显示的观察器，输入exec尚需收尾。当前T64竞争修复已实际通过，不再重跑该项。
+
 ## 17:12实际启动
 
 17:12:52.029129首次实读：queue实际Python PID **325056**，status=running/stage=t64_contention/error=None，ASIC14+240_REUSED=True。launcher返回的325042是启动进程，不代替state的实际PID。**前台只读watcher PID325493**，每30秒显示；需要输命令前先截图并Control_L c仅退出观察器，不终止后台队列。89627输入已结束。截图t64_serial03_first_watch.png。
