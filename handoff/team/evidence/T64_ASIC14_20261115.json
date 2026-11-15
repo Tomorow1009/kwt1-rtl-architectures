@@ -1,0 +1,87 @@
+{
+  "bundle": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-b9155b4",
+  "bundle_manifest_sha256": "c80e6f3355832f6a072cc25353c94f5e8825e49ca274b82510361b8201170804",
+  "cases": 14,
+  "checked_outputs": 354816,
+  "clock_period_ns": "6.666666",
+  "cycle_data": [
+    {
+      "case": "layer_01",
+      "cycles": 116751
+    },
+    {
+      "case": "layer_02",
+      "cycles": 113731
+    },
+    {
+      "case": "layer_03",
+      "cycles": 112105
+    },
+    {
+      "case": "layer_04",
+      "cycles": 112511
+    },
+    {
+      "case": "layer_05",
+      "cycles": 110445
+    },
+    {
+      "case": "layer_06",
+      "cycles": 108925
+    },
+    {
+      "case": "layer_07",
+      "cycles": 107165
+    },
+    {
+      "case": "layer_08",
+      "cycles": 107645
+    },
+    {
+      "case": "layer_09",
+      "cycles": 107205
+    },
+    {
+      "case": "layer_10",
+      "cycles": 111125
+    },
+    {
+      "case": "layer_11",
+      "cycles": 116971
+    },
+    {
+      "case": "layer_12",
+      "cycles": 126237
+    }
+  ],
+  "fields": [
+    "total_signed33",
+    "result_signed16",
+    "saturated"
+  ],
+  "final_240_verified": false,
+  "hardware_commit": "e2e83ce121963d499ea67914b4c34a05a0c58f27",
+  "mac_utilization": 0.22514391301257905,
+  "macs": 64,
+  "mean_cycles": 112568.0,
+  "new_area_mm2": null,
+  "new_energy_uj_task": null,
+  "new_power_mw": null,
+  "nominal_MMAC_s": 2161.381564920759,
+  "nominal_task_s": 1332.5278942505863,
+  "observation": "2026-11-15T16:07:24+08:00",
+  "observation_is_original_file_copy": false,
+  "official_600_verified": false,
+  "original_finished": "2026-11-15T15:37:02.589594",
+  "original_state_digest_equals_file_digest": true,
+  "original_state_status": "passed",
+  "ppa_scope": "pending_own_frozen_netlist_measurement",
+  "row_lanes": 4,
+  "run": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-b9155b4/runs/t64_soc03/t64_soc",
+  "schema": "t64-asic14-observation-v1",
+  "scope": "actual_asic_rtl_E203",
+  "shift": 10,
+  "summary_sha256": "8eb6e9822817c2bcdba325b977f7d27e381b8f2b0b2eb6f0331049a7474f7e2e",
+  "t80_desktop_modified": false,
+  "timing_scope": "first_source_VALID_to_final_output_ACK_and_drained"
+}

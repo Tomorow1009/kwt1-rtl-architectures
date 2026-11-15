@@ -4009,10 +4009,10 @@
     "formal_samples": 20,
     "formal_tasks": 240,
     "full100_authorized": false,
-    "server_observed": "2026-11-15T16:19:49.501150+08:00",
+    "server_observed": "2026-11-15T16:29:22.192404+08:00",
     "server_lock": "t64_serial02",
     "server_eda_processes": [
-      297516
+      301902
     ],
     "shared_free_bytes": 1048576,
     "tmp_free_GiB": 93.53,
@@ -4079,10 +4079,10 @@
       "shared_free_after": 4194304
     },
     "batch20_progress": {
-      "completed": 55,
+      "completed": 131,
       "failed": 0,
-      "checked_outputs": 1393920,
-      "remaining_seconds_with_margin": 1676.4380901499396
+      "checked_outputs": 3320064,
+      "remaining_seconds_with_margin": 986.9832877011023
     },
     "archive_tool": {
       "path": "workspaces/arch03/scripts/t64_archive_runtime.py",
@@ -4091,6 +4091,8 @@
       "source_deletion": false,
       "deployed": false,
       "executed": false
-    }
+    },
+    "visible_readonly_watcher_pid": 300088,
+    "vnc_foreground": "readonly watcher; Ctrl+C watcher before typing shell; do not interrupt background queue"
   }
 }

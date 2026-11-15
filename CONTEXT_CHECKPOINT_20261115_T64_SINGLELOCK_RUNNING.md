@@ -1,5 +1,15 @@
 # T64单锁队列实际运行 — 2026-11-15 16:13
 
+## 16:30补充及恢复注意
+
+只读观察器PID300088正在VNC前台，每30秒显示同一serial02队列。**当前不是shell提示符**；要输新命令时，先截图确认前台观察器，再Ctrl+C仅停止它。后台队列289025为独立会话，不能中断。观察器遇到failed或reports_ready_review_required会自行退出。源码local_runs/t64_visible_watch.py，启动命令takeover_local/t64_visible_watch.txt，不要重复启动。
+
+16:29:22.192404实读：131/240、failed0、3320064输出，simv301902正在sample011/layer12；queue仍running/t64_batch20，error=None。含20%余量剩余986.983秒。截图t64_batch_watch_1630.png。16:25:21时已100/240；没有重跑任何阶段。归档工具2测试及状态已push12e8e45，新小型ASIC14观察JSON待同步；未部署/执行归档。
+
+G64尚未开发，只读查看已有ICG包装器及T64四行结构：工艺单元CLKLANAQV4_12TR40、TE为post-latch且须静态旁路；将来必须从T64派生，不能以旧N2硬件或PASS替代G64。等待T64自己的240、综合、门级、活动、功耗和精度完成。
+
+所有输入会话已结束，20418也结束，仅转发91027与远端只读前台观察器保持。不要把屏幕上CHILD exited passed误认为整阶段通过；以queue和stage最终summary/state为准。
+
 ## 16:20补充
 
 16:19:49.501150观察同一队列running、error=None，批量55/240、failed=0、checked_outputs=1393920；当前simv297516为sample005/layer08，ledger child000056。含20%余量剩余1676.438秒；不能保证最终结束时刻。原lock/queue未重启。最后截图t64_batch_progress_1622.png（文件名近似，实际观察时间以画面为准）。watch文本已改为batch_progress.json简要字段，避免打印全部逐例列表。
