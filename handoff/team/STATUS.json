@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4530,19 +4530,73 @@
       "manifest_sha256": "c4774571c8aebe323657a5aaebc017f24324396b28ea6b2852e32e40a213b924",
       "pid": 163793,
       "dc_pid": 164078,
-      "status": "running",
+      "status": "passed",
       "started": "2026-11-15T22:52:08.115738",
-      "observed_at": "2026-11-15T22:52:36+08:00",
+      "observed_at": "2026-11-15T22:56:14+08:00",
       "stage": "final_link_only",
       "mapping_repeated": false,
-      "final_netlist_ready": false
+      "final_netlist_ready": true,
+      "summary_sha256": "e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916",
+      "conservative_budget_mm2": 0.9535222591004618,
+      "known_added_mm2": 0.7926218383005581,
+      "system_library_area": 4475738.758645,
+      "setup_ns": 0.000386715,
+      "hold_ns": 0.0055688,
+      "small_macros": 92,
+      "large_macros": 128,
+      "latches": 0,
+      "stage_accepted": false
     },
     "synth08_followup_waiter": {
       "source_commit": "14e6b1b",
       "sha256": "78b5601e1f85a0d8030939b66ca335c02cc665f4c332efef89e543d94b83d19d",
       "transfer_session": 51072,
-      "status": "transferring",
-      "new_eda_started": false
+      "status": "launched_validation_preflight",
+      "new_eda_started": false,
+      "transfer_session_completed": true,
+      "pid": 165061
+    },
+    "s0_finish_attempt01": {
+      "pid": 165305,
+      "status": "failed_before_queue_or_EDA",
+      "error": "common.sha(__file__) str has no read_bytes",
+      "observed_at": "2026-11-15T22:56:55+08:00",
+      "new_netlist_unchanged": true
+    },
+    "s0_finishfix_transfer": {
+      "source_commit": "a7e7e49",
+      "manifest_sha256": "4d0699ff21c1708484f182e09a934ea918255ddfc116f1f2a179ec7b015e8766",
+      "exec_session": 29202,
+      "status": "server_manifest_verified",
+      "files": 853,
+      "modules": 137,
+      "actual_queue_entrypoint_test_passed": true,
+      "exec_session_completed": true
+    },
+    "s0_finish_launcher03": {
+      "source_commit": "bc0a897",
+      "sha256": "5650846f3f3c16aba83a87cb839ff456f102adf8692666f350ddf30c3ed7a9d7",
+      "status": "launched",
+      "session": "s0_finish02",
+      "synthesis_bundle": "a5f138e",
+      "synthesis_session": "s0_synth08",
+      "transfer_session": 56347,
+      "transfer_session_completed": true
+    },
+    "s0_finish_attempt02": {
+      "pid": 168421,
+      "source_commit": "a7e7e49",
+      "session": "s0_finish02",
+      "started": "2026-11-15T23:02:32.412418",
+      "observed_at": "2026-11-15T23:03:35+08:00",
+      "status": "running",
+      "stage": "gate",
+      "completed": 1,
+      "child_pid": 168925,
+      "foreground_readonly_watcher": 169108,
+      "error": null,
+      "synthesis_not_repeated": true,
+      "stage_accepted": false
     }
   }
 }

@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**23:03:35实际队列：a7e7e49/s0_finish02父168421，structure已完成、当前gate端口探针子168925，无错误。前台只读watcher169108；所有输入结束。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续原队列，禁止重启或改新网表。保守面积0.953522mm²、正setup/hold；SAIF/PT仍待。T80桌面和旧八路不动。**
+
+**23:02当前唯一VNC输入exec56347：13行新finish03启动器，目标a7e7e49/s0_finish02，复用a5f138e/synth08新网表；a7包853文件已服务器核验，bc0a897已push。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部并收完输入，尚未观察新队列PID。旧失败保留，综合不重跑，T80桌面与旧八路不动。**
+
 **22:58恢复优先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)。synth08已passed，保守面积0.9535222591mm²、setup+0.000386715ns、hold+0.0055688ns、220宏、0latches。接续父165305在EDA前遇到工具Path类型错误并退出；当前无EDA、Bash空闲，勿重启旧控制目录。本地仅入口修复及真实execute回执测试3项通过，待新独立验证工具包；不重跑综合。T80桌面/旧八路不动，S1–S4未开始。**
 
 **22:52:36已实际启动synth08：父163793/DC164078，a5f138e独立包，严格缓存检查通过，只做final_link。当前正在部署17行自动接续守卫，先读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)顶部并收完输入，禁止并发键入或重启。尚未有新面积/时序；T80桌面及旧八路不动。**

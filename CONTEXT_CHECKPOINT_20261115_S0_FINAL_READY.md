@@ -1,5 +1,9 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:03:35实际进展：新a7e7e49/s0_finish02父168421已运行，structure完成，completed=1；当前gate/DC端口探针子168925（common_shell_ex，96%CPU），error=None。队列开始23:02:32.412418；明确使用a5f138e/synth08 summary e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916。所有29202/56347/87739输入已结束。VNC当前为前台只读watcher169108，不能向它盲输shell；仅需命令时Ctrl+C退出watcher，不碰后台队列。转发91027保持，T80桌面/旧八路不动。**
+
+**23:02部署接续：a7e7e49修复包853文件/manifest4d0699ff21c1708484f182e09a934ea918255ddfc116f1f2a179ec7b015e8766已服务器核验，29202输入结束。当前唯一输入exec56347，13行`local_runs/s0_finish03_launch_bc0a897/transfer.ps1`，启动器SHA5650846f3f3c16aba83a87cb839ff456f102adf8692666f350ddf30c3ed7a9d7。bc0a897已push。目标新包runs/s0_finish02，明确引用a5f138e/synth08，注册a5+9ff+05原证据。尚未观察新PID，不要重复执行；收完截图后查新driver/state。`S0_BUILD_REPORT_REQUEST03_20261115.py`已按新包/finish02准备，但未部署执行。**
+
 恢复先读AGENTS、当前用户计划`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`、本文和STATUS。服务器桌面T80、旧八路不改；S1–S4未开始。
 
 ## 已完成
