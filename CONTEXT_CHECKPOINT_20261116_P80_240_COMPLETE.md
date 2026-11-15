@@ -1,5 +1,34 @@
 # P80前20条完成，空间恢复与单锁接续
 
+## 06:44优先恢复补充：当前73879输入（覆盖下方旧状态）
+
+**唯一当前VNC输入exec73879**：`local_runs/p80_combined04_cache10_transfer_20261116/transfer.ps1`，20行。先收完并查看`E:/fpga_race-two/takeover_local/p80_combined04_cache10_transfer_20261116.png`，禁止并发键入、重复传输。它部署cache10/combined04/export04，归档成功才立即启动combined04；export04只写入，不启动。尚未观察cache10终态或新PID。
+
+已确认及失败路径：
+
+- 96487已结束，**cache09成功**：B0 gate02的38个普通csrc文件/65,967,651B全成员SHA/大小回读核验，持久压缩副本已核验，原结果/源码/日志/可执行文件不变，恢复后共享剩56,623,104B。显示归档SHA为`66d65a697e0ecb3d74ae9cbc4012ca1445176ac9da80188430c6d0098ed38ee2`（进一步机器回执在root/b0_gate02_csrc_20261116.receipt.json）。**不要再执行cache09**，不碰旧八路或T80桌面。
+- combined02父77916在获取锁前因`common.sha(__file__)`传入str而失败，没有EDA，只留下空`4cfbundle/runs/p80_finish02`与launcher log；保留。已修成Path，连同finish.__file__一并修。使用严格Path版SHA函数的完整main成功/映射失败两项本地演练通过，均只获取/释放锁一次，失败不进后继。
+- 58712的18行修复输入也已完成。combined03父80375于06:38建原共享锁又遇ENOSPC，**仍无新综合**；`p80_final_combined03.json`和`4cfbundle/runs/p80_finish03/state.json`失败保留。06:41确认80375已退出、原锁不存在。缓存09恢复的空间在传输修复期间已耗尽。
+- 其他输入60560/84895/99289/78207/83485均结束。当前除了73879没有其他键盘输入。没有自己的EDA在跑（新combined04尚未观察）。
+
+本轮cache10（当前操作，不能预填完成）：
+
+- 已固定`b0_cache_candidates01.json`索引1，B0包`light-light126-systolic-b-v3-20261112_114355-ced0e139a01e`内`systolic_b_r4_saif_replay01/native_saif_r4_replay/csrc`，**40普通文件/68,559,403B**。
+- 06:40–06:41只读确认R4_native_saif_replay_function_and_window_passed、25344输出、source_netlist_unchanged；721个source_inputs全部存在，csrc没有被列为验证输入。它的R4 gate引用为49759e108719包，不是旧八路。仅归档csrc；SAIF、VCD、模型、输入和结果都不删。
+- tmp归档`b0_r4_saif_csrc_20261116.tar.gz`和`.receipt.json`，持久副本同原stage的`csrc_regular_files_20261116_p80.tar.gz`。沿用先压缩+逐项回读核验+确认无人使用，再移除重复普通缓存、复制持久副本并复核所有冻结证据；其自身不启动EDA，外层仅在returncode0后立即启动combined04。
+
+当前新源码/队列：
+
+- 本地最新提交`8e95112`；最近push为6b13b08，0be741f/8e95112待同步。
+- combined04 SHA **f78a8143ba0b1ff3669ad97a40454f346ed36cdd159c2b4d3f5eab2f7f6f60bf**，`root/p80_final_combined04_controller.py`；control `p80_final_combined04.json`，日志同名`.launcher.log`；新队列 **4cfbundle/runs/p80_finish04**，新综合 **4cfbundle/runs/p80_synth_d2_05/p80_synth**。
+- export04 SHA **0a8ed3c0c2313b11499361be2ef579e8cb19fb5ab8d702f837721f5ad256dd92**，`root/p80_export_review04_controller.py`，未启动；等确认combined04在跑后再启动，输出`p80_report04`、`p80_unknown_inventory04`、`p80_unknown_connections04`。
+- cache10 SHA **edc9ab30e10c3c7e9e804121d8770769550e510654d9cf88b80e2dc172a820fe**，`root/p80_b0_r4_saif_cache10.py`。
+- 当前20行patch payload SHA **2377548f0bc85c76b657cf33bc9459b163c6c11aac32f4b32b005fabb740a30a**；对既有03/cache09做逐字节差分，仅写新文件，旧源和受测包都没改。所有新文件SHA重建验证后才运行。
+- combined04与03经过完整主入口演练的逻辑相同，只改独立运行名称；全新映射、FLOAT连接和17项最终网表验收用一个原协作锁。1400级平台参数、32位ICB、宏布局及数值未改变。
+- 58712本地transfer_state的深层patch数组曾被默认ConvertTo-Json截为描述字符串；实际发送line文件和服务器payload SHA始终完整。已从固定payload完整恢复本地数组。新73879状态序列化使用Depth8，不影响真实输入。
+
+继续：先收73879及实际归档/新PID；若成功，读取combined04真实stage并启动已部署export04等待器；不能重跑240，也不能重启旧失败队列。P80自己的240证据保持通过，综合/精度/门级/活动/功耗仍待；C80/C32/G32未开始。根交接与STATUS应同步以上新入口，最终归档工具14c6dab仍仅本地准备，实际共享空间须另核实。
+
 记录时间：2026-11-16 06:29，北京时间。恢复先读本文件、根交接、AGENTS和当前计划`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`。不要根据旧running记录重新派发。
 
 ## 当前有效目标及保护范围
