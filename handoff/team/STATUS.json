@@ -4697,7 +4697,7 @@
       "source_commit": "8da012f",
       "pid": 193002,
       "status": "exporting_report",
-      "observed_at": "2026-11-16T01:20:54+08:00",
+      "observed_at": "2026-11-16T01:28:59+08:00",
       "script": "ops-66b9496/S0_EXPORT_AFTER_FINISH_20261115.py",
       "source_sha256": "06bfe60625dfea206ace3cff788679afee24d30e5b4583f4b7918d8196635715",
       "builder_sha256": "9ca45ab038c916ce00b64c63a7c49fdd7948b365392e5fdacfb12c19597bba0c",
@@ -4710,7 +4710,12 @@
       "unknown_inventory_started": false,
       "child_pid": 231552,
       "child_stage": "report",
-      "foreground_readonly_watcher": 233182
+      "foreground_readonly_watcher": 236422,
+      "child_elapsed_seconds": 700,
+      "child_cpu_seconds": 694,
+      "child_cpu_percent": 99.2,
+      "observed_open_project_file": "s0_finish03_saif/t80_s0_saif/layer_07.saif",
+      "open_file_observed_at": "2026-11-16T01:26:24+08:00"
     },
     "s0_model_review_snapshot": {
       "source_commit": "5430dc5",
