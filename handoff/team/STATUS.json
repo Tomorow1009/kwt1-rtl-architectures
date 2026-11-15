@@ -4624,17 +4624,19 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-15T23:14:55+08:00",
+      "observed_at": "2026-11-15T23:24:37+08:00",
       "status": "running",
       "stage": "gate",
       "completed": 1,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 174044,
-      "foreground_readonly_watcher": 173225,
-      "child_tool": "vcs",
-      "sram_provenance_checked": true
+      "child_pid": 178996,
+      "foreground_readonly_watcher": 177140,
+      "child_tool": "simv",
+      "sram_provenance_checked": true,
+      "current_case": "layer_11",
+      "gate_cases_passed": 12
     }
   }
 }

@@ -1,5 +1,9 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:24:37最新实查：gate已逐例通过12/14（extremes、rounding、L01–L10），当前L11 simv178996；父172535，completed stage仍1，error=None。前台watcher已替换为177140（旧173225仅Ctrl+C退出），命令`local_runs/s0_finish03_case_watch_command.txt`现在显示case_progress回执及当前日志；98978输入已结束。尚未获得完整gate summary，不重跑。已有1bbd126已push。**
+
+**后续归档注意（只读检查所得，未执行）：**现有`t80_archive_runtime.py`固定旧T80队列schema及`session/t80_kind`目录，不直接接受S0的`t80_s0_kind`。最终持久归档需按S0实际终态适配，保留已核验tar写入/完整回读原语；现/tmp包含多份历史失败包，不能盲套旧入口。归档前重新查空间与终态，不动桌面T80或旧八路。当前未新增清理、压缩或备份操作。
+
 **23:14:55最新实查：SRAM双清单核对已通过，当前gate已进入VCS编译子174044（已运行10秒），父172535、watcher173225继续，无错误。端口DC173089已完成26秒。全部输入结束，不重启；6683ce5已push。下一步等真实gate14结果，随后原队列SAIF12/timing/DRC/PT12。**
 
 **23:12:55实查：66b9496/s0_finish03父172535运行，structure已完成、completed=1，当前gate端口DC子173089，无错误。开始23:11:48.772018。前台只读watcher173225；全部96034/10794/4606输入已结束，无半截输入。下一次命令前只退出该watcher，不碰后台队列或锁。综合仍是a5f138e/synth08，不重跑；T80桌面及旧八路不动。**
