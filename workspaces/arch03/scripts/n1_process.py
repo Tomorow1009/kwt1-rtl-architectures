@@ -55,6 +55,7 @@ class ProcessLedger:
             schema='arch03-n1-process-lock-v1',token=uuid.uuid4().hex,child_ledger=str(self.ledger))
         self.owner_raw=encoded(self.owner);self.lock_identity=None;self.owner_identity=None
         self.acquired=False;self.initialized=False;self.sequence=0;self.active=None
+        self.stage_sessions={}
 
     def acquire(self):
         require(self.common.ACTIVE_CHILD is None,'Existing active child prevents N1 lock acquisition')
@@ -100,6 +101,36 @@ class ProcessLedger:
     def record(self,path,value):
         self.check_ledger();atomic_save(path,value)
 
+    def register_stage_session(self,session):
+        """Pin a sibling stage under this owner; never reacquire the shared lock.
+
+        The coordinator owns every child and retains its original private ledger.
+        Default single-stage callers do not register any additional scope.
+        """
+        self.check_owner();self.check_ledger()
+        require(self.active is None and self.common.ACTIVE_CHILD is None,'Cannot register a stage during a child')
+        session=Path(session).absolute()
+        require(session.parent==self.bundle/'runs' and session.resolve()==session and session.is_dir()
+                and re.fullmatch('[A-Za-z0-9_-]{1,64}',session.name),'Noncanonical sibling stage session')
+        stamp=identity(session)
+        require(stamp[2]==identity(self.session)[2],'Other-owner stage session')
+        require(session!=self.session and session not in self.stage_sessions,'Stage scope already registered')
+        proposed=dict(self.stage_sessions);proposed[session]=stamp
+        self.record(self.ledger/'stage_scopes.json',dict(owner=self.owner,
+            sessions=[dict(path=str(p),identity=list(v)) for p,v in sorted(proposed.items(),key=lambda x:str(x[0]))]))
+        self.stage_sessions=proposed
+
+    def run_scope(self,run):
+        try:
+            run.relative_to(self.session);return self.session
+        except ValueError:pass
+        for session,stamp in self.stage_sessions.items():
+            try:run.relative_to(session)
+            except ValueError:continue
+            require(identity(session)==stamp and session.resolve()==session,'Registered stage identity changed')
+            return session
+        raise ValueError('Child run is outside the owner session and explicitly registered stages')
+
     def drain(self,child):
         """Do not abandon a child because waiting itself was interrupted."""
         interruptions=[]
@@ -124,7 +155,7 @@ class ProcessLedger:
     def call(self,cmd,run,log):
         self.check_owner();self.check_ledger()
         require(self.common.ACTIVE_CHILD is None and self.active is None,'N1 already has an accepted child')
-        run=Path(run).absolute();run.relative_to(self.session)
+        run=Path(run).absolute();scope=self.run_scope(run)
         require(run.resolve()==run and run.is_dir(),'Noncanonical N1 child run directory')
         relative=Path(log)
         require(not relative.is_absolute() and '..' not in relative.parts,'N1 child log must stay in its run')
@@ -136,6 +167,7 @@ class ProcessLedger:
         row=dict(schema='arch03-n1-child-process-v1',sequence=self.sequence,owner_token=self.owner['token'],
             driver_pid=self.owner['pid'],host=self.owner['host'],bundle=str(self.bundle),session=self.session.name,
             run=str(run),log=str(logfile),command=command,status='prepared',prepared=now(),pid=None)
+        row['stage_session']=str(scope)
         self.record(record_path,row)  # Private ENOSPC here prevents spawning.
         self.check_owner()  # Recheck immediately before the accepted operation.
         child=None;errors=[];code=None

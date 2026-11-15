@@ -4000,7 +4000,7 @@
   },
   "t64_g64_resume_20261115": {
     "plan": "workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md",
-    "stage": "T64_ASIC14_running",
+    "stage": "T64_ASIC14_passed_batch_blocked_by_ENOSPC",
     "protected_desktop": "/storage2/2026contest/server4/s4_21usr/Desktop/T80_Delivery_20261113",
     "t80_desktop_modified": false,
     "old8_modified": false,
@@ -4009,14 +4009,14 @@
     "formal_samples": 20,
     "formal_tasks": 240,
     "full100_authorized": false,
-    "server_observed": "2026-11-15T15:36:07+08:00",
-    "server_lock": "t64_soc03",
+    "server_observed": "2026-11-15T15:43:17.943597+08:00",
+    "server_lock": null,
     "server_eda_processes": [],
     "shared_free_bytes": 1048576,
     "tmp_free_GiB": 93.53,
     "t64_formal_started": true,
     "g64_started": false,
-    "next": "Observe existing automatic soc03 -> batch20_01 -> finish01; do not restart",
+    "next": "Deploy tested single-lock remaining-stage coordinator; reuse soc03; no hardware changes",
     "tool_source": "b9155b49df9303b5324047aecd0ce18d300bbed2",
     "server_bundle": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-b9155b4",
     "manifest_sha256": "c80e6f3355832f6a072cc25353c94f5e8825e49ca274b82510361b8201170804",
@@ -4037,7 +4037,7 @@
     ],
     "supervisor": "t64_start_pipeline.py",
     "supervisor_sha256": "016dfbb037e43d50d981fb653d43847768792c4a4000b78132a72e6a5f5eb7d4",
-    "supervisor_status": "running t64_soc",
+    "supervisor_status": "failed at batch20_01 shared lock mkdir before compile",
     "content_preserving_hardlink_dedup": {
       "scope": "old T64 validated_data input copies",
       "files": 42,
@@ -4049,8 +4049,18 @@
     "started": "2026-11-15T15:33:23.604195",
     "last_observed_layer": "layer_01",
     "last_observed_cycles": 116751,
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_T64_RUNNING_1536.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_T64_ASIC14_PASS.md",
     "firmware_dedup_files": 6,
-    "firmware_duplicate_blocks_reclaimed_bytes": 3145728
+    "firmware_duplicate_blocks_reclaimed_bytes": 3145728,
+    "asic14": {
+      "passed": true,
+      "outputs": 354816,
+      "summary_sha256": "8eb6e9822817c2bcdba325b977f7d27e381b8f2b0b2eb6f0331049a474f472e2",
+      "mean_cycles": 112568.0,
+      "nominal_task_s": 1332.5278942505863,
+      "server_run": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-b9155b4/runs/t64_soc03/t64_soc"
+    },
+    "singlelock_tests": 43,
+    "batch20_started": false
   }
 }

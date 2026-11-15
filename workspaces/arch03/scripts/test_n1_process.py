@@ -63,6 +63,41 @@ class N1ProcessTests(unittest.TestCase):
             with self.assertRaises(OSError):self.manager.acquire()
         self.assertFalse(self.lock.exists());self.no_child_left();self.assertIsNone(self.common.LOCK)
 
+    def test_registered_sibling_stages_keep_one_owner_and_reap_each_child(self):
+        self.ready()
+        with patch.object(process,'write_initial_owner',side_effect=OSError(errno.ENOSPC,'shared full')):
+            with patch.object(process.subprocess,'Popen',side_effect=self.launch):
+                for index in range(2):
+                    stage=self.bundle/'runs'/('next_%d'%index);run=stage/'t64_stage';run.mkdir(parents=True)
+                    self.manager.register_stage_session(stage)
+                    self.manager.call(self.command(),run,'case.log')
+                    self.assertTrue((run/'child_done').is_file())
+                    self.assertEqual((self.lock/'owner.json').read_bytes(),self.owner_before)
+        records=[json.loads(p.read_text()) for p in sorted(self.manager.ledger.glob('child_*.json'))]
+        self.assertEqual([r['stage_session'] for r in records],
+                         [str(self.bundle/'runs'/('next_%d'%i)) for i in range(2)])
+        self.assertTrue(all(r['session']=='session' and r['wait_completed'] for r in records))
+        self.no_child_left();self.manager.release();self.assertFalse(self.lock.exists())
+
+    def test_sibling_requires_registration_and_original_directory_identity(self):
+        self.ready();stage=self.bundle/'runs/next';run=stage/'t64_stage';run.mkdir(parents=True)
+        with patch.object(process.subprocess,'Popen') as spawn:
+            with self.assertRaisesRegex(ValueError,'outside'):self.manager.call(self.command(),run,'case.log')
+            self.manager.register_stage_session(stage)
+            stage.rename(self.bundle/'runs/preserved');run.mkdir(parents=True)
+            with self.assertRaisesRegex(ValueError,'identity changed'):self.manager.call(self.command(),run,'case.log')
+            spawn.assert_not_called()
+        self.manager.release()
+
+    def test_failed_scope_record_does_not_authorize_child(self):
+        self.ready();stage=self.bundle/'runs/next';run=stage/'t64_stage';run.mkdir(parents=True)
+        with patch.object(process,'atomic_save',side_effect=OSError(errno.ENOSPC,'scope full')):
+            with self.assertRaises(OSError):self.manager.register_stage_session(stage)
+        self.assertFalse(self.manager.stage_sessions)
+        with self.assertRaisesRegex(ValueError,'outside'):self.manager.call(self.command(),run,'case.log')
+        with self.assertRaisesRegex(ValueError,'Noncanonical'):self.manager.register_stage_session(self.root)
+        self.manager.release()
+
     def test_initial_partial_owner_enospc_preserves_lock_for_manual_recovery(self):
         def partial(path,raw):
             Path(path).write_bytes(raw[:12]);raise OSError(errno.ENOSPC,'partial owner')

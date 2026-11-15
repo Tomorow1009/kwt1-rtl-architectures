@@ -80,7 +80,7 @@ def run(args):
     require(manifest['architecture'] == 'arch03_'+name and
             manifest['row_lanes'] == {'T80':5,'T64':4}[args.stage], 'Wrong report bundle')
     cfg = paths.configure(json.loads((common.ROOT/'handoff/team/server_config.json').read_text()), common.ROOT,
-                          args.runtime_root, args.runtime_manifest_sha256)
+                          args.runtime_root, args.runtime_manifest_sha256,getattr(args,'runtime_evidence',()))
     verify_queue_path(args.queue, common.ROOT)
     paths.allowed_run(args.asic_run, cfg, 'Report ASIC evidence')
     require(re.fullmatch('[A-Za-z0-9_-]{1,48}',args.session), 'Unsafe report session')
@@ -153,6 +153,7 @@ def main():
     p.add_argument('--unknown-inventory',action='store_true')
     p.add_argument('--runtime-root',type=Path)
     p.add_argument('--runtime-manifest-sha256')
+    p.add_argument('--runtime-evidence',nargs=2,action='append',default=[])
     run(p.parse_args())
 
 
