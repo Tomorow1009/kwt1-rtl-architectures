@@ -1,5 +1,11 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**18:36恢复先读[最新检查点](CONTEXT_CHECKPOINT_20261115_S0_TRANSFER_1836.md)。当前唯一输入exec66349：新Bash终端59行S0完整工具传输，未结束前不要另输VNC命令。** 旧tcsh输入保留未执行，不可闭合；旧T64进程/锁18:30已自然结束。c6aa1e2工具已推送，尚无新S0硬件/EDA通过结果。
+
+**18:31重要恢复入口，覆盖下方传输记录：** 18:30:28实查旧T64父325056/子15147均退出、原锁False，DC已输出mapped.ddc与完成marker；旧队列因预排SIGINT为failed/error空串，属于停止派发，不是综合数值失败。不重启旧队列。S0首个传输29518虽已结束，但tcsh结束符差异使整个脚本未执行；原/tmp/..._1810不存在。旧终端仍保留未完成输入，Ctrl-C未成功取消，不再输入或闭合它（自动审批拒绝闭合残缺脚本）。现已在workspace3打开**新的独立终端，Bash4.2提示符**。FileZilla已关闭，代理DNS公共地址检查失败，未连接FTP。
+
+新完整S0修订包c6aa1e2已推GitHub，正在新Bash终端传输local_runs/s0_direct_c6aa1e2/transfer.ps1，59行，状态同目录transfer_state.json；目标/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-c6aa1e2。payload SHA6c038eefd6301d99fbfcf65a69471e2c9bcba46887ee0241d948f15807b957c2。传输期间禁止另输VNC命令。完成先截图核对S0_INPUTS_PREPARED，再读新manifest和旧队列终态，先跑能力检查，未启动新EDA。桌面T80与旧8路均未动。
+
 **18:12传输中：exec29518正在VNC输入首个S0 overlay，80行状态见local_runs/s0_transfer_1e90782/transfer_state.json。不要向VNC盲输其他命令，先收完传输并截图。1e90782已推送，本地后续还有未提交的S0身份验证及门级/活动入口，首包只用于能力预检，正式综合应等修订包。** 详细恢复步骤见C32_G32_START检查点。原T64最后17:58:25仍综合；桌面T80与旧8路不动。
 
 **最新用户已提供新计划并授权开始，覆盖下方暂停及T64/G64持续路线。** 原文workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md；恢复先读CONTEXT_CHECKPOINT_20261115_C32_G32_START.md。独立工作树E:/fpga_race-two/kwt1-c32-g32-20261115，分支codex/light-light126/t80-pipeline-c32-g32-20261115。最终32PE、面积≤1.00mm²，S0分块综合先行；T80桌面和旧八路不动。

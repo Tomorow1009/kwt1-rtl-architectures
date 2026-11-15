@@ -4094,8 +4094,8 @@
     },
     "visible_readonly_watcher_pid": null,
     "vnc_foreground": "idle shell",
-    "last_observed": "2026-11-15T17:49:08+08:00",
-    "current_status": "retirement_requested_draining_current_synthesis",
+    "last_observed": "2026-11-15T18:30:28+08:00",
+    "current_status": "retired_after_synthesis_no_later_dispatch",
     "current_stage": "synth",
     "batch_tasks_completed": 240,
     "batch_failed": 0,
@@ -4134,14 +4134,17 @@
     "paused_by_user": false,
     "pause_receipt": "/tmp/s4_21usr_t64_20261115_1510/ops-3552163/user_pause_20261115_1724.json",
     "replaced_by_plan": "c32_g32_20261115",
-    "driver_state": "S",
-    "synth_child_state": "R",
-    "retirement_receipt": "/tmp/s4_21usr_t64_20261115_1510/ops-3552163/new_plan_stop_after_child_20261115.json"
+    "driver_state": "absent",
+    "synth_child_state": "absent",
+    "retirement_receipt": "/tmp/s4_21usr_t64_20261115_1510/ops-3552163/new_plan_stop_after_child_20261115.json",
+    "shared_lock_present": false,
+    "raw_synthesis_completed": true,
+    "raw_synthesis_host_seconds": 3598
   },
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_C32_G32_START.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_TRANSFER_1836.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4173,10 +4176,19 @@
     "s0_mapping_server_verified": false,
     "t80_activity_compatibility_tests_passed": 8,
     "transfer": {
-      "session_id": 29518,
-      "lines": 80,
-      "state": "local_runs/s0_transfer_1e90782/transfer_state.json",
-      "purpose": "capability_only; corrected synthesis bundle pending"
-    }
+      "session_id": 66349,
+      "lines": 59,
+      "state": "local_runs/s0_direct_c6aa1e2/transfer_state.json",
+      "payload_sha256": "6c038eefd6301d99fbfcf65a69471e2c9bcba46887ee0241d948f15807b957c2",
+      "runtime_root": "/tmp/s4_21usr_t80_20261115_1830",
+      "bundle": "light-light126-t80-s0-c6aa1e2",
+      "purpose": "new complete S0 tools in explicit Bash terminal"
+    },
+    "acceptance": "workspaces/arch03/ACCEPTANCE_T80_P80_C32_G32_20261115.md",
+    "old_queue_retired": true,
+    "first_transfer_executed": false,
+    "first_transfer_reason": "tcsh quoted heredoc terminator differed; old input left unexecuted",
+    "ftp_connected": false,
+    "ftp_proxy_error": "DNS public address guard rejected result"
   }
 }
