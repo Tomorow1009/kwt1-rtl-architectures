@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_SYNTH_STARTED.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_BATCH20.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -5668,9 +5668,9 @@
       ]
     },
     "current_local_sessions": [
-      18293
+      65394
     ],
-    "last_server_observation": "2026-11-16T05:45:44+08:00 functional02 pid42584 recovery/contention passed, batch20 running. Synthesis waiter47889 waits for full functional completion. Unique input18293 deploys fa43bc2 tools only.",
+    "last_server_observation": "2026-11-16T05:52:54+08:00 functional02 pid42584 batch43/240,1089792 outputs,0failed. Synthesis waiter47889 waiting. Unique VNC input65394 deploys4cf review tools44lines.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5891,10 +5891,13 @@
       "status": "running",
       "current": "batch20",
       "completed": 2,
-      "observed": "2026-11-16T05:45:44+08:00",
+      "observed": "2026-11-16T05:52:54+08:00",
       "controller_sha256": "5feee4584a5c07463c6e7ac380722f6c2c999e8b7e15941156cd5895fbb65d1a",
       "fresh_directory_and_failure_rehearsals_passed": 2,
-      "error": null
+      "error": null,
+      "batch_completed": 43,
+      "batch_outputs": 1089792,
+      "batch_failed": 0
     },
     "p80_ops_transfer7430": {
       "status": "prepared_verified",
@@ -5921,10 +5924,12 @@
       "server_run_started": false
     },
     "p80_ops_transfer_fa43": {
-      "status": "visible_transfer_in_progress",
-      "input_session": 18293,
+      "status": "prepared_verified",
+      "input_session": null,
       "lines": 29,
-      "payload_sha256": "ff9e1e4f14668e2a450421e55206d8ac5011fbfdc83526dcf50d93253ad54e68"
+      "payload_sha256": "ff9e1e4f14668e2a450421e55206d8ac5011fbfdc83526dcf50d93253ad54e68",
+      "manifest_sha256": "7268edcebeb44b2918bbadba72daaec17395eb466f7bae120c083a4d50a63b6d",
+      "files": 942
     },
     "p80_precision_sources_rechecked": {
       "observed": "2026-11-16T05:45:44+08:00",
@@ -5932,6 +5937,17 @@
       "float_sha256": "5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2",
       "numpy_receipt_sha256": "c1fe14065d6919ff337f2cbf53551f94941acc35d04d3cadabca311fe742eacd",
       "new_P80_precision_pass": false
+    },
+    "p80_ops_transfer4cf": {
+      "status": "visible_transfer_in_progress",
+      "input_session": 65394,
+      "lines": 44,
+      "source_commit": "4cf35b6359f48ebaef8bd877fc4a3c00d52b6c5d",
+      "payload_sha256": "ca268afa2d21023324c6fb0d28d8e9ed0f34711a4a67c55cb1fae778e07b421e",
+      "patch_sha256": "2b670e3ec187ccd576695c5a588236f5eb6dc816911aabf497ab5d0159899e8d",
+      "patch_bytes": 14748,
+      "review_tests_passed": 33,
+      "hardware_changed": false
     }
   }
 }
