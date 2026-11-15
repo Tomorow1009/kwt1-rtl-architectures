@@ -1,5 +1,13 @@
 # S0服务器预检接续
 
+**19:19本地修复完成：** s0_partition_synth和partition_synth_contract已改为正常退出Tcl会话读取版本、精确命令选项，并新增原生clock TSV→仅恢复create_clock period/waveform序列化精度的实现；原始导出另存raw，任何大于舍入误差的差异或未知/缺失/重复时钟均拒绝，不改端口时序预算。两个新增测试，相关12项检查通过。下一步提交后生成基于c6包输入的差分overlay，新包新session重试；服务器c6包不可修改。当前VNC新Bash空闲，全部输入结束，cap04过、synth01失败且无在途EDA。空间仍需旧可再生缓存归档与启动连续操作，不能普通GUI先释放再慢慢启动。
+
+**19:16最新结论：** 正式s0_synth01/PID64154于19:09:16.856580启动，19:09:20.175020失败并自然释放原锁，尚未characterize或映射。原因是安装DC的`-version`打印正确版本T-2022.03-SP5-5却退出1；保留tool_version.txt及失败state。本地已修改s0_partition_synth.py：从正常退出的DC Tcl会话启动banner读取完整版本及patch后缀，不放宽ProcessLedger非零退出检查；6项映射测试通过。按安装自带官方手册将characterize改为准确`-constraints`，write_script明确`-format dctcl -nosplit -output`；11项相关检查通过。**这些新工具还未提交/部署，不可改服务器c6冻结包。**
+
+安装手册实际路径/eda/synopsys/dc/dc_2022.03-SP5-5/doc/syn/man/cat2/{characterize,write_script,write_sdc}.2。write_sdc没有-significant_digits选项，不猜测添加。原T80 mapped.sdc实读hf_clk导出period6.66667、waveform0/3.33333，说明导出文本会舍入；S0的精确时钟守卫不能放宽。下一步将边界导出的原生clock period/waveform高精度属性另存，然后只恢复create_clock的序列化精度，保留characterize得到的端口预算和其他约束，测试后新包部署。此前尚未实现该精度恢复。
+
+exec6057已完成，R4最终批量csrc的35普通缓存9,970,979B已完整归档回读并放回共享盘，SHA02e87edaedd8cacb7d5cb4f21ff7136ca24559981151cba01644124248202fe4；原240/1200数据、回执及summary不动。所有当前输入已结束，VNC18874435/workspace3新Bash空闲，旧tcsh未闭合终端仍不要碰；无S0后台EDA存活。当前GitHub头d497c19已推送，版本/语法修复为本地未提交。s0_cap04已真实通过工具marker，cap04 summary完整SHA尚未抄录，后继launcher已在服务器核验state passed与summary匹配。S1–S4未开始。
+
 **19:09优先：** cap04已实际运行DC并输出S0_CAPABILITIES_PRINTED，5秒结束；命令characterize/write_script/read_ddc/compile/report_timing存在，帮助只列命令简介，具体边界脚本仍须实跑。cap04 PID62910；其源/输入预检通过，之前cap01–03失败都保留。R4 metrics14的35份普通编译缓存9,970,277B已完整归档回读并复制回共享盘，SHA7ad3e546fc4c5a7428604c75a70b8322997dbc6e6e92afc64745f0e0587f2a9；原结果/链接/目录未改。共享剩余空间随后又降到1MiB。
 
 当前exec6057正在输入11行新“R4已完成batch编译缓存归档→立即启动S0 synth01”脚本；local_runs/s0_r4_batch_synth/transfer_state.json。脚本handoff/team/evidence/S0_R4_BATCH_CACHE_SYNTH_20261115.py SHA55ef4b2bf15769b990f804b0bd0e965fba6b02528fc6d933193644ae3fa45958，先校验cap04终态/summary，再仅归档旧R4 finish01_final1200/icb32_batch/csrc普通缓存、保留全部1200回执及结果，然后立刻启动冻结c6工具的s0_synth01。**不要并发输入，不要再手动运行synth_command.txt；当前脚本会自动启动。** 完成看takeover_local/s0_r4_batch_synth.png，实际PID记录ops/s0_synth01_launcher.json；主日志ops/s0_synth01.log，状态bundle/runs/s0_synth01/state.json。当前尚未观察到正式映射启动。

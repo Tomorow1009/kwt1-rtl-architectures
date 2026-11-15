@@ -1,5 +1,15 @@
 # S0分块综合实施记录
 
+## 2026-11-15安装工具实查修正
+
+cap04已在安装DC中完成命令能力检查。synth01在版本查询处停止：安装器的`dc_shell -version`打印T-2022.03-SP5-5但退出1。新入口改为正常退出的短Tcl会话，从启动banner读取完整版本及构建后缀；不放宽子进程非零退出检查。原失败目录保留，尚未运行characterize或映射。
+
+已只读核对安装自带doc/syn/man/cat2的characterize、write_script、write_sdc命令说明：使用准确的`characterize -constraints`和`write_script -format dctcl -nosplit -output`。该版write_sdc没有-significant_digits，不能添加猜测的选项。
+
+原T80 mapped.sdc实见时钟period被序列化为6.66667、半周期为3.33333。新工具在characterize后独立记录原生时钟period/waveform高精度属性，保留未经改动的raw脚本，并仅恢复create_clock的两个数字字段。端口输入/输出延迟、负载、时钟不确定度等保持原导出命令；不添加时钟，不另分配完整周期。仅接受与原生属性相差文本舍入量的字段，未知时钟、重复、缺失、异常周期或不支持语法均拒绝。缓存指纹绑定恢复后的约束，raw及原生属性一并保留；实际服务器重载精度守卫仍保留。
+
+版本和精度恢复新增两项测试，涉及的12项分块/约束检查全部通过。修订包部署前不修改任何现有运行输入；S0新综合和后续验证仍未通过。
+
 本文件为新计划的实施细节，不是综合或时序通过证明。T80受测RTL保持876b883，桌面交付目录完全不参与修改。
 
 ## 分块与面积口径

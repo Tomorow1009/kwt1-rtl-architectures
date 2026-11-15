@@ -159,9 +159,17 @@ proc s0_characterize {} {
         if {[sizeof_collection $target] != 1} {error "Missing/ambiguous S0 boundary $block"}
         set name [get_object_name $target]
         set reference [get_attribute $target ref_name]
-        characterize -constraint $target
+        characterize -constraints $target
         current_design $reference
-        redirect ${block}.characterized.tcl {write_script}
+        write_script -format dctcl -nosplit -output ${block}.characterized.tcl
+        set clock_file [open ${block}.native_clocks.tsv w]
+        foreach_in_collection native_clock [all_clocks] {
+            set clock_name [get_object_name $native_clock]
+            set edges [get_attribute $native_clock waveform]
+            if {[llength $edges] != 2} {error "Unexpected characterized waveform"}
+            puts $clock_file "$clock_name\\t[format %.12g [get_attribute $native_clock period]]\\t[format %.12g [lindex $edges 0]]\\t[format %.12g [lindex $edges 1]]"
+        }
+        close $clock_file
         redirect ${block}.characterized_clocks.rpt {report_clock}
         redirect ${block}.characterized_ports.rpt {report_port -verbose}
         puts $inventory "$block\\t$name\\t$reference\\t[sizeof_collection [all_inputs]]\\t[sizeof_collection [all_outputs]]"

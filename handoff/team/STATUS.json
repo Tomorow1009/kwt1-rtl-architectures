@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_synthesis_launcher_transfer",
+    "current_stage": "S0_tool_compatibility_fix_ready_to_package",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4233,7 +4233,7 @@
     "capability_attempt04": {
       "session": "s0_cap04",
       "pid": 62910,
-      "status": "DC_marker_observed",
+      "status": "passed_server_state_verified_by_synth_launcher",
       "mapping_started": false,
       "tool_elapsed_seconds": 5
     },
@@ -4243,7 +4243,17 @@
       "input_session": 6057,
       "lines": 11,
       "target_session": "s0_synth01",
-      "automatically_launches_after_archive": true
-    }
+      "automatically_launches_after_archive": true,
+      "status": "finished_launched"
+    },
+    "synth_attempt01": {
+      "pid": 64154,
+      "status": "failed_before_characterization",
+      "reason": "Installed dc_shell -version returns 1 with valid version",
+      "started": "2026-11-15T19:09:16.856580",
+      "finished": "2026-11-15T19:09:20.175020",
+      "lock_released": true
+    },
+    "latest_changed_tool_tests_passed": 12
   }
 }

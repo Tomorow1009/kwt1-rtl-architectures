@@ -64,7 +64,8 @@ class PartitionTests(unittest.TestCase):
 
     def test_characterization_uses_single_top_clock_and_real_boundary_context(self):
         text=c.characterize_script('/run/frozen.ddc','/run/task_mode.sdc','/run/libs.tcl')
-        self.assertIn('characterize -constraint $target',text)
+        self.assertIn('characterize -constraints $target',text)
+        self.assertIn('write_script -format dctcl -nosplit -output',text)
         self.assertIn('6.666666',text)
         self.assertNotIn('create_clock',text)
         self.assertNotIn('set_false_path',text)

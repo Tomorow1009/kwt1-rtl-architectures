@@ -6,6 +6,22 @@ import s0_partition_synth as s
 
 
 class S0MappingTests(unittest.TestCase):
+    def test_native_clock_precision_restoration_retains_boundary_constraints(self):
+        native='hf_clk\t6.666666031\t0\t3.3333330155\nlf_clk\t66\t0\t33\n'
+        raw='set_input_delay -clock hf_clk 1.76543 [get_ports cmd]\ncreate_clock [get_ports clk] -name "hf_clk" -period 6.66667 -waveform {0 3.33333}\ncreate_clock -name lf_clk -period 66 -waveform {0 33} [get_ports lf]\nset_clock_uncertainty 0.1 [get_clocks hf_clk]\n'
+        exact=s.restore_clock_precision(raw,native)
+        self.assertEqual(exact.replace('6.666666031','6.66667').replace('3.3333330155','3.33333'),raw)
+        self.assertEqual(s.restore_clock_precision(exact,native),exact)
+        for bad in (raw.replace('6.66667','7.0'),raw+raw,raw.replace('-name "hf_clk"','-name unknown'),raw.replace('-waveform {0 3.33333}','')):
+            with self.assertRaises(ValueError):s.restore_clock_precision(bad,native)
+        with self.assertRaises(ValueError):s.restore_clock_precision(raw,native.replace('6.666666031','6.667'))
+
+    def test_dc_startup_version_retains_build_and_rejects_ambiguity(self):
+        self.assertEqual(s.tool_version_from_banner('Version T-2022.03-SP5-5 for linux64'), 'T-2022.03-SP5-5')
+        self.assertEqual(s.tool_version_from_banner('Version Q-2020.03-SP2\nVersion Q-2020.03-SP2'), 'Q-2020.03-SP2')
+        for bad in ('dc_shell version - T-2022.03-SP5-5', 'Version T-2022.03-SP5\nVersion T-2022.03-SP5-5'):
+            with self.assertRaises(ValueError): s.tool_version_from_banner(bad)
+
     def test_child_compare_checks_connection_changes_and_duplicate_definitions(self):
         with tempfile.TemporaryDirectory() as d:
             a=Path(d)/'a.v';b=Path(d)/'b.v'

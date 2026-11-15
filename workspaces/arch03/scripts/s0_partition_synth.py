@@ -4,6 +4,7 @@ S0 only: unchanged T80 RTL and baseline link may be reused after full input
 identity checks. Every output lives in a new run; none is a timing PASS.
 """
 import json
+import math
 from pathlib import Path
 import re
 import shutil
@@ -212,6 +213,67 @@ def characterize_inventory(path):
     return rows
 
 
+def tool_version_from_banner(text):
+    """Use a successfully exited DC session, preserving the full patch suffix.
+
+    This installation prints valid version information for -version but exits 1.
+    Do not weaken the process ledger's nonzero-exit failure rule to accept it.
+    """
+    versions = re.findall(r'Version\s+([A-Z]-20\d\d\.\d\d(?:-SP\d+)?(?:-\d+)?)\b', text)
+    require(len(set(versions)) == 1, 'Cannot identify exact DC version from startup banner')
+    return versions[0]
+
+
+def restore_clock_precision(exported, native):
+    """Undo decimal serialization rounding, retaining every boundary delay.
+
+    Native attributes come from the characterized design under the exact top
+    constraints. No clock is added and no non-clock command is changed.
+    Unknown script forms fail rather than silently restoring a default budget.
+    """
+    clocks = {}
+    for line in native.splitlines():
+        fields = line.split('\t')
+        require(len(fields) == 4 and fields[0] not in clocks, 'Invalid native clock inventory')
+        name = fields[0]
+        require(name in ('hf_clk', 'lf_clk'), 'Unreviewed characterized clock')
+        numbers = [float(x) for x in fields[1:]]
+        require(all(math.isfinite(x) for x in numbers), 'Nonfinite native clock')
+        period, first, second = numbers
+        expected = 6.666666 if name == 'hf_clk' else 66.0
+        require(abs(period-expected) <= 1e-7 and 0 <= first < second < period,
+                'Native characterized clock differs from top clock')
+        clocks[name] = fields[1:]
+    require('hf_clk' in clocks, 'Missing native HF clock')
+    seen = set(); lines = []
+    number = r'[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?'
+    for line in exported.splitlines(keepends=True):
+        if not re.match(r'^\s*create_clock\b', line):
+            require(not re.match(r'^\s*create_generated_clock\b', line), 'Generated boundary clock needs explicit review')
+            lines.append(line); continue
+        names = re.findall(r'-name\s+(?:"([^"]+)"|\{([^}]+)\}|([^\s]+))', line)
+        require(len(names) == 1, 'Missing/ambiguous exported clock name')
+        name = next(x for x in names[0] if x)
+        require(name in clocks and name not in seen, 'Unexpected or repeated exported clock')
+        period, first, second = clocks[name]
+        p = re.findall(r'-period\s+('+number+r')(?=\s|$)', line)
+        w = re.findall(r'-waveform\s+\{\s*('+number+r')\s+('+number+r')\s*\}', line)
+        require(len(p) == len(w) == 1, 'Unsupported exported clock syntax')
+        # DC's six-significant-digit writer may round; large discrepancies are
+        # configuration changes and must not be repaired by this serializer.
+        for serialized, actual in zip([p[0]]+list(w[0]), clocks[name]):
+            require(abs(float(serialized)-float(actual)) <= max(1e-5,abs(float(actual))*1e-5),
+                    'Clock discrepancy is more than serialization rounding')
+        line, count = re.subn(r'-period\s+'+number+r'(?=\s|$)', '-period '+period, line)
+        require(count == 1, 'Ambiguous clock period replacement')
+        line, count = re.subn(r'-waveform\s+\{\s*'+number+r'\s+'+number+r'\s*\}',
+                             '-waveform {'+first+' '+second+'}', line)
+        require(count == 1, 'Ambiguous clock waveform replacement')
+        lines.append(line); seen.add(name)
+    require(seen == set(clocks), 'Incomplete exported clock inventory')
+    return ''.join(lines)
+
+
 def execute(cfg, run, origin, call):
     run=Path(run); origin=Path(origin).resolve()
     require(not any(run.iterdir()), 'S0 requires a new empty run')
@@ -228,12 +290,13 @@ def execute(cfg, run, origin, call):
     for name in ('s0_partition_synth.py','partition_synth_contract.py','s0_server.py'):
         path=Path(__file__).with_name(name).resolve();linked_inputs[str(path)]=digest(path)
     save(run/'source_inputs.json',linked_inputs)
-    version = call([cfg['tools']['dc_shell'], '-version'], run, 'tool_version.txt')
-    versions = re.findall(r'(?:Version\s*[: ]\s*)?([A-Z]-20\d\d\.\d\d(?:-SP\d+)?)', version)
-    require(len(set(versions)) == 1, 'Cannot identify DC version')
-    original_version = re.findall(r'Version\s+([A-Z]-20\d\d\.\d\d(?:-SP\d+)?)', (origin/'icb32_synth.log').read_text())
-    require(set(original_version) == set(versions), 'Original mapping used another DC version')
-    tool = dict(version=versions[0], executable_sha256=digest(Path(cfg['tools']['dc_shell']).resolve()))
+    (run/'tool_version.tcl').write_text('puts "S0_TOOL_VERSION_READY"\nquit\n')
+    version = call([cfg['tools']['dc_shell'], '-f', run/'tool_version.tcl'], run, 'tool_version.txt')
+    soc_synth.require_tool_marker(version, 'S0_TOOL_VERSION_READY')
+    actual_version = tool_version_from_banner(version)
+    original_version = tool_version_from_banner((origin/'icb32_synth.log').read_text())
+    require(original_version == actual_version, 'Original mapping used another DC version')
+    tool = dict(version=actual_version, executable_sha256=digest(Path(cfg['tools']['dc_shell']).resolve()))
     character = run/'characterization'; character.mkdir()
     script = characterize_script(origin/'mapped.ddc', run/'task_mode.sdc', run/'libraries.tcl')
     (character/'characterize.tcl').write_text(script)
@@ -241,6 +304,18 @@ def execute(cfg, run, origin, call):
     soc_synth.require_tool_marker(log, 'S0_CHARACTERIZATION_READY not_mapping_or_acceptance=true')
     identities = characterize_inventory(character/'characterized_blocks.tsv')
     save(run/'boundaries.json', identities)
+    precision_receipt = {}
+    for block in BLOCKS:
+        exported = character/(block+'.characterized.tcl')
+        original = character/(block+'.characterized.raw.tcl')
+        native = character/(block+'.native_clocks.tsv')
+        raw = exported.read_text()
+        exact = restore_clock_precision(raw, native.read_text())
+        original.write_text(raw); exported.write_text(exact)
+        precision_receipt[block] = dict(raw_sha256=digest(original), exact_sha256=digest(exported),
+            native_clock_sha256=digest(native), boundary_delays_modified=False,
+            operation='restore only create_clock period/waveform from native characterized attributes')
+    save(run/'clock_serialization.json', precision_receipt)
     library_hashes = {str(p): digest(p) for p in (origin/'libs').glob('*.db')}
     timing = {}; fingerprints = {}
     for block in ('shared_sram', 'accelerator', 'cpu_soc'):
