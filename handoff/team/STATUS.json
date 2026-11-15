@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FIRST_CPU.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_SYNTH_STARTED.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -5667,10 +5667,8 @@
         }
       ]
     },
-    "current_local_sessions": [
-      30194
-    ],
-    "last_server_observation": "2026-11-16T04:41:01+08:00 sweep05 pid324565 lock owner324565 running depth4 fixed14; completed0/errorNone; B0 compiler cache archive verified; new ops input30194 in progress.",
+    "current_local_sessions": [],
+    "last_server_observation": "2026-11-16T05:08:18+08:00 p80_selected_synth01 pid27509 running depth2; original shared lock owner27509; all VNC input sessions ended. No final PPA observed.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5794,23 +5792,77 @@
     },
     "p80_sweep05": {
       "pid": 324565,
-      "status": "running",
-      "current": "p80_fixed_d4_05",
-      "completed": 0,
-      "last_observed": "2026-11-16T04:41:01+08:00",
-      "shared_lock_owner": 324565
+      "status": "completed",
+      "current": null,
+      "completed": 3,
+      "last_observed": "2026-11-16T04:58:41+08:00",
+      "shared_lock_owner": null
     },
     "p80_ops_transfer854": {
-      "status": "visible_transfer_in_progress",
-      "input_session": 30194,
+      "status": "prepared_verified",
+      "input_session": null,
       "lines": 89,
-      "source_commit": "8543440d625144b5034d8bb8094e530ad4bf6458"
+      "source_commit": "8543440d625144b5034d8bb8094e530ad4bf6458",
+      "manifest_sha256": "42ff74ed50d2da1b348bf69c7750ac231da5a83166519d2c700d43260e681850",
+      "files": 938
     },
     "p80_selected_synth_launcher": {
-      "status": "prepared_not_executed",
+      "status": "running",
       "controller_sha256": "0114a53c16a87afda1fff2342e096989d6b4f8314c14dfb1e89c0271ae055e3a",
       "area_qualified": false,
+      "stage_accepted": false,
+      "pid": 27509,
+      "session": "p80_synth_d2_01",
+      "bundle": "light-light126-p80-8543440",
+      "selected_depth": 2,
+      "observed": "2026-11-16T05:08:18+08:00"
+    },
+    "p80_performance_depths": {
+      "depths": [
+        2,
+        4,
+        8
+      ],
+      "each_fixed14_passed": true,
+      "outputs_per_depth": 354816,
+      "cycles_each_depth": [
+        80471,
+        78357,
+        77223,
+        77503,
+        76061,
+        74997,
+        73765,
+        74101,
+        73793,
+        76537,
+        80625,
+        87111
+      ],
+      "cycles_sum12": 930544,
+      "mean_cycles": 77545.33333333333,
+      "nominal_150MHz_task_per_second": 1934.3523788235698,
+      "provisional_smallest_depth": 2,
+      "area_qualified": false,
       "stage_accepted": false
+    },
+    "p80_space_recovery08": {
+      "status": "completed",
+      "files": 38,
+      "bytes": 65971564,
+      "archive_sha256": "fa4ee769a8689c877147b5bf59130173b36ba0cde7d684ba55426bd6cb4c8236",
+      "persistent_verified": true,
+      "old8_modified": false,
+      "protected_T80_modified": false
+    },
+    "p80_d2_diagnostic_firmware": {
+      "sequence": "local_runs/p80_sequence_firmware_d2_20261116",
+      "contention": "local_runs/p80_contention_firmware_d2_20261116",
+      "status": "compiled_only",
+      "cpu_executed": false,
+      "package_prepared": false,
+      "package_tool_commit": "e139032",
+      "package_tests_passed": 3
     }
   }
 }

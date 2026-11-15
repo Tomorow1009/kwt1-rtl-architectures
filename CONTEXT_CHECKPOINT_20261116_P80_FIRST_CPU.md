@@ -1,5 +1,14 @@
 # P80首个真实CPU任务通过；共享空间与串行队列恢复
 
+## 04:52恢复提示：后继工具与精度输入
+
+- 当前仍唯一输入30194（854独立工具包89行；04:51已46行），不能并发键入。sweep05最后实际观察04:41:01父/锁324565运行depth4；不要根据经过时间猜测已完成。下一步先收完整transfer，再读取三深度终态及854准备回执。
+- 最新已push6b18024；后继新综合启动器本地15行，尚未部署/执行。controller SHA **0114a53c16a87afda1fff2342e096989d6b4f8314c14dfb1e89c0271ae055e3a**，实际93行LF，不使用CRLF文件SHA作为服务器脚本SHA。
+- 精度输入不能误用最初未取得的原ZIP容器SHA edb98e1d：有效来源是`exact_original_npz_members`，100个原NPZ及共享W/b字节已与原manifest匹配。新容器`n1-recovered-float100-20261113.zip` 143,258,826B，SHA **5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2**。共享源在原项目目录；历史private副本在`/tmp/s4_21usr_n1_20261113_0210/n1_precision_inputs_20261113_0840`。后续先只读核实仍存在和SHA，不重复上传或把容器字节说成原ZIP相同。
+- NumPy历史private目录`/tmp/s4_21usr_n1_20261113_0210/n1_numpy1195_20261113_0905`，488成员已核验、版本1.19.5，receipt SHA c1fe14065d6919ff337f2cbf53551f94941acc35d04d3cadabca311fe742eacd。当前是否存在仍须只读确认；精度父进程需明确sys.path和单线程环境，不修改系统Python。数据入口仍Desktop/IC/hex_short_all，正式仅前20。
+- P80精度入口先要求自身ASIC240，再重新执行t80_precision纯数值复算并连接自身回执，不引用旧硬件PASS。
+
+
 ## 04:44最新：缓存已归档，sweep05真实运行；854工具包传输中
 
 - **唯一VNC输入30194**：local_runs/p80_ops_transfer_8543440_20261116/transfer.ps1共89行，04:43本地state为13行；不要并发输入或重跑。先收完整传输与服务器准备回执，再读队列。

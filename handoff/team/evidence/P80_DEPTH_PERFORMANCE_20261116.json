@@ -1,0 +1,43 @@
+{
+  "schema": "p80-displayed-fixed12-depth-comparison-v1",
+  "observed": "2026-11-16T04:58:41+08:00",
+  "source_commit": "142fae28545759e33fa38de514eabf752cb8c43a",
+  "bundle_manifest_sha256": "7017da04075aea98b7a9dfe414e41621d3974fb43709d542d42ac6b0f43920fc",
+  "server_root": "/tmp/s4_21usr_p80_20261116_0315",
+  "queue_receipt": "p80_sweep05.json",
+  "server_summary_hashes_location": "p80_sweep05.json completed[].summary_sha256",
+  "display_evidence": "E:/fpga_race-two/takeover_local/p80_depths_final_status.png",
+  "result": {
+    "depths": [
+      2,
+      4,
+      8
+    ],
+    "each_fixed14_passed": true,
+    "outputs_per_depth": 354816,
+    "cycles_each_depth": [
+      80471,
+      78357,
+      77223,
+      77503,
+      76061,
+      74997,
+      73765,
+      74101,
+      73793,
+      76537,
+      80625,
+      87111
+    ],
+    "cycles_sum12": 930544,
+    "mean_cycles": 77545.33333333333,
+    "nominal_150MHz_task_per_second": 1934.3523788235698,
+    "provisional_smallest_depth": 2,
+    "area_qualified": false,
+    "stage_accepted": false
+  },
+  "full240_completed": false,
+  "power_measured": false,
+  "old8_modified": false,
+  "protected_T80_modified": false
+}
