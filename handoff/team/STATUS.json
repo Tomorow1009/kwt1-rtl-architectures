@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 local numeric/protocol/14-case/sequence/latency2 checks passed; preparing independent server bundle",
+    "current_stage": "P80 immutable 142fae2 functional bundle transferring; no P80 server task launched",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5693,12 +5693,13 @@
       "mapped_netlist_tested": false,
       "cpu_executed": false,
       "full_observer_elaborated_only": true,
-      "tool_contract_tests": 10,
+      "tool_contract_tests": 12,
       "python36_syntax_files": 41,
       "local_failed_run": "local_runs/p80_gate_observer_20261116_032531_824245",
       "failure": "XSim Tcl absolute Windows path interpreted backslash escapes; fixed slash path, rerun in fresh directory passed",
       "protected_delivery_modified": false,
-      "old8_modified": false
+      "old8_modified": false,
+      "fresh_link_library_inputs_bound": true
     },
     "p80_transfer_142fae2": {
       "status": "typing_in_progress",
@@ -5708,6 +5709,13 @@
       "target": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2",
       "payload_sha256": "ae9ac56a16fdef489c508368fd224082bbb6b1cb1e4d7fc319d880a3c6a7b3a8",
       "eda_started": false
+    },
+    "p80_precision_tools": {
+      "status": "local_only_2_negative_scope_checks_passed",
+      "own_asic240_required": true,
+      "fresh_same_FLOAT_recompute_required": true,
+      "server_run": null,
+      "script": "workspaces/arch03/scripts/p80_precision_join.py"
     }
   }
 }

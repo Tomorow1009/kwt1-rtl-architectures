@@ -19,14 +19,15 @@ from n1_process import ProcessLedger
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('stage',choices=('status','synth','gate','structure','timing_audit','drc_audit','saif','power'))
+    p.add_argument('stage',choices=('status','synth','gate','structure','timing_audit','drc_audit','saif','power','precision'))
     p.add_argument('--session',required=True)
     p.add_argument('--platform',type=Path,default=Path('/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master'))
     p.add_argument('--firmware-root',type=Path)
     p.add_argument('--budget-origin',type=Path)
-    for role in ('synth','gate','activity','qualification'):
+    for role in ('synth','gate','activity','qualification','batch'):
         p.add_argument('--'+role+'-run',type=Path);p.add_argument('--'+role+'-sha256')
     p.add_argument('--layer',choices=['layer_%02d'%i for i in range(1,13)])
+    p.add_argument('--archive',type=Path);p.add_argument('--archive-sha256');p.add_argument('--dataset',type=Path)
     p.add_argument('--runtime-root',type=Path,required=True);p.add_argument('--runtime-manifest-sha256',required=True)
     p.add_argument('--runtime-evidence',nargs=2,action='append',default=[])
     a=p.parse_args();require(re.fullmatch('[A-Za-z0-9_-]{1,64}',a.session),'Invalid fresh session')
@@ -40,11 +41,14 @@ def main():
     require(not session.exists(),'Preserve previous attempt; use a new session')
     if a.stage=='synth':require(a.budget_origin is not None,'Explicit pinned S0 budget origin required')
     for role,stages in (('synth',('gate','structure','timing_audit','drc_audit')),
-                        ('gate',('saif',)),('qualification',('saif',)),('activity',('power',))):
+                        ('gate',('saif',)),('qualification',('saif',)),('activity',('power',)),('batch',('precision',))):
         if a.stage in stages:
             require(getattr(a,role+'_run') is not None and re.fullmatch('[a-f0-9]{64}',getattr(a,role+'_sha256') or ''),
                 'Explicit '+role+' run and SHA256 required')
     if a.stage=='power':require(a.layer is not None,'Select one immutable activity layer')
+    if a.stage=='precision':
+        require(a.archive is not None and a.dataset is not None and re.fullmatch('[a-f0-9]{64}',a.archive_sha256 or ''),
+            'Precision requires explicit same-data FLOAT archive, SHA256 and dataset')
     packaged=common.inputs()
     for name in ('p80_eda_server.py','p80_paths.py','p80_validation.py','p80_partition_synth.py','p80_link.py','n1_process.py'):
         relative='workspaces/arch03/scripts/'+name
@@ -82,9 +86,12 @@ def main():
             elif a.stage=='saif':
                 from p80_saif import verify
                 report=verify(cfg,run,a.gate_run,a.gate_sha256,a.qualification_run,a.qualification_sha256,layers,ledger.call)
-            else:
+            elif a.stage=='power':
                 from p80_power import estimate
                 report=estimate(cfg,run,a.activity_run,a.activity_sha256,a.layer,ledger.call)
+            else:
+                from p80_precision_join import verify
+                report=verify(cfg,run,a.batch_run,a.batch_sha256,a.archive,a.archive_sha256,a.dataset)
             common.inputs();p80_paths.recheck(cfg)
             report['temporary_storage_is_final_delivery']=False
             common.save(run/'summary.json',report);record.update(status='passed',summary_sha256=common.sha(run/'summary.json'))

@@ -102,6 +102,7 @@ def source_contract(cfg,run,platform_source,firmware,call):
         expected_macros={'RAMSP128X16':92,'RAMSP4096X16':128},
         source_inputs_sha256=digest(run/'source_inputs.json'),linked_ddc_sha256=digest(run/'linked.ddc'),
         firmware_manifest_sha256=digest(firmware/'manifest.json'),area_basis=basis,
+        library_inputs={str(p):digest(p) for p in lib_inputs},
         libraries={str(p):digest(p) for p in [standard]+databases},
         mapped=False,stage_accepted=False)
     (run/'link_receipt.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')

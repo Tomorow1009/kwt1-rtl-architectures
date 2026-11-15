@@ -1,5 +1,14 @@
 # P80本地收敛，准备独立服务器验证 — 2026-11-16 03:05
 
+## 03:44 最新恢复指针
+
+- **唯一活动输入仍是exec15378**，`local_runs/p80_transfer_142fae2_0315/transfer.ps1`总202行；03:43:42为126/202，读state后继续收原会话，绝不重跑/并发VNC键入。Bash仍接收完整here-document，尚未执行准备脚本，没有P80服务器作业。
+- 本地EDA工具与记录已commit并push **6caefe6b69c8a04e131f3c0244065cafcfd6b7db**。这不改变正在传的142fae2功能包。
+- 本地`p80_overlay_6caefe6_20261116`为106文件；payload SHA4ff50204379a6cf024b3588be27688786688abc91ddcf83220af2c6dc1418164。相对142原payload仅22文件变化的无损patch已本地整JSON回读一致：42668字节、SHA86ad3ae8b61bad3f47f82d38aaa5e83b3341ad7e8c624a52cac5bcf4624c0008，**未部署**。先不传它；后加精度入口还需新提交和新包。
+- 后加未提交内容：`p80_precision_join.py`、`test_p80_precision.py`、`p80_eda_server.py`的precision阶段。只接受自己前20条ASIC240的逐项回执，调用保持原样的t80_precision软件重新计算同批浮点，再连接新P80输出；2项拒绝旧T80/全100/纯软件PASS检查通过，3.6语法及import通过。此入口尚未服务器执行。
+- 本地串行测试启动器`local_runs/p80_transfer_142fae2_0315/sweep01_server.py`，SHA315aff3fe2622260a17a07dc76d0a33019625f4f2d02fa8f567d4aa935b3a887，**未部署/未启动**。计划顺序：pilot_d4首层→fixed_d4/2/8各12层；任何失败停止派发。每子阶段沿用共享ProcessLedger锁；支持root/p80_sweep01.stop在阶段之间停派。先等完整准备回执和新鲜锁/进程检查再启动。
+- 60868为门级工具首次失败会话，84324为修复后通过，均退出。无其他本地仿真会话，只有15378持续输入。桌面T80和全部旧八路不动；S0完成，不重复旧作业；C80/C32/G32未开始。
+
 ## 03:15 实际传输进行中（优先于下方旧状态）
 
 142fae28545759e33fa38de514eabf752cb8c43a已提交并推送。完整87文件payload已生成，本地SHA为ae9ac56a16fdef489c508368fd224082bbb6b1cb1e4d7fc319d880a3c6a7b3a8。另用长度前缀＋原始字节＋XZ无损封装，132124字节、SHA369f009655205d866a153584480209f43e21b759b266af78872433b64a587338，解包后整个JSON逐字节一致。没有采用早先wire差分实验，实验文件仅留本地，不部署。
