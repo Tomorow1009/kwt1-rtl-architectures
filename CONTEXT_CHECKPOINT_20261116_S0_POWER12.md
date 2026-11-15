@@ -1,10 +1,19 @@
 # S0完整功耗已获得，正在汇总 — 2026-11-16
 
+**01:59:38最新实查：全12未知清单、连接、别名和模型快照已完成，export193002/检查218088及子进程均退出，团队锁释放，VNC终端空闲。S0声明任务模式/布局前估算的技术结论通过，待copy-only归档回读后冻结，S1尚未改硬件。先读`workspaces/arch03/S0_STAGE_REPORT_20261116.md`及`handoff/team/evidence/S0_STAGE_CONCLUSION_20261116.json`。**
+
+- 模型快照SHA `351bc89a8707b409897887290a9201e79ba54b427aec9e74dd284f15331ee32d`，全部2444未直接解析名称均分类，未知显式控制引脚0；12层活动注释完整，220宏覆盖。
+- **哈希转录纠正：** 正确report SHA为`65c471298fe5109ed4f246df573422cbd9434e15c5f9f4d42ef4b5b9caa3f48c`。旧本地索引首部多写c、末尾漏c；一次只读查询因此AssertionError，已纠正本地记录，原服务器报告从未更改。
+- 全12禁用弧实际均为C72218/c12145/d201/p59255，总143819。旧首层148318及其分项为本地屏幕转录错误，由完整表核对更正，原服务器表不动。
+- 新copy-only启动器`handoff/team/evidence/S0_COPY_ARCHIVE_20261116.py`已本地Python3.6语法核对，尚未部署或执行；沿用已部署e516e4c归档工具，外部cwd和日志，完整回读，源不删。
+- 最新空间/tmp 92,301,160,448 B、storage2 12,073,304,064 B；归档工具须再次按真实压缩量检查20%余量及2GiB保留，不清旧证据。
+- 最新输入83216/90179/50559/12160均已结束；前台旧watcher241373自然退出，当前Bash空闲。VNC18874435/workspace3、FileZilla关闭；桌面T80及旧八路不动。
+
 **01:39:39最新实查：S0报告已完整导出；export转为unknown_inventory子239612运行，L01/02未知清单已完成（40699/40689项）。当前前台只读watcher241373；export193002与检查等待218088保持。46642/56100及此前输入全部结束，S0未冻结、S1未开发，保护目录不动。**
 
 报告目录：`66b9496/runs/s0_report01/t80_s0_report`，JSON7,231,534B、tasks.csv4035B、summary.csv366B、report_zh.md4103B、receipt.json414B。新的小型转录索引为`handoff/team/evidence/S0_REPORT_EXPORT_SNAPSHOT_20261116.json`。
 
-- report SHA：`65cc471298fe5109ed4f246df573422cbd9434e15c5f9f4d42ef4b5b9caa3f48`。
+- report SHA：`65c471298fe5109ed4f246df573422cbd9434e15c5f9f4d42ef4b5b9caa3f48c`。
 - receipt SHA：`603fc47473341acebd2b1bc59a528a3526fd8a5d9647f221d29f8d6eacd1d667`。
 - S0新最终网表 SHA：`8ec59cc89847f18713e7504dc4d7e35eeb491432490209102764165d4409ff12`。
 - 报告确认112569周期/1332.5160568184847task/s，功耗/能耗与上次12层直接汇总一致；ASIC14、gate14、final240、activity12、power12及两组内部精度字段为真。
@@ -35,7 +44,7 @@
 - 小型证据`handoff/team/evidence/S0_POWER12_SNAPSHOT_20261116.json`；截图`s0_power12_values_0118.png`。完整功耗约50.2404mW、37.7034µJ，相对原T8050.231619870716627mW约+0.017426%。均布局前估算，独立活动/模型事实汇总还在进行，S0尚未冻结。
 - **转录更正**：首层实际`0.0501344018 W`。早先本地/口头`0.051344018 W`是屏幕数值转录错误，已向用户更正并修STATUS；服务器原报告从未改动。首层不是12层均值。
 - 时序/结构独立读取见`S0_SYNTH_REVIEW_SNAPSHOT_20261116.json`及`S0_STRUCTURE_REVIEW_SNAPSHOT_20261116.json`。DDC高扇出清单3个时钟网络，与初始TIM-134的4个计数差异保留；不能伪称已消除该警告。未细分面积0.1609004207998941mm²仍全部计入保守上界。
-- 首层PT完整表189无时钟引脚均静态JTAG，148318禁用弧仅c/C/d/p；全12的同类检查由后续模型工具执行。已完成前6层stdout日志哈希和错误前缀检查，redirect报告的警告另审。
+- 首层PT完整表189无时钟引脚均静态JTAG；完整12层禁用弧均143819，仅c/C/d/p（更正早期转录，见顶部）。已完成前6层stdout日志哈希和错误前缀检查，全部12层原工具的错误拒绝及redirect报告核对已完成。
 
 ## 当前实际进程与下一步
 

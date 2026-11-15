@@ -1,0 +1,45 @@
+{
+  "schema": "s0-independent-review-displayed-snapshot-v1",
+  "observed_at": "2026-11-16T01:59:38+08:00",
+  "server_review_control": "/tmp/s4_21usr_t80_20261115_1830/ops-66b9496/s0_review01_control",
+  "server_snapshot_sha256": "351bc89a8707b409897887290a9201e79ba54b427aec9e74dd284f15331ee32d",
+  "connections_sha256": "8f965fb40a6c4c97d39ded96a0da59490bdc15c7c1c78c7e1ca49f729f428783",
+  "aliases_sha256": "136de3252441b294de13eb6d9bc903723f307609035115682086f25c476ef436",
+  "model_tool_sha256": "d919784083c2164d4ea2c163ecd5eb7f3642d4358b6c1200cbea5bae9819b160",
+  "report_sha256": "65c471298fe5109ed4f246df573422cbd9434e15c5f9f4d42ef4b5b9caa3f48c",
+  "layers": 12,
+  "layer_inventory_complete": true,
+  "unknown_rows_per_layer_range": [40565,40768],
+  "unknown_review": {
+    "targets": 40798,
+    "resolved": 38354,
+    "classified_missing_names": 2444,
+    "alias_counts": {
+      "absent_DDC_net_and_no_local_expression": 1787,
+      "exported_dummy_absent_DDC_net_driver_power_not_exempt": 499,
+      "simple_wire_alias_to_linked_net": 158
+    },
+    "unique_leaf_endpoints": 65243,
+    "unknown_explicit_control_pins": [],
+    "driver_internal_power_exempted": false,
+    "all_unknowns_waived": false
+  },
+  "all12_same_clock_groups": {"static_jtag_dtm":186,"static_jtag_reset_sync":3},
+  "all12_same_disabled_arc_flags": {"C":72218,"c":12145,"d":201,"p":59255},
+  "all12_same_activity_sources": {"exact_mapping":374570,"isolated_default":1265,"total":375835,"not_annotated":0},
+  "isolated_defaults_proof": "PT all_connected direct and leaf collections both empty for every exact missing net; no activity values modified",
+  "sram_macros": {"accelerator":92,"dtcm":32,"itcm":32,"shared":64},
+  "settings": {"power_analysis_mode":"averaged","power_include_initial_x_transitions":"false","power_x_transition_derate_factor":"0.5"},
+  "base_units": {"Capacitive_load_unit":"1e-12 Farad","Time_unit":"1e-09 Second","Voltage_unit":"1 Volt"},
+  "unknown_representation": "VCS combined TX X-or-Z; not separately measured",
+  "all_helpers_exited": true,
+  "team_lock_present_at_observation": false,
+  "free_bytes_at_observation": {"/tmp":92301160448,"/storage2":12073304064},
+  "physical_power_error_bound_proved": false,
+  "source_modified": false,
+  "protected_T80_or_old8_modified": false,
+  "transcription_corrections": [
+    "The previous local report SHA began 65cc4712 and omitted the terminal c. Correct identity is the bound server receipt value shown above; one read-only query rejected the mistyped SHA before reading reports. No server report was modified.",
+    "Earlier single-layer disabled-arc counts were a local transcription error; all twelve complete tables have the counts recorded here. Original server timing tables are unchanged."
+  ]
+}
