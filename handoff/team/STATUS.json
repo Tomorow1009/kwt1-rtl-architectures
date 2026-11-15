@@ -5670,14 +5670,8 @@
         }
       ]
     },
-    "current_local_sessions": [
-      {
-        "session_id": 73879,
-        "kind": "visible_vnc_input",
-        "lines": 20
-      }
-    ],
-    "last_server_observation": "2026-11-16T07:23:29+08:00",
+    "current_local_sessions": [],
+    "last_server_observation": "2026-11-16T07:31:10+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6149,7 +6143,7 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T07:23:29+08:00",
+      "observed_at": "2026-11-16T07:31:10+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
@@ -6158,7 +6152,10 @@
       "current_block": "accelerator",
       "child_pid": 98857,
       "child_pid_transcription_corrected": true,
-      "current_log_actual_errors": 0
+      "current_log_actual_errors": 0,
+      "child_elapsed_seconds": 704,
+      "child_cpu_percent": 99.6,
+      "child_rss_kib": 8599916
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6167,6 +6164,24 @@
       "source_sha256": "952242ef4a1ea2b9ee5bcde89ec0cd4b4c48f2bd504a55ae8a3f1031a31fee4b",
       "stage_accepted": false,
       "c80_started": false
+    },
+    "p80_live_snapshot": {
+      "observed_at": "2026-11-16T07:31:10+08:00",
+      "status": "synthesis_running",
+      "parent_pid": 95253,
+      "child_pid": 98857,
+      "exporter_pid": 96154,
+      "own_fixed14_three_depths_passed": true,
+      "own_recovery_contention_batch20_passed": true,
+      "own_batch_tasks": 240,
+      "own_batch_outputs": 6082560,
+      "own_current_hardware_real_E203_tested": true,
+      "own_current_hardware_original_fabric_tested": true,
+      "final_netlist_ready": false,
+      "stage_accepted": false,
+      "c80_started": false,
+      "protected_T80_modified": false,
+      "old8_modified": false
     }
   }
 }
