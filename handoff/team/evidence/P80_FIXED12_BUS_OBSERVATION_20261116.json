@@ -1,0 +1,179 @@
+{
+  "schema": "p80-displayed-fixed12-bus-observation-v1",
+  "observed_at": "2026-11-16T06:51:59+08:00",
+  "source_run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2/runs/p80_fixed_d2_05/p80_soc",
+  "source_summary_sha256": "43e9ec58048d24ab8ab7d505723f7360b1e7e1e6eeaf5d76c81134cef34222c8",
+  "source_commit": "142fae28545759e33fa38de514eabf752cb8c43a",
+  "transaction_metadata_depth": 2,
+  "rows": [
+    {
+      "case": "layer_01",
+      "encoded_bytes": 31428,
+      "complete_cycles": 80471,
+      "transfer_transactions": 36243,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 44092,
+      "conditional_model_cycles": "80343",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_02",
+      "encoded_bytes": 30220,
+      "complete_cycles": 78357,
+      "transfer_transactions": 35337,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 42880,
+      "conditional_model_cycles": "78229",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_03",
+      "encoded_bytes": 29572,
+      "complete_cycles": 77223,
+      "transfer_transactions": 34851,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 42232,
+      "conditional_model_cycles": "77095",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_04",
+      "encoded_bytes": 29732,
+      "complete_cycles": 77503,
+      "transfer_transactions": 34971,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 42392,
+      "conditional_model_cycles": "77375",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_05",
+      "encoded_bytes": 28908,
+      "complete_cycles": 76061,
+      "transfer_transactions": 34353,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 41570,
+      "conditional_model_cycles": "75933",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_06",
+      "encoded_bytes": 28300,
+      "complete_cycles": 74997,
+      "transfer_transactions": 33897,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 40959,
+      "conditional_model_cycles": "74869",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_07",
+      "encoded_bytes": 27596,
+      "complete_cycles": 73765,
+      "transfer_transactions": 33369,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 40258,
+      "conditional_model_cycles": "73637",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_08",
+      "encoded_bytes": 27788,
+      "complete_cycles": 74101,
+      "transfer_transactions": 33513,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 40448,
+      "conditional_model_cycles": "73973",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_09",
+      "encoded_bytes": 27612,
+      "complete_cycles": 73793,
+      "transfer_transactions": 33381,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 40273,
+      "conditional_model_cycles": "73665",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_10",
+      "encoded_bytes": 29180,
+      "complete_cycles": 76537,
+      "transfer_transactions": 34557,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 41840,
+      "conditional_model_cycles": "76409",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_11",
+      "encoded_bytes": 31516,
+      "complete_cycles": 80625,
+      "transfer_transactions": 36309,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 44180,
+      "conditional_model_cycles": "80497",
+      "measured_minus_conditional_model_cycles": "128"
+    },
+    {
+      "case": "layer_12",
+      "encoded_bytes": 35220,
+      "complete_cycles": 87111,
+      "transfer_transactions": 39087,
+      "metadata_peak": 2,
+      "metadata_credit_wait": 47882,
+      "conditional_model_cycles": "86979",
+      "measured_minus_conditional_model_cycles": "132"
+    }
+  ],
+  "phase_totals": {
+    "source_read": {
+      "acks": 89268,
+      "accept_to_response_latency_cycles_sum": 267935,
+      "maximum_cycles": 4,
+      "mean_cycles": 3.0014674911502444
+    },
+    "shared_write": {
+      "acks": 89268,
+      "accept_to_response_latency_cycles_sum": 351282,
+      "maximum_cycles": 5,
+      "mean_cycles": 3.93513913160371
+    },
+    "shared_read": {
+      "acks": 89268,
+      "accept_to_response_latency_cycles_sum": 362949,
+      "maximum_cycles": 6,
+      "mean_cycles": 4.065835461755612
+    },
+    "output_write": {
+      "acks": 152064,
+      "accept_to_response_latency_cycles_sum": 456304,
+      "maximum_cycles": 4,
+      "mean_cycles": 3.000736531986532
+    }
+  },
+  "aggregate": {
+    "total_cycles": 930544,
+    "mean_cycles": 77545.33333333333,
+    "nominal_150MHz_task_s": 1934.3523788235698,
+    "encoded_bytes_sum": 357072,
+    "encoded_bytes_mean": 29756.0,
+    "transactions_sum": 419868,
+    "transactions_mean": 34989.0,
+    "accepted_transactions_per_full_window_cycle": 0.45120703588438593,
+    "complete_window_mac_utilization": 0.2614625423408243,
+    "speedup_vs_S0": 0.45165408621193626,
+    "cycle_reduction_vs_S0": 0.3111306546799445
+  },
+  "source_scope": "Already completed actual ASIC/E203 fixed12; passive observer outside DUT power scope",
+  "stage_accepted": false,
+  "power_or_area_inferred": false,
+  "model_is_strict_bound": false,
+  "phase_spans_may_overlap": true,
+  "new_simulation_started": false,
+  "display_evidence": [
+    "E:/fpga_race-two/takeover_local/p80_bus12_0653.png",
+    "E:/fpga_race-two/takeover_local/p80_phase_metrics_0654.png"
+  ]
+}
