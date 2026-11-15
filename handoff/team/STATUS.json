@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SYNTH03_DEPLOY.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4295,7 +4295,7 @@
     },
     "synth_attempt03": {
       "pid": 75787,
-      "observed_at": "2026-11-15T19:45:43+08:00",
+      "observed_at": "2026-11-15T19:55:42+08:00",
       "status": "running",
       "error": null,
       "source_commit": "05c923fe178230f0550d79dfd4b4ae3fcfc0c79f",
@@ -4307,7 +4307,22 @@
       ],
       "current_block": "accelerator",
       "final_netlist_ready": false,
-      "foreground_readonly_watcher_pid": 78421
-    }
+      "foreground_readonly_watcher_pid": null,
+      "dc_pid": 76822,
+      "dc_cpu_percent": 99.7,
+      "dc_elapsed_seconds": 1086,
+      "dc_cpu_seconds": 1083
+    },
+    "next_tools_transfer": {
+      "session_id": 39807,
+      "lines": 61,
+      "status": "in_progress",
+      "source_commit": "774312747e7024b7c0b25db68a646fe4880a1cc3",
+      "manifest_sha256": "ce81bdd649b4168326bc910229fc6685f4f6e8e7d0bae44443bb449278205870",
+      "files": 845,
+      "auto_launches_EDA": false
+    },
+    "s0_report_and_finish_tests_passed": 12,
+    "s0_report_and_finish_deployed": false
   }
 }
