@@ -1,5 +1,22 @@
 # P80三深度完成，深度2新综合运行
 
+## 05:46真实恢复/竞争通过，240运行
+
+- 05:45:44实读：**功能02父42584** status running、current batch20、completed2、error=None；自己的恢复sequence与CPU竞争contention均已通过。输出在e139包`runs/p80_d2_sequence_02/p80_sequence`、`p80_d2_contention_02/p80_contention`；前20条240正在`p80_d2_batch20_02/p80_batch20`，不能预先算完成。
+- **综合等待器47889**已部署，05:44:28状态waiting_functional02；17行输入24139完成。它仅在02三个阶段通过、原父退出/锁自然释放后，启动7430包`p80_synth_d2_02`，任一失败则退出。脚本SHA **f0ce45ad205f6d87be57529998616d0e5397760c64c8972303ab3e665e6b456e**。不重复启动、不改原包。
+- 7430修复包已核验940文件，manifest **f3406e930f048a73f344736f8b10c2c91651a4b1f43ad3e9b79ebdf785e5ad1a**。97391/58460/24139/23294/3512输入均结束。
+- 有效FLOAT原成员恢复包仍存在，143,258,826B、SHA **5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2**，路径`/tmp/s4_21usr_n1_20261113_0210/n1_precision_inputs_20261113_0840/n1-recovered-float100-20261113.zip`。NumPy1.19.5 `receipt.json` SHA **c1fe14065d6919ff337f2cbf53551f94941acc35d04d3cadabca311fe742eacd**，488成员记录，模块位于`/tmp/s4_21usr_n1_20261113_0210/n1_numpy1195_20261113_0905/numpy/__init__.py`。仅路径/容器与既有安装回执核验，不是新P80精度PASS。
+- 新`p80_finish.py`单原锁17阶段（结构→gate14→SAIF12→时序/DRC→PT12）及3项流程测试通过，源 **fa43bc2c7e15ac0dcb7e34f52931326ed18372d2**已push。**正在传新工具包29行**`local_runs/p80_ops_transfer_fa43bc2_20261116/transfer.ps1`，只部署不启动，先收当前输入再操作。payload **ff9e1e4f14668e2a450421e55206d8ac5011fbfdc83526dcf50d93253ad54e68**，差分3924B/SHA **7a4257ebf563b2e5d3c3b279dcae9269a0a01486a5145c5bcf7c877c8322bbd1**；两个新工具文件，RTL/固件不变。新包准备回执尚未观察。
+- 后续仍需：当前240、综合02、精度重算连接、同最终网表gate/SAIF/PT、完整报告/独立审核/持久归档。C80/C32/G32未开始；桌面T80/旧八路始终不动。
+
+## 05:38接续准备与唯一输入
+
+- **唯一输入97391**正在传`local_runs/p80_ops_transfer_7430bb6_20261116/transfer.ps1`，33行，只部署综合修复工具、不启动EDA。先收完、查看准备回执，禁止并发键入。
+- 修复源 **7430bb660b67d35045a9d9b56d4e9c7289f615bb**，payload **604ea895d4a3edd423ff128af6dd1f62626cb9cf03be87a0a27aa736d1833cf3**，XZ差分6872B/SHA **13ad5741fe1f619fe6a602cb8d4b313f6ec924189cbf317b55e55a7ea20f63f7**，仅两个工具文件变化，所有RTL/固件不变。新旧标准库DB必须逐字节相同；修复只将已知`file.db:library`选择器改为原逻辑库名，并逐个检查库/单元/引脚唯一。原驱动弧、转换时间、延迟、负载不变。12项相关工具测试通过，待服务器验证。
+- 功能01父39551已在EDA前退出：新包无`runs`父目录，`session.mkdir()`失败，未启动仿真，原锁释放。原脚本/记录保留。修复为`parents=True`，**功能02**脚本已提交fbe2609；干净目录及注入中途失败的两个便携演练通过。Windows演练最初缺os.getuid mock的失败仅本地测试环境，已修正mock重演。
+- **尚未执行**功能02的16行传输：`local_runs/p80_functional02_transfer_20261116/transfer.ps1`，controller SHA **5feee4584a5c07463c6e7ac380722f6c2c999e8b7e15941156cd5895fbb65d1a**。在97391结束后才输入；目标仍e139包，新queue/stage均使用02，不重试01目录。
+- GitHub最新已push7430bb6；fbe2609及新检查点随后同步。无活跃EDA已观察到；当前不得把准备回执或演练当CPU PASS。
+
 ## 05:31更新：综合01失败保留，e139包准备通过
 
 - 05:28:13实读原父27509已失败、子30930退出；05:28:59原锁不存在。共享块日志虽然exit0且生成mapped文件，但有146条错误：导出的`set_driving_cell -library`使用`数据库文件名:逻辑库名`限定符，新的独立库进程无法唯一解析（UID-993）。严格入口正确拒绝；**不能用这些映射文件作为通过结果**，原目录保留。

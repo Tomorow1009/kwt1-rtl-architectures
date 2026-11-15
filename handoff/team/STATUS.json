@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 depth2 recovery/batch preparation; synthesis tooling fix",
+    "current_stage": "P80 depth2 actual recovery/contention/first20; fresh synthesis repair ready",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5667,8 +5667,10 @@
         }
       ]
     },
-    "current_local_sessions": [],
-    "last_server_observation": "2026-11-16T05:30:33+08:00 mapping01 failed on exported driving-library alias; 146 errors, original shared lock released. e139 prepared940. Functional successor not launched.",
+    "current_local_sessions": [
+      18293
+    ],
+    "last_server_observation": "2026-11-16T05:45:44+08:00 functional02 pid42584 recovery/contention passed, batch20 running. Synthesis waiter47889 waits for full functional completion. Unique input18293 deploys fa43bc2 tools only.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5878,6 +5880,58 @@
       "reconstruction_rehearsal_passed": true,
       "manifest_sha256": "c5429439f979357154736a30a2024a8c84fd615b545a2d8974b7ead52ecc52c8",
       "files": 940
+    },
+    "p80_functional01": {
+      "pid": 39551,
+      "status": "failed_before_EDA",
+      "error": "Missing new bundle runs parent; lock released"
+    },
+    "p80_functional02": {
+      "pid": 42584,
+      "status": "running",
+      "current": "batch20",
+      "completed": 2,
+      "observed": "2026-11-16T05:45:44+08:00",
+      "controller_sha256": "5feee4584a5c07463c6e7ac380722f6c2c999e8b7e15941156cd5895fbb65d1a",
+      "fresh_directory_and_failure_rehearsals_passed": 2,
+      "error": null
+    },
+    "p80_ops_transfer7430": {
+      "status": "prepared_verified",
+      "source_commit": "7430bb660b67d35045a9d9b56d4e9c7289f615bb",
+      "manifest_sha256": "f3406e930f048a73f344736f8b10c2c91651a4b1f43ad3e9b79ebdf785e5ad1a",
+      "files": 940,
+      "rtl_and_firmware_unchanged": true,
+      "tool_tests_passed": 12
+    },
+    "p80_synth02_waiter": {
+      "status": "waiting_functional02",
+      "input_session": null,
+      "lines": 17,
+      "controller_sha256": "f0ce45ad205f6d87be57529998616d0e5397760c64c8972303ab3e665e6b456e",
+      "starts_only_after_functional02_complete": true,
+      "pid": 47889,
+      "observed": "2026-11-16T05:44:28+08:00"
+    },
+    "p80_finish_tools": {
+      "source_commit": "fa43bc2c7e15ac0dcb7e34f52931326ed18372d2",
+      "tests_passed": 3,
+      "stages": 17,
+      "source_pushed": true,
+      "server_run_started": false
+    },
+    "p80_ops_transfer_fa43": {
+      "status": "visible_transfer_in_progress",
+      "input_session": 18293,
+      "lines": 29,
+      "payload_sha256": "ff9e1e4f14668e2a450421e55206d8ac5011fbfdc83526dcf50d93253ad54e68"
+    },
+    "p80_precision_sources_rechecked": {
+      "observed": "2026-11-16T05:45:44+08:00",
+      "float_bytes": 143258826,
+      "float_sha256": "5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2",
+      "numpy_receipt_sha256": "c1fe14065d6919ff337f2cbf53551f94941acc35d04d3cadabca311fe742eacd",
+      "new_P80_precision_pass": false
     }
   }
 }
