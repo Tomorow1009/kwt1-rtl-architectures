@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**21:53当前：先读[S0设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth06在67秒短探针失败，未做长映射；single_file仍留同名设计，9ffb2a9改为显式替换旧设计对象。所有输入结束，VNC Bash空闲；下一新session synth07，旧包不改。T80桌面和旧八路保护。**
+
 **21:45恢复先读[设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth05已failed并释放原锁，错误为原RTL与seed DDC设计同名。VNC Bash空闲，无EDA/未完输入（21:38观察）。本地容器修复及21项检查通过，待独立新包短链接探针→synth06；未提交synth05 finish启动器禁用。旧失败和桌面T80/旧八路保持。**
 
 **21:30当前恢复入口：[S0恢复运行检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_RUNNING.md)。synth05已成功持锁运行，父126260；21:29:58子126956正在shared_sram映射，error=None，characterize已完成。前台只读watcher127118，全部传输结束。** 仅N1已通过竞争测试35份普通编译缓存10,651,781B完成无损回读归档，压缩包已返回原目录、全部结果保留；桌面T80及旧8路未动。旧synth03工具失败、synth04空间失败和两次归档前保护拒绝均保留，不重复执行。新综合a5ce90a包852文件；最新b0a2548已push，S1–S4未开始。

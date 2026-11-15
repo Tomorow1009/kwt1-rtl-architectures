@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_DDC_container_fix_local",
+    "current_stage": "S0_explicit_DDC_object_replacement_local",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4401,6 +4401,17 @@
       "status": "completed_archive_and_launched_synth05"
     },
     "s0_ddc_container_fix_tests_passed": 21,
-    "s0_ddc_container_fix_deployed": false
+    "s0_ddc_container_fix_deployed": false,
+    "synth_attempt06": {
+      "pid": 135293,
+      "status": "failed_in_short_DDC_link_probe",
+      "dc_pid": 135510,
+      "dc_elapsed_seconds": 67,
+      "new_block_mapping_started": false,
+      "error": "single_file did not remove duplicate original and mapped block designs",
+      "source_commit": "5e6a727169aa250bcc5a09b3b4b10762e35f5e68",
+      "session": "s0_synth06",
+      "observed_at": "2026-11-15T21:50:26+08:00"
+    }
   }
 }
