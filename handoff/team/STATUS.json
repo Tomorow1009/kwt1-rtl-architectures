@@ -4630,18 +4630,18 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T00:28:45+08:00",
+      "observed_at": "2026-11-16T00:43:02+08:00",
       "status": "running",
-      "stage": "saif",
-      "completed": 2,
+      "stage": "power_layer_01",
+      "completed": 5,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 208256,
-      "foreground_readonly_watcher": 209631,
-      "child_tool": "simv",
+      "child_pid": null,
+      "foreground_readonly_watcher": null,
+      "child_tool": null,
       "sram_provenance_checked": true,
-      "current_case": "layer_11",
+      "current_case": null,
       "gate_cases_passed": 14,
       "gate_outputs_passed": 354816,
       "gate_complete": true,
@@ -4655,8 +4655,13 @@
         "layer_07",
         "layer_08",
         "layer_09",
-        "layer_10"
-      ]
+        "layer_10",
+        "layer_11",
+        "layer_12"
+      ],
+      "saif_complete": true,
+      "timing_query_complete": true,
+      "drc_query_complete": true
     },
     "new_final_netlist_ready": true,
     "s0_archive_preparation": {
@@ -4741,6 +4746,25 @@
       },
       "area_or_power_cells_exempted": false,
       "stage_accepted": false
+    },
+    "s0_review_followup_prepared": {
+      "path": "handoff/team/evidence/S0_COMPLETE_REVIEW_20261116.py",
+      "status": "prepared_not_deployed",
+      "waits_existing_export": true,
+      "no_automatic_acceptance": true
+    },
+    "s0_high_fanout_read": {
+      "observed_at": "2026-11-16T00:43:02+08:00",
+      "summary_sha256": "f777f5e3fa30bf45ee812834ae9d7e07f4e52b54adfbbdf56555d052b4bee531",
+      "query_count": 3,
+      "initial_warning_count": 4,
+      "nets": [
+        "u_e203_subsys_top/core_csr_clk",
+        "u_e203_subsys_top/hfclk",
+        "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+      ],
+      "difference_not_waived": true,
+      "screenshot_sha256": "05494f952221e6d7f4553d896da8228c4ec8de4c33e2e1e5856859b3bc69574a"
     }
   }
 }

@@ -1,5 +1,12 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日00:43:02实查：原finish03父172535已完成SAIF12、timing_audit与drc_audit，completed=5，进入power_layer_01，error=None。前台只读watcher209631仅为读取报告退出；后台队列和汇总等待193002保持。S0未冻结、S1未开始；服务器桌面T80及旧八路保持原样。**
+
+- 12层活动全部通过；功耗第一层尚无完成回执，不提前记12层功耗通过。新综合、gate14不重复。
+- 同网表timing_audit已读取并核summary哈希，DDC查询1000阈值清单为3个：core_csr_clk、hfclk、u_sirv_aon_top/crossing_clock（均在u_e203_subsys_top内）。初始check_timing警告写4个，数量差异保留，不据此自动豁免TIM-134；完整时序模型审核待后续事实汇总。
+- `S0_BUILD_CONNECTION_REQUEST_20261116.py`已在f0ab4e9提交推送，尚未部署。新增`S0_COMPLETE_REVIEW_20261116.py`先等现有export结果，再依次生成请求、用原锁查询DC连接、只读别名/模型快照；不自动验收、归档或开始S1。Python3.6语法检查通过，尚未部署或执行。
+- 现有ops-review-e516e4c的6工具已部署，不重部署。原export193002等待17阶段后导出报告和完整未知清单。新连接查询必须等原队列退出，不并发EDA，不修改冻结包。
+
 **11月16日00:28:45实查：SAIF L01–L10通过，L11子208256运行，父172535无错误；当前前台只读watcher209631。206849仅退出用于已完成结构报告核对，71425/29371/40621输入全部结束；后台汇总等待193002保持。6fe251c重试TLS后已push；S0未冻结、S1未开始，T80桌面/旧八路不动。**
 
 - 新`handoff/team/evidence/S0_STRUCTURE_REVIEW_SNAPSHOT_20261116.json`记录同网表结构实读：11,353个仅声明端口；275个无负载驱动与仅声明端口集合一致、extra/missing空；PE80/array1/requant80。
