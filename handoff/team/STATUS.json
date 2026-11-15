@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_BATCH20.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_240_COMPLETE.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4242,7 +4242,10 @@
         "tmp_free_bytes": 94974496768,
         "shared_free_bytes": 29304553472,
         "new_cleanup_performed": false
-      }
+      },
+      "shared_free_bytes_last_observed": 1048576,
+      "shared_free_observed": "2026-11-16T06:16:01+08:00",
+      "tmp_free_bytes_last_observed": 90484076544
     },
     "capability_attempt02": {
       "session": "s0_cap02",
@@ -5667,7 +5670,13 @@
         }
       ]
     },
-    "current_local_sessions": [],
+    "current_local_sessions": [
+      {
+        "session_id": 96487,
+        "kind": "visible_vnc_input",
+        "lines": 35
+      }
+    ],
     "last_server_observation": "2026-11-16T05:52:54+08:00 functional02 pid42584 batch43/240,1089792 outputs,0failed. Synthesis waiter47889 waiting. Unique VNC input65394 deploys4cf review tools44lines.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
@@ -5886,16 +5895,18 @@
     },
     "p80_functional02": {
       "pid": 42584,
-      "status": "running",
-      "current": "batch20",
-      "completed": 2,
-      "observed": "2026-11-16T06:09:29+08:00",
+      "status": "completed",
+      "current": null,
+      "completed": 3,
+      "observed": "2026-11-16T06:20:28+08:00",
       "controller_sha256": "5feee4584a5c07463c6e7ac380722f6c2c999e8b7e15941156cd5895fbb65d1a",
       "fresh_directory_and_failure_rehearsals_passed": 2,
       "error": null,
-      "batch_completed": 174,
-      "batch_outputs": 4409856,
-      "batch_failed": 0
+      "batch_completed": 240,
+      "batch_outputs": 6082560,
+      "batch_failed": 0,
+      "finished": "2026-11-16T06:19:14.148944+08:00",
+      "batch_summary_sha256": "36953e487c757a9980c4ac33760b7a8f65c6f61209e6b2582a8342b582d7e687"
     },
     "p80_ops_transfer7430": {
       "status": "prepared_verified",
@@ -5906,13 +5917,15 @@
       "tool_tests_passed": 12
     },
     "p80_synth02_waiter": {
-      "status": "waiting_functional02",
+      "status": "failed_before_mapping",
       "input_session": null,
       "lines": 17,
       "controller_sha256": "f0ce45ad205f6d87be57529998616d0e5397760c64c8972303ab3e665e6b456e",
       "starts_only_after_functional02_complete": true,
       "pid": 47889,
-      "observed": "2026-11-16T05:44:28+08:00"
+      "observed": "2026-11-16T06:26:03+08:00",
+      "error": "ENOSPC creating original shared lock",
+      "process_exited": true
     },
     "p80_finish_tools": {
       "source_commit": "fa43bc2c7e15ac0dcb7e34f52931326ed18372d2",
@@ -5951,20 +5964,51 @@
       "observed": "2026-11-16T06:09:29+08:00"
     },
     "p80_final_followup01": {
-      "status": "waiting_synthesis02",
+      "status": "failed_predecessor_guard",
       "pid": 67274,
-      "observed": "2026-11-16T06:09:29+08:00",
+      "observed": "2026-11-16T06:26:03+08:00",
       "source_commit": "871bda8",
       "controller_sha256": "e25435bf74ff0a582a0956a6e1892a65163999af8dffbc177e501b2f83d257e7",
       "local_rehearsals": 3,
       "stage_accepted": false,
-      "server_eda_started": false
+      "server_eda_started": false,
+      "process_exited": true
     },
     "p80_export_review01": {
-      "status": "local_preparation",
-      "deployed": false,
+      "status": "failed_preserved_predecessor_guard",
+      "deployed": true,
       "completion_guard_checks": 5,
-      "stage_accepted": false
+      "stage_accepted": false,
+      "pid": 69883,
+      "process_exited": true,
+      "observed": "2026-11-16T06:26:03+08:00"
+    },
+    "p80_combined02_recovery09_transfer": {
+      "next_line": 20,
+      "line_count": 35,
+      "window": 18874435,
+      "source_commit": "1e4f0bf",
+      "payload_sha256": "132023d5f3675271ad7127ceae74235aa80859842f280d4a7cc9df584a9b1e6e",
+      "files": {
+        "p80_b0_gate02_cache09.py": "1bc5403557f268892cc6b8ddadcbdb64e29cd53d84757da809869113f12c65e9",
+        "p80_final_combined02_controller.py": "f9566e5f768ddd6977022a835a7e3f5e899d9a8600a4ce90c7645efb4ab0b21a",
+        "p80_export_review02_controller.py": "2e15053973fdd32b07e621f1a7d33ee321eaf5ff7e526561d79f3e298b9b269b"
+      },
+      "archive_before_duplicate_cache_removal": true,
+      "combined_started": false,
+      "export02_started": false,
+      "status": "visible_input_in_progress",
+      "input_session": 96487,
+      "cache_recovery_verified": false,
+      "new_pid_observed": false,
+      "local_mapping_rehearsals_passed": 3
+    },
+    "p80_archive_preparation": {
+      "source_commit": "14c6dab",
+      "local_contract_checks_passed": 4,
+      "deployed": false,
+      "server_archive_executed": false,
+      "copy_only": true
     }
   }
 }
