@@ -278,6 +278,11 @@ def verify_synthesis(synthesis, expected_sha, cfg):
     if not re.fullmatch('[a-f0-9]{64}', expected_sha) or sha(summary_path) != expected_sha:
         raise ValueError('ICB32 synthesis summary digest mismatch')
     summary = json.loads(summary_path.read_text())
+    if summary.get('scope') == 's0_t80_partitioned_whole_soc_task_mode':
+        # Explicitly validate the NEW three-DDC identity; do not treat it as
+        # the former monolithic T80 netlist or reuse its functional PASS.
+        from s0_validation import verify_synthesis as verify_partitioned
+        return verify_partitioned(synthesis, expected_sha, cfg)
     state = json.loads((synthesis.parent/'state.json').read_text()).get('stages', {}).get('t80_synth', {})
     if (state.get('status') != 'passed' or state.get('summary_sha256') != expected_sha or
             summary.get('synthesis_completed') is not True or summary.get('scope') != 't80_whole_soc_task_mode_preliminary_synthesis'):

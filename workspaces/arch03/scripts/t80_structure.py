@@ -81,13 +81,18 @@ def no_load_drivers(text,mapped,ports):
         extra=sorted(actual-expected),missing=sorted(expected-actual),rows=rows)
 
 
-def audit(run,digest):
+def audit(run,digest,cfg=None):
     run=Path(run).resolve();summary=run/'summary.json'
     require(sha(summary)==digest,'N1 synthesis digest mismatch')
     report=json.loads(summary.read_text())
-    state=json.loads((run.parent/'state.json').read_text())['stages']['t80_synth']
-    require(state['status']=='passed' and state['summary_sha256']==digest and
-        report['scope']=='t80_whole_soc_task_mode_preliminary_synthesis','Wrong N1 synthesis provenance')
+    if report.get('scope')=='s0_t80_partitioned_whole_soc_task_mode':
+        require(cfg is not None,'S0 needs explicit runtime registration')
+        from s0_validation import verify_synthesis
+        verify_synthesis(run,digest,cfg)
+    else:
+        state=json.loads((run.parent/'state.json').read_text())['stages']['t80_synth']
+        require(state['status']=='passed' and state['summary_sha256']==digest and
+            report['scope']=='t80_whole_soc_task_mode_preliminary_synthesis','Wrong N1 synthesis provenance')
     tracked={str(summary):digest}
     for name in ('mapped.v','check_design_mapped.rpt'):
         tracked[str(run/name)]=report['artifacts'][name]

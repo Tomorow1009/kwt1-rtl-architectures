@@ -1,6 +1,7 @@
 import tempfile
 from pathlib import Path
 import unittest
+import tkinter
 import s0_partition_synth as s
 
 
@@ -33,6 +34,7 @@ class S0MappingTests(unittest.TestCase):
             self.assertIn('s0_export u_arch03_accel accelerator_after_link.v',active)
             self.assertIn('report_timing -through $pins -delay_type min',active)
             self.assertIn('write -format ddc -hierarchy -output mapped.ddc',active)
+            self.assertEqual(tkinter.Tcl().call('info','complete',text),1)
 
     def test_blocks_use_baseline_context_and_cpu_preserves_them(self):
         text=s.block_script(Path('/old'),Path('/new'),'accelerator','arch03_t80_accel')
@@ -44,6 +46,7 @@ class S0MappingTests(unittest.TestCase):
         cpu=s.cpu_script(Path('/old'),Path('/new'))
         self.assertLess(cpu.index('set_dont_touch [get_cells [lindex $pair 0]] true'),cpu.index('compile -map_effort high'))
         self.assertIn('accelerator_after_cpu.v',cpu)
+        for generated in (text,cpu):self.assertEqual(tkinter.Tcl().call('info','complete',generated),1)
 
     def test_characterization_requires_both_complete_unique_boundaries(self):
         with tempfile.TemporaryDirectory() as d:

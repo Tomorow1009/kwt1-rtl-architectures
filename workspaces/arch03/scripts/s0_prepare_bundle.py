@@ -16,7 +16,7 @@ BASE_SHA='181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b'
 BASE='/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4'
 ALLOWED = {
     'workspaces/arch03/scripts/'+n for n in ('s0_prepare_bundle.py','s0_partition_synth.py',
-    's0_server.py','partition_synth_contract.py','n1_process.py')}
+    's0_server.py','s0_validation.py','partition_synth_contract.py','n1_process.py','t80_gate.py','t80_structure.py')}
 ALLOWED.update(('handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json',
     'workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md',
     'workspaces/arch03/S0_PARTITION_IMPLEMENTATION_NOTES.md'))

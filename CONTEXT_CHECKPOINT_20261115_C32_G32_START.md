@@ -40,4 +40,8 @@ T64已过ASIC14/240/竞争/恢复，数值结果保留；综合最终结果待�
 
 新包拟从/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4的833个输入复制到新私有root，manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b；本地对应备份ZIP已核对身份。只追加S0新工具/文档及当前n1_process，不复制runs、不改原件。接下来完成工具测试、提交同步、准备并传输overlay；旧T64自然退出释放锁前不启动新EDA。S1/S2/S3/S4尚未开始。
 
-VNC18874435/workspace3当前shell，FileZilla未开；板端转发91027持续。所有旧输入已结束。恢复时先读取本计划/检查点，再观察实时锁/进程/空间。尚无新阶段PASS，不能自动进入S1。
+18:12：1e907824280f3e998a2f9d5d569456dec98e90a1已推送；首个S0工具overlay通过VNC传输中，**exec29518仍活动，禁止同时输入VNC命令**。状态local_runs/s0_transfer_1e90782/transfer_state.json，80行、最近next_line约36；原可见python heredoc尚未结束。payload SHA07bcd57d89299426dea45e76cfc319ff1befe80788623d3f592dff9440830c2a，目标/tmp/s4_21usr_t80_20261115_1810/light-light126-t80-s0-1e90782。此版本只先做工具能力/来源预检；后续映射工具已补充当前SRAM配置输入追踪和row_lanes字段，实际综合须使用新修订包，不直接运行1e90782的synth。
+
+同时在本地新增S0独立来源校验，扩展新S0入口的gate/SAIF/PT等阶段。t80_gate仅增加明确S0 scope分派到单独校验器；旧T80验证分支规则不变。t80_structure同理。18:17本地S0共14项（含新来源分派和Tcl完整性）通过，原四段计时/SAIF/PT兼容8项通过；Python3.6语法兼容检查通过。准备提交修订工具，首个传输包不含它们；补包应从原833文件新建另一个bundle，不能改首包及原T80。
+
+VNC18874435/workspace3当前正在输入heredoc，FileZilla未开；板端转发91027持续。恢复先读传输状态、轮询29518完成后截图，不盲输新命令。尚无新阶段PASS，不能自动进入S1。

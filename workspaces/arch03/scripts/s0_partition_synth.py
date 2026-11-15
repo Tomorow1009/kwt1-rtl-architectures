@@ -221,8 +221,13 @@ def execute(cfg, run, origin, call):
     (run/'task_mode.sdc').write_text(baseline.constraints())
     (run/'libs').mkdir()
     for p in (origin/'libs').glob('*.db'): shutil.copy2(str(p), str(run/'libs'/p.name))
-    for name in ('technology_verification.json', 'memory_library_verification.json', 'source_inputs.json'):
+    for name in ('technology_verification.json', 'memory_library_verification.json', 'arch02_sram_config.vh'):
         shutil.copy2(str(origin/name), str(run/name))
+    linked_inputs=dict(before['traced'])
+    linked_inputs[str((run/'arch02_sram_config.vh').resolve())]=digest(run/'arch02_sram_config.vh')
+    for name in ('s0_partition_synth.py','partition_synth_contract.py','s0_server.py'):
+        path=Path(__file__).with_name(name).resolve();linked_inputs[str(path)]=digest(path)
+    save(run/'source_inputs.json',linked_inputs)
     version = call([cfg['tools']['dc_shell'], '-version'], run, 'tool_version.txt')
     versions = re.findall(r'(?:Version\s*[: ]\s*)?([A-Z]-20\d\d\.\d\d(?:-SP\d+)?)', version)
     require(len(set(versions)) == 1, 'Cannot identify DC version')
@@ -271,7 +276,7 @@ def execute(cfg, run, origin, call):
     save(run/'child_identity.json',child_proof)
     tracked={str(p):digest(p) for p in run.rglob('*') if p.is_file()}
     save(run/'synthesis_inputs.json',tracked)
-    report=baseline.collect_reports(run,dict(status='linked',scope='s0_three_ddc_link',origin=before['origin'],
+    report=baseline.collect_reports(run,dict(status='linked',scope='s0_three_ddc_link',origin=before['origin'],row_lanes=5,
         origin_identity_sha256=digest(run/'origin_identity.json'),block_fingerprints=fingerprints),tracked,log)
     area=json.loads((run/'area_inventory.json').read_text())
     area.pop('conservative_budget_within_1_2mm2',None)
