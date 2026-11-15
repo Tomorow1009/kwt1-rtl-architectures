@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**07:56定位：前台已回第一标签watcher105419，第二标签tcsh空闲；原队列running/synthesis，所有输入结束。新日志/状态见[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部，勿据下方旧位置键入或重启。**
+
+**07:55最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。DC98857日志增至18,344B、Error0，已进入Updating timing information；运行35:38、CPU99.7%。当前前台第二标签tcsh空闲，第一标签watcher保持；全部输入结束。f2b1008复现说明已push，PPA仍待；T80/旧八路不动、C80未开始。**
+
 **07:46终端补充：当前前台已切回第一标签的只读watcher105419，第二标签tcsh空闲；不能向watcher直接键入。原综合still running/synthesis，仅共享块完成，未重启。下一步读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
 
 **07:44最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原98857实际CPU99.7%、运行24:44；tmp89.38GB，内存充足，共享仅1MiB。workspace3新第二终端标签为tcsh空闲，第一标签watcher105419保持；所有输入结束。原综合/后继继续，未重启或修改受测包；C80未开始。**

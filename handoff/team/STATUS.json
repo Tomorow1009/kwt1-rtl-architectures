@@ -5671,7 +5671,7 @@
       ]
     },
     "current_local_sessions": [],
-    "last_server_observation": "2026-11-16T07:46:22+08:00",
+    "last_server_observation": "2026-11-16T07:56:22+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6143,7 +6143,7 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T07:31:10+08:00",
+      "observed_at": "2026-11-16T07:55:04+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
@@ -6153,9 +6153,11 @@
       "child_pid": 98857,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 704,
-      "child_cpu_percent": 99.6,
-      "child_rss_kib": 8599916
+      "child_elapsed_seconds": 2138,
+      "child_cpu_percent": 99.7,
+      "child_rss_kib": 25529944,
+      "current_log_bytes": 18344,
+      "current_log_phase": "Updating timing information / UID-85"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6166,7 +6168,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T07:46:22+08:00",
+      "observed_at": "2026-11-16T07:56:22+08:00",
       "status": "synthesis_running",
       "parent_pid": 95253,
       "child_pid": 98857,
@@ -6200,6 +6202,14 @@
       "swap_free_kib": 134215676,
       "new_eda_started": false,
       "source_modified": false
+    },
+    "p80_runbook": {
+      "path": "workspaces/arch03/P80_RUNBOOK.md",
+      "commit": "f2b1008",
+      "source_pushed": true,
+      "listed_entry_paths_checked": 9,
+      "cli_help_checked": true,
+      "server_input_changed": false
     }
   }
 }
