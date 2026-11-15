@@ -36,8 +36,8 @@ def main():
         if lock.exists():print('TEAM_LOCK',(lock/'owner.json').read_text() if (lock/'owner.json').exists() else 'incomplete lock')
         print('FREE_BYTES',shutil.disk_usage(str(common.ROOT)).free);return
     if session.exists():raise ValueError('Preserve all old artifacts; use a fresh session')
-    if a.stage=='batch20' and (a.dataset is None or a.firmware_root is not None):
-        raise ValueError('Formal batch needs pinned first20 inventory and bundle default firmware')
+    if a.stage=='batch20' and a.dataset is None:
+        raise ValueError('Formal batch needs pinned first20 inventory')
     packaged=common.inputs();dep='workspaces/arch03/scripts/n1_process.py'
     if Path(n1_process.__file__).resolve()!=(common.ROOT/dep).resolve() or packaged['files'].get(dep)!=common.sha(common.ROOT/dep):
         raise ValueError('Changed process ledger')
@@ -63,7 +63,7 @@ def main():
                 report=verify(cfg,run,a.platform,a.cases,processes.call,a.firmware_root)
             else:
                 from p80_batch import verify
-                report=verify(cfg,run,a.platform,a.dataset,processes.call)
+                report=verify(cfg,run,a.platform,a.dataset,processes.call,a.firmware_root)
             common.inputs();p80_paths.recheck(cfg)
             report['runtime_storage']=dict(receipt_sha256=common.sha(run/'runtime_storage_receipt.json'),
                 durable_archive_required=True,temporary_storage_is_final_delivery=False)

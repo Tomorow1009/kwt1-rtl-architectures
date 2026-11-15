@@ -1,0 +1,19 @@
+{
+  "status": "local_proof_and_elaboration_passed",
+  "run": "local_runs/p80_gate_observer_20261116_032629_469475",
+  "receipt_sha256": "c8c1c9c2cf5441da7f9b4abd3814f426714664929834a11d364313d0205d3fd1",
+  "proof_depths": [
+    2,
+    4,
+    8
+  ],
+  "mapped_netlist_tested": false,
+  "cpu_executed": false,
+  "full_observer_elaborated_only": true,
+  "tool_contract_tests": 10,
+  "python36_syntax_files": 41,
+  "local_failed_run": "local_runs/p80_gate_observer_20261116_032531_824245",
+  "failure": "XSim Tcl absolute Windows path interpreted backslash escapes; fixed slash path, rerun in fresh directory passed",
+  "protected_delivery_modified": false,
+  "old8_modified": false
+}

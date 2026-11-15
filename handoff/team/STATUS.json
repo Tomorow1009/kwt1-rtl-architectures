@@ -5668,7 +5668,7 @@
       ]
     },
     "current_local_sessions": {},
-    "last_server_observation": "2026-11-16T02:47:24+08:00; terminal idle; other-team DC/PT processes present; no own P80 task started",
+    "last_server_observation": "2026-11-16T03:14:05+08:00; lock absent, tmp free92072710144/shared8115978240, ongoing visible transfer; no P80 EDA",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5679,7 +5679,35 @@
       "screenshot": "takeover_local/p80_platform_parameters.png",
       "shared_free_bytes_at_0241": 5371854848
     },
-    "p80_code_commit": "957838b",
-    "p80_code_pushed": true
+    "p80_code_commit": "142fae28545759e33fa38de514eabf752cb8c43a",
+    "p80_code_pushed": true,
+    "p80_eda_tool_preparation": {
+      "status": "local_proof_and_elaboration_passed",
+      "run": "local_runs/p80_gate_observer_20261116_032629_469475",
+      "receipt_sha256": "c8c1c9c2cf5441da7f9b4abd3814f426714664929834a11d364313d0205d3fd1",
+      "proof_depths": [
+        2,
+        4,
+        8
+      ],
+      "mapped_netlist_tested": false,
+      "cpu_executed": false,
+      "full_observer_elaborated_only": true,
+      "tool_contract_tests": 10,
+      "python36_syntax_files": 41,
+      "local_failed_run": "local_runs/p80_gate_observer_20261116_032531_824245",
+      "failure": "XSim Tcl absolute Windows path interpreted backslash escapes; fixed slash path, rerun in fresh directory passed",
+      "protected_delivery_modified": false,
+      "old8_modified": false
+    },
+    "p80_transfer_142fae2": {
+      "status": "typing_in_progress",
+      "session_id": 15378,
+      "state": "local_runs/p80_transfer_142fae2_0315/transfer_state.json",
+      "lines": 202,
+      "target": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2",
+      "payload_sha256": "ae9ac56a16fdef489c508368fd224082bbb6b1cb1e4d7fc319d880a3c6a7b3a8",
+      "eda_started": false
+    }
   }
 }

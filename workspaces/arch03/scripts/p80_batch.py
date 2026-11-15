@@ -37,13 +37,13 @@ def storage_guard(run, remaining, observed_max=8*1024*1024):
     return receipt
 
 
-def verify(cfg, run, platform_source, dataset, call):
+def verify(cfg, run, platform_source, dataset, call, firmware=None):
     run, dataset = Path(run), Path(dataset).resolve()
     data.require(dataset.is_dir(), 'Missing pinned N1 100-sample source inventory (first20 executed)')
     all_tasks = data.index_dataset(dataset)
     tasks = select_first20(all_tasks)
     storage_guard(run, 240)
-    contract, compile_receipt, fw, base = soc.compile_design(cfg, run, platform_source, call)
+    contract, compile_receipt, fw, base = soc.compile_design(cfg, run, platform_source, call, firmware=firmware)
     data.require(contract.get('diagnostic') is None and contract['row_lanes'] == 5 and
                  contract['layout_id'] == 0x00100004 and fw['configuration']['irq_enabled'] and
                  fw['numeric_format'] == '0x000e0c20', 'P80 batch20 requires five-row SHIFT10 IRQ firmware')
@@ -51,7 +51,8 @@ def verify(cfg, run, platform_source, dataset, call):
         dataset_inventory_sha256=data.DATA100_INVENTORY_SHA,
         dataset_manifest_sha256=sha(dataset/'manifest.json'),
         layout_id=0x00100004, numeric_format_id=0x000e0c20, numeric_format=data.FORMAT,
-        row_lanes=5, samples=20, tasks=240, outputs_per_task=25344, expected_outputs=6082560,
+        row_lanes=5, transaction_metadata_depth=fw['configuration']['transaction_metadata_depth'],
+        samples=20, tasks=240, outputs_per_task=25344, expected_outputs=6082560,
         fields_checked=['total_signed33', 'result_signed16', 'saturated'],
         capture_columns=['row', 'column', 'result', 'saturated', 'total'],
         build_contract_sha256=sha(run/'p80_build_contract.json'),
@@ -119,6 +120,7 @@ def verify(cfg, run, platform_source, dataset, call):
         samples=20, tasks=240, checked_outputs=outputs, checked_totals=totals,
         checked_saturation_flags=outputs, failed=0, compile_count=1,
         layout_id=0x00100004, numeric_format_id=0x000e0c20, shift=10, row_lanes=5,
+        transaction_metadata_depth=fw['configuration']['transaction_metadata_depth'],
         batch_identity_sha256=identity_sha, compile_receipt=compile_receipt, cases=results,
         host_elapsed_seconds=elapsed, mean_task_cycles=sum(cycles)/240.,
         min_task_cycles=min(cycles), max_task_cycles=max(cycles),
