@@ -83,6 +83,49 @@ def translated_budget(raw,native,old_ref,new_ref):
     return ''.join(lines),removed
 
 
+def driving_library_budget(text,standard):
+    """Rebind an exported DB-container qualifier to the identical loaded library.
+
+    DC can serialize ``file.db:logical_library`` after loading a mapped DDC.
+    That process-local qualifier is not the logical library name in the fresh
+    RTL process. Only the known standard DB is accepted; cell/arc, polarity,
+    transition values, ports and every other constraint remain byte-identical.
+    The caller checks the old/new standard DB bytes before this translation.
+    """
+    standard=Path(standard);logical=standard.stem
+    require(standard.suffix=='.db' and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*',logical),
+        'Unreviewed standard library name')
+    aliases={logical,standard.name+':'+logical};rows=[];lines=[]
+    for line in text.splitlines(keepends=True):
+        if re.match(r'^\s*set_driving_cell\b',line):
+            token=re.findall(r'(?<!\S)-library\s+(\S+)',line)
+            require(len(token)==1 and token[0] in aliases,'Unknown exported driving library')
+            arc=[]
+            for option in ('lib_cell','from_pin','pin'):
+                value=re.findall(r'(?<!\S)-'+option+r'\s+(\S+)',line)
+                require(len(value)==1 and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*',value[0]),
+                    'Unreviewed driving-cell arc '+option)
+                arc.append(value[0])
+            replacement=re.sub(r'((?<!\S)-library\s+)'+re.escape(token[0])+r'(?=\s|$)',
+                lambda match:match.group(1)+logical,line)
+            rows.append(dict(original_library=token[0],library=logical,cell=arc[0],
+                from_pin=arc[1],pin=arc[2],original_line=line.rstrip('\r\n'),
+                effective_line=replacement.rstrip('\r\n')))
+            line=replacement
+        lines.append(line)
+    require(rows,'No boundary driving-cell constraints')
+    arcs=sorted({(row['cell'],row['from_pin'],row['pin']) for row in rows})
+    guard=('set p80_driver_lib [get_libs -quiet '+logical+']\n'
+        'if {[sizeof_collection $p80_driver_lib] != 1} {error "P80 driving library not unique"}\n')
+    for cell,from_pin,pin in arcs:
+        guard+=('if {[sizeof_collection [get_lib_cells -quiet '+logical+'/'+cell+']] != 1} '
+            '{error "P80 driving cell missing or ambiguous: '+cell+'"}\n')
+        for port in (from_pin,pin):
+            guard+=('if {[sizeof_collection [get_lib_pins -quiet '+logical+'/'+cell+'/'+port+']] != 1} '
+                '{error "P80 driving pin missing or ambiguous: '+cell+'/'+port+'"}\n')
+    return guard+''.join(lines),rows
+
+
 def characterization_script(origin,run):
     script=characterize_script(origin/'mapped.ddc',run/'task_mode.sdc',run/'budget_libraries.tcl')
     extra=r'''set port_file [open ${block}.budget_ports.tsv w]
@@ -101,6 +144,9 @@ def execute(cfg,run,platform,firmware,origin,call):
     link=run/'fresh_link';link.mkdir()
     linked=p80_link.source_contract(cfg,link,platform,firmware,call)
     origin_identity=verify_budget_origin(origin,link);save(run/'budget_origin.json',origin_identity)
+    standard=link/'libs'/Path(cfg['standard_library_member']).name
+    require(digest(standard)==digest(origin/'libs'/standard.name),
+        'Boundary driving-library DB bytes differ')
     # Mapping libraries always come from this fresh P80 link. The separate
     # characterization process loads S0's own library paths, avoiding duplicate
     # logical-library containers when that older DDC is read.
@@ -136,10 +182,12 @@ def execute(cfg,run,platform,firmware,origin,call):
         original=character/(block+'.characterized.raw.tcl');original.write_text(raw)
         native=character/(block+'.native_clocks.tsv')
         translated,removed[block]=translated_budget(raw,native.read_text(),old[block]['reference'],new[block]['reference'])
+        translated,drivers=driving_library_budget(translated,standard)
         exported.write_text(translated)
         precision[block]=dict(raw_sha256=digest(original),effective_sha256=digest(exported),
             native_clock_sha256=digest(native),ports=source_ports,source_reference=old[block]['reference'],
             new_reference=new[block]['reference'],port_delay_load_constraints_changed=False,
+            driving_library_db_sha256=digest(standard),driving_library_bindings=drivers,
             removed_mapped_only_cells=removed[block],source_is_S0_budget_not_P80_timing_PASS=True)
     save(run/'boundary_contract.json',precision)
     before=json.loads((link/'source_inputs.json').read_text())

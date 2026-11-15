@@ -58,5 +58,29 @@ class P80MappingTests(unittest.TestCase):
         self.assertNotIn('write -format ddc',text)
         self.assertEqual(tkinter.Tcl().call('info','complete',text),1)
 
+    def test_exported_driving_library_is_rebound_without_changing_arc_or_delays(self):
+        line=('set_driving_cell -rise -lib_cell NOR2V2_12TR40 -library ss_corner.db:ss_corner '
+              '-pin ZN -from_pin A2 -input_transition_rise 0.26123 '
+              '-input_transition_fall 0.231548 -no_design_rule [get_ports {cmd_addr[31]}]\n')
+        tail='set_input_delay -clock hf_clk 1.256 [get_ports cmd_valid]\nset_load 0.03 [get_ports rsp_data]\n'
+        text,rows=p.driving_library_budget(line+tail,Path('/new/libs/ss_corner.db'))
+        self.assertTrue(text.endswith(line.replace('ss_corner.db:ss_corner','ss_corner')+tail))
+        self.assertEqual(rows[0]['cell'],'NOR2V2_12TR40')
+        self.assertEqual(rows[0]['from_pin'],'A2')
+        self.assertIn('get_lib_cells -quiet ss_corner/NOR2V2_12TR40',text)
+        self.assertIn('get_lib_pins -quiet ss_corner/NOR2V2_12TR40/ZN',text)
+        self.assertEqual(tkinter.Tcl().call('info','complete',text),1)
+        for bad in ('other.db:ss_corner','ss_corner.db:other','{ss_corner}',
+                    '/unknown/ss_corner.db:ss_corner'):
+            with self.assertRaises(ValueError):
+                p.driving_library_budget(line.replace('ss_corner.db:ss_corner',bad),Path('/new/ss_corner.db'))
+        with self.assertRaises(ValueError):p.driving_library_budget(tail,Path('/new/ss_corner.db'))
+
+    def test_plain_driving_library_keeps_original_command(self):
+        raw='set_driving_cell -lib_cell INV2 -library ss_corner -pin ZN -from_pin I [get_ports valid]\n'
+        result,rows=p.driving_library_budget(raw,Path('/new/ss_corner.db'))
+        self.assertTrue(result.endswith(raw))
+        self.assertEqual(rows[0]['original_line'],rows[0]['effective_line'])
+
 
 if __name__=='__main__':unittest.main()
