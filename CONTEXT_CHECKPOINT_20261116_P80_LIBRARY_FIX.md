@@ -2,7 +2,9 @@
 
 ## 07:20真实DC修复已通过共享块
 
-原combined05父95253保持、export05父96154等待，所有输入结束（最近只读32287也已结束）。07:20:36实际读取：新综合06的`blocks/shared_sram/cache.json`为mapped，耗时35.674336516764015秒，`compile.log`实际Error行0；加速器子**99675**已经启动。此前fresh_link96331、characterization97905、shared98527均由原ledger顺序接续，没有重启作业。
+07:23:29补充：加速器仍运行、实际Error行0，尚无cache终态。重新读取原launcher日志确认子PID为**98857**；本地07:20条目曾将屏幕数字抄为99675，现纠正。服务器记录没有改变，从未对误抄PID执行操作。最近只读67752也已结束，无当前输入。
+
+原combined05父95253保持、export05父96154等待，所有输入结束（最近只读32287也已结束）。07:20:36实际读取：新综合06的`blocks/shared_sram/cache.json`为mapped，耗时35.674336516764015秒，`compile.log`实际Error行0；加速器子**98857**已经启动。此前fresh_link96331、characterization97905、shared98527均由原ledger顺序接续，没有重启作业。
 
 `boundary_contract.json`已记录两个子块各自旧/新标准DB逐字节一致及统一路径；修复验证范围现在是共享块实际映射通过，不能据此提前宣称加速器/CPU/整机时序或面积通过。截图`takeover_local/p80_boundary_fixed_0719.png`、`p80_shared_map_fixed_0720.png`。继续读原队列，下一步等待加速器、CPU及顶层链接，取得整机数值后原18项后继自动继续。当前P80仍未冻结，C80未开始；T80桌面/旧八路保持。
 

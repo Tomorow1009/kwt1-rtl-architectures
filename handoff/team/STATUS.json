@@ -5677,7 +5677,7 @@
         "lines": 20
       }
     ],
-    "last_server_observation": "2026-11-16T07:20:36+08:00",
+    "last_server_observation": "2026-11-16T07:23:29+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6149,14 +6149,16 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T07:20:36+08:00",
+      "observed_at": "2026-11-16T07:23:29+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
       "stage": "synthesis",
       "current_block": "accelerator",
-      "child_pid": 99675
+      "child_pid": 98857,
+      "child_pid_transcription_corrected": true,
+      "current_log_actual_errors": 0
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
