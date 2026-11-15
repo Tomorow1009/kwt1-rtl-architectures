@@ -1,5 +1,7 @@
 # S0后继工具传输检查点
 
+**20:17:12最后观察：** 原综合仍running/accelerator、DC76822 CPU99.7%，39:36 elapsed/39:30 CPU；日志推进到Allocating blocks/DW算术单元处理，error=None。新工具774已部署且import通过，当前只有原综合在跑。已在本地准备handoff/team/evidence/S0_FINISH_LAUNCH_20261115.py（Python3.6语法通过），尚未传输/执行；它要求原synth03 passed、原父75787退出、summary身份正确、面积≤1.00、setup/hold非负及原锁不存在，才创建全新的s0_finish01并调用774包统一锁队列。无清理、无修改旧包、无自动重试。当前前台只读watcher91575保持。
+
 **20:11更新，覆盖下方传输状态：** exec39807已61/61结束，服务器S0_INPUTS_PREPARED确认845文件及ce81bdd6…清单匹配，S0_NEXT_TOOLS_READY确认没有启动新EDA。20:09:39实际import s0_finish/s0_report通过，模块齐全。20:11:09原synth03仍running/accelerator，DC76822 CPU99.7%、33:33 elapsed/33:28 CPU，日志已从Processing推进到OPT-1206常量寄存器处理，无错误。shared_sram仍是唯一已生成独立DDC的块。
 
 **当前VNC前台为新只读观察器PID91575，不是shell。** 每30秒显示原75787/DC76822状态与CPU时间，终态自动退出。所有输入exec39807/69865/31346已结束。要输入命令前先看截图，必要时Ctrl+C只退出此观察器，后台综合保持。截图takeover_local/s0_watcher2011.png。不要重跑传输、原观察器78421、任何旧launcher或综合。
