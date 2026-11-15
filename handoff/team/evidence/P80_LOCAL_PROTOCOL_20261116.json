@@ -1,0 +1,286 @@
+{
+  "schema": "p80-local-protocol-progress-v1",
+  "stage": "P80",
+  "status": "local_component_protocol_passed",
+  "tool": "Vivado Simulator 2018.3",
+  "tests": {
+    "arbiter": {
+      "status": "passed",
+      "scope": "isolated_ordered_arbiter_only",
+      "cpu_executed": false,
+      "real_platform_tested": false,
+      "transport_simulated": false,
+      "transport_syntax_compiled": true,
+      "seed": "0x80c32a91",
+      "rows": [
+        {
+          "accepted": 601,
+          "returned": 601,
+          "cpu": 301,
+          "dma": 300,
+          "full_turnover": 587,
+          "held": 324,
+          "errors": 29,
+          "reset_pending": 1,
+          "depth": 2
+        },
+        {
+          "accepted": 1040,
+          "returned": 1040,
+          "cpu": 532,
+          "dma": 508,
+          "full_turnover": 892,
+          "held": 456,
+          "errors": 49,
+          "reset_pending": 1,
+          "depth": 4
+        },
+        {
+          "accepted": 1496,
+          "returned": 1496,
+          "cpu": 758,
+          "dma": 738,
+          "full_turnover": 665,
+          "held": 578,
+          "errors": 71,
+          "reset_pending": 1,
+          "depth": 8
+        }
+      ],
+      "source_sha256": {
+        "workspaces/arch03/rtl/arch03_icb_arb2_queued.sv": "cb794c67e314b2a722a27b405cede17f8ca48d7cc10071b46427fc1f6227864b",
+        "workspaces/arch03/rtl/arch03_p80_transport.sv": "aa41b9a06beda6ef603942151bfbe3d73036d0eb9e53a309b0d04193b92645c4",
+        "workspaces/arch03/tb/tb_arch03_p80_arbiter.sv": "5ed671037c762e0cb0c7354eb5aae31c27ed2651f33025f5fd6707ea195f7f3d",
+        "workspaces/arch03/scripts/local_verify_p80_arbiter.py": "ad3cf02279e79e6afc0198def9fb094edaec5c2b53cc6762ee638fe3963d1428"
+      },
+      "scenarios": [
+        "CPU/DMA accepted-request fairness",
+        "held command stability",
+        "ordered response ownership",
+        "held response stability",
+        "error forwarding",
+        "full simultaneous pop/push",
+        "reset with pending",
+        "both masters and queues completely drained"
+      ],
+      "run": "local_runs/p80_arbiter_20261116_022220_377239",
+      "receipt_sha256": "7c9d089309da4a426957808fe91c1627b0c6952aee5eed221b9655ac3e152199"
+    },
+    "transport": {
+      "status": "passed",
+      "scope": "isolated_ordered_DMA_protocol_only",
+      "cpu_executed": false,
+      "real_platform_tested": false,
+      "physical_sram_tested": false,
+      "rows": [
+        {
+          "cases": 9,
+          "peak": 2,
+          "simultaneous": 15730,
+          "final_ack_waits": 75,
+          "depth": 2
+        },
+        {
+          "cases": 9,
+          "peak": 4,
+          "simultaneous": 19748,
+          "final_ack_waits": 73,
+          "depth": 4
+        },
+        {
+          "cases": 9,
+          "peak": 8,
+          "simultaneous": 21466,
+          "final_ack_waits": 74,
+          "depth": 8
+        }
+      ],
+      "source_sha256": {
+        "workspaces/arch03/rtl/arch03_p80_transport.sv": "aa41b9a06beda6ef603942151bfbe3d73036d0eb9e53a309b0d04193b92645c4",
+        "workspaces/arch03/tb/tb_arch03_p80_transport.sv": "09f50626f18ccc595e653d6319199a371cae1c75b59e1c2e0b643e9ede7a4eeb",
+        "workspaces/arch03/scripts/local_verify_p80_transport.py": "40107ef251f928abfe249e6240a435cfb764ca34a08c5975ecbbb7d6204bff65"
+      },
+      "scenarios": [
+        "response-only decoder payload",
+        "successful shared write before read",
+        "latency 1/2 plus variable waits",
+        "data FIFO reservation",
+        "four ordered error addresses/types",
+        "cancel held read",
+        "cancel multiple accepted transactions",
+        "reset with pending",
+        "no-reset recovery",
+        "final write ACK delay",
+        "complete drain"
+      ],
+      "run": "local_runs/p80_transport_20261116_022612_746819",
+      "receipt_sha256": "667dc6d26ae4c712471f961a23f3f11d380c615c7590ed7e824a26b7813f20a8"
+    },
+    "window": {
+      "status": "passed",
+      "scope": "passive_window_directed_stimulus_only",
+      "cpu_executed": false,
+      "rows": [
+        {
+          "successful": 5,
+          "rejected": 9,
+          "post_done": 1,
+          "reset_pending": 1,
+          "depth": 2
+        },
+        {
+          "successful": 5,
+          "rejected": 9,
+          "post_done": 1,
+          "reset_pending": 1,
+          "depth": 4
+        },
+        {
+          "successful": 5,
+          "rejected": 9,
+          "post_done": 1,
+          "reset_pending": 1,
+          "depth": 8
+        }
+      ],
+      "source_sha256": {
+        "workspaces/arch03/tb/arch03_task_window_p80.sv": "edec19c0ec472f3979d2c8e2892bc0bf0383205fd3d8812f4b6de0857fbe8446",
+        "workspaces/arch03/tb/tb_arch03_p80_window.sv": "e8a31a12d7aea93301571609b02bfd1ed7c683d269cbbfe2507610f27c6e24d4",
+        "workspaces/arch03/scripts/local_verify_p80_window.py": "622ececbc2eda4c2eb6f2d15b383305416b684f2cb759b98eedb8d1e989cbc33"
+      },
+      "boundary": "first_source_VALID_to_final_ACK_confirmed_after_drain",
+      "run": "local_runs/p80_window_20261116_023913_247689",
+      "receipt_sha256": "449adc5f218133cbe7e42043172f2d53d0289baf35bb49a0eed0fe6f8c7f47fc"
+    },
+    "route": {
+      "status": "passed",
+      "scope": "passive_route_directed_stimulus_only",
+      "cpu_executed": false,
+      "original_platform_executed": false,
+      "rows": [
+        {
+          "commands": 160,
+          "cpu": 64,
+          "dma": 96,
+          "full_turnover": 158,
+          "overlaps": 158,
+          "errors": 13,
+          "depth": 2
+        },
+        {
+          "commands": 160,
+          "cpu": 64,
+          "dma": 96,
+          "full_turnover": 155,
+          "overlaps": 156,
+          "errors": 13,
+          "depth": 4
+        },
+        {
+          "commands": 160,
+          "cpu": 64,
+          "dma": 96,
+          "full_turnover": 149,
+          "overlaps": 152,
+          "errors": 13,
+          "depth": 8
+        }
+      ],
+      "negative": [
+        {
+          "fault": 1,
+          "reason": "root payload mismatch/bypass",
+          "log_sha256": "6056d21b74e701da2d1dffeeb398e6eb78a7bea28ce43d7452e9d0a1d305f3b2",
+          "exit_code": 0
+        },
+        {
+          "fault": 2,
+          "reason": "O4 reordered/payload mismatch",
+          "log_sha256": "7d5af5b50ff2a0697c1f963aed0b2881460d257257a6f964ab9237f88fabb12b",
+          "exit_code": 0
+        },
+        {
+          "fault": 3,
+          "reason": "slave payload mismatch",
+          "log_sha256": "4192a7489b2a97d9d51afd772be43e08ca824d5fc7082a8abc94e6c5ad26b26c",
+          "exit_code": 0
+        },
+        {
+          "fault": 4,
+          "reason": "master response data",
+          "log_sha256": "98e186f1e0dc562bf1ffa1d2b77fcd7ae68b21c3cd7b38825b0c34cb58d324ff",
+          "exit_code": 0
+        },
+        {
+          "fault": 5,
+          "reason": "orphan root response",
+          "log_sha256": "bc6d16ae9e6a7be1d962720730a855a8ea6d095d74614f15c47ee413976bf768",
+          "exit_code": 0
+        },
+        {
+          "fault": 6,
+          "reason": "response wrong master",
+          "log_sha256": "4d7dfdcc6b1b4bcc5e6c1cf4441e16f3d852e9635dca2c717e88908687b68132",
+          "exit_code": 0
+        }
+      ],
+      "source_sha256": {
+        "workspaces/arch03/tb/arch03_p80_route_observer.sv": "255807e8cfe04e9de23cb9b5b657881090ad8edd480d71d1d3ef89957d018e07",
+        "workspaces/arch03/tb/tb_arch03_p80_route.sv": "8113f4e765835b8473a02fd31a65b54c93ba9d00e106b70c2dc4e7c8d2cc128d",
+        "workspaces/arch03/scripts/local_verify_p80_route.py": "36f88be86393d3b4e49345707178f76c79c2b3911613554658084420dd68bd83"
+      },
+      "run": "local_runs/p80_route_20261116_024953_796864",
+      "receipt_sha256": "1149a162f4b7b905500ac0e55e9bd9cd7d43c436bcb6a5a883aec1c5162c20a9"
+    },
+    "datapath_initial": {
+      "status": "passed",
+      "scope": "p80_shared_readback_local_harness_no_original_mem_fab_no_e203_no_vendor_macros",
+      "tasks": 9,
+      "outputs": 228096,
+      "source_sha256": {
+        "workspaces/arch02/arch02/rtl/sram_port.sv": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+        "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+        "workspaces/arch02/arch02/tb/pin_mock.sv": "c48806300f03130c9948a6639103fa8e29ba2e512fb3661cf5f6dba5ccd9c417",
+        "workspaces/arch03/rtl/arch03_n1_requantize.sv": "f3d01532c435a276fa0d92b7d5dab88f26a444eb68626adcfb25838ca420c34e",
+        "workspaces/arch03/rtl/arch03_n1_systolic5x16.sv": "18061346a98aeb50e5cd422815ee7e0856950c206dbc8768f5b8e1a60f3d5c62",
+        "workspaces/arch03/rtl/arch03_n1_linear16x5.sv": "728052a5b6e70fe1c6ba50ec0303ad0c7e1f90ef4a5253bed0fd8e5e1c0d419a",
+        "workspaces/arch03/rtl/arch03_n1_decoder.sv": "d5776611d40c09a10460a3b47ed463fb26735f85d7babef200f1093656417d66",
+        "workspaces/arch03/rtl/arch03_p80_accel.sv": "060bcc5152afe77b29b73af9bfe633cb0a7083e190a4a63fa894ce356d6b2c92",
+        "workspaces/arch03/rtl/arch03_p80_transport.sv": "aa41b9a06beda6ef603942151bfbe3d73036d0eb9e53a309b0d04193b92645c4",
+        "workspaces/arch03/rtl/arch03_icb_arb2_queued.sv": "cb794c67e314b2a722a27b405cede17f8ca48d7cc10071b46427fc1f6227864b",
+        "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv": "c6a08ccf75e938d41dec60cf6fb123ca1c56074d8bc0a594642ac1cfc8b66728",
+        "workspaces/arch03/rtl/arch03_shared_sram_turnover.sv": "4dad8b04ed04aefd9f6cae43ce6a30431d61c3e75e56a783ba64bce3a20f00f8",
+        "workspaces/arch03/tb/tb_arch03_p80_datapath.sv": "0df3e1d2109202b4f136af763b251a68d55429558740f17252c436af3c2e54d6",
+        "workspaces/arch02/arch02/tb/pin_mock_config.json": "c1625585d3a97ffb3724efddb78452c8bb7c40611e474adbcf60c7b21224744d",
+        "local_runs/p80_datapath_20261116_025156_036756/arch02_sram_config.vh": "2c27538c9af6dc5081c6950248808bc97e808733462c06d145646413c51361be",
+        "workspaces/arch03/scripts/local_p80_datapath_verify.py": "68b967a4e652827501730b34a0607c516688daa8d0f57cb9c925d8b648b97749",
+        "workspaces/arch03/scripts/n1_data.py": "8386170804db998a94ee486ccad5be50fd62f5579cfaf8b900fbbda575859b4f",
+        "workspaces/arch03/scripts/n1_codec.py": "78dbc9d7d3826167e23c4c04e440adf068660cd4db7060f4d821aef16346218b",
+        "workspaces/arch03/scripts/systolic_b_codec.py": "7e5928a72c3f681421897fb5f55f4cc801af7d7722cfd34853e73a58735afa28",
+        "workspaces/arch03/scripts/dma16_batch.py": "6d615ea0f13846eceea785eddee0853f7f541b6dd60a053204ed307717c36364"
+      },
+      "run": "local_runs/p80_datapath_20261116_025156_036756",
+      "receipt_sha256": "b23a372f6e6f655900b521fe708a3e78a6eba28b9576add9b2a364db4cb5a06a",
+      "total_result_sat_checked": true,
+      "backend": "pin_mock",
+      "cpu_executed": false
+    }
+  },
+  "real_E203_tested": false,
+  "original_fabric_tested": false,
+  "final_netlist_ready": false,
+  "PPA_verified": false,
+  "stage_accepted": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "local_tool_failures": [
+    {
+      "run": "local_runs/p80_window_20261116_023822_354005",
+      "reason": "Testbench realtime exact equality after reset; fixed to sub-femtosecond comparison, independent cycle check retained"
+    },
+    {
+      "run": "local_runs/p80_route_20261116_024900_716046",
+      "reason": "Windows batch split FAULT=1; switched to explicit xsim options file; positive tests passed before runner failure"
+    }
+  ]
+}
