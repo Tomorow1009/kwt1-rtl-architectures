@@ -1,5 +1,16 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:57:58实查：原finish03父172535继续，SAIF L01–L05已通过，L06子195282运行，error=None。前台只读watcher193691；旧177140仅退出观察器。汇总等待器193002已部署并等待原17步队列退出，之后只导出报告和未知活动清单，不启动EDA或S1。所有3447/34023/77571输入结束，无半截命令；8da012f已push。T80桌面和旧八路不动。**
+
+最新恢复补充：
+
+- 已部署汇总工具8da012f：`ops-66b9496/S0_EXPORT_AFTER_FINISH_20261115.py`，SHA06bfe60625dfea206ace3cff788679afee24d30e5b4583f4b7918d8196635715；builder REQUEST04的Git原始字节SHA9ca45ab038c916ce00b64c63a7c49fdd7948b365392e5fdacfb12c19597bba0c，不能用本地CRLF文件的753d...替代。控制`ops-66b9496/s0_export01_control`；driver同ops下`s0_export01_driver.log`。
+- 原17阶段全部完成且父退出后，才建立`runs/s0_report01/t80_s0_report`，随后`runs/s0_unknown_inventory01`；失败保留、不自动重试。尚未导出报告或授予验收。不要重启等待器193002。
+- 23:52:16实读可用：/tmp 94,974,496,768B，/storage2 29,304,553,472B。本次未清理任何文件；正式归档前仍重新核查。
+- `s0_model_review_snapshot.py`及其测试已提交5430dc5：3项真实小文件测试（另含8种拒绝情形）、Python3.6通过，尚未部署/运行。绑定S0自己的最终网表、12PT、连接及别名证据，复用已有全行时序表解析器，仅聚合事实，不自动通过。未知连接/别名查询尚未运行，等完整导出/清单后再按原团队锁进行；不借N1旧数量。
+- copy-only归档工具9422302已push但未部署；还需n1_archive_runtime/t80_archive_runtime/transport_report_stage等依赖，66包不含这些模块。保留源且完整回读；旧T80归档入口不直接适用S0。
+- 一次本地中文stdin进度更新因编码报错，未写文件；随后改为apply_patch记录。5430dc5只含审核工具，不能误称该提交已记录上述进度。
+
 **23:44:14实查：原队列172535仍在SAIF阶段；L01/L02完整活动已通过，L03 simv187750已退出，正进行输出与窗口核对，尚不计为通过。gate14/354,816输出及synth08已完成，不重跑。前台只读watcher177140，所有输入结束；服务器桌面T80和旧八路不动。**
 
 **23:27:38最新实查：gate14全部完成，354,816输出逐坐标/result/saturated及写回核对通过，queue completed=2、stage=saif。父172535，SAIF VCS子180054运行54秒（1471 modules done），error=None；前台只读watcher177140。gate路径为66b9496/runs/s0_finish03_gate/t80_s0_gate，SAIF路径为同包runs/s0_finish03_saif/t80_s0_saif。全部输入结束，无半截命令；不重跑gate或综合。严格无SDF，internal total在门级不可观测的边界仍明确保留。**
