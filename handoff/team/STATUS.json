@@ -5712,7 +5712,7 @@
       "payload_sha256": "ae9ac56a16fdef489c508368fd224082bbb6b1cb1e4d7fc319d880a3c6a7b3a8",
       "eda_started": false,
       "input_session_finished": true,
-      "manifest_sha256": "7017da04075aea98b7a9dfe414e41621d3974fb43709d542ad42ac6b0f43920fc",
+      "manifest_sha256": "7017da04075aea98b7a9dfe414e41621d3974fb43709d542d42ac6b0f43920fc",
       "source_preserved": true,
       "screenshot": "takeover_local/p80_transfer_142fae2_0315.png"
     },

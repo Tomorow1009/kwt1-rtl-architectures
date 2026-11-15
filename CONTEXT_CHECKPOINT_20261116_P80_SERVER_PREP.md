@@ -12,7 +12,7 @@
 
 ## 03:59 实际准备完成，首层启动器输入中
 
-- **15378已退出，202/202全部输入完成。** 03:58:36服务器显示`P80_INPUTS_PREPARED`：917文件、source_preserved=true、eda_started=false；目标`/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2`，manifest SHA **7017da04075aea98b7a9dfe414e41621d3974fb43709d542ad42ac6b0f43920fc**。截图`takeover_local/p80_transfer_142fae2_0315.png`，Bash空闲。
+- **15378已退出，202/202全部输入完成。** 03:58:36服务器显示`P80_INPUTS_PREPARED`：917文件、source_preserved=true、eda_started=false；目标`/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2`，manifest SHA **7017da04075aea98b7a9dfe414e41621d3974fb43709d542d42ac6b0f43920fc**。截图`takeover_local/p80_transfer_142fae2_0315.png`，Bash空闲。
 - **当前唯一VNC输入exec98620**：`local_runs/p80_sweep_launch14_20261116/transfer.ps1`22行，启动12a11d启动器（首层→深度4/2/8各14例）；新鲜锁/自己EDA/空间检查在脚本内。尚未观察实际子PID，先收会话与截图，不得重启或并发输入。
 - 321a217已commit/push：P80报告工具及两个独立报告测试完成；仍只有本地工具结论，854 ops包不含这些后加报告文件。ops89行未开始，等待启动器完成后可在后台ASIC运行期间部署到新目录。
 
