@@ -61,11 +61,11 @@ def audit_batch(run, report):
     identity=read(run/'batch_identity.json')
     require(sha(run/'batch_identity.json')==report['batch_identity_sha256'] and
         identity['dataset_inventory_sha256']==data.DATA100_INVENTORY_SHA and
-        identity['samples']==20 and identity['tasks']==240 and identity['row_lanes']==5 and identity['compile_count']==1,
+        identity['samples']==20 and identity['tasks']==240 and identity['row_lanes']==4 and identity['compile_count']==1,
         'T64 batch data/hardware/firmware identity changed')
     contract=read(run/'t64_build_contract.json');soc.verify_frozen(contract)
     require(contract['schema']=='arch03-t64-asic-build-v4' and contract['diagnostic'] is None and
-        contract['row_lanes']==5 and contract['layout_id']==0x00100004 and contract['clock_period_ns']=='6.666666' and
+        contract['row_lanes']==4 and contract['layout_id']==0x00100004 and contract['clock_period_ns']=='6.666666' and
         sha(Path(contract['firmware'])/'manifest.json')==identity['firmware_manifest_sha256'], 'Wrong T64 build/firmware')
     require(sha(run/'t64_build_contract.json')==identity['build_contract_sha256'], 'T64 batch build changed')
     dataset=Path(identity['dataset']);tasks=select_first20(data.index_dataset(dataset))

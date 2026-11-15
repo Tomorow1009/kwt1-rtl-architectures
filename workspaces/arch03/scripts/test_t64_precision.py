@@ -12,6 +12,37 @@ import t64_finish_queue as queue
 
 
 class PrecisionTests(unittest.TestCase):
+    def test_four_row_batch_reaches_task_validation_and_five_row_rejected(self):
+        # A complete header must reach the independent per-task inventory.
+        # Rejecting every valid four-row run is not a successful safety check.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);run = root/'run';run.mkdir()
+            fw = root/'fw';fw.mkdir();stage.common.save(fw/'manifest.json', {})
+            identity = dict(dataset_inventory_sha256=join.data.DATA100_INVENTORY_SHA,
+                            samples=20,tasks=240,row_lanes=4,compile_count=1,
+                            firmware_manifest_sha256=join.sha(fw/'manifest.json'),dataset=str(root/'data'))
+            contract = dict(schema='arch03-t64-asic-build-v4',diagnostic=None,row_lanes=4,
+                            layout_id=0x00100004,clock_period_ns='6.666666',firmware=str(fw))
+            report = dict(schema='arch03-t64-first20-batch-v4',asic_cpu_verified=True,tasks=240,
+                          checked_outputs=6082560,checked_totals=6082560,failed=0,shift=10,
+                          numeric_format_id=0x000e0c20)
+            for identity_rows, contract_rows in ((4,4),(5,4),(4,5)):
+                identity['row_lanes']=identity_rows;contract['row_lanes']=contract_rows
+                stage.common.save(run/'t64_build_contract.json',contract)
+                identity['build_contract_sha256']=join.sha(run/'t64_build_contract.json')
+                stage.common.save(run/'batch_identity.json',identity)
+                report['batch_identity_sha256']=join.sha(run/'batch_identity.json')
+                with patch.object(join.soc,'verify_frozen'),patch.object(join.data,'index_dataset',
+                        side_effect=RuntimeError('task inventory reached')) as inventory:
+                    if identity_rows==contract_rows==4:
+                        with self.assertRaisesRegex(RuntimeError,'task inventory reached'):
+                            join.audit_batch(run,report)
+                        inventory.assert_called_once_with(root/'data')
+                    else:
+                        with self.assertRaisesRegex(ValueError,'identity changed|Wrong T64 build'):
+                            join.audit_batch(run,report)
+                        inventory.assert_not_called()
+
     def test_prior_contention_requires_identical_hardware_and_actual_cpu(self):
         with tempfile.TemporaryDirectory() as temp:
             old = Path(temp)/'old'

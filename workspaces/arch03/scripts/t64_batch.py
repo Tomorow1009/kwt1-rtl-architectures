@@ -46,7 +46,7 @@ def verify(cfg, run, platform_source, dataset, call):
     contract, compile_receipt, fw, base = soc.compile_design(cfg, run, platform_source, call)
     data.require(contract.get('diagnostic') is None and contract['row_lanes'] == 4 and
                  contract['layout_id'] == 0x00100004 and fw['configuration']['irq_enabled'] and
-                 fw['numeric_format'] == '0x000e0c20', 'T64 batch20 requires five-row SHIFT10 IRQ firmware')
+                 fw['numeric_format'] == '0x000e0c20', 'T64 batch20 requires four-row SHIFT10 IRQ firmware')
     identity = dict(schema=SCHEMA, dataset=str(dataset),
         dataset_inventory_sha256=data.DATA100_INVENTORY_SHA,
         dataset_manifest_sha256=sha(dataset/'manifest.json'),
