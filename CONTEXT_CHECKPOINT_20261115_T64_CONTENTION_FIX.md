@@ -1,5 +1,25 @@
 # T64批量通过与竞争固件修复 — 2026-11-15 16:58
 
+## 17:12实际启动
+
+17:12:52.029129首次实读：queue实际Python PID **325056**，status=running/stage=t64_contention/error=None，ASIC14+240_REUSED=True。launcher返回的325042是启动进程，不代替state的实际PID。**前台只读watcher PID325493**，每30秒显示；需要输命令前先截图并Control_L c仅退出观察器，不终止后台队列。89627输入已结束。截图t64_serial03_first_watch.png。
+
+新队列PID325042，3552163/runs/t64_serial03；request为ops-3552163/singlelock_request05.json，log同ops/t64_serial03.log。launcher02源码SHA1d2fe4cfca174897b6581ec0babc296feb46935de4ec677c9f592f2f46a163d2，保存handoff/team/evidence/T64_CONTENTION_REPAIR_LAUNCH02_20261115.py。
+
+初次launcher01因共享盘重新满在free检查拒绝，无队列/请求/EDA。第二次只对旧T64 delta01/fix02输入41个完全相同文件去重，原路径/字节全部保留，free4194304B。prepared/complete回执ops-3552163/contention_repair_dedup02_*.json。没有删除T80、旧八路或历史结果。截图t64_rowfix_launch02_result.png。
+
+全部包/launcher传输完成50436/56052/48883。正在启动只读观察器local_runs/t64_remainder_watch.py，新前台状态须截图确认；后台queue不能中断。原14/240明确跳过。源码/生产固件不变；只修诊断行数。Git已push a8e3fa4，最新运行记录待提交。
+
+## 17:08部署补充
+
+修复提交35521631b9fdedff03ec6e7c50f1558e38b2aafd；正式包local_runs/t64_resume_3552163/reconstructed，881文件，manifest81f861731d29df3252c775e8bc1dcab8628b2f2f79c71fa504827c9e7d2ed763。三固件本地校验通过，生产/性能/恢复输入相同；竞争boot只改offset1864的一个字节21→17。ROWS5负编译已指定cache重试并正确拒绝。
+
+**VNC包传输exec50436正在进行，32行，状态local_runs/t64_resume_3552163/transfer_state.json。不能同时输入新命令。** 原本地打包脚本因SequenceMatcher对重复verilog文本低效，改为压缩完整镜像后约9秒完成；旧本地进程19276/5916已结束，exec4438 exit1。PowerShell Stop-Process报错，最终仅对精确匹配的本地helper用taskkill终止，没有动服务器进程。
+
+17:01:02.068506服务器只读：LOCK ABSENT、EDA[]、tmp99410456576B、shared401604608B。新启动器准备为handoff/team/evidence/T64_CONTENTION_REPAIR_LAUNCH_20261115.py，SHA cf806b467b0e125f0134b42c2cc49dc61e620aad275b3b9e420918f509543b0b；传输入口local_runs/transfer_rowfix_launch.ps1，共7行，尚未执行。它会新建ops-3552163/request04、t64_serial03，引用原ASIC14与240，跳过成功阶段，只从contention接续。无需存储去重，任何原任务/锁存在则拒绝。
+
+等32行包传输完成，截图确认T64_ROW_FIX_READY，再执行7行launcher并观察新queue。只读自动观察器已准备local_runs/t64_remainder_watch.py及takeover_local/t64_remainder_watch_command.txt，尚未启动。Git最新a8e3fa4已push，含ASIC240观察JSON与新版验收表。桌面T80与旧8路仍未动，G64未开始。
+
 恢复先读AGENTS、T64_G64_RESUME_PLAN_20261115.md、原N1_T80_T64_G64计划及本记录。桌面T80和旧8路完全保护；仅前20条240任务，G64须等T64完整验收。
 
 ## 已完成
