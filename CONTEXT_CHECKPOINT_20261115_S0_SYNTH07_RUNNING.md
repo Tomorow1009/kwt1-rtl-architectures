@@ -1,5 +1,9 @@
 # S0 synth07正在运行 — 2026-11-15 22:00
 
+**22:14:21最近观察：父139859仍running、CPU/SoC子143046 CPU99.7%、elapsed9:14，日志在优化ITCM WEN相关路径，无错误；未看到最终网表/面积/时序。前台现为新只读live watcher（PID未从截屏读出），其本地命令`local_runs/s0_live_watch_command.txt`会自动转看finish01并在终态退出；不是shell。63916及此前全部输入均结束。自动接续143305不重复启动。**
+
+**报告准备：** 已只读核验原T80请求`/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4/runs/t80_final_report01/request.json`，SHA **ec74187f550a70e5bbe0662862b8db5c142448baa223855099b5e391612d9e43**。本地新`handoff/team/evidence/S0_BUILD_REPORT_REQUEST_20261115.py`仅准备请求（没有运行/部署）：finish01全部17步顺序完整并终态后，复用旧请求的同源ASIC/240/FLOAT三项，综合/gate/SAIF/PT全部使用新S0引用；拒绝不完整队列的本地夹具及Python3.6语法通过。随后调用包内原`s0_report.py`导出，不能把准备请求当正式报告。旧FLOAT位于另一个/tmp根，仅按固定旧请求与manifest身份读取，不注入新runtime_roots或扩宽路径权限。
+
 **22:06:56最新实际状态：加速器增量已完成，父139859仍running/error=None；DC子143046正在CPU/SoC块。自动接续等待器143305已实际启动，源码cc21f8d，`ops-9ffb2a9/s0_followup_cc21f8d.log`显示等待synth07 running；finish01尚未启动。85724/75913输入均结束；当前VNC前台Bash空闲（无watcher）。需要继续时先只读现有state/进程，绝不再启动synth或等待器。**
 
 **22:04更新：共享块已完成，22:03:36实际观察父139859、DC141571正在accelerator增量映射，CPU99.2%、elapsed1:48，无错误。只读watcher140380已由Ctrl+C正常退出，后台综合不动。当前唯一输入exec85724正在传输18行`local_runs/s0_followup_cc21f8d/transfer.ps1`，不要并发输入或重复执行。接续脚本SHA841ced330ffedd9e37b1640615609bfa939894fb5926789da168bc478167c0dc；部署后会启动仅等待synth07终态的后台观察器，全部门槛通过才一次启动finish01，任何失败即保留并停止，不自动重试。尚未观察实际部署/等待器PID。cc21f8d已push。**
