@@ -108,7 +108,8 @@ def main():
     print('P80_CACHE_ARCHIVED',len(files),info['archive_sha256'],'FREE',info['free_bytes'],flush=True)
     original=ROOT/'p80_sweep01_server.py'
     assert sha(original)=='12a11d70044f39fee470a21a2996931b2604b23357edc2cb83b720e0e29aea21'
-    text=original.read_text().replace('p80_sweep01','p80_sweep02').replace('_01','_02')
+    text=original.read_text().replace('p80_sweep01','p80_sweep02')
+    text=text.replace('p80_pilot_d4_01','p80_pilot_d4_02').replace('p80_fixed_d%d_01','p80_fixed_d%d_02')
     path=ROOT/'p80_sweep02_server.py'
     assert not path.exists() and not (ROOT/'p80_sweep02.json').exists()
     idle()
