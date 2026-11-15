@@ -1,5 +1,7 @@
 # S0只重链接恢复准备 — 2026-11-15 22:30
 
+**22:48恢复核对：已重读计划、AGENTS、检查点及实际VNC；a5f138e修正包本地853文件/137模块/Python3.6核对通过，manifest c4774571c8aebe323657a5aaebc017f24324396b28ea6b2852e32e40a213b924。当前唯一VNC输入exec49908，32行`local_runs/s0_finish_a5f138e/transfer.ps1`，勿并发键入或重跑。尚无新EDA。新启动器14e6b1b已push：`S0_SYNTH08_RELINK02_LAUNCH_20261115.py`，本地12行传输目录`s0_synth08_launch_14e6b1b`尚未执行，SHA5eceb6cfe40e912285d83a47a946af0facb53068a0d821cdf5b57a679caa54ee。finish02和report02仅本地准备，旧固定0e/9ff启动器禁用。桌面T80及旧八路不动。**
+
 **22:41重要修正：0e31包已部署，但c214启动器在cache预检的state SHA处停止，尚未创建synth08 session/取锁/启动EDA。实际逐8字符读回为`43294b52 8a89c8d0 239ccd5e 92ee597f c2653121 7fe3c524 50521120 30744405`，即43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405。此前抄写的43294052…错误，不能继续使用；原state仍是22:20:13.543084的同一失败终态，未修改。当前Bash空闲，45059/96327全部结束。只修改新版本引用并再核验，不放宽校验，旧0e包保留。**
 
 **22:36更新：0e31e5b包853文件及manifest已在服务器核验成功，78210传输结束。当前唯一输入exec45059为12行`s0_synth08_launch_c21429d/transfer.ps1`，SHA dbe1aacac49078762629dc58c89fd3a1d237e3f72a036744305edfd9f0f9da62，来源c21429d（已push）；收完后将自动做严格cache预检并尝试新synth08。尚未观察实际PID，勿再手动启动或并发键入。新`S0_SYNTH08_FINISH_LAUNCH_20261115.py`仅本地准备、尚未部署；旧所有finish等待器保持停止。**

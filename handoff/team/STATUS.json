@@ -4425,7 +4425,7 @@
       "foreground_readonly_watcher_pid": null,
       "source_commit": "9ffb2a987ae8261e1d27e80fefa89886b7d4d2c5",
       "session": "s0_synth07",
-      "observed_at": "2026-11-15T22:14:21+08:00",
+      "observed_at": "2026-11-15T22:40:43+08:00",
       "manifest_sha256": "d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba",
       "dc_cpu_percent": 99.7,
       "dc_elapsed_seconds": 554,
@@ -4498,6 +4498,26 @@
       "transfer_session_completed": true,
       "session_created": false,
       "eda_started": false
+    },
+    "s0_relink_corrected_transfer": {
+      "source_commit": "a5f138e",
+      "manifest_sha256": "c4774571c8aebe323657a5aaebc017f24324396b28ea6b2852e32e40a213b924",
+      "status": "transferring",
+      "exec_session": 49908,
+      "files": 853,
+      "modules": 137,
+      "python36_syntax_passed": true
+    },
+    "synth08_launcher02": {
+      "source_commit": "14e6b1b",
+      "sha256": "5eceb6cfe40e912285d83a47a946af0facb53068a0d821cdf5b57a679caa54ee",
+      "status": "prepared_not_executed",
+      "session": "s0_synth08",
+      "mapping_repeated": false
+    },
+    "s0_report_request_builder02": {
+      "path": "handoff/team/evidence/S0_BUILD_REPORT_REQUEST02_20261115.py",
+      "status": "prepared_not_executed"
     }
   }
 }
