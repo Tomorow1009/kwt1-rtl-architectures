@@ -4502,22 +4502,47 @@
     "s0_relink_corrected_transfer": {
       "source_commit": "a5f138e",
       "manifest_sha256": "c4774571c8aebe323657a5aaebc017f24324396b28ea6b2852e32e40a213b924",
-      "status": "transferring",
+      "status": "server_manifest_verified",
       "exec_session": 49908,
       "files": 853,
       "modules": 137,
-      "python36_syntax_passed": true
+      "python36_syntax_passed": true,
+      "exec_session_completed": true,
+      "observed_at": "2026-11-15T22:50:03+08:00"
     },
     "synth08_launcher02": {
       "source_commit": "14e6b1b",
       "sha256": "5eceb6cfe40e912285d83a47a946af0facb53068a0d821cdf5b57a679caa54ee",
-      "status": "prepared_not_executed",
+      "status": "cache_preflight_passed_relink_started",
       "session": "s0_synth08",
-      "mapping_repeated": false
+      "mapping_repeated": false,
+      "transfer_session": 78220,
+      "transfer_completed": true,
+      "observed_at": "2026-11-15T22:51:45+08:00",
+      "eda_pid_observed": true
     },
     "s0_report_request_builder02": {
       "path": "handoff/team/evidence/S0_BUILD_REPORT_REQUEST02_20261115.py",
       "status": "prepared_not_executed"
+    },
+    "synth_attempt08": {
+      "source_commit": "a5f138e",
+      "manifest_sha256": "c4774571c8aebe323657a5aaebc017f24324396b28ea6b2852e32e40a213b924",
+      "pid": 163793,
+      "dc_pid": 164078,
+      "status": "running",
+      "started": "2026-11-15T22:52:08.115738",
+      "observed_at": "2026-11-15T22:52:36+08:00",
+      "stage": "final_link_only",
+      "mapping_repeated": false,
+      "final_netlist_ready": false
+    },
+    "synth08_followup_waiter": {
+      "source_commit": "14e6b1b",
+      "sha256": "78b5601e1f85a0d8030939b66ca335c02cc665f4c332efef89e543d94b83d19d",
+      "transfer_session": 51072,
+      "status": "transferring",
+      "new_eda_started": false
     }
   }
 }
