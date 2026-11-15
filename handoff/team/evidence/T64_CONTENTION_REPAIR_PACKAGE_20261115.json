@@ -1,0 +1,26 @@
+{
+  "changed": [
+    "firmware_contention/driver.elf",
+    "firmware_contention/manifest.json",
+    "firmware_contention/shift_10.bin",
+    "firmware_contention/shift_10.verilog",
+    "workspaces/arch03/scripts/t64_singlelock_queue.py",
+    "workspaces/arch03/sw/main_t64_contention.c"
+  ],
+  "commit": "35521631b9fdedff03ec6e7c50f1558e38b2aafd",
+  "files": 881,
+  "lines": 32,
+  "manifest_sha256": "81f861731d29df3252c775e8bc1dcab8628b2f2f79c71fa504827c9e7d2ed763",
+  "performance_and_sequence_firmware_unchanged": true,
+  "production_hardware_unchanged": true,
+  "deployed": false,
+  "server_cpu_test_passed": false,
+  "boot_byte_differences": [
+    {
+      "offset": 1864,
+      "old": 21,
+      "new": 17
+    }
+  ],
+  "scope": "Diagnostic firmware only; production ASIC14 and first20 batch unchanged"
+}
