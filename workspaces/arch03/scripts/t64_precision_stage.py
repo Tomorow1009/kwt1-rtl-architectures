@@ -84,10 +84,13 @@ def main():
         p.add_argument('--'+name, type=Path, required=True)
     for name in ('session', 'archive-sha256', 'batch-sha256', 'operations-manifest-sha256'):
         p.add_argument('--'+name, required=True)
+    p.add_argument('--runtime-root', type=Path)
+    p.add_argument('--runtime-manifest-sha256')
     a = p.parse_args()
     join.require(re.fullmatch('[A-Za-z0-9_-]{1,64}', a.session), 'Invalid new T64 session')
     ops = operations_identity(a.operations_manifest_sha256)
-    cfg = t64_paths.configure(join.read(common.ROOT/'handoff/team/server_config.json'), common.ROOT)
+    cfg = t64_paths.configure(join.read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
+                             a.runtime_root, a.runtime_manifest_sha256)
     t64_paths.allowed_run(a.batch_run, cfg)
     packaged = common.inputs()
     for module in (numeric, __import__('n1_data'), __import__('n1_precision'), __import__('t64_soc')):

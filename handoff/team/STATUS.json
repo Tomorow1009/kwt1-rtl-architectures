@@ -3997,5 +3997,25 @@
       "started": "2026-11-13T22:36:41.395248",
       "last_observed": "2026-11-13T22:41:37+08:00"
     }
+  },
+  "t64_g64_resume_20261115": {
+    "plan": "workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md",
+    "stage": "T64_tools_freeze",
+    "protected_desktop": "/storage2/2026contest/server4/s4_21usr/Desktop/T80_Delivery_20261113",
+    "t80_desktop_modified": false,
+    "old8_modified": false,
+    "t64_hardware": "e2e83ce121963d499ea67914b4c34a05a0c58f27",
+    "tool_tests_passed": 32,
+    "formal_samples": 20,
+    "formal_tasks": 240,
+    "full100_authorized": false,
+    "server_observed": "2026-11-15T14:58:04.295978+08:00",
+    "server_lock": false,
+    "server_eda_processes": [],
+    "shared_free_bytes": 0,
+    "tmp_free_GiB": 93.53,
+    "t64_formal_started": false,
+    "g64_started": false,
+    "next": "Freeze fresh T64 runtime with same RTL/firmware and corrected four-transfer activity tooling; ASIC14 then batch20 and own PPA."
   }
 }

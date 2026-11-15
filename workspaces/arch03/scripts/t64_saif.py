@@ -12,11 +12,11 @@ import re
 import shutil
 from pathlib import Path
 from server_run import sha,save
-from icb32_power import stream_sha,window_values
+from icb32_power import stream_sha
 from native_saif_replay import capture_commands,verify_inputs
 from native_saif_activity import audit
 from t64_gate import verify_synthesis,SCOPE,check_capture,parse_result
-from t64_window import read_window
+from t64_window import read_window,window_values
 from t64_soc import MARKERS
 import n1_data as data
 from t64_paths import allowed_run
@@ -78,12 +78,13 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
     if sha(gate/'source_inputs.json')!=report['source_inputs_sha256']:raise ValueError('N1 gate input receipt changed')
     before=read(gate/'source_inputs.json');verify_inputs(before)
     tool_inputs={str(Path(__file__).with_name(name)):stream_sha(Path(__file__).with_name(name))
-                 for name in ('t64_saif.py','t64_paths.py','t64_gate.py')}
+                 for name in ('t64_saif.py','t64_paths.py','t64_gate.py','t64_window.py',
+                              'native_saif_replay.py','native_saif_activity.py')}
     # Pilot size is measured from R4, with a 2x allowance for the N1
     # design. Re-estimate from actual N1 files after every completed capture.
     maximum=max(2*method['activity']['bytes'],128*1024**2)
     storage_guard(run,len(cases),maximum)
-    compile_command,_,_=capture_commands(gate,run,rows[cases[0]])
+    compile_command,_,_=capture_commands(gate,run,rows[cases[0]],window_reader=window_values)
     if compile_command[0]!=cfg['tools']['vcs']:raise ValueError('VCS executable changed')
     save(run/'compile_command.json',compile_command)
     log=call(compile_command,run,'compile.log')
@@ -91,7 +92,7 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
     results=[]
     for case in cases:
         row=rows[case];window_values(row['task_window'])
-        _,runtime,ucli=capture_commands(gate,run,row)
+        _,runtime,ucli=capture_commands(gate,run,row,window_reader=window_values)
         script=run/(case+'_capture.tcl');script.write_text(ucli)
         runtime[-1]=str(script)
         save(run/(case+'_command.json'),runtime)
@@ -110,7 +111,7 @@ def verify(cfg,run,gate,gate_sha,qualified,qualified_sha,cases,call):
         if (len(irq)!=1 or len(cpu)!=1 or int(cpu[0])!=row['cpu_cycles'] or
             tuple(map(int,irq[0]))!=tuple(int(expected[k]) for k in ('enabled','external','timer','wfi','events','unhandled'))):
             raise ValueError('N1 native replay IRQ/WFI proof differs')
-        activity=audit(run/(case+'.saif'),window)
+        activity=audit(run/(case+'.saif'),window,window_reader=window_values)
         evidence=dict(case=case,outputs=25344,total_checked=False,internal_total_observable=False,
             numeric_format='0x000e0c20',task_window=window,activity=activity,
             integer_capture_sha256=stream_sha(run/(case+'.csv')),layout_sha256=row['layout_sha256'],

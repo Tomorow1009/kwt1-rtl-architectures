@@ -13,6 +13,7 @@ import sys
 import time
 
 import server_run as common
+import t64_paths
 from n1_process import atomic_save, ProcessLedger
 from t64_precision_stage import operations_identity
 from t64_precision_join import require, read
@@ -105,6 +106,12 @@ def execute(request, queue):
     require(str(common.ROOT) == request['bundle'], 'Wrong frozen T64 bundle import')
     require(common.sha(common.ROOT/'manifest.json') == request['bundle_manifest_sha256'], 'Bundle changed')
     common.inputs()
+    runtime_args = []
+    if request.get('runtime_root') is not None:
+        t64_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
+                            Path(request['runtime_root']), request['bundle_manifest_sha256'])
+        runtime_args = ['--runtime-root', request['runtime_root'],
+                        '--runtime-manifest-sha256', request['bundle_manifest_sha256']]
     ops = operations_identity(request['operations_manifest_sha256'])
     require(request['queue_sha256'] == common.sha(Path(__file__)), 'Queue source changed')
     require(Path(request['operations']).resolve() == Path(ops['root']).resolve(), 'Wrong operations root')
@@ -127,7 +134,7 @@ def execute(request, queue):
         script = str(common.ROOT/'workspaces/arch03/scripts/t64_server.py')
         def stage(name, suffix, extra=()):
             session = prefix+'_'+suffix
-            command = [sys.executable, '-B', '-u', script, name, '--session', session]+list(extra)
+            command = [sys.executable, '-B', '-u', script, name, '--session', session]+runtime_args+list(extra)
             return run_child(command, common.ROOT/'runs'/session/('t64_'+name), 't64_'+name, queue, state, lock)
         if prior is None:
             stage('contention', 'contention', ['--cases', 'layer_01'])
@@ -158,7 +165,7 @@ def execute(request, queue):
         command = [sys.executable, '-B', '-u', '-c', bootstrap, '--session', session,
             '--operations-manifest-sha256', request['operations_manifest_sha256'],
             '--archive', request['archive'], '--archive-sha256', request['archive_sha256'],
-            '--dataset', request['dataset'], '--batch-run', batch['run'], '--batch-sha256', batch['sha256']]
+            '--dataset', request['dataset'], '--batch-run', batch['run'], '--batch-sha256', batch['sha256']]+runtime_args
         run_child(command, common.ROOT/'runs'/session/'t64_precision', 't64_precision', queue, state, lock)
         state.update(status='reports_ready_review_required', finished=datetime.datetime.now().isoformat())
     except BaseException as exc:

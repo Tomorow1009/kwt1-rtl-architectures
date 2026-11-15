@@ -23,7 +23,8 @@ import t64_gate as gate_tools
 from t64_power import extract_reports
 from native_saif_activity import audit as activity_audit
 from native_saif_replay import verify_inputs
-from icb32_power import stream_sha as sha,window_values
+from icb32_power import stream_sha as sha
+from t64_window import window_values
 from icb32_report import configuration_identity,clock_conditions
 from dma16_report import read
 from icb32_delivery_sdc import restore_clock

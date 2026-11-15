@@ -1,6 +1,26 @@
 """Complete four-transfer task accounting; never reuse the N1 three-transfer gate."""
 from decimal import Decimal
 import re
+import soc_power
+
+
+def window_values(window):
+    """Validate the T64 four-transfer contract before sharing timing utilities."""
+    encoded = window.get('encoded_bytes')
+    require(type(encoded) is int and 32 <= encoded <= 47008 and encoded % 4 == 0,
+            'Invalid T64 encoded size')
+    require(window.get('boundary') == 'first_source_valid_to_final_write_response_ack_with_drain_proof'
+            and window.get('transfer_bytes') == encoded * 3 + 50688
+            and window.get('transfer_transactions') == 3 * (encoded // 4) + 12672,
+            'T64 power requires source read, shared write, shared read and output write')
+    require(Decimal(str(window['period_ns'])) == Decimal('6.666666'), 'T64 clock mismatch')
+    values = soc_power.window_values(window)
+    start, end, cycles = (int(window[k]) for k in ('start_cycle', 'end_cycle', 'cycles'))
+    require(start >= 0 and end - start == cycles and cycles >= window['transfer_transactions']
+            and int(window['finished_cycle']) >= end, 'T64 cycle/drain proof mismatch')
+    finished = Decimal(str(window['finished_ns']))
+    require(finished.is_finite() and finished >= Decimal(values[1]), 'T64 drain precedes final ACK')
+    return values
 
 
 def require(value, message):

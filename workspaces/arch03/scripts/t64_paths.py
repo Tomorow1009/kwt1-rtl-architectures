@@ -77,8 +77,9 @@ def _manifest(bundle,expected,cfg,uid,ops=False):
     manifest=json.loads(path.read_text());files=manifest['files']
     required={'handoff/team/server_config.json','workspaces/arch03/scripts/t64_server.py'}
     required.update('workspaces/arch03/rtl/arch03_t64_'+name+'.sv'
-        for name in ('transport','accel'))
-    required.update('workspaces/arch03/rtl/arch03_n1_'+name+'.sv' for name in ('requantize','decoder','systolic5x16','linear16x5'))
+        for name in ('systolic4x16','linear16x4','accel'))
+    required.add('workspaces/arch03/rtl/arch03_t80_transport.sv')
+    required.update('workspaces/arch03/rtl/arch03_n1_'+name+'.sv' for name in ('requantize','decoder','systolic5x16'))
     if ops:required.add('workspaces/arch03/scripts/t64_paths.py')
     require(isinstance(files,dict) and required<=set(files),'Not a complete frozen T64 bundle manifest')
     for relative,expected_file in files.items():
