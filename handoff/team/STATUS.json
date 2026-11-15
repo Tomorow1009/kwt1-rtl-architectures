@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 immutable 142fae2 functional bundle transferring; no P80 server task launched",
+    "current_stage": "P80 shared-lock space recovery; first server sweep failed before EDA",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5667,8 +5667,10 @@
         }
       ]
     },
-    "current_local_sessions": {},
-    "last_server_observation": "2026-11-16T03:14:05+08:00; lock absent, tmp free92072710144/shared8115978240, ongoing visible transfer; no P80 EDA",
+    "current_local_sessions": {
+      "9206": "14-line N1 ASIC14 regular compiler cache verified archive; then fresh P80 sweep02; no second VNC input"
+    },
+    "last_server_observation": "2026-11-16T04:04:04+08:00 N1 ASIC14 csrc35 regular files10643394 bytes passed; Bash idle before archive input. Shared free1048576B/tmp92038000640B as of04:01:54",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5702,13 +5704,17 @@
       "fresh_link_library_inputs_bound": true
     },
     "p80_transfer_142fae2": {
-      "status": "typing_in_progress",
+      "status": "server_prepared_917_files",
       "session_id": 15378,
       "state": "local_runs/p80_transfer_142fae2_0315/transfer_state.json",
       "lines": 202,
       "target": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2",
       "payload_sha256": "ae9ac56a16fdef489c508368fd224082bbb6b1cb1e4d7fc319d880a3c6a7b3a8",
-      "eda_started": false
+      "eda_started": false,
+      "input_session_finished": true,
+      "manifest_sha256": "7017da04075aea98b7a9dfe414e41621d3974fb43709d542ad42ac6b0f43920fc",
+      "source_preserved": true,
+      "screenshot": "takeover_local/p80_transfer_142fae2_0315.png"
     },
     "p80_precision_tools": {
       "status": "local_only_2_negative_scope_checks_passed",
@@ -5716,6 +5722,23 @@
       "fresh_same_FLOAT_recompute_required": true,
       "server_run": null,
       "script": "workspaces/arch03/scripts/p80_precision_join.py"
+    },
+    "p80_sweep01": {
+      "status": "failed_before_EDA",
+      "pid": 303160,
+      "child": 303161,
+      "completed": 0,
+      "error": "ENOSPC creating original shared team lock",
+      "root": "/tmp/s4_21usr_p80_20261116_0315",
+      "protected_desktop_modified": false,
+      "old8_modified": false
+    },
+    "p80_space_recovery": {
+      "script": "handoff/team/evidence/P80_CACHE_SPACE_RECOVERY_20261116.py",
+      "script_sha256": "18ec144d92c98cd7c1f840002a6a7e7ac24942df95f1054fc613de332da9b66f",
+      "status": "visible_transfer_in_progress",
+      "result_observed": false,
+      "source_kind": "completed_N1_ASIC14_regular_compiler_cache_only"
     }
   }
 }
