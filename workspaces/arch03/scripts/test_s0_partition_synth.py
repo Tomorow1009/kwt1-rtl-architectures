@@ -38,9 +38,10 @@ class S0MappingTests(unittest.TestCase):
 
     def test_final_link_reloads_three_ddcs_without_compiling_or_fixing_nets(self):
         with tempfile.TemporaryDirectory() as d:
-            run=Path(d);(run/'libs').mkdir()
-            for name in ('standard.db','small.db','large.db'):(run/'libs'/name).touch()
-            text=s.top_script(Path('/original'),run,{'standard_library_member':'standard.db'})
+            run=Path(d);(run/'libs').mkdir();origin=run/'original';(origin/'libs').mkdir(parents=True)
+            for name in ('standard.db','small.db','large.db'):
+                (run/'libs'/name).touch();(origin/'libs'/name).touch()
+            text=s.top_script(origin,run,{'standard_library_member':'standard.db'})
             active='\n'.join(x for x in text.splitlines() if not x.lstrip().startswith('#'))
             self.assertNotIn('compile ',active)
             self.assertNotIn('set_fix_multiple_port_nets',active)
@@ -50,6 +51,8 @@ class S0MappingTests(unittest.TestCase):
             self.assertIn('s0_export u_arch03_accel accelerator_after_link.v',active)
             self.assertIn('report_timing -through $pins -delay_type min',active)
             self.assertIn('write -format ddc -hierarchy -output mapped.ddc',active)
+            self.assertIn('{'+str(origin/'libs'/'standard.db')+'}',active)
+            self.assertNotIn('{'+str(run/'libs'/'standard.db')+'}',active)
             self.assertEqual(tkinter.Tcl().call('info','complete',text),1)
 
     def test_blocks_use_baseline_context_and_cpu_preserves_them(self):

@@ -23,6 +23,7 @@ def main():
     p.add_argument('--runtime-manifest-sha256',required=True)
     p.add_argument('--runtime-evidence',nargs=2,action='append',default=[])
     p.add_argument('--recovery-run',type=Path);p.add_argument('--recovery-state-sha256')
+    p.add_argument('--reuse-blocks-run',type=Path);p.add_argument('--reuse-blocks-state-sha256')
     p.add_argument('--synth-run',type=Path);p.add_argument('--synth-sha256')
     p.add_argument('--gate-run',type=Path);p.add_argument('--gate-sha256')
     p.add_argument('--qualification-run',type=Path);p.add_argument('--qualification-sha256')
@@ -35,6 +36,15 @@ def main():
     t80_paths.allowed_run(a.origin,cfg,'Original T80 synthesis')
     manifest=common.inputs()
     recovery=None
+    reuse=None
+    if a.reuse_blocks_run is not None or a.reuse_blocks_state_sha256 is not None:
+        require(a.stage=='synth' and a.reuse_blocks_run is not None and
+                re.fullmatch('[a-f0-9]{64}',a.reuse_blocks_state_sha256 or '') and
+                a.recovery_run is None and a.recovery_state_sha256 is None,'Invalid cache-only relink request')
+        t80_paths.allowed_run(a.reuse_blocks_run,cfg,'Completed S0 block caches')
+        import s0_relink
+        s0_relink.verify(a.reuse_blocks_run,a.reuse_blocks_state_sha256,cfg,common.ROOT)
+        reuse=dict(run=str(a.reuse_blocks_run),state_sha256=a.reuse_blocks_state_sha256)
     if a.recovery_run is not None or a.recovery_state_sha256 is not None:
         require(a.stage=='synth' and a.recovery_run is not None and
                 re.fullmatch('[a-f0-9]{64}',a.recovery_state_sha256 or ''),'Invalid S0 recovery request')
@@ -75,7 +85,10 @@ def main():
         common.save(session/'storage_preflight.json',dict(free_bytes=free,required_bytes=required,margin=1.2))
         record.update(status='running',run=str(run));atomic_save(session/'state.json',state)
         if a.stage=='synth':
-            report=mapping.execute(cfg,run,a.origin,ledger.call,recovery)
+            if reuse is not None:
+                report=s0_relink.execute(cfg,run,reuse['run'],reuse['state_sha256'],ledger.call)
+            else:
+                report=mapping.execute(cfg,run,a.origin,ledger.call,recovery)
         elif a.stage=='capability':
             text='''
 set_app_var sh_continue_on_error false

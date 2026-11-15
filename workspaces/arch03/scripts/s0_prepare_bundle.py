@@ -20,7 +20,7 @@ ALLOWED = {
     'partition_synth_contract.py','n1_process.py','t80_gate.py','t80_structure.py',
     'b0_saif_unknown_inventory.py','transport_review_contract.py','t64_window.py',
     'saif_unknown_connections.py','saif_unknown_alias_review.py','saif_static_probability_review.py',
-    's0_recovery.py')}
+    's0_recovery.py','s0_relink.py')}
 ALLOWED.update(('handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json',
     'workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md',
     'workspaces/arch03/S0_PARTITION_IMPLEMENTATION_NOTES.md'))

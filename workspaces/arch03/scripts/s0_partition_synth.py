@@ -212,7 +212,12 @@ def cpu_script(origin, run):
 
 def top_script(origin, run, cfg):
     # Exact existing final report implementation; no compile during final link.
-    text = baseline.script(run, cfg)
+    # DDCs retain canonical library paths. Loading an identical copy from the
+    # new output directory creates duplicate logical libraries in this DC.
+    databases=list((run/'libs').glob('*.db'))
+    require(len(databases)==3,'Expected three copied reporting libraries')
+    for path in databases:checked_file(origin/'libs'/path.name,digest(path))
+    text = baseline.script(origin, cfg)
     text = baseline.replace_once(text, 'read_ddc linked.ddc',
         DDC_REPLACE+read_replacing_designs(run/'blocks/cpu_soc/mapped.ddc')+load_children(run))
     text = baseline.replace_once(text, 'compile -map_effort high', '# S0 final link only; mapping occurred per block')
@@ -442,8 +447,15 @@ def execute(cfg, run, origin, call, recovery=None):
     child_proof = {}
     for block in BLOCKS:
         child_proof[block] = dict(cpu=same_blocks(run/'blocks'/block/'mapped.v',run/'blocks/cpu_soc'/(block+'_after_cpu.v')))
+    return finalize(cfg,run,origin,call,before,fingerprints,timing,child_proof,
+                    recovered if recovery is not None else None)
+
+
+def finalize(cfg,run,origin,call,before,fingerprints,timing,child_proof,recovered=None,cache_reuse=None):
     (run/'final_link.tcl').write_text(top_script(origin,run,cfg))
+    link_started=time.monotonic()
     log=call([cfg['tools']['dc_shell'],'-f',run/'final_link.tcl'],run,'final_link.log')
+    link_seconds=time.monotonic()-link_started
     for block in BLOCKS:
         child_proof[block]['top']=same_blocks(run/'blocks'/block/'mapped.v',run/(block+'_after_link.v'))
     save(run/'child_identity.json',child_proof)
@@ -459,9 +471,10 @@ def execute(cfg, run, origin, call, recovery=None):
     report.update(scope='s0_t80_partitioned_whole_soc_task_mode',project_limit_mm2=1.0,
         area_summary={k:v for k,v in area.items() if k!='rows'},
         partition_area={k:v for k,v in attribution.items() if k!='rows'},block_mapping_seconds=timing,
-        block_cache_reused=False,original_unmapped_link_reused=True,child_definitions_checked=True,
+        block_cache_reused=cache_reuse is not None,original_unmapped_link_reused=True,child_definitions_checked=True,
+        final_link_seconds=link_seconds,partition_cache_reuse=cache_reuse,
         stage_accepted=False)
-    if recovery is not None:
+    if recovered is not None:
         report['incremental_recovery']=dict(seed_sha256=digest(Path(recovered['seed_ddc'])),
             failed_run=recovered['failed_run'],failed_state_sha256=recovered['failed_state_sha256'],
             failed_seed_tool_elapsed_seconds=recovered['failed_seed_tool_elapsed_seconds'],

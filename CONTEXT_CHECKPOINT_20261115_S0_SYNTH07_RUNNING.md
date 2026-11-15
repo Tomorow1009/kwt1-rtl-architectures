@@ -1,5 +1,9 @@
 # S0 synth07正在运行 — 2026-11-15 22:00
 
+**22:19:52最新实际进展：三块映射及CPU后两子块token一致检查已完成。父139859仍running，当前DC148878在最终顶层链接/完整报告，CPU100%、elapsed1:49、error=None；SysMem端口检查marker已出现，正在输出shared_sram_after_link.v及跨块报告。当前前台watcher147221；自动接续143305仍在。最终summary/面积/setup/hold尚未读取，不能先报PASS。**
+
+**22:16:21观察：CPU/SoC首轮映射已结束、正在incremental优化；同一DC143046 CPU99.4%、elapsed11:15，无错误。当前前台live watcher PID已读出为147221；要输入先截图并仅Ctrl+C退出此观察器。自动接续等待器143305继续，不重复启动。最新532c5bf已push。**
+
 **22:14:21最近观察：父139859仍running、CPU/SoC子143046 CPU99.7%、elapsed9:14，日志在优化ITCM WEN相关路径，无错误；未看到最终网表/面积/时序。前台现为新只读live watcher（PID未从截屏读出），其本地命令`local_runs/s0_live_watch_command.txt`会自动转看finish01并在终态退出；不是shell。63916及此前全部输入均结束。自动接续143305不重复启动。**
 
 **报告准备：** 已只读核验原T80请求`/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4/runs/t80_final_report01/request.json`，SHA **ec74187f550a70e5bbe0662862b8db5c142448baa223855099b5e391612d9e43**。本地新`handoff/team/evidence/S0_BUILD_REPORT_REQUEST_20261115.py`仅准备请求（没有运行/部署）：finish01全部17步顺序完整并终态后，复用旧请求的同源ASIC/240/FLOAT三项，综合/gate/SAIF/PT全部使用新S0引用；拒绝不完整队列的本地夹具及Python3.6语法通过。随后调用包内原`s0_report.py`导出，不能把准备请求当正式报告。旧FLOAT位于另一个/tmp根，仅按固定旧请求与manifest身份读取，不注入新runtime_roots或扩宽路径权限。

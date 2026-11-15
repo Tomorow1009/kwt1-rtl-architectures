@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_synth07_cpu_soc_mapping",
+    "current_stage": "S0_cached_block_relink_preparation",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4343,7 +4343,7 @@
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
     "s0_finish_started": false,
-    "finish_launcher_prepared": "handoff/team/evidence/S0_SYNTH07_FINISH_LAUNCH_20261115.py; local fixture passed, not deployed",
+    "finish_launcher_prepared": "obsolete synth07 failed; prepare new synth08 guards only after actual success",
     "finish_launcher_deployed": true,
     "s0_review_profile_tests_passed": 26,
     "s0_review_profile_deployed": true,
@@ -4416,8 +4416,8 @@
     "s0_ddc_object_replacement_probe_passed": true,
     "synth_attempt07": {
       "pid": 139859,
-      "status": "running",
-      "dc_pid": 143046,
+      "status": "failed_final_library_identity",
+      "dc_pid": 148878,
       "current_block": "cpu_soc",
       "final_netlist_ready": false,
       "short_link_probe_passed": true,
@@ -4429,13 +4429,22 @@
       "manifest_sha256": "d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba",
       "dc_cpu_percent": 99.7,
       "dc_elapsed_seconds": 554,
-      "error": null,
+      "error": "1578 duplicate-library errors from original/copy DB paths; final ambiguous DRNQV2_12TR40 leaf guard",
       "mapped_blocks": [
         "shared_sram",
-        "accelerator"
+        "accelerator",
+        "cpu_soc"
       ],
       "dc_cpu_seconds": 552,
-      "foreground_readonly_watcher": "new live watcher active; PID not read from screenshot; command local_runs/s0_live_watch_command.txt"
+      "foreground_readonly_watcher": null,
+      "finished": "2026-11-15T22:20:13.543084",
+      "lock_released": true,
+      "state_sha256": "432940528a89c8d0239ccd5e92ee597fc3625312f23c05245123102030744405",
+      "block_mapping_seconds": {
+        "shared_sram": 40.45153220905922,
+        "accelerator": 197.2824583069887,
+        "cpu_soc": 770.6193923819822
+      }
     },
     "synth07_launcher": {
       "source_commit": "437f156",
@@ -4448,7 +4457,7 @@
       ]
     },
     "synth07_followup_waiter": {
-      "status": "waiting_for_synthesis",
+      "status": "stopped_mapping_failed",
       "transfer_session": 85724,
       "source_commit": "cc21f8d",
       "sha256": "841ced330ffedd9e37b1640615609bfa939894fb5926789da168bc478167c0dc",
@@ -4456,14 +4465,24 @@
       "starts_eda_only_after_mapping_passes_all_guards": true,
       "pid": 143305,
       "transfer_session_completed": true,
-      "observed_at": "2026-11-15T22:06:56+08:00"
+      "observed_at": "2026-11-15T22:06:56+08:00",
+      "finished": "2026-11-15T22:20:22.833347",
+      "new_eda_started": false
     },
     "s0_report_request_builder": {
       "path": "handoff/team/evidence/S0_BUILD_REPORT_REQUEST_20261115.py",
       "local_guards_passed": true,
       "deployed": false,
       "executed": false,
-      "old_request_sha256": "ec74187f550a70e5bbe0662862b8db5c142448baa223855099b5e391612d9e43"
+      "old_request_sha256": "ec74187f550a70e5bbe0662862b8db5c142448baa223855099b5e391612d9e43",
+      "status": "obsolete fixed synth07 bundle; rebind to new final netlist after success"
+    },
+    "s0_relink_local": {
+      "tests_passed": 23,
+      "python36_syntax_passed": true,
+      "all_three_mapping_scripts_unchanged_from_9ffb2a9": true,
+      "deployed": false,
+      "executed": false
     }
   }
 }

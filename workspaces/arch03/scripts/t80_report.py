@@ -348,6 +348,7 @@ def build(request, s0_config=None):
         synthesis_route=(dict(scope=s['scope'],partition_area=s['partition_area'],
             block_mapping_seconds=s['block_mapping_seconds'],block_cache_reused=s['block_cache_reused'],
             incremental_recovery=s.get('incremental_recovery'),
+            partition_cache_reuse=s.get('partition_cache_reuse'),final_link_seconds=s.get('final_link_seconds'),
             origin_identity_sha256=s['link_report']['origin_identity_sha256'],
             source_proof='unchanged RTL and firmware checked; new gate/activity/power are bound to the new final netlist',
             context_auditor_sha256=context['auditor_sha256']) if is_s0 else dict(scope=s['scope'])),
