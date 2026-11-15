@@ -6064,22 +6064,48 @@
       "old8_untouched": true
     },
     "p80_combined04": {
-      "status": "running",
+      "status": "failed",
       "observed_at": "2026-11-16T06:47:43+08:00",
       "pid": 82946,
       "stage": "synthesis",
       "child_pid": 83963,
       "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-4cf35b6/runs/p80_synth_d2_05/p80_synth",
       "source_sha256": "f78a8143ba0b1ff3669ad97a40454f346ed36cdd159c2b4d3f5eab2f7f6f60bf",
-      "stage_accepted": false
+      "stage_accepted": false,
+      "finished": "2026-11-16T06:51:48.173816+08:00",
+      "error": "Shared SRAM compile has duplicate standard-library identity through old set_local_link_library; exit0 but tool errors rejected",
+      "pid_observed_exited_at": "2026-11-16T06:54:14+08:00"
     },
     "p80_export_review04": {
-      "status": "launched_waiting_predecessor",
+      "status": "failed_preserved",
       "observed_at": "2026-11-16T06:48:23+08:00",
       "pid": 84918,
       "source_sha256": "0a8ed3c0c2313b11499361be2ef579e8cb19fb5ab8d702f837721f5ad256dd92",
       "stage_accepted": false,
-      "c80_started": false
+      "c80_started": false,
+      "pid_observed_exited_at": "2026-11-16T06:54:14+08:00"
+    },
+    "p80_local_library_fix": {
+      "source_commit": "102364644dd181b23358dc2c7fe0d6e8279ae0d2",
+      "local_tests": 14,
+      "dc_verified": false,
+      "hardware_changed": false,
+      "declared_constraints_changed": false
+    },
+    "p80_ops_transfer1023646": {
+      "next_line": 16,
+      "line_count": 44,
+      "window": 18874435,
+      "source_commit": "102364644dd181b23358dc2c7fe0d6e8279ae0d2",
+      "payload_sha256": "2a1b6f16a10f84b664d6c9db83dca38e1ed6e25ea20c4da972d7026ce8b995be",
+      "patch_sha256": "f8387b0ccb86f06e655293e7a9c740ab94365bb3bd54b496f34aae96142a607f",
+      "patch_bytes": 14804,
+      "changed_files": 6,
+      "server_started": false,
+      "input_session": 52140,
+      "status": "visible_input_in_progress",
+      "expected_manifest_sha256": "402c08165610ed18bdd772cddd3d527570fd62bdaa6ff820e0ad19b5d7082bcd",
+      "source_files": 947
     }
   }
 }
