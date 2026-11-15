@@ -1,5 +1,11 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日00:14当前唯一VNC输入exec18946：45行`local_runs/s0_review_ops_e516e4c_02/transfer.ps1`，只部署6个审核/归档工具到新`ops-review-e516e4c`，不启EDA或归档。先收完该输入再截图，禁止并发键入或重跑。前台199060已仅退出观察器；后台172535验证、193002汇总等待不动。最后00:13:26 SAIF L01–L07通过，L08子200584仿真已退出、核对中。T80桌面/旧八路不动。**
+
+- 审核工具部署来源e516e4c，6文件、139模块静态闭包及Python3.6通过；本地payload SHA `fd028bc649412db0a3c761691dd9c68cdcc8bfaaaf2f1c0529d24caa4c43a423`。首个本地目录`local_runs/s0_review_ops_e516e4c`因编码名称utf8-sig拼写错误停止、未传服务器；实际使用后缀`_02`目录，生成器`local_runs/build_s0_review_ops.py`。
+- 本次部署仅写新ops目录，导入时显式将66b9496脚本路径放入sys.path并核server_run.ROOT；旧bundle源码/manifest不改。完成标记应为`S0_REVIEW_TOOLS_READY 6 NO_EDA_NO_ARCHIVE`，尚未观察，不提前称部署完成。
+- 完成输入后可恢复`local_runs/s0_finish03_case_watch_command.txt`只读观察；新watcher PID须实际记录。e516e4c已经push，git仅有旧未跟踪S0_SYNTH05启动器（勿加入）。
+
 **11月16日00:04:53实查：finish03父172535仍运行，SAIF L01–L06已通过，L07子197943运行，无错误；只读汇总等待器193002保持。前台watcher已换成199060（193691仅Ctrl+C退出用于只读报告核查），所有85268/18334/23998/40106输入完成。S0未冻结，S1未开始，T80桌面/旧八路不动。13fdc27已push。**
 
 - 00:01–00:03只读完整constraints/check_timing和partition_area，并先核对summary中的文件哈希：constraints明确无违例；check_timing全部非空行只有TIM-134，4条高扇出网络按1000估计，实际网络名仍待队列timing_audit。106个SysMem位、max1/min0、transition0.1/load0.01已覆盖。
