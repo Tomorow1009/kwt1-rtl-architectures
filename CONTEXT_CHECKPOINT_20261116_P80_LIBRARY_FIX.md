@@ -1,5 +1,13 @@
 # P80库引用修复与继续入口
 
+## 07:09恢复补充（优先于下方旧输入状态）
+
+52140输入已完整结束，新1023646包**947文件准备核验通过**，manifest为下文402c0816…82bcd，源保持；截图`takeover_local/p80_1023646_prepared_0707.png`。07:07:58又只读核对cache11候选：索引4/35文件/10,760,211B，原两例真实CPU竞争PASS、contract存在，旧82946/84918均退出，共享剩1,048,576B。
+
+**现在唯一输入exec17240**：`local_runs/p80_combined05_cache11_transfer_20261116/transfer.ps1`，24行。payload SHA `660987ebf346fb59e5d2faae81c5bb33837db9a70fcbe1a6eb7f285c95b8fbaf`，逐字节差分重建combined05/helper02/cache11/export05（四个文件SHA见下文），先校验新包SHA，再归档cache11，成功后立即启动combined05；export05只部署不启动。先收17240并看截图，禁止并发键入、重复运行。**cache11和新队列PID尚未观察，不能预填完成。**
+
+新控制脚本、检查点和P80进度报告已提交并push **99dd9f2**；1023646工具包不改。当前只有旧未跟踪S0_SYNTH05_FINISH_LAUNCH_20261115.py，不能提交或执行。后续确认combined05运行后才启动已部署export05等待器。
+
 记录：2026年11月16日07:06，北京时间。恢复先读AGENTS、根交接、用户计划`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`和本文件。服务器桌面T80_Delivery_20261113及全部旧八路数据不写、不移、不删。
 
 ## 唯一当前操作

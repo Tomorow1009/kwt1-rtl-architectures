@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_240_COMPLETE.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -5677,7 +5677,7 @@
         "lines": 20
       }
     ],
-    "last_server_observation": "2026-11-16T06:48:23+08:00",
+    "last_server_observation": "2026-11-16T07:07:58+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6093,7 +6093,7 @@
       "declared_constraints_changed": false
     },
     "p80_ops_transfer1023646": {
-      "next_line": 16,
+      "next_line": 44,
       "line_count": 44,
       "window": 18874435,
       "source_commit": "102364644dd181b23358dc2c7fe0d6e8279ae0d2",
@@ -6102,10 +6102,40 @@
       "patch_bytes": 14804,
       "changed_files": 6,
       "server_started": false,
-      "input_session": 52140,
-      "status": "visible_input_in_progress",
+      "input_session": null,
+      "status": "source_prepared_verified",
       "expected_manifest_sha256": "402c08165610ed18bdd772cddd3d527570fd62bdaa6ff820e0ad19b5d7082bcd",
-      "source_files": 947
+      "source_files": 947,
+      "observed_at": "2026-11-16T07:07:19+08:00"
+    },
+    "p80_combined05_transfer": {
+      "next_line": 14,
+      "line_count": 24,
+      "window": 18874435,
+      "payload_sha256": "660987ebf346fb59e5d2faae81c5bb33837db9a70fcbe1a6eb7f285c95b8fbaf",
+      "files": {
+        "p80_final_combined05_controller.py": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
+        "p80_export_review05_controller.py": "952242ef4a1ea2b9ee5bcde89ec0cd4b4c48f2bd504a55ae8a3f1031a31fee4b",
+        "p80_precision_helper02.py": "aa506efa781e76928fbd16aa614c47b47e4e927ff2e63cf396a319cbd849b2e4",
+        "p80_b0_contention_cache11.py": "3cbc51a964cc9b70cebdd80e37976cc9f57a4ee7f44dfa3c6056776bda3a319f"
+      },
+      "cache11_completed": false,
+      "combined05_started": false,
+      "export05_started": false,
+      "input_session": 17240,
+      "status": "visible_input_in_progress",
+      "source_commit": "99dd9f2"
+    },
+    "p80_cache11_preflight": {
+      "observed_at": "2026-11-16T07:07:58+08:00",
+      "candidate": 4,
+      "files": 35,
+      "bytes": 10760211,
+      "own_B0_two_CPU_contention_cases_passed": true,
+      "source_contract_exists": true,
+      "archived": false,
+      "old8_modified": false,
+      "protected_T80_modified": false
     }
   }
 }
