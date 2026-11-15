@@ -34,6 +34,10 @@ T64已过ASIC14/240/竞争/恢复，数值结果保留；综合最终结果待�
 
 新增partition_synth_contract.py及5项本地测试，17:52再次全部通过：分开物理分块/计费归属，未知CPU胶合仍保守计入；缓存指纹锁定源码、参数、库、约束、工具、依赖DDC，拒绝缺失/损坏/变化缓存；生成由同一T80顶层DDC提取边界环境的characterize脚本。该工具尚未服务器实测，不能称S0综合通过。详细设计见workspaces/arch03/S0_PARTITION_IMPLEMENTATION_NOTES.md。
 
-接下来提交同步上述工具/计划，实施CPU/SoC、共享SRAM、加速器三块DDC和顶层跨块时序流程。先核实原T80报告与安装DC的characterize能力；旧T64自然退出释放锁前不启动新EDA。新增仲裁/译码/IRQ胶合计费保持，最终顶层重新检查全部路径，不能相加孤立块功耗。S1/S2/S3/S4尚未开始。
+566816a已经推送新分支。18:04已实现三块映射和顶层链接脚本、独立单锁S0入口及白名单工具覆盖式输入包克隆工具；前10项本地检查通过，包克隆检查正在补齐。未在服务器执行，新Tcl仍待实际DC兼容检查。最后17:58:25旧T64父S/子R，日志继续处理DW加法模块，/tmp约99GB、共享仅1MiB；不启动第二个EDA。
+
+原T80综合来源与summary已定位：/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-9196556-delta03/runs/t80_finish02_synth/t80_synth，summary c485b3f77cd7c4f9d7911c5e2052babbc2d8c83811b94ec72c608ffed027f341，mapped.v 6a9ab02be889d4aecb55576a71c51ce68f324fc8a0897430e0dbe40a1373eff2。服务器安装DC路径/eda/synopsys/dc/dc_2022.03-SP5-5/bin/dc_shell，下一步先help能力检查再正式映射。
+
+新包拟从/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4的833个输入复制到新私有root，manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b；本地对应备份ZIP已核对身份。只追加S0新工具/文档及当前n1_process，不复制runs、不改原件。接下来完成工具测试、提交同步、准备并传输overlay；旧T64自然退出释放锁前不启动新EDA。S1/S2/S3/S4尚未开始。
 
 VNC18874435/workspace3当前shell，FileZilla未开；板端转发91027持续。所有旧输入已结束。恢复时先读取本计划/检查点，再观察实时锁/进程/空间。尚无新阶段PASS，不能自动进入S1。

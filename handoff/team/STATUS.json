@@ -4163,11 +4163,13 @@
       "C32-B_evaluation",
       "G32"
     ],
-    "local_contract_tests_passed": 5,
+    "local_contract_tests_passed": 12,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
     "current_stage": "S0_tools_development",
     "new_eda_started": false,
-    "old_queue_retirement_requested": true
+    "old_queue_retirement_requested": true,
+    "s0_mapping_tool_implemented": true,
+    "s0_mapping_server_verified": false
   }
 }

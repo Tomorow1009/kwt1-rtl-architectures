@@ -139,6 +139,7 @@ def characterize_script(mapped_ddc,top_constraints,library_setup):
     """
     return '''
 proc s0_characterize {} {
+    global target_library
     set_app_var sh_continue_on_error false
     source @LIBRARIES@
     read_ddc @DDC@
