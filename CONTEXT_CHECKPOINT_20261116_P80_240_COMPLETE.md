@@ -1,5 +1,14 @@
 # P80前20条完成，空间恢复与单锁接续
 
+## 06:48实测：combined04已进入新综合，export04等待
+
+- 输入73879的20行全部完成，exec58035的后继启动输入也已结束；目前没有键盘输入会话。VNC18874435、workspace3 Bash空闲；workspace4没有操作。
+- cache10成功归档40个普通编译缓存文件；显示归档SHA `583863ce923f05dd5caaf0931c9b7c5c17036b8cee53397ab36971650097d59b`，归档后共享剩60,817,408B。完整成员回读/持久副本/原结果保持由脚本成功出口确认；机器回执位于root/b0_r4_saif_csrc_20261116.receipt.json。不重复执行任何cache入口，未动SAIF/VCD、桌面T80或旧八路。
+- **combined04父82946**：06:47:43队列state为running、stage=synthesis，`4cfbundle/runs/p80_synth_d2_05/p80_synth`。fresh_link子83963正在运行，原锁由当前队列持有。日志及最终结果需继续读取，不重启。
+- **export04父84918**：06:48:23已启动，等待combined04自然完成。只完成报告/活动连接与模型事实收集，不自动验收或进入C80。
+- 截图：`takeover_local/p80_resume_0648.png`（归档/新PID）、`p80_live_0647.png`（进程）、`p80_state_0648.png`（新综合阶段）、`p80_export04_launch_0649.png`（等待器）。文件名时间近似，以图中服务器时刻为准。
+- 新综合最终面积、setup/hold、精度连接、门级/活动/功耗尚未取得；自己的240和三深度14保持已通过。下一步读原队列，映射完成即报告初步数值，再完成同网表验证、审核、持久备份和冻结。C80/C32/G32未开始。
+
 ## 06:44优先恢复补充：当前73879输入（覆盖下方旧状态）
 
 **唯一当前VNC输入exec73879**：`local_runs/p80_combined04_cache10_transfer_20261116/transfer.ps1`，20行。先收完并查看`E:/fpga_race-two/takeover_local/p80_combined04_cache10_transfer_20261116.png`，禁止并发键入、重复传输。它部署cache10/combined04/export04，归档成功才立即启动combined04；export04只写入，不启动。尚未观察cache10终态或新PID。
@@ -24,7 +33,7 @@
 - export04 SHA **0a8ed3c0c2313b11499361be2ef579e8cb19fb5ab8d702f837721f5ad256dd92**，`root/p80_export_review04_controller.py`，未启动；等确认combined04在跑后再启动，输出`p80_report04`、`p80_unknown_inventory04`、`p80_unknown_connections04`。
 - cache10 SHA **edc9ab30e10c3c7e9e804121d8770769550e510654d9cf88b80e2dc172a820fe**，`root/p80_b0_r4_saif_cache10.py`。
 - 当前20行patch payload SHA **2377548f0bc85c76b657cf33bc9459b163c6c11aac32f4b32b005fabb740a30a**；对既有03/cache09做逐字节差分，仅写新文件，旧源和受测包都没改。所有新文件SHA重建验证后才运行。
-- combined04与03经过完整主入口演练的逻辑相同，只改独立运行名称；全新映射、FLOAT连接和17项最终网表验收用一个原协作锁。1400级平台参数、32位ICB、宏布局及数值未改变。
+- combined04与03经过完整主入口演练的逻辑相同，只改独立运行名称；全新映射、FLOAT连接和17项最终网表验收用一个原协作锁。原平台参数、32位ICB、宏布局及数值未改变。
 - 58712本地transfer_state的深层patch数组曾被默认ConvertTo-Json截为描述字符串；实际发送line文件和服务器payload SHA始终完整。已从固定payload完整恢复本地数组。新73879状态序列化使用Depth8，不影响真实输入。
 
 继续：先收73879及实际归档/新PID；若成功，读取combined04真实stage并启动已部署export04等待器；不能重跑240，也不能重启旧失败队列。P80自己的240证据保持通过，综合/精度/门级/活动/功耗仍待；C80/C32/G32未开始。根交接与STATUS应同步以上新入口，最终归档工具14c6dab仍仅本地准备，实际共享空间须另核实。

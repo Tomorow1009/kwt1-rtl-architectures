@@ -5677,7 +5677,7 @@
         "lines": 20
       }
     ],
-    "last_server_observation": "2026-11-16T05:52:54+08:00 functional02 pid42584 batch43/240,1089792 outputs,0failed. Synthesis waiter47889 waiting. Unique VNC input65394 deploys4cf review tools44lines.",
+    "last_server_observation": "2026-11-16T06:48:23+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6035,7 +6035,7 @@
       "observed": "2026-11-16T06:41:11+08:00"
     },
     "p80_combined04_transfer": {
-      "next_line": 17,
+      "next_line": 20,
       "line_count": 20,
       "window": 18874435,
       "payload_sha256": "2377548f0bc85c76b657cf33bc9459b163c6c11aac32f4b32b005fabb740a30a",
@@ -6044,12 +6044,42 @@
         "p80_export_review04_controller.py": "0a8ed3c0c2313b11499361be2ef579e8cb19fb5ab8d702f837721f5ad256dd92",
         "p80_b0_r4_saif_cache10.py": "edc9ab30e10c3c7e9e804121d8770769550e510654d9cf88b80e2dc172a820fe"
       },
-      "cache10_completed": false,
-      "combined04_started": false,
-      "export04_started": false,
-      "status": "visible_input_in_progress",
-      "input_session": 73879,
-      "source_commit": "8e95112"
+      "cache10_completed": true,
+      "combined04_started": true,
+      "export04_started": true,
+      "status": "visible_input_completed",
+      "source_commit": "8e95112",
+      "input_session": null
+    },
+    "p80_space_recovery10": {
+      "status": "verified_archive_completed",
+      "observed_at": "2026-11-16T06:46:39+08:00",
+      "files": 40,
+      "source_bytes": 68559403,
+      "archive_sha256": "583863ce923f05dd5caaf0931c9b7c5c17036b8cee53397ab36971650097d59b",
+      "free_after_bytes": 60817408,
+      "scope": "B0 R4 SAIF replay regular compiler cache only",
+      "saif_and_vcd_untouched": true,
+      "protected_T80_untouched": true,
+      "old8_untouched": true
+    },
+    "p80_combined04": {
+      "status": "running",
+      "observed_at": "2026-11-16T06:47:43+08:00",
+      "pid": 82946,
+      "stage": "synthesis",
+      "child_pid": 83963,
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-4cf35b6/runs/p80_synth_d2_05/p80_synth",
+      "source_sha256": "f78a8143ba0b1ff3669ad97a40454f346ed36cdd159c2b4d3f5eab2f7f6f60bf",
+      "stage_accepted": false
+    },
+    "p80_export_review04": {
+      "status": "launched_waiting_predecessor",
+      "observed_at": "2026-11-16T06:48:23+08:00",
+      "pid": 84918,
+      "source_sha256": "0a8ed3c0c2313b11499361be2ef579e8cb19fb5ab8d702f837721f5ad256dd92",
+      "stage_accepted": false,
+      "c80_started": false
     }
   }
 }
