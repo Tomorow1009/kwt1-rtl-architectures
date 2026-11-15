@@ -5677,7 +5677,7 @@
         "lines": 20
       }
     ],
-    "last_server_observation": "2026-11-16T07:07:58+08:00",
+    "last_server_observation": "2026-11-16T07:13:44+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6109,7 +6109,7 @@
       "observed_at": "2026-11-16T07:07:19+08:00"
     },
     "p80_combined05_transfer": {
-      "next_line": 14,
+      "next_line": 24,
       "line_count": 24,
       "window": 18874435,
       "payload_sha256": "660987ebf346fb59e5d2faae81c5bb33837db9a70fcbe1a6eb7f285c95b8fbaf",
@@ -6119,11 +6119,11 @@
         "p80_precision_helper02.py": "aa506efa781e76928fbd16aa614c47b47e4e927ff2e63cf396a319cbd849b2e4",
         "p80_b0_contention_cache11.py": "3cbc51a964cc9b70cebdd80e37976cc9f57a4ee7f44dfa3c6056776bda3a319f"
       },
-      "cache11_completed": false,
-      "combined05_started": false,
-      "export05_started": false,
-      "input_session": 17240,
-      "status": "visible_input_in_progress",
+      "cache11_completed": true,
+      "combined05_started": true,
+      "export05_started": true,
+      "input_session": null,
+      "status": "visible_input_completed",
       "source_commit": "99dd9f2"
     },
     "p80_cache11_preflight": {
@@ -6133,9 +6133,31 @@
       "bytes": 10760211,
       "own_B0_two_CPU_contention_cases_passed": true,
       "source_contract_exists": true,
-      "archived": false,
+      "archived": true,
       "old8_modified": false,
-      "protected_T80_modified": false
+      "protected_T80_modified": false,
+      "verified_members": true,
+      "persistent_copy_verified": true,
+      "archive_sha256": "2918ba44fb0c373f6dcd7ea5b622702f8926fbb69b3fed47cf2e14a4567145d5",
+      "observed_completed_at": "2026-11-16T07:12:13+08:00",
+      "free_after_bytes": 9437184
+    },
+    "p80_combined05": {
+      "status": "running",
+      "pid": 95253,
+      "observed_at": "2026-11-16T07:13:07+08:00",
+      "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
+      "bundle": "light-light126-p80-1023646",
+      "run": "runs/p80_synth_d2_06/p80_synth",
+      "stage_accepted": false
+    },
+    "p80_export_review05": {
+      "status": "launched_waiting_predecessor",
+      "pid": 96154,
+      "observed_at": "2026-11-16T07:13:44+08:00",
+      "source_sha256": "952242ef4a1ea2b9ee5bcde89ec0cd4b4c48f2bd504a55ae8a3f1031a31fee4b",
+      "stage_accepted": false,
+      "c80_started": false
     }
   }
 }
