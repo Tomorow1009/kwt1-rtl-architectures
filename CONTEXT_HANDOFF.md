@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**22:00最新：先读[S0 synth07运行检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)。9ffb2a9包852文件核验通过，父139859；短DDC链接及两子块token一致检查已通过，子140561正在characterization、无错误。前台只读watcher140380，所有输入结束，无半截传输；不重启、不改当前包。T80桌面/旧八路保持，S1–S4未开始。收尾启动器仅本地准备，旧synth03/05启动器禁用。**
+
 **21:53当前：先读[S0设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth06在67秒短探针失败，未做长映射；single_file仍留同名设计，9ffb2a9改为显式替换旧设计对象。所有输入结束，VNC Bash空闲；下一新session synth07，旧包不改。T80桌面和旧八路保护。**
 
 **21:45恢复先读[设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth05已failed并释放原锁，错误为原RTL与seed DDC设计同名。VNC Bash空闲，无EDA/未完输入（21:38观察）。本地容器修复及21项检查通过，待独立新包短链接探针→synth06；未提交synth05 finish启动器禁用。旧失败和桌面T80/旧八路保持。**

@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_explicit_DDC_object_replacement_local",
+    "current_stage": "S0_synth07_characterization_after_DDC_probe",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4343,7 +4343,7 @@
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
     "s0_finish_started": false,
-    "finish_launcher_prepared": "synth03 and synth05 fixed launchers obsolete; do not execute",
+    "finish_launcher_prepared": "handoff/team/evidence/S0_SYNTH07_FINISH_LAUNCH_20261115.py; local fixture passed, not deployed",
     "finish_launcher_deployed": false,
     "s0_review_profile_tests_passed": 26,
     "s0_review_profile_deployed": true,
@@ -4401,7 +4401,7 @@
       "status": "completed_archive_and_launched_synth05"
     },
     "s0_ddc_container_fix_tests_passed": 21,
-    "s0_ddc_container_fix_deployed": false,
+    "s0_ddc_container_fix_deployed": true,
     "synth_attempt06": {
       "pid": 135293,
       "status": "failed_in_short_DDC_link_probe",
@@ -4412,6 +4412,31 @@
       "source_commit": "5e6a727169aa250bcc5a09b3b4b10762e35f5e68",
       "session": "s0_synth06",
       "observed_at": "2026-11-15T21:50:26+08:00"
+    },
+    "s0_ddc_object_replacement_probe_passed": true,
+    "synth_attempt07": {
+      "pid": 139859,
+      "status": "running",
+      "dc_pid": 140561,
+      "current_block": "characterization",
+      "final_netlist_ready": false,
+      "short_link_probe_passed": true,
+      "seed_children_token_identical": true,
+      "foreground_readonly_watcher_pid": 140380,
+      "source_commit": "9ffb2a987ae8261e1d27e80fefa89886b7d4d2c5",
+      "session": "s0_synth07",
+      "observed_at": "2026-11-15T22:00:10+08:00",
+      "manifest_sha256": "d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba"
+    },
+    "synth07_launcher": {
+      "source_commit": "437f156",
+      "sha256": "5439847d78a2665ec7820f3d9c75d211cccb1b3307ca0f032e08aadb966a264d",
+      "status": "completed_launched_synth07",
+      "transfer_sessions_completed": [
+        42215,
+        37121,
+        25471
+      ]
     }
   }
 }
