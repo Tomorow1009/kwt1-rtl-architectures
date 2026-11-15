@@ -82,5 +82,30 @@ class P80MappingTests(unittest.TestCase):
         self.assertTrue(result.endswith(raw))
         self.assertEqual(rows[0]['original_line'],rows[0]['effective_line'])
 
+    def test_old_local_library_rebound_only_after_identical_bytes(self):
+        with tempfile.TemporaryDirectory() as root:
+            old=Path(root)/'old'/'ss_corner.db';new=Path(root)/'fresh'/'ss_corner.db'
+            old.parent.mkdir();new.parent.mkdir();old.write_bytes(b'exact DB');new.write_bytes(b'exact DB')
+            prefix='set_operating_conditions ss -library ss_corner.db:ss_corner\n'
+            suffix='set_input_delay -clock hf_clk 1.234 [get_ports valid]\nset_load 0.03 [get_ports out]\n'
+            raw=prefix+'set_local_link_library {'+old.as_posix()+'}\n'+suffix
+            text,rows=p.local_link_library_budget(raw,new)
+            self.assertEqual(text,prefix+'set_local_link_library '+p.tcl_path(new.resolve())+'\n'+suffix)
+            self.assertEqual(len(rows),1);self.assertFalse(rows[0]['library_bytes_changed'])
+            self.assertEqual(rows[0]['sha256'],p.digest(new))
+            self.assertEqual(tkinter.Tcl().call('info','complete',text),1)
+            new.write_bytes(b'different DB')
+            with self.assertRaises(ValueError):p.local_link_library_budget(raw,new)
+
+    def test_local_library_rejects_missing_duplicate_or_nonliteral_paths(self):
+        with tempfile.TemporaryDirectory() as root:
+            db=Path(root)/'ss_corner.db';db.write_bytes(b'exact DB')
+            good='set_local_link_library {'+db.as_posix()+'}\n'
+            for bad in ('',good+good,'set_local_link_library [list '+db.as_posix()+']\n',
+                        good.replace(db.as_posix(),db.as_posix()+' /extra.db'),
+                        good.replace(db.as_posix(),'$target_library'),
+                        good.replace(db.as_posix(),'missing.db')):
+                with self.subTest(bad=bad),self.assertRaises(ValueError):p.local_link_library_budget(bad,db)
+
 
 if __name__=='__main__':unittest.main()

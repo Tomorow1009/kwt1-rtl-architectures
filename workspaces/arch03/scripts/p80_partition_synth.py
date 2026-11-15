@@ -126,6 +126,37 @@ def driving_library_budget(text,standard):
     return guard+''.join(lines),rows
 
 
+def local_link_library_budget(text,standard):
+    """Keep the characterized local library on the same verified DB container.
+
+    DC write_script preserves an absolute set_local_link_library from the
+    earlier mapped design. Loading that copy after a fresh P80 link creates
+    two logical libraries with the same name, even when their bytes match.
+    Rebind only the single standard-library path, after verifying both files.
+    All operating conditions, driving arcs, transitions, delays and loads stay.
+    """
+    standard=Path(standard).resolve();want=digest(standard);rows=[];lines=[]
+    for line in text.splitlines(keepends=True):
+        if re.match(r'^\s*set_local_link_library\b',line):
+            match=re.fullmatch(r'([ \t]*set_local_link_library[ \t]+)\{([^{}\r\n]+)\}([ \t]*(?:\r?\n)?)',line)
+            require(match is not None,'Unsupported characterized local-library syntax')
+            original=match.group(2)
+            require(not any(c.isspace() for c in original) and not any(c in original for c in ';[]$'),
+                'Only one literal characterized local library is allowed')
+            source=Path(original)
+            require(source.is_absolute() and source.is_file() and source.name==standard.name and
+                    source.suffix=='.db' and digest(source)==want,
+                    'Characterized local-library bytes differ from the fresh P80 standard DB')
+            replacement=match.group(1)+tcl_path(standard)+match.group(3)
+            rows.append(dict(original_path=str(source),canonical_path=str(standard),sha256=want,
+                original_line=line.rstrip('\r\n'),effective_line=replacement.rstrip('\r\n'),
+                library_bytes_changed=False))
+            line=replacement
+        lines.append(line)
+    require(len(rows)==1,'Exactly one characterized local standard library is required')
+    return ''.join(lines),rows
+
+
 def characterization_script(origin,run):
     script=characterize_script(origin/'mapped.ddc',run/'task_mode.sdc',run/'budget_libraries.tcl')
     extra=r'''set port_file [open ${block}.budget_ports.tsv w]
@@ -182,12 +213,14 @@ def execute(cfg,run,platform,firmware,origin,call):
         original=character/(block+'.characterized.raw.tcl');original.write_text(raw)
         native=character/(block+'.native_clocks.tsv')
         translated,removed[block]=translated_budget(raw,native.read_text(),old[block]['reference'],new[block]['reference'])
+        translated,local_libraries=local_link_library_budget(translated,standard)
         translated,drivers=driving_library_budget(translated,standard)
         exported.write_text(translated)
         precision[block]=dict(raw_sha256=digest(original),effective_sha256=digest(exported),
             native_clock_sha256=digest(native),ports=source_ports,source_reference=old[block]['reference'],
             new_reference=new[block]['reference'],port_delay_load_constraints_changed=False,
             driving_library_db_sha256=digest(standard),driving_library_bindings=drivers,
+            local_link_library_bindings=local_libraries,
             removed_mapped_only_cells=removed[block],source_is_S0_budget_not_P80_timing_PASS=True)
     save(run/'boundary_contract.json',precision)
     before=json.loads((link/'source_inputs.json').read_text())
