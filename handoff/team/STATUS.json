@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_corrected_bundle_transfer",
+    "current_stage": "S0_native_waveform_adapter_ready",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4254,7 +4254,7 @@
       "finished": "2026-11-15T19:09:20.175020",
       "lock_released": true
     },
-    "latest_changed_tool_tests_passed": 12,
+    "latest_changed_tool_tests_passed": 13,
     "fix_transfer": {
       "input_session": 57781,
       "lines": 31,
@@ -4263,8 +4263,18 @@
       "manifest_sha256": "93be0a4c5e6e16ebe575d73fa7249e2002c0e1a0db41c371f47302236a2d7475",
       "session": "s0_synth02",
       "automatically_launches_after_verified_package_and_cache_archive": true,
-      "status": "transfer_in_progress",
+      "status": "completed_841_files_manifest_verified",
       "mapping_server_verified": false
+    },
+    "synth_attempt02": {
+      "pid": 71485,
+      "status": "failed_in_characterization",
+      "started": "2026-11-15T19:26:01.309989",
+      "finished": "2026-11-15T19:27:02.251476",
+      "reason": "DC waveform attribute is an object-value list containing the edge list",
+      "version_check_passed": true,
+      "mapping_started": false,
+      "lock_released": true
     }
   }
 }

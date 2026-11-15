@@ -1,5 +1,9 @@
 # S0服务器预检接续
 
+**19:31当前终态：** exec57781已结束31/31，0bf新包841文件和manifest93be0a4c…实际匹配；旧R4竞争csrc35普通文件9,639,341B完整归档回读并返回共享盘，SHA07de94123ee8ec5de802b5ca7f34bc216c6f568c24710edd736fd3de753c0a75，原结果/链接/目录未动。synth02/PID71485于19:26:01.309989启动，19:27:02.251476因characterize中waveform返回嵌套列表而失败退出，原锁释放；无后台EDA。版本查询修复已在服务器通过，新工具确实进入characterize，导出accelerator.characterized.tcl；尚无三块映射。
+
+现本地追加CLOCK_EDGES Tcl适配，按安装get_attribute官方“每对象一个值”语义，仅展开一层列表，不改数字；13项相关检查通过，尚未新部署。下一步提交新修复、基于已部署0bf的payload生成更小差分包，建立新bundle/session（拟s0_synth03），不能改原0bf运行目录。VNC18874435新Bash空闲，旧tcsh终端不动。GitHub已到2e85053，当前追加修复和本条尚未提交。
+
 **19:23当前活动，恢复必读：** 修复已提交并推送0bf4af395a6830b17b4666ae6affd5994381ec95。exec57781正在VNC新Bash输入31行完整差分引导，状态local_runs/s0_fix_0bf4af3/transfer_state.json；没有其他键盘输入。该引导会从旧c6输入payload恢复新overlay，逐字重建已在本地独立执行验证通过（167,522B），然后生成新包、核验manifest、归档旧R4竞争测试普通编译缓存并自动启动s0_synth02。**未输入结束前不得向VNC发送其他命令；结束后不要重复手动启动。**
 
 新包=/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-0bf4af3；ops=同root/ops-0bf4af3。新manifest预期93be0a4c5e6e16ebe575d73fa7249e2002c0e1a0db41c371f47302236a2d7475；payload SHA7f2688856e3c3ebbf106690f2b76de1a4752892eed1a5f7f7dc7bda83d3fe167；delta SHA1d465aa099d96ccd4f5b50d53bc9df2d7e2e5d62317879177f15cccd109a7a89。启动脚本handoff/team/evidence/S0_R4_CONTENTION_CACHE_SYNTH02_20261115.py，实际传输SHA5c946de61cb322ccd00aed7a6bc4e6a40ffe8bba3f0df7d8af731b5a4e89d413，待下一次文档提交。只有旧R4 contention01/icb32_contention/csrc普通缓存参与归档，原所有结果和符号链接不动。新stage PID将保存在ops/s0_synth02_launcher.json；日志ops/s0_synth02.log；状态新bundle/runs/s0_synth02/state.json。完成截图takeover_local/s0_fix_0bf4af3.png，先确认包准备回执、归档和启动PID，再查询state/日志。此时尚未看到服务器新包或启动成功。

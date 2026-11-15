@@ -131,13 +131,27 @@ def tcl_path(path):
     return '{'+text+'}'
 
 
+CLOCK_EDGES = r'''
+proc s0_clock_edges {values} {
+    # get_attribute returns one value per object. The waveform value is itself
+    # a list, so this DC release returns a one-element outer list for one clock.
+    if {[llength $values] == 1} {set values [lindex $values 0]}
+    if {[llength $values] != 2} {error "Unexpected characterized waveform: $values"}
+    foreach edge $values {
+        if {![string is double -strict $edge]} {error "Nonnumeric characterized waveform: $values"}
+    }
+    return $values
+}
+'''
+
+
 def characterize_script(mapped_ddc,top_constraints,library_setup):
     """Derive boundary environments from one measured full T80 timing context.
 
     Does not reset subblocks to unconstrained/full-period independent budgets.
     The installed DC command capability and resulting scripts still need audit.
     """
-    return '''
+    return CLOCK_EDGES+'''
 proc s0_characterize {} {
     global target_library
     set_app_var sh_continue_on_error false
@@ -165,8 +179,7 @@ proc s0_characterize {} {
         set clock_file [open ${block}.native_clocks.tsv w]
         foreach_in_collection native_clock [all_clocks] {
             set clock_name [get_object_name $native_clock]
-            set edges [get_attribute $native_clock waveform]
-            if {[llength $edges] != 2} {error "Unexpected characterized waveform"}
+            set edges [s0_clock_edges [get_attribute $native_clock waveform]]
             puts $clock_file "$clock_name\\t[format %.12g [get_attribute $native_clock period]]\\t[format %.12g [lindex $edges 0]]\\t[format %.12g [lindex $edges 1]]"
         }
         close $clock_file

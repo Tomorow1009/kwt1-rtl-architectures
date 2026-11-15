@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**19:31最新：** 0bf包已核验、synth02已实际运行，但在characterize波形属性返回嵌套列表处失败；无后台EDA、所有输入结束。版本查询已修好；本地新增原生waveform对象列表适配，相关13项检查通过，待提交新包synth03。先读[检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部；禁止重跑或修改0bf/c6冻结输入，T80桌面及旧8路未动。
+
 **19:23当前唯一操作：exec57781传输31行S0修复包并自动启动synth02，勿并发输入或重复启动。** [检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部含全部身份和恢复顺序。修复0bf4af3已push，当前服务器旧c6 synth01已失败且无EDA；新包0bf4af3预期manifest93be0a4c…，正在准备。全部T80桌面与旧8路数据保持，S1–S4未开始。先收完传输并截图，再查新state。
 
 **19:16先读[最新S0检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部。** synth01已取锁但在dc_shell -version退出1时停止，未映射；锁自然释放、没有当前S0 EDA。本地已修版本读取和安装手册命令语法，11项检查通过，尚未部署。安装工具导出时钟会舍入，下一步实现仅恢复原生period/waveform序列化精度，绝不放宽6.666666守卫。d497c19已推送；所有输入结束，VNC新Bash空闲，服务器c6包和桌面T80不改。

@@ -1,8 +1,17 @@
 import copy,json,tempfile,unittest
+import tkinter
 from pathlib import Path
 import partition_synth_contract as c
 
 class PartitionTests(unittest.TestCase):
+    def test_native_waveform_object_list_is_unwrapped_without_changing_edges(self):
+        tcl=tkinter.Tcl();tcl.eval(c.CLOCK_EDGES)
+        a=tcl.eval('s0_clock_edges {{0 3.3333330155}}')
+        self.assertEqual(tcl.splitlist(a),('0','3.3333330155'))
+        self.assertEqual(a,tcl.eval('s0_clock_edges {0 3.3333330155}'))
+        for values in ('{}','{0}','{0 1 2}','{{zero 1}}'):
+            with self.assertRaises(tkinter.TclError):tcl.eval('s0_clock_edges '+values)
+
     def args(self):
         return dict(partition='accelerator',sources={'rtl':'1'*64},
             parameters=dict(period_ns=c.PERIOD,corner=c.CORNER,row_lanes=5),
