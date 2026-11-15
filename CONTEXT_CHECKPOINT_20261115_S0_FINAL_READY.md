@@ -1,10 +1,16 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:44:14实查：原队列172535仍在SAIF阶段；L01/L02完整活动已通过，L03 simv187750已退出，正进行输出与窗口核对，尚不计为通过。gate14/354,816输出及synth08已完成，不重跑。前台只读watcher177140，所有输入结束；服务器桌面T80和旧八路不动。**
+
 **23:27:38最新实查：gate14全部完成，354,816输出逐坐标/result/saturated及写回核对通过，queue completed=2、stage=saif。父172535，SAIF VCS子180054运行54秒（1471 modules done），error=None；前台只读watcher177140。gate路径为66b9496/runs/s0_finish03_gate/t80_s0_gate，SAIF路径为同包runs/s0_finish03_saif/t80_s0_saif。全部输入结束，无半截命令；不重跑gate或综合。严格无SDF，internal total在门级不可观测的边界仍明确保留。**
 
 **23:24:37最新实查：gate已逐例通过12/14（extremes、rounding、L01–L10），当前L11 simv178996；父172535，completed stage仍1，error=None。前台watcher已替换为177140（旧173225仅Ctrl+C退出），命令`local_runs/s0_finish03_case_watch_command.txt`现在显示case_progress回执及当前日志；98978输入已结束。尚未获得完整gate summary，不重跑。已有1bbd126已push。**
 
 **后续归档注意（只读检查所得，未执行）：**现有`t80_archive_runtime.py`固定旧T80队列schema及`session/t80_kind`目录，不直接接受S0的`t80_s0_kind`。最终持久归档需按S0实际终态适配，保留已核验tar写入/完整回读原语；现/tmp包含多份历史失败包，不能盲套旧入口。归档前重新查空间与终态，不动桌面T80或旧八路。当前未新增清理、压缩或备份操作。
+
+归档实施还须注意：`n1_archive_runtime.no_open_users`检查cwd，归档进程本身须从源runtime之外运行；原通用入口会扫描整个runtime，不能把只检查一个bundle终态误称所有历史子目录已验收。源文件不得删除，完整解压回读和前后哈希一致后才记录备份完成。S0 report入口只写报告文件、不自动创建旧归档器期待的session state，需明确适配而非伪造旧T80队列状态。
+
+S1准备仅做了只读源码核对（未开发）：团队仲裁器和memory_router均为单pending、允许retire同拍接新请求。保持原平台buffer参数，必须先测原通路接受/响应间隔，不能把仲裁器队列深度直接当下游吞吐。router是否限制服务率以测量判断；当前RTL完全未改，S1尚未开始。
 
 **23:14:55最新实查：SRAM双清单核对已通过，当前gate已进入VCS编译子174044（已运行10秒），父172535、watcher173225继续，无错误。端口DC173089已完成26秒。全部输入结束，不重启；6683ce5已push。下一步等真实gate14结果，随后原队列SAIF12/timing/DRC/PT12。**
 
@@ -42,3 +48,7 @@
 详`CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md`及其之前检查点：synth03无效set_map_only、synth05/06设计容器重复、synth07最终库路径重复。0e首次relink因手工抄错state SHA在EDA前停止；正确state为43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405。
 
 本次未清理任何服务器文件。既有可恢复编译缓存归档回执继续保留；全部桌面T80和旧八路数据保护不变。新/tmp产物最终仍需持久归档。
+
+## 23:44本地准备
+
+新增S0专用copy-only归档工具、终态合同及测试：严格绑定17阶段、报告和同网表；原tar完整回读原语复用，3项测试与Python3.6语法通过。尚未部署/运行，没有压缩、删除或修改任何服务器证据；持久盘空间须实际核查。旧归档入口目录契约不适用于S0，不能直接调用。新工具将全部源保留，归档成功不自动授予阶段验收。

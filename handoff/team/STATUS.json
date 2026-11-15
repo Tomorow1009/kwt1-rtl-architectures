@@ -4148,7 +4148,7 @@
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
-    "stage": "S0_partition_mapping",
+    "stage": "S0_final_netlist_validation",
     "final_pe": 32,
     "area_limit_mm2": 1.0,
     "formal_samples": 20,
@@ -4169,11 +4169,11 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_relink_reference_hash_correction",
+    "current_stage": "S0_saif12_running",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
-    "s0_mapping_server_verified": false,
+    "s0_mapping_server_verified": true,
     "t80_activity_compatibility_tests_passed": 8,
     "transfer": {
       "session_id": 66349,
@@ -4342,7 +4342,7 @@
     },
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
-    "s0_finish_started": false,
+    "s0_finish_started": true,
     "finish_launcher_prepared": "obsolete synth07 failed; prepare new synth08 guards only after actual success",
     "finish_launcher_deployed": true,
     "s0_review_profile_tests_passed": 26,
@@ -4624,21 +4624,40 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-15T23:27:38+08:00",
+      "observed_at": "2026-11-15T23:44:14+08:00",
       "status": "running",
       "stage": "saif",
       "completed": 2,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 180054,
+      "child_pid": 187750,
       "foreground_readonly_watcher": 177140,
-      "child_tool": "vcs",
+      "child_tool": "simv_exited_audit_pending",
       "sram_provenance_checked": true,
-      "current_case": null,
+      "current_case": "layer_03",
       "gate_cases_passed": 14,
       "gate_outputs_passed": 354816,
-      "gate_complete": true
+      "gate_complete": true,
+      "saif_cases_passed": [
+        "layer_01",
+        "layer_02"
+      ]
+    },
+    "new_final_netlist_ready": true,
+    "s0_archive_preparation": {
+      "status": "local_only_not_deployed_or_run",
+      "copy_only": true,
+      "source_delete_allowed": false,
+      "tests_passed": 3,
+      "python36_syntax_passed": true,
+      "requires_terminal_queue_and_export": true
+    },
+    "s0_report_request_builder04": {
+      "path": "handoff/team/evidence/S0_BUILD_REPORT_REQUEST04_20261115.py",
+      "status": "prepared_not_deployed_or_executed",
+      "bundle": "66b9496",
+      "queue": "s0_finish03"
     }
   }
 }
