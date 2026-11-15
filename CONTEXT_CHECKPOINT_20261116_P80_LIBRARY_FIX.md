@@ -1,5 +1,11 @@
 # P80库引用修复与继续入口
 
+## 07:20真实DC修复已通过共享块
+
+原combined05父95253保持、export05父96154等待，所有输入结束（最近只读32287也已结束）。07:20:36实际读取：新综合06的`blocks/shared_sram/cache.json`为mapped，耗时35.674336516764015秒，`compile.log`实际Error行0；加速器子**99675**已经启动。此前fresh_link96331、characterization97905、shared98527均由原ledger顺序接续，没有重启作业。
+
+`boundary_contract.json`已记录两个子块各自旧/新标准DB逐字节一致及统一路径；修复验证范围现在是共享块实际映射通过，不能据此提前宣称加速器/CPU/整机时序或面积通过。截图`takeover_local/p80_boundary_fixed_0719.png`、`p80_shared_map_fixed_0720.png`。继续读原队列，下一步等待加速器、CPU及顶层链接，取得整机数值后原18项后继自动继续。当前P80仍未冻结，C80未开始；T80桌面/旧八路保持。
+
 ## 07:14实际接续（当前恢复入口）
 
 - 17240的24行与后继93763输入均已完整结束；没有当前键盘输入，VNC18874435/workspace3 Bash空闲。
