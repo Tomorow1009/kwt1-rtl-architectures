@@ -181,26 +181,42 @@ def frozen_drc_inventory(synthesis,run):
     return result
 
 
-def selection(aggregate, area):
+def selection(aggregate, area, s0=False):
     bound=Decimal(str(area['conservative_budget_mm2']))
-    return dict(conservative_area_mm2=str(bound),project_limit_mm2='1.20',
-        numerical_area_limit_met=bound<=Decimal('1.20'),area_attribution_reviewed=False,
+    limit='1.00' if s0 else '1.20'
+    return dict(conservative_area_mm2=str(bound),project_limit_mm2=limit,
+        numerical_area_limit_met=bound<=Decimal(limit),area_attribution_reviewed=False,
         eligible_for_next_hardware_stage=False,
-        reason='Current T80/T64/G64 plan: report measured throughput and energy; independent acceptance remains required')
+        reason=('S0 partitioned T80 baseline: conservative area controls until instance ownership is reviewed; independent acceptance remains required'
+                if s0 else 'Current T80/T64/G64 plan: report measured throughput and energy; independent acceptance remains required'))
 
 
-def build(request):
-    require(request['schema']=='arch03-t80-report-request-v1','Wrong T80 report schema')
+def build(request, s0_config=None):
+    is_s0=request['schema']=='arch03-s0-report-request-v1'
+    require((is_s0 and s0_config is not None) or
+            (request['schema']=='arch03-t80-report-request-v1' and s0_config is None),
+            'Wrong report schema or missing explicit S0 runtime validation')
     refs={key:request[key] for key in ('asic','synthesis','gate')}
     arun,srun,grun=[Path(refs[key]['run']).resolve() for key in ('asic','synthesis','gate')]
     a,s,g=[stage(refs[key],name) for key,name in
         (('asic','t80_soc'),('synthesis','t80_synth'),('gate','t80_gate'))]
+    if is_s0:
+        from s0_report import synthesis_context
+        context=synthesis_context(refs['synthesis'],s0_config)
+        require(context['summary']==s,'S0 synthesis changed during collection')
+        platform_sha=context['platform_baseline_sha256']
+        libraries=context['library_inputs']
+    else:
+        context=None
+        platform_sha=s['link_report']['platform_baseline_sha256']
+        libraries=s['link_report']['library_inputs']
     require(a['asic_cpu_verified'] is True and a['cpu_executed'] is True and a['global_FPGA_defined'] is False and
         g['gate_simulation_verified'] is True and g['sdf_annotated'] is False and
         g['cpu_executed'] is True and g['global_FPGA_defined'] is False and s['synthesis_completed'] is True and
         g['scope']=='t80_whole_soc_mapped_functional_without_SDF' and
         g.get('numeric_format')=='0x000e0c20' and g.get('internal_total_observable') is False and
-        s['scope']=='t80_whole_soc_task_mode_preliminary_synthesis','Wrong T80 hardware execution scope')
+        s['scope']==('s0_t80_partitioned_whole_soc_task_mode' if is_s0 else
+                    't80_whole_soc_task_mode_preliminary_synthesis'),'Wrong T80 hardware execution scope')
     require(g['synthesis_summary_sha256']==refs['synthesis']['sha256'] and
         g['firmware_sha256']==a['compile_receipt']['firmware_manifest_sha256'],'Mixed T80 synthesis/firmware')
     require(sha(arun/'source_inputs.json')==a['compile_receipt']['source_inputs_sha256'] and
@@ -209,7 +225,7 @@ def build(request):
     require(sha(arun/'t80_build_contract.json')==a['build_contract_sha256'],'ASIC build changed')
     hardware=configuration_identity(arun)
     require(configuration_identity(srun)==hardware and
-        a['compile_receipt']['platform_baseline_sha256']==s['link_report']['platform_baseline_sha256'],
+        a['compile_receipt']['platform_baseline_sha256']==platform_sha,
         'ASIC and synthesis production hardware differ')
     require(sha(grun/'source_inputs.json')==g['source_inputs_sha256'],'Gate provenance changed')
     verify_inputs(read(grun/'source_inputs.json'))
@@ -314,17 +330,26 @@ def build(request):
         'Unknown activity/model influence and pre-layout estimation limits','Official random600 and physical signoff']
     if not precision['fresh_float_reference_verified']:
         unverified.append('Fresh same-sample float20 recomputation; no old Q12 SSE/NRMSE reuse')
-    return dict(schema='arch03-t80-evidence-export-v1',status='evidence_exported_stage_unaccepted',
-        stage='T80',numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,row_lanes=5,
+    handoff=(dict(next_stage='S1_P80',allowed=False,
+        reason='S0 new final netlist requires its own gate14, activity12, power12 and independent acceptance') if is_s0 else
+        dict(next_stage=None,allowed=False,T64_deferred=True,G64_cancelled=True,
+            reason='T80 completion only; numerical collection does not replace independent precision, timing, area and system-power review'))
+    return dict(schema='arch03-s0-evidence-export-v1' if is_s0 else 'arch03-t80-evidence-export-v1',
+        status='evidence_exported_stage_unaccepted',stage='S0' if is_s0 else 'T80',
+        numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,row_lanes=5,
         gate_internal_total_observable=False,
-        selection=selection(aggregate,s['area_summary']),
+        selection=selection(aggregate,s['area_summary'],is_s0),
         precision=precision,fixed12_precision=fixed_precision,
-        stage_handoff=dict(next_stage=None,allowed=False,T64_deferred=True,G64_cancelled=True,
-            reason='T80 completion only; numerical collection does not replace independent precision, timing, area and system-power review'),
+        stage_handoff=handoff,
         references=refs,activity_reference=activity_ref,power_references=request.get('power',[]),
         batch_reference=request.get('batch'),precision_reference=request.get('precision'),
         production_hardware=hardware,firmware_sha256=g['firmware_sha256'],netlist_sha256=s['artifacts']['mapped.v'],
-        libraries_sha256=s['link_report']['library_inputs'],area=s['area_summary'],area_basis=s['area_basis'],
+        libraries_sha256=libraries,area=s['area_summary'],area_basis=s['area_basis'],
+        synthesis_route=(dict(scope=s['scope'],partition_area=s['partition_area'],
+            block_mapping_seconds=s['block_mapping_seconds'],block_cache_reused=s['block_cache_reused'],
+            origin_identity_sha256=s['link_report']['origin_identity_sha256'],
+            source_proof='unchanged RTL and firmware checked; new gate/activity/power are bound to the new final netlist',
+            context_auditor_sha256=context['auditor_sha256']) if is_s0 else dict(scope=s['scope'])),
         timing_metrics=s['metrics'],drc_inventory=drc,conditions=conditions,
         cases=rows,aggregate=aggregate,batch=batch,history=request.get('history',[]),
         verification=dict(asic14=True,gate14_without_SDF=True,final240=batch.get('tasks')==240,
@@ -350,7 +375,8 @@ def write(report,output):
     a=report['aggregate'];b=report['batch']
     precision=report['precision']
     layer_error=precision['maximum_layer_nrmse_percent'];task_error=precision['maximum_task_nrmse_percent']
-    lines=['# T80原总线真实共享读回80PE配置证据报告','',
+    is_s0=report['stage']=='S0'
+    lines=['# '+('S0分块综合T80同源新网表证据报告' if is_s0 else 'T80原总线真实共享读回80PE配置证据报告'),'',
         '本报告复核ASIC/E203的total33/result/sat及无SDF门级result/sat。门级不观察内部total，不用参考值伪造第五列。功耗为布局前估算。独立时序、面积归属和未知活动影响审核另行记录；本导出不自动授予验收。','',
         'SS、0.99V、125°C；DC与任务周期6.666666ns。计时从首源VALID至最终写ACK并证明排空，保留原System Bus的源读、共享写、同地址真实读回及完整输出写回。','',
         '12层平均 %.6f 周期，按150MHz折算 %.6f task/s。'%
@@ -374,11 +400,12 @@ def write(report,output):
             (report['drc_inventory']['violation_record_count'],report['drc_inventory']['extraction_complete'],
              report['drc_inventory']['explicit_no_violations']),
         '源码、固件、布局、数据、库、网表及活动身份、模块功耗、SRAM、未知驻留及全部计数见JSON。重叠等待不相加作为总周期，缺失功耗不作零。','',
-        '项目面积上限1.20mm²；全部PPA来自T80自身配置。历史N1/B0证据独立保留，不转移PASS。缺同批20样本浮点精度或未知活动审核时，T80未验收。T64暂停、G64取消，当前仅完成T80。','',
+        ('项目面积上限1.00mm²；逐实例归属与物理综合块分开报告，归属未审清前采用原T80口径的保守上界。三块映射耗时与缓存使用情况见JSON。同源ASIC14/240可引用，新最终网表的门级、活动与功耗必须自行取得；本报告不自动冻结S0或授权进入S1。'
+         if is_s0 else '项目面积上限1.20mm²；全部PPA来自T80自身配置。历史N1/B0证据独立保留，不转移PASS。缺同批20样本浮点精度或未知活动审核时，T80未验收。T64暂停、G64取消，当前仅完成T80。'),'',
         '历史失败/停止路径：']
     lines+=['- '+json.dumps(item,ensure_ascii=False) for item in report['history']]
     (output/'report_zh.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
-    data.save(output/'receipt.json',dict(schema='arch03-t80-export-receipt-v1',
+    data.save(output/'receipt.json',dict(schema='arch03-s0-export-receipt-v1' if is_s0 else 'arch03-t80-export-receipt-v1',
         artifacts={p.name:sha(p) for p in output.iterdir() if p.is_file()}))
 
 

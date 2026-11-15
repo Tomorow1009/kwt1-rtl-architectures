@@ -4144,11 +4144,11 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_SYNTH03_DEPLOY.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
-    "stage": "S0_server_preflight",
+    "stage": "S0_partition_mapping",
     "final_pe": 32,
     "area_limit_mm2": 1.0,
     "formal_samples": 20,
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_native_waveform_adapter_ready",
+    "current_stage": "S0_synth03_accelerator_running",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4217,6 +4217,13 @@
         "protected_t80_modified": false,
         "old8_modified": false,
         "free_bytes_after": 41943040
+      },
+      "r4_sequence_cache": {
+        "files": 35,
+        "original_bytes": 6699345,
+        "archive_sha256": "200e23d33de51ab78a1b42b425676859c9d288d2fcedd4507f1a68e7adf16f8f",
+        "archive_returned_to_shared": true,
+        "results_modified": false
       }
     },
     "capability_attempt02": {
@@ -4275,6 +4282,32 @@
       "version_check_passed": true,
       "mapping_started": false,
       "lock_released": true
+    },
+    "waveform_fix_transfer": {
+      "input_session": 32639,
+      "lines": 26,
+      "source_commit": "05c923fe178230f0550d79dfd4b4ae3fcfc0c79f",
+      "bundle": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-05c923f",
+      "manifest_sha256": "4473686ec4bb1b67edd4741fbf171a89788465140b8a1e7d3a9944f4847e7ff2",
+      "session": "s0_synth03",
+      "status": "completed_841_files_manifest_verified",
+      "auto_launch": true
+    },
+    "synth_attempt03": {
+      "pid": 75787,
+      "observed_at": "2026-11-15T19:45:43+08:00",
+      "status": "running",
+      "error": null,
+      "source_commit": "05c923fe178230f0550d79dfd4b4ae3fcfc0c79f",
+      "session": "s0_synth03",
+      "characterization_completed": true,
+      "clock_precision_receipt_completed": true,
+      "mapped_blocks": [
+        "shared_sram"
+      ],
+      "current_block": "accelerator",
+      "final_netlist_ready": false,
+      "foreground_readonly_watcher_pid": 78421
     }
   }
 }
