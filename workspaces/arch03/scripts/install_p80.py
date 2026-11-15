@@ -26,7 +26,7 @@ def install(source,destination,row_lanes=5,transaction_depth=4):
         peripheral_id='0x4b57530b',capability='0x000905bf',transaction_metadata_depth=transaction_depth,
         source_credits=3,data_fifo_depths=dict(source=16,read_response=16,output=32),
         unpresented_descriptor_depth=8,original_fabric_parameters_modified=False,
-        inherited_t80_installer_sha256=spec['implementation_sha256'],implementation_sha256=sha(__file__))
+        inherited_t80_installer_sha256=spec['implementation_sha256'],implementation_sha256=sha(Path(__file__)))
     manifest['p80']=spec
     (destination/'platform_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     return manifest
