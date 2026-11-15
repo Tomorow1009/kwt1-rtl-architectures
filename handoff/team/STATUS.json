@@ -5668,7 +5668,7 @@
       ]
     },
     "current_local_sessions": [
-      95957
+      13095
     ],
     "last_server_observation": "2026-11-16T04:30:23+08:00 Bash idle; sweep04 failed at shared lock ENOSPC before EDA. B0 completed SAIF csrc40/80788435 bytes inventoried only; new input95957 in progress.",
     "p80_original_platform_readonly": {
@@ -5773,12 +5773,20 @@
       "evidence": "p80_sweep04.launcher.log"
     },
     "p80_space_recovery03": {
-      "status": "visible_transfer_in_progress",
+      "status": "failed_path_precheck_no_changes",
       "source_kind": "completed_B0_SAIF_regular_compiler_cache",
       "files": 40,
       "bytes": 80788435,
       "protected_T80_modified": false,
       "old8_modified": false
+    },
+    "p80_space_recovery06": {
+      "status": "visible_transfer_in_progress",
+      "input_session": 13095,
+      "source": "machine_inventory_pinned",
+      "script_sha256": "7d96eff11f42c49df00d41ab9effc0ad520a55b9d2d8fb79dea4f04091c84a4d",
+      "files": 40,
+      "bytes": 80788435
     }
   }
 }

@@ -1,5 +1,14 @@
 # P80首个真实CPU任务通过；共享空间与串行队列恢复
 
+## 04:40输入状态与防重跑修正
+
+- 唯一输入exec13095，local_runs/p80_b0_cache06_transfer_20261116/transfer.ps1，共14行，当前只在输入，未观察归档或队列PASS。
+- cache03/04均在不存在的手工转录路径检查处退出，未归档、未删任何文件；cache05输入因本地CRLF与服务器LF校验不匹配，在创建文件前停止。保留原失败，不能重跑。
+- 本次从服务器机器清单b0_cache_candidates01.json直接取得精确路径，清单SHA c5d5e6b4069637e5d720eebaa09ba684e53604a8e6da2a0ebf176a68f5a68cd5。核验目录必须属于本人bundles下systolic-b-v3/已passed的指定SAIF阶段，绝不触及旧八路/T80桌面。
+- 正确LF归档脚本P80_B0_CACHE_SPACE_RECOVERY05_20261116.py SHA7d96eff11f42c49df00d41ab9effc0ad520a55b9d2d8fb79dea4f04091c84a4d，部署为cache_space_recovery06.py。成功后启动仍未执行过的p80_sweep05_controller.py。只有实际新PID及锁证据才算恢复。
+- 最新本地9622b09，远端已push0573754；854 EDA包未传。首层80471周期结果不变。上述失败只涉及工具入口，没有RTL改动或新增硬件PASS。
+
+
 ## 04:35更新：03身份失败与04建锁失败；正在传入05
 
 以下覆盖04:18状态。当前唯一VNC输入exec95957，入口local_runs/p80_b0_cache_sweep05_transfer_20261116/transfer.ps1共19行。先收完输入和归档终态，不并发键入、不重跑。
