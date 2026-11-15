@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 ROOT=Path('/tmp/s4_21usr_t80_20261115_1830')
 BUNDLE=ROOT/'light-light126-t80-s0-9ffb2a9'
@@ -82,4 +83,40 @@ def main():
     print('S0_FINISH_LAUNCHED',child.pid,str(control),flush=True)
 
 
-if __name__=='__main__':main()
+def wait_for_mapping():
+    """Read-only wait; no lock ownership or EDA until main's guards pass."""
+    assert sha(BUNDLE/'manifest.json')==MANIFEST
+    control=OPS/'s0_synth07_followup_wait'
+    control.mkdir()  # Never retry an existing follow-up.
+    save(control/'identity.json',dict(pid=os.getpid(),started=datetime.datetime.now().isoformat(),
+        launcher_sha256=sha(__file__),synthesis=str(SYNTH),no_eda_until_mapping_passes=True))
+    previous=None
+    try:
+        while True:
+            row=json.loads((SYNTH.parent/'state.json').read_text())['stages']['t80_synth']
+            status=row['status']
+            if status!=previous:
+                print('S0_FOLLOWUP_WAIT',datetime.datetime.now().isoformat(),row['pid'],status,flush=True)
+                previous=status
+            assert status in ('acquiring_lock','running','passed','failed'),'Unknown mapping state'
+            if status=='failed':raise RuntimeError('Mapping failed; no follow-up started: '+row.get('error',''))
+            if status=='passed' and row.get('finished'):break
+            time.sleep(10)
+        # The stage writes its terminal state just before its process exits.
+        for _ in range(60):
+            if not (Path('/proc')/str(row['pid'])).exists():break
+            time.sleep(1)
+        main()
+        save(control/'result.json',dict(status='finish_queue_launched',finished=datetime.datetime.now().isoformat(),
+            stage_accepted=False,protected_desktop_written=False,old8_written=False))
+    except BaseException as exc:
+        save(control/'result.json',dict(status='stopped',error=str(exc),finished=datetime.datetime.now().isoformat(),
+            stage_accepted=False))
+        raise
+
+
+if __name__=='__main__':
+    if sys.argv[1:]==['--wait']:wait_for_mapping()
+    else:
+        assert not sys.argv[1:],'Only --wait is supported'
+        main()
