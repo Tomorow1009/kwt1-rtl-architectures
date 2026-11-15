@@ -48,7 +48,9 @@ def allowed(name):
 
 def overlay(payload):
     require(payload['schema']=='p80-source-firmware-overlay-v1' and
-        re.fullmatch('[a-f0-9]{40}',payload['source_commit']) and payload['transaction_metadata_depth']==4,'Invalid P80 overlay identity')
+        re.fullmatch('[a-f0-9]{40}',payload['source_commit']) and
+        type(payload['transaction_metadata_depth']) is int and payload['transaction_metadata_depth'] in (2,4,8),
+        'Invalid P80 overlay identity')
     require(REQUIRED<=set(payload['files']),'Incomplete P80 source')
     for directory in FIRMWARE_DIRS:require(directory+'/manifest.json' in payload['files'],'Missing P80 firmware family')
     values={}
@@ -57,6 +59,13 @@ def overlay(payload):
         raw=base64.b64decode(row['base64'],validate=True)
         require(hashlib.sha256(raw).hexdigest()==row['sha256'],'Changed overlay '+name)
         values[name]=raw
+    depths={'firmware':payload['transaction_metadata_depth'],'firmware_d2':2,'firmware_d8':8,
+        'firmware_sequence':payload['transaction_metadata_depth'],
+        'firmware_contention':payload['transaction_metadata_depth']}
+    for directory,depth in depths.items():
+        firmware=json.loads(values[directory+'/manifest.json'].decode('utf8'))
+        require(firmware.get('configuration',{}).get('transaction_metadata_depth')==depth,
+            'Firmware queue depth differs from package role: '+directory)
     return values
 
 def prepare(source,target,payload):
@@ -84,7 +93,8 @@ def prepare(source,target,payload):
     result=dict(original)
     result.update(source_commit=payload['source_commit'],hardware_source_commit=payload['source_commit'],
         operations_source_commit=payload['source_commit'],files=desired,architecture='arch03_p80_ordered_original_bus',
-        peripheral_id='0x4b57530b',numeric_format='0x000e0c20',layout_id='0x00100004',transaction_metadata_depth=4,
+        peripheral_id='0x4b57530b',numeric_format='0x000e0c20',layout_id='0x00100004',
+        transaction_metadata_depth=payload['transaction_metadata_depth'],
         derivation=dict(source_bundle=str(source),source_manifest_sha256=BASE_SHA,
             source_preserved=True,overlay_files={n:desired[n] for n in sorted(values)}),
         inherited_results_are_not_P80_PASS=True,new_synthesis_verified=False)
