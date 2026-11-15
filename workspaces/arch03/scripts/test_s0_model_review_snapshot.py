@@ -20,7 +20,8 @@ def fixture(root,control_pin='D',disabled=DISABLED):
     (synth/'mapped.v').write_text('module e203_soc_top; endmodule\n')
     (synth/'mapped.sdc').write_text(SDC)
     area=dict(units='um^2',conservative_budget_mm2=0.95)
-    metrics=dict(period_ns='6.666666',max=0.001,min=0.002,latches=0)
+    # Actual DC metrics are decimal/count strings, not Python numbers.
+    metrics=dict(period_ns='6.666666000000',max='0.001',min='0.002',latches='0')
     summary=dict(scope='s0_t80_partitioned_whole_soc_task_mode',synthesis_completed=True,
         project_limit_mm2=1.0,link_report=dict(scope='s0_three_ddc_link',row_lanes=5),
         metrics=metrics,area_summary=area,artifacts={'mapped.sdc':tool.digest(synth/'mapped.sdc')})

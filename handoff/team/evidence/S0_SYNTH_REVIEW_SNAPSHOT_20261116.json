@@ -1,0 +1,86 @@
+{
+  "schema": "s0-displayed-synthesis-review-v1",
+  "observed_at": "2026-11-16T00:03:47+08:00",
+  "scope": "read-only final S0 synth08 reports; not stage acceptance",
+  "synthesis_run": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-a5f138e/runs/s0_synth08/t80_s0_synth",
+  "summary_sha256": "e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916",
+  "artifacts_checked_against_summary": [
+    "constraints.rpt",
+    "check_timing.rpt",
+    "partition_area.json"
+  ],
+  "constraints": {
+    "explicit_no_violations": true,
+    "full_report_read": true
+  },
+  "timing_check": {
+    "all_nonblank_lines_read": true,
+    "high_fanout_warning_net_count": 4,
+    "high_fanout_estimated_load": 1000,
+    "warning_code": "TIM-134",
+    "actual_net_names_pending_queue": true,
+    "other_warning_or_error_lines": 0
+  },
+  "metrics": {
+    "hf_period_ns": "6.666666000000",
+    "lf_period_ns": "66.000000000000",
+    "setup_ns": "0.000386715",
+    "hold_ns": "0.0055688",
+    "max_groups": 2,
+    "min_groups": 2,
+    "latches": 0,
+    "small_macros": 92,
+    "large_macros": 128,
+    "system_report_area_um2": "4475738.758645"
+  },
+  "sysmem": {
+    "groups": 10,
+    "bits": 106,
+    "input_bits": 35,
+    "output_bits": 71,
+    "clock": "hf_clk",
+    "max_delay_ns": 1.0,
+    "min_delay_ns": 0.0,
+    "input_transition_ns": 0.1,
+    "output_load_library_units": 0.01,
+    "external_receiver_specification_verified": false
+  },
+  "area": {
+    "conservative_t80_comparable_mm2": 0.9535222591004618,
+    "project_charged_mm2": 0.9535222591005087,
+    "unresolved_area_mm2": 0.1609004207998941,
+    "unresolved_leaf_count": 73334,
+    "attribution_complete": false,
+    "official_area_attribution_confirmed": false,
+    "whole_leaf_sum_mm2": 4.475738759069746,
+    "physical_partitions": {
+      "accelerator": {
+        "area_um2": 789927.4711011982,
+        "leaf_count": 269985
+      },
+      "cpu_soc": {
+        "area_um2": 1922577.8043845657,
+        "leaf_count": 77075
+      },
+      "shared_sram": {
+        "area_um2": 1763233.4835839823,
+        "leaf_count": 1703
+      }
+    },
+    "decision_uses_conservative_upper": true,
+    "limit_mm2": 1.0,
+    "numerical_limit_met": true
+  },
+  "netlist_modified": false,
+  "source_modified": false,
+  "new_eda_started": false,
+  "old8_modified": false,
+  "protected_t80_modified": false,
+  "strict_task_mode_timing_review_complete": false,
+  "stage_accepted": false,
+  "screenshots": {
+    "s0_constraints_complete.png": "b6f9614c5f8b6e300661bde39aa094250ac1cabe268892b8a19512d335674b67",
+    "s0_timing_complete.png": "3bda8181de97570df168369d44d22228880051339e55ab11a97dc58620be200c",
+    "s0_partition_area_done.png": "13fe2460bfad25bc11b5ad092de51ac5b656c27f34ee316188b34a0bcac13479"
+  }
+}

@@ -4630,18 +4630,18 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-15T23:57:58+08:00",
+      "observed_at": "2026-11-16T00:04:53+08:00",
       "status": "running",
       "stage": "saif",
       "completed": 2,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 195282,
-      "foreground_readonly_watcher": 193691,
+      "child_pid": 197943,
+      "foreground_readonly_watcher": 199060,
       "child_tool": "simv",
       "sram_provenance_checked": true,
-      "current_case": "layer_06",
+      "current_case": "layer_07",
       "gate_cases_passed": 14,
       "gate_outputs_passed": 354816,
       "gate_complete": true,
@@ -4650,7 +4650,8 @@
         "layer_02",
         "layer_03",
         "layer_04",
-        "layer_05"
+        "layer_05",
+        "layer_06"
       ]
     },
     "new_final_netlist_ready": true,
@@ -4688,7 +4689,19 @@
       "tests_passed": 3,
       "python36_syntax_passed": true,
       "additional_reject_cases": 8,
-      "no_acceptance_granted": true
+      "no_acceptance_granted": true,
+      "actual_DC_string_count_supported": true
+    },
+    "s0_synthesis_independent_read": {
+      "evidence": "handoff/team/evidence/S0_SYNTH_REVIEW_SNAPSHOT_20261116.json",
+      "observed_at": "2026-11-16T00:03:47+08:00",
+      "constraints_explicitly_clean": true,
+      "sysmem_bits": 106,
+      "high_fanout_warning_nets": 4,
+      "actual_net_names_pending": true,
+      "conservative_area_mm2": 0.9535222591004618,
+      "unresolved_ownership_still_charged": true,
+      "strict_timing_review_complete": false
     }
   }
 }

@@ -39,7 +39,7 @@ def snapshot(request):
     synth=read(srun/'summary.json',sr['sha256']);synthesis_identity(synth,'S0')
     metrics=report['timing_metrics']
     require(metrics==synth['metrics'] and Decimal(str(metrics['period_ns']))==Decimal('6.666666') and
-            Decimal(str(metrics['max']))>=0 and Decimal(str(metrics['min']))>=0 and metrics['latches']==0,
+            Decimal(str(metrics['max']))>=0 and Decimal(str(metrics['min']))>=0 and int(metrics['latches'])==0,
             'S0 timing or structure does not meet declared conditions')
     require(report['drc_inventory']['explicit_no_violations'] and
             report['drc_inventory']['extraction_complete'] and
