@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_failed_exported_map_only_recovery_preparation",
+    "current_stage": "S0_storage_preparation_for_incremental_recovery",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4334,19 +4334,35 @@
     "finish_launcher_prepared": "obsolete fixed synth03 launcher; do not execute",
     "finish_launcher_deployed": false,
     "s0_review_profile_tests_passed": 26,
-    "s0_review_profile_deployed": false,
+    "s0_review_profile_deployed": true,
     "s0_recovery_tests_passed": 20,
-    "s0_recovery_deployed": false,
+    "s0_recovery_deployed": true,
     "recovery_transfer": {
       "lines": 70,
       "files": 852,
       "auto_launches_EDA": false,
       "session_id": 33855,
-      "status": "transferring",
+      "status": "completed_server_852_files_manifest_verified",
       "manifest_sha256": "6d40f4d67fc94a3b10fe3e1ece27076cf7affc33297602078721397165ca8d78",
       "source_commit": "a5ce90ae4a967f0fddb12e3185fda5444ef9964f"
     },
     "recovery_launcher_prepared": "handoff/team/evidence/S0_RECOVERY_LAUNCH_20261115.py",
-    "recovery_launcher_executed": false
+    "recovery_launcher_executed": true,
+    "recovery_launcher_transfer": {
+      "source_commit": "b58251a",
+      "lines": 12,
+      "status": "completed",
+      "session_id": 16016,
+      "auto_launches_synth04_after_guards": true,
+      "sha256": "3d4faf1840f98de5116ba471c4e6d63b7463be4d1edcb2cf67e1e3e3d319a153"
+    },
+    "s0_recovery_seed_server_verified": true,
+    "synth_attempt04": {
+      "status": "failed_before_DC",
+      "observed_at": "2026-11-15T21:16:45+08:00",
+      "session": "s0_synth04",
+      "error": "ENOSPC creating unchanged team lock",
+      "pid": 120765
+    }
   }
 }

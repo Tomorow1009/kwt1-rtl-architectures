@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**21:20：synth04预检通过但在取原锁时ENOSPC，DC未启动；所有输入结束，Bash空闲。** 正准备对已核验N1竞争测试csrc普通编译缓存35文件/10.65MB做无损回读归档后立即新session synth05；只完成本地夹具检查，尚未执行清理。见[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部。不重复synth03/04，不清锁、不碰T80桌面或旧8路。
+
+**21:14更新：a5ce90a新包852文件/清单服务器验证通过，33855传输结束。现在唯一输入exec16016传输12行恢复启动器，结束后会自动严格预检并尝试新synth04；未观察真实启动结果。** 先读[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部，收完输入后核对PID/state，不重复启动、不输入其他VNC命令。b58251a已push，T80桌面及旧8路保持，S1–S4未开始。
+
 **21:05恢复先读[增量恢复传输检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)。exec33855正在VNC输入70行a5ce90a新包，不要并发输入或重复执行。** 原synth03已failed退出，无EDA；原因是两条旧映射单元set_map_only无效导出。新恢复工具20项检查及852文件/136模块闭包已过，a5ce90a已push；传完只核验输入、不自动EDA。恢复启动器已本地准备未执行，旧617finish启动器禁用。T80桌面及旧8路保持不动，S1–S4未开始。
 
 **20:58恢复重要：原synth03已失败退出，当前没有EDA。** 20:49:56.234720回执failed，原75787/DC76822均退出、原锁不存在（20:57:58只读核查）。失败原因是characterize导出的`set_map_only [get_cells U2055/U2048]`引用旧映射单元，在原unmapped RTL中不存在，产生两条CMD-036；DC仍写出加速器mapped.ddc但不能据此记PASS，CPU未执行。正在本地准备新目录增量恢复：仅移除这两条无效优化指令、在原RTL中先证明对象不存在，再以未验收DDC为seed重新增量编译和全部检查。旧失败包不改。最新审核工具e55c1c8本地851文件候选尚未部署；7156303已push。收尾617 launcher不再适用，**不要运行**。详见S0_NEXT_TOOLS_TRANSFER检查点最上方。
