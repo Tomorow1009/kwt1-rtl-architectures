@@ -5667,9 +5667,7 @@
         }
       ]
     },
-    "current_local_sessions": [
-      65394
-    ],
+    "current_local_sessions": [],
     "last_server_observation": "2026-11-16T05:52:54+08:00 functional02 pid42584 batch43/240,1089792 outputs,0failed. Synthesis waiter47889 waiting. Unique VNC input65394 deploys4cf review tools44lines.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
@@ -5891,12 +5889,12 @@
       "status": "running",
       "current": "batch20",
       "completed": 2,
-      "observed": "2026-11-16T05:52:54+08:00",
+      "observed": "2026-11-16T06:09:29+08:00",
       "controller_sha256": "5feee4584a5c07463c6e7ac380722f6c2c999e8b7e15941156cd5895fbb65d1a",
       "fresh_directory_and_failure_rehearsals_passed": 2,
       "error": null,
-      "batch_completed": 43,
-      "batch_outputs": 1089792,
+      "batch_completed": 174,
+      "batch_outputs": 4409856,
       "batch_failed": 0
     },
     "p80_ops_transfer7430": {
@@ -5939,15 +5937,34 @@
       "new_P80_precision_pass": false
     },
     "p80_ops_transfer4cf": {
-      "status": "visible_transfer_in_progress",
-      "input_session": 65394,
+      "status": "prepared_source_verified_no_new_eda",
+      "input_session": null,
       "lines": 44,
       "source_commit": "4cf35b6359f48ebaef8bd877fc4a3c00d52b6c5d",
       "payload_sha256": "ca268afa2d21023324c6fb0d28d8e9ed0f34711a4a67c55cb1fae778e07b421e",
       "patch_sha256": "2b670e3ec187ccd576695c5a588236f5eb6dc816911aabf497ab5d0159899e8d",
       "patch_bytes": 14748,
       "review_tests_passed": 33,
-      "hardware_changed": false
+      "hardware_changed": false,
+      "files": 944,
+      "manifest_sha256": "b8981502f271542300ec6139553be939bffb0d7f14c2cd00d0fda616ba59c6d1",
+      "observed": "2026-11-16T06:09:29+08:00"
+    },
+    "p80_final_followup01": {
+      "status": "waiting_synthesis02",
+      "pid": 67274,
+      "observed": "2026-11-16T06:09:29+08:00",
+      "source_commit": "871bda8",
+      "controller_sha256": "e25435bf74ff0a582a0956a6e1892a65163999af8dffbc177e501b2f83d257e7",
+      "local_rehearsals": 3,
+      "stage_accepted": false,
+      "server_eda_started": false
+    },
+    "p80_export_review01": {
+      "status": "local_preparation",
+      "deployed": false,
+      "completion_guard_checks": 5,
+      "stage_accepted": false
     }
   }
 }
