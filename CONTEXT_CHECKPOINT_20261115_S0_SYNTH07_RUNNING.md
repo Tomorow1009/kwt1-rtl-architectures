@@ -1,5 +1,9 @@
 # S0 synth07正在运行 — 2026-11-15 22:00
 
+**22:06:56最新实际状态：加速器增量已完成，父139859仍running/error=None；DC子143046正在CPU/SoC块。自动接续等待器143305已实际启动，源码cc21f8d，`ops-9ffb2a9/s0_followup_cc21f8d.log`显示等待synth07 running；finish01尚未启动。85724/75913输入均结束；当前VNC前台Bash空闲（无watcher）。需要继续时先只读现有state/进程，绝不再启动synth或等待器。**
+
+**22:04更新：共享块已完成，22:03:36实际观察父139859、DC141571正在accelerator增量映射，CPU99.2%、elapsed1:48，无错误。只读watcher140380已由Ctrl+C正常退出，后台综合不动。当前唯一输入exec85724正在传输18行`local_runs/s0_followup_cc21f8d/transfer.ps1`，不要并发输入或重复执行。接续脚本SHA841ced330ffedd9e37b1640615609bfa939894fb5926789da168bc478167c0dc；部署后会启动仅等待synth07终态的后台观察器，全部门槛通过才一次启动finish01，任何失败即保留并停止，不自动重试。尚未观察实际部署/等待器PID。cc21f8d已push。**
+
 恢复先读AGENTS、CONTEXT_HANDOFF、本文、STATUS.c32_g32_20261115，以及有效计划`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`（SHA1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39）。路线S0→P80→C80→C32→G32；S1–S4尚未开始。
 
 ## 当前实际作业：不要重启

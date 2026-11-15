@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_synth07_characterization_after_DDC_probe",
+    "current_stage": "S0_synth07_cpu_soc_mapping",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4344,7 +4344,7 @@
     "s0_report_and_finish_deployed": true,
     "s0_finish_started": false,
     "finish_launcher_prepared": "handoff/team/evidence/S0_SYNTH07_FINISH_LAUNCH_20261115.py; local fixture passed, not deployed",
-    "finish_launcher_deployed": false,
+    "finish_launcher_deployed": true,
     "s0_review_profile_tests_passed": 26,
     "s0_review_profile_deployed": true,
     "s0_recovery_tests_passed": 20,
@@ -4417,16 +4417,23 @@
     "synth_attempt07": {
       "pid": 139859,
       "status": "running",
-      "dc_pid": 140561,
-      "current_block": "characterization",
+      "dc_pid": 143046,
+      "current_block": "cpu_soc",
       "final_netlist_ready": false,
       "short_link_probe_passed": true,
       "seed_children_token_identical": true,
-      "foreground_readonly_watcher_pid": 140380,
+      "foreground_readonly_watcher_pid": null,
       "source_commit": "9ffb2a987ae8261e1d27e80fefa89886b7d4d2c5",
       "session": "s0_synth07",
-      "observed_at": "2026-11-15T22:00:10+08:00",
-      "manifest_sha256": "d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba"
+      "observed_at": "2026-11-15T22:06:56+08:00",
+      "manifest_sha256": "d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba",
+      "dc_cpu_percent": 99.2,
+      "dc_elapsed_seconds": 108,
+      "error": null,
+      "mapped_blocks": [
+        "shared_sram",
+        "accelerator"
+      ]
     },
     "synth07_launcher": {
       "source_commit": "437f156",
@@ -4437,6 +4444,17 @@
         37121,
         25471
       ]
+    },
+    "synth07_followup_waiter": {
+      "status": "waiting_for_synthesis",
+      "transfer_session": 85724,
+      "source_commit": "cc21f8d",
+      "sha256": "841ced330ffedd9e37b1640615609bfa939894fb5926789da168bc478167c0dc",
+      "script": "ops-9ffb2a9/s0_followup_cc21f8d.py",
+      "starts_eda_only_after_mapping_passes_all_guards": true,
+      "pid": 143305,
+      "transfer_session_completed": true,
+      "observed_at": "2026-11-15T22:06:56+08:00"
     }
   }
 }

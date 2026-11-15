@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**22:06:56最新：S0 synth07父139859、DC143046正在CPU/SoC；共享块和加速器增量已完成，无错误。自动接续等待器143305已运行，只在综合通过全部门槛后启动finish01（目前尚未启动）。所有输入结束，前台Bash空闲。恢复读[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)最上方；不要重启任何作业。T80桌面和旧八路不动。**
+
+**22:04优先接续[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)顶部。父139859/DC141571正在加速器增量映射，无错误，共享块已完成；watcher140380已退出。当前exec85724独占VNC输入18行自动接续守卫，勿并发键入或重跑；收完截图确认等待器PID。cc21f8d已push，运行包9ff不改。T80桌面、旧八路保持。**
+
 **22:00最新：先读[S0 synth07运行检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)。9ffb2a9包852文件核验通过，父139859；短DDC链接及两子块token一致检查已通过，子140561正在characterization、无错误。前台只读watcher140380，所有输入结束，无半截传输；不重启、不改当前包。T80桌面/旧八路保持，S1–S4未开始。收尾启动器仅本地准备，旧synth03/05启动器禁用。**
 
 **21:53当前：先读[S0设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth06在67秒短探针失败，未做长映射；single_file仍留同名设计，9ffb2a9改为显式替换旧设计对象。所有输入结束，VNC Bash空闲；下一新session synth07，旧包不改。T80桌面和旧八路保护。**
