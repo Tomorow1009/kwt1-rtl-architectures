@@ -30,19 +30,21 @@ class RecoveryTests(unittest.TestCase):
                                     recovery.CELLS,Path('/failed/mapped.ddc'))
         self.assertEqual(tkinter.Tcl().call('info','complete',script),1)
         self.assertLess(script.index('get_cells -quiet U2055'),script.index('/failed/mapped.ddc'))
-        self.assertLess(script.index('get_cells -quiet U2048'),script.index('remove_design -all'))
-        self.assertLess(script.index('remove_design -all'),script.index('/failed/mapped.ddc'))
+        self.assertLess(script.index('get_cells -quiet U2048'),script.index('remove_design -designs'))
+        self.assertLess(script.index('remove_design -designs'),script.index('/failed/mapped.ddc'))
         self.assertNotIn('compile -map_effort high',script)
         self.assertIn('set_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high',script)
         self.assertIn('if {![link]} {error "Recovery seed unresolved"}',script)
         self.assertIn('report_timing -delay_type min',script)
 
-    def test_cpu_and_probe_load_all_ddcs_into_one_container(self):
+    def test_cpu_and_probe_replace_old_design_objects_before_link(self):
         for script in (mapping.cpu_script(Path('/original'),Path('/new')),
                        mapping.ddc_link_probe_script(Path('/original'),Path('/new'),Path('/seed'))):
             self.assertEqual(tkinter.Tcl().call('info','complete',script),1)
-            self.assertNotIn('read_ddc ',script)
-            self.assertEqual(script.count('read_file -format ddc -single_file s0_designs '),3)
+            self.assertEqual(script.count('s0_read_replace {'),4)  # proc plus 3 calls
+            self.assertIn('remove_from_collection [get_designs *] $before',script)
+            self.assertIn('remove_design $obsolete',script)
+            self.assertIn('Design replacement remained ambiguous',script)
             self.assertIn('if {![link]}',script)
         probe=mapping.ddc_link_probe_script(Path('/original'),Path('/new'),Path('/seed'))
         self.assertNotIn('compile ',probe)

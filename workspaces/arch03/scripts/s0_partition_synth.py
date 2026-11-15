@@ -116,7 +116,7 @@ def block_script(origin, run, block, reference, removed_map_only=(), seed=None):
                    for name in removed_map_only)
     # The absence check above uses the original RTL only. Drop that in-memory
     # design container before reading a mapped seed with the same design names.
-    seeded=('remove_design -all\nread_ddc '+tcl_path(seed)+'\ncurrent_design '+reference+'\nif {![link]} {error "Recovery seed unresolved"}\n') if seed else ''
+    seeded=('remove_design -designs\nread_ddc '+tcl_path(seed)+'\ncurrent_design '+reference+'\nif {![link]} {error "Recovery seed unresolved"}\n') if seed else ''
     optimization=('set_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n' if seed else
                   'compile -map_effort high\nset_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n')
     body = ('source '+tcl_path(run/'libraries.tcl')+'\nread_ddc '+tcl_path(origin/'linked.ddc')+'\n'+FIND_BLOCK+
@@ -143,18 +143,47 @@ def block_script(origin, run, block, reference, removed_map_only=(), seed=None):
     return proc_script(body, 'S0_BLOCK_MAPPED '+block)
 
 
-def read_into_container(path):
-    # DC read_file -single_file puts DDC designs in one in-memory container.
-    # Otherwise linked.ddc and mapped.ddc retain duplicate design names.
-    return 'read_file -format ddc -single_file s0_designs '+tcl_path(path)+'\n'
+DDC_REPLACE = r'''
+proc s0_read_replace {path} {
+    set before [get_designs -quiet *]
+    read_ddc $path
+    set incoming [remove_from_collection [get_designs *] $before]
+    if {[sizeof_collection $incoming] == 0} {error "DDC introduced no design objects: $path"}
+    set names [dict create]
+    foreach_in_collection d $incoming {
+        set name [get_attribute $d name]
+        if {[dict exists $names $name]} {error "Duplicate incoming design: $name"}
+        dict set names $name 1
+    }
+    set obsolete [get_designs -quiet __S0_NO_SUCH_DESIGN__]
+    foreach_in_collection d $before {
+        if {[dict exists $names [get_attribute $d name]]} {
+            set obsolete [add_to_collection $obsolete $d]
+        }
+    }
+    set count [sizeof_collection $obsolete]
+    if {$count > 0} {remove_design $obsolete}
+    set seen [dict create]
+    foreach_in_collection d [get_designs *] {
+        set name [get_attribute $d name]
+        if {[dict exists $seen $name]} {error "Design replacement remained ambiguous: $name"}
+        dict set seen $name 1
+    }
+    puts "S0_DDC_OBJECT_REPLACEMENT $path removed_in_memory=$count"
+}
+'''
+
+
+def read_replacing_designs(path):
+    return 's0_read_replace '+tcl_path(path)+'\n'
 
 
 def load_children(run):
-    return ''.join(read_into_container(run/'blocks'/block/'mapped.ddc') for block in sorted(BLOCKS))
+    return ''.join(read_replacing_designs(run/'blocks'/block/'mapped.ddc') for block in sorted(BLOCKS))
 
 
 def ddc_link_probe_script(origin, run, seed_run):
-    body=('source '+tcl_path(run/'libraries.tcl')+'\n'+read_into_container(origin/'linked.ddc')+
+    body=('source '+tcl_path(run/'libraries.tcl')+'\n'+DDC_REPLACE+read_replacing_designs(origin/'linked.ddc')+
           load_children(seed_run)+FIND_BLOCK+
           'current_design e203_soc_top\nif {![link]} {error "S0 probe link unresolved"}\n'+
           baseline.macro_guard()+
@@ -164,7 +193,7 @@ def ddc_link_probe_script(origin, run, seed_run):
 
 
 def cpu_script(origin, run):
-    body = ('source '+tcl_path(run/'libraries.tcl')+'\n'+read_into_container(origin/'linked.ddc')+
+    body = ('source '+tcl_path(run/'libraries.tcl')+'\n'+DDC_REPLACE+read_replacing_designs(origin/'linked.ddc')+
         load_children(run)+FIND_BLOCK+
         'current_design e203_soc_top\nif {![link]} {error "S0 CPU link unresolved"}\n'+baseline.macro_guard()+
         '\nsource '+tcl_path(run/'task_mode.sdc')+'\n'
@@ -185,7 +214,7 @@ def top_script(origin, run, cfg):
     # Exact existing final report implementation; no compile during final link.
     text = baseline.script(run, cfg)
     text = baseline.replace_once(text, 'read_ddc linked.ddc',
-        read_into_container(run/'blocks/cpu_soc/mapped.ddc')+load_children(run))
+        DDC_REPLACE+read_replacing_designs(run/'blocks/cpu_soc/mapped.ddc')+load_children(run))
     text = baseline.replace_once(text, 'compile -map_effort high', '# S0 final link only; mapping occurred per block')
     text = baseline.replace_once(text, 'compile -incremental_mapping -map_effort high', '# No silent top remapping')
     text = baseline.replace_once(text, 'set_fix_multiple_port_nets -all -buffer_constants', '# No topology changes at final link')
