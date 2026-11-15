@@ -4144,11 +4144,11 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_S0_POWER12.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_S0_FROZEN_P80.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
-    "stage": "S0_final_netlist_validation",
+    "stage": "P80_preparation",
     "final_pe": 32,
     "area_limit_mm2": 1.0,
     "formal_samples": 20,
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0 technical review complete; copy-only archive pending; S1 hardware not started",
+    "current_stage": "P80 development allowed after completed S0 freeze",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4680,7 +4680,7 @@
     },
     "new_final_netlist_ready": true,
     "s0_archive_preparation": {
-      "status": "deployed_import_verified_not_executed",
+      "status": "verified_copy",
       "copy_only": true,
       "source_delete_allowed": false,
       "tests_passed": 3,
@@ -4688,7 +4688,13 @@
       "requires_terminal_queue_and_export": true,
       "launcher": "handoff/team/evidence/S0_COPY_ARCHIVE_20261116.py",
       "launcher_syntax_python36": true,
-      "launcher_executed": false
+      "launcher_executed": true,
+      "pid": 254753,
+      "active": false,
+      "source_deleted": false,
+      "destination": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/s0-runtime-20261116_0209",
+      "archive_sha256": "fe2c44b882a5e4dafd538fc2a38615b2a45bbcfddbd6ddac1f2013d91e3c19fa",
+      "archive_bytes": 867372148
     },
     "s0_report_request_builder04": {
       "path": "handoff/team/evidence/S0_BUILD_REPORT_REQUEST04_20261115.py",
@@ -5021,6 +5027,47 @@
       "s1_hardware_start_allowed": false,
       "next_action": "Copy-only durable archive with full readback; then freeze S0 and begin P80",
       "protected_desktop_T80_modified": false,
+      "old8_modified": false
+    },
+    "s0_frozen": true,
+    "s0_freeze": {
+      "schema": "arch03-s0-freeze-v1",
+      "frozen_at": "2026-11-16T02:15:33+08:00",
+      "stage": "S0",
+      "technical_conclusion_commit": "2de8145",
+      "technical_conclusion_sha256": "c39dacf3aea7bb96a28e537218bda5ebbf9bb525ea5c091d5aec3fa6c9bcac30",
+      "archive": {
+        "schema": "s0-copy-only-archive-displayed-receipt-v1",
+        "observed_at": "2026-11-16T02:14:24+08:00",
+        "source_commit": "2de8145",
+        "runtime_root": "/tmp/s4_21usr_t80_20261115_1830",
+        "operations": "/tmp/s4_21usr_s0_copy_ops_20261116_0205",
+        "destination": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/s0-runtime-20261116_0209",
+        "status": "verified_copy",
+        "finished": "2026-11-15T18:12:40.375498Z",
+        "archive_sha256": "fe2c44b882a5e4dafd538fc2a38615b2a45bbcfddbd6ddac1f2013d91e3c19fa",
+        "archive_bytes": 867372148,
+        "receipt_sha256": "b7dda6dbc6715f624e101b3b265f7b195bd37283d2cb6efdeeea692f2e5cfd17",
+        "member_counts": {
+          "directory": 990,
+          "regular": 11431,
+          "symlink": 2
+        },
+        "all_members_readback_verified": true,
+        "source_before_after_identical": true,
+        "source_deleted": false,
+        "source_modified": false,
+        "relocation_verified": false,
+        "archive_implies_acceptance": false,
+        "protected_T80_modified": false,
+        "old8_modified": false
+      },
+      "local_key_hashes_machine_checked_against_server": true,
+      "s0_frozen": true,
+      "s1_development_allowed": true,
+      "physical_signoff": false,
+      "official600_verified": false,
+      "protected_T80_modified": false,
       "old8_modified": false
     }
   }

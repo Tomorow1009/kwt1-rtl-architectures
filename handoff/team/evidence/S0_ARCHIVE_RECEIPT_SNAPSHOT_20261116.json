@@ -1,0 +1,22 @@
+{
+  "schema":"s0-copy-only-archive-displayed-receipt-v1",
+  "observed_at":"2026-11-16T02:14:24+08:00",
+  "source_commit":"2de8145",
+  "runtime_root":"/tmp/s4_21usr_t80_20261115_1830",
+  "operations":"/tmp/s4_21usr_s0_copy_ops_20261116_0205",
+  "destination":"/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/s0-runtime-20261116_0209",
+  "status":"verified_copy",
+  "finished":"2026-11-15T18:12:40.375498Z",
+  "archive_sha256":"fe2c44b882a5e4dafd538fc2a38615b2a45bbcfddbd6ddac1f2013d91e3c19fa",
+  "archive_bytes":867372148,
+  "receipt_sha256":"b7dda6dbc6715f624e101b3b265f7b195bd37283d2cb6efdeeea692f2e5cfd17",
+  "member_counts":{"directory":990,"regular":11431,"symlink":2},
+  "all_members_readback_verified":true,
+  "source_before_after_identical":true,
+  "source_deleted":false,
+  "source_modified":false,
+  "relocation_verified":false,
+  "archive_implies_acceptance":false,
+  "protected_T80_modified":false,
+  "old8_modified":false
+}
