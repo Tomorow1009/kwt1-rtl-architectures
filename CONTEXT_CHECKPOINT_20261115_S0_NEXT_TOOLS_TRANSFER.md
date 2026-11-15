@@ -1,5 +1,9 @@
 # S0后继工具传输检查点
 
+**20:11更新，覆盖下方传输状态：** exec39807已61/61结束，服务器S0_INPUTS_PREPARED确认845文件及ce81bdd6…清单匹配，S0_NEXT_TOOLS_READY确认没有启动新EDA。20:09:39实际import s0_finish/s0_report通过，模块齐全。20:11:09原synth03仍running/accelerator，DC76822 CPU99.7%、33:33 elapsed/33:28 CPU，日志已从Processing推进到OPT-1206常量寄存器处理，无错误。shared_sram仍是唯一已生成独立DDC的块。
+
+**当前VNC前台为新只读观察器PID91575，不是shell。** 每30秒显示原75787/DC76822状态与CPU时间，终态自动退出。所有输入exec39807/69865/31346已结束。要输入命令前先看截图，必要时Ctrl+C只退出此观察器，后台综合保持。截图takeover_local/s0_watcher2011.png。不要重跑传输、原观察器78421、任何旧launcher或综合。
+
 2026-11-15 20:02，北京时间。恢复先读AGENTS.md、CONTEXT_HANDOFF.md、本文件、有效计划workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md及STATUS.c32_g32_20261115。
 
 ## 当前动作，先收完
