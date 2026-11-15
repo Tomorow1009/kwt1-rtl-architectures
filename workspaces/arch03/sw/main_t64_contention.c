@@ -2,6 +2,9 @@
  * Task inputs still arrive solely through the original SysMem DMA path.
  * Scratch lies outside task input/output and the completion mailbox. */
 #include "kwt_t64.h"
+#if KWT_ICB32_ROWS != 4u
+#error "T64 contention firmware requires four rows"
+#endif
 #define SCRATCH_BASE 0xa0040000u
 #define TIMEOUT 100000000ull
 static uint32_t rd(unsigned offset) {
@@ -31,7 +34,7 @@ int main(void) {
     int rc=rd(K16_ID)==KWT_ICB32_ID_VALUE ? K16_OK : K16_BAD_ID;
     if(!rc && (rd(K16_CAPABILITY)!=KWT_T64_CAPABILITY ||
        rd(K16_NUMERIC_FORMAT)!=KWT_T64_NUMERIC_FORMAT)) rc=K16_BAD_ID;
-    if(!rc && (metadata[0]!=10u || metadata[2]!=KWT_ICB32_LAYOUT || metadata[3]!=5u ||
+    if(!rc && (metadata[0]!=10u || metadata[2]!=KWT_ICB32_LAYOUT || metadata[3]!=KWT_ICB32_ROWS ||
        metadata[1]<32u || metadata[1]>KWT_ICB32_MAX_INPUT_BYTES || (metadata[1]&3u))) rc=K16_BAD_ARGUMENT;
     if(!rc) { wr(K16_IRQ_ENABLE,0);rc=kwt_icb32_cancel(1000000ull,&s); }
     if(!rc) { wr(K16_CONTROL,4);fence();rc=ready(start); }

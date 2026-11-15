@@ -78,4 +78,29 @@ class SingleLockTests(unittest.TestCase):
         self.ledger.release()
 
 
+class PriorEvidenceTests(unittest.TestCase):
+    def test_diagnostic_only_rebuild_preserves_production_identity(self):
+        old={'workspaces/arch03/rtl/arch03_t64_accel.sv':'rtl','firmware/driver.elf':'fw',
+             'firmware_sequence/manifest.json':'recovery','validated_data/layer_01/load.hex':'data',
+             'workspaces/arch03/sw/main_t64_contention.c':'old-c','firmware_contention/driver.elf':'old-test'}
+        new=dict(old);new['workspaces/arch03/sw/main_t64_contention.c']='four-row-c'
+        new['firmware_contention/driver.elf']='new-test'
+        new['workspaces/arch03/scripts/t64_singlelock_queue.py']='new-runner'
+        queue.reusable_inputs(old,new)
+        for key in ('workspaces/arch03/rtl/arch03_t64_accel.sv','firmware/driver.elf',
+                    'firmware_sequence/manifest.json','validated_data/layer_01/load.hex'):
+            changed=dict(new);changed[key]='different'
+            with self.assertRaisesRegex(ValueError,'production'):queue.reusable_inputs(old,changed)
+
+    def test_passed_state_and_digest_are_both_required(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            session=Path(temporary);run=session/'t64_batch20';run.mkdir();(run/'summary.json').write_text('{}')
+            sha=queue.common.sha(run/'summary.json');state=session/'state.json'
+            state.write_text(json.dumps(dict(stages={'t64_batch20':dict(status='failed',summary_sha256=sha)})))
+            with self.assertRaisesRegex(ValueError,'Incomplete'):queue.completed(run,'t64_batch20',sha)
+            state.write_text(json.dumps(dict(stages={'t64_batch20':dict(status='passed',summary_sha256=sha)})))
+            with self.assertRaisesRegex(ValueError,'Incomplete'):queue.completed(run,'t64_batch20','0'*64)
+            self.assertEqual(queue.completed(run,'t64_batch20',sha)['sha256'],sha)
+
+
 if __name__=='__main__':unittest.main()

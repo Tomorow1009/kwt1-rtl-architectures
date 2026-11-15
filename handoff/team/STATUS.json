@@ -4000,7 +4000,7 @@
   },
   "t64_g64_resume_20261115": {
     "plan": "workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md",
-    "stage": "T64_batch20_running",
+    "stage": "T64_contention_firmware_repair",
     "protected_desktop": "/storage2/2026contest/server4/s4_21usr/Desktop/T80_Delivery_20261113",
     "t80_desktop_modified": false,
     "old8_modified": false,
@@ -4009,16 +4009,14 @@
     "formal_samples": 20,
     "formal_tasks": 240,
     "full100_authorized": false,
-    "server_observed": "2026-11-15T16:29:22.192404+08:00",
-    "server_lock": "t64_serial02",
-    "server_eda_processes": [
-      301902
-    ],
+    "server_observed": "2026-11-15T16:47:13.240401+08:00",
+    "server_lock": "recheck before next launch; old queue exited",
+    "server_eda_processes": [],
     "shared_free_bytes": 1048576,
     "tmp_free_GiB": 93.53,
     "t64_formal_started": true,
     "g64_started": false,
-    "next": "Observe one-lock serial remainder; no stage restarts; G64 after full T64 acceptance",
+    "next": "Deploy isolated contention repair and new queue; reuse ASIC14 and batch240; G64 after full T64 acceptance",
     "tool_source": "9934df8ae0768c3da8262f2f3341d766a11fab59",
     "server_bundle": "/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-9934df8",
     "manifest_sha256": "32f48cc22391667881476ba6bf6ad7e26b69c6693e19182fb8688a69ac596c68",
@@ -4039,7 +4037,7 @@
     ],
     "supervisor": "t64_singlelock_queue.py",
     "supervisor_sha256": "016dfbb037e43d50d981fb653d43847768792c4a4000b78132a72e6a5f5eb7d4",
-    "supervisor_status": "running t64_batch20",
+    "supervisor_status": "failed at contention; diagnostic row guard",
     "content_preserving_hardlink_dedup": {
       "scope": "old T64 validated_data input copies",
       "files": 42,
@@ -4051,7 +4049,7 @@
     "started": "2026-11-15T15:33:23.604195",
     "last_observed_layer": "layer_01",
     "last_observed_cycles": 116751,
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_T64_SINGLELOCK_RUNNING.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_T64_CONTENTION_FIX.md",
     "firmware_dedup_files": 6,
     "firmware_duplicate_blocks_reclaimed_bytes": 3145728,
     "asic14": {
@@ -4079,10 +4077,10 @@
       "shared_free_after": 4194304
     },
     "batch20_progress": {
-      "completed": 131,
+      "completed": 240,
       "failed": 0,
-      "checked_outputs": 3320064,
-      "remaining_seconds_with_margin": 986.9832877011023
+      "checked_outputs": 6082560,
+      "checked_totals": 6082560
     },
     "archive_tool": {
       "path": "workspaces/arch03/scripts/t64_archive_runtime.py",
@@ -4092,7 +4090,19 @@
       "deployed": false,
       "executed": false
     },
-    "visible_readonly_watcher_pid": 300088,
-    "vnc_foreground": "readonly watcher; Ctrl+C watcher before typing shell; do not interrupt background queue"
+    "visible_readonly_watcher_pid": null,
+    "vnc_foreground": "idle shell after watcher exited",
+    "last_observed": "2026-11-15T16:47:13+08:00",
+    "current_status": "asic240_passed_contention_diagnostic_fix_pending",
+    "current_stage": "contention_firmware_rebuild",
+    "batch_tasks_completed": 240,
+    "batch_failed": 0,
+    "batch_checked_outputs": 6082560,
+    "batch_summary_sha256": "50c42478461985dfd33f0324aa464dc3d775388d6e54e3de4f06c8d46f190d16",
+    "queue_running": false,
+    "watcher_running": false,
+    "latest_checkpoint": "CONTEXT_CHECKPOINT_20261115_T64_CONTENTION_FIX.md",
+    "repair_tool_tests": 9,
+    "negative_rows5_compile": "rejected as required"
   }
 }

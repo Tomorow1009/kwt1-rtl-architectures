@@ -1,8 +1,9 @@
 """Serial T64 remainder with one unchanged shared lock for the entire queue.
 
-Reuses only the explicitly identified ASIC14. Each new stage keeps its own
-state and artifacts; every EDA child is reaped by the coordinator's ledger.
-No hardware, firmware, validation threshold or sample scope changes here.
+Reuses explicitly identified ASIC14 and optionally completed ASIC240 when
+production inputs remain identical. Each new stage keeps its own state and
+artifacts; every EDA child is reaped by the coordinator's ledger. Diagnostic
+firmware repairs do not change hardware, thresholds or sample scope.
 """
 import argparse
 import datetime
@@ -29,6 +30,20 @@ def completed(run, name, expected=None):
     return dict(run=str(run),sha256=digest)
 
 
+def reusable_inputs(old,new):
+    """Allow only coordinator/tool changes and isolated contention test firmware.
+
+    Production RTL, performance/recovery firmware, data, and all actual matrix
+    verifiers remain byte-identical. A diagnostic rebuild does not rerun ASIC240.
+    """
+    allowed={'workspaces/arch03/scripts/'+n for n in
+             ('n1_process.py','transport_report_stage.py','t64_singlelock_queue.py')}
+    allowed.add('workspaces/arch03/sw/main_t64_contention.c')
+    def selected(files):
+        return {k:v for k,v in files.items() if k not in allowed and not k.startswith('firmware_contention/')}
+    require(selected(old)==selected(new),'Prior production hardware, firmware, data or verifier changed')
+
+
 def validate_prior(request,cfg):
     ref=request['asic'];run=paths.allowed_run(ref['run'],cfg,'Prior ASIC14')
     completed(run,'t64_soc',ref['sha256'])
@@ -39,12 +54,20 @@ def validate_prior(request,cfg):
             all(r['outputs']==r['total_outputs']==25344 for r in result['cases']),
             'Prior ASIC14 scope is incomplete')
     old=read(run.parents[2]/'manifest.json')['files'];new=common.inputs()['files']
-    allowed={'workspaces/arch03/scripts/'+n for n in
-             ('n1_process.py','transport_report_stage.py','t64_singlelock_queue.py')}
-    require({k:v for k,v in old.items() if k not in allowed}==
-            {k:v for k,v in new.items() if k not in allowed},
-            'Prior ASIC hardware, firmware, data or verifier changed')
+    reusable_inputs(old,new)
     return ref
+
+
+def validate_batch(ref,cfg):
+    run=paths.allowed_run(ref['run'],cfg,'Prior ASIC240')
+    completed(run,'t64_batch20',ref['sha256'])
+    result=read(run/'summary.json')
+    require(result.get('schema')=='arch03-t64-first20-batch-v4' and
+            result.get('asic_cpu_verified') is True and result.get('tasks')==240 and
+            result.get('checked_outputs')==result.get('checked_totals')==6082560 and
+            result.get('failed')==0 and result.get('row_lanes')==4,'Prior own ASIC240 scope differs')
+    reusable_inputs(read(run.parents[2]/'manifest.json')['files'],common.inputs()['files'])
+    return dict(ref)
 
 
 def dispatch(name,cfg,run,request,refs,call):
@@ -158,6 +181,7 @@ def execute(request,queue):
                 common.ROOT in source.parents,'Unfrozen queue module')
         require(files.get(source.relative_to(common.ROOT).as_posix())==common.sha(source),'Queue dependency changed')
     asic=validate_prior(request,cfg)
+    batch=validate_batch(request['prior_batch'],cfg) if request.get('prior_batch') else None
     require(common.sha(Path(request['archive']))==request['archive_sha256'],'FLOAT source changed')
     require(Path(request['numpy_root']).is_dir(),'Missing numerical runtime')
     os.environ['OPENBLAS_NUM_THREADS']='1';sys.path.insert(0,request['numpy_root'])
@@ -175,7 +199,12 @@ def execute(request,queue):
     try:
         ledger.acquire();ledger.initialize()
         refs={}
-        for name in ('batch20','contention','sequence','synth','gate','saif','timing_audit','drc_audit','structure'):
+        if batch is None:
+            refs['batch20']=run_stage('batch20','batch20',cfg,queue,state,ledger,request,refs)
+        else:
+            refs['batch20']=batch;state['batch_reference']=batch
+            state['reused_unchanged_production_batch']=True;atomic_save(queue/'state.json',state)
+        for name in ('contention','sequence','synth','gate','saif','timing_audit','drc_audit','structure'):
             refs[name]=run_stage(name,name,cfg,queue,state,ledger,request,refs)
         for i in range(1,13):
             refs['power_layer']='layer_%02d'%i
