@@ -17,7 +17,7 @@ TICKS = 199999980000
 class TransportWindowSelection(unittest.TestCase):
     def test_both_four_transfer_profiles_and_three_transfer_predecessors(self):
         four=dict(WINDOW,transfer_bytes=50784,transfer_transactions=12696)
-        for profile in ('T80','T64','S0'):
+        for profile in ('T80','T64','S0','P80'):
             self.assertEqual(tool.profile_window_reader(profile)(four),tool.native.window_values(WINDOW))
             with self.assertRaises(ValueError):tool.profile_window_reader(profile)(WINDOW)
         for profile in ('B0','N1'):
@@ -67,6 +67,15 @@ def index():
 
 
 class UnknownTests(unittest.TestCase):
+    def test_p80_uses_own_stage_names_and_no_predecessor_identity(self):
+        report=dict(schema='arch03-p80-evidence-export-v1',stage='P80',row_lanes=5,
+            numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,transaction_metadata_depth=2,
+            synthesis_route=dict(scope='p80_partitioned_whole_soc_task_mode',
+                old_linked_ddc_reused=False,block_cache_reused=False))
+        self.assertEqual(tool.profile_contract(report),
+            ('P80','p80_synth','p80_saif','P80_native_saif_function_and_complete_windows_passed'))
+        with self.assertRaises(ValueError):tool.profile_contract(dict(report,stage='S0'))
+
     def test_s0_report_selects_own_run_hashes_with_t80_engine_keys(self):
         report = dict(schema='arch03-s0-evidence-export-v1',stage='S0',row_lanes=5,
                       numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,
@@ -204,8 +213,10 @@ endmodule
         root = Path(self.directory.name)
         n1 = getattr(self, 'n1_fixture', False)
         s0 = getattr(self, 's0_fixture', False)
+        p80 = getattr(self, 'p80_fixture', False)
         synth_stage = 't80_synth' if s0 else ('n1_synth' if n1 else 'systolic_b_synth')
         activity_stage = 't80_saif' if s0 else ('n1_saif' if n1 else 'systolic_b_saif')
+        if p80:synth_stage,activity_stage='p80_synth','p80_saif'
         def write(path, value):
             path.parent.mkdir(parents=True, exist_ok=True)
             tool.save(path, value)
@@ -216,6 +227,10 @@ endmodule
         if s0:
             synthesis.update(scope='s0_t80_partitioned_whole_soc_task_mode',synthesis_completed=True,
                              project_limit_mm2=1.0,link_report=dict(scope='s0_three_ddc_link',row_lanes=5))
+        if p80:
+            synthesis.update(scope='p80_partitioned_whole_soc_task_mode',synthesis_completed=True,
+                project_limit_mm2=1.0,transaction_metadata_depth=2,old_linked_ddc_reused=False,block_cache_reused=False,
+                link_report=dict(schema='arch03-p80-fresh-link-v1',row_lanes=5,transaction_metadata_depth=2))
         ss = write(srun/'summary.json', synthesis)
         write(srun.parent/'state.json', dict(stages={synth_stage:dict(status='passed',summary_sha256=ss)}))
         arun = root/'activity'/activity_stage;arun.mkdir(parents=True)
@@ -224,18 +239,23 @@ endmodule
             path = arun/(name+'.saif');path.write_bytes(self.path.read_bytes())
             expected = dict(self.expected, file=path.name)
             cases.append(dict(case=name,activity=expected,task_window=self.window))
-        acts = write(arun/'summary.json', dict(status=('T80' if s0 else ('N1' if n1 else 'B'))+'_native_saif_function_and_complete_windows_passed',
+        acts = write(arun/'summary.json', dict(status=('P80' if p80 else 'T80' if s0 else ('N1' if n1 else 'B'))+'_native_saif_function_and_complete_windows_passed',
             synthesis_summary_sha256=ss, firmware_sha256='1'*64, cases=cases,
             numeric_format='0x000e0c20',layout_id=0x00100004,gate_summary_sha256='2'*64))
         write(arun.parent/'state.json',dict(stages={activity_stage:dict(status='passed',summary_sha256=acts)}))
         report = root/'export'/'report.json'
-        report_sha = write(report,dict(schema=('arch03-s0-evidence-export-v1' if s0 else
+        document=dict(schema=('arch03-s0-evidence-export-v1' if s0 else
                                               ('arch03-n1-evidence-export-v1' if n1 else 'systolic-b-evidence-export-v1')),
             stage='S0' if s0 else 'N1',numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,row_lanes=5,
             synthesis_route=dict(scope='s0_t80_partitioned_whole_soc_task_mode') if s0 else {},
             activity_reference=dict(run=str(arun),sha256=acts),
             references=dict(synthesis=dict(run=str(srun),sha256=ss),gate=dict(sha256='2'*64)),
-            netlist_sha256=tool.sha(mapped),firmware_sha256='1'*64))
+            netlist_sha256=tool.sha(mapped),firmware_sha256='1'*64)
+        if p80:
+            document.update(schema='arch03-p80-evidence-export-v1',stage='P80',transaction_metadata_depth=2,
+                synthesis_route=dict(scope='p80_partitioned_whole_soc_task_mode',
+                    old_linked_ddc_reused=False,block_cache_reused=False))
+        report_sha=write(report,document)
         write(report.parent/'receipt.json',dict(artifacts={'report.json':report_sha}))
         before = {str(p):tool.sha(p) for p in root.rglob('*') if p.is_file()}
         output = root/'new_analysis'
@@ -244,8 +264,9 @@ endmodule
         self.assertFalse(got['full12_collected'])
         self.assertFalse(got['system_power_verified'])
         self.assertEqual(got['only_existing_N1_activity_used'], n1)
-        self.assertEqual(got['only_existing_B0_activity_used'], not (n1 or s0))
+        self.assertEqual(got['only_existing_B0_activity_used'], not (n1 or s0 or p80))
         if s0:self.assertEqual(got['activity_configuration'],'S0')
+        if p80:self.assertEqual(got['activity_configuration'],'P80')
         self.assertEqual(set(got['runtime_dependencies']), set(tool.DEPENDENCIES)|{'tool'})
         self.assertEqual(got['runtime_dependencies'], tool.dependencies())
         lines = gzip.decompress((output/'layer_01.unknown.jsonl.gz').read_bytes()).splitlines()
@@ -271,6 +292,11 @@ endmodule
     def test_s0_collector_binds_partitioned_netlist_and_four_transfer_window(self):
         self.s0_fixture = True
         self.window = dict(self.window,transfer_bytes=50784,transfer_transactions=12696)
+        self.test_collector_pins_inputs_and_publishes_complete_jsonl_only()
+
+    def test_p80_collector_binds_own_fresh_netlist_and_complete_bus_window(self):
+        self.p80_fixture=True
+        self.window=dict(self.window,transfer_bytes=50784,transfer_transactions=12696)
         self.test_collector_pins_inputs_and_publishes_complete_jsonl_only()
 
     def test_n1_identity_cannot_be_changed_by_schema_alone(self):

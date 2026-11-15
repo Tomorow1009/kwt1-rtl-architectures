@@ -27,6 +27,8 @@ UNCHANGED_HELPERS.add('workspaces/arch03/irq_mapping.json')
 REQUIRED={'workspaces/arch03/rtl/arch03_p80_accel.sv','workspaces/arch03/rtl/arch03_p80_transport.sv',
     'workspaces/arch03/rtl/arch03_icb_arb2_queued.sv','workspaces/arch03/scripts/p80_server.py',
     'workspaces/arch03/scripts/p80_paths.py','workspaces/arch03/scripts/install_p80.py'}
+REVIEW_HELPERS={'workspaces/arch03/scripts/'+name for name in
+    ('transport_review_contract.py','b0_saif_unknown_inventory.py')}
 
 def require(ok,message):
     if not ok:raise ValueError(message)
@@ -41,7 +43,7 @@ def member(name):
 
 def allowed(name):
     p=member(name)
-    if name in UNCHANGED_HELPERS or name in REQUIRED:return True
+    if name in UNCHANGED_HELPERS or name in REQUIRED or name in REVIEW_HELPERS:return True
     if len(p.parts)==2 and p.parts[0] in FIRMWARE_DIRS and p.name in FIRMWARE_NAMES:return True
     return len(p.parts) in (3,4) and p.parts[:2]==('workspaces','arch03') and \
         ('p80' in p.name.lower()) and p.suffix in ('.sv','.svh','.py','.md','.c','.h')

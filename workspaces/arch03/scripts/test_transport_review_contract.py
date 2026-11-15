@@ -3,6 +3,25 @@ import transport_review_contract as c
 
 
 class ReviewIdentity(unittest.TestCase):
+    def test_p80_requires_own_queue_and_fresh_mapping(self):
+        request=dict(transport_stage='P80',jobs=[dict(name='P80')])
+        manifest=dict(architecture='arch03_p80_ordered_original_bus',row_lanes=5,
+            fixed_shift=10,numeric_format_id='0x000e0c20',transaction_metadata_depth=2)
+        self.assertEqual(c.profile(request,manifest),'P80')
+        with self.assertRaises(ValueError):c.profile(request,dict(manifest,transaction_metadata_depth=1))
+        report=dict(schema='arch03-p80-evidence-export-v1',stage='P80',row_lanes=5,
+            numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,transaction_metadata_depth=2,
+            synthesis_route=dict(scope=c.P80_SCOPE,old_linked_ddc_reused=False,block_cache_reused=False))
+        c.report_identity(report,'P80')
+        with self.assertRaises(ValueError):c.report_identity(dict(report,synthesis_route=dict(scope=c.S0_SCOPE)),'P80')
+        synth=dict(scope=c.P80_SCOPE,synthesis_completed=True,project_limit_mm2=1.0,
+            transaction_metadata_depth=2,old_linked_ddc_reused=False,block_cache_reused=False,
+            link_report=dict(schema='arch03-p80-fresh-link-v1',row_lanes=5,transaction_metadata_depth=2))
+        c.synthesis_identity(synth,'P80')
+        for change in (dict(block_cache_reused=True),dict(scope=c.S0_SCOPE),dict(transaction_metadata_depth=4),
+                       dict(project_limit_mm2=1.2)):
+            with self.assertRaises(ValueError):c.synthesis_identity(dict(synth,**change),'P80')
+
     def test_partitioned_s0_cannot_borrow_monolithic_identity(self):
         request = dict(transport_stage='S0',jobs=[dict(name='S0')])
         manifest = dict(architecture='arch03_t80_s0_partition',row_lanes=5,
