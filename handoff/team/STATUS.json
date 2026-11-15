@@ -4009,10 +4009,10 @@
     "formal_samples": 20,
     "formal_tasks": 240,
     "full100_authorized": false,
-    "server_observed": "2026-11-15T16:12:44.478320+08:00",
+    "server_observed": "2026-11-15T16:19:49.501150+08:00",
     "server_lock": "t64_serial02",
     "server_eda_processes": [
-      289973
+      297516
     ],
     "shared_free_bytes": 1048576,
     "tmp_free_GiB": 93.53,
@@ -4077,6 +4077,20 @@
       "files": 16,
       "all_paths_and_bytes_preserved": true,
       "shared_free_after": 4194304
+    },
+    "batch20_progress": {
+      "completed": 55,
+      "failed": 0,
+      "checked_outputs": 1393920,
+      "remaining_seconds_with_margin": 1676.4380901499396
+    },
+    "archive_tool": {
+      "path": "workspaces/arch03/scripts/t64_archive_runtime.py",
+      "local_tests_passed": 2,
+      "copy_only": true,
+      "source_deletion": false,
+      "deployed": false,
+      "executed": false
     }
   }
 }
