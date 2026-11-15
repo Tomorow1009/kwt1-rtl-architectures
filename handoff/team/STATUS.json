@@ -4696,8 +4696,8 @@
     "s0_export_followup": {
       "source_commit": "8da012f",
       "pid": 193002,
-      "status": "exporting_report",
-      "observed_at": "2026-11-16T01:28:59+08:00",
+      "status": "collecting_full12_unknown_inventory",
+      "observed_at": "2026-11-16T01:39:39+08:00",
       "script": "ops-66b9496/S0_EXPORT_AFTER_FINISH_20261115.py",
       "source_sha256": "06bfe60625dfea206ace3cff788679afee24d30e5b4583f4b7918d8196635715",
       "builder_sha256": "9ca45ab038c916ce00b64c63a7c49fdd7948b365392e5fdacfb12c19597bba0c",
@@ -4707,15 +4707,20 @@
       "starts_new_eda": false,
       "starts_s1": false,
       "queue_complete": true,
-      "unknown_inventory_started": false,
-      "child_pid": 231552,
-      "child_stage": "report",
-      "foreground_readonly_watcher": 236422,
-      "child_elapsed_seconds": 700,
-      "child_cpu_seconds": 694,
-      "child_cpu_percent": 99.2,
+      "unknown_inventory_started": true,
+      "child_pid": 239612,
+      "child_stage": "unknown_inventory",
+      "foreground_readonly_watcher": 241373,
+      "child_elapsed_seconds": 237,
+      "child_cpu_seconds": 236,
+      "child_cpu_percent": 99.7,
       "observed_open_project_file": "s0_finish03_saif/t80_s0_saif/layer_07.saif",
-      "open_file_observed_at": "2026-11-16T01:26:24+08:00"
+      "open_file_observed_at": "2026-11-16T01:26:24+08:00",
+      "report_export_complete": true,
+      "unknown_cases_completed": {
+        "layer_01": 40699,
+        "layer_02": 40689
+      }
     },
     "s0_model_review_snapshot": {
       "source_commit": "5430dc5",
@@ -4857,6 +4862,43 @@
       "physical_signoff": false,
       "screenshot_sha256": "23929b8c9da3fea87d5577f6d8ff717b9f39959361268ea898031f30d933b622",
       "mean_cycles": "112569"
+    },
+    "s0_report_export_read": {
+      "schema": "s0-report-export-readonly-snapshot-v1",
+      "observed_at": "2026-11-16T01:38:49+08:00",
+      "run": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-66b9496/runs/s0_report01/t80_s0_report",
+      "report_sha256": "65cc471298fe5109ed4f246df573422cbd9434e15c5f9f4d42ef4b5b9caa3f48",
+      "receipt_sha256": "603fc47473341acebd2b1bc59a528a3526fd8a5d9647f221d29f8d6eacd1d667",
+      "netlist_sha256": "8ec59cc89847f18713e7504dc4d7e35eeb491432490209102764165d4409ff12",
+      "mean_cycles": 112569.0,
+      "nominal_150MHz_tasks_per_second": 1332.5160568184847,
+      "internal20_maximum_layer_nrmse_percent": 0.20198143836753799,
+      "internal20_maximum_task_nrmse_percent": 0.20953408931848963,
+      "fixed12_maximum_task_nrmse_percent": 0.1425636423408142,
+      "files_bytes": {
+        "report.json": 7231534,
+        "tasks.csv": 4035,
+        "summary.csv": 366,
+        "report_zh.md": 4103,
+        "receipt.json": 414
+      },
+      "verification": {
+        "activity12": true,
+        "asic14": true,
+        "final240": true,
+        "fixed12_precision_verified": true,
+        "gate14_without_SDF": true,
+        "internal20_precision_verified": true,
+        "official_precision_verified": false,
+        "physical_signoff": false,
+        "power12_numbers": true,
+        "project_area_reviewed": false,
+        "system_power_verified": false,
+        "task_mode_timing_verified": false
+      },
+      "stage_accepted": false,
+      "notes": "Export complete; independent review and durable archive still pending.",
+      "screenshot_sha256": "095b969c7e867526ff2cb3817149bfbbcd74eb8c84dea042c42e81cf6863546e"
     }
   }
 }
