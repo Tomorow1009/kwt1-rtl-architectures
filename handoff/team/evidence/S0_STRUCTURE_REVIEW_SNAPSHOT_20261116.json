@@ -1,0 +1,66 @@
+{
+  "schema": "s0-displayed-structure-review-v1",
+  "observed_at": "2026-11-16T00:27:20+08:00",
+  "source": "Read-only VNC query; summary SHA checked against current queue completed structure reference",
+  "queue": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-66b9496/runs/s0_finish03",
+  "stage_run": "/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-66b9496/runs/s0_finish03_structure/t80_s0_structure",
+  "disposition_counts": {
+    "declaration_only": 11353
+  },
+  "numeric_instances": {
+    "pe": 80,
+    "array": 1,
+    "requantize": 80
+  },
+  "no_load": {
+    "count": 275,
+    "unique_driver_ports": 275,
+    "matches_declaration_only_unloaded_ports": true,
+    "extra": [],
+    "missing": []
+  },
+  "remaining_warning_counts": {
+    "LINT-32": 10741,
+    "LINT-33": 1187,
+    "LINT-1": 4
+  },
+  "all_normalized_LINT32_LINT33_classes": [
+    {
+      "count": 10741,
+      "meaning": "A pin on submodule is connected to logic 1 or logic 0"
+    },
+    {
+      "count": 1187,
+      "meaning": "The same net is connected to more than one pin on submodule"
+    }
+  ],
+  "LINT1_cells": [
+    {
+      "design": "sirv_debug_csr_PC_SIZE32",
+      "cell": "ndreset_dfflr"
+    },
+    {
+      "design": "sirv_debug_csr_PC_SIZE32",
+      "cell": "fullreset_dfflr"
+    },
+    {
+      "design": "sirv_aon_wrapper",
+      "cell": "u_aon_porrst"
+    },
+    {
+      "design_prefix": "sirv_plic_man_",
+      "cell": "flop_o_irq.plic_irq_prio_dffr"
+    }
+  ],
+  "LINT1_meaning": "Cell does not drive any nets; not an exemption of its area or internal power",
+  "area_or_power_cells_exempted": false,
+  "source_modified": false,
+  "new_eda_started": false,
+  "stage_accepted": false,
+  "high_fanout_names_pending": true,
+  "gate_internal_total_observable": false,
+  "screenshots": {
+    "s0_structure_summary.png": "a0cf543bb7cb3e30d9ca6ef72cb403bc4ad67d5a871834ec60a5b05e8570e275",
+    "s0_warning_classes.png": "0f7d300c1ef4832fcfa7be076cd1bee959f9bb6a899209b8a18691c42ed92f91"
+  }
+}

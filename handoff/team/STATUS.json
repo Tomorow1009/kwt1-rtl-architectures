@@ -4630,18 +4630,18 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T00:22:24+08:00",
+      "observed_at": "2026-11-16T00:28:45+08:00",
       "status": "running",
       "stage": "saif",
       "completed": 2,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 205685,
-      "foreground_readonly_watcher": 206849,
+      "child_pid": 208256,
+      "foreground_readonly_watcher": 209631,
       "child_tool": "simv",
       "sram_provenance_checked": true,
-      "current_case": "layer_10",
+      "current_case": "layer_11",
       "gate_cases_passed": 14,
       "gate_outputs_passed": 354816,
       "gate_complete": true,
@@ -4654,7 +4654,8 @@
         "layer_06",
         "layer_07",
         "layer_08",
-        "layer_09"
+        "layer_09",
+        "layer_10"
       ]
     },
     "new_final_netlist_ready": true,
@@ -4722,6 +4723,24 @@
       "transfer_completed": true,
       "archive_started": false,
       "snapshot_executed": false
+    },
+    "s0_structure_independent_read": {
+      "evidence": "handoff/team/evidence/S0_STRUCTURE_REVIEW_SNAPSHOT_20261116.json",
+      "observed_at": "2026-11-16T00:27:20+08:00",
+      "declaration_only_ports": 11353,
+      "no_load_drivers": 275,
+      "numeric_instances": {
+        "pe": 80,
+        "array": 1,
+        "requantize": 80
+      },
+      "remaining_warning_classes": {
+        "LINT-32": 10741,
+        "LINT-33": 1187,
+        "LINT-1": 4
+      },
+      "area_or_power_cells_exempted": false,
+      "stage_accepted": false
     }
   }
 }

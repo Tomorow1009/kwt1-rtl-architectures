@@ -1,5 +1,10 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日00:28:45实查：SAIF L01–L10通过，L11子208256运行，父172535无错误；当前前台只读watcher209631。206849仅退出用于已完成结构报告核对，71425/29371/40621输入全部结束；后台汇总等待193002保持。6fe251c重试TLS后已push；S0未冻结、S1未开始，T80桌面/旧八路不动。**
+
+- 新`handoff/team/evidence/S0_STRUCTURE_REVIEW_SNAPSHOT_20261116.json`记录同网表结构实读：11,353个仅声明端口；275个无负载驱动与仅声明端口集合一致、extra/missing空；PE80/array1/requant80。
+- 其余警告全文归一后恰为两类：LINT-32共10,741（子模块pin接常量0/1）；LINT-33共1,187（同网连接多个pin）。另4个LINT-1均平台单元“不驱动任何网”，实际对象为debug CSR的ndreset/fullreset_dfflr、AON u_aon_porrst和PLIC flop_o_irq.plic_irq_prio_dffr。它们仍计面积/内部功耗，不作为豁免。此处不授予时序或功耗验收，高扇出实际网名仍待队列查询。
+
 **11月16日00:22:24实查：SAIF L01–L09已通过，L10子205685运行，父172535无错误。前台只读watcher206849；汇总等待器193002保持。18946/78391输入全部结束，新ops-review-e516e4c的6工具已核验导入，未执行归档/审核快照或额外EDA。S0未冻结，S1未开始；不重启旧队列、不动T80桌面或旧八路。619521f已push。**
 
 - 新ops根为`/tmp/s4_21usr_t80_20261115_1830/ops-review-e516e4c`，`receipt.json`记录e516e4c源码、66b9496基础manifest与6文件哈希，已实际看到`S0_REVIEW_TOOLS_READY 6 NO_EDA_NO_ARCHIVE`。其代码作为独立工具使用，不在运行bundle中改源码。
