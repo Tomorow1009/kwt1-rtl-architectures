@@ -1,0 +1,153 @@
+{
+  "schema": "s0-t80-git-source-check-v1",
+  "baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
+  "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
+  "files": [
+    {
+      "path": "workspaces/arch02/arch02/rtl/sram_macro_adapter.sv",
+      "baseline_sha256": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "current_git_sha256": "e88a62f8d855ad086c59472486f3fcbd31f4ccc6634d1ab3e42fdd6196f30d72",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch02/arch02/rtl/sram_port.sv",
+      "baseline_sha256": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "current_git_sha256": "383a4eda07beb37663eb0ffef1a626935b20700fa2f8b04b292fa1cc04ca173a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_icb_arb2_turnover.sv",
+      "baseline_sha256": "dedaca7e57f17299fe1ecb7688b2a9ba5ac85d851ac1c7765db98e25278c5c4b",
+      "current_git_sha256": "dedaca7e57f17299fe1ecb7688b2a9ba5ac85d851ac1c7765db98e25278c5c4b",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_icb_memory_router_turnover.sv",
+      "baseline_sha256": "c6a08ccf75e938d41dec60cf6fb123ca1c56074d8bc0a594642ac1cfc8b66728",
+      "current_git_sha256": "c6a08ccf75e938d41dec60cf6fb123ca1c56074d8bc0a594642ac1cfc8b66728",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_n1_decoder.sv",
+      "baseline_sha256": "d5776611d40c09a10460a3b47ed463fb26735f85d7babef200f1093656417d66",
+      "current_git_sha256": "d5776611d40c09a10460a3b47ed463fb26735f85d7babef200f1093656417d66",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_n1_linear16x5.sv",
+      "baseline_sha256": "728052a5b6e70fe1c6ba50ec0303ad0c7e1f90ef4a5253bed0fd8e5e1c0d419a",
+      "current_git_sha256": "728052a5b6e70fe1c6ba50ec0303ad0c7e1f90ef4a5253bed0fd8e5e1c0d419a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_n1_requantize.sv",
+      "baseline_sha256": "f3d01532c435a276fa0d92b7d5dab88f26a444eb68626adcfb25838ca420c34e",
+      "current_git_sha256": "f3d01532c435a276fa0d92b7d5dab88f26a444eb68626adcfb25838ca420c34e",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_n1_systolic5x16.sv",
+      "baseline_sha256": "18061346a98aeb50e5cd422815ee7e0856950c206dbc8768f5b8e1a60f3d5c62",
+      "current_git_sha256": "18061346a98aeb50e5cd422815ee7e0856950c206dbc8768f5b8e1a60f3d5c62",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_shared_sram.sv",
+      "baseline_sha256": "a4d003559992e647084b0c60650ca8a46715f6e76834b603735eb32cefa1da1f",
+      "current_git_sha256": "a4d003559992e647084b0c60650ca8a46715f6e76834b603735eb32cefa1da1f",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_shared_sram_turnover.sv",
+      "baseline_sha256": "4dad8b04ed04aefd9f6cae43ce6a30431d61c3e75e56a783ba64bce3a20f00f8",
+      "current_git_sha256": "4dad8b04ed04aefd9f6cae43ce6a30431d61c3e75e56a783ba64bce3a20f00f8",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_t80_accel.sv",
+      "baseline_sha256": "b6fb299daabfad2e3366456e0924ca41cbafa739072c05c2f62e548a0ea0a88a",
+      "current_git_sha256": "b6fb299daabfad2e3366456e0924ca41cbafa739072c05c2f62e548a0ea0a88a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_t80_transport.sv",
+      "baseline_sha256": "cacec659084f3b25c57d4002b2a2816919df9d9e0984e92f6730db264ce8f586",
+      "current_git_sha256": "cacec659084f3b25c57d4002b2a2816919df9d9e0984e92f6730db264ce8f586",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/rtl/arch03_tcm_ram.sv",
+      "baseline_sha256": "768739619c24703ea8950a670436cf13d006a27e79ecb0e4d4d66076ae1f6f9a",
+      "current_git_sha256": "768739619c24703ea8950a670436cf13d006a27e79ecb0e4d4d66076ae1f6f9a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_dma16.py",
+      "baseline_sha256": "140d222e05b6beb86240426f830b20894c2a17741f74420689457a721b9ff95a",
+      "current_git_sha256": "140d222e05b6beb86240426f830b20894c2a17741f74420689457a721b9ff95a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_icb32.py",
+      "baseline_sha256": "32623054c425f21e1e447d2e6a52cc918cd8b466e01495defe3798a76e0b64c5",
+      "current_git_sha256": "32623054c425f21e1e447d2e6a52cc918cd8b466e01495defe3798a76e0b64c5",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_n1.py",
+      "baseline_sha256": "3ca8bf566d5206c82f4ff5f559487dbf73b5bfb2dc2de7379abfd40bdd5b2907",
+      "current_git_sha256": "3ca8bf566d5206c82f4ff5f559487dbf73b5bfb2dc2de7379abfd40bdd5b2907",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_platform.py",
+      "baseline_sha256": "d6ff29cf5999720f2b0d152268501f97d0ba49d5c8b49293c46acc76d3a95ed4",
+      "current_git_sha256": "d6ff29cf5999720f2b0d152268501f97d0ba49d5c8b49293c46acc76d3a95ed4",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_systolic_b.py",
+      "baseline_sha256": "a97459d7b0dd250b8d34787dab5e9601cc274449f18770b643392b21c0a56f1f",
+      "current_git_sha256": "a97459d7b0dd250b8d34787dab5e9601cc274449f18770b643392b21c0a56f1f",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/scripts/install_t80.py",
+      "baseline_sha256": "aab7cec9e7e5105ed461313c8d6ee2c117e06d1c2567be746dae989c4e1e448f",
+      "current_git_sha256": "aab7cec9e7e5105ed461313c8d6ee2c117e06d1c2567be746dae989c4e1e448f",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/sw/kwt_t80.c",
+      "baseline_sha256": "3a1437f06b4206741184b493f7e9f5ddf25f3c843ed95e4ddd23c044395b757d",
+      "current_git_sha256": "3a1437f06b4206741184b493f7e9f5ddf25f3c843ed95e4ddd23c044395b757d",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/sw/kwt_t80.h",
+      "baseline_sha256": "6b1252f34fb7b12db949ff6eec108025956fccd004b30a17d06058fa49e8c54c",
+      "current_git_sha256": "6b1252f34fb7b12db949ff6eec108025956fccd004b30a17d06058fa49e8c54c",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/sw/link.ld",
+      "baseline_sha256": "1b8fa2b0b5e748bb2159b2847bdc7420b7cbb2badeed41fa9668d069ec75197a",
+      "current_git_sha256": "1b8fa2b0b5e748bb2159b2847bdc7420b7cbb2badeed41fa9668d069ec75197a",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/sw/main_t80.c",
+      "baseline_sha256": "6c7d49efcce7078482bc8a44410338f8beb994cfb683c922c164c640780f519c",
+      "current_git_sha256": "6c7d49efcce7078482bc8a44410338f8beb994cfb683c922c164c640780f519c",
+      "same": true
+    },
+    {
+      "path": "workspaces/arch03/sw/start_icb32.S",
+      "baseline_sha256": "ad72170ad03fe4771a9dfc54d75f70507be28253de63fbd2287315780fca063f",
+      "current_git_sha256": "ad72170ad03fe4771a9dfc54d75f70507be28253de63fbd2287315780fca063f",
+      "same": true
+    }
+  ],
+  "all_equal": true,
+  "scope": "Git byte comparison of hardware, integration chain and production firmware; server platform/libraries/binary firmware still separately pinned"
+}
