@@ -1,5 +1,7 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**23:07：finish02在gate配置来源检查失败，尚未启VCS；新网表/报告未变，门级端口探针已完成。S0重链接header在第二份冻结清单中，现正修gate以同时严格核对两份清单；5项相关测试通过。Bash空闲、无EDA。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)最上方，旧finish02不重启，下一finish03；T80桌面及旧八路不动。**
+
 **23:03:35实际队列：a7e7e49/s0_finish02父168421，structure已完成、当前gate端口探针子168925，无错误。前台只读watcher169108；所有输入结束。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续原队列，禁止重启或改新网表。保守面积0.953522mm²、正setup/hold；SAIF/PT仍待。T80桌面和旧八路不动。**
 
 **23:02当前唯一VNC输入exec56347：13行新finish03启动器，目标a7e7e49/s0_finish02，复用a5f138e/synth08新网表；a7包853文件已服务器核验，bc0a897已push。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部并收完输入，尚未观察新队列PID。旧失败保留，综合不重跑，T80桌面与旧八路不动。**

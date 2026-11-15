@@ -367,6 +367,25 @@ def verify_gate_memory_config(synthesis, run):
     # counterpart. Match the actual gate vendor configuration to its traced
     # synthesis input instead of accidentally exempting it with test headers.
     inputs = json.loads((synthesis/'source_inputs.json').read_text())
+    receipt_names=['source_inputs.json']
+    summary_path=synthesis/'summary.json'
+    summary=json.loads(summary_path.read_text()) if summary_path.exists() else {}
+    if summary.get('scope')=='s0_t80_partitioned_whole_soc_task_mode':
+        # Cache-only S0 relinking preserves the original source receipt. Its
+        # copied current header is frozen in the final synthesis input receipt.
+        # Read both pinned receipts, retaining all ancestors and rejecting any
+        # conflicting digest; never patch the completed synthesis evidence.
+        receipt_names.append('synthesis_inputs.json')
+        for name in receipt_names:
+            if summary['artifacts'].get(name)!=sha(synthesis/name):
+                raise ValueError('Changed frozen S0 SRAM provenance receipt '+name)
+        linked=json.loads((synthesis/'synthesis_inputs.json').read_text())
+        for name,value in linked.items():
+            if name in inputs and inputs[name]!=value:
+                raise ValueError('Conflicting S0 SRAM provenance receipts')
+            inputs[name]=value
+        if summary['artifacts'].get('arch02_sram_config.vh')!=sha(synthesis/'arch02_sram_config.vh'):
+            raise ValueError('Changed frozen S0 SRAM configuration')
     matches = [(Path(name), digest) for name, digest in inputs.items()
                if Path(name).name == 'arch02_sram_config.vh']
     if not matches or len({digest for _,digest in matches})!=1:
@@ -381,6 +400,7 @@ def verify_gate_memory_config(synthesis, run):
     if any(sha(path)!=value for path,value in matches) or sha(run/'arch02_sram_config.vh')!=digest:
         raise ValueError('Gate SRAM model configuration differs from synthesized hardware')
     save(run/'memory_configuration_receipt.json',dict(sha256=digest,
+        synthesis_receipts={name:sha(synthesis/name) for name in receipt_names},
         identical_traced_inputs=[str(path.resolve()) for path,_ in matches],
         gate_configuration=str((run/'arch02_sram_config.vh').resolve())))
 
