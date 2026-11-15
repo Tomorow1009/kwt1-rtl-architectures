@@ -1,5 +1,7 @@
 # 恢复T64→G64，保护桌面T80 — 2026-11-15
 
+**17:26用户已要求暂停，等新计划；此条覆盖下方持续推进状态。** 先读`CONTEXT_CHECKPOINT_20261115_T64_PAUSED_FOR_NEW_PLAN.md`。17:25:56.177774实际暂停调度父325056（状态T），当前DC子15147保留运行（R），原锁保留，禁止继续派发/重启队列。专用回执root/ops-3552163/user_pause_20261115_1724.json记录PID/start_ticks/锁身份；queue JSON仍可能显示running，不能当实时。前台watcher3636已退出，所有输入结束，VNC当前shell，转发91027保持。T64 ASIC14、240、竞争、恢复已过；综合继续但最终PPA未出，G64未开始。等待用户新计划，不自动SIGCONT。桌面T80/旧8路不动。
+
 **17:18综合接续：先读CONTEXT_CHECKPOINT_20261115_T64_SYNTH_RUNNING.md。** 竞争及真实CPU恢复均已通过，原队列325056继续running/t64_synth、completed2、无错误；ASIC14/240明确复用。尚未获得本版面积/功耗。前台只读watcher3636、转发91027、VNC18874435/workspace3保持；全部输入会话已结束。不要重启队列，不碰桌面T80和旧8路，G64等待T64完整验收。
 
 **17:15进展：** 修复后的真实CPU竞争已通过，225轮scratch/29946竞争拍/完整输出通过。主队列实际PID325056继续running/t64_sequence、error=None，不能重跑contention。当前前台简洁只读观察器PID3636（原325493已仅Ctrl+C退出），每30秒刷新；VNC命令前只结束该观察器，不碰后台队列。39078输入结束，转发91027保持。T80和旧8路无改动，G64尚未开始。
