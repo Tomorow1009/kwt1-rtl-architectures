@@ -12,7 +12,7 @@ import s0_partition_synth as mapping
 from partition_synth_contract import require,digest,reusable,fingerprint,PERIOD,CORNER
 
 MANIFEST='d397b97768c6ce5089aeda32a5e2e22d50e30f0b5a34c6edfae12e71ea9988ba'
-STATE='432940528a89c8d0239ccd5e92ee597fc3625312f23c05245123102030744405'
+STATE='43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405'
 BLOCKS=('shared_sram','accelerator','cpu_soc')
 
 

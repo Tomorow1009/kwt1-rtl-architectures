@@ -1,5 +1,7 @@
 # S0只重链接恢复准备 — 2026-11-15 22:30
 
+**22:41重要修正：0e31包已部署，但c214启动器在cache预检的state SHA处停止，尚未创建synth08 session/取锁/启动EDA。实际逐8字符读回为`43294b52 8a89c8d0 239ccd5e 92ee597f c2653121 7fe3c524 50521120 30744405`，即43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405。此前抄写的43294052…错误，不能继续使用；原state仍是22:20:13.543084的同一失败终态，未修改。当前Bash空闲，45059/96327全部结束。只修改新版本引用并再核验，不放宽校验，旧0e包保留。**
+
 **22:36更新：0e31e5b包853文件及manifest已在服务器核验成功，78210传输结束。当前唯一输入exec45059为12行`s0_synth08_launch_c21429d/transfer.ps1`，SHA dbe1aacac49078762629dc58c89fd3a1d237e3f72a036744305edfd9f0f9da62，来源c21429d（已push）；收完后将自动做严格cache预检并尝试新synth08。尚未观察实际PID，勿再手动启动或并发键入。新`S0_SYNTH08_FINISH_LAUNCH_20261115.py`仅本地准备、尚未部署；旧所有finish等待器保持停止。**
 
 **22:33传输中：0e31e5b1977583070dbe4ba22e045455d5088834已push，独立包853文件/137模块闭包通过。当前唯一VNC输入exec78210，`local_runs/s0_finish_0e31e5b/transfer.ps1`共32行；勿并发输入或重跑。目标bundle light-light126-t80-s0-0e31e5b，manifest5dd2d2153435037c34026456879cd840fa6253c6dcf3c500d6c177b9c0ad67ab，payload9e7d9e2f347cbb13742d40cbb4274e4ffb2a022e7d9f623a7ae2387059696f07。传输只准备独立输入，不自动启动EDA。synth08启动器已本地准备，尚未部署/运行。**

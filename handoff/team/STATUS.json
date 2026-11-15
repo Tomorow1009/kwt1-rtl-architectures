@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_relink_launcher_transfer",
+    "current_stage": "S0_relink_reference_hash_correction",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4439,12 +4439,13 @@
       "foreground_readonly_watcher": null,
       "finished": "2026-11-15T22:20:13.543084",
       "lock_released": true,
-      "state_sha256": "432940528a89c8d0239ccd5e92ee597fc3625312f23c05245123102030744405",
+      "state_sha256": "43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405",
       "block_mapping_seconds": {
         "shared_sram": 40.45153220905922,
         "accelerator": 197.2824583069887,
         "cpu_soc": 770.6193923819822
-      }
+      },
+      "state_hash_correction": "Grouped 8-character actual readback; previous manual transcription was wrong; original state unchanged"
     },
     "synth07_launcher": {
       "source_commit": "437f156",
@@ -4492,8 +4493,11 @@
       "transfer_session": 45059,
       "source_commit": "c21429d",
       "sha256": "dbe1aacac49078762629dc58c89fd3a1d237e3f72a036744305edfd9f0f9da62",
-      "status": "transfer_in_progress",
-      "mapping_repeated": false
+      "status": "stopped_preflight_bad_transcribed_state_hash",
+      "mapping_repeated": false,
+      "transfer_session_completed": true,
+      "session_created": false,
+      "eda_started": false
     }
   }
 }
