@@ -1,5 +1,7 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:14:55最新实查：SRAM双清单核对已通过，当前gate已进入VCS编译子174044（已运行10秒），父172535、watcher173225继续，无错误。端口DC173089已完成26秒。全部输入结束，不重启；6683ce5已push。下一步等真实gate14结果，随后原队列SAIF12/timing/DRC/PT12。**
+
 **23:12:55实查：66b9496/s0_finish03父172535运行，structure已完成、completed=1，当前gate端口DC子173089，无错误。开始23:11:48.772018。前台只读watcher173225；全部96034/10794/4606输入已结束，无半截输入。下一次命令前只退出该watcher，不碰后台队列或锁。综合仍是a5f138e/synth08，不重跑；T80桌面及旧八路不动。**
 
 **23:10当前唯一输入exec10794：13行`local_runs/s0_finish04_launch_1881cd3/transfer.ps1`，启动器SHA3b20c94cc969816b8f171808b2c53a62fb9db9a6e2ae2e905fae6b362732a649。66b9496包853文件和manifest2afb9a79e600e4bd1a0493699b50d463f7df8ebef666d99290cde2efbf0426b4已服务器核验，96034输入结束。新目标66b9496/runs/s0_finish03，仍引用a5f138e/synth08已完成网表；尚未观察新PID。1881cd3已push。先收完输入，禁止并发VNC/重跑；下一个只读watch命令在local_runs/s0_finish03_watch_command.txt。最新report请求为S0_BUILD_REPORT_REQUEST04_20261115.py，未部署执行。**
