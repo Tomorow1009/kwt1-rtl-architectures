@@ -14,6 +14,17 @@ from test_native_saif_activity import WINDOW
 TICKS = 199999980000
 
 
+class TransportWindowSelection(unittest.TestCase):
+    def test_both_four_transfer_profiles_and_three_transfer_predecessors(self):
+        four=dict(WINDOW,transfer_bytes=50784,transfer_transactions=12696)
+        for profile in ('T80','T64'):
+            self.assertEqual(tool.profile_window_reader(profile)(four),tool.native.window_values(WINDOW))
+            with self.assertRaises(ValueError):tool.profile_window_reader(profile)(WINDOW)
+        for profile in ('B0','N1'):
+            self.assertEqual(tool.profile_window_reader(profile)(WINDOW),tool.native.window_values(WINDOW))
+            with self.assertRaises(ValueError):tool.profile_window_reader(profile)(four)
+
+
 def record(name, unknown=0):
     bad = TICKS * unknown // 10
     return '(%s (T0 %d) (T1 0) (TX %d) (TC %d))' % (name, TICKS-bad, bad, int(unknown != 10))

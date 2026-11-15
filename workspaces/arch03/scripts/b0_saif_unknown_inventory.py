@@ -18,6 +18,7 @@ import sys
 
 import native_saif_activity as native
 import t80_window
+import t64_window
 from saif_syntax import integer_ticks
 from dma16_unknown_netlist import index_netlist, resolve_alias
 
@@ -30,7 +31,13 @@ LIMIT_OUTPUT_CASE = 256 * 1024**2
 RESERVE_BYTES = 2 * 1024**3
 OUTPUT_CHECK_BYTES = 4 * 1024**2
 DEPENDENCIES = ('native_saif_activity', 'saif_syntax', 'dma16_unknown_netlist',
-                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth', 't80_window')
+                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth', 't80_window', 't64_window')
+
+
+def profile_window_reader(profile):
+    if profile == 'T80':return t80_window.window_values
+    if profile == 'T64':return t64_window.window_values
+    return native.window_values
 
 
 def require(value, message):
@@ -348,7 +355,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS, path_vali
                             output_guard(output);unchecked[0] = 0
                         packed.write(payload);unchecked[0] += len(payload)
                         require(raw.tell() <= LIMIT_OUTPUT_CASE, 'Per-case output cap reached; partial retained')
-                    reader = t80_window.window_values if profile == 'T80' else native.window_values
+                    reader = profile_window_reader(profile)
                     result = scan(path, row['task_window'], expected, index, emit,window_reader=reader)
                 raw.flush();os.fsync(raw.fileno())
             require(partial.stat().st_size <= LIMIT_OUTPUT_CASE, 'Completed compressed output exceeds cap')
