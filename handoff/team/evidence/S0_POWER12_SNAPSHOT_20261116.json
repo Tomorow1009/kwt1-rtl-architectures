@@ -1,0 +1,22 @@
+{
+  "schema": "s0-power12-readonly-snapshot-v1",
+  "observed_at": "2026-11-16T01:17:51+08:00",
+  "scope": "complete_12_task_pre_layout_numbers_independent_review_pending",
+  "synthesis_summary_sha256": "e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916",
+  "queue_state_sha256": "dc900c9d685a0c0d968b40581af040350818e632886b5ace2a60e5ed89a12ce0",
+  "tasks": 12,
+  "weighted_average_power_w": "0.05024037337247095855282833936",
+  "weighted_dynamic_w": "0.04306381651949904799130607302",
+  "weighted_leakage_w": "0.007176556796782684398013662731",
+  "mean_energy_j": "0.0000377033868307654954451",
+  "total_duration_ns": "9005519.099448",
+  "period_ns": "6.666666",
+  "all_summary_hashes_checked": true,
+  "single_synthesis_and_activity_identity": true,
+  "ordered_complete_layers": true,
+  "stage_accepted": false,
+  "system_power_verified": false,
+  "physical_signoff": false,
+  "screenshot_sha256": "23929b8c9da3fea87d5577f6d8ff717b9f39959361268ea898031f30d933b622",
+  "mean_cycles": "112569"
+}

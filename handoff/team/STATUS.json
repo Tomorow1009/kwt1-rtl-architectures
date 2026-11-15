@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_S0_POWER12.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4630,15 +4630,15 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T01:05:35+08:00",
-      "status": "running",
+      "observed_at": "2026-11-16T01:17:51+08:00",
+      "status": "reports_ready_review_required",
       "stage": "power_layer_09",
-      "completed": 13,
+      "completed": 17,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
       "child_pid": null,
-      "foreground_readonly_watcher": 224035,
+      "foreground_readonly_watcher": null,
       "child_tool": null,
       "sram_provenance_checked": true,
       "current_case": null,
@@ -4670,8 +4670,13 @@
         "layer_05",
         "layer_06",
         "layer_07",
-        "layer_08"
-      ]
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12"
+      ],
+      "queue_state_sha256": "dc900c9d685a0c0d968b40581af040350818e632886b5ace2a60e5ed89a12ce0"
     },
     "new_final_netlist_ready": true,
     "s0_archive_preparation": {
@@ -4691,8 +4696,8 @@
     "s0_export_followup": {
       "source_commit": "8da012f",
       "pid": 193002,
-      "status": "waiting_existing_queue_no_EDA",
-      "observed_at": "2026-11-15T23:52:16+08:00",
+      "status": "exporting_report",
+      "observed_at": "2026-11-16T01:20:54+08:00",
       "script": "ops-66b9496/S0_EXPORT_AFTER_FINISH_20261115.py",
       "source_sha256": "06bfe60625dfea206ace3cff788679afee24d30e5b4583f4b7918d8196635715",
       "builder_sha256": "9ca45ab038c916ce00b64c63a7c49fdd7948b365392e5fdacfb12c19597bba0c",
@@ -4700,7 +4705,12 @@
       "transfer_session": 3447,
       "transfer_completed": true,
       "starts_new_eda": false,
-      "starts_s1": false
+      "starts_s1": false,
+      "queue_complete": true,
+      "unknown_inventory_started": false,
+      "child_pid": 231552,
+      "child_stage": "report",
+      "foreground_readonly_watcher": 233182
     },
     "s0_model_review_snapshot": {
       "source_commit": "5430dc5",
@@ -4788,7 +4798,7 @@
       "observed_at": "2026-11-16T00:50:38+08:00",
       "scope": "layer_01_only_not_twelve_layer_average",
       "summary_sha256": "adb42144fe5d46408d0fe745373f97bfd3d86419798c2e6049531da0a30af36a",
-      "power_w": "0.051344018",
+      "power_w": "0.0501344018",
       "energy_j": "0.0000390219406241628806976",
       "no_clock_pins": 189,
       "no_clock_groups": {
@@ -4802,7 +4812,8 @@
         "C": 72118,
         "d": 16792
       },
-      "model_scope": "pre_layout_stable_task_mode"
+      "model_scope": "pre_layout_stable_task_mode",
+      "transcription_correction": "Earlier local/user-facing 0.051344018 transcription was wrong; server summary unchanged. Full12 readback confirmed 5.01344018e-02."
     },
     "s0_power_log_review": {
       "observed_at": "2026-11-16T00:59:53+08:00",
@@ -4819,6 +4830,28 @@
       "tool": "Vivado Simulator 2018.3",
       "checked_version_only": true,
       "hardware_tests_started": false
+    },
+    "s0_power12_read": {
+      "schema": "s0-power12-readonly-snapshot-v1",
+      "observed_at": "2026-11-16T01:17:51+08:00",
+      "scope": "complete_12_task_pre_layout_numbers_independent_review_pending",
+      "synthesis_summary_sha256": "e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916",
+      "queue_state_sha256": "dc900c9d685a0c0d968b40581af040350818e632886b5ace2a60e5ed89a12ce0",
+      "tasks": 12,
+      "weighted_average_power_w": "0.05024037337247095855282833936",
+      "weighted_dynamic_w": "0.04306381651949904799130607302",
+      "weighted_leakage_w": "0.007176556796782684398013662731",
+      "mean_energy_j": "0.0000377033868307654954451",
+      "total_duration_ns": "9005519.099448",
+      "period_ns": "6.666666",
+      "all_summary_hashes_checked": true,
+      "single_synthesis_and_activity_identity": true,
+      "ordered_complete_layers": true,
+      "stage_accepted": false,
+      "system_power_verified": false,
+      "physical_signoff": false,
+      "screenshot_sha256": "23929b8c9da3fea87d5577f6d8ff717b9f39959361268ea898031f30d933b622",
+      "mean_cycles": "112569"
     }
   }
 }
