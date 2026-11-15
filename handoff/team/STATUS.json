@@ -5668,9 +5668,9 @@
       ]
     },
     "current_local_sessions": [
-      13095
+      30194
     ],
-    "last_server_observation": "2026-11-16T04:30:23+08:00 Bash idle; sweep04 failed at shared lock ENOSPC before EDA. B0 completed SAIF csrc40/80788435 bytes inventoried only; new input95957 in progress.",
+    "last_server_observation": "2026-11-16T04:41:01+08:00 sweep05 pid324565 lock owner324565 running depth4 fixed14; completed0/errorNone; B0 compiler cache archive verified; new ops input30194 in progress.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5781,12 +5781,36 @@
       "old8_modified": false
     },
     "p80_space_recovery06": {
-      "status": "visible_transfer_in_progress",
+      "status": "completed",
       "input_session": 13095,
       "source": "machine_inventory_pinned",
       "script_sha256": "7d96eff11f42c49df00d41ab9effc0ad520a55b9d2d8fb79dea4f04091c84a4d",
       "files": 40,
-      "bytes": 80788435
+      "bytes": 80788435,
+      "persistent_verified": true,
+      "removed_regular_files": 40,
+      "archive_sha256": "8dcedc469f4325a79f246bedea03a6b043ac6ee5b5e3a3e4effe7b98c735db78",
+      "free_bytes_after": 71303168
+    },
+    "p80_sweep05": {
+      "pid": 324565,
+      "status": "running",
+      "current": "p80_fixed_d4_05",
+      "completed": 0,
+      "last_observed": "2026-11-16T04:41:01+08:00",
+      "shared_lock_owner": 324565
+    },
+    "p80_ops_transfer854": {
+      "status": "visible_transfer_in_progress",
+      "input_session": 30194,
+      "lines": 89,
+      "source_commit": "8543440d625144b5034d8bb8094e530ad4bf6458"
+    },
+    "p80_selected_synth_launcher": {
+      "status": "prepared_not_executed",
+      "controller_sha256": "0114a53c16a87afda1fff2342e096989d6b4f8314c14dfb1e89c0271ae055e3a",
+      "area_qualified": false,
+      "stage_accepted": false
     }
   }
 }

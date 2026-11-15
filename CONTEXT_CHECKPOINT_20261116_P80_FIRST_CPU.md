@@ -1,5 +1,16 @@
 # P80首个真实CPU任务通过；共享空间与串行队列恢复
 
+## 04:44最新：缓存已归档，sweep05真实运行；854工具包传输中
+
+- **唯一VNC输入30194**：local_runs/p80_ops_transfer_8543440_20261116/transfer.ps1共89行，04:43本地state为13行；不要并发输入或重跑。先收完整传输与服务器准备回执，再读队列。
+- 04:40:28 cache_space_recovery06.py完成B0 SAIF普通缓存归档：40文件/80,788,435B，tar SHA **8dcedc469f4325a79f246bedea03a6b043ac6ee5b5e3a3e4effe7b98c735db78**；全部成员size/SHA匹配、原结果保持，持久副本回读通过。原缓存重复普通文件已删，目录、链接、simv、源码、日志、SAIF、回执不变。最终free71,303,168B。不能再次归档。
+- 缓存真实目录由哈希固定的机器清单取得，不再使用前文手工抄录的B0包名。P80根receipt为b0_saif_csrc_20261116.receipt.json，临时tar同前缀；持久tar在其source父目录下csrc_regular_files_20261116_p80.tar.gz。
+- **04:41:01 sweep05父324565/共享锁owner324565，status running/current p80_fixed_d4_05，completed0，无error**。此为真实运行观察；尚未观察三深度最终结果。14例各自完整原总线/E203检查，深度4→2→8串行。
+- 后继综合选择启动器已本地准备但未部署：handoff/team/evidence/P80_SELECTED_SYNTH01_LAUNCH_20261116.py。必须三深度14全部通过/原锁自然释放，验证同数据同硬件后选距全体最佳吞吐≤1%的最小队列进行自己的新综合；此时仅性能候选，不预先授予面积/阶段PASS。
+- 后继transfer：local_runs/p80_selected_synth01_transfer_20261116/transfer.ps1，执行前必须先读854准备回执及sweep05完成状态。综合预算来源只读a5f138e/s0_synth08，新P80三块全部fresh map，不复用旧硬件DDC。
+- 首层已知80471周期/25344输出仍只是单例。P80自己的240/恢复/竞争/精度/PPA等仍待；C80/C32/G32均未开始。T80桌面及旧八路始终不动。
+
+
 ## 04:40输入状态与防重跑修正
 
 - 唯一输入exec13095，local_runs/p80_b0_cache06_transfer_20261116/transfer.ps1，共14行，当前只在输入，未观察归档或队列PASS。
