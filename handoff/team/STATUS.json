@@ -5667,8 +5667,10 @@
         }
       ]
     },
-    "current_local_sessions": [],
-    "last_server_observation": "2026-11-16T05:08:18+08:00 p80_selected_synth01 pid27509 running depth2; original shared lock owner27509; all VNC input sessions ended. No final PPA observed.",
+    "current_local_sessions": [
+      18873
+    ],
+    "last_server_observation": "2026-11-16T05:14:11+08:00 original synthesis pid27509, DC child30930 mapping shared_sram, fresh link/characterization completed. Unique VNC input18873 now transferring independent e139 depth2 tools; no final PPA observed.",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -5860,9 +5862,20 @@
       "contention": "local_runs/p80_contention_firmware_d2_20261116",
       "status": "compiled_only",
       "cpu_executed": false,
-      "package_prepared": false,
+      "package_prepared": true,
       "package_tool_commit": "e139032",
-      "package_tests_passed": 3
+      "package_tests_passed": 3,
+      "package_server_prepared": false
+    },
+    "p80_d2_transfer": {
+      "status": "visible_transfer_in_progress",
+      "input_session": 18873,
+      "lines": 66,
+      "source_commit": "e139032a1892087869c41987acb0a8635e803c5a",
+      "payload_sha256": "7db6c43046c4c7437e447526f325c2e47cded1b1542789d3b0f5080026001f4a",
+      "patch_sha256": "b816d126a3e46896fec8b03f5a715b68cd4402f08fbf4aaa5a6449b26e74b18c",
+      "patch_bytes": 23916,
+      "reconstruction_rehearsal_passed": true
     }
   }
 }

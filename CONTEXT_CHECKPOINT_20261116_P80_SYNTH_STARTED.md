@@ -1,5 +1,17 @@
 # P80三深度完成，深度2新综合运行
 
+## 05:15最新：原综合已进入块映射，独立d2包正在传输
+
+- **唯一VNC输入18873**：`local_runs/p80_d2_ops_transfer_e139032_20261116/transfer.ps1`共66行。先收完整输入及准备回执，禁止并发键入或重跑。
+- 05:14:11实查：原父27509仍持锁，fresh link和characterization已结束；**DC子30930**正在`854包/runs/p80_synth_d2_01/p80_synth/blocks/shared_sram`，准备/启动时间05:14:08。不重启、不改当前854包。launcher中child000005对应共享块；尚无最终面积/时序。
+- 最新GitHub已push **07dba32**（含e139032工具）。新的d2包源e139032a1892087869c41987acb0a8635e803c5a，仅部署、不启动新EDA；新包名`light-light126-p80-e139032`。
+- 新包110个overlay文件，19文件变化；原854 payload保持。完整payload SHA **7db6c43046c4c7437e447526f325c2e47cded1b1542789d3b0f5080026001f4a**。
+- 传输采用仅复制已知基底字节的无损差分，整包重建验证不变：23,916B XZ，SHA **b816d126a3e46896fec8b03f5a715b68cd4402f08fbf4aaa5a6449b26e74b18c**。实际66行传输脚本已在本地完整重演，目标payload SHA完全一致；不是估计或只验分段。
+- 默认IRQ固件=原已验证的firmware_d2字节，恢复/竞争使用新编译的d2；所有固件source_sha256与包内源逐项一致。新prepare入口绑定三类固件的深度，3项工具测试通过。**尚无恢复/竞争的服务器CPU PASS，新的prepare回执也尚未观察。**
+- 新包默认transaction_metadata_depth=2，并含p80_report工具。根`payload_e139032_d2.json`、`prepare_e139032_d2.py`由当前输入创建；不能重复执行旧完整raw差分/旧synth01启动器。
+- 后续仍跟进原综合；新e139包在原锁自然释放后承担恢复/竞争/240/精度、同最终网表gate/SAIF/PT/报告。20样本限制、T80桌面/旧八路保护不变。
+
+
 记录时间：2026-11-16 05:09（北京时间）。恢复先读AGENTS、根交接、本文件、STATUS本轮段和有效计划`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`。
 
 ## 约束及当前位置
