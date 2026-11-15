@@ -4630,16 +4630,16 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T01:01:04+08:00",
+      "observed_at": "2026-11-16T01:05:35+08:00",
       "status": "running",
-      "stage": "power_layer_07",
-      "completed": 11,
+      "stage": "power_layer_09",
+      "completed": 13,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 223699,
+      "child_pid": null,
       "foreground_readonly_watcher": 224035,
-      "child_tool": "pt_shell",
+      "child_tool": null,
       "sram_provenance_checked": true,
       "current_case": null,
       "gate_cases_passed": 14,
@@ -4668,7 +4668,9 @@
         "layer_03",
         "layer_04",
         "layer_05",
-        "layer_06"
+        "layer_06",
+        "layer_07",
+        "layer_08"
       ]
     },
     "new_final_netlist_ready": true,
@@ -4812,6 +4814,11 @@
       "screenshot_sha256": "4a736d526320a163ef3634e19e8bf2c6c6fc4c8bd99bba05fb3109b582ca229b",
       "previous_query_attempts": "01 Bash quoting error before Python; 02 overescaped regex invalid for warning classification; only query03 used"
     },
-    "s1_readonly_preparation": "workspaces/arch03/S1_PREPARATION_20261116.md"
+    "s1_readonly_preparation": "workspaces/arch03/S1_PREPARATION_20261116.md",
+    "local_simulator_ready": {
+      "tool": "Vivado Simulator 2018.3",
+      "checked_version_only": true,
+      "hardware_tests_started": false
+    }
   }
 }

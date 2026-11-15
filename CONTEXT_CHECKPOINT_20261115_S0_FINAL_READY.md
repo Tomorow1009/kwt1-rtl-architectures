@@ -1,5 +1,11 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日01:05:35实查：finish03父172535前八层功耗完成，power_layer_09处理中/completed13，无错误。前台只读watcher224035，后台export193002及检查等待218088保持。全部输入结束、无半截命令；6e67d9d已push。S0未冻结、S1未开始，桌面T80和旧八路不动。**
+
+- 恢复必须先读本顶部、原计划、STATUS，再观察当前224035；旧running仅历史。当前仍执行同一个66b9496/s0_finish03，不重启综合/gate/活动/功耗。
+- 本地只执行`D:/Xilinx/Vivado/2018.3/bin/xvlog.bat -version`，实际返回Vivado Simulator 2018.3；没有开启S1仿真或修改硬件。源码准备见S1_PREPARATION，仍不授予阶段通过。
+- 下一步：等待12PT完成及原队列退出；export193002导出S0自己的JSON/CSV/中文报告和12层未知清单；218088随后按原锁作连接查询、别名核对及ops-review-e516e4c事实快照。先检查各control/result，不要重跑等待器。全部事实读完再写S0独立结论与copy-only持久归档，随后P80。
+
 **11月16日01:01:04实查：finish03父172535仍正常，前六层功耗完成、power_layer_07子223699运行/completed11。当前前台只读watcher224035。后台export193002、检查等待218088保持；20654及此前输入全部结束。d673646已push。S0未冻结，S1仅只读准备说明，未改RTL/TB；保护目录不动。**
 
 - 已完成前六层`summary.json`及`power.log`按哈希核对，日志stdout没有Warning:/Error:/Fatal:前缀行；这不等于redirect到文件的时序警告不存在，后者由逐层完整表另审。有效截图`s0_power_warnings_query03.png`。前一次查询Bash引号错误未执行Python，第二次正则过度转义不能用作证据；只有第三次明确字符串前缀查询有效。原文件/队列未变。
