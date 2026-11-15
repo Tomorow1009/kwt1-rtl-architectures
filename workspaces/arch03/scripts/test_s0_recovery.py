@@ -30,10 +30,24 @@ class RecoveryTests(unittest.TestCase):
                                     recovery.CELLS,Path('/failed/mapped.ddc'))
         self.assertEqual(tkinter.Tcl().call('info','complete',script),1)
         self.assertLess(script.index('get_cells -quiet U2055'),script.index('/failed/mapped.ddc'))
+        self.assertLess(script.index('get_cells -quiet U2048'),script.index('remove_design -all'))
+        self.assertLess(script.index('remove_design -all'),script.index('/failed/mapped.ddc'))
         self.assertNotIn('compile -map_effort high',script)
         self.assertIn('set_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high',script)
         self.assertIn('if {![link]} {error "Recovery seed unresolved"}',script)
         self.assertIn('report_timing -delay_type min',script)
+
+    def test_cpu_and_probe_load_all_ddcs_into_one_container(self):
+        for script in (mapping.cpu_script(Path('/original'),Path('/new')),
+                       mapping.ddc_link_probe_script(Path('/original'),Path('/new'),Path('/seed'))):
+            self.assertEqual(tkinter.Tcl().call('info','complete',script),1)
+            self.assertNotIn('read_ddc ',script)
+            self.assertEqual(script.count('read_file -format ddc -single_file s0_designs '),3)
+            self.assertIn('if {![link]}',script)
+        probe=mapping.ddc_link_probe_script(Path('/original'),Path('/new'),Path('/seed'))
+        self.assertNotIn('compile ',probe)
+        self.assertIn('accelerator_probe.v',probe)
+        self.assertIn('shared_sram_probe.v',probe)
 
 
 if __name__=='__main__':unittest.main()

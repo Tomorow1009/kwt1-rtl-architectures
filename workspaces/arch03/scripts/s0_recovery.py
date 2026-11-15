@@ -43,6 +43,8 @@ def verify_seed(run,state_sha256):
     for name,want in inputs.items():require(digest(name)==want,'Changed failed-run input '+name)
     directory=run/'blocks/accelerator'
     log=(directory/'compile.log').read_text();allowed_error_log(log)
+    elapsed=re.findall(r'Elapsed time for this session\s+(\d+) seconds',log)
+    require(len(elapsed)==1,'Missing failed seed tool elapsed time')
     constraint=(run/'characterization/accelerator.characterized.tcl').read_text()
     _,removed=remove_mapped_only_directives(constraint)
     require(removed==CELLS,'Unexpected old map-only directives')
@@ -57,4 +59,5 @@ def verify_seed(run,state_sha256):
     inputs.update({str(p):digest(p) for p in directory.iterdir() if p.is_file()})
     return dict(failed_run=str(run),failed_state_sha256=state_sha256,no_op_cells=CELLS,
                 seed_ddc=str(directory/'mapped.ddc'),inputs=inputs,seed_is_accepted=False,
+                failed_seed_tool_elapsed_seconds=int(elapsed[0]),
                 requires_fresh_incremental_compile=True,old_failure_modified=False)

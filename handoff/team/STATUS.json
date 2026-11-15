@@ -287,7 +287,7 @@
       "timing_verified": false,
       "scoring_area_verified": false,
       "finished": "2026-11-09T21:18:35.199596",
-      "setup_ns": 1.04904E-05,
+      "setup_ns": 1.04904e-05,
       "hold_ns": 0.00150293,
       "whole_area_um2": 3956891.3469,
       "latches": 0,
@@ -2580,7 +2580,7 @@
     "synthesis_evidence": "handoff/team/evidence/ICB32_SYNTH_20261111.json",
     "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
     "conservative_budget_mm2": 0.926561671200504,
-    "setup_slack_ns": 7.15256E-05,
+    "setup_slack_ns": 7.15256e-05,
     "hold_slack_ns": 0.000253469,
     "strict_timing_verified": false,
     "timing_probe_evidence": "handoff/team/evidence/ICB32_TIMING_PROBE_20261111.json",
@@ -3524,7 +3524,7 @@
     "final_report_observer_status": "report_and_unknown_inventory_ready_review_required",
     "final_report_tools_deployed": true,
     "power_weighted_w_rounded": 0.06177734894060393,
-    "power_energy_j_rounded": 1.2236444205517346E-05,
+    "power_energy_j_rounded": 1.2236444205517346e-05,
     "power_review": "handoff/team/evidence/N1_POWER12_POST_AUDIT_20261113.json",
     "final_report_sha256": "8f778dd1f201855ae6b0fad815e3e3b0e258a64a694fab4cc538569ee522c2e1",
     "saif_static_diagnostic_started": true,
@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_RUNNING.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_recovery_shared_sram_mapping",
+    "current_stage": "S0_DDC_container_fix_local",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4343,7 +4343,7 @@
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
     "s0_finish_started": false,
-    "finish_launcher_prepared": "obsolete fixed synth03 launcher; do not execute",
+    "finish_launcher_prepared": "synth03 and synth05 fixed launchers obsolete; do not execute",
     "finish_launcher_deployed": false,
     "s0_review_profile_tests_passed": 26,
     "s0_review_profile_deployed": true,
@@ -4377,18 +4377,21 @@
       "pid": 120765
     },
     "synth_attempt05": {
-      "foreground_readonly_watcher_pid": 127118,
-      "error": null,
-      "current_block": "shared_sram",
+      "foreground_readonly_watcher_pid": null,
+      "error": "Two ambiguous arch03_t80_accel design errors caused by original and seed DDC containers",
+      "current_block": "accelerator",
       "observed_at": "2026-11-15T21:29:58.219963+08:00",
       "characterization_completed": true,
       "final_netlist_ready": false,
       "source_commit": "a5ce90ae4a967f0fddb12e3185fda5444ef9964f",
       "started": "2026-11-15T21:28:13.994272",
-      "dc_pid": 126956,
-      "status": "running",
+      "dc_pid": 127319,
+      "status": "failed",
       "pid": 126260,
-      "session": "s0_synth05"
+      "session": "s0_synth05",
+      "finished": "2026-11-15T21:33:17",
+      "lock_released": true,
+      "dc_elapsed_seconds": 185
     },
     "recovery_space_launcher": {
       "server_script": "ops-a5ce90a/s0_recovery_space_launch03.py",
@@ -4396,6 +4399,8 @@
       "sha256": "2606f9eba050ebc7935442ee9cd9d1c0bc338714dd7988cbc1db434fa1d80315",
       "prior_attempts": "01 missing underscore; 02 byte-count transcription; both stopped before archive/deletion",
       "status": "completed_archive_and_launched_synth05"
-    }
+    },
+    "s0_ddc_container_fix_tests_passed": 21,
+    "s0_ddc_container_fix_deployed": false
   }
 }

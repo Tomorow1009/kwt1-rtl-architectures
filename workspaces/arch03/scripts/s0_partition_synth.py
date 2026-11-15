@@ -114,7 +114,9 @@ def block_script(origin, run, block, reference, removed_map_only=(), seed=None):
         require(re.fullmatch(r'U[0-9]+',name), 'Unexpected removed mapped-cell name')
     absent=''.join('if {[sizeof_collection [get_cells -quiet '+name+']] != 0} {error "Removed map-only cell exists in original RTL: '+name+'"}\n'
                    for name in removed_map_only)
-    seeded=('read_ddc '+tcl_path(seed)+'\ncurrent_design '+reference+'\nif {![link]} {error "Recovery seed unresolved"}\n') if seed else ''
+    # The absence check above uses the original RTL only. Drop that in-memory
+    # design container before reading a mapped seed with the same design names.
+    seeded=('remove_design -all\nread_ddc '+tcl_path(seed)+'\ncurrent_design '+reference+'\nif {![link]} {error "Recovery seed unresolved"}\n') if seed else ''
     optimization=('set_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n' if seed else
                   'compile -map_effort high\nset_fix_hold [all_clocks]\ncompile -incremental_mapping -map_effort high\n')
     body = ('source '+tcl_path(run/'libraries.tcl')+'\nread_ddc '+tcl_path(origin/'linked.ddc')+'\n'+FIND_BLOCK+
@@ -141,12 +143,28 @@ def block_script(origin, run, block, reference, removed_map_only=(), seed=None):
     return proc_script(body, 'S0_BLOCK_MAPPED '+block)
 
 
+def read_into_container(path):
+    # DC read_file -single_file puts DDC designs in one in-memory container.
+    # Otherwise linked.ddc and mapped.ddc retain duplicate design names.
+    return 'read_file -format ddc -single_file s0_designs '+tcl_path(path)+'\n'
+
+
 def load_children(run):
-    return '\n'.join('read_ddc '+tcl_path(run/'blocks'/block/'mapped.ddc') for block in sorted(BLOCKS))+'\n'
+    return ''.join(read_into_container(run/'blocks'/block/'mapped.ddc') for block in sorted(BLOCKS))
+
+
+def ddc_link_probe_script(origin, run, seed_run):
+    body=('source '+tcl_path(run/'libraries.tcl')+'\n'+read_into_container(origin/'linked.ddc')+
+          load_children(seed_run)+FIND_BLOCK+
+          'current_design e203_soc_top\nif {![link]} {error "S0 probe link unresolved"}\n'+
+          baseline.macro_guard()+
+          '\ns0_export u_arch03_accel accelerator_probe.v\n'
+          's0_export u_arch03_shared shared_sram_probe.v\n')
+    return proc_script(body,'S0_DDC_LINK_PROBE_READY no_mapping_or_acceptance=true')
 
 
 def cpu_script(origin, run):
-    body = ('source '+tcl_path(run/'libraries.tcl')+'\nread_ddc '+tcl_path(origin/'linked.ddc')+'\n'+
+    body = ('source '+tcl_path(run/'libraries.tcl')+'\n'+read_into_container(origin/'linked.ddc')+
         load_children(run)+FIND_BLOCK+
         'current_design e203_soc_top\nif {![link]} {error "S0 CPU link unresolved"}\n'+baseline.macro_guard()+
         '\nsource '+tcl_path(run/'task_mode.sdc')+'\n'
@@ -167,7 +185,7 @@ def top_script(origin, run, cfg):
     # Exact existing final report implementation; no compile during final link.
     text = baseline.script(run, cfg)
     text = baseline.replace_once(text, 'read_ddc linked.ddc',
-        'read_ddc '+tcl_path(run/'blocks/cpu_soc/mapped.ddc')+'\n'+load_children(run))
+        read_into_container(run/'blocks/cpu_soc/mapped.ddc')+load_children(run))
     text = baseline.replace_once(text, 'compile -map_effort high', '# S0 final link only; mapping occurred per block')
     text = baseline.replace_once(text, 'compile -incremental_mapping -map_effort high', '# No silent top remapping')
     text = baseline.replace_once(text, 'set_fix_multiple_port_nets -all -buffer_constants', '# No topology changes at final link')
@@ -326,6 +344,18 @@ def execute(cfg, run, origin, call, recovery=None):
     original_version = tool_version_from_banner((origin/'icb32_synth.log').read_text())
     require(original_version == actual_version, 'Original mapping used another DC version')
     tool = dict(version=actual_version, executable_sha256=digest(Path(cfg['tools']['dc_shell']).resolve()))
+    if recovery is not None:
+        # Check replacement/linking with preserved, unaccepted seed artifacts
+        # before spending time on fresh mapping. This is NOT a hardware PASS.
+        seed_run=Path(recovered['failed_run'])
+        probe=run/'ddc_link_probe';probe.mkdir()
+        (probe/'probe.tcl').write_text(ddc_link_probe_script(origin,run,seed_run))
+        log=call([cfg['tools']['dc_shell'],'-f',probe/'probe.tcl'],probe,'probe.log')
+        soc_synth.require_tool_marker(log,'S0_DDC_LINK_PROBE_READY no_mapping_or_acceptance=true')
+        proof={block:same_blocks(seed_run/'blocks'/block/'mapped.v',probe/(block+'_probe.v')) for block in BLOCKS}
+        save(probe/'identity.json',dict(child_proof=proof,mapping_started=False,hardware_accepted=False,
+             seed_inputs={str(seed_run/'blocks'/b/n):digest(seed_run/'blocks'/b/n)
+                          for b in BLOCKS for n in ('mapped.ddc','mapped.v')}))
     character = run/'characterization'; character.mkdir()
     script = characterize_script(origin/'mapped.ddc', run/'task_mode.sdc', run/'libraries.tcl')
     (character/'characterize.tcl').write_text(script)
@@ -405,6 +435,7 @@ def execute(cfg, run, origin, call, recovery=None):
     if recovery is not None:
         report['incremental_recovery']=dict(seed_sha256=digest(Path(recovered['seed_ddc'])),
             failed_run=recovered['failed_run'],failed_state_sha256=recovered['failed_state_sha256'],
+            failed_seed_tool_elapsed_seconds=recovered['failed_seed_tool_elapsed_seconds'],
             fresh_compile_and_reports=True,old_failed_state_unchanged=True)
     verify_origin(origin,ROOT)
     report['artifacts']={p.name:digest(p) for p in run.iterdir() if p.is_file()}
