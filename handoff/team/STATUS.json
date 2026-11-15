@@ -4630,16 +4630,16 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T00:43:02+08:00",
+      "observed_at": "2026-11-16T00:51:43+08:00",
       "status": "running",
-      "stage": "power_layer_01",
-      "completed": 5,
+      "stage": "power_layer_04",
+      "completed": 8,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": null,
-      "foreground_readonly_watcher": null,
-      "child_tool": null,
+      "child_pid": 219643,
+      "foreground_readonly_watcher": 219856,
+      "child_tool": "pt_shell",
       "sram_provenance_checked": true,
       "current_case": null,
       "gate_cases_passed": 14,
@@ -4661,7 +4661,12 @@
       ],
       "saif_complete": true,
       "timing_query_complete": true,
-      "drc_query_complete": true
+      "drc_query_complete": true,
+      "power_cases_passed": [
+        "layer_01",
+        "layer_02",
+        "layer_03"
+      ]
     },
     "new_final_netlist_ready": true,
     "s0_archive_preparation": {
@@ -4749,9 +4754,17 @@
     },
     "s0_review_followup_prepared": {
       "path": "handoff/team/evidence/S0_COMPLETE_REVIEW_20261116.py",
-      "status": "prepared_not_deployed",
+      "status": "deployed_waiting_existing_export",
       "waits_existing_export": true,
-      "no_automatic_acceptance": true
+      "no_automatic_acceptance": true,
+      "source_commit": "dfa13b0",
+      "pid": 218088,
+      "started": "2026-11-16T00:47:42.194031",
+      "source_sha256": "8f3299cc60796e8f679d3b05d83507afec726e7d439939730e9cb8272a375878",
+      "builder_sha256": "04665592cd0edcf63b828722e4f4d815b2dedef7cb1498eab514b94d7a8ad6c0",
+      "control": "ops-66b9496/s0_review01_control",
+      "transfer_session_completed": true,
+      "connection_query_started": false
     },
     "s0_high_fanout_read": {
       "observed_at": "2026-11-16T00:43:02+08:00",
@@ -4765,6 +4778,26 @@
       ],
       "difference_not_waived": true,
       "screenshot_sha256": "05494f952221e6d7f4553d896da8228c4ec8de4c33e2e1e5856859b3bc69574a"
+    },
+    "s0_power_first_read": {
+      "observed_at": "2026-11-16T00:50:38+08:00",
+      "scope": "layer_01_only_not_twelve_layer_average",
+      "summary_sha256": "adb42144fe5d46408d0fe745373f97bfd3d86419798c2e6049531da0a30af36a",
+      "power_w": "0.051344018",
+      "energy_j": "0.0000390219406241628806976",
+      "no_clock_pins": 189,
+      "no_clock_groups": {
+        "static_jtag_dtm": 186,
+        "static_jtag_reset_sync": 3
+      },
+      "disabled_arcs": 148318,
+      "flag_counts": {
+        "c": 153,
+        "p": 59255,
+        "C": 72118,
+        "d": 16792
+      },
+      "model_scope": "pre_layout_stable_task_mode"
     }
   }
 }
