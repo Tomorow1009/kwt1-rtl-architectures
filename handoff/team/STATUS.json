@@ -4630,18 +4630,18 @@
       "source_commit": "66b9496",
       "session": "s0_finish03",
       "started": "2026-11-15T23:11:48.772018",
-      "observed_at": "2026-11-16T00:13:26+08:00",
+      "observed_at": "2026-11-16T00:22:24+08:00",
       "status": "running",
       "stage": "saif",
       "completed": 2,
       "error": null,
       "synthesis_not_repeated": true,
       "stage_accepted": false,
-      "child_pid": 200584,
-      "foreground_readonly_watcher": null,
-      "child_tool": "simv_exited_audit_pending",
+      "child_pid": 205685,
+      "foreground_readonly_watcher": 206849,
+      "child_tool": "simv",
       "sram_provenance_checked": true,
-      "current_case": "layer_08",
+      "current_case": "layer_10",
       "gate_cases_passed": 14,
       "gate_outputs_passed": 354816,
       "gate_complete": true,
@@ -4652,12 +4652,14 @@
         "layer_04",
         "layer_05",
         "layer_06",
-        "layer_07"
+        "layer_07",
+        "layer_08",
+        "layer_09"
       ]
     },
     "new_final_netlist_ready": true,
     "s0_archive_preparation": {
-      "status": "local_only_not_deployed_or_run",
+      "status": "deployed_import_verified_not_executed",
       "copy_only": true,
       "source_delete_allowed": false,
       "tests_passed": 3,
@@ -4686,7 +4688,7 @@
     },
     "s0_model_review_snapshot": {
       "source_commit": "5430dc5",
-      "status": "local_only_not_deployed_or_run",
+      "status": "deployed_import_verified_not_executed",
       "tests_passed": 3,
       "python36_syntax_passed": true,
       "additional_reject_cases": 8,
@@ -4712,10 +4714,14 @@
       "payload_sha256": "fd028bc649412db0a3c761691dd9c68cdcc8bfaaaf2f1c0529d24caa4c43a423",
       "exec_session": 18946,
       "lines": 45,
-      "status": "input_in_progress_not_server_verified",
+      "status": "server_six_files_verified_imports_passed",
       "target": "ops-review-e516e4c",
       "starts_eda": false,
-      "starts_archive": false
+      "starts_archive": false,
+      "observed_at": "2026-11-16T00:21:30+08:00",
+      "transfer_completed": true,
+      "archive_started": false,
+      "snapshot_executed": false
     }
   }
 }

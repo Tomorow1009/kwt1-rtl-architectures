@@ -1,5 +1,11 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**11月16日00:22:24实查：SAIF L01–L09已通过，L10子205685运行，父172535无错误。前台只读watcher206849；汇总等待器193002保持。18946/78391输入全部结束，新ops-review-e516e4c的6工具已核验导入，未执行归档/审核快照或额外EDA。S0未冻结，S1未开始；不重启旧队列、不动T80桌面或旧八路。619521f已push。**
+
+- 新ops根为`/tmp/s4_21usr_t80_20261115_1830/ops-review-e516e4c`，`receipt.json`记录e516e4c源码、66b9496基础manifest与6文件哈希，已实际看到`S0_REVIEW_TOOLS_READY 6 NO_EDA_NO_ARCHIVE`。其代码作为独立工具使用，不在运行bundle中改源码。
+- 后续调用须同时设置该ops与66b9496的`workspaces/arch03/scripts`导入路径；导入已经核实server_run.ROOT确为66包。模块为s0_model_review_snapshot、s0_archive_contract、s0_archive_runtime、n1_archive_runtime、t80_archive_runtime、transport_report_stage。不要重跑部署脚本覆盖目录。
+- 已只读复核原T80被动计数及观察器：`T80_ASIC12_COUNTERS_20261113.json`同源summary f9e27c7f...；3/3/4/3拍响应与18.0114% MAC利用率是原T80数据，不冒充S0新网表功耗。未来S1多笔事务时须同步升级当前单pending TB观察器，不能删除其多在途fatal来伪造通过；当前未改任何RTL/TB，S1未开始。
+
 **11月16日00:14当前唯一VNC输入exec18946：45行`local_runs/s0_review_ops_e516e4c_02/transfer.ps1`，只部署6个审核/归档工具到新`ops-review-e516e4c`，不启EDA或归档。先收完该输入再截图，禁止并发键入或重跑。前台199060已仅退出观察器；后台172535验证、193002汇总等待不动。最后00:13:26 SAIF L01–L07通过，L08子200584仿真已退出、核对中。T80桌面/旧八路不动。**
 
 - 审核工具部署来源e516e4c，6文件、139模块静态闭包及Python3.6通过；本地payload SHA `fd028bc649412db0a3c761691dd9c68cdcc8bfaaaf2f1c0529d24caa4c43a423`。首个本地目录`local_runs/s0_review_ops_e516e4c`因编码名称utf8-sig拼写错误停止、未传服务器；实际使用后缀`_02`目录，生成器`local_runs/build_s0_review_ops.py`。
