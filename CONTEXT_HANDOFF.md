@@ -1,5 +1,11 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**07:46终端补充：当前前台已切回第一标签的只读watcher105419，第二标签tcsh空闲；不能向watcher直接键入。原综合still running/synthesis，仅共享块完成，未重启。下一步读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
+
+**07:44最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原98857实际CPU99.7%、运行24:44；tmp89.38GB，内存充足，共享仅1MiB。workspace3新第二终端标签为tcsh空闲，第一标签watcher105419保持；所有输入结束。原综合/后继继续，未重启或修改受测包；C80未开始。**
+
+**07:34终端：workspace3前台只读watcher105419，每60秒显示原综合状态，最多1小时或综合结束退出；输入29625已结束。当前不是空闲Bash，勿直接键入。原95253/98857/96154不变，最新同步c5e4e11；继续看[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)。**
+
 **07:31最新恢复入口：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原combined05父95253保持，DC加速器子98857运行11:44、CPU99.6%、实际Error行0；export05父96154等待，全部输入结束。共享块已mapped、自己的240/三深度14通过；整机PPA仍待，不重启。桌面T80/旧八路不动；C80/C32/G32未开始。**
 
 **07:20新实测：[库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原combined05父95253保持；共享SRAM块真实DC映射完成（35.674秒、实际Error行0），当前加速器子98857，export05父96154等待。全部输入结束。整机PPA仍待，不重启；自己的240和三深度14保持通过。桌面T80/旧八路不动，C80未开始。**
