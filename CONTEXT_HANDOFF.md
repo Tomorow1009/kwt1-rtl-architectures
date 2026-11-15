@@ -1,5 +1,11 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**20:46:54最新进展：** 原S0 synth03父75787/DC76822仍running，accelerator首轮优化完成、进入incremental hold修复。共享块已完成，CPU及最终链接仍待。前台只读watcher91575；无未完输入。S0未知活动审核profile本地完成、26项检查通过，尚未部署；新旧网表身份明确隔离。原05c映射及774收尾包不改，收尾queue尚未启动。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部。T80桌面和旧8路仍保护，S1–S4未开始。
+
+**20:34:49最新进展：** S0原75787/DC76822已进入accelerator高强度映射优化，仍99.7%CPU、无错误。当前前台只读watcher91575；所有输入/观察exec结束。共享SRAM DDC已完成，CPU及最终链接、gate/SAIF/PT仍待；后继774工具已部署，launcher仅本地准备。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部；继续原作业，不重复启动，不动T80桌面或旧8路。
+
+**20:26:46观察：** 原S0 synth03仍running/accelerator，无错误，父75787/DC76822、99.7%CPU；前台只读watcher91575。最新617cf17已push，后继774工具已部署，启动脚本仅本地保存未运行。先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部；全部输入和只读截图exec均结束，不重跑当前综合。服务器T80桌面与旧8路保护不变。
+
 **20:11当前：** [S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部已更新。7743127独立845文件部署/清单核验及服务器导入全部通过，所有输入结束，没有启动收尾队列。原05c synth03父75787/DC76822仍running/accelerator、CPU99.7%，日志已推进OPT-1206，无错误。VNC前台现只读观察器**91575**，命令前先退出此观察器；不能向它盲输shell。T80桌面、旧8路保护保持，S1–S4未开始。
 
 **20:02恢复先读[新S0后继传输检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)。** exec39807正在VNC输入61行7743127工具包，只clone独立845文件，不启动EDA；不能并发输入或重跑。7743127已push。原05c synth03父75787/DC76822，19:55:42仍正常99.7%CPU映射accelerator，shared_sram已完成。原观察器78421已退出；当前前台是传输here-doc。T80桌面和全部旧8路不动，S1–S4未开始。

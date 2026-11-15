@@ -3,6 +3,24 @@ import transport_review_contract as c
 
 
 class ReviewIdentity(unittest.TestCase):
+    def test_partitioned_s0_cannot_borrow_monolithic_identity(self):
+        request = dict(transport_stage='S0',jobs=[dict(name='S0')])
+        manifest = dict(architecture='arch03_t80_s0_partition',row_lanes=5,
+                        fixed_shift=10,numeric_format_id='0x000e0c20')
+        self.assertEqual(c.profile(request,manifest),'S0')
+        with self.assertRaises(ValueError):c.profile(request,dict(manifest,architecture='arch03_t80'))
+        report = dict(schema='arch03-s0-evidence-export-v1',stage='S0',row_lanes=5,
+                      numeric_format='0x000e0c20',layout_id=0x00100004,shift=10,
+                      synthesis_route=dict(scope=c.S0_SCOPE))
+        c.report_identity(report,'S0')
+        with self.assertRaises(ValueError):c.report_identity(dict(report,synthesis_route={}), 'S0')
+        synthesis = dict(scope=c.S0_SCOPE,synthesis_completed=True,project_limit_mm2=1.0,
+                         link_report=dict(scope='s0_three_ddc_link',row_lanes=5))
+        c.synthesis_identity(synthesis,'S0')
+        for change in (dict(scope='t80_whole_soc_task_mode_preliminary_synthesis'),
+                       dict(project_limit_mm2=1.2),dict(link_report={})):
+            with self.assertRaises(ValueError):c.synthesis_identity(dict(synthesis,**change),'S0')
+
     def test_only_matching_transport_bundle_and_own_job(self):
         for stage, rows in (('T80',5),('T64',4)):
             request = dict(transport_stage=stage,jobs=[dict(name=stage)])

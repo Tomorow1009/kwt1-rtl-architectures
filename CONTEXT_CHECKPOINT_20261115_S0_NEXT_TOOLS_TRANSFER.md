@@ -1,5 +1,11 @@
 # S0后继工具传输检查点
 
+**20:46:54最新观察：** 原synth03父75787/DC76822仍running/error=None，accelerator首轮优化已完成并进入`Beginning Pass 1 Mapping (Incremental)`（hold修复），DC已运行1:09:18/CPU1:09:05。中间面积约0.79mm²不能当最终面积，CPU及顶层尚未完成；TIM-134提示两条高扇出网，须用最终时序审核核对。前台仍watcher91575，没有未完输入或传输。新S0功耗审核profile本地补齐：未知活动清单/四段窗口/新分块网表身份，26项相关检查通过，尚未部署；运行05c和后继774包不改。617启动脚本仍未传输或运行。S1–S4未开始。
+
+**20:34:49当前恢复状态：** synth03原父75787/DC76822继续running，accelerator已输出`Beginning Mapping Optimizations (High effort)`；57:13 elapsed/57:04 CPU、99.7%，error=None。shared_sram已完成，CPU/SoC与最终链接尚未开始。当前前台只读watcher91575；本轮只读截图cell g2:525已结束，无未完输入/传输。后继774包的845文件/manifest/import均已完成，S0_FINISH_LAUNCH_20261115.py仅本地已提交617cf17，未部署或执行。**不要重复启动任何综合或收尾队列；先截图读取原作业终态。**
+
+**20:26:46最新观察：** 原synth03父75787/DC76822仍running/accelerator、99.7%CPU、49:10 elapsed/49:02 CPU，日志Processing DW01_add_width4，error=None。只读watcher91575保持。新工具已部署，launcher仅本地准备未执行。最新Git **617cf17已push**，工作树当时干净。只读三次截图的functions cell g2:520已结束，无未完输入/exec；板端转发91027保持。下一步仍读取原综合终态，不重启、不修改05c受测包；S1–S4未开始。
+
 **20:17:12最后观察：** 原综合仍running/accelerator、DC76822 CPU99.7%，39:36 elapsed/39:30 CPU；日志推进到Allocating blocks/DW算术单元处理，error=None。新工具774已部署且import通过，当前只有原综合在跑。已在本地准备handoff/team/evidence/S0_FINISH_LAUNCH_20261115.py（Python3.6语法通过），尚未传输/执行；它要求原synth03 passed、原父75787退出、summary身份正确、面积≤1.00、setup/hold非负及原锁不存在，才创建全新的s0_finish01并调用774包统一锁队列。无清理、无修改旧包、无自动重试。当前前台只读watcher91575保持。
 
 **20:11更新，覆盖下方传输状态：** exec39807已61/61结束，服务器S0_INPUTS_PREPARED确认845文件及ce81bdd6…清单匹配，S0_NEXT_TOOLS_READY确认没有启动新EDA。20:09:39实际import s0_finish/s0_report通过，模块齐全。20:11:09原synth03仍running/accelerator，DC76822 CPU99.7%、33:33 elapsed/33:28 CPU，日志已从Processing推进到OPT-1206常量寄存器处理，无错误。shared_sram仍是唯一已生成独立DDC的块。

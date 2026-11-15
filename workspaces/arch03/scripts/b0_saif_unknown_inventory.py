@@ -1,4 +1,4 @@
-"""Read frozen B0/N1/T80/T64 SAIF and mapped.v; emit every unknown declaration.
+"""Read frozen B0/N1/T80/T64/S0 SAIF and mapped.v; emit unknown declarations.
 
 Inputs remain unchanged. No simulation, PT run, activity assignment, or power
 approval. Output is a new directory containing compressed JSONL and receipts.
@@ -19,6 +19,7 @@ import sys
 import native_saif_activity as native
 import t80_window
 import t64_window
+import transport_review_contract
 from saif_syntax import integer_ticks
 from dma16_unknown_netlist import index_netlist, resolve_alias
 
@@ -31,11 +32,12 @@ LIMIT_OUTPUT_CASE = 256 * 1024**2
 RESERVE_BYTES = 2 * 1024**3
 OUTPUT_CHECK_BYTES = 4 * 1024**2
 DEPENDENCIES = ('native_saif_activity', 'saif_syntax', 'dma16_unknown_netlist',
-                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth', 't80_window', 't64_window')
+                'dma16_structural_audit', 'icb32_power', 'soc_power', 'icb32_synth', 't80_window', 't64_window',
+                'transport_review_contract')
 
 
 def profile_window_reader(profile):
-    if profile == 'T80':return t80_window.window_values
+    if profile in ('T80', 'S0'):return t80_window.window_values
     if profile == 'T64':return t64_window.window_values
     return native.window_values
 
@@ -262,6 +264,12 @@ def scan(path, window, expected, index, emit, window_reader=native.window_values
 
 def profile_contract(report):
     """Bind the inventory to this export's own stages, never a predecessor PASS."""
+    if report.get('schema') == 'arch03-s0-evidence-export-v1':
+        transport_review_contract.report_identity(report, 'S0')
+        # S0 uses the unchanged T80 engines and state keys, but different runs,
+        # summary hashes and final netlist. These are not historical T80 PASSes.
+        return ('S0', 't80_synth', 't80_saif',
+                'T80_native_saif_function_and_complete_windows_passed')
     if report.get('schema') == 'systolic-b-evidence-export-v1':
         return ('B0', 'systolic_b_synth', 'systolic_b_saif',
                 'B_native_saif_function_and_complete_windows_passed')
@@ -299,6 +307,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS, path_vali
             'Activity stage not frozen passed')
     srun = scope_path(report['references']['synthesis']['run'])
     synthesis = small(srun / 'summary.json', report['references']['synthesis']['sha256'])
+    if profile == 'S0':transport_review_contract.synthesis_identity(synthesis, profile)
     synthesis_state = small(srun.parent / 'state.json')['stages'][synth_stage]
     require(synthesis_state['status'] == 'passed' and
             synthesis_state['summary_sha256'] == report['references']['synthesis']['sha256'],
@@ -306,7 +315,7 @@ def collect(report_path, report_sha, scope_root, output, cases=LAYERS, path_vali
     require(activity['status'] == activity_status and
             activity['synthesis_summary_sha256'] == report['references']['synthesis']['sha256'] and
             activity['firmware_sha256'] == report['firmware_sha256'], 'Mixed activity identity')
-    if profile in ('N1', 'T80', 'T64'):
+    if profile in ('N1', 'T80', 'T64', 'S0'):
         require(activity.get('numeric_format') == report['numeric_format'] and
                 activity.get('layout_id') == report['layout_id'] and
                 activity.get('gate_summary_sha256') == report['references']['gate']['sha256'],

@@ -287,7 +287,7 @@
       "timing_verified": false,
       "scoring_area_verified": false,
       "finished": "2026-11-09T21:18:35.199596",
-      "setup_ns": 1.04904e-05,
+      "setup_ns": 1.04904E-05,
       "hold_ns": 0.00150293,
       "whole_area_um2": 3956891.3469,
       "latches": 0,
@@ -387,7 +387,7 @@
       "server_results_read": true,
       "timing_verified": false,
       "started": "2026-11-09T22:24:11.597528",
-      "finished": "2026-11-09T22:27:06.519870",
+      "finished": "2026-11-09T22:27:06.51987",
       "last_observed": "2026-11-09T22:36:25.050096",
       "outputs": 354816,
       "cycles_each": 225770,
@@ -399,7 +399,7 @@
       "summary_sha256_transcription_candidate": "1b7e03944fcab5f17eefdd71bb5a6a739180e2718e8a77ddf9a0148704ec8514",
       "summary_transcription_remotely_asserted": true,
       "summary_sha256": "1b7e03944fcbaf5f17eefd71bb5a6a739180e2718e8a77ddf9a0148704ec8514",
-      "hash_verified_time": "2026-11-09T23:17:21.083030",
+      "hash_verified_time": "2026-11-09T23:17:21.08303",
       "prior_transcription_rejected": true,
       "bus_service_observation": {
         "observed": "2026-11-09T23:21:48.945435",
@@ -509,7 +509,7 @@
       "meaning": "reports_ready_review_required",
       "driver_pid": 205580,
       "started_launcher": "2026-11-09T23:12:48.139901",
-      "started": "2026-11-09T23:12:49.044790",
+      "started": "2026-11-09T23:12:49.04479",
       "finished": "2026-11-09T23:32:09.934485",
       "last_observed": "2026-11-09T23:43:53.855048",
       "stage": "dma16_synth",
@@ -687,7 +687,7 @@
       "server_zip_bytes_verified": true,
       "server_zip_sha256_verified": true,
       "server_unpacked_verified": true,
-      "server_sha_observed": "2026-11-10T00:23:56.259410",
+      "server_sha_observed": "2026-11-10T00:23:56.25941",
       "server_inputs_verified": 627,
       "server_inputs_observed": "2026-11-10T00:27:36.565681",
       "ftp_ui_success": true,
@@ -891,7 +891,7 @@
       "firmware_variants": 5,
       "server_uploaded": true,
       "server_zip_sha_verified": true,
-      "server_unpacked_observed": "2026-11-10T01:48:27.963770",
+      "server_unpacked_observed": "2026-11-10T01:48:27.96377",
       "server_inputs_verified": 643,
       "server_inputs_observed": "2026-11-10T01:49:28.992472",
       "ftp_success_seconds": 33,
@@ -958,7 +958,7 @@
         "dtcm": 32
       },
       "leaf_artifact_sha_verified": true,
-      "observed": "2026-11-10T02:25:44.706690",
+      "observed": "2026-11-10T02:25:44.70669",
       "physical_signoff": false,
       "official_scoring_confirmed": false,
       "handoff": "workspaces/arch03/AREA_REVIEW_20261109.md",
@@ -1013,7 +1013,7 @@
       "firmware_variants": 5,
       "server_uploaded": true,
       "server_zip_sha_verified": true,
-      "server_unpacked_observed": "2026-11-10T02:53:37.823430",
+      "server_unpacked_observed": "2026-11-10T02:53:37.82343",
       "server_inputs_verified": 648,
       "server_inputs_observed": "2026-11-10T02:54:15.790502",
       "ftp_success_seconds": 33,
@@ -1178,7 +1178,7 @@
       "server_zip_sha_verified": true,
       "server_unpacked_observed": "2026-11-10T04:02:28.049584",
       "server_inputs_verified": 654,
-      "server_inputs_observed": "2026-11-10T04:03:17.132980",
+      "server_inputs_observed": "2026-11-10T04:03:17.13298",
       "ftp_disconnected": true,
       "ftp_queue_empty": true,
       "ftp_success_seconds": 33
@@ -1194,7 +1194,7 @@
       ],
       "performance_measurement": false,
       "contention_verified": true,
-      "finished": "2026-11-10T04:01:07.123980",
+      "finished": "2026-11-10T04:01:07.12398",
       "summary_sha256": "a55fe2e951ad239403c230a28bd771affa3588abd6cc751c86c84f7a9faf4e8e",
       "outputs": 50688,
       "case_counts": {
@@ -1343,7 +1343,7 @@
       "changed_runtime_helper_resume_rejected": true,
       "superseded_unuploaded_package": "light-light126-receipt-fix-dma16-20261110_044410-197429560e54.zip",
       "source_commit": "66838470bb12a036b37305393c84b712b11cd43f",
-      "actual_reaudit_observed": "2026-11-10T04:55:45.723680",
+      "actual_reaudit_observed": "2026-11-10T04:55:45.72368",
       "old_state_and_receipt_sha_unchanged": true,
       "old_batch_state_remains": "failed",
       "new_batch_credit_from_old_attempt": 0
@@ -1431,7 +1431,7 @@
       "numeric_sha256": "b01847992ca3ac7e43a302238a5601c3c4c9b40948ec3844032395fa7f0415b0",
       "default_raw_energy_j": "0.0000446779497038379161700",
       "boundary_raw_energy_j": "0.0000446808093063719558880",
-      "old_and_new_raw_energy_equal_verified": "2026-11-10T05:43:14.766660",
+      "old_and_new_raw_energy_equal_verified": "2026-11-10T05:43:14.76666",
       "manual_document_energy_transcription_corrected": true
     },
     "unknown_audit_package": {
@@ -1446,7 +1446,7 @@
       "clean_audit_sha256": "328e0395849d817ef1999f46392cdbe774a35b264d5db44f3bf30847ea74e3f6",
       "filezilla_transfer_seconds_observed": 33,
       "unpacked": "2026-11-10T05:36:23.644361",
-      "inputs_verified": "2026-11-10T05:36:54.416400",
+      "inputs_verified": "2026-11-10T05:36:54.4164",
       "actual_unknown_scan_started": false
     },
     "actual_mapped_structural_warnings": {
@@ -1466,7 +1466,7 @@
         "bundle": "light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd",
         "artifact": "runs/dma16_struct_review01/mapped_port_diagnostic.json",
         "sha256": "999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60",
-        "finished": "2026-11-10T06:03:57.998090",
+        "finished": "2026-11-10T06:03:57.99809",
         "sha_independently_confirmed": true,
         "module_count": 1334,
         "port_warning_count": 4852,
@@ -1580,7 +1580,7 @@
       "finished": "2026-11-10T07:00:28.058236",
       "summary_sha256": "d1ea229f95cc54884af698e3f7406bb32c104dbab0b3f6db0fa7568aafc96b8a",
       "summary_sha256_independently_verified": true,
-      "sha_verified_at": "2026-11-10T07:08:06.859410"
+      "sha_verified_at": "2026-11-10T07:08:06.85941"
     },
     "review_correct_package_rejected": {
       "source_commit": "97553fe93b61c414499a12ef9492de72ddfd3d75",
@@ -1838,7 +1838,7 @@
       "system_power_verified": false,
       "initial_history_draft_preserved": "request_history_draft.json",
       "request_sha_verified_at": "2026-11-10T08:37:10.857006",
-      "finished": "2026-11-10T08:38:53.904490",
+      "finished": "2026-11-10T08:38:53.90449",
       "output_artifacts_verified_at": "2026-11-10T08:41:17.016627",
       "batch_tasks": 1200,
       "batch_outputs": 30412800,
@@ -1852,7 +1852,7 @@
       "run": "runs/mmio8_source_gate01/mmio8_gate",
       "driver_pid": 46140,
       "started_launcher": "2026-11-10T08:42:24.188768",
-      "started": "2026-11-10T08:42:24.710930",
+      "started": "2026-11-10T08:42:24.71093",
       "last_observed": "2026-11-10T09:09:16.781222",
       "status": "running",
       "child_pid": 55423,
@@ -1976,7 +1976,7 @@
       "bundle": "light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696",
       "run": "runs/mmio8_source_gate01/mmio8_gate",
       "status": "passed",
-      "started": "2026-11-10T08:42:24.710930",
+      "started": "2026-11-10T08:42:24.71093",
       "finished": "2026-11-10T09:31:05.827774",
       "outputs": 25344,
       "cycles": 3843121,
@@ -1998,7 +1998,7 @@
       "last_observed": "2026-11-10T09:45:15.492324",
       "owns_shared_lock": false,
       "prior_pid_transcription_error": 22688,
-      "finished": "2026-11-10T09:55:52.729450",
+      "finished": "2026-11-10T09:55:52.72945",
       "summary_sha256": "3321b70941d2667baaf5e143bcaf9db4e53cb01d0ac33f3a34543fe144a48eba"
     },
     "mac_use_diagnostic": {
@@ -2014,7 +2014,7 @@
       "bundle": "light-light126-mac-use-dma16-20261110_094741-3dcd35187115",
       "pid": 129811,
       "started": "2026-11-10T09:59:12.167053",
-      "finished": "2026-11-10T09:59:40.385600",
+      "finished": "2026-11-10T09:59:40.3856",
       "error": "MAC_USE_ACTIVITY_AUDIT_ERROR regex_error",
       "server_compiler": "GCC 4.8.5 20150623 (Red Hat 4.8.5-44)",
       "full_scan_completed": false,
@@ -2080,7 +2080,7 @@
       "launch_parent_missing_before_popen": true,
       "scan_read_bytes": 1268646653,
       "vcd_bytes": 8745588450,
-      "finished": "2026-11-10T10:38:43.356180",
+      "finished": "2026-11-10T10:38:43.35618",
       "summary_sha256": "7c1bba6b91b7bfb0aa08ddcbe5fc9a9ecb1ae8c0bdc04b5925b4dfd851fcd298",
       "summary_independently_asserted": true,
       "accepted_macs": 1622016,
@@ -2137,7 +2137,7 @@
       "production_files_unchanged": 40,
       "audit": "local_runs/dma16_x_model_clean_audit_20261110_1026/receipt.json",
       "audit_sha256": "57d94eab7a7b38ac4a2aa335dbc34fbf9baa53c1365ec5fe131e7466fc9befee",
-      "unpacked": "2026-11-10T10:30:51.445480",
+      "unpacked": "2026-11-10T10:30:51.44548",
       "inputs_verified": "2026-11-10T10:38:37.395611",
       "uploaded_via": "board_linux_filezilla",
       "filezilla_disconnected": true
@@ -2166,7 +2166,7 @@
       "bundle": "light-light126-x-model-dma16-20261110_102408-b85e908fab38",
       "run": "runs/dma16_x_queue_remaining_v1",
       "pid": 188919,
-      "started": "2026-11-10T10:58:59.937100",
+      "started": "2026-11-10T10:58:59.9371",
       "plan_sha256": "c49598b1484a7fd0eaab67ca8d832d2eeb9c43d62f7a782561756f79e7718e79",
       "plan_hash_asserted": "2026-11-10T11:02:45.038248",
       "points": [
@@ -2186,7 +2186,7 @@
       "next_owner_not_yet_read": false,
       "one_finished": "2026-11-10T11:20:12.393155",
       "one_status": "passed",
-      "finished": "2026-11-10T11:30:16.479150",
+      "finished": "2026-11-10T11:30:16.47915",
       "completed": 3
     },
     "x_compare_package": {
@@ -2427,7 +2427,7 @@
       "server_verified": true,
       "upload_status": "success_33_seconds_queue_empty_success29",
       "filezilla_disconnected": true,
-      "unpacked": "2026-11-10T12:08:01.733280",
+      "unpacked": "2026-11-10T12:08:01.73328",
       "inputs_verified": "2026-11-10T12:09:22.174422"
     },
     "mmio8_timing_objects01": {
@@ -2436,7 +2436,7 @@
       "status": "diagnostics_ready_review_required",
       "finished": "2026-11-10T12:10:44.634346",
       "sha256": "013d8f712aa3078118f5afd66dcd6a5048e97e9c4ce3de216f17c29448f03aae",
-      "hash_asserted": "2026-11-10T12:13:38.433250",
+      "hash_asserted": "2026-11-10T12:13:38.43325",
       "no_clock_pins": 189,
       "groups": {
         "static_jtag_dtm": 186,
@@ -2580,7 +2580,7 @@
     "synthesis_evidence": "handoff/team/evidence/ICB32_SYNTH_20261111.json",
     "synthesis_summary_sha256": "fd36940c164157653d9e4af9233cef436589d1395b2420dea540d03fbb4b4c3d",
     "conservative_budget_mm2": 0.926561671200504,
-    "setup_slack_ns": 7.15256e-05,
+    "setup_slack_ns": 7.15256E-05,
     "hold_slack_ns": 0.000253469,
     "strict_timing_verified": false,
     "timing_probe_evidence": "handoff/team/evidence/ICB32_TIMING_PROBE_20261111.json",
@@ -2785,7 +2785,7 @@
       "cases": 14,
       "lock_matches": null,
       "source_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
-      "finished": "2026-11-12T01:11:55.771680",
+      "finished": "2026-11-12T01:11:55.77168",
       "outputs": 354816,
       "mean_cycles": 30502.333333333332,
       "irq_wfi_all_pass": true,
@@ -2798,7 +2798,7 @@
       "pid": null,
       "status": "passed_reports_ready_review_required",
       "observed": "2026-11-12T11:39:06+08:00",
-      "started": "2026-11-12T08:45:21.455160",
+      "started": "2026-11-12T08:45:21.45516",
       "bundle": "light-light126-systolic-b-v3-20261112_032054-8d8f26247b7a",
       "production_hardware_commit": "63da6ba0d6d9c931fbe4a4bdfb9f233d4502ce86",
       "prior_failed_session_preserved": "systolic_b_v3_synth01",
@@ -3524,7 +3524,7 @@
     "final_report_observer_status": "report_and_unknown_inventory_ready_review_required",
     "final_report_tools_deployed": true,
     "power_weighted_w_rounded": 0.06177734894060393,
-    "power_energy_j_rounded": 1.2236444205517346e-05,
+    "power_energy_j_rounded": 1.2236444205517346E-05,
     "power_review": "handoff/team/evidence/N1_POWER12_POST_AUDIT_20261113.json",
     "final_report_sha256": "8f778dd1f201855ae6b0fad815e3e3b0e258a64a694fab4cc538569ee522c2e1",
     "saif_static_diagnostic_started": true,
@@ -3730,7 +3730,7 @@
       "child_pid": null,
       "status": "reports_ready_review_required",
       "stage": "t80_precision",
-      "started": "2026-11-13T20:36:32.019510",
+      "started": "2026-11-13T20:36:32.01951",
       "last_observed": "2026-11-13T22:18:25.100876+08:00",
       "bundle": "/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4",
       "manifest_sha256": "181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b",
@@ -3797,7 +3797,7 @@
       "exec_session": null,
       "last_transfer_line_observed": 71,
       "total_transfer_lines": 141,
-      "server_preflight_at": "2026-11-13T19:07:08.365340+08:00",
+      "server_preflight_at": "2026-11-13T19:07:08.36534+08:00",
       "server_hardware_executed": false,
       "prior_incomplete_bundle_preserved": "light-light126-t64-v4-65d2507-delta01"
     },
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "S0_synth03_accelerator_running",
+    "current_stage": "S0_accelerator_incremental_hold_mapping",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -4257,8 +4257,8 @@
       "pid": 64154,
       "status": "failed_before_characterization",
       "reason": "Installed dc_shell -version returns 1 with valid version",
-      "started": "2026-11-15T19:09:16.856580",
-      "finished": "2026-11-15T19:09:20.175020",
+      "started": "2026-11-15T19:09:16.85658",
+      "finished": "2026-11-15T19:09:20.17502",
       "lock_released": true
     },
     "latest_changed_tool_tests_passed": 13,
@@ -4295,7 +4295,7 @@
     },
     "synth_attempt03": {
       "pid": 75787,
-      "observed_at": "2026-11-15T20:11:09+08:00",
+      "observed_at": "2026-11-15T20:46:54+08:00",
       "status": "running",
       "error": null,
       "source_commit": "05c923fe178230f0550d79dfd4b4ae3fcfc0c79f",
@@ -4310,9 +4310,9 @@
       "foreground_readonly_watcher_pid": 91575,
       "dc_pid": 76822,
       "dc_cpu_percent": 99.7,
-      "dc_elapsed_seconds": 2013,
-      "dc_cpu_seconds": 2008,
-      "latest_log": "OPT-1206 constant-register removal in accelerator mapping"
+      "dc_elapsed_seconds": 4158,
+      "dc_cpu_seconds": 4145,
+      "latest_log": "Beginning Pass 1 Mapping (Incremental)"
     },
     "next_tools_transfer": {
       "session_id": 39807,
@@ -4326,6 +4326,10 @@
     },
     "s0_report_and_finish_tests_passed": 12,
     "s0_report_and_finish_deployed": true,
-    "s0_finish_started": false
+    "s0_finish_started": false,
+    "finish_launcher_prepared": "handoff/team/evidence/S0_FINISH_LAUNCH_20261115.py",
+    "finish_launcher_deployed": false,
+    "s0_review_profile_tests_passed": 26,
+    "s0_review_profile_deployed": false
   }
 }
