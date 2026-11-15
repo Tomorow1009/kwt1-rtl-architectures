@@ -4588,15 +4588,51 @@
       "source_commit": "a7e7e49",
       "session": "s0_finish02",
       "started": "2026-11-15T23:02:32.412418",
-      "observed_at": "2026-11-15T23:03:35+08:00",
-      "status": "running",
+      "observed_at": "2026-11-15T23:05:35+08:00",
+      "status": "failed",
       "stage": "gate",
       "completed": 1,
       "child_pid": 168925,
-      "foreground_readonly_watcher": 169108,
+      "foreground_readonly_watcher": null,
+      "error": "Current synthesis SRAM configuration is not traced: current copied include is in frozen synthesis_inputs, legacy verifier read source_inputs only",
+      "synthesis_not_repeated": true,
+      "stage_accepted": false,
+      "gate_probe_completed": true,
+      "vcs_started": false
+    },
+    "s0_memoryfix_transfer": {
+      "source_commit": "66b9496",
+      "manifest_sha256": "2afb9a79e600e4bd1a0493699b50d463f7df8ebef666d99290cde2efbf0426b4",
+      "exec_session": 96034,
+      "status": "server_manifest_verified",
+      "files": 853,
+      "modules": 137,
+      "provenance_tests_passed": 5,
+      "damaged_input_cases_rejected": 6,
+      "exec_session_completed": true
+    },
+    "s0_finish_launcher04": {
+      "source_commit": "1881cd3",
+      "sha256": "3b20c94cc969816b8f171808b2c53a62fb9db9a6e2ae2e905fae6b362732a649",
+      "status": "launched",
+      "session": "s0_finish03",
+      "transfer_session": 10794,
+      "transfer_session_completed": true
+    },
+    "s0_finish_attempt03": {
+      "pid": 172535,
+      "source_commit": "66b9496",
+      "session": "s0_finish03",
+      "started": "2026-11-15T23:11:48.772018",
+      "observed_at": "2026-11-15T23:12:55+08:00",
+      "status": "running",
+      "stage": "gate",
+      "completed": 1,
       "error": null,
       "synthesis_not_repeated": true,
-      "stage_accepted": false
+      "stage_accepted": false,
+      "child_pid": 173089,
+      "foreground_readonly_watcher": 173225
     }
   }
 }

@@ -1,5 +1,9 @@
 # S0最终链接完成，验证入口修复 — 2026-11-15 22:58
 
+**23:12:55实查：66b9496/s0_finish03父172535运行，structure已完成、completed=1，当前gate端口DC子173089，无错误。开始23:11:48.772018。前台只读watcher173225；全部96034/10794/4606输入已结束，无半截输入。下一次命令前只退出该watcher，不碰后台队列或锁。综合仍是a5f138e/synth08，不重跑；T80桌面及旧八路不动。**
+
+**23:10当前唯一输入exec10794：13行`local_runs/s0_finish04_launch_1881cd3/transfer.ps1`，启动器SHA3b20c94cc969816b8f171808b2c53a62fb9db9a6e2ae2e905fae6b362732a649。66b9496包853文件和manifest2afb9a79e600e4bd1a0493699b50d463f7df8ebef666d99290cde2efbf0426b4已服务器核验，96034输入结束。新目标66b9496/runs/s0_finish03，仍引用a5f138e/synth08已完成网表；尚未观察新PID。1881cd3已push。先收完输入，禁止并发VNC/重跑；下一个只读watch命令在local_runs/s0_finish03_watch_command.txt。最新report请求为S0_BUILD_REPORT_REQUEST04_20261115.py，未部署执行。**
+
 **23:07新失败：finish02父168421在gate的SRAM配置来源核对停止，VCS尚未启动。门级DC端口探针子168925已正常完成27秒；不是数值失败。重链接当前header已被不可变`synthesis_inputs.json`记录，但旧gate仅查`source_inputs.json`。本地仅对明确S0 profile同时核对两份清单哈希、全部历史header、当前header和实际模型；冲突/缺失/任一字节变化仍拒绝，不修改完成综合的任何文件。3项新测试（含6种损坏情形）及2项来源路由测试通过。当前watcher169108已自然结束，Bash空闲、无EDA；全部旧失败保留。下一新工具包/finish03，不重跑synth08。**
 
 **23:03:35实际进展：新a7e7e49/s0_finish02父168421已运行，structure完成，completed=1；当前gate/DC端口探针子168925（common_shell_ex，96%CPU），error=None。队列开始23:02:32.412418；明确使用a5f138e/synth08 summary e77fac98d9ab9032e431e8bcfe7d0e3d42f33d8b28222d37ceb48777c9bd4916。所有29202/56347/87739输入已结束。VNC当前为前台只读watcher169108，不能向它盲输shell；仅需命令时Ctrl+C退出watcher，不碰后台队列。转发91027保持，T80桌面/旧八路不动。**
