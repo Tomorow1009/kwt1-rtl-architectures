@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "C32-A own ASIC240/FLOAT20/synthesis/gate14 complete; finish03 collecting SAIF12",
+    "current_stage": "C32-A own ASIC240/FLOAT20/synthesis/gate14/SAIF12 and diagnostics complete; finish03 PT12 running",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T01:30:00+08:00",
+      "last_observed_at": "2026-11-17T01:54:22+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7231,12 +7231,17 @@
       "finish02_pid": 304144,
       "finish02_exited": true,
       "finish02_state_sha256": "c502d28a5d4aee1689abe597b40465f42a2d98c17fb9468b28b3ecd7423eccec",
-      "finish03_status": "running_saif",
+      "finish03_status": "running_power_layer_03",
       "finish03_pid": 308692,
       "finish03_started_at": "2026-11-17T00:31:05.429536",
       "finish03_completed": [
         "structure",
-        "gate"
+        "gate",
+        "saif",
+        "timing_audit",
+        "drc_audit",
+        "power_layer_01",
+        "power_layer_02"
       ],
       "current_queue": "c32_finish03",
       "status_readonly_version": 4,
@@ -7251,24 +7256,31 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 10278,
+      "current_child_pid": null,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
       },
-      "current_activity_case": "layer_09",
+      "current_activity_case": null,
       "gate14_passed": true,
       "gate14_evidence": "handoff/team/evidence/C32_GATE14_20261117.json",
       "all14_gate_cycles_equal_ASIC": true,
-      "saif_completed_layers": 8,
+      "saif_completed_layers": 12,
       "saif_l01_bytes": 63448403,
       "saif_l01_cpu_seconds": 298.78,
-      "current_child_state": "running",
+      "current_child_state": "Power child identity to be read from current ledger",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
-      "saif_completed_bytes": 507634642,
+      "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
-      "evidence_index": "workspaces/arch03/C32_EVIDENCE_INDEX_20261117.md"
+      "evidence_index": "workspaces/arch03/C32_EVIDENCE_INDEX_20261117.md",
+      "saif12_passed": true,
+      "saif12_evidence": "handoff/team/evidence/C32_SAIF12_20261117.json",
+      "saif_summary_sha256": "7a9cdba2de2efcbe131b08071076202eaf27e86731a468e0e3c8661466e6353f",
+      "timing_drc_diagnostics_evidence": "handoff/team/evidence/C32_TIMING_DRC_DIAGNOSTICS_20261117.json",
+      "structure_review_evidence": "handoff/team/evidence/C32_STRUCTURE_REVIEW_20261117.json",
+      "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_20261117.json",
+      "power_layers_completed": 2
     }
   }
 }

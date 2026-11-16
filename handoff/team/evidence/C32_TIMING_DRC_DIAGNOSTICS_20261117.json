@@ -1,0 +1,25 @@
+{
+  "schema": "c32-own-timing-drc-diagnostics-observation-v1",
+  "observed_at": "2026-11-17T01:52:43.620199+08:00",
+  "queue": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6/runs/c32_finish03",
+  "timing_summary_sha256": "968a02165572b84192c141dfd492062b7e975062150c7da216341fa3b4390543",
+  "drc_summary_sha256": "e345c6a1326fc33e3a00f313efdd32d06a82af602e4740ee8877d03897e44034",
+  "both_hashes_asserted_against_original_queue_and_files": true,
+  "constraint_report_clear": true,
+  "constraint_violation_records": 0,
+  "driver_query_complete": true,
+  "frozen_synthesis_interfaces_crosschecked": true,
+  "high_fanout_threshold": 1000,
+  "high_fanout_count": 3,
+  "high_fanout_nets": [
+    "u_e203_subsys_top/core_csr_clk",
+    "u_e203_subsys_top/hfclk",
+    "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+  ],
+  "initial_manual_timing_hash_transcription_rejected": true,
+  "actual_hash_reconstructed_from_decimal_bytes_and_verified": true,
+  "netlist_or_constraints_modified": false,
+  "strict_timing_verified": false,
+  "physical_signoff": false,
+  "note": "Own mapped diagnostics complete. Stable-task timing conclusion follows the full power clock/exception and model review. These read-only diagnostics do not waive high-fanout assumptions."
+}
