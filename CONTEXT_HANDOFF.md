@@ -1,5 +1,16 @@
 # 当前交接：C80已冻结，开始C32-A
 
+## 21:38 归档21全量通过，精确恢复22已启动
+
+只读归档完成并退出：49200文件2639224198B，gzip508256874B，完整回读及源再核对通过；回执 ROOT/r4_generated_archive21/receipt.json SHA 1b8ae10a78a0fb8f094ff34d55fc0e245bb4ed4b7c3fd17418cbb813b3e5e6ef。本地证据 C32_R4_ARCHIVE21_20261116.json。原R4摘要/结果/日志/源码/活动均未改。
+
+恢复22于21:38通过可见终端显式启动，PID202397，ROOT/r4_recovery22.py SHA fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c；日志与启动回执为 r4_recovery22.log、r4_recovery22_launch.json。它再次核验归档、元数据与选中文件后，仅删除归档中的生成输入副本；保持/tmp归档，成功后写新持久备份 PROJECT/backups/r4-generated-inputs-20261116_2135 并核验，再调用既有initial02。此刻尚未观察删除完成或C32启动。
+
+下一步先读 r4_generated_recovery22/state.json、persistent_copy.json、followup.json 和 c32_initial02_launch.json；不可重跑22，不重复旧initial01/19/20。GUI传输53526/81314/17056均已退出，第一终端空闲。最新已push4b02978；本段和新归档证据待同步。所有T80/旧八路/P80/C80及已有备份保持保护。
+
+本地两次通过PowerShell管道插入中文记录遇到stdin编码错误，未写文件；改用UTF-8文件读取插入，硬件与远端运行不受影响。
+
+
 **21:34最新：R4归档21初次因历史哈希抄录失败，零写入；与原摘要绑定核对后新只读归档PID199005运行。恢复22已准备，GUI会话53526仅传工具，尚未删除或启动C32。先读C32_START顶部；T80及旧八路保护不变。**
 
 **21:27最新：C32服务器尚未启动硬件；只读R4输入归档21已本地测试并提交e23bed5，GUI会话72180正传工具，未执行删除。先读C32_START顶部，不重复19/20或initial01。T80与旧八路不动。**

@@ -1,0 +1,24 @@
+{
+  "schema": "c32-r4-generated-inputs-staged-archive-observation-v1",
+  "observed": "2026-11-16T21:37:09+08:00",
+  "status": "verified_staged_archive_source_preserved",
+  "root": "/tmp/s4_21usr_c32_20261116_2010/r4_generated_archive21",
+  "receipt_sha256": "1b8ae10a78a0fb8f094ff34d55fc0e245bb4ed4b7c3fd17418cbb813b3e5e6ef",
+  "members_verified": 49200,
+  "source_bytes": 2639224198,
+  "archive_bytes": 508256874,
+  "elapsed_archive_seconds": 187.3251307499595,
+  "summary_sha256": "3bb0290586f7b92e5a392cb8f7e735ec483b8b302cc285a39fff2e63ebc01bc2",
+  "actual_identity_sha256": "27060dfcec0e8fcfadd925d2899ecabcad3c05d05d9048e631616811b540adc9",
+  "source_script_sha256": "2a28e61f85792f4f0d2fc2655950feaeb34a3a9e728ca108042f982dace233c4",
+  "source_deleted_at_archive": false,
+  "scope": "Only old R4 per-task generated .hex/.bin/.verilog inputs; actual output CSV, logs, receipts, source, netlist, activity untouched.",
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "previous_attempt": {
+    "pid": 197816,
+    "status": "rejected_identity_transcription_before_output_creation",
+    "history_preserved": true
+  },
+  "persistent_copy_completed_at_this_observation": false
+}

@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T21:34:18.187618+08:00",
+      "updated_at": "2026-11-16T21:40:40.342018+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Wait for read-only archive21 complete readback; only then bind exact receipt to recovery22. No C32 initial02 queue exists.",
+      "next": "Observe recovery22 PID202397 through preserved-archive copy and fresh initial02 launch. Never restart removal.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7101,13 +7101,18 @@
         "server_started": true,
         "source_deleted": false,
         "worker_pid": 199005,
-        "previous_worker_failed_identity_transcription": true
+        "previous_worker_failed_identity_transcription": true,
+        "completed": true,
+        "worker_exited": true,
+        "evidence": "handoff/team/evidence/C32_R4_ARCHIVE21_20261116.json"
       },
       "recovery22": {
         "prepared": true,
-        "server_executed": false,
+        "server_executed": true,
         "source_sha256": "fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c",
-        "gui_session": 53526
+        "gui_session": null,
+        "worker_pid": 202397,
+        "completed": false
       }
     }
   }
