@@ -1,0 +1,70 @@
+# C80 综合与后续队列接续检查点
+
+更新：2026-11-16 14:26，北京时间。进程状态最后现场观察为14:24:48，不视为恢复时实时状态。压缩后先读AGENTS、本文件、根交接、STATUS及有效计划。
+
+## 当前范围
+
+有效计划：`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`，原用户文件SHA `1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39`。
+
+S0、P80已完整冻结；当前C80，之后C32-A/可选B及G32。最终32PE、150MHz/6.666666ns、SS/0.99V/125°C、保守面积≤1.00mm²。原32位ICB及四段源读→共享写ACK→原总线实际读回→完整输出写ACK/排空保持；数值X14/W12/acc32/total33/SHIFT10不变。每阶段正式批量仅原前20条×12层，不能提前进入下一硬件阶段。
+
+**服务器桌面T80_Delivery_20261113、任何旧八路数据、P80原包及备份均不改、不移、不删。** 本上下文未删除服务器文件、未修改受测RTL/固件、未重启综合，未开始C32/G32。
+
+本地 `E:/fpga_race-two/kwt1-c32-g32-20261115`，个人分支`codex/light-light126/t80-pipeline-c32-g32-20261115`。目前已push **bf41e5a6ce466df3c96f5f528fac846fef81c7ec**；随后本检查点及RUNBOOK更新为文档变更。历史未跟踪`handoff/team/evidence/S0_SYNTH05_FINISH_LAUNCH_20261115.py`不添加、不运行。
+
+## 活跃作业：只准观察，不重复启动
+
+私有根 `/tmp/s4_21usr_c80_20261116_1245`；正式包其下`light-light126-c80-74f3ae7`，1,008文件。
+
+- 受测提交 `74f3ae7bb479d5fdd7917702c4a2c0671eacb61b`。
+- 包manifest SHA `d0f18e4a6aa8a928df37d4347f1a8853c448e823f0685a83c5b710732e5e7a59`。
+- 原队列 `runs/c80_initial02/state.json`；父 **279630**，13:21:31启动；根日志`c80_initial02.log`。
+- 原request SHA **`49db1e2183bf38924af74a3223a088c811e1ccb94a2f25c3d98cc82ab922a9be`**。旧65位、以9bae结尾的转录错误值禁止使用。
+- 14:24:48：原队列`running/synth`，加速器子 **299424**，13:37:42启动，已运行2826秒，CPU99.7%、RSS约24.3GiB；日志持续推进。未取得最终综合摘要。
+- 综合目录 `runs/c80_initial02_synth/c80_synth`，最新块`blocks/accelerator`。它之后还有CPU/SoC块及最终链接。P80历史同类加速器4470.30秒、CPU748.90秒、最终链接133.86秒，只作排期参考。
+- 原共享锁 `.arch02_team_lock`位于`/storage2/2026contest/server4/s4_21usr/Desktop/IC`。由原父持有，不清锁、不杀进程、不改运行包。
+
+**后续控制器已启动：不要再手动启动precision/finish。**
+
+- 父 **314678**，14:12:34.038526启动；14:24:48为`waiting_original_initial02`、error=None、CPU约0.2%。没有并发EDA。
+- 控制`私有根/c80_followup01.json`；日志`c80_followup01.log`；回执`c80_followup01_launch.json`。
+- 脚本`ops-followup-9eda887/C80_FINAL_FOLLOWUP01_20261116.py`；源码9eda8879820eba1b110a4d13254e05a868aef049。
+- 五文件payload SHA `b13fd8e373d302437d3acffd48dfe60dd4381a76ccc1579ec6e6f6cd4235d1dd`。
+- 导入回执SHA `508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2`，113模块（108原包＋5独立工具）实际逐项核对。
+- 后续只等原队列自然终止并退出；若正常全部完成，直接继续。若前五步完成、仅最后精度报`No module named 'numpy'`，验证原所有子进程已退出，再新建`runs/c80_precision03`只恢复精度。
+- 精度绑定已有NumPy1.19.5收据SHA `c1fe14065d6919ff337f2cbf53551f94941acc35d04d3cadabca311fe742eacd`，只在后续进程设置路径/线程，不改全局环境、原状态或受测包。
+- 随后新`runs/c80_finish01`执行原包`c80_finish.py`：结构→门级14→SAIF12→时序→DRC→PT12。总17阶段，独立原团队锁及账本。其他失败停止，不自动认可、归档或进入C32。
+
+## 已经取得的C80证据
+
+1. 自身ASIC/E203十四例354,816输出逐坐标及total/result/saturated通过，真实IRQ/WFI、原四段传输。
+   - `runs/c80_initial02_soc/c80_soc/summary.json` SHA `4c3668ebe351804b43edd8cf1ec4a56ab4004ed2c8724cc73a8afcc4929b7cb1`。
+   - 固定12周期：73186、71625、70620、70696、69233、67609、66776、66966、67042、69450、73829、80206。
+   - 总847238，平均70603.16666666667；150MHz折算2124.550598533116task/s，同数据P80总930544，吞吐+9.8326562%。非芯片实测。
+2. 十阶段恢复/无复位ABA通过，summary SHA `a2f821f4971f7624cd7a5990062a90da3a2284183a4b1e96ec2f85035c698b01`。
+3. 真实CPU竞争通过，summary SHA `497b3b05bf4db090886e7f0e6b86a05f102dc2fe1d9067bc5af7171584ba9017`；竞争L01 92654周期，不纳入固定12均值。
+4. 14:15从上述原ASIC回执实际核对固定12四段ACK：源读77370、共享写77370、共享读77370、输出写152064，总384174笔；逐层符合编码长度，没有省略中间共享写或读回。
+   - `handoff/team/evidence/C80_FIXED12_BUS_OBSERVATION_20261116.json`。
+   - 平均输入29756→25790B，减13.3284%；完整周期减8.9524%。新总线分析不推断面积或功耗。
+
+此前本地48解码场景、全14、raw、两拍SRAM/预取0/1 ABA、10000随机＋32定向阵列块均通过，见旧C80_LOCAL检查点。复用仲裁/运输组件三个深度测试及工具检查见C80_SERVER检查点，不重复已通过项。
+
+**尚未完成：**C80新最终网表/面积/时序、自己的240、同批精度、门级14、SAIF/PT12、独立模型/未知活动审核、持久归档和冻结。没有C80功耗数值。不能把P80的PPA或240转移到C80。
+
+## 本上下文实现、失败及保留路径
+
+- 独立`c80_precision_recovery.py`严格验证缺NumPy这一失败、五个原硬件PASS、父子退出、原文件哈希；仅新精度阶段。归档器显式连接原失败队列和新精度恢复证据，原失败保持。八项正负身份测试通过，Python3.6语法通过。
+- 0360ee8三个审核/归档工具先部署到`ops-review-0360ee8`，111依赖通过，未运行归档；其目录保留。后续使用新9eda887五文件工具，包含更新归档器及精度恢复。
+- bf239c8第一次26段部署因错误65字符request SHA在目录创建前被拒绝；服务器已断言`NO_OPS_WRITTEN=True`。原运行未受影响。此本地目录及launch01准备保留，不再执行。
+- 修复9eda887改为精确64字符值，增加长度检查；19段新传输及3段启动全部成功。全量压缩传输本地回读一致；一次本地回读检查因exec变量同名覆盖Path而TypeError，改局部变量后字节逐项一致，不是RTL失败。
+- GitHub普通TLS和OpenSSL尝试曾连续失败；只读connector确认远端仍9eda887。后来`git -c http.version=HTTP/1.1 push`成功推送bf41e5a，证书验证始终开启，无全局配置更改。
+
+## GUI与接续
+
+- 仍通过开发板`F:/linux_fpga_try/ac820.ps1`的可见VNC，不另开服务器隐藏通道。恢复先读computer-use技能及`F:/linux_fpga_try/AGENTS.md`，重新`windows`核对；本轮窗口18874435、workspace3。workspace4不操作，FileZilla没运行。
+- 第一终端标签Bash空闲；第二标签有只读观察器 **317329**，14:18:01开始，最多30×20秒，约14:28自然结束。观察器只读原两份状态及子账本，发现最终摘要就显示面积/metrics后退出。**未确认前不向第二标签输入，不随意Ctrl-C。**
+- 所有本地输入会话均结束：24392失败部署、74076成功部署、15661启动、61489观察器输入、72036快照输入均不再轮询/重启。旧NUMPY预检等输入也已结束。
+- 下一步先读原initial02和followup01实际状态；最终综合出现时立即报告同一最终网表面积/宏/setup/hold，数值不合格则当前阶段修复。原队列/后续入口已自动串行，不再自行派同一批。
+- 全部报告就绪后，新独立C80导出/未知活动与连接审核；使用9eda887归档器（若精度恢复发生，必须显式提供precision_recovery身份），只复制并全量回读，源保留。C80冻结后才进入C32。
+
+P80冻结标签、备份和输入FLOAT/DATA/S0地址在`CONTEXT_CHECKPOINT_20261116_C80_LOCAL.md`及`C80_SERVER.md`；不要重新跑P80或启动旧T64/G64。
