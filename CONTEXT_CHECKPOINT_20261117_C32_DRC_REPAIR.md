@@ -1,3 +1,19 @@
+# 05:08最新执行检查点：新网表门级14已通过，SAIF第1层正在执行
+
+本节覆盖下方04:55的运行状态。有效计划、原始功能/精度身份、修复03映射和保护范围均不变。
+
+- 2026-11-17 05:08:07.795199：唯一队列父101802，runs/c32_finish_repair04状态running/saif，已完成structure、gate。SAIF第1层子112646自05:05:28.203511运行；尚无完成层，不应标活动12或功耗通过。新网表门级14完整输出354816通过，全部14周期与原同RTL ASIC14机器比较一致，无SDF、门级内部total不可观测。
+- 门级summary SHA8eaea9b1318f8f8031c3d4f160283140842896b68cb73bbfd93f719b81ed09a9已机器断言。新证据handoff/team/evidence/C32_GATE14_REPAIR03_20261117.json，原C32_GATE14_20261117.json属于旧网表，保持不动。
+- 当前共享盘1048576B、/tmp72495587328B。原队列已持原锁，owner只初始写一次，后续ledger都在/tmp；不需为每层重抢共享锁。清理34已终态，不能重复。归档候选只剩已归档旧B0生成NPZ536份81364074B，后续若需要必须先核对全链journal与当前实际存在。
+- 一次性报告等待器父110729于05:02:53.930401启动，ROOT/c32_finish04_export_wait.py；等待101802自然成功退出再调用ROOT/c32_repaired04_export_review.py。失败不重试；当前未启动报告/unknown查询，不推进新硬件阶段。payload SHA4005586b999e322779099eddf53d9de196fd1362dd992429748a2d1e45832441，waiter SHA6afee3001cde7f6e4ffe71ff01737173f014e6fd9c44a39bf4d3f78dcf65e777，exporter SHAa2aaef702e6c241f1bc12da41905c0e4434d5a8c803c6299958f5fd6b28bcebc。部署逐文件哈希核验完成，不重复部署/启动。
+- 新报告预定控制ROOT/c32_repaired_export_review03，输出新包runs/c32_report_repair03/c32_report；连接查询已自带原锁空间等待，不能恢复旧export03。新的归档合同和copy-only入口已本地12测试/Py3.6检查通过，尚未部署归档、更未完成持久备份。
+- 只读精简查看器已部署ROOT/c32_repair04_status.py，SHA6bf482079317c2363ecbd77e89ff976d56a28dc2e652aa6725d5c5c732388992。VNC执行`python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_repair04_status.py`即可看queue、gate/SAIF数量及唯一子进程。不打印大state字典或重复WAIT日志。
+- Git最新已推1aad475；后续0cead09和f2ee84e及本次检查点待同步。当前无未结束GUI输入会话，窗口18874435/workspace3，恢复重查windows。仅历史S0_SYNTH05_FINISH_LAUNCH_20261115.py未跟踪，勿提交/执行。
+
+接下来继续同一队列的SAIF12、严格时序/DRC及PT12，再核对原报告等待器及新模型snapshot。完成审核和持久归档后才冻结C32-A，再按计划评估C32-B/G32。不能借用旧网表48.97mW功耗。桌面T80、旧8全部、S0/P80/C80及备份保持不动。压缩后重新读计划与本检查点。
+
+---
+
 # C32-A修复已通过约束，新网表门级正在执行（11月17日04:55交接）
 
 ## 有效要求

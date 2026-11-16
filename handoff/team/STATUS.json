@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T04:52:57.187365+08:00",
+      "last_observed_at": "2026-11-17T05:08:07.795199+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7265,14 +7265,14 @@
         "removed_bytes": 165281376,
         "followup_finish03_running": true
       },
-      "current_gate_case": "layer_02",
-      "current_child_pid": 106307,
+      "current_gate_case": null,
+      "current_child_pid": 112646,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
       },
-      "current_activity_case": null,
+      "current_activity_case": "layer_01",
       "gate14_passed": true,
       "gate14_evidence": "handoff/team/evidence/C32_GATE14_20261117.json",
       "all14_gate_cycles_equal_ASIC": true,
@@ -7464,11 +7464,21 @@
       "repair_finish04": {
         "pid": 101802,
         "status": "running",
-        "stage": "gate",
+        "stage": "saif",
         "started": "2026-11-17T04:44:20.534853",
         "driver_sha256": "69d8a2cfa69b692953ce1dbddea77f491f85d288cd5a077ccaa5e4d0bc3ceeac",
         "new_gate_power_required": true,
-        "original_lock_unchanged": true
+        "original_lock_unchanged": true,
+        "completed": [
+          "structure",
+          "gate"
+        ],
+        "gate14_passed": true,
+        "checked_gate_outputs": 354816,
+        "gate_cycles_match_own_ASIC": true,
+        "gate_summary_sha256": "8eaea9b1318f8f8031c3d4f160283140842896b68cb73bbfd93f719b81ed09a9",
+        "saif_completed_layers": 0,
+        "new_power_completed_layers": 0
       },
       "recovery33": {
         "pid": 97746,
@@ -7494,7 +7504,19 @@
         "state_hash_machine_asserted": false
       },
       "repaired_archive_tests_passed": 12,
-      "lock_storage_wait_tests_passed": 3
+      "lock_storage_wait_tests_passed": 3,
+      "repair_export_wait": {
+        "pid": 110729,
+        "started": "2026-11-17T05:02:53.930401",
+        "status": "waiting_finish04",
+        "payload_sha256": "4005586b999e322779099eddf53d9de196fd1362dd992429748a2d1e45832441",
+        "waiter_sha256": "6afee3001cde7f6e4ffe71ff01737173f014e6fd9c44a39bf4d3f78dcf65e777",
+        "exporter_sha256": "a2aaef702e6c241f1bc12da41905c0e4434d5a8c803c6299958f5fd6b28bcebc"
+      },
+      "repair_status_reader": {
+        "path": "/tmp/s4_21usr_c32_20261116_2010/c32_repair04_status.py",
+        "sha256": "6bf482079317c2363ecbd77e89ff976d56a28dc2e652aa6725d5c5c732388992"
+      }
     }
   }
 }
