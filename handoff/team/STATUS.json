@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 depth2 actual recovery/contention/first20; fresh synthesis repair ready",
+    "current_stage": "P80 final report and activity inventory complete; own mapped connection review running; not frozen",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -6669,6 +6669,62 @@
       "stage_accepted": false,
       "tasks": 240,
       "version": "0x00050000"
+    },
+    "latest_observation": {
+      "at": "2026-11-16T11:37:13.879623+08:00",
+      "queue": "reports_ready_review_required",
+      "export": "querying_own_mapped_connections",
+      "exporter_pid": 96154,
+      "queue_parent_exited": true,
+      "report_sha256": "a5821699ef4551bfdfb485c7c3b9bae3e07f0fb0b27ca984ed58f3d0a6ace5ce",
+      "stage_accepted": false,
+      "p80_frozen": false,
+      "c80_hardware_started": false,
+      "current_terminal": "first tab watcher178083; second tab idle; all input sessions completed",
+      "protected_T80_modified": false,
+      "old8_modified": false,
+      "new_server_deletion": false
+    },
+    "p80_report_model_observation": {
+      "schema": "p80-displayed-export-model-observation-v1",
+      "observed_at": "2026-11-16T11:27:43+08:00",
+      "report_path": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_report05/p80_report/report.json",
+      "report_sha256": "a5821699ef4551bfdfb485c7c3b9bae3e07f0fb0b27ca984ed58f3d0a6ace5ce",
+      "firmware_manifest_sha256": "29441cd52dacccde21f84a6cb165f52233eb51ed9e1a49f89508a50458a31069",
+      "report_and_firmware_transcription_server_asserted": "2026-11-16T11:32:23.909459+08:00",
+      "fixed12_precision_status": "fixed12_fresh_quantization_and_error_rechecked",
+      "fixed12_maximum_task_nrmse_percent": 0.1425636423408142,
+      "all12_activity_source_tables_identical": true,
+      "exact_mapping": 374206,
+      "isolated_default": 1273,
+      "total": 375479,
+      "unannotated": 0,
+      "toggle_and_static_probability_tables_agree": true,
+      "all12_sram_inventory_contract": "N1_60_X_plus_32_W_plus_128_reused_macros",
+      "all12_power_settings_identical": true,
+      "power_analysis_mode": "averaged",
+      "power_include_initial_x_transitions": "false",
+      "power_x_transition_derate_factor": "0.5",
+      "base_units": {
+        "time_s": "1e-9",
+        "voltage_v": "1",
+        "capacitance_f": "1e-12"
+      },
+      "independent_unknown_connections_review_complete": false,
+      "stage_accepted": false,
+      "source_modified": false,
+      "protected_T80_modified": false,
+      "old8_modified": false
+    },
+    "c80_fixed14_software_preparation": {
+      "evidence": "handoff/team/evidence/C80_FIXED14_SOFTWARE_PREPARATION_20261116.json",
+      "tasks": 14,
+      "reference_outputs": 354816,
+      "fixed12_mean_encoded_bytes": 25790,
+      "same_P80_fixed_source_join": true,
+      "tests_passed": 3,
+      "hardware_started": false,
+      "stage_accepted": false
     }
   }
 }

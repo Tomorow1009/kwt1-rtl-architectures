@@ -1,6 +1,20 @@
 # P80最终网表验收继续入口
 
-更新：2026-11-16 11:09（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+更新：2026-11-16 11:38（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+
+## 11:38最新：报告、12层清单完成，原连接核对中
+
+11:37:13.879623原watcher显示export96154进入`querying_own_mapped_connections`、无错误。原18阶段仍为`reports_ready_review_required`，父95253已经退出，不重启。原报告子205116已结束；后续清单子225367在11:29:03实读第8层、99.7%CPU，随后完整清单完成，原流程自然启动同网表连接查询。后续别名、模型快照及独立结论/归档待完成，P80未冻结。
+
+报告`1023646/runs/p80_report05/p80_report/report.json` SHA **a5821699ef4551bfdfb485c7c3b9bae3e07f0fb0b27ca984ed58f3d0a6ace5ce**；固件SHA **29441cd52dacccde21f84a6cb165f52233eb51ed9e1a49f89508a50458a31069**。11:32:23服务器断言与本地转录相同。固定12新浮点最大NRMSE0.1425636423408142%；12层活动源表完全一致，374206直接映射/1273独立孤立默认/375479总计/0未注释；SRAM合同为60X＋32W＋128复用。PT averaged、X系数0.5、排除初始X，单位ns/V/pF；详见P80_REPORT_MODEL_OBSERVATION_20261116.json。这些事实尚不替代独立连接及功耗结论。
+
+**当前第一标签watcher178083前台，第二Bash空闲，全部输入会话结束。**watcher约11:43自然退出，只是观察器；不要由此重启EDA或export。VNC18874435/workspace3；FileZilla未打开。最后确认push293d4a9，后续文件待同步。只复制归档启动器与transfer文本仍未部署或运行，等原export完成退出后先刷新空间。无新增服务器删除，cleanup13仍不需要；T80桌面、旧八路及源包未改。
+
+C80仍仅软件准备：新增`c80_data.py`、`test_c80_data.py`及`C80_CODEC_FORMAT_20261116.md`；压缩/raw、数值参考、来源及新旧格式拒绝三组测试通过，Python3.6语法通过。本地14例源为旧N1包0f62e412的validated_data，manifest SHA 1c55d5515de4258c77537e52387809ea04a33a334a4fefee8e2600ec2b7209e0；自己重新计算total/result/saturated并编码到`local_runs/c80_fixed14_software_20261116_1135`，354816参考输出零差异，41.859秒，33556已结束。新manifest SHA **7ca8bc59ac04fa41fef61576da430c6a2150cabca54250fb7fa812719044cf07**。固定12编码平均25790B，不混用first20的25075.65B。
+
+11:36:23.197221原服务器P80包142fae2的70个实际源文件逐项匹配manifest，路径＋SHA链**75b233b5fefce53feeac39fb2f61af70bbacfe96c05641df63e1b9af859790bd**与本地适配输入相同。原软件生成manifest中的join=false为较早快照，另存C80_FIXED14_SOFTWARE_PREPARATION_20261116.json记录成功连接，不改旧回执。没有C80 RTL、固件、服务器硬件验证或阶段PASS。
+
+本次恢复只读STATUS时PowerShell默认ConvertFrom-Json因C/c键大小写冲突拒绝，已用-AsHashtable/原Python读取；Windows rg通配路径及一个不存在p80_data.py读取失败均仅本地只读，不影响文件或运行。所有修改通过独立新增工具/文档完成，旧运行包未动。
 
 ## 11:09最新：P80功耗12全部生成，原导出运行
 
