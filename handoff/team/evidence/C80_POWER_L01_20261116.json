@@ -21,5 +21,24 @@
   "twelve_layer_aggregate": false,
   "system_power_verified": false,
   "stage_accepted": false,
-  "note": "One completed layer only. Do not compare this layer with another configuration's twelve-layer mean or use it as the final C80 weighted mean. Unknown activity/model review remains separate."
+  "note": "One completed layer only. Do not compare this layer with another configuration's twelve-layer mean or use it as the final C80 weighted mean. Unknown activity/model review remains separate.",
+  "first_layer_model_counts": {
+    "asserted_at": "2026-11-16T18:11:29+08:00",
+    "toggle_and_static_probability": {
+      "exact_mapping": 374565,
+      "default": 1336,
+      "not_annotated": 0,
+      "total": 375901
+    },
+    "independently_classified_isolated_defaults": 1336,
+    "sram_counts": {
+      "itcm": 32,
+      "dtcm": 32,
+      "shared": 64,
+      "accelerator": 92
+    },
+    "power_analysis_mode": "averaged",
+    "power_x_transition_derate_factor": "0.5",
+    "complete_twelve_layer_unknown_net_review": false
+  }
 }

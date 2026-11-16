@@ -1,0 +1,41 @@
+{
+  "schema": "c80-own-structure-review-observation-v1",
+  "observed_at": "2026-11-16T18:22:34+08:00",
+  "run": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_finish02_structure/c80_structure",
+  "summary_sha256": "4262e60fc1ff882bf8d08641e8100f9056df8b8c43728f3ea0d23500e234eeb8",
+  "summary_matches_original_queue": true,
+  "summary_and_counts_asserted_on_server": true,
+  "disposition_counts": {"declaration_only": 11124},
+  "warning_counts": {
+    "LINT-1": 4,
+    "LINT-2": 259,
+    "LINT-8": 259,
+    "LINT-28": 10865,
+    "LINT-32": 10771,
+    "LINT-33": 1183
+  },
+  "no_load_drivers": {
+    "count": 259,
+    "unique_driver_ports": 259,
+    "matches_declaration_only_unloaded_ports": true,
+    "extra": [],
+    "missing": []
+  },
+  "numeric_instances": {"pe": 80, "array": 1, "requantize": 80},
+  "all_remaining_warning_classes": [
+    "LINT-32: a submodule pin is connected to logic 1 or logic 0",
+    "LINT-33: the same net is connected to more than one submodule pin",
+    "LINT-1: four original-platform cells drive no nets"
+  ],
+  "LINT1_cells": [
+    {"design": "sirv_debug_csr_PC_SIZE32", "cell": "ndreset_dfflr"},
+    {"design": "sirv_debug_csr_PC_SIZE32", "cell": "fullreset_dfflr"},
+    {"design": "sirv_aon_wrapper", "cell": "u_aon_porrst"},
+    {"design_prefix": "sirv_plic_man_", "cell": "flop_o_irq.plic_irq_prio_dffr"}
+  ],
+  "area_or_driver_internal_power_exempted": false,
+  "new_eda_started": false,
+  "source_modified": false,
+  "stage_accepted": false,
+  "note": "Own final-netlist structural classification, combined with its own ASIC240/gate14 evidence. Task-mode timing and whole-system activity/model conclusions remain separate. No old hardware PASS inherited."
+}
