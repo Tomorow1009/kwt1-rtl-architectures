@@ -6088,7 +6088,9 @@
       "shared_block_mapping_verified": true,
       "shared_mapping_seconds": 35.674336516764015,
       "shared_actual_error_lines": 0,
-      "dc_whole_soc_verified": false
+      "dc_whole_soc_verified": false,
+      "accelerator_block_mapping_verified": true,
+      "accelerator_mapping_seconds": 4470.295607929118
     },
     "p80_ops_transfer1023646": {
       "next_line": 44,
@@ -6143,21 +6145,20 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:25:17+08:00",
+      "observed_at": "2026-11-16T08:34:50+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
       "stage": "synthesis",
-      "current_block": "accelerator",
-      "child_pid": 98857,
+      "current_block": "cpu_soc",
+      "child_pid": 132629,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 3950,
-      "child_cpu_percent": 99.7,
-      "child_rss_kib": 25536180,
-      "current_log_bytes": 18344,
-      "current_log_phase": "Mapping optimization table advances"
+      "child_elapsed_seconds": 52,
+      "child_cpu_percent": 100,
+      "child_rss_kib": 2914180,
+      "current_log_phase": "CPU/SoC mapping; accelerator mapped"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6168,10 +6169,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:25:17+08:00",
+      "observed_at": "2026-11-16T08:34:50+08:00",
       "status": "synthesis_running",
       "parent_pid": 95253,
-      "child_pid": 98857,
+      "child_pid": 132629,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6185,9 +6186,10 @@
       "protected_T80_modified": false,
       "old8_modified": false,
       "foreground": "workspace3 terminal tab2 idle Bash",
-      "watcher_pid": 105419,
+      "watcher_pid": null,
       "second_terminal_tab": "idle Bash",
-      "current_local_sessions": []
+      "current_local_sessions": [],
+      "current_block": "cpu_soc"
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6234,6 +6236,18 @@
       "archive_members_verified": 63653,
       "archive_bytes_verified": 7006124866,
       "space_recovered_bytes": 0
+    },
+    "p80_b0_cleanup13_preparation": {
+      "status": "local_only_not_deployed_not_executed",
+      "path": "handoff/team/evidence/P80_B0_ARCHIVED_BATCH_CLEANUP13_20261116.py",
+      "requires_original_queue_and_export_completed": true,
+      "requires_original_shared_lock": true,
+      "requires_strict_no_open_users": true,
+      "scope_rejections_tested": 10,
+      "source_deleted": false,
+      "space_recovered_bytes": 0,
+      "protected_T80_modified": false,
+      "old8_modified": false
     }
   }
 }
