@@ -1,6 +1,6 @@
 # C32-A受测配置与结果入口
 
-截至2026-11-17，C32-A自身ASIC、240任务、精度、新综合和门级14已完成，finish03仍在采集活动。此页是查阅入口；冻结与最终功耗结论以随后生成的本版阶段报告为准。恢复工作先读根交接和[当前检查点](../../CONTEXT_CHECKPOINT_20261117_C32_FINISH.md)，不要重启以下已有队列。
+截至2026-11-17 02:20，C32-A自身ASIC、240任务、精度、新综合、门级14、SAIF12、时序/约束查询与PT12全部完成，finish03已自然退出，export_review03正在汇总和独立模型审阅。此页是查阅入口；冻结结论以随后生成的本版阶段报告为准。恢复工作先读根交接和[当前检查点](../../CONTEXT_CHECKPOINT_20261117_C32_REVIEW.md)，不要重启以下已有队列。
 
 ## 受测身份
 
@@ -23,11 +23,13 @@
 | 前20条、240任务与total核对 | `runs/c32_initial03_batch20/c32_batch20` | [批量回执](../../handoff/team/evidence/C32_BATCH20_20261117.json) |
 | 同批浮点精度连接 | `runs/c32_initial03_precision/c32_precision` | [精度回执](../../handoff/team/evidence/C32_PRECISION20_20261117.json) |
 | 同网表门级14，无SDF | `runs/c32_finish03_gate/c32_gate` | [门级回执](../../handoff/team/evidence/C32_GATE14_20261117.json) |
-| 12层活动，正在完成 | `runs/c32_finish03_saif/c32_saif` | `case_progress.json`只列已完成核对的层；最终以本阶段summary为准 |
+| 12层完整活动已完成 | `runs/c32_finish03_saif/c32_saif` | [SAIF12回执](../../handoff/team/evidence/C32_SAIF12_20261117.json) |
+| 时序与约束查询已完成 | `runs/c32_finish03_timing_audit/c32_timing_audit`、`runs/c32_finish03_drc_audit/c32_drc_audit` | [诊断事实](../../handoff/team/evidence/C32_TIMING_DRC_DIAGNOSTICS_20261117.json) |
+| 12层整机功耗数值已完成 | `runs/c32_finish03_power_layer_01`至`12`下的`c32_power` | [PT12数值及身份](../../handoff/team/evidence/C32_POWER12_20261117.json)，独立模型审阅进行中 |
 
 综合目录中的`mapped.v`、`mapped.ddc`、`mapped.sdc`及面积/时序报告由其`summary.json`逐项绑定。不要使用旧61246bb失败包中的结果冒充修复包91135f6。固定12和240任务分别统计，不能混用均值。
 
-后继由同一finish03队列生成`c32_finish03_timing_audit`、`c32_finish03_drc_audit`及`c32_finish03_power_layer_01`至`12`。队列成功退出后才运行已部署的export_review03工具，生成`runs/c32_report01/c32_report`与独立模型审阅事实；截至本页更新，该导出尚未运行，不能把计划路径当作已有报告。
+全部阶段均由同一finish03队列生成。它成功退出后，export_review03于02:16:43启动，目标为`runs/c32_report01/c32_report`及独立模型审阅事实。当前导出仍在运行，不能把目标路径当作已经完整交付的最终报告，也不能重复启动该工具。
 
 ## 只读恢复与保护
 
@@ -37,6 +39,6 @@
 python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_status_readonly_v4.py
 ```
 
-该入口只读取原队列，不派发任务。父进程308692只是启动时身份，恢复时核对实际命令、台账和状态。finish01/02因创建共享锁时空间耗尽退出，零子任务，保留且不重启；恢复24/25已完成，不重复清理。原协作锁由finish03统一持有，不手工清锁。
+该入口只读取原finish03队列，不派发任务；finish03父308692现已退出。当前活动状态应读`ROOT/c32_export_review03/state.json`，父36287和导出子36484最近仍存活。finish01/02因创建共享锁时空间耗尽退出，零子任务，保留且不重启；恢复24/25已完成，不重复清理。连接查询继续遵守原协作锁，不手工清锁。
 
 所有新产物位于`/tmp`，目前没有声称已有C32持久归档。桌面T80、旧八路、已冻结S0/P80/C80及其备份不改动。完整100条未获本轮自动运行授权；当前正式批量仅前20条。原始工具报告、失败和边界说明均保留，不能把布局前估算或无SDF门级称为物理签核。

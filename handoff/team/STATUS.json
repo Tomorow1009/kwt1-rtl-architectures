@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261117_C32_FINISH.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261117_C32_REVIEW.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "C32-A own ASIC240/FLOAT20/synthesis/gate14/SAIF12 and diagnostics complete; finish03 PT12 running",
+    "current_stage": "C32-A own full validation and power12 complete; export_review03 running, independent conclusion pending",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -7033,7 +7033,7 @@
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
-      "checkpoint": "CONTEXT_CHECKPOINT_20261117_C32_FINISH.md",
+      "checkpoint": "CONTEXT_CHECKPOINT_20261117_C32_REVIEW.md",
       "array_random10000_directed32_passed": true,
       "first_local_datapath_passed": true,
       "local_evidence": "handoff/team/evidence/C32_LOCAL_INITIAL_20261116.json",
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Follow running finish03 with readonly_v4. After all own stages and exit use export_review03 with actual terminal SHA. Never repeat recovery24/25 or finish01/02.",
+      "next": "Follow running export_review03, then independently review its snapshot and preserve/freeze C32-A; no C32-B/G32 yet",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T02:03:28+08:00",
+      "last_observed_at": "2026-11-17T02:20:48+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7180,11 +7180,11 @@
       "synthesis_child_pid": null,
       "shared_block_mapped_seconds": 25.55,
       "export_review_tool_deployed": true,
-      "export_review_started": false,
+      "export_review_started": true,
       "synthesis_child_status": "exited",
       "synthesis_child_previous_pid_transcription_wrong": true,
       "accelerator_block_mapped_seconds": 1139.53,
-      "runtime_free_gib": 70.33,
+      "runtime_free_gib": 69.52,
       "status_readonly_tool_deployed": true,
       "synthesis_evidence": "handoff/team/evidence/C32_SYNTH_INITIAL_20261116.json",
       "project_conservative_area_mm2": 0.722402954997787,
@@ -7231,7 +7231,7 @@
       "finish02_pid": 304144,
       "finish02_exited": true,
       "finish02_state_sha256": "c502d28a5d4aee1689abe597b40465f42a2d98c17fb9468b28b3ecd7423eccec",
-      "finish03_status": "running_power_layer_07",
+      "finish03_status": "reports_ready_review_required",
       "finish03_pid": 308692,
       "finish03_started_at": "2026-11-17T00:31:05.429536",
       "finish03_completed": [
@@ -7245,7 +7245,13 @@
         "power_layer_03",
         "power_layer_04",
         "power_layer_05",
-        "power_layer_06"
+        "power_layer_06",
+        "power_layer_07",
+        "power_layer_08",
+        "power_layer_09",
+        "power_layer_10",
+        "power_layer_11",
+        "power_layer_12"
       ],
       "current_queue": "c32_finish03",
       "status_readonly_version": 4,
@@ -7260,7 +7266,7 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": null,
+      "current_child_pid": 36484,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
@@ -7273,7 +7279,7 @@
       "saif_completed_layers": 12,
       "saif_l01_bytes": 63448403,
       "saif_l01_cpu_seconds": 298.78,
-      "current_child_state": "Power child identity to be read from current ledger",
+      "current_child_state": "export child alive",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
@@ -7284,7 +7290,18 @@
       "timing_drc_diagnostics_evidence": "handoff/team/evidence/C32_TIMING_DRC_DIAGNOSTICS_20261117.json",
       "structure_review_evidence": "handoff/team/evidence/C32_STRUCTURE_REVIEW_20261117.json",
       "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_20261117.json",
-      "power_layers_completed": 6
+      "power_layers_completed": 12,
+      "finish03_exited": true,
+      "finish03_state_sha256": "6b11814712c7b5580f2dc47c8f3c743736e77cdc2dd1fbe66ba9f2a53b90f09c",
+      "power12_evidence": "handoff/team/evidence/C32_POWER12_20261117.json",
+      "raw_time_weighted_power_w": "0.04897383731730862481412038534",
+      "raw_energy_per_task_j": "0.00002356599049899043666325",
+      "all12_power_units_and_mapping_matched": true,
+      "export_review_pid": 36287,
+      "export_review_started_at": "2026-11-17T02:16:43.092249",
+      "export_review_status": "exporting",
+      "export_child_pid": 36484,
+      "export_review_control": "/tmp/s4_21usr_c32_20261116_2010/c32_export_review03"
     }
   }
 }
