@@ -17,6 +17,7 @@ import os
 from pathlib import Path
 import shutil
 import sys
+import time
 
 ROOT=Path('/tmp/s4_21usr_c32_20261116_2010')
 BUNDLE=ROOT/'light-light126-c32-repair-5828804'
@@ -25,7 +26,7 @@ PROJECT=Path('/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-u
 BASE=PROJECT/'bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/r4_waves_lossless_archive02'
 SOURCE=BASE/'layer_03.vcd.gz'
 STAGE=Path('/tmp/s4_21usr_r4_l03_xzstage_20261117')
-CONTROL=Path('/tmp/s4_21usr_r4_l03_xzmigrate02_20261117')
+CONTROL=Path('/tmp/s4_21usr_r4_l03_xzmigrate03_20261117')
 DEST=PROJECT/'backups/r4-l03-xz-20261117'
 CHUNK=4*1024**2
 SESSION_HELPERS={
@@ -87,6 +88,18 @@ def imports():
     return cfg,archive
 
 
+def acquire_available(cfg,archive,session):
+    """Wait for the original lock or storage; never clear another lock."""
+    lock=Path(cfg['server_root'])/'.arch02_team_lock'
+    while True:
+        if lock.exists():
+            time.sleep(5);continue
+        try:return archive.acquire_lock(cfg,session)
+        except OSError as error:
+            if error.errno!=28 or lock.exists():raise
+            print('WAIT_SHARED_LOCK_STORAGE',flush=True);time.sleep(5)
+
+
 def verify(stage_sha):
     need(STAGE.resolve()==STAGE and STAGE.stat().st_uid==os.getuid() and
          sha(STAGE/'state.json')==stage_sha,'Staging identity changed')
@@ -131,9 +144,10 @@ def main(stage_sha,migrate):
         source_deleted=False,source_gzip_copy=str(STAGE/'original_layer_03.vcd.gz'),
         raw_VCD_restorable_from_XZ=True,old_receipt_modified=False,old8_modified=False,T80_modified=False)
     archive.save(CONTROL/'state.json',state)
-    # Fail without deleting anything if another job or ENOSPC prevents taking
-    # the original shared lock. No stale-lock cleanup or automatic retry.
-    lock,identity,owner=archive.acquire_lock(cfg,DEST.name)
+    # The previous separate attempt failed ENOSPC before acquiring a lock and
+    # before any deletion. Wait here without restarting that attempt.
+    state['status']='waiting_for_team_lock';archive.save(CONTROL/'state.json',state)
+    lock,identity,owner=acquire_available(cfg,archive,DEST.name)
     try:
         need(verify(stage_sha)==proof,'Staging or source changed while acquiring the lock')
         state['open_user_check']=usage_observation(archive)

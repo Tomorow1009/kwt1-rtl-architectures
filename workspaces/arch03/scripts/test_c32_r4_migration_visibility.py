@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import types
 import unittest
+from unittest import mock
 
 SOURCE=Path(__file__).resolve().parents[3]/'handoff/team/evidence/C32_R4_L03_XZ_MIGRATE_20261117.py'
 spec=importlib.util.spec_from_file_location('r4_migrate',str(SOURCE))
@@ -40,6 +41,26 @@ class Visibility(unittest.TestCase):
     def test_wrong_permission_error_not_broadly_ignored(self):
         with self.assertRaisesRegex(ValueError,'Unclassified'):
             m.usage_observation(api([dict(pid=10519,errno=5)]),uid=0)
+
+    def test_lock_storage_wait_retries_only_enospc(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            archive=types.SimpleNamespace(acquire_lock=mock.Mock(side_effect=[OSError(28,'full'),('lock','identity','owner')]))
+            with mock.patch.object(m.time,'sleep') as sleep:
+                self.assertEqual(m.acquire_available({'server_root':tmp},archive,'one'),('lock','identity','owner'))
+                sleep.assert_called_once_with(5)
+            archive.acquire_lock=mock.Mock(side_effect=OSError(13,'denied'))
+            with mock.patch.object(m.time,'sleep') as sleep:
+                with self.assertRaises(OSError):m.acquire_available({'server_root':tmp},archive,'one')
+                sleep.assert_not_called()
+
+    def test_existing_lock_is_never_cleared_by_waiter(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lock=Path(tmp)/'.arch02_team_lock';lock.mkdir()
+            archive=types.SimpleNamespace(acquire_lock=mock.Mock(return_value=('lock','identity','owner')))
+            def external_release(_):
+                self.assertTrue(lock.exists());archive.acquire_lock.assert_not_called();lock.rmdir()
+            with mock.patch.object(m.time,'sleep',side_effect=external_release):
+                self.assertEqual(m.acquire_available({'server_root':tmp},archive,'one'),('lock','identity','owner'))
 
 
 if __name__=='__main__':unittest.main()
