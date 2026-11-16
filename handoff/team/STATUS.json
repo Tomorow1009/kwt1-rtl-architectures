@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T12:41:49.893726",
+      "at": "2026-11-16T13:08:41.439178",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": false,
-      "current_terminal": "visible C80 delta transfer in progress; local exec 69099; no EDA started; last remote preflight12:32 lock absent",
+      "current_terminal": "C80 second delta transfer 49440 active; first719 staging verified13:06. No EDA launched.",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6826,7 +6826,15 @@
       "eda_tools_local_tests": 23,
       "eda_preparation_evidence": "handoff/team/evidence/C80_EDA_PREPARATION_20261116.json",
       "raw_full_task_local_passed": true,
-      "gate_observer_local_passed": true
+      "gate_observer_local_passed": true,
+      "source_commit": "083f47a36ef8ea94f70214be2e0bccfc438e1ac8",
+      "formal_bundle": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-083f47a",
+      "formal_manifest_expected": "11d438d7758687398231023a9ed78533811c13af211796d6ee221b4310000897",
+      "formal_file_count_expected": 1003,
+      "first_transfer_verified": true,
+      "second_transfer_local_session": 49440,
+      "qualification_launch_prepared": true,
+      "qualification_started": false
     }
   }
 }
