@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T03:27:23.096386+08:00",
+      "last_observed_at": "2026-11-17T03:44:16.140201+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": null,
+      "current_queue": "c32_repair01_waiting_original_lock",
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7359,9 +7359,27 @@
         "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dcdc1510b8f97ebd7fb7ebe35b8663",
         "state_hash_machine_asserted": false
       },
-      "local_DRC_parser_and_admission_tests": 15,
+      "local_DRC_parser_and_admission_tests": 26,
       "repair_tools_prepared": true,
-      "repair_server_started": false
+      "repair_server_started": true,
+      "repair01": {
+        "bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-repair-c7c7f6c",
+        "source_commit": "c7c7f6c3505ca54b90d1fa54893b925866d3c3ee",
+        "pid": 72614,
+        "started": "2026-11-17T03:39:20.358366",
+        "status": "waiting_original_lock_storage",
+        "payload_sha256": "07dbf1b62ad6c16128909ed2b6c8be035edd15939033594b2eaeafc8424caa54",
+        "runtime_manifest_displayed": "45448653c5cc0c1edc74598b1e9ec81a5567961e89850fc023c6d3d506e5f809"
+      },
+      "recovery30": {
+        "started": true,
+        "worker_pid": 74341,
+        "started_at": "2026-11-17T03:43:12.405144",
+        "source_sha256": "b25320301ff5d4fb62bbf89419374b5afac23b6f4ef32f2602d94f3cbf72d2b8",
+        "candidate_files": 663,
+        "candidate_bytes": 213048254,
+        "completed": false
+      }
     }
   }
 }

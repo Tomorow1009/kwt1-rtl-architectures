@@ -1,67 +1,55 @@
-# C32-A：三只缓冲器等价驱动修复准备
+# C32-A修复恢复入口（03:44实际观察）
 
-本节覆盖下方所有旧“正在等待/传输/运行”的描述。恢复后先读有效计划和本节。
+先读AGENTS.md、有效计划、本文和STATUS。有效计划为workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md，SHA 1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39。路线S0→P80→C80→C32-A→可选C32-B→G32，当前只修复C32-A。
 
-- 最后服务器只读观察：2026-11-17 03:27:23.096386，原协作锁不存在，57941/63231/62034均退出，共享盘1048576 B、/tmp 74567278592 B可用；这是观察值，不冒充实时状态。
-- 独立驱动检查inspect02已完成（03:18:51观察），summary SHA 5fb1e75174bc4fa325963d1a2f394ac0767cc67a5af8c62664a78d3c36531781，已机器核对。326条max_transition记录完整解析为3网，constraints_clear=false。
-- core/n9882→U16528，n9916→U16527，n9950→U16523，均BUFV2RD_12TR40；上游输入网分别n60014/n60013/n60011。可选属性dont_touch/dont_size/size_only unavailable不视为false。
-- 恢复28完成且回执机器核对。恢复29在原查询获得锁时自动停止：537份已归档旧B0 task.csv副本、172434752 B已移除，663份仍保留；状态query_started_remaining_captures_preserved。不重复29，不清锁，不触碰T80/旧八路/冻结S0P80C80。
-- 新修复脚本c32_mapped_repair.py只允许三个BUFV2RD→BUFV4RD等价替换；同库引脚/函数检查，临时解除并恢复精确祖先保护，禁止compile、拓扑或时序约束更改。全网表token及leaf身份核对。修复路线显式标记复用自身映射，不能伪称重新完成三个分块综合。当前本地15项测试通过，尚未启动服务器修复。
-- 新最终网表仍须自己的DRC、面积、setup/hold、门级14、SAIF12/PT12和审核；旧RTL240、恢复/竞争/精度在RTL未变的情况下保留。C32-A未冻结，不进C32-B/G32。
-- 当前无GUI输入任务；VNC18874435/workspace3第一终端，实际操作前重新检查。Git最新已推1220f7a，后续c76b9df及本次代码/记录待同步。
+## 当前唯一服务器任务
 
-有效计划：workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md，SHA1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39。继续32PE/150MHz/≤1mm²及真实四段ICB；仅正式20条，100条未授权。
+- ROOT=/tmp/s4_21usr_c32_20261116_2010。
+- 新工具包ROOT/light-light126-c32-repair-c7c7f6c，代码c7c7f6c3505ca54b90d1fa54893b925866d3c3ee；仅工具改动，RTL仍61246bb，竞争固件仍91135f6。
+- manifest屏幕显示45448653c5cc0c1edc74598b1e9ec81a5567961e89850fc023c6d3d506e5f809，准备器按已提交工具字节、旧manifest及逐文件SHA机器验证后生成；此字符串人工转录尚需独立断言。
+- GUI差量包SHA07dbf1b62ad6c16128909ed2b6c8be035edd15939033594b2eaeafc8424caa54；7工具文件，19097字符；本地逐字节往返及Python3.6语法检查通过。
+- 修复父72614于03:39:20.358366启动；03:44:16.140201仍在WAIT_ORIGINAL_LOCK_STORAGE，尚无DC子进程，runs/c32_repair01尚不存在。不要重复启动。启动回执ROOT/c32_repair01_launch.json、request同前缀、日志ROOT/c32_repair01_launch.log。
+- 恢复30 worker74341于03:43:12.405144启动，03:44未终态，日志无错误。只处理恢复29留下的663份已核验归档B0 task.csv副本（213048254B），获得原锁即停止。原始归档、日志、汇总、源码、活动、最终网表全保留；不要重复30或29。工具SHA b25320301ff5d4fb62bbf89419374b5afac23b6f4ef32f2602d94f3cbf72d2b8，源码handoff/team/evidence/C32_B0_ARCHIVED_CAPTURES_RECOVERY30_20261117.py。
+- 最近空间03:27：共享1048576B，/tmp74567278592B；用户确认没有团队持续共享盘写入。当前状态不能用这个旧观察代替，恢复先查进程、原锁和space。
+- 当前无GUI输入会话。VNC18874435/workspace3第一终端，实际操作前重查windows；不使用workspace4。
 
-## 保留的较早记录（状态以上方为准）
+## 必须修复的真实问题
 
-# C32-A恢复入口：最终约束核对发现真实转换时间违反
+旧最终网表有326条max_transition违反记录，完整解析为三个网：core/n9882→U16528，n9916→U16527，n9950→U16523，均BUFV2RD_12TR40；上游分别n60014/n60013/n60011。要求1.35ns，实际约1.36–1.37ns。旧摘要“DRC0”是人工转录错误，已撤回，服务器原报告未修改。不能用正setup/hold代替DRC通过。
 
-## 03:11执行状态更新（覆盖下方较早状态）
+修复脚本仅尝试三个BUFV2RD→BUFV4RD：同库引脚/布尔功能等价，临时解除并恢复精确祖先保护，无compile、无拓扑/约束变更；全网表token与leaf证明只允许三个引用及对应面积变化。修复路线显式复用自身映射及原三块证明，绝不伪称新完成三块综合。26项相关测试通过（原25项＋修复身份拒绝测试）。源已提交推送c7c7f6c，后续2d1faef/d50ecfc/1e9ffe0待同步。
 
-三网只读检查工具已传输且哈希一致，`inspect02.py`父PID57941于03:05:56.094926启动，目前仍在等原共享锁ENOSPC，尚未产生新DC子进程。原export_review03已退出，不重启。
+独立驱动检查inspect02已完成：57941/DC63231退出，summary SHA5fb1e75174bc4fa325963d1a2f394ac0767cc67a5af8c62664a78d3c36531781已机器核对。原export_review03因Unresolved C32 constraints失败退出，不重启；unknowninventory/connection/aliases旧网表查询完成，snapshot未生成。
 
-恢复28已完成，仅移除已归档DRC05 hierarchy.rpt 7848411B，worker59115；state显示SHA dd6940df48aa7e24cd7e2c6d8d68d7cb4eecbb8ff66f0930dea08e366644ea45，尚需机器断言转录。释放少量空间仍很快耗尽。
+## 已完成证据与边界
 
-恢复29工具已提交4ea244a，目标为旧B0已通过1200任务的输出CSV副本：1200文件385483006B，全都位于已有完整回读归档内。最终网表、汇总、日志、源、活动、归档、T80和旧八路均保留；出现原协作锁即停止并保留剩余副本。当前GUI传输会话90251（local_runs/c32_recovery29_gui.txt，共4361字符）仍进行中，尚未执行删除。恢复时先等待该会话再查截图，不并发GUI输入。源码SHA6710fc05d79ccd019c3fc1e0aaff55329e194c345b0ff93ca26749f985dd1627。恢复26/27/28均不得重复。
+旧完整包ROOT/light-light126-c32-91135f6，manifest d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7。
 
-解析器及准入九项测试通过。最新本地提交4ea244a（另有f14498f、790eb84、1a2b5d6）；已push11e16a9。当前只有C32约束修复工作；未开始新综合修复、C32-B或G32。下方“37400传输”已完成，不能再等该旧会话。
+- C32本地10000随机＋32定向、14例、1/2拍、ABA及取消恢复通过。
+- ASIC14/恢复/CPU竞争通过；前20×12=240任务，6082560个输出和total逐项零差异。RTL未变，不重复这些。
+- 同批浮点20最大逐层NRMSE0.20198143836753799%，固定12最大0.1425636423408142%；官方600未验。
+- 固定12平均72179.3333333周期、2078.1571825730357 task/s（按150MHz折算）。
+- 旧未合格网表保守项目0.722402954997787mm²、整机4.244619443828mm²；setup+0.0000524521ns/hold+0.0010598ns、220宏/0锁存器。
+- 旧网表自己的门级14、SAIF12/PT12完成：时间加权48.9738373173mW、23.5659904990µJ/task，布局前估算。不得转移给修复网表或标为阶段验收。
+- 旧报告runs/c32_report01/c32_report SHA4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7；网表3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c；synth summary ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87。
+- 初始各任务及精度哈希见C32_EVIDENCE_INDEX_20261117.md和对应JSON；最新状态以本文为准，旧索引中的“export运行中”已过时。
 
+## 空间恢复历史
 
-实施更新：解析器修复已提交f14498f，识别带(dont_touch)网及PIN子行；后继门级/功耗准入改为先检查真实约束报告，提交790eb84。九项相关测试通过。当前正经GUI传入`ops-c32-drc02-f14498f`，统一执行会话37400，输入文件`local_runs/c32_drc02_gui.txt`共15571字符；若恢复时仍在运行，先等待该会话，不得并发向VNC输入或重复传输。工具尚未启动。两源SHA：c32_drc_audit.py=3e698243214e9b1480bade07a3d849a456675d1dd9b1dd8e0dfcd0d1986c17ae，inspect02.py=e3e628337c174305c9bef049311a640acfc424d988f10474dc06672e7bd757c4。读取旧冻结包，新查询使用新目录c32_drc_inspect02，不改任何旧输入。最新已push11e16a9，后续两提交待同步。
+恢复26/27/28完成，不重复。26/27回执已机器断言；28 SHA dd6940df48aa7e24cd7e2c6d8d68d7cb4eecbb8ff66f0930dea08e366644ea45已机器断言。
 
-最后实际观察2026-11-17 02:56:48。恢复先读AGENTS、有效计划、STATUS及本检查点。**不要冻结当前C32-A，不启动C32-B/G32。**
+恢复29在查询取得锁时停止：537份172434752B移除，剩663份。正确state SHA为a1170088c32ca7f91ac01916c351e96215dcdc1510b8f97ebd7fb7ebe35b8663（十进制分组重新读取；此前dccd/dcc转录错误不得沿用）。恢复30启动前机器核验此SHA和journal，不重跑29。归档为原B0 backups/systolic-b-20261112_2320/completed-evidence.tar.gz，SHA dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50；63653文件7006124866B完整回读证据保留。更早19/20/22/23/24/25均终态，见历史检查点。
 
-## 关键更正
+## 下一步
 
-完整报告和原始DRC摘要实际为：326条max_transition违反记录，要求约1.35ns，实际约1.36–1.37ns；全326行未被旧解析器识别，driver_query_complete=false。三个网为加速器core/n9916、n9882、n9950，报告附(dont_touch)，各含PIN子行。原setup/hold仍为正，但不能替代转换时间约束。此前本地“0约束违反”的摘要错误已撤回，原服务器报告从未修改，详见C32_DRC_CORRECTION_20261117.json。
+1. 跟进原72614和74341，不重复启动，不清锁。核对新repair01终态、工具错误和token/leaf证明。
+2. 若DRC转移到上游或setup/hold失败，保留该尝试，在新目录修复实际问题，不放宽约束；当前目标是完整32PE版本。
+3. 若修复全部约束/面积/结构通过，用已准备的handoff/team/evidence/C32_FINISH_REPAIR01_20261117.py（未部署/未运行）启动新网表自己的gate14/SAIF12/PT12；不能继承旧finish03。运行前绑定新summary SHA，核对原锁和所有子进程。
+4. 新最终网表的报告/模型审核需显式连接“原未变RTL功能批量＋等价映射修复＋新门级/PPA”；旧export03只支持同包旧网表链，不可直接重启。
+5. 完成新审核、持久归档及C32-A冻结后，才继续可选C32-B/G32。当前C32没有持久归档，不虚构备份完成。
 
-export_review03在02:52:35.361942以failed_preserved结束，原因snapshot: Unresolved C32 constraints。父36287及导出36484、清单42011、连接46872/DC51750、aliases52025、snapshot52073全部退出。全12未知活动清单、连接及aliases已完成，不重新扫描或查询同一事实；model_review_snapshot没有成功生成。连接状态及aliases哈希待最终单独登记。不要重启旧export工具。
+## 固定保护和同步
 
-## 已完成及保留结果
+桌面T80_Delivery_20261113、旧八路全部数据、S0/P80/C80冻结运行及备份不写不移不删。保持原32位ICB四段真实传输、原共享写ACK/读回、X14/W12/b32/SHIFT10、150MHz/SS/.99V/125°C、项目≤1mm²。正式仅20条，100条未自动授权。不恢复旧8路/R1追加队列，不开发宽ICB/旁路/A版。
 
-S0/P80/C80已经冻结。当前C32-A生产RTL61246bb2a21c56a9bfd871fd68de93028d79f5fd，修正竞争固件受测包91135f61c97c980039793c6637d0a06888638df0，manifest d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7。
-
-自己的本地10000随机＋32定向/14例/1、2拍/恢复，以及ASIC14、恢复、竞争、240任务6082560输出和total零差异。浮点20最大逐层0.20198143836753799%、固定12最大0.1425636423408142%。RTL不变时不重跑这些；新映射仍必须自己的门级14、SAIF12/PT12及全部约束核对。
-
-当前未合格网表的初步数值：固定12平均72179.3333333周期、2078.1571826task/s；保守项目0.722402954997787mm²、整机4.244619443828；setup+0.0000524521ns、hold+0.0010598ns；220宏/0锁存器；整机48.9738373173mW、23.5659904990µJ/task。门级14和SAIF12/PT12完成，但这些不能继承给修复后的新网表。不是官方600、SDF或物理签核。
-
-ROOT=/tmp/s4_21usr_c32_20261116_2010；BUNDLE=ROOT/light-light126-c32-91135f6。完整报告runs/c32_report01/c32_report，SHA4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7；网表SHA3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c；综合summary ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87。
-
-## 已做空间恢复，绝不重复
-
-26已清理1份归档后的DRC04 hierarchy.rpt（7851420B），free一度8MiB又耗尽。27已清理5份已归档旧B0中间映射（174723523B），明确最终B0绑定DRC06，DRC06所有文件及R4方法SAIF保留。原等待查询自行取得原协作锁。两回执哈希已机器断言，详见C32_SHARED_SPACE_RECOVERY26_27_20261117.json。旧19/20/22/23/24/25也均已完成。用户确认没有团队持续写共享盘；不再重复询问。所有归档原件不变。
-
-## 下一步与边界
-
-1. 补全C32约束解析器对(dont_touch)及PIN子行的识别，定向测试后只读查询三个实际驱动和约束；不能把未解析行或命令成功当合格。
-2. 根据真实驱动与同库可用单元，在新目录修复映射，保持原6.666666ns、库、角、IO/负载和平台规则，不清除或放宽约束。优先复用可核验未变块，不能虚称新子块未变。
-3. 修复网表通过面积/setup/hold/transition及结构后，重新自身门级14、SAIF12/PT12和报告；旧失败全部保留。
-4. 当前C32尚无持久归档；原始/tmp保持。不要为额外备份删受保护数据，也不虚构备份完成。技术冻结后再进可选C32-B/G32。
-
-有效计划workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md，SHA1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39。最终32PE，项目≤1.00mm²；四段真实ICB及数值不变，正式只跑20条，100条未自动授权。
-
-桌面T80_Delivery_20261113、旧八路全部数据、S0/P80/C80冻结运行及备份不写不移不删。GUI最近18874435、workspace3第一终端空闲，恢复重查窗口，不用workspace4；FTP旧安全检查失败不绕过。没有活动GUI输入。不要启动子代理或goal。
-
-本地E:/fpga_race-two/kwt1-c32-g32-20261115，个人分支codex/light-light126/t80-pipeline-c32-g32-20261115；已push8f83aa1，后续本地04c56af/e1fa926为清理工具，待随本更正同步。未追踪S0_SYNTH05_FINISH_LAUNCH_20261115.py不提交不执行。旧FINISH/REVIEW/历史交接均保留。
-
-03:15:16更新：恢复29传输已结束且源码哈希一致，worker62034已启动，日志ROOT/c32_recovery29.log、启动回执ROOT/c32_recovery29_launch.json。先跟进该进程，不能重复删除或重启。统一执行会话90251已退出，GUI现无活动输入。驱动检查父57941仍是原等待任务。
+本地E:/fpga_race-two/kwt1-c32-g32-20261115，个人分支codex/light-light126/t80-pipeline-c32-g32-20261115；仅S0_SYNTH05_FINISH_LAUNCH_20261115.py未追踪历史文件勿提交/执行。禁止新增子代理或goal。更早详记保留CONTEXT_HISTORY_20261117_C32_0339.md。压缩后重新读计划和本文。
