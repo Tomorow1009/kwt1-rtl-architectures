@@ -1,0 +1,18 @@
+{
+  "schema": "c80-first20-source-join-displayed-v1",
+  "observed_at": "2026-11-16T09:41:58.786567+08:00",
+  "tasks": 240,
+  "group8_load_hash_chain_sha256": "af44510d1fdf61059af8eef82ecdbf2810da6be004f364ad95ed2fcff242d987",
+  "local_tasks_sha256": "f2548ecad3305ccbaa13c7dc1cf5d2b22ac1b8cf3720189be6060a5336cf0ea5",
+  "local_summary_sha256": "37d33d44546aaa1493fca21bab85fe59d9af261dfc48d532e9ad28b5743cf0c6",
+  "server_dataset": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex_short_all",
+  "server_inventory_sha256": "ae052bc1e543930abece8202a5b1439dcbd50dd4f5d7d09fb8f049eb30eeb997",
+  "server_manifest_sha256": "9900a9bd1addbdeb256020ba9a04f4615791fbd5a624abd411364098c382c97e",
+  "all240_actual_source_files_matched_inventory": true,
+  "local_requantized_group8_files_match_actual_server": true,
+  "server_modified": false,
+  "hardware_executed": false,
+  "stage_accepted": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}

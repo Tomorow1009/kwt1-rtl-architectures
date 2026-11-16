@@ -1,0 +1,99 @@
+{
+  "candidate_frozen": false,
+  "codec_sha256": {
+    "c80_codec_candidate.py": "88dc5d54e218c629cb2ec1759267d5b30aa90893a604b50c2054e8372e553d93",
+    "c80_codec_screen.py": "0fd7fc99b9fd7b12e80a25e4e667efb0c82584ff81a9a74ee58824f3249f7190",
+    "dma16_layout.py": "c034f438c7a901c5ec3c6a4e75cf203873aee9f79e292546fa728467d11d2a1d",
+    "icb32_codec.py": "c0e70c91301672559880671229911213782f220f096fedcdc9a76a6e9ea93606",
+    "n1_codec.py": "78dbc9d7d3826167e23c4c04e440adf068660cd4db7060f4d821aef16346218b",
+    "systolic_b_codec.py": "7e5928a72c3f681421897fb5f55f4cc801af7d7722cfd34853e73a58735afa28"
+  },
+  "complete_headers_bias_tables_padding_fallback_counted": true,
+  "converter_sha256": "c99301b68185f599b95e4b4b3cbe5e62db27128dcf3cf04e4725bdb9a5620c35",
+  "coordinate_integers_checked": 11028480,
+  "coordinate_integers_per_task": 22976,
+  "elapsed_seconds": 43.76599999998871,
+  "full20_server_hash_join_required": true,
+  "hardware_executed": false,
+  "limits": [
+    "Experimental software ABI; no C80 RTL or decoder-cycle/PPA evidence",
+    "Conditional bus formula is the measured P80 scenario, not a proof for arbitrary encoded streams",
+    "Same immutable source FLOAT and converter, but generated group8 hashes still require own DATA100 join",
+    "P80 completion and freeze required before C80 hardware changes"
+  ],
+  "metrics": {
+    "baseline": {
+      "conditional_mean_bus_cycles": 77416.825,
+      "hardware_cycles_measured": false,
+      "ideal_c32_lower_bound_cycles_mean": 77416.825,
+      "max_bytes": 35220,
+      "mean_bytes": 29755.9,
+      "mean_four_segment_transactions": 34988.925,
+      "min_bytes": 27556,
+      "sum_bytes": 7141416
+    },
+    "candidate": {
+      "conditional_mean_bus_cycles": 69226.3875,
+      "hardware_cycles_measured": false,
+      "ideal_c32_lower_bound_cycles_mean": 69226.3875,
+      "max_bytes": 31328,
+      "mean_bytes": 25075.65,
+      "mean_four_segment_transactions": 31478.7375,
+      "min_bytes": 21548,
+      "sum_bytes": 6018156
+    },
+    "compact_bias_v3": {
+      "conditional_mean_bus_cycles": 76520.825,
+      "hardware_cycles_measured": false,
+      "ideal_c32_lower_bound_cycles_mean": 76520.825,
+      "max_bytes": 34708,
+      "mean_bytes": 29243.9,
+      "mean_four_segment_transactions": 34604.925,
+      "min_bytes": 27044,
+      "sum_bytes": 7018536
+    }
+  },
+  "numerical_format": {
+    "accumulator_bits": 32,
+    "bias_bits": 32,
+    "bias_fraction": 22,
+    "product_bits": 26,
+    "result_bits": 16,
+    "result_fraction": 12,
+    "shift": 10,
+    "total_bits": 33,
+    "total_fraction": 22,
+    "w_bits": 12,
+    "w_fraction": 12,
+    "x_bits": 14,
+    "x_fraction": 10
+  },
+  "numpy_version": "1.19.5",
+  "original_zip_container_obtained": false,
+  "python_version": "3.8.20 (default, Oct  2 2024, 15:21:04) [MSC v.1929 64 bit (AMD64)]",
+  "quantization_clipping": {
+    "b": 0,
+    "w": 0,
+    "x": 0
+  },
+  "raw_bias_halfwords": 2,
+  "raw_bytes": 46464,
+  "raw_halfwords": 23232,
+  "reset_logical_rows": 8,
+  "sample_order": "original_ranks_001_through_020",
+  "samples": 20,
+  "schema": "arch03-c80-offline-codec-screen-v1",
+  "server_hex_rechecked_this_run": false,
+  "software_only": true,
+  "source_archive_sha256": "5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2",
+  "source_identity_sha256": "8b0013901ccd876a0607d0b212320d4e380ae85c5f86dd2e636cc40cffb9bfe0",
+  "source_npz_members_rechecked": 21,
+  "source_order": "W0/b0,X0..98,W1/b1..W15/b15",
+  "stage_accepted": false,
+  "status": "software_roundtrip_passed",
+  "tasks": 240,
+  "tasks_csv_sha256": "b9ae05fe2360318e0241289dbb5a94fa2835341e2a9ec1a672b1085115333c5e",
+  "tasks_json_sha256": "f2548ecad3305ccbaa13c7dc1cf5d2b22ac1b8cf3720189be6060a5336cf0ea5",
+  "tied_to_mac_row_count": false,
+  "weights_sha256": "99a3f2d990203b2bd9f3bdf5dc98974d6a7102027f7d67b9abf19e72ee03a6ad"
+}

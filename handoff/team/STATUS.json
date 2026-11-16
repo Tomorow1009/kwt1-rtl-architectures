@@ -6168,7 +6168,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T09:26:43.938849+08:00",
+      "observed_at": "2026-11-16T09:45:22+08:00",
       "status": "saif_running",
       "parent_pid": 95253,
       "child_pid": null,
@@ -6211,9 +6211,11 @@
       "own_gate14_completed": true,
       "watcher_terminal_tab": 1,
       "previous_watcher135257_confirmed_exited": true,
-      "saif_cases_completed": 3,
+      "saif_cases_completed": 6,
       "current_saif_case": null,
-      "last_confirmed_push": "0363c46"
+      "last_confirmed_push": "251fbbe",
+      "c80_offline_preparation": true,
+      "c80_hardware_started": false
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6450,6 +6452,19 @@
       "stage_accepted": false,
       "protected_T80_modified": false,
       "old8_modified": false
+    },
+    "c80_offline_preparation": {
+      "status": "software_roundtrip_and_source_hash_join_passed",
+      "hardware_started": false,
+      "stage_accepted": false,
+      "samples": 20,
+      "tasks": 240,
+      "coordinate_integers_checked": 11028480,
+      "baseline_mean_bytes": 29755.9,
+      "candidate_mean_bytes": 25075.65,
+      "evidence": "handoff/team/evidence/C80_OFFLINE_SCREEN_20261116.json",
+      "source_join": "handoff/team/evidence/C80_FIRST20_SOURCE_JOIN_20261116.json",
+      "notes": "P80 queue continues unchanged; C80 RTL awaits own P80 acceptance and freeze."
     }
   }
 }
