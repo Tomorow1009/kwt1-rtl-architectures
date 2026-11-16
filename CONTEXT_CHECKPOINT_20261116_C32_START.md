@@ -1,5 +1,23 @@
 # C80已冻结，进入C32-A
 
+## 21:34 R4归档身份修正；回读运行中
+
+archive21初次PID197816已退出，在身份检查阶段失败，未创建OUT、未归档、未删除。历史`ICB32_FINAL1200_20261111.json`中的batch_identity哈希第8/9字符抄反；实际为`27060dfcec0e8fcfadd925d2899ecabcad3c05d05d9048e631616811b540adc9`，机器确认与原未改summary内部`batch_identity_sha256`完全一致，summary SHA保持`3bb0290586f7b92e5a392cb8f7e735ec483b8b302cc285a39fff2e63ebc01bc2`。原错误记录保留，不将差异视为硬件变更。
+
+本地提交9167b46仅纠正归档器常量。新源SHA `2a28e61f85792f4f0d2fc2655950feaeb34a3a9e728ca108042f982dace233c4`，服务器新`ROOT/r4_archive21_fixed.py`及`r4_archive21_fixed.log`，PID199005，21:32仍在扫描输入，日志尚未报SELECTED，原源未改。输出待`ROOT/r4_generated_archive21/receipt.json`；完整回读通过前不能删除。
+
+严格后继恢复工具`C32_R4_GENERATED_RECOVERY22_20261116.py`已本地Python3.6及11范围检查，提交7829d9c，SHA `fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c`。当前GUI传输会话53526输入recovery22.b64，未退出前不可另发键盘。**尚未执行22。** 它须显式绑定21完成回执，重核全归档和选中文件，只删已归档每例输入副本，保留/tmp压缩及证据，随后核验持久副本`PROJECT/backups/r4-generated-inputs-20261116_2135`，再调用现有initial02。若任何步骤失败先读状态，不重跑删除。
+
+21:28实际df：共享NFS8.8TB满，statvfs块大小1MiB、available1块，inode尚有60887；/tmp约74GiB。不是本地仿真失败。C32仍无CPU/综合任务；保护桌面T80、旧八路、全部结果及冻结备份。
+
+## 21:27 恢复核对；仅准备 R4 输入归档21
+
+重读有效计划、AGENTS、根交接、STATUS和本检查点，确认S0/P80/C80已冻结；C32-A本地完成，服务器尚未启动硬件。最新源码提交e23bed5只增加只读归档工具，不改变61246bb受测硬件。`C32_R4_GENERATED_ARCHIVE21_20261116.py` SHA `6f98219c19bb640cee5f15ca6ae884daaecc64b62328a0f1b3da9ae48b8a1ed6`，本地Python3.6语法和11范围检查通过。
+
+候选严格限旧R4 96443包的`icb32_r4_finish01_final1200/icb32_batch/cases`每任务.hex/.bin/.verilog生成输入；已只读确认1200例/30412800输出完成。summary SHA `3bb0290586f7b92e5a392cb8f7e735ec483b8b302cc285a39fff2e63ebc01bc2`，identity SHA `27060dfcce0e8fcfadd925d2899ecabcad3c05d05d9048e631616811b540adc9`。归档21只复制至私有/tmp并全量回读、源再核对；不删除源，不动结果CSV/日志/JSON/源码/网表/SAIF。后续删除尚未准备或授权执行到具体工具。
+
+当前GUI会话72180仅传archive21.b64到`/tmp/s4_21usr_c32_20261116_2010`，未退出前不能并发键盘输入。第一终端workspace3，窗口18874435经新windows/screenshot核对。无新EDA、无initial02。原19/20删除已完成，不能重复；旧R4唯一gzip、桌面T80、旧八路、P80/C80及完整备份不动。
+
 更新时间：2026-11-16 20:13（北京时间）。压缩后先读AGENTS、有效计划、根交接、本文及STATUS，核对完成与未完成项，不从旧待办重启队列。
 
 ## 21:12 清理20完成但空间再耗尽；C32硬件尚未启动

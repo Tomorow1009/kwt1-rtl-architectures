@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T21:12:56.664700+08:00",
+      "updated_at": "2026-11-16T21:34:18.187618+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Read ongoing bundle disk-usage inventory; seek nonprotected archiveable generated duplicates. Existing initial02 launcher has not dispatched any job.",
+      "next": "Wait for read-only archive21 complete readback; only then bind exact receipt to recovery22. No C32 initial02 queue exists.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7094,7 +7094,21 @@
         "worker_pid": 187957,
         "worker_exited": true
       },
-      "space_recovery20": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY20_20261116.json"
+      "space_recovery20": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY20_20261116.json",
+      "archive21": {
+        "source_sha256": "2a28e61f85792f4f0d2fc2655950feaeb34a3a9e728ca108042f982dace233c4",
+        "local_test_passed": true,
+        "server_started": true,
+        "source_deleted": false,
+        "worker_pid": 199005,
+        "previous_worker_failed_identity_transcription": true
+      },
+      "recovery22": {
+        "prepared": true,
+        "server_executed": false,
+        "source_sha256": "fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c",
+        "gui_session": 53526
+      }
     }
   }
 }
