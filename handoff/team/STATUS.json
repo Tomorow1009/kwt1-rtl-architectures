@@ -4144,11 +4144,11 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_FOLLOWUP.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
-    "stage": "P80",
+    "stage": "C80",
     "final_pe": 32,
     "area_limit_mm2": 1.0,
     "formal_samples": 20,
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "C80 local RTL/firmware integration; P80 frozen 8674293",
+    "current_stage": "C80 own synthesis running; P80 frozen",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -6874,7 +6874,12 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "bf41e5a6ce466df3c96f5f528fac846fef81c7ec"
+      "latest_pushed_commit": "c2a0de7",
+      "last_server_observed_at": "2026-11-16T14:40:14+08:00",
+      "export_review_prepared": true,
+      "export_review_deployed": false,
+      "export_chain_tests": 10,
+      "c32_readonly_preparation": "workspaces/arch03/C32_PREPARATION_READONLY_20261116.md"
     }
   }
 }
