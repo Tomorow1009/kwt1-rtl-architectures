@@ -1,0 +1,30 @@
+{
+  "schema": "p80-copy-only-archive-displayed-receipt-v1",
+  "observed_at": "2026-11-16T12:04:51+08:00",
+  "runtime_root": "/tmp/s4_21usr_p80_20261116_0315",
+  "control": "/tmp/s4_21usr_p80_archive03_20261116_1155",
+  "destination": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/p80-runtime-20261116_1155-copy03",
+  "status": "verified_copy",
+  "finished": "2026-11-16T03:59:14.758356Z",
+  "archive_sha256": "3859be727e617f8b1c9a3c7a8d8bdb1b65d298e9bb847c52720d4f4b7fcc76e4",
+  "archive_bytes": 1102799426,
+  "receipt_sha256": "bb0463ecd040ce9539870fdd3c447a10a77daa4ac45c0d7163745968c9d18bad",
+  "manifest_sha256": "a00978c958acbf464c6ce14dec004eda92668cef20b4ba1c00b1a6a543efa33d",
+  "member_counts": {
+    "directory": 1849,
+    "regular": 26884,
+    "symlink": 9
+  },
+  "all_members_readback_verified": true,
+  "source_before_after_identical": true,
+  "source_deleted": false,
+  "source_modified": false,
+  "relocation_verified": false,
+  "archive_implies_acceptance": false,
+  "worker_exited": true,
+  "worker_result_matches_receipt": true,
+  "cooperation_lock_absent": true,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "local_hashes_asserted_on_server_at": "2026-11-16T12:10:21.199443+08:00"
+}
