@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T05:23:05.973746+08:00",
+      "last_observed_at": "2026-11-17T05:47:51.011287+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7266,17 +7266,17 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 119023,
+      "current_child_pid": 129728,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
       },
-      "current_activity_case": "layer_04",
+      "current_activity_case": "layer_09",
       "gate14_passed": true,
       "gate14_evidence": "handoff/team/evidence/C32_GATE14_REPAIR03_20261117.json",
       "all14_gate_cycles_equal_ASIC": true,
-      "saif_completed_layers": 3,
+      "saif_completed_layers": 8,
       "saif_l01_bytes": null,
       "saif_l01_cpu_seconds": null,
       "current_child_state": "running",
@@ -7477,12 +7477,17 @@
         "checked_gate_outputs": 354816,
         "gate_cycles_match_own_ASIC": true,
         "gate_summary_sha256": "8eaea9b1318f8f8031c3d4f160283140842896b68cb73bbfd93f719b81ed09a9",
-        "saif_completed_layers": 3,
+        "saif_completed_layers": 8,
         "new_power_completed_layers": 0,
         "saif_completed_cases": [
           "layer_01",
           "layer_02",
-          "layer_03"
+          "layer_03",
+          "layer_04",
+          "layer_05",
+          "layer_06",
+          "layer_07",
+          "layer_08"
         ]
       },
       "recovery33": {
@@ -7522,7 +7527,7 @@
         "path": "/tmp/s4_21usr_c32_20261116_2010/c32_repair04_status.py",
         "sha256": "6bf482079317c2363ecbd77e89ff976d56a28dc2e652aa6725d5c5c732388992"
       },
-      "runtime_free_bytes": 72304087040,
+      "runtime_free_bytes": 63789752320,
       "active_evidence_scope": {
         "mapping": "repair03",
         "queue": "c32_finish_repair04",
@@ -7567,7 +7572,8 @@
         "qualification": "failed_original_max_transition_326",
         "inherited_by_repair03": false
       },
-      "current_operations_source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7"
+      "current_operations_source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
+      "storage_preparation": "handoff/team/evidence/C32_STORAGE_PREPARATION_20261117.json"
     }
   }
 }

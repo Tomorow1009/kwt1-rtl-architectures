@@ -1,0 +1,37 @@
+{
+  "schema": "c32-readonly-storage-preparation-v1",
+  "observed_at": "2026-11-17T05:48:25.626113+08:00",
+  "archive_tools": {
+    "payload_sha256": "3c58a4c28cb1d180ebb38c46fb0092862da8ab418e2e39a7a34faf642edb3a93",
+    "tools_sha256": "c53a4c486c5003341c7610f2e3706a9c99fe00b6ad6190829177eed8b2fb95ca",
+    "files": {
+      "c32_archive_runtime.py": "4b6319bfc2cec1fc6b6d12b963b57b021e6ea7b5ded63a2a456a11da5e83ee75",
+      "c32_archive_capacity.py": "d4f0b579cc621e7456bea9bb1618bbc44d3485f3815fb1cdab979d966cd34330",
+      "c32_repaired_archive_contract.py": "cd3a50d3cca274ad24899dadecec34e25456c642570fe18a97caccea3efc9137",
+      "tools.json": "c53a4c486c5003341c7610f2e3706a9c99fe00b6ad6190829177eed8b2fb95ca",
+      "launcher.py": "6ad68a9ee39c0ef6f4e29af23ef8a11ec3a39b3ce0abbed62252222d09d4f976"
+    },
+    "chars": 10660,
+    "server_started": false,
+    "path": "/tmp/s4_21usr_c32_archiveops01_20261117",
+    "deployed": true,
+    "loaded_frozen_dependencies": 54,
+    "archive_started": false
+  },
+  "stage": {
+    "pid": 128419,
+    "source_sha256": "1ab445bf8f621c84f40adb0db4e4fa43fbb5f18e660e13cd720a820b0c286f04",
+    "directory": "/tmp/s4_21usr_r4_l03_xzstage_20261117",
+    "status": "compressing_xz",
+    "gzip_copy_verified": true,
+    "raw_bytes_processed": 2147483648,
+    "xz_bytes_observed": 478309001,
+    "full_xz_verified": false,
+    "source_modified": false,
+    "source_deleted": false
+  },
+  "shared_space_recovered_by_this_work": false,
+  "durable_migration_started": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
