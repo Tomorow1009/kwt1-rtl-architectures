@@ -6147,17 +6147,17 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:56:45+08:00",
+      "observed_at": "2026-11-16T09:07:59+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
-      "stage": "gate",
+      "stage": "saif",
       "current_block": null,
-      "child_pid": 143466,
+      "child_pid": null,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "current_log_phase": "Same-netlist gate cases; extremes and rounding passed"
+      "current_log_phase": "Own same-netlist gate14 passed; native SAIF12 preparation"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6168,10 +6168,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:56:45+08:00",
-      "status": "gate_running",
+      "observed_at": "2026-11-16T09:09:08+08:00",
+      "status": "saif_running",
       "parent_pid": 95253,
-      "child_pid": 143466,
+      "child_pid": null,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6192,10 +6192,23 @@
       "own_fresh_float20_precision_verified": true,
       "gate_cases_passed": [
         "extremes",
-        "rounding"
+        "rounding",
+        "layer_01",
+        "layer_02",
+        "layer_03",
+        "layer_04",
+        "layer_05",
+        "layer_06",
+        "layer_07",
+        "layer_08",
+        "layer_09",
+        "layer_10",
+        "layer_11",
+        "layer_12"
       ],
-      "current_gate_case": "layer_01",
-      "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md"
+      "current_gate_case": null,
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md",
+      "own_gate14_completed": true
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6327,6 +6340,54 @@
       "official600_verified": false,
       "stage_accepted": false,
       "scope": "Own first20 real ASIC/E203 results joined with newly recomputed same-data FLOAT references. Not final PPA or official precision acceptance."
+    },
+    "p80_own_gate14": {
+      "schema": "p80-displayed-own-gate14-completion-v1",
+      "observed_at": "2026-11-16T09:09:08+08:00",
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_finish05_gate/p80_gate",
+      "summary_sha256": "4688df6cc69d60c3705b603efbe65c3481e68f8742a1ff23a542945b48e29061",
+      "synthesis_summary_sha256": "75460463afddef3043613822bd58b8ee66e4869a826d49bf0899052d6e664c1e",
+      "netlist_sha256": "583e2e8f5ed6e61b357ddf477bab0e3e826e9f39f6ba490f16da275d40d0192c",
+      "status": "passed",
+      "cases": 14,
+      "outputs": 354816,
+      "gate_simulation_verified": true,
+      "cpu_executed": true,
+      "sdf_annotated": false,
+      "internal_total_checked_in_gate": false,
+      "internal_total_checked_in_own_RTL_batch": true,
+      "all14_complete_cycles_match_own_ASIC_RTL": true,
+      "fixed12_complete_cycles": [
+        80471,
+        78357,
+        77223,
+        77503,
+        76061,
+        74997,
+        73765,
+        74101,
+        73793,
+        76537,
+        80625,
+        87111
+      ],
+      "fixed12_mean_cycles": 77545.33333333333,
+      "own_ASIC_summary_sha256": "43e9ec58048d24ab8ab7d505723f7360b1e7e1e6eeaf5d76c81134cef34222c8",
+      "queue_status_at_observation": "running",
+      "queue_stage_at_observation": "saif",
+      "stage_accepted": false,
+      "power12_completed": false,
+      "physical_signoff": false,
+      "protected_T80_modified": false,
+      "old8_modified": false
+    },
+    "p80_b0_six_reports_readonly": {
+      "path": "handoff/team/evidence/P80_B0_ARCHIVED_REPORTS_READONLY_20261116.json",
+      "current_bytes_matched_archive": 961987609,
+      "files": 6,
+      "source_deleted": false,
+      "unused_proven": false,
+      "added_to_cleanup13": false
     }
   }
 }

@@ -1,6 +1,14 @@
 # P80最终网表验收继续入口
 
-更新：2026-11-16 08:57（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+更新：2026-11-16 09:09（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+
+## 09:09最新：同网表gate14全部通过，原队列进入SAIF
+
+09:07:59实际队列running/saif、error=None，completed=[precision,structure,gate]。自身门级14全部通过，摘要SHA **`4688df6cc69d60c3705b603efbe65c3481e68f8742a1ff23a542945b48e29061`**；09:09进一步读取354816输出、全部14例完整周期与自己的ASIC RTL一致，固定12均值77545.33333333333。无SDF、门级不观察内部total，内部total已由自己的ASIC批量验证；不扩大此验证范围。详细摘录`P80_GATE14_OBSERVATION_20261116.json`。
+
+前台第一标签Bash空闲，所有输入已结束（最近94093），第二旧watcher自然结束状态尚未截图；原父95253和export05不变。最新push02305a4；本节及gate14摘录待下一次提交。新活动12/STA/DRC/PT12、最终审核和持久归档仍待，未进入C80。
+
+仅补充只读空间证据：B0完整原备份中的六个DRC04/05统计报告当前SHA全部匹配，961987609B，见`P80_B0_ARCHIVED_REPORTS_READONLY_20261116.json`。名称是**systolic_b_v3_drc04/05**，不是无v3的路径；此前严格名称查询返回0，未作文件操作。六文件为mapped_probe_inventory.tsv、area_inventory.json、leaf_area.tsv；没有移除原件，没有加入cleanup13，也没有准备/执行新的清理工具。原备份、最终DRC06、网表、T80桌面和旧八路不动。
 
 ## 有效目标与不可动对象
 

@@ -1,0 +1,54 @@
+{
+  "schema": "p80-old-B0-archived-reports-readonly-v1",
+  "observed_at": "2026-11-16T09:04:44+08:00",
+  "source_bundle": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e",
+  "archive_manifest_sha256": "443a49be5abd11b5ab8d5c5bef744ae1c6cef5908ffd933041d06e086193aea9",
+  "archive_reference": "P80_B0_DUPLICATE_INPUT_PREFLIGHT_20261116.json: full original archive verified; no new full archive readback",
+  "candidate_columns": [
+    "relative_run_path",
+    "bytes",
+    "current_sha256_matches_archived_manifest"
+  ],
+  "candidates": [
+    [
+      "systolic_b_v3_drc04/systolic_b_synth/mapped_probe_inventory.tsv",
+      268913562,
+      true
+    ],
+    [
+      "systolic_b_v3_drc05/systolic_b_synth/mapped_probe_inventory.tsv",
+      268811341,
+      true
+    ],
+    [
+      "systolic_b_v3_drc04/systolic_b_synth/area_inventory.json",
+      137426026,
+      true
+    ],
+    [
+      "systolic_b_v3_drc05/systolic_b_synth/area_inventory.json",
+      136737089,
+      true
+    ],
+    [
+      "systolic_b_v3_drc04/systolic_b_synth/leaf_area.tsv",
+      75222281,
+      true
+    ],
+    [
+      "systolic_b_v3_drc05/systolic_b_synth/leaf_area.tsv",
+      74877310,
+      true
+    ]
+  ],
+  "candidate_bytes": 961987609,
+  "source_deleted": false,
+  "source_modified": false,
+  "backup_modified": false,
+  "unused_proven": false,
+  "added_to_cleanup13": false,
+  "space_recovered_bytes": 0,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "scope": "Only six large intermediate B0 DRC04/05 statistics reports. Final DRC06, netlists, source, functional outputs, SAIF and power reports excluded. No cleanup prepared or executed for these six files."
+}
