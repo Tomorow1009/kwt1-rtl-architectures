@@ -54,7 +54,10 @@ def evidence(req,bundle):
 
 
 def archive(req):
-    need(req['schema']==SCHEMA,'Wrong C32 archive request')
+    import c32_repaired_archive_contract as repaired
+    need(req['schema'] in (SCHEMA,repaired.SCHEMA),'Wrong C32 archive request')
+    evidence_reader=repaired.evidence if req['schema']==repaired.SCHEMA else evidence
+    contract_module=repaired if req['schema']==repaired.SCHEMA else contract
     selected_capacity=capacity.policy(req)
     uid=paths._identity();root,_=paths._root(req['runtime_root'],uid)
     bundle=Path(req['bundle']).absolute()
@@ -66,7 +69,7 @@ def archive(req):
          re.fullmatch(r'c32-runtime-[0-9]{8}_[0-9]{4}(?:-[A-Za-z0-9_-]+)?',target.name) and
          not target.exists() and not target.is_symlink(),'Fresh durable C32 backup directory required')
     need(target.parent.stat().st_dev!=root.stat().st_dev,'C32 backup must use a different durable filesystem')
-    proof=evidence(req,bundle)
+    proof=evidence_reader(req,bundle)
     lock,identity,owner=tar.acquire_lock(cfg,target.name);created=False
     try:
         before=tar.no_open_users([root],copy_only=True)
@@ -75,16 +78,16 @@ def archive(req):
         required=capacity.required_bytes(size,selected_capacity)
         free_before=shutil.disk_usage(str(target.parent)).free
         need(free_before>=required,'Need 1.2x compressed C32 archive plus declared reserve')
-        need(runtime_copy.inventory(root,uid)==rows and evidence(req,bundle)==proof,'C32 source changed during size check')
+        need(runtime_copy.inventory(root,uid)==rows and evidence_reader(req,bundle)==proof,'C32 source changed during size check')
         target.mkdir(mode=0o700);created=True
         tar.save(target/'state.json',dict(status='copying',source_deleted=False))
-        manifest=dict(schema=SCHEMA,request=req,files=rows,evidence=proof,source_root=str(root),
+        manifest=dict(schema=req['schema'],request=req,files=rows,evidence=proof,source_root=str(root),
             member_prefix=root.name,predicted_gzip_bytes=size,required_free_bytes=required,
             storage_policy=selected_capacity,free_bytes_before_copy=free_before,
             source_deleted=False,source_modified=False,archive_implies_acceptance=False,
             historical_runs_copied_without_promoting_acceptance=True,
             external_link_targets_copied=False,relocation_verified=False,
-            tools={Path(m.__file__).name:paths.digest(m.__file__) for m in (tar,paths,contract,runtime_copy,capacity)},
+            tools={Path(m.__file__).name:paths.digest(m.__file__) for m in (tar,paths,contract,contract_module,runtime_copy,capacity)},
             archiver_sha256=paths.digest(__file__))
         tar.save(target/'manifest.json',manifest)
         partial=target/'runtime-evidence.tar.gz.partial'
@@ -92,11 +95,11 @@ def archive(req):
             written=tar.stream_archive(rows,capacity.Sink(stream,target,selected_capacity));stream.flush();os.fsync(stream.fileno())
         need(written==size==partial.stat().st_size,'C32 archive size changed')
         counts=tar.verify_archive(partial,rows);digest=paths.digest(partial)
-        need(runtime_copy.inventory(root,uid)==rows and evidence(req,bundle)==proof,'C32 source changed during copy')
+        need(runtime_copy.inventory(root,uid)==rows and evidence_reader(req,bundle)==proof,'C32 source changed during copy')
         after=tar.no_open_users([root],copy_only=True);paths.recheck(cfg)
         final=target/'runtime-evidence.tar.gz';need(not final.exists(),'Preserve previous C32 archive')
         os.rename(str(partial),str(final));tar.sync_dir(target)
-        receipt=dict(schema=SCHEMA,status='verified_copy',finished=tar.now(),archive_sha256=digest,
+        receipt=dict(schema=req['schema'],status='verified_copy',finished=tar.now(),archive_sha256=digest,
             archive_bytes=size,member_counts=counts,manifest_sha256=paths.digest(target/'manifest.json'),
             storage_policy=selected_capacity,
             source_deleted=False,source_modified=False,all_members_readback_verified=True,
