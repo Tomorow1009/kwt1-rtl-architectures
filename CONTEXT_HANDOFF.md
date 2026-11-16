@@ -1,8 +1,8 @@
 # 架构三当前交接：C32-A finish03运行中
 
-最后观察：2026-11-17 01:13:20（北京时间）。恢复后重新读AGENTS、有效计划、STATUS和下方当前检查点，核对实际进程；禁止据旧PID或旧失败队列重启。
+最后观察：2026-11-17 01:30:00（北京时间）。恢复后重新读AGENTS、有效计划、STATUS和下方当前检查点，核对实际进程；禁止据旧PID或旧失败队列重启。
 
-最新：**自身门级14已通过，354816输出，全部14例完整周期与本版ASIC RTL相同，哈希和周期已机器核验。SAIF已完成L01至L05，回执记录完整窗口及功能核对，合计317357854B。** finish03父308692继续running/saif；01:11子326234已结束L05模拟，/tmp70.51GiB，下一子进程按台账读取。只读跟进原队列，不另起作业；余下SAIF、独立timing/DRC/PT12、导出与冻结仍待完成。最近已同步GitHub44098fd，本次面积与进度记录随后同步。阶段报告新增映射实例面积分解，未修改RTL或运行输入。
+最新：**自身门级14已通过，354816输出，全部14例完整周期与本版ASIC RTL相同，哈希和周期已机器核验。SAIF已完成L01至L08，回执记录完整窗口及功能核对，合计507634642B。** finish03父308692继续running/saif；子10278运行L09，/tmp70.33GiB。只读跟进原队列，不另起作业；余下SAIF、独立timing/DRC/PT12、导出与冻结仍待完成。最近已同步GitHub7012008，本次结果索引与状态随后同步。阶段报告已有映射实例面积分解，未修改RTL或运行输入。
 
 ## 当前有效目标
 
@@ -14,12 +14,12 @@
 
 ## 当前入口
 
-- 本地`E:/fpga_race-two/kwt1-c32-g32-20261115`；分支`codex/light-light126/t80-pipeline-c32-g32-20261115`，最近已push44098fd。
+- 本地`E:/fpga_race-two/kwt1-c32-g32-20261115`；分支`codex/light-light126/t80-pipeline-c32-g32-20261115`，最近已push7012008。
 - **当前检查点：`CONTEXT_CHECKPOINT_20261117_C32_FINISH.md`。** 初始运行及所有旧失败详细记录保留于`CONTEXT_CHECKPOINT_20261116_C32_SERVER.md`。
 - 服务器ROOT=`/tmp/s4_21usr_c32_20261116_2010`；包`ROOT/light-light126-c32-91135f6`，manifest d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7。
 - **正在运行`runs/c32_finish03`，父PID308692，00:31:05.429536启动；结构及门级14已完成，当前SAIF采集。** 历史子PID不用于操作，恢复用台账查实际子进程。
 - 只读命令：`python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_status_readonly_v4.py`。旧v1–v3可能指向失败的finish01/02，不再用它们判断当前队列。
-- 原共享锁`/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock`现由finish03持有，全部新大产物在/tmp；01:11剩余70.51GiB。
+- 原共享锁`/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock`现由finish03持有，全部新大产物在/tmp；01:30剩余70.33GiB。01:27共享盘仅1048576B可用，不假称已有C32持久备份。
 - 当前VNC18874435、workspace3第一终端空闲，无活动GUI输入；恢复时重新查窗口，不用workspace4。
 
 ## 已完成
