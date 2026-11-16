@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 accepted, durable copy verified and frozen; C80 decoder development next",
+    "current_stage": "C80 local RTL/firmware integration; P80 frozen 8674293",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5670,7 +5670,16 @@
         }
       ]
     },
-    "current_local_sessions": [],
+    "current_local_sessions": [
+      {
+        "id": 15825,
+        "task": "C80 SRAM latency2 prefetch0/1 ABA"
+      },
+      {
+        "id": 48842,
+        "task": "C80 own 10000 random compute blocks"
+      }
+    ],
     "last_server_observation": "2026-11-16T08:25:17+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
@@ -6672,17 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T12:10:21+08:00",
-      "original_queue_completed": true,
-      "export_completed": true,
-      "archive_completed": true,
-      "archive_pid": 241828,
-      "archive_worker_exited": true,
-      "cooperation_lock_absent": true,
+      "at": "2026-11-16T12:28:00+08:00",
       "p80_frozen": true,
-      "c80_hardware_started": false,
-      "current_terminal": "both tabs idle Bash; all input sessions completed",
-      "new_server_deletion": false,
+      "c80_hardware_started": true,
+      "c80_server_started": false,
+      "current_terminal": "both tabs idle Bash; no remote job last observed12:10",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6776,6 +6779,37 @@
       "official600_verified": false,
       "protected_T80_modified": false,
       "old8_modified": false
+    },
+    "c80_development": {
+      "started_after_p80_freeze": true,
+      "layout": "0x00100006",
+      "peripheral_id": "0x4b57530c",
+      "capability": "0x000a05bf",
+      "numeric_format": "0x000e0c20",
+      "source_credits": 3,
+      "transaction_metadata_depth": 2,
+      "decoder_good_and_negative_cases": 48,
+      "local_first_task_outputs": 25344,
+      "firmware_families_compiled": [
+        "irq",
+        "sequence",
+        "contention"
+      ],
+      "monitor_modes_elaborated": [
+        "positive",
+        "sequence",
+        "contention"
+      ],
+      "server_started": false,
+      "stage_accepted": false,
+      "project_area_verified": false,
+      "system_power_verified": false,
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_LOCAL.md",
+      "local14_passed": true,
+      "local14_outputs": 354816,
+      "local_sequence10_passed": true,
+      "local_sequence_outputs": 76032,
+      "local_observer_negative_cases": 3
     }
   }
 }
