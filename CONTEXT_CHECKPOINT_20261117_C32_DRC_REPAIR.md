@@ -1,3 +1,37 @@
+# 04:11执行状态更新：repair02与原依赖等待器仍在，不能重启
+
+本节覆盖下方旧repair01与恢复30的运行状态。有效计划、保护范围及旧功能证据不变。
+
+- 最新服务器观察2026-11-17 04:10:59.170434：repair02父78851、依赖等待器82597、恢复32 worker85635均存活；repair02尚无stage目录，仍WAIT_ORIGINAL_LOCK_STORAGE。当前无DC或新门级/PPA子进程被观察到。
+- 新包ROOT/light-light126-c32-repair-b9f0127，源码b9f012707be7c557ac717138dc4060d23fd603b4；03:53:23.740263启动。manifest屏幕值aa329cd1a7137f857068cde6ee100946f9aa55953ecc1cf1c03cc4615e559b2e；来源和逐文件身份由准备器及等待器机器验证，字符串尚未另作人工转录断言。差量payload SHA90d6ef80ca4b3d5e74bd02c83b3d7bec0bfc8693a997260e64194b1126419e5c，仅2个工具文件，4422字符，逐字节往返及Py3.6通过。
+- repair01已失败并退出，DC实际执行52秒、日志7条UID-133错误：缺省dont_touch返回空字符串而非Tcl异常。新代码处理空值并恢复属性缺省，增加真实Tcl回归；相关27项测试通过。
+- repair01候选还暴露一个上游n60013、34条max_transition记录；静态驱动NOR3V2_12TR40 U24686。新repair02从原始ee08629b网表重新派生，只改3个BUFV2RD→BUFV4RD及U24686 NOR3V2→NOR3V4；同库引脚/函数等价、token/leaf证明，无compile、无拓扑/约束更改。旧尝试不能当合格结果。
+- repair02先前脚本固定路径runs/c32_repair02/c32_synth。ROOT/c32_repair02_launch.json、request和launch.log为状态入口。不要运行repair01或修改任何既有包。
+
+## 单次后续验证接续
+
+ROOT/c32_finish_repair02_wait.py父82597于04:01:54.153666启动。它等78851自然退出，然后必须通过完整修复身份、DRC、setup/hold、≤1mm²、0锁存器、原锁空闲及所有子进程退出检查才调用ROOT/c32_finish_repair02_tool.py。任何失败保留并退出，不重试。目标队列为新包runs/c32_finish_repair02；当前尚未启动。
+
+等待器SHA e88671019a689f3f7ff6cc5b49b92a4cd886350cc56dde0bc09cfd73c06c34bb；启动工具SHA93c9f4aa26ce21ea485e3249ea0cdbc6f88b368ab22ca7eede5ae0109059372d；payload51088235b927c67464f77c9a330653c9e86a5357fc34ee4bade43f978a53d6b6。部署哈希机器验证。不要重复启动等待器或手工并行启动finish。
+
+新门级/PPA完成后的报告工具已提交：handoff/team/evidence/C32_REPAIRED_EXPORT_REVIEW_20261117.py（尚未部署/运行）。它明确连接“原未变RTL功能/精度＋新等价映射＋新门级/活动/功耗”，不使用旧export03同包假设，不继承旧网表结果。
+
+## 空间恢复终态与当前唯一清理
+
+- 恢复30已终止：654份210149660B已归档CSV重复副本被移除，余9份2898594B保留；取得原锁即停止，状态query_started_remaining_captures_preserved。原清理工具不要重复。回执哈希还未独立机器转录核验。
+- 恢复31 worker81140于03:58:42.064777启动后在首次文件存在性检查失败；任务固件镜像已经由更早清理移除，未创建b0_archived_firmware31目录，因此零删除。保留日志/脚本，不重复31。
+- 04:04:55对磁盘实际存在文件只读复核：该旧B0批量仅expected.npz1200份182156054B仍较大，另有9份CSV及小型回执/汇总/日志。04:06:48确认精确路径cases/sample_000001_layer_01/task_data/expected.npz等。
+- 恢复32仅处理上述1200份已核验完整归档内的生成参考NPZ副本，canonical模型/数据、所有汇总日志、完整归档和受保护版本保留。worker85635于04:08:47.613846启动，04:10:59仍在验证，无终态/错误。工具SHA ef70a9db4d61f9e286dd5bd994556d12639a141eadf10fe6d33ce65dd13e5519；ROOT/c32_recovery32.log，终态ROOT/b0_archived_expected32/state.json。原修复取得锁即停止；不能重复32。
+- 用户已确认无我方持续共享盘写入。共享盘仍反复接近1MiB；所有新验证产物在/tmp，原协作锁不改、不清。不要依据旧归档清单猜测文件仍在，应先只读检查实际存在。
+
+## 接下来
+
+先看78851/82597/85635和原锁。若repair02完成，读取真实报告并跟进原等待器；不另开重复队列。如果仍有约束/工具/等价证明问题，保留失败，在新目录修复。C32-A仍未冻结，不启动C32-B/G32。正式仅20条，100条未授权。T80桌面、旧8全部数据、冻结S0/P80/C80及备份不改动。
+
+最新本地459dd79；已推b9f0127，后续操作工具/检查点待同步。当前GUI空闲，窗口18874435、workspace3第一终端；恢复重查windows。不使用workspace4。不启子代理/goal。下方为较早完整证据索引，旧活动状态以上述为准。
+
+---
+
 # C32-A修复恢复入口（03:44实际观察）
 
 先读AGENTS.md、有效计划、本文和STATUS。有效计划为workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md，SHA 1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39。路线S0→P80→C80→C32-A→可选C32-B→G32，当前只修复C32-A。
