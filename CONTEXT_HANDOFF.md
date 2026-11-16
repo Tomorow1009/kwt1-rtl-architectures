@@ -95,3 +95,12 @@ VNC窗口18874435已重新确认、workspace3；不使用workspace4。当前无�
 8. 下一步部署确认后，在新独立日志启动迁移03，核对waiting状态和原锁；再显式启动恢复35（--execute-verified-remaining-captures），持久归档/原锁均核验后只删已备份重复NPZ直到锁出现，供迁移03取得锁。之后跟踪R4持久XZ完整回读和C32新报告，完成C32持久copy后才冻结C32-A，再进入C32-B/G32。
 
 最新本地提交e416b13（恢复工具和测试，未推）；此前9ff2cd2及82be84d已推。当前阶段报告已重写为新网表专用，原混合历史保留C32_STAGE_REPORT_PRE_REPAIR03_20261117.md，不再据旧表拿新功耗。仅S0_SYNTH05_FINISH_LAUNCH_20261115.py历史未跟踪勿提交。本段之后的实际观察继续追加；全部禁止保护范围与当前计划不变。
+
+## 07:03 增量：新功耗数值及空间迁移完成
+
+- 新修复03完整报告已生成，report SHA ea4b916db90117e1082565bd9dd78947098200dddd39de5a6d2c42d950ad3565。07:01:35.762375已机器断言该SHA、修复网表SHA、12层周期/时长/功耗/能耗关系。时间加权平均0.04897381980833410302117873075W，平均能耗0.0000235659820737505569651J。总时长5774346.089232ns、总能量0.0002827917848850066835812J。加权动态0.04208028354075208508437318161W、泄漏0.006893535898086675317958048934W。新证据C32_POWER12_REPAIR03_20261117.json，阶段报告已更新。
+- 首次数字转录将power内部一位抄错，机器断言拒绝；分组重读后已更正并全断言通过。原report及实测数据未改，错误值未写入正式数值证据。
+- 06:56:23 exporter155861为collecting_new_activity、error=None，export子155879已退出；新unknown inventory仍在处理。不要重复汇总或原EDA，之后还有连接及model snapshot。C32-A暂未冻结、未启动C32-B/G32。
+- 迁移03父160753，06:52:30.217349启动；恢复35父161408，06:54:04.737909启动。35完成128份已归档expected.npz重复移除、19387868B，余408份61976206B。完整持久archive不变；不重复35。
+- **R4 L03持久XZ已通过完整解压回读并完成**：06:58:31.604005，父160753已退出；status durable_xz_verified_original_gzip_copy_retained，2780943668B，完成时free4433379328B。目标PROJECT/backups/r4-l03-xz-20261117/layer_03.vcd.xz，receipt.json与RESTORE.txt保留。原共享gzip已删除，其精确副本仍在/tmp/s4_21usr_r4_l03_xzstage_20261117/original_layer_03.vcd.gz；原JSON未改。原始VCD全字节可恢复，不是丢弃波形。下一步读取/机器绑定持久receipt SHA及35journal状态，记录准确恢复索引。
+- 所有GUI输入会话已结束；当前窗口18874435/workspace3。继续原export模型审核，等110729及export全部退出后，显式运行已部署C32复制launcher（tools SHA c53a4c486c5003341c7610f2e3706a9c99fe00b6ad6190829177eed8b2fb95ca），不得在其source仍写日志时归档。备份成功后才冻结C32-A。桌面T80/旧8/冻结S0/P80/C80不动。
