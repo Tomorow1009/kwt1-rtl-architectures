@@ -6147,20 +6147,17 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T09:13:07+08:00",
+      "observed_at": "2026-11-16T09:18:42+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
       "stage": "saif",
       "current_block": null,
-      "child_pid": 149666,
+      "child_pid": 152202,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "current_log_phase": "Native SAIF compile finished; first layer simulation running",
-      "child_elapsed_seconds": 259,
-      "child_cpu_percent": 99.5,
-      "child_rss_kib": 542260
+      "current_log_phase": "L01 own full-window SAIF passed; original L02 simulation running"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6171,10 +6168,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T09:13:07+08:00",
+      "observed_at": "2026-11-16T09:18:42+08:00",
       "status": "saif_running",
       "parent_pid": 95253,
-      "child_pid": 149666,
+      "child_pid": 152202,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6214,7 +6211,8 @@
       "own_gate14_completed": true,
       "watcher_terminal_tab": 1,
       "previous_watcher135257_confirmed_exited": true,
-      "saif_cases_completed": 0
+      "saif_cases_completed": 1,
+      "current_saif_case": "layer_02"
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6403,6 +6401,54 @@
       "tmp_free_bytes": 87922278400,
       "first_case_complete": false,
       "new_vcd_created": false
+    },
+    "p80_saif_l01": {
+      "schema": "p80-displayed-native-saif-first-layer-v1",
+      "observed_at": "2026-11-16T09:18:42+08:00",
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_finish05_saif/p80_saif",
+      "case": "layer_01",
+      "outputs": 25344,
+      "complete_cycles": 80471,
+      "activity_status": "saif_scope_duration_and_residence_verified",
+      "activity_bytes": 97679538,
+      "activity_sha256": "369a96911074d6d2b9a642c07d195290b27e339e33a0f2b813509a7d2171d89e",
+      "start_ns": "93149.990685",
+      "end_ns": "629623.270371",
+      "duration_ns": "536473.279686",
+      "timescale_ns": "0.000001",
+      "native_compile_started": "2026-11-16T09:07:51.146635",
+      "native_compile_finished": "2026-11-16T09:08:48.747892",
+      "layer01_child_pid": 149666,
+      "layer01_child_started": "2026-11-16T09:08:48.778415",
+      "layer01_child_finished": "2026-11-16T09:13:15.782032",
+      "layer01_simulation_cpu_seconds": 266.02,
+      "first_case_progress_mtime_when_only_L01_complete": "2026-11-16T09:14:31.020395",
+      "layer02_child_pid": 152202,
+      "layer02_child_started": "2026-11-16T09:14:31.035304",
+      "layer02_status_at_observation": "running",
+      "simulator_wall_seconds": 267.003617,
+      "start_to_first_verified_receipt_seconds": 342.24198,
+      "post_simulation_activity_audit_seconds": 75.238363,
+      "first_storage_budget": {
+        "free_bytes": 87824801792,
+        "required_bytes": 3441161304,
+        "remaining_cases": 11,
+        "maximum_case_bytes": 98005883,
+        "margin": 1.2,
+        "reserve_bytes": 2147483648
+      },
+      "estimated_remaining_activity_minutes_at_observation": [
+        60,
+        75
+      ],
+      "estimate_includes_twenty_percent_margin": true,
+      "estimate_excludes_timing_drc_power_export_archive": true,
+      "estimate_is_not_completion_promise": true,
+      "all12_complete": false,
+      "system_power_verified": false,
+      "stage_accepted": false,
+      "protected_T80_modified": false,
+      "old8_modified": false
     }
   }
 }
