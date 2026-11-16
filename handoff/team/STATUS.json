@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Finish GUI transfer26709, verify ops24 hashes, execute exact two archived B0 repair seed recovery24 and immediate finish02. Preserve finish01 failure; never repeat prior cleanups.",
+      "next": "Read recovery24 state/log and finish02 state. Do not repeat cleanup or restart finish01.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T00:10:57+08:00",
+      "last_observed_at": "2026-11-17T00:20:22+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7216,11 +7216,14 @@
       "finish01_state_sha256": "0c853c6c0bf5585437d49823d58f8c2527d05b28eb9cf11e491696acec5c58a6",
       "recovery24": {
         "prepared": true,
-        "server_executed": false,
+        "server_executed": true,
         "files": 2,
         "bytes": 66052096,
         "source_sha256": "d407efb9ff8244f6c5620736200705ae15c09e72985cb6cd08d899d5011c5dd5",
-        "gui_transfer_session": 26709
+        "gui_transfer_session": null,
+        "worker_pid": 303992,
+        "started": "2026-11-17T00:20:22.352163",
+        "tools_deployed": true
       }
     }
   }
