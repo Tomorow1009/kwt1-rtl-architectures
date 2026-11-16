@@ -1,5 +1,9 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:48 三个修复包摘要已完成机器核对
+
+22:48:50服务器明确打印THREE_SUMMARIES_AND_354816_OUTPUTS_VERIFIED。soc正确SHA为 **2ebcde2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7**；原屏幕抄录将首八位c/d顺序看错，先前两次断言拒绝仅为转录检查，没有修改摘要或影响综合。sequence与contention SHA使用上节值并同次机器验证通过。C32_ASIC_CORRECTED_20261116.json已修正。任何含2ebdce2f或2cbdce2f前缀的旧记录均不可用。
+
 ## 22:43 修复包竞争通过，正在新综合
 
 PID238916的initial03已完成soc/sequence/contention，开始自己的新综合。22:43:37当前子PID256175执行fresh_link/c32_link.log；原锁保持，未并发额外EDA。竞争实际检查122轮scratch，CPU授权7876次、DMA33120次、竞争3215拍、scratch读写各3877次，CPU等待期间最大连续DMA授权1，满足≤8条件。竞争93645周期仅用于竞争用例，不纳入固定12性能平均。
@@ -8,7 +12,7 @@ PID238916的initial03已完成soc/sequence/contention，开始自己的新综合
 
 ## 22:40 initial03的ASIC14及恢复通过，竞争编译中
 
-22:40:07原PID238916仍运行，completed=['soc','sequence']、stage=contention，当前子PID250798正在竞争固件的VCS编译。新ASIC摘要SHA 2ebdce2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7，恢复摘要SHA 4eeb72b3d16e10be04df11184a2c4d61020baab55aff31e171c81b48e214d85（后续收证时与机器文件再次核对）。固定12周期与旧ASIC14一致。竞争尚未完成，综合尚未开始。
+22:40:07原PID238916仍运行，completed=['soc','sequence']、stage=contention，当前子PID250798正在竞争固件的VCS编译。新ASIC摘要SHA 2ebcde2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7，恢复摘要SHA 4eeb72b3d16e10be04df11184a2c4d61020baab55aff31e171c81b48e214d85（后续收证时与机器文件再次核对）。固定12周期与旧ASIC14一致。竞争尚未完成，综合尚未开始。
 
 后继ROOT/c32_finish_from_initial03.py已部署，22:37:09机器核验SHA 7e4c2c74ed44017c53390f3d52693293fa30b61eec9782a4c3dd964e72d5c256，未执行。GUI输入75319/96279均已完成。根交接已整合，旧全文保存为CONTEXT_HISTORY_20261116_C32_2238.md，不能把旧“尚未创建initial03”等段落当实时状态。
 

@@ -10,7 +10,7 @@
   "last_observed_stage": "synth",
   "passed": {
     "soc": {
-      "summary_sha256": "2ebdce2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7",
+      "summary_sha256": "2ebcde2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7",
       "cases": 14,
       "outputs": 354816,
       "fixed12_cycles": [74750, 73187, 72186, 72264, 70798, 69193, 68427, 68604, 68610, 70970, 75393, 81770],
