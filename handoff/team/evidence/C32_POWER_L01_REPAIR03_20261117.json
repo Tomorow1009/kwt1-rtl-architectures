@@ -1,0 +1,49 @@
+{
+  "schema": "c32-own-repaired-first-layer-power-observation-v1",
+  "observed_at": "2026-11-17T06:16:41.868588+08:00",
+  "run": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-repair-5828804/runs/c32_finish_repair04_power_layer_01/c32_power",
+  "summary_sha256": "e0548230104f9525e684703259202f224a1ba6c4bb94678bc57c6f9cbf60ac69",
+  "summary_hash_and_total_power_asserted_on_server": true,
+  "energy_recomputed_with_Decimal_on_server_and_host": true,
+  "scope": "layer_01 complete-task whole-system pre-layout estimate; not the twelve-layer aggregate",
+  "duration_ns": "498333.283500",
+  "cycles": 74750,
+  "reported_power_w": {
+    "switching": "5.00424532e-03",
+    "internal": "3.68173271e-02",
+    "leakage": "6.89319801e-03",
+    "total": "4.87147681e-02"
+  },
+  "energy_j": "0.0000242761903422140563500",
+  "mapping": {
+    "exact_mapping": 237428,
+    "map_file": 0,
+    "built_in_mapping": 0,
+    "ssa": 0,
+    "sca": 0,
+    "clock": 0,
+    "default": 1274,
+    "propagated": 0,
+    "implied": 0,
+    "not_annotated": 0,
+    "total": 238702
+  },
+  "static_probability_same_mapping_counts": true,
+  "actual_clocks_ns": {
+    "hf_period_ns": "6.666666000000",
+    "lf_period_ns": "66.000000000000"
+  },
+  "component_leaf_counts": {
+    "accelerator": 144716,
+    "dma_arbiter": 216,
+    "dma_router": 212,
+    "dtcm": 675,
+    "itcm": 655,
+    "platform_other": 71995,
+    "shared": 1575
+  },
+  "old_netlist_power_reused": false,
+  "system_power_verified": false,
+  "physical_signoff": false,
+  "note": "Own final-netlist first-layer observation. Full12 unknown-state, macro-model and timing-scope review remains separate. Do not compare this single layer against another version's twelve-layer average."
+}
