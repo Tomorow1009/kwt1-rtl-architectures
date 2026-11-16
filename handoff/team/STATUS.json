@@ -6082,15 +6082,17 @@
     "p80_local_library_fix": {
       "source_commit": "102364644dd181b23358dc2c7fe0d6e8279ae0d2",
       "local_tests": 14,
-      "dc_verified": false,
+      "dc_verified": true,
       "hardware_changed": false,
       "declared_constraints_changed": false,
       "shared_block_mapping_verified": true,
       "shared_mapping_seconds": 35.674336516764015,
       "shared_actual_error_lines": 0,
-      "dc_whole_soc_verified": false,
+      "dc_whole_soc_verified": true,
       "accelerator_block_mapping_verified": true,
-      "accelerator_mapping_seconds": 4470.295607929118
+      "accelerator_mapping_seconds": 4470.295607929118,
+      "cpu_mapping_seconds": 748.8967320428485,
+      "final_link_seconds": 133.86486406158656
     },
     "p80_ops_transfer1023646": {
       "next_line": 44,
@@ -6145,20 +6147,17 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:40:46+08:00",
+      "observed_at": "2026-11-16T08:51:03+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
-      "stage": "synthesis",
-      "current_block": "cpu_soc",
-      "child_pid": 132629,
+      "stage": "precision",
+      "current_block": null,
+      "child_pid": null,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 409,
-      "child_cpu_percent": 99.7,
-      "child_rss_kib": 2933272,
-      "current_log_phase": "CPU/SoC mapping; accelerator mapped"
+      "current_log_phase": "Final synthesis reports generated; own FLOAT precision join running"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6169,10 +6168,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:40:46+08:00",
-      "status": "synthesis_running",
+      "observed_at": "2026-11-16T08:51:03+08:00",
+      "status": "precision_running",
       "parent_pid": 95253,
-      "child_pid": 132629,
+      "child_pid": null,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6180,16 +6179,16 @@
       "own_batch_outputs": 6082560,
       "own_current_hardware_real_E203_tested": true,
       "own_current_hardware_original_fabric_tested": true,
-      "final_netlist_ready": false,
+      "final_netlist_ready": true,
       "stage_accepted": false,
       "c80_started": false,
       "protected_T80_modified": false,
       "old8_modified": false,
-      "foreground": "workspace3 terminal tab2 readonly watcher135257",
+      "foreground": "workspace3 terminal tab1 idle Bash",
       "watcher_pid": 135257,
-      "second_terminal_tab": "readonly watcher; do not type",
+      "second_terminal_tab": "watcher135257 should exit on phase change; reobserve",
       "current_local_sessions": [],
-      "current_block": "cpu_soc"
+      "current_block": null
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6250,6 +6249,50 @@
       "old8_modified": false,
       "lifecycle_rejections_tested": 6,
       "unittest_cases_passed": 2
+    },
+    "p80_synthesis_numbers": {
+      "schema": "p80-displayed-final-netlist-numbers-v1",
+      "observed_at": "2026-11-16T08:51:03+08:00",
+      "hardware_commit": "142fae28545759e33fa38de514eabf752cb8c43a",
+      "synthesis_tools_commit": "102364644dd181b23358dc2c7fe0d6e8279ae0d2",
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_synth_d2_06/p80_synth",
+      "summary_sha256": "75460463afddef3043613822bd58b8ee66e4869a826d49bf0899052d6e664c1e",
+      "netlist_sha256": "583e2e8f5ed6e61b357ddf477bab0e3e826e9f39f6ba490f16da275d40d0192c",
+      "transaction_metadata_depth": 2,
+      "period_ns": "6.666666000000",
+      "lf_period_ns": "66.000000000000",
+      "setup_slack_ns": "0.000055331",
+      "hold_slack_ns": "0.00113887",
+      "max_path_groups": 2,
+      "min_path_groups": 2,
+      "latches": 0,
+      "RAMSP128X16": 92,
+      "RAMSP4096X16": 128,
+      "macro_count": 220,
+      "whole_system_library_area_um2": "4475145.365862",
+      "known_added_mm2": "0.7924098895005534",
+      "conservative_budget_mm2": "0.9529288663004588",
+      "project_limit_mm2": "1.00",
+      "block_mapping_seconds": {
+        "shared_sram": 35.674336516764015,
+        "accelerator": 4470.295607929118,
+        "cpu_soc": 748.8967320428485
+      },
+      "final_link_seconds": 133.86486406158656,
+      "queue_status_at_observation": "running",
+      "queue_stage_at_observation": "precision",
+      "stage_accepted": false,
+      "gate14_completed": false,
+      "power12_completed": false,
+      "scope": "Preliminary numbers from own final partition-linked netlist; subsequent detailed audits and own gate/activity/power remain pending.",
+      "physical_signoff": false,
+      "protected_T80_modified": false,
+      "old8_modified": false
+    },
+    "p80_schedule_observation": {
+      "path": "handoff/team/evidence/P80_FIXED12_SCHEDULE_OBSERVATION_20261116.json",
+      "source_summary_sha256": "43e9ec58048d24ab8ab7d505723f7360b1e7e1e6eeaf5d76c81134cef34222c8",
+      "no_new_simulation": true
     }
   }
 }
