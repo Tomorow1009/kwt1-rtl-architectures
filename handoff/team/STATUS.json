@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "P80 final report and activity inventory complete; own mapped connection review running; not frozen",
+    "current_stage": "P80 technically accepted in declared task mode; copy03 durable archive running before freeze",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -6537,10 +6537,11 @@
     },
     "p80_copy_only_preparation": {
       "source": "handoff/team/evidence/P80_COPY_ONLY_LAUNCH_20261116.py",
-      "deployed": false,
-      "executed": false,
+      "deployed": true,
+      "executed": true,
       "source_deletion_allowed": false,
-      "guards_checked": true
+      "guards_checked": true,
+      "status": "attempt01_import_failed_no_target_created"
     },
     "c80_scalar_software_budget": {
       "evidence": "handoff/team/evidence/C80_SCALAR_SOFTWARE_BUDGET_20261116.json",
@@ -6671,19 +6672,20 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T11:37:13.879623+08:00",
-      "queue": "reports_ready_review_required",
-      "export": "querying_own_mapped_connections",
-      "exporter_pid": 96154,
-      "queue_parent_exited": true,
-      "report_sha256": "a5821699ef4551bfdfb485c7c3b9bae3e07f0fb0b27ca984ed58f3d0a6ace5ce",
-      "stage_accepted": false,
+      "at": "2026-11-16T11:55:54+08:00",
+      "original_queue_completed": true,
+      "export_completed": true,
+      "watcher_exited": true,
+      "p80_technical_stage_accepted": true,
       "p80_frozen": false,
       "c80_hardware_started": false,
-      "current_terminal": "first tab watcher178083; second tab idle; all input sessions completed",
+      "archive_pid": 241828,
+      "archive_control": "/tmp/s4_21usr_p80_archive03_20261116_1155",
+      "archive_destination": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/p80-runtime-20261116_1155-copy03",
+      "current_terminal": "first tab idle Bash; second idle Bash; all typing completed",
+      "new_server_deletion": false,
       "protected_T80_modified": false,
-      "old8_modified": false,
-      "new_server_deletion": false
+      "old8_modified": false
     },
     "p80_report_model_observation": {
       "schema": "p80-displayed-export-model-observation-v1",
@@ -6725,6 +6727,9 @@
       "tests_passed": 3,
       "hardware_started": false,
       "stage_accepted": false
-    }
+    },
+    "p80_independent_conclusion": "handoff/team/evidence/P80_STAGE_CONCLUSION_20261116.json",
+    "p80_independent_model_review": "handoff/team/evidence/P80_MODEL_REVIEW_SNAPSHOT_20261116.json",
+    "p80_stage_report": "workspaces/arch03/P80_STAGE_REPORT_20261116.md"
   }
 }

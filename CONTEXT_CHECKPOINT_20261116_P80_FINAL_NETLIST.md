@@ -1,6 +1,18 @@
 # P80最终网表验收继续入口
 
-更新：2026-11-16 11:38（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+更新：2026-11-16 11:57（北京时间）。恢复时先读AGENTS.md、当前计划、本文件及根交接；下列远端状态仅对应观察时间。
+
+## 11:57最新：独立技术结论完成，copy03运行
+
+原export96154已自然到达`facts_joined_manual_conclusion_required`并退出，原watcher178083在11:37:43观测终态后退出；11:40:19再次确认原父95253/export均不在proc，协作锁不存在、共享可用34935406592B。快照SHA **e5fceabc3b935bba6cac2235cc545cfbe880085d604c3c6d9e69f76584ebe333**已服务器断言。未知40906目标/38462直接解析/2444全部分类，65529叶引脚，无未知显式时钟、复位、ICG或SRAM控制；12层无时钟JTAG186+同步3一致，禁用弧C72371/c12146/d202/p59804一致，实际周期6.666666/66ns。独立P80_STAGE_CONCLUSION与中文P80_STAGE_REPORT已写，技术验收限稳定任务模式/布局前模型，不改原报告false标志，不声称物理签核。仍需归档冻结才能开始C80硬件。
+
+归档失败路径：copy01子235749在导入`n1_archive_runtime`失败，目标未创建；控制`/tmp/s4_21usr_p80_archive_20261116_1141`保留。copy02在启动器完整导入预检中发现`transport_report_stage`间接依赖缺失，控制`/tmp/s4_21usr_p80_archive02_20261116_1149`只含两个辅助脚本，没有worker或目标。两次均未改源、未删除。一次本地生成transfer的PowerShell引号解析失败也未执行，改用独立Python文件生成。
+
+11:53只读导入闭包成功，确认仅需从原S0 `ops-review-e516e4c`复制三份同字节工具：n1_archive_runtime SHA8a1162f15b3e7c561c11ecc403e5a0bca806078fb47ee080374ff678f7cfb5db；t80_archive_runtime SHA8670077cffe84e4cfe5ea1bf98a9bb9f36cc2ad00e6bb6b330057a6a843f0a6b；transport_report_stage SHA82cb80cc83a5c630be9e227fc8c980a3ce2cb4e9b0b508a7b50876881728f812。新独立目录复制，P80/S0包不改；所有实际加载的P80模块逐项匹配原manifest后才派发。
+
+**copy03已启动子241828**：控制`/tmp/s4_21usr_p80_archive03_20261116_1155`，目标`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/p80-runtime-20261116_1155-copy03`。启动器`/tmp/s4_21usr_p80_copy_dependencies03_20261116.py` SHA **9a77e4322c45d09ef28900fca18e946cfe9da44e7180012cd46133bb02ba0a59**；本地源`P80_COPY_ONLY_DEPENDENCIES03_20261116.py`，transfer`local_runs/p80_copy03_transfer_20261116.txt`，来源生成器`local_runs/p80_build_copy03_transfer.py`。已有完整导入/身份预检，保留全部源和历史，无删除。读control的archive.log/process/result/failed，以及目标state/receipt；**归档运行时不要读取源ROOT中的文件，以免自身短时只读进程撞上严格占用核对。**工具前后完整源身份与tar回读是通过条件；未完成不能标归档成功。
+
+当前前台第一标签Bash空闲，第二也空闲，全部键盘输入结束（最近40767）。只剩copy03，不存在EDA或watcher；不能按旧PID重启。最新已push41ef7f5，后续独立报告/结论与copy02/03工具待同步。C80软件14同源准备已完成，无硬件变更。T80桌面及所有旧八路数据未动，cleanup13仍未执行。
 
 ## 11:38最新：报告、12层清单完成，原连接核对中
 
