@@ -14,6 +14,7 @@ import n1_archive_runtime as tar
 import t80_archive_runtime as runtime_copy
 import c80_paths as paths
 import c80_archive_contract as contract
+import c80_archive_capacity as capacity
 
 SCHEMA='arch03-c80-runtime-copy-v1'
 BACKUPS=Path(paths.SERVER_ROOT)/'light-light126-undergrad-d2-20261109/backups'
@@ -54,6 +55,7 @@ def evidence(req,bundle):
 
 def archive(req):
     need(req['schema']==SCHEMA,'Wrong C80 archive request')
+    selected_capacity=capacity.policy(req)
     uid=paths._identity();root,_=paths._root(req['runtime_root'],uid)
     bundle=Path(req['bundle']).absolute()
     cfg=paths.configure(read(bundle/'handoff/team/server_config.json'),bundle,root,
@@ -70,22 +72,24 @@ def archive(req):
         before=tar.no_open_users([root],copy_only=True)
         rows=runtime_copy.inventory(root,uid)
         size=tar.stream_archive(rows,tar.Sink())
-        required=(size*6+4)//5+tar.RESERVE
-        need(shutil.disk_usage(str(target.parent)).free>=required,'Need 1.2x compressed C80 archive plus reserve')
+        required=capacity.required_bytes(size,selected_capacity)
+        free_before=shutil.disk_usage(str(target.parent)).free
+        need(free_before>=required,'Need 1.2x compressed C80 archive plus declared reserve')
         need(runtime_copy.inventory(root,uid)==rows and evidence(req,bundle)==proof,'C80 source changed during size check')
         target.mkdir(mode=0o700);created=True
         tar.save(target/'state.json',dict(status='copying',source_deleted=False))
         manifest=dict(schema=SCHEMA,request=req,files=rows,evidence=proof,source_root=str(root),
             member_prefix=root.name,predicted_gzip_bytes=size,required_free_bytes=required,
+            storage_policy=selected_capacity,free_bytes_before_copy=free_before,
             source_deleted=False,source_modified=False,archive_implies_acceptance=False,
             historical_runs_copied_without_promoting_acceptance=True,
             external_link_targets_copied=False,relocation_verified=False,
-            tools={Path(m.__file__).name:paths.digest(m.__file__) for m in (tar,paths,contract,runtime_copy)},
+            tools={Path(m.__file__).name:paths.digest(m.__file__) for m in (tar,paths,contract,runtime_copy,capacity)},
             archiver_sha256=paths.digest(__file__))
         tar.save(target/'manifest.json',manifest)
         partial=target/'runtime-evidence.tar.gz.partial'
         with partial.open('xb') as stream:
-            written=tar.stream_archive(rows,tar.Sink(stream,target));stream.flush();os.fsync(stream.fileno())
+            written=tar.stream_archive(rows,capacity.Sink(stream,target,selected_capacity));stream.flush();os.fsync(stream.fileno())
         need(written==size==partial.stat().st_size,'C80 archive size changed')
         counts=tar.verify_archive(partial,rows);digest=paths.digest(partial)
         need(runtime_copy.inventory(root,uid)==rows and evidence(req,bundle)==proof,'C80 source changed during copy')
@@ -94,6 +98,7 @@ def archive(req):
         os.rename(str(partial),str(final));tar.sync_dir(target)
         receipt=dict(schema=SCHEMA,status='verified_copy',finished=tar.now(),archive_sha256=digest,
             archive_bytes=size,member_counts=counts,manifest_sha256=paths.digest(target/'manifest.json'),
+            storage_policy=selected_capacity,
             source_deleted=False,source_modified=False,all_members_readback_verified=True,
             source_before_after_identical=True,process_observation_before=before,
             process_observation_after=after,relocation_verified=False,archive_implies_acceptance=False)
