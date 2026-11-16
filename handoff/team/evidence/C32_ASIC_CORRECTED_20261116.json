@@ -13,7 +13,20 @@
       "summary_sha256": "2ebcde2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7",
       "cases": 14,
       "outputs": 354816,
-      "fixed12_cycles": [74750, 73187, 72186, 72264, 70798, 69193, 68427, 68604, 68610, 70970, 75393, 81770],
+      "fixed12_cycles": [
+        74750,
+        73187,
+        72186,
+        72264,
+        70798,
+        69193,
+        68427,
+        68604,
+        68610,
+        70970,
+        75393,
+        81770
+      ],
       "fixed12_total_cycles": 866152,
       "fixed12_average_cycles": 72179.33333333333,
       "fixed12_task_s_at_150MHz": 2078.1571825730357,
@@ -44,5 +57,24 @@
   "own_gate14_complete": false,
   "own_power12_complete": false,
   "protected_T80_modified": false,
-  "old8_modified": false
+  "old8_modified": false,
+  "passive_fixed12": {
+    "observed_at": "2026-11-16T22:56:35+08:00",
+    "total_encoded_bytes": 309480,
+    "total_transfer_transactions": 384174,
+    "total_mac_updates": 19464192,
+    "mac_utilization": 0.7022508751350802,
+    "average_schedule": {
+      "supply_empty": 18654.25,
+      "x_wait": 15838.417,
+      "w_wait": 7032.167,
+      "slot_wait": 0.0,
+      "first_feed_wait_cycles": 2288.083,
+      "within_tile_mean_start_interval": 81.285,
+      "final_write_tail_cycles": 22.0
+    },
+    "schedule_means_rounded_to_3_decimals": true,
+    "waits_may_overlap": true,
+    "power_inferred_from_counters": false
+  }
 }
