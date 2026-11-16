@@ -6145,7 +6145,7 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:34:50+08:00",
+      "observed_at": "2026-11-16T08:40:46+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
@@ -6155,9 +6155,9 @@
       "child_pid": 132629,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 52,
-      "child_cpu_percent": 100,
-      "child_rss_kib": 2914180,
+      "child_elapsed_seconds": 409,
+      "child_cpu_percent": 99.7,
+      "child_rss_kib": 2933272,
       "current_log_phase": "CPU/SoC mapping; accelerator mapped"
     },
     "p80_export_review05": {
@@ -6169,7 +6169,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:34:50+08:00",
+      "observed_at": "2026-11-16T08:40:46+08:00",
       "status": "synthesis_running",
       "parent_pid": 95253,
       "child_pid": 132629,
@@ -6185,9 +6185,9 @@
       "c80_started": false,
       "protected_T80_modified": false,
       "old8_modified": false,
-      "foreground": "workspace3 terminal tab2 idle Bash",
-      "watcher_pid": null,
-      "second_terminal_tab": "idle Bash",
+      "foreground": "workspace3 terminal tab2 readonly watcher135257",
+      "watcher_pid": 135257,
+      "second_terminal_tab": "readonly watcher; do not type",
       "current_local_sessions": [],
       "current_block": "cpu_soc"
     },
@@ -6243,11 +6243,13 @@
       "requires_original_queue_and_export_completed": true,
       "requires_original_shared_lock": true,
       "requires_strict_no_open_users": true,
-      "scope_rejections_tested": 10,
+      "scope_rejections_tested": 15,
       "source_deleted": false,
       "space_recovered_bytes": 0,
       "protected_T80_modified": false,
-      "old8_modified": false
+      "old8_modified": false,
+      "lifecycle_rejections_tested": 6,
+      "unittest_cases_passed": 2
     }
   }
 }
