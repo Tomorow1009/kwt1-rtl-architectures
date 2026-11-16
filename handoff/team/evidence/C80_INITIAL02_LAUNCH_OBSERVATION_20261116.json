@@ -1,0 +1,22 @@
+{
+  "schema": "c80-initial02-visible-launch-observation-v1",
+  "observed_at": "2026-11-16T13:22:53.113267+08:00",
+  "started": "2026-11-16T13:21:31.147536+08:00",
+  "pid": 279630,
+  "status": "running",
+  "stage": "soc",
+  "completed": [],
+  "error": null,
+  "bundle": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7",
+  "manifest_sha256": "d0f18e4a6aa8a928df37d4347f1a8853c448e823f0685a83c5b710732e5e7a59",
+  "payload_sha256": "37f628a694c031547ce30bac9f764e7f0b353b787bf6be6a232a0a6cfe7055ac",
+  "queue_sha256": "f04f6f4644faf26832c7e757db0a5e98f3e30e2eb844bee7816bdad17aca5500",
+  "launch_sha256": "5ca11bfe9beae75c9285b42aeb1b33ee669bfae2fce0b026bfbb36775071d792",
+  "source_commit": "74f3ae7bb479d5fdd7917702c4a2c0671eacb61b",
+  "runtime_free_bytes_at_launch": 84608491520,
+  "shared_free_bytes_at_launch": 19401913336,
+  "stage_accepted": false,
+  "c32_started": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
