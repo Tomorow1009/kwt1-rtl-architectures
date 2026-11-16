@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T22:11:59.738477+08:00",
+      "updated_at": "2026-11-16T22:18:22.332466+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Poll55447 metadata-probe launcher transfer, verify script, attempt actual32768B shared metadata writes before original-lock C32 initial03. No new cleanup.",
+      "next": "Poll33837 recovery23 tool transfer, verify SHA, explicitly start exact578-file R4 generated-cache archive/cleanup/persistent copy and immediate recovered metadata launch. Never rerun completed22.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7130,19 +7130,26 @@
       "rtl_changed_in_fix": false,
       "initial03_created": false,
       "firmware_fix_transfer": {
-        "session": 55447,
+        "session": 33837,
         "patch_chars": 3760,
         "patch_transferred": true,
         "tools_transferring": false,
         "new_payload_sha256": "bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc",
-        "metadata_tool_transferring": true,
-        "main_package_prepared": true
+        "metadata_tool_transferring": false,
+        "main_package_prepared": true,
+        "recovery23_transferring": true
       },
-      "initial03_status": "preflight_shared_free_below_64MiB_no_queue",
+      "initial03_status": "actual_shared_metadata_probe_ENOSPC_before_mkdir_no_queue",
       "new_bundle_prepared": true,
       "new_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
       "new_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
-      "team_reports_no_shared_writer": true
+      "team_reports_no_shared_writer": true,
+      "recovery23": {
+        "source_sha256": "b444d190cb76fb81d12f06b5137323bc0e7138a587e14ffa671d63e2b7d6b0b7",
+        "files": 578,
+        "bytes": 48520513,
+        "server_executed": false
+      }
     }
   }
 }

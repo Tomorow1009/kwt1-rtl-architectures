@@ -1,5 +1,18 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:17 实际元数据探测亦ENOSPC；小范围恢复23工具传输中
+
+metadata工具55447传输完成并执行；22:12:43在新探测目录mkdir时报ENOSPC，尚未创建目录、协作锁或initial03。ROOT/c32_initial03_metadata_probe.json保留失败回执，不能再运行同一probe工具覆写它。用户明确回复没有团队正在向共享盘写入的任务。本轮没有额外数据清理，91135f6包仍完整。
+
+22:14:27只读确认旧R4 metrics14已通过：PROJECT/bundles/light-light126-icb32-r4-20261111_043048-96443c284a1c/runs/icb32_r4_finish01_metrics14/icb32_soc，summary SHA bb0ee4cf23b31730d72c196bfc5101f3d2f49e7d1dea33b49e366a72de54e576，stage与summary绑定、14例ASIC通过。其生成输入/编译缓存578文件48520513B；实际CSV/日志/JSON/源码/网表/SAIF都排除。
+
+新 C32_R4_METRICS_RECOVERY23_20261116.py（提交1d566a3，SHA b444d190cb76fb81d12f06b5137323bc0e7138a587e14ffa671d63e2b7d6b0b7）先独立归档上述精确文件并全成员回读，重核源和进程，再删除可恢复副本。完整压缩包留ROOT/r4_metrics_generated_recovery23，并另核验持久副本 PROJECT/backups/r4-metrics14-generated-20261116_2216。所有非选中文件前后hash保持。尚未执行23。
+
+成功后工具立即生成并调用新 C32_QUALIFICATION03_RECOVERED_LAUNCH_20261116.py，SHA f40276324f849b6a9eff62bb8f1841fb47487c424c57c696924d0d2f8b8918c2；与已有metadata启动器仅更换新的probe目录/回执身份，不改既有文件。新探测目录 PROJECT/c32_lock_metadata_probe_20261116_2216、回执 ROOT/c32_initial03_metadata_probe23.json；通过实际32768B写入后原锁启动initial03。新运行仍全部写/tmp，完整验收条件不变。若23失败先读原状态，不能重跑删除。
+
+**当前GUI会话33837只传 recovery23_tool.b64。退出前不可追加键盘输入。** 完成截图 takeover_local/c32_recovery23_transfer.png；然后核验源码SHA并显式启动后台，保留launch/log。current initial03尚未创建。原22已完成不得再跑，T80/旧八路及所有冻结备份继续保护。最新工具提交1d566a3及ee094bd文档尚待push，最后已push3143002。
+
+
 ## 22:10 新包已准备，initial03被共享空间阈值挡住；准备实际元数据探测
 
 两工具传输24760已退出并核验。prepare完成，新包 ROOT/light-light126-c32-91135f6 共1081输入，manifest SHA d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7；完整payload SHA bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc，服务器打印确认。旧包未改。文件为 ROOT/payload_91135f6.json 和 light-light126-c32-91135f6.prepared.json。Git修复及证据已push3143002。
