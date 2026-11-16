@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T02:56:48+08:00",
+      "last_observed_at": "2026-11-17T03:11:45+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": null,
+      "current_queue": "c32_drc_inspect02_waiting_original_lock",
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7279,7 +7279,7 @@
       "saif_completed_layers": 12,
       "saif_l01_bytes": 63448403,
       "saif_l01_cpu_seconds": 298.78,
-      "current_child_state": "all review children exited",
+      "current_child_state": "not started: no shared storage for original lock",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
@@ -7317,7 +7317,37 @@
       "constraint_violation_records": 326,
       "constraint_extraction_complete": false,
       "drc_correction": "handoff/team/evidence/C32_DRC_CORRECTION_20261117.json",
-      "space_recovery26_27": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY26_27_20261117.json"
+      "space_recovery26_27": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY26_27_20261117.json",
+      "drc_inspect02": {
+        "pid": 57941,
+        "started": "2026-11-17T03:05:56.094926",
+        "status": "waiting_original_lock_storage",
+        "operations": "/tmp/s4_21usr_c32_20261116_2010/ops-c32-drc02-f14498f",
+        "source_sha256": "e3e628337c174305c9bef049311a640acfc424d988f10474dc06672e7bd757c4",
+        "parser_sha256": "3e698243214e9b1480bade07a3d849a456675d1dd9b1dd8e0dfcd0d1986c17ae"
+      },
+      "recovery28": {
+        "completed": true,
+        "worker_pid": 59115,
+        "removed_files": 1,
+        "removed_bytes": 7848411,
+        "source_sha256": "7c0c51db686c3938abc05f37c62789cfc2a46c30fd82252736b448704601a5e9",
+        "state_sha256_displayed": "dd6940df48aa7e24cd7e2c6d8d68d7cb4eecbb8ff66f0930dea08e366644ea45",
+        "state_hash_machine_asserted": false
+      },
+      "recovery29": {
+        "prepared": true,
+        "server_started": true,
+        "gui_transfer_session": null,
+        "source_sha256": "6710fc05d79ccd019c3fc1e0aaff55329e194c345b0ff93ca26749f985dd1627",
+        "candidate_files": 1200,
+        "candidate_bytes": 385483006,
+        "scope": "Only fully archived completed B0 task.csv duplicates; stops if original shared lock appears",
+        "worker_pid": 62034,
+        "started": "2026-11-17T03:15:16.493124",
+        "source_hash_verified": true
+      },
+      "local_DRC_parser_and_admission_tests": 9
     }
   }
 }
