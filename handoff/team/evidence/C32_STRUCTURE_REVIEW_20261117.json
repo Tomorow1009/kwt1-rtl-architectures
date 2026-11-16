@@ -5,10 +5,26 @@
   "summary_sha256": "e7c2a91b88ce496776f59a110f91b60bec08d1969f5dc0aefb4d18d08ccfb7eb",
   "summary_matches_original_queue": true,
   "summary_hash_asserted_on_server": true,
-  "disposition_counts": {"declaration_only": 6486},
-  "warning_counts": {"LINT-1":4,"LINT-2":133,"LINT-8":133,"LINT-28":6353,"LINT-32":6256,"LINT-33":702},
-  "no_load_drivers": {"count":133,"matches_declaration_only_unloaded_ports":true},
-  "numeric_instances": {"pe":32,"array":1,"requantize":32},
+  "disposition_counts": {
+    "declaration_only": 6486
+  },
+  "warning_counts": {
+    "LINT-1": 4,
+    "LINT-2": 133,
+    "LINT-8": 133,
+    "LINT-28": 6353,
+    "LINT-32": 6256,
+    "LINT-33": 702
+  },
+  "no_load_drivers": {
+    "count": 133,
+    "matches_declaration_only_unloaded_ports": true
+  },
+  "numeric_instances": {
+    "pe": 32,
+    "array": 1,
+    "requantize": 32
+  },
   "mapped_sum_bits": 32,
   "mapped_total_bits": 33,
   "all_remaining_warning_classes": [
@@ -17,14 +33,35 @@
     "LINT-1: four original-platform cells drive no nets"
   ],
   "LINT1_cells": [
-    {"design":"sirv_debug_csr_PC_SIZE32","cell":"ndreset_dfflr"},
-    {"design":"sirv_debug_csr_PC_SIZE32","cell":"fullreset_dfflr"},
-    {"design":"sirv_aon_wrapper","cell":"u_aon_porrst"},
-    {"design_prefix":"sirv_plic_man_","cell":"flop_o_irq.plic_irq_prio_dffr"}
+    {
+      "design": "sirv_debug_csr_PC_SIZE32",
+      "cell": "ndreset_dfflr"
+    },
+    {
+      "design": "sirv_debug_csr_PC_SIZE32",
+      "cell": "fullreset_dfflr"
+    },
+    {
+      "design": "sirv_aon_wrapper",
+      "cell": "u_aon_porrst"
+    },
+    {
+      "design_prefix": "sirv_plic_man_",
+      "cell": "flop_o_irq.plic_irq_prio_dffr"
+    }
   ],
   "area_or_driver_internal_power_exempted": false,
   "extra_eda_started_by_review": false,
   "source_modified": false,
   "stage_accepted": false,
-  "note": "Own final-netlist structural classification, joined with its own ASIC240/gate14 evidence. Task-mode timing and complete system activity/model conclusions remain separate. No historical hardware PASS transferred."
+  "note": "Own final-netlist structural classification, joined with its own ASIC240/gate14 evidence. Task-mode timing and complete system activity/model conclusions remain separate. No historical hardware PASS transferred.",
+  "existing_CLKLAN_reference_inventory": {
+    "observed_at": "2026-11-17T01:59:14.165880+08:00",
+    "reference": "CLKLANAQV4_12TR40",
+    "owner": "platform_other",
+    "count": 15,
+    "accelerator_matching_instances": 0,
+    "source": "hashed area_inventory.json",
+    "scope": "Reference-name inventory only; not a gated-register coverage or energy claim"
+  }
 }

@@ -8,18 +8,45 @@
   "scope": "layer_01 complete-task whole-system pre-layout estimate, not twelve-layer aggregate",
   "cycles": 74750,
   "reported_power_w": {
-    "switching":"5.0039587e-03",
-    "internal":"3.68176550e-02",
-    "leakage":"6.89318543e-03",
-    "total":"4.87147979e-02"
+    "switching": "5.0039587e-03",
+    "internal": "3.68176550e-02",
+    "leakage": "6.89318543e-03",
+    "total": "4.87147979e-02"
   },
-  "energy_j":"0.0000242762051925459046500",
-  "mapping": {"exact_mapping":237428,"implied":0,"default":1274,"not_annotated":0,"total":238702},
+  "energy_j": "0.0000242762051925459046500",
+  "mapping": {
+    "exact_mapping": 237428,
+    "implied": 0,
+    "default": 1274,
+    "not_annotated": 0,
+    "total": 238702
+  },
   "static_probability_same_mapping_counts": true,
-  "sram": {"shared":64,"accelerator":92,"itcm":32,"dtcm":32,"total":220},
-  "actual_clocks_ns": {"hf_period_ns":"6.666666000000","lf_period_ns":"66.000000000000"},
+  "sram": {
+    "shared": 64,
+    "accelerator": 92,
+    "itcm": 32,
+    "dtcm": 32,
+    "total": 220
+  },
+  "actual_clocks_ns": {
+    "hf_period_ns": "6.666666000000",
+    "lf_period_ns": "66.000000000000"
+  },
   "queue_at_observation": "running power_layer_03; layer_01 and layer_02 complete",
   "system_power_verified": false,
   "physical_signoff": false,
-  "note": "Retain unknown-state and isolated-default review for the complete own netlist. Do not extrapolate this one layer or compare it against another version's twelve-layer mean."
+  "note": "Retain unknown-state and isolated-default review for the complete own netlist. Do not extrapolate this one layer or compare it against another version's twelve-layer mean.",
+  "timing_objects_read_at": "2026-11-17T02:03:28+08:00",
+  "no_clock_groups": {
+    "static_jtag_dtm": 186,
+    "static_jtag_reset_sync": 3
+  },
+  "disabled_arc_flag_counts": {
+    "c": 6098,
+    "p": 37440,
+    "C": 69820,
+    "d": 250
+  },
+  "timing_report_warnings_retained": true
 }
