@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T13:08:41.439178",
+      "at": "2026-11-16T13:18:31.446606",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": false,
-      "current_terminal": "C80 second delta transfer 49440 active; first719 staging verified13:06. No EDA launched.",
+      "current_terminal": "Initial01 failed before queue/lock: Path hashing; fixed74f3ae7. VNC retry02 transfer local76477 active; no confirmed new PID.",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6827,14 +6827,17 @@
       "eda_preparation_evidence": "handoff/team/evidence/C80_EDA_PREPARATION_20261116.json",
       "raw_full_task_local_passed": true,
       "gate_observer_local_passed": true,
-      "source_commit": "083f47a36ef8ea94f70214be2e0bccfc438e1ac8",
-      "formal_bundle": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-083f47a",
-      "formal_manifest_expected": "11d438d7758687398231023a9ed78533811c13af211796d6ee221b4310000897",
-      "formal_file_count_expected": 1003,
+      "source_commit": "74f3ae7bb479d5fdd7917702c4a2c0671eacb61b",
+      "formal_bundle": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7",
+      "formal_manifest_expected": "d0f18e4a6aa8a928df37d4347f1a8853c448e823f0685a83c5b710732e5e7a59",
+      "formal_file_count_expected": 1008,
       "first_transfer_verified": true,
       "second_transfer_local_session": 49440,
       "qualification_launch_prepared": true,
-      "qualification_started": false
+      "qualification_started": false,
+      "qualification_retry_local_session": 76477,
+      "entry_fix_tests_passed": 4,
+      "model_review_tests_passed": 10
     }
   }
 }

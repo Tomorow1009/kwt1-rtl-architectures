@@ -1,0 +1,89 @@
+{
+  "schema": "c80-initial01-preflight-failure-v1",
+  "observed": "2026-11-16T13:14:25+08:00",
+  "pid": 276128,
+  "poll": 1,
+  "queue_directory_created": false,
+  "lock_acquired": false,
+  "eda_started": false,
+  "reason": "common.sha received str __file__, requires Path",
+  "fix_commit": "74f3ae7bb479d5fdd7917702c4a2c0671eacb61b",
+  "entry_tests_passed": 4,
+  "original_log": "/tmp/s4_21usr_c80_20261116_1245/c80_initial01.log",
+  "original_receipt": "/tmp/s4_21usr_c80_20261116_1245/c80_initial01_launch.json",
+  "failed_bundle_preserved": true,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "protocol_rechecks": [
+    {
+      "directory": "p80_transport_20261116_131300_226444",
+      "sha256": "667dc6d26ae4c712471f961a23f3f11d380c615c7590ed7e824a26b7813f20a8",
+      "scope": "isolated_ordered_DMA_protocol_only",
+      "rows": [
+        {
+          "cases": 9,
+          "peak": 2,
+          "simultaneous": 15730,
+          "final_ack_waits": 75,
+          "depth": 2
+        },
+        {
+          "cases": 9,
+          "peak": 4,
+          "simultaneous": 19748,
+          "final_ack_waits": 73,
+          "depth": 4
+        },
+        {
+          "cases": 9,
+          "peak": 8,
+          "simultaneous": 21466,
+          "final_ack_waits": 74,
+          "depth": 8
+        }
+      ],
+      "cpu_executed": false
+    },
+    {
+      "directory": "p80_arbiter_20261116_131300_216658",
+      "sha256": "7c9d089309da4a426957808fe91c1627b0c6952aee5eed221b9655ac3e152199",
+      "scope": "isolated_ordered_arbiter_only",
+      "rows": [
+        {
+          "accepted": 601,
+          "returned": 601,
+          "cpu": 301,
+          "dma": 300,
+          "full_turnover": 587,
+          "held": 324,
+          "errors": 29,
+          "reset_pending": 1,
+          "depth": 2
+        },
+        {
+          "accepted": 1040,
+          "returned": 1040,
+          "cpu": 532,
+          "dma": 508,
+          "full_turnover": 892,
+          "held": 456,
+          "errors": 49,
+          "reset_pending": 1,
+          "depth": 4
+        },
+        {
+          "accepted": 1496,
+          "returned": 1496,
+          "cpu": 758,
+          "dma": 738,
+          "full_turnover": 665,
+          "held": 578,
+          "errors": 71,
+          "reset_pending": 1,
+          "depth": 8
+        }
+      ],
+      "cpu_executed": false
+    }
+  ]
+}
