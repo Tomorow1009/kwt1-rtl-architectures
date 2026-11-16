@@ -2,9 +2,35 @@
 
 更新时间：2026-11-16 20:13（北京时间）。压缩后先读AGENTS、有效计划、根交接、本文及STATUS，核对完成与未完成项，不从旧待办重启队列。
 
+## 21:12 清理20完成但空间再耗尽；C32硬件尚未启动
+
+21:14更新：只读du已结束，第一终端回到Bash提示符，两标签可用，无GUI传输。`takeover_local/c32_space_inventory_latest.png`列出其它较大旧包：N1-v4-20261113_013211-9305c6948c76约7.131GB（主要为必须保留的R4 gzip，不动其唯一归档）、`light-light126-icb32-r4-20261111_043048-96443c284a1c`约3.744GB、`light-light126-batch-identity-dma16-20261110_045000-66838470bb12`约1.565GB。其它T80包排除。下一步仅核查旧R4/DMA16的生成数据/缓存及备份，不能直接删除整包。尚未准备cleanup21；当前无服务器EDA，无initial02。
+
+cleanup20/PID187957已退出，21:06:50.235783实测1852文件98453710B精确清理完成，完整归档保留。回执`ROOT/b0_archived_generated_duplicates20/state.json` SHA `36d6c8b449345b998669572fb520ac05ea16f1d2ea9a1f1df5329c84de2d24b4`；后继initial02又在共享>=64MiB检查拒绝，未创建其队列或任务；共享再次1048576B。**19/20均完成，不得重跑删除。** 20的followup.json及log记录后继失败，清理本身状态仍完成；见C32_SHARED_SPACE_RECOVERY20_20261116.json。
+
+当前没有GUI输入传输会话。第一终端在只读`du -B1 --max-depth=1 PROJECT/bundles`及Python排序中，21:11截图仍未返回提示符；不要在它完成前追加输入。输出会列18个最大历史包，下一步检查哪些非T80/非旧八路的生成缓存可完整归档。只读查询不意味着允许删除候选；必须核验备份、身份、进程和范围。
+
+已确认旧R4 12.595GB原始VCD早在11月13日完成gzip核验并删除原始副本，不能重复归档/删除；唯一7GB压缩件与回执仍保留。旧B0当前>40MB只剩R4方法关联SAIF，未选入删除范围。不得为解决空间触碰桌面T80、旧八路、P80/C80冻结包或完整备份。
+
+新C32包和全部已传工具完整，受测61246bb、manifest `0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccbdb1070fc849cc`。原initial01零工作ENOSPC失败保留；现有ops-recovery02可在空间恢复后直接调用，不重建/重传。真实CPU14/综合/240/PPA仍未运行。最新恢复源码提交b33e7a8，本段及证据待同步。
+
+## 20:58 清理19已完成；共享盘再次满，initial02尚未派发
+
+21:04补充：只读统计已返回，五个旧B0 run的生成/编译副本共1852文件98453710B（3个gate14各574/30590599B，contention82/4417569B，sequence48/2264344B）。新`C32_B0_GENERATED_DUPLICATES20_20261116.py`提交b33e7a8，SHA `8a3cbb86f6edccbb1a76acc12fa3415873373ef629055fd933a1fe408ebac277`，Python3.6语法和17项范围守卫通过。只允许这五目录、7种生成文件类型，逐项核验完整归档/源SHA，保留全部源码/网表/摘要/日志；全程无锁/无EDA/无占用检查，删除日志持久化。成功后立即调用已部署initial02；不会重复initial01或改变RTL。**当前本地会话17378仅传cleanup20.b64，尚未执行；未退出前不发VNC输入。** 新工具输出`ROOT/b0_archived_generated_duplicates20`，会在清理完成后单独记录followup；若失败必须先读状态，绝不能重跑删除。
+
+- cleanup19/PID180471已退出；20:49:33.824636回执`verified_duplicates_removed_backup_retained`，精确移除三份旧B0 drc06重复统计481632614B，源备份保留。回执SHA `b08a1d1b1dc488f498bd81fa687df873c9bb3a39799ef4b2777b400e3c752b51`，当时共享可用341835776B。见`C32_SHARED_SPACE_RECOVERY19_20261116.json`。**不得再执行19。**
+- 新启动器及其后继工具已部署到`ROOT/ops-recovery02/`，两文件packet SHA `191eb8ab7fd048fc9aef27305d8850c292dad5b8da312fbba3523fbbdb1e9473`；本地提交79e7334已push。
+- `C32_QUALIFICATION02_LAUNCH_20261116.py` SHA `5a74620bc3a76bf3285f49274a224af0f3767f0287be0d5a9871af29413c917d`。它绑定initial01失败与cleanup19，参数`--manifest-sha256`及`--cleanup-receipt-sha256`。20:55在共享空间>=64MiB前置检查被拒绝，**尚未创建initial02请求、日志、队列或进程**。20:57共享又仅1048576B。不要误报已运行CPU。
+- `C32_FINISH_FROM_INITIAL02_20261116.py` SHA `c87a1324fdc89a850697c6efe634393167b015fdf28aa229e8fb1bc338612329`已部署，但只能在initial02完成并退出后用，finish01尚未创建。旧绑定initial01的finish启动器不可用。
+- 人工manifest转录第50/51字符曾交换，已用服务器逐字符差异纠正（未派发作业）。**准确manifest：`0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccbdb1070fc849cc`**。之后通过prepared回执读取准确参数，并复核实际manifest，不再重抄。不要重跑会mkdir ops的bootstrap，因为ops-recovery02已存在。
+- 20:57只读筛选旧B0仍存在的>40MB归档成员，只剩旧R4 `systolic_b_r4_saif_replay01/native_saif_r4_replay/layer_01.saif` 94632798B。它未进入清理范围，不动方法资格数据。
+- 当前只读GUI查询会话40570正在统计同一旧B0归档内各旧run的生成输入/编译副本（.hex/.bin/.verilog/.o/.so/.a/simv），排除名称含r4的run。截图`takeover_local/c32_b0_small_duplicate_groups.png`；先poll并读结果。尚未选定或编写cleanup20，未执行任何额外删除。若有适合的已归档副本，必须重验归档/源哈希/占用；恢复空间后尽快直接调用已部署initial02，避免再次被占满。
+
+本地与服务器受测RTL始终61246bb；1081成员新包仍完整。T80/旧八路/P80/C80/完整备份保护不变。C32自身CPU/PPA仍未运行；当前阶段仍C32-A，不进入C32-B/G32。新19及换行问题的本地记录、初始失败保留，不恢复任何旧EDA队列。
+
 ## 20:47 新包已核验，initial01零子任务因共享盘满失败
 
-**C32服务器硬件仍未运行。** 主包重建和1081输入准备已完成。包路径`/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-61246bb`，manifest准确SHA `0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccdbb1070fc849cc`；受测提交仍61246bb。此前人工抄录65字符哈希触发前置拒绝，无任务；之后用prepared回执机器取值启动。
+**C32服务器硬件仍未运行。** 主包重建和1081输入准备已完成。包路径`/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-61246bb`，manifest准确SHA `0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccbdb1070fc849cc`；受测提交仍61246bb。此前人工抄录65字符哈希触发前置拒绝，无任务；之后用prepared回执机器取值启动。
 
 - 差分首次重建被25处基准哈希差异拦住；只读核对25处全是CRLF/LF，无内容变化。新重建器`C32_RECONSTRUCT_LF_61246BB_20261116.py`提交e9c52fe，SHA `d21c6326c6241b13d04dcbd5c90ac0a827972ce84ab185a48cb7bc1dcfc01d65`，先核验原冻结字节，再仅内存换行归一化并检查差分基准SHA，最后完整payload仍精确为`40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602`。原工具和失败保留。新根`reconstruction_lf_receipt.json`记录25处，原源未改。
 - `c32_initial01`于20:40:42.554042启动PID177134，随后在`.arch02_team_lock`的mkdir即ENOSPC失败。20:41:53状态failed，completed=[]、无stage；20:45机器确认PID不存在、整个队列无child回执。原state SHA `42ffa16c397ab474753eb1cc9ef5617c2bf226bbee1c318f8e752fd5416aa674`；request SHA `49a8fa04de09a5e269c89cc21c99be1fffa5d7018467c469c350ad2ad977cd7a`。**不得重跑/覆写initial01。** 启动时/tmp可用79114158080B，共享盘仅1048576B，仍无法创建锁。

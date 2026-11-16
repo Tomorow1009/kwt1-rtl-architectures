@@ -1,0 +1,23 @@
+{
+  "schema": "c32-shared-space-recovery20-v1",
+  "observed_at": "2026-11-16T21:06:50.235783+08:00",
+  "worker_pid": 187957,
+  "worker_exited": true,
+  "status": "verified_duplicates_removed_backup_retained",
+  "removed_files": 1852,
+  "removed_bytes": 98453710,
+  "shared_free_bytes_observed": 1048576,
+  "source_commit": "b33e7a8",
+  "source_sha256": "8a3cbb86f6edccbb1a76acc12fa3415873373ef629055fd933a1fe408ebac277",
+  "state_sha256": "36d6c8b449345b998669572fb520ac05ea16f1d2ea9a1f1df5329c84de2d24b4",
+  "run": "/tmp/s4_21usr_c32_20261116_2010/b0_archived_generated_duplicates20",
+  "followup_status": "fresh_queue_preflight_rejected_shared_space_below_64MiB",
+  "initial02_created": false,
+  "retained_archive_sha256": "dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50",
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "p80_modified": false,
+  "c80_modified": false,
+  "backup_modified": false,
+  "scope": "Only archived generated inputs and compiler duplicates from five exact historical B0 runs; no source, netlist, summary, log or R4 method evidence removed."
+}
