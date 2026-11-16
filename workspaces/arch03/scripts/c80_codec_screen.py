@@ -8,6 +8,7 @@ import argparse
 from collections import Counter
 import csv
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import sys
@@ -33,14 +34,19 @@ def save(path, value):
                                     allow_nan=False) + '\n', encoding='utf8')
 
 
-def screen(archive, identity_path, output):
+def screen(archive, identity_path, output, converter_file=None):
     archive, identity_path, output = map(Path, (archive, identity_path, output))
     need(not output.exists(), 'Use a new offline screening directory')
     need(n1_data.sha(archive) == ARCHIVE_SHA, 'Different recovered source archive')
     identity = json.loads(identity_path.read_text(encoding='utf8'))
     need(identity['sha256'] == ARCHIVE_SHA and identity['all_original_npz_members_match'] is True
          and identity['members'] == 101, 'Original-member provenance mismatch')
-    converter = n1_data.converter_module()
+    converter_file = Path(converter_file or n1_data.CONVERTER)
+    need(n1_data.sha(converter_file) == n1_data.CONVERTER_SHA, 'Frozen PR converter changed')
+    spec = importlib.util.spec_from_file_location('c80_frozen_converter', str(converter_file))
+    converter = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(converter)
+    need(converter.FORMAT == n1_data.FORMAT, 'Converter numeric format changed')
     import numpy as np
     output.mkdir(parents=True)
     (output/'streams').mkdir()
@@ -101,7 +107,7 @@ def screen(archive, identity_path, output):
                                                   hardware_executed=False))
                 print('C80_OFFLINE_SAMPLE', sample, 'tasks', len(rows), 'seconds', round(time.monotonic()-started,2),flush=True)
         need(len(rows) == 240 and n1_data.sha(archive) == ARCHIVE_SHA, 'Incomplete or changed source')
-        need(n1_data.sha(n1_data.CONVERTER) == n1_data.CONVERTER_SHA, 'Converter changed')
+        need(n1_data.sha(converter_file) == n1_data.CONVERTER_SHA, 'Converter changed')
         for module in (candidate, n1_codec, n1_codec.base, n1_codec.base.v2, dma16_layout):
             need(n1_data.sha(module.__file__) == code[Path(module.__file__).name], 'Screening source changed')
         metrics = {}
@@ -154,4 +160,5 @@ if __name__=='__main__':
     p.add_argument('--archive',required=True,type=Path)
     p.add_argument('--identity',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path)
-    a=p.parse_args();screen(a.archive,a.identity,a.output)
+    p.add_argument('--converter-file',type=Path,help='Exact frozen PR bytes; no newline/hash relaxation')
+    a=p.parse_args();screen(a.archive,a.identity,a.output,a.converter_file)
