@@ -1,5 +1,27 @@
 # P80库引用修复与继续入口
 
+## 08:21恢复入口：映射与只读预检均在运行
+
+48723的16行传输已完整结束，唯一只读预检PID **126699** 于08:20:30启动；最新查询51680也已结束。前台第二标签是Bash空闲，第一标签watcher105419仍保留（其上限约08:34结束）。无待收键盘会话。
+
+08:21:10原加速器DC98857运行1:01:44、CPU99.7%、RSS25,535,112KiB，日志已进入持续打印优化表的阶段，实际Error行0；没有映射终态。原combined05父95253和export05保持同一队列，不重启。
+
+新预检`root/b0_archived_batch_preflight12/intent.json`实际选中**49,200个生成输入文件，共2,616,732,144B**，PID126699运行41秒/CPU99.7%，日志暂空；尚无verified_candidates终态。源脚本`root/p80_b0_archived_batch_preflight12.py`，日志`root/p80_b0_archived_batch_preflight12.log`。本次只有读原归档/重复文件、写新的私有核验回执，没有删除任何源文件或修改B0只读备份。不能把此只读核验当作允许立即删除。
+
+下一步先收原映射和预检终态；P80仍待CPU/顶层综合、精度连接、gate14、SAIF12、PT12、独立审核及归档。C80/C32/G32未开始。服务器桌面T80和所有旧八路数据不动。截图`p80_map_audit_0821.png`；b9dc3da已经push。
+
+## 08:19只读空间核验传输（当前唯一输入）
+
+**exec48723**正在输入`local_runs/p80_b0_archived_batch_preflight12_transfer_20261116/transfer.ps1`，16行。先收完，不得并发键入、重复运行。当前第二终端标签已经显式进入Bash（第一标签watcher105419保持）；此前tcsh多行只读统计被拒绝，没有文件变更，已改为单行查询。
+
+源工具`P80_B0_ARCHIVED_BATCH_PREFLIGHT12_20261116.py`已提交并push b9dc3da；7474B，SHA `b3eecb8d413edf8bb3be3afd1182806f73f54ad5725ce65ed23a20014b9f41e9`。此工具**只有只读全量归档回读和当前重复文件SHA核验，没有删除/压缩/移动功能**。传输完成后在新私有`root/b0_archived_batch_preflight12`写核验记录；实际PID尚未观察，不能预填通过。
+
+只读发现B0原完整备份`SERVER/IC/light-light126-undergrad-d2-20261109/backups/systolic-b-20261112_2320`仍在，manifest SHA `443a49be5abd11b5ab8d5c5bef744ae1c6cef5908ffd933041d06e086193aea9`已再次核对一致。原备份63653文件/7006124866B；tar1261445859B，SHA `dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50`（本轮完整tar回读尚待），原receipt SHA `b798a588f09cc18edc1239df988f6e2779a16e86989e2e88aca8a30acb29f5ee`。备份是只读保护对象，不修改。
+
+候选只限ced0e139a01e的`runs/systolic_b_final02_final1200/systolic_b_batch/cases/`下生成的`.hex/.verilog/.bin`：清单整批统计分别1579033392/943718400/93980352B，约2.62GB；工具将重新核对实际case范围和文件数，不能把统计当删除依据。现有.csv输出/.npz/JSON/日志/源码/网表/SAIF均不在候选中。没有执行任何新删除。T80桌面、旧八路和B0备份都未修改。新预检不证明无人使用，也不授予清理；若以后确需处理，必须另核占用及当前文件身份。
+
+P80原综合保持95253/98857，08:04:52 DC已运行45:26、CPU99.8%、日志180924B/实际Error0，进入DW算术单元处理；没有新EDA。原export96154保持等待。后续先完成原映射/精度/门级/活动/功耗，C80仍未开始。
+
 **07:56:22恢复定位：原combined05仍running/synthesis、仅共享块完成；现已切回第一标签watcher105419，第二标签tcsh空闲。全部键盘输入结束，无需收exec。下一步继续原队列，不重启，若需查询可切第二标签并先看截图。**
 
 ## 07:55映射日志继续推进

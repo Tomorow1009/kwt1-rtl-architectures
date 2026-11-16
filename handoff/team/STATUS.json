@@ -5671,7 +5671,7 @@
       ]
     },
     "current_local_sessions": [],
-    "last_server_observation": "2026-11-16T07:56:22+08:00",
+    "last_server_observation": "2026-11-16T08:21:10+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6143,7 +6143,7 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T07:55:04+08:00",
+      "observed_at": "2026-11-16T08:21:10+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
@@ -6153,11 +6153,11 @@
       "child_pid": 98857,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 2138,
+      "child_elapsed_seconds": 3704,
       "child_cpu_percent": 99.7,
-      "child_rss_kib": 25529944,
+      "child_rss_kib": 25535112,
       "current_log_bytes": 18344,
-      "current_log_phase": "Updating timing information / UID-85"
+      "current_log_phase": "Mapping optimization table advances"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6168,7 +6168,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T07:56:22+08:00",
+      "observed_at": "2026-11-16T08:21:10+08:00",
       "status": "synthesis_running",
       "parent_pid": 95253,
       "child_pid": 98857,
@@ -6184,9 +6184,10 @@
       "c80_started": false,
       "protected_T80_modified": false,
       "old8_modified": false,
-      "foreground": "workspace3 terminal tab1 read-only watcher",
+      "foreground": "workspace3 terminal tab2 idle Bash",
       "watcher_pid": 105419,
-      "second_terminal_tab": "idle tcsh"
+      "second_terminal_tab": "idle Bash",
+      "current_local_sessions": []
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6210,6 +6211,23 @@
       "listed_entry_paths_checked": 9,
       "cli_help_checked": true,
       "server_input_changed": false
+    },
+    "p80_b0_backup_preflight12": {
+      "status": "read_only_audit_running",
+      "pid": 126699,
+      "observed_at": "2026-11-16T08:21:10+08:00",
+      "candidate_files": 49200,
+      "candidate_bytes": 2616732144,
+      "source_commit": "b9dc3da",
+      "script_sha256": "b3eecb8d413edf8bb3be3afd1182806f73f54ad5725ce65ed23a20014b9f41e9",
+      "result_directory": "/tmp/s4_21usr_p80_20261116_0315/b0_archived_batch_preflight12",
+      "source_modified": false,
+      "source_deleted": false,
+      "backup_modified": false,
+      "unused_proven": false,
+      "cleanup_authorized_by_audit": false,
+      "full_readback_complete": false,
+      "input_session_finished": true
     }
   }
 }

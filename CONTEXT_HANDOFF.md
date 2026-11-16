@@ -1,5 +1,9 @@
 # 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
 
+**08:21最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原DC98857运行1:01:44/CPU99.7%、优化表推进、Error0；combined05/export05不变。只读备份预检126699已启动，49200候选/2616732144B，未读终态、无删除。全部输入结束，前台第二标签Bash空闲，第一watcher约08:34到时。b9dc3da已push；桌面T80/旧八路/B0备份不动，C80未开始。**
+
+**08:19唯一输入48723：16行B0既有完整备份只读核验工具，先收完勿并发。第二标签已切Bash，第一标签watcher保持；b9dc3da已push。工具无删除/压缩/移动功能，仅准备未来空间方案，实际新PID未读。原95253/98857综合保持（08:04实际Error0、DW处理），export96154等待；桌面T80/旧八路/B0备份不动，C80未开始。详读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
+
 **07:56定位：前台已回第一标签watcher105419，第二标签tcsh空闲；原队列running/synthesis，所有输入结束。新日志/状态见[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部，勿据下方旧位置键入或重启。**
 
 **07:55最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。DC98857日志增至18,344B、Error0，已进入Updating timing information；运行35:38、CPU99.7%。当前前台第二标签tcsh空闲，第一标签watcher保持；全部输入结束。f2b1008复现说明已push，PPA仍待；T80/旧八路不动、C80未开始。**
