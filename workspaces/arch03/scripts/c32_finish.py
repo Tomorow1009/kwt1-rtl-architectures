@@ -97,7 +97,8 @@ def execute(request,queue):
         Path(request['runtime_root']),request['bundle_manifest_sha256'],request['runtime_evidence'])
     common.inputs()
     synthesis=request['synthesis'];report,_=verify_synthesis(synthesis['run'],synthesis['sha256'],cfg)
-    require(report['scope']=='c32_partitioned_whole_soc_task_mode','Cannot use old T80 netlist')
+    from c32_mapped_repair import SCOPE as REPAIR_SCOPE
+    require(report['scope'] in ('c32_partitioned_whole_soc_task_mode',REPAIR_SCOPE),'Cannot use old T80 netlist')
     require(report['setup_hold_nonnegative'] is True and report['area_summary']['conservative_budget_mm2']<=1.0,
         'Resolve actual C32 timing/area before final validation queue')
     require_clear_constraints(synthesis['run'],report)

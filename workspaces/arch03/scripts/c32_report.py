@@ -146,7 +146,8 @@ def build(request,cfg):
         g['cpu_executed'] is True and g['global_FPGA_defined'] is False and s['synthesis_completed'] is True and
         g['scope']=='c32_whole_soc_mapped_functional_without_SDF' and
         g.get('numeric_format')=='0x000e0c20' and g.get('internal_total_observable') is False and
-        s['scope']=='c32_partitioned_whole_soc_task_mode','Wrong C32 hardware execution scope')
+        s['scope'] in ('c32_partitioned_whole_soc_task_mode',
+                      'c32_equivalent_cell_repaired_whole_soc_task_mode'),'Wrong C32 hardware execution scope')
     require(g['synthesis_summary_sha256']==refs['synthesis']['sha256'] and
         g['firmware_sha256']==a['compile_receipt']['firmware_manifest_sha256'],'Mixed C32 synthesis/firmware')
     require(sha(arun/'source_inputs.json')==a['compile_receipt']['source_inputs_sha256'] and
@@ -275,7 +276,10 @@ def build(request,cfg):
         synthesis_route=dict(scope=s['scope'],partition_area=s['partition_area'],
             block_mapping_seconds=s['block_mapping_seconds'],block_cache_reused=s['block_cache_reused'],
             final_link_seconds=s['final_link_seconds'],boundary_origin=s['boundary_origin'],
-            old_linked_ddc_reused=False,source_proof='Fresh C32 link and all three freshly mapped partitions',
+            old_linked_ddc_reused=s['old_linked_ddc_reused'],
+            mapped_repair=s.get('mapped_repair'),repair_identity=s.get('repair_identity'),
+            source_proof=('Equivalent-cell repair of its own pinned C32 mapping; original partition proof retained'
+                if s.get('mapped_repair') else 'Fresh C32 link and all three freshly mapped partitions'),
             context_auditor_sha256=sha(__import__('c32_validation').__file__)),
         timing_metrics=s['metrics'],drc_inventory=drc,conditions=conditions,
         cases=rows,aggregate=aggregate,batch=batch,history=request.get('history',[]),

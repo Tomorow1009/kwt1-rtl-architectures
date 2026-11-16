@@ -7049,9 +7049,9 @@
       "firmware_compiled": true,
       "local_qualification_evidence": "handoff/team/evidence/C32_LOCAL_QUALIFICATION_20261116.json",
       "server_last_readonly": {
-        "at": "2026-11-16T19:57:54.384588+08:00",
-        "tmp_free_bytes": 79155372032,
+        "at": "2026-11-17T03:27:23.096386+08:00",
         "shared_free_bytes": 1048576,
+        "tmp_free_bytes": 74567278592,
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T03:11:45+08:00",
+      "last_observed_at": "2026-11-17T03:27:23.096386+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": "c32_drc_inspect02_waiting_original_lock",
+      "current_queue": null,
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7279,7 +7279,7 @@
       "saif_completed_layers": 12,
       "saif_l01_bytes": 63448403,
       "saif_l01_cpu_seconds": 298.78,
-      "current_child_state": "not started: no shared storage for original lock",
+      "current_child_state": "exited",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
@@ -7315,16 +7315,20 @@
       "model_snapshot_complete": false,
       "constraint_report_clear": false,
       "constraint_violation_records": 326,
-      "constraint_extraction_complete": false,
+      "constraint_extraction_complete": true,
       "drc_correction": "handoff/team/evidence/C32_DRC_CORRECTION_20261117.json",
       "space_recovery26_27": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY26_27_20261117.json",
       "drc_inspect02": {
         "pid": 57941,
         "started": "2026-11-17T03:05:56.094926",
-        "status": "waiting_original_lock_storage",
+        "status": "driver_facts_ready_constraints_still_violated",
         "operations": "/tmp/s4_21usr_c32_20261116_2010/ops-c32-drc02-f14498f",
         "source_sha256": "e3e628337c174305c9bef049311a640acfc424d988f10474dc06672e7bd757c4",
-        "parser_sha256": "3e698243214e9b1480bade07a3d849a456675d1dd9b1dd8e0dfcd0d1986c17ae"
+        "parser_sha256": "3e698243214e9b1480bade07a3d849a456675d1dd9b1dd8e0dfcd0d1986c17ae",
+        "exited": true,
+        "child_pid": 63231,
+        "child_exited": true,
+        "summary_sha256": "5fb1e75174bc4fa325963d1a2f394ac0767cc67a5af8c62664a78d3c36531781"
       },
       "recovery28": {
         "completed": true,
@@ -7333,7 +7337,7 @@
         "removed_bytes": 7848411,
         "source_sha256": "7c0c51db686c3938abc05f37c62789cfc2a46c30fd82252736b448704601a5e9",
         "state_sha256_displayed": "dd6940df48aa7e24cd7e2c6d8d68d7cb4eecbb8ff66f0930dea08e366644ea45",
-        "state_hash_machine_asserted": false
+        "state_hash_machine_asserted": true
       },
       "recovery29": {
         "prepared": true,
@@ -7345,9 +7349,19 @@
         "scope": "Only fully archived completed B0 task.csv duplicates; stops if original shared lock appears",
         "worker_pid": 62034,
         "started": "2026-11-17T03:15:16.493124",
-        "source_hash_verified": true
+        "source_hash_verified": true,
+        "status": "query_started_remaining_captures_preserved",
+        "completed": true,
+        "worker_exited": true,
+        "removed_files": 537,
+        "removed_bytes": 172434752,
+        "remaining_files": 663,
+        "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dccd1510b8f97ebd7fb7ebe35b8663",
+        "state_hash_machine_asserted": false
       },
-      "local_DRC_parser_and_admission_tests": 9
+      "local_DRC_parser_and_admission_tests": 15,
+      "repair_tools_prepared": true,
+      "repair_server_started": false
     }
   }
 }

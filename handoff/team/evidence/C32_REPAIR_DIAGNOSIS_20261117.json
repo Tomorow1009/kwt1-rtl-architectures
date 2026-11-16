@@ -1,0 +1,62 @@
+{
+  "schema": "c32-three-buffer-diagnosis-v1",
+  "observed_at": "2026-11-17T03:27:23.096386+08:00",
+  "summary_sha256": "5fb1e75174bc4fa325963d1a2f394ac0767cc67a5af8c62664a78d3c36531781",
+  "summary_machine_asserted": true,
+  "constraint_records": 326,
+  "unique_nets": 3,
+  "all_parsed": true,
+  "constraints_clear": false,
+  "drivers": [
+    {
+      "net": "n9882",
+      "cell": "U16528",
+      "reference": "BUFV2RD_12TR40",
+      "input_net": "n60014"
+    },
+    {
+      "net": "n9916",
+      "cell": "U16527",
+      "reference": "BUFV2RD_12TR40",
+      "input_net": "n60013"
+    },
+    {
+      "net": "n9950",
+      "cell": "U16523",
+      "reference": "BUFV2RD_12TR40",
+      "input_net": "n60011"
+    }
+  ],
+  "prior_netlist_preserved": true,
+  "repair_started": false,
+  "stage_accepted": false,
+  "recovery28": {
+    "completed": true,
+    "worker_pid": 59115,
+    "removed_files": 1,
+    "removed_bytes": 7848411,
+    "source_sha256": "7c0c51db686c3938abc05f37c62789cfc2a46c30fd82252736b448704601a5e9",
+    "state_sha256_displayed": "dd6940df48aa7e24cd7e2c6d8d68d7cb4eecbb8ff66f0930dea08e366644ea45",
+    "state_hash_machine_asserted": true
+  },
+  "recovery29": {
+    "prepared": true,
+    "server_started": true,
+    "gui_transfer_session": null,
+    "source_sha256": "6710fc05d79ccd019c3fc1e0aaff55329e194c345b0ff93ca26749f985dd1627",
+    "candidate_files": 1200,
+    "candidate_bytes": 385483006,
+    "scope": "Only fully archived completed B0 task.csv duplicates; stops if original shared lock appears",
+    "worker_pid": 62034,
+    "started": "2026-11-17T03:15:16.493124",
+    "source_hash_verified": true,
+    "status": "query_started_remaining_captures_preserved",
+    "completed": true,
+    "worker_exited": true,
+    "removed_files": 537,
+    "removed_bytes": 172434752,
+    "remaining_files": 663,
+    "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dccd1510b8f97ebd7fb7ebe35b8663",
+    "state_hash_machine_asserted": false
+  }
+}

@@ -35,7 +35,11 @@ def require_clear_constraints(run, report):
 def verify_synthesis(run,expected,cfg):
     run=allowed_run(run,cfg,'C32 synthesis')
     require(re.fullmatch('[a-f0-9]{64}',expected or '') and digest(run/'summary.json')==expected,'C32 summary changed')
-    report=read(run/'summary.json');state=read(run.parent/'state.json')['stages']['c32_synth']
+    report=read(run/'summary.json')
+    from c32_mapped_repair import SCOPE as REPAIR_SCOPE,verify as verify_repair
+    if report.get('scope')==REPAIR_SCOPE:
+        return verify_repair(run,expected,cfg)
+    state=read(run.parent/'state.json')['stages']['c32_synth']
     require(state['status']=='passed' and state['summary_sha256']==expected and report['scope']==SCOPE and
         report['synthesis_completed'] is True and report['old_linked_ddc_reused'] is False and
         report['block_cache_reused'] is False,'Not a completed fresh C32 partition synthesis')

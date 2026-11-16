@@ -305,7 +305,8 @@ def verify_gate_memory_config(synthesis, run):
     receipt_names=['source_inputs.json']
     summary_path=synthesis/'summary.json'
     summary=json.loads(summary_path.read_text()) if summary_path.exists() else {}
-    if summary.get('scope')=='c32_partitioned_whole_soc_task_mode':
+    if summary.get('scope') in ('c32_partitioned_whole_soc_task_mode',
+                              'c32_equivalent_cell_repaired_whole_soc_task_mode'):
         # The fresh C32 link and final mapping both trace SRAM configuration. The
         # copied current header is frozen in the final synthesis input receipt.
         # Read both pinned receipts, retaining all ancestors and rejecting any
