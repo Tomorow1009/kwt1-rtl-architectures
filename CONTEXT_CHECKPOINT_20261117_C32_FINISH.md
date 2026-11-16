@@ -1,0 +1,45 @@
+# C32-A后半程：finish03已运行
+
+最后观察：2026-11-17 00:35:37（北京时间）。压缩恢复后先读AGENTS、有效计划、根交接、本检查点及STATUS。不要把旧失败队列或历史PID当作当前作业。
+
+最新进展：门级编译已完成，finish03父308692仍running/gate，最新子311236正在`c32_finish03_gate/c32_gate/layer_01.log`。日志实际ASIC启动、源读取与严格时序标记已出现，L01尚未结束。不依据文件名推断完整门级PASS；等待本阶段summary。VNC最后v4状态查询已结束，终端空闲，无活动GUI输入。
+
+## 当前作业与恢复命令
+
+- ROOT=`/tmp/s4_21usr_c32_20261116_2010`；BUNDLE=`ROOT/light-light126-c32-91135f6`。
+- 当前队列`BUNDLE/runs/c32_finish03`，父PID **308692**，启动 **00:31:05.429536**。00:32:31状态running/gate，structure已完成；mapped_probe子309141已退出，接下来由同一队列编译和运行门级。
+- 日志`ROOT/c32_finish03.log`；启动回执`ROOT/c32_finish03_launch.json`。原协作锁`/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock`由该队列持有，不能清锁、重启或另起正式EDA。
+- 推荐只读命令：`python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_status_readonly_v4.py`，SHA `1468f671fd258cdfe04857a4518e2d03024a65d96fa11bc1cad1ce2c336e3784`。V4优先读取finish03；旧v1/v2/v3保留但不能误以旧失败队列为当前状态。
+- 当前VNC窗口18874435、workspace3第一终端空闲。GUI输入会话26709/82850/75895/53809/82984均已完成；无活动输入。恢复必须重新查窗口，不能使用workspace4。
+
+## 已完成且不重跑
+
+- S0/P80/C80已冻结，保留全部证据。C32-A的10000随机＋32定向、本地14、两拍SRAM、恢复、真实ASIC14、CPU恢复和竞争、新综合、自身240、FLOAT20连接已完成。
+- 受测包91135f61c97c980039793c6637d0a06888638df0；生产RTL来自61246bb2a21c56a9bfd871fd68de93028d79f5fd。修复仅为竞争固件旧五行检查，RTL与IRQ/恢复固件不变。
+- 包manifest `d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7`，1081输入；payload_91135f6.json SHA `bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc`。运行中不能修改这些输入。
+- initial03父238916已退出，六阶段soc/sequence/contention/synth/batch20/precision齐全。成功终态SHA **37e1279f0c165b6fb50493c4d87edb2a994e159a90e22e48b92c41ef8ab500c0**。
+- 自身240任务、6082560输出及total，零差异；均70929.40833333334周期、最小64833、最大81861。批量摘要SHA **2b51abd8844c73e342487e0be3e69c3cccfa4528296ef01ba15f1dca22621e81**。
+- 同批浮点精度连接通过，最大逐层NRMSE0.20198143836753799%，最大任务0.20953408931848963%，裁剪/饱和0。精度摘要SHA **ca5a8e3afdac539bcad08367611cf38c5c602754c5eddf152e307be13e4775ca**。三份哈希00:05:47机器验证通过。不是官方600条。
+- 固定12仍单独报告：866152总周期、均72179.33333333333、2078.1571825730357task/s（150MHz折算），比C80低2.183681386%。编码文件与C80一致，平均25790B、32014.5笔四段DMA事务。不可混用240的平均周期。
+- 自己的新综合保守项目面积0.722402954997787mm²，明确新增0.5618935446998727，整机4.244619443828；setup+0.0000524521ns/hold+0.0010598ns，220宏/0锁存器。摘要SHA **ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87**。SS/.99V/125°C、6.666666ns；独立最终审核与功耗仍待完成。
+
+## 已失败与空间恢复：不要重复执行
+
+- finish01父297927于00:06:49创建共享锁ENOSPC，零子任务，已退出。终态SHA **0c853c6c0bf5585437d49823d58f8c2527d05b28eb9cf11e491696acec5c58a6**。
+- 恢复24完成：旧B0 drc04/drc05两份已完整归档repair_seed.ddc，66052096B；归档和逐文件哈希、进程检查通过，最终网表/日志/源/备份不动。回执`ROOT/b0_archived_repair_seeds24/state.json` SHA **60cdf04891898ebc28cfbc8ff55ad2033d471de7b288bb04c01973538fa8599c**。worker303992已退出。
+- 当时实际free从1048576升至66060288B，但约32秒后耗尽；finish02父304144于00:21:00同样在锁创建前失败，无子任务。终态SHA **c502d28a5d4aee1689abe597b40465f42a2d98c17fb9468b28b3ecd7423eccec**。不是硬件失败，不重启它。
+- `df -i`观察有110656空闲inode；quota工具未安装。不能确认共享盘其他写入来源。用户已说明没有团队持续写入，不再重复询问。
+- 恢复25完成：仅旧B0 `systolic_b_power_final01_power_l01`至l12中的`disabled_timing.rpt`，共12文件/165281376B，逐项匹配原完整回读归档，原件清理后归档仍保留。回执`ROOT/b0_archived_diagnostics25/state.json` SHA **4e15ede39287b131c7960341774d04d7067bcf2367ed4bce9cf0d3a5d107f080**；free_after131072000B。worker308400已退出，followup返回0，随后finish03已实际运行。两个清理回执哈希00:32:31机器核验通过。
+- 保留归档：PROJECT/backups/systolic-b-20261112_2320/completed-evidence.tar.gz，SHA dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50。PROJECT为IC下light-light126-undergrad-d2-20261109。
+- 空间恢复19/20/22/23/24/25均已完成，禁止重复。所有新大产物在/tmp，最后可用71.25GiB。桌面T80、旧八路、冻结P80/C80及其备份完全保护。
+- 首次initial终态SHA截图转录错误被断言拒绝，随后以十进制字节读回修正并机器核验；未改证据。旧失败转录及本地脚本编码入口问题记录于前一检查点，不当作RTL失败。
+
+## 后续工具与完成条件
+
+1. 跟进当前finish03，顺序structure→gate14（无SDF）→SAIF12→timing_audit→drc_audit→PT12，不并行、不重复综合或240，不提前进入C32-B/G32。
+2. 当前启动工具`ROOT/c32_finish03_from_initial03.py` SHA291bcfe3ea26d23fe58f8baea34511c67b2c353cb9807f8cd3135f30fac13e27，**已经执行，不再启动**。新队列引用同一冻结c32_finish.py及网表。
+3. 全部报告完成、父子退出后，用`ROOT/c32_export_review03_tool.py`，SHA **86247880c807fe298943b8a4913fa80fa5fd3a83fe6b62c739665deaec7d7dfc**，传`--initial-state-sha256`上述initial03成功哈希及`--finish-state-sha256`实际finish03成功终态哈希。此工具**尚未执行**。它绑定finish03，生成本版JSON/CSV/中文报告与未知活动/连接/模型事实；旧export01/02不能使用。
+4. 依据自己的全部证据做声明条件下的独立结论，保留布局前估算、无SDF、静态JTAG和未知活动模型边界。整理归档并完整回读；共享盘没有容量时不删除受保护数据以强行复制。不得假称已有持久副本。
+5. C32-A真实完成报告/冻结后，再评估C32-B缓存和G32门控。正式批量只20条，不自动跑100条。
+
+本地分支`codex/light-light126/t80-pipeline-c32-g32-20261115`，工程E:/fpga_race-two/kwt1-c32-g32-20261115。最近已push34b2de0；下一次同步包含当前检查点和恢复回执。历史未追踪S0_SYNTH05_FINISH_LAUNCH_20261115.py不提交不执行。前期失败、平台依赖、完整浮点源和旧冻结证据见CONTEXT_CHECKPOINT_20261116_C32_SERVER.md及此前历史交接。
