@@ -29,8 +29,12 @@ def evidence(req,bundle):
         ref=req[role];queue=Path(ref['queue']).absolute()
         need(queue.parent==bundle/'runs' and queue.resolve()==queue,
              'C80 queue outside its frozen bundle')
-        proof=contract.completed_queue(queue,ref['state_sha256'],
-            lambda pid:Path('/proc/%d'%pid).exists(),role)
+        if role=='initial' and req.get('precision_recovery') is not None:
+            proof=contract.recovered_initial(queue,ref['state_sha256'],req['precision_recovery'],
+                lambda pid:Path('/proc/%d'%pid).exists())
+        else:
+            proof=contract.completed_queue(queue,ref['state_sha256'],
+                lambda pid:Path('/proc/%d'%pid).exists(),role)
         request=read(queue/'request.json')
         schema='c80-qualification-v1' if role=='initial' else 'c80-final-netlist-finish-v1'
         script='c80_qualification.py' if role=='initial' else 'c80_finish.py'

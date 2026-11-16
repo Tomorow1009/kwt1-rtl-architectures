@@ -1,0 +1,14 @@
+{
+  "status": "prepared_not_deployed_or_run",
+  "tests": 8,
+  "python36_syntax": true,
+  "reason": "Default NumPy absent and active initial02 has no numerical PYTHONPATH; original mapping/batch left untouched",
+  "source_sha256": {
+    "c80_precision_recovery.py": "4bd46be533e992449dd2c2e7fb109b9dc435915ecf5a46f51a4858ef9fce1d30",
+    "c80_archive_contract.py": "08252db25e957986c0053d344eca2ff5f1f2412f51df88552b934d001dfb12f5",
+    "c80_archive_runtime.py": "cf92d0b6906d520595d72e83b889123ddf15589a9260dc4a3ce570fed0ba4c26"
+  },
+  "original_queue_modified": false,
+  "hardware_modified": false,
+  "original_failure_not_yet_observed": true
+}

@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T13:34:57.126846+08:00",
+      "at": "2026-11-16T13:49:21.448941+08:00",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": true,
-      "current_terminal": "initial02 PID279630 running/synth; fresh_link child296877 running. First tab bounded watcher285039 last seen13:24, second Bash idle.",
+      "current_terminal": "initial02 PID279630 running/synth; accelerator299424; first tab idle; second read-only watcher300443 until about13:53",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6856,7 +6856,12 @@
       "contention_summary_sha256": "497b3b05bf4db090886e7f0e6b86a05f102dc2fe1d9067bc5af7171584ba9017",
       "fresh_link_pid": 296877,
       "archive_and_snapshot_local_tests": 7,
-      "archive_and_snapshot_server_deployed": false
+      "archive_and_snapshot_server_deployed": true,
+      "accelerator_pid": 299424,
+      "ops_review_import_sha256": "b0e9bdd832aebeae46762c213f5a60cdede7ddb2c812c34dc6c64795e1bf0f3f",
+      "ops_review_dependencies": 111,
+      "numpy_default_available": false,
+      "precision_recovery_preparation": true
     }
   }
 }

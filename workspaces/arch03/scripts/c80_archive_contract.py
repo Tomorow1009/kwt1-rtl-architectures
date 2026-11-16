@@ -57,6 +57,45 @@ def joined_queues(initial,finish):
                 inputs=dict(initial['inputs'],**finish['inputs']),archive_implies_acceptance=False)
 
 
+def recovered_initial(queue,expected_sha,recovery,owner_alive):
+    """Keep the failed original queue plus a separately completed precision retry."""
+    import c80_precision_recovery as retry
+    queue=Path(queue).absolute();fresh=Path(recovery['queue']).absolute()
+    require(fresh.parent==queue.parent and fresh!=queue and fresh.resolve()==fresh,
+            'Precision recovery must be a distinct sibling queue')
+    require(digest(fresh/'state.json')==recovery['state_sha256'] and
+            digest(fresh/'request.json')==recovery['request_sha256'], 'Precision recovery identity changed')
+    state=read(fresh/'state.json');request=read(fresh/'request.json')
+    require(request.get('schema')==retry.SCHEMA and request.get('bundle')==str(queue.parents[1]) and
+            request.get('recovery_sha256')==digest(retry.__file__), 'Wrong precision recovery source')
+    previous=request['predecessor']
+    require(previous['queue']==str(queue) and previous['state_sha256']==expected_sha and
+            state.get('predecessor')==previous,'Precision retry names another failed queue')
+    proof=retry.predecessor(previous,queue.parents[1],owner_alive)
+    require(state.get('schema')==retry.SCHEMA and state.get('status')=='precision_recovered_review_required' and
+            state.get('finished') and type(state.get('pid')) is int and not owner_alive(state['pid']) and
+            [r['stage'] for r in state.get('completed',[])]==['precision'],
+            'Precision recovery must complete and exit')
+    ref=state['completed'][0]['reference'];run=fresh.with_name(fresh.name+'_precision')/'c80_precision'
+    require(ref['run']==str(run) and run.resolve()==run and digest(run/'summary.json')==ref['sha256'],
+            'Precision recovery summary changed')
+    local=read(run.parent/'state.json')['stages']['c80_precision'];report=read(run/'summary.json')
+    require(local.get('status')=='passed' and local.get('finished') and local.get('run')==str(run) and
+            local.get('summary_sha256')==ref['sha256'] and
+            report.get('schema')=='arch03-c80-first20-precision-join-v1' and
+            report.get('fresh_float_reference_verified') is True and
+            report.get('batch',{}).get('batch_summary_sha256')==proof['references']['batch20']['sha256'],
+            'Incomplete precision or another hardware batch')
+    inputs=dict(proof['inputs'])
+    for path in (fresh/'state.json',fresh/'request.json',fresh/'numeric_runtime.json',
+                 fresh/'predecessor_proof.json',run.parent/'state.json',run/'summary.json'):
+        inputs[str(path)]=digest(path)
+    refs=dict(proof['references']);refs['precision']=ref
+    return dict(queue=str(queue),role='initial',state=proof['state'],references=refs,inputs=inputs,
+                precision_recovery=dict(recovery),original_failed_state_preserved=True,
+                stage_accepted=False,archive_implies_acceptance=False)
+
+
 def exported_report(run,expected_sha,proof):
     run=Path(run).absolute();path=run/'report.json'
     require(digest(path)==expected_sha,'C80 archive export changed')
