@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T13:27:16.914097+08:00",
+      "at": "2026-11-16T13:34:57.126846+08:00",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": true,
-      "current_terminal": "initial02 PID279630 running/sequence; ASIC14 complete; first tab readonly watcher285039, second Bash idle.",
+      "current_terminal": "initial02 PID279630 running/synth; fresh_link child296877 running. First tab bounded watcher285039 last seen13:24, second Bash idle.",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6804,7 +6804,7 @@
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
-      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_LOCAL.md",
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_SERVER.md",
       "local14_passed": true,
       "local14_outputs": 354816,
       "local_sequence10_passed": true,
@@ -6841,7 +6841,7 @@
       "qualification_pid": 279630,
       "qualification_session": "c80_initial02",
       "qualification_status": "running",
-      "qualification_stage": "sequence",
+      "qualification_stage": "synth",
       "formal_file_count_verified": 1008,
       "asic14_passed": true,
       "asic14_outputs": 354816,
@@ -6849,7 +6849,14 @@
       "fixed12_total_cycles": 847238,
       "fixed12_mean_cycles": 70603.16666666667,
       "fixed12_tasks_per_second": 2124.550598533116,
-      "same_logical_fixed12_verified": true
+      "same_logical_fixed12_verified": true,
+      "recovery_passed": true,
+      "cpu_contention_passed": true,
+      "sequence_summary_sha256": "a2f821f4971f7624cd7a5990062a90da3a2284183a4b1e96ec2f85035c698b01",
+      "contention_summary_sha256": "497b3b05bf4db090886e7f0e6b86a05f102dc2fe1d9067bc5af7171584ba9017",
+      "fresh_link_pid": 296877,
+      "archive_and_snapshot_local_tests": 7,
+      "archive_and_snapshot_server_deployed": false
     }
   }
 }
