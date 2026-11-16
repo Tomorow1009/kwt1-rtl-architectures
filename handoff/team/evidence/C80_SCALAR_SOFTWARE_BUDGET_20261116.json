@@ -1,0 +1,43 @@
+{
+  "codec_sha256": "88dc5d54e218c629cb2ec1759267d5b30aa90893a604b50c2054e8372e553d93",
+  "full_profile_sha256": "bf48db2906794f9b9a16c56feac0a28132f4840c5aa65bf0ad5a338662390a04",
+  "internal_halves_per_task": 23488,
+  "limits": [
+    "Hypothetical scalar one-action/cycle service, not proven hardware timing",
+    "Always-ready output; no SRAM conflicts, CPU contention or output bus scheduling",
+    "Synthetic periodic input is not a replay of original shared-read acknowledgments",
+    "No numeric acceptance: profiling reuses the provisional software parser"
+  ],
+  "max_reservoir_bits": 128,
+  "maximum_rice_bits": 23,
+  "profiler_sha256": "2e33a69baead3a7b1a2c9c8ed6b80a07c8979bb3b88755bfd450e4595372a7d2",
+  "rtl_executed": false,
+  "schema": "c80-isolated-software-decoder-budget-v1",
+  "service_summary": {
+    "1": {
+      "first2_prefix_mean": 1215.5708333333334,
+      "first5_prefix_mean": 1413.1333333333334,
+      "max_cycles": 23753,
+      "mean_cycles": 23740.283333333333,
+      "mean_input_backpressure_cycles": 17460.35,
+      "mean_input_wait_cycles": 1.0,
+      "min_cycles": 23707
+    },
+    "7": {
+      "first2_prefix_mean": 2260.6208333333334,
+      "first5_prefix_mean": 2709.7,
+      "max_cycles": 54821,
+      "mean_cycles": 43879.6375,
+      "mean_input_backpressure_cycles": 0.0,
+      "mean_input_wait_cycles": 20140.354166666668,
+      "min_cycles": 37707
+    }
+  },
+  "software_only": true,
+  "source_summary_sha256": "37d33d44546aaa1493fca21bab85fe59d9af261dfc48d532e9ad28b5743cf0c6",
+  "source_tasks_sha256": "f2548ecad3305ccbaa13c7dc1cf5d2b22ac1b8cf3720189be6060a5336cf0ea5",
+  "stage_accepted": false,
+  "tasks": 240,
+  "total_internal_halves": 5637120,
+  "whole_task_cycles_measured": false
+}
