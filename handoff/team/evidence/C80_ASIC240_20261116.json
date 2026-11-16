@@ -1,0 +1,20 @@
+{
+  "schema": "c80-own-asic-batch20-final-observation-v1",
+  "observed_at": "2026-11-16T15:47:45+08:00",
+  "source_commit": "74f3ae7bb479d5fdd7917702c4a2c0671eacb61b",
+  "run": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_initial02_batch20/c80_batch20",
+  "summary_sha256": "8dca0f4f57548b2b0f58af3326b909a5a0034b7fa3adad4ccf3030a7b8793312",
+  "status": "passed",
+  "tasks": 240,
+  "checked_outputs": 6082560,
+  "checked_totals": 6082560,
+  "failed": 0,
+  "compile_count": 1,
+  "mean_cycles": 69352.7125,
+  "min_cycles": 63179,
+  "max_cycles": 80297,
+  "host_seconds": 2274.8367858980782,
+  "fixed12_mean_unchanged": 70603.16666666667,
+  "stage_accepted": false,
+  "source_modified": false
+}
