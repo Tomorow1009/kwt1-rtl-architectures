@@ -6874,7 +6874,7 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "19ce48f",
+      "latest_pushed_commit": "a9eb430",
       "last_server_observed_at": "2026-11-16T14:49:07+08:00",
       "export_review_prepared": true,
       "export_review_deployed": true,
@@ -6898,12 +6898,17 @@
       "numerical_timing_area_gate_passed": true,
       "synthesis_observation": "handoff/team/evidence/C80_SYNTHESIS_OBSERVATION_20261116.json",
       "final_synthesis_identity_asserted_at": "2026-11-16T15:11:14+08:00",
-      "batch_last_observed_at": "2026-11-16T15:09:43+08:00",
-      "batch_tasks_completed": 13,
-      "batch_outputs_checked": 329472,
-      "batch_totals_checked": 329472,
+      "batch_last_observed_at": "2026-11-16T15:18:03+08:00",
+      "batch_tasks_completed": 70,
+      "batch_outputs_checked": 1774080,
+      "batch_totals_checked": 1774080,
       "batch_failures": 0,
-      "source_result_modified": false
+      "source_result_modified": false,
+      "readonly_watcher_pid": 27432,
+      "readonly_watcher_expected_end": "2026-11-16T15:26:23+08:00",
+      "copy_launcher_prepared": true,
+      "copy_launcher_deployed": false,
+      "copy_started": false
     }
   }
 }
