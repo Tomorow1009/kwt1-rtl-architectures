@@ -1,6 +1,12 @@
 # C32-A后半程：finish03已运行
 
-最后观察：2026-11-17 00:40:06（北京时间）。压缩恢复后先读AGENTS、有效计划、根交接、本检查点及STATUS。不要把旧失败队列或历史PID当作当前作业。
+最后观察：2026-11-17 00:48:09（北京时间）。压缩恢复后先读AGENTS、有效计划、根交接、本检查点及STATUS。不要把旧失败队列或历史PID当作当前作业。
+
+## 最新：门级14通过，进入完整SAIF12
+
+gate14自身summary已passed，14例354816输出（row/col/result/saturated）逐项核对通过，无SDF、内部total不可见；total由自己的ASIC240证明，不伪称门级total已观察。SHA **fde3abb19c8de0f4de3329141109783ad02135408c91b226382e89100cefdb7f**，00:48机器核验，并断言全部14例完整周期与本版ASIC RTL完全相同。详见C32_GATE14_20261117.json。
+
+finish03父308692目前running/saif，completed为structure、gate，最新子317438正在`c32_finish03_saif/c32_saif/layer_01.log`。/tmp70.80GiB。当前不重复门级，继续本队列SAIF12→timing/DRC→PT12。全部成功退出后才运行已部署export_review03；当前未执行。GUI会话93752已结束，无活跃输入，终端空闲。最近已pushc9730e6，本次门级里程碑随后同步。
 
 压缩前最新核对：finish03父308692仍running/gate，最新子313308运行L06，/tmp71.06GiB。没有失败或重启；structure已完成。读取映射结构证明确有32个PE、1阵列、32个requantize，sum32/total33；declaration_only6486且unloaded driver匹配，其他LINT-1/32保持待结合最终报告审核，未擅自豁免。完整gate14/SAIF12/PT12、导出/独立结论/归档/冻结未完成。后继export_review03已部署未执行；C32-B/G32未开始。最近已push2416ee2，当前更新随后同步。
 

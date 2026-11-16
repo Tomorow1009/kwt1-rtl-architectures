@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "C32-A own ASIC240/FLOAT20 and synthesis passed; finish03 running gate L06; own power and final review pending",
+    "current_stage": "C32-A own ASIC240/FLOAT20/synthesis/gate14 complete; finish03 collecting SAIF12",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5680,7 +5680,7 @@
         "task": "C80 own 10000 random compute blocks"
       }
     ],
-    "last_server_observation": "2026-11-17T00:40:06+08:00",
+    "last_server_observation": "2026-11-17T00:48:09+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-17T00:40:06+08:00",
+      "updated_at": "2026-11-17T00:48:09+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T00:40:06+08:00",
+      "last_observed_at": "2026-11-17T00:48:09+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7184,7 +7184,7 @@
       "synthesis_child_status": "exited",
       "synthesis_child_previous_pid_transcription_wrong": true,
       "accelerator_block_mapped_seconds": 1139.53,
-      "runtime_free_gib": 71.06,
+      "runtime_free_gib": 70.8,
       "status_readonly_tool_deployed": true,
       "synthesis_evidence": "handoff/team/evidence/C32_SYNTH_INITIAL_20261116.json",
       "project_conservative_area_mm2": 0.722402954997787,
@@ -7231,11 +7231,12 @@
       "finish02_pid": 304144,
       "finish02_exited": true,
       "finish02_state_sha256": "c502d28a5d4aee1689abe597b40465f42a2d98c17fb9468b28b3ecd7423eccec",
-      "finish03_status": "running_gate",
+      "finish03_status": "running_saif",
       "finish03_pid": 308692,
       "finish03_started_at": "2026-11-17T00:31:05.429536",
       "finish03_completed": [
-        "structure"
+        "structure",
+        "gate"
       ],
       "current_queue": "c32_finish03",
       "status_readonly_version": 4,
@@ -7249,13 +7250,17 @@
         "removed_bytes": 165281376,
         "followup_finish03_running": true
       },
-      "current_gate_case": "layer_06",
-      "current_child_pid": 313308,
+      "current_gate_case": null,
+      "current_child_pid": 317438,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
-      }
+      },
+      "current_activity_case": "layer_01",
+      "gate14_passed": true,
+      "gate14_evidence": "handoff/team/evidence/C32_GATE14_20261117.json",
+      "all14_gate_cycles_equal_ASIC": true
     }
   }
 }
