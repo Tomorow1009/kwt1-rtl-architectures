@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T04:30:12.421817+08:00",
+      "last_observed_at": "2026-11-17T04:52:57.187365+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": "repair03_GUI_transfer_in_progress",
+      "current_queue": "c32_finish_repair04",
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7265,8 +7265,8 @@
         "removed_bytes": 165281376,
         "followup_finish03_running": true
       },
-      "current_gate_case": null,
-      "current_child_pid": null,
+      "current_gate_case": "layer_02",
+      "current_child_pid": 106307,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
@@ -7436,11 +7436,65 @@
       },
       "repair03": {
         "source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
-        "status": "GUI_transfer_in_progress",
+        "status": "mapping_complete_constraints_clear_requires_own_final_PPA",
         "payload_sha256": "652403c2598be68a764f48844cf958c28cf6917c50abc12764e448bbfd0b58ce",
-        "gui_session": 61492,
-        "targeted_equivalent_cells": 6
-      }
+        "gui_session": null,
+        "targeted_equivalent_cells": 6,
+        "pid": 96263,
+        "started": "2026-11-17T04:31:54.592615",
+        "exited": true,
+        "bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-repair-5828804",
+        "summary_sha256": "78268481a2fc203ae27102239ac9cdfcf83fdac3fef40dd08c8e1e2e2ef878e5",
+        "netlist_sha256": "4f6e416402f2a178ec0ae0494fab1cddc53d7cf9113ac19990e108580b47c1dc",
+        "netlist_sha_machine_asserted": true,
+        "constraints_explicit_clear": true,
+        "conservative_area_mm2": 0.7224077334997787,
+        "setup_slack_ns": 5.24521e-05,
+        "hold_slack_ns": 0.0010598,
+        "macros_small": 92,
+        "macros_large": 128,
+        "latches": 0
+      },
+      "repair_finish03": {
+        "pid": 99561,
+        "status": "failed_ENOSPC_zero_children",
+        "exited": true,
+        "finished": "2026-11-17T04:39:46.674070"
+      },
+      "repair_finish04": {
+        "pid": 101802,
+        "status": "running",
+        "stage": "gate",
+        "started": "2026-11-17T04:44:20.534853",
+        "driver_sha256": "69d8a2cfa69b692953ce1dbddea77f491f85d288cd5a077ccaa5e4d0bc3ceeac",
+        "new_gate_power_required": true,
+        "original_lock_unchanged": true
+      },
+      "recovery33": {
+        "pid": 97746,
+        "status": "query_started_remaining_captures_preserved",
+        "completed": true,
+        "worker_exited": true,
+        "removed_files": 64,
+        "removed_bytes": 9718967,
+        "remaining_files": 832,
+        "state_sha256": "8f4d2d6fd2db747d1402b98d07fdabf84b01ec2816a7b1e602bbcd8691f5f441",
+        "state_hash_machine_asserted": true
+      },
+      "recovery34": {
+        "pid": 102523,
+        "status": "query_started_remaining_captures_preserved",
+        "completed": true,
+        "worker_exited": true,
+        "removed_files": 296,
+        "removed_bytes": 44987070,
+        "remaining_files": 536,
+        "remaining_bytes": 81364074,
+        "state_sha256_displayed": "a4130c4109113e6b3295b9bcc1bdfdaa787c2802be632233938da4ca8c4da51e",
+        "state_hash_machine_asserted": false
+      },
+      "repaired_archive_tests_passed": 12,
+      "lock_storage_wait_tests_passed": 3
     }
   }
 }

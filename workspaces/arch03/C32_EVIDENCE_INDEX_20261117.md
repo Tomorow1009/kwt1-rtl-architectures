@@ -1,3 +1,5 @@
+**04:55更新：repair03新映射的真实约束已清零；保守项目面积0.7224077334997787mm²，setup/hold为正。其自己的finish_repair04已运行至门级layer_02。下方表格及旧功耗属于原未合格网表，不能继承为新网表验收结果；当前恢复入口为[修复检查点](../../CONTEXT_CHECKPOINT_20261117_C32_DRC_REPAIR.md)，新映射证据见[C32修复03](../../handoff/team/evidence/C32_EQUIVALENT_REPAIR03_20261117.json)。**
+
 > 最新状态（03:44）：旧网表326条max_transition记录待修复，C32未验收；新repair01父72614等待原锁，恢复30 worker74341执行中。本文较早活动状态已过时，恢复以根目录CONTEXT_CHECKPOINT_20261117_C32_DRC_REPAIR.md为准。旧报告全部保留，T80/旧八路不改。
 
 **02:55更正：当前C32-A约束未通过。原始报告有326条max_transition违反、旧解析器未识别，之前“0约束违反”记录有误。完整功能与数值仍保留，但不能冻结，需新映射修复及同网表重新验证。详见[当前修复检查点](../../CONTEXT_CHECKPOINT_20261117_C32_DRC_REPAIR.md)。下文较早数值为未合格网表结果，不能作为最终阶段结论。**

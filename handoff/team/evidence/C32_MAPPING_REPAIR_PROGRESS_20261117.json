@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-11-17T04:10:59.170434+08:00",
+  "observed_at": "2026-11-17T04:52:57.187365+08:00",
   "repair01": {
     "bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-repair-c7c7f6c",
     "source_commit": "c7c7f6c3505ca54b90d1fa54893b925866d3c3ee",
@@ -19,47 +19,88 @@
     "source_commit": "b9f012707be7c557ac717138dc4060d23fd603b4",
     "pid": 78851,
     "started": "2026-11-17T03:53:23.740263",
-    "status": "waiting_original_lock_storage",
+    "status": "mapping_complete_not_qualified_capacitance2",
     "payload_sha256": "90d6ef80ca4b3d5e74bd02c83b3d7bec0bfc8693a997260e64194b1126419e5c",
-    "runtime_manifest_displayed": "aa329cd1a7137f857068cde6ee100946f9aa55953ecc1cf1c03cc4615e559b2e"
+    "runtime_manifest_displayed": "aa329cd1a7137f857068cde6ee100946f9aa55953ecc1cf1c03cc4615e559b2e",
+    "exited": true,
+    "summary_sha256": "057e0dd63d44b38c722ad192d123f8799a6c2d7582e15dac0422d315e27fe02f",
+    "max_capacitance_violation_records": 2,
+    "conservative_area_mm2": 0.7224058182997788
   },
-  "waiter": {
-    "pid": 82597,
-    "started": "2026-11-17T04:01:54.153666",
-    "status": "waiting_repair02",
-    "launcher_sha256": "93c9f4aa26ce21ea485e3249ea0cdbc6f88b368ab22ca7eede5ae0109059372d",
-    "waiter_sha256": "e88671019a689f3f7ff6cc5b49b92a4cd886350cc56dde0bc09cfd73c06c34bb"
+  "repair03": {
+    "source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
+    "status": "mapping_complete_constraints_clear_requires_own_final_PPA",
+    "payload_sha256": "652403c2598be68a764f48844cf958c28cf6917c50abc12764e448bbfd0b58ce",
+    "gui_session": null,
+    "targeted_equivalent_cells": 6,
+    "pid": 96263,
+    "started": "2026-11-17T04:31:54.592615",
+    "exited": true,
+    "bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-repair-5828804",
+    "summary_sha256": "78268481a2fc203ae27102239ac9cdfcf83fdac3fef40dd08c8e1e2e2ef878e5",
+    "netlist_sha256": "4f6e416402f2a178ec0ae0494fab1cddc53d7cf9113ac19990e108580b47c1dc",
+    "netlist_sha_machine_asserted": true,
+    "constraints_explicit_clear": true,
+    "conservative_area_mm2": 0.7224077334997787,
+    "setup_slack_ns": 5.24521e-05,
+    "hold_slack_ns": 0.0010598,
+    "macros_small": 92,
+    "macros_large": 128,
+    "latches": 0
   },
-  "recovery30": {
-    "started": true,
-    "worker_pid": 74341,
-    "started_at": "2026-11-17T03:43:12.405144",
-    "source_sha256": "b25320301ff5d4fb62bbf89419374b5afac23b6f4ef32f2602d94f3cbf72d2b8",
-    "candidate_files": 663,
-    "candidate_bytes": 213048254,
-    "completed": true,
-    "status": "query_started_remaining_captures_preserved",
-    "removed_files": 654,
-    "removed_bytes": 210149660,
-    "remaining_files": 9
+  "repair_finish03": {
+    "pid": 99561,
+    "status": "failed_ENOSPC_zero_children",
+    "exited": true,
+    "finished": "2026-11-17T04:39:46.674070"
   },
-  "recovery31": {
-    "pid": 81140,
-    "status": "preflight_failed_prior_file_already_absent",
-    "removed_files": 0,
-    "completed": true,
-    "source_sha256": "f028cd01d9d13f14daf99291bc8dfc1a298ab15f513555b999fe26302118fff1"
+  "repair_finish04": {
+    "pid": 101802,
+    "status": "running",
+    "stage": "gate",
+    "started": "2026-11-17T04:44:20.534853",
+    "driver_sha256": "69d8a2cfa69b692953ce1dbddea77f491f85d288cd5a077ccaa5e4d0bc3ceeac",
+    "new_gate_power_required": true,
+    "original_lock_unchanged": true
   },
   "recovery32": {
     "pid": 85635,
     "started": "2026-11-17T04:08:47.613846",
-    "status": "verifying_retained_archive_and_actual_files",
+    "status": "query_started_remaining_captures_preserved",
     "candidate_files": 1200,
     "candidate_bytes": 182156054,
-    "source_sha256": "ef70a9db4d61f9e286dd5bd994556d12639a141eadf10fe6d33ce65dd13e5519"
+    "source_sha256": "ef70a9db4d61f9e286dd5bd994556d12639a141eadf10fe6d33ce65dd13e5519",
+    "completed": true,
+    "worker_exited": true,
+    "removed_files": 304,
+    "removed_bytes": 46085943,
+    "remaining_files": 896,
+    "remaining_bytes": 136070111,
+    "free_after": 35651584,
+    "finished": "2026-11-17T04:11:11.290856"
   },
-  "stage_accepted": false,
-  "old_gate_power_not_reused": true,
-  "protected_T80_modified": false,
-  "old8_modified": false
+  "recovery33": {
+    "pid": 97746,
+    "status": "query_started_remaining_captures_preserved",
+    "completed": true,
+    "worker_exited": true,
+    "removed_files": 64,
+    "removed_bytes": 9718967,
+    "remaining_files": 832,
+    "state_sha256": "8f4d2d6fd2db747d1402b98d07fdabf84b01ec2816a7b1e602bbcd8691f5f441",
+    "state_hash_machine_asserted": true
+  },
+  "recovery34": {
+    "pid": 102523,
+    "status": "query_started_remaining_captures_preserved",
+    "completed": true,
+    "worker_exited": true,
+    "removed_files": 296,
+    "removed_bytes": 44987070,
+    "remaining_files": 536,
+    "remaining_bytes": 81364074,
+    "state_sha256_displayed": "a4130c4109113e6b3295b9bcc1bdfdaa787c2802be632233938da4ca8c4da51e",
+    "state_hash_machine_asserted": false
+  },
+  "stage_accepted": false
 }
