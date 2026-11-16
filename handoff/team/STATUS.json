@@ -7356,7 +7356,7 @@
         "removed_files": 537,
         "removed_bytes": 172434752,
         "remaining_files": 663,
-        "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dccd1510b8f97ebd7fb7ebe35b8663",
+        "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dcdc1510b8f97ebd7fb7ebe35b8663",
         "state_hash_machine_asserted": false
       },
       "local_DRC_parser_and_admission_tests": 15,
