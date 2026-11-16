@@ -1,5 +1,21 @@
 # C80 最终综合完成与240任务接续
 
+## 16:11：新接续尚未启动；部署限定旧B0重复输入清理
+
+最新push **d6eadfbe4300854ae9fa9ff8d62a5ae292fe2d2f**；3502772是五项恢复条件测试后的新followup02，00e0810为新export02和copy02。新export02的同链/异链/失败披露三项测试通过，Python3.6语法通过；未改变正式RTL/固件/数据。下文旧314678/4047已失败退出，不能重启。
+
+15:56观察共享可用4,132,438,016B、inode8,088,383，无删除；16:03又为1,048,576B、原锁不存在。12段传输19960已结束，新`私有根/ops-followup02-3502772`两源码/源payload已校验写入，但启动片段第31行空间闸门拒绝：**followup02.json、launch、import_receipt均不存在，没有新进程或precision04/finish02**。保留传输记录，不能重复完整部署。
+
+新followup02源码SHA **d5f012fefa01db49de5cb093774d7afee2547692a3f4611c7a2e25e73221cdc5**，payload **c37fc7f142d064f0d490289a5413b8250a59295aa7b1b8ba8e4d01104b0805c7**。空间恢复后，从既有两文件重新校验并创建独立启动回执，不能覆盖目录或已存在控制文件。它要求旧precision03是精确ENOSPC、completed=[]、没有子阶段、三个旧父退出；保持原失败状态哈希。将新精度放precision04，后续finish02。
+
+空间候选：旧B0 `ced0e139a01e/runs/systolic_b_final02_final1200/systolic_b_batch/cases`下49,200个.hex/.bin/.verilog生成输入，共2,616,732,144B，已在持久备份`systolic-b-20261112_2320`完整63,653成员/7,006,124,866B回读验证。proof=`/tmp/s4_21usr_p80_20261116_0315/b0_archived_batch_preflight12/verified_candidates.json`，SHA fbb98604283fcac8285dc817f554dd7bcccee37f85faba07d9fefe72906e9bd8；旧cleanup13未部署/执行。六份B0中间DRC报告961,987,609B仍保留，不是本次删除候选。
+
+原P80包未包含n1_archive_runtime，第一次只读占用检查import失败；改用C80包工具后读到三个受保护桌面服务（10519 gnome-keyring-daemon --start，79103/202972 gnome-pty-helper）的fd不可见，其余47个本账号进程未使用候选。严格旧检查因此拒绝，并未删除。新cleanup14按早期已授权归档维护规则：无原团队锁、无本账号EDA、旧C80父均退出、新followup未启动，精确允许上述类型的系统桌面服务权限限制并记载；任何其他不可见进程停止。不是宣称全部fd可见，也不以此放宽EDA锁。共享满时不尝试绕开/清除原锁；逐项重新核对备份、原报告、候选哈希/身份，逐文件日志fsync后只unlink生成输入；任何新团队锁即停止。所有备份和结果保留。
+
+新清理源码`handoff/team/evidence/C80_B0_ARCHIVED_INPUT_CLEANUP14_20261116.py`，SHA **122dc4476cd2e1972c7187fdbab91c1be15770f53c4b72697b14309c535a1798**，源d6eadfb。目标工具目录`私有根/ops-b0-cleanup14-d6eadfb`；控制输出`私有根/b0_archived_batch_cleanup14`。本地输入**11194**当前6/8，完成截图`takeover_local/c80_cleanup14_d6eadfb_1610.png`。先结束该输入并读取服务器PID/日志；目前未观察实际运行或删除结果，不能重传/再派。
+
+VNC18874435/workspace3，当前第一标签传输中，workspace4不动；第二旧观察器已经按时结束，输入仍需截图确认。所有其他本地输入19960/48196/76834已结束。清理完成并检查实际空间/原锁后，恢复已准备followup02；再部署`local_runs/c80_export02_ops_00e0810_20261116_1615`的export02（10段），其源码SHA **4c001bb4603a52b3c6f24d95566442bc59c48ee9709e37cbd224b0982331048a**，绑定新launch实际PID，不填旧314678。不得先启动export02。copy02仅本地准备，旧copy01保持未运行。
+
 ## 15:50重要恢复入口：240通过，精度恢复取锁遇到共享盘满
 
 最新已push为8214eed。15:47:45核对自己的`runs/c80_initial02_batch20/c80_batch20`最终summary：240任务、6,082,560输出及total通过，failed=0、compile_count=1；summary SHA **8dca0f4f57548b2b0f58af3326b909a5a0034b7fa3adad4ccf3030a7b8793312**，与原队列引用匹配。批量平均69352.7125周期，范围63179—80297，宿主2274.8367858980782秒。此平均不替换固定12性能平均70603.1666667。
