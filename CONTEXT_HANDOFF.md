@@ -1,6 +1,6 @@
 # 架构三当前交接：C32-A修复包运行中
 
-最后观察：2026-11-16 22:43:37（北京时间）。恢复后先读本文件、AGENTS.md、当前计划及C32_SERVER检查点，再查询实际进程；不要据历史PID重启作业。
+最后观察：2026-11-16 22:54:10（北京时间）。恢复后先读本文件、AGENTS.md、当前计划及C32_SERVER检查点，再查询实际进程；不要据历史PID重启作业。
 
 ## 有效目标与保护范围
 
@@ -13,7 +13,7 @@
 ## 当前本地身份
 
 - 工程 `E:/fpga_race-two/kwt1-c32-g32-20261115`。
-- 分支 `codex/light-light126/t80-pipeline-c32-g32-20261115`，私人仓库Tomorow1009/kwt1-rtl-architectures。最后已push `aa04ea1`。
+- 分支 `codex/light-light126/t80-pipeline-c32-g32-20261115`，私人仓库Tomorow1009/kwt1-rtl-architectures。最后已push `b3a2bee`。
 - C32生产RTL源自 `61246bb2a21c56a9bfd871fd68de93028d79f5fd`；新受测包提交 `91135f61c97c980039793c6637d0a06888638df0` 只修正竞争固件的旧五行检查。RTL、IRQ及恢复固件未变。
 - 未追踪的 `handoff/team/evidence/S0_SYNTH05_FINISH_LAUNCH_20261115.py` 属历史，不提交、不执行。
 
@@ -22,7 +22,7 @@
 - C32本地10000随机＋32定向块、14例、两拍SRAM预取开/关连续任务与恢复通过。详见C32_LOCAL_INITIAL、C32_LOCAL_QUALIFICATION及C32_LOCAL_BRINGUP。
 - 原包initial01因共享锁目录ENOSPC退出，未运行子任务；initial02自身ASIC14/恢复通过，但竞争固件在启动前因metadata行数仍写5而拒绝参数。失败完整保留，不能重启。
 - 原ASIC14固定12完整周期合866152、平均72179.3333，150MHz折算2078.1572task/s；比冻结C80低2.18368%。尚非C32最终PPA结论。
-- 新包initial03的ASIC14、恢复与CPU竞争均通过。22:43:37正在新综合，当前子PID256175执行fresh_link/c32_link.log。竞争检查122轮，最大连续DMA授权1次，符合公平性要求；初步功能证据见C32_ASIC_CORRECTED_20261116.json。
+- 新包initial03的ASIC14、恢复与CPU竞争均通过。22:54:10正在加速器综合，子PID257996；共享SRAM块已完成25.55秒，最终面积和时序尚未产生。竞争检查122轮，最大连续DMA授权1次，符合公平性要求；功能证据见C32_ASIC_CORRECTED_20261116.json，三个摘要在22:48已机器核对。
 - 共享空间恢复19/20/22/23均已完成，禁止重复清理。恢复22归档回读49200个旧R4生成输入后清理约2.64GB；压缩及回执两份保留。恢复23只清理575个普通生成缓存/31816241B，压缩包5588458B，全部.so及链接、实际输出/日志/源/元数据保留。
 - 恢复23首次因VCS链接安全拒绝，未删除；修复将所有.so排除。第一次补丁解包遗漏zlib层在哈希处拒绝，未创建脚本；正确解包后通过并启动initial03。失败记录均留存。
 - FileZilla因既有公共地址代理检查未通过而不可用；未绕过检查，部署继续使用已授权的可见VNC终端。
@@ -37,7 +37,8 @@ ROOT=`/tmp/s4_21usr_c32_20261116_2010`，全部大产物写这里。
 - 队列新包`/runs/c32_initial03`，PID **238916**，开始 **22:31:59.227004**；日志 `ROOT/c32_initial03.log`。顺序soc→sequence→contention→synth→batch20→precision。原协作锁持有期间不更换锁、不清锁、不并发正式EDA。
 - 原共享锁 `/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock`，owner仅初次写入，后续台账在/tmp。共享盘持续满，不改锁路径。
 - 后继 `ROOT/c32_finish_from_initial03.py` 已部署并核验，SHA `7e4c2c74ed44017c53390f3d52693293fa30b61eec9782a4c3dd964e72d5c256`，**未执行**。要求initial03成功退出及显式终态SHA才运行自己的gate14/SAIF12/时序/DRC/PT12。不能用旧612/initial02启动器。
-- 当前VNC窗口18874435、workspace3第一终端空闲，最后输入C32NEXT已完成。窗口ID恢复后重新查询，不使用workspace4。
+- 收尾工具 `ROOT/c32_export_review01_tool.py` 已部署，SHA `fda73258ed8f1779835d84bbe405299590d3c402425a4f006f06537dc068e470`，**未执行**。只在initial03/finish01均成功退出且给出终态哈希后，导出新报告及活动/连接审核。当前不启动它，不提前冻结。
+- 当前VNC窗口18874435、workspace3第一终端空闲，最后输入EXPORTREADY已完成；无活动GUI输入会话。窗口ID恢复后重新查询，不使用workspace4。
 
 ## 剩余与后续入口
 

@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-16T22:43:37+08:00",
+      "last_observed_at": "2026-11-16T22:54:10+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7172,7 +7172,12 @@
       "finish03_tool_deployed": true,
       "finish03_started": false,
       "contention_passed": true,
-      "corrected_functional_evidence": "handoff/team/evidence/C32_ASIC_CORRECTED_20261116.json"
+      "corrected_functional_evidence": "handoff/team/evidence/C32_ASIC_CORRECTED_20261116.json",
+      "synthesis_phase": "accelerator_mapping",
+      "synthesis_child_pid": 257996,
+      "shared_block_mapped_seconds": 25.55,
+      "export_review_tool_deployed": true,
+      "export_review_started": false
     }
   }
 }

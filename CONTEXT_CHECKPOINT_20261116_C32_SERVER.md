@@ -1,5 +1,13 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:54 正在加速器映射；后续汇总工具已部署但不执行
+
+22:52:00原initial03仍running/synth；shared_sram块已mapped，用时25.55秒。加速器子PID257996，22:54:10 compile.log继续显示Processing DW算术子模块至DW01_add_294，没有最终网表结论。当前仍不得标记面积/时序通过；综合之后原队列还会执行自己的240/精度。
+
+新增本地/服务器独立工具 `C32_EXPORT_REVIEW01_20261116.py`（提交b3a2bee），SHA **fda73258ed8f1779835d84bbe405299590d3c402425a4f006f06537dc068e470**。本地Python3.6语法、正确关联请求及三种错链拒绝检查通过。服务器ROOT/c32_export_review01_tool.py已由4800字符zlib/base64重建，哈希核验后独占保存，**未执行**。未来必须显式传`--initial-state-sha256`、`--finish-state-sha256`，且两个队列均成功退出，才导出自己的报告、SAIF未知活动清单、同网表连接查询和审核快照；不自动冻结，不继承旧硬件PASS。当前控制目录ROOT/c32_export_review01尚未创建。
+
+GUI会话44278/6612都已结束，无活跃输入。workspace3第一终端空闲；最后截图takeover_local/c32_export_verified_accel.png。GitHub已push b3a2bee（含56a7dd7摘要更正）。新工具不在当前受测包内，不改变manifest或正在跑的源码。旧S0未追踪工具仍不要提交/执行。恢复23等清理已完成，不再执行。
+
 ## 22:48 三个修复包摘要已完成机器核对
 
 22:48:50服务器明确打印THREE_SUMMARIES_AND_354816_OUTPUTS_VERIFIED。soc正确SHA为 **2ebcde2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7**；原屏幕抄录将首八位c/d顺序看错，先前两次断言拒绝仅为转录检查，没有修改摘要或影响综合。sequence与contention SHA使用上节值并同次机器验证通过。C32_ASIC_CORRECTED_20261116.json已修正。任何含2ebdce2f或2cbdce2f前缀的旧记录均不可用。
