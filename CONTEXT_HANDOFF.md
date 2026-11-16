@@ -1,3 +1,39 @@
+# C32修复03恢复入口（2026-11-17 04:30观察）
+
+先重读AGENTS.md、有效计划workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md和STATUS。本次只修C32-A，不进入C32-B/G32。原计划正式批量20条；保护桌面T80、旧8全部资料、冻结S0/P80/C80和备份。
+
+## 已完成与实际缺口
+
+- S0/P80/C80已冻结。C32原RTL240任务6082560个输出及total零差异、ASIC14/恢复/竞争/精度已通过，当前RTL未改。原网表门级14、SAIF12/PT12已跑，但原网表有326条max_transition违反，不能作为合格阶段。
+- repair01因DC缺省dont_touch返回空字符串、恢复时UID-133失败，已保留且退出。repair02修复此工具问题，并调整3个BUF与一个上游NOR3；等价token/leaf证明通过、DC无工具错误，映射已完成。
+- repair02仍有两个真实max_capacitance违反：core/n60014与n60011，报告显示0.03/0.03/0.00 (VIOLATED: increase significant digits)。旧解析器未提取这两条但明确标extraction=false，准入正确拒绝，不能说DRC0通过。
+- repair02 summary SHA 057e0dd63d44b38c722ad192d123f8799a6c2d7582e15dac0422d315e27fe02f；保守项目面积0.7224058182997788mm²，setup+0.0000524521ns、hold+0.0010598ns，92小宏/128大宏、0锁存器。网表功耗尚不能沿用原值。
+- 04:17静态驱动读取：n60014→U24687 NOR3V2，n60011→U24680 NOR3V2。新repair03从原ee08629b/3c116d5网表重新派生，只改三个BUF V2RD→V4RD与三个NOR3 V2→V4，所有其他Verilog token/leaf必须相同。无compile、无拓扑/约束放宽，报告提高到8位有效数字。
+- 新解析器保留rounded-zero VIOLATED为真实违规，无法识别/截断记录继续拒绝。28项相关本地测试于本轮重新通过；工具源码58288044bfbbe344fafc7550647bfc5c29eef0a7。
+
+## 服务器身份与恢复
+
+ROOT=/tmp/s4_21usr_c32_20261116_2010。repair02包ROOT/light-light126-c32-repair-b9f0127，父78851、finish等待器82597与恢复32父85635在04:30:12均已退出，原协作锁不存在。finish等待器因真实约束失败退出，没有新gate/SAIF/PT启动；不重启02。
+
+repair03两文件差量已经生成并正在GUI传输：local_runs/c32_repair_overlay_delta03/gui.txt，4614字符；payload SHA 652403c2598be68a764f48844cf958c28cf6917c50abc12764e448bbfd0b58ce。原1082文件逐一校验、新目录light-light126-c32-repair-5828804；原始seed仍为91135f6包自己的初始综合，不串接02网表。当前GUI unified session61492，恢复必须先确认完成再输入。新启动回执将为ROOT/c32_repair03_launch.json，未观察到之前不得标已启动。
+
+## 空间与已尝试清理
+
+用户确认无团队持续写共享盘。04:30共享1048576B、/tmp73445593088B，全部新运行仍在/tmp；不清锁、不换锁。
+
+恢复32终态query_started_remaining_captures_preserved，304份46085943B旧B0生成expected.npz重复副本被移除，剩896份136070111B；04:11:11.290856结束，当时释放35651584B，随后空间回到1MiB。完整已核验归档、原始数据、汇总/日志和所有保护版本保留。不得重复32。恢复31存在性前检失败零删除；恢复30移除654CSV留9；更早26至29终态见历史。
+
+若仍需要锁空间，只能新建精确剩余文件清理，先核对旧state/journal和当前文件，再核对完整归档与无人使用；不能把归档目录清单当作当前文件存在证据。
+
+## 下一步
+
+1. 查看repair03实际启动、进程、原锁及最终报告，不重启既有任务。
+2. DRC、setup/hold、≤1mm²、结构和等价证明全部通过后，新repair03自己的gate14/SAIF12/PT12；保留原未变RTL240证据，不继承旧网表活动/功耗。
+3. 适配新报告导出，连接原RTL证据与修复映射身份，完成审核、持久归档和C32-A冻结，再继续计划。
+4. 每次压缩前更新本文与STATUS，Git同步同个人分支。不启子代理/goal，不使用workspace4。
+
+---
+
 # 04:11执行状态更新：repair02与原依赖等待器仍在，不能重启
 
 本节覆盖下方旧repair01与恢复30的运行状态。有效计划、保护范围及旧功能证据不变。

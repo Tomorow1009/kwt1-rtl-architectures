@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T04:10:59.170434+08:00",
+      "last_observed_at": "2026-11-17T04:30:12.421817+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": "c32_repair02_waiting_original_lock",
+      "current_queue": "repair03_GUI_transfer_in_progress",
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7359,7 +7359,7 @@
         "state_sha256_displayed": "a1170088c32ca7f91ac01916c351e96215dcdc1510b8f97ebd7fb7ebe35b8663",
         "state_hash_machine_asserted": false
       },
-      "local_DRC_parser_and_admission_tests": 27,
+      "local_DRC_parser_and_admission_tests": 28,
       "repair_tools_prepared": true,
       "repair_server_started": true,
       "repair01": {
@@ -7394,16 +7394,22 @@
         "source_commit": "b9f012707be7c557ac717138dc4060d23fd603b4",
         "pid": 78851,
         "started": "2026-11-17T03:53:23.740263",
-        "status": "waiting_original_lock_storage",
+        "status": "mapping_complete_not_qualified_capacitance2",
         "payload_sha256": "90d6ef80ca4b3d5e74bd02c83b3d7bec0bfc8693a997260e64194b1126419e5c",
-        "runtime_manifest_displayed": "aa329cd1a7137f857068cde6ee100946f9aa55953ecc1cf1c03cc4615e559b2e"
+        "runtime_manifest_displayed": "aa329cd1a7137f857068cde6ee100946f9aa55953ecc1cf1c03cc4615e559b2e",
+        "exited": true,
+        "summary_sha256": "057e0dd63d44b38c722ad192d123f8799a6c2d7582e15dac0422d315e27fe02f",
+        "max_capacitance_violation_records": 2,
+        "conservative_area_mm2": 0.7224058182997788
       },
       "repair_finish_wait": {
         "pid": 82597,
         "started": "2026-11-17T04:01:54.153666",
-        "status": "waiting_repair02",
+        "status": "exited_constraint_admission_rejected",
         "launcher_sha256": "93c9f4aa26ce21ea485e3249ea0cdbc6f88b368ab22ca7eede5ae0109059372d",
-        "waiter_sha256": "e88671019a689f3f7ff6cc5b49b92a4cd886350cc56dde0bc09cfd73c06c34bb"
+        "waiter_sha256": "e88671019a689f3f7ff6cc5b49b92a4cd886350cc56dde0bc09cfd73c06c34bb",
+        "exited": true,
+        "new_gate_or_power_started": false
       },
       "recovery31": {
         "pid": 81140,
@@ -7415,10 +7421,25 @@
       "recovery32": {
         "pid": 85635,
         "started": "2026-11-17T04:08:47.613846",
-        "status": "verifying_retained_archive_and_actual_files",
+        "status": "query_started_remaining_captures_preserved",
         "candidate_files": 1200,
         "candidate_bytes": 182156054,
-        "source_sha256": "ef70a9db4d61f9e286dd5bd994556d12639a141eadf10fe6d33ce65dd13e5519"
+        "source_sha256": "ef70a9db4d61f9e286dd5bd994556d12639a141eadf10fe6d33ce65dd13e5519",
+        "completed": true,
+        "worker_exited": true,
+        "removed_files": 304,
+        "removed_bytes": 46085943,
+        "remaining_files": 896,
+        "remaining_bytes": 136070111,
+        "free_after": 35651584,
+        "finished": "2026-11-17T04:11:11.290856"
+      },
+      "repair03": {
+        "source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
+        "status": "GUI_transfer_in_progress",
+        "payload_sha256": "652403c2598be68a764f48844cf958c28cf6917c50abc12764e448bbfd0b58ce",
+        "gui_session": 61492,
+        "targeted_equivalent_cells": 6
       }
     }
   }
