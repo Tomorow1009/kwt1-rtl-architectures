@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T13:22:53.113267+08:00",
+      "at": "2026-11-16T13:27:16.914097+08:00",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": true,
-      "current_terminal": "Initial02 queue PID279630 running/soc, no completed stages; VNC input finished, first Bash idle.",
+      "current_terminal": "initial02 PID279630 running/sequence; ASIC14 complete; first tab readonly watcher285039, second Bash idle.",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6841,8 +6841,15 @@
       "qualification_pid": 279630,
       "qualification_session": "c80_initial02",
       "qualification_status": "running",
-      "qualification_stage": "soc",
-      "formal_file_count_verified": 1008
+      "qualification_stage": "sequence",
+      "formal_file_count_verified": 1008,
+      "asic14_passed": true,
+      "asic14_outputs": 354816,
+      "asic14_evidence": "handoff/team/evidence/C80_ASIC14_20261116.json",
+      "fixed12_total_cycles": 847238,
+      "fixed12_mean_cycles": 70603.16666666667,
+      "fixed12_tasks_per_second": 2124.550598533116,
+      "same_logical_fixed12_verified": true
     }
   }
 }
