@@ -7028,12 +7028,34 @@
     "c32_development": {
       "variant": "C32-A",
       "start_allowed_after_c80_freeze": true,
-      "hardware_files_created": false,
+      "hardware_files_created": true,
       "server_started": false,
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
-      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C32_START.md"
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C32_START.md",
+      "array_random10000_directed32_passed": true,
+      "first_local_datapath_passed": true,
+      "local_evidence": "handoff/team/evidence/C32_LOCAL_INITIAL_20261116.json",
+      "hardware_id": "0x4b57530d",
+      "capability": "0x000b02bf",
+      "encoding_layout": "0x00100006",
+      "row_lanes": 2,
+      "updated_at": "2026-11-16T20:01:00+08:00",
+      "local14_passed": true,
+      "local_latency2_prefetch_aba_tasks": 6,
+      "local_sequence_fixture_passed": true,
+      "guard_tests_passed": 54,
+      "firmware_compiled": true,
+      "local_qualification_evidence": "handoff/team/evidence/C32_LOCAL_QUALIFICATION_20261116.json",
+      "server_last_readonly": {
+        "at": "2026-11-16T19:57:54.384588+08:00",
+        "tmp_free_bytes": 79155372032,
+        "shared_free_bytes": 1048576,
+        "own_active_eda": false,
+        "cooperation_lock_present": false
+      },
+      "next": "Commit and deploy new private C32-A package, then own ASIC14/recovery/contention/synthesis/240/precision"
     }
   }
 }
