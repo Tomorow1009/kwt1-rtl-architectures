@@ -1,5 +1,13 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 23:08 已完成加速器，CPU/SoC映射中
+
+23:07:56只读状态工具确认：initial03 PID238916 running/synth，completed仍soc/sequence/contention；最新子进程 **266393** running/alive，日志新包/runs/c32_initial03_synth/c32_synth/blocks/cpu_soc/compile.log。加速器块mapped用时 **1139.53秒**，共享块 **25.55秒**，/tmp可用 **72.37 GiB**。CPU和顶层未完成，最终面积/时序尚待收回。不要重启原综合。
+
+已部署纯只读快速观察工具：ROOT/c32_status_readonly.py，SHA **ff41acc87dc597ed9ba9d8795eec56d7818a9920bfa6d3e76e45173284f3fc40**，来自提交9192a41。可在可见VNC终端执行 `python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_status_readonly.py`，每次仅显示原队列、真实子PID、最后四行日志、已完成块和临时空间；不写文件、不启动/重试任务、不触碰锁。finish01存在时显示其状态。工具已核验并首次运行成功。
+
+GUI输入34994及STATUSREADY均结束，无活动输入。当前workspace3第一终端空闲，截图takeover_local/c32_compact_status2308.png。后继finish及export仍只部署、未执行；当前不进入C32-B/G32。压缩后必须重读本计划/检查点/根交接并核对原队列实际进展。
+
 ## 23:00 压缩恢复入口：C32原综合仍在运行，真实子PID257796
 
 直接读取initial03/process_ledger/child_000025.json：23:00:25 **pid=257796、status=running、/proc存在、returncode=None**，加速器日志更新时间23:00:24，正在继续时序/面积映射。先前屏幕抄成257996，导致ps未找到而误判“子进程结束”；从未停止或重启作业。后续用台账真实PID，不能用此前抄录。原队列238916依旧负责全部阶段，宏块mapped25.55秒，CPU块和顶层未完成，不具有新PPA验收结论。
