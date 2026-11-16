@@ -1,0 +1,33 @@
+{
+  "schema": "c32-drc-observation-correction-v1",
+  "observed_at": "2026-11-17T02:55:21+08:00",
+  "source_report_sha256": "4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7",
+  "original_drc_summary_sha256": "e345c6a1326fc33e3a00f313efdd32d06a82af602e4740ee8877d03897e44034",
+  "constraint_report_clear": false,
+  "violation_record_count": 326,
+  "by_section": {
+    "max_transition": 326
+  },
+  "extraction_complete": false,
+  "unparsed_rows": 326,
+  "driver_query_complete": false,
+  "nets": [
+    "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core/n9916",
+    "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core/n9882",
+    "u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core/n9950"
+  ],
+  "displayed_required_transition_ns": 1.35,
+  "displayed_actual_transition_ns": [
+    1.37,
+    1.37,
+    1.36
+  ],
+  "previous_local_summary_incorrect": true,
+  "previous_clear_statement_retracted": true,
+  "underlying_server_reports_unchanged": true,
+  "stage_accepted": false,
+  "review_terminal": "failed_preserved",
+  "snapshot_failure": "Unresolved C32 constraints",
+  "export_parent_and_all_children_exited": true,
+  "next": "Parse PIN and dont_touch decorated report rows, inspect exact drivers, repair a fresh mapping without relaxing constraints; revalidate the new final netlist"
+}

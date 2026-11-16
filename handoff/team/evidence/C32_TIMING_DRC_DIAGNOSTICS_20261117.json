@@ -5,9 +5,9 @@
   "timing_summary_sha256": "968a02165572b84192c141dfd492062b7e975062150c7da216341fa3b4390543",
   "drc_summary_sha256": "e345c6a1326fc33e3a00f313efdd32d06a82af602e4740ee8877d03897e44034",
   "both_hashes_asserted_against_original_queue_and_files": true,
-  "constraint_report_clear": true,
-  "constraint_violation_records": 0,
-  "driver_query_complete": true,
+  "constraint_report_clear": false,
+  "constraint_violation_records": 326,
+  "driver_query_complete": false,
   "frozen_synthesis_interfaces_crosschecked": true,
   "high_fanout_threshold": 1000,
   "high_fanout_count": 3,
@@ -21,5 +21,8 @@
   "netlist_or_constraints_modified": false,
   "strict_timing_verified": false,
   "physical_signoff": false,
-  "note": "Own mapped diagnostics complete. Stable-task timing conclusion follows the full power clock/exception and model review. These read-only diagnostics do not waive high-fanout assumptions."
+  "note": "Own mapped diagnostics complete. Stable-task timing conclusion follows the full power clock/exception and model review. These read-only diagnostics do not waive high-fanout assumptions.",
+  "corrected_at": "2026-11-17T02:55:21+08:00",
+  "correction": "handoff/team/evidence/C32_DRC_CORRECTION_20261117.json",
+  "previous_observation_error": "Earlier local transcription said clear/0/complete; actual pinned server report says false/326/false. The successful diagnostic command was not DRC acceptance."
 }
