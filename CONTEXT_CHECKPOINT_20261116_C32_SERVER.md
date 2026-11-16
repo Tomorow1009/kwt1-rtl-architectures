@@ -1,5 +1,13 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 23:40 回归129/240、零失败
+
+23:39:54实际进度：completed129、failed0、checked_outputs=checked_totals=3269376，host_elapsed_seconds=1232.946047021076，剩余含20%余量1273.0884764589716秒。原父PID238916仍在batch20；不得据此提前宣布完整240通过。VNC最后C32HALF已完成，无活跃输入；当前workspace3第一终端空闲。所有后继仍待initial03成功终态。
+
+## 23:34 回归94/240，未停止
+
+23:34:17实际batch_progress：completed94、failed0、checked_outputs2382336；已耗15.02分钟，含20%余量的本批剩余估计28.00分钟。initial03父PID238916继续运行，无新硬件改动。后继门级/SAIF/PT仍未启动；不得把当前部分批量当完整PASS。最新已push2d85391，当前进度记录后续同步。
+
 ## 23:25 压缩前状态：240回归34例通过，继续原队列
 
 23:24:48 batch_progress.json为running、completed34/240、failed0、checked_outputs=861696、checked_totals=861696；已耗5.41分钟，基于宿主实测并加20%余量的剩余估算39.35分钟，仅指该批，不含后续门级/功耗。23:22:05曾观察子PID278150执行sample_002_layer_06，子PID随样本变化，**恢复时用台账读最新，不固定旧子PID**。队列父PID238916不变。
