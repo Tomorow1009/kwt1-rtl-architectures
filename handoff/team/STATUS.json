@@ -6168,7 +6168,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T09:45:22+08:00",
+      "observed_at": "2026-11-16T09:48:53+08:00",
       "status": "saif_running",
       "parent_pid": 95253,
       "child_pid": null,
@@ -6211,9 +6211,9 @@
       "own_gate14_completed": true,
       "watcher_terminal_tab": 1,
       "previous_watcher135257_confirmed_exited": true,
-      "saif_cases_completed": 6,
+      "saif_cases_completed": 7,
       "current_saif_case": null,
-      "last_confirmed_push": "251fbbe",
+      "last_confirmed_push": "ffc8067",
       "c80_offline_preparation": true,
       "c80_hardware_started": false
     },
