@@ -1,0 +1,28 @@
+{
+  "schema": "p80-displayed-existing-schedule-observation-v1",
+  "observed_at": "2026-11-16T08:44:22+08:00",
+  "source_run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-142fae2/runs/p80_fixed_d2_05/p80_soc",
+  "source_summary_sha256": "43e9ec58048d24ab8ab7d505723f7360b1e7e1e6eeaf5d76c81134cef34222c8",
+  "source_commit": "142fae28545759e33fa38de514eabf752cb8c43a",
+  "columns": ["case", "first_feed_wait_cycles", "supply_empty_cycles", "slot_wait_cycles", "response_credit_wait_cycles", "within_tile_mean_start_interval_rounded_3dp", "final_write_tail_cycles"],
+  "rows": [
+    ["layer_01",3385,56447,4418,0,137.263,141],
+    ["layer_02",3371,54347,4414,0,137.204,141],
+    ["layer_03",3175,53409,4414,0,137.099,141],
+    ["layer_04",3049,53815,4410,0,137.237,141],
+    ["layer_05",3021,52401,4418,0,137.263,141],
+    ["layer_06",2909,51449,4410,0,137.237,141],
+    ["layer_07",2825,50301,4406,0,137.224,141],
+    ["layer_08",2993,50469,4406,0,137.224,141],
+    ["layer_09",2811,50343,4406,0,137.224,141],
+    ["layer_10",2881,53017,4414,0,137.25,141],
+    ["layer_11",3245,56741,4416,0,137.263,141],
+    ["layer_12",3707,62765,4418,0,137.263,141]
+  ],
+  "interpretation": "Supply-empty spans already include overlapping causes; do not add slot or X/W waits to total cycles. The rounded mean block intervals are observed under this complete task traffic, not an isolated ready-data core II.",
+  "new_simulation_started": false,
+  "hardware_changed": false,
+  "final_PPA_accepted": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
