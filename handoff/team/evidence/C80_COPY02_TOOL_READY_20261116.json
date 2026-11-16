@@ -1,0 +1,19 @@
+{
+  "schema": "c80-copy-tool-deployment-observation-v1",
+  "observed_at": "2026-11-16T17:01:06+08:00",
+  "source_commit": "00e08106cd8a5d41b8f3159e302feb2805781114",
+  "directory": "/tmp/s4_21usr_c80_archiveops02_20261116_1658",
+  "entry": "C80_COPY_ONLY_LAUNCH02_20261116.py",
+  "source_sha256": "049cf4693bd8854c0e4466cded3c2384b36ea8d33089c3e1d0fbda40b4c12998",
+  "import_receipt_sha256": "45e6ce912a992f56c13053547f8dc66514c4eeff9952149771cef8b75a52d660",
+  "loaded_dependencies": 50,
+  "entry_identity_asserted": true,
+  "receipt_identity_asserted_on_server": true,
+  "bound_followup": "c80_followup02.json",
+  "bound_export": "c80_export_review02/state.json",
+  "archive_started": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "note": "Deploy/import only. Recheck terminal owners, completed reports, independent conclusions and current capacity before invoking. Old copy01 is unused."
+}

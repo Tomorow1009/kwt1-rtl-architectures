@@ -6873,8 +6873,8 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "ff14464",
-      "last_server_observed_at": "2026-11-16T16:54:06+08:00",
+      "latest_pushed_commit": "31358e8",
+      "last_server_observed_at": "2026-11-16T17:06:41+08:00",
       "export_review_prepared": true,
       "export_review_deployed": true,
       "export_chain_tests": 10,
@@ -6903,8 +6903,8 @@
       "batch_totals_checked": 6082560,
       "batch_failures": 0,
       "source_result_modified": false,
-      "readonly_watcher_pid": 73000,
-      "readonly_watcher_expected_end": "2026-11-16T16:57:52+08:00",
+      "readonly_watcher_pid": 82248,
+      "readonly_watcher_expected_end": "2026-11-16T17:30:41+08:00",
       "copy_launcher_prepared": true,
       "copy_launcher_deployed": true,
       "copy_started": false,
@@ -6916,7 +6916,7 @@
       "copy_tools_evidence": "handoff/team/evidence/C80_COPY_TOOL_READY_20261116.json",
       "batch_final_passed": true,
       "batch_final_evidence": "handoff/team/evidence/C80_ASIC240_20261116.json",
-      "shared_free_bytes_last": 1334837248,
+      "shared_free_bytes_last": 1048576,
       "active_eda_observed": true,
       "followup_source_sha256": "d5f012fefa01db49de5cb093774d7afee2547692a3f4611c7a2e25e73221cdc5",
       "old_followup_pid": 314678,
@@ -6948,10 +6948,16 @@
       "gate14_evidence": "handoff/team/evidence/C80_GATE14_20261116.json",
       "gate14_summary_sha256": "4c57b9d0df63dc3bcc081a095eb1eabbf0c383069d4b666582702fd6ab34f8cd",
       "gate14_fixed12_cycles": 847238,
-      "saif_layers_completed": 2,
-      "saif_completed_bytes": 195142377,
+      "saif_layers_completed": 5,
       "saif_progress_evidence": "handoff/team/evidence/C80_SAIF_PROGRESS_20261116.json",
-      "old_followup_started_at_record": "2026-11-16T14:12:34.038526+08:00"
+      "old_followup_started_at_record": "2026-11-16T14:12:34.038526+08:00",
+      "copy02_tools_evidence": "handoff/team/evidence/C80_COPY02_TOOL_READY_20261116.json",
+      "copy02_deployed": true,
+      "saif_completed_bytes_last_observation": {
+        "at": "2026-11-16T17:01:06+08:00",
+        "layers": 4,
+        "bytes": 390272049
+      }
     }
   }
 }
