@@ -5671,7 +5671,7 @@
       ]
     },
     "current_local_sessions": [],
-    "last_server_observation": "2026-11-16T08:21:10+08:00",
+    "last_server_observation": "2026-11-16T08:25:17+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -6143,7 +6143,7 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:21:10+08:00",
+      "observed_at": "2026-11-16T08:25:17+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
@@ -6153,9 +6153,9 @@
       "child_pid": 98857,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "child_elapsed_seconds": 3704,
+      "child_elapsed_seconds": 3950,
       "child_cpu_percent": 99.7,
-      "child_rss_kib": 25535112,
+      "child_rss_kib": 25536180,
       "current_log_bytes": 18344,
       "current_log_phase": "Mapping optimization table advances"
     },
@@ -6168,7 +6168,7 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:21:10+08:00",
+      "observed_at": "2026-11-16T08:25:17+08:00",
       "status": "synthesis_running",
       "parent_pid": 95253,
       "child_pid": 98857,
@@ -6213,9 +6213,9 @@
       "server_input_changed": false
     },
     "p80_b0_backup_preflight12": {
-      "status": "read_only_audit_running",
+      "status": "read_only_full_readback_and_current_duplicates_verified",
       "pid": 126699,
-      "observed_at": "2026-11-16T08:21:10+08:00",
+      "observed_at": "2026-11-16T08:25:17+08:00",
       "candidate_files": 49200,
       "candidate_bytes": 2616732144,
       "source_commit": "b9dc3da",
@@ -6226,8 +6226,14 @@
       "backup_modified": false,
       "unused_proven": false,
       "cleanup_authorized_by_audit": false,
-      "full_readback_complete": false,
-      "input_session_finished": true
+      "full_readback_complete": true,
+      "input_session_finished": true,
+      "finished": "2026-11-16T08:23:46.100534",
+      "process_exited": true,
+      "result_sha256": "fbb98604283fcac8285dc817f554dd7bcccee37f85faba07d9fefe72906e9bd8",
+      "archive_members_verified": 63653,
+      "archive_bytes_verified": 7006124866,
+      "space_recovered_bytes": 0
     }
   }
 }
