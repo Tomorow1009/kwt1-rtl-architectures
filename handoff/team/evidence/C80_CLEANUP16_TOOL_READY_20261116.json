@@ -1,0 +1,17 @@
+{
+  "schema": "c80-cleanup16-import-only-observation-v1",
+  "observed_at": "2026-11-16T17:41:31+08:00",
+  "source_commit": "c8c730dd1eb6286bf8a0f7b0c6114b382f3f63cd",
+  "directory": "/tmp/s4_21usr_c80_20261116_1245/ops-b0-cleanup16-c8c730d",
+  "entry": "C80_B0_DUPLICATES_CLEANUP16_20261116.py",
+  "source_sha256": "0e98728332e0ba048142231f414322dc3aaf21e287b3bde0bc4121124c976441",
+  "import_receipt_sha256": "eda250cdc43986be6636510fc8f5ee6ebd700df01151134d51f0047976e7f204",
+  "receipt_machine_asserted": true,
+  "readonly_proof_sha256": "3d9ffdba6e36bca8487da1355ccdb8b397439d9332c2e026bcb1a4399bd9097c",
+  "cleanup_executed": false,
+  "cleanup_output_absent": true,
+  "source_deleted": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "transcription_correction": "Two read-only hash assertions failed due to manually transcribed characters. Eight-character groups were reread and the exact original receipt then passed server assertion; no remote file changed."
+}
