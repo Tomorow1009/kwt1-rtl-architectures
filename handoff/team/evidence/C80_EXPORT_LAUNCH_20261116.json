@@ -1,0 +1,23 @@
+{
+  "schema": "c80-export-review-launch-observed-v1",
+  "observed_at": "2026-11-16T14:49:07+08:00",
+  "source_commit": "fd519960055cb13da964ec30e19cb3bdfec726b7",
+  "source_sha256": "01547cb992b2f8ca716a132baa09c2ac1f1eab52eeb4afb88a468f8e65491656",
+  "import_receipt_sha256": "3af466b9209b221402ea7a466569a47c591e0c8184ad00ee776a5c381a04450c",
+  "server_script_sha256": "ee7390e0b94e4ccc0a65be051e9ce411ebe46cd39924814954c0f4e10bcd0858",
+  "pid": 4047,
+  "status": "waiting_original_finish",
+  "runtime_root": "/tmp/s4_21usr_c80_20261116_1245",
+  "operations_directory": "ops-export-fd51996",
+  "control": "c80_export_review01/state.json",
+  "log": "c80_export_review01.log",
+  "predecessor_pid": 314678,
+  "initial_pid": 279630,
+  "accelerator_pid": 299424,
+  "outputs_created": false,
+  "stage_accepted": false,
+  "new_simulation_started": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}

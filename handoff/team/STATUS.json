@@ -6874,12 +6874,22 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "c2a0de7",
-      "last_server_observed_at": "2026-11-16T14:40:14+08:00",
+      "latest_pushed_commit": "fd519960055cb13da964ec30e19cb3bdfec726b7",
+      "last_server_observed_at": "2026-11-16T14:49:07+08:00",
       "export_review_prepared": true,
-      "export_review_deployed": false,
+      "export_review_deployed": true,
       "export_chain_tests": 10,
-      "c32_readonly_preparation": "workspaces/arch03/C32_PREPARATION_READONLY_20261116.md"
+      "c32_readonly_preparation": "workspaces/arch03/C32_PREPARATION_READONLY_20261116.md",
+      "export_review_pid": 4047,
+      "export_review_status": "waiting_original_finish",
+      "export_review_evidence": "handoff/team/evidence/C80_EXPORT_LAUNCH_20261116.json",
+      "accelerator_mapping_completed": true,
+      "accelerator_mapping_seconds": 4379.676646931097,
+      "shared_mapping_seconds": 36.13776023965329,
+      "cpu_soc_pid": 6020,
+      "latest_mapping_observation": "2026-11-16T14:56:42+08:00",
+      "final_synthesis_ready": false,
+      "export_import_receipt_asserted": true
     }
   }
 }
