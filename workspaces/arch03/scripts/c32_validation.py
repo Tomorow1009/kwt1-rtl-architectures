@@ -17,6 +17,21 @@ SCOPE='c32_partitioned_whole_soc_task_mode'
 def read(path):return json.loads(Path(path).read_text())
 
 
+def require_clear_constraints(run, report):
+    """Gate expensive final-netlist work on the actual frozen DRC report.
+
+    Identity validation intentionally also allows diagnosis of failed designs;
+    this separate admission guard must not mistake that for DRC acceptance.
+    """
+    from c32_drc_audit import constraints_inventory
+    path=Path(run)/'constraints.rpt'
+    require(report['artifacts'].get('constraints.rpt')==digest(path),'Changed C32 constraint report')
+    inventory=constraints_inventory(path.read_text())
+    require(inventory['explicit_no_violations'] and inventory['extraction_complete'] and
+            inventory['violation_record_count']==0,'Resolve actual C32 design-rule violations before final netlist validation')
+    return inventory
+
+
 def verify_synthesis(run,expected,cfg):
     run=allowed_run(run,cfg,'C32 synthesis')
     require(re.fullmatch('[a-f0-9]{64}',expected or '') and digest(run/'summary.json')==expected,'C32 summary changed')

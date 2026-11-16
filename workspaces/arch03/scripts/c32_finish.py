@@ -15,7 +15,7 @@ import server_run as common
 import c32_paths as paths
 from n1_process import ProcessLedger,atomic_save
 from partition_synth_contract import require
-from c32_validation import verify_synthesis
+from c32_validation import verify_synthesis,require_clear_constraints
 
 LAYERS=tuple('layer_%02d'%i for i in range(1,13))
 ORDER=('structure','gate','saif','timing_audit','drc_audit')+tuple('power_'+n for n in LAYERS)
@@ -100,6 +100,7 @@ def execute(request,queue):
     require(report['scope']=='c32_partitioned_whole_soc_task_mode','Cannot use old T80 netlist')
     require(report['setup_hold_nonnegative'] is True and report['area_summary']['conservative_budget_mm2']<=1.0,
         'Resolve actual C32 timing/area before final validation queue')
+    require_clear_constraints(synthesis['run'],report)
     from c32_saif import qualification
     method=request['qualification'];qualification(Path(method['run']),method['sha256'],cfg)
     require(not queue.exists(),'Preserve existing C32 finish session')
