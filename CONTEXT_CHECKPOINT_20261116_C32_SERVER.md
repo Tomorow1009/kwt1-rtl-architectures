@@ -1,5 +1,13 @@
 # C32-A服务器交接：完整240执行结束，末尾核对中
 
+## 00:14 精度通过；finish01被共享盘阻断，准备恢复24
+
+initial03终态SHA `37e1279f0c165b6fb50493c4d87edb2a994e159a90e22e48b92c41ef8ab500c0`，父238916退出。精度SHA `ca5a8e3afdac539bcad08367611cf38c5c602754c5eddf152e307be13e4775ca`；最大逐层NRMSE0.20198143836753799%，最大任务0.20953408931848963%，裁剪/饱和0。initial、batch、precision三个哈希于00:05:47机器校验通过；第一次截图哈希转录错误已被断言拒绝，没有启动或改动文件，后以十进制字节重新读取修正。
+
+finish01启动于00:06:34.322180，父297927于00:06:49因创建原`.arch02_team_lock` ENOSPC退出，completed空、stage None、没有子任务。失败终态SHA `0c853c6c0bf5585437d49823d58f8c2527d05b28eb9cf11e491696acec5c58a6`，已从十进制字节确认。共享报告free1048576B、lock不存在；/tmp仍71.25GiB。不能改锁路径、重启旧队列或把启动回执当运行成功。
+
+准备新工具C32_FINISH02_FROM_INITIAL03、C32_EXPORT_REVIEW02、C32_STATUS_READONLY_V3，以及恢复24脚本C32_B0_REPAIR_SEEDS_RECOVERY24_20261117.py。恢复24只处理原B0 v3的drc04/repair_seed.ddc（32940032B）及drc05/repair_seed.ddc（33112064B）；它们在完整回读过的B0归档中，保留最终mapped网表/源/日志/摘要/波形、桌面T80、旧八路、P80/C80和全部备份。已本地验证两精确路径/字节准入和越界拒绝，尚未服务器执行。后续必须先核验归档和实际进程，再删除两份重复修复种子并立即启动新finish02。
+
 ## 00:02 完整批量通过，precision继续
 
 11月17日00:01:34实际队列为running/precision，completed已包含soc/sequence/contention/synth/batch20。批量summary为passed，240任务6082560输出和total、failed0；平均70929.40833333334周期、最少64833、最多81861、名义150MHz折算2114.7786725510773task/s，宿主2424.0403541969135秒。此为240组，固定12仍按72179.3333周期报告。

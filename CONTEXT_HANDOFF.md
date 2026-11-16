@@ -2,7 +2,7 @@
 
 最后观察：2026-11-17 00:01:34（北京时间）。恢复后先读本文件、AGENTS.md、当前计划及C32_SERVER检查点，再查询实际进程；不要据历史PID重启作业。
 
-最新：initial03已完成batch20最终核对，240任务/6082560输出及total零失败，正在precision。浮点软件重算20条已经结束，连接实际ASIC回执的核对仍在执行。后继finish未启动，待本队列成功退出。详细阶段数字见 `workspaces/arch03/C32_PROGRESS_20261117.md`；批量身份见 `handoff/team/evidence/C32_BATCH20_20261117.json`。
+最新：initial03的240任务及FLOAT20连接全部通过并已退出；00:06:34启动finish01后，在创建原共享锁时ENOSPC失败，completed为空、没有子任务，父297927已退出。失败目录原样保留。当前准备恢复24：仅两个已完整归档的旧B0 drc04/drc05 repair_seed.ddc（66052096B），哈希及无人使用检查后删除重复原件并立即启动新finish02。此时尚未执行恢复24；不要重跑旧清理，也不要重启finish01。详细数字见 `workspaces/arch03/C32_PROGRESS_20261117.md`、C32_BATCH20及C32_PRECISION20证据。
 
 ## 有效目标与保护范围
 
