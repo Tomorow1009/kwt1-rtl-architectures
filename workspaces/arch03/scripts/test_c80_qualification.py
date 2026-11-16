@@ -26,6 +26,24 @@ def fixture(root):
 
 
 class Qualification(unittest.TestCase):
+    def test_entry_hashes_actual_file_before_configure_or_dispatch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);q.common.save(root/'manifest.json',{'files':{}})
+            request=dict(schema='c80-qualification-v1',bundle=str(root),
+                bundle_manifest_sha256=q.common.sha(root/'manifest.json'),
+                queue_sha256=q.common.sha(Path(q.__file__)),runtime_root=str(root))
+            (root/'handoff/team').mkdir(parents=True)
+            q.common.save(root/'handoff/team/server_config.json',{})
+            with patch.object(q.common,'ROOT',root),patch.object(q.paths,'configure',
+                    side_effect=RuntimeError('reached configuration after file hash')) as configure:
+                with self.assertRaisesRegex(RuntimeError,'reached configuration'):
+                    q.execute(request,root/'runs/new')
+                self.assertEqual(configure.call_count,1)
+                with self.assertRaisesRegex(ValueError,'qualification script changed'):
+                    q.execute(dict(request,queue_sha256='0'*64),root/'runs/new')
+                self.assertEqual(configure.call_count,1)
+            self.assertFalse((root/'runs').exists())
+
     def test_comparison_rejects_other_data_changed_evidence_and_slow_full_window(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);ref,base=fixture(root)

@@ -140,7 +140,7 @@ def execute(request,queue):
     require(request['schema']=='c80-qualification-v1','Wrong qualification request')
     require(str(common.ROOT)==request['bundle'] and common.sha(common.ROOT/'manifest.json')==
             request['bundle_manifest_sha256'],'Wrong frozen C80 bundle')
-    require(common.sha(__file__)==request['queue_sha256'],'C80 qualification script changed')
+    require(common.sha(Path(__file__))==request['queue_sha256'],'C80 qualification script changed')
     cfg=paths.configure(read(common.ROOT/'handoff/team/server_config.json'),common.ROOT,
         Path(request['runtime_root']),request['bundle_manifest_sha256'],request.get('runtime_evidence',[]))
     common.inputs()
