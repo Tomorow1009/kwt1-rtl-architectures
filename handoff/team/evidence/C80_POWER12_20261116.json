@@ -1,0 +1,33 @@
+{
+  "schema": "c80-own-power12-numerical-observation-v1",
+  "observed_at": "2026-11-16T18:31:20+08:00",
+  "queue": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_finish02",
+  "queue_state_sha256": "80f6cef26318a9de213656966ed87001c9eb83905b37c808d5b1b519743b0e6e",
+  "queue_status": "reports_ready_review_required",
+  "power_layers": 12,
+  "all_power_summaries_matched_original_queue_hashes": true,
+  "complete_cycle_count": 847238,
+  "duration_ns": "5648252.768508",
+  "total_energy_j": "0.0003127301381461297247520",
+  "time_weighted_average_power_w": "0.05536758905156756424995101731",
+  "mean_energy_j": "0.0000260608448455108103960",
+  "time_weighted_dynamic_w": "0.04816905827004055531031422103",
+  "time_weighted_leakage_w": "0.007198530140784478505449472285",
+  "total_energy_duration_average_and_queue_hash_asserted_on_server": true,
+  "dynamic_leakage_transcribed_from_independently_hashed_summaries": true,
+  "whole_soc_pre_layout_estimate": true,
+  "synthesis_summary_sha256": "0d1b11b013e4c4ee1698417e20124c4cb5601b49aae3d8b4b15cd0f2f0b46fc5",
+  "netlist_sha256": "6a62a3aa792865390549dd11a841d0888501902c449c61c74aa82eecd2523b00",
+  "activity_summary_sha256": "29fbb12f7d743fffbc4ee8e417b5d7fff8787b10a53e3f3079edc796270bbcdd",
+  "relative_to_frozen_P80": {
+    "complete_throughput_change_percent": 9.8326562,
+    "average_power_change_percent": 2.9599489759676545,
+    "energy_per_task_change_percent": -6.257435166417833
+  },
+  "numerical_report_only": true,
+  "system_power_verified": false,
+  "stage_accepted": false,
+  "note": "All twelve same-netlist complete task windows are included. The original exporter is independently collecting unknown-net/model evidence; numerical completion does not bypass that review or durable archive. Component sums retain original PT printed precision.",
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
