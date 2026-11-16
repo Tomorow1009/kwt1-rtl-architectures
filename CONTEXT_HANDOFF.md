@@ -1,5 +1,7 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+**最新恢复入口（22:27）：** 先读 CONTEXT_CHECKPOINT_20261116_C32_SERVER.md 顶部。恢复23在VCS共享对象链接检查时安全退出，未归档/删除；initial03尚未启动。修复9a48632保留全部.so及链接，待部署新ROOT/r4_metrics_recovery23_fixed.py，不能重跑旧脚本或恢复22。新脚本SHA 45b5e51ec22494371b0674b81d29589622b2a01e69cd83635d2a78c81023c6c7。VNC workspace3第一终端空闲，旧会话33837等均已结束。
+
 ## 22:17 实际元数据探测亦ENOSPC；小范围恢复23工具传输中
 
 metadata工具55447传输完成并执行；22:12:43在新探测目录mkdir时报ENOSPC，尚未创建目录、协作锁或initial03。ROOT/c32_initial03_metadata_probe.json保留失败回执，不能再运行同一probe工具覆写它。用户明确回复没有团队正在向共享盘写入的任务。本轮没有额外数据清理，91135f6包仍完整。
