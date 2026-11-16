@@ -6168,8 +6168,8 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T10:13:08.858196+08:00",
-      "status": "saif_running",
+      "observed_at": "2026-11-16T10:25:09.603132+08:00",
+      "status": "power_layer_02_running",
       "parent_pid": 95253,
       "child_pid": null,
       "exporter_pid": 96154,
@@ -6211,16 +6211,19 @@
       "own_gate14_completed": true,
       "watcher_terminal_tab": 1,
       "previous_watcher135257_confirmed_exited": true,
-      "saif_cases_completed": 11,
+      "saif_cases_completed": 12,
       "current_saif_case": null,
-      "last_confirmed_push": "6e5fa30",
+      "last_confirmed_push": "8bc21f4",
       "c80_offline_preparation": true,
       "c80_hardware_started": false,
       "free_tmp_bytes": 87053959168,
       "free_shared_bytes": 55034511360,
       "cleanup13_needed_at_observation": false,
       "previous_watcher151016_confirmed_exited": true,
-      "export_status": "waiting_original_finish"
+      "export_status": "waiting_original_finish",
+      "power_cases_completed": 1,
+      "own_saif12_completed": true,
+      "timing_drc_diagnostics_collected": true
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6470,6 +6473,29 @@
       "evidence": "handoff/team/evidence/C80_OFFLINE_SCREEN_20261116.json",
       "source_join": "handoff/team/evidence/C80_FIRST20_SOURCE_JOIN_20261116.json",
       "notes": "P80 queue continues unchanged; C80 RTL awaits own P80 acceptance and freeze."
+    },
+    "p80_own_saif12": {
+      "schema": "p80-displayed-native-saif-completion-v1",
+      "observed_at": "2026-11-16T10:20:59.304502+08:00",
+      "source": "Read-only query in existing VNC terminal; original queue not restarted",
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_finish05_saif/p80_saif",
+      "summary_sha256": "83af4dca794d3884e76455bbda53bc86462a7d11e9ea0e49def03d3cacf4f8c4",
+      "status": "P80_native_saif_function_and_complete_windows_passed",
+      "tasks": 12,
+      "checked_outputs": 304128,
+      "total_cycles": 930544,
+      "total_activity_bytes": 1171998648,
+      "total_duration_ns": "6203626.046304",
+      "all_activity_scope_duration_residence_verified": true,
+      "synthesis_summary_sha256": "75460463afddef3043613822bd58b8ee66e4869a826d49bf0899052d6e664c1e",
+      "gate_summary_sha256": "4688df6cc69d60c3705b603efbe65c3481e68f8742a1ff23a542945b48e29061",
+      "source_netlist_unchanged": true,
+      "new_VCD_created": false,
+      "stage_accepted": false,
+      "power12_complete": false,
+      "note": "Own final-netlist full activity verified. Timing/DRC diagnostics collected; independent conclusion and all12 power, model review, durable copy and freeze remain. No physical signoff.",
+      "protected_T80_modified": false,
+      "old8_modified": false
     }
   }
 }
