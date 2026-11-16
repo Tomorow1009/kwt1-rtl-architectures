@@ -1,0 +1,31 @@
+{
+  "schema": "c80-own-report-output-observation-v1",
+  "observed_at": "2026-11-16T18:51:11+08:00",
+  "run": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_report02/c80_report",
+  "report_sha256": "46d13e9cbfac0730bec8eb7ea0b7927a9612462cf4b5cd056402c06155711cf4",
+  "report_matches_original_export_state": true,
+  "hash_aggregate_and_verification_machine_asserted": true,
+  "files": ["report.json", "tasks.csv", "summary.csv", "report_zh.md", "receipt.json"],
+  "own_completed_evidence": {
+    "asic14": true,
+    "final240": true,
+    "gate14_without_SDF": true,
+    "activity12": true,
+    "power12_numbers": true,
+    "internal20_precision_verified": true,
+    "fixed12_precision_verified": true
+  },
+  "first20_maximum_layer_nrmse_percent": 0.20198143836753799,
+  "fixed12_maximum_task_nrmse_percent": 0.1425636423408142,
+  "total_task_cycles": 847238,
+  "mean_task_cycles": 70603.16666666667,
+  "nominal_150MHz_tasks_per_second": 2124.550598533116,
+  "nominal_150MHz_MMAC_per_second": 3446.0550636302905,
+  "time_weighted_power_w": "0.05536758905156756424995101731",
+  "mean_energy_j": "0.0000260608448455108103960",
+  "netlist_sha256": "6a62a3aa792865390549dd11a841d0888501902c449c61c74aa82eecd2523b00",
+  "raw_report_acceptance_flags_preserved": true,
+  "system_power_verified": false,
+  "stage_accepted": false,
+  "note": "Formal numerical and functional export completed. Original exporter now collects all twelve unknown-state inventories and mapped connections before the separate independent task-mode/model conclusion. Archive and C80 freeze are still pending."
+}

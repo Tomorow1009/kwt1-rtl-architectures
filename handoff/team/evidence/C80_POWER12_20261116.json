@@ -29,5 +29,29 @@
   "stage_accepted": false,
   "note": "All twelve same-netlist complete task windows are included. The original exporter is independently collecting unknown-net/model evidence; numerical completion does not bypass that review or durable archive. Component sums retain original PT printed precision.",
   "protected_T80_modified": false,
-  "old8_modified": false
+  "old8_modified": false,
+  "all12_model_coverage_observed_at": "2026-11-16T18:44:37+08:00",
+  "all12_units_settings_mapping_identical": true,
+  "all12_model_coverage": {
+    "exact_mapping": 374565,
+    "isolated_defaults": 1336,
+    "not_annotated": 0,
+    "total": 375901,
+    "toggle_and_static_probability_equal": true,
+    "sram_cells": 220,
+    "sram_counts": {
+      "accelerator": 92,
+      "dtcm": 32,
+      "itcm": 32,
+      "shared": 64
+    },
+    "dynamic_unit": "1 Watt",
+    "leakage_unit": "1 Watt",
+    "hf_period_ns": "6.666666000000",
+    "lf_period_ns": "66.000000000000",
+    "power_analysis_mode": "averaged",
+    "power_include_initial_x_transitions": "false",
+    "power_x_transition_derate_factor": "0.5",
+    "unknown_net_connections_review_complete": false
+  }
 }
