@@ -145,6 +145,10 @@ def main():
                 state['removed_bytes'] += row['bytes']
                 journal.write(json.dumps(dict(action='removed', path=row['path']))+'\n')
                 journal.flush(); os.fsync(journal.fileno())
+        for parent in sorted({(checked.PROJECT/row['path']).parent for row in rows}):
+            archive.sync_dir(parent)
+        need(all(not (checked.PROJECT/row['path']).exists() for row in rows),
+             'A removed duplicate reappeared')
         need(all(checked.stamp(p) == before[str(p)] and sha(p) == want
                  for p, want in frozen.items()), 'Preserved backup/evidence changed')
         state.update(status='verified_duplicates_removed_backup_retained', finished=archive.now(),
