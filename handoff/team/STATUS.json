@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T00:57:46+08:00",
+      "last_observed_at": "2026-11-17T01:13:20+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7184,7 +7184,7 @@
       "synthesis_child_status": "exited",
       "synthesis_child_previous_pid_transcription_wrong": true,
       "accelerator_block_mapped_seconds": 1139.53,
-      "runtime_free_gib": 70.68,
+      "runtime_free_gib": 70.51,
       "status_readonly_tool_deployed": true,
       "synthesis_evidence": "handoff/team/evidence/C32_SYNTH_INITIAL_20261116.json",
       "project_conservative_area_mm2": 0.722402954997787,
@@ -7251,19 +7251,22 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 321863,
+      "current_child_pid": 326234,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
       },
-      "current_activity_case": "layer_03",
+      "current_activity_case": "layer_05",
       "gate14_passed": true,
       "gate14_evidence": "handoff/team/evidence/C32_GATE14_20261117.json",
       "all14_gate_cycles_equal_ASIC": true,
-      "saif_completed_layers": 1,
+      "saif_completed_layers": 5,
       "saif_l01_bytes": 63448403,
-      "saif_l01_cpu_seconds": 298.78
+      "saif_l01_cpu_seconds": 298.78,
+      "current_child_state": "exited; activity receipt audit may still be running",
+      "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
+      "saif_completed_bytes": 317357854
     }
   }
 }

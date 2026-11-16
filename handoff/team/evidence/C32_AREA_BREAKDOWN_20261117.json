@@ -1,0 +1,37 @@
+{
+  "schema": "arch03-c32-mapped-area-breakdown-observation-v1",
+  "observed_at": "2026-11-17T01:11:05.152630+08:00",
+  "synthesis_run": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6/runs/c32_initial03_synth/c32_synth",
+  "synthesis_summary_sha256": "ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87",
+  "source_artifact": "area_inventory.json",
+  "artifact_hash_checked_against_summary": true,
+  "method": "Sum every accelerator-owned leaf once using its mapped instance prefix after u_arch03_accel/. SRAM and wrapper logic remain together in their respective cache groups.",
+  "accelerator_leaf_count": 145386,
+  "area_mm2_rounded_12_decimals": {
+    "core/array/": 0.112214760000,
+    "core/convert[": 0.043602720000,
+    "core/weight_banks[": 0.086149859200,
+    "core/x_banks[": 0.161541719100,
+    "core_other": 0.085919383200,
+    "decoder/": 0.021636972000,
+    "mmio_control": 0.007956698400,
+    "transport/": 0.040117375200
+  },
+  "accelerator_sum_mm2": 0.5591394870999894,
+  "sum_checked_against_synthesis_partition": true,
+  "sum_check_tolerance_um2": 0.001,
+  "known_added_project_area_mm2": 0.5618935446998727,
+  "project_conservative_area_mm2": 0.722402954997787,
+  "whole_soc_area_mm2": 4.244619443828,
+  "limits": [
+    "Array includes mapped PE and propagation control; it is not a multiplier-only area.",
+    "Cache groups include actual macros and their port adapters; quantities are not estimates based only on macro count.",
+    "core_other includes the remaining mapped core logic such as response, bias, sum preparation, result state and scheduling. Do not claim a separate exact area for these functions.",
+    "The project upper bound additionally charges new interface logic and all unresolved ownership under the unchanged T80 policy.",
+    "This read-only breakdown is not final stage acceptance or physical signoff."
+  ],
+  "extra_eda_started": false,
+  "mapped_netlist_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
