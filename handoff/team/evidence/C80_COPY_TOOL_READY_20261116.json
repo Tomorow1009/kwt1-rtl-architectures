@@ -1,0 +1,15 @@
+{
+  "schema": "c80-copy-tool-deployment-observation-v1",
+  "observed_at": "2026-11-16T15:34:03+08:00",
+  "source_commit": "f37844f291bc170ab7335b5ad666af21d1577ff1",
+  "directory": "/tmp/s4_21usr_c80_archiveops_20261116_1526",
+  "entry": "C80_COPY_ONLY_LAUNCH_20261116.py",
+  "source_sha256": "6bb7ba8c9a51e29960c309d401a945a45e51647d206dec1ac33ae24218c80b36",
+  "import_receipt_sha256": "98bc3e47e16e0d1c33b2242b2a1463adab87325b060fe317463b60c6a691e3f5",
+  "loaded_dependencies": 50,
+  "entry_identity_asserted": true,
+  "archive_started": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
