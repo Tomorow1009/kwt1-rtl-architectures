@@ -24,6 +24,8 @@ ORIGIN_NETLIST = '3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd
 PREFIX = 'u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core/'
 TARGETS = {PREFIX+n: ('BUFV2RD_12TR40', 'BUFV4RD_12TR40') for n in ('U16528', 'U16527', 'U16523')}
 TARGETS[PREFIX+'U24686'] = ('NOR3V2_12TR40', 'NOR3V4_12TR40')
+TARGETS[PREFIX+'U24687'] = ('NOR3V2_12TR40', 'NOR3V4_12TR40')
+TARGETS[PREFIX+'U24680'] = ('NOR3V2_12TR40', 'NOR3V4_12TR40')
 
 
 def read(path):
@@ -31,7 +33,7 @@ def read(path):
 
 
 def equivalent_tokens(original, repaired):
-    """Only the inspected buffers and their one violating upstream driver change."""
+    """Only the inspected buffers and their three violating upstream drivers change."""
     old, new = partitions.module_tokens(original), partitions.module_tokens(repaired)
     require(set(old) == set(new), 'Repair changed the mapped module set')
     remaining = {p.rsplit('/', 1)[1]: pair for p, pair in TARGETS.items()}
@@ -145,6 +147,8 @@ def repair_script(run, cfg, original):
     text = reports.replace_once(text, 'compile -map_effort high', '# No fresh mapping or inherited mapping claim')
     text = reports.replace_once(text, 'set_fix_hold [all_clocks]', '# Original setup/hold constraints retained')
     text = reports.replace_once(text, 'compile -incremental_mapping -map_effort high', sizing_script())
+    text = reports.replace_once(text, 'report_constraint -all_violators',
+                                'report_constraint -all_violators -significant_digits 8')
     text = reports.replace_once(text, 'redirect check_design_mapped.rpt',
                                 'redirect hierarchy.rpt {report_hierarchy}\nredirect check_design_mapped.rpt')
     return text
@@ -271,7 +275,7 @@ def main():
     cfg = c32_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
         Path(request['runtime_root']), request['manifest_sha256'], request['runtime_evidence'])
     common.inputs()
-    session = common.ROOT/'runs'/'c32_repair02'
+    session = common.ROOT/'runs'/'c32_repair03'
     require(not session.exists(), 'Preserve prior repair attempts')
     require(shutil.disk_usage(str(common.ROOT)).free >= 4*1024**3, 'Repair runtime space insufficient')
     ledger = ProcessLedger(common, Path(cfg['server_root'])/'.arch02_team_lock', session)

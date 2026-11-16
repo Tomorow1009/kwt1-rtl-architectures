@@ -17,7 +17,7 @@ class RepairProof(unittest.TestCase):
 
     def test_exact_inspected_drivers(self):
         old,new=self.fixture();proof=equivalent_tokens(old,new)
-        self.assertEqual(len(proof['changes']),4)
+        self.assertEqual(len(proof['changes']),len(TARGETS))
 
     def test_changed_wire_rejected(self):
         old,new=self.fixture()
@@ -34,7 +34,7 @@ class RepairProof(unittest.TestCase):
     def test_leaf_proof(self):
         old='\n'.join('%s\t%s\t1\tlib/%s'%(p,v[0],v[0]) for p,v in sorted(TARGETS.items()))+'\nother\tINV\t2\tlib/INV'
         new=old.replace('BUFV2RD','BUFV4RD').replace('NOR3V2','NOR3V4').replace('\t1\t','\t2\t')
-        self.assertEqual(verify_cells(old,new)['area_delta_um2'],4)
+        self.assertEqual(verify_cells(old,new)['area_delta_um2'],len(TARGETS))
         with self.assertRaises(ValueError):verify_cells(old,new.replace('other\tINV\t2','other\tINV\t3'))
 
     def test_no_compile_and_equivalence(self):
@@ -108,7 +108,7 @@ proc size_cell {x lib} {global refs;set refs($x) [lindex [split $lib /] end]}
                 os.chdir(directory);t.eval(sizing_script())
                 self.assertEqual(t.eval('array size flags'),'1')
                 self.assertEqual(t.eval('set flags(u_e203_subsys_top)'),'true')
-                self.assertEqual(sum(line.startswith('cell\t') for line in Path('equivalent_sizing.tsv').read_text().splitlines()),4)
+                self.assertEqual(sum(line.startswith('cell\t') for line in Path('equivalent_sizing.tsv').read_text().splitlines()),len(TARGETS))
             finally:os.chdir(cwd)
         for path,(before,after) in TARGETS.items():self.assertEqual(t.getvar('refs('+path+')'),after)
 

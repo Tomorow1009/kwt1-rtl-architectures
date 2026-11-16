@@ -5,6 +5,26 @@ from test_n1_drc_audit import REPORT
 
 
 class DecoratedConstraints(unittest.TestCase):
+    def test_rounded_zero_is_still_an_explicit_violation(self):
+        report='''max_capacitance
+Net Required Actual Slack
+core/n60014 (dont_touch)
+ 0.03 0.03 0.00 (VIOLATED: increase significant digits)
+core/n60011 (dont_touch)
+ 0.03 0.03 0.00 (VIOLATED: increase significant digits)
+Total 2 -0.00
+'''
+        got=drc.constraints_inventory(report)
+        self.assertEqual(got['violation_record_count'],2)
+        self.assertTrue(got['extraction_complete'])
+        self.assertFalse(got['explicit_no_violations'])
+        self.assertEqual(got['query_targets'],['core/n60011','core/n60014'])
+        self.assertTrue(all(row['report_precision_warning'] for row in got['violations']))
+        for bad in ['(VIOLATED: unknown)','(VIOLATED: increase significant digits']:
+            got=drc.constraints_inventory(report.replace('(VIOLATED: increase significant digits)',bad))
+            self.assertFalse(got['extraction_complete'])
+            self.assertFalse(got['explicit_no_violations'])
+
     def test_decorated_net_and_pin_subrecords(self):
         report='''max_transition
 Net Required Actual Slack

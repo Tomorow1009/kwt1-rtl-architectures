@@ -25,6 +25,7 @@ SECTIONS = NET_SECTIONS | {'max_delay/setup', 'min_delay/hold', 'min_period',
                            'min_pulse_width', 'max_area', 'max_dynamic_power',
                            'max_leakage_power', 'clock_gating_setup', 'clock_gating_hold'}
 NUMBER = r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
+VIOLATION_MARKER = r'\(VIOLATED(?:: increase significant digits)?\)'
 
 
 def constraints_inventory(text):
@@ -43,8 +44,9 @@ def constraints_inventory(text):
         if re.fullmatch(r'(?:max_|min_|clock_gating_|multiple_port)[A-Za-z_/]+', first):
             section, pending, parent_net = None, None, None
             continue
-        if '(VIOLATED)' in line:
-            left = line.split('(VIOLATED)', 1)[0].strip()
+        marker = re.search(VIOLATION_MARKER, line)
+        if marker:
+            left = line[:marker.start()].strip()
             fields = left.split()
             numeric = []
             while fields and re.fullmatch(NUMBER, fields[-1]):
@@ -56,11 +58,12 @@ def constraints_inventory(text):
             if not fields and pending:
                 target, object_kind, query_target = pending
                 wrapped = True
-            parsed = bool(section and target and numeric and line.count('(VIOLATED)') == 1
-                          and not line.split('(VIOLATED)', 1)[1].strip())
+            parsed = bool(section and target and numeric and len(re.findall(VIOLATION_MARKER,line)) == 1
+                          and not line[marker.end():].strip())
             row = dict(line=line_number, section=section, target=target if parsed else None,
                        numbers=numeric, raw=line, parsed=parsed, wrapped=wrapped,
-                       object_kind=object_kind, query_target=query_target if parsed else None)
+                       object_kind=object_kind, query_target=query_target if parsed else None,
+                       report_precision_warning='increase significant digits' in marker.group(0))
             rows.append(row)
             if not parsed:
                 unparsed.append(dict(line=line_number, raw=line, reason='Unrecognized violation row'))
