@@ -97,8 +97,14 @@ def prepare(source,target,payload):
     for name,want in desired.items():require(sha(target/name)==want,'New C80 bytes mismatch')
     result=dict(original)
     result.update(source_commit=payload['source_commit'],hardware_source_commit=payload['source_commit'],
+        production_hardware_commit=payload['source_commit'],activity_tools_commit=payload['source_commit'],
         operations_source_commit=payload['source_commit'],files=desired,architecture='arch03_c80_ordered_original_bus',
         peripheral_id='0x4b57530c',numeric_format='0x000e0c20',layout_id='0x00100006',
+        runtime_layout='arch03-c80-lossless-layout6',
+        input_data_format='Original X14/W12/b32 group8 HEX independently checked then C80 lossless layout6',
+        derived_from_manifest_sha256=BASE_SHA,
+        diagnostic_firmware={name:desired['firmware_'+name+'/manifest.json'] for name in ('sequence','contention')},
+        cpu_execution_verified=False,timing_verified=False,official_precision_verified=False,
         transaction_metadata_depth=payload['transaction_metadata_depth'],
         derivation=dict(source_bundle=str(source),source_manifest_sha256=BASE_SHA,
             source_preserved=True,overlay_files={n:desired[n] for n in sorted(values)}),

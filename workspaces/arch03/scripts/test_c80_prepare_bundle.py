@@ -45,7 +45,13 @@ class Bundle(unittest.TestCase):
             want=s.sha(src/'manifest.json')
             with patch.object(s,'BASE_SHA',want),patch.object(s,'BASE_COUNT',3):
                 result=s.prepare(src,root/'c80',payload(2));self.assertTrue(result['source_preserved'])
-                self.assertEqual(json.loads((root/'c80/manifest.json').read_text())['transaction_metadata_depth'],2)
+                made=json.loads((root/'c80/manifest.json').read_text())
+                self.assertEqual(made['transaction_metadata_depth'],2)
+                self.assertEqual(made['production_hardware_commit'],'a'*40)
+                self.assertEqual(made['runtime_layout'],'arch03-c80-lossless-layout6')
+                self.assertFalse(made['cpu_execution_verified'])
+                for role in ('sequence','contention'):
+                    self.assertEqual(made['diagnostic_firmware'][role],s.sha(root/'c80'/('firmware_'+role)/'manifest.json'))
                 self.assertFalse((root/'c80/firmware/old.bin').exists())
                 self.assertTrue((src/'firmware/old.bin').exists())
                 for name,h in files.items():self.assertEqual(s.sha(src/name),h)
