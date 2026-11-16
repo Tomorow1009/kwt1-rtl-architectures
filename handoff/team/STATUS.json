@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T13:49:21.448941+08:00",
+      "at": "2026-11-16T14:13:52.287777+08:00",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": true,
-      "current_terminal": "initial02 PID279630 running/synth; accelerator299424; first tab idle; second read-only watcher300443 until about13:53",
+      "current_terminal": "original279630 running/synth accelerator299424; successor314678 waiting_original_initial02; first Bash idle; no parallel EDA",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6861,7 +6861,18 @@
       "ops_review_import_sha256": "b0e9bdd832aebeae46762c213f5a60cdede7ddb2c812c34dc6c64795e1bf0f3f",
       "ops_review_dependencies": 111,
       "numpy_default_available": false,
-      "precision_recovery_preparation": true
+      "precision_recovery_preparation": true,
+      "followup_pid": 314678,
+      "followup_control": "/tmp/s4_21usr_c80_20261116_1245/c80_followup01.json",
+      "followup_started_at": "2026-11-16T14:12:34.038526+08:00",
+      "followup_source_commit": "9eda8879820eba1b110a4d13254e05a868aef049",
+      "followup_payload_sha256": "b13fd8e373d302437d3acffd48dfe60dd4381a76ccc1579ec6e6f6cd4235d1dd",
+      "followup_status": "waiting_original_initial02",
+      "followup_tools_bound": 113,
+      "precision_recovery_tests": 8,
+      "old_original_request_transcription_corrected": true,
+      "fixed12_actual_transfer_transactions": 384174,
+      "fixed12_four_segments_verified": true
     }
   }
 }

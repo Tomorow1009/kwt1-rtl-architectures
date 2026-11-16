@@ -151,8 +151,12 @@
   "hardware_cycles_source": "Own actual C80 ASIC/E20314 summary; displayed receipts",
   "byte_count_source": "Matched local fixed14 encoding manifest",
   "formula_only_transaction_counts": true,
-  "passive_bus_counts_still_to_join": true,
+  "passive_bus_counts_still_to_join": false,
   "not_a_C32_performance_result": true,
   "area_or_power_inferred": false,
-  "stage_accepted": false
+  "stage_accepted": false,
+  "actual_bus_observation": {
+    "path": "handoff/team/evidence/C80_FIXED12_BUS_OBSERVATION_20261116.json",
+    "sha256": "2ca3276ca4cf59e3e5f44ecb9f768601bc34dad23f74f2d73d29e5e36577ff3d"
+  }
 }

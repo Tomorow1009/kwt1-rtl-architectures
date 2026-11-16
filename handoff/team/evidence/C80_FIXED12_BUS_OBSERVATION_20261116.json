@@ -1,0 +1,141 @@
+{
+  "schema": "c80-own-fixed12-bus-observation-v1",
+  "observed_at": "2026-11-16T14:15:10+08:00",
+  "source_summary_sha256": "4c3668ebe351804b43edd8cf1ec4a56ab4004ed2c8724cc73a8afcc4929b7cb1",
+  "source_run": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_initial02_soc/c80_soc",
+  "rows": [
+    {
+      "case": "layer_01",
+      "encoded_bytes": 27264,
+      "cycles": 73186,
+      "transfer_transactions": 33120,
+      "source_read_acks": 6816,
+      "shared_write_acks": 6816,
+      "shared_read_acks": 6816,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_02",
+      "encoded_bytes": 26372,
+      "cycles": 71625,
+      "transfer_transactions": 32451,
+      "source_read_acks": 6593,
+      "shared_write_acks": 6593,
+      "shared_read_acks": 6593,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_03",
+      "encoded_bytes": 25800,
+      "cycles": 70620,
+      "transfer_transactions": 32022,
+      "source_read_acks": 6450,
+      "shared_write_acks": 6450,
+      "shared_read_acks": 6450,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_04",
+      "encoded_bytes": 25844,
+      "cycles": 70696,
+      "transfer_transactions": 32055,
+      "source_read_acks": 6461,
+      "shared_write_acks": 6461,
+      "shared_read_acks": 6461,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_05",
+      "encoded_bytes": 25008,
+      "cycles": 69233,
+      "transfer_transactions": 31428,
+      "source_read_acks": 6252,
+      "shared_write_acks": 6252,
+      "shared_read_acks": 6252,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_06",
+      "encoded_bytes": 24080,
+      "cycles": 67609,
+      "transfer_transactions": 30732,
+      "source_read_acks": 6020,
+      "shared_write_acks": 6020,
+      "shared_read_acks": 6020,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_07",
+      "encoded_bytes": 23604,
+      "cycles": 66776,
+      "transfer_transactions": 30375,
+      "source_read_acks": 5901,
+      "shared_write_acks": 5901,
+      "shared_read_acks": 5901,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_08",
+      "encoded_bytes": 23712,
+      "cycles": 66966,
+      "transfer_transactions": 30456,
+      "source_read_acks": 5928,
+      "shared_write_acks": 5928,
+      "shared_read_acks": 5928,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_09",
+      "encoded_bytes": 23756,
+      "cycles": 67042,
+      "transfer_transactions": 30489,
+      "source_read_acks": 5939,
+      "shared_write_acks": 5939,
+      "shared_read_acks": 5939,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_10",
+      "encoded_bytes": 25132,
+      "cycles": 69450,
+      "transfer_transactions": 31521,
+      "source_read_acks": 6283,
+      "shared_write_acks": 6283,
+      "shared_read_acks": 6283,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_11",
+      "encoded_bytes": 27632,
+      "cycles": 73829,
+      "transfer_transactions": 33396,
+      "source_read_acks": 6908,
+      "shared_write_acks": 6908,
+      "shared_read_acks": 6908,
+      "output_write_acks": 12672
+    },
+    {
+      "case": "layer_12",
+      "encoded_bytes": 31276,
+      "cycles": 80206,
+      "transfer_transactions": 36129,
+      "source_read_acks": 7819,
+      "shared_write_acks": 7819,
+      "shared_read_acks": 7819,
+      "output_write_acks": 12672
+    }
+  ],
+  "aggregate": {
+    "total_transactions": 384174,
+    "mean_transactions": 32014.5,
+    "total_cycles": 847238,
+    "source_read_acks": 77370,
+    "shared_write_acks": 77370,
+    "shared_read_acks": 77370,
+    "output_write_acks": 152064
+  },
+  "actual_counts_match_all_four_segments": true,
+  "new_simulation_started": false,
+  "stage_accepted": false,
+  "display_evidence": "E:/fpga_race-two/takeover_local/c80_bus_fixed12_1415.png"
+}

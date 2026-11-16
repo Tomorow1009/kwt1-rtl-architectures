@@ -1,5 +1,14 @@
 # C80 服务器验证接续检查点
 
+## 14:14唯一综合＋已启动后续等待控制器
+
+- 19段修复工具部署74076及3段启动15661均已结束；工具目录`/tmp/s4_21usr_c80_20261116_1245/ops-followup-9eda887`实际验证113个导入模块成功。payload SHA `b13fd8e373d302437d3acffd48dfe60dd4381a76ccc1579ec6e6f6cd4235d1dd`；源码9eda887已push，原0360工具目录保留。
+- 后续控制器**314678**于**14:12:34.038526**启动，命令`/bin/python3 -B -u .../ops-followup-9eda887/C80_FINAL_FOLLOWUP01_20261116.py`。控制`c80_followup01.json`，日志`c80_followup01.log`，启动回执`c80_followup01_launch.json`，均在C80私有根，不能重复运行启动器。
+- **14:13:52.287777**现场：原279630 `running/synth`，加速器299424仍running、DesignWare算子处理日志已前进；后续314678 `waiting_original_initial02`，error=None，没有并发EDA。
+- 原队列自然完成/退出后，控制器仅允许正常全完成或精度阶段缺NumPy这一确定失败。必要时新`runs/c80_precision03`仅补精度，然后原包`c80_finish.py`在新`runs/c80_finish01`执行结构/门级14/SAIF12/时序/DRC/PT12；全部使用原团队锁。失败停止并保留记录，不自动冻结或进入C32。
+- 最新正确原request SHA `49db1e2183bf38924af74a3223a088c811e1ccb94a2f25c3d98cc82ab922a9be`已服务器工具预检断言通过，旧65位值禁用。
+- 第一VNC标签Bash空闲；第二旧只读观察器未现场确认终态。所有本地输入会话结束。桌面T80、旧八路、P80未修改，仍无C80最终PPA或240通过结论。
+
 ## 14:06后续工具传输预检失败，未写目录/未启动
 
 bf239c8已push。26段本地传输24392正常结束，但server_script第7行原队列request SHA断言失败，发生在新ops目录创建前。14:05:36现场断言`NO_OPS_WRITTEN=True`，原initial02仍running/synth。错误为手工转录SHA多一个字符；正确64位值为`49db1e2183bf38924af74a3223a088c811e1ccb94a2f25c3d98cc82ab922a9be`（已分32+32字符读取）。旧65位以`9bae`结尾的值禁止使用。
