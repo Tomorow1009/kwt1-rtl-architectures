@@ -1,92 +1,77 @@
-# 当前交接：C80已冻结，开始C32-A
+# C32-A服务器交接：竞争固件修复准备中
 
-## 21:38 归档21全量通过，精确恢复22已启动
+更新：2026-11-16 22:02，北京时间。恢复先读AGENTS、本检查点、有效计划和STATUS；当前不是旧摘要里的“正在综合”或“仍因共享盘满未启动”。
 
-只读归档完成并退出：49200文件2639224198B，gzip508256874B，完整回读及源再核对通过；回执 ROOT/r4_generated_archive21/receipt.json SHA 1b8ae10a78a0fb8f094ff34d55fc0e245bb4ed4b7c3fd17418cbb813b3e5e6ef。本地证据 C32_R4_ARCHIVE21_20261116.json。原R4摘要/结果/日志/源码/活动均未改。
+## 当前目标与保护
 
-恢复22于21:38通过可见终端显式启动，PID202397，ROOT/r4_recovery22.py SHA fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c；日志与启动回执为 r4_recovery22.log、r4_recovery22_launch.json。它再次核验归档、元数据与选中文件后，仅删除归档中的生成输入副本；保持/tmp归档，成功后写新持久备份 PROJECT/backups/r4-generated-inputs-20261116_2135 并核验，再调用既有initial02。此刻尚未观察删除完成或C32启动。
+用户持续授权实施 T80→S0→P80→C80→C32-A/可选B→G32，最终32 PE、150 MHz/6.666666 ns、SS/.99 V/125°C，项目保守面积≤1.00 mm²。X14/W12/acc32/total33/SHIFT10不变。原32位ICB，源读→共享写成功ACK→原总线读回→解码→计算→最终写ACK并排空，不允许旁路。
 
-下一步先读 r4_generated_recovery22/state.json、persistent_copy.json、followup.json 和 c32_initial02_launch.json；不可重跑22，不重复旧initial01/19/20。GUI传输53526/81314/17056均已退出，第一终端空闲。最新已push4b02978；本段和新归档证据待同步。所有T80/旧八路/P80/C80及已有备份保持保护。
+**服务器桌面T80_Delivery_20261113、所有旧八路、P80/C80冻结运行与备份不能修改、移动或删除。** 本轮正式批量仅20×12=240；完整100未自动授权。阶段完成后再进入下一阶段；没有子代理。持续推进并同步私人GitHub；不因等待自动结束任务。
 
-本地两次通过PowerShell管道插入中文记录遇到stdin编码错误，未写文件；改用UTF-8文件读取插入，硬件与远端运行不受影响。
+有效计划 workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md，SHA 1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39。早前全部过程在 CONTEXT_CHECKPOINT_20261116_C32_START.md；根旧正文另存 CONTEXT_HISTORY_20261116_C32_2202.md。
 
+## 已完成阶段和本地C32
 
-**21:34最新：R4归档21初次因历史哈希抄录失败，零写入；与原摘要绑定核对后新只读归档PID199005运行。恢复22已准备，GUI会话53526仅传工具，尚未删除或启动C32。先读C32_START顶部；T80及旧八路保护不变。**
+S0/P80/C80已正式冻结，不重跑。C80标签 arch03-c80-codec-20261116-1930，冻结回执 C80_FREEZE_20261116.json，报告 workspaces/arch03/C80_STAGE_REPORT_20261116.md：固定12均70603.1667周期/2124.5505985 task/s，保守项目面积0.9611361367 mm²，setup+0.000216007 ns、hold+0.00623399 ns，220宏，时间加权55.3675891 mW/26.06084485 µJ，自己的ASIC14/恢复/竞争/240/精度/门级14/SAIF12/PT12与独立模型结论、持久归档完成。布局前限制保持。
 
-**21:27最新：C32服务器尚未启动硬件；只读R4输入归档21已本地测试并提交e23bed5，GUI会话72180正传工具，未执行删除。先读C32_START顶部，不重复19/20或initial01。T80与旧八路不动。**
+C32-A受测RTL自61246bb2a21c56a9bfd871fd68de93028d79f5fd未改：2×16、32 PE，两32项结果区、32转换器、10位块号、800块、尾row98单行；X60个/W32个小宏，仍23 KiB。布局0x00100006、硬件ID0x4b57530d、能力0x000b02bf。原C80编码/源信用3/32字FIFO/事务队列深度2不变。
 
-**21:14更新：只读占用统计已完成，第一终端空闲，无GUI传输/服务器EDA。发现较大的旧R4运行包约3.744GB及旧DMA16批量包约1.565GB，下一步核查其生成缓存和备份，尚无cleanup21，不直接删整包。N1目录里的7GB唯一R4 gzip归档继续保留。当前C32仍因共享盘满未能开始硬件验证。**
+本地10000随机+32定向块317824输出、完整14例354816输出、两拍SRAM预取0/1 A/B/A六任务、恢复fixture、固件/观察器及54工具检查全部通过，范围见 C32_LOCAL_INITIAL_20261116.json、C32_LOCAL_QUALIFICATION_20261116.json、workspaces/arch03/C32_LOCAL_BRINGUP_20261116.md。不重新运行这些已完成测试；固件修复另验证。
 
-**21:12最新：cleanup20已核验清理1852份旧B0生成副本98453710B，备份保留；共享盘又只剩1MiB，initial02前置拒绝、未派发硬件。19/20都不能重跑。第一终端正只读统计PROJECT/bundles占用（du），无GUI输入传输；等其回到提示符再操作。C32包与所有工具已部署，无需重传。恢复先读C32_START顶部，继续保护T80/旧八路及冻结备份。**
+## 服务器运行与失败（必须保留）
 
-**20:58最新：cleanup19已核验清理三份旧B0重复统计481632614B并保留完整备份，但共享盘再次降至1MiB，initial02在前置空间检查停止，尚未派发CPU/EDA。两份恢复工具已部署ops-recovery02；无需重传或重建包。当前40570仅只读统计其它已归档生成/编译副本，未选cleanup20、未新删除。先读C32_START顶部。准确manifest末段为ccbdb1070fc849cc；人工转录已纠正。T80与旧八路不动。**
+ROOT=/tmp/s4_21usr_c32_20261116_2010，0700。
 
-**20:47最新：C32新包1081输入已核验，但initial01/PID177134在创建共享锁时ENOSPC，零子任务后退出。失败保留，不重跑原session。当前会话12125仅传三份已归档旧B0重复统计的精确清理工具，尚未执行删除；退出前勿并发VNC输入。之后需新的initial02及明确恢复回执。详见C32_START顶部；T80/旧八路/冻结备份均不动。**
+旧C32包 ROOT/light-light126-c32-61246bb，1081文件manifest SHA 0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccbdb1070fc849cc。全payload ROOT/payload_61246bb.json SHA 40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602。此包及其运行原样保留。
 
-**20:31最新：主传输13372已完成且终端空闲；当前70703传3份部署工具，未退出前不要并发VNC输入。重建/准备脚本已本地就绪，下一步核验完整612包再启动自己的初始验证队列。最新已push643398e（文档及后继启动器），硬件仍61246bb，服务器C32 EDA尚未启动。详见C32_START顶部。**
+- initial01/PID177134在创建共享锁时ENOSPC，零子任务失败；不能重启。
+- initial02/PID205526于21:44:35.190599启动，21:52:48.406007在contention失败，所有子进程已排空，21:57:43确认父进程不存在且原协作锁不存在。
+- **initial02的ASIC14和恢复通过。** ASIC摘要SHA 859eea742125cb9c0af818107b913e7946b1c22ceaf9beef0cc881ce85ea1580；恢复摘要SHA 3f67bf80d74ed883f8b6e5bca7e0274a74521a8761fe971505bbd77608d90d3d。21:53:37已机器断言两摘要与实际文件一致。
+- 固定12完整周期 [74750,73187,72186,72264,70798,69193,68427,68604,68610,70970,75393,81770]，合866152、均72179.3333，150MHz折算2078.1571826 task/s。同逻辑数据且同C80编码，吞吐比C80低2.18368%。极值57532、舍入56822。不是芯片实测，也不是最终PPA验收。
+- 初始证据 handoff/team/evidence/C32_ASIC_INITIAL_20261116.json。此文件描述21:52:12通过部分和当时运行状态；随后发生下面的竞争失败，不能据其旧queue_stage推断仍运行。
+- 失败终态 ROOT/light-light126-c32-61246bb/runs/c32_initial02/state.json SHA **0acf9538cd1faa74d4b63f273f6053a4f42eb79fc4800e09cb9d4663a9b3b1e9**。队列status=failed、stage=contention、completed=['soc','sequence']。
+- 错误是竞争固件启动前拒绝参数：monitor报 magic=bad00002、rc=fffffffc(-4)、count=0。根因 main_c32_contention.c 第34行遗留 metadata[3]!=5u；新包实际metadata为2。没有执行到DMA任务，不能归因于总线仲裁或MAC。
+- 竞争、综合、240、精度、门级/活动/功耗都未完成；C32-B/G32未开始。
 
-**20:13最新：C32-A已push `61246bb`。GUI输入会话13372正在传新包到`/tmp/s4_21usr_c32_20261116_2010`；勿并发发送VNC输入或重传。完成后核验精确重建payload，再创建独立612包和启动自己的CPU/PPA队列。详见C32_START检查点顶部。服务器尚无C32 EDA，T80/旧八路/冻结包不动。**
+## 已修复内容与正在传输（先处理此处）
 
-**20:01最新：C32-A完整本地14、两拍SRAM预取开关A/B/A、恢复fixture、观察器检查及54项工具测试通过；三套固件已编译。正在准备独立服务器包，真实CPU/PPA未开始。19:57:54远端无队列/锁，/tmp约79GB，共享盘仅1MiB，未删除文件。恢复读C32_START检查点顶部，勿据下方旧快照重做。**
+本地修复提交 **91135f61c97c980039793c6637d0a06888638df0**，只把上述5u换成KWT_ICB32_ROWS；生产RTL、IRQ性能固件及恢复固件所有字节不变。新竞争固件 local_runs/c32_fw_contention_fix_20261116_2156 已重新编译并核验。不要覆盖旧firmware_contention。
 
-**19:46最新：C80标签已push至c7f3c00；C32-A独立32PE核心已创建，10000随机＋32定向阵列块及第一层完整本地搬运通过。正在扩展14例和两拍/连续任务测试，真实CPU与PPA尚未开始。先读`CONTEXT_CHECKPOINT_20261116_C32_START.md`顶部及`C32_LOCAL_INITIAL_20261116.json`，下方19:29“尚未生成RTL”是历史。服务器未新启动队列，桌面T80、全部旧八路和冻结包不动。**
+新完整payload在 local_runs/c32_fwfix_20261116_2200/payload.json，SHA **bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc**。114成员中仅6处改变：main_c32_contention.c和竞争固件build_command、driver.elf、manifest、shift_10.bin/verilog。新source_commit=91135f6。未改RTL，未新开发架构。
 
-**19:29最新：C80自身全部验证、PPA和独立模型结论已完成；持久归档752263487B、19478文件/1293目录/6链接全部回读通过，源未改未删。冻结回执`handoff/team/evidence/C80_FREEZE_20261116.json`，标签`arch03-c80-codec-20261116-1930`随本次提交创建。现在进入C32-A，尚未生成新RTL。恢复先读`CONTEXT_CHECKPOINT_20261116_C32_START.md`及有效计划、STATUS。**
+精确前后缀差分 patch02.json SHA **115050d5f291747f25ff822abdbb1d3662d9e4b344cdf5587cba8708c680a489**，base64 3760字符、6成员；本地完整重建逐字节相同，旧/补丁损坏拒绝通过。早先23976字符的完整patch仅本地未上传。服务器 **contention_fix_patch02.b64已经传完**，会话9664退出，不能重复传。
 
-服务器原验证、导出、清理及归档进程均已退出，19:27无协作锁。不要重跑旧作业。完整C80与P80备份、桌面T80及所有旧八路保护不变。cleanup14/17/18已完成且不得重复，cleanup16未执行且已失效。共享盘最后约463MB，下一版继续独立私有/tmp。详细身份、结果、失败路径和C32改动清单集中在新检查点。
+**当前GUI会话24760正在传两份工具，未退出前不可再发VNC输入。** 目标 ROOT/c32fix_prepare_tool.b64、ROOT/c32fix_launch03_tool.b64；完成后自动发送结束行并截图 takeover_local/c32_contention_fix_tools_transfer.png。此时未执行prepare或initial03。
 
-以下为本轮较早观察，恢复以顶部和新检查点为准。
+工具（均在handoff/team/evidence）：
 
-**19:15最新：C80模型快照已核验，自己的功能/PPA/任务模式结论完成，见`C80_STAGE_CONCLUSION_20261116.json`及`workspaces/arch03/C80_STAGE_REPORT_20261116.md`。原58047/59705/134382/DC137120均退出。持久归档仍未做，C32尚未启动。**
+- C32_CONTENTION_FIX_PREPARE_20261116.py，SHA **5f31ca5abed929adaaa69f17caab1307843e1d2bb28ca4065b5ab62b8e84c6a6**。先核原payload及补丁，严格只允许6文件，生成新 ROOT/payload_91135f6.json，再复用已核验 ROOT/prepare_61246bb.py 从冻结C80源复制 **ROOT/light-light126-c32-91135f6**，不继承旧运行。该新包尚未创建。
+- C32_QUALIFICATION03_LAUNCH_20261116.py，SHA **8f595d8c4ab34702e3cd32ac420e69dad969cdfa7cb75884986b11b6fca2b34f**。绑定initial02已退出失败终态及新payload，显式参数 --manifest-sha256。新包核验后启动独立c32_initial03，顺序soc→sequence→contention→synth→batch20→precision。仍使用原共享锁。旧initial02不可续跑。
+- 新启动器最初仅日志标记写INITIAL01，已在传输前改INITIAL03；当前SHA以上为准，早先3322...无效。
+- 旧finish启动器绑定612/initial02，**不能用于新包**。initial03运行后再准备对应911/initial03的finish工具；它只能在该队列成功退出后启动自己的门级/SAIF/PT。
 
-**空间恢复：single17只移除已完整备份且再次核验的旧B0 drc05/mapped_probe_inventory.tsv（268811341B），回执在ROOT/b0_archived_single_duplicate17；原连接查询因此自行继续，无重启。此前cleanup16不能再运行（其18文件中已有1份被核验清理）。新的remaining18只准备本地，明确排除single17并绑定回执；剩余17份2070730031B须等无队列/锁/EDA、复核归档和占用后再清理。T80、旧八路、P80及活跃/冻结包不动。**
+工具已经本地Python3.6语法/CLI/重建与损坏拒绝检查。当前修复提交及新工具/文档尚待git提交推送；最后已push4a609e7。历史未跟踪S0_SYNTH05_FINISH_LAUNCH_20261115.py不添加、不运行。
 
-原导出终态`facts_joined_manual_conclusion_required`，19:11:17完成；模型快照SHA `81517233df218c5738a1e3950bef1dd1f5b8ca0de15a4948d1e6a85877f04071`，终态SHA `311c74f6b83c2020458f20b49d9ef8d60c16b466ec7d0af9a2ebf977b6ed97e3`，19:15机器assert。完整12层未知活动39930目标，37879直接解析、2051分类，显式关键控制未知0。实际时钟及静态JTAG范围一致。下一步归档并全量回读，再冻结C80。第一终端空闲，第二123167观察器按原限时已结束；输入前刷新截图。
+## 空间恢复：已经完成，严禁重跑删除
 
-**18:45恢复入口：读`CONTEXT_CHECKPOINT_20261116_C80_POWER.md`顶部。当前已push cd11d20；原汇总59705/子118827继续，无error。第二只读观察器123167最迟19:08:31结束，第一标签空闲。12层单位/活动覆盖/宏与实际时钟一致已核对，没有新删除、归档或C32硬件。**
+旧B0cleanup19/20分别精确清理481632614B、98453710B，完整B0备份保留。旧R4原始VCD早已gzip核验并删除重复原始，唯一7GB gzip不能再删除。
 
-**18:34最新：PT12全部完成，55.3675891mW、26.06084485µJ/task；原验证58047已自然退出，汇总59705仍exporting。恢复以新检查点`CONTEXT_CHECKPOINT_20261116_C80_POWER.md`为准，下方是较早观察。未归档、未新删除、未进入C32硬件，桌面T80/旧八路/P80不动。**
+归档21逐文件核验49200个旧R4任务生成.hex/.bin/.verilog，原始2639224198B、gzip508256874B。ROOT/r4_generated_archive21/receipt.json SHA 1b8ae10a78a0fb8f094ff34d55fc0e245bb4ed4b7c3fd17418cbb813b3e5e6ef。旧结果CSV/日志/JSON/源码/网表/SAIF均不动。历史R4 identity哈希抄录第8/9字曾倒置，依据原summary绑定修正；首次失败归档零输出，保留记录。
 
-**18:23最新：原队列PT完成10/12、运行L11，原58047/59705不变；第二只读观察器108679到18:35:58，第一标签空闲。已独立读取本版结构摘要并机器assert数量，证据C80_STRUCTURE_REVIEW_20261116.json。桌面T80/旧八路/P80及所有活动运行文件不动，没有新归档或清理任务。**
+recovery22/PID202397已退出并完成精确清理全部49200副本，私有/tmp归档保留，持久副本在 PROJECT/backups/r4-generated-inputs-20261116_2135，三文件SHA/字节数核验通过。PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。
 
-更新：2026-11-16 18:05，北京时间。持续执行用户最新计划，S0/P80已冻结，当前C80；C80完整验收、归档冻结后进入C32-A/可选B，再G32。
+- recovery22/state.json SHA **dae7017bafacdd32784772b70ddcf8fc133c652a62a82b51c67810a0b2672e97**。
+- persistent_copy.json SHA **f6c223bfd1ec66b8d96a4cb458eff7eba3b0eff52cecb8a248ba1f38a6e53bac**。
+- followup.json SHA **2c2a85f4accffae49109014ac47365f05cce75c030f390c0550c322159bb9f4f**，returncode0。
+- 本地早先两处回执哈希人工抄录倒序，已通过逐字符差异纠正，21:50:46机器断言通过；见 C32_SHARED_SPACE_RECOVERY22_20261116.json。不得使用旧错误哈希。
+- 21:45:30共享约1.40GB、/tmp约78GB；之后仅只读，当前空间须重查。不能继续删已清文件或任何保护目录。
 
-恢复必读：AGENTS、`workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md`、`CONTEXT_CHECKPOINT_20261116_C80_SAIF.md`、STATUS的`c32_g32_20261115.c80_development`。此前根交接原文保存在`CONTEXT_HISTORY_20261116_C80_1805.md`，更早失败、空间和部署详情仍保留。
+## 操作与恢复入口
 
-## 固定要求与保护
+仓库 E:/fpga_race-two/kwt1-c32-g32-20261115，分支 codex/light-light126/t80-pipeline-c32-g32-20261115；Python E:/fpga_race-two/.venv-kwt/Scripts/python.exe。Windows原生shell对中文Python stdin两次编码失败，未改文件；中文文档用apply_patch写UTF-8文件，再用ASCII Python读取。
 
-最终32PE、150MHz/6.666666ns、SS/.99V/125°C，项目保守面积≤1.00mm²。原32位ICB、平台缓冲和X14/W12/acc32/total33/SHIFT10不改；源读→共享写成功ACK→原总线读回→解码→计算→完整写回ACK/排空，不用写ACK旁路。
+Linux板控制 F:/linux_fpga_try/ac820.ps1，须读该目录AGENTS和computer-use skill。当前VNC窗口18874435、workspace3第一终端；workspace4不操作。不能并发GUI键盘输入。每次传输/异步后台命令后确认真正回到提示符，截图可能早于最后几字显示。
 
-**服务器桌面T80_Delivery_20261113、任何旧八路数据、P80冻结运行包及备份保持不动。** C80活跃包不改、不清协作锁、不重启原任务。C32只有只读准备，没有新硬件；G32尚未开始。
+FTP旧DNS约束仍保持，不绕过；继续通过可见VNC。type每次≤1000字符，通常900；Python源码分段时不能在中途额外插入换行。所有长命令进程必须先poll，不能把命令打进未结束的cat或Python。
 
-## 当前作业（最后观察，不代表永远有效）
-
-私有根`/tmp/s4_21usr_c80_20261116_1245`，包`light-light126-c80-74f3ae7`，受测提交74f3ae7bb479d5fdd7917702c4a2c0671eacb61b。1008文件manifest：`d0f18e4a6aa8a928df37d4347f1a8853c448e823f0685a83c5b710732e5e7a59`。
-
-- 原父58047：`c80_followup02.json`，自己的precision04已通过，继续`包/runs/c80_finish02`。18:03:01观察为running/power_layer_05，PT完成4/12；SAIF12、gate14、时序及DRC诊断已完成。不新派EDA。
-- 原父59705：`c80_export_review02/state.json`，仍waiting_original_finish。等待58047自然完成后生成report02、unknown_inventory02/connections02和model_review_snapshot.json；不自动验收。
-- 第二标签只读观察器94139预计18:03:29自然结束；输入前先看截图。第一标签空闲。全部传输已结束。
-
-## 已取得的本版证据
-
-本地48解码、完整14、恢复/两拍SRAM/raw、10000随机+32定向块通过。真实ASIC14、恢复、CPU竞争通过；自己的240任务6082560输出及total零失败。FLOAT20逐层最大NRMSE0.2019814384%，裁剪/饱和0。无SDF门级14通过354816输出。SAIF12完整窗口通过304128输出，总847238周期、1170767047B。
-
-固定12均70603.1666667周期，150MHz折算2124.5505985task/s，较P80吞吐+9.8326562%；编码均25790B，四段实际384174事务。综合项目保守面积0.9611361367mm²，setup+0.000216007ns/hold+0.00623399ns，220宏/0锁存器；数值条件通过，最终声明时序与模型结论仍待汇总。
-
-首层整机功耗55.1722385mW、26.9189002872µJ/task，属于布局前估算，**不是12层平均**。尚未获得全部功耗汇总，不能借用P80。完整SHA见各证据JSON及SAIF检查点。
-
-仍缺：剩余PT、报告与独立模型/时序审核、持久归档、C80冻结。不得提前进入C32硬件。
-
-## 空间与工具
-
-共享Desktop/IC最后17:26仅1MiB；私有/tmp有足够空间供当前队列。旧B0 cleanup14已完成，只删除49200份已备份生成输入副本；不要重跑。新preflight15只读核对18份旧B0重复SAIF/大统计，共2339541372B，完整备份仍保留；cleanup16已预部署但**未执行**，必须等当前原父退出、无协作锁/EDA、复核身份和占用后再处理。T80、旧八路、P80、R4方法资格均不在清理范围。
-
-copy03只预部署，未启动归档：`/tmp/s4_21usr_c80_archiveops03_20261116_1720`。显式20%+512MiB固定余量，精确体积及全成员回读，不删除源。copy01绑定旧失败链不能用；copy02为标准2GiB预留备用。若export02失败，保留失败并做明确的独立接续，不修改旧状态或伪造完成。
-
-## 失败路径与恢复入口
-
-initial02前五项硬件通过后精度缺NumPy；旧followup01在取共享锁时ENOSPC，无子步骤；旧export01失败。都保留，finish01不存在。恢复后的02链使用既有经核验NumPy，未重复综合、240或门级。人工SHA转录错误均已重新读取并机器断言纠正，原服务器文件未变。
-
-工作区`E:/fpga_race-two/kwt1-c32-g32-20261115`；分支`codex/light-light126/t80-pipeline-c32-g32-20261115`；当前已push9a045f2，之后SAIF12/诊断/L01证据和本文待同步。历史未跟踪`S0_SYNTH05_FINISH_LAUNCH_20261115.py`不添加、不运行。
-
-GUI使用既有`F:/linux_fpga_try/ac820.ps1`，窗口18874435/workspace3，恢复时重新列窗口和看截图；workspace4不操作，FileZilla未用。持续完成C80，冻结后开始C32。压缩前保存进度，压缩后重读计划和检查点。
+下一步：先poll24760并读截图→核验解压两工具→执行prepare创建911新包→从prepared回执机器取manifest并校验→显式启动initial03。若任何前置失败，保留原目录和日志后查原因，不改已冻结源、不跳过守卫。随后沿计划当前C32-A阶段继续，完成再进入可选C32-B和G32。

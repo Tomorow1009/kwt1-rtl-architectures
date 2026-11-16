@@ -7033,7 +7033,7 @@
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
-      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C32_START.md",
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C32_SERVER.md",
       "array_random10000_directed32_passed": true,
       "first_local_datapath_passed": true,
       "local_evidence": "handoff/team/evidence/C32_LOCAL_INITIAL_20261116.json",
@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T21:40:40.342018+08:00",
+      "updated_at": "2026-11-16T22:03:41.144941+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Observe recovery22 PID202397 through preserved-archive copy and fresh initial02 launch. Never restart removal.",
+      "next": "Poll GUI transfer24760, verify prepare/launch tools, create fresh91135f6 bundle, start initial03 only after exact hashes and old failure exit.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7074,15 +7074,15 @@
         "files": 1081
       },
       "local_bringup_report": "workspaces/arch03/C32_LOCAL_BRINGUP_20261116.md",
-      "server_hardware_started": false,
+      "server_hardware_started": true,
       "server_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-61246bb",
       "server_manifest_sha256": "0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccbdb1070fc849cc",
       "initial01_status": "failed_ENOSPC_acquiring_lock_zero_children",
       "initial01_pid": 177134,
       "initial01_exited": true,
       "space_recovery19": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY19_20261116.json",
-      "initial02_created": false,
-      "initial02_preflight_failed": "shared_space_below_64MiB_before_any_request_or_queue_creation",
+      "initial02_created": true,
+      "initial02_preflight_failed": null,
       "cleanup20_scope": {
         "runs": 5,
         "files": 1852,
@@ -7112,7 +7112,29 @@
         "source_sha256": "fa9290736120c2a9473badeaeff208835bf199d5fa7a90dc4b99afec0c61620c",
         "gui_session": null,
         "worker_pid": 202397,
-        "completed": false
+        "completed": true,
+        "worker_exited": true,
+        "persistent_archive_verified": true
+      },
+      "initial02_pid": 205526,
+      "initial02_status": "failed_contention_firmware_rejected_old_five_row_literal",
+      "space_recovery22": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY22_20261116.json",
+      "initial02_exited": true,
+      "initial02_state_sha256": "0acf9538cd1faa74d4b63f273f6053a4f42eb79fc4800e09cb9d4663a9b3b1e9",
+      "asic14_passed": true,
+      "sequence_passed": true,
+      "fixed12_total_cycles": 866152,
+      "fixed12_task_s_at_150MHz": 2078.1571825730357,
+      "asic_initial_evidence": "handoff/team/evidence/C32_ASIC_INITIAL_20261116.json",
+      "firmware_fix_commit": "91135f61c97c980039793c6637d0a06888638df0",
+      "rtl_changed_in_fix": false,
+      "initial03_created": false,
+      "firmware_fix_transfer": {
+        "session": 24760,
+        "patch_chars": 3760,
+        "patch_transferred": true,
+        "tools_transferring": true,
+        "new_payload_sha256": "bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc"
       }
     }
   }

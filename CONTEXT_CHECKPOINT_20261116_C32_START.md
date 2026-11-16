@@ -1,5 +1,18 @@
 # C80已冻结，进入C32-A
 
+## 21:47 空间恢复完成，C32-A真实ASIC队列已启动
+
+恢复22/PID202397已退出：49200个已归档生成输入副本2639224198B全部清理；源码、结果CSV、日志、JSON及R4原摘要不改。私有/tmp归档保留，新持久备份 PROJECT/backups/r4-generated-inputs-20261116_2135 已复制并逐文件SHA/大小核验；不是删除唯一副本。回执详见 C32_SHARED_SPACE_RECOVERY22_20261116.json。不得再次执行22，19/20和原始失败initial01也不重跑。
+
+唯一 C32 initial02 队列于2026-11-16 21:44:35.190599启动，PID205526。包 ROOT/light-light126-c32-61246bb，ROOT=/tmp/s4_21usr_c32_20261116_2010。21:46:38观察 status=running、stage=soc、error=null、completed=[]，编译已结束并派发extremes例。真实ASIC14尚未整体完成，不能当作PASS。
+
+启动回执 ROOT/c32_initial02_launch.json SHA 22d2e7a2e15a88ce0675777a257951ab3561af09a7f3dc9f475d0c40842aa8cd；请求 SHA 361fbe5b3a50ae930d2840ba6872d099ccde9e84b17ff41edebb5dd93abd4c4c。队列 runs/c32_initial02/state.json 动态变化，不以旧状态SHA校验当前进度。原协作锁由本队列管理，不能清除、接管或另派EDA。受测源码61246bb和1081成员manifest保持，桌面T80/旧八路/P80/C80完全不动。
+
+21:45:30共享可用1401946112B；启动时私有/tmp78390505472B，共享1527775232B。后续全部C32硬件结果写私有/tmp，服务器共享空间仍紧张。下一步沿原队列CPU14→恢复→竞争→综合→240→精度；成功退出后才用已部署 ops-recovery02/C32_FINISH_FROM_INITIAL02_20261116.py 启动自己的门级/SAIF/PT队列。此工具须绑定实际终态SHA。C32-B/G32仍未开始。
+
+无GUI输入传输在运行，第一终端workspace3空闲，窗口18874435。最近Git已push4a609e7，本段及22证据待同步。压缩后先读本段、计划、AGENTS、STATUS；不要据下方旧“共享盘满/尚未启动”状态重复操作。
+
+
 ## 21:38 归档21全量通过，精确恢复22已启动
 
 只读归档完成并退出：49200文件2639224198B，gzip508256874B，完整回读及源再核对通过；回执 ROOT/r4_generated_archive21/receipt.json SHA 1b8ae10a78a0fb8f094ff34d55fc0e245bb4ed4b7c3fd17418cbb813b3e5e6ef。本地证据 C32_R4_ARCHIVE21_20261116.json。原R4摘要/结果/日志/源码/活动均未改。
