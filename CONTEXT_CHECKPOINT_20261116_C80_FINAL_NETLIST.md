@@ -1,5 +1,17 @@
 # C80 最终综合完成与240任务接续
 
+## 16:18：旧B0重复输入恢复空间完成，C80精度04已运行
+
+16:11:21清理14父56033启动；16:16:32读取终态`verified_duplicates_removed_backup_retained`，删除49,200份已备份生成输入，共2,616,732,144B，error=None，完成时共享可用2,543,845,376B、观察时2,419,064,832B。父已退出。完整备份保持，所有日志/结果、桌面T80及旧八路未动。没有删除六份DRC报告或P80目录。
+
+清理state SHA逐16字符读为 **39edc92bf5c29dbd aff714aef264c786 246e9e20bbf305fa 6f5ec1f0859130b0**。原备份/候选/过程观察和逐项删除journal在`私有根/b0_archived_batch_cleanup14`；恢复需按备份manifest回读到新空目录，不原地覆盖。
+
+后继入口1860c87（SHA baf8990bf73317eb0bfe4e36d0894e96679beaf9990d733894a3bf034999d4ed）已部署`ops-after-cleanup14-1860c87`，父58039等待清理成功且退出，再启动**followup02父58047**。control=`私有根/c80_followup02.json`，launch=`c80_followup02_launch.json`，log=`c80_followup02.log`。16:17:32 status=recovering_precision_only、error=None、未结束。原precision03及314678失败不改；新precision04和随后finish02均属于相同74f3ae7硬件，不重跑五个硬件步骤。
+
+本地26082/28846等已结束。当前唯一本地输入**31447**正在传`local_runs/c80_export02_ops_00e0810_20261116_1615/transfer.ps1`10段；目标`ops-export02-00e0810`，控制`c80_export_review02`，源SHA4c001bb4603a52b3c6f24d95566442bc59c48ee9709e37cbd224b0982331048a。先收完、观察真实PID及回执，不重复启动。它严格绑定followup02实际launch/PID、旧ENOSPC失败哈希及自身最终网表/精度/功耗。尚未读取新export启动结果，不写作已运行。
+
+最新已push1860c87；之后是本节及STATUS更新。C80当前仍缺精度终态、门级14、SAIF12/PT12、独立审核、归档冻结；C32/G32仍未进入。原copy01只部署未运行；copy02源码00e0810本地准备，之后须使用新export02链，不能执行旧入口。
+
 ## 16:11：新接续尚未启动；部署限定旧B0重复输入清理
 
 最新push **d6eadfbe4300854ae9fa9ff8d62a5ae292fe2d2f**；3502772是五项恢复条件测试后的新followup02，00e0810为新export02和copy02。新export02的同链/异链/失败披露三项测试通过，Python3.6语法通过；未改变正式RTL/固件/数据。下文旧314678/4047已失败退出，不能重启。

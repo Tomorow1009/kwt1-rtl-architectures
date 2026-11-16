@@ -1,0 +1,23 @@
+{
+  "schema": "c80-first20-precision-observation-v1",
+  "observed_at": "2026-11-16T16:21:29+08:00",
+  "run": "\\tmp\\s4_21usr_c80_20261116_1245\\light-light126-c80-74f3ae7\\runs\\c80_precision04_precision\\c80_precision",
+  "summary_sha256": "d7e0dbb52d17659e78af3357688367d4624773221c7693ed3c543f2de2d84acb",
+  "samples": 20,
+  "tasks": 240,
+  "outputs": 6082560,
+  "total_outputs": 6082560,
+  "maximum_layer_nrmse_percent": 0.20198143836753799,
+  "maximum_task_nrmse_percent": 0.20953408931848963,
+  "quantization_clipping_count": {
+    "x": 0,
+    "w": 0,
+    "b": 0
+  },
+  "saturation_count": 0,
+  "own_c80_float_reference_recomputed": true,
+  "official600_verified": false,
+  "stage_accepted": false,
+  "original_missing_numpy_and_ENOSPC_failures_preserved": true,
+  "followup_pid": 58047
+}

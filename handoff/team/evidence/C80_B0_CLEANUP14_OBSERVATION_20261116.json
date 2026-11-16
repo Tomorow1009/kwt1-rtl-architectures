@@ -1,0 +1,29 @@
+{
+  "schema": "c80-old-B0-duplicate-input-cleanup-observation-v1",
+  "observed_at": "2026-11-16T16:17:32+08:00",
+  "run": "\\tmp\\s4_21usr_c80_20261116_1245\\b0_archived_batch_cleanup14",
+  "source_commit": "d6eadfbe4300854ae9fa9ff8d62a5ae292fe2d2f",
+  "source_sha256": "122dc4476cd2e1972c7187fdbab91c1be15770f53c4b72697b14309c535a1798",
+  "state_sha256": "39edc92bf5c29dbdaff714aef264c786246e9e20bbf305fa6f5ec1f0859130b0",
+  "status": "verified_duplicates_removed_backup_retained",
+  "removed_files": 49200,
+  "removed_bytes": 2616732144,
+  "free_after": 2543845376,
+  "worker_pid": 56033,
+  "worker_exited": true,
+  "scope": "Only archived B0 generated case .hex/.verilog/.bin inputs; full archive and all results retained",
+  "full_archive": "../backups/systolic-b-20261112_2320/completed-evidence.tar.gz",
+  "archive_sha256": "dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50",
+  "prior_full_readback_files": 63653,
+  "prior_full_readback_bytes": 7006124866,
+  "backup_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "protected_process_fd_visibility_complete": false,
+  "protected_desktop_service_exceptions": [
+    "gnome-keyring-daemon --start",
+    "gnome-pty-helper"
+  ],
+  "no_new_eda_started_during_cleanup": true,
+  "restore_requires_verified_archive_members": true
+}
