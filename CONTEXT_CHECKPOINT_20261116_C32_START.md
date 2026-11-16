@@ -1,6 +1,21 @@
 # C80已冻结，进入C32-A
 
-更新时间：2026-11-16 20:01（北京时间）。压缩后先读AGENTS、有效计划、根交接、本文及STATUS，核对完成与未完成项，不从旧待办重启队列。
+更新时间：2026-11-16 20:13（北京时间）。压缩后先读AGENTS、有效计划、根交接、本文及STATUS，核对完成与未完成项，不从旧待办重启队列。
+
+## 20:13 受测提交已同步，GUI传输正在运行
+
+**C32-A受测源码及工具已提交并push：`61246bb2a21c56a9bfd871fd68de93028d79f5fd`。** 三套固件绑定当前源码检查通过。C32自己的真实CPU/PPA仍未运行，所有本地结果范围不变。
+
+- 完整传输资料：`local_runs/c32_overlay_20261116_2002/payload.json`，114文件，5485929B，SHA `40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602`。普通zlib445715B未传。
+- 精确差分传输：同目录`delta03.zlib`，72999B，SHA `64d6f32d905cd59decb73a08a7120d31634d95dc4503b3717feccf1ea22525b5`；base64文件`delta03.b64`共97332字符。基于冻结C80成员做只读重建，最终完整payload SHA必须相同。早先delta01/02/XZ只是本地压缩尝试，没有上传。
+- **本地exec会话13372正在连续GUI输入，不能另发VNC键盘输入、切换标签或重复启动传输。** 它每段900字符，进度`local_runs/c32_overlay_20261116_2002/gui_transfer_chunks.txt`；最后观察20:11已9900字符。循环将自动发送全部内容及`C32PAYLOADEND`结束行，并保存`takeover_local/c32_transfer_payload_done.png`。恢复先poll该会话/读本地进度和截图；未见退出不要发送下一命令。可继续纯本地工作。
+- 新私有根已于20:07建立：`/tmp/s4_21usr_c32_20261116_2010`，0700。第一终端当前在`cat > .../delta03.b64 <<'C32PAYLOADEND'`中，窗口18874435/workspace3。最后截图`takeover_local/c32_transfer_start.png`。没有FileZilla；原FTP DNS约束仍保持，未尝试绕过。
+- 下一步上传本地重建器`handoff/team/evidence/C32_RECONSTRUCT_61246BB_20261116.py`（SHA `5092484b3a34ab1d3d32549c67784217f1d7e96419237d5c450794bc7fcf09d2`），本地完整重建/损坏拒绝通过。服务器先验证C80 manifest及每个引用成员，再独占创建`payload_61246bb.json`。若基准成员不存在/哈希不符，保留失败并修复传输资料，不能跳过检查。
+- 从核验payload取出`c32_prepare_bundle.py`到新根bootstrap，运行`--payload ... --root ... --bundle light-light126-c32-61246bb`。新包只读复制C80原包1008文件并写新C32覆盖；源不会修改。核对prepared回执/新manifest全部文件。
+- 新启动器已本地准备`handoff/team/evidence/C32_QUALIFICATION01_LAUNCH_20261116.py`，**尚未上传或执行**。需要显式`--manifest-sha256`，绑定payload612、prepared回执、冻结C80报告SHA、S0预算、DATA100和FLOAT、私有NumPy、进程/锁/空间。将启动唯一`c32_initial01`，顺序CPU14→恢复→竞争→综合→240→精度；C32-B/G32不会自动启动。
+- 当前qualification源码SHA `147af697f797cfcd84796a66fa7daecd24910f1527f8d08422fb9c216ae63afb`。冻结C80对照报告`/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_report02/c80_report/report.json` SHA `46d13e9cbfac0730bec8eb7ea0b7927a9612462cf4b5cd056402c06155711cf4`。新队列要求同源、同编码SHA；不要求C32-A必须超过C80才测自己的PPA。
+
+共享盘最后仍仅1MiB，私有/tmp约79GB；未做任何新删除。桌面T80、旧八路、P80和C80冻结证据禁止动。压缩后先解决当前传输和新包校验，不回到旧综合或旧240。上面两个现场辅助脚本和本次进度待下一提交；不改变612受测硬件。
 
 ## 20:01 本地验证齐备，准备独立服务器包
 
