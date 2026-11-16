@@ -1,0 +1,29 @@
+{
+  "schema": "p80-displayed-runtime-observation-v1",
+  "observed_at": "2026-11-16T09:57:53.931341+08:00",
+  "parent_pid": 95253,
+  "exporter_pid": 96154,
+  "queue_status": "running",
+  "queue_stage": "saif",
+  "saif_completed": 8,
+  "current_child_pid": 169613,
+  "current_case": "layer_09",
+  "child_started": "2026-11-16T09:54:17.182830",
+  "last_completed": {
+    "case": "layer_08",
+    "outputs": 25344,
+    "cycles": 74101,
+    "activity_sha256": "fd246ded9406b9e04679d8ef796f768d2e1f7bc02cd916d65ef6d26d330fd14a"
+  },
+  "free_tmp_bytes": 87053959168,
+  "free_shared_bytes": 55034511360,
+  "remaining_activity_required_bytes": 2617662920,
+  "remaining_activity_cases": 4,
+  "cleanup13_deployed": false,
+  "cleanup13_executed": false,
+  "new_server_deletions_this_context": 0,
+  "stage_accepted": false,
+  "c80_hardware_started": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}
