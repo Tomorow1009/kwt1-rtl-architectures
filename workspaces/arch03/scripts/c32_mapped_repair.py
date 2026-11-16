@@ -23,6 +23,7 @@ ORIGIN_SHA = 'ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87'
 ORIGIN_NETLIST = '3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c'
 PREFIX = 'u_e203_subsys_top/u_e203_subsys_main/u_e203_subsys_mems/u_arch03_accel/core/'
 TARGETS = {PREFIX+n: ('BUFV2RD_12TR40', 'BUFV4RD_12TR40') for n in ('U16528', 'U16527', 'U16523')}
+TARGETS[PREFIX+'U24686'] = ('NOR3V2_12TR40', 'NOR3V4_12TR40')
 
 
 def read(path):
@@ -30,7 +31,7 @@ def read(path):
 
 
 def equivalent_tokens(original, repaired):
-    """Only the three inspected cell reference tokens may change anywhere."""
+    """Only the inspected buffers and their one violating upstream driver change."""
     old, new = partitions.module_tokens(original), partitions.module_tokens(repaired)
     require(set(old) == set(new), 'Repair changed the mapped module set')
     remaining = {p.rsplit('/', 1)[1]: pair for p, pair in TARGETS.items()}
@@ -49,7 +50,7 @@ def equivalent_tokens(original, repaired):
             changes.append(dict(module=module, instance=instance, before=before, after=after))
         require(expected == new[module], 'Repair changed tokens beyond equivalent references: '+module)
     require({x['instance'] for x in changes} == set(remaining), 'Missing exact reference replacement')
-    return dict(schema='c32-three-buffer-token-proof-v1', changes=sorted(changes, key=lambda x:x['instance']),
+    return dict(schema='c32-equivalent-driver-token-proof-v2', changes=sorted(changes, key=lambda x:x['instance']),
                 all_other_verilog_tokens_identical=True, rtl_modified=False, topology_changed=False)
 
 
@@ -113,7 +114,13 @@ foreach {path expected replacement} {@TRIPLES@} {
   if {$part eq {}} {set part $component} else {append part / $component}
   set object [get_cells $part]
   if {[sizeof_collection $object]!=1} {error "Missing exact repair hierarchy"}
-  if {[catch {get_attribute $object dont_touch} oldvalue]} {set oldvalue absent}
+  if {[catch {get_attribute $object dont_touch} oldvalue] || $oldvalue eq {}} {
+   # DC may return empty with UID-101 instead of a Tcl error for an absent
+   # flag. Empty is not an accepted argument to set_dont_touch (UID-133).
+   set oldvalue absent
+  } elseif {[lsearch -exact {true false} $oldvalue] < 0} {
+   error "Unrecognized original dont_touch flag $part $oldvalue"
+  }
   lappend protection [list $part $oldvalue]
   set_dont_touch $object false
  }
@@ -259,12 +266,12 @@ def main():
     args = parser.parse_args()
     require(digest(args.request) == args.request_sha256, 'Repair request changed')
     request = read(args.request)
-    require(request['schema'] == 'c32-three-buffer-repair-request-v1' and
+    require(request['schema'] == 'c32-equivalent-driver-repair-request-v2' and
             request['bundle'] == str(common.ROOT) and request['tool_sha256'] == digest(__file__), 'Wrong repair tool/bundle')
     cfg = c32_paths.configure(read(common.ROOT/'handoff/team/server_config.json'), common.ROOT,
         Path(request['runtime_root']), request['manifest_sha256'], request['runtime_evidence'])
     common.inputs()
-    session = common.ROOT/'runs'/'c32_repair01'
+    session = common.ROOT/'runs'/'c32_repair02'
     require(not session.exists(), 'Preserve prior repair attempts')
     require(shutil.disk_usage(str(common.ROOT)).free >= 4*1024**3, 'Repair runtime space insufficient')
     ledger = ProcessLedger(common, Path(cfg['server_root'])/'.arch02_team_lock', session)

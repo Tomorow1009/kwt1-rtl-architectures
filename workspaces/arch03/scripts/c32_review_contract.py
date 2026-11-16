@@ -19,7 +19,7 @@ def route_identity(route):
         proof.get('rtl_modified') is False and proof.get('topology_changed') is False and
         proof.get('task_constraints_unchanged') is True and proof.get('inherited_gate_pass') is False and
         proof.get('requires_new_gate_and_ppa') is True and proof.get('only_size_cell_no_compile') is True and
-        identity.get('schema') == 'c32-three-buffer-token-proof-v1' and
+        identity.get('schema') == 'c32-equivalent-driver-token-proof-v2' and
         identity.get('all_other_verilog_tokens_identical') is True and
         identity.get('leaf_identity',{}).get('all_other_leaves_identical') is True)
 
