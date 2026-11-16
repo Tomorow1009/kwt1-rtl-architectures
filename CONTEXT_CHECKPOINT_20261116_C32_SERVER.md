@@ -1,5 +1,13 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:33 修复包initial03已启动，正在ASIC14
+
+恢复23固定工具45b5e51由PID238810于22:31:42启动，归档及全成员回读后清理575个普通生成文件/31816241B；压缩包5588458B，/tmp与PROJECT/backups/r4-metrics14-generated-20261116_2216两份完整核验。所有.so与链接、实际输出/日志/元数据/源文件均保留。state=verified_generated_duplicates_removed_archive_retained，persistent_copy=verified，followup返回0。操作23已完成，禁止重复清理。旧失败PID233254没有删除文件；首次补丁解码遗漏zlib层在哈希检查处退出，未创建脚本，随后按实际编码正确部署。
+
+**initial03 PID238916于22:31:59.227004启动。** 新包ROOT/light-light126-c32-91135f6，manifest d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7；22:32:59队列status=running、stage=soc、父进程存在。队列目录为新包/runs/c32_initial03，日志ROOT/c32_initial03.log。按soc→sequence→contention→synth→batch20→precision运行，不重复启动。所有大产物在/tmp，原共享锁不替换。
+
+本地后继工具 C32_FINISH_FROM_INITIAL03_20261116.py 已准备，SHA 7e4c2c74ed44017c53390f3d52693293fa30b61eec9782a4c3dd964e72d5c256；只在initial03成功退出且绑定其终态哈希后，启动同新包自己的gate14/SAIF12/PT12。此工具未部署/执行，旧612/initial02 finish入口不可用于本包。最近GitHub已同步5563872。证据见C32_SHARED_SPACE_RECOVERY23_20261116.json。
+
 ## 22:27 恢复23安全停止；保留共享对象链接后准备新脚本
 
 恢复23旧PID233254已退出，在扫描时发现唯一VCS缓存链接 csrc/_291240_archive_1.so → ../simv.daidir/_291240_archive_1.so，被普通文件身份检查拒绝。OUT目录尚未创建，没有归档或删除任何文件，initial03仍未启动。旧脚本及失败日志保留。
