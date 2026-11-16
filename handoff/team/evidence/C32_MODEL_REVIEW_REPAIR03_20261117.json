@@ -1,0 +1,56 @@
+{
+  "schema": "c32-repaired-displayed-model-review-snapshot-v1",
+  "observed_at": "2026-11-17T07:15:51.319288+08:00",
+  "snapshot": "/tmp/s4_21usr_c32_20261116_2010/c32_repaired_export_review03/model_review_snapshot.json",
+  "snapshot_sha256": "43e166f0ea0d874198babd1ef52b27529b9fde3714739a00ca09bb913b81e6ee",
+  "snapshot_and_fact_values_server_asserted": true,
+  "export_state_sha256": "6ddefae9601cb1f89ba0210aadcab2188b615b3c57bb643e97a5d18dc186e0c6",
+  "unknown_inventory_sha256": "75705255242234c6731930e1db83148e215e0c89af96609a6a1431c6b345c50a",
+  "connections_sha256": "19c3cb97fbf5f5ce7a8a6a09e1446d1f330b5b6c7270685605cf771be1572fa7",
+  "export_terminal": "facts_joined_manual_conclusion_required",
+  "export_finished": "2026-11-17T07:08:33.837854",
+  "queue_exporter_query_and_dc_exited": true,
+  "unknown_review": {
+    "targets": 40132,
+    "resolved": 38321,
+    "classified_missing_names": 1811,
+    "alias_counts": {
+      "absent_DDC_net_and_no_local_expression": 1353,
+      "exported_dummy_absent_DDC_net_driver_power_not_exempt": 307,
+      "simple_wire_alias_to_linked_net": 151
+    },
+    "unique_leaf_endpoints": 61562,
+    "unknown_explicit_control_pins": [],
+    "all_unknowns_waived": false,
+    "driver_internal_power_exempted": false
+  },
+  "power_timing_cases": 12,
+  "all12_timing_tables_identical": true,
+  "no_clock_groups": {
+    "static_jtag_dtm": 186,
+    "static_jtag_reset_sync": 3
+  },
+  "disabled_arc_counts": {
+    "C": 69820,
+    "c": 6098,
+    "d": 250,
+    "p": 37440
+  },
+  "user_or_loop_or_false_net_disabled_flags": false,
+  "hf_period_ns": "6.666666000000",
+  "lf_period_ns": "66.000000000000",
+  "static_JTAG_TCK_TMS_TDI": [
+    0,
+    0,
+    0
+  ],
+  "setup_ns": "0.0000524521",
+  "hold_ns": "0.0010598",
+  "small_macros": 92,
+  "large_macros": 128,
+  "latches": 0,
+  "physical_signoff": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}

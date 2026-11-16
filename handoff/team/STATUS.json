@@ -7030,7 +7030,7 @@
       "start_allowed_after_c80_freeze": true,
       "hardware_files_created": true,
       "server_started": true,
-      "stage_accepted": false,
+      "stage_accepted": true,
       "project_area_verified": false,
       "system_power_verified": false,
       "checkpoint": "CONTEXT_CHECKPOINT_20261117_C32_DRC_REPAIR.md",
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T06:47:50.261047+08:00",
+      "last_observed_at": "2026-11-17T07:25:29.578189+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7282,7 +7282,7 @@
       "current_child_state": "running",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
-      "shared_free_bytes": 1048576,
+      "shared_free_bytes": 2970615808,
       "evidence_index": "workspaces/arch03/C32_EVIDENCE_INDEX_20261117.md",
       "saif12_passed": true,
       "saif12_evidence": "handoff/team/evidence/C32_SAIF12_REPAIR03_20261117.json",
@@ -7309,10 +7309,10 @@
       "fixed12_precision_verified": true,
       "fixed12_max_layer_nrmse_percent": 0.1425636423408142,
       "export_review_exited": true,
-      "unknown_inventory_complete": false,
-      "unknown_connections_complete": false,
-      "aliases_complete": false,
-      "model_snapshot_complete": false,
+      "unknown_inventory_complete": true,
+      "unknown_connections_complete": true,
+      "aliases_complete": true,
+      "model_snapshot_complete": true,
       "constraint_report_clear": true,
       "constraint_violation_records": 0,
       "constraint_extraction_complete": true,
@@ -7543,11 +7543,12 @@
       "repair_export_wait": {
         "pid": 110729,
         "started": "2026-11-17T05:02:53.930401",
-        "status": "exporter_running",
+        "status": "completed",
         "payload_sha256": "4005586b999e322779099eddf53d9de196fd1362dd992429748a2d1e45832441",
         "waiter_sha256": "6afee3001cde7f6e4ffe71ff01737173f014e6fd9c44a39bf4d3f78dcf65e777",
         "exporter_sha256": "a2aaef702e6c241f1bc12da41905c0e4434d5a8c803c6299958f5fd6b28bcebc",
-        "last_command_identity_matched_at": "2026-11-17T06:08:37.239001+08:00"
+        "last_command_identity_matched_at": "2026-11-17T06:08:37.239001+08:00",
+        "exited": true
       },
       "repair_status_reader": {
         "path": "/tmp/s4_21usr_c32_20261116_2010/c32_repair04_status.py",
@@ -7558,8 +7559,8 @@
         "mapping": "repair03",
         "queue": "c32_finish_repair04",
         "old_netlist_power_inherited": false,
-        "stage_accepted": false,
-        "durable_archive_completed": false
+        "stage_accepted": true,
+        "durable_archive_completed": true
       },
       "space_readonly_0523": {
         "old_N1_cache_candidates_over_1MB": 0,
@@ -7639,18 +7640,24 @@
         "migration03_finished": "2026-11-17T06:58:31.604005",
         "migration03_exited": true,
         "full_durable_readback_verified": true,
-        "free_bytes_at_finish": 4433379328
+        "free_bytes_at_finish": 4433379328,
+        "durable_receipt_evidence": "handoff/team/evidence/C32_R4_L03_DURABLE_XZ_20261117.json",
+        "durable_receipt_sha256": "7b8bb1dd0f59bee614b57c362786cfbf88491d802655880416cecf88bd74363f"
       },
       "repair_export03": {
         "pid": 155861,
         "started": "2026-11-17T06:41:49.855622",
-        "status": "collecting_new_activity",
+        "status": "facts_joined_manual_conclusion_required",
         "error": null,
         "control": "/tmp/s4_21usr_c32_20261116_2010/c32_repaired_export_review03",
         "export_child_pid": 155879,
-        "export_child_exited": true
+        "export_child_exited": true,
+        "finished": "2026-11-17T07:08:33.837854",
+        "exited": true,
+        "model_snapshot_sha256": "43e166f0ea0d874198babd1ef52b27529b9fde3714739a00ca09bb913b81e6ee",
+        "state_sha256": "6ddefae9601cb1f89ba0210aadcab2188b615b3c57bb643e97a5d18dc186e0c6"
       },
-      "current_stage": "repaired_report_and_model_review",
+      "current_stage": "C32-A_frozen",
       "recovery35": {
         "prepared": true,
         "server_started": true,
@@ -7667,8 +7674,30 @@
         "removed_files": 128,
         "removed_bytes": 19387868,
         "remaining_files": 408,
-        "remaining_bytes": 61976206
-      }
+        "remaining_bytes": 61976206,
+        "worker_exited": true,
+        "state_sha256": "8778b950c3c8981257fa859e3d33d0c22276acecf993b81b7c80cb5472e3edeb",
+        "state_hash_machine_asserted": true
+      },
+      "repaired_archive_launch": {
+        "requested": true,
+        "launched_at_observed": "2026-11-17T07:10:03+08:00",
+        "worker_pid_not_yet_read": false,
+        "source_deleted": false,
+        "launcher": "/tmp/s4_21usr_c32_archiveops01_20261117/launcher.py",
+        "worker_pid": 168727,
+        "worker_exited": true,
+        "status": "verified_copy",
+        "receipt_sha256": "f707f20af9a8f98a615298481a81daddc57e5ebb9fc98999b22097f185310db9",
+        "evidence": "handoff/team/evidence/C32_ARCHIVE_REPAIR03_20261117.json"
+      },
+      "technical_conclusion": "handoff/team/evidence/C32_STAGE_CONCLUSION_20261117.json",
+      "freeze": "handoff/team/evidence/C32_FREEZE_20261117.json",
+      "freeze_tag": "arch03-c32a-repair03-20261117-0725",
+      "archive_verified": true,
+      "task_mode_timing_reviewed": true,
+      "prelayout_system_power_estimate_reviewed": true,
+      "next_action": "Freeze C32-A; evaluate compact X cache without reducing complete throughput, then G32"
     }
   }
 }

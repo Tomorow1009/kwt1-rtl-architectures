@@ -1,0 +1,60 @@
+{
+  "schema": "r4-l03-durable-lossless-xz-observation-v1",
+  "observed_at": "2026-11-17T07:05:35.781918+08:00",
+  "finished": "2026-11-17T06:58:31.604005",
+  "status": "durable_xz_verified_original_gzip_copy_retained",
+  "receipt": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/r4-l03-xz-20261117/receipt.json",
+  "receipt_sha256": "7b8bb1dd0f59bee614b57c362786cfbf88491d802655880416cecf88bd74363f",
+  "receipt_and_control_equal_machine_asserted": true,
+  "archive": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/r4-l03-xz-20261117/layer_03.vcd.xz",
+  "archive_sha256": "44bdc9d4adae4e013931bcabd9fedd47f601aed08be6c67761b3d41d8b751ea4",
+  "archive_bytes": 2780943668,
+  "restored_bytes": 12584787471,
+  "restored_sha256": "93f87e3fbac3dfab270f808e9c40c74835bce30336f4059b038a22614c4574bb",
+  "full_durable_readback_verified": true,
+  "original_gzip_bytes": 7662823694,
+  "original_gzip_sha256": "1fca316ffef679706f21bf1c9973c9fe5e5b22dc57c2698a5d4aaa1ff7443f55",
+  "original_shared_gzip_deleted": true,
+  "exact_gzip_copy_retained": "/tmp/s4_21usr_r4_l03_xzstage_20261117/original_layer_03.vcd.gz",
+  "original_receipt_unchanged": true,
+  "restore_instructions": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/r4-l03-xz-20261117/RESTORE.txt",
+  "saved_archive_bytes": 4881880026,
+  "free_shared_bytes_at_finish": 4433379328,
+  "migration_worker": 160753,
+  "migration_worker_exited": true,
+  "migration_source_sha256": "cdd422679ce3084b0397306bd1446b492dda11f231cd295c89927b2dda9b163d",
+  "previous_attempt": {
+    "pid": 156897,
+    "status": "failed_ENOSPC_before_lock",
+    "source_deleted": false,
+    "preserved": true
+  },
+  "process_visibility": {
+    "protected_session_helpers": [
+      10519,
+      79103,
+      202972
+    ],
+    "all_descriptors_observed": false,
+    "observed_source_users": 0,
+    "exact_identities_checked": true,
+    "visibility_limit_preserved": true
+  },
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "S0_P80_C80_modified": false,
+  "bounded_duplicate_cleanup35": {
+    "pid": 161408,
+    "exited": true,
+    "started": "2026-11-17T06:54:04.737909",
+    "status": "verified_duplicates_removed_archive_retained",
+    "removed_files": 128,
+    "removed_bytes": 19387868,
+    "remaining_files": 408,
+    "remaining_bytes": 61976206,
+    "state_sha256": "8778b950c3c8981257fa859e3d33d0c22276acecf993b81b7c80cb5472e3edeb",
+    "state_hash_machine_asserted": true,
+    "scope": "Only exact already-durably-archived B0 generated expected.npz copies; prior journals excluded; source and backup unchanged",
+    "full_original_archive_retained": true
+  }
+}

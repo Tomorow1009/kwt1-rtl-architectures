@@ -104,3 +104,19 @@ VNC窗口18874435已重新确认、workspace3；不使用workspace4。当前无�
 - 迁移03父160753，06:52:30.217349启动；恢复35父161408，06:54:04.737909启动。35完成128份已归档expected.npz重复移除、19387868B，余408份61976206B。完整持久archive不变；不重复35。
 - **R4 L03持久XZ已通过完整解压回读并完成**：06:58:31.604005，父160753已退出；status durable_xz_verified_original_gzip_copy_retained，2780943668B，完成时free4433379328B。目标PROJECT/backups/r4-l03-xz-20261117/layer_03.vcd.xz，receipt.json与RESTORE.txt保留。原共享gzip已删除，其精确副本仍在/tmp/s4_21usr_r4_l03_xzstage_20261117/original_layer_03.vcd.gz；原JSON未改。原始VCD全字节可恢复，不是丢弃波形。下一步读取/机器绑定持久receipt SHA及35journal状态，记录准确恢复索引。
 - 所有GUI输入会话已结束；当前窗口18874435/workspace3。继续原export模型审核，等110729及export全部退出后，显式运行已部署C32复制launcher（tools SHA c53a4c486c5003341c7610f2e3706a9c99fe00b6ad6190829177eed8b2fb95ca），不得在其source仍写日志时归档。备份成功后才冻结C32-A。桌面T80/旧8/冻结S0/P80/C80不动。
+
+## 07:11 增量：模型事实齐备，C32持久复制已发出
+
+- 07:09:17.128417观察：新export终态facts_joined_manual_conclusion_required，error=None，finished07:08:33.837854；unknown inventory12/12、连接子167226、aliases、model snapshot全链完成。尚需读取snapshot具体无时钟/禁用弧/未知端点分类，给出独立最终结论；不能仅凭工具完成自动宣称物理签核。
+- **07:10已在可见终端发出C32 archiveops01/launcher.py --tools-sha256 c53a4c486c5003341c7610f2e3706a9c99fe00b6ad6190829177eed8b2fb95ca。当前截图终端尚未回到提示符，先截图核对返回/worker PID，不重复启动，也不在旧命令仍前台运行时继续输入。** 所有工具输入函数会话已结束；仅VNC终端前台命令可能忙。启动器只在所有父/子/waiter退出后放行，源ROOT全部保留。
+- 07:09共享free2970615808B，本轮runtime约6.69GB未压缩；copy工具会先精确估计gzip大小，要求1.2倍+512MiB余量并逐成员回读。若空间门槛失败保留失败、原产物与已有XZ，不随意减少余量或删历史证据。
+- R4持久receipt与control已于07:05:35.781918机器绑定，SHA7b8bb1dd0f59bee614b57c362786cfbf88491d802655880416cecf88bd74363f。XZ SHA44bdc9d4adae4e013931bcabd9fedd47f601aed08be6c67761b3d41d8b751ea4，2780943668B；完整原VCD12584787471B、SHA93f87e3fbac3dfab270f808e9c40c74835bce30336f4059b038a22614c4574bb。精确原gzip临时副本及原JSON继续保留。
+- 恢复35终态SHA8778b950c3c8981257fa859e3d33d0c22276acecf993b81b7c80cb5472e3edeb也已机器绑定，父161408已退出；不重复35。新索引C32_R4_L03_DURABLE_XZ_20261117.json含完整恢复路径。
+- 最新已推dce11da。自己的功耗数值和源哈希都已入Git。下一步先确认持久复制启动/运行状态，再读取新的model snapshot、完成范围明确的技术结论；归档完成及核验后冻结C32-A，再按有效计划评估可选C32-B/G32。不自动运行100条。所有旧8和桌面T80保护继续有效。
+
+## 07:25 C32-A冻结：本阶段完整收口
+
+- repair03本版门级14、SAIF12、PT12及完整模型事实已经收齐。07:15:51.319288机器绑定model snapshot、未知端点分类、12层时钟/禁用弧表；没有未知活动落到显式时钟、复位、ICG或SRAM控制引脚。记录原PT未知活动政策，不豁免驱动内部功耗。独立C32_STAGE_CONCLUSION_20261117.json给出稳定任务模式/布局前估算范围内的验收，原工具false标记不篡改。
+- 归档worker168727已自然退出；07:16:55.275349完成copy，07:23:38.283548再次机器绑定关键值。目的PROJECT/backups/c32-runtime-20261117_0709-repair03-copy01；runtime-evidence.tar.gz 1572653883B，SHA30f111ef8b51cb7ab223cc50a35e7812be4a8f08c53fc54df9b51aea8b56b80f。25291常规文件、1706目录、11链接全部回读，源前后相同；源未改未删、迁址复现未宣称。receipt SHA f707f20af9a8f98a615298481a81daddc57e5ebb9fc98999b22097f185310db9，原协作锁已自然释放。
+- 新冻结记录C32_FREEZE_20261117.json，计划tag arch03-c32a-repair03-20261117-0725。固定12：72179.3333333周期、2078.1571825730357task/s；保守0.7224077334997787mm²；48.9738198083341mW、23.5659820737506µJ/task。功能240/6082560输出及total零差异，未运行100条。C80对照：吞吐−2.18368%、面积−24.83815%、功耗−11.54786%、能耗−9.57322%。
+- C32-B/G32硬件此前尚未开发；下一步先评估两4096×16行奇偶bank方案，吞吐下降则不选。不要重跑C32-A的240、综合或门级/PT。不再做旧8/T80清理、不重复35或R4迁移。
