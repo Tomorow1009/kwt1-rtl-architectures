@@ -1,0 +1,158 @@
+{
+  "schema": "c80-fixed12-codec-performance-analysis-v1",
+  "source_sha256": {
+    "handoff\\team\\evidence\\P80_FIXED12_BUS_OBSERVATION_20261116.json": "689c1d2c06044d76b9af7aeff85f7811934841972538e506f574d64247d31597",
+    "handoff\\team\\evidence\\C80_ASIC14_20261116.json": "679eaa3e1afac6b9d956365a4c0c30f0c9a2713759cb4052f2898e9b55d1c20b",
+    "local_runs\\c80_fixed14_software_20261116_1135\\manifest.json": "7ca8bc59ac04fa41fef61576da430c6a2150cabca54250fb7fa812719044cf07"
+  },
+  "rows": [
+    {
+      "case": "layer_01",
+      "p80_bytes": 31428,
+      "c80_bytes": 27264,
+      "p80_cycles": 80471,
+      "c80_cycles": 73186,
+      "expected_c80_dma_transactions": 33120,
+      "conditional_bus_model_cycles": 73056.0,
+      "actual_minus_conditional_model": 130.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_02",
+      "p80_bytes": 30220,
+      "c80_bytes": 26372,
+      "p80_cycles": 78357,
+      "c80_cycles": 71625,
+      "expected_c80_dma_transactions": 32451,
+      "conditional_bus_model_cycles": 71495.0,
+      "actual_minus_conditional_model": 130.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_03",
+      "p80_bytes": 29572,
+      "c80_bytes": 25800,
+      "p80_cycles": 77223,
+      "c80_cycles": 70620,
+      "expected_c80_dma_transactions": 32022,
+      "conditional_bus_model_cycles": 70494.0,
+      "actual_minus_conditional_model": 126.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_04",
+      "p80_bytes": 29732,
+      "c80_bytes": 25844,
+      "p80_cycles": 77503,
+      "c80_cycles": 70696,
+      "expected_c80_dma_transactions": 32055,
+      "conditional_bus_model_cycles": 70571.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_05",
+      "p80_bytes": 28908,
+      "c80_bytes": 25008,
+      "p80_cycles": 76061,
+      "c80_cycles": 69233,
+      "expected_c80_dma_transactions": 31428,
+      "conditional_bus_model_cycles": 69108.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_06",
+      "p80_bytes": 28300,
+      "c80_bytes": 24080,
+      "p80_cycles": 74997,
+      "c80_cycles": 67609,
+      "expected_c80_dma_transactions": 30732,
+      "conditional_bus_model_cycles": 67484.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_07",
+      "p80_bytes": 27596,
+      "c80_bytes": 23604,
+      "p80_cycles": 73765,
+      "c80_cycles": 66776,
+      "expected_c80_dma_transactions": 30375,
+      "conditional_bus_model_cycles": 66651.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_08",
+      "p80_bytes": 27788,
+      "c80_bytes": 23712,
+      "p80_cycles": 74101,
+      "c80_cycles": 66966,
+      "expected_c80_dma_transactions": 30456,
+      "conditional_bus_model_cycles": 66840.0,
+      "actual_minus_conditional_model": 126.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_09",
+      "p80_bytes": 27612,
+      "c80_bytes": 23756,
+      "p80_cycles": 73793,
+      "c80_cycles": 67042,
+      "expected_c80_dma_transactions": 30489,
+      "conditional_bus_model_cycles": 66917.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_10",
+      "p80_bytes": 29180,
+      "c80_bytes": 25132,
+      "p80_cycles": 76537,
+      "c80_cycles": 69450,
+      "expected_c80_dma_transactions": 31521,
+      "conditional_bus_model_cycles": 69325.0,
+      "actual_minus_conditional_model": 125.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_11",
+      "p80_bytes": 31516,
+      "c80_bytes": 27632,
+      "p80_cycles": 80625,
+      "c80_cycles": 73829,
+      "expected_c80_dma_transactions": 33396,
+      "conditional_bus_model_cycles": 73700.0,
+      "actual_minus_conditional_model": 129.0,
+      "model_is_strict_lower_bound": false
+    },
+    {
+      "case": "layer_12",
+      "p80_bytes": 35220,
+      "c80_bytes": 31276,
+      "p80_cycles": 87111,
+      "c80_cycles": 80206,
+      "expected_c80_dma_transactions": 36129,
+      "conditional_bus_model_cycles": 80077.0,
+      "actual_minus_conditional_model": 129.0,
+      "model_is_strict_lower_bound": false
+    }
+  ],
+  "summary": {
+    "p80_mean_bytes": 29756.0,
+    "c80_mean_bytes": 25790.0,
+    "encoded_byte_reduction_percent": 13.328404355424118,
+    "cycle_reduction_percent": 8.952397737237572,
+    "throughput_gain_percent": 9.832656231188874,
+    "mean_dma_transactions_expected": 32014.5,
+    "mean_residual_cycles": 126.66666666666667
+  },
+  "hardware_cycles_source": "Own actual C80 ASIC/E20314 summary; displayed receipts",
+  "byte_count_source": "Matched local fixed14 encoding manifest",
+  "formula_only_transaction_counts": true,
+  "passive_bus_counts_still_to_join": true,
+  "not_a_C32_performance_result": true,
+  "area_or_power_inferred": false,
+  "stage_accepted": false
+}

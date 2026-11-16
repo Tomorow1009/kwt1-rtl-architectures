@@ -8,6 +8,7 @@ import datetime
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import sys
 import time
@@ -16,10 +17,11 @@ ROOT=Path('/tmp/s4_21usr_c80_20261116_1245')
 BUNDLE=ROOT/'light-light126-c80-74f3ae7'
 MANIFEST='d0f18e4a6aa8a928df37d4347f1a8853c448e823f0685a83c5b710732e5e7a59'
 INITIAL=BUNDLE/'runs/c80_initial02'
-INITIAL_REQUEST='49db1e2183bf38924af74a3223a088c811e1ccb94a2f25c3d98cc82ab922a9bae'
+INITIAL_REQUEST='49db1e2183bf38924af74a3223a088c811e1ccb94a2f25c3d98cc82ab922a9be'
 INITIAL_PID=279630
 QUALIFICATION=Path('/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/systolic_b_r4_crosscheck02/native_saif_r4_crosscheck')
 QUALIFICATION_SHA='a0a9bc6280e7fe5f35b666535157700aac1d9c0b4490873b6199ba9b5c662d26'
+assert all(re.fullmatch('[a-f0-9]{64}',v) for v in (MANIFEST,INITIAL_REQUEST,QUALIFICATION_SHA))
 
 
 def read(path):return json.loads(Path(path).read_text())
