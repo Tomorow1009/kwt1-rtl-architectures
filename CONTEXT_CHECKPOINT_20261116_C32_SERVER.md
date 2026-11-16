@@ -1,5 +1,11 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:40 initial03的ASIC14及恢复通过，竞争编译中
+
+22:40:07原PID238916仍运行，completed=['soc','sequence']、stage=contention，当前子PID250798正在竞争固件的VCS编译。新ASIC摘要SHA 2ebdce2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7，恢复摘要SHA 4eeb72b3d16e10be04df11184a2c4d61020baab55aff31e171c81b48e214d85（后续收证时与机器文件再次核对）。固定12周期与旧ASIC14一致。竞争尚未完成，综合尚未开始。
+
+后继ROOT/c32_finish_from_initial03.py已部署，22:37:09机器核验SHA 7e4c2c74ed44017c53390f3d52693293fa30b61eec9782a4c3dd964e72d5c256，未执行。GUI输入75319/96279均已完成。根交接已整合，旧全文保存为CONTEXT_HISTORY_20261116_C32_2238.md，不能把旧“尚未创建initial03”等段落当实时状态。
+
 ## 22:33 修复包initial03已启动，正在ASIC14
 
 恢复23固定工具45b5e51由PID238810于22:31:42启动，归档及全成员回读后清理575个普通生成文件/31816241B；压缩包5588458B，/tmp与PROJECT/backups/r4-metrics14-generated-20261116_2216两份完整核验。所有.so与链接、实际输出/日志/元数据/源文件均保留。state=verified_generated_duplicates_removed_archive_retained，persistent_copy=verified，followup返回0。操作23已完成，禁止重复清理。旧失败PID233254没有删除文件；首次补丁解码遗漏zlib层在哈希检查处退出，未创建脚本，随后按实际编码正确部署。
