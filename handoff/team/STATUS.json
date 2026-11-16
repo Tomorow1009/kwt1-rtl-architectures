@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-16T23:39:54+08:00",
+      "last_observed_at": "2026-11-16T23:45:26+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7190,13 +7190,13 @@
       "hold_slack_ns": 0.0010598,
       "batch20_progress": {
         "status": "running",
-        "completed": 129,
+        "completed": 164,
         "failed": 0,
-        "checked_outputs": 3269376,
-        "checked_totals": 3269376,
-        "host_elapsed_seconds": 1232.946047021076,
-        "estimated_remaining_seconds_with_20percent_margin": 1273.0884764589716
-      }
+        "checked_outputs": 4156416,
+        "checked_totals": 4156416,
+        "estimated_remaining_minutes_with_20percent_margin_rounded": 14.5
+      },
+      "status_readonly_v2_deployed": true
     }
   }
 }

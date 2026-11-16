@@ -1,5 +1,11 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 23:45 回归164/240；新版只读入口已部署
+
+23:45:26 initial03父PID238916 running/batch20；164/240、failed0、4156416输出和total，剩余含20%余量14.50分钟。当前样本14层9，子PID288481仅为当时观察，下一例会变。不重启队列。
+
+新推荐只读命令：`python3 -B /tmp/s4_21usr_c32_20261116_2010/c32_status_readonly_v2.py`。直接显示batch_progress的准确完成数/输出数/余量估算，避免靠样本路径推断。SHA **10296751a487b4fa19ac42f865ed6aec402be8d9e9ed1673ec92cac3fef5341a**，源提交17d94a0。旧ROOT/c32_status_readonly.py（ff41...）原样保留。V2已由精确delta哈希核验独占部署且首次运行成功，无新硬件/仿真/队列变动。GUI会话53561已结束，无活动输入，workspace3第一终端空闲。
+
 ## 23:40 回归129/240、零失败
 
 23:39:54实际进度：completed129、failed0、checked_outputs=checked_totals=3269376，host_elapsed_seconds=1232.946047021076，剩余含20%余量1273.0884764589716秒。原父PID238916仍在batch20；不得据此提前宣布完整240通过。VNC最后C32HALF已完成，无活跃输入；当前workspace3第一终端空闲。所有后继仍待initial03成功终态。
