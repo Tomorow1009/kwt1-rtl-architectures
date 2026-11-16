@@ -1,5 +1,13 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 23:19 综合初步通过，已进入自己的240任务
+
+initial03 PID238916在23:17:45已完成synth，stage=batch20。新顶层摘要SHA **ee08629b7cc9181d6e6db4ae21205ae931c6b1fe28f5c4420afd83097e8cef87**，23:19:06机器核对哈希和面积/时序准入通过。项目保守 **0.722402954997787mm²**，明确新增0.5618935446998727mm²，整机4.244619443828mm²；同C80口径保守面积下降24.8386438%。SS/.99V/125°C、6.666666ns，setup+0.0000524521ns，hold+0.0010598ns，128大宏＋92小宏＝220，锁存器0。此为自己的新综合初步结果，不代表门级/功耗/完整冻结已完成。
+
+三个块mapping：shared25.55s、accelerator1139.53s、CPU596.69s，顶层final_link子PID270861已结束。当前不再运行旧mapping；接下来只跟进batch20、precision自然完成。新证据C32_SYNTH_INITIAL_20261116.json与C32_ASIC_CORRECTED_20261116.json分别保存PPA初值和功能计数，不能将尚未完成的功耗填0。
+
+GUI会话52723/8079均完成，最后C32PPAPIN已退出；workspace3第一终端空闲。下一步用纯只读status工具查看240进度。initial03尚未退出前，finish工具与export工具均不执行。桌面T80、旧八路及冻结C80继续保护。
+
 ## 23:08 已完成加速器，CPU/SoC映射中
 
 23:07:56只读状态工具确认：initial03 PID238916 running/synth，completed仍soc/sequence/contention；最新子进程 **266393** running/alive，日志新包/runs/c32_initial03_synth/c32_synth/blocks/cpu_soc/compile.log。加速器块mapped用时 **1139.53秒**，共享块 **25.55秒**，/tmp可用 **72.37 GiB**。CPU和顶层未完成，最终面积/时序尚待收回。不要重启原综合。
