@@ -2,6 +2,26 @@
 
 更新时间：2026-11-16 20:13（北京时间）。压缩后先读AGENTS、有效计划、根交接、本文及STATUS，核对完成与未完成项，不从旧待办重启队列。
 
+## 20:47 新包已核验，initial01零子任务因共享盘满失败
+
+**C32服务器硬件仍未运行。** 主包重建和1081输入准备已完成。包路径`/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-61246bb`，manifest准确SHA `0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccdbb1070fc849cc`；受测提交仍61246bb。此前人工抄录65字符哈希触发前置拒绝，无任务；之后用prepared回执机器取值启动。
+
+- 差分首次重建被25处基准哈希差异拦住；只读核对25处全是CRLF/LF，无内容变化。新重建器`C32_RECONSTRUCT_LF_61246BB_20261116.py`提交e9c52fe，SHA `d21c6326c6241b13d04dcbd5c90ac0a827972ce84ab185a48cb7bc1dcfc01d65`，先核验原冻结字节，再仅内存换行归一化并检查差分基准SHA，最后完整payload仍精确为`40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602`。原工具和失败保留。新根`reconstruction_lf_receipt.json`记录25处，原源未改。
+- `c32_initial01`于20:40:42.554042启动PID177134，随后在`.arch02_team_lock`的mkdir即ENOSPC失败。20:41:53状态failed，completed=[]、无stage；20:45机器确认PID不存在、整个队列无child回执。原state SHA `42ffa16c397ab474753eb1cc9ef5617c2bf226bbee1c318f8e752fd5416aa674`；request SHA `49a8fa04de09a5e269c89cc21c99be1fffa5d7018467c469c350ad2ad977cd7a`。**不得重跑/覆写initial01。** 启动时/tmp可用79114158080B，共享盘仅1048576B，仍无法创建锁。
+- 已只读找到旧B0 `systolic_b_v3_drc06/systolic_b_synth`三份已归档重复统计：mapped_probe_inventory.tsv 268868363B、area_inventory.json 137502877B、leaf_area.tsv 75261374B，合计481632614B。不是T80/旧八路，也不是源、网表或摘要。完整B0归档及63653成员回读证明不动。
+- 新范围限定工具`C32_B0_DUPLICATE_REPORTS19_20261116.py`提交b026f9b，SHA `d87d789ad28b0e2ab2c4d290f52b3997f9d525a755eb7942ceba46af4d06e071`，本地Python3.6语法和6项终态守卫通过。它重新hash完整归档、清单、三源文件，检查无锁/无EDA/无占用，写intent及journal后才删三个重复文件；原B0完整备份留存。**当前本地会话12125仅通过GUI传cleanup19.b64，尚未执行删除。未退出前不发其它VNC输入。**
+- 清理成功后应从同一612冻结包新建`c32_initial02`，显式绑定initial01零工作终态和cleanup19回执；原初始启动器写死initial01不可再次调用。本地`C32_FINISH01_LAUNCH_20261116.py`也写死initial01，后续须新增绑定initial02的启动器，不能原地改受测包或冒用旧成功。
+
+截至本段尚无任何新清理完成、无C32 CPU/PPA结果、无C32-B/G32。桌面T80、旧八路、P80/C80冻结与备份全部未动。原删除14/17/18不可重复；16从未执行且已过期。接续先读本段和实际会话，不按下方早期“正在ASIC”文字推断状态。
+
+## 20:31 主传输完成，部署工具传输中
+
+- 旧GUI会话13372已正常退出，97332字符和结束行全部发出，20:30截图确认第一终端回到Bash提示符。**不要重复传delta03**。服务器尚未重建或启动EDA。
+- 新GUI会话70703正在输入`deployment_tools02.b64`（6588字符），结束后自动写`C32TOOLSEND`并截图。未退出前不要另发VNC输入。该工具payload SHA `34829ef86778d18293f812fe00c21b4a42297068c2811812d41ce8e2a0b3c39a`，3文件。
+- 本地`local_runs/c32_overlay_20261116_2002/prepare_remote01.py`已准备1477字符ASCII，先语法检查。待工具传输结束后，通过可见终端运行此代码：核验工具payload、独占创建`ops-deploy01`，执行重建器核验完整612 payload，再提取其prepare工具创建新C32包。若失败保留现场，不跳过哈希。
+- 当前已push `643398e`：新增本地带范围的报告`C32_LOCAL_BRINGUP_20261116.md`及终态后显式启动门级/功耗的`C32_FINISH01_LAUNCH_20261116.py`，SHA `6a7ab5a948c33cdecd96642f03b9ad484c8e1dc0f556a069ed52c8b5b051196f`。此工具只准备，不能在initial01完成退出前运行；本地Python3.6语法与CLI检查通过。硬件受测提交仍61246bb。
+- 本次没有新增硬件改动、重跑测试或清理服务器文件。T80/旧八路/P80/C80保护不变。新包完成校验后继续原计划自己的ASIC14/恢复/竞争/综合/240/精度。
+
 ## 20:13 受测提交已同步，GUI传输正在运行
 
 **C32-A受测源码及工具已提交并push：`61246bb2a21c56a9bfd871fd68de93028d79f5fd`。** 三套固件绑定当前源码检查通过。C32自己的真实CPU/PPA仍未运行，所有本地结果范围不变。

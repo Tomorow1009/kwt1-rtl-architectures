@@ -7029,7 +7029,7 @@
       "variant": "C32-A",
       "start_allowed_after_c80_freeze": true,
       "hardware_files_created": true,
-      "server_started": false,
+      "server_started": true,
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T20:13:00+08:00",
+      "updated_at": "2026-11-16T20:51:14.542451+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,20 +7055,32 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Commit and deploy new private C32-A package, then own ASIC14/recovery/contention/synthesis/240/precision",
+      "next": "Deploy pinned initial02 launcher after completed duplicate recovery; preserve original failure",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
         "runtime_root": "/tmp/s4_21usr_c32_20261116_2010",
-        "status": "visible_VNC_typing",
-        "local_exec_session": 13372,
+        "status": "source_bundle_verified_recovery02_tools_typing",
+        "local_exec_session": 70703,
         "payload_sha256": "40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602",
         "compressed_sha256": "64d6f32d905cd59decb73a08a7120d31634d95dc4503b3717feccf1ea22525b5",
         "compressed_bytes": 72999,
         "chunk_progress": "local_runs/c32_overlay_20261116_2002/gui_transfer_chunks.txt",
-        "server_reconstructed": false,
-        "server_prepared": false
-      }
+        "server_reconstructed": true,
+        "server_prepared": true,
+        "main_input_session_exited": true,
+        "main_payload_chars": 97332,
+        "tools_payload_sha256": "34829ef86778d18293f812fe00c21b4a42297068c2811812d41ce8e2a0b3c39a",
+        "files": 1081
+      },
+      "local_bringup_report": "workspaces/arch03/C32_LOCAL_BRINGUP_20261116.md",
+      "server_hardware_started": false,
+      "server_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-61246bb",
+      "server_manifest_sha256": "0b12bff8f9d989e83eb48d4bd5e62185852edf592e442d3bccdbb1070fc849cc",
+      "initial01_status": "failed_ENOSPC_acquiring_lock_zero_children",
+      "initial01_pid": 177134,
+      "initial01_exited": true,
+      "space_recovery19": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY19_20261116.json"
     }
   }
 }

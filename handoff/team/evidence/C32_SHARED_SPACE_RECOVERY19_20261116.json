@@ -1,0 +1,22 @@
+{
+  "schema": "c32-shared-space-recovery19-v1",
+  "observed_at": "2026-11-16T20:49:33.824636+08:00",
+  "worker_pid": 180471,
+  "worker_exited": true,
+  "status": "verified_duplicates_removed_backup_retained",
+  "removed_files": 3,
+  "removed_bytes": 481632614,
+  "shared_free_bytes_observed": 341835776,
+  "source_commit": "b026f9b",
+  "source_sha256": "d87d789ad28b0e2ab2c4d290f52b3997f9d525a755eb7942ceba46af4d06e071",
+  "state_sha256": "b08a1d1b1dc488f498bd81fa687df873c9bb3a39799ef4b2777b400e3c752b51",
+  "run": "/tmp/s4_21usr_c32_20261116_2010/b0_archived_duplicate_reports19",
+  "original_failed_queue_state_sha256": "42ffa16c397ab474753eb1cc9ef5617c2bf226bbee1c318f8e752fd5416aa674",
+  "retained_archive_sha256": "dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50",
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "p80_modified": false,
+  "c80_modified": false,
+  "backup_modified": false,
+  "scope": "Three byte-identical superseded B0 drc06 inventories only. Full archived members retained; no source, netlist, summary or log removed."
+}

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "base_members": 98,
+  "normalizations_exercised": 91,
+  "payload_sha256": "40fed77e347aad1347f1998f19801652770b176c5f5e0e03f405d68d0a11c602",
+  "mutated_source_rejected": true,
+  "non_newline_difference_rejected": true,
+  "tool_sha256": "d21c6326c6241b13d04dcbd5c90ac0a827972ce84ab185a48cb7bc1dcfc01d65",
+  "schema": "c32-transfer-newline-recovery-v1",
+  "observed_at": "2026-11-16T20:39:04.621738+08:00",
+  "server_mismatching_base_targets": 25,
+  "server_non_crlf_differences": 0,
+  "original_failure": "Frozen C80 source member hash differed from LF delta base; reconstruction stopped before payload creation",
+  "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
+  "tool_commit": "e9c52fe",
+  "protected_sources_modified": false,
+  "server_hardware_started": false,
+  "screenshot": "E:/fpga_race-two/takeover_local/c32_delta_normalization_probe.png"
+}
