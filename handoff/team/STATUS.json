@@ -6681,11 +6681,11 @@
       "version": "0x00050000"
     },
     "latest_observation": {
-      "at": "2026-11-16T12:28:00+08:00",
+      "at": "2026-11-16T12:41:49.893726",
       "p80_frozen": true,
       "c80_hardware_started": true,
       "c80_server_started": false,
-      "current_terminal": "both tabs idle Bash; no remote job last observed12:10",
+      "current_terminal": "visible C80 delta transfer in progress; local exec 69099; no EDA started; last remote preflight12:32 lock absent",
       "protected_T80_modified": false,
       "old8_modified": false
     },
@@ -6809,7 +6809,24 @@
       "local14_outputs": 354816,
       "local_sequence10_passed": true,
       "local_sequence_outputs": 76032,
-      "local_observer_negative_cases": 3
+      "local_observer_negative_cases": 3,
+      "local_latency2_aba_passed": true,
+      "local_latency2_aba_tasks": 6,
+      "local_latency2_aba_outputs": 152064,
+      "own_random_blocks": 10000,
+      "own_directed_blocks": 32,
+      "own_random_outputs": 794560,
+      "local_all_jobs_finished": true,
+      "delta_transfer": {
+        "directory": "local_runs/c80_transfer_719afc0_20261116_1245",
+        "session_id": 69099,
+        "exact77files_reconstruction_checked": true,
+        "server_eda_started": false
+      },
+      "eda_tools_local_tests": 23,
+      "eda_preparation_evidence": "handoff/team/evidence/C80_EDA_PREPARATION_20261116.json",
+      "raw_full_task_local_passed": true,
+      "gate_observer_local_passed": true
     }
   }
 }

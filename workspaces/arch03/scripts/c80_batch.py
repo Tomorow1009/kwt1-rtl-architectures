@@ -13,6 +13,7 @@ import time
 from server_run import A3, sha, save
 import n1_data as data
 import c80_soc as soc
+import c80_data as wire_data
 
 SCHEMA = 'arch03-c80-first20-batch-v6'
 
@@ -35,6 +36,13 @@ def storage_guard(run, remaining, observed_max=8*1024*1024):
     save(Path(run)/'storage_budget.json', receipt)
     data.require(free >= required, 'Insufficient space for C80 batch20 with 20% margin; evidence retained')
     return receipt
+
+
+def audit_task(source, case_run):
+    """Recheck C80 wire identity and the unchanged signed33 integer oracle."""
+    case_run = Path(case_run)
+    wire_data.verify_prepared(Path(source), case_run/'task_data')
+    return data.check_capture(case_run/'task.csv', case_run/'task_data')
 
 
 def verify(cfg, run, platform_source, dataset, call, firmware=None):
@@ -105,8 +113,7 @@ def verify(cfg, run, platform_source, dataset, call, firmware=None):
         receipt = run/entry['receipt']
         data.require(sha(receipt) == entry['receipt_sha256'], 'N1 case receipt changed')
         case_run = receipt.parent
-        data.verify_prepared(Path(task['source']), case_run/'task_data')
-        captured = data.check_capture(case_run/'task.csv', case_run/'task_data')
+        captured = audit_task(task['source'], case_run)
         data.require(captured['capture_sha256'] == entry['capture_sha256'] and captured['total_checked'],
                      'C80 final capture audit changed')
     outputs = sum(item['outputs'] for item in results)
