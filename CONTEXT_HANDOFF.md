@@ -82,3 +82,16 @@ VNC窗口18874435已重新确认、workspace3；不使用workspace4。当前无�
 - 本地迁移入口仅修正上述常量及新control02目录，3测试再通过；新脚本/tmp/s4_21usr_r4_l03_xzmigrate02_20261117.py SHA00a4db3982d05a786aacc80510804b2372082faff8b35b23b9364541dcb67d89，原脚本保留。06:30部署核验及只读可见进程检查通过（49可观测、3固定桌面辅助进程不可观测、可观测源占用0）；未声称全FD可见或完整idle。
 - 新只读全哈希前检已发出，日志/tmp/s4_21usr_r4_l03_preflight02_20261117.log，启动回执同前缀.json；待读取PID与终态。没有传--migrate。不得重跑相同日志入口。
 - 继续原PT12/110729报告等待器；全部结束后才持原锁进行具体无损归档迁移，收齐模型/活动审核和持久副本，再冻结C32-A。桌面T80、旧8、S0/P80/C80不动。
+
+## 06:50 增量记录（最高优先恢复项）
+
+1. **finish04父101802已自然退出**，终态reports_ready_review_required；finished06:41:14.588988，自己的门级14/活动12/时序/DRC/PT12全部结束。state SHA e39de67261e36f838cc93a2c39004b9373338dddea96675dc38ef5d461613183已由后续启动命令机器断言。不要重启。原锁已自然释放。
+2. 110729等待器已自动派发新exporter **155861**，06:41:49.855622启动。06:47:50仍exporting、error=None。控制ROOT/c32_repaired_export_review03，仍需等report.json、unknown inventory、连接和model snapshot；不能启动旧export03或提前验收。自己的完整功耗数值待读取，仍不继承原坏网表数值。
+3. R4 L03默认只读前检已通过，父151286退出，日志/tmp/s4_21usr_r4_l03_preflight02_20261117.log SHA c575195f3aaf1c9b43b93b1cb1d8bd40143d21494baa94ece7964ef58bc2576e。完整staging state SHA632b0460df8d6a78e411aebae634ffe1ed7efd9cc1901b4fe165543b03d22e05已机器核验。
+4. **迁移02父156897失败且退出，删除0**。06:43:41.385391启动，在acquire_lock的mkdir遇到ENOSPC；control state仍preflight，source_deleted=false，原gzip仍存在。失败日志/tmp/s4_21usr_r4_l03_migrate02_20261117.log、control/tmp/s4_21usr_r4_l03_xzmigrate02_20261117保留，不原地重跑。
+5. 新迁移03工具准备：/tmp/s4_21usr_r4_l03_xzmigrate03_20261117.py，SHA cdd422679ce3084b0397306bd1446b492dda11f231cd295c89927b2dda9b163d。新control同名去.py；完整原始内容/两份临时副本/原回执核验逻辑不变，新增等待原锁及ENOSPC5秒轮询，不清任何旧锁。5项身份和锁等待测试通过。**尚未启动迁移03。**
+6. 新恢复35最多选择剩余536份中按名称排序前128份旧B0 generated expected.npz，全部已由完整持久archive核验。32/33/34 journals和并集、已删文件不得再现、剩余536份81364074B必须精确相符；仍使用原路径/字节/哈希/无人使用/无EDA检查，有锁立即停止。没有源码、网表、日志、波形、T80、旧8或冻结S0/P80/C80文件。代码handoff/team/evidence/C32_B0_ARCHIVED_EXPECTED_RECOVERY35_20261117.py SHA785667c891ca90644c2652c3b96c25c8c0fda36acc3cf7ec67164ef289366218，目标ROOT/c32_recovery35.py；静态逐项适配原32安全逻辑及语法已核对。**尚未执行35**，必须先有身份正确的迁移03 waiting_for_team_lock进程才允许运行。
+7. **当前GUI传输统一exec会话76905尚在运行**：正在部署以上03/35两个新工具，无main执行；本地命令E:/fpga_race-two/takeover_local/c32_space03_deploy.txt，共8489字符。先write_stdin轮询直到退出，再截图确认两个DEPLOYED SHA。不得重复传输或在未结束前并发GUI输入。窗口18874435/workspace3；不用workspace4。
+8. 下一步部署确认后，在新独立日志启动迁移03，核对waiting状态和原锁；再显式启动恢复35（--execute-verified-remaining-captures），持久归档/原锁均核验后只删已备份重复NPZ直到锁出现，供迁移03取得锁。之后跟踪R4持久XZ完整回读和C32新报告，完成C32持久copy后才冻结C32-A，再进入C32-B/G32。
+
+最新本地提交e416b13（恢复工具和测试，未推）；此前9ff2cd2及82be84d已推。当前阶段报告已重写为新网表专用，原混合历史保留C32_STAGE_REPORT_PRE_REPAIR03_20261117.md，不再据旧表拿新功耗。仅S0_SYNTH05_FINISH_LAUNCH_20261115.py历史未跟踪勿提交。本段之后的实际观察继续追加；全部禁止保护范围与当前计划不变。
