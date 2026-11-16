@@ -48,3 +48,9 @@ ROOT=`/tmp/s4_21usr_c32_20261116_2010`；BUNDLE=`ROOT/light-light126-c32-91135f6
 - 本地历史未追踪`handoff/team/evidence/S0_SYNTH05_FINISH_LAUNCH_20261115.py`不提交、不执行。
 
 本地`E:/fpga_race-two/kwt1-c32-g32-20261115`，分支`codex/light-light126/t80-pipeline-c32-g32-20261115`，最近已push2a3862f；本次完整功耗及新检查点随后同步。原详细检查点`CONTEXT_CHECKPOINT_20261117_C32_FINISH.md`和11月16日SERVER文件保留。不要启动子代理或新goal。
+
+## 02:37报告与活动扫描更新
+
+02:32:35通过可见VNC机器断言确认完整报告已生成：`runs/c32_report01/c32_report`下有JSON、逐任务/汇总CSV、中文说明和回执。report SHA为`4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7`，网表SHA为`3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c`，功耗和能耗原始值再次断言一致。固定12精度最大逐层NRMSE为0.1425636423408142%；20条精度另列，不混用。
+
+02:37:33父36287仍运行、无error；导出子36484已退出，未知活动清单子42011正在读取L09。随后仍需本版DDC连接与model_review_snapshot，未启动C32-B/G32。原始报告保留采集阶段的review=false，最终独立结论另记，不覆盖原报告。证据见`handoff/team/evidence/C32_REPORT_OUTPUT_20261117.json`。最近已同步Git提交f88564d；本次新观察待同步。已完成队列、工具及清理均不重复执行。

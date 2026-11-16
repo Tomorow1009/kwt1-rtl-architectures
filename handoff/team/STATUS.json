@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-17T00:48:09+08:00",
+      "updated_at": "2026-11-17T02:37:33+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T02:20:48+08:00",
+      "last_observed_at": "2026-11-17T02:37:33+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7253,7 +7253,7 @@
         "power_layer_11",
         "power_layer_12"
       ],
-      "current_queue": "c32_finish03",
+      "current_queue": "c32_export_review03",
       "status_readonly_version": 4,
       "export_review_version": 3,
       "space_recovery24_25": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY24_25_20261117.json",
@@ -7266,7 +7266,7 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 36484,
+      "current_child_pid": 42011,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
@@ -7279,7 +7279,7 @@
       "saif_completed_layers": 12,
       "saif_l01_bytes": 63448403,
       "saif_l01_cpu_seconds": 298.78,
-      "current_child_state": "export child alive",
+      "current_child_state": "inventory reading layer_09.saif",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
@@ -7299,9 +7299,15 @@
       "all12_power_units_and_mapping_matched": true,
       "export_review_pid": 36287,
       "export_review_started_at": "2026-11-17T02:16:43.092249",
-      "export_review_status": "exporting",
+      "export_review_status": "collecting_existing_activity",
       "export_child_pid": 36484,
-      "export_review_control": "/tmp/s4_21usr_c32_20261116_2010/c32_export_review03"
+      "export_review_control": "/tmp/s4_21usr_c32_20261116_2010/c32_export_review03",
+      "export_child_exited": true,
+      "report_output_evidence": "handoff/team/evidence/C32_REPORT_OUTPUT_20261117.json",
+      "report_output_completed": true,
+      "report_sha256": "4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7",
+      "fixed12_precision_verified": true,
+      "fixed12_max_layer_nrmse_percent": 0.1425636423408142
     }
   }
 }

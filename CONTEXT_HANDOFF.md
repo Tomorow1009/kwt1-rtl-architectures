@@ -32,3 +32,9 @@ initial01/finish01/finish02为创建原共享锁ENOSPC，零子任务；initial0
 GUI最近为VNC18874435、workspace3第一终端空闲，无活动输入，恢复重新查窗口，不使用workspace4。FTP公共地址检查失败未绕过，继续已授权可见VNC。旧S0_SYNTH05_FINISH_LAUNCH_20261115.py未追踪，不提交不执行。不要启动子代理或新goal。
 
 本地E:/fpga_race-two/kwt1-c32-g32-20261115；分支codex/light-light126/t80-pipeline-c32-g32-20261115，最近已push2a3862f，本次功耗与新检查点随后同步。旧根交接保留CONTEXT_HISTORY_20261117_C32_0203.md，运行/失败细节保留FINISH与11月16日SERVER检查点。
+
+## 02:37报告与活动扫描更新
+
+02:32:35通过可见VNC机器断言确认完整报告已生成：`runs/c32_report01/c32_report`下有JSON、逐任务/汇总CSV、中文说明和回执。report SHA为`4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7`，网表SHA为`3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c`，功耗和能耗原始值再次断言一致。固定12精度最大逐层NRMSE为0.1425636423408142%；20条精度另列，不混用。
+
+02:37:33父36287仍运行、无error；导出子36484已退出，未知活动清单子42011正在读取L09。随后仍需本版DDC连接与model_review_snapshot，未启动C32-B/G32。原始报告保留采集阶段的review=false，最终独立结论另记，不覆盖原报告。证据见`handoff/team/evidence/C32_REPORT_OUTPUT_20261117.json`。最近已同步Git提交f88564d；本次新观察待同步。已完成队列、工具及清理均不重复执行。

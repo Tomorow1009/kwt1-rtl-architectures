@@ -1,0 +1,49 @@
+{
+  "schema": "c32-report-output-observation-v1",
+  "observed_at": "2026-11-17T02:32:35.961676+08:00",
+  "verification_method": "Visible VNC Python SHA256 and Decimal assertions; original report unchanged",
+  "report": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6/runs/c32_report01/c32_report/report.json",
+  "report_sha256": "4f4be422643e0123ec40ff106d3750237e1e1ed79d7c9869b22a590c7a6dc7d7",
+  "netlist_sha256": "3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c",
+  "files": [
+    "report.json",
+    "tasks.csv",
+    "summary.csv",
+    "report_zh.md",
+    "receipt.json"
+  ],
+  "raw_time_weighted_power_w": "0.04897383731730862481412038534",
+  "raw_energy_per_task_j": "0.00002356599049899043666325",
+  "task_s_at_150MHz": 2078.1571825730357,
+  "MMAC_s_at_150MHz": 3370.804200648385,
+  "fixed12_max_layer_nrmse_percent": 0.1425636423408142,
+  "verification": {
+    "activity12": true,
+    "asic14": true,
+    "final240": true,
+    "fixed12_precision_verified": true,
+    "gate14_without_SDF": true,
+    "internal20_precision_verified": true,
+    "power12_numbers": true,
+    "project_area_reviewed": false,
+    "system_power_verified": false,
+    "task_mode_timing_verified": false,
+    "official_precision_verified": false,
+    "physical_signoff": false
+  },
+  "raw_flags_are_collection_state_not_final_independent_review": true,
+  "latest_worker_observation": {
+    "at": "2026-11-17T02:37:33.183026+08:00",
+    "status": "collecting_existing_activity",
+    "parent_pid": 36287,
+    "parent_alive": true,
+    "export_pid": 36484,
+    "export_alive": false,
+    "inventory_pid": 42011,
+    "inventory_alive": true,
+    "reading": "layer_09.saif",
+    "error": null
+  },
+  "stage_accepted": false,
+  "source_and_frozen_inputs_changed": false
+}
