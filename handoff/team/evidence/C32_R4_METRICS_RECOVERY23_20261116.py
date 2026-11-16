@@ -1,7 +1,7 @@
-"""Archive/read back only 578 generated files from one completed R4 metrics run.
+"""Archive/read back regular generated files from one completed R4 metrics run.
 
 Preserve actual outputs, logs, metadata, source, all protected versions and
-both archive copies. Then attempt the new C32 queue with an actual metadata
+both archive copies. All .so files and links are retained. Then attempt the new C32 queue with an actual metadata
 write probe; no arbitrary large shared-volume reserve or old-lock takeover.
 """
 import base64
@@ -36,7 +36,13 @@ def sha(p):
 def read(p):return json.loads(Path(p).read_text())
 
 
-def selected(p):return p.suffix in ('.hex','.bin','.verilog','.o','.so','.a') or p.name=='simv'
+def generated(p):return p.suffix in ('.hex','.bin','.verilog','.o','.so','.a') or p.name=='simv'
+def selected(p):return generated(p) and p.suffix!='.so'
+
+
+def link_stamp(p):
+    s=p.lstat()
+    return [s.st_dev,s.st_ino,s.st_uid,s.st_mode,s.st_mtime_ns,s.st_ctime_ns,os.readlink(str(p))]
 
 
 def main():
@@ -59,16 +65,26 @@ def main():
     need(summary['status']=='passed' and summary['asic_cpu_verified'] and len(summary['cases'])==14 and
          stage['status']=='passed' and stage['summary_sha256']==SUMMARY,'Metrics run not passed')
     need(not (ROOT/'light-light126-c32-91135f6/runs/c32_initial03').exists(),'C32 queue already exists')
-    rows={};protected={str(run.parent/'state.json'):sha(run.parent/'state.json')}
+    rows={};links={};candidate_count=0;candidate_bytes=0
+    protected={str(run.parent/'state.json'):sha(run.parent/'state.json')}
     for p in sorted(run.rglob('*')):
         if not p.is_file():continue
+        if generated(p):candidate_count+=1;candidate_bytes+=p.stat().st_size
+        if p.is_symlink():
+            need(p.suffix=='.so' and p.parent==run/'csrc' and
+                 p.resolve().parent==run/'simv.daidir' and p.lstat().st_uid==os.getuid(),
+                 'Unexpected link; preserve source')
+            links[str(p)]=link_stamp(p);continue
         st=h.stamp(p);digest=sha(p);need(h.stamp(p)==st,'Source changed while scanning')
         if selected(p):rows[p.relative_to(run).as_posix()]=dict(bytes=st['bytes'],sha256=digest,stamp=st)
         else:protected[str(p)]=digest
-    need(len(rows)==578 and sum(x['bytes'] for x in rows.values())==48520513,'Exact generated scope changed')
+    need(candidate_count==578 and candidate_bytes==48520513 and len(links)==1 and
+         550<len(rows)<578,'Exact observed source scope changed')
+    total=sum(x['bytes'] for x in rows.values())
     need(shutil.disk_usage(str(ROOT)).free>1024**3,'No staged archive margin')
     base.idle(ar,lock,[run]);OUT.mkdir(mode=0o700)
-    manifest=dict(source_root=str(run),files=rows,protected=protected,source_sha256=sha(__file__))
+    manifest=dict(source_root=str(run),files=rows,protected=protected,protected_links=links,
+                  excluded_all_shared_object_files=True,source_sha256=sha(__file__))
     ar.save(OUT/'manifest.json',manifest);packed=OUT/'generated-inputs.tar.gz'
     with tarfile.open(str(packed),'x:gz',compresslevel=1) as tar:
         for name,v in sorted(rows.items()):
@@ -83,14 +99,15 @@ def main():
             v=rows[member.name];need(digest==v['sha256'] and count==v['bytes'],'Archive readback differs')
             seen.add(member.name)
     need(seen==set(rows),'Incomplete archive')
-    state=dict(status='full_archive_verified_source_preserved',members_verified=len(rows),source_bytes=48520513,
+    state=dict(status='full_archive_verified_source_preserved',members_verified=len(rows),source_bytes=total,
         archive=str(packed),archive_bytes=packed.stat().st_size,archive_sha256=sha(packed),
         manifest_sha256=sha(OUT/'manifest.json'),removed_files=0,removed_bytes=0,
         protected_T80_modified=False,old8_modified=False,p80_modified=False,c80_modified=False,
         results_modified=False,process_observation=obs)
     ar.save(OUT/'archive_receipt.json',state);ar.save(OUT/'state.json',state)
     try:
-        need(all(sha(p)==v for p,v in protected.items()),'Protected result changed')
+        need(all(sha(p)==v for p,v in protected.items()) and all(link_stamp(Path(p))==v for p,v in links.items()),
+             'Protected result or link changed')
         with (OUT/'removal_journal.jsonl').open('x') as journal:
             for i,(name,v) in enumerate(sorted(rows.items())):
                 if i%64==0:base.idle(ar,lock,[run])
@@ -102,7 +119,8 @@ def main():
                 journal.write(json.dumps(dict(action='removed',path=name))+'\n')
                 if i%64==0:journal.flush();os.fsync(journal.fileno());ar.save(OUT/'state.json',state)
             journal.flush();os.fsync(journal.fileno())
-        need(all(sha(p)==v for p,v in protected.items()) and sha(packed)==state['archive_sha256'],
+        need(all(sha(p)==v for p,v in protected.items()) and all(link_stamp(Path(p))==v for p,v in links.items()) and
+             sha(packed)==state['archive_sha256'],
              'Retained result or archive changed')
         state.update(status='verified_generated_duplicates_removed_archive_retained',finished=ar.now(),
                      free_after=shutil.disk_usage(str(h.PROJECT)).free)
