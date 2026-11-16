@@ -1,5 +1,20 @@
 # C32-A服务器交接：竞争固件修复准备中
 
+## 22:10 新包已准备，initial03被共享空间阈值挡住；准备实际元数据探测
+
+两工具传输24760已退出并核验。prepare完成，新包 ROOT/light-light126-c32-91135f6 共1081输入，manifest SHA d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7；完整payload SHA bc73ccd413657fd527628be76f5973de10f8cc30705580c3d5970ccbaed143bc，服务器打印确认。旧包未改。文件为 ROOT/payload_91135f6.json 和 light-light126-c32-91135f6.prepared.json。Git修复及证据已push3143002。
+
+22:05:30执行已部署c32fix_launch03_tool.py时在共享>=64MiB启发式检查停止，尚未创建initial03的请求、队列、日志或启动回执；没有硬件作业。此前initial02失败SHA守卫已经通过，证明0acf...终态抄录正确。原启动器仍保留。用户22:07回复没有团队正在运行的共享盘写入；不能推断具体是哪一个其它账号导致空间耗尽。
+
+22:08:15只读du已结束，第一终端回到提示符。旧R4包剩余944357376B，其中原批量目录约627MB主要为应保留的实际输出与证据，metrics14约63.76MB；此后没有删除任何文件。不再重跑归档21或恢复22。
+
+所有大型C32产物都写私有/tmp（约78GB）；共享只写原锁owner。为不以额外64MiB阈值代替实际可写性，本地新 C32_QUALIFICATION03_METADATA_LAUNCH_20261116.py（提交0f3ffa8，SHA 60da852cc133dbb5001f9f15d273f487a455aec9719e7fb96ce9d189a9b122ee）将独占创建 PROJECT/c32_lock_metadata_probe_20261116_2210，写32768B并fsync、回读，然后只删除刚创建且身份仍匹配的探测文件/空目录。原协作锁不改变；实际队列仍通过原ProcessLedger原子申请锁，/tmp运行容量及所有源码/数据检查不变。
+
+探测回执 ROOT/c32_initial03_metadata_probe.json 用独占创建。若失败，尚未启动队列，先读失败信息，不能盲目再次运行同探测工具，因为回执/路径不覆盖。探测成功后继续同一新包initial03。源元数据检查不是缩减功能、时序或活动验收条件。
+
+**当前GUI传输会话55447只在输入 c32fix_launch03_metadata_tool.b64（4464字符），未退出前不能另发VNC键盘。** 完成截图 takeover_local/c32_metadata_launch_transfer.png；然后解压为新py、核验上述SHA，使用prepared回执机器取manifest后执行。此刻尚未执行探测，initial03仍未创建。新元数据工具提交0f3ffa8尚待push，旧结果/保护目录不动。
+
+
 更新：2026-11-16 22:02，北京时间。恢复先读AGENTS、本检查点、有效计划和STATUS；当前不是旧摘要里的“正在综合”或“仍因共享盘满未启动”。
 
 ## 当前目标与保护
