@@ -6804,7 +6804,7 @@
       "stage_accepted": false,
       "project_area_verified": false,
       "system_power_verified": false,
-      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_GATE.md",
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_C80_SAIF.md",
       "local14_passed": true,
       "local14_outputs": 354816,
       "local_sequence10_passed": true,
@@ -6873,8 +6873,8 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "31358e8",
-      "last_server_observed_at": "2026-11-16T17:06:41+08:00",
+      "latest_pushed_commit": "4065fc2",
+      "last_server_observed_at": "2026-11-16T17:26:43+08:00",
       "export_review_prepared": true,
       "export_review_deployed": true,
       "export_chain_tests": 10,
@@ -6948,16 +6948,22 @@
       "gate14_evidence": "handoff/team/evidence/C80_GATE14_20261116.json",
       "gate14_summary_sha256": "4c57b9d0df63dc3bcc081a095eb1eabbf0c383069d4b666582702fd6ab34f8cd",
       "gate14_fixed12_cycles": 847238,
-      "saif_layers_completed": 5,
+      "saif_layers_completed": 8,
       "saif_progress_evidence": "handoff/team/evidence/C80_SAIF_PROGRESS_20261116.json",
       "old_followup_started_at_record": "2026-11-16T14:12:34.038526+08:00",
       "copy02_tools_evidence": "handoff/team/evidence/C80_COPY02_TOOL_READY_20261116.json",
       "copy02_deployed": true,
       "saif_completed_bytes_last_observation": {
-        "at": "2026-11-16T17:01:06+08:00",
-        "layers": 4,
-        "bytes": 390272049
-      }
+        "at": "2026-11-16T17:26:43+08:00",
+        "layers": 8,
+        "bytes": 780452359
+      },
+      "copy03_deployed": true,
+      "copy03_tools_evidence": "handoff/team/evidence/C80_COPY03_TOOL_READY_20261116.json",
+      "b0_preflight15_evidence": "handoff/team/evidence/C80_B0_PREFLIGHT15_OBSERVATION_20261116.json",
+      "b0_cleanup16_prepared_local_only": true,
+      "b0_cleanup16_started": false,
+      "archive_capacity_tests": 10
     }
   }
 }

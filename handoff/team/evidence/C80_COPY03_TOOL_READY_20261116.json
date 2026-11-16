@@ -1,0 +1,25 @@
+{
+  "schema": "c80-copy-tool-deployment-observation-v1",
+  "observed_at": "2026-11-16T17:26:43+08:00",
+  "source_commit": "4065fc211b8aba307a0dfce8a15a4b1283d89f32",
+  "directory": "/tmp/s4_21usr_c80_archiveops03_20261116_1720",
+  "entry": "C80_COPY_ONLY_LAUNCH03_20261116.py",
+  "source_sha256": "e49e8af01880e56555267736170a294cc4340a3f6c6fb27ac3f46084e019675c",
+  "payload_sha256": "3bbcc8f8ffa81af605893a670da845568ee8a3c6a2dd90174e453235822fe2d5",
+  "import_receipt_sha256": "ffba1790ee1b64a0f8476bc55c9ed374d339e1d17c1df34e7893dacb72b32c54",
+  "loaded_dependencies": 51,
+  "receipt_identity_asserted_on_server": true,
+  "explicit_new_dependencies": {
+    "c80_archive_runtime.py": "f69d1ebd4114e94ae0ddfff8866728c2897c06f4ac7e10b9264cb96326dbff2f",
+    "c80_archive_capacity.py": "a2904fed5a05c4ee38ab0e5cf959fad37013baf14a6609453b7b4ed0fcf87408"
+  },
+  "storage_profile": "copy_only_512MiB",
+  "compressed_size_margin": 1.2,
+  "reserve_bytes": 536870912,
+  "full_readback_required": true,
+  "archive_started": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "note": "Imports only. Both original followup02 and export02 must finish and exit before invocation. Copy03 never authorizes deletion or stage acceptance."
+}
