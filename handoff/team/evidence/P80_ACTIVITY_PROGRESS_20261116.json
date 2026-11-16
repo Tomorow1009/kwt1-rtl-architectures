@@ -1,0 +1,36 @@
+{
+  "schema": "p80-displayed-native-activity-progress-v1",
+  "observed_at": "2026-11-16T09:26:43.938849+08:00",
+  "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_finish05_saif/p80_saif",
+  "completed": [
+    {
+      "case": "layer_01",
+      "outputs": 25344,
+      "cycles": 80471,
+      "bytes": 97679538,
+      "sha256": "369a96911074d6d2b9a642c07d195290b27e339e33a0f2b813509a7d2171d89e",
+      "status": "saif_scope_duration_and_residence_verified"
+    },
+    {
+      "case": "layer_02",
+      "outputs": 25344,
+      "cycles": 78357,
+      "bytes": 97671753,
+      "sha256": "532b28fb59da8bad0743c47a48ea2140a4a1b0d947d4d854f9c63cff2e5a3af8",
+      "status": "saif_scope_duration_and_residence_verified"
+    },
+    {
+      "case": "layer_03",
+      "outputs": 25344,
+      "cycles": 77223,
+      "bytes": 97672635,
+      "sha256": "dbdf16092caefa13a89420696c0c31693569a37d3b4a2a050ed0aaaafdafcbc3",
+      "status": "saif_scope_duration_and_residence_verified"
+    }
+  ],
+  "all12_complete": false,
+  "system_power_verified": false,
+  "stage_accepted": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}

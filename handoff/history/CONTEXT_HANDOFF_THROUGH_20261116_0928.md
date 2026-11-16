@@ -1,0 +1,1864 @@
+# 新有效路线：T80→P80→C80→C32→G32 — 2026-11-15
+
+**09:19最新：[最终网表检查点](CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md)顶部。L01完整SAIF通过，97.68MB、80471周期，含解析实际约342秒；L02子152202原任务运行。第一标签watcher151016、前台第二标签Bash空闲，所有输入已结束。剩余活动估计60～75分钟，PT/审核/归档另计；最终P80未冻结。原队列95253/export96154保持，无新删除，桌面T80与旧八路未动。**
+
+**09:13当前：[最终网表检查点](CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md)顶部。前台第二标签Bash空闲，第一标签只读watcher151016运行；输入全部结束。原95253的首层SAIF子149666已运行4:19，native编译完成、尚无完整活动回执；tmp空闲87.922GB。gate14/精度/综合已完成，功耗及最终审核/归档待。3285a1d已push，未新删文件，旧八路与桌面T80不动。**
+
+**09:09最新：[P80最终网表检查点](CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md)顶部。自身同网表gate14全部通过354816输出，14例周期与ASIC RTL一致；原95253进入SAIF12，功耗/详细审核/归档尚待。前台第一标签Bash空闲、输入全结束。六份B0旧中间统计报告与备份只读核对一致，无任何新删除；桌面T80和旧八路未动，C80未开始。**
+
+**08:57新恢复入口：[P80最终网表检查点](CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md)。自身浮点20条连接已通过，最差逐层0.201981%、单任务0.209534%、裁剪/饱和0；综合最终网表0.952929mm²、正setup/hold已生成。原95253正在gate，08:56:45 extremes/rounding已过、layer01子143466运行。前台第一标签Bash空闲，输入均结束；export05仍是原后继。后续门级/活动/功耗/独立审核/归档待完成，C80未开始。T80桌面及旧八路不动，无新删除。**
+
+**08:51最新：[检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。P80最终综合网表已生成：保守项目面积0.9529288663mm²，setup+0.000055331ns/hold+0.00113887ns、220宏/0锁存器。原95253队列进入precision，自己的门级/活动/功耗及独立审核尚待，未冻结P80。前台第一标签Bash空闲，所有输入结束；第二watcher应自然结束待确认。T80桌面/旧八路/B0备份不动，C80未开始。**
+
+**08:41终端：第二标签前台只读watcher135257（30秒间隔、20分钟上限、阶段变更退出），勿直接键入。所有输入已结束。原CPU132629仍运行，08:40:46 elapsed6:49/CPU99.7%；共享/加速器mapped，最终PPA待。清理工具13未部署/未执行，旧八路与T80桌面/B0备份均未动。详见[检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
+
+**08:35最新：[检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。加速器块已mapped，4470.2956秒；原队列95253自动进入CPU块132629，未重启。最终整机PPA待CPU/顶层。所有输入结束、第二标签Bash空闲。只读B0备份核验完成；清理工具13仅本地准备未部署/未执行，空间仍1MiB。桌面T80、旧八路及B0备份不动，C80未开始。**
+
+**08:25最新：先读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原98857运行1:05:50/CPU99.7%，原95253/96154队列不变，PPA仍待。只读B0预检126699已完整通过并退出，49200候选/2.616GB与原完整备份一致；没有删除或释放空间，未证明无占用。所有输入结束，前台第二标签Bash空闲；第一watcher约08:34到时。桌面T80/旧八路/B0备份不动，C80未开始。**
+
+**08:21最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原DC98857运行1:01:44/CPU99.7%、优化表推进、Error0；combined05/export05不变。只读备份预检126699已启动，49200候选/2616732144B，未读终态、无删除。全部输入结束，前台第二标签Bash空闲，第一watcher约08:34到时。b9dc3da已push；桌面T80/旧八路/B0备份不动，C80未开始。**
+
+**08:19唯一输入48723：16行B0既有完整备份只读核验工具，先收完勿并发。第二标签已切Bash，第一标签watcher保持；b9dc3da已push。工具无删除/压缩/移动功能，仅准备未来空间方案，实际新PID未读。原95253/98857综合保持（08:04实际Error0、DW处理），export96154等待；桌面T80/旧八路/B0备份不动，C80未开始。详读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
+
+**07:56定位：前台已回第一标签watcher105419，第二标签tcsh空闲；原队列running/synthesis，所有输入结束。新日志/状态见[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部，勿据下方旧位置键入或重启。**
+
+**07:55最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。DC98857日志增至18,344B、Error0，已进入Updating timing information；运行35:38、CPU99.7%。当前前台第二标签tcsh空闲，第一标签watcher保持；全部输入结束。f2b1008复现说明已push，PPA仍待；T80/旧八路不动、C80未开始。**
+
+**07:46终端补充：当前前台已切回第一标签的只读watcher105419，第二标签tcsh空闲；不能向watcher直接键入。原综合still running/synthesis，仅共享块完成，未重启。下一步读[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。**
+
+**07:44最新：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原98857实际CPU99.7%、运行24:44；tmp89.38GB，内存充足，共享仅1MiB。workspace3新第二终端标签为tcsh空闲，第一标签watcher105419保持；所有输入结束。原综合/后继继续，未重启或修改受测包；C80未开始。**
+
+**07:34终端：workspace3前台只读watcher105419，每60秒显示原综合状态，最多1小时或综合结束退出；输入29625已结束。当前不是空闲Bash，勿直接键入。原95253/98857/96154不变，最新同步c5e4e11；继续看[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)。**
+
+**07:31最新恢复入口：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原combined05父95253保持，DC加速器子98857运行11:44、CPU99.6%、实际Error行0；export05父96154等待，全部输入结束。共享块已mapped、自己的240/三深度14通过；整机PPA仍待，不重启。桌面T80/旧八路不动；C80/C32/G32未开始。**
+
+**07:20新实测：[库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。原combined05父95253保持；共享SRAM块真实DC映射完成（35.674秒、实际Error行0），当前加速器子98857，export05父96154等待。全部输入结束。整机PPA仍待，不重启；自己的240和三深度14保持通过。桌面T80/旧八路不动，C80未开始。**
+
+**07:14恢复：[P80库修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。cache11归档已成功，combined05父95253持原锁在新1023646包做综合06；export05父96154已启动等待。全部输入结束、Bash空闲。原04库冲突失败保留，库引用修复的真实DC结果仍待观察，不能重启旧作业。自己的240已通过；T80桌面/旧八路不动，C80未开始。**
+
+**07:09：[P80库引用修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)顶部。1023646包947文件准备已通过；旧82946/84918退出。唯一输入17240正在24行cache11/combined05/helper02/export05差分部署，归档通过才立即启新综合；先收完勿并发，实际归档/新PID未观察。99dd9f2已push。自己的240保持通过，桌面T80及旧八路未动，C80仍未开始。**
+
+**07:06先读[P80库引用修复检查点](CONTEXT_CHECKPOINT_20261116_P80_LIBRARY_FIX.md)：唯一输入52140正在传1023646工具修复包44行，先收完勿并发。combined04/84918已因导出旧set_local_link_library导致重复库而失败并退出；原目录保留。14项本地修复检查通过，947文件新包准备尚未观察。combined05/helper02/export05及cache11目前仅本地准备。自己的240和三深度14仍通过；桌面T80与旧八路不动，C80未开始。**
+
+**06:48新实测：[P80240检查点](CONTEXT_CHECKPOINT_20261116_P80_240_COMPLETE.md)顶部。cache10无损归档成功，combined04父82946已进入4cf包新综合p80_synth_d2_05（fresh_link子83963）；export04父84918已启动等待。全部输入结束、Bash空闲，先读原队列，禁止重复启动。自己的240已通过，PPA仍在做；桌面T80和旧八路不动，C80未开始。**
+
+**06:44恢复优先读[P80240检查点](CONTEXT_CHECKPOINT_20261116_P80_240_COMPLETE.md)最上方：唯一输入73879正传20行cache10＋combined04；先收完勿并发，归档与新PID尚未观察。cache09已成功恢复56.6MB，combined02在建锁前Path类型错误、03因空间再满建锁失败，均未启EDA且已退出；修复主入口成功/失败演练通过。新combined04将在cache10核验后立即用一个原锁跑全新综合及最终检查，240不重跑。T80桌面/旧八路始终不动；P80尚未验收，C80未开始。**
+
+**06:29最新恢复入口：[P80自己的240已通过及单锁接续](CONTEXT_CHECKPOINT_20261116_P80_240_COMPLETE.md)。原42584批量终态通过6082560输出/total零差异；综合等待47889建锁ENOSPC，67274/69883正确停止，全部退出。唯一输入96487正在35行归档cache09及新combined02部署，先收完勿并发；尚未观察归档结果/新PID。新队列将用一个原锁串行全新综合→精度→门级/功耗，所有旧失败保持。T80桌面与旧八路不动，C80未开始。**
+
+**06:11恢复先读[P80批量检查点](CONTEXT_CHECKPOINT_20261116_P80_BATCH20.md)顶部：全部VNC输入已结束；4cf审核包944文件已准备。原42584批量174/240零差异（06:09:29），综合等待47889保持；新67274只等待原综合，成功后自己的精度及17项最终网表检查串行接续。原队列不重启。汇总/连接审核工具仅本地准备，P80尚未验收，C80未开始；T80桌面和旧八路不动。**
+
+**05:55最新入口：[P80批量与综合修复接续](CONTEXT_CHECKPOINT_20261116_P80_BATCH20.md)。唯一输入65394正在传4cf审核包44行，先收完勿并发；原功能42584恢复/竞争已过、43/240零差异（05:52:54），综合等待47889保持。4cf35b6已push，综合02尚未观察启动，后继finish/精度request未创建。桌面T80和旧八路不动；恢复先读新检查点及计划。**
+
+**05:46：功能02父42584恢复/竞争已通过，当前240运行；综合等待器47889等待其通过退出，原锁保持。唯一新输入正传fa43bc2后继工具29行，只部署、不启EDA，先收完。最新GitHub fa43bc2。读P80_SYNTH_STARTED顶部，FLOAT/NumPy已核实路径及SHA。桌面T80与旧八路不动；不要重启旧失败目录。**
+
+**05:38唯一输入97391：33行7430bb6独立综合修复包，先收完勿并发。功能01在创建runs父目录前失败、没有EDA；功能02已修、干净目录/失败停止演练通过，16行启动器尚未执行。综合01原失败保存，禁止借其mapped当PASS。详读P80_SYNTH_STARTED顶部；桌面T80与旧八路不动。**
+
+**05:31先读P80_SYNTH_STARTED顶部：综合01已退出失败（共享块导出驱动库限定符不能解析，146条错误，exit0仍被拒绝），原锁已释放，禁止使用旧mapped作PASS。e139包940文件准备通过；全部输入结束、Bash空闲。正在准备独立d2恢复/竞争/240队列及综合工具修复，尚未启动；桌面T80与旧八路不动。**
+
+**05:15恢复：唯一输入18873正在传独立e139深度2包66行，先收完，禁止并发键入。原综合父27509/锁保持，05:14:11共享块DC30930运行，fresh link/characterization已完成，无最终PPA。07dba32已push。先读P80_SYNTH_STARTED顶部；桌面T80/旧八路不动，不重启任何旧队列。**
+
+**05:09最新恢复入口：[P80三深度完成与新综合](CONTEXT_CHECKPOINT_20261116_P80_SYNTH_STARTED.md)。三深度各14例通过，固定12均77545.333周期/1934.352task/s；选最小深度2进入新综合。05:08:18父/共享锁27509，854包p80_synth_d2_01运行，未见最终PPA。全部VNC输入结束，Bash空闲；先fresh截图/读原作业，禁止重启。深度2恢复/竞争FW本地编译完成，下一独立包尚未生成。T80桌面和旧八路未动；四份普通编译缓存已无损归档，不能重复清理。**
+
+**04:52恢复：唯一输入30194仍传854 ops89行（04:51为46行）；必须先收完再键入。sweep05最后观察父/锁324565，勿猜终态。6b18024已push，综合选择15行启动器未部署；P80_FIRST_CPU顶部补充正确FLOAT容器/NumPy来源。T80桌面与旧八路不动。**
+
+**04:44最新：B0普通缓存归档成功、完整回读及原结果保持；sweep05父/锁324565已实际运行深度4的14例。唯一输入30194正传854工具包89行，先收完，禁止并发。读P80_FIRST_CPU最新段；后继新综合选择启动器已准备未部署。桌面T80/旧八路不动。**
+
+**04:40唯一输入13095：缓存06/新sweep05恢复入口14行，先收完。前述缓存03/04路径转录错误及05换行身份检查均在任何删除前失败；现从固定哈希机器清单定位。详细见P80_FIRST_CPU顶部，不能重跑旧入口；T80桌面/旧八路未动，854 ops未传。**
+
+**04:35先读P80_FIRST_CPU最新段：唯一VNC输入95957正传19行缓存03归档及新sweep05；先收完，不并发键入。N1缓存02已完成，sweep03身份失败/sweep04共享盘ENOSPC均退出未启EDA，首层PASS保持。854 ops未部署；桌面T80与旧八路不动。**
+
+**04:18最新恢复入口：[P80首个真实CPU与持锁队列检查点](CONTEXT_CHECKPOINT_20261116_P80_FIRST_CPU.md)。首层真实ASIC/E203通过80471周期/25344输出；sweep02下一阶段再次因共享盘满在建锁前失败。当前所有输入会话结束，VNC前台正在N1 sequence普通编译缓存无损归档02（尚无终态），成功后新sweep03持有一个原共享锁跑三深度各14。先截图/读实际PID，禁止重复输入。854 ops未部署，PPA未开始；T80桌面和旧八路保持。**
+
+**04:08：P80首层在原共享锁mkdir ENOSPC，未启EDA，sweep01失败保留。唯一输入9206正在输入14行N1已通过ASIC14编译缓存无损归档及新sweep02启动器（ed4e590）；先收会话/看回执，尚未观察归档或新PID，不并发键入。854 ops仍未部署。详读P80_SERVER_PREP最上方。桌面T80和全部旧八路始终不动。**
+
+**03:59：原15378传输已完成，服务器917文件准备核验通过、原源保持；当前唯一输入98620正在输入22行P80串行启动器，先收完并读截图，不得并发或重启。实际EDA PID尚未观察。321a217报告工具已push；854 ops89行未开始。详读P80_SERVER_PREP顶部。T80桌面和旧八路不动。**
+
+**03:57先读P80_SERVER_PREP最上方：唯一输入15378还在传142包，未启P80服务器作业。8543440工具已push，新ops89行包尚未部署。首层接续启动器已改为深度4/2/8各14例，新的22行`p80_sweep_launch14_20261116/transfer.ps1`未执行；旧315aff/旧sweep_launch入口作废。先等202行完整传输及回执，再检查锁/进程。桌面T80和旧八路不动。**
+
+**03:44恢复先读P80_SERVER_PREP最上方。唯一VNC输入15378，202行、03:43为126行，未执行封包准备/未启P80服务器任务；先收原会话，禁止并发输入。EDA工具6caefe6已push，精度连接入口2项本地检查通过但未提交；后续106文件包和首层→三深度12层串行启动器都只在本地准备，尚未部署。桌面T80/旧八路保持，S0不重跑。**
+
+**03:34仍为唯一VNC输入15378（202行，约81行，查本地transfer_state.json），不得并发键入。P80新综合/门级/SAIF/PT接入本地准备完成，三深度完成证明与完整观察器elaborate、10项工具检查通过；未部署、未服务器验收。读P80_SERVER_PREP最新03:34段。142fae2传输快照不改，桌面T80及旧八路不动。**
+
+**03:15当前唯一VNC输入15378：`local_runs/p80_transfer_142fae2_0315/transfer.ps1`共202行，向新P80根传入142fae2的87文件包，不启动EDA；先收完会话，勿并发输入/重跑。142fae2已push，最新P80_SERVER_PREP检查点顶部已记录精确payload身份。锁空闲、tmp约92GB/共享约8.1GB，仍无P80正式作业；S0已冻结，不重跑，不动桌面T80/旧八路。**
+
+**03:05最新恢复入口：[P80服务器准备检查点](CONTEXT_CHECKPOINT_20261116_P80_SERVER_PREP.md)。P80本地14类/22矩阵、10000＋32块、十阶段恢复和三套观察器elaborate均已完成；所有本地测试会话退出。957838b已push，新的运行/打包工具待提交并部署。自己的P80服务器作业为0，旧S0不重跑，桌面T80/旧八路不动。先读新检查点再操作。**
+
+**02:56后P80：仲裁、DMA、窗口、原总线路由观察器本地测试通过；完整本地9任务/228096输出通过。10000块34263、序列52105、其余矩阵3081及2拍ABA40080仍运行，先收会话勿重启。P80正式SoC/PPA尚未开始。只读确认原平台split1/FIFO4保持，其他团队EDA不动；共享盘最近约5.37GB。不动桌面T80/旧八路，详见S0_FROZEN_P80检查点最新顶部。**
+
+**02:30后P80本地进展：S0冻结8d92e46及备份标签已推送；新有序仲裁/搬运模块2/4/8深度本地协议通过，新深度4固件已编译、顶层仅elaborate。P80观察器及真实SoC接入仍在开发，无P80整机/PPA验收。读S0_FROZEN_P80检查点新增顶部及P80_LOCAL_PROTOCOL证据。旧服务器作业均于最后02:15观察退出；桌面T80和旧八路不动。**
+
+**02:15最新入口：[S0已冻结/P80检查点](CONTEXT_CHECKPOINT_20261116_S0_FROZEN_P80.md)。S0声明条件技术验收与持久备份已完成；备份s0-runtime-20261116_0209，867372148B、11431文件逐项回读，源未动。五项关键哈希已机器核对，所有旧队列/归档/观察器退出，Bash空闲。现在进入P80开发，仍不动桌面T80和旧八路；先读新检查点，不重复执行旧running记录。**
+
+**01:59:38最新恢复：S0全12活动连接/模型核对完成，声明任务模式/布局前估算技术结论通过，待复制归档回读后冻结；S1未改硬件。export193002、review218088及全部子进程退出，锁释放，Bash空闲。读S0_POWER12检查点最新顶部、S0_STAGE_REPORT及独立结论。注意report SHA已纠正为65c47129…caa3f48c，早期本地禁用弧转录已更正；服务器原报告从未改动。只复制归档、不删除源，不动桌面T80及旧八路。**
+
+**01:39:39恢复补充：S0 JSON/CSV/中文报告已导出；原export193002转unknown_inventory子239612，L01/02完成。前台只读watcher241373，检查等待218088保持，全部输入结束。先读S0_POWER12检查点顶部（新报告/网表哈希及精度已记录）。S0未冻结/S1未开发，不动桌面T80及旧八路。**
+
+**01:28:59恢复补充：先读`CONTEXT_CHECKPOINT_20261116_S0_POWER12.md`顶部。原17阶段完成；export231552仍正常复核SAIF并导出报告（11:40、CPU99.2%），当前前台只读watcher236422。193002/218088后台等待关系不变，所有输入结束；f090f49已push。S0尚未冻结，S1未开发，桌面T80及旧八路不动。**
+
+**最新恢复入口：[S0完整功耗检查点](CONTEXT_CHECKPOINT_20261116_S0_POWER12.md)。01:16:37原17阶段全部完成；12层50.240373mW、37.703387µJ/task（布局前），S0尚未冻结。01:20:54前台只读watcher233182，export193002/子231552正在导出报告，检查等待218088保持；所有输入结束。先读新检查点与原计划，不重跑旧队列。桌面T80及旧八路不动，S1未开发。**
+
+**11月16日01:05:35实查：finish03父172535前八层功耗完成，power_layer_09处理中/completed13，无错误。前台只读watcher224035，export193002/检查等待218088保持；全部输入结束。6e67d9d已push。先读S0_FINAL_READY顶部核对恢复入口；S0未冻结，S1未开发，桌面T80和旧八路不动。**
+
+**11月16日01:01:04实查：finish03父172535完成前六层功耗，power_layer_07子223699运行/completed11，无错误。前台只读watcher224035，export193002/检查等待218088保持；所有输入结束。d673646已push。恢复先读S0_FINAL_READY顶部；S0未冻结，S1未开发，桌面T80及旧八路不动。**
+
+**11月16日00:51:43实查：finish03父172535已完成前三层功耗，power_layer_04子219643运行/completed8，无错误。前台只读watcher219856，export193002及新检查等待218088保持；输入全部结束。先读S0_FINAL_READY顶部；dfa13b0已push，S0未冻结/S1未开始，桌面T80及旧八路不动。**
+
+**11月16日00:43:02实查：finish03父172535已完成SAIF12/timing_audit/drc_audit，completed=5，power_layer_01运行无错误；前台只读watcher209631已退出，Bash空闲，后台export193002保持。先读S0_FINAL_READY顶部。S0未冻结/S1未开始，桌面T80和旧八路不动。f0ab4e9已push；新S0_COMPLETE_REVIEW脚本仅本地准备，尚未部署/运行。**
+
+**11月16日00:28:45实查：SAIF L01–L10通过，L11子208256运行，父172535无错误；当前前台只读watcher209631。206849仅退出用于已完成结构报告核对，71425/29371/40621输入全部结束；后台汇总等待193002保持。先读S0_FINAL_READY顶部。6fe251c重试TLS后已push；S0未冻结、S1未开始，T80桌面/旧八路不动。**
+
+**11月16日00:22:24实查：SAIF L01–L09已通过，L10子205685运行，父172535无错误。前台只读watcher206849；汇总等待器193002保持。18946/78391输入全部结束，新ops-review-e516e4c的6工具已核验导入，未执行归档/审核快照或额外EDA。恢复先读S0_FINAL_READY顶部；不重启旧队列、不动T80桌面或旧八路。**
+
+**11月16日00:14当前唯一VNC输入exec18946：45行`local_runs/s0_review_ops_e516e4c_02/transfer.ps1`，只部署6个审核/归档工具到新ops-review-e516e4c，不启EDA或归档。先收完该输入再截图，禁止并发键入或重跑。前台199060已仅退出观察器；后台172535验证、193002汇总等待不动。最后00:13:26 SAIF L01–L07通过，L08仿真退出、核对中。恢复先读S0_FINAL_READY最上方。**
+
+**11月16日00:04:53实查：finish03父172535仍运行，SAIF L01–L06已通过，L07子197943运行，无错误；只读汇总等待器193002保持。前台watcher已换成199060（193691仅Ctrl+C退出用于只读报告核查），所有85268/18334/23998/40106输入完成。先读S0_FINAL_READY检查点顶部；S0未冻结，S1未开始，T80桌面/旧八路不动。**
+
+**23:57:58实查：原finish03父172535继续，SAIF L01–L05已通过，L06子195282运行，error=None。前台只读watcher193691；旧177140仅退出观察器。汇总等待器193002已部署并等待原17步队列退出，之后只导出报告和未知活动清单，不启动EDA或S1。所有3447/34023/77571输入结束，无半截命令；8da012f已push。T80桌面和旧八路不动。恢复读S0_FINAL_READY检查点最上方。**
+
+**23:44:14实查：原队列172535仍在SAIF阶段；L01/L02完整活动已通过，L03 simv187750已退出，正进行输出与窗口核对，尚不计为通过。gate14/354,816输出及synth08已完成，不重跑。前台只读watcher177140，所有输入结束；服务器桌面T80和旧八路不动。**
+
+**23:27:38当前：66b9496/s0_finish03父172535，gate14/354,816输出已通过，completed=2，SAIF编译子180054运行，无错误。前台只读watcher177140，全部输入结束。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续原SAIF12→timing/DRC→PT12；不重跑已过gate/综合。T80桌面和旧八路不动。**
+
+**23:24:37当前：66b9496/s0_finish03父172535，gate已过12/14（极值、舍入、L01–L10），当前L11子178996，无错误。前台只读watcher177140，全部输入已结束；旧173225已仅退出观察器。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续原队列，不重跑；T80桌面和旧八路不动。**
+
+**23:14:55最新：66b9496/s0_finish03父172535正在gate VCS编译（子174044），已通过SRAM双清单核对，error=None；前台只读watcher173225，全部输入结束。6683ce5已push。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，不重启任何旧队列，不动T80桌面或旧八路。**
+
+**23:12:55当前：66b9496/s0_finish03父172535，structure完成、gate端口DC173089运行，无错误。前台只读watcher173225、所有输入结束。恢复先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续此队列，不重启synth08/旧finish01/02。新网表保守面积0.953522mm²、正setup/hold，gate/SAIF/PT待；T80桌面与旧八路不动。**
+
+**23:10唯一输入exec10794：13行finish04启动器，目标66b9496/s0_finish03，复用a5f138e/synth08；新包已服务器核验，1881cd3已push。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部并收完输入。尚未观察新PID，不重复启动；T80桌面和旧八路不动。**
+
+**23:07：finish02在gate配置来源检查失败，尚未启VCS；新网表/报告未变，门级端口探针已完成。S0重链接header在第二份冻结清单中，现正修gate以同时严格核对两份清单；5项相关测试通过。Bash空闲、无EDA。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)最上方，旧finish02不重启，下一finish03；T80桌面及旧八路不动。**
+
+**23:03:35实际队列：a7e7e49/s0_finish02父168421，structure已完成、当前gate端口探针子168925，无错误。前台只读watcher169108；所有输入结束。恢复读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部，继续原队列，禁止重启或改新网表。保守面积0.953522mm²、正setup/hold；SAIF/PT仍待。T80桌面和旧八路不动。**
+
+**23:02当前唯一VNC输入exec56347：13行新finish03启动器，目标a7e7e49/s0_finish02，复用a5f138e/synth08新网表；a7包853文件已服务器核验，bc0a897已push。先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)顶部并收完输入，尚未观察新队列PID。旧失败保留，综合不重跑，T80桌面与旧八路不动。**
+
+**22:58恢复优先读[S0最终链接检查点](CONTEXT_CHECKPOINT_20261115_S0_FINAL_READY.md)。synth08已passed，保守面积0.9535222591mm²、setup+0.000386715ns、hold+0.0055688ns、220宏、0latches。接续父165305在EDA前遇到工具Path类型错误并退出；当前无EDA、Bash空闲，勿重启旧控制目录。本地仅入口修复及真实execute回执测试3项通过，待新独立验证工具包；不重跑综合。T80桌面/旧八路不动，S1–S4未开始。**
+
+**22:52:36已实际启动synth08：父163793/DC164078，a5f138e独立包，严格缓存检查通过，只做final_link。当前正在部署17行自动接续守卫，先读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)顶部并收完输入，禁止并发键入或重启。尚未有新面积/时序；T80桌面及旧八路不动。**
+
+**22:48当前：a5f138e修正包正在部署，唯一输入exec49908，32行；勿并发VNC或重跑。最新14e6b1b已push；synth08尚未启动，12行relink02启动器已准备。恢复读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)顶部并先收完输入。三块缓存保留、无新EDA；T80桌面和旧八路不动。**
+
+**22:41当前：0e包的synth08启动器因转录错误的state SHA在预检停止，未建session/取锁/启EDA；原state未变。已按8字符分段复核正确SHA43294b528a89c8d0239ccd5e92ee597fc26531217fe3c5245052112030744405，正在修新工具包引用。所有输入结束、Bash空闲。先读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)最上方，旧错误SHA/启动器禁用，T80桌面与旧八路不动。**
+
+**22:36最新：0e31e5b包853文件已服务器核验，78210结束；当前唯一输入exec45059部署并启动synth08 cache预检启动器，先收完截图确认真实PID，勿并发输入/重跑。当前尚无新EDA观察。恢复读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)顶部；旧三块和失败保持、T80桌面及旧八路不动。**
+
+**22:33当前唯一输入exec78210：32行0e31e5b独立重链接包，勿并发键入或重跑。853文件/137模块本地核验通过，0e31e5b已push；没有当前EDA，synth08尚未启动。恢复读[S0重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)顶部，先收完传输截图；原三块缓存/失败/T80桌面/旧八路均不改。**
+
+**22:30恢复先读[S0只重链接检查点](CONTEXT_CHECKPOINT_20261115_S0_RELINK_READY.md)。synth07三块已完成，但最终报告因两条路径的同名工艺库重复加载失败（1578库歧义＋1leaf guard）；父/DC/等待器均已退出，原锁释放，未启动finish01。当前Bash空闲、全部输入完成。本地只重链接恢复工具及23项检查完成，尚未部署；下一新synth08，保留三块缓存及全部失败，不重跑17分钟映射。旧固定synth07 finish/report准备物禁用。T80桌面和旧八路不动。**
+
+**22:19:52最新：三块映射和CPU后子块一致检查已完成，父139859/DC148878正在最终顶层链接与完整报告，无错误。前台watcher147221，自动接续143305继续；最终summary尚未读取。恢复读[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)最上方，不重启。**
+
+**22:16观察：CPU143046已进入incremental优化，父139859仍运行，无错误；前台live watcher为147221，后台接续等待器143305。全部输入结束，最新532c5bf已push。恢复按[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)最上方，不重启现有作业。**
+
+**22:14恢复入口仍为[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)顶部。CPU/SoC143046已运行9:14，父139859无错误；自动接续143305等候，未看到最终综合。当前前台新live只读watcher（PID未从截屏读出），全部输入结束，不能直接输shell。新S0报告请求工具仅本地准备；桌面T80/旧八路保持。**
+
+**22:06:56最新：S0 synth07父139859、DC143046正在CPU/SoC；共享块和加速器增量已完成，无错误。自动接续等待器143305已运行，只在综合通过全部门槛后启动finish01（目前尚未启动）。所有输入结束，前台Bash空闲。恢复读[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)最上方；不要重启任何作业。T80桌面和旧八路不动。**
+
+**22:04优先接续[S0 synth07检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)顶部。父139859/DC141571正在加速器增量映射，无错误，共享块已完成；watcher140380已退出。当前exec85724独占VNC输入18行自动接续守卫，勿并发键入或重跑；收完截图确认等待器PID。cc21f8d已push，运行包9ff不改。T80桌面、旧八路保持。**
+
+**22:00最新：先读[S0 synth07运行检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH07_RUNNING.md)。9ffb2a9包852文件核验通过，父139859；短DDC链接及两子块token一致检查已通过，子140561正在characterization、无错误。前台只读watcher140380，所有输入结束，无半截传输；不重启、不改当前包。T80桌面/旧八路保持，S1–S4未开始。收尾启动器仅本地准备，旧synth03/05启动器禁用。**
+
+**21:53当前：先读[S0设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth06在67秒短探针失败，未做长映射；single_file仍留同名设计，9ffb2a9改为显式替换旧设计对象。所有输入结束，VNC Bash空闲；下一新session synth07，旧包不改。T80桌面和旧八路保护。**
+
+**21:45恢复先读[设计容器检查点](CONTEXT_CHECKPOINT_20261115_S0_DDC_CONTAINER.md)。synth05已failed并释放原锁，错误为原RTL与seed DDC设计同名。VNC Bash空闲，无EDA/未完输入（21:38观察）。本地容器修复及21项检查通过，待独立新包短链接探针→synth06；未提交synth05 finish启动器禁用。旧失败和桌面T80/旧八路保持。**
+
+**21:30当前恢复入口：[S0恢复运行检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_RUNNING.md)。synth05已成功持锁运行，父126260；21:29:58子126956正在shared_sram映射，error=None，characterize已完成。前台只读watcher127118，全部传输结束。** 仅N1已通过竞争测试35份普通编译缓存10,651,781B完成无损回读归档，压缩包已返回原目录、全部结果保留；桌面T80及旧8路未动。旧synth03工具失败、synth04空间失败和两次归档前保护拒绝均保留，不重复执行。新综合a5ce90a包852文件；最新b0a2548已push，S1–S4未开始。
+
+**21:22当前输入exec1192：14行可恢复N1编译缓存归档＋synth05启动器；不要并发输入或重跑。** e2db114已push，实际归档及新EDA结果尚待收完截图。恢复先读[增量恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部。旧synth03/04失败保留，T80桌面及旧8路不动。
+
+**21:20：synth04预检通过但在取原锁时ENOSPC，DC未启动；所有输入结束，Bash空闲。** 正准备对已核验N1竞争测试csrc普通编译缓存35文件/10.65MB做无损回读归档后立即新session synth05；只完成本地夹具检查，尚未执行清理。见[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部。不重复synth03/04，不清锁、不碰T80桌面或旧8路。
+
+**21:14更新：a5ce90a新包852文件/清单服务器验证通过，33855传输结束。现在唯一输入exec16016传输12行恢复启动器，结束后会自动严格预检并尝试新synth04；未观察真实启动结果。** 先读[恢复检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)顶部，收完输入后核对PID/state，不重复启动、不输入其他VNC命令。b58251a已push，T80桌面及旧8路保持，S1–S4未开始。
+
+**21:05恢复先读[增量恢复传输检查点](CONTEXT_CHECKPOINT_20261115_S0_RECOVERY_TRANSFER.md)。exec33855正在VNC输入70行a5ce90a新包，不要并发输入或重复执行。** 原synth03已failed退出，无EDA；原因是两条旧映射单元set_map_only无效导出。新恢复工具20项检查及852文件/136模块闭包已过，a5ce90a已push；传完只核验输入、不自动EDA。恢复启动器已本地准备未执行，旧617finish启动器禁用。T80桌面及旧8路保持不动，S1–S4未开始。
+
+**20:58恢复重要：原synth03已失败退出，当前没有EDA。** 20:49:56.234720回执failed，原75787/DC76822均退出、原锁不存在（20:57:58只读核查）。失败原因是characterize导出的`set_map_only [get_cells U2055/U2048]`引用旧映射单元，在原unmapped RTL中不存在，产生两条CMD-036；DC仍写出加速器mapped.ddc但不能据此记PASS，CPU未执行。正在本地准备新目录增量恢复：仅移除这两条无效优化指令、在原RTL中先证明对象不存在，再以未验收DDC为seed重新增量编译和全部检查。旧失败包不改。最新审核工具e55c1c8本地851文件候选尚未部署；7156303已push。收尾617 launcher不再适用，**不要运行**。详见S0_NEXT_TOOLS_TRANSFER检查点最上方。
+
+**20:46:54最新进展：** 原S0 synth03父75787/DC76822仍running，accelerator首轮优化完成、进入incremental hold修复。共享块已完成，CPU及最终链接仍待。前台只读watcher91575；无未完输入。S0未知活动审核profile本地完成、26项检查通过，尚未部署；新旧网表身份明确隔离。原05c映射及774收尾包不改，收尾queue尚未启动。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部。T80桌面和旧8路仍保护，S1–S4未开始。
+
+**20:34:49最新进展：** S0原75787/DC76822已进入accelerator高强度映射优化，仍99.7%CPU、无错误。当前前台只读watcher91575；所有输入/观察exec结束。共享SRAM DDC已完成，CPU及最终链接、gate/SAIF/PT仍待；后继774工具已部署，launcher仅本地准备。恢复先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部；继续原作业，不重复启动，不动T80桌面或旧8路。
+
+**20:26:46观察：** 原S0 synth03仍running/accelerator，无错误，父75787/DC76822、99.7%CPU；前台只读watcher91575。最新617cf17已push，后继774工具已部署，启动脚本仅本地保存未运行。先读[S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部；全部输入和只读截图exec均结束，不重跑当前综合。服务器T80桌面与旧8路保护不变。
+
+**20:11当前：** [S0检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)顶部已更新。7743127独立845文件部署/清单核验及服务器导入全部通过，所有输入结束，没有启动收尾队列。原05c synth03父75787/DC76822仍running/accelerator、CPU99.7%，日志已推进OPT-1206，无错误。VNC前台现只读观察器**91575**，命令前先退出此观察器；不能向它盲输shell。T80桌面、旧8路保护保持，S1–S4未开始。
+
+**20:02恢复先读[新S0后继传输检查点](CONTEXT_CHECKPOINT_20261115_S0_NEXT_TOOLS_TRANSFER.md)。** exec39807正在VNC输入61行7743127工具包，只clone独立845文件，不启动EDA；不能并发输入或重跑。7743127已push。原05c synth03父75787/DC76822，19:55:42仍正常99.7%CPU映射accelerator，shared_sram已完成。原观察器78421已退出；当前前台是传输here-doc。T80桌面和全部旧8路不动，S1–S4未开始。
+
+**19:55本地工具补齐：** S0独立报告入口（1.00mm²、同源旧ASIC可引用但新gate/活动/功耗必须匹配新网表）和统一持锁收尾队列已实现，12项相关报告/来源/复制/调度及真实子进程检查通过。尚未部署后继包，正在运行的05c包不改。19:51:44最后观察synth03仍running/accelerator，shared_sram已映射，前台只读watcher78421。完整恢复入口仍为下方S0检查点；S1–S4未开始。
+
+**19:41运行中：** [S0检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH03_DEPLOY.md)顶部已更新。synth03父75787、05c包；边界提取及精度恢复已过，共享SRAM独立DDC完成，正在加速器块综合，无错误。VNC前台现为只读观察器**78421**，不是shell；输入命令前只能先退出该观察器，后台综合保持。全部传输已结束。原T80桌面与旧8路不变。
+
+**19:34当前恢复入口改为[第三次部署检查点](CONTEXT_CHECKPOINT_20261115_S0_SYNTH03_DEPLOY.md)。** exec32639正在新Bash输入26行05c923f修复包及自动启动synth03；不并发键入、不重复启动。05c923f已push，新增waveform对象列表适配后13项检查通过；旧synth02已失败退出，无当前EDA。新包manifest预期4473686e…；先收完传输截图，再查新PID/state。T80桌面及旧8路保持原样，S1–S4未开始。
+
+**19:31最新：** 0bf包已核验、synth02已实际运行，但在characterize波形属性返回嵌套列表处失败；无后台EDA、所有输入结束。版本查询已修好；本地新增原生waveform对象列表适配，相关13项检查通过，待提交新包synth03。先读[检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部；禁止重跑或修改0bf/c6冻结输入，T80桌面及旧8路未动。
+
+**19:23当前唯一操作：exec57781传输31行S0修复包并自动启动synth02，勿并发输入或重复启动。** [检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部含全部身份和恢复顺序。修复0bf4af3已push，当前服务器旧c6 synth01已失败且无EDA；新包0bf4af3预期manifest93be0a4c…，正在准备。全部T80桌面与旧8路数据保持，S1–S4未开始。先收完传输并截图，再查新state。
+
+**19:16先读[最新S0检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)顶部。** synth01已取锁但在dc_shell -version退出1时停止，未映射；锁自然释放、没有当前S0 EDA。本地已修版本读取和安装手册命令语法，11项检查通过，尚未部署。安装工具导出时钟会舍入，下一步实现仅恢复原生period/waveform序列化精度，绝不放宽6.666666守卫。d497c19已推送；所有输入结束，VNC新Bash空闲，服务器c6包和桌面T80不改。
+
+**19:09先读[服务器预检检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)最上方。** cap04实际DC能力检查已执行5秒并输出完成marker。当前输入exec6057正在传输旧R4 batch编译缓存归档及立即启动S0 synth01的脚本，11行；收完截图后只读新state/PID，不要再手动启动synth。原结果全部保留，桌面T80与旧8路未动；S1–S4尚未开始。
+
+**19:00接续：** [服务器预检检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)已更新。旧R4编译缓存38份/48,122,849B完整归档回读通过，归档已返回共享盘，所有原结果保留；共享可用40MiB。cap01/02均在创建原协作锁时ENOSPC，未启动DC；现在刚发出cap03，先读它的状态。全部传输结束，不再执行空间脚本。桌面T80与旧8路未操作。
+
+**18:50优先接续[服务器预检检查点](CONTEXT_CHECKPOINT_20261115_S0_SERVER_PREFLIGHT.md)。** 新S0包841文件已完成且manifest匹配fbd6c786…；exec66349结束。s0_cap01因共享盘ENOSPC无法创建原锁失败，DC未启动。当前旧T64未运行包的相同输入正在合并存储，保留全部路径和字节；输入exec15855已完成，服务器脚本终态仍需截图确认。不要在脚本未回到Bash前盲输命令，不重跑失败session；下一次cap02。T80桌面及旧8路未动，S1–S4未开始。
+
+**18:36恢复先读[最新检查点](CONTEXT_CHECKPOINT_20261115_S0_TRANSFER_1836.md)。当前唯一输入exec66349：新Bash终端59行S0完整工具传输，未结束前不要另输VNC命令。** 旧tcsh输入保留未执行，不可闭合；旧T64进程/锁18:30已自然结束。c6aa1e2工具已推送，尚无新S0硬件/EDA通过结果。
+
+**18:31重要恢复入口，覆盖下方传输记录：** 18:30:28实查旧T64父325056/子15147均退出、原锁False，DC已输出mapped.ddc与完成marker；旧队列因预排SIGINT为failed/error空串，属于停止派发，不是综合数值失败。不重启旧队列。S0首个传输29518虽已结束，但tcsh结束符差异使整个脚本未执行；原/tmp/..._1810不存在。旧终端仍保留未完成输入，Ctrl-C未成功取消，不再输入或闭合它（自动审批拒绝闭合残缺脚本）。现已在workspace3打开**新的独立终端，Bash4.2提示符**。FileZilla已关闭，代理DNS公共地址检查失败，未连接FTP。
+
+新完整S0修订包c6aa1e2已推GitHub，正在新Bash终端传输local_runs/s0_direct_c6aa1e2/transfer.ps1，59行，状态同目录transfer_state.json；目标/tmp/s4_21usr_t80_20261115_1830/light-light126-t80-s0-c6aa1e2。payload SHA6c038eefd6301d99fbfcf65a69471e2c9bcba46887ee0241d948f15807b957c2。传输期间禁止另输VNC命令。完成先截图核对S0_INPUTS_PREPARED，再读新manifest和旧队列终态，先跑能力检查，未启动新EDA。桌面T80与旧8路均未动。
+
+**18:12传输中：exec29518正在VNC输入首个S0 overlay，80行状态见local_runs/s0_transfer_1e90782/transfer_state.json。不要向VNC盲输其他命令，先收完传输并截图。1e90782已推送，本地后续还有未提交的S0身份验证及门级/活动入口，首包只用于能力预检，正式综合应等修订包。** 详细恢复步骤见C32_G32_START检查点。原T64最后17:58:25仍综合；桌面T80与旧8路不动。
+
+**最新用户已提供新计划并授权开始，覆盖下方暂停及T64/G64持续路线。** 原文workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md；恢复先读CONTEXT_CHECKPOINT_20261115_C32_G32_START.md。独立工作树E:/fpga_race-two/kwt1-c32-g32-20261115，分支codex/light-light126/t80-pipeline-c32-g32-20261115。最终32PE、面积≤1.00mm²，S0分块综合先行；T80桌面和旧八路不动。
+
+**18:04接续：** 17:41:17已核验身份后仅向原调度父325056发送SIGINT+SIGCONT，原排空机制保留DC子15147直至自然完成，不再派发T64后续；未向子进程发信号。回执ops-3552163/new_plan_stop_after_child_20261115.json。17:58:25最后实查父S、子R、原锁仍在，等待自然释放，禁止重启或清锁。S0已完成源码24文件同876b883核对，三块映射/顶层链接、边界约束、面积归属、缓存及复制输入工具共12项本地测试；实际服务器DC能力及映射尚未验证。566816a已推送，新工具准备同步部署。没有新RTL或新EDA启动，G64不再执行。VNC仍workspace3空闲shell、转发91027保持，无未完成输入。完整路径和未完成项见新检查点。
+
+---
+# 历史：恢复T64→G64，保护桌面T80 — 2026-11-15
+
+**17:26用户已要求暂停，等新计划；此条覆盖下方持续推进状态。** 先读`CONTEXT_CHECKPOINT_20261115_T64_PAUSED_FOR_NEW_PLAN.md`。17:25:56.177774实际暂停调度父325056（状态T），当前DC子15147保留运行（R），原锁保留，禁止继续派发/重启队列。专用回执root/ops-3552163/user_pause_20261115_1724.json记录PID/start_ticks/锁身份；queue JSON仍可能显示running，不能当实时。前台watcher3636已退出，所有输入结束，VNC当前shell，转发91027保持。T64 ASIC14、240、竞争、恢复已过；综合继续但最终PPA未出，G64未开始。等待用户新计划，不自动SIGCONT。桌面T80/旧8路不动。
+
+**17:18综合接续：先读CONTEXT_CHECKPOINT_20261115_T64_SYNTH_RUNNING.md。** 竞争及真实CPU恢复均已通过，原队列325056继续running/t64_synth、completed2、无错误；ASIC14/240明确复用。尚未获得本版面积/功耗。前台只读watcher3636、转发91027、VNC18874435/workspace3保持；全部输入会话已结束。不要重启队列，不碰桌面T80和旧8路，G64等待T64完整验收。
+
+**17:15进展：** 修复后的真实CPU竞争已通过，225轮scratch/29946竞争拍/完整输出通过。主队列实际PID325056继续running/t64_sequence、error=None，不能重跑contention。当前前台简洁只读观察器PID3636（原325493已仅Ctrl+C退出），每30秒刷新；VNC命令前只结束该观察器，不碰后台队列。39078输入结束，转发91027保持。T80和旧8路无改动，G64尚未开始。
+
+**17:12新队列已启动，优先本条：** 3552163诊断修复包已服务器881文件/三固件核验通过，manifest81f861731d29df3252c775e8bc1dcab8628b2f2f79c71fa504827c9e7d2ed763。新队列PID325042，bundle/runs/t64_serial03，ops-3552163/singlelock_request05.json，复用原ASIC14和240，仅从contention继续。第一次launcher因共享盘又满在启动前拒绝；第二次对旧T64未运行包41个相同输入保留路径/字节去重，free4194304B后立即启动；T80/旧8路/历史结果未动。两次失败和去重回执保留。当前正启动只读观察器，恢复须先截图确认前台状态，不能盲输命令。各输入传输50436/56052/48883均完成；转发91027保持。详细接续见CONTEXT_CHECKPOINT_20261115_T64_CONTENTION_FIX.md。
+
+**16:58最新：240任务已通过，专用竞争固件待修复重跑。** 先读`CONTEXT_CHECKPOINT_20261115_T64_CONTENTION_FIX.md`。原serial02已失败退出，观察器300088自行结束，VNC当前为shell；不是仍在运行批量。批量240/6082560输出及total/saturated全部通过，summary SHA `50c42478461985dfd33f0324aa464dc3d775388d6e54e3de4f06c8d46f190d16`。失败发生于竞争测试启动前：其C代码误将metadata行数写死5，T64为4，返回BAD_ARGUMENT。仅修该测试C并重建专用固件；生产RTL、性能/恢复固件、数据不改，ASIC14和240不重跑。新单锁工具增加明确prior_batch引用及输入身份检查，9项测试通过；尚未部署新包。T80桌面及旧8路不动，G64继续等待T64完整验收。转发91027保留，当前无未完输入。
+
+**16:30 UI重要变化：当前前台是只读自动观察器，不是shell提示符。** WATCH_PID **300088**，每30秒读serial02状态与batch_progress；它不启动EDA、不写证据，终态会自行退出。需要执行其他命令前，先看截图确认仍是该观察器，再Ctrl+C仅退出此前台观察器；后台队列289025和其EDA不能中断。不要直接向观察器输入shell命令。16:29:22.192404实读131/240、failed0、checked_outputs3320064，当前simv301902 sample011/layer12；原队列running/t64_batch20/error=None。先前16:25已100/240。含20%余量剩余986.983秒。工具及检查点12e8e45已push，当前新小型证据T64_ASIC14_20261115.json待提交；归档工具未部署/执行，G64仅只读查阅旧ICG契约，尚未开发。板端转发91027保持，VNC18874435/workspace3，输入会话20418结束。最新截图t64_batch_watch_1630.png；仅需截图可观察，避免重复输入查询或启动命令。
+
+**16:20观察补充：** 同一serial02队列继续running，16:19:49.501150实读55/240、failed=0，total/result/saturated已核对1,393,920输出；当前simv297516为sample005/layer08，原锁与队列未重启。批量含20%余量的剩余估计1676秒。此前16:15已24/240。watch脚本已改读batch_progress.json并只打印简要字段。新增`t64_archive_runtime.py`只是T64后续复制归档工具，复用既有tar逐成员读回、保留原件、不跟随外部库链接；2项本地读回/终态拒绝测试通过，未部署或执行，必须等所有作业结束及足够持久空间。不改活跃9934包，不进入G64。4f597f7已push，归档工具及本状态待同步。全部UI输入会话已结束，无半截输入；只保留转发91027。
+
+**16:13已实际启动，优先读此条：** `t64_serial02`单锁队列PID **289025**，16:12:44.478320实读running/t64_batch20、error=None；首子编译PID **289973**，中央ledger child_000001。活跃包9934df8/881files/manifest32f48cc22391667881476ba6bf6ad7e26b69c6693e19182fb8688a69ac596c68。队列状态在`/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-9934df8/runs/t64_serial02/state.json`，当前stage为同bundle/runs/t64_serial02_batch20/t64_batch20，主日志root/ops-9934df8/t64_serial02.log。launcher03源码SHA2367969121af07fb6717b73ba4c4d54dcb25dabfa04260f4a1251d00160a4bf3。该次没有额外去重；loader02曾对16份相同T64输入做保留路径/字节的硬链接去重，释放到4194304B。所有本地传输结束，58982/53253均结束；只保留板端转发91027。watch文本已改为serial02，可以明确键入，禁止重启旧队列。批量尚未完成；ASIC14仍使用校正后的原成功摘要。下一步观察批量与自动接续，综合完成先报告面积/时序；不要开发G64直到T64规定验收完成。桌面T80及全部旧八路未动。
+
+**16:11最新覆盖：** 新单锁工具9934df8已提交push并部署，881文件及三固件服务器预检通过，bundle为`/tmp/s4_21usr_t64_20261115_1510/light-light126-t64-resume-9934df8`，manifest `32f48cc22391667881476ba6bf6ad7e26b69c6693e19182fb8688a69ac596c68`。第一次launcher在旧T64深目录新建临时硬链接时ENOSPC；launcher02改在原包根创建短临时链接，保留全部路径/字节，16文件去重后free4194304B，但新队列serial01在旧ASIC摘要SHA引用错误处停止，未建session/取锁/运行EDA。**原ASIC真实正确SHA是8eb6e9822817c2bcdba325b977f7d27e381b8f2b0b2eb6f0331049a7474f7e2e**，已用服务器state与实际sha一致核验；早前末尾抄写错误已修正，原证据未动。ASIC14实际15:37:02.589594完成。
+
+当前正在传输launcher03（exec58982，5行，状态local_runs/t64_singlelock_launch03_transfer/transfer_state.json），SHA2367969121af07fb6717b73ba4c4d54dcb25dabfa04260f4a1251d00160a4bf3，改用正确SHA、新request03、新队列`T64 bundle/runs/t64_serial02`和ops-9934df8/t64_serial02.log。尚未观察实际启动，恢复先收完传输截图，再明确查询serial02（已有watch文本仍serial01，须改）。不能再执行旧launcher01/02。相关源码存handoff/team/evidence/T64_SINGLELOCK_LAUNCH*_20261115.py，待提交同步。16:00:29原锁ABSENT、EDA[]、shared1048576B、tmp100259155968B；不能当实时。转发91027保持，VNC18874435/workspace3。T80与旧八路没有修改；G64未开始，批量240仍未执行。
+
+**15:52最新：** ASIC14已实际通过，summary SHA `8eb6e9822817c2bcdba325b977f7d27e381b8f2b0b2eb6f0331049a7474f7e2e`，354816输出及total/result/saturated、真实CPU，固定12均值112568周期/1332.5278943task/s。原包装器268175已失败退出：后继batch20_01在共享锁mkdir处ENOSPC，尚未编译，不是数值失败；不能重启包装器或重跑ASIC14。当前本地开发新`t64_singlelock_queue.py`，同一原协作锁持续持有，复用原各阶段验证函数，串行接续240→竞争/恢复→综合/门级/SAIF/功耗/精度；新n1_process仅增加显式注册同bundle兄弟stage目录，所有子进程仍归单一ledger。43项相关真实子进程/错误恢复/路径/导出测试通过，尚未部署新包。桌面T80和旧8路未动。VNC18874435/workspace3、转发91027保持，当前没有EDA运行（须再次实查），没有未完输入。
+
+**15:36实际已经运行：先读 `CONTEXT_CHECKPOINT_20261115_T64_RUNNING_1536.md`。** 唯一包装器268175，t64_soc03真实driver268189，原锁owner=t64_soc03，启动15:33:23.604195；layer01已通过116751周期，下一层273345。自动顺序soc03→batch20_01→finish01，不手动重复启动。54项工具检查通过；新硬件结果仍待整批完成。所有传输已结束，只保留板端转发91027。先前两次启动被ENOSPC挡在锁mkdir，第三次通过仅对相同T64固件副本做保留路径/字节的硬链接去重后立即启动解决；T80和旧8路未动。
+
+**15:32最新覆盖：** b9155b4正式工具包已880文件/三类固件服务器预检通过；85和最终小增量传输均结束。t64_soc01（15:17:25 PID261262）及t64_soc02两次均在原共享锁mkdir处ENOSPC，未进入编译/仿真，原launch日志保留。共享盘空余反复被占满；15:21已对旧T64 delta01的42个validated_data重复文件做硬链接去重，6,995,968B重复块释放，**所有原路径/内容/manifest都保留**，T80与旧8路没有操作；随后7MB又耗尽。只读旧R4/B/N1波形扫描结果0，已归档R4不得重复归档。
+
+正在传输并启动新的顺序包装器，exec **15345**，`local_runs/transfer_pipeline.ps1`，状态 `local_runs/t64_pipeline_transfer/transfer_state.json`（11行，恢复时先读取）。该脚本在校验FLOAT/SAIF资格后，仅去重旧T64 delta01/fix02中相同的固件副本，保留全部路径和字节，然后立即串行运行 **t64_soc03→t64_batch20_01→t64_finish01**，减少释放空间到建锁及阶段间人工等待。脚本SHA **016dfbb037e43d50d981fb653d43847768792c4a4000b78132a72e6a5f5eb7d4**，已保存 `handoff/team/evidence/T64_START_PIPELINE_20261115.py`。不修改硬件、固件或已有阶段工具；仍用原锁和20条约束。
+
+包装器目标 `/tmp/s4_21usr_t64_20261115_1510/ops-b9155b4/t64_start_pipeline.py`，主日志同目录`t64_start_pipeline.log`；控制状态为最终bundle的`runs/t64_start01/state.json`。传输结束先截图确认启动PID，再读日志/状态；不要再手动启动soc/batch或旧finish队列。若preflight失败，保持失败记录后修新的包装器，不能直接重跑。包装器尚未观察到实际启动结果。板端转发91027仍保持；VNC18874435/workspace3。早前exec2790、64983、35249、57997、74820均结束。原检查点15:12及下方内容为较早记录。
+
+**恢复首先读 `CONTEXT_CHECKPOINT_20261115_T64_RESUME.md`：** 本轮已完成工具85baa0e、四行精度3f2072c及未知活动b9155b4修正。可见VNC传输exec2790进行中，板端转发91027长期运行；不要重复输入。最终正式包应为b9155b4（880文件、manifest c80e6f3355832f6a072cc25353c94f5e8825e49ca274b82510361b8201170804），不是先传的85副本。尚未开始T64正式验证。实时锁/空间最后观察及路径详检查点。本轮没有删除服务器文件。
+
+最新用户明确恢复T64/G64，并要求桌面T80版本不动。有效补充计划为 `workspaces/arch03/T64_G64_RESUME_PLAN_20261115.md`，技术基础仍为 `N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`。下方T80优先/取消记录属于历史。
+
+新工作树 `E:/fpga_race-two/kwt1-t64-g64-20261115`；分支 `codex/light-light126/t64-g64-resume-20261115`，从1d9fbb5派生。旧工作树未提交T80文档/截图/交付回执全部保持。桌面保护目录 `/storage2/2026contest/server4/s4_21usr/Desktop/T80_Delivery_20261113` 已在11月13日23:52:18交付1205文件/864910296字节，原工作树有完整回执；本次绝不修改该目录或重跑T80。
+
+已重读AGENTS、团队同步、计划、T64实现及1955/1927检查点。T64 RTL e2e83ce本地测试已通过；服务器旧65d2507-fix02只预检。发现T64 SAIF/PT/report仍调用旧三段窗口校验，需移植T80自己的四段检查再启动新包。尚未修改RTL或启动服务器正式任务。G64须等T64验收后实施。
+
+本轮板端已上电，windows观察没有VNC/FileZilla；已启动既有VNC转发（本地exec session91027，保持连接），服务器队列/锁/空间尚未实时读取。不要把11月13日状态当实时。所有旧八路文件禁止删除。每版仅前20条240任务；未授权100条。
+
+下一步：修正并测试T64工具、恢复板端VNC查锁/空间/包身份、建立新冻结运行目录并执行T64。压缩后重新读本条与有效计划，核对实际作业身份。以下保存历史。
+
+---
+# T80全部21项完成，报告导出中 — 2026-11-13 22:44
+
+继续有效计划T80_PRIORITY_COMPLETION_PLAN_20261113.md：只完成T80，G64取消、T64暂停、旧8路全部文件保留。原ASIC240、综合及gate14不能重跑。完整历史和路径见22:20、21:53检查点及STATUS。
+
+主队列t80_finish03于22:33:18.385053自然完成，status=reports_ready_review_required、child_pid=None、21个阶段齐全。最终state SHA `a746925c3ef46405209d14494e0aaa88a30e98fdb6c06a942687ae64f61537c0`。原父183563已由导出启动器确认消失、协作锁已自然释放。
+
+十二层SAIF通过，summary SHA `2fee667759ed46e95e672716ef4ccea60c1155fa63c0bc27323d72be5f49a35d`。十二层PT完成。原始功耗W依次为0.0501254834、0.0502292328、0.0502437986、0.0502531491、0.0503219143、0.0503468513、0.0503912009、0.0503552333、0.0503889248、0.0502546728、0.0501167029、0.0498352200。按实际周期手工转录复算：时间加权50.2316198707mW，37.6968176785µJ/task；尚待正式导出值交叉确认和未知影响审核，不能标系统功耗已验收。
+
+前20条精度关联通过：240任务、6082560输出及total，最大逐层NRMSE 0.20198143836753799%，最大单任务0.20953408931848963%，X/W/b裁剪0、饱和0，fresh_float_reference_verified=true。精度summary SHA `b620e1201d725e9f48a63547d0c80cc2229a581bd750c36c9d54f2ff61e10151`，路径active/runs/t80_finish03_precision/t80_precision。非官方600条。
+
+实际导出已启动：22:36:41开始，PID318967，session=t80_final_report01，使用ops-review-b80b171（manifest b4cef85bf45ad4bfc49bf328cc10e9ca75072615e5063696e8c03d275085f884），source SHA bb28cd7ce9157ec0e5e4e3560e70246abf61efd92d9a6b28277ef55bd73b717b。22:41:37实读status=exporting、无错误、log空；仍在核验原文件，不能重复启动。运行包active=/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4；导出状态active/runs/t80_final_report01/state.json；日志同root/ops-review-b80b171/t80_final_report01.log。导出包含unknown_inventory，结束后再做连接/别名/静态概率策略审核；这些额外审核尚未启动。
+
+已集中读取12个PT timing_check/disabled_timing原报告，并先核验artifact SHA。画面可见L04–L12均189个no_clock且全在静态JTAG、HF6.666666ns/LF66ns。禁弧计数每层c12145、p60252、C72506、d201（case、常量及条件弧）。前三层滚出截图，最终需再以汇总集合确认全部12层；不要把截图未见的数据当作逐层已阅。查询文本takeover_local/t80_timing_read_cmd.txt，截图t80_timing_all12.png。无新DC/综合。
+
+归档工具ops-archive-66186a6已部署并导入通过，未运行。等导出和审核全部关闭后，完整runtime根复制到durable backups新目录，保留原件，逐成员回读；不要删除任何历史资料。新归档日志和cwd必须在runtime根之外。
+
+VNC18874436/workspace3，FZ20972102断开；当前没有未完成exec或半截输入。最后VNC命令读取导出state及log，不能误Up当成功耗查询。功耗通用命令takeover_local/t80_power_watch_cmd.txt；精度命令t80_precision_final_read.txt；导出启动器t80_export_launch.py和local_runs/t80_export_launch已执行完毕，不再执行。Git已push38057b4，本检查点待提交。压缩恢复重读AGENTS、计划、本检查点和STATUS，再查看当前导出状态。
+
+---
+# T80十二层活动通过，功耗7/12 — 2026-11-13 22:20
+
+当前有效计划仍 `workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md`。G64取消，T64暂停，当前只完成T80。旧8路及所有历史文件禁止删除；不重跑已通过的ASIC240、综合或gate14。
+
+最新实读22:18:25.100876：唯一队列t80_finish03仍running/t80_power，父183563、当时子297128，无错误。已完成15项＝原7项＋SAIF＋7层功耗。tmp剩151077998592B。尚缺P08–P12、20条FLOAT/ASIC精度关联，之后完整报告、独立时序/未知活动审核、持久归档。
+
+十二层SAIF已全部通过；总回执SHA `2fee667759ed46e95e672716ef4ccea60c1155fa63c0bc27323d72be5f49a35d`，L12为126238周期、97750415B。完整窗口、输出和坐标由本次门级独立核对。截图 `takeover_local/t80_saif12_complete.png`。
+
+前7层整机功耗W依次为0.0501254834、0.0502292328、0.0502437986、0.0502531491、0.0503219143、0.0503468513、0.0503912009，均为布局前原模型数值，尚未完成未知影响审核，不能称系统功耗验收通过。首层实读HF6.666666ns/LF66ns，189个no_clock全部位于静态JTAG调试模块；220宏＝ITCM32+DTCM32+shared64+accelerator92；活动exact374614、default1245、total375859，其他来源0。首层internal0.0381124578W、switching0.00484297518W、leakage0.00717004994W。截图 `takeover_local/t80_p01_review.png`。禁用弧细节查询已发，截图待读取。
+
+活跃包仍 `/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4`，manifest `181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b`。ops-cef81d4/request未变，自动继续P08–P12后precision。不要改活跃包或重启队列。
+
+最终报告工具已更新并独立部署为 `ops-review-b80b171/scripts`，8文件manifest `b4cef85bf45ad4bfc49bf328cc10e9ca75072615e5063696e8c03d275085f884`。22:06:39实见IMPORT_PASS/READY。0391b09修复queue目录形状；b80b171进一步修复unknown_inventory对stage内具体文件的校验（不能把文件直接传给只接受stage目录的allowed_run）。5项本地测试通过。最终导出用此目录，不再用旧cfbca86/0391b09。全部21项完成后，以实际最终state SHA调用transport_report_stage.py；显式runtime-root/manifest、原delta01 ASIC14及--unknown-inventory。不自动授予验收。
+
+仅复制归档工具也已部署 `ops-archive-66186a6`，2文件manifest `348023da60fa760f2e091237b035f11cd404dbbe5c26fa46af3f898ea5255d91`，22:01:43实见IMPORT_PASS/READY；尚未运行。包含t80_archive_runtime.py与复用tar读回模块n1_archive_runtime.py。需PYTHONPATH包括该ops、最新report ops/scripts和活跃包/scripts。最终所有任务和审核结束后，明确queue state SHA，用新shared backups/t80-runtime-DATE_TIME目录，完整runtime根复制、回读、不删原件。归档日志必须在runtime根之外；归档进程cwd也在源根之外。
+
+本地活动工作树 `E:/fpga_race-two/kwt1-t80-t64-g64`，分支codex/light-light126/n1-t80-t64-g64-20261113。已push66186a6；339f7d7、b80b171及本检查点待同步。另一个同步操作的5360ad9已保留。原脏工作树不动。
+
+VNC18874436/workspace3，FZ20972102断开。所有ops传输已结束。最后发出读取首层disabled_timing.rpt前23行的只读命令，执行session85670待取最终截图 `takeover_local/t80_disabled_timing_head.png`；不要误Up当成功耗查询。功耗通用查询文本在 `takeover_local/t80_power_watch_cmd.txt`。恢复先核对windows、完成待收输出，再明确键入功耗查询。本文不将22:18状态作为未来实时状态。
+
+---
+# T80 L11通过 — 2026-11-13 21:53
+
+有效计划 `T80_PRIORITY_COMPLETION_PLAN_20261113.md`；G64取消、T64暂停、旧8路及历史结果禁止删除。继续T80，不重跑ASIC240、gate14和综合。
+
+21:51:19.460786实读：t80_finish03父183563/子183576，running/t80_saif，error=None；L01至L11通过，L11为116972周期、97727287B。tmp剩153597235200B。还缺L12、12层PT、20条精度关联，及最终报告、时序/未知活动审核、持久归档。
+
+活跃包 `/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4`，833文件manifest `181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b`。ops-cef81d4及request未改。全部21阶段完成后才导出报告，当前尚无T80功耗数值。
+
+报告入口0391b09：队列是runs/session，原阶段路径校验仅接受runs/session/stage；现严格验证当前bundle直接session、canonical路径和owner，3项测试通过。独立部署 `ops-review-0391b09`，8文件manifest `ad9ac1898a93771a367b1963a92a020fb24d7d627aea051023cf20d0ccd8162b`；21:45:31实见IMPORT_PASS/READY。后续使用该目录替代旧cfbca86；显式传 `--runtime-root`、`--runtime-manifest-sha256`、`--unknown-inventory`。其余参数见旧检查点。运行中的工具保持不变。
+
+66186a6准备 `t80_archive_runtime.py`：完整runtime复制归档，保留原件及外部symlink文本；独立T80路径/终态检查，复用tar写入与逐项读回。需精确压缩体积加20%及2GiB余量；4项归档/队列测试通过。尚未部署/运行。所有作业及审核关闭后才复制，归档进程日志必须位于runtime根之外。
+
+VNC18874436/workspace3；FZ20972102断开。无待传内容、无半截输入、无本地后台任务。最后只读命令 `takeover_local/t80_finish03_compact_cmd.txt`，确认后可Up/Return复查；截图 `takeover_local/t80_watch_2153.png`。
+
+Git分支 `codex/light-light126/n1-t80-t64-g64-20261113`。另一个同步操作的5360ad9仅新增T80_SYNC_STATUS_20261113_2141.md，保留未覆盖。66186a6已成功push。此前两次Python stdin中混合中文的长脚本产生编码SyntaxError，均未执行修改；后续文档使用apply_patch，Python脚本保持ASCII。
+
+---
+# T80 L08通过 — 2026-11-13 21:34
+
+当前有效计划T80_PRIORITY_COMPLETION_PLAN_20261113.md。G64已取消，T64暂停，旧8路禁止删除。当前仅持续完成T80；无用户暂停请求。
+
+最新实读21:34:05.788499：t80_finish03=running/t80_saif，父183563、子183576、error=None。L01–L08全部通过完整结果/窗口/SAIF；第8层周期107646、活动97680213B；前7层详情在STATUS.json。/tmp剩156590975104B。还差4层SAIF、12层PT、20条精度关联、完整报告与时序/未知模型审核、输出持久归档。
+
+实际包仍/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4，833文件manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b。主队列在runs/t80_finish03；ops-cef81d4运行已修复的四段窗口工具，request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888。任何通过的原synth、ASIC240、gate14都不重跑，不改活跃目录，不启动T64/G64。
+
+最终report ops-review-cfbca86已服务器部署并预检；8文件manifest f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81，支持显式/tmp路径和T80四段窗口。待队列所有21阶段结束，读取最终state SHA后用transport_report_stage.py导出并审阅。不能用旧d611597入口直接处理/tmp。原N1审核文件只能参考方法，不转移验收。
+
+当前无未完成传输、无待输入命令、无本地后台验证；远端只有既有T80正式队列。VNC18874436/workspace3，FZ20972102断开。最后终端命令是已知只读t80_finish03_compact_cmd.txt；确认仍是该命令时，可Up再Return复查，否则明确键入文件内容。最新截图takeover_local/t80_watch_2132.png，实际时钟21:34。恢复先windows核实，不碰workspace4。
+
+源码、已测输入已备份（8989696B，833成员回读匹配，回执T80_INPUT_BACKUP_20261113.json）。输出/tmp归档仍未完成，n1_archive_runtime.py是N1专用，不能直接当T80归档。不得删除任何历史结果来省空间。
+
+最新已push dca4ce5；8ab07d1及本更新待提交同步。前文21:20/21:12等检查点完整保留原失败原因、受测876b883、0.9521382079mm²初步面积、+0.000576019/+0.00623399ns时序、门级/综合哈希及恢复路径。阶段整体仍未验收，功耗尚无T80数值。
+
+---
+# 增量：T80 L07已通过（21:26:50.262364）
+
+当前唯一队列仍t80_finish03，183563/183576，running/t80_saif，无错误。L01至L07全部实际采集通过；L07周期107166、SAIF97673789B。/tmp剩157256986624B。还缺后5层、power12、precision20和最终审核归档。无待续传输或VNC键盘输入。最近状态截图takeover_local/t80_watch_2127.png。继续读下方21:20检查点和T80优先计划，不重启、不开发T64/G64。
+
+已核对新的report ops和三个后处理接口支持T80自己的四段窗口与显式/tmp路径；连接/静态概率/别名审查尚未运行，待完整报告生成及实际未知情况决定。不能把准备好的工具标成已审核。
+
+---
+# T80活动过半：L01–L06通过 — 2026-11-13 21:20
+
+继续执行，不暂停。有效计划T80_PRIORITY_COMPLETION_PLAN_20261113.md；G64取消，T64暂停，当前只完成T80。旧8路全部保留。
+
+21:19:48.676417原队列状态：t80_finish03=running/t80_saif，父183563、子183576、error=None。L01–L06均完成实际输出、完整窗口及SAIF审核；周期116752/113732/112106/112512/110446/108926，活动字节97722100/97710598/97711398/97709964/97699114/97697893。/tmp剩158140846080B。仍余6层活动、12层功耗和20条精度关联，随后报告、模型/时序审核和持久归档。
+
+活跃包/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4；队列runs/t80_finish03。源码manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b。runner同根ops-cef81d4；request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888。不要改包，不要并启队列，不重跑已有ASIC240/gate14/synth。
+
+全部早前传输都完成，没有待续exec或半截终端输入。最后查询与截图t80_watch_2117.png（图中文件名不等于实际观察时钟）。读取当前状态用takeover_local/t80_finish03_compact_cmd.txt；VNC18874436/workspace3，FZ20972102断开。恢复先windows核实。
+
+完整方法、失败路径、最终report ops和备份见21:12/21:00检查点。原finish02因旧三段窗口验证器失败，不是硬件失败；cef81d4只修7个采集/功耗工具，硬件仍876b883。新的report ops-review-cfbca86已部署并导入PASS，最终要显式传runtime参数。N1归档器硬编码N1，不能直接套T80；/tmp输出未备份。本地833项输入备份已完整回读。
+
+最新已push dca4ce5；本21:20状态待提交同步。主工作树E:/fpga_race-two/kwt1-t80-t64-g64，个人分支codex/light-light126/n1-t80-t64-g64-20261113。阶段未验收：T80尚无最终功耗数字，面积/时序仅初值及部分审阅，不能借旧N1/B0 PASS。
+
+---
+# T80 L05通过 — 2026-11-13 21:12恢复入口
+
+先重读本文件、21:04/21:00检查点及workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md。用户取消G64；T64暂停且不得拖延T80；旧8路及所有历史结果不能删除。现在只做T80收尾，仍连续执行。
+
+最新实读21:11:18.928387：队列t80_finish03仍running/t80_saif，父183563、子183576、error=None。L01–L05活动全部通过；周期116752/113732/112106/112512/110446；SAIF字节97722100/97710598/97711398/97709964/97699114。/tmp剩158645653504B。后续七层SAIF→十二层PT→20条FLOAT精度join自动串行，不要重启或替换。没有待完成VNC输入、传输或本地测试。
+
+活动运行于/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4，manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b。父队列工具同根ops-cef81d4，request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888。硬件仍876b883，原ASIC14/240任务、竞争恢复、综合及门级14已通过；只修7个SAIF/PT窗口工具，不改硬件。原finish02的旧三段窗口校验失败完整保留。
+
+目前还没有T80功耗数值；面积上界0.9521382079mm²，setup+0.000576019ns/hold+0.00623399ns为同网表初值。等待本版PT完成时钟/no_clock/禁弧/未知活动与模型审核后，再做最终验收。不要用旧N1/B0数值补齐。N1_FINAL_REVIEW_20261113.md可参考审核范围，不继承PASS。
+
+最终报告工具已部署并导入PASS：/tmp同根ops-review-cfbca86/scripts，manifest f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81；支持显式runtime-root和四段窗口。全部21阶段成功后调用transport_report_stage.py；需原delta01 ASIC14引用，--runtime-root与--runtime-manifest-sha256必须明确。完整21:00/20:57检查点保留命令与身份细节。
+
+已有本地输入备份8989696B，SHA1f6742d40f171ccb06f979f6a31ad39fec18b31c4a20dd53101cd3ec263298ed；833项全部回读匹配。/tmp输出仍需最后归档，N1专用归档脚本不能原样套T80。当前不新增结构优化或额外EDA队列。
+
+恢复先windows核实VNC18874436/FZ20972102，只用workspace3；FZ断开。板端helper F:/linux_fpga_try/ac820.ps1（已授权）。当前终端仍共享盘T80 delta01。只读状态命令E:/fpga_race-two/takeover_local/t80_finish03_compact_cmd.txt；最后截图t80_watch_2111.png。
+
+工作树E:/fpga_race-two/kwt1-t80-t64-g64，个人分支codex/light-light126/n1-t80-t64-g64-20261113。最新已push f3fc168；ccb6c5c及本更新待同步。阶段内如无新问题只继续监测，严禁重新运行已有PASS或把采集中的文件交给PT。
+
+---
+# T80 L04通过，持续等待当前串行采集 — 2026-11-13 21:04
+
+当前有效要求：T80_PRIORITY_COMPLETION_PLAN_20261113.md；G64取消，T64暂停，旧8路全部保留。恢复时继续现有T80，不重新开发、不重复已通过测试。
+
+21:03:31.175427实读t80_finish03仍running/t80_saif，父183563、child183576、error=None。已通过L01至L04完整活动与结果，周期116752/113732/112106/112512，SAIF字节97722100/97710598/97711398/97709964；/tmp剩157254582272B。当前预计仍在采下一层，不能把四层PASS写成十二层。
+
+继续入口：/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4/runs/t80_finish03/state.json。自动顺序剩SAIF→12层PT→20条FLOAT关联。主脚本同根ops-cef81d4/t80_resume_evidence.py；实际request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888；833文件manifest181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b。
+
+当前没有任何待继续的exec/VNC输入、本地验证或传输。最近只读命令t80_finish03_compact_cmd.txt；最后截图takeover_local/t80_watch_2103.png。VNC18874436、workspace3，FZ20972102断开，恢复先windows核实。终端cwd仍共享盘old T80 delta01。
+
+完整上下文见21:00检查点：本地输入备份已完成；新report ops-cfbca86已部署并预检，支持当前/tmp和四段窗口。原synth、ASIC240、gate14和错误恢复全部沿用同一已验证硬件876b883。原finish02 SAIF失败来自旧窗口验证器，修复cef81d4后已通过四层。原失败证据全部保留。
+
+还缺：活动后8层、系统功耗12层、同批20条精度join、完整JSON/CSV/中文报告、时钟禁弧/未知活动模型审核、/tmp结果持久归档。不要将N1旧结果拼成T80新PPA。TIM134=4与DDC列表3平台时钟保持披露，待本版PT输出完整审核声明任务模式。
+
+最新已push f3fc168，本21:04更新待同步。所有当前源码、备份回执、过往节点均在个人分支codex/light-light126/n1-t80-t64-g64-20261113；主工作树kwt1-t80-t64-g64。继续跟踪当前队列，最终报告工具在/tmp同根ops-review-cfbca86/scripts，不用旧d611597报告入口。
+
+---
+# T80 L03通过与输入备份 — 2026-11-13 21:00
+
+压缩恢复先读本文件、20:57检查点和T80_PRIORITY_COMPLETION_PLAN_20261113.md。G64取消、T64暂停；旧8路不删除，当前只完成T80。
+
+20:59:28.315609实读：t80_finish03仍running/t80_saif，父183563、子183576、error=None；L01/L02/L03三层已通过，cycles116752/113732/112106，SAIF字节97722100/97710598/97711398。/tmp剩157567946752B。后面9层活动、12层功耗、20条精度关联仍自动继续。当前不启动其他EDA、不修改在跑包。L01用了405.330秒CPU，后续每层约数分钟，不能按普通门级50秒估算。
+
+本地新增输入备份local_runs/t80_input_backup_cef81d4/t80-hardware876b883-activitycef81d4-inputs.zip，8989696B，SHA 1f6742d40f171ccb06f979f6a31ad39fec18b31c4a20dd53101cd3ec263298ed；833项逐文件回读均匹配manifest181bb96b...。只备份已冻结输入，不代表正在生成的输出已经备份，更不代表T80已整体验收。回执已入handoff/team/evidence/T80_INPUT_BACKUP_20261113.json。
+
+已读取N1_FINAL_REVIEW_20261113.md：其最终审核接受的是稳定任务模式和可复现布局前模型，非物理初态最坏值。T80必须用自己的12层PT重新核no_clock/禁弧/未知和模型，不能借N1 PASS。原T80 TIM-134=4与DDC查询3平台时钟的统计差异保留，不额外重新综合。四个LINT1对象已实读为原debug两reset输出、AON POR、PLIC prio；常量/重复输入LINT32/33与实际原文一致。未完成审核保持false。
+
+检查过n1_archive_runtime.py：它硬编码N1的stage/queue schema，不可直接套用于T80；尚未新建T80输出归档器。最终应在原队列、报告和审阅均结束后，用明确T80路径及哈希的无损归档保留源码、活动、报告，绝不删旧8路或输入。所有/tmp产物持久化仍待办。
+
+8文件最终report ops已经部署并预检通过（/tmp/s4_21usr_t80_20261113_2012/ops-review-cfbca86；manifest f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81）。后续用其transport_report_stage.py带明确runtime-root及181bb96b...manifest；当前原采集/功耗队列用ops-cef81d4，实际request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888。
+
+**没有待续传输、没有半截VNC命令、没有本地活跃验证进程。** 所有既往exec传输已完成。当前状态命令takeover_local/t80_finish03_compact_cmd.txt；下次按需截图。VNC18874436/workspace3，FZ20972102断开，恢复先windows核实。主终端仍在共享盘旧T80 delta01。
+
+最新已push eb6215d；d6e3c45及本次更新待同步。工作树kwt1-t80-t64-g64，个人分支codex/light-light126/n1-t80-t64-g64-20261113。禁止重启旧队列、重复ASIC240或门级14、恢复G64/T64。
+
+---
+# T80持续采集，L02已通过 — 2026-11-13 20:57
+
+必须重读T80_PRIORITY_COMPLETION_PLAN_20261113.md。G64取消，T64暂停；原8路及所有历史结果保留，当前唯一目标完成T80。不要复活旧计划里的N2/D1/D2、G64或T64队列。
+
+## 当前实况
+
+- t80_finish03持续运行，父183563/SAIF驱动183576，20:53:58.534710实际status=running, stage=t80_saif,error=None；/tmp剩160438259712B。
+- L01和L02已通过完整输出/IRQ/WFI/实际首VALID至最终ACK窗口：周期116752/113732，SAIF97722100/97710598字节。L01仿真CPU405.330秒。后续SAIF仍在运行，不能按旧门级50秒/层估时。
+- 路径 `/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4/runs/t80_finish03*`；同根ops-cef81d4为队列，request正确Linux SHA `e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888`；bundle manifest `181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b`。自动顺序仍SAIF12→PT12→20条FLOAT关联。不能改运行副本或重启队列。
+- **无待完成VNC输入或本地传输进程**。exec84865已完成；20:49:57实读新report ops的8文件manifest与导入预检PASS。路径同根`ops-review-cfbca86`，manifest `f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81`。该工具支持显式runtime路径与T80四段窗口；原d611597版不直接用于新/tmp报告。
+
+## 新审阅事实
+
+- DRC无违例、完整解析。结构端口11319全仅声明；243无负载驱动准确对应声明；80PE/1array/80requant。
+- 四个LINT-1实际为原平台debug ndreset_dfflr/fullreset_dfflr、AON u_aon_porrst、PLIC flop_0_irq.plic_irq_prio_dffr，都是未消费输出。LINT32=10741（接逻辑常量），LINT33=1341（同网多输入）。原报告不删。
+- 原check_timing报告写4个高扇出；实际DDC threshold1000查询列3条平台时钟：core_csr_clk、hfclk、aon crossing_clock。保留这两个不同统计，不编造第四条。旧N1_FINAL_REVIEW_20261113.md采取同样披露，不能借其PASS。等T80自己的PT检查所有no_clock及禁弧和时钟/IO条件后，再决定稳定任务模式时序验收。不得为此重综合或提前阻塞采集。
+- 当前预算上界0.9521382079004799mm²，setup +0.000576019ns/hold +0.00623399ns为T80自身初步结果。最终系统功耗尚未得到。
+
+## 下一步
+
+1. 继续只读检查现有队列，不重复运行ASIC240/门级14/综合。
+2. 复用即将生成的每层PT时钟/禁弧/活动覆盖及宏模型报告完成T80审核；旧N1审核方法可参考，结果不得转移。
+3. 全部21阶段完成后，用ops-review-cfbca86的transport_report_stage.py（--runtime-root和--runtime-manifest-sha256）导出。PYTHONPATH先ops/scripts，再当前bundle/scripts；asic输入为原delta01的t80_soc01。--unknown-inventory会用显式验证路径访问/tmp活动和原共享盘网表，不需复制网表。
+4. 同目录另外3个review脚本可做连接/静态概率/别名审核；根据T80实际报告决定最少必要工作，不能用单层/默认翻转替代12层功耗。
+5. 最终归档/tmp证据到持久存储；空间不足不删旧8路。报告/源码/小摘要同步GitHub。
+
+最新已push eb6215d（包括cef81d4修复和cfbca86报告工具）；本20:57更新尚待提交。现有worktree E:/fpga_race-two/kwt1-t80-t64-g64，个人分支codex/light-light126/n1-t80-t64-g64-20261113。
+VNC18874436/FZ20972102；恢复先windows，仅workspace3；原终端cwd仍共享盘T80 delta01。只读状态命令takeover_local/t80_finish03_compact_cmd.txt。完整原队列、网表与失败身份见20:33/20:47检查点。
+
+---
+# T80接续已运行，首层完整SAIF通过 — 2026-11-13 20:47
+
+当前仅完成T80。G64取消、T64暂停；旧8路与全部历史文件保持。有效计划T80_PRIORITY_COMPLETION_PLAN_20261113.md。
+
+- **t80_finish03已运行**：父183563，采集驱动183576，开始20:36:32.019510。新工具副本 `/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4`（833文件；7个活动工具修复，硬件/固件未变），manifest 181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b。
+- **L01通过**：20:47:10读取case_progress已经包含L01。25344输出，cycles116752，pending_transactions0/all_writes_responded true，IRQ/WFI真实执行。SAIF97722100B；仿真CPU405.330秒，实际比普通门级慢，不能用门级50秒/层估算。后续11层SAIF→12层PT→20条FLOAT关联仍自动串行。20:43:24/tmp空闲162679791616B。
+- 接续入口 `/tmp/s4_21usr_t80_20261113_2012/ops-cef81d4/t80_resume_evidence.py`，runner SHA9f1cb186e74b59d59e15dce2358b7d773a999f05183cce24d7303e6c15bdf8ff。**实际Linux request SHA e0009ed15805d221489ac441b2019669d79e506ef7ad0bf54274de1d9b35c888**。上一检查点56ab...是本地CRLF文件SHA，不应用于服务器。已按LF独立重算匹配；不是放松身份检查。
+- 部署曾在最终print发生str/Path类型错误；前置833文件/原队列检查已执行，但仍重跑只读预检，20:35:19实际PASS后才启动。原finish02的失败保留；它是三段窗口验证器错误，非硬件错误、非空间失败。未发任何信号/清锁。
+- 20:38读取实际DRC：明确无约束违规、0记录、完整解析、driver_query_complete。20:43结构：11319端口全declaration_only，243无负载驱动与声明逐项对应；80PE/1阵列/80转换。高扇出3条均命名时钟。剩余LINT32=10741、LINT33=1341、LINT1=4要看实际对象，严格时序尚未最终审核。详T80_SYNTH_REVIEW_PROGRESS_20261113.json。
+- 报告/未知活动工具也已修四段窗口与显式/tmp路径；代码174068c、cfbca86。**当前VNC传输exec84865仍在发送11行report ops，不能另发键盘。** state=local_runs/t80_reviewops_cfbca86/transfer_state.json；完成后截图确认T80_REVIEW_OPS_READY。目标同/tmp根下ops-review-cfbca86，manifest f35927b878b4fe32caf77fb63d252939fb8aa9d4eb523eff367f2461af8e3c81。不启动任何额外EDA。
+- 最新已push edc5e86，174068c/cfbca86及本记录待后续同步。原综合/门级/240任务不重跑。采集运行目录及源码均不可修改。没有实现新并行调度；避免打断已经开始的单队列。最终/tmp结果需持久归档。
+
+恢复先poll84865，再windows/screenshot（VNC18874436，workspace3；FZ20972102断开）。原终端仍位于共享盘old T80 delta01。详上一检查点包含原综合/门级SHA、旧失败与禁止事项。
+
+---
+# T80活动工具修复接续 — 2026-11-13 20:33
+
+先读 `workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md`。G64已取消；T64暂停，不占用T80资源。旧八路与所有历史证据禁止删除、覆盖或归档后删原件。
+
+## 已完成
+
+- 受测硬件仍876b883；T80 ASIC14、前20条240任务/6082560输出与total/saturated、竞争及恢复均已通过。固定12任务平均112569周期，150MHz折算1332.5160568 task/s。
+- 原综合自然完成，初步预算面积上界0.9521382079004799mm²，setup +0.000576019ns、hold +0.00623399ns；220宏、0锁存、无组合环。严格警告/条件审核仍待完成。
+- **同网表门级14已通过（无SDF）**。原运行 `PROJECT/bundles/light-light126-t80-v4-9196556-delta03/runs/t80_finish02_gate/t80_gate`；summary SHA `918d256b4081e116100169b33cabe7f977255b9f9194e43c08667208ce29df2c`。
+- 20:28:55只读确认原队列PID14008不在、child=None、共享锁不存在。原队列20:22:45.012957退出FAILED，state SHA `5e3e269e207cf5783a1e230baf443e7cb6a68dc9f8efd03a4e63e81eab5af289`。没有人为停止综合或原队列。
+
+## 失败与修复
+
+- 原SAIF驱动167734于20:22:44.997271失败，**原因不是空间不足**：`native_saif_replay.capture_commands`调用旧icb32_power三段窗口校验，拒绝T80四段搬运。原始失败完整保留，未开始正式活动采集。
+- 新提交cef81d4增加T80独立四段窗口验证；旧通用SAIF/PT函数仅增加显式window_reader参数，默认旧三段校验不变。T80采集、流式活动审核与PT建脚本全部显式传T80验证器，保留实际时间/ACK/排空检查。
+- 本地16项活动/旧方法/契约测试通过；另新增工具差异克隆保护测试通过。第一次测试受Windows默认GBK影响，设置PYTHONUTF8后通过，不是RTL失败。
+- 新接续仅允许7个活动工具差异，逐项哈希验证833文件；不允许改RTL、固件、数值/布局或库。原门级、综合、240任务不重跑。
+
+## 正在部署（尚未启动新队列）
+
+- 新目录 `/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-activity-cef81d4`，manifest `181bb96b719363be5350e9e968ac2b2ad29555e2f4606e362721be3c42629b9b`。
+- 操作入口同根 `ops-cef81d4/t80_resume_evidence.py`，SHA `9f1cb186e74b59d59e15dce2358b7d773a999f05183cce24d7303e6c15bdf8ff`；request SHA `56ab33b3b472fdb72e3d9df91cbfba5da9294369c0ce07b36d276921fd8a39ad`。
+- **VNC传输exec28932仍在运行，19行，state位于local_runs/t80_activity_fix_cef81d4/transfer_state.json。不得同时输入VNC。** 完成后截图确认`T80_ACTIVITY_FIX_PREFLIGHT_PASS`再启动。
+- 原17df21b接续工具已部署并预检，因未包含窗口修复不再使用。原/tmp同字节源副本也保留。
+- 新队列计划只继续SAIF12→power12→first20浮点精度关联。仍同共享锁、串行；未启用新的并行调度。临时盘证据最终需持久归档。
+
+## 下一步
+
+1. poll28932，读取可见预检回执；确认通过后用新ops在新session启动。
+2. 审阅已生成timing_audit、drc_audit、structure，不能把诊断生成PASS当严格时序审核PASS。
+3. 核对L01完整活动/实际窗口，再完成剩余层、功耗与精度；新工具不允许把finished时间当最后ACK。
+4. 生成完整报告和未知活动审核。现有通用report入口尚未适配/tmp根，需要显式运行路径配置，不能假定可直接使用。
+5. 同步代码及本记录到授权个人Git分支；不上传大数据/厂商库/凭据。
+
+PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。
+VNC18874436、FileZilla20972102；恢复先windows，仅workspace3。板端helper F:/linux_fpga_try/ac820.ps1。原VNC终端cwd仍PROJECT/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01。
+
+---
+# T80优先：取消G64、综合已完成 — 2026-11-13 20:14
+
+**先读新有效计划`workspaces/arch03/T80_PRIORITY_COMPLETION_PLAN_20261113.md`。用户已取消G64；T64全部现有成果保留，但不得再占用T80推进时间，必要时放弃T64。当前只完成T80。旧8路全部资料不删、不覆盖、不归档后删原件。**
+
+## 原任务与初步结果
+
+- T80原综合已自然完成，受测RTL仍876b883。20:10对summary和mapped.v/metrics/area_inventory/latch/check_timing逐个SHA校验后读取：预算上界0.9521382079004799mm²，known-added0.7914963391005749mm²；setup+0.000576019ns、hold+0.00623399ns，6.666666ns；220宏（92小+128大），0latch，无组合环。**只是初步数字，尚未完整验收。** 详`handoff/team/evidence/T80_SYNTH_PRELIMINARY_20261113.json`。
+- synth summary SHA **c485b3f77cd7c4f9d7911c5e2052babbc2d8c83811b94ec72c608ffed027f341**；mapped.v SHA **6a9ab02be889d4aecb55576a71c51ce68f324fc8a0897430e0dbe40a1373eff2**。
+- 原队列`t80_finish02`仍自然执行。**20:10:49.980968实读running/t80_gate，driver14008、child151885、completed6、errorNone、free10540285952B。** 已完成contention、sequence、synth、timing_audit、drc_audit、structure；三个诊断完成不自动代表审阅通过。后续SAIF12、power12和precision仍原队列负责。
+- 门级进度查询刚发送并完成Return，命令`takeover_local/t80_gate_progress_cmd.txt`；下一步截图读输出，不要重复启动门级。
+
+## 交接尝试：没有暂停任何实际任务
+
+- 用户图片建议安全冻结父调度、合并gate/SAIF、逐层功耗及有限并发。本轮先核实父14008与综合驱动23158在do_wait、DC29185运行、锁属于23158；start ticks分别189690906/189704644/189738560。
+- 准备了仅SIGSTOP父14008的可逆脚本`local_runs/t80_pause_dispatch_2007.py`。**实际执行时DC29185已经退出，身份读取在发送任何信号之前报FileNotFoundError，故没有发SIGSTOP，没有暂停父/子，也没有创建交接目录。** 不得按旧PID重试，不得声称父队列已冻结。
+- 原队列已自动进入门级，此时替换合并入口可能重复已开始工作；保留原队列。尚未实现或启动新的并行/合并采集调度。需根据门级实际进度再判断是否有收益，不能为了新调度拖延当前结果。
+
+## 临时盘退路
+
+- 共享空间下降，未删除任何文件。已仅复制833个manifest文件（不复制runs、不移动活跃任务）到 **/tmp/s4_21usr_t80_20261113_2012/light-light126-t80-v4-9196556-delta03**，manifest仍fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d。
+- 20:13:23截图确认`T80_RUNTIME_SOURCE_READY`，uid14021、root_mode00700、source_only=true、live_runs_copied=false、job_started=false。完整回执`/tmp/s4_21usr_t80_20261113_2012/clone_receipt.json`。**尚未实际调用t80_paths.configure做Linux路径预检。** 用作后续新阶段空间不足时的退路，不改变当前原队列。临时结果必须最终归档回持久存储。
+- 新副本脚本`local_runs/prepare_t80_runtime_2012.py`；传输exec72912已全部完成，exec10657失败的冻结尝试、75040初步指标和52615身份查询也都结束。无待输入/Return。
+
+## 恢复入口
+
+工作树`E:/fpga_race-two/kwt1-t80-t64-g64`，分支codex/light-light126/n1-t80-t64-g64-20261113。最近已push cf969b6；新计划、初步指标及本检查点待提交同步。
+
+VNC18874436、FZ20972102，恢复先windows。只用workspace3，终端cwd仍`PROJECT/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01`。FZ断开，不碰workspace4。授权板端helper为F:/linux_fpga_try/ac820.ps1；勿建立隐蔽服务器通道。
+
+优先：读取原gate进度；审阅同网表constraints/诊断结果；持续原队列或经核验的安全接续；收齐T80自己12活动/功耗和20条精度。T64/G64不得恢复。现有report/unknown ops仍为d611597（8文件/669837...）；T64最新4bbd0af ops只保留，不启动。
+
+PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109；原共享锁仍在上级IC/.arch02_team_lock。任何阶段失败、停止或未验证事项如实保留。
+
+---
+# T80继续映射、T64最终队列工具已就绪 — 2026-11-13 19:55
+
+## 当前要求
+
+重读`workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`与`T80_RESULT_PRIORITY_20261113.md`。用户要求持续推进，当前没有暂停。每版前20条240任务，未授权100条；T64完整验收后才进入G64。**服务器旧八路全部文件不删、不覆盖、不归档后删原件。** 本轮没有服务器删除。
+
+## 原T80队列
+
+- 生产RTL876b883，当前工具/观察器运行包`PROJECT/bundles/light-light126-t80-v4-9196556-delta03`，833文件，manifest fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d。
+- 唯一正式队列`t80_finish02`，PID14008，child23158，实际DC29185。原ops仍`light-light126-t80-finishops-9196556`，没有更换或编辑。19:44:26实读DC R态、99.5%CPU、CPU时间1:13:20。19:54:56截图读到最新日志为映射时序优化迭代；最后完整可见队列state仍为19:42:28的running/t80_synth，尚未观察到最终summary。
+- 原计划队列仍自动依次执行synth→timing/drc/structure→gate14→SAIF12→power12→precision。不要重启或插入新EDA，也不要改运行目录。综合完成立即读初步结果，不等最终功耗。
+- 已通过：ASIC14、真实CPU竞争/恢复、前20条240任务/6082560输出及total/sat。固定12平均112569周期、150MHz折算1332.5160568task/s；PPA与同批新浮点精度关联待完成。
+- 已从原summary逐项SHA核验后读出实际计数：源读/共享写/共享读/输出写延迟3/3/4/3拍，MAC利用率18.0114%，成功事务0.310823/拍。详`T80_MEASURED_TRANSPORT_20261113.md`及`T80_ASIC12_COUNTERS_20261113.json`。等待可重叠，不相加作总时间。
+
+## T64及审查工具
+
+- T64生产RTL e2e83ce，实际运行包仍`light-light126-t64-v4-65d2507-fix02`，875文件，manifest6632a4f266d48f50fd8a9e542cb6e03f05653d7ade3153903b38c3282c3339c1。三类固件及全部包文件服务器预检通过；尚无T64正式ASIC/EDA。
+- **后续T64应使用最新ops：`PROJECT/operations/light-light126-t64-finishops-4bbd0af`，3文件，manifest c8d77f164f4f1c798f85741ae1dd6ffe3be5c8691193e5a6071cb131f0e45028。19:52:24实读服务器预检PASS。** 新ops保留gate/SAIF优先于补充诊断；额外修复Popen成功但状态写入ENOSPC时仍等待子进程退出的收尾。3场景×两队列本地注入通过。源提交4bbd0afa078c48c07e7c774fae9bdfbdaae75c7b。旧65d2507、fbfdc2e ops均保留但不作为接下来首选。
+- 本地`t80_finish_queue.py`也修复相同收尾问题，仅供未来导出；**并未部署替换原T80正在执行的9196556工具**。
+- 审查ops `light-light126-transport-reviewops-d611597`，8文件，manifest669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3，已服务器预检通过。完整报告仍需21阶段全部完成，precision取join内部float20引用。
+- 最新VNC传输exec61820已经结束，26行全部发送并核验。没有本地后台验证或待输入任务，1953查询已完成。不要继续poll旧session。
+
+## 空间和恢复
+
+- 19:39:35共享free19545456640B，/tmp free246422388736B，当前synth目录261464KiB。19:42:28共享free19186843648B。空间下降需要观察，但不能动旧八路。可在后续新阶段必要时采用已有显式私有/tmp支持；不能搬动当前运行综合。临时盘不是最终交付存储。
+- VNC18874436、FileZilla20972102，本轮已核。恢复先调用windows确认。只用workspace3；终端cwd还是`PROJECT/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01`。FileZilla断开，最后421；不连续重试，不碰workspace4。
+- 现成只读命令在`E:/fpga_race-two/takeover_local/`：`t80_finish02_compact_cmd.txt`、`t80_synth_status_cmd.txt`、`t80_process_cmd.txt`、`t80_space_scope_cmd.txt`。`t80_preliminary_cmd.txt`仅在synth passed后执行，校验summary及mapped.v/metrics/area/latch/loop报告SHA，打印最终网表对应初值。
+- 通过`F:/linux_fpga_try/ac820.ps1`操作已授权板端VNC。截图有时早于终端输出，等后再截图，不能因此重复启动命令。当前无交互阻塞或待Return。
+
+## Git和下一步
+
+工作树`E:/fpga_race-two/kwt1-t80-t64-g64`，分支`codex/light-light126/n1-t80-t64-g64-20261113`。d7969bd已推送，4bbd0af和本检查点正在同步；原其他工作树不动。下步先读原T80状态，在综合完毕后立即报告初步面积/时序/宏及结构，再持续原队列、读取失败或完整结果。T64正式运行等原T80必要证据收齐；G64继续未开始。
+
+PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。原共享锁在上级IC/.arch02_team_lock，不自动清锁。历史失败与所有旧8路数据保留。
+
+---
+# T80开始映射优化、T64顺序调整已部署 — 2026-11-13 19:42
+
+继续执行`workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`及`T80_RESULT_PRIORITY_20261113.md`。前20条240任务，不启动100条；T64完整验收前不进入G64。**旧八路服务器全部文件绝不删除、覆盖或归档后删原件。**
+
+## 最新实读状态
+
+- T80唯一正式队列`t80_finish02`，driver14008，child23158，实际DC最后确认29185。19:40:35.304067仍running/t80_synth，log已出现`Beginning Mapping Optimizations (High effort)`。这不是最终setup/hold或面积；不引用中间迭代数字作结果。
+- 19:39:35共享free19545456640B，/tmp free246422388736B；当前综合目录`du -sk`为261464 KiB。共享空间下降主要不来自本次综合目录增长，后续需持续看空间预检；没有删任何服务器文件。若新阶段因空间停下，可评估已存在的显式私有/tmp运行支持，不能移动正在执行的综合。
+- 先前T80 ASIC14、前20条240任务6082560输出/total/sat、CPU竞争和恢复仍通过，生产RTL876b883不变。PPA、同网表门级与新20条浮点关联待齐全。
+- 19:38/19:39只读聚合固定12实测：112569周期，0.3108226954事务/周期，80PE利用率18.011353%。源读/共享写/共享读/输出写响应延迟3/3/4/3拍；同tile块间隔198.1543拍，首供数等待4446.3333拍，最终写回尾部255.5拍。等待重叠，不能相加作为总周期。详新证据`T80_ASIC12_COUNTERS_20261113.json`及`T80_MEASURED_TRANSPORT_20261113.md`。
+
+## 接收和工具
+
+- 审查ops `light-light126-transport-reviewops-d611597`，8文件，manifest669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3。**19:29:49服务器预检8文件/导入通过。** 不再有待完成传输31899。
+- T64新队列顺序提交**fbfdc2e8838c68a941eeb6f1e7b44655abe4651c**：只将timing/drc/structure补充诊断后移到gate14和SAIF12之后，仍在最终报告之前。gate入口原有必需端口检查完整保留。无VCS/PT并行，没有改变T80当前队列或任何生产RTL。Python3.6语法与2项完整队列报告校验通过。
+- T64新ops已在`PROJECT/operations/light-light126-t64-finishops-fbfdc2e`接收并于19:36:44预检通过。3文件，manifest **6917b611b2145d665bd6b1abd98ef65014a67b77431cec7c65e0ff3736d9ff9b**。旧65d2507 ops仍保留；后续正式T64请求应选新ops。T64基础运行包仍fix02的875文件/6632a4...，生产RTL仍e2e83ce。**没有启动T64正式任务。**
+- 本地exec36906传输26行已完成；18099/79286指标查询也完成。没有本地后台任务，没有VNC待输入。
+- VNC18874436、FileZilla20972102，当前终端cwd原T80 delta01，workspace3。恢复先windows核对。FZ未连、最后421，不持续重试，不碰workspace4。
+
+## 恢复步骤
+
+1. 读取原`t80_finish02`，综合成功后立即运行`takeover_local/t80_preliminary_cmd.txt`只读抽取最终摘要，先报告面积、setup/hold、宏数、latch/loop与未验项目，不等功耗12。它会要求对应synth stage已passed且summary SHA匹配。
+2. 可用查询文件：`t80_finish02_compact_cmd.txt`、`t80_synth_status_cmd.txt`、`t80_process_cmd.txt`、`t80_space_scope_cmd.txt`。当前所有命令已完成。必要时截图读取输出，不因窗口截图较早而重复启动任务。
+3. 原T80队列自动继续诊断、门级、SAIF、power12及precision，不原地编辑、不重启。失败保留并查实际原因。尚无最终PPA数字。
+4. 完整报告入口`transport_report_stage.py`仍要21阶段完成；从precision join取内部float20引用；再做未知活动/时序审查，不把reports_ready当验收。
+5. 所有新工作先在独立目录；T64后续使用已通过预检的fix02与新fbfdc2e ops。G64不得提前。
+
+当前工作树`E:/fpga_race-two/kwt1-t80-t64-g64`，个人分支codex/light-light126/n1-t80-t64-g64-20261113。最近已推送4ab1517，fbfdc2e及本检查点/指标报告待同步。PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。共享锁仍在上级IC/.arch02_team_lock。
+
+---
+# T80继续综合、审查工具接收完成 — 2026-11-13 19:27
+
+先重读有效计划`workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`及补充`T80_RESULT_PRIORITY_20261113.md`。每版前20条、240任务；未授权100条。服务器旧八路全部文件禁止删除、覆盖或归档后删原件。
+
+## 已完成和当前作业
+
+- T80生产RTL仍876b883；ASIC14、240任务6082560输出/total/sat、真实CPU竞争及恢复通过。固定12平均112569周期、150MHz折算1332.5160568 task/s；PPA与新20条浮点关联尚未齐全。
+- 唯一正式队列`t80_finish02`，PID14008，当前child23158，实际DC此前PID29185。**19:26:07.864091再次实读running/t80_synth、completed=2、无错误，可用磁盘22661824512B。** 不重启、不修改其脚本或输入。
+- T64生产RTL e2e83ce，本地随机10000、14例、延迟/ABA、恢复及三套固件通过；已部署`light-light126-t64-v4-65d2507-fix02`，875文件，manifest6632a4f266d48f50fd8a9e542cb6e03f05653d7ade3153903b38c3282c3339c1。19:07预检通过。真实CPU/EDA未运行；旧delta01缺ABI的失败目录保留。
+- 审查工具VNC传输31899已经结束，**19:20:11观察到TRANSPORT_REVIEW_OPS_READY 8**，manifest669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3。目录`PROJECT/operations/light-light126-transport-reviewops-d611597`。仍需导入/身份预检，尚未开始审查任务。
+- 本地没有活动的VNC传输或验证进程。VNC窗口18874436、FileZilla20972102于本次重新核对；恢复后再查windows。工作区3，终端cwd仍T80原delta01；勿碰workspace4。FileZilla未连接，最后19:09仍421。
+- Git已推送847ce94，62ff08e复现入口及本检查点待推送。生产硬件未再改动。
+
+## 新的执行优先级
+
+用户建议综合一完就先报告最终网表对应面积/时序/宏与结构初值，不等12层功耗。已接受，保持最终验收严格区分。现有队列不可原地换序；可选VCS/PT流水需新调度与独立回执验证，不为其拖延当前队列。19:23资源：96CPU、约665GiB可用内存、约21.45GiB磁盘；许可未确认。既有功耗入口要求完整12层SAIF冻结摘要，不能直接偷跑单层PT。
+
+## 接续
+
+1. 用`takeover_local/t80_finish02_compact_cmd.txt`读取原队列；综合完成立即读取同网表summary、metrics和结构报告，给初步结论。不要只等最终队列。
+2. 队列继续timing/drc/structure、gate14、SAIF12、power12及precision。失败保留；不原地重复。
+3. 审查ops预检后，用完整队列及自己的ASIC/batch导出报告。precision需引用join内部的float20报告，不混同两个目录。
+4. 收齐T80必要证据后启动T64自己的正式队列；G64必须等待T64完整验收。
+5. 未知活动、严格时序及面积归属不得借用历史N1/B0。T80与T64本地pin_mock对比不是实际SoC吞吐。
+
+PROJECT=/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109。原协作锁在上级IC/.arch02_team_lock，绝不自动清锁。所有历史失败与旧8路资料保留。
+
+---
+# T64接收预检通过、T80综合仍运行 — 2026-11-13 19:10
+
+**用户最新约束：服务器旧8路全部数据及产物禁止删除、覆盖或归档后删原件。本轮没有执行服务器删除。** 有效计划仍为`workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`，每版前20条240任务；全100条未授权；G64等T64全项验收。
+
+## 运行与接收
+
+- T80原队列`t80_finish02`，驱动PID14008，开始18:22:51，仍是唯一正式EDA队列。19:03:01实读running/t80_synth、child23158。19:08:08.734274只读进程核查：实际DC PID29185、父23158，R态，99.7% CPU，累计CPU00:37:16，RSS25468948KB；没有失败终态。19:04:10可用空间27936161792B。不要因日志长时间停留在Processing而重启，实际CPU仍在推进。
+- T80此前ASIC14、240任务6082560输出/total/sat、CPU竞争及恢复均通过。固定12平均112569周期，150MHz折算1332.5160568 task/s；面积、时序、门级、功耗与20条新浮点关联仍待收齐。旧finish01失败保留，生产RTL876b883不变。
+- T64第一次874文件重建成功，但服务器固件预检发现遗漏`T64_ABI.md`。这是运行子集生成遗漏，不是RTL输出失败；没有启动任何T64 ASIC/EDA。旧`light-light126-t64-v4-65d2507-delta01`原样保留。
+- 已在全新`light-light126-t64-v4-65d2507-fix02`补齐固件全部来源引用，875文件，manifest SHA **6632a4f266d48f50fd8a9e542cb6e03f05653d7ade3153903b38c3282c3339c1**。**服务器19:07:08.365340预检通过全部875文件和IRQ/竞争/恢复三套固件，row_lanes=4、source65d25073a1afcf4fc37da29c2d40ffc56f7e122a。** 实际RTL仍e2e83ce，T64真实CPU/PPA仍未验。
+- T64完整ZIP仍`local_runs/light-light126-t64-v4-20261113_183328-65d25073a1af.zip`，981文件、9597032B、SHA bbc52d95968ec51324b7af7e30600361cb5c2f4461c9f735a401ac7278320709。本地`local_runs/t64_fix02/reconstructed`与该完整包875项完全一致，已实际执行三套固件验证。首次缺ABI的子集生成路径要记为失败，不能只做import检查代替固件引用检查。
+- 前两次VNC传输exec60646（141行）、3519（21行）均已结束。T64预检和只读短命令也均结束。
+
+## 当前正在进行的本地任务
+
+**exec会话31899正在通过VNC工作区3发送审查工具，64行。完成前禁止额外VNC键盘操作。** 实时进度`local_runs/transport_reviewops_d611597/transfer_state.json`；执行脚本`local_runs/transfer_transport_review.ps1`。只是在新operations目录写入工具，不启动EDA。
+
+- 目标：`PROJECT/operations/light-light126-transport-reviewops-d611597`；8文件，manifest **669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3**。读取已经存在的旧T64 delta01作为部分相同代码来源，SHA逐项核验，不修改它。
+- 本地源`local_runs/transport_reviewops_d611597`；工具从已提交d611597导出，T80旧bundle+该ops的8模块本地导入通过。包括报告导出、未知活动清单/连接/别名/静态概率审查及新阶段身份绑定；不自动授予PPA验收。
+- 小ZIP37239B，SHA **9d030d10116995b3ffed1cdd8ecd6d1188e194d47260842d97fbe4d32812cba2**，已暂存板端实际路径`/opt/ac820-gui-root/home/board/t80_review_ops_1857/`，桌面FileZilla看到`/home/board/t80_review_ops_1857/`。第一次误用桌面路径作板端根路径失败，未创建文件；修正后upload SHA通过。
+- 19:09再次FTP连接仍421；没有服务器FTP上传。不要不停重试。FileZilla未连接、队列空。
+
+## 接续操作
+
+1. 重读计划、本检查点及`T80_T64_G64_EXECUTION.json`。先poll31899，结束后截图看`TRANSPORT_REVIEW_OPS_READY`8文件及manifest回执，核验后才能使用。
+2. 终端cwd仍原T80 delta01：`PROJECT/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01`。VNC18874436、FileZilla20972102本轮已实读，恢复后重新windows确认；勿碰workspace4。
+3. 原队列状态命令已备好`E:/fpga_race-two/takeover_local/t80_finish02_compact_cmd.txt`；进程命令`t80_process_cmd.txt`；日志尾部`t80_synth_status_cmd.txt`。不要在31899输入中并发执行。
+4. T80综合后队列自行继续timing/drc/structure、门级14、SAIF12、power12及precision。读取实际终态；错误保留后定位，不原地重跑。T64正式作业等T80结束及必要审核，后续只用fix02。
+5. T80报告导出工具`transport_report_stage.py`需要完整21个阶段及自己的ASIC引用。precision参数必须取join报告内部reference指向的float20，不直接指向join目录。导出之后仍需审核时序、面积和未知活动；不把`reports_ready`直接标为验收。
+6. 本地新增`test_transport_report.py`的2个加权/缺项/窗口测试通过，提交5a3a633；最近已推送26f4541，5a3a633及本检查点待同步。T64代码/固件没有改动。
+
+PROJECT=`/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109`。现有team lock仍在上级IC/.arch02_team_lock，绝不自动清锁。历史旧8路及其他失败证据均保留。
+
+---
+# T64传输过半、等待原T80队列 — 2026-11-13 18:50
+
+恢复时先读有效计划 `workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md`、本记录、1839/1826记录及执行JSON。任务没有暂停。用户要求连续推进，**服务器旧8路任何数据、日志、波形、网表和报告均禁止删除、覆盖或归档后删除原件**。
+
+## 实际状态
+
+- 工作树 `E:/fpga_race-two/kwt1-t80-t64-g64`，个人分支 `codex/light-light126/n1-t80-t64-g64-20261113`。`861b7d2`已推送GitHub；此前`d611597`审查工具、`6bcb7ce`本地对照均已同步。旧工作树未提交修改不动。
+- T80生产RTL仍`876b883`，前20条240任务、6082560个输出/total/sat零失败，ASIC14、真实CPU竞争及恢复通过。固定12平均112569周期（150MHz折算1332.5160568 task/s）。PPA/同批浮点关联仍未收齐，不宣称全项验收。
+- T80唯一队列 `t80_finish02`、驱动PID14008，18:22:51启动。**最后一次服务器状态观察18:35:25.095956：running/t80_synth，free34212937728B。当前状态尚未再读，不能把旧观察当实时。** 目录及哈希详1839/1826记录；不重复启动。
+- **本地exec会话60646正在通过VNC输入T64包。18:49:52读取进度70/141行，随后输出71/141。不要向VNC发送其他键盘输入。** 传输脚本`local_runs/transfer_t64_delta01.ps1`；实时位置`local_runs/t64_delta01_65d2507_verified/transfer_state.json`。先poll60646，完成后截图观察回执，不重启传输。
+- VNC ID18874436、FileZilla ID20972102已本轮重新确认；使用开发板授权helper `F:/linux_fpga_try/ac820.ps1`。VNC工作区3，勿碰4。18:41截图确认终端仍接收Python heredoc文本；结尾标记为带单引号的`'T64_DELTA01_65D2507'`。FTP此前一次重试仍421、没有成功传包。
+- 目标新bundle `light-light126-t64-v4-65d2507-delta01`，874文件，manifest `367eb3d21e0dcacc230f821be609805d9b1789bc3dd9ebca432e9f977f60c8ff`；目标ops `light-light126-t64-finishops-65d2507`，manifest `437a29f65ed61f1f389445ddd16fc457151b87f34fade3ca8548b44c338100f9`。尚未取得服务器重建完成回执，尚无T64服务器作业。
+- T64硬件`e2e83ce`，工具包`65d2507`。本地10000随机+32定向、14例、延迟/反压/ABA、恢复和三类固件已通过。当前874文件运行子集还通过14个服务器模块的本地导入/Python3.6语法检查。真实CPU/厂商宏/PPA仍待验。
+
+## 新准备的材料
+
+- 同输入本地T80/T64比较：平均45384.916667与46076.333333周期，T64本地周期增加1.52345%；编码、布局、参数及34989平均事务全部一致。这不是原总线/CPU性能。见`T80_T64_LOCAL_COMPARISON.md`及同名证据JSON。
+- 只读审查工具支持T80/T64自己的身份：未知SAIF清单18tests、连接检查3tests、静态概率2tests、新阶段合同2tests、报告队列2tests通过。报告不自动给验收；新RTL或计时未改。
+- `transport_report_stage.py`读取完整队列和自己的ASIC/240/PPA，取precision join内部`reference`指向真正的float20审计，再导出JSON/CSV/中文说明，可串行收集未知SAIF。不能把join summary直接当含identity.json的float20目录。
+- 尚未发送的审查ops：`local_runs/transport_reviewops_d611597`，8个源码、64行，manifest `669837cebad4edd91988a0247b4b5c87950560756cb49243221b2ba422e1dac3`。目标`operations/light-light126-transport-reviewops-d611597`，源为已提交d611597；依赖T64新bundle完成后才能重建。传输脚本需要另建，当前不要发送。
+- T64接收后只读预检已生成：`local_runs/t64_delta01_65d2507_verified/preflight_cmd.txt`及`resources_cmd.txt`。预检874文件与IRQ/竞争/恢复三套固件，资源命令读锁/空间/同账户EDA。先等60646完结再用。
+
+## 下一步与禁止事项
+
+1. poll60646并查看T64重建回执，然后发送预检；任何失败保留新目录，不原地覆盖。
+2. 读取原T80 `t80_finish02`状态及日志、锁与空间；只继续现有队列。当前还不知道综合是否结束。
+3. 收齐T80综合/时序/门级14/SAIF12/功耗12/20条精度，导出并审阅；T64正式作业等T80结束及所需审阅。不借旧N1/B0的功耗或PASS。
+4. T64正式范围前20条240任务；未授权100条。G64等待T64完整验收，不提前开发门控。
+5. 既有失败：T80旧finish01观察CPU端口错误已9196556修复并真实CPU重测通过；首次T64重建误要求sequence ELF容器完全相等，失败目录保留；实际BIN/Verilog/RTL及其余metadata相同，verified目录重建成功。没有删服务器旧8路数据。
+
+---
+# T64独立包传输中、T80继续综合 — 2026-11-13T18:37:51.917520+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。每版只跑前20条/240任务/6082560输出；全100条未授权。G64必须等T64全项验收。
+
+**最新保留要求：服务器旧8路所有数据、源码包、日志、波形、网表和报告不得删除或覆盖，也不能归档后删原件。本接续没有执行服务器删除。**
+
+## 已完成与运行中
+- GitHub个人分支codex/light-light126/n1-t80-t64-g64-20261113已成功推送至65d25073a1afcf4fc37da29c2d40ffc56f7e122a；T64生产RTL仍为e2e83ce，新增仅验收/报告工具及阶段标签修正。
+- T80原ASIC14、240任务和真实CPU恢复/竞争通过，固定12平均112569周期，150MHz折算1332.5160568task/s。各summary哈希与目录见1826检查点，未重跑。
+- **T80唯一队列t80_finish02，PID14008，18:22:51启动；18:35:25.095956实读running/t80_synth。** 日志正在处理N1数值核心层级，无新终态。可用空间34212937728B。当前bundle light-light126-t80-v4-9196556-delta03，不修改其文件，不重启。
+- T64本地10000随机+32定向、14例、1/2拍/预取开关/ABA及恢复全部通过，详见1826检查点及T64_IMPLEMENTATION_REPORT.md；仍无真实ASIC/PPA PASS。
+- 新完整T64包local_runs/light-light126-t64-v4-20261113_183328-65d25073a1af.zip，981文件，9597032B，SHA bbc52d95968ec51324b7af7e30600361cb5c2f4461c9f735a401ac7278320709。前包e2e仍保留。
+- 新包的全部RTL、三套实际装载固件BIN/Verilog与前包完全一致。sequence ELF容器哈希变化，但装载字节及除elf_sha256外全部metadata一致；该差异已明确，不宣称所有ELF字节相同。
+- FTP一次重试仍421，未上传包、未恢复旧上传队列。改用现有VNC工作区3在新目录重建精确运行子集；不碰工作区4。
+- **VNC键盘传输中，本地exec会话60646。未完成前禁止发其他VNC输入。** 执行local_runs/transfer_t64_delta01.ps1，共141行；进度见local_runs/t64_delta01_65d2507_verified/transfer_state.json。只有代码传输，未启动T64作业。
+- 重建目标bundle light-light126-t64-v4-65d2507-delta01，874文件，manifest SHA367eb3d21e0dcacc230f821be609805d9b1789bc3dd9ebca432e9f977f60c8ff；ops light-light126-t64-finishops-65d2507，SHA437a29f65ed61f1f389445ddd16fc457151b87f34fade3ca8548b44c338100f9。先在本机重建874文件与完整包逐字节核验通过，再发送。所有新目录使用exist_ok=False，不覆盖旧文件。
+- 功耗未知活动收集器新增T80/T64身份绑定，18项本地测试通过；尚未部署、尚未拿到新功耗数据，不代表审核通过。
+
+## 待办和失败路径
+- 等60646结束，读取VNC回执并再次核对874文件、三套固件、源码和ops身份。先查看T80现有队列终态、锁、空间，再决定后续正式作业，不能重复启动。
+- T80还缺综合/时序/面积、门级14、SAIF12、功耗12、同批20条浮点关联及独立审查。T64待实际ASIC14/240及完整PPA。G64尚未开始。
+- 原t80_finish01因被动观察器把原O4混合端口视作CPU而失败，已9196556改到仲裁前mem_icb；新真实CPU恢复通过。旧失败目录保留。
+- 首次T64本地delta检查把ELF容器也当作必须完全一致，因sequence ELF容器差异停止；local_runs/t64_delta01_65d2507保留。随后明确比较实际装载镜像、RTL和metadata，在*_verified新目录重新生成通过，未使用失败目录传输。
+- 原工作树kwt1-rtl-architectures未提交修改保持不动；活动工作树kwt1-t80-t64-g64。
+
+---
+# T80综合进行中、T64本地验证完成 — 2026-11-13T18:26:06.953737+08:00
+
+**用户最新要求：服务器旧8路所有数据/产物禁止删除、覆盖、归档后删原件。空间管理也不得例外。** 见workspaces/arch03/RETENTION_REQUIREMENTS.md；本接续未执行服务器删除。
+
+有效计划仍为workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md，正式每版前20条240任务。100条未授权，G64等待T64完整验收。
+
+## T80
+- 生产硬件876b883仍冻结；原ASIC14、240任务/6082560输出/total/sat通过。固定12平均112569周期(150MHz折算1332.5160568task/s)，本版PPA仍待验。
+- 旧t80_finish01在sequence第6阶段因O4混合端口误作CPU专用观察点失败，现场保留。9196556改为仲裁前mem_icb观察CPU，生产RTL/固件不改。
+- delta03全部833文件重建核验、ops核验及原竞争报告身份预检通过。新bundle light-light126-t80-v4-9196556-delta03，manifest fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d。ops light-light126-t80-finishops-9196556，manifest ca77bd7d0388fbd7f79398e254d3511d3c3cbab267ab714d2e8d5fc20c221cf6，请求SHA fca6e03b84c86efc64cec79cc4f73ff84b2006fdb06fda17999ca2923a4e2298。
+- **当前唯一服务器队列t80_finish02，驱动PID14008，开始2026-11-13T18:22:51.269828；18:25:26实读running/t80_synth。不要重启。** 目录delta03/runs/t80_finish02。CPU竞争复用经833文件仅观察器差异核验的原报告；新真实CPU10阶段恢复及A/B/A已通过，summary SHA7943123a4ad0b4ed6d4739562947c4962757866c4de5219fe4aca99b6e0c5aa2，目录delta03/runs/t80_finish02_sequence/t80_sequence。
+- 队列后续：synth→timing/drc/structure→门级14→SAIF12→功耗12→原240输出与同批浮点精度关联。失败即退出保留。18:22:00启动前锁空、无EDA，空间43009441792B。新阶段开始后锁归其子任务，后续必须重新读取。
+- 原先本地传输92632及短命令会话均完成；VNC3正常提示符，无传输占键盘。未碰VNC4，FTP仍没有成功上传，不重试旧上传队列。
+
+## T64
+- 独立3份RTL已完成：4×16、25组末3行，保留5行物理X映射60宏+W32宏，同T80 transport，数值不改，无新增ICG。
+- 本地10000随机+32定向阵列通过635648输出；14例通过354816输出/total/sat；首层jitter通过；1/2拍SRAM×预取0/1×无复位ABA共12任务304128输出通过，逐次X响应独立按绝对坐标检查，覆盖240次跨五行组窗口/任务、16个末三行块。
+- 新恢复fixture10阶段、3负向、76032输出通过。以上仅pin_mock/无CPU/无原mem_fab，不是服务器验收。证据handoff/team/evidence/T64_*.json，说明T64_IMPLEMENTATION_REPORT.md。
+- IRQ/WFI、竞争和恢复三套RV32镜像本地编译，元数据10项自检及T64接口3项测试通过。新增独立SoC/前20条/综合/门级/SAIF/PPA工具已准备并通过导入/语法检查，仍需实际服务器验证。新ID4b575309、cap000804bf、layout00100004、SHIFT10。
+- 关键本地目录：t64_systolic_array_20261113_180915_841354；t64_datapath_20261113_181252_855428(14)；t64_datapath_20261113_181750_703041(延迟/ABA)；t64_sequence_fixture_20261113_182348_658376；t64_firmware_20261113_1819；t64_sequence_firmware_20261113_1824；t64_contention_firmware_20261113_1825。
+- 目前无本地测试仍运行。T64未上传/未运行服务器，G64未开始。新T64包准备后可上传独立目录，但正式作业等T80队列完成及审核。
+
+## 失败与下一步
+- 早先4dd hash str/Path预检错误修复于e249，旧目录保留；本次tcsh双引号只读命令失败后改外层单引号；T64准备脚本默认GBK读取中文ABI失败后固定UTF-8，1818不完整固件目录保留，1819重新编译成功；测试误导入旧TestCase触发其GBK扫描后改模块导入，新3项通过。都没有借用失败产物。
+- 下一步先看正在运行的T80综合/锁/空间，继续T64工具审查与冻结打包；不启动重复队列、不清理旧8路。T80最终报告工具已在本地，尚未运行最终报告。
+- 本次准备把9196556之后T64实现和记录提交并同步个人分支codex/light-light126/n1-t80-t64-g64-20261113；推送结果以Git实际回执为准。
+
+---
+**最新保留约束：服务器旧8路全部数据和运行产物禁止删除、覆盖、或归档后删原件。见 workspaces/arch03/RETENTION_REQUIREMENTS.md。**
+
+# T80恢复观察器修复与T64本地进度 — 2026-11-13T18:15:41.129048+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。正式回归仅前20条240任务，100条仍未授权；G64需T64完整验收后开始。
+
+- T80生产硬件876b883未改；ASIC14及前20条240任务通过，6082560个输出/total/sat零失败，固定12平均112569周期。尚无本版PPA验收。
+- 服务器原t80_finish01驱动306658于18:08:20.803679失败退出：CPU竞争已通过，summary SHA32304ab2fd2c241377d576d1b35c7f672a67b18b5b44b8952124209d385e21f4；sequence第6阶段把原mem_fab O4的DMA读取误当CPU非法读取。18:10:40实读日志：arch03_t80_sequence_monitor.svh:322，时间84776658189fs。不是数值输出不符；恢复仍须真实CPU重测。
+- 修复提交9196556d64b560d0836c6885acc78890a1e00ad2：CPU观察改到仲裁前mem_icb，保留O4四类DMA路径证明。修复后本地10阶段/3负向/76032输出fixture通过；仍不代表真实CPU重测通过。队列仅允许在除该被动观察器外全部833文件身份相同的条件下复用原CPU竞争结果；6个范围/身份/锁测试通过。
+- 正在通过VNC3传输delta03及新ops，本地exec会话92632，进度local_runs/t80_fix03_9196556/transfer_state.json；**传输完成前勿发额外VNC键盘**。新bundle light-light126-t80-v4-9196556-delta03，manifest fcbac79ce3be1446a1c0055a7dad51428a4dcdea7d98bfe0b7fab717d9d3112d；ops light-light126-t80-finishops-9196556，manifest ca77bd7d0388fbd7f79398e254d3511d3c3cbab267ab714d2e8d5fc20c221cf6；request fca6e03b84c86efc64cec79cc4f73ff84b2006fdb06fda17999ca2923a4e2298。此时新服务器队列尚未启动。
+- T64已新建独立accel/linear16x4/systolic4x16及本地测试入口，不修改T80/N1生产文件。保留60X+32W宏、原五行物理映射；四行窗口跨组读映射带响应标签，25组末三行，2×64结果槽，32字输出FIFO。
+- T64阵列10000随机+32定向通过，635648有效输出，恰好64次MAC，连续II64，201275暂停拍，11取消及11复位。运行local_runs/t64_systolic_array_20261113_180915_841354，证据handoff/team/evidence/T64_ARRAY10000_20261113.json。独立整数模型；无CPU/宏/PPA。
+- T64首层带jitter本地完整DMA/共享SRAM fixture通过25344输出/total/sat，89754周期，FIFO峰值32；local_runs/t64_datapath_20261113_181028_413671。正在本地14例无jitter，exec48491，目录local_runs/t64_datapath_20261113_181252_855428。随后补2拍SRAM、跨组独立检查、无复位ABA及错误/取消测试。
+- 已失败/保留：旧4dd预检str/Path错误已e249修复；本次tcsh双引号嵌套只读命令报Unmatched，已改文件传递单引号命令；原sequence观察点错误如上。均不删原目录，不复跑旧队列。
+- Git本地HEAD9196556，远端最后3606046；后续提交T64及本检查点并推送。新包只有观察器变更，T64尚不进服务器。
+
+下一步：收取92632传输结果→新833文件/ops/原竞争证据预检→检查锁、进程与空间→新t80_finish02串行恢复测试及综合/严格STA/门级14/SAIF12/功耗12/同批精度。不得重复原batch20、原contention、旧失败队列；不得占用VNC4。
+
+---
+# 18:06接续检查点：T80功能冻结，PPA继续；T64本地准备
+
+有效计划仍为workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。
+
+- T80真实ASIC/E203前20条240任务通过，6082560个total/result/sat零失败；平均112568.75周期，宿主1978.422608182067秒（不含先前编译）。summary SHA34985a7070e03c6db33fdb74b00b5e00526bc7f96a9319616864fe6ade1f02b4，服务器原delta01/runs/t80_batch20_01/t80_batch20。固定12仍平均112569周期。
+- T80硬件876b883与delta02/aa1d15b生产RTL、IRQ固件字节相同；此实现固定用于后续测量。PPA/精度关联尚未验收，不能称完整阶段通过。
+- 新串行队列t80_finish01驱动PID306658，开始18:04:10.827144；18:05:18实读running，当前t80_contention。位置delta02/runs/t80_finish01；子阶段前缀t80_finish01_。禁止重启或并行另跑EDA。
+- 队列用operations/light-light126-t80-finishops-e249649；manifest dce16eae7080bd373caf6e492c527b0b5bc5223bc1e79e81b3fc01ef9b30178c，请求SHA a51ca9d59bd8108f316c80bf8254f70cd8cbbda0f046c0ccca2ae3201a43da4d。18:02:39数据、NumPy1.19.5、SAIF资格预检通过；18:03:15锁空且无EDA、空闲50544508928B。
+- 旧4dd工具在启动前检查时暴露str/Path SHA接口不一致；已在e249649修复，旧目录保留，旧工具未启动作业。现在无本地传输进程，VNC3为正常提示符，FileZilla仍未成功连接；工作区4未使用。
+- 本地将从功能冻结T80派生独立T64文件，保留T80各文件不变；服务器仍先完成T80证据。计划只对G64明确要求T64完整验收，因此不让本地安全派生闲等PPA，不借用T80 PASS。
+- T64静态映射说明已写T64_PREIMPLEMENTATION_NOTES.md；目前尚无T64 RTL。G64未开始。正式每版仍只20条；100条另需授权。
+- t80_report.py已准备但未部署/运行。Git本地HEAD e249649，远端3606046；下一重要节点同步。
+
+恢复先读本文件、计划及STATUS；再读取现有队列，不能复制历史状态当实时状态。
+
+---
+# T80检查点追加：2026-11-13 17:55
+
+先读有效计划workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md与本文件，再恢复。
+
+- 17:52:41 delta02重建成功；17:53:15独立重读833文件SHA全部匹配。路径为同项目bundles/light-light126-t80-v4-20261113_173111-aa1d15b53a79-delta02；manifest8f0f675ab510ba43de8e5275e9dba5d0f88e861a7c0562ae52220ce1ca7c6e0a。生产RTL/IRQ固件与原876b883字节相同。
+- 原delta01/t80_batch20_01驱动247023仍在运行；17:53:15通过178/240任务，4511232输出与total，零失败。估计余量589秒（含20%）；共享空闲44608520192B。不要启动重复批次。
+- 当前VNC3正在输入新operations包，**本地exec会话29180**，进度local_runs/t80_finish_ops_20261113_175104/transfer_state.json。此期间不要额外向VNC键盘输入。旧delta02传输会话78586已正常结束。
+- 新ops源4dd2a1d，3脚本manifest d0380127559db2099e4a5dfb4bb8032fa83b0150e329198e0b71be99f6fe00e3；请求SHA446fd2be71bd1bb3b541216a9ee9d6742b45ff652423ae74d685e29290259ef2。目标operations/light-light126-t80-finishops-4dd2a1d。旧7d5a457准备包未部署，保留但不用。
+- ops部署后先读取实际批次、锁、进程、空间，核验NumPy/浮点源/SAIF方法资格，再启动唯一t80_finish01队列。它等待原批次后顺序运行contention、sequence、synth、timing/drc/structure、gate14、SAIF12、power12、前20精度关联。任一失败即保留并退出，不重启历史或100条。
+- 5个精度范围/锁/原任务身份测试通过；报告工具t80_report.py已准备，正确时间加权与缺项保持空值的烟测通过；尚无服务器PPA报告，不可宣称验收。
+- Git本地HEAD4dd2a1d；远端已推至c1baf3a，下一次同步补4dd。T64只完成静态25组/99行无bank重复映射分析，见T64_PREIMPLEMENTATION_NOTES.md；尚未RTL开发。G64未开始。
+- 后续任务身份/源路径以local_runs/t80_finish_ops_20261113_175104/queue_request.json为准。正式回归只20条，100条必须另获授权。
+
+---
+# T80扩展工具传输与前20条回归检查点 — 2026-11-13T17:41:57.331361+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。当前独立分支codex/light-light126/n1-t80-t64-g64-20261113；原工作区和所有历史证据保留。
+
+## 已完成
+- T80生产RTL876b883：真实共享写ACK后经原mem_fab读回，解码仅消费读响应；80PE、原数值/缓存/并发限制保持。ASIC/E20314例354816个total/result/saturated全部通过；原总线四类事务逐笔检查通过。
+- 固定12任务平均112569周期，150MHz折算1332.5160568task/s。不是芯片实测；不继承历史N1/B0的面积、时序或功耗PASS。
+- 本地10000随机+32定向阵列、7协议用例、双拍SRAM/ABA和恢复fixture已通过，详见前检查点。本地不等同真实SoC。
+- 扩展包aa1d15b已完整打包校验，923文件、9386985B。实际生产RTL与876b883相同；新增门级、SAIF/PPA、真实CPU竞争/恢复工具及诊断固件。
+- delta02在本地从不可变delta01重建833文件全部SHA匹配；manifest8f0f675ab510ba43de8e5275e9dba5d0f88e861a7c0562ae52220ce1ca7c6e0a。为缩小可见传输，诊断镜像从包内ELF与元数据按原构建函数重建，结果与完整ZIP逐字节同SHA。
+- 新独立精度工具：T80前20条浮点复算+真实240任务逐坐标total/result/sat关联；4项范围/失败排空测试通过。尚未服务器执行。
+
+## 当前实际作业
+- 服务器delta01/t80_soc01已PASS，勿重跑。
+- delta01/t80_batch20_01：驱动PID247023，开始17:27:35.377905。最后17:36:42实读至少50/240PASS，无失败。不能把此观察当作实时终态。
+- delta01路径：/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01。
+- VNC工作区3正在接受delta02的tcsh Python here-document。传输脚本本地exec会话78586；精确进度local_runs/t80_delta02/transfer_state.json及line_*.txt。**不要在传输结束前额外向VNC键盘输入**。服务器delta02尚未完成核验。
+- 关闭here-document必须发送带引号的'T80_DELTA_AA1D15B'。上一delta01首次未引号结束触发末尾NameError，但重建与后续807文件独立核验已通过；保留此失败路径。
+- FileZilla17:31仍421，未上传扩展ZIP；未碰工作区4。共享盘最后空闲43665850368B(17:20:22)，后续启动前重新看。
+
+## 下一步及未验
+- 收取现有delta02传输结果、逐文件校验；读取原batch20终态，不重复启动。
+- batch完成释放锁后：真实CPU竞争/恢复、新综合、严格时序/面积/结构、同网表门级14、SAIF12及系统功耗。精度新ops小包尚待部署。
+- T64/G64尚未开发；按阶段冻结与测量后推进。禁止恢复N2/D1/D2、A广播或宽总线/省略共享写入路线。
+- 本轮正式只20条240任务6082560输出；完整100条必须另获用户明确授权。
+
+
+---
+历史交接记录如下：
+
+# T80真实ASIC14通过 — 2026-11-13T17:30:08.144129+08:00
+
+有效计划仍为workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md；独立工作区kwt1-t80-t64-g64。
+
+## 新完成
+- 876b883候选已在原平台、真实E203、厂商宏模型上完成14例，354816个total/result/saturated通过，原System Bus四类事务逐笔路径检查通过。
+- 固定12层周期：116752,113732,112106,112512,110446,108926,107166,107646,107206,111126,116972,126238。平均112569周期，按150MHz折算1332.5161 task/s；为ASIC RTL仿真折算，不是芯片实测。
+- 两个人工用例extremes72348周期、rounding48650周期。面积、时序、功耗仍未验。
+- 本地新T80恢复fixture：10阶段、3项负向观察器测试、3个无复位ABA任务76032输出通过。明确无CPU/原mem_fab，不作为真实CPU恢复验收。
+- 扩展工具已提交并推送3d42baa，之后又加入恢复fixture与诊断固件打包支持，尚未提交。
+
+## 目前实际运行
+- 服务器独立bundle：/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01。
+- t80_soc01已passed，PID236597，不重复运行。
+- t80_batch20_01正运行，驱动PID247023，开始2026-11-13T17:27:35.377905；最后17:29:23观察为running。固定前20条240任务，不是100条。
+- 启动前17:20:22独立807文件哈希全匹配，协作锁为空、同账户无EDA、可用43665850368B。运行中不要依旧观察清锁或重复启动。
+
+## 未完成/下一步
+- 读取现有batch20进度，不另起同批；之后真实CPU竞争/恢复、新综合、同网表门级14、SAIF12、系统功耗及精度关联。
+- T64、G64尚未开发。未经用户另行明确授权不跑100条。
+- 完整扩展工具和诊断固件需要新包部署，保留876b883生产RTL不变；FTP目前421，正准备重试，失败则继续可见VNC增量。
+- 所有历史包/失败路径保留；先读此检查点和计划后恢复。绝不续跑已取消的N2/D1/D2或旧归档队列。
+
+---
+
+# T80服务器送达与工具检查点 — 2026-11-13T17:20:38.769364+08:00
+
+有效计划仍为workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。工作区E:/fpga_race-two/kwt1-t80-t64-g64，个人分支codex/light-light126/n1-t80-t64-g64-20261113。
+
+## 已完成
+- 876b883候选的807文件精确运行子集已通过可见VNC重建到独立delta01目录；服务器打印manifest SHA882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749，和本地一致。无旧文件覆盖。
+- 本地14例、10000随机+32定向、7协议及两拍SRAM/随机停顿/ABA 6例均通过；详情见上一检查点和handoff/team/evidence/T80_*。
+- 新增独立T80门级、SAIF、功耗、时序/结构审核工具，完成语法/导入和观察器生成检查；尚未在服务器执行。
+- 门级完成证明改为只跟踪DMA在途，CPU原总线MMIO不阻止任务完成。独立RTL单测通过CPU竞争状态读取、已接受DMA等待响应、结束后再出现DMA则拒绝，见T80_GATE_PROOF_LOCAL_20261113.json。
+- CPU竞争、十阶段取消恢复/ABA固件已编译，新ABI和真实共享读回计数已适配；未执行E203。
+- first20浮点检查工具t80_precision.py准备完成，保留原100条成员身份核验，只重算前20条。尚未取得本阶段精度PASS；软件精度与T80硬件回执关联仍需补齐。
+
+## 失败与限制
+- FTP仍421，采用VNC增量。tcsh要求带引号结束符，原无引号结束行进入了Python；重建/807文件校验和成功打印后，末行产生NameError。它不是重建失败或硬件失败；另一次独立全文件校验正在准备，必须读回结果后启动。
+- 一次工具输出省略内容导致怀疑窗口模块缺声明；读原始字节和Git diff证实声明完整，无源码改动。尝试Ctrl+C未退出tcsh收集，继续原收集后重建成功。
+- 本地工具生成一次cwd错误未写文件，纠正目录后生成完成。历史失败保留。
+
+## 现场与下一步
+- VNC工作区3，原共享目录下新delta01；没有访问workspace4。
+- 最后尚未启动T80服务器作业；新全文件/空间/锁/进程校验由会话22605输入，需读取终态和截图。
+- 启动顺序：先实际E203首层，随后同次编译其余13例；再冻结完整工具，首20条240任务及PPA。T64/G64未开始，不擅自跑100条。
+- 当前服务器候选仍876b883；此后本地改动只补工具与监测，无生产RTL更改。不要在已部署包中替换源码，后续修复另打包。
+
+---
+
+# T80传输前检查点 — 2026-11-13T17:05:35.013632+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。
+工作区E:/fpga_race-two/kwt1-t80-t64-g64，分支codex/light-light126/n1-t80-t64-g64-20261113。
+
+## 已完成
+- 受测候选876b883已推送。真实读回transport、原mem_fab上游仲裁安装器、T80独立ABI、IRQ固件和首20条运行入口已实现。
+- 本地14例354816输出、10000随机+32定向块794560输出、7个协议场景通过。
+- 后续两拍SRAM/jitter/prefetch0和1/无复位ABA完成6任务152064输出，total/result/saturated全部通过。证据T80_LOCAL_ABA_20261113.json。所有本地会话已结束。
+- 完整包9270205字节，SHA65464b46f8fde02de54db95b61f64d77152a47b96481b75ccab07bfe48908945，已送开发板，未送比赛服务器。
+- FTP两次返回421连接用户过多。准备通过现有可见VNC终端逐行传送增量，不新建服务器隐蔽连接。
+- 增量是876b883精确807文件子集，本地全量重建及固件哈希通过；最终manifest SHA882f98d5059ca283c642b60085fd5b3913c6dacd92825ba0b4863e26397a0749。
+
+## 未完成
+- 服务器真实T80安装、E203及原mem_fab仿真仍未执行；本地结果不能代替这些验收。
+- T80首20条240任务、精度、综合、门级、功耗未完成。门级/功耗/CPU竞争恢复入口尚需适配。
+- T64/G64未开始，完整100条未授权，禁止自动执行。
+
+## 现场与恢复入口
+- 上次服务器观察16:44:16：无团队锁、同账户无EDA进程，共享盘26851334208字节可用；启动前需重查。
+- 增量目录local_runs/t80_delta01，transfer_state.json记录55行和next_line；此检查点时next_line=0，尚未输入。
+- 基目录/tmp/s4_21usr_n1_20261113_0210/light-light126-n1-v4-20261113_045945-0f62e4120790；新目录为共享项目bundles/light-light126-t80-v4-20261113_165244-876b883d9519-delta01。仅创建新目录，逐文件核哈希，不修改旧包。
+- t80_apply_delta.py为独立操作工具，不属于876b883硬件；保存其哈希并后续单独提交。
+- VNC工作区3终端当前截图大部分黑色，先解决可见性，不能盲输。workspace4不操作。
+- 原协议测试首次仅导出路径失败、已新目录重跑通过；所有旧失败保留。旧N1归档03、N2/D1/D2及其他队列不恢复。
+
+---
+
+# T80实施检查点 — 2026-11-13T16:51:17.644660+08:00
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md。
+工作区E:/fpga_race-two/kwt1-t80-t64-g64；分支codex/light-light126/n1-t80-t64-g64-20261113。
+
+## 已完成
+
+- 新计划原文已保存；从70de850独立开发，计算RTL仍是9305c694的N1，未使用N2门控RTL。
+- T80独立transport：每字源读→共享写成功→同址共享读→解码FIFO；无写ACK数据转发。保留额度3、FIFO容量和全部数值/缓存规则。
+- install_t80把公平仲裁移到原mem_fab上游；O4只接单入口router。已通过5项Python接线/计时契约检查，但尚未在实际服务器平台安装或编译。
+- 新ID4b575308、cap000705bf、layout00100004、SHIFT10；独立IRQ固件已编译并核哈希，不等于CPU已执行。
+- 本地14例354816输出的total/result/saturated通过；固定12层本地平均45384.917周期。这里只包含实际SRAM RTL、仲裁/路由与pin_mock，尚未执行原mem_fab或E203，不当作正式吞吐。
+- 独立transport7例通过：源/共享写/共享读/输出写4类错误，读请求被反压时取消排空，无复位重启；读响应故意与源数据不同，证明解码消费真实读响应。
+- T80新增四段计时/原总线逐笔路径观察器、ASIC入口、综合入口和只允许前20条240任务的批量入口。
+
+## 正在运行和未验证
+
+- session38407已完成：10000随机+32定向块、794560输出，sum/total/result/sat、64次MAC、暂停、标签回绕、11次取消及11次局部复位通过。证据T80_ARRAY10000_20261113.json。
+- session7466：两拍SRAM、jitter、prefetch0/1、无复位A/B/A，尚未读取终态。
+- 新SoC观察器、安装器只做本地静态契约检查；尚未真实E203/原mem_fab验证。
+- 所有T80正式20条精度、ASIC、门级、面积、时序、SAIF/功耗都未验收；T64/G64未开始。
+- t80_server暂提供soc/build/synth/batch20，后续T80门级/活动/功耗与CPU恢复竞争入口还需适配。绝不把旧N1 PASS用于新配置。
+
+## 失败与保留
+
+- 首次protocol测试7例仿真通过，但报告导出因__file__相对路径失败；改为resolve后在新目录完整重跑通过。旧失败目录保留。
+- VNC只读查询首次超过helper1000字限制未输入；分段后成功。没有因此启动远端任务。
+- 原N1归档03尚未启动，不恢复旧N2/D1/D2队列。
+
+## 现场和下一步
+
+服务器最后只读观察2026-11-13 16:44:16：无团队锁、同账户EDA进程为空、共享可用26851334208B；VNC工作区3，未动工作区4。尚未上传T80包或启动服务器作业。
+下一步读取本地两个作业终态，完善T80契约/保护，提交打包并按原FileZilla路径上传。先真实ASIC首层再14及固定前20条，串行综合/门级/活动功耗。保持同12性能任务和同库条件。
+每次恢复先读本文件、原文计划和T80_T64_G64_EXECUTION.json；未经明确批准不得跑完整100条。
+
+---
+
+# T80/T64/G64 新计划开始 — 2026-11-13
+
+有效计划：workspaces/arch03/N1_T80_T64_G64_IMPLEMENTATION_PLAN_20261113.md（用户原文完整保留）。
+
+## 已完成
+
+- 从70de850建立独立工作区 E:/fpga_race-two/kwt1-t80-t64-g64 和个人分支 codex/light-light126/n1-t80-t64-g64-20261113；原工作区未提交的答疑审阅保持不动。
+- 新代码以9305c6948c764fed01fe86b20bb3db94170299ab的N1计算/数值实现为依据；不从N2门控实现派生。
+- 读取新计划、旧终止检查点和答疑核查，并视觉检查答疑第3/4页。N1原仲裁在O4之后，需移到原mem_fab上游；所有四类DMA事务经过原分路器。
+- N1历史1200任务和PPA结果保留，不能充当T80或最新总线要求的PASS。
+
+## 当前任务与未完成
+
+1. T80：原32位System Bus上游公平CPU/DMA仲裁；成功共享写ACK后才能对同址发读；解码器只消费共享读响应。保持80 PE、N1编码、缓存、源额度3和FIFO容量。
+2. T80独立数值/协议、本地14、真实E203固定前20条240任务、同网表功能门级、固定12任务SAIF/PPA、同批浮点精度和报告。
+3. T64：在冻结T80上改64 PE、25块末块3行；保留五行物理缓存容量并解决跨组映射；独立验收。
+4. 仅T64完整验收后进入G64真实工艺ICG；不恢复原N2/D1/D2路线。
+5. 各版本均禁止自动完整100条；三版对照后再按计划申请。既有归档03从未启动，不自动恢复。
+
+## 现场与失败路径
+
+- 新任务尚未连接服务器或启动作业。旧观察仅为15:13:58：无团队锁/EDA进程；不能当作实时状态。
+- 本机项目venv没有pypdf；使用已有PDF第3/4页渲染核对总线条款，不安装依赖影响工程。
+- 原N1归档01/02失败证据、N2本地代码/测试及所有历史结果保持。
+
+恢复时先读本检查点、原文计划和T80_T64_G64_EXECUTION.json，核对代码与实际运行回执，再继续。
+
+---
+
+**2026-11-13 15:05 RESUMED BY USER:** Read [resume checkpoint](CONTEXT_CHECKPOINT_20261113_1505_N2_RESUME.md) and [current results](workspaces/arch03/PROGRESS_N1_N2_20261113_1505.md). User requested GitHub sync then continuation. N1 model-scope acceptance complete; N2 local array and datapath14 pass, server/PPA pending. Board responds after reboot; remote lock/process/space not yet rechecked. Archive03 NOT launched. No duplicate old jobs.
+
+**2026-11-13 14:37 PAUSED BY USER / BOARD SAFE TO POWER OFF:** Read [pause checkpoint](CONTEXT_CHECKPOINT_20261113_1435_N2_PAUSED.md). N1 accepted declared pre-layout model. N2 local10000+32 array and full datapath14 PASS; own ASIC/vendor/PPA pending. All local tests ended. VNC/FZ absence confirmed after Exit viewer; workspace4 untouched. Remote jobs not stopped; own archive02 already failed/dead, team lock absent14:33:58. Copy-only archive fix43tests passed locally, NOT deployed; no archive03/no source deletion. Do not resume until instructed.
+
+**2026-11-13 14:15 N2 ARRAY LOCAL PASS:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1415_N2.md). N1 accepted in declared pre-layout model scope. N2 three-way cycle equivalence passed10000 random+32directed blocks; wholeSoC/vendor/PPA pending. Archive01 failed safely on canonical request copy hash;43-test fix a02fd56 synced, archive02 prepared NOT launched. No duplicate jobs or deletion.
+
+**2026-11-13 13:35 N1 ACCEPTED IN DECLARED MODEL SCOPE; N2 NEXT:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1335_N1_N2.md) and [independent review](workspaces/arch03/N1_FINAL_REVIEW_20261113.md). N1 precision/function/declared STA/area and pre-layout power model review complete. No physical unknown-state bound claimed. Original24 diagnostic and alias reviews complete; noN2codeyet. Preserve all old evidence; durable runtime archive pending. VNC3idle/FZclosed.
+
+**2026-11-13 13:05 N1 REVIEW CONTINUES:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1305_N1.md). Safe obsolete build retention/removal completed; original187134 resumed, 10/24 diagnostic cases done at13:04. Both linked queries complete; scoped unknown control pins zero. Final precision/report complete; independent power admission pending, noN2. Do not repeat cleanup/jobs. VNC3idle/FZclosed.
+
+**2026-11-13 12:47 FOREGROUND OLD BUILD RETENTION:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1247_N1.md). VNC3 running verifiedcopyof76oldbuildfiles/172MB; originalsnotdeleted. ExistingSAIFdiagnostic187134 waitingENOSPClock, noPTyet, do notduplicate. N1globalquerycomplete, finalprecision/powernumberscomplete. NoN2.
+
+**12:40 storage update:** ExistingSAIFdiagnostic187134 waits before sharedlock creation (ENOSPC), noPTstarted. Do NOT duplicate. N1globalquerycomplete. Inspectold_build_inventory.json for backed-up obsolete buildfiles before cleanup; none removedyet. Read1236checkpointincrement.
+
+**2026-11-13 12:36 N1 POWER REVIEW ACTIVE:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1236_N1.md). Finalreport/FLOAT1200/unknown12 complete. NewN1linkedquery185005 andsame-SAIF static-probability diagnostic187134 launched; inspectstates, do notduplicate. OriginalN1weighted61.77735mW/12.23644uJ remains unacceptedpendingimpactreview. NoN2. VNC18874435/workspace3idle/FZclosed.
+
+**2026-11-13 12:20 N1 FINAL REPORT EXPORTED:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1220_N1.md). ASIC/FLOAT1200 join passed; weighted61.77735mW/12.23644uJ, still power-review pending. Original118695 collectingN1unknown12. B0 linked-query completed; new actualSAIF all-state diagnostic prepared/notrun. NoN2. VNC18874435/workspace3idle/FZclosed.
+
+**2026-11-13 11:55 N1 POWER12 COMPLETE:** Read [checkpoint](CONTEXT_CHECKPOINT_20261113_1155_N1.md). All12 power cases finished; final export118695 running at11:52. Do not repeat power, SAIF or precision. New linked-unknown query tool locally tested, not deployed/run. N2 awaits independent acceptance. VNC18874435/workspace3idle, FZclosed.
+
+**2026-11-13 11:45 N1 LAST POWER RUNNING:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_1145_N1.md). Unique84627 atpower12 child116631, 11powersdone. Reportobserver116442 willautomaticallyexportthenN1unknowninventory; donotduplicate. VNC18874435/workspace3idle/FZclosed. N2notstarted.
+
+**2026-11-13 11:30 N1 POWER RECOVERED:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_1130_N1.md). Unique84627/power_recovery02 completedpower03/04; power05 child92846 last11:25. No duplicate launches. VNC reconnectedNEW18874435/workspace3. Finalreporttoolpreparednotdeployed; noN2. FZclosed.
+
+**2026-11-13 11:09 STORAGE RECOVERY STILL ACTIVE:** Read [increment](CONTEXT_CHECKPOINT_20261113_1045_N1.md). Precision100/SAIF12 andp01/p02 done.330.96MB duplicated inputZIPs safely retained/removed, but shared NFS filled again; recovery p03 failed before lock acquisition. Preserve failed controls; no power03 output/N2. Read-only large-file inventory foreground still running in VNC3. FZclosed.
+
+**2026-11-13 10:45 N1 POWER QUEUE FAILED AT P03:** Read [recovery checkpoint](CONTEXT_CHECKPOINT_20261113_1045_N1.md). Precision100/SAIF12 passed; power01/02 passed. Driver237710 ended ENOSPC, shared lock absent. Verified duplicate ZIP cleanup saved17.8MB. Prepare fresh p03-p12 recovery, do not repeat original queue. No N2. FZclosed/VNC3idle.
+
+**2026-11-13 10:34 N1 FORMAL PRECISION PASSED:** Read [latest checkpoint increment](CONTEXT_CHECKPOINT_20261113_1030_N1.md). Same100 original FLOAT/4800HEX fresh audit passed1200 tasks/30412800 outputs, zero integer/byte differences or clipping/saturation; max layer NRMSE0.1933721614699203%. Original queue237710 runs power01 child31478 as of10:31; do not repeat precision/SAIF. Final independent ASIC join and power review pending, no N2. Cloudb9fc9d6 verified. FZclosed/VNC3 idle.
+
+**2026-11-13 10:30 N1 SAIF12 PASSED:** Read [new recovery checkpoint](CONTEXT_CHECKPOINT_20261113_1030_N1.md). Original SAIF ended10:23:56,12 files1.168GB. Existing queue237710 is running precision child26305; actual10:29 computed100/1200/30412800, final identity check still running. Power12 follows automatically; do not duplicate. New final-review tools04825e4 are server-deployed inside precisionOPS02; final export and N1 unknown inventory NOT run. No N2. FZclosed/VNC3 idle.
+
+**2026-11-13 10:12 N1 ACCEPTANCE CONTINUES:** Read [latest checkpoint and increment](CONTEXT_CHECKPOINT_20261113_1000_N1.md). Original SAIF186577 confirmed10/12; L11child314052 exited0 and postprocess pending, not yet counted. Existing observer237710 owns the later precision/power sequence; do not duplicate. New read-only N1 unknown inventory support passes17 local checks, not deployed. Final export request/launch scripts prepared only. No RTL change or N2. FZclosed/VNC3 idle. Cloud012743c was verified before this increment.
+
+**2026-11-13 10:00 N1 ACCEPTANCE CONTINUES:** Read [latest checkpoint](CONTEXT_CHECKPOINT_20261113_1000_N1.md). Actual09:56 SAIF186577 completed9/12, L10child284416; existing observer237710 will run precision then power12, do not duplicate. ArchiveOPS fe65a94 deployed and smoke verified, no archive/deletion yet. Shared disk recovered to9.04GB at09:44. Final report request prepared only. N1 not yet accepted; no N2. FZclosed/VNC3 idle.
+
+**2026-11-13 09:35 N1 CONTINUES:** Read [latest checkpoint](CONTEXT_CHECKPOINT_20261113_0935_N1.md). Actual09:32 original SAIF186577 at6/12, L07child243709. Observer237710 already queues precision/power12; no duplicate launch. Own1200/gate14/localFLOAT100 done; formal precision join, power and independent review pending. No N2. New cycle/byte comparison and stage handoff prepared; FZclosed/VNC3 idle.
+
+**2026-11-13 09:25 N1 SERIAL CONTINUATION RUNNING:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_0925_N1.md). Original SAIF186577:5/12 complete,L06 running as of09:19. New observer queue237710 waits for that exact job, then runs N1 precision and power12 under the original lock; do NOT manually start duplicate precision/power. Own1200/gate14 passed; formal precision/power/independent admission remain pending, no N2. Local100 FLOAT numeric probe completed1200 layers: max aggregated layer NRMSE0.1933721614699203%, no clipping/saturation; formal server HEX/RTL join still pending. FZclosed/VNC3 idle; shared almost full, private522GiB; final durable archive still required.
+
+**2026-11-13 09:04 PRECISION DEPLOYED, NOT RUN:** Read [09:04 increment](CONTEXT_CHECKPOINT_20261113_0900_N1.md). All3 uploaded files server-hash verified; private tools/data and NumPy1.19.5/488 members deployed and smoke passed. FZclosed/VNC3 idle. Unique SAIF186577 still owns formal queue; do not run precision/power concurrently. Prepare locked precision session, then finish N1 admission before N2. No source deletion or RTL changes.
+
+**2026-11-13 09:00 N1 ACCEPTANCE CONTINUES:** Read [new full recovery checkpoint](CONTEXT_CHECKPOINT_20261113_0900_N1.md). User explicitly reaffirmed: finish N1 precision/power then enter N2 without step confirmations. Gate14/own1200 passed; unique SAIF186577 at L03, first2 complete as of08:57. Original100 FLOAT members all exact; new precision tools/data/private NumPy deploying via existing FTP, not yet run. Cloud d390d879 verified; production9305 unchanged. Do not repeat jobs or close active FZ until queue empty.
+
+**2026-11-13 08:36 N1 GATE14 PASS / SAIF12 RUNNING / FLOAT100 EXACT:** Read [latest checkpoint](CONTEXT_CHECKPOINT_20261113_0755_N1.md). Unique SAIF driver186577, started08:32:45, original0f62. Gate14 passed14/354816. All100 original float NPZ hashes plus W/b matched server manifest; original ZIP container still unavailable. Separate recovered-member precision audit prepared, not yet deployed/run. Do not repeat batch1200/gate14 or enter N2. FZclosed/VNC3 idle.
+
+**2026-11-13 08:12 N1 GATE14 STARTED / FLOAT001 EXACT:** Read [latest checkpoint increment](CONTEXT_CHECKPOINT_20261113_0755_N1.md). Unique gate14 driver161539 started08:11 in0f62; do not repeat. Own1200 passed. Timing diagnostic complete. WAV100 original SHA join passed; sample001 full float NPZ recovered with exact original SHA. Other99 candidates and full precision pending, no N2. FZclosed/VNC3 idle. Cloud7050fbc; production9305 unchanged.
+
+**2026-11-13 07:55 N1 OWN1200 PASSED:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_0755_N1.md). Actual07:53 full1200/30412800 outputs+totals, zero failures; final independent report pending. Collect original lock and controls94482 terminal state before next stage. Shared disk near full; small WAV hashlist FTP failed553, not uploaded. EvidenceOPS b42990b deployed; no gate/SAIF/power/float100 PASS, no N2. VNC3 idle/FZclosed, preserve prior jobs.
+
+**2026-11-13 06:33 N1 CONTINUES:** Read [06:33 increment](CONTEXT_CHECKPOINT_20261113_0600_N1.md). Unique batch02 PID18736: actual06:30 completed488/1200, zero failures,12367872 outputs+totals. Full gate/activity/power/float100 pending; no N2. FTP small manifest download denied550; no file retrieved, FZclosed. Local audio-index comparison and auxiliary/control tools preparing, not remotely launched. VNC3 idle after two bounded B0 queries; do not duplicate batch or cleanup.
+
+**2026-11-13 06:00 N1 BATCH02 RUNNING:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_0600_N1.md). UniquePID18736/0f62 OPS, actual05:57 progress176 tasks/4460544 outputs+totals, zero failures; original shared lock/private ledger verified. Full80 total33 limited structure checks passed; own full1200/gate/SAIF/power/float100 still pending. Correct B0 report SHA machine-verified in checkpoint; earlier transcription failures preserved. No N2. FZclosed/VNC3 idle; do not duplicate launches.
+
+**2026-11-13 05:30 NEW OPS UPLOAD SUCCEEDED:** Read [current recovery checkpoint](CONTEXT_CHECKPOINT_20261113_0530_N1.md). Eight exact old input ZIP duplicates retained/hash-verified then removed; results untouched. New0f62 OPS uploaded successfully, not yet server-unpacked/runtime-verified, no batch02 yet. FZclosed/VNC3 idle. Production9305 unchanged; own1200/PPA/fullfloat pending, no N2.
+
+**2026-11-13 05:10 NEW OPS FROZEN; FTP FAILED ON FULL SHARED DISK:** Read [05:10 increment](CONTEXT_CHECKPOINT_20261113_0458_N1.md). Cloud0f62e41 verified, new9.01MB/807-file package locally+board verified; FTP553 failed and server confirms no new ZIP. FZclosed. Eight exact old DMA16/MMIO duplicate inputZIPs133216003B under local identity review, NOT copied/deleted yet. Own stale lock already reviewed/released; no batch02. Preserve all RTL9305/B0/R4/failed01 evidence.
+
+**2026-11-13 04:58 N1 PROCESS FIX READY FOR FREEZE:** Read [new recovery checkpoint](CONTEXT_CHECKPOINT_20261113_0458_N1.md). Batch01 failed after65 verified tasks on shared owner.tmp; own exited lock manually released with preserved evidence04:52. New N1 private-ledger fix/tests/review ready, not committed/deployed yet; prepare new full OPS then batch02. RTL9305 unchanged. Cloud07ce5e1 verified, no N2. VNC3 idle/FZclosed.
+
+**2026-11-13 04:48 N1 BATCH FAILED ON SHARED OWNER WRITE:** Read [04:48 checkpoint increment](CONTEXT_CHECKPOINT_20261113_0430_N1.md). 65 tasks/1647360 outputs passed prefix only; driver failed04:41 ENOSPC owner.tmp. Own stale lock275224/287728 remains; exact processes and task66 have ended, root recovery review pending, do not auto-clear. N1 process-ledger tool fix in progress; no RTL change/no batch02 yet. Full80 mapped narrow checks passed. Cloud07ce5e1 verified; no N2.
+
+**2026-11-13 04:32 N1 SYNTH COMPLETE, OWN1200 STARTED:** Read [new checkpoint](CONTEXT_CHECKPOINT_20261113_0430_N1.md). Synth finished04:15, preliminary budget0.951148688mm2/positive slack/clean constraints/0latches; full audit still pending. Structure03 finished; own batch100_01 uniquePID275224 just started, inspect before repeat. Structure01/02 preflight failures preserved; verified duplicate OPS upload ZIP removed with full copies retained. B0/R4 untouched. No N2. VNC3 idle/FZclosed.
+
+**2026-11-13 04:10 SHARED DISK FULL; N1 CONTINUES IN PRIVATE TMP:** Read [04:10 increment](CONTEXT_CHECKPOINT_20261113_0405_N1.md). Shared free1048576B; do not copy outputs there. N1 original169157/174746 still running. Control probe254486 finished558 selected/0unknown, but all1280 macro pins missing; exact SHA and missing list saved. No power approval/no N2. VNC3 idle/shared9305cwd, FZclosed.
+
+**2026-11-13 04:05 CONTINUES:** Read [new checkpoint](CONTEXT_CHECKPOINT_20261113_0405_N1.md). Original N1 synth169157/174746 remains running; B0 full12 unknown inventory complete. New controlops3165 deployed/hash-verified, unique readonly control probe254486 started04:03 in private/tmp; inspect before any repeat. Latest cloud3165fb3 verified. Archiveops deployed, durable runtime archive not started. Own N1 batch/PPA/float100 still pending, no N2. VNC3 idle/shared9305cwd, FZclosed.
+
+**2026-11-13 03:55 CONTINUES:** Read [checkpoint03:55 increment](CONTEXT_CHECKPOINT_20261113_0332_N1.md). N1 original synth169157/174746 still running, now optimization output/no mapped.v. B0 all12 unknown inventories complete and exact common identity checked; impact unapproved. Archiveops0f3a46d deployed/hash-verified, archiving NOT started. Full100 float source alternative ruled out; original ZIP missing. Local selected-control tool under independent review, not deployed. VNC3 idle/FZclosed; no N2.
+
+**2026-11-13 03:32 N1 CONTINUES:** Read [current checkpoint](CONTEXT_CHECKPOINT_20261113_0332_N1.md). R4 authorized archive completed and raw duplicate removed only after full proof; do not repeat. Original N1 synth169157/174746 still running at03:29. New reviewops deployed; B0 L01 full unknown inventory complete, remaining11 PID226051 running. No power approval/N1 own1200/PPA yet, no N2. VNCworkspace3 idle/shared9305cwd, FZclosed.
+
+**2026-11-13 03:12 R4 ARCHIVE COMPLETE, N1 CONTINUES:** Read [checkpoint and03:12 increment](CONTEXT_CHECKPOINT_20261113_0301_N1.md). Approved R4L01 full-restore proof passed; verified6.987GB gzip returned to shared storage, duplicate raw removed, net5.608GB saved. Do not rerun archive/resume. Original N1 synth last03:06 running169157/174746. New B0 unknown tool frozen locally, not deployed; runtime archive tool still preparing. VNCworkspace3 idle shared9305cwd/FZclosed. N1 own1200/PPA/float100 still pending, no N2.
+
+**2026-11-13 03:01 CONTINUING N1:** Read [new checkpoint](CONTEXT_CHECKPOINT_20261113_0301_N1.md) and active plan. Original synth169157/174746 still running; approved R4 archive186061 still compressing, raw retained. New41b OPS deployed/verified; 18f7960 cloud sync verified. B0 inventory02 collected original weighted69.8371mW/14.2013uJ but unknown impact remains open. N1 full1200/PPA/float100 pending, no N2. VNCworkspace3 idle shared9305cwd, FZclosed.
+
+**2026-11-13 02:45 CONTINUING N1:** [checkpoint increments](CONTEXT_CHECKPOINT_20261113_0215_N1.md) updated. New41b OPS uploaded/unpacked, all781 hashes and actual Linux runtime identity passed. Original9305 synth169157/174746 and approved R4 archive186061 continue; raw retained. B0 read-only inventory01 rejected cumulative small-file budget, no new power approval. FileZilla closed; VNCworkspace3 idle shared9305cwd. N1 own1200/PPA/float100 still pending, no N2.
+
+**2026-11-13 02:35 CONTINUING N1:** [checkpoint and increments](CONTEXT_CHECKPOINT_20261113_0215_N1.md) are current. ASIC14/recovery/contention passed; synth169157/child174746 runs in private server/tmp with original team lock. Approved R4 staged archive186061 now compresses in /tmp/s4_21usr-r4-l01-20261113_0233, raw retained. Earlier archive01 failed storage guard; failed partial only was removed with receipt. Tools41b0846 synced; new runtime ZIP prepared, upload in progress (not yet verified). Shared storage fluctuates near full; /tmp has about770GB. Preserve original9305 and all historical evidence. No N1 full1200/PPA/float100 acceptance and no N2.
+
+**2026-11-13 02:15 N1 ASIC14/RECOVERY/CONTENTION PASS, SYNTH RUNNING:** read [new checkpoint](CONTEXT_CHECKPOINT_20261113_0215_N1.md) and the active N1→N2→D1→D2 plan. Real ASIC14 checked354816 outputs; full cycles29711 mean /5048.635task/s. Own1200/PPA/float100 remain pending. Shared disk filled by other writes; R4 archive01 stopped safely, raw intact; only failed3.240GB partial disposed with receipt. Found independent server/tmp with771GB free: verified frozen9305 clone in private0700 `/tmp/s4_21usr_n1_20261113_0210`; unique synth169157 running there with ORIGINAL shared lock. Do not repeat passed jobs or archive01. New staged-archive/runtime-path helpers preparing locally, not deployed. VNCworkspace3 idle shell still shared9305cwd; FZclosed. Temporary results must be archived back for delivery.
+
+**2026-11-13 01:50 N1 ASIC14 RUNNING:** read [active plan](workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md) and [checkpoint with 01:50 increment](CONTEXT_CHECKPOINT_20261113_0120_N1.md). N1 implementation9305c69 is cloud-synced and deployed in its unique N1 bundle; 4800 HEX identity audit passed. Actual ASIC14 PID130549 is compiling, no hardware PASS yet. User explicitly approved verified R4 L01 gzip/raw-duplicate removal; unique low-priority archive PID131387 is running, raw retained until full proof. No repeat launches. VNC workspace3 is an idle shell; FileZilla closed. Full100 FLOAT and B0 power impact review remain open; N2 must wait.
+
+**2026-11-13 01:20 N1 LOCAL PASS, SERVER SPACE LIMITED: read [active plan](workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md) and [new checkpoint](CONTEXT_CHECKPOINT_20261113_0120_N1.md). 10000 random blocks + directed, localDMA14, latency1/2 recovery, new firmware/data/monitor checks passed; NO new ASIC/PPA PASS. N1 EDA tools preparing. VNC workspace3/window18874436 restored; no EDA/lock at01:09, shared space nearly full. Old gateprobe wave cleanup only under review, no deletion yet. Full100 FLOAT and B0 power review open. User explicitly requests continuous progress.**
+
+**2026-11-13 00:55 N1 IMPLEMENTATION ACTIVE: read [new approved plan](workspaces/arch03/IMPLEMENTATION_PLAN_N1_N2_D1_D2_20261113.md), [checkpoint](CONTEXT_CHECKPOINT_20261113_0055_N1.md), [acceptance](workspaces/arch03/N1_ACCEPTANCE_20261113.md). New branch arch03-n1-n2-d1-d2 from cd4a63a; B0 backups preserved. Three local agents implement N1 RTL/data/pressure tests in disjoint new files. No N1 PASS or server job yet. Full100 FLOAT source and B0 unknown-power review remain open. B0 report completed with69.8371mW/14.2013uJ preliminary; old report/queue must not restart. VNC closed; no pending input.**
+
+**23:58 BACKUP VERIFIED: [backup index](handoff/team/freezes/systolic-b-20261112_2320/README.md), [checkpoint](CONTEXT_CHECKPOINT_20261112_2345_B_BACKUP.md). Source39a23bb cloud tag fixed; local255MB core artifacts verified. Server63653 files/7.006GB frozen into1.261GB archive, all file hashes verified; originals unchanged. Original power12/activity12 and R4 archive10 complete. Only read-only report293353 remains, last23:56 L12; excluded from archive. Await new plan; do not repeat any jobs or move tag.**
+
+**23:45 USER-REQUESTED BACKUP: read [backup checkpoint](CONTEXT_CHECKPOINT_20261112_2345_B_BACKUP.md). Local255MB copy verified; cloud tag arch03-b-backup-20261112-2320 verified at39a23bb. User released VNC, reopened workspace3. Original B power12/activity12 and R4 archive10 completed; no EDA running. Read-only report293353 still auditing. Unique server backup launched23:45; inspect state before claiming complete or taking any further action. Do not duplicate launch.**
+
+**22:15 USER-REQUESTED HANDOFF: read [current checkpoint](CONTEXT_CHECKPOINT_20261112_2215_SYSTOLIC_B.md) and [stage report](workspaces/arch03/SYSTOLIC_B_STAGE_HANDOFF_20261112.md). VNC client closed and verified absent; teammate has control, do not reconnect until user confirms availability. No new development/jobs. Remote B320367/320434 and lossless archive166071 continue; last observation22:01 B10/12, power unavailable. SIX obsolete-wave cleanups complete. R4 L02 raw duplicate removed only after full lossless proof; gzip7669475725B retained. L03-L12 archive running, later progress unknown. Older entries below are history.**
+
+**21:40+ ACTIVE: read [current checkpoint](CONTEXT_CHECKPOINT_20261112_2136_SYSTOLIC_B.md). R4 L02 lossless restore verification PASSED:12567832939B restores from7669475725B gzip; original raw still retained. VNC18874436/workspace3 is now an idle shell. New local two-worker L03-L12 archive tool passed roundtrip and wrong-hash preservation checks, NOT committed/deployed/run yet. B original queue continues; no sixth deletion. Latest cloud315a8f6 verified.**
+
+**21:12:44: B activity6/12, power0/12; original queue320367/activity child320434 continues without error.** Read [20:26 checkpoint including21:12 updates](CONTEXT_CHECKPOINT_20261112_2026_SYSTOLIC_B.md), then the B plan. Own1200 and R4 SAIF method already passed. Five cleanups finished524880555968B, all R4/B protected. Free98517909504B and decreasing with other shared writes. Another old29.86GB D3 wave now has a verified independent reaudit link; see cleanup candidate JSON, **not deleted, no sixth cleanup script or receipt**. Latest independently verified cloud head315a8f67538b209869345491591497b5639c4acf. New local722-file ZIP not uploaded. **VNC18874436/workspace3 foreground READ_ONLY_MONITOR is active again**, refreshing every30s; do not type shell commands into it. It exits on queue completion/failure or free<12GiB; Control_L c stops only this monitor. No pending Return/local exec. No repeated cleanup, launch or passed verification. Older entries are dated history.
+
+**19:50: unique B power continuation is RUNNING driver320367/activity child320434.** User-requested completed evidence sync is verified atf6f704c. Read [new checkpoint](CONTEXT_CHECKPOINT_20261112_1950_SYSTOLIC_B.md), [19:22 completed evidence](CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md), and B plan. Own1200 and SAIF method passed. Fourth obsolete-wave cleanup completed61477973078B; all R4/B retained. Correct power request SHA contains d8ddbff5c; earlier transcription assertion started no job. prepare00..03 and actual launch are nowDONE, never repeat. Latest activity0/12; no B power yet. VNC18874436 workspace3/ced idle shell, no pending input or exec. Continue original queue and monitor storage.
+
+**19:22: B own1200 PASSED30412800 outputs/zero failures; R4 SAIF crosscheck02 PASSED with actual1060 isolated-net proof and <=1% all major modules.** User requests GitHub sync then continuation. Read [new checkpoint](CONTEXT_CHECKPOINT_20261112_1922_SYSTOLIC_B.md) and B plan. Original final02 and crosscheck02 ended; lock absent at19:21. B activity/power NOT started; request prepare00..03 still unexecuted. No fourth cleanup; broad read-only inventory cancelled, fixed-depth query prepared only. VNC18874436 workspace3/ced idle shell; no pending input/session. Protect R4/B and do not restart completed jobs.
+
+**18:49: unique B batch149529/156788 continues,950 tasks/24076800 outputs,zero failures; free93395615744B.** Read [18:33 checkpoint plus its18:51 increment](CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md) and B plan. Actual cleanCPU12-layer scheduler statistics collected; clean14 SHA transcription corrected from63 to64hex characters by matching server queue reference. New [delivery index](workspaces/arch03/SYSTOLIC_B_DELIVERY_20261112.md) remains explicitly incomplete. crosscheck02/power NOT started, no new deletion or RTL. VNCworkspace3/window18874436/ced idle shell, no pending command/session. Latest cloud23330b2; new docs/evidence awaiting sync.
+
+**18:33: B own1200 still running149529/156788;761 tasks/19286784 outputs,zero failures. Third obsolete-wave cleanup completed56.23GiB, all R4/B preserved; free97.3GiB.** Read [new complete checkpoint](CONTEXT_CHECKPOINT_20261112_1833_SYSTOLIC_B.md) and B plan. New4b58ff0 16-file ops fully installed/hashed; do not reappend. crosscheck02 and power continuation prepared but NOT started; wait original batch and actual lock release. No repeated cleanup or old runs. VNCworkspace3/window18874436/ced shell, no pending command/local exec. Cleanup receipt/docs were cloud synced in23330b2 after this historical observation.
+
+**18:00: unique B batch149529/156788 continues; latest307 tasks/7780608 outputs,zero failures.** Read [18:00 checkpoint](CONTEXT_CHECKPOINT_20261112_1800_SYSTOLIC_B.md) and active plan. New precise PT connectivity audit for1060 SAIF defaults passes11 local checks but is NOT deployed/qualified; wait current batch lock before next PT. Raw R4 SAIF/VCD numerical difference <1%, coverage proof still pending. No new cleanup; existing279.506GiB deletion complete. VNCworkspace3/window18874436/ced idle shell, no pending command. New15-file ops generation is next; last deployed52f37cc must not be modified or reappended.
+
+**17:34: B own1200 running149529/156788,97 tasks/2458368 outputs passed, zero failures; cleanASIC14 passed.** Read [checkpoint including17:38](CONTEXT_CHECKPOINT_20261112_1720_SYSTOLIC_B.md). SAIF native/vcd numerical difference is below1% but1060 defaults remain unqualified pending connectivity; no concurrent EDA. Unique final02 must continue, R4 preserved. Free116890009600B at17:34, monitor shared storage. VNCworkspace3/window18874436; latest disk inventory query executed, no pending input.
+
+**17:21: B final02 unique queue149529 is running cleanASIC14 child150171; own1200 follows.** Read [new checkpoint](CONTEXT_CHECKPOINT_20261112_1720_SYSTOLIC_B.md) and B plan. final01 failed before EDA on a63-character transcription error; correct predecessor SHA/request02 deployed and preflight passed. R4 SAIFcrosscheck01 failed1060 default nets; no B power qualified. DRC06 own gate14/timing/area scoped review passed. VNCworkspace3/window18874436, FZclosed; no duplicate launch/cleanup. Latest readonly default-net query executed, screenshot pending.
+
+**16:57: SAIF crosscheck FAILED on1060 default-source nets; own functional queue request deploying, NOT launched.** Read latest increment in [checkpoint](CONTEXT_CHECKPOINT_20261112_1640_SYSTOLIC_B.md). DRC06 gate14 passed7c1a3ade..., scope review supports cleanASIC14/own1200 while SAIF is investigated. Final request89442d0f... deliberately omits unqualified activity/power. Install00..02 done,03..05 tool session pending,06..07 not run; no duplicate append/launch. VNC restored toworkspace3/ced,window18874435,FZclosed. Crosscheck01 finished16:41 failed; no EDA known running. Cloud0bd55f0,52 tools deployed. Own1200 not started yet.
+
+**15:44 historical:** Full R4 SAIF replay passed25344 outputs/window, summary f7d542dd..., finished15:41:08. PT cross-check pending. d48 gate/c307 final tools deployed and verified.
+
+**15:15: gate01 FAILED before simulation on duplicate identical SRAM provenance; R4 SAIF replay PID314119 now running.** Read 15:15 increment in [checkpoint](CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md). DRC06 still zero violations; netlist unchanged. Gate provenance fix local with6 tool checks, not deployed; newgate02 must use new9-file ops. Do not restart gate01/replay01 or run concurrent EDA. 390331c pushed. VNC workspace3/ced shell, FZ closed; no pending input/local session.
+
+**15:06: DRC06 has ZERO constraint violations; new gate14 PID294410 running.** Read [new checkpoint](CONTEXT_CHECKPOINT_20261112_1506_SYSTOLIC_B.md) and B plan. New area upper1.0990947mm2, setup+.00010252ns/hold+.00249085ns,220macros/0latches. New gate session systolic_b_v3_drc06_gate01 launched once; do not restart. SAIF tiny passed; R4 replay request deployed but NOT launched, wait for gate/lock. 610e25f synced/deployed. VNC workspace3/ced shell, FZ closed; no pending input/local session. Final B1200/power still pending.
+
+**14:59: DRC06 PID279581 is running, no errors at14:58; do not restart.** Read 14:59 increment in [checkpoint](CONTEXT_CHECKPOINT_20261112_1438_SYSTOLIC_B.md) and B plan. 610e25f synced/deployed. Three NOR3 replacements completed; final timing not available. R4 SAIF request SHA bded7b37... deployed but replay NOT launched; wait for original DRC06 and real lock. SAIF tiny passed. VNC workspace3/ced shell, FZ closed. Last warning query completed, screenshot read; no pending local session/input.
+
+**14:50: upstream DRC cause identified; three NOR3 equivalent-drive repair prepared, not launched.** Read 14:50 increment in [checkpoint](CONTEXT_CHECKPOINT_20261112_1438_SYSTOLIC_B.md). ee621bf synced/deployed; inspect02 failed only on optional missing library patterns but produced reviewed driver data. New DRC06 must use new tools, not old60. SAIF tiny passed; full R4/B power and B1200 pending. New activity operations request runner local, 10 tool checks pass. VNC workspace3/ced idle, FZ closed; no pending local session/input.
+
+**14:38: native SAIF tiny VCS/PT PASSED; DRC05 complete but upstream transition/capacitance remain.** Read [latest checkpoint](CONTEXT_CHECKPOINT_20261112_1438_SYSTOLIC_B.md) and B plan. 60df772 synced/deployed. DRC05 multiport violations removed; 72 VIOLATED strings include repeated pin listings, not 72 unique nets. No B final1200/newgate/power approval. New read-only cap/driver inspector local and uncommitted. VNC workspace3/ced shell, FZ closed, no pending input/local session; recheck real cfg lock before EDA.
+
+**14:18: targeted driver sizing and PT get_switching_activity fixes prepared locally, not deployed.** Read 14:18 increment in [current checkpoint](CONTEXT_CHECKPOINT_20261112_1350_SYSTOLIC_B.md). 0d49b5a synced/deployed; read-only driver inspection passed. SAIF probe03 failed on unsupported attribute query after successful read_saif. No new acceptance/EDA running. Next fresh probe04 and DRC05, never repeat old launches.
+
+**13:50: DRC04 reports complete but four transition violations and two multiport nets remain; no final approval.** Read [latest checkpoint](CONTEXT_CHECKPOINT_20261112_1350_SYSTOLIC_B.md) and B plan. SAIF probe02 failed on PT ANSI syntax; classic-port local fix not deployed. bf55a29 tools deployed, structure05 partial audit passed. Recheck resources before next EDA. VNC workspace3/ced shell, FZ closed, no pending input. B own1200/newgate/power pending; R4 protected.
+
+**13:29: DRC03 FAILED on duplicate library file identities, lock released; new repair not started.** Read [checkpoint including13:29](CONTEXT_CHECKPOINT_20261112_1320_SYSTOLIC_B.md) and B plan. Local fix binds original verified DB paths; new SAIF parser handles actual VCS comments/integral decimal duration/combined TX; structure parser now records actual imported module location.13 local checks pass, fixes not deployed. e6 tools/failed runs preserved. VNC workspace3/ced shell, FZ closed; no local session/pending input. New DRC04 must be fresh; do not restart03 or edit e6. New gate/1200/PPA still pending, R4 protected.
+
+**13:02: FTP421 persists; no teammate or leftover FileZilla connection.** New62faf49 full ZIP board staged only, not uploaded. Small-tool VNC recovery runner committed/pushed27b9358; prepare exact-hash overlay in new personal operations directory, never edit old bundle inputs. No EDA launched; VNC workspace3/ced idle shell. Gate14/CPU recovery/contention passed; four transition violations still block timing. Read [checkpoint](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md).
+
+**12:48: independent mapped DRC repair prepared, 12 local tool checks pass; NOT deployed/run.** Original B gate14 complete, four max-transition violations still block timing. No EDA/lock at12:43, free227.95GiB. Package combined repair/structure/SAIF diagnostics next, preserving63da RTL and original constraints. Read [checkpoint](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md). VNC workspace3/ced shell, FZ closed.
+
+**12:38: B gate14 PASSED, but 4 max-transition violations block timing acceptance.** Read [checkpoint](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md) and B plan. validation03 complete; never restart. Investigate installed DC repair syntax, preserve old netlist and constraints; any new mapping needs its own gate14. No final1200 approval. 2b diagnostic ZIP only board staged: FTP421, FZ closed. VNC18874435 workspace3/ced idle shell; no local session. Two cleanups complete279.51GiB, all R4/B retained.
+
+**12:28: original B gate has9/14 passed; new2b diagnostic package board-staged only, NOT FTP uploaded.** Read [checkpoint through12:28](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md) and B plan. Cloud2b39c6d matched. Queue102905/gate117191 continues; no repeat launches. New710-input package fixes structural table parsing and adds isolated SAIF timeunit diagnostics, no hardware changes. FileZilla opening via desktop for upload; VNC18874435 workspace3/ced shell, no pending command/local session. Two cleanup receipts complete279.51GiB; R4/B protected. Finish new package transfer, then actual diagnostics only after original gate releases lock.
+
+**12:21: validation03 sequence/contention/timing diagnostics passed, gate14 running; SAIF tiny probe failed on -tres 1ps.** Read [checkpoint through12:21](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md) and B plan. ced tool package deployed709 inputs/3firmware verified, queue102905/gate117191 active; never restart. Two authorized cleanups now total279.51GiB, only obsoleteMMIO8 L03-L12 waves; R4/B protected. New structural parser needs one more local table-row fix, not yet deployed. VNC18874435 workspace3/ced shell, FZ closed; no pending input/local session. Need actual SAIF syntax diagnosis, new structural review and own1200; no new hardware changes.
+
+**11:40: B synthesis completed; validation02 failed before simulation on missing sequence --cases.** Read [new checkpoint](CONTEXT_CHECKPOINT_20261112_1140_SYSTOLIC_B.md) and B plan. New220 macros/0 latches/no loops, area upper1.099123mm2, positive setup/hold; review pending. Queue and structure-parser fixes passed5 local tests, NOT deployed. Next new tool bundle/validation03 against completed8d synth02; never resynthesize or restart failedqueue. VNC18874435 workspace3 shell, FZ closed. Structure audit failed on parser, not accepted; actual text query executed, screenshot pending.
+
+**10:10: B synth02 entered high-effort mapping; original queue remains waiting.** Read [checkpoint through10:10](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and plan. Last10:09:41 synth183038 running, queue184658 waiting, no errors; free180.62GiB. Hardware frozen63da, no new acceptance. VNC18874435 workspace3 foreground monitor_v2, NOT shell; FZ closed. Future result/structure queries still NOT executed. Only four obsolete MMIO8 waves deleted; R4/B protected. Continue original jobs, no repeat launches.
+
+**09:34: hard freeze reached; fixed63da B/v3 continues validation, R4 remains delivery fallback.** Read [checkpoint through09:34](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and plan. Actual synth183038/child192693 CPU advances; queue184658 waiting, no failures. Latest09:33 free250.95GiB. Foreground VNC18874435 workspace3 is monitor_v2, NOT shell; no pending input/local session, FZ closed. Do not duplicate jobs. Cloud2e91ded matched before this record.
+
+**09:24: synth183038/child192693 + queue184658 continue, no new failures; foreground VNC is read-only monitor_v2.** Read [checkpoint through09:24](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and plan. Free257.75GiB now; only four old MMIO8 waves deleted. Cloud536d012 matched. Requirements/energy-comparison notes added locally; no new B PPA. Two future result/structure commands prepared but NOT run. Do not type into monitor or duplicate jobs.
+
+**09:10: synth183038/child192693 and queue184658 continue; VNC terminal is now a read-only monitor, NOT a shell.** Read [current checkpoint through09:10](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and B plan. Last09:08 no errors, free167.70GiB. Source frozen/cloud46e44a3; new runbook and innovation materials prepared. No new PPA/gate/1200 results. Observe screenshots; do not type shell commands into monitor or duplicate jobs.
+
+**08:58: B source candidate frozen; synth183038/queue184658 continue.** Read [08:30 checkpoint through08:58](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md). Cleanup+recovery synced dfb1bcd. Exact ZIP/Git RTL and firmware-source identity checked; no new hardware acceptance. Latest08:52 lock matches, free170.09GiB. VNC workspace3/new8d bundle idle shell; no pending command. Do not duplicate jobs.
+
+**08:49: Authorized cleanup completed; B synth02 PID183038 and queue184658 now running.** Read [current checkpoint including08:49](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Deleted only obsolete MMIO8 L09-L12 VCDs (112.42GiB), with receipt; R4/B protected. New705-input bundle verified. No duplicate launches. VNC workspace3/new8d bundle idle shell; FileZilla closed.
+
+**08:43: User authorized targeted obsolete-wave cleanup, then continuing B.** Read [current checkpoint](CONTEXT_CHECKPOINT_20261112_0830_SYSTOLIC_B.md) and active plan. Prior no-deletion restriction is superseded only for explicitly inventoried obsolete project waves. R4 and current B protected. New tool package uploaded; fresh synthesis not started yet.
+
+**03:25：磁盘阻塞仍在，03:24可用仅1.683594GiB；原综合及队列均已退出，无最终网表。8d8f262新705输入工具包本地核验完成，未上传。** 先读[03:15检查点全部增量至03:25](CONTEXT_CHECKPOINT_20261112_0315_SYSTOLIC_B.md)及有效B计划。空间协调问题待答，建议16GiB；不删证据、不重试旧session。VNC workspace3/caad包空闲shell，FileZilla关闭，无本地任务或待输入命令。旧state仍running/waiting是过期状态。
+
+**03:15关键变化：服务器磁盘满，原B综合75738/79637已中止且无最终网表，103191队列也已退出；旧state仍running/waiting是保存失败后的过期状态。** 必须先读[03:15检查点](CONTEXT_CHECKPOINT_20261112_0315_SYSTOLIC_B.md)及有效B计划，不重复旧session、不删证据。03:13可用约3.215GiB，空间协调问题已发；继续本地包修复。VNC workspace3/caad包，FileZilla关闭。当前只读b_disk_processes命令已Return执行，截图结果待读。
+
+**03:02：69d042b已云同步，冻结后队列草稿3项检查通过、尚未部署；原综合75738/79637继续。** 先读[02:16检查点全部增量至03:02](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。最新综合02:59:34仍运行，第一103191队列不能重启；无新最终1200/功耗。VNC workspace3/caad包shell，FileZilla关闭，无待输入命令。
+
+**02:55恢复核对：原综合75738/79637及队列103191继续；B报告工具本地检查通过，未部署。** 先读[02:16检查点全部增量至02:55](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。VNC workspace3/caad包空闲shell，FileZilla关闭，无待输入命令；不重复任何launch。自己的1200、gate14、SAIF/PPA仍待实际证据。
+
+**02:44：新caad8de工具包已上传/解包/716输入三固件核验，原综合75738/79637及队列103191继续。** 先读[02:16检查点全部增量至02:44](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。SAIF实际未验、没有新EDA启动；当前VNC workspace3 cwd为caad包，查询旧队列用b_validation_from_caad.txt。FileZilla关闭，无本地任务/待输入命令。不要重复上传、解包或旧作业。
+
+**02:33增量：原综合75738/79637进入高强度映射，队列103191不变。** 先读[02:16检查点全部增量至02:33](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)。37fc276云同步已核；新本地调度两例50688输出/周期不变，生产RTL未改，SAIF实际仍未验。VNC workspace3空闲shell，FileZilla关闭，无本地仿真；下一步提交新工具包，不重复旧作业。
+
+**11月12日02:16：B原综合75738/79637继续，唯一验证队列103191仍等待。** 先读[02:16完整检查点](CONTEXT_CHECKPOINT_20261112_0216_SYSTOLIC_B.md)及有效B计划。ASIC14已过、4917.6566task/s；新SAIF/浮点汇总草稿本地准备，尚未实际功耗。35d包已服务器核验/云同步，不重传、不重启。VNC workspace3空闲shell，FileZilla关闭。
+
+**11月12日01:52：新B验证队列103191已唯一启动，等待原综合75738。** 先读[01:04检查点全部增量至01:52](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md)及有效B计划。35d8ae1已云同步、705输入/三固件包已FileZilla上传并服务器核验；不要重传或重启。B/v3 ASIC14与latency2本地18任务已过；CPU恢复/竞争、SAIF小试、时序诊断和gate14将由新队列串行执行，不自动最终1200。VNC18874435/workspace3在新35d8ae1包，FileZilla关闭，无本地仿真。最新只读队列截图b_validation_waiting_0152.png需读取。
+
+**01:14: B/v3 ASIC14 PASSED354816 outputs/IRQ-WFI,30502.3333 mean cycles. New v3 synthesis PID75738 launched once.** Read [01:04 checkpoint through01:14](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md) and B plan. Do not restart runs. Tool commit c4d8cf0 cloud matched; diagnostic ZIP11357606B/698 inputs local only, unchanged35 runtime files. VNC18874435 workspace3; FileZilla closed; no local jobs. Current SAIF report-help query has been typed, not Return yet. Continue SAIF/tool work while sole synthesis runs.
+
+**01:10: B/v3 ASIC14 running attempt launched once, PID67766/session systolic_b_v3_first01.** Read [01:04 checkpoint through01:10](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md) and active B plan. Package63da6ba uploaded, safely unpacked,663 inputs/IRQ verified. Next view b_v3_live_0110.png from executed query; no repeat launch/upload. Original e11 synthesis complete, no strict PPA acceptance. New diagnostic/batch/package tools local and uncommitted; no local simulation jobs. VNC18874435 workspace3, FileZilla closed. Continue task.
+
+**2026-11-12 01:04 RESUMED.** Old B/v2 synthesis completed22:14,220 macros/no latches/no loops, area upper1.085795mm2, strict review pending. Server free14.411GiB, lock absent/no EDA at00:58. New63da6ba v3 package uploaded successfully; FileZilla closed. Read [01:04 checkpoint](CONTEXT_CHECKPOINT_20261112_0104_SYSTOLIC_B.md) and active B plan. New B diagnostic/batch tools locally prepared; sequence fixture76032 outputs passed, no actual CPU. Current VNC18874435 workspace3; unpack command has now been executed, screenshot b_v3_unpacked.png must be viewed next. No new ASIC job started yet. Continue preflight then unique v3 first01 launch; no duplicate upload.
+
+**21:52 USER PAUSED again after brief read-only resume.** Board status/windows at21:51 showed rebooted desktop, no FileZilla/VNC. No relays, clients, transfers or jobs were started; remote synthesis untouched, last observed21:09. See [pause checkpoint including21:52](CONTEXT_CHECKPOINT_20261111_2123_SYSTOLIC_B_PAUSED.md). Wait for user resume.
+
+**21:23 USER PAUSED for board poweroff.** FileZilla and VNC clients closed and verified; local project FTP/VNC relays stopped; no local simulation running. Remote synthesis99451/108110 untouched, last observed running21:09, final state unknown. Current63da6ba is cloud-synced; newv3 ZIP is board-staged and SHA-verified only, NOT FTP uploaded. Read [pause checkpoint](CONTEXT_CHECKPOINT_20261111_2123_SYSTOLIC_B_PAUSED.md), active B plan and STATUS before resuming. Do not reconnect or start work until user says continue.
+
+**21:08: selected B/v3 local14 passed, 30502.33cycles / 4917.66task/s; new firmware/tools adapted.** Read [checkpoint including21:08](CONTEXT_CHECKPOINT_20261111_2055_SYSTOLIC_B.md) and B plan. All local jobs ended, including v2 compatibility14/debug/v3 recovery/monitor. Newv3 not committed/ASIC/PPA accepted. Old synthesis99451/108110 must continue; latest health screenshot b_synth_health.png still needs viewing. Workspace3 shell/no pending input/FileZilla closed. Next save/commit/push/newpackage, then realCPU; SAIF still tool exploration, no capture PASS.
+
+**20:16 B update: e11c317 cloud independently confirmed; immutable B ZIP uploaded, safely extracted, 655 inputs and IRQ firmware verified on server.** Read [B checkpoint including 20:16 increment](CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md) and active B plan. No ASIC job started yet. VNC workspace3 shell is now in the new B bundle; FileZilla closed. Corrected read-only process/tool query has been entered and executed; inspect its output next, then launch new B ASIC14 under existing lock. Do not repeat upload/unpack.
+
+**20:00: B/v2 local full14, protocol and scalar debug passed; no ASIC/PPA acceptance.** Read [20:00 checkpoint](CONTEXT_CHECKPOINT_20261111_2000_SYSTOLIC_B.md) and [B plan](workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md). Local 36862 cycles is slower than R4; continue codec/early-start work. User confirmed transfer finished and VNC permitted. Current workspace3 shell; old L02 passed, lock absent, free148.094GiB at20:00. No new server job. Next commit/package B, inspect live processes, then new ASIC14/synthesis.
+
+**B实施增量：独立80PE阵列14块1088点积/II64/暂停/取消/复位本地通过；五行缓存及双结果核心已写，尚待编译验证。** 读[B检查点](CONTEXT_CHECKPOINT_20261111_1930_SYSTOLIC_B.md)及[B计划](workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md)。没有服务器新操作，VNC workspace4由用户传输占用。
+
+**2026-11-11 19:30: direct systolic B implementation authorized and started.** Read [B checkpoint](CONTEXT_CHECKPOINT_20261111_1930_SYSTOLIC_B.md) and [active B plan](workspaces/arch03/IMPLEMENTATION_PLAN_SYSTOLIC_B_20261111.md) after compaction. A is cancelled. R4 remains frozen; no old queue resumes. User is transferring files in VNC workspace 4: do not work there or interrupt the transfer. B RTL and all new validation still pending at H0.
+
+**User requested wrap-up and sync before a new goal.** Read [wrap-up checkpoint](CONTEXT_CHECKPOINT_20261111_WRAPUP_ICB32.md), [implementation/path summary](workspaces/arch03/ICB32_STAGE_REPORT_20261111.md) and the active ICB32 plan after compaction. R4 delivery complete. Only original MMIO8 L02 v2 PID323693 remains running as last observed 15:04; no successor queue launched. L01 passed; R1 new waves deferred, no extra storage available. FileZilla closed; small operations package only local/board staged, never uploaded to competition server. Do not restart completed work or deploy prepared queue before reading the new plan.
+
+**15:00 latest: MMIO8 L01 power complete; L02 v2 PID323693 running.** Read [new checkpoint](CONTEXT_CHECKPOINT_20261111_1500_ICB32.md) and active ICB32 plan. L02 v1 missing-input failure preserved; no PT ran there. L03-L12 serial tool prepared but not uploaded/launched yet. R4 delivery complete; R1 new waves still blocked by disk budget. FileZilla opened for small operation-tool upload.
+
+**14:35 latest: R4 delivery complete; R1 ASIC14 and synthesis collected; original8 L01 power is the only active job (PID293690).** Read [new checkpoint](CONTEXT_CHECKPOINT_20261111_1435_ICB32.md) and active ICB32 plan after compaction. R1 synthesis203950 has finished; pilot gate was blocked before creation by free space37GiB<50GiB. Current free32.3GiB. Original8 power uses existing waves in ecf3, no successor queue yet. Do not restart any completed R4/R1 work or repeat L01 launch. Last VNC query returned to shell.
+
+**14:10 checkpoint saved: R1 synthesis203950 remains active; final timing/area not available yet.** Read [checkpoint through 14:10](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md) and active ICB32 plan after compaction. Last VNC query returned to shell. No pilot gate launched; review final synthesis before one-layer storage/time measurement. Current uncommitted edits are progress and actual-CPU comparison documentation only; R4 delivery snapshot is unchanged.
+
+**13:53 observation: existing R1 synthesis203950 / DC child212679 is in high-effort mapping (99.7% CPU).** Read [checkpoint through 13:53](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md) after compaction. No synthesis completion or gate launch yet. R4 delivery complete; R1 ASIC14 passed. Optional submission-details question remains pending; keep current work running. Last VNC query returned to shell, no outstanding local exec.
+
+**13:45 checkpoint saved: R1 ASIC14 passed; existing synthesis203950 still running.** Cloud693341c independently verified. Read [13:25 checkpoint through 13:45 increment](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md) and active plan after compaction. Last VNC command was a read-only synthesis-log query, now shell. No R1 gate launched; first measure one activity layer after synthesis review because free disk is135GiB. R4 delivery remains complete and unchanged.
+
+**13:39 current: R1 ASIC14 passed 354816 outputs / 116280 mean cycles; synthesis PID203950 running with matching lock.** Read [latest checkpoint and 13:39 increment](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md) and the active ICB32 plan. R4 final export and delivery snapshot are complete. Free disk135.405GiB vs R4 VCD139.178GiB: after R1 synthesis, measure one gate/activity layer before scheduling full12. Do not restart existing jobs or delete history.
+
+**13:30最新：R4最终报告和11.52MB交付准备包已完成，云端928559f已确认；R1真实对照已启动。** 先读[13:25检查点及13:30增量](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md)。R1独立session icb32_r1_compare01、PID187418，13:30实际ASIC14 running/锁匹配；不能重复launch。继续原任务通过后再做R1综合，R4最终1200/报告/交付快照不重跑。
+
+**13:25最新：R4最终1200及同配置报告已经完成独立重审。** 先读[13:25检查点](CONTEXT_CHECKPOINT_20261111_1325_ICB32.md)和当前32位计划。wrapper121468/child121471已结束并正常释放自锁，不重启报告或仿真。下一步提交/同步并运行交付准备打包器，再串行补R1真实对照；R1刚完成607输入预检但尚未启动。详细哈希、路径、未验证项和恢复入口均在新检查点。
+
+**13:00最新：最终1200已全部通过30412800输出、零失败；锁内最终报告正在运行。** 先读[12:40检查点及13:00增量](CONTEXT_CHECKPOINT_20261111_1240_ICB32.md)和有效计划。prepare/history/locked_launch三条已全部执行，严禁重复。原monitor已退出，VNC第三终端现在是shell；已有wrapper121468/child121471持有自己的锁，最后12:59仍running。下一步明确输入export_live查询，等待正式报告完成后继续交付。FileZilla关闭，不重新跑仿真或上传。
+
+**12:40最新：最终1200已过九成，1086任务/27523584输出/零失败。** 压缩后先读[12:40新检查点](CONTEXT_CHECKPOINT_20261111_1240_ICB32.md)和有效计划；其中已汇总全部已完成项、限制、包身份、失败路径及三个未执行的后继报告入口。VNC第三终端仍为30秒只读monitor，正常等原queue终态退出后再输入命令。不要重复队列、上传或无锁报告；继续执行至最终报告和交付收尾。
+
+**12:26最新：最终1200已通过968任务、24532992输出，零失败。** 压缩后先读[11:20检查点全部增量至12:26](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)及有效计划。前台VNC仍为30秒只读monitor，等原queue终态自行退出；三个prepared后继命令均未执行。下一步确认完整批量/锁释放，再prepare→history→locked_launch，不重复作业或上传。云端61edc5b已核。
+
+**12:12最新：最终1200已过三分之二，807任务/20452608输出/零失败。** 压缩后先读[11:20检查点全部增量至12:12](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和有效计划。VNC第三终端是只读monitor，不是shell；正常等队列结束自动退出。已准备的prepare/history/locked_launch均未执行，最终报告仍待原批量，不重复任务或上传。
+
+**12:05最新：最终1200已通过723任务、18323712输出，零失败。** 压缩后先读[11:20检查点全部增量至12:05](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和有效计划。VNC第三终端仍在30秒只读monitor中，不直接type新命令；等队列终态自行退出。后继prepare/history/locked_launch均未执行，所有操作包已服务器就绪，不重传、不重复仿真。云端87f517b已核，继续执行。
+
+**11:57最新：最终1200已过半，610任务/15459840输出/零失败。** 先读[11:20检查点全部增量至11:57](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和当前有效计划。VNC第三终端仍运行30秒只读monitor，不能直接type shell命令；结束自行退出。原285397队列保持，最终报告尚未启动，后续仅用已备prepare/history/locked_launch。已完成时序/面积范围审阅及十二层功耗，系统功耗未知影响仍false；FileZilla关闭，继续执行。
+
+**11:40最新：最终1200已通过400任务、10137600输出，零失败；VNC第三终端正在运行只读monitor。** 先读[11:20检查点全部增量，特别11:40](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和有效计划。monitor每30秒显示原队列进度，结束自行退出；不要向它直接type shell命令。只截图跟进，不重复原285397作业。时序/面积独立审阅、十二层功耗、ASIC14复现均完成；系统功耗未知影响仍false，最终报告待批量完成。FileZilla关闭，云端961a658已核。
+
+**11:35历史：稳定任务模式综合时序及项目面积上界已完成独立审阅；最终1200已通过291任务、7375104输出，零失败。** 继续原285397队列，不重启。先读[11:20检查点及11:35增量](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和有效ICB32计划。十二层功耗已完整汇总，系统功耗未知活动影响仍未批准；最终报告等待批量。最后VNC为power12_modules，FileZilla关闭，查询须明确type文本。
+
+**11:20最新：十二层功耗与真实ASIC14计数复现全部完成，最终1200运行中。** 11:16已过105任务/2661120输出、零失败；原285397队列继续。先读[11:20检查点](CONTEXT_CHECKPOINT_20261111_1120_ICB32.md)和有效ICB32计划。平均71.8126mW/16.5724µJ为布局前估算，系统功耗审核仍false；最终报告尚未启动。最后VNC为power246_exact，FileZilla关闭；查询用明确文本，不用Up历史，不重复任务。
+
+**10:54最新：功耗11/12完成，最后L12已启动；原队列仍无错误。** 先读[10:30检查点的10:54增量](CONTEXT_CHECKPOINT_20261111_1030_ICB32.md)及有效计划。后续metrics14、1200和正式报告尚未完成，等待原队列自动接续，不重复。当前最后VNC是紧凑annotation_live/cwd964，FileZilla关闭，继续执行。
+
+**10:50接续：原队列仍L11，功耗10/12已完成。** 已补新版答辩讲解/演示顺序和常见问答，实际批量及完整功耗仍待原队列。见[10:30检查点的10:50增量](CONTEXT_CHECKPOINT_20261111_1030_ICB32.md)。当前最后VNC为finish_live，FileZilla关闭，继续执行，不另起作业。
+
+**10:44最新：功耗10/12完成，原队列L11继续；报告工具已服务器就绪。** 先读[10:30检查点的10:44增量](CONTEXT_CHECKPOINT_20261111_1030_ICB32.md)及有效计划。后续metrics14/1200/最终报告尚未完成，原队列会自动接续，勿重复。当前最后VNC是紧凑annotation_live/cwd964，FileZilla关闭，继续执行。
+
+**10:30最新：功耗9/12完成，原队列L10继续；所有报告工具已服务器就绪。** 先读[10:30完整检查点](CONTEXT_CHECKPOINT_20261111_1030_ICB32.md)及有效计划，继续原power12→metrics14→1200→锁内报告。当前最后VNC是紧凑annotation_live/cwd964，FileZilla已关闭；不要用Up+Return历史命令、不要重复上传或启动队列。新最终1200和最终报告尚未完成，继续执行。
+
+**10:20最新：功耗8/12完成，原队列L09继续；报告工具已全部服务器就绪。** 先读[09:56检查点的10:20增量](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)及有效计划；metrics14/1200/最终报告仍未执行。终端历史Up+Return曾被自动审批拒绝，已用明确只读文本查询解决，后续统一type查询再Return。当前最后VNC是annotation_live/cwd964，FileZilla关闭；持续原队列，不重复上传或作业。
+
+**10:12最新：功耗7/12完成，原队列L08继续；最终报告锁包装器已上传并服务器核验通过。** FileZilla已退出，所有报告工具就绪，正式导出仍等待原metrics14和1200完成。先读[09:56检查点的10:12增量](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)和有效计划；当前最后VNC是finish_live/cwd964。后续只用locked_launch，不使用旧无锁入口，继续执行。
+
+**09:56最新：功耗6/12完成，原队列L07继续；6层活动来源/设置已核对。** 新标准单元/SRAM模型身份已核，系统功耗仍未审定；最终1200/复现尚未执行。锁包装器09:50重试FTP仍421、未上传，FileZilla已退出。先读[09:56检查点](CONTEXT_CHECKPOINT_20261111_0956_ICB32.md)和有效计划，再继续原power12→metrics14→1200。最后VNC是annotation_live；最终报告只用新locked_launch，勿误用旧无锁入口。
+
+**09:40最新：功耗5/12完成，原285397队列正在L06。** 最终报告锁包装器已本地/干净包2项检查及板端SHA通过，但FTP两次返回421，尚未上传，FileZilla已关闭，稍后重试。报告工具/精确SDC已先前上传通过，不受影响。先读[09:22检查点的09:40增量](CONTEXT_CHECKPOINT_20261111_0922_ICB32.md)及有效计划；原power12→metrics14→1200保持，当前最后VNC仍finish_live/cwd964，继续执行。
+
+**09:30接续：功耗4/12完成，原队列L05继续；新报告工具和精确SDC均已服务器核验。** 先读[09:22检查点及09:30增量](CONTEXT_CHECKPOINT_20261111_0922_ICB32.md)和有效计划。最终请求命令已备但未执行，大报告须先补共享锁持有器，避免与队友并发重扫VCD；当前报告未启动。最后VNC为finish_live/cwd964，FileZilla关闭，持续原power12→metrics14→1200。
+
+**09:10最新接续：原队列285397已完成功耗L01–L03，L04运行中。** 精确交付SDC已正常FileZilla上传工具、服务器独立导出及哈希核对通过；原网表/SDC/功耗记录均未修改。先读[08:58检查点的09:10增量](CONTEXT_CHECKPOINT_20261111_0858_ICB32.md)。最后VNC为finish_live/cwd964，FileZilla已退出；继续power12→metrics14→1200，不重启。最终报告须明确DC/波形精确时钟、原PT舍入导入和精确交付文件的区别。
+
+**08:58最新恢复入口：功耗L01/L02完成，原队列285397正在L03。** 首层72.1431449mW/16.6597743µJ，布局前估算、非12层均值；189个无时钟引脚全部静态JTAG，活动362618网络精确映射。DC精确周期6.666666ns，但原mapped.sdc舍入，新增交付精度导出工具仅本地两项检查通过、未上传执行。先读[08:58完整检查点](CONTEXT_CHECKPOINT_20261111_0858_ICB32.md)及有效计划。原功耗→metrics14→1200队列不改不重启；最后VNC为finish_live/cwd964，继续执行。
+
+**08:35最新恢复入口：门级14例和活动12层全部通过，首层功耗正在运行。** 原gate209764于08:29:52自然完成，最终摘要95113a35…已独立核对；后继285397自动接手power_l01，实际PT计算136939。先读[08:35完整检查点](CONTEXT_CHECKPOINT_20261111_0835_ICB32.md)及有效计划；不要再使用旧gate扫描PID或重复后继任务。最后VNC为pt_live/cwd964，FileZilla关闭；新功耗、metrics14、1200及最终报告仍待完成，继续执行。
+
+**08:08最新接续：** 原gate已完整通过L01–L11；08:07实际最后L12活动scanner119433/driver209764，约10%。后继285397仍等gate，自动power12→metrics14→final1200，不手动重复。详见[07:24检查点的08:08增量](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)，新增固定L12/整批回执查询入口也在其中。云端ce581da已核；当前最后VNC为gate_live/cwd964，FileZilla关闭，继续执行。
+
+**08:04最新接续：** 原gate已完整通过L01–L11；08:03实际L12映射仿真114063/driver209764。后继285397仍waiting_gate，自动power12→metrics14→final1200，不手动重复。详见[07:24检查点的08:04增量](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)。云端04520ca已核，最后VNC为all_live/cwd964，FileZilla关闭；继续执行，最终功耗/1200/报告仍缺。
+
+**07:36最新接续：** 原gate完整通过L01–L10，07:35实际L11映射仿真90534/driver209764；后继285397仍waiting_gate，自动power12→metrics14→final1200，不手动重复。详见[07:24检查点的07:36增量](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)。云端1e7616d已核，最后VNC为all_live/cwd964，FileZilla关闭；继续执行。
+
+**07:24最新恢复入口：** 先读[07:24完整检查点](CONTEXT_CHECKPOINT_20261111_0724_ICB32.md)和有效计划。原gate完整通过9/14例、9/12活动；07:23实际L10活动73822/driver209764，后继285397仍waiting_gate，自动power12→metrics14→final1200，禁止手工重复。11138端口告警复核及来源表已补齐，PT时钟/功耗、新1200和最终交付仍缺。最后VNC为finish_live查询、cwd964，FileZilla关闭。云端dff99a7已独立核对，继续执行，不因等待结束。
+
+**07:12最新接续：** 原gate已完整通过L01–L09；07:11实看L10映射仿真71015/driver209764。后继285397仍waiting_gate、completed=[]，自动power12→metrics14→final1200，不手动重复启动。11138条端口告警已全量只读核对，待PT时钟/禁用弧。详见[05:58检查点的07:12增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)。当前cwd964/最后all_live，FileZilla关闭，继续执行。
+
+**06:52最新接续：** 原gate已完整通过L01–L08；06:51实看L09活动58615/driver209764。后继285397仍waiting_gate、completed=[]，自动power12→metrics14→final1200，不要手工重复启动。详见[05:58检查点的06:52增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)。当前cwd964/最后all_live查询，FileZilla关闭；持续执行，功耗和最终1200仍未完成。
+
+**06:26最新接续：** 原gate已完整通过L01–L07；06:25实看L08活动34949/driver209764，sim30155已结束。后继285397仍waiting_gate、completed=[]，自动power12→metrics14→final1200，不手工重复启动。云端de45243已核。详见[05:58检查点的06:26增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)。当前cwd964/最后all_live查询，FileZilla关闭；持续执行，功耗和最终1200仍未完成。
+
+**06:04最新接续：** 原gate已完整通过L01–L06；06:03实看L07活动9081/driver209764，sim4274已结束。后继285397仍waiting_gate、completed=[]，自动接续power12→metrics14→final1200，禁止手工重复启动。云端2b8a7be已核。压缩后先读[05:58检查点的06:04增量](CONTEXT_CHECKPOINT_20261111_0558_ICB32.md)、有效计划和STATUS。当前cwd964/最后all_live查询，FileZilla关闭；新功耗和最终1200尚未完成，继续执行。
+
+**05:35最新接续：** 原gate已完整通过L01–L05；05:34实看L06活动309313/driver209764，原sim306705已结束。后继285397仍waiting_gate、completed=[]，会自动power12→metrics14→final1200，禁止手工重复启动。云端3df333c已核。详见[05:10检查点的05:35增量](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)，当前cwd964/最后all_live查询，FileZilla关闭；继续执行。
+
+**05:22最新接续：** 05:21实看原gate209764/L05活动291732正常，4层完整通过，VCD约68.7%；后继285397仍waiting_gate、completed=[]。云端已核502915f，设计报告已补带宽下界。详见[05:10检查点的05:22增量](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)。当前cwd964，最后`icb32_all_live.txt`查询可Up Return，FileZilla关闭。后继将自动power12→metrics14→final1200，不要手工重复启动，持续执行。
+
+**05:10接续：** 原gate已完整通过L01–L04，05:05实际L05活动291732/driver209764。后继285397已核验964及100数据、等待原gate，随后自动power12→metrics14→final1200，禁止手工重复启动。新ICB32设计报告准备稿完成。压缩后先读[05:10检查点](CONTEXT_CHECKPOINT_20261111_0510_ICB32.md)、有效计划及STATUS；当时cwd964，最后gate_status查询，FileZilla关闭。新功耗和最终1200仍未完成，持续执行。
+
+**05:00最新接续：** 后继队列285397已实际启动并完成预检，04:58处于waiting_gate；原209764仍独占锁处理L04活动273982。原gate全部成功后自动串行power12→964真实ASIC14计数/干净复现→最终1200，**不要手工重复启动**。ops小包FileZilla上传核验完毕并已关闭，云端e09331d。详见[04:30检查点的05:00增量](CONTEXT_CHECKPOINT_20261111_0430_ICB32.md)和`ICB32_FINALIZE_QUEUE_20261111.json`。当前cwd964，最后ops_status查询；继续执行，未验项仍保留。
+
+**04:46最新接续：** 964测量包已云端同步、FileZilla上传、安全解包及636输入/三固件/生产身份核验通过，未启动新EDA。原gate已完整3层，04:45实际L04活动273982/driver209764。详见[04:30检查点的04:46增量](CONTEXT_CHECKPOINT_20261111_0430_ICB32.md)。交互cwd现在964包根，最后gate_status查询；FileZilla已关闭。继续原队列，再功耗、964真实计数和最终1200。
+
+**04:30最新接续：** 原gate209764仍在L03活动254612，04:27实际约75.4%，已完整通过L01/L02。新被动计数观察器本地两例50688输出及17工具检查通过，DUT/固件没变；需提交打新测量包，当前服务器497未改。详见[04:30检查点](CONTEXT_CHECKPOINT_20261111_0430_ICB32.md)，压缩后先读计划/检查点继续。最后VNC为通用gate_live查询，Up Return可用；新PPA/1200/复现仍待完成。
+
+**04:12增量：** L03已进入活动扫描254612，driver209764不变，L01/L02完整通过。4条LINT-1对象已查明为原平台无输出连接实例，记录在新综合证据，其他时序/PPA待审；详见[检查点04:12增量](CONTEXT_CHECKPOINT_20261111_0340_ICB32.md)。当前最后VNC恢复gate状态查询；不要复用旧L03仿真PID。
+
+**04:07最新接续：** gate的L01、L02功能和完整活动均已通过，L02为34607周期；04:05实际进入L03映射仿真251554，driver209764不变。云端已核50c7225。详见[03:40检查点04:07增量](CONTEXT_CHECKPOINT_20261111_0340_ICB32.md)，继续原队列。当前最后VNC命令是L02回执哈希断言，不能误用Up当实时查询；重新type gate状态命令。
+
+**04:00最新接续：** 已压缩后重读计划/检查点；03:59实际gate209764仍在L02活动扫描232973，L01完整通过。交付索引已按赛题原图补齐，硬件/固件未改；新功耗、1200和复现待完成。见[03:40检查点的04:00增量](CONTEXT_CHECKPOINT_20261111_0340_ICB32.md)。当前终端最后为gate状态查询，继续原队列，不重复启动。
+
+**03:40最新接续：新gate的L01功能和完整活动已通过（34639周期），L02正在运行，driver209764/child230178。** 新综合、CPU竞争/恢复及本地贡献对照均已完成；新PPA/1200/复现仍待做。压缩后先读[03:40检查点](CONTEXT_CHECKPOINT_20261111_0340_ICB32.md)和有效计划。当前最后VNC命令恢复为gate状态查询，可Up Return；不要复用已结束L01扫描PID214920，不重复任务，持续执行。
+
+**03:44增量：** 云端b4669c4已核；03:42实际已进入L02活动扫描child232973，driver209764保持，L01完整通过。详见同检查点03:44增量；无本地运行任务，不重复旧PID/诊断。
+
+**03:18最新接续：新综合及真实CPU竞争/恢复均完成，gate14＋12活动继续运行。** 首层仿真已结束，当前L01活动扫描child214920/driver209764（03:17实际）；完整阶段PASS尚未发布。新增面积上界0.926562mm²、setup/hold正裕量，PPA/新1200仍待完成；云端1477dd9已核。压缩后先读[03:10检查点及03:18增量](CONTEXT_CHECKPOINT_20261111_0310_ICB32.md)和有效计划。终端仍R1包，当前只读gate查询可Up Return；不要重复任务，继续执行。
+
+**03:24补充：** 本地R4 raw剩余11层已全部通过，session50608结束；三份受测报告硬件/TB哈希相同，12层304128输出与压缩R4独立比较一致。固定R4时压缩减少9.03%周期、13.69%事务，证据及中文对照已生成，非CPU/PPA。服务器03:23仍209764/214920在L01活动扫描；详见同检查点03:24增量，不重复任务。
+
+**03:29补充：** 云端已核3d09629，本地无运行任务。L01 scan214920在03:28实际读至61.8%、CPU99.7%；继续原gate，不重复。当前终端最后查询为固定L01的`icb32_activity_live.txt`，Up Return会重复该进度查询；读阶段状态需type `icb32_gate_status.txt`。详见03:29增量。
+
+**最新接续见[02:32检查点](CONTEXT_CHECKPOINT_20261111_0232_ICB32.md)。** e65唯一综合仍在优化、无最终metrics；ASIC14已过，497真实CPU诊断及新PPA/1200仍待执行。下方带时间记录保留为历史，持续推进指令有效。
+
+**01:55持续执行状态：** 云端21e5533已核；新R4ASIC14通过，e65综合128047在01:54实测99.7%CPU、正在映射16×4核心，未有metrics。有效计划、已完成/待办/失败路径及三包区别见[01:41检查点含01:55增量](CONTEXT_CHECKPOINT_20261111_0141_ICB32.md)。VNC cwd仍R1包；不重复队列、不并发EDA。
+
+**01:47接续：** 云端已核d78cc6a；新综合仍在映射、未有metrics，最后owner125556/child128047。服务器空闲884.82GiB，固定100样本清单SHA已重核。新版验收表/索引已补待提交。读[01:41检查点含01:47增量](CONTEXT_CHECKPOINT_20261111_0141_ICB32.md)继续原队列，勿重复启动。
+
+**2026-11-11 01:41当前执行入口：R4真实ASIC/E20314例已通过，354816输出、真实IRQ/WFI全部通过，12层平均34616周期/4333.256 task/s，已自动进入新综合。** 原ecf队列01:35完成，旧8路门级14/活动12通过；R1本地14对照通过，独立包已服务器预检。压缩后必读[01:41检查点](CONTEXT_CHECKPOINT_20261111_0141_ICB32.md)及有效计划；唯一e65队列75421仍在，严禁重复。VNC第三终端目前在R1包根，497诊断尚未跑。
+
+**2026-11-11 01:25最新：** 497新包服务器ZIP/630输入/三固件哈希全部通过，FileZilla已退出；旧L12扫描已完成，原driver212822正在extremes、child112654，e65唯一后继75421仍等待。VNC第三终端已在497包根。见[01:12检查点含01:25增量](CONTEXT_CHECKPOINT_20261111_0112_ICB32.md)。
+
+**2026-11-11 01:23增量：** 诊断已云端49759e1；630输入新包干净构建/板端SHA/17项工具检查通过，FileZilla已到100%但尚未收到最终成功。原队列最后01:13仍L12扫描，e65后继等候；勿重复上传或队列。见[01:12检查点含01:23增量](CONTEXT_CHECKPOINT_20261111_0112_ICB32.md)。
+
+# 当前工作与上下文交接
+
+**02:32最新恢复入口：** 已按要求重读计划和检查点，R4真实ASIC14已通过；唯一e65综合仍在映射优化，最后02:31:33实际running/no metrics，尚无PPA结论。详细已完成、未完成、三包区别、失败路径和下游入口见[02:32检查点](CONTEXT_CHECKPOINT_20261111_0232_ICB32.md)。当前终端仍R1包，后续497竞争/恢复尚未运行；不重复队列、不清锁、不结束等待用户。
+
+**02:05持续执行：** R4 ASIC14已过；02:04:29新综合仍running、无metrics，日志已越过新核心至平台模块，尚无PPA结论。原队列不动，唯一e65后继75421继续；README/运行手册已更正，未改RTL。压缩后先读[01:41检查点含02:05增量](CONTEXT_CHECKPOINT_20261111_0141_ICB32.md)和有效计划，继续等待结果并串行推进，勿结束等待用户。
+
+**2026-11-11 01:12 持续执行入口：** 用户明确不因常规步骤停等。新E203竞争/无复位序列工具均已实现；序列本地10阶段和3负例通过，A/B/A76032输出一致，非CPU证据；首次8192超时诊断进入计算，改4096后通过，RTL未变。准备提交/独立打包上传，实际新ASIC/PPA仍待原队列释放。压缩后先读[01:12检查点](CONTEXT_CHECKPOINT_20261111_0112_ICB32.md)和有效计划；不要重跑临时adapt生成器覆盖4096修复，不重复服务器队列。
+
+**2026-11-11 01:01 接续：** 云端已核`022274d`（报告工具/恢复记录），服务器e65唯一后继75421仍等旧队列；00:59:37旧L12 activity_scan，212822/72155。新增本地E203共享SRAM竞争固件及运行/打包入口，当前0101固件编译与哈希通过但未提交/服务器执行。无复位恢复序列适配尚未写，真实ASIC/PPA仍待运行。压缩后重读[00:54检查点含01:01增量](CONTEXT_CHECKPOINT_20261111_0054_ICB32.md)与有效计划，不能重复队列/清锁。
+
+**2026-11-11 00:54 最新恢复入口：** e65新包已FileZilla上传、服务器SHA安全解包/594输入/IRQ固件核验通过；FileZilla已退出。唯一新后继PID75421已实际启动，00:53:43处于waiting_predecessor，等原ecf队列完整回执/锁释放后ASIC14→综合。原队列00:46仍L12，未重启或并发EDA。新增本地ICB32报告工具/3项检查通过但未提交/上传，真实新ASIC/PPA仍未通过。压缩后读[00:54检查点](CONTEXT_CHECKPOINT_20261111_0054_ICB32.md)和有效计划。
+
+**2026-11-11 00:42 已恢复，覆盖下方暂停要求：** 用户已明确“继续”。已重读AGENTS、有效ICB32/C64计划与暂停记录；开发板在线，两个客户端重启前均不在，板端e65新包SHA重新核对一致。FTP代理本机PID21036、板端19080监听已恢复；新包尚未上传，原服务器状态尚未重新读取。继续正常FileZilla上传及VNC只读核查原队列后，再启动唯一新bringup队列；不重复旧作业、不清锁。旧暂停记录保留作历史。
+
+**2026-11-11 00:11 暂停，优先于下方全部执行记录：** 用户准备开发板下电；FileZilla和VNC客户端已关闭并经窗口/进程确认，电脑端10109/40071连接已停止，无本地仿真/构建。远端原队列未动，最后00:04实际在L11 activity_scan（232492/212822/31787），未查其暂停后状态。云端e65已确认；594输入新包仅本地/板端暂存未FTP上传，580输入c019已服务器预检。新bringup队列尚未启动。恢复必须先读[本次暂停检查点](CONTEXT_CHECKPOINT_20261111_0011_PAUSE.md)和有效计划，等待用户明确继续，不自动重启任务。
+
+**23:59最新入口：** 新synth/gate/activity/power/numbers/timing/batch及等待原队列后ASIC14→synth工具已写，端口observer两真实datapath例通过，14软件契约检查通过。新工具未提交/上传/服务器执行；c019包仅服务器预检通过。恢复必读[23:59完整检查点](CONTEXT_CHECKPOINT_20261110_2359_ICB32.md)与有效计划。原队列最后23:45仍L10 activity_scan持锁，VNC已恢复；不要重复旧队列或提前并发EDA。
+
+**23:47已恢复并核验：** 用户要求重试后VNC成功登录（window20971587）。新c019包服务器SHA安全解包、580输入、IRQ固件ID4b574604、原平台新安装128大/96小宏预检全部通过，尚未编译/仿真。23:45:42实际原队列仍mmio8 L10 activity_scan，owner212822/queue232492/child279413，锁保持；不并发EDA。继续本地gate/PPA工具，待队列释放再新ASIC。详情见最新检查点。
+
+**23:44当前状态：** c019新包已Linux FileZilla上传成功（21秒、成功1、队列空）并断开；服务器SHA/解包未做。VNC在RFB欢迎头前断流，当前无法查看原队列；最后23:03 running，不推断已结束。既有连接DNS恢复细节、会话10109/40071见[检查点23:44增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。本地正在补新synth/batch，未提交/实测，原生产保持。
+
+**23:28接续：** 已重读计划/检查点；云端及新包源码为`c019d7ce33066d8744fbc656b62d1f8c71f4e4f7`。580输入、10,912,739B新ZIP已干净构建、ZIP核验、板端SHA核验，本地包内monitor fixture L01=34639通过（无E203）。FileZilla当前正常密码对话框，尚未上传；VNC客户端已退出需恢复，原远端23:03仍running，不能当已结束。详见[检查点23:28增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。
+
+**23:15工具入口：** 新icb32_soc/icb32_data/package_icb32及server_run两个阶段已实现，生产monitor fixture两例已通过；准备提交、干净源码构建与新包。真实ASIC/新PPA尚未开始，1200/synth/gate/power新入口仍缺。恢复读[最新检查点23:15增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，原队列仍保持。
+
+**23:08接续：** 新动态源/完整观察器及生产monitor fixture两例通过（34639/38052周期，无E203），源与计时边界和独立datapath一致。新增5文件+小型摘要尚未提交，SoC/batch/package/server入口待做；旧队列保持23:03实际running。恢复必读[最新检查点23:08增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)及有效计划，不重复旧测试。
+
+**23:04远端核查：** 原8路完整gate仍running、原队列持锁；23:03:28 parent212822/232492在，直接activity_scan子进程264277活跃。未重启或并发EDA，FileZilla未开。继续本地新ASIC monitor/source/运行入口；云端6a6f6ea已确认，最新恢复细节见[22:57检查点23:04增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)。
+
+**23:01同步已核实：** 新阶段54文件已云端确认`6a6f6ea97c10939fa15869e0d09f734eb3f1e4ed`，原生产fcd保持。新ASIC/PPA仍未做；继续读[22:57检查点及23:01增量](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，先核查原服务器队列，再实现新SoC入口。
+
+**22:57当前入口：** R4名义及反压各14例通过；本地12层平均34616周期（4333.256task/s折算，无E203/PPA），raw/R1拆分与错误/载荷截断/取消/合成CPU竞争通过。新IRQ固件编译通过，新安装器已写，真实SoC monitor/source/运行入口待实现。全部本地仿真已结束；原服务器22:10状态需重查，VNC relay76458保持。先读[最新完整检查点](CONTEXT_CHECKPOINT_20261110_2257_ICB32.md)，不继承旧1200/PPA为新PASS。
+
+**22:46当前入口：** R4核心18任务通过；压缩DMA/decoder/R4/turnover共享SRAM首任务37428B、34639周期、25344正确输出（本地pin_mock，无CPU/PPA）。R4全14 jitter1会话66399、R1三例双pf名义6284继续，禁止中途改受测文件。新RTL/ABI已实现未提交，集成错误恢复/新固件/ASIC/PPA待做；见[本轮完整检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。
+
+**22:34当前入口：** B1本地14例及6个名义对照全部通过（pf1名义162713周期）；turnover fabric 386事务/306同拍交接通过。独立R1/R4核心已写尚未测试，继续核心→压缩DMA→ASIC/PPA；实际恢复路径与失败见[本轮检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。原fcd及服务器旧队列保留，新结果均非E203。
+
+**22:27接续：** B1独立ACK转发模块已实现，本地真实DMA/core/shared pin_mock 14例pf1/jitter1回归会话29674正在进行，前9层通过213836周期；不与旧nominal直接比。独立turnover fabric三个模块已写尚未验证。三份新代码路径、运行目录和下一步见[执行检查点22:27](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。继续实施，不重复测试会话或原服务器队列。
+
+**22:23当前入口：** 无损软件600/7200全回读/坐标通过，独立RTL decoder21配置通过（非DMA/CPU/PPA），小型证据已保存。下一步独立B1 ACK转发模块及真实datapath对照，再同拍fabric/R4核心集成。新计划持续执行中；读[22:04检查点22:23完整接续](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)和有效新计划，保留未提交文件。服务器原队列保持，VNC隧道76458继续，本地两个测试会话已完成。
+
+**22:15实施进展：** 新计划及无损codec格式/软件已落盘，8项定向测试通过，600捕获7200任务全编码解码及坐标核验正在本地会话87888运行。开发板/VNC已恢复；22:10实际确认原L02–L12 MAC全部passed，原8路完整gate仍driver212822/child127804在第8层活动扫描，原队列parent232492继续持锁，无新重任务。新RTL尚未完成；恢复详见[22:04检查点22:15增量](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)。
+
+**2026-11-10 22:04 开始新计划：** 用户已明确按修订计划开始，暂停解除。有效计划改为[32位ICB＋压缩＋16×4](workspaces/arch03/IMPLEMENTATION_PLAN_ICB32_C64_20261110.md)，11/11 18:00冻结、11/12 17:16交付准备。输入在PC无损压缩→32位DMA实际写共享SRAM→成功ACK后解码转发；输出原16位。取消宽总线/128MAC方案，保留fcd基线。恢复先读[本轮执行检查点](CONTEXT_CHECKPOINT_20261110_2204_ICB32.md)，不沿用下方暂停为当前指示，不把12:12远端记录当实时状态。
+
+**2026-11-10 19:46 暂停（优先于下方历史记录）：** 用户暂停本轮5000 task/s计划，准备重新提供目标；随后要求开发板下电前关闭两个客户端。开发板上的TigerVNC与FileZilla已正常退出，窗口及进程检查确认客户端不在运行。未向远端Linux发送停止命令、未关远端终端或清锁；远端队列本轮未重新查询，不能推断已完成。源码仍为57d62f6交接/fcd生产基线。新方案仅只读核对，尚未定稿或实施，等待用户新目标及恢复指示。恢复前先读[本次暂停检查点](CONTEXT_CHECKPOINT_20261110_1946_PAUSE.md)，不得自动继续5000方案或重复原队列。
+
+**用户最新要求（12:24收尾）：** 不再把验证扩展得复杂，先汇报现有功耗并同步，用户随后提供新目标/计划。本轮停止追加审核或新服务器任务；已启动的串行队列保持运行。12层现有整机平均功耗**29.6273447417mW**、平均能耗**44.5930996895μJ/task**、225770周期、664.392966task/s，SS/0.99V/125°C综合后布局前估算。详见[当前功耗汇报](workspaces/arch03/POWER_REVIEW_20261109.md)和[本轮检查点](CONTEXT_CHECKPOINT_20261110_1150.md)。先完成这次进度云同步，然后等待用户新计划，不自行继续扩展审核。
+
+**12:14最新入口：** 原8路完整时序对象分类已真实通过并独立确认SHA；e9相位诊断哈希也已确认。L02 MAC扫描12:03通过，唯一队列当前L03（12:12 owner268568/child271468，CPU99.5%），禁止重复旧层。下一步读`l02_assert_lint_formats.png`、补原8路结构警告审核及CPU/SRAM/AON未知有效消费。恢复见[当前检查点顶部](CONTEXT_CHECKPOINT_20261110_1150.md)。
+
+**12:08最新入口：** 4231c41已云端确认，时序对象包686输入/235干净tests/40生产文件不变，通过FileZilla33秒上传success29；安全解包命令待读结果，之后核验输入并运行新对象分类。e9实际相位比较已11:59:31通过；正确SHA候选仍待独立断言。唯一重队列12:01仍l02，禁止重启。详见[11:50检查点顶部12:08增量](CONTEXT_CHECKPOINT_20261110_1150.md)。
+
+**11:59增量：** e9相位修复已FileZilla成功并683服务器输入核验，实际相位比较命令待读`e9_phase_actual.png`。新队列计划SHA已独立确认；它只在全部完成后写done.json，不存在queue/state.json属预期。原8路完整时序对象保存工具7新＋20相关tests通过，尚未提交上传；见[最新检查点顶部](CONTEXT_CHECKPOINT_20261110_1150.md)。
+
+**11:50最新入口：** 已重读计划。四点X比较完成、打印数值相同，原8路只读高扇出诊断完成；系统功耗仍false。唯一重队列ecf `dma16_mac02_12_mmio8_gate_queue_v1`于11:40:10启动，parent232492；11:46实测l02 driver232496/scan232863运行。将串行剩余11层MAC后运行原8路14门级/12活动。e9相位报告修复已云端/228干净tests，FileZilla已发上传请求，成功和服务器核验待观察。恢复看[11:50检查点](CONTEXT_CHECKPOINT_20261110_1150.md)；不重复队列、1200/full02，旧状态均为历史。
+
+**11:33最新入口：** 四点X诊断全部完成，三点队列11:30:16正常结束并释放锁；ecf `dma16_x_compare_l01_v1`实际比较命令已执行，待读`x_comparison_outcome.png`。e9fc57c相位报告修复已云端确认并228干净tests通过，FTP421导致新包尚未上传，服务器最新仍ecf；可继续当前比较及8路短时序查询。原8路189 no_clock已全量归为186 DTM＋3复位同步（含7 CKN），尚未保存派生JSON/审完禁用弧。恢复详见[当前检查点顶部](CONTEXT_CHECKPOINT_20261110_1050.md)，不要重复四点、1200或full02。
+
+**11:25最新入口：** ecf已上传/安全解包/683服务器输入核验；三点队列parent188919当前最后一项**initial running，owner212936/pt213156**（11:22:57观察），one11:20:12已通过。新增发现：原8路ASIC/gate同3843121周期但首VALID相位差1ns，旧报告等纳秒条件会拒绝；已本地修复并29相关tests通过，尚未提交/打包/服务器复验。详情、原始实际数字和接续顺序见[当前检查点顶部](CONTEXT_CHECKPOINT_20261110_1050.md)。系统功耗仍false；不要并发EDA/重启队列/重跑1200或full02。压缩后必须重读计划和本检查点。
+
+**11:18最新：** ecf3cd4新原8路诊断工具已云端确认，683输入/226干净tests通过，正经FileZilla上传；成功回执与服务器核验尚待观察。三点唯一队列parent188919最后11:12:52为**one running，owner200283/pt200523**，zero已通过，initial未启动。详见[当前检查点顶部](CONTEXT_CHECKPOINT_20261110_1050.md)，包含新包SHA、恢复顺序、未完成189 no_clock/禁用弧审核和禁止重复项。不要另开EDA/大扫描或重启队列。
+
+**11:12最新：** a745包已上传/解包/681输入核验，新比较读取器实际验证冻结复现与原正式报告身份一致。三点唯一队列parent188919继续，zero11:09:28.639448已通过，total/J与默认相同；one/initial最新状态待查，尚未完整四点比较。原8路3687端口警告全量仅声明诊断已完成并独立核对SHA。新增只读`mmio8_timing_audit`及26相关tests通过，尚未提交/打包/运行。详细SHA、目录、剩余工作、锁/失败路径与下一步见[10:50检查点顶部](CONTEXT_CHECKPOINT_20261110_1050.md)。系统功耗仍false，不并发EDA/大扫描、不重复1200/full02；压缩后重读当前计划及该检查点。
+
+**11:00增量：** frozen复现10:52:11通过，准确SHA与原六项功耗字段均已独立确认；详见[10:50检查点顶部](CONTEXT_CHECKPOINT_20261110_1050.md)。**当前唯一重队列为b85 `dma16_x_queue_remaining_v1`，parent188919，10:58:59启动，串行zero/one/initial、失败即停**；待查其最新owner，勿并发EDA/大扫描。新比较工具已云端确认a74588d，681输入/223干净tests通过，正经FileZilla上传，尚未观察成功/解包。系统功耗仍false，原生产及1200/full02保持不变。
+
+**2026-11-10 10:50最新入口：** 先读[10:50检查点](CONTEXT_CHECKPOINT_20261110_1050.md)和有效计划。b85已云端确认、215干净tests/679服务器输入核验；FileZilla已断开。bb25首层MAC全波形有效采样审计10:38:43.356180通过，准确摘要SHA=`7c1bba6b91b7bfb0aa08ddcbe5fc9a9ecb1ae8c0bdc04b5925b4dfd851fcd298`已10:44:47独立核验。**当前唯一重作业是b85 `dma16_x_frozen_l01_v1`，driver170842/child171053，10:42:03.773833开始，最后10:48:39仍读完整VCD。** 新四点比较工具40相关tests通过但尚未提交/上传，四点实际结果尚未齐。系统功耗仍false；不重复1200/full02、不清锁/并发EDA。下方10:23及更早条目为历史。
+
+**10:23增量：** 新增独立X敏感性工具`dma16_x_sensitivity.py`及7项tests，连同来源/数值共32tests通过；server_run新增专用阶段与仅该阶段可用的`--x-point`。新工具尚未提交/打包/服务器执行，不影响正在运行的bb25 MAC扫描。其zero/frozen/one/initial四点均保留同窗口/网表/库，结果不作为物理误差界、不替换默认功耗；见`X_SENSITIVITY_REVIEW_20261110.md`。MAC最后10:19:01仍142991/143321，读到1268646653B，尚未完成。
+
+**10:17最新：** bb25f0843195de883a12dedb12af0d8e3b0c8105已云端确认；GCC兼容包676输入/208干净tests/40生产不变通过，FileZilla33秒上传后断开，10:12:44.410399解包、10:13:31.721855输入核验。**当前唯一重作业：bb25包`dma16_mac_use_l01_v2`，driver142991、child143321，stage10:15:25.502263开始，10:16:15.035173仍running执行mac_full_scan.json**。首个启动因runs父目录缺失在Popen之前停止；补建后只有这一实际作业。原GCC regex失败v1保留；系统功耗仍false。恢复详见10:06检查点顶部增量，勿重复启动/清锁/并发扫描。
+
+**2026-11-10 10:06最新入口：** 先读[新完整检查点](CONTEXT_CHECKPOINT_20261110_1006.md)与有效计划。原8路首层PT及实际数值校核已完成；首层MAC诊断v1因服务器GCC4.8.5的std::regex不兼容而失败，锁正常释放，原错误目录保留。已本地改严格数字范围解析并通过8项测试，尚未提交/新包/真实v2运行。现无本任务重作业，启动前重查锁。系统功耗仍false；生产16路、1200和full02不重做。最新已上传及云端工具3dcd351；新文档包含所有SHA、失败原因、未完成项与恢复入口。
+
+**09:47最新及PID更正：** 09:45:15.492324读取state/owner确认原8路PT的driver为**106327**，child**107249**，stage开始09:35:35.465062，仍running读原30.231GB VCD；此前09:37条目的22688是长截图人工误抄，不能使用。新MAC有效采样诊断8项定向/51相关tests通过，准备提交与干净打包；尚未实际扫描。该工具不修改冻结生产，仍不批准系统功耗。先等当前PT，不并发EDA/大扫描。
+
+**09:37最新：** e777包672输入/200干净tests/40生产文件不变，通过FileZilla33秒上传并断开，09:31:33解包。真实annotation_all12_v3于09:32:25.979277完成12层来源/设置/未标注审核，SHA=`697793c6f4ab94aebe16414a8dee1ad0723039e1404a052c3767697db0b78ac4`于09:34:09独立确认，系统功耗仍false。原8路首层gate于09:31:05.827774自然通过25344输出/3843121周期/30.231GB活动，锁释放。**当前唯一重作业改为e777包mmio8_source_power_l01_v1，PID22688，09:35:34.915404启动**；勿重启/清锁/并发EDA。正在准备独立MAC有效采样未知诊断，尚未实现；原16路生产保持冻结。
+
+**09:28最新：** 第三版未标注清单解析修正已通过35相关测试，待新包/真实12层v3复验；实际尾部标记须绑定自身两张零未标注统计表，不直接忽略。前两次失败保留，系统功耗仍false。原8路门级46140/scan55423最后09:25:37仍running持锁。详见09:06检查点顶部更新及POWER_ANNOTATION_REVIEW文档。
+
+**2026-11-10 09:06优先入口：** 请先读[最新完整检查点](CONTEXT_CHECKPOINT_20261110_0906.md)，再读有效三天计划和三份状态。此前08:22概要及下方过程段落均为历史：当前1200与独立重审/12层报告已完成，原8路首层门级46140仍在完整活动扫描；新12层映射首版因两张统计表的同名表头被严格拒绝，本地双表修正33相关tests通过，待提交/新包实际复验。系统功耗仍false。云端最后确认db8e271，同范围持续同步授权有效。
+
+**09:12增量：** 双表修正已提交并同步云端fd54fd14267df093a991e9e07685462b6b414c44；新包672输入/198干净tests/40生产文件不变通过，板端SHA暂存后正由FileZilla上传。先观察传输成功，尚未服务器解包/复验；下一步用新annotation_all12_v2，首版失败保留。详情与SHA见09:06检查点顶部增量。原8路gate46140/scan55423最后09:09读取12.8GB/30.2GB，阶段未结束。
+
+**09:20最新：** fd54已上传/解包/672输入核验；annotation v2通过双表后被未标注清单尾部独立行`1`拒绝，全部24份报告均有此标记且自身统计为零未标注。新失败诊断已保存，正在准备“自身计数＋尾部标记”严格解析，未修改生产或旧报告；尚未有12层映射审核PASS。详细实际格式及恢复入口见09:06检查点顶部09:20增量。FileZilla断开，原8路scan55423继续，不重复启动重作业。
+
+更新时间：2026-11-10，北京时间。每次准备压缩上下文前更新本文件；压缩后先重读本文件、AGENTS.md、当前计划和执行检查点。
+
+## 当前要求与停点
+
+**当前概要（2026-11-10 08:22，优先于下文历史叙述）：** 用户已恢复执行、允许FileZilla，并授权本次及后续同范围推送指定私人GitHub个人分支；本轮独立ls-remote确认云端`a2e2bc68269677122843bd8c0a8364e86b8f5fcc`。16路生产fcd已通过ASIC14、门级14/活动12、真实恢复/竞争；668最终1200于06:22:56通过30412800输出/0失败。d25审定已绑定时序及0.434796781612mm²面积上界，功耗仍false。12层PT已全部完成，full01导出在L06数值检查失败，尚未执行1200导出重审。a2数值修正包已通过669输入/189干净tests/40生产文件不变，已暂存开发板，正经FileZilla上传。当前唯一EDA是原8路MMIO同条件对照新综合17074，08:21:09仍running；不是8路DMA。未知34742对象网表审计已完成，1775声明残留、32967有表达式仍需有效时段审查。剩余：新解析器实际12层复验、full02完整导出及1200重审、未知活动审核、原8路新门级/PT、干净复现和交付。以下保留历史经过。
+
+**最新：用户已明确要求“同步到云端一下，然后继续”，并确认开发板重新上电。当前暂停已解除。** 先保存并推送暂停期间的小型证据与交接记录，再恢复现有连接工具，重查两项验证原始摘要和协作锁后继续新综合。暂停前两个远端任务均已自然完成，但22:36:25的FREE记录不是当前状态；恢复时必须重新核对。暂停经过保留在下方历史检查点。
+
+用户已明确 PLEASE IMPLEMENT 新版三天计划，撤销此前暂停，开始直接16路MAC＋ICB DMA＋双缓冲；不做8路DMA。H0=2026-11-09T17:16:08+08:00，H28硬冻结=2026-11-10T21:16:08+08:00，内部H72=2026-11-12T17:16:08+08:00，官方精确截止尚未核实。
+
+最新用户补充：提交截止为**2026-11-13晚上**，具体时刻/入口未确认，来源是用户直接答复。内部冻结和72小时交付节点保持不变，不能因截止晚一天就推迟1200回归。
+
+**FileZilla已获用户明确恢复（2026-11-09约21:18）：用户说“你可以用filezilla了”。** 此前为队友上传而暂停的限制解除。5bdf88b后续包已板端SHA核验但未上传；21:39发现取消组合反馈与gate探测问题，保留该包并由修正版新包替代。仍用开发板Linux FileZilla到已授权独立服务器目录；首包已完整上传，不重传。首包综合已结束但有TIM-209，不能据此验收时序。
+
+当前有效计划为 [DMA16三天计划](workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md)，老师答复记录在 [答疑依据](workspaces/arch03/QA_DMA_LOADING_20261109.md)。旧七天计划和历史证据保留。DMA16核心、搬运、仲裁、布局和正式监视器已通过本地测试；真实E203/厂商宏、新STA、门级及功耗尚待新运行。
+
+本地分工：dma_feasibility负责新增linear16核心和核心测试；evidence_audit负责DMA16引擎/MMIO及协议测试；contest_requirements负责tile16布局和独立数值验证；主代理负责平台源接口核查、仲裁/安装、CPU固件、集成及服务器调度。各代理只改自己新增文件，不提交git；主代理统一集成。
+
+已核对原sysmem_icb_*接线/译码，source=0xb0000000位于原O4覆盖范围；恢复原加载源响应路径，禁止新增SRAM私口。DMA源读→共享写ACK→共享读到缓存→结果写ACK全部计时。新版数据46976B，输出50688B，四段191616B；同任务预取允许，跨任务预装禁止。
+
+## 最新实施检查点（2026-11-09约18:49）
+
+### 用户恢复与云端同步（本节优先于下方暂停记录）
+
+- **08:52最新包状态：** 新提交`db8e2719b2a6030208925a8dc99856e20adb711c`已推送指定私人个人分支并独立ls-remote确认。包`light-light126-annotation-review-dma16-20261110_084850-db8e2719b2a6.zip`为16629994B，SHA=`7935ce6d3788c896525f6bd1723f294aa8a632586f649bfbe63e241bf9ab23e6`；672输入、197干净tests、5固件及40生产文件一致通过，audit=`local_runs/dma16_annotation_clean_audit_20261110_0850/receipt.json`，SHA=`f9cd6de76edd25346f76cc117ae86033718c6790c8f17a720fe9a2e36f99a441`。已板端SHA暂存`/home/root/undergrad-annotation-review-20261110/`，**FileZilla新上传已启动，尚未观察成功**；不要重复上传或先解包。当前本地无测试会话挂起。
+- 原8路门级最后08:47:21.673834为driver46140/child49235执行layer_01.log；08:50:24.037821波形已18104546216B，日志显示正确ASIC/固件only/原SysMem加载启动，无结束回执。唯一重任务仍是此门级，保持共享锁，不开新EDA/大波形扫描。08:49已读安装手册：initial-X设置决定未初始化net从X首次变成0/1时是否计入相应功耗；冻结false不是“完全没有X”，后续敏感性必须单独标为诊断。首个X系数手册明确其控制X跃迁功耗比例；未启动敏感性实验。
+
+- **08:48接续：** 完整报告receipt SHA=`06c246af4de0914e1e304fc77cf1b61413e955a350c59d5d8d0df8c521e84e5c`已08:43:30.357526独立确认。原8路首层新门级已实际启动：a2 `runs/mmio8_source_gate01/mmio8_gate`，driver**46140**，launcher08:42:24.188768，stage08:42:24.710930；最后08:43:30仍running，child46169执行`mapped_probe.log`。它持共享锁，不重复启动、不并发重任务。FileZilla断开，VNC第三页当前空闲用于只读查询，完整报告已完成。
+- 新增本地`dma16_power_activity_review.py`与8项测试，和数值/报告测试共32项通过：对12层全部原始工件SHA、实际X设置、映射各列、显式未标注对象清单、告警代码及相同冻结来源逐项核对；保留未知记录，不把映射率当翻转率或自动批准功耗。实际L06来源表及未标注格式已读取，后者只有表头和空的“List of nonannotated nets”。新工具**尚未打包/服务器运行**。原生产RTL、668 runner/parser和已成功full02输出不变。还在考虑同波形X设置敏感性诊断，未实现/启动，不能声称有误差界。
+
+- **08:42最新：完整证据导出成功。** a2 `runs/dma16_report_full02`于**08:38:53.904490**输出`DMA16_EVIDENCE_EXPORTED`并正常释放自有锁。08:41:17.016627独立核对receipt中全部文件SHA，确认batch=`passed_reaudited`、1200任务/30412800输出、12功耗层。生成`output/report.json`、`tasks.csv`、`modules.csv`、`summary.csv`、`report_zh.md`及`receipt.json`；时序/保守项目面积true，系统功耗/官方精度/物理签核false。回执SHA分组`06c246af 4de0914e 1e304fc7 7cf1b614 13e955a3 50c59d5d 8d0df8c5 21e84e5c`，尚待独立断言该抄录串。最终1200原始通过及其独立全回执重审现在均完成；不用再重复重审。
+- 08:37:10.857006已独立确认正确的原8路综合SHA=`0e33c1d045d063829c34e97b7ba10109d446c381c95fa7003449d0bbc6159fc9`，full02请求SHA=`a6f483701cff4fac27f03a11c8cc0f63b59bb318898991448826f938f860b105`。此前长行人工误抄被断言拒绝，按8位编号逐行输出后通过；原文件未修改。原8路实际setup=+0.00000905991ns、hold=+0.00131008ns、0latch、138宏、预算上界0.2921861914119108mm²，仍待约束/门级/PPA审核。
+- 08:39:42.532892检查文件系统free=2745875562496B；`/bin/quota -s`无输出，**不能据此声称已证明无个人配额**。首层原8路新门级准备独立启动，只有实际看到启动回执才记录PID；不一次抢占12个并发任务。VNC现有5页，3页报告已空闲，5页只读；FileZilla已断开。下一步核对门级实际启动和报告receipt摘要、更新云端检查点，继续未知活动/全部层映射与功耗审核、原8路后续活动/PT、干净复现与交付。
+
+- **08:34最新，覆盖08:22概要中的运行状态：** a2新工具已上传/解包/669输入核验，并于08:28:23.154041完成全部12层真实功耗数字提取，`runs/power_numbers_all12_sumchain01/numbers.json` SHA=`06c867453c7225537188a8d32b815b4947383f4a05339210a3bb2c665126e17e`，08:30:18.105774独立断言确认。首命令因缺runs父目录在输出前失败；改parents=True后完成。首次截图SHA首字符0误读为c，独立断言拒绝后按分组纠正，原JSON不变。单位、模块、162宏和数值检查全部通过，系统功耗仍false。
+- 原8路MMIO综合17074于**08:30:15.335643 passed**，08:30:18锁FREE；summary SHA观察为`0e33c1d045d063829c34e97b7ba10109d446c381c95fa7003449d0bbc6159fc9`，尚待独立断言及读取实际指标。没有启动门级或PT。
+- **当前唯一重任务：** a2 `runs/dma16_report_full02`，**PID38915，08:32:44.175393启动**，持共享锁在VNC第三终端页前台重审1200回执并导出12层完整证据。08:33:14仍未看到完成；不要向该忙页输入命令，不重复运行/清锁/并发EDA。新请求保留旧full01失败；运行前发现新增history键应为description，原未运行草稿保存`request_history_draft.json`，正确request摘要分组为`a6f48370 1cff4fac 27f03a11 c8cc0f63 b59bb318 89899144 8826f938 f860b105`，待独立确认。文件和批准范围均沿用原冻结证据，功耗不自动批准。
+
+- **08:22接续记录：** a2新包`light-light126-power-sumchain-dma16-20261110_081342-a2e2bc682696.zip`为16616399B，SHA=`2a800278d4fb4af4df219a668c3231be3e902c6213fe8b30b3a11ba8897f7b74`；干净回执`local_runs/dma16_sumchain_clean_audit_20261110_0814/receipt.json`确认669输入、189tests、五固件、40生产文件不变，SHA=`b2c2cffa38f3c7c199b8527bc1634790e692f91eca111abc0c07862dc1bf111b`。新板端目录`/home/root/undergrad-power-sumchain-20261110`已创建，包暂存SHA核验通过；FileZilla已恢复准备上传，服务器尚未解包/复验。云端a2完整提交已独立确认；后续同范围授权持续有效。
+- **08:21:09.615788服务器观察：** 1aa原8路MMIO综合仍running，driver17074/child20252持锁，不重复启动或并发EDA。12份功耗报告集合SHA已独立断言通过：`ded415f4767c8d1f0e9ab45848c7daa0018dcca96f67e12303ec0f7965157e89`。原full01失败保留，等待新工具复验后用全新full02；1200原通过不等于导出重审完成。压缩前遗留本地会话80458/21365已结束，干净回执存在，未重跑。
+
+- **08:13最新停点，覆盖08:05“报告运行中”：** 1aa `dma16_report_full01`在功耗数值提取阶段被`Power sum mismatch: all groups total`拒绝，**没有执行1200独立重审、没有生成最终output**；原request/draft/power_collection保留，PID8416正常退出并释放自有锁。08:07逐层定位L01—L05 numbers OK，**L06**触发拒绝，后续层还未提取。12个PT原始stage和所有原summary始终passed，未改原报告。
+- L06原始组总和与总功耗差`2.262699e-9 W`；严格检查全部7行、3个分量列和整机分量和均通过，11项可推导链式上界=`6.302418279692705255001783370e-9 W`。本地`parse_power`保留`check_sum`及11项原检查，仅在直接“组总计列”检查失败时，使用这些已通过检查的三角不等式上界并保存全部支撑界；不是任意扩大相对容差。35项功耗/报告相关tests通过，含改变组总计、分量和整机总计的拒绝反例。新真实数据测试首次手抄clock leakage指数e-09而非e-07，被原行检查拦截；纠正后完整7组/4总项的规范JSON SHA=`f9e24970832e026d1b1623a69c9c44b99baa29b0fa697fb0d4d2d4f0856d33ec`已08:12:18.161796在服务器独立断言与本地完全相同。**本地修正尚未提交/打包/服务器复验**，不得声称报告已修好。
+- **当前唯一EDA：** 1aa `runs/mmio8_source_synth01/mmio8_synth`，driver/owner**17074**，launcher08:11:02.108784、stage08:11:02.831326；08:12:18仍running。这是原8路MMIO/CPU同源加载对照的新综合，DMA_present=false，不是8路DMA。首次启动被自动审批拒绝，理由是与“直接16路”冲突；重新核对用户明确批准计划中“旧8路同条件对照”“加载通路修改须重新综合”和实际源码后，同一动作重新审批已通过并实际启动。没有绕过拒绝、没有新增待用户批准事项；此前被拒的调用未执行，不重复启动此stage。
+- 接续：先提交/打包新的数值修正，按既有669文件/188tests干净包流程复验（新增用例后应189tests），通过FileZilla独立上传/输入核验；用新工具对同一L06及全部12层原始报告复验，**保留失败full01，使用全新full02请求/输出**。最终1200独立导出重审须等原8路综合释放锁再排队，不能并发重任务。生产RTL、正式固件、668批量runner/parser均不变。原8路新门级/PT、未知有效时段/其他层活动、干净复现和最终交付仍待办。
+- 最新云端已推送并独立确认`38ccfc15998453b1aaeb41ec3af5d186c542e57e`；同范围当前/后续授权持续有效。FileZilla断开最小化，VNC第三页已空闲可做小型只读查询，远端原8路综合在后台持锁；本地无挂起工具会话。压缩后重读计划/root/三份状态，先查17074实际状态，不能重复已通过的12PT。
+
+- **08:05压缩前停点（本条最新）：** 89b串行L05—12队列已自然全部完成，08:00:18观察PT退出及EDA列表空；08:01:49.403793逐个核验全部12个PT stage passed与原summary SHA，并写入**1aa包`runs/dma16_report_full01/power_collection.json`**。集合SHA仅在截图`all12_power_verified.png`，尚未独立抄录；以原文件为准，不猜字符串。数值最终提取由正在执行的完整报告再次严格检查；system_power_verified仍false。
+- 完整请求已在1aa `runs/dma16_report_full01/request.json`就绪，含原fcd ASIC/综合、a53门级、12PT、668最终1200及d25审定；另保留旧失败batch v1和未知活动待审事项。请求SHA分组打印`262e389a 59797b7f de4eafc3 6eca66e9 ad627ac0 e0a04c39 dd7d040a f3d87bcb`，尚未独立断言。**08:03:41.821567已启动完整导出/1200独立重审，PID8416，持原团队锁，当前为VNC第三个终端页的前台Python进程。** 输出预期`runs/dma16_report_full01/output/`，尚未看到完成。不要向仍忙的终端输入命令、不要重复运行/抢锁/另起EDA。正常退出的atexit只在owner仍为本进程时释放自有锁；错误/失败目录保留。
+- 下一步先看终端截图，等待`DMA16_EVIDENCE_EXPORTED`或具体错误；完整报告成功后验证receipt/JSON、1200 passed_reaudited/30412800输出、12层及审定边界，读取集合/请求/输出SHA并独立确认。锁和EDA空后，优先排**原8路同源新`mmio8_synth`**（未运行过），再门级和功耗；不开发8路DMA、不复用旧synth07/BEGIN功耗。未知使用时段与全部层活动审查继续待办，必要时准备被动有效采样/未知敏感性分析，不凭声明残留或中位数自动批准功耗，也暂不改冻结生产RTL。
+- 新未知审计实际SHA已07:49:32独立确认：`e6f41c9f4f95db5321b52d96eb3720494fa65697c3eec3ab4eb88820c170a235`；1775声明残留/32967有表达式，别名45605有引用/2703仅声明。07:59交叉过滤后有引用MAC标识19733，未知持续周期分箱0、(0,1]、(1,100]、(100,225770]分别0/1280/1796/16657，结束未知0，中位及最大约92694.0045周期。此前文档把0.0与92694相邻字段误抄为0.02694，已改UNKNOWN_ACTIVITY_REVIEW；原诊断未变。必须继续核对初始加载与有效采样，不能宣称全部是小毛刺。
+- 用户最新GitHub授权覆盖当前和后续同范围。**最新云端已独立确认`4f17b0a724f9f8fd2f85304868fca1715a1d58a3`**，分支和目的地不变；本次08:05交接/纠错改动尚待新提交推送。FileZilla成功上传1aa后已断开最小化，服务器输入669/本地188tests通过；VNC/FTP中继保持。所有本地测试、打包、上传和UI工具会话均已结束；唯一当前重作业是远端前台报告PID8416。压缩后先读本计划/root/三份状态，再看报告实际结果。
+
+- **07:49最新：** 1aa包07:45:50.779439安全解包，07:47:00.259078服务器669输入/完整提交核验通过；FileZilla已断开。`runs/dma16_unknown_netlist01/inventory.json`审计07:47:37.770025开始、**07:47:45.732944完成**，全部34742标识覆盖：1775项全部别名仅声明，32967项有mapped表达式引用（需时间审查）；工具没有批准功耗。SHA打印为`e6f41c9f4f95db5321b52d96eb3720494fa65697c3eec3ab4eb88820c170a235`，**待独立断言**。真实运行未报错、未改网表/波形；下一步核对SHA及全部引用对象的功能/时段分组。一次本地PowerShell管道中文更新因编码SyntaxError在写入前失败，改apply_patch更新中文，本地文档不损坏。
+
+- **07:45用户新授权与云同步：** 用户已明确允许本次及后续同范围项目源码、交接和小型验证摘要同步至私人`Tomorow1009/kwt1-rtl-architectures`的`codex/light-light126/undergrad-d1-numerics`。此前自动审批阻塞已解除；正常git push成功，独立ls-remote确认`1aa0ba3de8a958079b07b6b391acc9d0e3bf709a`，后续同范围不需重复询问。以下“云端7379718/待授权/不重试”均为历史，不再是当前限制。不得提交凭据、厂商库、聊天原文、大型产物或自动合main。
+- 新未知网表审计包`light-light126-unknown-netlist-dma16-20261110_073951-1aa0ba3de8a9.zip`，16613737B，SHA=`eb76e93a17906709ddfe3fc66497ccf7fdd7fcb14d4cd7dab8bea3ed0007d417`，669输入/五固件/**188干净tests无skip**，40生产文件与668相同。audit=`local_runs/dma16_unknown_netlist_clean_audit_20261110_0741/receipt.json`，SHA=`620677ccadd0ee6b06bee9f2a8ed30384166a1478091cf19385fb15dcec79ea1`。板端首次因暂存目录不存在而Socket closed，创建新目录后重新暂存并SHA通过；没有服务器失败文件。FileZilla33秒成功、队列空、成功计数18，现正断开最小化。**服务器尚未解包/输入核验/运行新审计**；下一步先核验新包，不重复上传。
+
+- **07:40本地/服务器增量：** 07:38:34.600349观察89b串行PT已L05—08 passed、L09 running，owner317811/pt318019；父队列仍唯一执行者，禁止重复启动5—12。第2—5层d25实际数字解析已通过，`runs/power_numbers_l02_l05_v1/numbers.json` SHA=`403518dfb66ed613501c8111ae6f8c4937d8b8430eaa4a5a416a8ab0e63424e8`（07:34:23独立确认）。不能把PT collected当系统功耗通过。
+- 新增`dma16_unknown_netlist.py`及11测试，用实际mapped层级逐别名检查所有34742未知对象的声明/表达式/外部模型/未解析状态，不更改波形或自动放宽功耗。连同原结构审计19tests通过；需新包干净复验并FileZilla上传后实际运行，当前尚未打包。实际短诊断误用DMA模块前缀选中DW子模块，已改精确模块；error_q[31]/output_q[31]只有声明的样例不能代表全量。生产和668批量脚本保持不变。云端仍7379718，自动审批待具体目的地确认，不重试。
+
+- **07:28最新实测：** d25包已通过FileZilla上传（33秒、成功队列17、空队列），随后断开最小化。07:12:27.502149安全解包，07:14:21.839915核验667输入、完整提交及LF文档绑定。首次临时诊断导入本地打包模块因服务器无NumPy而失败，未改环境；改标准库JSON/hashlib和server_run.inputs后通过。不要在服务器导入package_dma16。
+- `d25/runs/dma16_review_binding02/decision.json`于**07:19:44.558331**成功，SHA=`7b78900893c7b4444e33b639e9c374ba1cf825903dfc17458c8764a5244be4fe`，07:27:30独立断言确认。首次人工抄录漏一个4，被63字符哈希断言拒绝；原文件未改。decision只接受时序/面积，system_power_verified=false、官方/物理签核false；最终全报告尚未导出，不能等同批量重审通过。
+- 89b第四层07:08:36.755841 passed，SHA=`bf86b0e57727ef7308f589e149edd58c98b4a83ff02d3824e5099024b972820f`。第5—12层已建立**单一串行队列**`runs/dma16_power_queue05_12_v1`，parent305656，plan SHA=`5b79977456218f79fbf2228cfc3c7b34973e056b33de20d95e867845e60d56a1`（07:27:30独立断言通过）。child使用check=True，首次失败即停，每项各自拿共享锁；禁止另起05—12或并发EDA。第5层driver305657，07:17:48.131123开始、**07:22:47.675875** passed，SHA=`5b7ed207a7c329a7eca4aa6a3de3364b700895858736815d4232e935876bdadb`。最后07:25:54第6层owner308667/pt308948。层02—05原始数字尚未抽取，仅PT报告完成。
+- 下一步：只读小型unknown_full_scan.json做全部对象用途/时段分组，逐层数字抽取；观察队列自然完成后再排重任务。最终1200独立全回执审计/统一导出、原8路同源新综合/门级/PT、干净服务器复现仍未做。生产RTL/正式固件及668批量runner/parser未改；不覆盖失败binding01或97553拒绝包。
+
+- **07:09压缩前完整停点：** 最新修正提交`d25ba8a0142d865f3e1ef69f32ea05fc041c03fb`已生成并干净核验新包`light-light126-review-lf-dma16-20261110_070335-d25ba8a0142d.zip`，16597053B、SHA=`aa669fd81b9a597b92cf537d8a0ab8e5a0f289a8661c51897bef383f82ad8bbf`，667输入/五固件/**177tests、0skip**，40生产文件与668相同。audit=`local_runs/dma16_review_lf_clean_audit_20261110_0706/receipt.json`，SHA=`f3d0d35283616a62349b9845f6972b5f26b6c96dbd489621fc37efba9932da55`。已板端SHA暂存`/home/root/undergrad-review-lf-20261110/`（GUI为`/home/board/...`），**尚未FileZilla上传**。下一步恢复FileZilla，上传该新包；不要误传97553失败包。
+- 当前唯一EDA为89b `dma16_power_l04_v1`，**实际owner297135**、launcher07:03:19.473323；约07:07仍持锁，完成未读。L02已于06:49:14.157641通过，SHA=`634b7ae97247a8decd996e6285aab2c4ac974afc93a4ef1536e7ccd9a5fdb9bb`（07:02独立确认）。L03实际完成时间更正为**07:00:28.058236**，正确SHA=`d1ea229f95cc54884af698e3f7406bb32c104dbab0b3f6db0fa7568aafc96b8a`，07:08:06.859410独立断言通过；此前小字体误读1dea前缀被断言拒绝，未写入正式SHA。终端已通过Ctrl+Shift+plus放大两次，后续短行输出便于核对。L05—L12未启动，不重复L02/03/04。
+- 下轮继续：先读取计划/root/三份JSON并核对已有成果。上传d25后安全解包/全输入核验，使用新`runs/dma16_review_binding02`请求及decision，不覆盖89b失败binding01；这版同时修正首层SHA、常量实例数、LF字节绑定。正式审定完整绑定与最终全报告尚未成功，不能仅据本地177tests宣称完成。第二/三层数值提取还未做，只是PT报告收集通过。未知首层34742对象全用途/时段解释仍未完成，其他层未知扫描也未跑；功耗验收false。
+- 本地所有工具会话已结束，包括14514、4241、6793；无挂起测试或上传。FileZilla断开最小化；VNC窗口18874435、FileZilla20972102、任务栏10485764（恢复时先刷新窗口清单）。本地新增了可复用忽略文件`local_runs/audit_dma16_delivery_bundle.py`，只供干净包测试，可用`--archive --sha256 --commit --output`；新output必须不存在。新包/修正不会改变fcd生产、a53门级和668最终1200。GitHub仍受当前目的地确认阻塞，最后云端7379718，不重试/绕过；本条及三份状态小改尚待提交。
+
+- **07:02本地干净包闸门再拦截，未上传97553包：** 97553生成`light-light126-review-correct-dma16-20261110_065806-97553fe93b61.zip`，16603004B、SHA=`5c8395e247ae19d0e74adee89dfc336651d02499fa607c7c41453145d0d86b3a`、667输入；在新`local_runs/dma16_review_correct_clean_audit_20261110_0700`已安全解包/全输入/五固件/40生产文件一致，但新增record↔document核对拒绝，尚未编译scanner/跑干净tests，没有receipt。原因是Windows Python写入Markdown为CRLF（44行），record绑定工作区CRLF SHA，Git包按既有`.gitattributes`导出LF。原97553包/失败目录保留不上传。
+- 已把本地审定Markdown及JSON以显式LF写回，正确LF文档SHA=`aa519fe96fb5ace6deab6ea0682f2d7fceae036ead9c33fc6a261ef5f5b85c34`。`package_dma16.py`新增Git导出后立刻验证record文档原始字节SHA及目录边界，两个新测试覆盖CRLF转LF和路径越界；27个相关测试通过。下一步提交新修正版、再新包/新干净目录（全检查应177），不要继续97553旧包或覆盖其目录。新增改动仅打包/审定工具，生产/固件/批量身份仍不变。
+- 当前刚发出L02 SHA独立断言和L03状态查询，本地VNC工具session待收；L03此前driver292470，不能未读结果就启动L04。服务器最新仍89b；完整审定binding02尚未开始，L01未知对象解释/其他层PT/原8路PPA/最终全回执导出/复现仍待办。GitHub待确认、FileZilla断开。恢复先读本计划/root，再收当前工具输出。
+
+- **06:59续存：** 修正已提交`97553fe`，正在生成`light-light126-review-correct-dma16-...`新包；本地exec session **56137**待收，**尚未干净核验/板端暂存/上传**，不要误用89b宣称审定整合成功。175tests已通过，生产/五固件/668批量脚本保持。下一步先收包元数据，按上一轮`local_runs/dma16_review_clean_audit_20261110_0630`流程在新目录核验（新增反例后175tests），再FileZilla独立上传/服务器输入核验，最后新binding02。当前PT仍89b第三层driver292470，未读完成，不重复启动。
+
+- **06:58最新停点（压缩后优先读取）：** 89b第二层PT已于06:49:14.157641 passed，原summary SHA尚未安全抄录，须从原state读并独立核对；不要重跑第二层。当前唯一EDA是89b新`dma16_power_l03_v1`，**driver292470，launcher06:55:24.759277**，实际完成尚未读取；层04—12未启动。FileZilla断开最小化，GitHub仍待确认。最终1200 passed和首层未知扫描passed保持不变；未知34742对象的功能用途/时段完整解释尚未做，不把扫描工具通过当功耗通过。
+- **面积审定纠错完成，本地待新包：** 89b底层条件检查在原文档139430叶实例处拒绝。06:54重新核对同SHA的无表头TSV全部143118行/143118唯一实例，**139266标准单元＋162 SRAM＋3690虚拟常量实例**，后者有两种引用（logic0=1018、logic1=2672）。早期文档把两种引用误当两个实例；不是网表变化。Decimal重算仍294096.516000＋140700.265612µm²＝0.434796781612mm²。第一次临时诊断跳过首行、第二次误取第四列（库名）被Decimal拒绝；按无表头、第三列面积纠正后完整统计通过。已修本地审定消费者/新增拒绝引用数冒充实例数测试、AREA_REVIEW及三份JSON，旧89b及原EDA产物保持。前面历史“139430唯一实例/两个常量”以本条更正为准。
+- 首层PT正确SHA为`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9`，已纠正8份本地文档；不沿用旧c1daf46e误串。审定record已重算其Markdown SHA。**本地全175tests/0skip已通过，所有本地工具会话已结束**；下一步提交干净修正包、重新核验/上传，在新`review_binding02`执行完整消费者。旧review_binding01未产生decision，保留失败。当前没有上传中的包或挂起VNC工具；不修改生产/固件/668批量runner。
+
+- **06:49审定绑定停点：** 89b实际`runs/dma16_review_binding01`请求已成功创建；完整消费者因`Review diagnostic identity differs`拒绝，未生成decision.json。逐项仅首层PT摘要手抄错位，**正确SHA为`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9`**（旧串的零基51/52字符a/f颠倒）。原27bf通过state和summary实际SHA一致，06:48:13.360645对正确串独立断言通过；原报告/数值没有改变。已纠正本地8份文档和审定JSON并重算其Markdown SHA，旧89b包保留原状；尚未提交打包修正记录。第一次本地替换把差异索引手写52/53，守卫在任何写入前拒绝；核对51/52后成功。
+- 为避免再上传后才发现其他问题，当前只读调用89b底层validate核对其余真实审定条件，完整绑定仍明确失败待新记录；本地命令session待收，下一次先取截图。该检查不是最终汇总或完整接受记录，不放宽身份守卫。所有生产与批量输入未改。
+- **当前唯一EDA：** 89b `runs/dma16_power_l02_v1/dma16_power`，launcher06:43:41.114984、driver285538；06:48:13仍running（stage启动06:43:41.957618）。后续层03—12均未启动，不能重复第二层。未知扫描已完成，详见06:43条目；下一步解释全部34742诊断对象，期间可只读小型JSON，但不重扫大VCD/并发EDA。
+
+- **06:43最新：首层完整未知扫描通过计数/身份检查。** b60 `dma16_unknown_l01_v1/dma16_unknown_activity`于06:37:58.048814 passed，summary SHA=`4581955c327470998048a8298165e4740112d9eebe03049830fdb4ad3e00d715`，独立断言已通过。实际unknown记录389025，**开始时29654、开始后359371**，不要颠倒；34128受影响identifier，9576结束仍未知，614缺初始观测，完整诊断34742项，34118具有正的未知持续时间。全量与原活动计数/窗口相同，波形前后SHA未改；并非“只有初始X”，系统功耗仍false。
+- 扫描结束后06:41:47.987283已确认锁False、EDA空。正在89b新`dma16_power_l02_v1`启动第二层PT（本地工具session待收，PID未记录）；禁止重复启动/并发EDA。后续层03—12仍未启动，保持同a53门级摘要和fcd生产。原8路新PPA及最终完整导出/复现仍待办。
+- 89b审定请求首次因新包无runs父目录而FileNotFound，未写入文件；改`mkdir(parents=True)`后重新发送，须检查是否`REVIEW_REQUEST_READY`再调用消费者，**消费者尚未实际运行**。文件预期`runs/dma16_review_binding01/request.json`。当前本地89b之外只有小型进度JSON/Markdown变更，生产/批量身份均未改。GitHub仍待确认，FileZilla已断开最小化。
+
+- **06:38同步与停点：** 新工具包89b已实际同步服务器，`light-light126-review-export-dma16-20261110_062714-89b35a37eb71.zip`，16599863B，SHA=`4f5ca45777aeaf83e4a610e182ee1d53657e6bc6ce20d4310228d5915c936f52`；干净667输入/五固件/174tests、40生产文件与668一致，audit=`local_runs/dma16_review_clean_audit_20261110_0630/receipt.json`、SHA=`57fba3998c7d71c620fecd30ced36cca0637f447a58b9b84548924c89b97c7fa`。FileZilla33秒成功、队列空，现已断开最小化；06:35:54.473392安全解包，06:36:44.336398服务器667输入/完整提交通过。原扫描仍用b60，不受新包影响。
+- 原生扫描未停滞：06:30:13约99.7%单核CPU/82MB内存；06:36:44文件偏移8145769298/8745588450（约93.1%）。当前仅该扫描占锁，不启动PT/其他EDA。启动时正常g++编译子进程274899，扫描274909；完成须核对summary、全部原计数一致与未知对象，不能凭进度当成功。
+- 正在89b新`runs/dma16_review_binding01`准备`request.json`，绑定审定文档、时序诊断、端口诊断及首层PT，仅做小型只读报告检查；本地session45819待收，未实际执行消费者。下次先收工具结果再续，勿重复mkdir。新89b代码已提交；当前只有小型进展文档/JSON待提交，无生产改动。随后实际绑定检查成功也不等于最终全报告已导出。
+
+- **06:26扫描启动已确认：** b60新`dma16_unknown_l01_v1`启动时间06:25:05.092274，driver274570；下方“PID尚未记录”已被本条替代。当前正在只读查询其state/owner（本地session待收），不重复启动、不并发EDA。本地报告审定整合174tests/0skip已通过，下一步提交干净工具并按需打包；不要改668批量脚本或fcd生产输入。
+
+- **06:24最终批量完成：** 668 `runs/dma16_final1200_v2`于**06:22:56.909362北京时间**自然passed，1200/1200真实ASIC/E203任务、**30412800输出、0失败**。state SHA=`764a854321921a0ca06f82394697cfa23200931dc1d0297ffa457ad822d35d93`，06:23:53.048048独立断言数量/模式/SHA通过；锁False、EDA列表空。总宿主任务用时约5124.008秒、均值4.270007秒；旧37和失败v1未参与。最终导出还需独立重核全部回执，不能把运行通过冒称导出已完成。
+- 正在通过b60已核验工具启动新`dma16_unknown_l01_v1`，仅扫描a53已冻结首层完整波形；启动命令本地session待收，PID尚未记录，不重复启动。首层原始VCD/门级/生产配置不改；该扫描完成前不运行其他EDA。随后剩余11层PT、原8路新PPA、最终导出/复现继续推进。
+- 本地新增`dma16_review.py`并接入报告，可绑定明确审定记录、原综合/门级/时序/结构及首层PT工件，仅提升已审定的任务模式时序与面积，不批准功耗/官方成绩/物理签核。**174tests、0skip通过**，其中24报告相关测试；本地修改尚未提交上传，服务器仍b60，无生产RTL/固件/批量runner变更。GitHub仍待当前目的地确认，不重试；FileZilla断开最小化。
+
+- **06:18审定更新：** 完成全部6类/10085条结构告警分类，未出现其他类型；4,852端口逐对象全部declaration_only，诊断SHA `999df6259a5a0a93f7c958ecefdeefa2114275d9354ad4236e4b02367c576c60`独立断言通过。结合已核实的时钟、禁用弧、例外、严格setup/hold及单位/逐叶面积，新增`workspaces/arch03/FROZEN_REVIEW_20261110.md/.json`，**接受声明范围内的稳定任务模式综合时序和项目面积上界**，不接受系统功耗、物理签核或官方成绩。原冻结摘要的false标记不改；导出器整合此审定记录尚未完成。第一次只读归类命令csh引号错误未执行，修正后全量分类成功；无生产改动。
+- 最后批量观察**06:16:15.253439：1100/1200、27878400输出、0失败**，剩余100含20%约510秒，owner221400仍在。下一步只读等待其自然结束，再核验最终state/退出进程/锁并排队b60首层未知活动完整扫描。此时没有挂起工具/上传/本地测试；FileZilla断开，VNC保留。GitHub仍待当前目的地确认，不重试。
+
+- **06:11最新停点：** b60结构审计包已上传并服务器核验663输入（06:03:14.765282）；生产fcd与运行批量668不变。实际结构审计于06:03:57.998090完成，完整解析**1334模块、4852条LINT-8/28端口告警，全部declaration_only**，其中输入4684、输出168。此前1315是初步文本计数，现以完整解析为准。诊断位于b60包`runs/dma16_struct_review01/mapped_port_diagnostic.json`；仍须审定其他LINT类别，不自动提升strict timing。下一步读取独立SHA断言回执。
+- 最终1200 v2最后**06:09:08.605678**为running，**1017/1200、25774848输出、0失败**；剩余183，宿主均值约4.227282秒，含20%余量约929秒；锁仍在，当前sample85/layer10。禁止并发EDA或完整VCD扫描。完成后先核验1200/30412800、最终state与锁释放，再运行b60未知活动首层扫描。
+- b60包`light-light126-struct-review-dma16-20261110_055845-b60bef16c4dd`：ZIP16587832B、SHA=`c622483ab6188d70c222126cb74f281745e13cf739aff7d34703dc69aa0e31e4`，663输入/五固件/167干净测试，40个RTL及固件与668相同。干净回执`local_runs/dma16_struct_clean_audit_20261110_0559/receipt.json`，SHA=`416999366ab68b678f1425e0352825d55661edc4069e798ef48240e2f29cf20a`。FileZilla33秒成功、队列空并已断开最小化；服务器06:02:50.368423解包。GitHub仍待当前目的地确认，不重试；最后云端7379718。
+- 已重新读取AGENTS、三天计划、根交接、STATUS、执行检查点及功耗/时序/验证矩阵。当前只有正在收取的只读服务器诊断命令（本地session57991），没有新仿真；下一步收完它再操作VNC。完整未知扫描、剩余11层PT、原8路新PPA、正式审定及最终导出/干净服务器复现/提交仍待办。
+
+- **05:58本地新增停点：** 已实现`dma16_structural_audit.py`及8项测试，读取完整mapped模块/端口声明和所有LINT-8/28警告，逐位识别去声明后的实际引用；绑定原综合/网表/报告SHA，不自动批准时序。尚未提交上传实际运行，下一步提交干净包复验；生产RTL、固件、冻结批量脚本均未改。原3178未知活动工具已服务器就绪，待当前1200释放锁后运行。最后批量观察仍05:49:32的748/1200、0失败、owner221400；不能因本地代码完成就推断远端作业完成。此次新工具替代上方“尚未编写端口用途审计”历史状态。
+
+- **05:52压缩前保存：** 668 `dma16_final1200_v2`最后05:49:32.349551仍running，**748/1200、18957312输出通过、0失败**，owner221400，当前sample63/layer05；宿主均值4.186089秒、剩余452含20%余量2270.535秒。下一次仍只读查看state/owner；未释放锁前不启动未知完整扫描或PT。最新服务器工具3178已核验，生产fcd与批量668未改；默认与含边界实际数值已核验，精确值见下一条，禁止沿用先前手抄错位能耗。
+- 新增`VERIFICATION_MATRIX_20261110.md`明确本地stub/pin_mock、真实E203及无SDF门级各自覆盖；05:47重新核对修复后4个本地回执SHA及所含生产RTL，全部一致。更新验收、交付索引、创新草稿和DMA16_EXECUTION干净复现入口；本次只是证据和命令整理，未启动新仿真，不冒称干净服务器复现已完成。结构告警模块统计仍只读进行，完整正式审定记录未完成。GitHub仍待用户具体目的地确认，不重试；FileZilla已断开最小化，VNC/中继保持。
+- 05:52补存：最新结构统计已收完（本地session77101结束），未连接端口涉及238个design，无负载输入主要为算术模块未用位；完整审定仍未完，详见TIMING_REVIEW新段及`lint_module_inventory.png`。当前无挂起工具/测试/上传。最新文档提交9f6abbf之后再提交此条；下一次先读计划/root，再查实际668批量状态。云端/服务器工具/生产版本均未因此改变。
+- 05:54只读格式核对：实际mapped.v有1315个module，非ANSI端口声明可逐模块解析；`e203_subsys_plic/plic_icb_cmd_wmask`仅在模块头和input声明出现，模块主体没有使用，对应4个LINT-28。这是一个具体对象的解释，不代表其余4670对象已审完。截图`mapped_port_syntax.png`；session75912已结束，无待收工具。可继续准备只读逐端口用途审计，但尚未编写该工具；不要误当已有脚本。最终批量仍以05:49:32的748通过为最后观察，下次刷新。
+
+- **05:44最新保存：** 最终1200 v2最后05:40:02.214135为running，**613/1200、15535872输出通过、0失败**，owner221400；均值4.185543秒，剩余587含20%余量约2948秒。只运行该批次，不启动未知扫描/其他EDA、不清锁。生产fcd、批量668保持不变。
+- 新工具包`light-light126-unknown-audit-dma16-20261110_053139-3178c8faab53`已159干净tests/660输入/五固件通过，40个RTL及固件与668全部相同。ZIP16575930B、SHA=`0b56714fa2f7563c5fae840e3eeb44b5230ddab187fbbdbd3b1fca17081684bb`；audit=`local_runs/dma16_unknown_clean_audit_20261110_0534/receipt.json`、SHA=`328e0395849d817ef1999f46392cdbe774a35b264d5db44f3bf30847ea74e3f6`。首次本地比对筛选漏5个arch02 RTL，数量守卫拒绝；补齐全部12RTL＋28固件后通过，没有改包。FileZilla33秒成功、队列空并已断开最小化；服务器05:36:23.644361安全解包、05:36:54.416400核对660输入和完整提交。
+- **实际边界数值复验通过：** 3178包`runs/power_boundary_review01/power_numbers.raw.json`于05:38:42.271299生成，SHA=`b01847992ca3ac7e43a302238a5601c3c4c9b40948ec3844032395fa7f0415b0`。默认total=0.0296837185W、energy=0.0000446779497038379161700J；含边界total=0.0296856184W、energy=0.0000446808093063719558880J。05:43:14.766660独立确认新文件SHA、原27bf JSON能耗相同且等于功耗×窗口。此前交接手抄能耗中间数字错位，已纠正各文档和状态，原JSON/原始报告从未更改；手抄新SHA首两字符db也被断言拒绝，实际b0已确认。首次输出因新包尚无runs父目录而失败，补parents后在原本不存在的新目录成功；不是PT运行失败。system_power_verified仍false。
+- **接续工作：** 当前无挂起工具/测试，新未知审计仅上传未运行。先继续只读跟踪668批量；同时补正式审定记录/材料。批量自然结束且锁释放后，3178包新session执行`dma16_unknown_activity --gate-run <a53>/runs/dma16_gate03/dma16_gate --gate-summary-sha256 9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc --cases layer_01`，再依据完整对象解释未知，排队其余11层PT及原8路新PPA。结构告警已按哈希读到6类：LINT1=4、LINT2=178、LINT8=178、LINT28=4674、LINT32=4549、LINT33=502；四个无负载cell属平台debug复位/AON POR/PLIC flop，尚未完成全部对象审定，不自动升级strict timing。GitHub仍待当前目的地确认，最后云端7379718；不重试/绕过。
+
+- **05:33最新：** 668的最终1200 v2在05:27:40.065696已438/1200、11100672输出通过、0失败，均值4.173856秒，剩余762含20%余量3816.57秒，owner仍221400；不清锁、不并发EDA。生产RTL/正式固件及批量runner/parser未改。新增独立`dma16_unknown_activity`完整波形未知值定位、独立边界功耗数值及JSON/CSV导出，**159项本地测试通过**，尚未打包上传或实际大波形复验。当前无挂起测试；下一步提交干净包上传，先只读验证实际边界报告，等批量结束后排队未知活动扫描及剩余11层PT。
+- 05:29重新核验冻结SRAM Liberty SHA并用Decimal计算默认双电源泄漏组：大宏0.000046031W、小宏0.000004881W，与实际162宏各报告值舍入吻合；实际verbose明确`<no wire load model is set>`。系统功耗仍未验收。新工具详见`workspaces/arch03/UNKNOWN_ACTIVITY_REVIEW_20261110.md`；本地Zig默认缓存AccessDenied后改项目缓存成功，初次审计导入名verify_gate错误已改gate_activity；一次测试命令cwd错误后已在scripts目录重跑通过，均未影响服务器运行。
+
+- **05:20恢复核对：** 已重读AGENTS、三天计划和当前检查点。最终1200 v2仍由owner221400运行，05:13:27.134515已235/1200任务、5955840输出通过、0失败，宿主均值约4.168秒；05:19:39又见running、剩余877（323完成），本次输出过长未作为最终机器汇总，下一次须只打印计数。没有启动并发EDA或修改冻结批量解析器。GitHub仍待原具体目的地确认，最后云端7379718，FileZilla断开、VNC保留。
+- **新增功耗审核：** 冻结链接清单中的标准单元和两种SRAM Liberty均重新核对哈希；每种SRAM80个internal_power组、4个非零双电源泄漏组。实际162宏的泄漏为130×4.60310002e-05W、32×4.88099977e-06W；仍需按RET1N条件核对模型默认组。12层全扫描的未知记录数不同，不能一概归为初始快照，准备独立逐信号/时间段审计；尚未新增服务器扫描任务。
+- **边界口径核对：** 安装手册`/eda/synopsys/prime/prime_2022.03-SP5-1/doc/pt/man/cat2/report_power.2`明确`-include_boundary_nets`计入原始输入网络开关功耗，默认排除。实际含边界switching=0.00269170501W、total=0.0296856184W；默认switching=0.00268980535W、total=0.0296837185W。普通分组解析器用于边界报告时拒绝“all groups switching”不相等，是诊断路径不适用，不是PT作业失败；保留默认严格检查，后续单独处理边界项。下方04:21手抄switching已纠正，原始JSON/SHA/总功耗与能耗从未改变。system_power_verified仍false。
+
+- **05:00压缩前最新保存：最终1200 v2已实际连续通过。** 668包`runs/dma16_final1200_v2`最后04:58:50.263803为running，**25/1200任务、633600输出已过、0失败**，当前`cases/sample_000003_layer_02/attempt_0001`。实际owner PID **221400**，launcher04:56:55.618624；此前截图手抄214800/.178651错误，已由实际owner/新截图纠正，不得沿用。宿主平均约4.14956秒/任务，剩余1175任务含20%余量约5851秒（97.5分钟），只含准备/仿真/回执复核，不含后续门级/功耗/排队。共享锁仍由该批次占用，禁止启动其他EDA、清锁或重复批次。原v1 failed/completed0完整保留。
+- **恢复入口**：先重读有效三天计划、AGENTS、本文件和STATUS/EXECUTION_CHECKPOINT；下一次只读查询668的v2 state/owner，按最新成功数继续监视。生产仍fcd真实ASIC/E203/厂商宏和IRQ固件，新增668仅修回执表示与运行解析器身份。首层PT和初步报告已经完成，不重跑；剩余11层功耗、宏模型/未知活动审核、原8路同源新综合/门级/功耗、最终审定报告/干净复现/提交仍缺。严格时序具体对象已查明，但报告接受标记仍待正式审核记录整合；不混称物理签核。GitHub最后云端7379718，自动审批仍待用户当前具体目的地确认，不再次尝试push。FileZilla断开最小化、VNC/既有中继保留，无活动本地测试或挂起工具会话。
+
+- **04:57最新：修正包服务器核验与失败首例只读复核均通过，最终1200 v2已启动。** 668包FileZilla传输成功、队列空后已断开；界面仅显示最后4.1KB段成功，完整ZIP16560820B/SHA已由服务器独立核验，不据尾段推断整包速度。04:54:00.603859安全解包，04:54:58.430249核对656输入、完整source_commit及真实ASIC contract/runtime parser SHA。04:55:45.723680使用旧只读runner＋新解析器复核旧失败首例通过25344输出/225770周期，原state/receipt前后SHA不变且仍failed；不把这一例计入最终新批次。
+- **当前唯一排队/运行任务**为668包`runs/dma16_final1200_v2`，launcher **04:56:55.618624、driver221400**（已按owner纠正初次手抄）。04:56:20.195146启动前锁False且EDA列表空；本条为启动时记录，首批结果见上方05:00条目。严禁重复启动或并发EDA。旧v1保留failed/completed0，旧37组不参与。V2使用fcd编译一次的真实ASIC/E203/厂商宏simv及正式IRQ boot，运行脚本/解析器身份为668；随后继续未知活动/模型审核、剩余11层功耗、原8路同源新PPA及最终导出复现。
+- 时序诊断正确SHA `2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa`已于04:56:20再次独立断言通过。原手抄错误已纠正，未改产物。最新本地代码6683847；当前仅新增小型交接/状态修改待提交，GitHub仍待确认、最后远端7379718。全部本地打包/测试/上传工具会话已结束（含54039、72309、60692、34316、49367、36218、77592）；开发板VNC保持，FileZilla断开最小化。
+
+- **04:53上传中：** 6683847正式修正包干净核验已通过**149tests、656输入、五固件**，audit=`local_runs/dma16_identity_clean_audit_20261110_0451/receipt.json`，SHA=`ca50388d5d5e7ed28a272f71b751311daf6489461c4396bea7dc575042c9b322`。40个生产相关文件中39个完全不变，唯一差异为`firmware_sequence/manifest.json`的来源记录；sequence ELF/bin/Verilog均与v6相同。新包已板端SHA暂存`/home/root/undergrad-batch-identity-20261110/`，正在FileZilla上传；须确认完成并断开，再服务器ZIP/656输入核验，不能把上传中记完成。当前没有挂起本地测试，54039及72309已结束；不使用197未上传旧包。下一步新工具只读复核失败首例，再新session最终1200v2。
+
+- **04:51压缩前准备记录：** 最新代码提交`66838470bb12a036b37305393c84b712b11cd43f`，回执JSON数组修正＋实际runtime helper SHA绑定都在此版本。包`light-light126-batch-identity-dma16-20261110_045000-66838470bb12.zip`为16560820B/656文件，SHA=`a1ab4af4868ea010639ce474b6484c171b468e05bc336917594d65ab8088226c`；正在`local_runs/dma16_identity_clean_audit_20261110_0451`做干净核验，当前本地工具session54039尚未收完，**未暂存/上传该包**。1974295旧包仅板端暂存，绝不误传。FileZilla已断开最小化；服务器仍8c、最终1200v1 failed/completed0，无新的EDA启动。
+- 运行helper身份修正改变`dma16_batch.py`，原sequence v6来源守卫正确拒绝打包；没有修改旧manifest绕过。已用原编译参数在新`local_runs/dma16_sequence_firmware_20261110_v7`重新构建，ELF SHA=`5f751362ad33a01f0b4237c84ef36b809708e23f6913741451c19eb0a80b9acd`、bin=`a1e8aa356f6b8a75fbcc1733eb617e6e4aa653f40d29e8a061977aa7ea3d1d1e`、Verilog=`f3c9e02cf9ba0c36b616dbfc6243f48a2ee84774c73da5d9f5f40db77f79029f`全部逐字节等于v6。仅sequence来源manifest更新，实际RTL和五固件机器码不变；首次误将tile目录传给需要legacy layout.json的构建入口，在建输出目录前被拒绝，改为validated_data后构建成功。以后打包使用sequence v7，不能再用v6来源清单。
+
+- **04:48补充停点：** 1974295回执修正包已148干净tests/656输入通过并暂存开发板，但**未上传**。复查发现批量冻结身份原来只显式绑定runner、未单列新包实际导入的bus_metrics解析器；已补`runtime_helpers_sha256`并在每任务边界复核，新增更换解析器后拒绝resume测试，62相关tests通过。因此197包保留为被替代的本地包，不上传；接下来提交/打包含运行解析器身份的新版本。FileZilla刚断开、无传输，服务器仍是8c3ad9f，1200v1仍failed且锁释放。新runner哈希改变，所以不能把旧失败首例的数据布局清单拿新runner直接冒充同配置复核；可加载旧只读runner并显式使用新解析器核对旧回执，原文件和failed状态保持不变；正式1200从新目录开始。
+
+- **04:43最新：最终1200第一轮因回执工具类型问题停止，修正已本地通过，尚未上传。** 8c3ad9f包`runs/dma16_final1200_v1`于04:37:29.879104启动（driver209121），首例`sample_000001_layer_01`25344捕获值检查通过、225770周期；但04:38:15.026741回执重读报`Receipt counters changed`，整批completed=0、state=failed，锁自然释放，没有手动停止。只读差异定位唯一字段为`bus_metrics.histogram_cycle_bins`：内存tuple，JSON重读list；实际计数/捕获没有差异。已仅改解析器返回JSON数组，保留全部严格比较；新增真实指标形状的两任务fixture写入/重读和篡改计数拒绝测试，61相关tests通过。生产RTL、五固件、冻结simv不变。下一步提交新工具、干净打包上传；只读复核旧失败首例以证明修复，再从**新批次v2**完整重跑，不把v1改为通过、不续旧37组。
+- **只读时序诊断已通过**：8c3ad9f包`runs/dma16_timing_audit01/dma16_timing_audit`，driver205686，04:31:56.623998开始、04:32:14.234559结束；正确SHA=`2b60daffaf19c85512b95c13024eabe4abe856e9a30764fadcff3fa102f309fa`。实际3个高扇出网络为`u_e203_subsys_top/core_csr_clk`、`u_e203_subsys_top/hfclk`、`u_e203_subsys_top/u_sirv_aon_top/crossing_clock`；冻结平台源码分别连接EXU门控时钟、HF选择器和LF时钟。实际mapped.sdc明确固定JTAG TCK/TMS/TDI为0；189个no_clock为DTM186/JTAG复位同步3。PT禁用弧61740行，原因C46683、p12863、c1992、d202，未见l/L/u/U/f等循环切断或人为禁用标记。保持任务模式/理想时钟/布局前范围，不称物理签核。曾手抄诊断SHA首16位错误，独立SHA断言拒绝；已分4字符核对纠正，未改原产物。
+- **首份实际JSON/CSV/中文报告已导出**：27bf包`runs/dma16_report_preliminary01`，04:33:22.008999启动只读导出driver206627，04:35:30观察`DMA16_EVIDENCE_EXPORTED review_required=true`和receipt存在。绑定真实ASIC14/综合/门级14活动12及首层功耗，power_layers=1，最终batch仍0；不代表最终验收。首层PT活动总览152987nets：152986精确映射、1 implied、其他来源/未标注0；toggle_limit=1覆盖64909/152987=42.43%，不是映射率。实际X系数0.5、initial X false；389025未知记录仍待按模型/对象审核。774条PSW-208是常量网络活动重置，另重定向报告774条和PTE-003一条合计1549。
+- 新诊断包8c3ad9f已126干净tests/656输入/五固件/40生产文件不变通过，ZIP16555314B，SHA=`cd49279f3349e6eea51942f23da76f721cfee059baf8081d892bdfba6e2bc74a`；FileZilla成功33秒并断开，服务器04:30:28.107773解包、04:31:15.721214全输入通过。下一步的回执修正版尚未提交打包。GitHub仍待当前用户具体目的地确认，最后远端7379718；不重试、不绕过。
+
+- **04:21最新：修正首层PT已完成，原始数值已成功提取。** 27bf包`runs/dma16_power_l01_v2/dma16_power`于04:10:02.258177 passed（报告收集），summary SHA=`9f4f8772279de85083c41b11975eb85f1fe0225da060a84dc1dfa46e6bf0bfd9`；PT 0 errors、1549 warnings。04:19:28实际锁False、EDA进程列表空。原始数值文件在同session的`power_numbers.raw.json`，SHA=`1c7e59c8275ed054ab79b40dfafc30112e45961f3d13a4cda74fd30eedb9bb45`。internal=0.0204980653W、switching=0.00268980535W、leakage=0.00649584783W、total=0.0296837185W，精确窗口1505133.182820ns，原始能耗0.0000446779497038379161700J；单位、普通/verbose分类合计、层级互斥分解及162宏表核对通过。**system_power_verified仍false、approved值仍null**，这是布局前原始估算，非最终功耗验收。
+- 正在逐对象审核实际新PT：`timing_check.rpt`共189个no_clock对象，全部归入JTAG DTM/调试复位同步层级（186+3），仍需结合实际约束/对象确认；`disabled_timing.rpt`为10752138B/61740条对象行，正在归类实际原因，不能凭PTE-003总数认定通过。3个综合高扇出网络名称仍待新DDC只读诊断。首层summary曾手抄末段错误，数值提取器哈希守卫在写文件前拒绝；后改为读取已通过stage回执的SHA并独立重算文件，未放宽检查、未改原产物。
+- 下一步完成时钟/禁用弧/模型/活动审核、实际整轮初步导出及高扇出诊断，再启动最终1200与剩余11层功耗、原8路新PPA。最后本地提交e802b7f，生产fcd和工具27bf不变；GitHub仍待当前用户目的地确认，不重试。FileZilla已断开，开发板VNC保持；以下“v2仍running”为历史状态。
+- 04:27本地新增`dma16_timing_audit`受共享锁管理的只读DC阶段：复用当前DDC/库/宏/硬件身份守卫与实际模块probe，运行现有`all_high_fanout -nets -threshold 1000`，保存完整网络名，前后核对全部输入SHA；不综合、不改网表、不自动升级时序结论。相关63tests通过，尚待新包上传和服务器实际诊断。生产RTL/正式固件未修改。
+
+- **04:09压缩前最新保存：竞争实测已通过、修正功耗正在运行。** 414包`dma16_contention01/dma16_contention`于04:01:07.123980 passed，2例50688输出一致；摘要SHA=`a55fe2e951ad239403c230a28bd771affa3588abd6cc751c86c84f7a9faf4e8e`。layer_01与rounding各观察到竞争1248拍、CPU总授予21893、DMA总授予47904，竞争时CPU授予1146/DMA授予102，blocked0；总arb grants/acks各69797、ready_wait25049、CPU-owned wait23903、response backpressure0。原工具按真实ASIC/E203和双方服务检查通过；独立polling/scratch固件，不作正式PPA，也不是任意仲裁序列的数学证明。
+- 27bf49a功耗修正包已FileZilla成功上传33秒并断开，服务器04:02:28.049584核验ZIP并安全解包、04:03:17.132980核验654输入/完整提交号。**当前唯一EDA是27bf包`runs/dma16_power_l01_v2/dma16_power`**：launcher04:04:30.789625，stage04:04:31.140224，driver188741，child188961。最后04:07:24.331056为running、正在读完整layer_01 VCD，实际日志Error行0；四个SEL-005已不再出现，但还未完成/验收。不要误用之前误读的PID；以本条及新owner为准。完整门级仍用正确SHA `9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc`。
+- 下一步读v2完成及真实PT报告，审核units/no_clock/disabled/X/映射/宏模型/高扇出；旧v1保留failed（4 errors、1553 warnings、无实际SIGTERM）。再最终1200、剩余11层功耗、原8路同源新PPA、实际JSON/CSV中文导出及干净复现。尚未运行任何实际整轮报告导出；高扇出只读诊断可用现有DC `all_high_fanout -nets -threshold 1000`，尚未对新整机执行，不能把历史clk结论移用。
+- 本地干净包124tests通过，所有工具会话99465、96761、8599、96045、42567、13163、51206、33004已结束；无本地仿真。GitHub仍待用户当前具体目的地确认，最后远端7379718，不重试push。FileZilla已断开最小化，VNC/既有中继保留。最新源码27bf49a，以下早期“上传中／竞争待验／无EDA”等均为历史。
+
+- **04:02上传中停点**：功耗quiet修正已提交`27bf49a938c752f77ba815ca5f4a0f43b595d6fb`；包`light-light126-ptquiet-dma16-20261110_035754-27bf49a938c7.zip`为16544198B/654输入，SHA`a13d9e9e0ad5f82b0a3081f531638f38c815398285376d9668fd9312898d44ff`。干净CRC/全部哈希/五固件/124tests通过，receipt=`local_runs/dma16_ptquiet_clean_audit_20261110_0359/receipt.json`，SHA`17603adbbca74ec06e7e885ab98087f777491731faa325ec57d497ddeeae8e58`；40生产RTL/固件文件与414一致。板端`/home/root/undergrad-ptquiet-20261110/`已SHA核验，正在FileZilla上传，**必须观察完成、断开、服务器SHA/解包/654输入核验后才使用**；GUI目录为`/home/board/undergrad-ptquiet-20261110/`。
+- **当前服务器新排队任务为CPU竞争**：修正包准备期间，在锁及EDA空闲检查通过后，用已上传414包启动`dma16_contention01`，layer_01/rounding，launcher03:58:52.124581，driver181178；尚未读取stage结果，先查询owner/state，不并发启动PT。采用独立polling/scratch竞争固件，不能拿其周期或活动替代正式IRQ PPA。待竞争结束释放锁及新包核验后，再用新session `dma16_power_l01_v2`重跑修正功耗。旧l01_v1自然failed、无实际终止信号的记录仍保留。
+
+- **03:56最新／压缩前保存：首轮功耗实际失败，当前没有本任务EDA运行。** `414/runs/dma16_power_l01_v1/dma16_power`在03:52:26.901824结束，PT退出码0但日志含**4 errors、1553 warnings**，原严格runner正确记failed，不生成可验收摘要。03:53:50.710187锁False。原因已定位为四个“禁止功能存储器应不存在”的`get_cells`空查询在PT发出SEL-005；不是实际发现功能RAM，也不能忽略错误直接验收。计划主动停止前检查owner时锁已自然消失，**没有发送SIGTERM、没有写manual_stop_reason**，本轮应记自然工具失败，不能记主动停止。原日志/原始报告全保留。
+- 已本地修正`dma16_power.quiet_absence_checks`，仅为预期空的forbidden查询加`-quiet`；MMIO8功耗复用同一修正。必须存在的162/138宏数量、归属及禁止单元非空即失败保持不变，未设置全局消息忽略。Tcl行为测试复现旧查询错误，并验证两版四类禁止RAM存在时仍拒绝、宏缺失仍拒绝；51项相关检查通过。**尚未提交/打包上传此次修正**，下一步先保存提交和新包干净复验，再FileZilla上传、新session `dma16_power_l01_v2`重跑，不能在414原运行里改脚本或把失败报告转成PASS。
+- 门级全14/12活动仍通过，实际SHA仍为`9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc`，生产fcd/综合网表不变，无须重跑门级来修功耗工具。严格时序/高扇出、功耗、CPU竞争、最终1200、MMIO8 PPA、实际完整导出/复现仍缺。原失败功耗报告可作诊断，不作正式数值验收。GitHub仍待当前用户确认，最后云端7379718；e013a8a为本次门级/首功耗启动证据本地提交。本地所有工具会话20670与functions cell552已结束，无挂起工具；FZ断开，VNC和既有中继保留。
+
+- **03:50最新重大进展／压缩后从此处继续**：a53 `dma16_gate03`已于03:41:09.458176完成，全14例354816输出、每任务225770周期、12份完整活动审计通过；极值/舍入饱和6336/4554一致，范围仍为无SDF门级功能。实际summary SHA为`9ba06d90c32842d1a817ddc2d439964af7b406af10617fca6f7bab43908f24dc`。注意中段是`a817ddc2d439964a`；曾把相邻d4误抄为4d，启动前SHA断言拦截，**未创建作业/运行目录**，已用差异索引24/25和大写分段核对修正。勿沿用错误哈希。03:44:53.613919实际锁False、EDA进程空，门级锁自然释放，未清锁或重启。
+- **当前唯一EDA改为首层功耗**：414包`runs/dma16_power_l01_v1/dma16_power`，launcher03:47:17.440913、stage03:47:17.940385，driver174171；最后03:48:09.774588为running，child174385，`power.log`。使用上方门级SHA、layer_01完整窗口，生产RTL/IRQ固件及综合fcd不变。现在应查询该功耗状态/报告，不再轮询已完成gate03。实际功耗、严格时序审核和最终1200尚未通过；先读真实units/no_clock/disabled/X/映射/模型及警告，再剩余11层、竞争、1200、原8路新PPA/最终导出复现。
+- 已找到可复用的实际DC高扇出诊断：`workspaces/arch03/scripts/dc_blocks.py`使用`all_high_fanout -nets -threshold 1000`输出真实网络名称。历史块级只有clk不能套到当前整机3个TIM-134警告；待新网表只读诊断并结合PT具体对象审核，不能直接放宽为通过。当前暂无实际DMA16 JSON/CSV整轮导出，可在新功耗运行时只读生成明确未审核的初步报告；最终审核入口仍待实际证据。
+- 本轮所有本地工具会话31400、56193、67990、81391、28090、47535、27490、21806、19067、47625均已退出；没有活动本地仿真。FileZilla断开最小化，板端中继/VNC保留。GitHub仍等待用户当前具体目的地确认，最后云端7379718，勿绕过push。最新源码工具414bc56、已提交上传记录bdd9287；本条证据准备保存提交。剩余任务与历史失败继续按FINAL_RUN_QUEUE及下方记录，不恢复旧37组。
+
+- **03:31压缩前最新保存**：原8路报告入口已本地提交`414bc5631438bed31e7228d8659ccd519ad1ac7f`；新包`light-light126-ref-export-dma16-20261110_032204-414bc5631438.zip`，16545313字节/654文件，SHA`06cb7083b785c069439d59029adce6d5aedc1a304f47d9f70cd355a5ac7d5d0a`。干净复验CRC/路径/全部SHA/五固件/123tests通过，receipt=`local_runs/dma16_ref_export_clean_audit_20261110_0323/receipt.json`，SHA`c041f91d1ddff5570486a9beeb55330de94a4f0ac7fda249339010a054a46cec`。40个生产RTL/固件文件与80包一致。已通过板端SHA暂存和FileZilla上传；服务器03:26:19.036366验证ZIP并安全解包，03:27:08.350746全654输入通过。新报告器还只读检查了实际c5 MMIO8 ASIC14摘要及3843121周期，未宣称其新门级/PPA通过。FZ成功队列10、队列空，已Control_L+d断开、Alt_L+F9最小化；本次最后显示小段传输成功，不据此推断整包速度，整包长度与SHA已独立通过。
+- **当前门级03:27:51.694021**：a53 `dma16_gate03`前11层功能及全活动已通过，第12层`layer_12_activity_scan.log`正在扫描，driver34122、child157914（100%CPU）；尚缺该层活动、两个边界用例及完整summary。勿重启、清锁或启动并发EDA。03:29:47.972852只读空间检查：12个VCD合计102909728001B，文件系统剩余2818079457280B（约2.82TB），未检查个人quota，未删文件。
+- 下一步先收全14/12活动和实际summary SHA，再从最新414工具包新session启动首层DMA16 PT；工具功耗逻辑与80/236一致。逐对象核查no_clock/disabled、X/覆盖/单位/模型/警告后，再12功耗、实际CPU竞争、最终1200、原8路新PPA、真实报告及干净复现；见FINAL_RUN_QUEUE。GitHub仍等待当前目的地确认，最后远端7379718，不再绕过push。本轮全部本地打包/审核/上传/查询会话91683、66599、18398、53094、8813已退出，无活动本地仿真；只保留现有板端VNC/FTP中继和远端门级作业。
+
+- **03:22新增报告入口与执行队列**：`mmio8_report.py`本地实现，要求同源原8路ASIC14/新门级14/12活动，独立绑定固件、布局、网表及功耗，保留首VALID相位；50相关测试通过。共享DMA16导出器仅增加可选标题/receipt schema，默认未变。详见MMIO8_GATE_POWER_HANDOFF，本次新入口尚未上传；不代表实际MMIO8 PPA完成。新增FINAL_RUN_QUEUE_20261110.md保存顺序、边界及宿主预算。03:14:52.583005服务器只读重验fcd批量契约288文件、真实ASIC/program-only、shift11/12通过，未启动最终1200。
+- 门级03:20:26.602751仍唯一作业，前10层已完成，第11层完整activity_scan正在运行（约7分59秒、99.7%CPU）。driver34122；子PID下一次从owner重新读取，不沿用旧simv的143794。全14/12活动仍未完；原80b54d1工具包已上传/核验，生产fcd和门级a53不变。最新小型证据本地a572c71，GitHub仍等待确认，未push。当前没有活动本地仿真，71811查询会话已退出。
+
+- **03:13恢复核对与新包上传完成**：已重读AGENTS、有效三天计划、STATUS及执行检查点。`80b54d1`数值/答辩包通过已授权FileZilla上传，观察到16.6MB传输成功（33秒）、队列空；已Control_L+d断开、Alt_L+F9最小化。服务器03:10:45.180232验证16535320字节/ZIP SHA并安全解包新目录；03:11:28.229852全部651输入及完整source_commit核验通过。实际旧PT SRAM表按mmio8_source正确解析138宏，默认DMA16仍拒绝；仅是格式/范围验证，不是新版功耗。
+- **门级最新03:12:11.764474**：a53 `dma16_gate03`已完成layer_01..10功能及完整活动扫描，driver34122，child143794为`layer_11.log`（仿真）；仍为唯一共享EDA作业，不重启、不清锁。全14/12活动仍未完成。后续先收完整摘要与SHA，再首层DMA16实际PT审核，随后全12功耗、真实CPU竞争、最终1200、MMIO8新PPA及完整导出/复现。生产RTL与IRQ固件未改。
+- 当前GitHub仍等待具体目的地确认，不重试或换通道。最后核验云端7379718，最新已保存本地95ffda7；服务器工具最新80b54d1、当前门级a53、生产及综合fcd。本轮没有挂起编译/本地仿真，已完成的上传工具会话10608、48810均退出。继续保持原始失败路径和旧37组，不复用它们作为最终验收。
+
+- **03:04压缩前最终保存**：80b54d1数值/答辩包干净复验已完成，651文件、CRC/安全路径/全部SHA/五固件及**116tests通过**；audit=`local_runs/dma16_ref_numbers_clean_audit_20261110_0306/receipt.json`，SHA`528077a7b416ba1260cb3fa1172756e8166a6e55209d69ed3a1439eadc4ed6d0`。目录名0306是预定标签，不是实际观察时刻；本机完成03:03:39。打包/审计session32553、14657均结束，没有挂起工具。**新80包尚未板端暂存或上传**；下一步先用已授权FileZilla新目录上传，核验651输入，再只读核对真实旧PT SRAM表的mmio8_source138宏profile可解析且默认DMA16仍拒绝。当前服务器最新仍431，生产/门级不变。
+
+- GitHub同步仍因自动审批拒绝等待当前用户确认；已补查原始项目用户授权但审批不认可检索来源，不再重试或换通道。问答继续等待，服务器工作不因此停止。当前最后门级02:58:22九层通过、child135475第十层扫描，下一次刷新owner。全14/12活动、首层新PT/全12功耗、实际CPU竞争、MMIO8新PPA、最终1200、最终导出/复现/提交仍缺；实际首层PT只有门级完整通过后才能启动。
+
+- **03:03审批复核补充**：只读查了同项目聊天《同步》（01a1b98d-b510-7082-a3f8-add6286fc27f）的原始用户消息，找到其对该私人GitHub仓库个人分支代码/脚本/共享文档/验证摘要的明确授权；向自动审批补交该新证据后，**仍被拒绝**，理由为聊天检索结果不属于当前可信用户授权。已告知用户；先前async确认问题继续等待，不重复提问、不再换工具/通道尝试push。云端最后实际核验仍7379718。本地80b54d1已提交，比赛服务器授权不受此GitHub拒绝影响。
+- 数值/答辩新包已生成`light-light126-ref-numbers-dma16-20261110_030111-80b54d1f408a.zip`，16535320字节/651文件，SHA`8dbc13c1c22165475ceba00f3a7fb780f7004806eaacdabf8b028c9ca21f7237`；**尚未板端暂存或上传**。正在`local_runs/dma16_ref_numbers_clean_audit_20261110_0306`做干净解包/五固件/116tests，需收回工具结果后才能标通过。门级最后仍02:58九层通过、第十层扫描；下一次刷新owner。当前无新EDA作业。
+
+- **03:03后续保存**：02:58:22.178477实际gate03完整通过layer_01..09，driver34122，child135475为layer_10_activity_scan.log（刚启动10秒、CPU103%）；其余还在跑，勿重启或清锁。当前最新本地已提交证据`ffe5243856ac527d713ce78aae3ab3e702c05b57`，云端仍因具体目的地审批等待用户答复而保持7379718。最新服务器工具包431，当前门级包a53，生产fcd均不变。
+- 新增`INNOVATION_DEFENSE_20261110.md`答辩准备稿，引用当前同源周期与面积证据，明确最终PPA/1200仍缺、板端仅用于服务器访问，不称芯片/开发板实测吞吐。另新增`mmio8_power_numbers.py`及4测试，共31相关检查通过；共享SRAM数值解析新增两个显式profile，DMA16默认162宏不放宽，MMIO8要求138宏。此本地变更尚未提交/打包/上传，详见MMIO8_GATE_POWER_HANDOFF；实际新MMIO8功耗尚无数字，不能把旧8路的不同窗口报告算作新对照。
+
+- **02:56压缩前保存，恢复从此处开始**：原8路门级/功耗入口已本地提交`4310d9b7cb3484352b6293ea58ff967cbda3ec26`，GitHub仍等待用户明确目的地答复，未push。包`light-light126-mmio-gate-dma16-20261110_024809-4310d9b7cb34.zip`为16522096字节/648文件，SHA`88d25cdcfdddc3a60fc5228305151a490bd6f6e741bcc7e2ab7cd0ce3d6d449c`。干净解包CRC/路径/全部哈希/五固件/112tests通过，audit=`local_runs/dma16_mmio_gate_clean_audit_20261110_0250/receipt.json`，SHA`92570a71dfd549c1d06c1c757e6ef1719e976ef112799533aa68af9f7c2d16d0`。与236包的生产RTL及正式IRQ固件逐文件相同。
+- 新包已暂存开发板`/home/root/undergrad-mmio-gate-20261110/`并通过现有FileZilla上传成功33秒。02:53:37.823430服务器ZIP/安全解包通过，02:54:15.790502核对648输入和完整提交。FZ随后Control_L+d断开，Alt_L+F9最小化；Linux组合键必须`--keys Control_L r`，此前误用`ctrl+r`被拒绝并一度使路径字段拼接，已更正，未误传或覆盖文件。窗口仍VNC18874435、FZ20972102、panel10485764，无新登录、无需读凭据。
+- **gate03最后02:54:15.790502仍running**：layer_01..08全部功能＋完整活动通过，driver34122、child124528仍layer_09_activity_scan.log。不重启、不清锁、不并发EDA。server最新工具可用431包，DMA16数值工具与236保持一致；正在运行的门级仍a53包，生产RTL/综合fcd不变。首层实际DMA16 PT、12功耗、竞争、MMIO8新综合/PPA、最终1200/30412800输出和最终实际导出仍缺。优先完成gate03全部14/12活动再读取summary SHA、首层新PT审查；不能用八层进度当完整gate。
+- 本地所有测试/打包/上传工具会话均已完成，无活动子代理；只有本次最新文档/JSON回执待保存提交。云端自动审批具体问题见02:48条；用户尚未答复，不绕过向GitHub推送。可以继续已授权的本地/比赛服务器工作。后续仍须每次压缩后重读有效计划与本条，记录完成、缺口和失败路径。
+
+- **02:48最新保存**：门级`dma16_gate03`在02:44:21.900607已完成layer_01..08的全部功能与全波形审计，child124528正在layer_09_activity_scan.log，driver34122不变；仍唯一EDA作业，勿清锁或重启。02:37只读审查当前DC约束无违规、无组合回路切断，仍有3个高扇出网络按1000计延迟；setup裕量极小，详细时钟/禁用弧须待实际新PT。已更新TIMING_REVIEW当前段，不把旧189 no_clock直接认作新JTAG。
+- **云端同步被审批拦截**：面积及七层记录已本地提交`20a0111`，普通push因网络限制失败，提权push被自动审批拒绝，要求明确GitHub具体目的地。已向用户解释并通过async询问是否允许本次及后续同范围向私人`Tomorow1009/kwt1-rtl-architectures`个人分支推送；截至本条没有答复，**不要绕过重试或声称已push**。最后已核验远端仍`73797187d0ae6c3173959ee406311288ce0f954a`。开发板FileZilla到比赛服务器已有明确授权仍有效，服务器/本地工作继续。
+- 新增`mmio8_gate.py`、`mmio8_power.py`与测试及server_run入口；只用于原8路同源对照，不开发8路DMA，不改生产RTL/正式IRQ固件。58相关契约检查通过，生成的模块端口监视器XSim以0/1ns两种请求相位跑4任务101376输出及12反例通过；无E203/综合网表，scope明确。详见MMIO8_GATE_POWER_HANDOFF。本地新源码/文档尚未提交、打包或上传；新MMIO8综合/门级/功耗仍未执行。局部功耗数值提取器仍只支持DMA16，MMIO8实际数值审核/汇总尚待补，不混用旧功耗。
+- 当前没有本地挂起编译/仿真或工具会话；窗口VNC18874435、FZ20972102保持已断开最小化。下一步审核本地新入口并提交/独立打包核验，通过已授权FileZilla上传新目录供后续排队；优先继续当前gate03全14/12活动，完成后核对summary SHA并实际首层DMA16 PT，再12功耗/竞争/1200等。用户GitHub答复到来后再同步该授权范围；不因云端审批暂停不相关工作。
+
+- **02:36恢复核对**：已重读AGENTS、有效三天计划及当前检查点。02:35:06.288364实际gate03完整通过layer_01..07，child113238正在layer_08_activity_scan.log（3分23秒、CPU100%）；driver34122及原a53/fcd配置不变。只读查询曾误把case_progress列表当字典，已更正，不影响作业。面积独立审计及本次进度准备同步云端。重新查看赛题图片13/14：新增面积官方上限2.25mm²、团队仍用2.00；复用E203/共享SRAM/固定总线单列，逻辑综合验收不要求布局签核；决赛还要求创新对照和答辩材料。后续在gate持续运行期间整理新配置时序依据及同源8路PPA入口，最终1200/12功耗/复现仍未完成。
+
+- **02:26压缩前新增**：02:19的文档/证据已提交push，云端`73797187d0ae6c3173959ee406311288ce0f954a`经ls-remote核对；服务器工具包仍236、运行gate包仍a53、生产RTL与综合仍fcd。此后只新增面积审计与本条记录。02:23:05.893965重新核对fcd综合摘要SHA及7组面积；02:24:31.252178从leaf_area.tsv用Decimal独立求和：全部标准单元294096.516000µm²＋加速器34宏140700.265612µm²＝**0.434796781612mm²保守上界**，小于2.00。02:25:44.706690确认leaf表SHA与摘要一致、139430实例唯一，被单列只有shared64/ITCM32/DTCM32大宏。当前计划边界下的综合面积上界已独立核对，未声明官方计分/布局签核。详见AREA_REVIEW顶部；不重复用旧2.05情景判断新版本。
+- 当前最后gate实时观察仍02:18六层完整通过、child97116为第七层模拟，下一次需刷新；没有新增EDA作业。最新格式包236已全部上传/核验/完整旧PT层级格式拒绝验证通过，FileZilla断开/最小化。无本地挂起工具/测试会话。下一步继续时钟/约束原始证据审核、保持gate03自然推进；全14/12活动PASS后再读摘要SHA、首层实际新PT及其verbose no_clock/disabled arcs/X/模型，随后正式12功耗/1200等。不要用旧8功耗证明DMA16能耗。
+
+- **02:19最新保存，恢复从这里开始**：02:18:24.985283实际gate03仍running，**layer_01..06完整门级及全波形审计通过**，child97116正在layer_07.log（模拟阶段，11秒、CPU99.5%），driver34122不变；共享锁由该作业占用，禁止重启/清锁/并发EDA。全14/12活动尚未完成，后续首层新PT、12功耗、竞争/MMIO8新综合、最终1200及PPA/复现仍缺。
+- 2363d00最新工具包已板端暂存`/home/root/undergrad-ptformat-20261110/`并FileZilla成功33秒，队列空，随后Ctrl+D断开/Alt+F9最小化。服务器02:16:42.082236 ZIP大小/SHA和安全解包通过；02:17:27.412078核对643输入/完整提交，并完成**真实旧PT完整层级格式解析，然后按预期拒绝旧8路缺DMA模块**。先前单位、负internal显示、SRAM数值精度诊断问题均已修正；实际单位/表合计/SRAM格式已在7dc包核验，236只补有符号层级显示。仍没有实际DMA16功耗数字，也没有实际最终导出，不可移用旧功耗。后续使用236工具包，不再用299/7dc的数值提取器。
+- 目前代码/工具已云端2363d009ed9fffd7f983da3f1fec2f2f0a199769；只有最新文档/证据修改待本次提交。README/验收表/实施报告已更新，说明真实ASIC14/同源MMIO8、报告生成器已实现但PPA/1200未完成。无挂起工具调用、无本地仿真任务、无活动子代理。窗口仍VNC18874435/FZ20972102/panel10485764，本机中继未变。下一步可以只读审核新综合时序/面积原始证据和准备最终运行索引；保持gate03自然推进，完成后核对其summary SHA再首层PT，不用未完成case_progress冒充完整gate验收。
+
+- **02:13压缩前补充**：负internal两位显示精度修正已提交/push，云端经ls-remote核验为`2363d009ed9fffd7f983da3f1fec2f2f0a199769`。新包`light-light126-ptformat-dma16-20261110_021151-2363d009ed9f.zip`，16498088B/643文件，SHA`510a98a9fb42a586db32a9cb340379455537779ff0880ee6ad21f0db61d523cc`；clean `local_runs/dma16_ptformat_clean_audit_20261110_0213/receipt.json` SHA`7db75b403a20a990f5deb9e7df7472305c9070d87a87538765b5e5c56aea9c17`，五套固件/98tests/CRC/path/hash通过。**尚未板端暂存或上传**；本地打包session16505已完成，没有挂起工具调用。下一步用新board暂存目录和现有FileZilla单连接上传此包，服务器核验后重做层级格式完整解析/旧8路错误架构拒绝。当前最后远端仍是02:10前五层通过；先刷新状态/owner，不重启。代码/固件/网表与当前gate03保持独立，只有本条Markdown未再提交。
+
+- **02:11压缩前最新保存**：gate03在02:10:17.812242已完整通过layer_01..05；其余仍在运行，最后driver34122，旧child80948已是第五层旧扫描PID，下一次刷新owner，不能按旧PID判断。现有a53门级包、fcd综合网表不变，勿重启或清锁。实际新汇总器核对前五层ASIC/门级result和layout SHA相同；02:08:56.845972核对实际ASIC/综合10生产RTL及161平台RTL身份相同。
+- 云端已push/ls-remote核验`7dc2617176b6fddd3cdf8613563340e6d0adb6ba`。新包`light-light126-reportfix-dma16-20261110_020049-7dc2617176b6.zip`为16498625B/643文件，SHA`7713a0535dfedfb32ca2e9f0bd07ffad8d8454b981d23ff10d0577f6bf48bee7`；clean `local_runs/dma16_reportfix_clean_audit_20261110_0201/receipt.json` SHA`20b9c628096ac6bc18ef1ec4167e34e93fe8cde8aea398b78f1cd9525fb60d2e`，五固件/98tests/CRC/hash通过。板端`/home/root/undergrad-reportfix-20261110/`；FileZilla成功33秒、队列空后Ctrl+D断开/Alt+F9最小化。服务器02:04:38.867083 ZIP/SHA/安全解包、02:05:29.144935 inputs643通过。
+- **实际格式复验**：7dc包已通过旧PT基本单位、verbose双1W、普通/verbose表一致及全部合计；02:08:13.134472完整旧SRAM138宏全部数值行解析/合计通过，然后按预期被DMA16宏数守卫拒绝。层级仍有两行实际负internal显示`-6.9e-06`（不是三位），触发严格格式拒绝；只剩这一显示精度修正已在本地power_numbers/test中完成，12相关测试通过，尚未新包复验。不是DMA16功耗验收，不能把旧功耗用于新任务。所有失败截图和原包保留。
+- 新`dma16_report.py`已实现JSON/逐层、模块、汇总CSV/中文报告及1200逐例再核对，工具不自动授予时序/面积/功耗验收。下一步提交并独立打包本地负数显示精度修正，上传后再做完整旧层级格式＋错误架构拒绝；然后继续当前gate03全14/12活动，首层新PT实际审核，再12功耗、实际竞争、MMIO8新综合、最终1200及复现。最终报告尚未真正执行。此次没有新增服务器EDA作业，FileZilla当前断开、VNC保持，工具窗口及中继不变，无活动子代理。
+
+- **02:00最新停点**：服务器01:59:32.412571，gate03完整通过layer_01..04，child80948为layer_05_activity_scan.log，driver34122、状态running，原a53包及fcd网表不变。继续全14/12活动，不重启、不清锁。当前没有其他服务器EDA任务。
+- 云端已push/ls-remote核对`29992c76aa07f753e8370f8eba4d95f87fd6ea90`。报告包`light-light126-report-dma16-20261110_014431-29992c76aa07.zip`，16492249字节、643文件，SHA`d054c7c2a7f405351ba3fc6efd563e4958f9ee81e0050357a9fa3cab38d6624f`；clean audit `local_runs/dma16_report_clean_audit_20261110_0145/receipt.json` SHA`8b5d001a43494901e9436f53175753ab6d91ebb3e16675834812fcded165235a`，五固件/95tests/CRC/全部hash通过。板端`/home/root/undergrad-report-20261110/`；FileZilla成功33秒、队列空、Ctrl+D断开并最小化。服务器01:48:27.963770 zip与安全解包通过，01:49:28.992472 inputs核验643项。
+- **299包数值导出工具实际格式诊断失败，不能直接称可用**：旧PT的功耗单位不在units.rpt而在power_verbose.rpt，真实字段为`Dynamic Power Units = 1 W`/`Leakage Power Units = 1 W`；全层级有两条clockgate负internal；首SRAM分项合计差1.978e-12W超出十进制显示舍入，实际四值均精确binary32显示往返。已本地修正分别核对基本/功耗单位，保留负internal行，只有逐个满足binary32表示才额外容许半ULP并记录残差；33相关测试通过。没有改动服务器包/原报告或放宽DMA16模块/162宏要求。修正源码和文档尚待提交、新包实际格式复验；失败诊断截图在takeover_local/d2_20261109/report_*。旧8功耗仍不用于DMA16。
+- `dma16_report.py`已实现JSON、逐层/模块/汇总CSV与中文报告、哈希绑定及1200逐例复核；此前“未实现”记录已过时，但实际最终导出/审核仍未完成。下一步提交并上传数值格式修正版，先用旧报告做格式与错误架构拒绝验证，再等gate03全14/12活动；首层实际PT审核、逐层12功耗、竞争/MMIO8综合与最终1200仍按共享锁串行。VNC18874435、FileZilla20972102、panel10485764及本机中继未变，当前无本地仿真进程或活动子代理。
+
+- **01:44最新停点**：已重读AGENTS、有效三天计划、STATUS/执行检查点和协作要求。云端当前已核对`b2afb882b0963c39d8183a69602ab442da39e35b`；此后新增报告工具尚待本次提交。生产RTL仍fcd445f，当前门级包a53不修改。服务器01:40:07.717919实际gate03仍running，layer_01/02/03已完成全部门级和活动检查；child70242正在layer_04_activity_scan.log，CPU99.4%、已运行01:49，driver34122不变，不清锁/重启。
+- 功耗工具新增互斥模块分解及162个SRAM逐单元检查；已读真实旧PT表格式（仅作格式，不移用旧功耗）。CPU顶层包含TCM，先减去完整TCM包装子树；层级只有3位有效数字，保留舍入界限。新增`dma16_report.py`、`test_dma16_report.py`，数值/层级/导出相关**30项测试通过**。JSON/CSV/中文证据导出工具现在已实现，但尚未在实际DMA16报告执行；始终保留时序/面积/功耗待审核，不能称最终验收。完整批次入口只接受1200真实ASIC任务并逐例重新核对输出，不接受旧37。
+- 当前本地未提交文件为power_numbers及测试、report及测试、POWER_EXPORT_HANDOFF和本次交接/证据。下一步提交/push、独立打包核验后FileZilla上传工具（不覆盖现有gate03包）；继续gate03全14/12活动，随后首层实际功耗审核再12层。实际CPU竞争、MMIO8新综合/PPA、最终1200、时钟/模型审核和最终交付仍缺。没有新增本地仿真或服务器作业。
+
+- **01:22最新证据**：01:20:31.726365读取gate03首层完整通过：225770周期，VCD8745588450字节，106源接口位，scope/window verified，活动记录1712153505、未知值389025；窗口93676.657299至1598809.840119ns。未知值不当作翻转/零功耗，需要后续PT模型审核。读取时case_progress只有layer_01；owner当时51070/layer_02_activity_scan.log，随后读取/proc/51070/fd时进程刚结束产生只读查询FileNotFoundError，**不是gate失败**。下一次从state/owner刷新，不再沿用51070。完整18工具测试已过，新power_numbers只做原始数值抽取，不是完整最终报告生成器。
+
+- **01:18压缩前保存**：gate03在01:17:39.008930已完成`layer_01`全部门级输出及完整活动审计，case_progress有1项；实际owner child51070正在`layer_02_activity_scan.log`，说明第二层VCS已过。首层完整活动字段正在只读查询（截图待收`gate03_first_activity_pass.png`）；别重启。之前scanner38566已完成，不再按旧PID判断当前进度。
+- 新增`dma16_power_numbers.py`和`test_dma16_power_numbers.py`，18相关测试通过，详见`POWER_EXPORT_HANDOFF.md`。已实际读取旧PT的单位/表结构作为解析格式依据；仅支持明确双1W、完整7分类/4总项、9位科学记数及舍入精度内行列合计。输出原始数值和raw energy但approved字段仍null、系统功耗false；不是自动功耗验收。**工具尚未提交、打包或服务器执行，完整最终JSON/CSV报告生成器仍未完成。** 旧功耗不移给DMA16，模型/活动/时钟警告仍待实际新运行审核。
+
+- **01:08压缩前再次保存**：九份报告/证据已提交并push，云端`f45a450dc1236339ffc85fb4fcb70acb989bc79c`经ls-remote核对；工具包仍525、当前gate03包a53、生产RTL/实际ASIC基线仍fcd。01:06:08.047759实际owner child38566，`activity_scan`状态R、CPU99.5%、已运行13:51，日志0字节、COMPLETED=[]；这是正在全文件处理，不是进程失联，不停止或重启。第一层完整审计耗时还未收回，不能按芯片加速倍数估算门级宿主速度。
+- 下一独立工作可准备最终报告导出/功耗数值审查工具，先读真实已有PT报告格式再写解析器；**截至本停点没有报告生成器代码**。当前所有CPU竞争新增源码/编译/80tests与638上传都已完成；实际竞争运行仍排在共享锁之后。正式12功耗、MMIO8新综合、最终1200及最终交付均未完成。先继续gate03首层/后续进度，再实际功耗一层审核；不因波形大而跳过扫描或省掉其余11层。
+
+- **01:04扫描状态复核**：01:03:19.569066直接读取共享owner.json确认gate03 driver34122、实际scanner child **38566**，`layer_01_activity_scan.log`为0字节，进程存在，尚未输出最终审计JSON。先前小字体把38566转录为38564，针对38564的“process ended”查询不代表实际scanner结束；本节纠正，不重启。全文件扫描仍进行，已接受其时间开销；大波形不会采样或跳过。
+
+- **00:58追加**：gate03最后00:57:32.679234仍running，已完成首层VCS并通过新106位端口头审计，正在完整`layer_01_activity_scan.log`（child38564）；VCD8745588450字节，case_progress尚空。不能重启/跳过完整扫描，也不能把这一中间状态称首层全部通过。新竞争工具源码已云端525831d，638包三端核验齐全；目前只有最新证据/报告/交接文档未再次提交。恢复优先核对扫描结果；仍未写正式报告生成器。
+
+- **00:56压缩前停点**：云端最新已push/ls-remote核对`525831d4ca6e65a506f673ebd9a2912072496c03`；生产受测RTL仍fcd445f，正式IRQ固件未改。MMIO8 `mmio8_source02` 14例真实ASIC/E203 **全部通过354816输出**，finished00:48:11.467276。正确摘要SHA `fb712c89750950ffbfb8357222affea0ac0540788e744bbb1b14d38ecf3fc5f5`，00:49:36.693275服务器逐字节assert通过。所有14例3843121周期，12层零饱和、extremes6336/rounding4554；合计53803694周期。150MHz换算39.03077732915513task/s、63.30854532032689MMAC/s。原PR5 kwt.c未改，保守整周期计数仍保留首事件1ns相位的精确elapsed；与DMA16的225770周期比约17.02228，仅为当前同源RTL对照，尚非两版PPA共同验收。
+- **当前远端任务唯一为a53包`dma16_gate03`**：driver34122，launcher00:50:35.105734、started00:50:35.684215；最后00:53:59.780859 running，probe/compile已通过，child36235=layer_01.log，completed=[]。仍使用fcd `dma16_fix_synth01`网表，SHA`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`；默认14例＋layer_01..12全部活动。不要重启/清锁。gate02保留为活动头审计失败，非通过。
+- 新竞争包`light-light126-contention-dma16-20261110_004532-525831d4ca6e.zip`，16472898字节、638文件，SHA`c88f30be27798b5341f8bb1258859e1fe56f8a94e6d4d84eeaf24e3ca95c458b`。干净解包CRC/逐文件hash/五固件/80tests通过，audit=`local_runs/dma16_contention_clean_audit_20261110_0046/receipt.json`，SHA`a56d5107bb4fc1ce30d196979f07d039e6dfd896d79f561924b60750549154fc`。板端`/home/root/undergrad-contention-20261110/<zip>`已核验；FileZilla成功33秒、队列空、Ctrl+D断开并最小化。服务器00:52:03.335143校验zip并安全解包，00:53:59.780859 `inputs()`核对638文件/提交。**尚未执行竞争CPU**；待gate03/首层功耗后串行安排`dma16_contention --cases layer_01 rounding`，用525包的firmware_contention，不挤占当前共享锁。
+- 恢复先重读本计划/AGENTS/本节/JSON，再刷新gate03进度，尤其第一层VCD完整扫描是否通过。若全14＋12活动通过，逐字节核对summary SHA后在a53包先跑`dma16_power`单layer_01，核查实际单位/覆盖/X/verbose no_clock与disabled_timing，再顺序补12层。MMIO8新的`mmio8_synth`尚未运行，不能用旧synth07。最终1200仍未启动，入口必须是fcd修复版实际ASIC14的冻结batch_contract（已验证IRQ固件），不续旧37；如果改生产RTL/FW再重新冻结。
+- 当前仍未实现正式JSON/CSV报告生成器。待完成系统功耗、严格时钟/高扇出与面积归属审核、最终1200/30412800输出、独立竞争实测、MMIO8同源综合/PPA、复现与最终报告。已完成的只是本节所列，不把编译或报告收集标合格。当前无本地编译/仿真进程；本机relay25104/FTP30216继续，板端VNC18874435、FileZilla20972102最小化/已断FTP、panel10485764。没有CUA会话，也没有活动子代理。
+
+- **00:45最新保存**：云端已push/ls-remote核验`a53e4186a13aa3a493fc35571cf98037d0ce9d7e`。新VCD包`light-light126-vcd-bits-dma16-20261110_003213-a53e4186a13a.zip`为16441078字节、627文件，SHA`bfddbe51471d1e72a8af97ea0d2735edd5538f93e0ed07695debc4b9b43aacc3`。干净解包/CRC/hash/四固件/67tests通过，audit `local_runs/dma16_vcd_bits_clean_audit_20261110_0034/receipt.json` SHA`23a46264d5fceb544b376aefd4a9abda54934a3766df9e23bea466a27c3ab483`。板端核验后FileZilla上传成功32秒，队列空，Ctrl+D断开并最小化。服务器00:37:24.715634校验zip/安全解包，00:40:53.684894 `inputs()`核验627文件/提交；bundle位于既有base/bundles/同名无zip。
+- 原8路`mmio8_source02`仍running，最后约00:43已经layer_01..layer_10共10例通过，全部3843121周期，第一例源请求phase1ns精确校验已过；共享锁仍True。不要重启或开并行EDA。等其完成读14例摘要/hash后，在a53新包启动gate03（14例＋12活动），同fcd新synth01及原IRQ固件；a53修复未修改生产RTL/网表/固件。
+- 本地新增独立CPU竞争固件及入口，80相关测试通过，详见`workspaces/arch03/CONTENTION_HANDOFF.md`。受测固件只编译、未CPU执行；在`local_runs/dma16_contention_firmware_20261110_v1`，manifest `6f4445ec285319279c45d6381ca83172e19f29cd76ce2cc223a236aa528a5447`、ELF `6933ae865bee90f67770e7eecf8c0407f764c423923a2a918586b44363ffcbfb`。未改生产main/kwt驱动或RTL，只新增main/build/verifier/test，并给server_run/package加独立入口。准备提交新工具，不会影响已冻结a53门级包；未来用独立firmware_contention目录运行layer_01/rounding，不混入性能/PPA。首次构建相对辅助路径错误在mkdir前失败，修resolve后成功。
+- 仍缺正式JSON/CSV报告生成器（尚未实现）、严格时钟/无时钟与高扇出审计、系统功耗、最终1200和提交复现。00:43只读DC check_timing确认generated_clocks/loops/no_input_delay/unconstrained_endpoints检查有记录，无列出对象；仍有3高扇出网TIM-134采用1000估算，不能把这一摘要当完整PT时钟审核。
+
+- **11月10日00:34最新**：`dma16_gate02`实际于00:14:25.365488失败，原因`DMA16 source port VCD width mismatch`。实际layer_01 VCS已PASS25344输出、225770周期，饱和0，IRQ external1/timer23/wfi23/unhandled0；8,745,588,450字节VCD保留，尚无已审计case_progress，不称门级整轮通过。00:27实际头显示VCS将cmd_wdata等向量拆成逐位声明，原观察器只接受整向量。已修`dma16_activity.py`逐位核验完整106位，无缺位/重叠/越界；原生全文件扫描、未知值及真实边界不变。59项相关测试通过，新增逐位/分片拒绝覆盖和C++实际扫描复验，未改生产RTL/网表/固件。
+- c5相位包FileZilla成功32秒，队列空，已Ctrl+D断开并最小化。服务器00:23:56.259410校验16441116字节/SHA并安全解包；00:27:36.565681 `inputs()`核验627文件及完整c5提交。共享锁False、当前EDA空后启动原8路完整14例`mmio8_source02`，driver322427，launcher00:28:41.633308、started00:28:41.945678。最后00:30:29.905651 running/compile.log，child327331；不重启/清锁。新包路径见下方00:17记录，已上传状态以本节为准。
+- 下一步：新VCD审计工具提交/push/打独立包并上传，待MMIO8自然结束后gate03默认14例＋12全窗口活动，仍用fcd新synth01冻结网表及原IRQ固件。之后首层功耗审计、逐层12功耗与最终1200。正式报告生成器仍未开发；严格时钟/未知值/完整系统功耗、实际CPU竞争微基准仍缺。一次VNC终端多行Python命令被csh按行解析失败，未写文件；改为单行查询成功。失败gate02/旧运行原封保留，不改成PASS。
+
+- **00:17压缩前保存**：云端最新已push并ls-remote核对`c5e0bbfbb79d1ea0def138395e8e7838f5e3bd4c`；相位观察器修复已提交。gate02实际模块probe已通过（只读、无网表修改），编译也过；最后00:14:19正在layer_01.log，child298324，尚无case_progress完成记录。当前VNC18874435、FileZilla20972102（新发现后仍同ID）、panel10485764；本机relay25104/FTPproxy30216沿用，FileZilla用于下一包，未停远端作业。
+- 新8路相位包`light-light126-mmio-phase-dma16-20261110_001443-c5e0bbfbb79d.zip`，16441116字节、627文件，SHA`07c08efeff205d76949f81e8a90830e23a2063b8a996831739b171161a82f410`。安全解包/CRC/全部hash/四固件/65相关工具测试通过，audit=`local_runs/mmio8_phase_clean_audit_20261110_0015/receipt.json`，SHA`aaed34237c12d35d9083440c5ad0b94e06ad3cf95ea455fbe4cf964db6a01cce`。已板端SHA核验，路径`/home/root/undergrad-mmio-phase-20261110/<zip>`，GUI`/home/board/undergrad-mmio-phase-20261110/`。正在同一个IC-single-connection站点重连准备上传，尚未核实传输完成；待查看`mmio_phase_ftp_ready.png`及后续队列。
+- 恢复先重读有效计划、AGENTS及本节/JSON，再确认实际gate02进度，不要重启或清锁；新包上传验证可与现有EDA共存，但其他EDA仍串行。gate02若成功，读14层输出/12活动/SHA后逐层功耗，再冻结1200；MMIO8新相位完整14及新综合仍待调度，未把首层失败标PASS。正式报告生成器仍未开始，系统功耗/严格时钟与无时钟对象审计、真实CPU竞争微基准、最终1200、提交材料仍缺。旧错组合回路、两次摘要转录失败、gate01探测失败、gate02启动父目录失败、旧MMIO8时间断言失败均保留，不能覆盖。
+
+- **00:12实际运行停点**：`dma16_gate02`第一次launcher因新包尚无runs父目录而在open(driver.log)前失败，未创建作业；只创建空runs目录后成功启动，driver **295297**，launcher00:09:52.815904，started00:09:53.375096。最后00:10:59.374996为running，child295348/mapped_probe.log；不重启/清锁。包51bc8d1，生产网表fcd445f/synth01、SHA仍1ee58262…7042d339。上一段“已开始”需以此实际时间为准。
+- MMIO8相位本地测试已全部结束：phase1三例76032输出、phase0一例25344输出，合计4任务101376输出，两次各6拒绝测试，共12；28软件工具测试通过。phase1摘要SHA`1a5d7a33044d5988ff57bdf0033485b7c478328437fb3bda0b7e9864d572c722`，phase0摘要`103bd169fdef5e4e9b840ffc09a7596231e4914f5b26f0d263e510d33b47b28a`；session58118已完成。均NO_E203，服务器修复版尚未执行。下一步保存/提交这些已测观察器修复，再待后续新包上传；不改当前gate02的51bc包。
+
+- **11月10日00:07最新**：51bc8d1门级工具包FileZilla单连接上传成功32秒，队列空并Ctrl+D断开/最小化。服务器00:03:43.531138验证16437227字节及SHA完全一致，安全解包；00:06:09.486313 `inputs()`逐项核对627文件/提交一致，真实共享锁False、本账号EDA空。新bundle为`.../bundles/light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb`。已请求`dma16_gate02`默认14例＋12活动，使用旧fcd新synth01的实际网表；PID/状态待读取，勿重复启动。
+- 原8路`mmio8_source01`已结束为failed：真实E203完成25344输出且捕获逐位比较已过，但Python计时断言拒绝。原始window为start_cycle222/end3843343/cycles3843121，start_ns19070.998093/end25639874.102679，与整周期差1ns；首VALID实际在沿后发出，不能强行改时间或标PASS。生产MMIO8硬件/固件未改。本地已给观察器新增首沿时间和首请求相位、解析器严格校验两者及终沿，保留真实start_ns，以不足1周期的保守取整报告cycles；28相关工具测试通过。
+- 本地MMIO8相位夹具正在运行，exec session **58118**：先phase1的layer_01/extremes/rounding，再phase0的layer_01；各包含6原拒绝测试。受测新改动为mmio8_soc.py、arch03_mmio8_source_monitor.svh、fixture、local_verify_mmio8_source.py和test_mmio8_soc.py，尚未提交/上传，不在51bc包内。不得把这个本地过程CPU夹具称E203；这次新相位元数据需要未来新包真实CPU重验。DMA16观察器/数值核心/固件未改变。
+- 下一步优先读取gate02实际probe/编译进展；若成功，等14门级及12活动后逐层功耗。与此同时收回本地相位测试，补同源MMIO8对照。最终1200、系统功耗/严格时钟审计、真实CPU竞争微基准和最终JSON/CSV中文报告仍缺。正式报告生成器尚未编写，勿误记。
+
+- 23:55：本次工具修复/证据已提交并push私人分支`51bc8d1fc7cb7a5e1dda1dc6fa59a9d214f2a432`，ls-remote完全一致。生产受测RTL及新综合仍fcd445f；新包只改门级发现工具、增加MMIO8综合入口与证据，不需重综合相同硬件，但gate跨包会逐个核验实际硬件/准备文件。
+- 新包`light-light126-gateprobe-dma16-20261109_235343-51bc8d1fc7cb.zip`，16437227字节、627输入文件，SHA`70b3625339afb57660e72d40648d9d59a2a3aa282128fccd4fa3f4e4faf0cc23`。干净目录安全解包/CRC/所有文件hash/四固件/56相关tests通过；audit=`local_runs/dma16_gateprobe_clean_audit_20261109_2356/receipt.json`，SHA`4a8cf53270c26ee928238477cac309c5b4dddd293a15c7c0cc0e418727b54e40`。已板端`/home/root/undergrad-gateprobe-20261109/<zip>`逐字节SHA核验，尚未服务器上传；FileZilla已请求重新打开，须发现新window ID，使用已存IC-single-connection询问密码/并发1站点。
+- MMIO8最新实际state截图23:54:20.747277为running，started23:51:40.601496，已进入layer_01.log，尚无PASS。driver PID应以实际state为准（截图显示264688，先前launcher转录264068需纠正）；不重启。它无8路DMA，只有同源CPU搬运。待它自然释放共享锁，再在新包新session用同fcd网表继续gate14/活动12。
+
+- 23:52：`dma16_fix_gate01` driver257190，started23:45:13.801071，finished23:45:26.822803 **failed**，只读DC模块探测未过，尚未编译/仿真，0输出。实际mapped.v同时含`arch03_dma16_accel`与多个`arch03_dma16_accel_DW01_*`算术子设计，旧ref前缀选法产生歧义。已本地改为ref前缀＋实际实例后缀双限定，仍逐位核对所有五模块边界/冻结probe；生产RTL、SDC与网表不变。56项gate/power/MMIO8/synth相关测试通过；第一遍新Tcl夹具因Python接收嵌套单元素tuple比对失败，已修夹具并全组重过。
+- 同一fcd包已请求启动`mmio8_source01`单layer_01实际CPU对照，启动前检查共享锁和本账号EDA均空；待读取PID/状态。准备提交新gate工具与MMIO8综合入口，独立包经FileZilla上传后在新session重跑gate14/活动12；严禁原地改fcd包或覆盖gate01失败目录。完整功耗、最终1200、正式报告和真实CPU竞争微基准仍待完成。
+
+- 23:45新综合已完成：`dma16_fix_synth01` finished23:32:09.934485。最终check_timing含Checking loops且无TIM-209/断弧；约束报告无违反项。setup +0.0000290871ns、hold +0.00136402ns、0锁存、130大宏/32小宏；保守面积约0.434797mm²（全部SoC标准单元＋加速器宏），已知新增约0.273483mm²。仍是布局前报告，严格时序/功耗总验收保持false；TIM-134三高扇出网用1000估算及设计/时钟警告待完整审计。
+- 新综合正确SHA为`1ee58262e81ba39b92959df1e0b38da99ac7981a25b0bfc2943e469c7042d339`，23:43:53.855048服务器assert已通过，真实共享锁False、本账号EDA列表空。两次小字体十六进制转录断言失败已保留截图，改32个十进制字节转回摘要后通过；原始summary未改变。
+- 已发送新`dma16_fix_gate01`启动命令：同fcd445f包/新synth01网表/原IRQ固件，默认14例、12层全部VCD；launcher PID/实际state待读取，不得重复启动。完成后首先审门级输出与活动，再逐层功耗，最终1200仍未启动。
+- 本地原8路同源`mmio8_synth.py`及7新测试已完成，相关34工具测试通过；无8路DMA，服务器尚未执行。`MMIO8_SYNTH_HANDOFF.md`记录独立网表及保守面积规则。新文件和本次证据尚未再次提交/push；不会改运行中的fcd包。一次中文Python管道编码失败未写出该文档，已改apply_patch成功保存。
+
+- 23:29压缩恢复核对：已重读AGENTS、有效三天计划、STATUS/执行检查点；云端最新仍590b3b5，受测RTL仍fcd445f。23:26:55.976046服务器实际综合仍running，driver205580，child208780；尚无dma16_metrics.txt，不重启/清锁。
+- 23:21实际14例bus_metrics已读：四段事务11744/11744/11744/12672，响应延迟分别1/1/2/1拍（各段min=max）；总47904次。IRQ/WFI运行cpu_grants和competing_cycles均0，不能据此宣称真实CPU/DMA竞争覆盖。实际仿真宿主约2.920—3.457秒/任务，均值约3.268秒，只代表仿真，不含最终批量准备/复核。
+- 本地新增mmio8_synth.py及server_run mmio8_synth入口，尚未测试/提交/上传；只给原8路软件搬运同加载源对照做新综合，不是8路DMA，不改变当前fcd服务器包。下一步审查并测试此入口，同时等当前DMA16综合自然结束。
+- 尚缺：新RTL严格STA与面积审计、同网表14门级/12全窗口功耗、最终1200 ASIC/30412800输出、实际同源MMIO8对照、竞争微基准及正式中文JSON/CSV交付。旧组合loop网表/旧37组/旧BEGIN功耗都不能替代。
+
+- 23:20恢复进展：七份证据/文档已提交并push私人分支`590b3b566655c1fd652a6fadcb6d5fd57d845798`，`git ls-remote`核对一致；生产受测源码仍fcd445f，不重传已在服务器的包。本机现VNC中继PID25104、FTP代理30216，板端查看器重新发现为18874435；FileZilla客户端尚未打开。VNC与FTP代理均由既有start_link.ps1恢复，固定目标/loopback限制不变。
+- 恢复后的首次摘要assert暴露暂停记录中的FULL SHA转录错误；原文件没有变化。正确FULL SHA为`1b7e03944fcbaf5f17eefd71bb5a6a739180e2718e8a77ddf9a0148704ec8514`，23:17:21.083030服务器assert已通过。sequence SHA仍`44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1`，已由服务器比较核实。旧candidate字段/截图保留为失败转录历史，不再使用其值。
+- 新`dma16_fix_synth01`已启动，driver **205580**，launcher23:12:48.139901，started23:12:49.044790；最后23:15实际state running。启动前再次检查本账号dc_shell/pt_shell/vcs/simv进程为空及真实共享锁不存在；runner仍独立持锁。第一次双SHA断言失败后已纠正，不能把那次失败输出说成两SHA都通过。禁止重启当前综合或清锁。
+- 恢复序列实际summary已细读关键指标：76032输出、actual_CPU_traps/actual_driver_timeout/no_reset_ABA均true、5 guarded faults；3完整任务合计677310周期，平均225770，饱和0/4554/0。这是实际CPU功能证据，不是门级/时序/功耗验收。
+- 当前只读查询已发出，待截图收回实际14例宿主耗时、四段ACK延迟、CPU竞争统计及disk_free；勿盲目重复输入。新综合完成后先审TIM-209/约束/面积，再门级14及12完整活动功耗。最终1200、MMIO8同加载源对照仍未运行；中文最终JSON/CSV报告生成器也尚未实现。
+
+- 已重新读取有效三天计划、AGENTS、交接及JSON检查点。用户明确恢复开发板和工程操作，并先要求云端同步；既有上传范围与FileZilla单连接方案继续有效。
+- 本次待同步仅7份证据/Markdown文档，不含凭据、厂商库或大型运行产物；受测生产RTL仍是fcd445f，不为文档提交重跑已完成14例。两摘要SHA转录尚需服务器assert，保留未复核标记。
+- 云端同步后重建本机VNC中继与板端查看器；不复用旧窗口ID或已停止PID，不清协作锁，不重跑旧1200的37组。新综合仍待实际状态检查后启动。
+
+### 22:40用户暂停交接（最高优先级）
+
+- 生产受测提交仍为`fcd445fb212a81469c900c6aa1cbb544daad08a5`，源码已push。其修复包已三端核验/安全解包/624输入检查，不重传。后续本地只有证据和交接文档修改，尚未再次提交/push；未开始报告生成器开发，不要误记为已实现。
+- `dma16_fix_full01`真实ASIC/E203 IRQ **14例通过，354816输出**。driver119217，started22:24:11.597528，finished22:27:06.519870；各任务225770周期，12层饱和0、extremes6336、rounding4554。新bus_metrics已随实际任务解析通过，阶段延迟/竞争具体数值尚未人工收回。summary完整SHA以服务器原文件为准，截图转录候选`1b7e03944fcab5f17eefdd71bb5a6a739180e2718e8a77ddf9a0148704ec8514`尚未做远端assert复核。
+- 暂停请求到来前已启动`dma16_fix_sequence01`，stage dma16_sequence，cases layer_01/rounding。最后检查实际 **passed**，driver141621，started22:32:12.284209，finished22:34:32.292395；10阶段真实CPU拒绝/取消/原驱动timeout/无复位A/B/A由runner验收。完整summary逐阶段数据与hash尚待恢复后细读。截图转录候选SHA`44e8fb569104d9aed867e110e434929b04e9508439518e84d6cbc8108dd61ab1`尚未远端assert复核。原始证据图`takeover_local/d2_20261109/dma16_pause3_remote_status.png`（位于工作区根目录E:/fpga_race-two下）。
+- 最后远端观察22:36:25.050096：上述两任务自然结束，共享锁FREE；未停止、清锁或重跑任何远端作业。新综合 **未启动**，没有自动后续队列。新RTL严格STA/面积、14门级、12功耗、最终1200真实ASIC/30412800输出、同加载源8路对照及最终报告仍未验收。
+- 板端两个客户端已正常Alt+F4关闭，随后窗口清单无Vncviewer/Filezilla。FileZilla上传成功33秒，之前已Ctrl+D断开，活动队列为空，历史失败与成功队列保留。单连接站点`IC-single-connection`/AskPassword/max_connections=1是有效恢复路径，避免QuickConnect额外传输连接触发421。
+- 本机已核验并停止：36448=`ftp_proxy.py`、32568=`board_link.py relay`。没有本地XSim/编译回归运行，没有活动子代理。旧vnc-relay.pid文件23160已过期，不可凭此PID杀进程；恢复时重新发现/核验身份。没有关闭远端Linux桌面。
+- 恢复顺序：重新接板并启动现有连接工具 → 只读确认两PASS及SHA/metrics/seq详情 → 检查真实共享锁 → 新session综合fcd445f，先检查TIM-209是否消失及所有约束/禁用弧 → 同网表gate14与12活动功耗 → 冻结真实ASIC1200。不得沿用有loop的synth01网表，旧37批量不续跑，旧5bdf候选包不上传。
+- H0/H28/H64/H72和11月13日晚截止原记录保留，暂停没有擅自改排期；恢复时按实际剩余时间复核。用户未要求本次暂停时新云端推送，当前证据已保存本地Markdown/JSON。
+
+### 22:24上传完成及新ASIC启动（最新）
+
+- 22:25已读实际launcher：`dma16_fix_full01` driver **119217**，launcher22:24:11.127045。FileZilla显示上传成功，传输33秒、成功队列1、历史失败1、活动队列空；已正常Ctrl+D断开并最小化，释放FTP名额。服务器回归状态正在读取，不重启。
+- 修复包fcd445f已完整上传到比赛服务器。22:18:55.519353服务器实测16429946字节、SHA`c58499378295ba493ce7bdaff18dcd62b49fe9537252eb351376ef4b358fd7d0`；既有unpack.py全部路径/hash检查后安全解包。22:22:14.983538再次`inputs()`核对624文件、完整提交号正确、真实共享锁False、本账号EDA列表空。
+- FTP故障路径已厘清：普通QuickConnect能列目录，但传输尝试额外连接时421，新包22:09仍不存在。用户明确队友已断开。新建Linux FileZilla站点`IC-single-connection`，沿用原host/port/account，登录模式“询问密码”、传输设置限制并发连接=1，选择断开旧连接并在当前标签连接。随后单连接上传成功，未绕过限制、未开并行账号、未保存新密码。旧失败队列保留；当前须读完成队列后正常断开FTP释放名额。
+- 已向新包请求启动`dma16_fix_full01`，stage dma16_soc、firmware_irq、默认完整14例。launcher已发出，PID/状态正在读取；禁止重复启动。目录为新包/runs/dma16_fix_full01/dma16_soc，driver日志同runs/dma16_fix_full01.driver.log。完成后先读summary/全部输出/metrics，再串行CPU sequence和新综合。
+- 最终数据入口清单服务器22:05:03.485514实测100样本/1200层，固定SHA匹配；仅manifest预检，逐层文件由新batch再次核验。旧37组没有启动。新版真实CPU错误恢复、新综合严格STA/面积、14门级、12功耗、最终1200仍未验收。
+
+### 22:03修正版打包停点（最新）
+
+- 修复提交`fcd445fb212a81469c900c6aa1cbb544daad08a5`已push私人分支。生产RTL唯一行为变更是取消译码去掉多余access_error条件；本地15协议/28数据通路/monitor+metrics/A/B/A复验通过，见下节回执。综合及gate入口均拒绝原始TIM-209；gate probe严格核对直接模块边界、保留DC wildcard内部引脚计数；power新增已安装PT手册确认的verbose时钟/disabled-arc报告。
+- 新包`light-light126-dma16-loopfix-dma16-20261109_215719-fcd445fb212a.zip`，16429946字节、624文件，SHA`c58499378295ba493ce7bdaff18dcd62b49fe9537252eb351376ef4b358fd7d0`。干净路径CRC/所有路径/逐文件hash/四固件/109tests通过；audit=`local_runs/dma16_loopfix_clean_audit_20261109_2200/receipt.json`，SHA`236d079907a542defb2658e5ccaed7e2b8883b2e21661124f1b29f4c709785e3`。新包尚未执行ASIC。
+- 已板端暂存并自动SHA核验：`/home/root/undergrad-dma16-loopfix-20261109/<同名ZIP>`；GUI为`/home/board/undergrad-dma16-loopfix-20261109/`。旧5bdf后续包保留但不上传。当前FileZilla窗口20972102，已选新目录，队列空，22:01重连仍421用户过多；不绕行或开并发连接。VNC18874436当前被FTP遮挡，需要FTP Alt_L F9后查看，操作前重新发现窗口。
+- 新包上传成功后：服务器校验ZIP摘要、安全解包、624输入 → 新session实际ASIC14/IRQ/metrics → 真实CPU10阶段恢复 → 新综合。不要重启原synth01，也不能复用其网表验收fcd445f。原服务器锁最后21:46观察False，下一次启动必须刷新。
+- 最终100样本数据已查交接：服务器`/storage2/2026contest/server4/s4_21usr/Desktop/IC/hex`，manifest SHA`0eaa4abfe8157b4ba78e32d91af3400aff0ff6321eaed8ec1b6a73848f544507`。新batch会逐项核验并重排；旧37组不续跑。最终1200、新14门级、12功耗、严格时序和系统功耗均仍待完成。
+- 本轮辅助错误保留说明：记录脚本一次因Python3.8 Path.write_text不支持newline参数而未写文件，已改open(newline)成功保存；第一次109tests中的负裕量合成夹具缺少新loop-check头，补齐夹具后通过，未放宽生产检查。WindowsCIM只读进程查询被系统拒绝，改用Get-Process/包回执确认打包完成，未中断进程。
+
+### 21:39压缩恢复与综合审查（优先于下方历史）
+
+- 21:52修复后本地复验：15协议通过`dma16_protocol_20261109_214621_159607`；14×pf0/pf1共28真实数据通路任务709632输出通过`dma16_datapath_20261109_214621_861576`；正式monitor+metrics两任务50688输出通过`dma16_monitor_fixture_20261109_214720_530015`，完整周期pf0=274010/pf1=225770；10阶段A/B/A及3负测通过`dma16_sequence_fixture_20261109_214721_177343`（NO_CPU）。109工具测试通过，补gate拒绝旧回路报告后36相关测试再通过。新真实ASIC/综合/门级仍未运行。
+- synth01 summary SHA已于21:50:57.351498通过服务器assert精确核验：`d60e386e8d6498576da5e21c369425513d420e4b1b19a393bc41d85c6e72be20`。旧网表已知新增面积0.273783044812mm²，保守预算0.434674847212mm²；这些只是旧网表归属核算，不能免除新RTL重综合。21:46实际锁False。
+- 已重读有效计划、AGENTS、STATUS和执行检查点。用户21:18明确允许FileZilla；21:24/21:30同客户端重连仍421连接人数过多，无新传输。5bdf88b后续包已板端SHA核验，但尚未上传；发现以下问题后改为保留并由修正版新包替代，不能继续上传此候选。
+- `dma16_synth01`已于21:18:35.199596结束，driver7612。报告收集成功，但check_timing发现组合回路自动切断时序弧，严格STA仍不合格。原始setup +0.0000104904ns、hold +0.00150293ns、整机面积3956891.346900um²、130大宏/32小宏、latches0；这些不能作为严格时序通过。summary SHA待精确核验，不凭截图猜写。
+- RTL已定位`access_error → cancel_request → blocked → access_error`结构反馈：CTRL=2取消本来无条件合法，取消译码却重复依赖包含debug LOAD/OUTPUT检查的access_error。准备仅去掉cancel_request的该依赖，保留地址/对齐/full-write/data检查及排空语义。此刻尚未修改RTL；修改后必须重跑本地协议/数据通路、真实ASIC14及新综合，原首包14例仅为历史数值证据。
+- 门级探测适配发现实际DC通配`*/u_arch03_accel/dma_*`返回386项、`core/*`返回211316项，包含子层级内部cell pin；现有gate parser误要求整个DMA集合等于106个模块边界pin。修正为按直接父层级精确核对边界pin，并保留内部条目数量及原始哈希；五模块全部端口/方向/位宽验证仍必须严格，不放宽缺失端口。
+- 旧power告警数已定位：power.log773个PSW-208、activity_coverage_before.rpt773个PSW-208、timing_check.rpt1个PTE-003，共1547。189个无时钟pin尚缺对象清单，不能假设全部无关；旧0.0200384986W仍非正式系统功耗结论。
+- 当前VNC只读命令已发出，待截图读取具体loop警告、面积归属；不得盲目重复。新EDA未启动，操作前重新检查真实共享锁。禁止用false path隐藏组合反馈、用旧网表验证新RTL或覆盖原运行。
+
+### 21:09实施检查点（优先于下方历史记录）
+
+- 首包同IRQ固件 `dma16_full01` **完整14例通过**，354816输出。12层零饱和，extremes6336、rounding4554；全部完整首源至末ACK为225770周期。started20:51:18.258165，finished20:54:07.550197，driver316389。summary SHA `899da0be2f54ef99d5b93c641d932f0a16a5f6b36770bc91fb2fea32d082c3a5`；IRQ首层SHA `9ab83f86e125841b47f35ea64a6fbda2569a3d22f841e56c256bec6a4a072936`。两个转录摘要已21:05:32.213658通过服务器assert与原state交叉验证。
+- 14例实际仿真宿主耗时min2.668223730896938s、mean3.097152099462359s、max3.3244687309488654s、sum43.36012939247303s；compile_receipt55.1665074571035802s。按平均仿真×1200×1.2约1.24h只含仿真，不能当整个最终批量；新batch含准备/重核实际计时，最终仍按首批实际总耗时更新。旧28.8h估算不再适用。
+- 真实IRQ首层及14例证明当前实际PLIC/WFI/定时唤醒可执行，但仍不能声明节能；需要新门级功耗。累计额外poll1+IRQ1+14为16次实际ASIC任务，最终100样本1200另跑，不拿这些替代。
+- 新 `dma16_synth01` 已启动，driver **7612**（不要误抄7012）、started **20:59:17.415251**，child11305实际dma16_synth.log。21:05:32最后观察仍running，library/link已进展到综合。首包路径/runs/dma16_synth01/dma16_synth；禁止重启或清锁，等待现有任务结果。新严格STA、计分面积、门级、功耗尚未完成。
+- 旧power07 SHA `2368034a7fa03fb3124403758a86ecbd1b65d1448cc9d593fe36fd96e5959187` 已按4×16组抄回。verbose动态/泄漏为W，实际总原始值0.0200384986W；只适用旧BEGIN窗口，不能乘新225770周期。实际X设置0.5/false，112361nets精确映射。power.log可见773个PSW-208，工具总1547warnings差异需检查重定向报告。POWER_REVIEW已记录，正式system_power_verified仍false。
+- 新证据/交接/POWER_REVIEW修改待小型记录提交；后续工具包5bdf88b已完整本地核验并云端保存，尚未板端或服务器上传。**FileZilla保持用户暂停，必须等明确恢复。** 后续sequence/MMIO8/metrics/gate/power服务器入口须新包，不能手工把新脚本粘入旧服务器包绕过上传暂停。
+
+### 20:54实施补充（历史）
+
+- 真实IRQ首层dma16_irq01已通过：driver305472，started20:44:53.351114，finished20:46:53.150876。25344输出、零饱和；首源cycle11413/末ACK237183/225770周期，CPU236980；external=1、timer=23、WFI=23、events=1、unhandled=0。host仿真3.0708447720389813秒。原始图dma16_irq01_progress1.png、dma16_full01_started.png；summary SHA需精确分组读取，不猜抄。
+- 首包同IRQ固件完整14例已新启动dma16_full01，driver316389，launcher20:51:17.712172；最后观察20:52:18已启动，结果未读。不要重启；完成后检查全部354816输出/饱和/IRQ及周期，再串行启动首包dma16_synth01。
+- 旧power verbose已实际明确Dynamic Power Units=1 W、Leakage Power Units=1 W。尚未完成告警、未知值、各宏及活动覆盖审核，system_power_verified仍false。当前只读诊断命令在取精简warnings/settings/source映射头与分组SHA。新14仿真可同时只读旧报告，但不能同时启动另一EDA。
+
+### 20:45实施检查点（历史）
+
+- 后续源码/小型证据已提交并push私人分支：`5bdf88bf7d71439f585c68eaf6d9c6ce18bb7264`；生产RTL、原source/window/monitor、installer和synth保持首包字节。新增被动metrics只在仿真接入。现有新证据JSON修改尚未再次提交。
+- 后续完整包已在本地生成：`light-light126-dma16-followon-dma16-20261109_203856-5bdf88bf7d71.zip`，16426075字节、624项manifest输入，SHA `ec1308c0ae5bd2cc4e1ab3d7c628ee5ed0fa11c05a25625815eb7f76ae51ce95`。未传开发板/服务器。独立干净解包CRC/唯一根/全部路径与624hash、4套FW、93tests通过；audit在local_runs/dma16_followon_clean_audit_20261109_2040/receipt.json，SHA7df385e57e7a8e1b700e6af9ef2a4b0a109eb988beea41756c2f5e7a97cca4a1。FileZilla仍用户暂停，禁止自动恢复。
+- 第一次后续打包被严格FW源码hash拒绝：新start_dma16_sequence.S工作区CRLF而Git为LF。失败目录保留，未弱化哈希检查。仅规范该文件到Git原始LF字节，代码无diff；刷新其索引后重建sequence **v6**，manifest `fd58521b9763f6d332929a8cd44cb0196d15988c649f0b65905cd77045865cef`，ELF/boot与v5完全相同。后续包包含v6，v4/v5不可用于当前包的源码身份。
+- 旧d3_power07_h0阶段最终passed，结束20:39:00.549312，20:42:34.154052观察锁FREE。PT实际链接/读完整VCD/update_power/全部报告完成，没有Error行，原PT-063未出现。工具报告1547warnings，逐类核对未完成；第一次正则汇总转义错误返回空，不能当无警告。实际units为时间1e-9s/电压1V/电流0.001A/电容1e-12F；功耗报告数值和W单位仍要由verbose核对。system_power_verified仍false，不能把reports ready当正式功耗验收。
+- 已请求在首包独立session `dma16_irq01` 执行dma16_soc layer_01、firmware_irq；紧接上一步实际FREE检查，启动脚本也检查lock及session不存在。正在读取实际PID/状态；不得重复启动。接下来IRQ通过后同FW跑14，再启动首包dma16_synth；后续新门级/sequence/MMIO8/metrics服务器运行等待FTP恢复后上传已核验新包。
+
+### 20:34实施检查点（历史）
+
+- dma16_smoke01实际通过：layer_01、25344输出、零饱和、首源cycle993/末ACK226763/225770周期、CPU226351；仿真宿主9.16798612099734秒。结束20:11:24.332854，最后读20:21:54.780747。summary SHA4b32b136f7a5f368d2a2f3f29714e2bc2cd8b05d0c7eea420dea49ab8c9a207c。首包2bd6b0f polling范围；IRQ/14/新PPA未过，不能声明最终500task/s或全新版已验收。
+- 原锁自然释放后启动旧修复8路功耗d3_power07_h0，driver **266936**（先前误抄206936已改JSON），实际started20:23:42.769200，PT child267785。20:31日志实际LC/PT链接成功并在读完整31.25GB VCD，暂未出现早期PT-063；最终结果未读。run为portcheck包/runs/d3_power07_h0/asic_power。不得重启/清锁；它完成后按原首包串行IRQ首层、14例，再新DMA综合。
+- 被动metrics已接dma16_soc/dma16_gate；在TB生成include，绑定实际accel/arb端口，修改后平台TB hash入manifest；门级必须实际probe。生产RTL/installer/source_list不改，metrics不综合。逐例摘要解析完整47904事务/191616B，原window逐周期交叉核对；batch_contract要求完整metrics块，batch每次核对/恢复都重新解析，不只看END标记。ASIC活动改用dma16_activity严格SysMem/新模块审计。
+- 本地真实数据通路+原正式monitor+metrics，pf0/pf1两任务50688输出通过：local_runs/dma16_monitor_fixture_20261109_202649_158872，summary SHA8ac129560fe5c1fb86250318921677e2dc143228040c4919ad364f34251c5b65。最终脚本变更后pf1复核local_runs/dma16_monitor_fixture_20261109_203109_390417，SHAf20c1e8cef4e1ca839ae8c5903f908e672fdc03c805cb2c2e29c89ddffc48b22。两者都是NO_CPU；protocol独立oracle7模式仍保留。相关工具93tests PASS，git diff --check通过。
+- batch解析增加完整metrics后，sequence依赖身份重建到 **v5**，manifest933ba35729318c892ebc5e230c1ff1647c51d913649515fde0f1745dfb86b680；与v4 ELF/boot逐字节相同，ELF5f751362ad33a01f0b4237c84ef36b809708e23f6913741451c19eb0a80b9acd。四套FW再验证通过。后续包选择v5，不能误用v4旧依赖manifest。
+- 实施报告/清单已补真实ASIC首层与剩余缺口。后续约57项新工具/文档/测试尚未提交；准备独立commit和本地包，**FileZilla继续暂停，不能上传或重连，等待用户明确可以传**。上次窗口核对20:18没有FileZilla。
+
+### 20:19压缩恢复补充（历史）
+
+- 已重新读取AGENTS、有效DMA16三天计划、STATUS、执行检查点及各工作线交接。FileZilla继续用户暂停；20:18通过开发板窗口清单重新核对，只有VNC等桌面窗口、没有FileZilla。未重新连接、未上传。等待用户明确允许恢复；本地开发与已有服务器任务继续。
+- 旧修复8路 `d3_gate07_h0` 已完成，最后观察20:07:32.641508为passed、锁释放，结束19:55:48.511351；summary SHA256 `4e735f46f27f643c820f59b386e1e4e04eca5f02b0719a50330a2a40a6e82f8e`。首层25344输出通过，旧BEGIN窗口3890080周期；完整VCD31246581717字节原生扫描通过scope/window，unknown记录34900278、active记录5759095124。完整VCD SHA尚未精确抄回，不猜测；该结果不能证明DMA16或新加载口径。
+- 首包的真实ASIC `dma16_smoke01` 已在20:09:16.557734启动，driver244469，stage dma16_soc，layer_01，默认polling固件。最后观察20:11:09为running、未读最终结果。运行目录为首包/runs/dma16_smoke01/dma16_soc，日志首包/runs/dma16_smoke01.driver.log。不能重启或清其锁；下一步只读检查状态。前次只读helper会话56013已消失，需观察屏幕，不盲目重输旧命令。
+- 新sequence完整10阶段/3任务76032输出及3负测本地通过：local_runs/dma16_sequence_fixture_20261109_200001_072693。它是过程MMIO、NO_CPU；真实E203 trap/mret/timeout仍未验证。runner12项测试及未修改夹具日志交叉核验通过，整体ASIC parser明确拒绝NO_CPU。交叉回执local_runs/dma16_sequence_parser_crosscheck_20261109_v1/receipt.json。v4固件manifest 2d921e2563d7dd70b51d7d29f36b802e208a18445b3c05df2c6a086f6203ff1b。生成TB已补ASIC clock guard需要的四个a3别名。
+- 新被动总线统计模块/解析器已完成，7 RTL模式及5解析测试通过：local_runs/dma16_bus_metrics_20261109_200900_766574/summary.json，SHA daff51a565bf6663f1f1348344e926355cbf84bcd034fdc1be3026d9d1482812。独立事件oracle检查47904事务/191616B、直方图和竞争区间；仅协议夹具，无CPU/MAC。下一步将其加入ASIC/gate仿真observer，使用实际端口binding及原window交叉检查；不得加入综合生产RTL。
+- 新server_run已接mmio8_soc/dma16_gate/dma16_power/dma16_sequence；package支持MMIO8和sequence独立固件；poll、IRQ、MMIO8、sequence四套源码/ELF/镜像均验证。dma16_batch已记录真实宿主时间及剩余量1.2余量估算（不拿芯片周期推算仿真速度），20测试通过；sequence因依赖batch哈希重建到v4，旧版本保留。
+- 中文实施报告、验收清单、交付索引已更新，但新门级、功耗、序列、MMIO8、metrics及batch改动尚未另提交/打包。首包2bd6b0f不可变；FTP暂停期间先本地准备后续包。仍缺新ASIC14、IRQ/WFI、CPU恢复、150MHz新网表/面积、14门级、12全活动功耗及最终1200 ASIC任务。旧PT-063修复实跑待新smoke自然释放锁后串行安排。
+
+### 19:45实施补充（历史，优先于19:20）
+
+- 首包2bd6b0f已经经开发板Linux FileZilla上传。FTP最终断开并记入失败队列，但服务器2026-11-09T19:32:35.329713实测16217831字节与SHA6bd72b192968bfd5783248e5978a2223f476e7b43717183df43583337d0e4a17完全一致；既有unpack.py安全解包成功，随后inputs()核验573文件。不要重传/覆盖此完整包，不把FTP失败UI当作文件损坏。
+- 新bundle绝对路径：/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d。真实平台安装预检runs/dma16_install_preflight01/platform已通过：原baseline ee8bfecd81e192a974be81479ef8a01793de3e59c2e2f8769886e8e86143e56e、9个modified files；这是安装接线生成，未运行VCS/CPU。
+- 旧门级d3_gate07_h0已经完成VCS、进入全文件native扫描；19:41:15活动子PID151649仍运行，读到VCD位置12030109043字节/总31246581717约38.5%。该扫描实际CPU持续推进，不能停止或跳过。真实锁是/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock，由driver128986持有。此前一次诊断用b.parents[1]查错层级显示LOCK False，已纠正，不能据此启动并行EDA。
+- synth07约束报告显示无违反项，check_timing/结构警告仍继续逐项读；DMA16硬件尚未STA。新smoke应等现有锁自然释放。旧power修复实跑和新smoke随后统一串行，不同时占用。
+- 后续新MMIO8 monitor已修clear凭据：必须成功CTRL2后新idle STATUS，START/新clear/复位失效。local_runs/mmio8_source_fixture_20261109_193147_494985/summary.json 6负测+3任务76032输出通过，733131过程总线cycles，NO E203。mmio8_soc新增12契约测试+layout8合计20通过。root已接server_run mmio8_soc、package --mmio8-firmware，实际ASIC未跑。
+- 新dma16_gate.py/root stage、dma16_power/root stage已接好；gate只读同SHA DDC实际probe五模块及clock/boot端口，严格拒绝缺失，后续仅新增测试固件允许复用同一实际生产RTL网表。source identity不得把无关sw新增误当硬件变更。新gate10tests通过、实际mapped binding未做。所有这些均不在第一包中，需要独立后续提交/运行包。
+- 三工作线继续：contest新增独立DMA16真实CPUsequence固件（5非法START真实trap、装载取消、短timeout恢复、A/B/A）；core与其对齐新source/monitor及NO_CPU夹具；evidence新增被动DMA分阶段总线统计。第一包生产RTL/固件/source/window/monitor保持冻结。新1200、14门级、12活动功耗、IRQ/WFI及CPU错误恢复仍未验收。
+
+### 19:20压缩恢复补充（优先）
+
+- 第一实施提交已完成并push私人分支：2bd6b0f0075d7e0a61809cd7f70fc990e7364e85。首包light-light126-dma16-smoke-dma16-20261109_185450-2bd6b0f0075d.zip，16217831字节、573输入文件，SHA6bd72b192968bfd5783248e5978a2223f476e7b43717183df43583337d0e4a17；独立ZIP唯一根/全部entry hash/CRC、干净包6测试通过。板端/home/root/undergrad-dma16-smoke-20261109同名ZIP已SHA核验。GUI路径为/home/board/undergrad-dma16-smoke-20261109。
+- 尚未传到比赛服务器：Linux FileZilla登录收到421用户过多，已约隔数分钟在同一会话正常重试，没有绕行或开启并发连接。FileZilla当前窗口20972102，class Filezilla；已正常启动受限FTP代理。旧VNC仍18874436、relay session22118。目标仍icdesigns0.nicu.cn:18888、/IC/light-light126-undergrad-d2-20261109，密码只经helper --text-file stdin输入，禁止输出内容。
+- FileZilla位于chroot GUI内，host无filezilla可执行文件。启动使用helper exec `busybox chroot /opt/ac820-gui-root /usr/local/bin/ac820-desktop-run filezilla >/tmp/kwt_dma16_filezilla.log 2>&1 </dev/null &`。代理入口F:/linux_fpga_try/tools/start_ftp_link.ps1。不能在截图被FileZilla遮挡时读VNC黑块；helper只设置focus、不raise。最有效切换：FileZilla用Alt_L F9最小化→VNC可见；恢复FileZilla点击主机Xfce4-panel窗口10485764的(216,15)。不要把远端Mate桌面顶栏当本机面板。xdotool不存在，XRaiseWindow尝试未前置，勿再重复。
+- 18:59:47新预检：共享锁空、本比赛账号无EDA；全服务器其他账号有任务，不动。19:04:06.789751启动旧8路synth07的独立gate/activity首层，用原已上传portcheck包，session d3_gate07_h0、driver128986，编译子130399、仿真子153110；19:13:00最后读仍running且ASIC_BOOT/MODE/BOOT_MODE全部日志已出现。这是保底旧边界证据，不是新版加载对照。不得重启或清其锁，完成后读summary并继续旧PT修复实跑。
+- 原门级run：.../bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_gate07_h0/gate_soc；driver日志同bundle/runs/d3_gate07_h0.driver.log。synth07 summary SHA仍3a167b8a0c3f77d5837a91c9aa43264f4c4e2fbec44313e075f84a4ed92e3ed6。
+- 首包已不可变，后续工作在当前worktree新文件中，不能替换首包内容。contest代理新增MMIO8_SOURCE_HANDOFF、原驱动SysMem源加载固件/布局/8单测（无CPU验证），正在新增mmio8_soc；root新增install_mmio8_source和arch03_mmio8_source_monitor，core代理正在做真实8core/arb/router/source的过程MMIO夹具（无E203）。该对照不是8路DMA。
+- core代理新增port-only gate monitor生成器dma16_gate_monitor.py和arch03_dma16_gate_proof.sv，14定向+1真实RTL任务25344输出通过；cycles225770，finished晚15拍但end不变。实际门级需以新mapped_probe绑定5个模块路径，尚未写/执行dma16_gate stage。proof从末ACK之后的新MMIO PENDING/COMPLETION/ERROR/STATUS响应证明排空，不绑fifo_empty常真。
+- evidence代理新增dma16_activity.py/dma16_power.py及10离线测试，实际native完整扫描/unknown保留，未运行PT。约定新gate scope=dma16_whole_soc_mapped_functional_without_SDF、stage=dma16_gate；summary需firmware_sha256/source_inputs_sha256，case需outputs/layout_sha256/task_window/activity；power依赖后续dma16_gate.verify_synthesis。12任务同gate/synth/firmware汇总，缺功耗/覆盖时值null不当0。
+- 下一步：查看gate活动进展，等该锁正常释放后安排旧power；FTP继续适度重试，成功后把已板端核验首包经Linux FileZilla传到授权目录，按ZIP SHA及safe-unpack验573文件，运行dma16_smoke01单层→IRQ→14。新8对照、门级/功耗适配完成后另提交/打新包。后续1200、真实CPU无复位A/B/A/错误恢复、150MHz新STA/面积和12功耗仍缺。
+
+- 以下内容覆盖下方旧暂停/17:50记录的实时状态。旧synth07已读完成，不重跑；远端EDA/锁最后实际观察仍是17:24无任务/无锁，下一次启动前重新查。
+- DMA最终RTL SHA4270345c39477220831ef4fda8227dc4f3c8d6df71f66234bfc0ec63b2df9f53；ABI6b1c53a46e8f490208adbd1d4734d2aead2bbe1ebf0df93cf0e294c7eba87c90。15协议、28真实core/arb/router/shared任务709632输出通过；包括首源请求前X/W失效、无复位新任务、held请求取消排空。最终协议和datapath目录在DMA16_ENGINE_HANDOFF及主JSON。
+- fabric386事务公平性/owner/反压通过；source统一为N接受、N+1最早ACK，11752请求测试通过。此前多余pending拍已删除，旧模型从未进ASIC。window3完整任务及12失败/取消、完成后非法事务拒绝通过。
+- 正式source/window/monitor同名层次夹具6任务152064输出通过：pf0=274010、pf1=225770周期。夹具只用过程MMIO，没有E203，不能当ASIC吞吐。单任务VCD边界轻审计已过，起163.333317ns/止1505296.516137ns与window逐fs一致、225770周期。XSim动态路径落为dcv，且其0宽parameter不被既有严格ASIC活动审计器接受；保留两次失败，不放宽服务器审计。
+- PLIC全部16原源已分配：DMA与GPIOB原线OR，共claim ID16；priority0x0c000040/enable0x0c002000 mask0x10000/threshold0x0c200000/claim0x0c200004。CLINT实际generated RTL已核对mtime0x0200bff8、mtimecmp0x02004000；irq_mapping.json记录源链和截图哈希。MEMS使用hfclk，实际WFI期间DMA仍需CPU验证。
+- 新固件显式等待STATUS bit14 ready：poll目录local_runs/dma16_firmware_poll_20261109_startready_v2；IRQ目录local_runs/dma16_firmware_irq_20261109_mapping_v1。只含程序/SHIFT，0x10000后全零；IRQ真trap/WFI/PLIC和timer probe已编译未运行。1024timer ticks、1M probe cycles是初版参数待测。
+- root新增install_dma16.py、dma16_soc.py、package_dma16.py及server_run dma16_soc/build/synth阶段；6集成契约测试通过，实际固定平台新安装/编译仍未执行。旧8路参考安装显式拒绝，不能误用DMA监视器；旧对照完整新加载口径尚未实现。
+- batch支持冻结boot_by_shift；19单测和14case夹具通过，不属于ASIC。独立批量在build释放sharedlock后自行持同一锁，旧37不续。新1200、真实CPU连续A/B/A和错误恢复、14门级、12功耗、150MHz和新增面积均未完成。
+- 新dma16_synth已完成，23项新旧离线测试通过；不改旧综合脚本。需包入UNDERGRAD_D3_SERVER_20261109.json用于同Liberty面积单位依据。仲裁/router/内联IRQ/glue不能漏计。
+- 新文件准备首个实施提交/上传；代理review的IRQ映射/固件源码冻结缺口和包名变量覆盖均已修，实际打包后再核验ZIP根目录与全部哈希；固定源码与固件哈希→提交私人分支→package_dma16.py→开发板暂存→Linux FileZilla→服务器安全解包→先dma16_smoke01/layer01，再IRQ和14。独立运行说明DMA16_EXECUTION.md。
+- 最近VNC窗口18874436，relay session22118；辅助工具key必须--keys Return；服务器Python必须python3，系统python是2且无pathlib。UI若命令已输入只补Return，勿重复输入。最近18:41只读平台检查；当前没有新EDA任务。工具截图在takeover_local/d2_20261109/dma16_*。
+- 正式监视器在最终mailbox检查finished&&!failed及全部ACK；VCD在最终output ACK停止，不等稍晚drain证明。IRQ模式要求mail中的external/timer/WFI>0、done event且无未处理中断；程序source和irq_mapping均进入batch contract哈希。
+
+每次压缩后仍按必读列表读取并核对，继续此实施链，不重做已完成本地测试，不将本地证据替代ASIC结果。
+
+## DMA16实施进度（H0后，2026-11-09约17:50）
+
+- 新计划和老师答复已落盘；用户已授权实施和恢复。所有新版功能/时序/功耗状态仍按实际分层，不沿用旧PASS。
+- 原synth07已读：11:33:34.089843结束，stage passed仅表示reports ready；setup +0.0000376701ns，hold +0.00131178ns，latches0，仍待完整约束审核/新门级/功耗。17:24:18读到锁已释放、无EDA。原结果未修改、未重启。
+- 固定平台O4 base=0x80000000/regionLSB31；0xb0000000源窗口合法。原e203_soc_top的sysmem为空零响应占位，恢复原已有ICB接口至仿真/门级边界，不加SRAM私口。PLIC base0x0c000000已核验，中断源号仍审查。
+- tile16 14用例软件转换通过，354816输出与旧整数参考逐位一致；14布局单测通过。新目录local_runs/dma16_layout_14case_20261109_h0。
+- linear16正式d3 14用例A/B/A pin_mock通过42任务/1064448输出，另旧源56任务与行为测试通过；核心无停顿pf0=156560、pf1=140480周期，仅核心性能。核心SHA6bb63bf42437617a5b73b71c22c0874528868f5ef9b4f01be5d9687dde433322。
+- DMA/MMIO引擎9个协议测试通过（core stub），真实core集成正在测，不能当E203完成。DMA首版先完成整个源→shared装载，然后读缓存/计算/输出重叠；保留单笔在途。
+- 原ASIC批量入口不复用旧功能TCM路径；新stdlib dma16_batch.py的15单测、14case重排和runner夹具通过，夹具复制参考不算RTL执行。
+- 主代理新增arb2/router；258事务payload/owner/error等检查通过后公平性覆盖不足，核心代理正在补持续竞争激励，原失败日志保留，尚未标fabric全通过。
+- 主代理下一步：完成IRQ映射、install_dma16与TB加载/计时/真实CPU固件，干净集成测试后打包上传。新代码尚未commit/上传/真实ASIC验证。
+- 开发板VNC曾退出，已恢复；现窗口18874436，仅作为最近观察，操作前仍重新发现。relay exec session22118仍运行。已有助手读取保存key需reviewed escalation，不输出key。服务器操作经开发板Linux VNC，上传仍用Linux FileZilla。
+- 分工独立交接见DMA16_CORE_HANDOFF.md、DMA16_ENGINE_HANDOFF.md、DMA16_LAYOUT_HANDOFF.md；主证据见handoff/team/evidence/DMA16_IMPLEMENTATION_20261109.json。
+
+## 已完成
+
+- 通用 X/W/b 编码、实际结果解码、数值格式及异常检查已完成。
+- 600 条内部开发样本、7,200 个完整 FC1 任务、182,476,800 输出已评估。最差层 NRMSE 0.14941871%，最差任务 0.22915377%，模型样本无编码截限和输出饱和。不是官方评测集；未训练/微调模型。
+- 本地 XSim pin_mock 共 25 任务、633,600 输出通过。
+- 实际 E203 两组 A/B/A 共 6 任务、152,064 输出通过，包括部分装载中止、实际驱动超时及无复位恢复；此项属于平台功能 TCM 分支。
+- 真实厂商 TCM 98,682 检查、262,144 字节启动映射和 11 类标准单元测试通过。
+- 修正配置 `371316a/d3_full02` 的 ASIC CPU 完整 14 用例通过，354,816 输出逐项一致；14 个完整任务启动选择检查通过。当前 portcheck 的 RTL、固件、向量、测试台和平台准备与该配置逐字节一致。
+- 原 UART/修正版对照通过：31,464 周期、213 次 APB 写、246 次读、600 个 TX 边沿。
+- 实际完整任务窗口为 3,890,080 周期，周期 6.666666 ns；约 25.933864 ms/task、38.559622 task/s。这是功能仿真换算，尚未绑定最终时序通过结论。
+- 1,276 种标准单元和两种 SRAM 的 Liberty/LEF 面积单位已交叉核对。整机 130 个大宏、8 个小宏，共 1,042 KiB。
+- 设计报告草稿、数值格式、时序/面积/功耗复核及交付索引已保存。详细进度见[更新计划前检查点](workspaces/arch03/PROGRESS_BEFORE_PLAN_UPDATE_20261109.md)。
+
+## 已尝试的路径和结果
+
+| 路径或问题 | 结果与处理 |
+|---|---|
+| 早期平台功能 TCM/FPGA 分支 | 不能作为 ASIC 证据；已修正条件分支并用厂商宏、标准单元完成新的 ASIC CPU 全量测试 |
+| TCM 首轮采样过早 | 旧失败保留；调整到同周期 3 ns 采样后真实组件测试通过，生产 RTL 不因该测试问题修改 |
+| 工具周期舍入和报告完成标记 | 改用 6.666666 ns 严格周期；只匹配独立输出标记，避免把 Tcl 过程回显当成实际执行 |
+| 启动选择路径、四个 timer CDC、UART 锁存器 | 增加完整任务模式守卫、精确首级 D 例外及无效 payload 默认值；UART 对照和新 ASIC 14 用例通过 |
+| `d3_synth04` | 映射完成，锁存器 0，hold +0.00623399 ns，setup −0.740983 ns；剩余三个 LF 控制输出预算需重验，不能写成时序通过 |
+| `d3_synth05` | 第一个 LF 端口的小写 o 被误写成 0；约束错误使结果不可用。DC 默认出错继续也已识别，新增显式失败即停 |
+| `d3_synth06` | 第二个 LF 端口漏 `_o_`，工具退出码 1、映射前停止，验证了失败即停；旧目录保留 |
+| 完整端口清单修正 | 独立提取实际网表全部 20 个顶层输出，清单哈希在本地和服务器一致；9 项定向测试通过。`d3_synth07` 已实际绑定正确三个 LF 输出 |
+| 历史门级/活动 | 旧配置首层 25,344 输出通过；原 Python 活动扫描慢，保留原仿真后用完整原生扫描器独立复核 29.86 GB VCD。未抽样，仍有未知值记录需功耗解释 |
+| `d3_power01` | 取得许可证并生成报告，但 PT-063 启动错误导致验收失败。LC 子进程环境、实际单位/未知跃迁/边界网络报告修正已打包，尚未实际功耗重验 |
+
+正确 LF 端口为 `io_pads_aon_pmu_padrst_o_oval`、`io_pads_aon_pmu_vddpaden_o_oval`、`lfxoscen`。其 1 ns 最大/0 ns 最小预算参考 LF 源域，是明确接口假设；未新增整时钟域 false path，也没有外部接收器规格或物理签核结论。
+
+## 当前冻结配置与远端状态
+
+- 仓库：`E:/fpga_race-two/kwt1-rtl-architectures`。
+- 分支：`codex/light-light126/undergrad-d1-numerics`，团队私人 GitHub 仓库。本地/此前缓存origin已核对的进度记录提交为 `fd47609107faece19235c0b04112e9c44fe6a72b`；文档提交不改变运行包源码。
+- 受测源码：`5946c54263868bb701bebe515a285ffb9f238e47`。
+- 包：`light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386.zip`；10,843,580 字节、402 文件；SHA256 `2d998f7dc8cadfaf230c90da499e1e7b3c110d1f86e2afeaca5723ecbb2ec4c5`。本地、开发板暂存、FileZilla 上传、服务器安全解包均已核验。
+- 远端最后观察时间：**2026-11-09 11:30:53.840890**。`d3_synth07` 当时 running，驱动 139120、DC 子进程 141535，实际协作锁由该运行持有。开始时间 11:18:46.512651。
+- 暂停时没有停止远端进程或关闭远端终端；它可能已经自行完成，最终结果尚未读取，不能沿用“running”作为实时判断。
+- 开发板 VNC/FileZilla 已退出、上传队列为空；本机连接代理 10044、23248 已停止。窗口 ID/PID 只能作为历史信息，恢复时重新发现。
+
+```text
+运行目录：
+/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/bundles/light-light126-d3-portcheck-arch03-20261109_110751-5946c5426386/runs/d3_synth07/asic_synth
+
+实际协作锁：
+/storage2/2026contest/server4/s4_21usr/Desktop/IC/.arch02_team_lock
+```
+
+远端保留的终端第 3 页为诊断页，cwd 为 SDC 包；第 4 页为运行页，cwd 为 reports 包。恢复时先观察界面，不盲用旧坐标。开发板连接辅助入口为 `F:/linux_fpga_try/ac820.ps1`；使用开发板 Linux VNC/FileZilla，不使用 Windows VNC/FileZilla，不新建未经授权的结果回传通道。
+
+## 未完成与恢复顺序
+
+1. 新计划已收到并获执行指示；先恢复连接，核对固定平台加载源/中断接口并读取synth07最终结果。
+2. 先读取原 `d3_synth07` 状态及实际协作锁，审查最终 setup/hold、约束覆盖和结构警告，不重复启动。
+3. 有效新网表需完整 14 用例门级验证，并采集同配置完整任务活动。
+4. 实际运行并审核系统功耗：单位、SRAM、未知活动、映射及导线/时钟假设；通过后计算 J/task。
+5. 用最终叶清单重算面积，确认官方计分归属，统一配置的精度、时序、面积、性能与功耗证据。
+6. 完善最终报告和提交材料；精确截止、模板、字段及视频要求仍待确认。PR #6 与 32 位复制优化尚未测量，按新计划决定后续安排。
+
+用户既有授权允许本计划当前及后续已核验源码/固件/测试包经开发板 Linux FileZilla 上传到 `icdesigns0.nicu.cn:18888` 的 `/IC/light-light126-undergrad-d2-20261109`，也已授权同步团队私人云端分支；用户本次IMPLEMENT指示已恢复执行。不要重新索取已授予的上传授权；只在已授权独立目录运行已核验包。
+
+保留旧 1,200 组批量的 37 组通过和第 38 组中断，禁止自动恢复旧批次、修改原平台/历史快照、删除旧失败、自动清锁或停止其他人的作业。不同版本的最好结果不得拼成当前配置通过。
+
+## 压缩后必读
+
+依次核对 [AGENTS.md](AGENTS.md)、本文件、[当前DMA16计划](workspaces/arch03/IMPLEMENTATION_PLAN_DMA16_20261109.md)、[团队状态](handoff/team/STATUS.json)、[验收清单](workspaces/arch03/ACCEPTANCE_20261109.md)、[执行检查点](workspaces/arch03/EXECUTION_CHECKPOINT.json)及[服务器证据](handoff/team/evidence/UNDERGRAD_D3_SERVER_20261109.json)。新计划到来后在此处更新有效计划指向，保留旧计划和历史证据。
+
+## 19:47增量：未来队列满盘收尾修复
+
+- 新提交4bbd0afa078c48c07e7c774fae9bdfbdaae75c7b修复未来T80/T64队列在Popen之后、状态写入ENOSPC时仍必须等待已接受子进程的问题。3个场景分别测试两种队列通过。只改本地/新operations，不替换当前正在执行的T80队列。
+- 新T64 operations准备为`light-light126-t64-finishops-4bbd0af`，3文件，manifest c8d77f164f4f1c798f85741ae1dd6ffe3be5c8691193e5a6071cb131f0e45028。本地身份预检通过。
+- **exec61820正在VNC工作区3传输26行，尚无服务器完成回执。此时不可并发向VNC打字。** `local_runs/t64_priority_ops_4bbd0af/transfer_state.json`记录进度，`local_runs/transfer_t64_safe.ps1`为执行脚本。先poll61820并观察完成，再验证新ops；旧fbfdc2e ops不动。
+- 19:46:46最新截图仍为DC映射优化的中间迭代，不能把其面积/负裕量当最终结果；原T80继续。
+- d7969bd已推送；4bbd0af及本增量尚待推送。旧8路文件仍无任何删除。
+
+
+19:56增量：19:55:45.042179实读原队列仍running/t80_synth，driver14008、child23158、completed=2、error=None，共享free17054040064B。该状态比前述日志截图更新，未出现最终摘要。

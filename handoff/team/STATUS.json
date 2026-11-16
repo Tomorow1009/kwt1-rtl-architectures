@@ -6168,10 +6168,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T09:18:42+08:00",
+      "observed_at": "2026-11-16T09:26:43.938849+08:00",
       "status": "saif_running",
       "parent_pid": 95253,
-      "child_pid": 152202,
+      "child_pid": null,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6184,7 +6184,7 @@
       "c80_started": false,
       "protected_T80_modified": false,
       "old8_modified": false,
-      "foreground": "workspace3 terminal tab2 idle Bash",
+      "foreground": "workspace3 terminal tab1 read-only watcher151016",
       "watcher_pid": 151016,
       "second_terminal_tab": "idle Bash",
       "current_local_sessions": [],
@@ -6211,8 +6211,9 @@
       "own_gate14_completed": true,
       "watcher_terminal_tab": 1,
       "previous_watcher135257_confirmed_exited": true,
-      "saif_cases_completed": 1,
-      "current_saif_case": "layer_02"
+      "saif_cases_completed": 3,
+      "current_saif_case": null,
+      "last_confirmed_push": "0363c46"
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
