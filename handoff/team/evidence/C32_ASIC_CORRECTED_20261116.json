@@ -1,0 +1,48 @@
+{
+  "schema": "c32-corrected-firmware-initial-functional-evidence-v1",
+  "observed_at": "2026-11-16T22:43:37+08:00",
+  "source_commit": "91135f61c97c980039793c6637d0a06888638df0",
+  "rtl_source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
+  "bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
+  "bundle_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
+  "queue": "c32_initial03",
+  "pid": 238916,
+  "last_observed_stage": "synth",
+  "passed": {
+    "soc": {
+      "summary_sha256": "2ebdce2ff3562f07346c914b4d60362bf9ae590f33c8b925fc31a7d6498923b7",
+      "cases": 14,
+      "outputs": 354816,
+      "fixed12_cycles": [74750, 73187, 72186, 72264, 70798, 69193, 68427, 68604, 68610, 70970, 75393, 81770],
+      "fixed12_total_cycles": 866152,
+      "fixed12_average_cycles": 72179.33333333333,
+      "fixed12_task_s_at_150MHz": 2078.1571825730357,
+      "chip_measured": false
+    },
+    "sequence": {
+      "summary_sha256": "4eeb72b3d16e10be04df11184a2c4d61020bbaab55aff31e171c81b48e214d85",
+      "outputs": 76032,
+      "no_reset_ABA_verified": true
+    },
+    "contention": {
+      "summary_sha256": "91d46a7e5ad48aa8659263013d8b6cc338046e263f3f2d68aa44a50dfb3b9283",
+      "outputs": 25344,
+      "cycles_with_competing_CPU": 93645,
+      "competing_cycles": 3215,
+      "cpu_grants": 7876,
+      "dma_grants": 33120,
+      "scratch_writes": 3877,
+      "scratch_reads": 3877,
+      "maximum_dma_grants_while_cpu_waits": 1,
+      "checked_scratch_rounds": 122,
+      "included_in_performance_or_power_average": false
+    }
+  },
+  "stage_accepted": false,
+  "own_synthesis_complete": false,
+  "own_batch20_complete": false,
+  "own_gate14_complete": false,
+  "own_power12_complete": false,
+  "protected_T80_modified": false,
+  "old8_modified": false
+}

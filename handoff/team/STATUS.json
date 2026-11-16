@@ -7139,7 +7139,7 @@
         "main_package_prepared": true,
         "recovery23_transferring": false
       },
-      "initial03_status": "running_contention",
+      "initial03_status": "running_synth",
       "new_bundle_prepared": true,
       "new_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
       "new_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
@@ -7162,14 +7162,17 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-16T22:40:07+08:00",
+      "last_observed_at": "2026-11-16T22:43:37+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
-        "sequence"
+        "sequence",
+        "contention"
       ],
       "finish03_tool_deployed": true,
-      "finish03_started": false
+      "finish03_started": false,
+      "contention_passed": true,
+      "corrected_functional_evidence": "handoff/team/evidence/C32_ASIC_CORRECTED_20261116.json"
     }
   }
 }
