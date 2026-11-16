@@ -6147,17 +6147,17 @@
     "p80_combined05": {
       "status": "running",
       "pid": 95253,
-      "observed_at": "2026-11-16T08:51:03+08:00",
+      "observed_at": "2026-11-16T08:56:45+08:00",
       "source_sha256": "46e2a8fb416db99febbc9c2bb6ea09b619b515bb185711c2a3a9782277d11651",
       "bundle": "light-light126-p80-1023646",
       "run": "runs/p80_synth_d2_06/p80_synth",
       "stage_accepted": false,
-      "stage": "precision",
+      "stage": "gate",
       "current_block": null,
-      "child_pid": null,
+      "child_pid": 143466,
       "child_pid_transcription_corrected": true,
       "current_log_actual_errors": 0,
-      "current_log_phase": "Final synthesis reports generated; own FLOAT precision join running"
+      "current_log_phase": "Same-netlist gate cases; extremes and rounding passed"
     },
     "p80_export_review05": {
       "status": "launched_waiting_predecessor",
@@ -6168,10 +6168,10 @@
       "c80_started": false
     },
     "p80_live_snapshot": {
-      "observed_at": "2026-11-16T08:51:03+08:00",
-      "status": "precision_running",
+      "observed_at": "2026-11-16T08:56:45+08:00",
+      "status": "gate_running",
       "parent_pid": 95253,
-      "child_pid": null,
+      "child_pid": 143466,
       "exporter_pid": 96154,
       "own_fixed14_three_depths_passed": true,
       "own_recovery_contention_batch20_passed": true,
@@ -6188,7 +6188,14 @@
       "watcher_pid": 135257,
       "second_terminal_tab": "watcher135257 should exit on phase change; reobserve",
       "current_local_sessions": [],
-      "current_block": null
+      "current_block": null,
+      "own_fresh_float20_precision_verified": true,
+      "gate_cases_passed": [
+        "extremes",
+        "rounding"
+      ],
+      "current_gate_case": "layer_01",
+      "checkpoint": "CONTEXT_CHECKPOINT_20261116_P80_FINAL_NETLIST.md"
     },
     "p80_resource_observation": {
       "observed_at": "2026-11-16T07:44:10+08:00",
@@ -6293,6 +6300,33 @@
       "path": "handoff/team/evidence/P80_FIXED12_SCHEDULE_OBSERVATION_20261116.json",
       "source_summary_sha256": "43e9ec58048d24ab8ab7d505723f7360b1e7e1e6eeaf5d76c81134cef34222c8",
       "no_new_simulation": true
+    },
+    "p80_own_precision": {
+      "schema": "p80-displayed-fresh-first20-precision-v1",
+      "observed_at": "2026-11-16T08:53:24+08:00",
+      "run": "/tmp/s4_21usr_p80_20261116_0315/light-light126-p80-1023646/runs/p80_finish05_precision/p80_precision",
+      "summary_sha256": "d7fca6e57d2e879b42c89c4e4ab09e7d82aeda1ed8a293267e2a1bf840303f31",
+      "status": "own_P80_ASIC240_and_same_data_fresh_FLOAT_precision_verified",
+      "samples": 20,
+      "tasks": 240,
+      "outputs": 6082560,
+      "maximum_layer_nrmse_percent": 0.20198143836753799,
+      "maximum_task_nrmse_percent": 0.20953408931848963,
+      "quantization_clipping_count": {
+        "x": 0,
+        "w": 0,
+        "b": 0
+      },
+      "saturation_count": 0,
+      "fresh_float_reference_verified": true,
+      "own_P80_batch_joined": true,
+      "original_float_members_recovered_and_verified": true,
+      "original_float_zip_container_verified": false,
+      "float_archive_sha256": "5df11251821d2d36e85e07c8a171195d9d2ed2d4084a979519d23f6df7d683e2",
+      "own_batch_summary_sha256": "36953e487c757a9980c4ac33760b7a8f65c6f61209e6b2582a8342b582d7e687",
+      "official600_verified": false,
+      "stage_accepted": false,
+      "scope": "Own first20 real ASIC/E203 results joined with newly recomputed same-data FLOAT references. Not final PPA or official precision acceptance."
     }
   }
 }
