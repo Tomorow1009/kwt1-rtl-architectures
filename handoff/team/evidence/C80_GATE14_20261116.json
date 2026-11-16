@@ -1,0 +1,18 @@
+{
+  "schema": "c80-final-netlist-gate14-observation-v1",
+  "observed_at": "2026-11-16T16:38:20+08:00",
+  "run": "\\tmp\\s4_21usr_c80_20261116_1245\\light-light126-c80-74f3ae7\\runs\\c80_finish02_gate\\c80_gate",
+  "summary_sha256": "4c57b9d0df63dc3bcc081a095eb1eabbf0c383069d4b666582702fd6ab34f8cd",
+  "summary_matches_original_queue_reference": true,
+  "status": "passed",
+  "cases": 14,
+  "outputs": 354816,
+  "fixed12_total_cycles": 847238,
+  "sdf_annotated": false,
+  "total_checked": false,
+  "internal_total_observable": false,
+  "scope": "Own final mapped netlist, actual E203, output result/saturation/coordinates and complete task boundary; no SDF",
+  "source_modified": false,
+  "own_saif_completed_at_observation": 0,
+  "stage_accepted": false
+}

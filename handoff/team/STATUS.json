@@ -6874,8 +6874,8 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "a8ef315",
-      "last_server_observed_at": "2026-11-16T16:24:28+08:00",
+      "latest_pushed_commit": "5184258",
+      "last_server_observed_at": "2026-11-16T16:38:20+08:00",
       "export_review_prepared": true,
       "export_review_deployed": true,
       "export_chain_tests": 10,
@@ -6904,8 +6904,8 @@
       "batch_totals_checked": 6082560,
       "batch_failures": 0,
       "source_result_modified": false,
-      "readonly_watcher_pid": 40322,
-      "readonly_watcher_expected_end": "2026-11-16T15:48:35+08:00",
+      "readonly_watcher_pid": 64504,
+      "readonly_watcher_expected_end": "2026-11-16T16:40:39+08:00",
       "copy_launcher_prepared": true,
       "copy_launcher_deployed": true,
       "copy_started": false,
@@ -6935,14 +6935,21 @@
       "precision_evidence": "handoff/team/evidence/C80_FIRST20_PRECISION_20261116.json",
       "export_review_control": "\\tmp\\s4_21usr_c80_20261116_1245\\c80_export_review02\\state.json",
       "finish_queue": "\\tmp\\s4_21usr_c80_20261116_1245\\light-light126-c80-74f3ae7\\runs\\c80_finish02",
-      "finish_stage": "gate",
+      "finish_stage": "saif",
       "finish_completed": [
-        "structure"
+        "structure",
+        "gate"
       ],
       "precision_hash_asserted": true,
       "cleanup_hash_asserted": true,
       "gate_child_last": 62530,
-      "export_review_source_sha256": "4c001bb4603a52b3c6f24d95566442bc59c48ee9709e37cbd224b0982331048a"
+      "export_review_source_sha256": "4c001bb4603a52b3c6f24d95566442bc59c48ee9709e37cbd224b0982331048a",
+      "gate14_passed": true,
+      "gate14_outputs": 354816,
+      "gate14_evidence": "handoff/team/evidence/C80_GATE14_20261116.json",
+      "gate14_summary_sha256": "4c57b9d0df63dc3bcc081a095eb1eabbf0c383069d4b666582702fd6ab34f8cd",
+      "gate14_fixed12_cycles": 847238,
+      "saif_layers_completed": 0
     }
   }
 }
