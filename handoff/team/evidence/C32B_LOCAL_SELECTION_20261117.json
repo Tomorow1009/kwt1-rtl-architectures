@@ -1,0 +1,169 @@
+{
+  "schema": "c32-cache-local-feasibility-v1",
+  "scope": "Identical local pin-mock DMA harness; no original mem_fab, E203 or vendor SRAM",
+  "c32_a_fixed12_total_cycles": 725798,
+  "c32_b_fixed12_total_cycles": 726236,
+  "c32_a_fixed12_mean_cycles": 60483.166666666664,
+  "c32_b_fixed12_mean_cycles": 60519.666666666664,
+  "throughput_change_percent": -0.06031097329243229,
+  "candidate_meets_local_nondecreasing_throughput": false,
+  "recommend_c32_b_for_server_qualification": false,
+  "own_local14_outputs_and_totals": 354816,
+  "identical_common_source_files": 18,
+  "c32_b_asic_verified": false,
+  "c32_b_area_verified": false,
+  "c32_b_power_verified": false,
+  "c32_b_stage_accepted": false,
+  "decision": "Retain frozen C32-A cache for G32; compact candidate not promoted",
+  "cases": [
+    {
+      "case": "layer_01",
+      "c32_a_cycles": 60581,
+      "c32_b_cycles": 60585,
+      "change_cycles": 4,
+      "encoded_sha256": "f9333daf52ea36b7a6ff07dcb2a96c2da8a7edb7f00c0eb6de221e026bf58e40",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3000
+    },
+    {
+      "case": "layer_02",
+      "c32_a_cycles": 60555,
+      "c32_b_cycles": 60550,
+      "change_cycles": -5,
+      "encoded_sha256": "1453662781d02a109fc70d9cdbdafa47b267ec5d734cc6bf62d13211fd388c97",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 2997
+    },
+    {
+      "case": "layer_03",
+      "c32_a_cycles": 60535,
+      "c32_b_cycles": 60532,
+      "change_cycles": -3,
+      "encoded_sha256": "3ff11331a0b01c09fe9eb091347c79511fbce7500be85ac3d73ff7f542651566",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3005
+    },
+    {
+      "case": "layer_04",
+      "c32_a_cycles": 60429,
+      "c32_b_cycles": 60480,
+      "change_cycles": 51,
+      "encoded_sha256": "47ea9c8b2cc61fe877f43dda34ee83f2c6f9beb7c2f23058d9ca5bf90a43fab6",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3002
+    },
+    {
+      "case": "layer_05",
+      "c32_a_cycles": 60415,
+      "c32_b_cycles": 60458,
+      "change_cycles": 43,
+      "encoded_sha256": "7818b4eca52e7c78fdff965b47d2dd0028c18c627d353d885b4b0264487e8c31",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3009
+    },
+    {
+      "case": "layer_06",
+      "c32_a_cycles": 60319,
+      "c32_b_cycles": 60393,
+      "change_cycles": 74,
+      "encoded_sha256": "616c4602d6ef4cb20a81dc5ae59dc2189dd9293d8526962e7dde9a691adeaaa8",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3000
+    },
+    {
+      "case": "layer_07",
+      "c32_a_cycles": 60290,
+      "c32_b_cycles": 60361,
+      "change_cycles": 71,
+      "encoded_sha256": "6416e0fee56a529cd0b1d443641a550ceb6886451b2d5cd6104c581f4fbedc2a",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3001
+    },
+    {
+      "case": "layer_08",
+      "c32_a_cycles": 60279,
+      "c32_b_cycles": 60346,
+      "change_cycles": 67,
+      "encoded_sha256": "2d844e0c9f3d9d1fca5f3c445cb5e7ce8f7790407959313a26a3b83dfaa2548c",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 2996
+    },
+    {
+      "case": "layer_09",
+      "c32_a_cycles": 60296,
+      "c32_b_cycles": 60367,
+      "change_cycles": 71,
+      "encoded_sha256": "f98f518649ce6307f6b169e2d50772e4b13abe2114cea7667490dc623d21e62a",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3007
+    },
+    {
+      "case": "layer_10",
+      "c32_a_cycles": 60325,
+      "c32_b_cycles": 60379,
+      "change_cycles": 54,
+      "encoded_sha256": "ee0a22d7cfd12c2a54b1f4182fed2fa25ae8211a6a6b3910844d28b144ed40c6",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3007
+    },
+    {
+      "case": "layer_11",
+      "c32_a_cycles": 60633,
+      "c32_b_cycles": 60632,
+      "change_cycles": -1,
+      "encoded_sha256": "31e7d989ed1c7514fc18158a925c4fef5b28e9d1be73a21a05f8740d5e0e1993",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3010
+    },
+    {
+      "case": "layer_12",
+      "c32_a_cycles": 61141,
+      "c32_b_cycles": 61153,
+      "change_cycles": 12,
+      "encoded_sha256": "b44f5ca7bb42f7f2763269739b9cac06c97e6d5c131b8a25114120a2b6a4e426",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3007
+    },
+    {
+      "case": "extremes",
+      "c32_a_cycles": 56854,
+      "c32_b_cycles": 59706,
+      "change_cycles": 2852,
+      "encoded_sha256": "7c5ee4d10e473619c87ac202a3d2ac4237e134af189de65b8e95c31922b48574",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 2999
+    },
+    {
+      "case": "rounding",
+      "c32_a_cycles": 56769,
+      "c32_b_cycles": 59660,
+      "change_cycles": 2891,
+      "encoded_sha256": "5cc067d76973050171ed7a01e3a48848baac1e46be44adb5f1587c99b481f974",
+      "a_x_write_conflicts": 0,
+      "b_x_write_conflicts": 3038
+    }
+  ],
+  "input_sha256": {
+    "local_runs\\c32_datapath_20261116_194814_422485\\summary.json": "55175a5b9955748643c1389f176e9addcfd7d2ca4585cdb821982822c69642a9",
+    "local_runs\\c32b_datapath_20261117_072930_759016\\summary.json": "1d1f0e0f4bdf7f98f7bf4ab018f432967aa571d5262adf7b9ad1543459c17261"
+  },
+  "source_sha256": "325fe555e15b7baf8212c1f3b47bdb9033d90fb75c776e89af31ca20aafc99b7",
+  "observed_at": "2026-11-17T07:34:52.750301+08:00",
+  "candidate_run": "E:\\fpga_race-two\\kwt1-c32-g32-20261115\\local_runs\\c32b_datapath_20261117_072930_759016",
+  "candidate_summary_sha256": "1d1f0e0f4bdf7f98f7bf4ab018f432967aa571d5262adf7b9ad1543459c17261",
+  "comparison_run": "E:\\fpga_race-two\\kwt1-c32-g32-20261115\\local_runs\\c32_cache_compare_20261117_0734",
+  "comparison_sha256": "fc883354fa355f575618e07e6251b8c8792e10764009de36adce7ac62a825c2f",
+  "formal_server_run_started": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "incomplete_attempt": {
+    "run": "local_runs/c32b_datapath_20261117_072828_668235",
+    "reason": "New runner mistakenly renamed existing codec32.hex to codec32b.hex; fixed runner only, no input alteration"
+  },
+  "candidate_sources": {
+    "workspaces\\arch03\\rtl\\arch03_c32b_linear16x2.sv": "96b0153cb2d9d6961502703a3b16c9cc60b96da59cb48a1ddf61223514c6e78f",
+    "workspaces\\arch03\\rtl\\arch03_c32b_accel.sv": "5a333c34461efbdbf11158a8ca5d2d0a212545cf47244c82c6fd8b95f3bceb0b",
+    "workspaces\\arch03\\tb\\tb_arch03_c32b_datapath.sv": "c7de7c7d4a4fb35c339b8243b5c85c90776fd66df40ef6a7d72d53945945ae39",
+    "workspaces\\arch03\\scripts\\local_c32b_datapath_verify.py": "1737c702ad9d352bb146a2ceb349bfbf61052bae084b2aa6d3976fa7a4d5ce53"
+  }
+}

@@ -7698,6 +7698,20 @@
       "task_mode_timing_reviewed": true,
       "prelayout_system_power_estimate_reviewed": true,
       "next_action": "Freeze C32-A; evaluate compact X cache without reducing complete throughput, then G32"
+    },
+    "c32_b_evaluation": {
+      "status": "local14_passed_not_promoted_due_to_throughput",
+      "evidence": "handoff/team/evidence/C32B_LOCAL_SELECTION_20261117.json",
+      "formal_server_started": false,
+      "stage_accepted": false,
+      "throughput_change_percent": -0.06031097329243229
+    },
+    "g32_development": {
+      "status": "implementation_starting_from_frozen_C32_A",
+      "baseline_tag": "arch03-c32a-repair03-20261117-0725",
+      "cache": "60_X_128x16_plus32_W_128x16",
+      "own_hardware_verified": false,
+      "server_started": false
     }
   }
 }
