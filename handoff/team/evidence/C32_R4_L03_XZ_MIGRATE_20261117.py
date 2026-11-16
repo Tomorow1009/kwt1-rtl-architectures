@@ -25,13 +25,13 @@ PROJECT=Path('/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-u
 BASE=PROJECT/'bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/r4_waves_lossless_archive02'
 SOURCE=BASE/'layer_03.vcd.gz'
 STAGE=Path('/tmp/s4_21usr_r4_l03_xzstage_20261117')
-CONTROL=Path('/tmp/s4_21usr_r4_l03_xzmigrate_20261117')
+CONTROL=Path('/tmp/s4_21usr_r4_l03_xzmigrate02_20261117')
 DEST=PROJECT/'backups/r4-l03-xz-20261117'
 CHUNK=4*1024**2
 SESSION_HELPERS={
     10519:('gnome-keyring-d','gnome-keyring-daemon','15432'),
     79103:('gnome-pty-helpe','gnome-pty-helper','139476165'),
-    202972:('gnome-pty-helpe','gnome-pty-helper','197856763')}
+    202972:('gnome-pty-helpe','gnome-pty-helper','130547063')}
 
 
 def need(ok,message):

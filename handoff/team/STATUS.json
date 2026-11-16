@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T06:08:37.239001+08:00",
+      "last_observed_at": "2026-11-17T06:28:57.987328+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7266,7 +7266,7 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 140573,
+      "current_child_pid": 150238,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
@@ -7279,7 +7279,7 @@
       "saif_completed_layers": 12,
       "saif_l01_bytes": null,
       "saif_l01_cpu_seconds": null,
-      "current_child_state": "exited",
+      "current_child_state": "running",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
       "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
@@ -7289,8 +7289,8 @@
       "saif_summary_sha256": "5a8e6da88e10481f172b9e64b0c458bd8773a06ea6072bd49315ce956f5e07ba",
       "timing_drc_diagnostics_evidence": "handoff/team/evidence/C32_TIMING_DRC_DIAGNOSTICS_20261117.json",
       "structure_review_evidence": "handoff/team/evidence/C32_STRUCTURE_REVIEW_20261117.json",
-      "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_20261117.json",
-      "power_layers_completed": 0,
+      "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_REPAIR03_20261117.json",
+      "power_layers_completed": 7,
       "finish03_exited": true,
       "finish03_state_sha256": "6b11814712c7b5580f2dc47c8f3c743736e77cdc2dd1fbe66ba9f2a53b90f09c",
       "power12_evidence": null,
@@ -7464,7 +7464,7 @@
       "repair_finish04": {
         "pid": 101802,
         "status": "running",
-        "stage": "power_layer_01",
+        "stage": "power_layer_08",
         "started": "2026-11-17T04:44:20.534853",
         "driver_sha256": "69d8a2cfa69b692953ce1dbddea77f491f85d288cd5a077ccaa5e4d0bc3ceeac",
         "new_gate_power_required": true,
@@ -7474,14 +7474,21 @@
           "gate",
           "saif",
           "timing_audit",
-          "drc_audit"
+          "drc_audit",
+          "power_layer_01",
+          "power_layer_02",
+          "power_layer_03",
+          "power_layer_04",
+          "power_layer_05",
+          "power_layer_06",
+          "power_layer_07"
         ],
         "gate14_passed": true,
         "checked_gate_outputs": 354816,
         "gate_cycles_match_own_ASIC": true,
         "gate_summary_sha256": "8eaea9b1318f8f8031c3d4f160283140842896b68cb73bbfd93f719b81ed09a9",
         "saif_completed_layers": 12,
-        "new_power_completed_layers": 0,
+        "new_power_completed_layers": 7,
         "saif_completed_cases": [
           "layer_01",
           "layer_02",
@@ -7580,18 +7587,19 @@
         "constraint_extraction_complete": true,
         "netlist_sha256": "3c116d5a026b7e832030cd0c5a8def5a633ade9eaefb4efd1080851acc4bbd2c",
         "qualification": "failed_original_max_transition_326",
-        "inherited_by_repair03": false
+        "inherited_by_repair03": false,
+        "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_20261117.json"
       },
       "current_operations_source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
       "storage_preparation": "handoff/team/evidence/C32_STORAGE_PREPARATION_20261117.json",
       "storage_preparation_state": {
         "pid": 128419,
-        "status": "compressing_xz",
-        "raw_bytes_processed": 8858370048,
+        "status": "fully_verified_staging_original_retained",
+        "raw_bytes_processed": 12584787471,
         "source_modified": false,
         "source_deleted": false,
-        "full_xz_readback_complete": false,
-        "migration_tool_deployed": false,
+        "full_xz_readback_complete": true,
+        "migration_tool_deployed": true,
         "migration_started": false,
         "visibility_tests_passed": 3,
         "known_protected_session_helpers": [
@@ -7599,7 +7607,14 @@
           79103,
           202972
         ],
-        "all_descriptors_observable": false
+        "all_descriptors_observable": false,
+        "worker_exited": true,
+        "xz_bytes": 2780943668,
+        "potential_saved_bytes": 4881880026,
+        "staging_finished": "2026-11-17T06:21:36.057712",
+        "stage_sha256": "632b0460df8d6a78e411aebae634ffe1ed7efd9cc1901b4fe165543b03d22e05",
+        "migration02_script_sha256": "00a4db3982d05a786aacc80510804b2372082faff8b35b23b9364541dcb67d89",
+        "helper_start_ticks_transcription_corrected": true
       }
     }
   }
