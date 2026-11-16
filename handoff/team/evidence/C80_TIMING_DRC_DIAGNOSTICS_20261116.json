@@ -1,0 +1,22 @@
+{
+  "schema": "c80-own-timing-drc-diagnostics-observation-v1",
+  "observed_at": "2026-11-16T17:54:12+08:00",
+  "queue": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_finish02",
+  "timing_summary_sha256": "ce3becb0ce035f8d6a3dcd76b3a4e4c842cc2878e861b1269458aec5a6721dc3",
+  "drc_summary_sha256": "7dbffda805f06e02bffb2c81bd63258b4eb9306642067ce8ae08d20a16ccf6df",
+  "both_hashes_asserted_against_original_queue_and_files": true,
+  "constraint_report_clear": true,
+  "driver_query_complete": true,
+  "frozen_synthesis_interfaces_crosschecked": true,
+  "alias_binding_used": false,
+  "high_fanout_threshold": 1000,
+  "high_fanout_count": 3,
+  "high_fanout_nets": [
+    "u_e203_subsys_top/core_csr_clk",
+    "u_e203_subsys_top/hfclk",
+    "u_e203_subsys_top/u_sirv_aon_top/crossing_clock"
+  ],
+  "strict_timing_verified": false,
+  "physical_signoff": false,
+  "note": "Completed read-only mapped diagnostics. Declared task-mode timing and model conclusions follow the complete own power and connection review; these diagnostics alone do not waive high-fanout assumptions."
+}

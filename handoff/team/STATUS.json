@@ -6873,8 +6873,8 @@
       "fixed12_actual_transfer_transactions": 384174,
       "fixed12_four_segments_verified": true,
       "followup_import_sha256": "508d4f70bbb8f886a59533bf09727ddd4122bcf5e2276336e062d0c62893acb2",
-      "latest_pushed_commit": "c8c730d",
-      "last_server_observed_at": "2026-11-16T17:41:31+08:00",
+      "latest_pushed_commit": "9a045f2",
+      "last_server_observed_at": "2026-11-16T18:03:01+08:00",
       "export_review_prepared": true,
       "export_review_deployed": true,
       "export_chain_tests": 10,
@@ -6934,10 +6934,17 @@
       "precision_evidence": "handoff/team/evidence/C80_FIRST20_PRECISION_20261116.json",
       "export_review_control": "/tmp/s4_21usr_c80_20261116_1245/c80_export_review02/state.json",
       "finish_queue": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_finish02",
-      "finish_stage": "saif",
+      "finish_stage": "power_layer_05",
       "finish_completed": [
         "structure",
-        "gate"
+        "gate",
+        "saif",
+        "timing_audit",
+        "drc_audit",
+        "power_layer_01",
+        "power_layer_02",
+        "power_layer_03",
+        "power_layer_04"
       ],
       "precision_hash_asserted": true,
       "cleanup_hash_asserted": true,
@@ -6948,15 +6955,15 @@
       "gate14_evidence": "handoff/team/evidence/C80_GATE14_20261116.json",
       "gate14_summary_sha256": "4c57b9d0df63dc3bcc081a095eb1eabbf0c383069d4b666582702fd6ab34f8cd",
       "gate14_fixed12_cycles": 847238,
-      "saif_layers_completed": 10,
+      "saif_layers_completed": 12,
       "saif_progress_evidence": "handoff/team/evidence/C80_SAIF_PROGRESS_20261116.json",
       "old_followup_started_at_record": "2026-11-16T14:12:34.038526+08:00",
       "copy02_tools_evidence": "handoff/team/evidence/C80_COPY02_TOOL_READY_20261116.json",
       "copy02_deployed": true,
       "saif_completed_bytes_last_observation": {
-        "at": "2026-11-16T17:39:42+08:00",
-        "layers": 10,
-        "bytes": 975565187
+        "at": "2026-11-16T17:50:37+08:00",
+        "layers": 12,
+        "bytes": 1170767047
       },
       "copy03_deployed": true,
       "copy03_tools_evidence": "handoff/team/evidence/C80_COPY03_TOOL_READY_20261116.json",
@@ -6965,7 +6972,13 @@
       "b0_cleanup16_started": false,
       "archive_capacity_tests": 10,
       "b0_cleanup16_deployed": true,
-      "b0_cleanup16_tools_evidence": "handoff/team/evidence/C80_CLEANUP16_TOOL_READY_20261116.json"
+      "b0_cleanup16_tools_evidence": "handoff/team/evidence/C80_CLEANUP16_TOOL_READY_20261116.json",
+      "saif12_passed": true,
+      "saif12_evidence": "handoff/team/evidence/C80_SAIF12_20261116.json",
+      "saif_summary_sha256": "29fbb12f7d743fffbc4ee8e417b5d7fff8787b10a53e3f3079edc796270bbcdd",
+      "timing_drc_diagnostics_evidence": "handoff/team/evidence/C80_TIMING_DRC_DIAGNOSTICS_20261116.json",
+      "power_layers_completed": 4,
+      "power_l01_evidence": "handoff/team/evidence/C80_POWER_L01_20261116.json"
     }
   }
 }

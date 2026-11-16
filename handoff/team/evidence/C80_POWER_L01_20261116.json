@@ -1,0 +1,25 @@
+{
+  "schema": "c80-own-first-layer-power-observation-v1",
+  "observed_at": "2026-11-16T17:56:24+08:00",
+  "case": "layer_01",
+  "run": "/tmp/s4_21usr_c80_20261116_1245/light-light126-c80-74f3ae7/runs/c80_finish02_power_layer_01/c80_power",
+  "summary_sha256": "9974e9a7d2f906d3e216ccebad59370bd15d9bd269e2f2fd4cb531d7f0ed6ff6",
+  "summary_and_unrounded_numbers_asserted_on_server": true,
+  "original_queue_reference_matched": true,
+  "period_ns": "6.666666000000",
+  "low_frequency_period_ns": "66.000000000000",
+  "duration_ns": "487906.617876",
+  "average_power_w": "5.51722385e-02",
+  "energy_j": "0.0000269189002871830354260",
+  "reported_power_w": {
+    "switching": "5.71624516e-03",
+    "internal": "4.22567539e-02",
+    "leakage": "7.19923805e-03",
+    "total": "5.51722385e-02"
+  },
+  "whole_soc_pre_layout_estimate": true,
+  "twelve_layer_aggregate": false,
+  "system_power_verified": false,
+  "stage_accepted": false,
+  "note": "One completed layer only. Do not compare this layer with another configuration's twelve-layer mean or use it as the final C80 weighted mean. Unknown activity/model review remains separate."
+}
