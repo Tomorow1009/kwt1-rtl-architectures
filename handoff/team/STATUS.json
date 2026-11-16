@@ -7162,7 +7162,7 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T05:47:51.011287+08:00",
+      "last_observed_at": "2026-11-17T06:08:37.239001+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
@@ -7184,7 +7184,7 @@
       "synthesis_child_status": "exited",
       "synthesis_child_previous_pid_transcription_wrong": true,
       "accelerator_block_mapped_seconds": 1139.53,
-      "runtime_free_gib": 69.52,
+      "runtime_free_gib": 57.12745666503906,
       "status_readonly_tool_deployed": true,
       "synthesis_evidence": "handoff/team/evidence/C32_EQUIVALENT_REPAIR03_20261117.json",
       "project_conservative_area_mm2": 0.7224077334997787,
@@ -7266,27 +7266,27 @@
         "followup_finish03_running": true
       },
       "current_gate_case": null,
-      "current_child_pid": 129728,
+      "current_child_pid": 140573,
       "mapped_numeric_structure_counts": {
         "pe": 32,
         "array": 1,
         "requantize": 32
       },
-      "current_activity_case": "layer_09",
+      "current_activity_case": null,
       "gate14_passed": true,
       "gate14_evidence": "handoff/team/evidence/C32_GATE14_REPAIR03_20261117.json",
       "all14_gate_cycles_equal_ASIC": true,
-      "saif_completed_layers": 8,
+      "saif_completed_layers": 12,
       "saif_l01_bytes": null,
       "saif_l01_cpu_seconds": null,
-      "current_child_state": "running",
+      "current_child_state": "exited",
       "area_breakdown_evidence": "handoff/team/evidence/C32_AREA_BREAKDOWN_20261117.json",
-      "saif_completed_bytes": null,
+      "saif_completed_bytes": 761444514,
       "shared_free_bytes": 1048576,
       "evidence_index": "workspaces/arch03/C32_EVIDENCE_INDEX_20261117.md",
-      "saif12_passed": false,
-      "saif12_evidence": null,
-      "saif_summary_sha256": null,
+      "saif12_passed": true,
+      "saif12_evidence": "handoff/team/evidence/C32_SAIF12_REPAIR03_20261117.json",
+      "saif_summary_sha256": "5a8e6da88e10481f172b9e64b0c458bd8773a06ea6072bd49315ce956f5e07ba",
       "timing_drc_diagnostics_evidence": "handoff/team/evidence/C32_TIMING_DRC_DIAGNOSTICS_20261117.json",
       "structure_review_evidence": "handoff/team/evidence/C32_STRUCTURE_REVIEW_20261117.json",
       "power_l01_evidence": "handoff/team/evidence/C32_POWER_L01_20261117.json",
@@ -7464,20 +7464,23 @@
       "repair_finish04": {
         "pid": 101802,
         "status": "running",
-        "stage": "saif",
+        "stage": "power_layer_01",
         "started": "2026-11-17T04:44:20.534853",
         "driver_sha256": "69d8a2cfa69b692953ce1dbddea77f491f85d288cd5a077ccaa5e4d0bc3ceeac",
         "new_gate_power_required": true,
         "original_lock_unchanged": true,
         "completed": [
           "structure",
-          "gate"
+          "gate",
+          "saif",
+          "timing_audit",
+          "drc_audit"
         ],
         "gate14_passed": true,
         "checked_gate_outputs": 354816,
         "gate_cycles_match_own_ASIC": true,
         "gate_summary_sha256": "8eaea9b1318f8f8031c3d4f160283140842896b68cb73bbfd93f719b81ed09a9",
-        "saif_completed_layers": 8,
+        "saif_completed_layers": 12,
         "new_power_completed_layers": 0,
         "saif_completed_cases": [
           "layer_01",
@@ -7487,8 +7490,14 @@
           "layer_05",
           "layer_06",
           "layer_07",
-          "layer_08"
-        ]
+          "layer_08",
+          "layer_09",
+          "layer_10",
+          "layer_11",
+          "layer_12"
+        ],
+        "saif12_passed": true,
+        "saif_summary_sha256": "5a8e6da88e10481f172b9e64b0c458bd8773a06ea6072bd49315ce956f5e07ba"
       },
       "recovery33": {
         "pid": 97746,
@@ -7521,13 +7530,14 @@
         "status": "waiting_finish04",
         "payload_sha256": "4005586b999e322779099eddf53d9de196fd1362dd992429748a2d1e45832441",
         "waiter_sha256": "6afee3001cde7f6e4ffe71ff01737173f014e6fd9c44a39bf4d3f78dcf65e777",
-        "exporter_sha256": "a2aaef702e6c241f1bc12da41905c0e4434d5a8c803c6299958f5fd6b28bcebc"
+        "exporter_sha256": "a2aaef702e6c241f1bc12da41905c0e4434d5a8c803c6299958f5fd6b28bcebc",
+        "last_command_identity_matched_at": "2026-11-17T06:08:37.239001+08:00"
       },
       "repair_status_reader": {
         "path": "/tmp/s4_21usr_c32_20261116_2010/c32_repair04_status.py",
         "sha256": "6bf482079317c2363ecbd77e89ff976d56a28dc2e652aa6725d5c5c732388992"
       },
-      "runtime_free_bytes": 63789752320,
+      "runtime_free_bytes": 61340139520,
       "active_evidence_scope": {
         "mapping": "repair03",
         "queue": "c32_finish_repair04",
@@ -7573,7 +7583,24 @@
         "inherited_by_repair03": false
       },
       "current_operations_source_commit": "58288044bfbbe344fafc7550647bfc5c29eef0a7",
-      "storage_preparation": "handoff/team/evidence/C32_STORAGE_PREPARATION_20261117.json"
+      "storage_preparation": "handoff/team/evidence/C32_STORAGE_PREPARATION_20261117.json",
+      "storage_preparation_state": {
+        "pid": 128419,
+        "status": "compressing_xz",
+        "raw_bytes_processed": 8858370048,
+        "source_modified": false,
+        "source_deleted": false,
+        "full_xz_readback_complete": false,
+        "migration_tool_deployed": false,
+        "migration_started": false,
+        "visibility_tests_passed": 3,
+        "known_protected_session_helpers": [
+          10519,
+          79103,
+          202972
+        ],
+        "all_descriptors_observable": false
+      }
     }
   }
 }
