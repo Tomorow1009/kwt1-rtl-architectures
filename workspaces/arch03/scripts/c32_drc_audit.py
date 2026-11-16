@@ -14,6 +14,8 @@ from c32_gate import verify_synthesis, probe_script, parse_probe, PROBE_MARKER
 from soc_power import power_databases, tcl_path
 from soc_synth import require_tool_marker
 from c32_paths import allowed_run
+import c32_gate as gate_dependency
+import c32_paths as paths_dependency
 
 SCHEMA = 'c32-readonly-drc-audit-v1'
 MARKER = 'C32_DRC_QUERY_COMPLETE netlist_modified=false'
@@ -31,14 +33,15 @@ def constraints_inventory(text):
     rows = []
     unparsed = []
     pending = None
+    parent_net = None
     for line_number, line in enumerate(text.splitlines(), 1):
         stripped = line.strip()
         first = stripped.split(' ', 1)[0].split('\t', 1)[0]
         if first in SECTIONS:
-            section, pending = first, None
+            section, pending, parent_net = first, None, None
             continue
         if re.fullmatch(r'(?:max_|min_|clock_gating_|multiple_port)[A-Za-z_/]+', first):
-            section, pending = None, None
+            section, pending, parent_net = None, None, None
             continue
         if '(VIOLATED)' in line:
             left = line.split('(VIOLATED)', 1)[0].strip()
@@ -48,12 +51,16 @@ def constraints_inventory(text):
                 numeric.insert(0, fields.pop())
             target = fields[0] if len(fields) == 1 else None
             wrapped = False
+            query_target = target
+            object_kind = 'object'
             if not fields and pending:
-                target, wrapped = pending, True
+                target, object_kind, query_target = pending
+                wrapped = True
             parsed = bool(section and target and numeric and line.count('(VIOLATED)') == 1
                           and not line.split('(VIOLATED)', 1)[1].strip())
             row = dict(line=line_number, section=section, target=target if parsed else None,
-                       numbers=numeric, raw=line, parsed=parsed, wrapped=wrapped)
+                       numbers=numeric, raw=line, parsed=parsed, wrapped=wrapped,
+                       object_kind=object_kind, query_target=query_target if parsed else None)
             rows.append(row)
             if not parsed:
                 unparsed.append(dict(line=line_number, raw=line, reason='Unrecognized violation row'))
@@ -61,16 +68,28 @@ def constraints_inventory(text):
             continue
         if re.search(r'\bVIOLATED\b', line) and NO_VIOLATIONS not in line:
             unparsed.append(dict(line=line_number, raw=line, reason='Unrecognized violation marker'))
-        # A wrapped object is only the immediately preceding single token.
-        pending = stripped if (len(stripped.split()) == 1 and '/' in stripped and
-                               not set(stripped) <= {'-', '*'}) else None
+        # DC also prints a decorated net header followed by PIN subrecords.
+        # Keep every violation, but query its parent net once. Only these exact
+        # forms are recognized; blank/unknown continuations still fail closed.
+        pin = re.fullmatch(r'PIN\s*:\s*(\S+)', stripped)
+        decorated = re.fullmatch(r'(\S+)\s+\(dont_touch\)', stripped)
+        if pin and '/' in pin.group(1):
+            pending = (pin.group(1), 'pin', parent_net or pin.group(1))
+        elif decorated and '/' in decorated.group(1) and section in NET_SECTIONS:
+            parent_net = decorated.group(1)
+            pending = (parent_net, 'net', parent_net)
+        elif len(stripped.split()) == 1 and '/' in stripped and not set(stripped) <= {'-', '*'}:
+            pending = (stripped, 'object', stripped)
+            parent_net = None
+        else:
+            pending = None
     clear_markers = text.count(NO_VIOLATIONS)
     if clear_markers and (rows or unparsed):
         raise ValueError('Constraint report contradicts its no-violations marker')
     clear = clear_markers == 1 and not rows and not unparsed
     if not clear and not rows and not unparsed:
         unparsed.append(dict(line=None, raw='', reason='Missing explicit clean marker or violation rows'))
-    targets = sorted({r['target'] for r in rows if r['parsed'] and r['section'] in NET_SECTIONS})
+    targets = sorted({r['query_target'] for r in rows if r['parsed'] and r['section'] in NET_SECTIONS})
     return dict(explicit_no_violations=clear, violation_record_count=len(rows),
                 by_section=dict(Counter(r['section'] or 'unknown' for r in rows)),
                 violations=rows, unparsed=unparsed, extraction_complete=not unparsed,
@@ -248,7 +267,7 @@ def audit(cfg, run, synthesis, expected_sha, call):
     dependency = dependency_identity(synthesis)
     before[dependency['path']] = dependency['sha256']
     before[dependency['bundle_manifest']] = dependency['bundle_manifest_sha256']
-    for path in power_databases(synthesis)+[Path(__file__), Path(__file__).with_name('c32_gate.py'), Path(__file__).with_name('c32_paths.py')]:
+    for path in power_databases(synthesis)+[Path(__file__), Path(gate_dependency.__file__), Path(paths_dependency.__file__)]:
         before[str(path.resolve())] = sha(path)
     inventory = constraints_inventory((synthesis/'constraints.rpt').read_text())
     save(run/'constraint_inventory.json', inventory)
