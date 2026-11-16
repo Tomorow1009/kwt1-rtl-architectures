@@ -30,7 +30,11 @@ def main():
     assert sha(BUNDLE/'manifest.json')==launch['manifest_sha256']
     pid=launch['pid'];expected=BUNDLE/'workspaces/arch03/scripts/c32_mapped_repair.py'
     while Path('/proc/%d'%pid).exists():
-        assert str(expected).encode()+b'\0' in (Path('/proc/%d'%pid)/'cmdline').read_bytes(), 'Repair PID identity changed'
+        try:command=(Path('/proc/%d'%pid)/'cmdline').read_bytes()
+        except (FileNotFoundError,ProcessLookupError):continue
+        if not command:
+            time.sleep(1);continue
+        assert str(expected).encode()+b'\0' in command, 'Repair PID identity changed'
         time.sleep(5)
     state=BUNDLE/'runs/c32_repair02/state.json'
     assert state.is_file(), 'Repair exited before creating its independent state'
