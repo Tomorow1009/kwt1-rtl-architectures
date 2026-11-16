@@ -1,4 +1,16 @@
-# C32-A服务器交接：竞争固件修复准备中
+# C32-A服务器交接：完整240执行结束，末尾核对中
+
+## 00:02 完整批量通过，precision继续
+
+11月17日00:01:34实际队列为running/precision，completed已包含soc/sequence/contention/synth/batch20。批量summary为passed，240任务6082560输出和total、failed0；平均70929.40833333334周期、最少64833、最多81861、名义150MHz折算2114.7786725510773task/s，宿主2424.0403541969135秒。此为240组，固定12仍按72179.3333周期报告。
+
+批量summary SHA `2b51abd8844c73e342487e0be3e69c3cccfa4528296ef01ba15f1dca22621e81`，目前来自可见终端分组显示，后继时再机器绑定。FLOAT20 progress为20条/240任务已重算，precision最终连接核对尚未退出。暂不启动finish。新报告 `workspaces/arch03/C32_PROGRESS_20261117.md`。此前本地更新脚本直接执行遇编码入口问题，使用read_text(UTF-8)+compile方式已成功；不是RTL/服务器失败，未改受测输入。
+
+## 23:58 压缩恢复后重新核对
+
+已重新读取AGENTS、计划、根交接、STATUS及本检查点；重新确认VNC窗口18874435。23:57:48 initial03父PID238916仍running/batch20，240/240、failed0、6082560输出及total。最后sample020/layer12子PID293758已退出；正在batch的原始capture末尾总核对。完整batch摘要与precision未完成，不提前运行finish。/tmp71.25GiB。最后GUI输入已退出、workspace3第一终端空闲。
+
+最新已push114680e。STATUS中的历史server_bundle/payload仍记录初始612失败包；current_server_bundle/current_server_manifest_sha256明确当前91135f6包，避免恢复时误用。所有清理19/20/22/23已完成，不重复。T80桌面/旧八路/冻结C80保持保护。
 
 ## 23:45 回归164/240；新版只读入口已部署
 

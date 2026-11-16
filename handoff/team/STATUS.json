@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T22:18:22.332466+08:00",
+      "updated_at": "2026-11-16T23:57:48+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Poll33837 recovery23 tool transfer, verify SHA, explicitly start exact578-file R4 generated-cache archive/cleanup/persistent copy and immediate recovered metadata launch. Never rerun completed22.",
+      "next": "Continue initial03 final capture audit and fresh first20 precision. Only after terminal success and owner exit, run the already deployed finish_from_initial03 tool with actual state SHA.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7139,7 +7139,7 @@
         "main_package_prepared": true,
         "recovery23_transferring": false
       },
-      "initial03_status": "running_batch20",
+      "initial03_status": "running_precision",
       "new_bundle_prepared": true,
       "new_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
       "new_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
@@ -7162,13 +7162,14 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-16T23:45:26+08:00",
+      "last_observed_at": "2026-11-17T00:01:34+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
         "sequence",
         "contention",
-        "synth"
+        "synth",
+        "batch20"
       ],
       "finish03_tool_deployed": true,
       "finish03_started": false,
@@ -7182,21 +7183,28 @@
       "synthesis_child_status": "exited",
       "synthesis_child_previous_pid_transcription_wrong": true,
       "accelerator_block_mapped_seconds": 1139.53,
-      "runtime_free_gib": 72.37,
+      "runtime_free_gib": 71.25,
       "status_readonly_tool_deployed": true,
       "synthesis_evidence": "handoff/team/evidence/C32_SYNTH_INITIAL_20261116.json",
       "project_conservative_area_mm2": 0.722402954997787,
       "setup_slack_ns": 5.24521e-05,
       "hold_slack_ns": 0.0010598,
       "batch20_progress": {
-        "status": "running",
-        "completed": 164,
+        "status": "passed",
+        "completed": 240,
         "failed": 0,
-        "checked_outputs": 4156416,
-        "checked_totals": 4156416,
-        "estimated_remaining_minutes_with_20percent_margin_rounded": 14.5
+        "checked_outputs": 6082560,
+        "checked_totals": 6082560,
+        "final_summary_verified": true,
+        "mean_task_cycles": 70929.40833333334,
+        "max_task_cycles": 81861
       },
-      "status_readonly_v2_deployed": true
+      "status_readonly_v2_deployed": true,
+      "current_tested_source_commit": "91135f61c97c980039793c6637d0a06888638df0",
+      "current_server_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
+      "current_server_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
+      "batch20_evidence": "handoff/team/evidence/C32_BATCH20_20261117.json",
+      "progress_report": "workspaces/arch03/C32_PROGRESS_20261117.md"
     }
   }
 }
