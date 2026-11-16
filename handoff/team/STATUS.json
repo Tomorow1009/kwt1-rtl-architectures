@@ -7041,7 +7041,7 @@
       "capability": "0x000b02bf",
       "encoding_layout": "0x00100006",
       "row_lanes": 2,
-      "updated_at": "2026-11-16T23:57:48+08:00",
+      "updated_at": "2026-11-17T00:16:00+08:00",
       "local14_passed": true,
       "local_latency2_prefetch_aba_tasks": 6,
       "local_sequence_fixture_passed": true,
@@ -7055,7 +7055,7 @@
         "own_active_eda": false,
         "cooperation_lock_present": false
       },
-      "next": "Continue initial03 final capture audit and fresh first20 precision. Only after terminal success and owner exit, run the already deployed finish_from_initial03 tool with actual state SHA.",
+      "next": "Finish GUI transfer26709, verify ops24 hashes, execute exact two archived B0 repair seed recovery24 and immediate finish02. Preserve finish01 failure; never repeat prior cleanups.",
       "source_commit": "61246bb2a21c56a9bfd871fd68de93028d79f5fd",
       "github_pushed": true,
       "transfer": {
@@ -7139,7 +7139,7 @@
         "main_package_prepared": true,
         "recovery23_transferring": false
       },
-      "initial03_status": "running_precision",
+      "initial03_status": "qualification_ready_gate_power_pending",
       "new_bundle_prepared": true,
       "new_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
       "new_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
@@ -7162,17 +7162,18 @@
       },
       "initial03_pid": 238916,
       "initial03_started": "2026-11-16T22:31:59.227004",
-      "last_observed_at": "2026-11-17T00:01:34+08:00",
+      "last_observed_at": "2026-11-17T00:10:57+08:00",
       "space_recovery23": "handoff/team/evidence/C32_SHARED_SPACE_RECOVERY23_20261116.json",
       "initial03_completed": [
         "soc",
         "sequence",
         "contention",
         "synth",
-        "batch20"
+        "batch20",
+        "precision"
       ],
       "finish03_tool_deployed": true,
-      "finish03_started": false,
+      "finish03_started": true,
       "contention_passed": true,
       "corrected_functional_evidence": "handoff/team/evidence/C32_ASIC_CORRECTED_20261116.json",
       "synthesis_phase": "complete",
@@ -7204,7 +7205,23 @@
       "current_server_bundle": "/tmp/s4_21usr_c32_20261116_2010/light-light126-c32-91135f6",
       "current_server_manifest_sha256": "d877234086f471acb3c7f4ea0c69bb280606d6bbb45fdd212e8bf30366b316c7",
       "batch20_evidence": "handoff/team/evidence/C32_BATCH20_20261117.json",
-      "progress_report": "workspaces/arch03/C32_PROGRESS_20261117.md"
+      "progress_report": "workspaces/arch03/C32_PROGRESS_20261117.md",
+      "initial03_exited": true,
+      "initial03_state_sha256": "37e1279f0c165b6fb50493c4d87edb2a994e159a90e22e48b92c41ef8ab500c0",
+      "precision20_passed": true,
+      "precision20_evidence": "handoff/team/evidence/C32_PRECISION20_20261117.json",
+      "finish01_status": "failed_ENOSPC_acquiring_lock_zero_children",
+      "finish01_pid": 297927,
+      "finish01_exited": true,
+      "finish01_state_sha256": "0c853c6c0bf5585437d49823d58f8c2527d05b28eb9cf11e491696acec5c58a6",
+      "recovery24": {
+        "prepared": true,
+        "server_executed": false,
+        "files": 2,
+        "bytes": 66052096,
+        "source_sha256": "d407efb9ff8244f6c5620736200705ae15c09e72985cb6cd08d899d5011c5dd5",
+        "gui_transfer_session": 26709
+      }
     }
   }
 }

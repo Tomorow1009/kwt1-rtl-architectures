@@ -25,5 +25,6 @@
   "system_power_verified": false,
   "protected_T80_modified": false,
   "old8_modified": false,
-  "evidence_transport": "Read-only visible VNC summary; digest to be machine-pinned at terminal handoff"
+  "evidence_transport": "Visible VNC observation, all three initial/batch/precision hashes machine-pinned at 2026-11-17T00:05:47+08:00",
+  "summary_sha256_machine_verified": true
 }
