@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T15:34:38.794122+08:00",
+  "updated": "2026-11-17T15:37:17.223709+08:00",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -7927,7 +7927,7 @@
   },
   "g32_full100_addendum": {
     "authorization": "User explicitly approved full100 regression",
-    "status": "first_launch_failed_shared_lock_ENOSPC_recovery_preparing",
+    "status": "running_batch100",
     "hardware_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
     "frozen_tag": "arch03-g32-final-20261117",
     "samples": 100,
@@ -7941,7 +7941,12 @@
     "tooling_commit": "398a58b",
     "first_failed_pid": 95634,
     "first_failed_session": "full100_01",
-    "tasks_executed": 0,
-    "preparation_record": "handoff/team/evidence/G32_FULL100_PREPARATION_20261117.json"
+    "tasks_executed": null,
+    "preparation_record": "handoff/team/evidence/G32_FULL100_PREPARATION_20261117.json",
+    "pid": 98932,
+    "session": "full100_02",
+    "observed_at": "2026-11-17T15:35:45.191381",
+    "started": "2026-11-17T15:35:05.461864",
+    "recovery_record": "handoff/team/evidence/G32_FULL100_SPACE41_20261117.json"
   }
 }

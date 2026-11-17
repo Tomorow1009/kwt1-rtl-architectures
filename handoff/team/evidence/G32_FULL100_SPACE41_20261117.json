@@ -1,0 +1,19 @@
+{
+  "schema": "g32-full100-lock-space41-receipt-v1",
+  "status": "verified_duplicates_removed_archive_retained",
+  "observed_at": "2026-11-17T15:35:45.191381",
+  "script": "handoff/team/evidence/G32_FULL100_LOCK_SPACE41_20261117.py",
+  "script_sha256": "8cf30d12c3c70a35761c5d6edcc17d114f00202e14424684778d2a1eb2083bfd",
+  "state_sha256": "7f1b6d4bddcd3fcb7253bddf737d3934e1d322f312d09a704395cfbc2dbb7f45",
+  "removed_files": 9,
+  "removed_bytes": 2898594,
+  "archive_preserved": true,
+  "archive_sha256": "dbfd6e93ea6257995e61e6fce8bff0aaf0d0f9d47c0d33cc38d6ce08ea536a50",
+  "old8_modified": false,
+  "T80_modified": false,
+  "full100_session": "full100_02",
+  "full100_pid": 98932,
+  "full100_started": "2026-11-17T15:35:05.461864",
+  "previous_failed_session_preserved": "full100_01",
+  "repeat_forbidden": true
+}
