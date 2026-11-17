@@ -8016,5 +8016,16 @@
     "runtime_archive_bytes": 1392335721,
     "runtime_source_members": 74538,
     "local_closeout_index": "handoff/team/evidence/N1_CLOSEOUT_RECEIPT_20261118.json"
+  },
+  "all_versions_overview_20261118": {
+    "status": "compiled_from_frozen_reports_and_latest_observed_terminal_states",
+    "document": "workspaces/arch03/ALL_VERSIONS_AND_LOCATIONS_20261118.md",
+    "scope": "arch01 v1.0-v1.3, arch02 v2.0, arch03 MMIO8/DMA16/B1/R1/R4/B0/N1/N2/T80/T64/G64/S0/P80/C80/C32A/C32B/G32 and planned/cancelled routes",
+    "remote_jobs_started": false,
+    "remote_files_modified": false,
+    "historical_server_paths_not_all_rechecked_live": true,
+    "N1_closeout_complete": true,
+    "G32_frozen20_complete": true,
+    "G32_full100_last_observed": "full100_and_precision_passed_archive_pending; finisher remains stopped"
   }
 }
