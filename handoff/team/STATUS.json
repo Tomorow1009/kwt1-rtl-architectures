@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261117_G32_RECOVERY.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261117_G32_FINAL.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -5680,7 +5680,7 @@
         "task": "C80 own 10000 random compute blocks"
       }
     ],
-    "last_server_observation": "2026-11-17T10:48:57+08:00",
+    "last_server_observation": "2026-11-17T11:10:27.215980+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_finish01",
       "queue_pid": 277152,
-      "last_observed_at": "2026-11-17T10:48:57+08:00",
+      "last_observed_at": "2026-11-17T11:10:27.215980+08:00",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7782,8 +7782,8 @@
       "icg_evidence": "handoff/team/evidence/G32_ICG_RECOVERY01_20261117.json",
       "clock_gating_path_checks_verified": true,
       "clock_gating_native_review_complete": true,
-      "status_reader": "/tmp/s4_21usr_g32_20261117_0810/status02.py",
-      "status_reader_sha256": "fdda247adabd1ad34a833cba84c9492a4fc8f92ab8eb5a59fb7b577d7fafb561",
+      "status_reader": "/tmp/s4_21usr_g32_20261117_0810/status03.py",
+      "status_reader_sha256": "8059697d01f58f8d75c485b9ab9d983d13eddb175d092693db1a0c3b906ce25e",
       "archive_launcher_deployed": true,
       "archive_started": false,
       "archive_operations_root": "/tmp/s4_21usr_g32_archiveops_20261117_1006",
@@ -7804,7 +7804,10 @@
           "gate"
         ],
         "original_team_lock_held": true,
-        "error": null
+        "error": null,
+        "saif_completed": 4,
+        "saif_current_layer": "layer_05",
+        "child_pid": 297467
       },
       "own_gate14_passed": true,
       "own_gate14_outputs": 354816,
