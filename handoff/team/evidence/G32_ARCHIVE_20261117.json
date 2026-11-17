@@ -1,0 +1,38 @@
+{
+  "schema": "g32-runtime-displayed-copy-receipt-v1",
+  "observed_at": "2026-11-17T13:34:57.253882+08:00",
+  "runtime_root": "/tmp/s4_21usr_g32_20261117_0810",
+  "control": "/tmp/s4_21usr_g32_runtime_20261117_1326_final01",
+  "destination": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/g32-runtime-20261117_1326-final01",
+  "status": "verified_copy",
+  "finished": "2026-11-17T05:29:15.606565Z",
+  "archive_sha256": "830208f1da00d5d8e10cbcc1029a6cfd17561e11e6163a7fbfc774d3423730b6",
+  "archive_bytes": 598460151,
+  "receipt_sha256": "b3c540ea4eb17edbd2422b1d72d963ce41c9dff608b6c1951581f0f9186818ea",
+  "manifest_sha256": "600e8bd864ba29eb6e1d54a96ba420eef003e900f762b016a480b1c7dc0d6ad3",
+  "member_counts": {
+    "directory": 1145,
+    "regular": 17659,
+    "symlink": 6
+  },
+  "all_members_readback_verified": true,
+  "source_before_after_identical": true,
+  "source_deleted": false,
+  "source_modified": false,
+  "relocation_verified": false,
+  "archive_implies_acceptance": false,
+  "worker_pid": 41491,
+  "worker_exited": true,
+  "actual_archive_hash_and_bytes_server_asserted": true,
+  "receipt_manifest_and_flags_server_asserted": true,
+  "storage_profile": "copy_only_512MiB",
+  "required_free_bytes": 1255023094,
+  "all_owned_processes_observed": false,
+  "protected_desktop_helper_descriptors_not_inspected": [
+    10519,
+    79103,
+    202972
+  ],
+  "observed_open_runtime_uses": 0,
+  "copy_only": true
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "g32-displayed-model-review-snapshot-v1",
+  "observed_at": "2026-11-17T13:22:05+08:00",
+  "snapshot": "/tmp/s4_21usr_g32_20261117_0810/g32_export_review01/model_review_snapshot.json",
+  "snapshot_sha256": "22a09d087d2528b5df267dadf1c660ddd24e7835158b71ee0e2f91cfcc1d9cec",
+  "snapshot_and_fact_values_server_asserted": true,
+  "export_state_sha256": "cce0dca85a27d407dca9789eeb61d5969414183f5b6ee72f87136ef0a841c2ef",
+  "unknown_inventory_sha256": "6917669ec3d9863c5046f767374c8a0b4d93447f02d1bc3f2c5f80762e858be3",
+  "connections_sha256": "90fb11107c78f1afcfb93e2b648f1a5dd82462fdc2902880c1d5e4739c947d3f",
+  "export_terminal": "facts_joined_manual_conclusion_required",
+  "export_finished": "2026-11-17T13:17:27.240974",
+  "queue_exporter_query_and_dc_exited": true,
+  "unknown_review": {
+    "targets": 41175,
+    "resolved": 38512,
+    "classified_missing_names": 2663,
+    "alias_counts": {
+      "absent_DDC_net_and_no_local_expression": 2199,
+      "exported_dummy_absent_DDC_net_driver_power_not_exempt": 313,
+      "simple_wire_alias_to_linked_net": 151
+    },
+    "unique_leaf_endpoints": 62326,
+    "unknown_explicit_control_pins": [],
+    "all_unknowns_waived": false,
+    "driver_internal_power_exempted": false
+  },
+  "power_timing_cases": 12,
+  "all12_timing_tables_identical": true,
+  "no_clock_groups": {
+    "static_jtag_dtm": 186,
+    "static_jtag_reset_sync": 3
+  },
+  "disabled_arc_counts": {
+    "C": 67628,
+    "c": 6098,
+    "d": 250,
+    "p": 35139
+  },
+  "user_or_loop_or_false_net_disabled_flags": false,
+  "hf_period_ns": "6.666666000000",
+  "lf_period_ns": "66.000000000000",
+  "static_JTAG_TCK_TMS_TDI": [
+    0,
+    0,
+    0
+  ],
+  "setup_ns": "0.000433922",
+  "hold_ns": "0.00289777",
+  "small_macros": 92,
+  "large_macros": 128,
+  "latches": 0,
+  "physical_signoff": false,
+  "source_modified": false,
+  "protected_T80_modified": false,
+  "old8_modified": false,
+  "raw_acceptance_flags_preserved": true,
+  "review_scope": "Declared stable task mode, whole-system prelayout library/SAIF estimate",
+  "unknown_activity_policy": "Original averaged PT; X-transition derate 0.5; initial-X transitions excluded; X/Z residence retained; driver internal power not exempted",
+  "server_asserted_at": "2026-11-17T13:26:58.382457+08:00"
+}

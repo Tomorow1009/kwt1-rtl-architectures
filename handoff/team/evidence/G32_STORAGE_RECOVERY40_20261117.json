@@ -1,0 +1,35 @@
+{
+  "schema": "g32-bounded-archived-duplicate-recovery-v1",
+  "source": "handoff/team/evidence/G32_B0_ARCHIVED_EXPECTED_RECOVERY40_20261117.py",
+  "source_sha256": "7b116d68da0206df20b9028d796081eac7f7bd83505998d0c4ecc5903e4e367d",
+  "server_script": "/tmp/s4_21usr_g32_20261117_0810/b0_recovery40b.py",
+  "pid": 34816,
+  "started": "2026-11-17T13:11:45.383108",
+  "observed_at": "2026-11-17T13:12:54.945569+08:00",
+  "status": "verified_duplicates_removed_archive_retained",
+  "state_path": "/tmp/s4_21usr_g32_20261117_0810/b0_archived_expected40/state.json",
+  "state_sha256": "4a551cc20f663b20fae846ba4407804c019c3e95cb50f8f7f30a7201d3bcbe8f",
+  "removed_files": 88,
+  "removed_bytes": 13391630,
+  "remaining_files": 0,
+  "remaining_bytes": 0,
+  "full_B0_archive_retained": true,
+  "shared_free_during_following_l04_copy": 5664407552,
+  "original_query_restarted": false,
+  "old8_modified": false,
+  "T80_modified": false,
+  "source_netlist_log_activity_modified": false,
+  "repeat_forbidden": true,
+  "failed_prechecks_preserved": [
+    {
+      "pid": 33184,
+      "reason": "Manually transcribed prior SHA had 63 characters; rejected before output creation",
+      "removed": 0
+    },
+    {
+      "reason": "Corrected length but transposed first hash digits; GUI assertion rejected before new script creation",
+      "removed": 0
+    }
+  ],
+  "hash_and_counts_server_asserted": true
+}

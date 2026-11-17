@@ -1,0 +1,78 @@
+{
+  "schema": "g32-displayed-passive-metrics12-v1",
+  "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183",
+  "observed_at": "2026-11-17T13:17:01.783281+08:00",
+  "tasks": 12,
+  "full_cycles": 866152,
+  "mac_utilization": 0.7022508751350802,
+  "accepted_transactions_per_cycle": 0.443541087476563,
+  "measured_sum_and_max": {
+    "command_ready_wait": [
+      398,
+      40
+    ],
+    "response_backpressure": [
+      0,
+      0
+    ],
+    "pending_response_wait": [
+      462521,
+      44032
+    ],
+    "turnovers": [
+      168,
+      16
+    ],
+    "result_stalls": [
+      0,
+      0
+    ],
+    "metadata_peak": [
+      24,
+      2
+    ],
+    "metadata_credit_wait": [
+      460810,
+      43886
+    ]
+  },
+  "phases": {
+    "source_read": {
+      "acks": 77370,
+      "mean_response_cycles": 3.016737753651286,
+      "max_response_cycles": 5
+    },
+    "shared_write": {
+      "acks": 77370,
+      "mean_response_cycles": 3.681750032312266,
+      "max_response_cycles": 5
+    },
+    "shared_read": {
+      "acks": 77370,
+      "mean_response_cycles": 4.299857826030761,
+      "max_response_cycles": 6
+    },
+    "output_write": {
+      "acks": 152064,
+      "mean_response_cycles": 3.042652830387205,
+      "max_response_cycles": 8
+    }
+  },
+  "mean_schedule": {
+    "supply_empty": "18654.25",
+    "x_wait": "15838.41666666666666666666667",
+    "w_wait": "7032.166666666666666666666667",
+    "slot_wait": "0",
+    "credit_wait": "0",
+    "first_feed_wait_cycles": "2288.083333333333333333333333",
+    "compute_result_tail_cycles": "16",
+    "final_write_tail_cycles": "22",
+    "within_tile_mean_start_interval": "81.28486394557823083333333333",
+    "tile_change_mean_start_interval": "404.1944444444444466666666667"
+  },
+  "schedule_tasks": 12,
+  "waits_can_overlap": true,
+  "latencies_acceptance_to_response_include_backpressure": true,
+  "scope": "passive_testbench_outside_SoC_power",
+  "stage_accepted_by_this_record": false
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T10:14:58+08:00",
+  "updated": "2026-11-17T13:38:48.817508+08:00",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -4144,7 +4144,7 @@
   "c32_g32_20261115": {
     "plan": "workspaces/arch03/IMPLEMENTATION_PLAN_T80_P80_C32_G32_20261115.md",
     "plan_sha256": "1d4827306ca07371f522126af6e3744bfbb3912b2e3aeef318176fe026935b39",
-    "checkpoint": "CONTEXT_CHECKPOINT_20261117_G32_FINAL.md",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261117_G32_FROZEN.md",
     "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
     "source_base": "6465f251a0a3aadf74498a59bac4a55e71c8a796",
     "production_baseline": "876b883d95199f2d1889019cbfec4c93c42d1be5",
@@ -4169,7 +4169,7 @@
     "local_contract_tests_passed": 14,
     "s0_source_identity": "handoff/team/evidence/S0_T80_SOURCE_IDENTITY_20261115.json",
     "s0_source_files_unchanged": 24,
-    "current_stage": "G32 own gate14, SAIF12 and power12 completed; export and independent model review running",
+    "current_stage": "All authorized S0/P80/C80/C32-A/G32 stages complete; G32 selected and frozen",
     "new_eda_started": true,
     "old_queue_retirement_requested": true,
     "s0_mapping_tool_implemented": true,
@@ -5680,7 +5680,7 @@
         "task": "C80 own 10000 random compute blocks"
       }
     ],
-    "last_server_observation": "2026-11-17T11:35:43.053960+08:00",
+    "last_server_observation": "2026-11-17T13:33:33+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -7707,10 +7707,10 @@
       "throughput_change_percent": -0.06031097329243229
     },
     "g32_development": {
-      "status": "own_power12_ready_connection_query_waiting_shared_lock_storage",
+      "status": "accepted_archived_frozen",
       "baseline_tag": "arch03-c32a-repair03-20261117-0725",
       "cache": "60_X_128x16_plus32_W_128x16",
-      "own_hardware_verified": false,
+      "own_hardware_verified": true,
       "server_started": true,
       "local_validation": "handoff/team/evidence/G32_LOCAL_VALIDATION_20261117.json",
       "local_array_random_blocks": 10000,
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_finish01",
       "queue_pid": 277152,
-      "last_observed_at": "2026-11-17T13:05:08+08:00",
+      "last_observed_at": "2026-11-17T13:33:33+08:00",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7785,7 +7785,7 @@
       "status_reader": "/tmp/s4_21usr_g32_20261117_0810/status03.py",
       "status_reader_sha256": "8059697d01f58f8d75c485b9ab9d983d13eddb175d092693db1a0c3b906ce25e",
       "archive_launcher_deployed": true,
-      "archive_started": false,
+      "archive_started": true,
       "archive_operations_root": "/tmp/s4_21usr_g32_archiveops_20261117_1006",
       "archive_launcher_manifest_sha256": "b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26",
       "own_batch20_passed": true,
@@ -7845,7 +7845,7 @@
       "export": {
         "pid": 4543,
         "started": "2026-11-17T12:20:33.450364",
-        "status": "querying_own_mapped_connections",
+        "status": "facts_joined_manual_conclusion_required",
         "export_child_pid": 4745,
         "control": "/tmp/s4_21usr_g32_20261117_0810/g32_export_review01",
         "last_observed_at": "2026-11-17T12:44:55.763750+08:00",
@@ -7856,8 +7856,14 @@
         "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183",
         "inventory_exited": true,
         "connections_pid": 22550,
-        "connections_session_created": false,
-        "waiting_shared_lock_storage": true
+        "connections_session_created": true,
+        "waiting_shared_lock_storage": false,
+        "finished": "2026-11-17T13:17:27.240974",
+        "exited": true,
+        "connections_complete": true,
+        "all_children_exited": true,
+        "snapshot_sha256": "22a09d087d2528b5df267dadf1c660ddd24e7835158b71ee0e2f91cfcc1d9cec",
+        "state_sha256": "cce0dca85a27d407dca9789eeb61d5969414183f5b6ee72f87136ef0a841c2ef"
       },
       "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183",
       "power12_evidence": "handoff/team/evidence/G32_POWER12_20261117.json",
@@ -7872,10 +7878,47 @@
         "control": "/tmp/s4_21usr_r4_l04_xzmigrate01_20261117",
         "started_before_model_review": true,
         "reason": "Small released shared space exhausted before original connection query can acquire lock",
-        "source_deletion_observed": false,
-        "status_not_yet_read": true
-      }
+        "source_deletion_observed": true,
+        "status_not_yet_read": false,
+        "status": "durable_xz_verified_original_gzip_copy_retained",
+        "exact_gzip_copy_in_tmp_preserved": true,
+        "shared_free_last_observed": 4547674112,
+        "finished": "2026-11-17T13:15:59.474301",
+        "worker_exited": true,
+        "durable_record": "handoff/team/evidence/G32_R4_L04_DURABLE_XZ_20261117.json",
+        "full_durable_readback_verified": true
+      },
+      "recovery40_evidence": "handoff/team/evidence/G32_STORAGE_RECOVERY40_20261117.json",
+      "prelayout_system_power_estimate_reviewed": true,
+      "model_review": "handoff/team/evidence/G32_MODEL_REVIEW_20261117.json",
+      "passive_metrics": "handoff/team/evidence/G32_PASSIVE_METRICS12_20261117.json",
+      "archive": {
+        "dispatch_pid": 41479,
+        "started": "2026-11-17T13:26:58.467497",
+        "name": "g32-runtime-20261117_1326-final01",
+        "control": "/tmp/s4_21usr_g32_runtime_20261117_1326_final01",
+        "outer": "/tmp/s4_21usr_g32_archive_dispatch01_20261117",
+        "source_readers_forbidden_while_active": false,
+        "source_deleted": false,
+        "worker_pid": 41491,
+        "worker_exited": true,
+        "status": "verified_copy",
+        "finished": "2026-11-17T05:29:15.606565Z",
+        "record": "handoff/team/evidence/G32_ARCHIVE_20261117.json",
+        "all_members_readback_verified": true
+      },
+      "stage_accepted": true,
+      "archive_verified": true,
+      "freeze": "handoff/team/evidence/G32_FREEZE_20261117.json",
+      "freeze_tag": "arch03-g32-final-20261117",
+      "technical_conclusion": "handoff/team/evidence/G32_STAGE_CONCLUSION_20261117.json",
+      "next_action": "Final GitHub sync; full100 only after explicit approval"
     },
-    "current_stage_before_G32": "C32-A own full validation and power12 complete; export_review03 running, independent conclusion pending"
+    "current_stage_before_G32": "C32-A own full validation and power12 complete; export_review03 running, independent conclusion pending",
+    "final_report": "workspaces/arch03/FINAL_ROUTE_REPORT_20261117.md",
+    "comparison": "workspaces/arch03/reports/frozen_route_20261117/comparison.json",
+    "full100_permission_requested": true,
+    "full100_started": false,
+    "all_authorized_stages_complete": true
   }
 }
