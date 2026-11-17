@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T13:41:56.112433+08:00",
+  "updated": "2026-11-17T15:19:00.976896+08:00",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -7924,5 +7924,17 @@
     "full100_permission_requested": true,
     "full100_started": false,
     "all_authorized_stages_complete": true
+  },
+  "g32_full100_addendum": {
+    "authorization": "User explicitly approved full100 regression",
+    "status": "preparing_independent_entry_not_started",
+    "hardware_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+    "frozen_tag": "arch03-g32-final-20261117",
+    "samples": 100,
+    "tasks": 1200,
+    "expected_outputs_and_totals": 30412800,
+    "checkpoint": "CONTEXT_CHECKPOINT_20261117_G32_FULL100.md",
+    "hardware_changed": false,
+    "prior_freeze_preserved": true
   }
 }
