@@ -30,8 +30,14 @@ def evidence(req,bundle):
         ref=req[role];queue=Path(ref['queue']).absolute()
         need(queue.parent==bundle/'runs' and queue.resolve()==queue,
              'G32 queue outside its frozen bundle')
-        proof=contract.completed_queue(queue,ref['state_sha256'],
-            lambda pid:Path('/proc/%d'%pid).exists(),role)
+        if role=='initial' and req.get('qualification_recovery'):
+            from g32_recovery_contract import recovered_initial
+            recovery=req['qualification_recovery']
+            proof=recovered_initial(queue,ref['state_sha256'],recovery['queue'],recovery['state_sha256'],
+                lambda pid:Path('/proc/%d'%pid).exists())
+        else:
+            proof=contract.completed_queue(queue,ref['state_sha256'],
+                lambda pid:Path('/proc/%d'%pid).exists(),role)
         request=read(queue/'request.json')
         schema='g32-qualification-v1' if role=='initial' else 'g32-final-netlist-finish-v1'
         script='g32_qualification.py' if role=='initial' else 'g32_finish.py'

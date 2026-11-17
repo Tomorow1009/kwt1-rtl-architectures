@@ -30,7 +30,8 @@ def main():
     state=read(prior/'state.json');launch=read(ROOT/'g32_initial01_process.json')
     assert state['status']=='failed' and state['stage']=='icg' and state['pid']==launch['pid']==202586
     assert not Path('/proc/202586').exists()
-    assert sha(prior/'request.json')==sha(ROOT/'g32_initial01_request.json')==launch['request_sha256']
+    assert sha(ROOT/'g32_initial01_request.json')==launch['request_sha256']
+    assert read(prior/'request.json')==read(ROOT/'g32_initial01_request.json')
     assert shutil.disk_usage(str(ROOT)).free>=6*1024**3
     session='g32_recovery01';request=ROOT/(session+'_request.json');receipt=ROOT/(session+'_launch.json');log=ROOT/(session+'.log')
     assert not any(x.exists() for x in (request,receipt,log,BUNDLE/'runs'/session))
@@ -48,6 +49,8 @@ def main():
     result=dict(pid=child.pid,started=datetime.datetime.now().isoformat(),command=command,
         request_sha256=sha(request),operations_manifest_sha256=a.ops_manifest_sha256,
         bundle_manifest_sha256=MANIFEST,source_sha256=sha(__file__),initial_state_sha256=INITIAL_SHA,
+        original_external_request_sha256=launch['request_sha256'],
+        original_internal_request_sha256=sha(prior/'request.json'),
         prior_successful_stages_rerun=False,production_bundle_modified=False,full100_allowed=False,stage_accepted=False)
     with receipt.open('x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n')
     print('G32_RECOVERY01_STARTED',json.dumps(result,sort_keys=True),flush=True)

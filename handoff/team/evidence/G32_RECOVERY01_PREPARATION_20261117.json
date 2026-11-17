@@ -1,0 +1,10 @@
+{
+  "root": "/tmp/s4_21usr_g32_recoveryops_20261117_0922",
+  "source_commit": "0463b2b1af0a750ff5b69f7d8cda40f0d6a7a65b",
+  "payload_sha256": "3b3948867cd655f1d11311ee604c8bba81da8860d0bb7aba489dcecbb7ea09b5",
+  "manifest_sha256": "4fa594b4db319a998890275724efacbf9e080fa607c2e1919d9782d8e3a1cbcd",
+  "characters": 10617,
+  "files": 3,
+  "server_started": false,
+  "production_bundle_modified": false
+}
