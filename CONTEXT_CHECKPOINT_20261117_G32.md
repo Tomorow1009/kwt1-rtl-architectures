@@ -76,3 +76,15 @@ FileZilla尝试因既有代理“Expected public FTP server addresses”校验�
 08:36:46 ASIC14正式通过：354816个输出及total，summary SHA **e1ed982103f15f60701eb383d327b18725135ba8a8871d69e34707662a0b9610**。固定12总866152周期，逐层相同数据/编码/周期与冻结C32-A一致。真实CPU、IRQ/WFI、总线路径和末写ACK通过。新证据G32_ASIC14_20261117.json。原队列进入sequence；后续competition/synth/ICG/240/精度未读终态，不能标PASS。
 
 新G32归档工具g32_archive_{contract,runtime,capacity}.py及3测试文件已本地准备，11项测试和Python3.6语法通过，尚未传服务器；不改生产0e16994包。归档连接初始七阶段与最终17阶段，并绑定实际ICG检查到相同最终网表；归档不隐含验收、绝不删除源。后续需要独立操作目录传这些辅助文件，再完成自己的门级/活动/功耗/模型审阅与归档。
+
+## 08:48 恢复/竞争通过，综合运行，独立操作工具传输中
+
+最新已推GitHub提交 **2ab70b5d37ed80d908139225a46e2bccb82a7ca6**；生产受测包仍0e16994，不变。STATUS已记seq/contention通过：sequence SHAa9e837c637a8b5ccaa2beef978f319f7d5c98f2064357879859911d4b2939904；contention SHA4e0bd443f0b778c7ce1bd61214eef840325e99d6634a1ca867bea281625456e4。08:43:26原G32 PID202586在synth，fresh_link结束、characterize child222634运行；只是最后观察，不能当实时终态。未启动240、正式ICG时序、门级或功耗。新摘要workspaces/arch03/G32_PROGRESS_20261117.md。
+
+已部署只读状态脚本 **/tmp/s4_21usr_g32_20261117_0810/status01.py**（SHA0f02e5922400e6c02057a913813097a1f6ec0542c4e2aae391c048bc8ed9ccf6），可用VNC命令`python3 .../status01.py`读取当前stage/child/log/回归数量/终态哈希；不改作业。GUI52970已结束。
+
+**唯一GUI输入会话1742正在运行，必须先轮询结束再操作VNC。** 正将5个交付操作辅助文件放到新目录 **/tmp/s4_21usr_g32_ops_20261117_0845**，不修改生产包、不自动启动EDA。输入E:/fpga_race-two/takeover_local/g32_ops01_gui.txt，总13790字符；进度g32_ops01_progress.txt。payload SHAe6b8867f67f329be2b258e7b0b8648238c6fcc441f96cff3d4d1f637393d4e55，manifest **86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26**。源2ab70b5，详情G32_OPERATIONS_PREPARATION_20261117.json。结束应显示G32_OPS_PREPARED；未看到前不得视为已部署。
+
+5个文件为g32_archive_contract/runtime/capacity.py、G32_FINISH01_FROM_INITIAL01_20261117.py、G32_EXPORT_REVIEW01_20261117.py。归档11测试、出口request2测试通过。finish启动器要求初始队列完整成功并退出、显式`--initial-state-sha256`和`--ops-manifest-sha256`，核验原包/实际ICG/精度/空间/锁后只启动g32_finish01。export要求两队列终态SHA和ops manifest，跑自己的报告/完整未知活动/连线/模型审阅；不自动验收。两者仅准备，未执行。
+
+接下来：1742退出后截图核验操作目录，运行status01看综合；若初始队列失败保留原失败，按具体原因新目录修复，不改受测文件、不弱化检查。通过synth+ICG后队列自动240/精度。初始队列完整结束后显式启动finish01，再export/审阅/能耗对照/持久归档。共享盘可能还满，原锁无损等待；恢复36已完成不要重跑，旧B0剩余280份42577349B副本。R4 L04仅阅读了既有L03工具以考虑未来存储，不曾探查、暂存、归档或删除L04；没有任何新R4作业。旧八路/桌面T80和所有冻结阶段保持保护。
