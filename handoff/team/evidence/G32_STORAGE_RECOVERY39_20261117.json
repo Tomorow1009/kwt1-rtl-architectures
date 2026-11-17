@@ -1,0 +1,33 @@
+{
+  "schema": "g32-bounded-archived-duplicate-recovery-v1",
+  "source": "handoff/team/evidence/G32_B0_ARCHIVED_EXPECTED_RECOVERY39_20261117.py",
+  "source_sha256": "5aa1074b1bd976018d994b7798846216d296ca294d7f1f701d58c5b3a34b92fc",
+  "pid": 30458,
+  "started": "2026-11-17T13:02:03.972287",
+  "observed_at": "2026-11-17T13:05:08+08:00",
+  "state_path": "/tmp/s4_21usr_g32_20261117_0810/b0_archived_expected39/state.json",
+  "state_sha256": "40c51722a13dba88fc0f0d2745436b13805488ca3e3a6405578026f1deff128b",
+  "removed_files": 32,
+  "removed_bytes": 4864624,
+  "remaining_files": 88,
+  "remaining_bytes": 13391630,
+  "status": "verified_duplicates_removed_archive_retained",
+  "free_before": 1048576,
+  "free_after": 2097152,
+  "free_at_later_observation": 1048576,
+  "archive_retained": true,
+  "queue_restarted": false,
+  "own_query_still_waiting_for_lock_storage": true,
+  "old8_modified": false,
+  "T80_modified": false,
+  "source_netlist_log_activity_modified": false,
+  "repeat_forbidden": true,
+  "prior_failed_precheck": {
+    "pid": 29276,
+    "source_sha256": "89ebc868d0faec06a2707f2993e37ccc98e70ca3b5a02f9f76dc268377a8bb47",
+    "reason": "Expected recovery38 status wrong; corrected only the expectation",
+    "output_directory_created": false,
+    "deletions": 0,
+    "script_and_log_preserved": true
+  }
+}
