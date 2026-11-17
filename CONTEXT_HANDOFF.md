@@ -109,3 +109,41 @@ R4 L06既有共享source在`PROJECT/bundles/light-light126-systolic-b-v3-2026111
 服务端部署到控制根`l06_stage.py/.log/.launch.json`；状态根`/tmp/s4_21usr_n1_r4_l06_stage_20261118/state.json`。**最后输入会话86682仍在部署约5KB命令，须先write_stdin结束并截图确认PID，不并行发GUI输入。** 新脚本先核对大文件，未观察到任何新增清理或L06压缩完成，不能提前写成功。
 
 下一步：1）核实L06暂存进程/进度，保持G32 finisher146858暂停；2）完整暂存通过后，在新持久目录完成R4 L06无损迁移并保留所有回执，确保原raw VCD可完整恢复；3）有足够共享空间后，以新尝试目录重启**仅N1完整三包**归档，勿重跑已verified辅助档；4）当前publish.py仍硬绑failed的archive_state03.json，最终新尝试通过后需新建publish02.py明确绑定新状态，不能直接运行旧publish.py；5）发布独立N1结果目录，更新计划/检查点/STATUS并同步。尚无N1完整三包持久归档，辅助归档与已完成硬件结果均有效。
+
+## 00:47–01:07：当前实际是L06 preset3新暂存
+
+第一份l06_stage.py（PID95939）在任何删除/创建OUT前因**L06回执SHA转录多出一位**失败，日志保留。已用8位分组逐字符核对：正确SHA为`2e2e38a866a0b90978b1379018e2bd762a0673b7c7b4beb2c353d9d0f3838359`（64位）；上文以`...83579`结尾的65位是历史错误，不再使用。L04/L05固定回执SHA核对无差异。
+
+第二份`l06_stage02.py`SHA `df134866251d2d8747dd5faf3844beba379fa20d2bf39f2f8999c2c6249eb5fe`，PID99444，00:52截图确认启动。因共享盘再次只有1MiB，改为**共享盘只读暂存流程**，不创建/绕过共享锁；清理/tmp重复件前仍确认无原锁、无EDA及无占用。这与历史只读XZ staging做法一致，正式迁移与N1归档仍必须持原共享锁。
+
+00:54实测：两份/tmp L04/L05 XZ重复件**已核验并删除**，合计5,491,982,376B；其共享持久XZ、原gzip暂存及全部回执均保留。状态在`/tmp/s4_21usr_n1_r4_l06_stage_20261118/state.json`，`duplicate_removal.jsonl`保留清理记录。原L06共享gzip仍完整不动。
+
+preset0实测压缩率偏低：01:00 raw5,368,709,120B→XZ2,115,837,438B，用时461.10s，预计完整输出会超4GiB上限。相比历史preset3，L04压缩2014.50s、L05压缩2066.79s，输出约2.7GB。已核对99444的UID、命令、脚本SHA后仅SIGINT此进程，保存`控制根/l06_stage02_stop.json`（含start_ticks、停止前状态及原因）；01:05截图确认发出中断。没有停止其他任务、没有删除L06共享原件。
+
+新方案用已实际验证的**preset3**，估计压缩约35分钟，再加独立回读。新脚本`N1_R4_L06_RESTAGE_20261118.py` SHA `5cc9d3d7d3992e00768071d490de3e65e681fa6deaf08df8f8afcc37f90ae772`。先确认旧阶段failed且99444退出，再完整重核原gzip、记录未验收preset0临时输出的SHA/大小，**仅删除该本次失败派生文件**，保留旧state/日志/停止回执；随后写新`/tmp/s4_21usr_n1_r4_l06_stage03_20261118`，不重复删除L04/L05副本。仍512MiB储备、4GiB输出上限、源只读、full raw SHA和独立XZ回读。服务端新文件`控制根/l06_restage03.py/.log/.launch.json`。本地语法及新脚本全部长SHA长度检查通过。
+
+**最后输入会话36831仍在部署并启动preset3；必须write_stdin结束、截图确认PID和启动结果后才输入。** 尚未观察新preset3的压缩进度或最终verified。上一个VNC会话17402已结束，旧后续工具部署成功但未执行。
+
+后续迁移工具已准备：本地`N1_R4_L06_STORAGE_MIGRATE_20261118.py`和`N1_L06_LOCK_SPACE_20261118.py`。旧服务端`l06_migrate.py`SHA baf2ff710439219a29df878a60c75be6e23d8bc160caac2e3a2f33271e1eccd0、`l06_lock_space.py`SHA4061db531be01f941abb3751c652b9e8f6ff12208ad7b3c1cf556424aef9a3f5绑定旧stage，**不要执行**。本地已改为新stage03路径和新source_script SHA，需部署新`l06_migrate02.py`、`l06_lock_space02.py`并记录新SHA。
+
+迁移前需完整preset3终态、固定SHA及原PID退出；迁移会先取原锁再做大文件核验，避免核验期间空间被占。若锁元数据仍无法写入，条件bootstrap只考虑**一个**已在不变B0完整归档内的`.../systolic_b_v3_drc06/systolic_b_synth/hierarchy.rpt`重复报告（约7.85MB），共享空闲≥16MiB则不清理；必须重新核完整备份SHA和原完整回读证明、当前文件SHA及无人使用，再删该重复件并立即调用迁移。**这个hierarchy.rpt目前未删除，bootstrap尚未执行。** 原库/RTL/网表/T80/旧八路/N1不在范围。
+
+L06迁移保留完整暂存XZ、原JSON与全raw VCD内容；此次没有额外精确gzip容器副本，旧gzip容器字节不会保留，恢复的是原始VCD逐字节内容。迁移新目标仍`PROJECT/backups/r4-l06-xz-20261118`，不得改旧回执。完成空间恢复后再用新attempt04归档N1三个包，建议显式512MiB储备+20%余量（既有复制归档原则，完整回读不减），记录配置；不要重复已verified的709MB辅助档。尚未编写/启动attempt04。
+
+私人GitHub已推送 **cca5844**。01:05后的最新stage修复、restage及迁移准备尚待下一次提交同步。本地归档结果说明仍如实标明完整三包未持久化，N1数值/精度/PPA已完成。
+
+## 01:14最新恢复锚点（覆盖上文旧“正在输入”状态）
+
+- 所有VNC输入会话36831、42077、57747已结束并截图；现在workspace3第一终端空闲，无待输入PTY。窗口仍18874436。
+- **实际后台任务只有L06 preset3暂存 PID107226**（本任务范围；G32 finisher146858仍T暂停）。脚本`控制根/l06_restage03.py` SHA `5cc9d3d7d3992e00768071d490de3e65e681fa6deaf08df8f8afcc37f90ae772`；状态`/tmp/s4_21usr_n1_r4_l06_stage03_20261118/state.json`。01:14:46读取：`compressing_l06_xz`，raw2,147,483,648B、XZ451,314,814B、elapsed323.10s，未见错误。预计整段约30–35分钟，之后独立回读；不能提前写staging verified。
+- 旧preset0 PID99444已退出、state为failed_preserved；新restage已记录并清理它从未验收的临时XZ派生文件（原shared gzip完整重核，旧日志/state/stop回执保留），开始新文件。没有删除L06共享gzip。
+- 新后续工具已部署且逐个SHA与本地一致，**尚未执行**：
+  - `l06_migrate02.py`：`ec229f8eeefd470f79aa70f3b20b7584449b8cd4d8e71ae1cd4cdafca7f17637`
+  - `l06_lock_space02.py`：`50e13e5a500b664399f1423f31158d3892f279fc6e7165468976fd069beb6396`
+  - `archive_driver04.py`：`573111a43084771dfaddb52f23735be0801c02786fb98a641d5479a38ec771d3`
+  - `publish02.py`：`667a87b440ffd6bab771903c548cca3899939f0d9aec0bc268ecea0d190aedb2`
+- 待preset3真正完成且PID退出，计算其state SHA并以CLI传给`l06_lock_space02.py --stage-sha256 <实际SHA> --migration-sha256 ec229...`。该入口必要时仅清理一个已完整备份的B0 hierarchy.rpt重复件，立即调用已核验迁移（先取锁再读大文件）；空间足则不清。输出控制`控制根/lock_space43`与`控制根/l06_migrate01`。不要用旧无02后缀迁移工具。
+- L06共享迁移完整回读通过、进程退出、原锁释放后，才启动`archive_driver04.py`，新状态`控制根/archive_state04.json`，新完整三包持久目标`PROJECT/backups/n1-runtime-20261118_0110`。显式512MiB储备+20%余量，打印精确预算，原来源和所有回读检查保留；只归档三包，不重做已verified辅助档。
+- 两档均verified后运行`publish02.py 控制根/review_payload.json fab93fd3b85370b23fa629635ff4701ba5fc067ff9cebf92fd94afc7f2b1a35d`。新可读结果目标`PROJECT/operations/n1-closeout-20261118_0110`。旧publish.py绑定失败state03，不能使用。
+- 交付只读预检已确认：原综合实际在`N1ROOT/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth`；待复制网表/报告14份49,265,092B，符合64MiB限额。mapped.v 31,806,243B，原文件不修改；完整源/固件/活动仍以三包归档为准。
+- 所有新增本地脚本已做语法和64位SHA字面值长度检查；辅助归档17测试此前已通过。没有新硬件、综合或功耗作业。桌面T80、旧八路、N1冻结源不动。需要继续跟踪当前压缩，而不是重复启动任何旧作业。

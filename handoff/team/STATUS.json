@@ -7969,9 +7969,9 @@
     "selected_version": "N1",
     "explicit_user_selection": true,
     "hardware_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
-    "status": "auxiliary_archived_runtime_waiting_for_storage",
+    "status": "auxiliary_archived_waiting_for_lossless_storage_recovery",
     "checkpoint": "CONTEXT_CHECKPOINT_20261117_N1_CLOSEOUT.md",
-    "observed_at": "2026-11-18T00:40:12+08:00",
+    "observed_at": "2026-11-18T01:14:46+08:00",
     "task_per_second": 5048.635185621487,
     "original_report_sha_verified": true,
     "original_review_snapshot_sha_verified": true,
@@ -7995,6 +7995,15 @@
     "auxiliary_receipt_sha256": "33993d020103fc642b9d07168bea4d5e3359fcf2ae7b5487e7180e71faa23042",
     "runtime_archive_verified": false,
     "runtime_attempt03": "stopped_before_writing_insufficient_space",
-    "l06_stage_prepared": true
+    "l06_stage_prepared": true,
+    "active_server_pid": 107226,
+    "active_job": "R4 L06 preset3 copy-only staging for N1 archive space",
+    "active_job_state": "/tmp/s4_21usr_n1_r4_l06_stage03_20261118/state.json",
+    "l06_raw_bytes_processed": 2147483648,
+    "l06_xz_bytes": 451314814,
+    "l06_preset": 3,
+    "l06_source_deleted": false,
+    "runtime_attempt04": "prepared_not_started",
+    "delivery_publish": "prepared_not_started"
   }
 }

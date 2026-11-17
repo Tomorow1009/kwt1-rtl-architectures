@@ -10,7 +10,7 @@ ROOT = Path('/tmp/s4_21usr_n1_20261113_0210')
 BASE = ROOT/'light-light126-n1-v4-20261113_013211-9305c6948c76'
 OPS = ROOT/'light-light126-n1-precisionops02-20261113_090845'
 PROJECT = Path('/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109')
-TARGET = PROJECT/'operations/n1-closeout-20261118_0030'
+TARGET = PROJECT/'operations/n1-closeout-20261118_0110'
 REPORT_SHA = '8f778dd1f201855ae6b0fad815e3e3b0e258a64a694fab4cc538569ee522c2e1'
 REVIEW_SHA = 'b9b2af6c888a0d37144e8eb91ee98f625b3c390701116619096b558f833853ce'
 
@@ -33,7 +33,7 @@ def main(payload_path, payload_sha):
     payload = read(payload_path)
     assert not TARGET.exists() and TARGET.parent.resolve() == TARGET.parent
     assert TARGET.parent.stat().st_uid == os.getuid()
-    state = read(CONTROL/'archive_state03.json')
+    state = read(CONTROL/'archive_state04.json')
     assert state['status'] == 'both_archives_verified_original_sources_retained'
     archives = {}
     for kind in ('runtime', 'auxiliary'):
@@ -82,7 +82,7 @@ def main(payload_path, payload_sha):
         records.append(dict(path='review/'+name, original='private_GitHub_handoff', sha256=hashlib.sha256(data).hexdigest(),bytes=len(data)))
     final = dict(schema='n1-final-closeout-v1', status='original_N1_results_and_durable_archives_verified',
         accepted_review=accepted, archives=archives, report_sha256=REPORT_SHA,
-        archive_state_sha256=sha(CONTROL/'archive_state03.json'), source_modified=False,
+        archive_state_sha256=sha(CONTROL/'archive_state04.json'), source_modified=False,
         T80_modified=False, old8_modified=False, new_hardware_runs_started=False,
         topology='original_N1_shared_write_ACK_forwarding_not_later_T80_shared_readback', files=records)
     write(TARGET/'closeout.json', (json.dumps(final,ensure_ascii=False,indent=2)+'\n').encode('utf8'))

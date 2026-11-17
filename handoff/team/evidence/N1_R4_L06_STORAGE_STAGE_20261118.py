@@ -2,7 +2,8 @@
 
 Reclaim only two /tmp XZ duplicates already fully preserved on shared storage.
 All original gzip copies and all durable archives remain. No N1/T80/old8 delete.
-The staged L06 XZ requires a separate verified migration step.
+The staged L06 XZ requires a separate verified migration step. This staging
+step is read-only toward shared storage and never creates or bypasses its lock.
 """
 import datetime, gzip, hashlib, importlib.util, json, lzma, os, shutil, sys, time
 from pathlib import Path
@@ -13,7 +14,7 @@ OUT=Path('/tmp/s4_21usr_n1_r4_l06_stage_20261118')
 BASE=PROJECT/'bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/r4_waves_lossless_archive02'
 SOURCE=BASE/'layer_06.vcd.gz'
 RECEIPT=BASE/'layer_06.vcd.json'
-RECEIPT_SHA='2e2e38a866a0b90978b1379018e2bd762a0673b7c7b4beb2c353d9d0f38383579'
+RECEIPT_SHA='2e2e38a866a0b90978b1379018e2bd762a0673b7c7b4beb2c353d9d0f3838359'
 KEEP={4:'c6962b18892f8bd0b3561224c2e8219ebbd2e791305e90a797a502fb7593d053',
       5:'5a661ac0fce451fa51c2c2f50ad6e7f6ca2ca2f117038c5ad2b8218e91b46491'}
 HELPER=Path('/tmp/s4_21usr_c80_20261116_1245/ops-b0-cleanup16-c8c730d/C80_B0_DUPLICATES_CLEANUP16_20261116.py')
@@ -78,14 +79,14 @@ def main():
         started=archive.now(),source_script_sha256=sha(__file__),source=str(SOURCE),source_stamp=source_stamp,
         source_reference=ref,source_receipt_sha256=RECEIPT_SHA,source_modified=False,source_deleted=False,
         T80_modified=False,old8_modified=False,N1_modified=False,duplicates=duplicates,removed_duplicates=0,
-        durable_duplicates_unchanged=True,process_observation=observation,exact_original_gzip_copy_created=False)
+        durable_duplicates_unchanged=True,process_observation=observation,exact_original_gzip_copy_created=False,
+        shared_storage_read_only=True,shared_lock_not_created=True)
     archive.save(OUT/'state.json',state)
-    cfg=dict(server_root=str(PROJECT.parent),runtime_roots=[dict(bundle=str(CONTROL))])
-    lk,identity,owner=archive.acquire_lock(cfg,'n1-r4-l06-copy-only-stage')
     try:
         with (OUT/'duplicate_removal.jsonl').open('x') as log:
             for row in duplicates:
                 p=Path(row['path']);uses=archive.no_open_users([p],copy_only=True)
+                assert not lock.exists(), 'Another team operation started; preserve remaining temporary copies'
                 assert uses['inaccessible_owned_processes']==observation['inaccessible_owned_processes']
                 assert all(stamp(q)==fixed_stamps[str(q)] for q in fixed)
                 assert stamp(p)==row['stamp'] and sha(p)==row['sha256']
@@ -124,7 +125,6 @@ def main():
     except BaseException as error:
         state.update(status='failed_preserved',error=str(error),finished=archive.now())
         archive.save(OUT/'state.json',state);raise
-    finally:archive.release_lock(lk,identity,owner)
 
 
 if __name__=='__main__':main()
