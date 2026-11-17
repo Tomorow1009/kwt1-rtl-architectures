@@ -1,4 +1,12 @@
-# G32最终网表验证恢复点（2026-11-17 11:35）
+# G32最终网表验证恢复点（2026-11-17 11:58）
+
+## 11:58补充：SAIF全部完成，继续同一队列
+
+`G32_GATE_SAIF12_20261117.json`记录自己的gate14/SAIF12服务器断言。SAIF摘要`19500ec93b08c9844f29552be3b000c0fe551337266514203a5e8c42902a6420`，12层304128输出、781461667B，全部实际窗口与自身门级完全一致。此前末段SHA人工转录错误导致只读断言拒绝，已纠正，服务器结果不变。
+
+11:57:15原父277152为running/power_layer_03，completed含structure/gate/saif/timing_audit/drc_audit及power_layer_01/02。最后ledger子320075已退出0；当前队列未终态，不启动export。锁277152，shared1048576B、tmp42153918464B。两层功耗只是初值，不宣布节能。无活动GUI输入会话。
+
+后续继续status03核查，finish完全结束后执行已准备export；其余恢复/归档入口见下文。下文11:35观察保留为历史，不当实时。
 
 压缩恢复后先读AGENTS、团队README/SYNC、有效计划、本文件及STATUS的`c32_g32_20261115`。此前完整过程保留在`CONTEXT_CHECKPOINT_20261117_G32_RECOVERY.md`和`CONTEXT_HISTORY_20261117_G32_PRE0936.md`。不要依历史PID重启作业。
 
