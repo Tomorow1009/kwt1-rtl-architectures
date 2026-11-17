@@ -7941,17 +7941,17 @@
     "tooling_commit": "398a58b",
     "first_failed_pid": 95634,
     "first_failed_session": "full100_01",
-    "tasks_executed": 483,
+    "tasks_executed": 625,
     "preparation_record": "handoff/team/evidence/G32_FULL100_PREPARATION_20261117.json",
     "pid": 98932,
     "session": "full100_02",
-    "observed_at": "2026-11-17T17:04:25",
+    "observed_at": "2026-11-17T17:30:03",
     "started": "2026-11-17T15:35:05.461864",
     "recovery_record": "handoff/team/evidence/G32_FULL100_SPACE41_20261117.json",
     "failed": 0,
-    "checked_outputs": 12241152,
-    "checked_totals": 12241152,
-    "estimated_remaining_seconds_with_20percent_margin": 9315,
+    "checked_outputs": 15840000,
+    "checked_totals": 15840000,
+    "estimated_remaining_seconds_with_20percent_margin": 7474,
     "l05_readonly_staging_pid": 106440,
     "l05_source_shared_file_preserved": true,
     "postprocess_tools": "handoff/team/evidence/G32_FULL100_POSTTOOLS_20261117.json",
@@ -7960,6 +7960,7 @@
     "l05_storage_record": "handoff/team/evidence/G32_FULL100_L05_STORAGE_20261117.json",
     "l05_migration_status": "waiting_for_team_lock",
     "finish_waiter_pid": 146858,
-    "finish_record": "handoff/team/evidence/G32_FULL100_FINISH_PREPARATION_20261117.json"
+    "finish_record": "handoff/team/evidence/G32_FULL100_FINISH_PREPARATION_20261117.json",
+    "finish_waiter_status": "waiting_existing_queue"
   }
 }
