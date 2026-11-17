@@ -1,6 +1,6 @@
 # G32完整100条追加验证：2026-11-17
 
-**当前状态（16:13:05最新观察）：full100_02/PID98932正常运行，198/1200任务通过、5,018,112输出、0失败，余量20%的剩余估计13,080秒。独立L05无损压缩PID106440正在运行，已处理10,737MB原始数据；共享原件未删除。收尾工具部署及服务器import检查完成。GUI输入会话15817/29946/23218都已结束；workspace3第一终端现在运行前台只读监视器，每50秒刷新，没有shell提示符。需要输入新命令时先Ctrl-C仅停止该显示并确认提示符，绝不能停止后台G32驱动。**
+**当前状态（16:23:06最新任务观察）：full100_02/PID98932正常运行，253/1200任务通过、6,412,032输出、0失败，余量20%的剩余估计12,352秒。独立L05无损压缩已完成完整回读。16:30:36已启动独立迁移等待器PID130462，先重新核验再等待原G32协作锁；不能把启动当作持久迁移完成。GUI输入会话69437已结束；现在会话35840正在重新打开前台只读监视器，需等结束并看截图再输入。收尾工具部署及服务器import检查已完成。**
 
 ## 当前授权与目标
 
@@ -53,3 +53,7 @@ R4 L05只读无损副本准备已启动，PID106440；源为旧B0包`runs/r4_wav
 收尾工具已部署并核验到`/tmp/s4_21usr_g32_full100_ops_20261117_1605`，包内只有`g32_full100_archive.py`、`g32_full100_archive_contract.py`、`g32_full100_report.py`和原G32结论的精确副本`G32_BASELINE_CONCLUSION.json`。操作包manifest实际SHA `331f238efe8150ca9a8ade11439f4185658c35d88f320192dddedc2264322941`。首次import发现旧生产包早于`g32_archive_capacity.py`，已在独立`/tmp/s4_21usr_g32_full100_deps_20261117_1610`补齐该已核验模块，模块SHA `2b591b8f32b583f03b11720d87b5029c64229bb56dc6fe4a86572512b504efcf`；16:09服务器实际import通过。**运行收尾工具时PYTHONPATH顺序：ops目录、deps目录、新生产包workspaces/arch03/scripts**，使用`python3 -B`避免改写源。记录见`G32_FULL100_POSTTOOLS_20261117.json`。
 
 本地ASCII部署命令`E:/fpga_race-two/takeover_local/g32_full100_posttools_command.txt`及`g32_full100_dependencies_command.txt`均已执行，禁止重复创建。生产包未补文件、manifest未变。报告/归档请求需绑定最终full100_02 state SHA；等待全部1200、精度以及驱动/1201个子进程退出后再运行。报告需要baseline参数指向ops中的`G32_BASELINE_CONCLUSION.json`，output指向新运行根的一个新目录（例如`full100_export01`），不能写入旧冻结G32根。归档使用原共享锁、完整成员回读和1.2倍体积+512MiB容量策略；保留源，不改冻结tag。归档前还需将ops/deps及收尾请求/终态的精确副本保存到新运行根的独立snapshot目录，使它们进入完整持久备份；不要在归档开始后继续写该源根。
+
+## 16:30归档空间准备
+
+L05 staging完整回读通过且worker已退出，state SHA `988d3fee1d0a6064b10cc551c05d4b5cc2c302cfc45a060ffecaf2abd63657e4`。XZ为2,709,005,716B，相比原gzip预计净省4,868,662,266B；原gzip精确副本仍留在/tmp。独立迁移PID130462，控制入口`/tmp/s4_21usr_g32_l05_migrateops_20261117`，状态目录`/tmp/s4_21usr_r4_l05_xzmigrate01_20261117`。它等待G32释放原锁后再重新核验、迁移到`backups/r4-l05-xz-20261117`并全解压回读；当前尚未观察迁移完成，不重复启动、不清锁。记录见`handoff/team/evidence/G32_FULL100_L05_STORAGE_20261117.json`。

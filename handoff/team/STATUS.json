@@ -7941,19 +7941,22 @@
     "tooling_commit": "398a58b",
     "first_failed_pid": 95634,
     "first_failed_session": "full100_01",
-    "tasks_executed": 198,
+    "tasks_executed": 253,
     "preparation_record": "handoff/team/evidence/G32_FULL100_PREPARATION_20261117.json",
     "pid": 98932,
     "session": "full100_02",
-    "observed_at": "2026-11-17T16:13:05",
+    "observed_at": "2026-11-17T16:23:06",
     "started": "2026-11-17T15:35:05.461864",
     "recovery_record": "handoff/team/evidence/G32_FULL100_SPACE41_20261117.json",
     "failed": 0,
-    "checked_outputs": 5018112,
-    "checked_totals": 5018112,
-    "estimated_remaining_seconds_with_20percent_margin": 13080,
+    "checked_outputs": 6412032,
+    "checked_totals": 6412032,
+    "estimated_remaining_seconds_with_20percent_margin": 12352,
     "l05_readonly_staging_pid": 106440,
     "l05_source_shared_file_preserved": true,
-    "postprocess_tools": "handoff/team/evidence/G32_FULL100_POSTTOOLS_20261117.json"
+    "postprocess_tools": "handoff/team/evidence/G32_FULL100_POSTTOOLS_20261117.json",
+    "l05_staging_status": "fully_verified_staging_original_retained",
+    "l05_migration_pid": 130462,
+    "l05_storage_record": "handoff/team/evidence/G32_FULL100_L05_STORAGE_20261117.json"
   }
 }

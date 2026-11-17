@@ -1,0 +1,22 @@
+{
+  "schema": "g32-full100-l05-storage-preparation-v1",
+  "observed_at": "2026-11-17T16:30:36",
+  "staging_status": "fully_verified_staging_original_retained",
+  "staging_root": "/tmp/s4_21usr_r4_l05_xzstage_20261117",
+  "staging_state_sha256": "988d3fee1d0a6064b10cc551c05d4b5cc2c302cfc45a060ffecaf2abd63657e4",
+  "source_gzip_bytes": 7577667982,
+  "restored_vcd_bytes": 12447866354,
+  "verified_xz_bytes": 2709005716,
+  "potential_saved_bytes": 4868662266,
+  "migration_pid": 130462,
+  "migration_launcher": "/tmp/s4_21usr_g32_l05_migrateops_20261117/launch.json",
+  "migration_control": "/tmp/s4_21usr_r4_l05_xzmigrate01_20261117",
+  "migration_script_sha256": "3160a0a4a2e240d10f2f2884d4a3c37233244175ff6d50a6fe1f7080afa5d4e7",
+  "status": "migration_launched_preflight_then_wait_for_original_team_lock",
+  "durable_migration_completed": false,
+  "source_deletion_observed": false,
+  "exact_gzip_copy_preserved": true,
+  "T80_modified": false,
+  "old8_modified": false,
+  "scope": "Only R4 layer_05 waveform; full100 continues in independent /tmp root"
+}
