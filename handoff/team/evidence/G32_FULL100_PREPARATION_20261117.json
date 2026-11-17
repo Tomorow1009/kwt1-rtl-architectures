@@ -1,0 +1,35 @@
+{
+  "schema": "g32-full100-preparation-v1",
+  "observed_at": "2026-11-17T15:26:31.699120+08:00",
+  "authorization": "explicit user approval for full100",
+  "tooling_commit": "398a58b",
+  "tests": {
+    "scope_guards": 6,
+    "status": "passed",
+    "python36_syntax": "passed"
+  },
+  "server_preflight": {
+    "time": "2026-11-17T15:19:28.237661",
+    "lock_exists": false,
+    "tmp_free_bytes": 40738131968,
+    "shared_free_bytes": 1048576,
+    "owned_eda_jobs_observed": 0
+  },
+  "runtime_root": "/tmp/s4_21usr_g32_20261117_1530",
+  "bundle": "light-light126-g32-full100-398a58b",
+  "frozen_root_modified": false,
+  "samples": 100,
+  "tasks": 1200,
+  "expected_outputs": 30412800,
+  "expected_totals": 30412800,
+  "large_waveforms": false,
+  "compile_count_planned": 1,
+  "deploy_sha256": "613981fd8b6601e8449f1ab62769f6175ccc62a4a70ab64c08a571d31eb4ed4c",
+  "payload_sha256": "2daf8fc7fd7bb6a5c44a45ad42124beb3f216766754401a4e398a31da6478fb0",
+  "status": "launched_waiting_first_progress_observation",
+  "pid": 95634,
+  "observed_launch_at": "2026-11-17T15:27:34+08:00",
+  "manifest_sha256": "1577690aba585e473c7d0174ebca95618edc032e1184cf99a6d350bfa75d9052",
+  "request_sha256": "e260f5fc1b4f2a4b1c475f711f4d046a42b83e766040519892e3bfccab7bbfd1",
+  "launch_sha256": "42c5b78372ef4fe9f5c7cd3b772018ad5d83a0282d2f5fe9ae965181a3195445"
+}
