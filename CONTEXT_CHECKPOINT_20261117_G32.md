@@ -100,3 +100,13 @@ GUI1742已成功结束，08:49:16截图G32_OPS_PREPARED，5份文件、manifest8
 两个新脚本保存在handoff/team/evidence：G32_R4_L04_STORAGE_PROBE_20261117.py SHA8d23bde78a0f86069c29defc5a89cafccb3357ec68ef9978b4535dc5b5ced928；G32_R4_L04_XZ_STAGE_20261117.py SHAa19afa203ee1c52566f7a9e8bd9583c6ff59a035e2a58f1db8c1525315605716。仅由既有L03工具逐字替换明确L04路径/身份派生，Python3.6语法通过；全部源只读、无unlink/delete。探查一个低优先级核(nice15)，3份64MiB样本，结果 **/tmp/s4_21usr_g32_storageprobe_20261117/result.json**。probe.log及probe_process.json在新ops目录。源文件、receipt、已有归档均保留；样本通过绝不授权删除。
 
 stage脚本只是部署，**尚未启动**。若probe完成且资源仍合适，可用确切probe SHA启动全量gzip副本→XZ→独立全解压核验，输出/tmp/s4_21usr_r4_l04_xzstage_20261117；需原gzip+raw最坏大小再加12GiB余量，持续保留12GiB。仍只写新/tmp，不动共享源；本轮没有任何L04持久迁移/删除代码或操作。先收GUI97426终态和G32原队列状态，避免把存储准备抢在硬件失败处理之前。
+
+## 09:06 最新恢复状态（覆盖前述GUI和存储状态）
+
+所有GUI输入会话均已结束（1742/97426/30814/73051/21675），无后台键盘输入。VNC窗口18874435仍为第三工作区。e28c066已推GitHub，09:06增量待提交。原G32队列PID202586继续synth；09:05截图已确认shared_sram和accelerator的cache.json为mapped，CPU/SoC仍在compile。未读取最终综合/ICG/240终态，勿重启或修改运行包。下一步只读`python3 /tmp/s4_21usr_g32_20261117_0810/status01.py`，最终综合后读完整面积/时序/宏/ICG/DRC；原队列通过门槛才自动240/精度。
+
+L04 probe PID227895完成并退出，3×64MiB样本往返完全一致。**正确完整probe SHA为3bf9dc891165fe001b63ba5e25642676e019d8a86ffdfbf1eff44f25318df5fc**。初次转录少一位，stage PID229017在输出目录创建前被SHA校验拒绝；第一次重试的预检查又定位第37字符应为ASCII56(8)、误填57(9)，未创建第二worker或输出。原stage.log和截图保留。不得使用早前错误SHA。
+
+纠正后新stage02 PID **232887**，开始 **2026-11-17T09:04:35.936042**，日志/storageops根的stage02.log（完整根为/tmp/s4_21usr_g32_l04_storageops_20261117）。09:05截图状态 **compressing_xz**：原gzip完整副本及独立回读已通过，当前只在/tmp/s4_21usr_r4_l04_xzstage_20261117写新XZ。nice15单核，保留12GiB/tmp余量；完整XZ回读尚未完成。没有共享原文件修改/删除，没有持久迁移。证据G32_R4_L04_STORAGE_PREPARATION_20261117.json记录两个输入转录失败与成功重试。等待其完成再决定后续持久空间操作，不把样本通过当删除授权。
+
+独立ops目录/tmp/s4_21usr_g32_ops_20261117_0845已核验。G32_FINISH01_FROM_INITIAL01_20261117.py / G32_EXPORT_REVIEW01_20261117.py尚未执行。前者须initial01全部七阶段通过、进程退出，给定终态SHA及ops manifest86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26；后者还需finish01终态SHA。当前正式240/门级14/SAIF12/PT12/功耗比较/实际门控审核和持久归档仍待完成。

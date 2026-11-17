@@ -1,0 +1,37 @@
+{
+  "schema": "g32-r4-l04-readonly-staging-v1",
+  "operations_root": "/tmp/s4_21usr_g32_l04_storageops_20261117",
+  "probe_pid": 227895,
+  "probe_exited": true,
+  "probe_finished": "2026-11-17T08:54:48.264939",
+  "probe_sha256": "3bf9dc891165fe001b63ba5e25642676e019d8a86ffdfbf1eff44f25318df5fc",
+  "samples": 3,
+  "sample_bytes_each": 67108864,
+  "sample_xz_bytes": [
+    9582500,
+    15380680,
+    15185140
+  ],
+  "all_sample_roundtrips": true,
+  "staging_pid": 232887,
+  "staging_root": "/tmp/s4_21usr_r4_l04_xzstage_20261117",
+  "source_modified": false,
+  "source_deleted": false,
+  "durable_migration_started": false,
+  "full_staging_verified": false,
+  "formal_G32_EDA_unchanged": true,
+  "first_staging_attempt": {
+    "pid": 229017,
+    "status": "failed_before_output_creation",
+    "error": "Manually transcribed expected probe SHA had 63 characters; identity check rejected it",
+    "expected_probe_sha256": "3bf9dc891165fe001b63ba5e2546276e019d9a86ffdfbf1eff44f25318df5fc",
+    "source_modified": false,
+    "source_deleted": false
+  },
+  "staging_status": "compressing_xz",
+  "GUI_session": null,
+  "second_launch_precheck": "Rejected incorrect character at index37 before process/file creation; ASCII actual56 vs supplied57; corrected to 8",
+  "staging_started": "2026-11-17T09:04:35.936042",
+  "gzip_copy_verified": true,
+  "last_observed_at": "2026-11-17T09:05:40"
+}
