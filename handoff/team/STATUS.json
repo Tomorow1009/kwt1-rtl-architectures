@@ -7964,5 +7964,25 @@
     "pause_receipt": "/tmp/s4_21usr_g32_full100_pause_20261117_1804.json",
     "remote_queue_continues": true,
     "explicit_resume_required": true
+  },
+  "legacy5000_closeout_20261117": {
+    "selected_version": "N1",
+    "explicit_user_selection": true,
+    "hardware_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+    "status": "original_results_verified_preparing_archive_space",
+    "checkpoint": "CONTEXT_CHECKPOINT_20261117_N1_CLOSEOUT.md",
+    "observed_at": "2026-11-17T23:58:56+08:00",
+    "task_per_second": 5048.635185621487,
+    "original_report_sha_verified": true,
+    "original_review_snapshot_sha_verified": true,
+    "new_hardware_runs_started": false,
+    "l05_migration_pid": 130462,
+    "l05_status": "waiting_for_team_lock_storage",
+    "g32_finish_pid": 146858,
+    "g32_finish_stopped": true,
+    "shared_free_bytes": 1048576,
+    "tmp_free_bytes": 120221696,
+    "T80_modified": false,
+    "old8_modified": false
   }
 }
