@@ -1,0 +1,21 @@
+{
+  "schema": "g32-bounded-archived-duplicate-recovery-v1",
+  "source": "handoff/team/evidence/G32_B0_ARCHIVED_EXPECTED_RECOVERY36_20261117.py",
+  "source_sha256": "99bd06f1c69a85e16e2e4b5c164574807e565032e5686dd1b62f950b510eaba9",
+  "server_root": "/tmp/s4_21usr_g32_20261117_0810",
+  "pid": 204236,
+  "observed_at": "2026-11-17T08:31:45.885439",
+  "status": "verified_duplicates_removed_archive_retained",
+  "removed_files": 128,
+  "removed_bytes": 19398857,
+  "remaining_files": 280,
+  "remaining_bytes": 42577349,
+  "free_after": 19922944,
+  "state_sha256": "8f08fc401e7fc262176d2265b824ab4483ba176c7b2d6bc9075befd0cb5e085d",
+  "old8_modified": false,
+  "T80_modified": false,
+  "archives_modified": false,
+  "frozen_stages_modified": false,
+  "scope": "Completed B0 generated expected.npz duplicates fully bound to original durable archive",
+  "queue_resumed_automatically_from_original_wait": true
+}

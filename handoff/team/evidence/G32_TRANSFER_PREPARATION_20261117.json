@@ -10,8 +10,15 @@
   "full_payload_sha256": "864ddb7f2c1e18cbeb27155353dabb5bc2442316129e972f5e8edf03fb195d4e",
   "runtime_payload_files": 89,
   "excluded_scope": "17 local test or plan/report documents; all production RTL, FW and EDA inputs retained",
-  "GUI_session": 11581,
-  "server_preparation_complete": false,
-  "server_started": false,
-  "FTP_attempt": "proxy rejected non-public address resolution; safety guard retained; FileZilla closed without connection"
+  "GUI_session": null,
+  "server_preparation_complete": true,
+  "server_started": true,
+  "FTP_attempt": "proxy rejected non-public address resolution; safety guard retained; FileZilla closed without connection",
+  "prepared_bundle_files": 1059,
+  "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
+  "queue_pid": 202586,
+  "queue_session": "g32_initial01",
+  "queue_observed_at": "2026-11-17T08:26:47.672707",
+  "queue_status": "acquiring_lock_shared_storage_full",
+  "source_preserved": true
 }

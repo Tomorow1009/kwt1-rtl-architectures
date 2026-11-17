@@ -62,3 +62,17 @@ FileZilla尝试因既有代理“Expected public FTP server addresses”校验�
 新启动器 **E:/fpga_race-two/takeover_local/g32_launch_initial01.py**（SHA5fdf50e0c3b3a87034c65a6f3366633a43e0619722b0094e51438485cbaecb74）仅在本地准备，未传未执行。它要求prepared.json、运行payload、冻结C32-A完整report SHAea4b916...及源码身份一致，18GiB/tmp余量；新queue名g32_initial01，运行自己的ASIC14→恢复→竞争→三块新综合→实际ICG/PT检查→240→精度，原共享锁无损等待。request/process/log均新独立文件，禁止重跑相同名字。
 
 传输终态读取后先确认G32_PREPARED及新manifest哈希；若出现源哈希或缺文件错误，保留失败，不直接跳过检查。通过后才部署启动器、观察进程/锁并显式启动g32_initial01。旧T80/旧8/冻结S0/P80/C80/C32全部保护。后续仍需要自己的门级14、SAIF12/PT12、ICG/模型审核及持久归档；当前G32无服务器PASS。
+
+## 08:31 传输完成，初始队列等待共享锁存储
+
+原GUI会话11581成功结束；服务器G32_PREPARED：1059份文件，新manifest **3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a**，源保留。5eb5d86进度提交已推GitHub。启动器已传并执行：**g32_initial01，PID202586，2026-11-17T08:26:14.737666**。不可重启同名队列。
+
+08:26:47观察：NumPy1.19.5已核验，队列状态acquiring_lock，日志G32_WAIT_ORIGINAL_LOCK_STORAGE，completed=[]；没有派发EDA，原锁未创建。08:24只读/tmp可用59113680896B，共享仅1048576B。等待器保持原锁和队列不变。
+
+新恢复36已通过GUI会话70782部署，输入已结束；执行结果尚待读取。脚本 **handoff/team/evidence/G32_B0_ARCHIVED_EXPECTED_RECOVERY36_20261117.py**，SHA **99bd06f1c69a85e16e2e4b5c164574807e565032e5686dd1b62f950b510eaba9**。目标G32根/recovery36.py，日志recovery36.log，进程回执recovery36_process.json。仅复用原32固定SHA安全逻辑，逐一核验32～35 journal并排除已删项；剩余408份61976206B中最多128份旧B0 generated expected.npz副本。全部完整持久archive/hash/字节/路径/无人使用检查，原锁一出现立即停止。G32状态必须仍为同PID/同request的acquiring_lock；不删除锁、不重启队列。新清理日志保存在G32根/b0_archived_expected36；旧32～35不再执行。不能声称已释放空间或已开始ASIC。
+
+08:33终态更新：恢复36 PID204236完成全部128份核验重复副本删除，19398857B；剩余280份42577349B，不再执行36。state SHA8f08fc401e7fc262176d2265b824ab4483ba176c7b2d6bc9075befd0cb5e085d，free_after19922944B，已留完整归档/日志。08:31:45 G32原PID202586已经取得原锁，stage=soc、status=running，自己的ASIC编译完成（VCS 65modules，CPU compile8.366+elab.991+link.471s）。尚未读取逐例终态。输入会话全部结束，无GUI后台输入，窗口18874435第三工作区。证据G32_STORAGE_RECOVERY36_20261117.json。
+
+08:36:46 ASIC14正式通过：354816个输出及total，summary SHA **e1ed982103f15f60701eb383d327b18725135ba8a8871d69e34707662a0b9610**。固定12总866152周期，逐层相同数据/编码/周期与冻结C32-A一致。真实CPU、IRQ/WFI、总线路径和末写ACK通过。新证据G32_ASIC14_20261117.json。原队列进入sequence；后续competition/synth/ICG/240/精度未读终态，不能标PASS。
+
+新G32归档工具g32_archive_{contract,runtime,capacity}.py及3测试文件已本地准备，11项测试和Python3.6语法通过，尚未传服务器；不改生产0e16994包。归档连接初始七阶段与最终17阶段，并绑定实际ICG检查到相同最终网表；归档不隐含验收、绝不删除源。后续需要独立操作目录传这些辅助文件，再完成自己的门级/活动/功耗/模型审阅与归档。

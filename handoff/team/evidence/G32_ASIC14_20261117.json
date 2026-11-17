@@ -1,0 +1,19 @@
+{
+  "schema": "g32-asic14-observed-v1",
+  "observed_at": "2026-11-17T08:36:46.208091",
+  "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
+  "run": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994/runs/g32_initial01_soc/g32_soc",
+  "summary_sha256": "e1ed982103f15f60701eb383d327b18725135ba8a8871d69e34707662a0b9610",
+  "tasks": 14,
+  "checked_outputs": 354816,
+  "checked_total_outputs": 354816,
+  "asic_cpu_verified": true,
+  "same_logical_and_encoded_fixed12": true,
+  "complete_cycles_equal_C32_A": true,
+  "fixed12_total_cycles": 866152,
+  "fixed12_mean_cycles": 72179.33333333333,
+  "fixed12_nominal_150MHz_tasks_per_second": 2078.1571825730357,
+  "stage_accepted": false,
+  "power_verified": false
+}
