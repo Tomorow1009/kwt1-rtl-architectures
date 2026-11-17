@@ -97,3 +97,12 @@ R4 L04 stage02父232887，09:04:35启动；09:29:31仍compressing_xz，已处理
 - 恢复38父278712于10:32:23.096109运行，32份核验重复参考已清理4866429B；state SHA4337023c8976f16d9a83d09fa701a2bf507005b8ff882dd88ad15879c1fb24e3已机器断言。剩余120份18256254B没有清理。完整备份保留，禁止重跑38及之前清理。
 - 共享仍仅1MiB，但当前锁已取得，所有新验证写入/tmp（约44.5GB余量）。L04只读前检早已通过，持久迁移尚未启动；待最终归档前再安排，不能误报已释放其4.87GB空间。
 - Git abb81fc已推，后续本段/两份新回执和STATUS待推。当前无GUI后台输入会话。T80桌面及旧八路保持不动。
+
+## 10:56 增量：门级14通过，完整活动采集中
+
+- `g32_finish01`父277152继续持原锁；同网表门级十四例已全部通过354816输出。14个完整周期分别为extremes57532、rounding56822及固定12的[74750,73187,72186,72264,70798,69193,68427,68604,68610,70970,75393,81770]，与自己的ASIC一致。门级无SDF，不声称内部total可观测。
+- 门级摘要`BUNDLE/runs/g32_finish01_gate/g32_gate/summary.json`，SHA **b76eaea9f59f8a7f23ce7132c85579844d8dc1773cc07c84051dc961ac77a793**。随后自动进入SAIF12，编译子286722结束，L01子287770于10:53:12正常完成（日志CPU252.030秒），当时等待活动完整核验；不把仿真结束直接当窗口通过。
+- 本地Git **bd03d69**（尚待推），ee16b1a和6718e59已推。STATUS顶层旧C32-A阶段入口已纠正为G32，旧值保留为历史。验收清单及README现在明确C32-A冻结、C32-B未晋级、G32正在验收。
+- 后续导出GUI入口已准备在`E:/fpga_race-two/takeover_local/g32_start_export01_gui.txt`，**未执行**。仅当finish01完整终态`reports_ready_review_required`且父/子全部退出，再调用部署ops0938的导出器；脚本自动绑定实际finish终态SHA及已知recovery终态，输出ROOT/g32_export_review01.log、_launch.json和独立control目录，不启动新硬件任务。
+- 新只读进度器`handoff/team/evidence/G32_STATUS_FINAL_CURRENT_20261117.py`已提交，SHA **8059697d01f58f8d75c485b9ab9d983d13eddb175d092693db1a0c3b906ce25e**；已部署`ROOT/status03.py`并核验哈希。GUI会话33738已结束，无后台输入。10:55:50.907258读取原finish父277152 running/saif，gate14和SAIF L01完整核验通过，当前子290307自10:54:03.278430运行L02；锁277152，/tmp44045254656B，shared1MiB。以后优先`python3 -B /tmp/s4_21usr_g32_20261117_0810/status03.py`集中看当前进度；旧status02保持不变。
+- 仍缺：自己的SAIF12/PT12及最终时序/DRC复核、导出和未知活动/模型审阅、对C32-A能耗比较、持久归档/冻结。L04迁移尚未启动。桌面T80/旧8不变，不运行100条。
