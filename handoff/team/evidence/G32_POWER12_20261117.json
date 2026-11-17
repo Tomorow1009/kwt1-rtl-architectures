@@ -1,0 +1,152 @@
+{
+  "schema": "g32-displayed-complete-power12-v1",
+  "observed_at": "2026-11-17T12:41:51.411913+08:00",
+  "report": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994/runs/g32_report01/g32_report/report.json",
+  "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183",
+  "finish_state_sha256": "24a7828e38fa4d387ffb0d2ed18e78495d57bed8e78e64c5a80dc436f1e5b414",
+  "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "netlist_sha256": "f02759430cff876497e7158a5b570a7543553f066a58197a5eeca0546c6e02bb",
+  "hashes_all_rows_and_aggregates_asserted_on_server": true,
+  "activity_layers": 12,
+  "power_layers": 12,
+  "cycles": 866152,
+  "mean_cycles": 72179.33333333333,
+  "nominal_150MHz_tasks_per_second": 2078.1571825730357,
+  "nominal_150MHz_MMAC_per_second": 3370.804200648385,
+  "time_weighted_power_w": "0.04278824864980673138202070768",
+  "time_weighted_dynamic_w": "0.03588379622301803840434473395",
+  "time_weighted_leakage_w": "0.006904452681160974055362107344",
+  "duration_ns": "5774346.089232",
+  "total_energy_j": "0.0002470741562560979036484",
+  "mean_energy_j": "0.0000205895130213414919707",
+  "mean_encoded_bytes": 25790.0,
+  "total_transactions": 384174,
+  "cases": [
+    {
+      "case": "layer_01",
+      "complete_cycles": 74750,
+      "encoded_bytes": 27264,
+      "transactions": 33120,
+      "duration_ns": "498333.283500",
+      "average_power_w": "4.24258597e-2",
+      "energy_j": "0.0000211422179696113249500"
+    },
+    {
+      "case": "layer_02",
+      "complete_cycles": 73187,
+      "encoded_bytes": 26372,
+      "transactions": 32451,
+      "duration_ns": "487913.284542",
+      "average_power_w": "4.26772609e-2",
+      "energy_j": "0.0000208228025409748710078"
+    },
+    {
+      "case": "layer_03",
+      "complete_cycles": 72186,
+      "encoded_bytes": 25800,
+      "transactions": 32022,
+      "duration_ns": "481239.951876",
+      "average_power_w": "4.27828170e-2",
+      "energy_j": "0.0000205888007941997146920"
+    },
+    {
+      "case": "layer_04",
+      "complete_cycles": 72264,
+      "encoded_bytes": 25844,
+      "transactions": 32055,
+      "duration_ns": "481759.951824",
+      "average_power_w": "4.28059921e-2",
+      "energy_j": "0.0000206222126918745245904"
+    },
+    {
+      "case": "layer_05",
+      "complete_cycles": 70798,
+      "encoded_bytes": 25008,
+      "transactions": 31428,
+      "duration_ns": "471986.619468",
+      "average_power_w": "4.30387780e-2",
+      "energy_j": "0.0000203137273342537301040"
+    },
+    {
+      "case": "layer_06",
+      "complete_cycles": 69193,
+      "encoded_bytes": 24080,
+      "transactions": 30732,
+      "duration_ns": "461286.620538",
+      "average_power_w": "4.32717279e-2",
+      "energy_j": "0.0000199606691278308876102"
+    },
+    {
+      "case": "layer_07",
+      "complete_cycles": 68427,
+      "encoded_bytes": 23604,
+      "transactions": 30375,
+      "duration_ns": "456179.954382",
+      "average_power_w": "4.33692299e-2",
+      "energy_j": "0.0000197841733173644704218"
+    },
+    {
+      "case": "layer_08",
+      "complete_cycles": 68604,
+      "encoded_bytes": 23712,
+      "transactions": 30456,
+      "duration_ns": "457359.954264",
+      "average_power_w": "4.33089845e-2",
+      "energy_j": "0.0000198077951701402849080"
+    },
+    {
+      "case": "layer_09",
+      "complete_cycles": 68610,
+      "encoded_bytes": 23756,
+      "transactions": 30489,
+      "duration_ns": "457399.954260",
+      "average_power_w": "4.33438160e-2",
+      "energy_j": "0.0000198254594558538561600"
+    },
+    {
+      "case": "layer_10",
+      "complete_cycles": 70970,
+      "encoded_bytes": 25132,
+      "transactions": 31521,
+      "duration_ns": "473133.286020",
+      "average_power_w": "4.29446213e-2",
+      "energy_j": "0.0000203185297925534842260"
+    },
+    {
+      "case": "layer_11",
+      "complete_cycles": 75393,
+      "encoded_bytes": 27632,
+      "transactions": 33396,
+      "duration_ns": "502619.949738",
+      "average_power_w": "4.23156619e-2",
+      "energy_j": "0.0000212686958573082015822"
+    },
+    {
+      "case": "layer_12",
+      "complete_cycles": 81770,
+      "encoded_bytes": 31276,
+      "transactions": 36129,
+      "duration_ns": "545133.278820",
+      "average_power_w": "4.14927378e-2",
+      "energy_j": "0.0000226190722041325533960"
+    }
+  ],
+  "relative_C32_A_energy_change_percent": "-12.63036288109743113135448153",
+  "prelayout": true,
+  "stage_accepted": false,
+  "independent_model_review_complete": false,
+  "raw_report_flags_preserved": true,
+  "physical_signoff": false,
+  "official600_verified": false,
+  "old8_modified": false,
+  "protected_T80_modified": false,
+  "own_first20_batch": {
+    "tasks": 240,
+    "outputs": 6082560,
+    "mean_cycles": 70929.40833333334,
+    "min_cycles": 64833,
+    "max_cycles": 81861,
+    "host_elapsed_seconds": 2737.018175350968
+  },
+  "fixed12_maximum_task_nrmse_percent": 0.1425636423408142
+}

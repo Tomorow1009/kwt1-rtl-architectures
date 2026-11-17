@@ -7707,7 +7707,7 @@
       "throughput_change_percent": -0.06031097329243229
     },
     "g32_development": {
-      "status": "own_functional_and_power12_complete_export_running",
+      "status": "own_power12_numbers_complete_model_review_running",
       "baseline_tag": "arch03-c32a-repair03-20261117-0725",
       "cache": "60_X_128x16_plus32_W_128x16",
       "own_hardware_verified": false,
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_finish01",
       "queue_pid": 277152,
-      "last_observed_at": "2026-11-17T12:21:35.585434+08:00",
+      "last_observed_at": "2026-11-17T12:44:55.763750+08:00",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7828,7 +7828,8 @@
         "observation_time": "2026-11-17T12:15:58.549942+08:00",
         "finished": "2026-11-17T12:19:05.607454",
         "exited": true,
-        "state_sha256": "24a7828e38fa4d387fb0d2ed18e78495d57bed8e78e64c5a80dc436f1e5b414"
+        "state_sha256": "24a7828e38fa4d387ffb0d2ed18e78495d57bed8e78e64c5a80dc436f1e5b414",
+        "state_hash_machine_asserted": true
       },
       "own_gate14_passed": true,
       "own_gate14_outputs": 354816,
@@ -7844,11 +7845,22 @@
       "export": {
         "pid": 4543,
         "started": "2026-11-17T12:20:33.450364",
-        "status": "exporting",
+        "status": "collecting_existing_activity",
         "export_child_pid": 4745,
         "control": "/tmp/s4_21usr_g32_20261117_0810/g32_export_review01",
-        "last_observed_at": "2026-11-17T12:21:35.585434+08:00"
-      }
+        "last_observed_at": "2026-11-17T12:44:55.763750+08:00",
+        "export_child_exited": true,
+        "inventory_pid": 17744,
+        "inventory_files_observed": 10,
+        "inventory_complete": false,
+        "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183"
+      },
+      "report_sha256": "f95e15e701e08bf8cd0bb091307b93c3c71af71705a5a998f4a84bb2e8af0183",
+      "power12_evidence": "handoff/team/evidence/G32_POWER12_20261117.json",
+      "raw_time_weighted_power_w": "0.04278824864980673138202070768",
+      "raw_mean_energy_j": "0.0000205895130213414919707",
+      "relative_C32_A_energy_change_percent": -12.63036288109743,
+      "canonical_query_fix_evidence": "handoff/team/evidence/G32_CANONICAL_QUERY_FIX_20261117.json"
     },
     "current_stage_before_G32": "C32-A own full validation and power12 complete; export_review03 running, independent conclusion pending"
   }

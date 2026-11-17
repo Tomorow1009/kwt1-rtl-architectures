@@ -2,7 +2,7 @@
   "schema": "g32-final-netlist-queue-completion-v1",
   "observed_at": "2026-11-17T12:20:34+08:00",
   "queue": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994/runs/g32_finish01",
-  "state_sha256": "24a7828e38fa4d387fb0d2ed18e78495d57bed8e78e64c5a80dc436f1e5b414",
+  "state_sha256": "24a7828e38fa4d387ffb0d2ed18e78495d57bed8e78e64c5a80dc436f1e5b414",
   "status": "reports_ready_review_required",
   "started": "2026-11-17T10:28:48.918079",
   "finished": "2026-11-17T12:19:05.607454",
@@ -30,5 +30,7 @@
   "stage_accepted": false,
   "source_modified": false,
   "protected_T80_modified": false,
-  "old8_modified": false
+  "old8_modified": false,
+  "state_hash_machine_asserted_at": "2026-11-17T12:41:51.411913+08:00",
+  "local_hash_transcription_correction": "An omitted f produced a 63-character local transcription; grouped reread and machine assertion corrected it. The launcher always joined the actual 64-character terminal hash; server state was never rewritten."
 }
