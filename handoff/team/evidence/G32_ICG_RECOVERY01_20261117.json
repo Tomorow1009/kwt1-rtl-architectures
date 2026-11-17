@@ -11,12 +11,16 @@
   "hold_slack_ns": 0.18723,
   "enable_path_setup_hold_nonnegative": true,
   "native_check_definition_report_bytes": 65973,
-  "native_path_report_review_complete": false,
+  "native_path_report_review_complete": true,
   "netlist_modified": false,
   "physical_signoff": false,
   "energy_verified": false,
   "stage_accepted": false,
   "native_path_reports_reason": "Explicit negative-slack filter: no paths below 0; complete per-ICG paths retained in TSV",
   "batch20_completed_at_last_observation": 35,
-  "batch20_failed": 0
+  "batch20_failed": 0,
+  "native_review_sha256": "add21a6f755ae86cc1496886ff16aa8c03ddbef2d521db02ee09c4dc3cc979c1",
+  "native_review_path": "/tmp/s4_21usr_g32_20261117_0810/g32_icg_native_review01.json",
+  "per_ICG_path_checks": 766,
+  "global_disabled_arcs_review_pending": true
 }

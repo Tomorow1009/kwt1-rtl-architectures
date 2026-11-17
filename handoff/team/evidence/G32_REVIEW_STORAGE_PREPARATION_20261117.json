@@ -1,0 +1,19 @@
+{
+  "root": "/tmp/s4_21usr_g32_reviewops_20261117_0948",
+  "manifest_sha256": "df1007b0ad6852b1d9f47bc5d3599715f739fe816271cc07136fa64444f9917c",
+  "payload_sha256": "37446c4cac7a653d99d466dbe23974e0e6d60a4c9416fd3eb56f50c9b79974de",
+  "characters": 5136,
+  "source_commit": "a6e1e0bc2bd195012040d4214103d16828794f21",
+  "server_deployed": true,
+  "preflight_started": true,
+  "migration_started": false,
+  "preflight_pid": 259618,
+  "preflight_started_at": "2026-11-17T09:49:59.692586",
+  "preflight_completed": true,
+  "preflight_exited": true,
+  "source_deleted": false,
+  "native_review_complete": true,
+  "native_review_sha256": "add21a6f755ae86cc1496886ff16aa8c03ddbef2d521db02ee09c4dc3cc979c1",
+  "stage_sha256": "a0bcf091dd3899031dd350d4fe47e01a4a96d4b392945ac11285601b06ecd7af",
+  "hashes_machine_asserted": true
+}
