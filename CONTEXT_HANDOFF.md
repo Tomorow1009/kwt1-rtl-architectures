@@ -80,3 +80,12 @@ R4 L04 stage02父232887，09:04:35启动；09:29:31仍compressing_xz，已处理
 - 归档工具后续GUI88601成功结束，10:13:07确认部署到`/tmp/s4_21usr_g32_archiveops_20261117_1006`。manifest **b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26**，launcher SHA784d130a8ff9bb0ef9b790088a703ba998c972b197bce8c4104bed5aae471542，source4ff6784ee77681b9c27897a7173e917e11a9f4ab。**只部署，未启动归档。** 原始记录`G32_ARCHIVE_PREPARATION_20261117.json`。
 - 所有本地GUI会话已退出，无未完成输入。只读状态入口status02可继续使用。Git **4ff6784已推**；本段和归档部署回执待同步。
 - 下一步先等原240/精度完成并读终态SHA；在ops0938调用`G32_FINISH01_FROM_RECOVERY01_20261117.py --initial-state-sha256 de797dab25bccd50134556e363bb074ebe94a22650965495f4e9820cda9d4df5 --recovery-state-sha256 <实际终态SHA> --ops-manifest-sha256 f614bef8b387b3943914cd7cd7407934bac2ba47396be15f95e789d1b07d21d4`。启动器会核验所有子进程、原锁及同网表；不要预填或猜测新SHA，不启动旧成功initial入口。
+
+## 10:30 增量：自己的240与精度通过，唯一finish01等待锁空间
+
+- `g32_recovery01`于10:27:22.313638自然完成，父245913已退出，完成icg/batch20/precision。终态SHA **59bfae25095530f60bd551f92e0bc97d5ebbe32b8224f2be14c79e125399d870**，由finish入口直接计算绑定。自己的240任务、6082560输出及total全部通过；新FLOAT精度摘要已通过，具体误差数值待读回记录。
+- 原initial01失败证据不改、原ASIC/综合等已过阶段未重跑。10:28:48.918079启动唯一`g32_finish01`，父**277152**；ROOT/g32_finish01_request.json、_launch.json、.log，BUNDLE/runs/g32_finish01/state.json。使用ops0938的新恢复入口，不是旧ops0845。
+- 10:29:19.395974状态`acquiring_lock`、completed=[]、error=None；10:30:27日志只有`G32_WAIT_ORIGINAL_LOCK_STORAGE`。shared仅1048576B，/tmp约44.5GB，原锁不存在。**禁止重启finish或清锁。** 队列获得空间后会自动开始structure→gate14→SAIF12→timing/DRC→PT12。
+- 新有界清理38已本地准备并通过Python3.6语法和固定32号守卫替换检查，SHA **e602acf18d5d13fe0fc040f850537be6ef7cb9642f6e28a548aaf40eac42b1ab**。只选择剩余152份、23122683B中的最多32份已完整持久归档B0 expected.npz；每份完整SHA/字节核验，锁出现立即停止，保留完整备份和回执。仅在确认finish01仍等待原锁、未开始structure时执行。**本段记录时尚未传/执行38**。禁止重跑32–37。
+- 10:26只读查询被自动审批误判为Windows终端自动化；读取ac820/board_link执行路径证明为开发板Linux X11，按技能明确的非Windows适用范围提交同一动作复审后获准，没有更换访问通道或绕过拒绝。
+- 所有GUI输入会话已退出。下一步先小批核验释放锁空间，然后持续检查原277152，完成自己的门级/活动/功耗、独立模型审阅、能耗对比和持久归档。T80/旧8未改，100条未启动。
