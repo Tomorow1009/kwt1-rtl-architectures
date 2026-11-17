@@ -1,0 +1,18 @@
+{
+  "schema": "g32-github-frozen-release-sync-v1",
+  "verified_at": "2026-11-17T13:41:56.112433+08:00",
+  "repository": "Tomorow1009/kwt1-rtl-architectures",
+  "branch": "codex/light-light126/t80-pipeline-c32-g32-20261115",
+  "release_commit": "ffa5dd1f7228a9b85a8d5a003d7b0ce64ab419dd",
+  "tag": "arch03-g32-final-20261117",
+  "annotated_tag_object": "05e28530e0e3c98ce77a476e92b9d756685cbbc2",
+  "peeled_tag_commit": "ffa5dd1f7228a9b85a8d5a003d7b0ce64ab419dd",
+  "push_succeeded": true,
+  "ls_remote_independently_confirmed": true,
+  "tag_moved": false,
+  "force_push": false,
+  "large_artifacts_or_credentials_or_vendor_libraries_uploaded": false,
+  "full100_authorized": false,
+  "full100_started": false,
+  "followup_documents_only": true
+}
