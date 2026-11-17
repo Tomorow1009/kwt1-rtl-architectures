@@ -1,0 +1,16 @@
+{
+  "schema": "g32-canonical-pt-query-fix-v1",
+  "observed_at": "2026-11-17T12:26:39.274398+08:00",
+  "canonical_file": "workspaces/arch03/scripts/g32_icg_timing.py",
+  "canonical_sha256": "33c20a4c5a9d081a9d60e9ed9d57bda80da44081306630a9659499ed9bf1e57d",
+  "tested_recovery_file": "workspaces/arch03/scripts/g32_icg_timing_pt2022.py",
+  "tested_recovery_sha256": "33c20a4c5a9d081a9d60e9ed9d57bda80da44081306630a9659499ed9bf1e57d",
+  "query_texts_identical": true,
+  "server_recovered_source_hash_asserted": true,
+  "changed_queries": 3,
+  "existing_tool_tests_passed": 5,
+  "production_rtl_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "server_production_bundle_modified": false,
+  "hardware_modified": false,
+  "original_failed_queue_preserved": true
+}

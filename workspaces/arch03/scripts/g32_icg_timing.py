@@ -37,8 +37,8 @@ proc g32_gating_audit {} {
     puts $out "schema\tg32-clock-gating-paths-v1"
     foreach_in_collection cell $cells {
         set name [get_object_name $cell]
-        set e [get_pins -of_objects $cell -filter "name == E"]
-        set te [get_pins -of_objects $cell -filter "name == TE"]
+        set e [get_pins -of_objects $cell -filter "full_name =~ */E"]
+        set te [get_pins -of_objects $cell -filter "full_name =~ */TE"]
         if {[sizeof_collection $e]!=1 || [sizeof_collection $te]!=1} {error "ICG enable pin mismatch"}
         set constant [get_attribute $te constant_value]
         if {$constant ne "0"} {error "G32 production test enable must be static zero: $name"}
@@ -55,7 +55,7 @@ proc g32_gating_audit {} {
     }
     puts $out "count\t[sizeof_collection $cells]"
     close $out
-    set enables [get_pins -of_objects $cells -filter "name == E"]
+    set enables [get_pins -of_objects $cells -filter "full_name =~ */E"]
     redirect clock_gating_setup.rpt {report_timing -to $enables -delay_type max -max_paths 1000 -significant_digits 10 -nosplit}
     redirect clock_gating_hold.rpt {report_timing -to $enables -delay_type min -max_paths 1000 -significant_digits 10 -nosplit}
     puts "@MARKER@"
