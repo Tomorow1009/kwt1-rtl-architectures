@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T08:43:40.539474",
+  "updated": "2026-11-17T08:53:22.833128",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_initial01",
       "queue_pid": 202586,
-      "last_observed_at": "2026-11-17T08:41:34.229138",
+      "last_observed_at": "2026-11-17T08:50:56.523140",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7734,7 +7734,10 @@
       "sequence_passed": true,
       "contention_passed": true,
       "sequence_summary_sha256": "a9e837c637a8b5ccaa2beef978f319f7d5c98f2064357879859911d4b2939904",
-      "contention_summary_sha256": "4e0bd443f0b778c7ce1bd61214eef840325e99d6634a1ca867bea281625456e4"
+      "contention_summary_sha256": "4e0bd443f0b778c7ce1bd61214eef840325e99d6634a1ca867bea281625456e4",
+      "operations_prepared": true,
+      "operations_manifest_sha256": "86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26",
+      "operations_root": "/tmp/s4_21usr_g32_ops_20261117_0845"
     }
   }
 }

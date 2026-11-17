@@ -88,3 +88,15 @@ FileZilla尝试因既有代理“Expected public FTP server addresses”校验�
 5个文件为g32_archive_contract/runtime/capacity.py、G32_FINISH01_FROM_INITIAL01_20261117.py、G32_EXPORT_REVIEW01_20261117.py。归档11测试、出口request2测试通过。finish启动器要求初始队列完整成功并退出、显式`--initial-state-sha256`和`--ops-manifest-sha256`，核验原包/实际ICG/精度/空间/锁后只启动g32_finish01。export要求两队列终态SHA和ops manifest，跑自己的报告/完整未知活动/连线/模型审阅；不自动验收。两者仅准备，未执行。
 
 接下来：1742退出后截图核验操作目录，运行status01看综合；若初始队列失败保留原失败，按具体原因新目录修复，不改受测文件、不弱化检查。通过synth+ICG后队列自动240/精度。初始队列完整结束后显式启动finish01，再export/审阅/能耗对照/持久归档。共享盘可能还满，原锁无损等待；恢复36已完成不要重跑，旧B0剩余280份42577349B副本。R4 L04仅阅读了既有L03工具以考虑未来存储，不曾探查、暂存、归档或删除L04；没有任何新R4作业。旧八路/桌面T80和所有冻结阶段保持保护。
+
+## 08:53 工具部署成功；新只读存储抽查准备
+
+GUI1742已成功结束，08:49:16截图G32_OPS_PREPARED，5份文件、manifest86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26准确。finish/export仍未执行。交接2774e30已推。08:50:56 G32原PID202586仍在synth，child223529 compile.log运行，无错误终态；completed为soc/sequence/contention。没有240或PPA完成结果。
+
+08:50只读容量：/tmp58451927040B、共享1048576B，96CPU/load3.11。为最终归档预备空间，开始新R4 L04只读压缩样本探查（非删除）。源为原r4_waves_lossless_archive02/layer_04.vcd.gz，既有receipt status lossless_archived_raw_removed，archive7649800109B、raw12564314076B。旧L03不会重复操作。
+
+**唯一GUI输入会话97426正在部署并启动只读probe，先等退出，再操作VNC。** 输入takeover_local/g32_l04_storageops_gui.txt，5402字符；进度g32_l04_storageops_progress.txt。新操作目录 **/tmp/s4_21usr_g32_l04_storageops_20261117**，部署payload SHA9678f5b6f2731700aac2f2610466fb777a96c6a4aaaf94945922924f83c97d05。
+
+两个新脚本保存在handoff/team/evidence：G32_R4_L04_STORAGE_PROBE_20261117.py SHA8d23bde78a0f86069c29defc5a89cafccb3357ec68ef9978b4535dc5b5ced928；G32_R4_L04_XZ_STAGE_20261117.py SHAa19afa203ee1c52566f7a9e8bd9583c6ff59a035e2a58f1db8c1525315605716。仅由既有L03工具逐字替换明确L04路径/身份派生，Python3.6语法通过；全部源只读、无unlink/delete。探查一个低优先级核(nice15)，3份64MiB样本，结果 **/tmp/s4_21usr_g32_storageprobe_20261117/result.json**。probe.log及probe_process.json在新ops目录。源文件、receipt、已有归档均保留；样本通过绝不授权删除。
+
+stage脚本只是部署，**尚未启动**。若probe完成且资源仍合适，可用确切probe SHA启动全量gzip副本→XZ→独立全解压核验，输出/tmp/s4_21usr_r4_l04_xzstage_20261117；需原gzip+raw最坏大小再加12GiB余量，持续保留12GiB。仍只写新/tmp，不动共享源；本轮没有任何L04持久迁移/删除代码或操作。先收GUI97426终态和G32原队列状态，避免把存储准备抢在硬件失败处理之前。
