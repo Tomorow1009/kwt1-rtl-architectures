@@ -24,7 +24,8 @@ def fixture(root,role):
                 netlist_sha256='d'*64,actual_g32_cells=123,static_TE_zero=True,
                 enable_path_setup_hold_nonnegative=True,setup_slack_ns=0.2,hold_slack_ns=0.1)
         if name=='precision':summary.update(fresh_float_reference_verified=True,
-            reference=dict(run=str(run/'float20'),sha256='c'*64))
+            reference=dict(run=str(run/'float20'),sha256='c'*64),
+            batch=dict(batch_summary_sha256=next(x['reference']['sha256'] for x in rows if x['stage']=='batch20')))
         digest=save(run/'summary.json',summary)
         save(run.parent/'state.json',dict(stages={'g32_'+kind:dict(status='passed',finished='time',
             run=str(run),summary_sha256=digest)}))
