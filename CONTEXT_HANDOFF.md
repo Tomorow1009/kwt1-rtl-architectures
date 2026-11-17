@@ -1,4 +1,4 @@
-# G32最终网表验证恢复点（2026-11-17 11:20）
+# G32最终网表验证恢复点（2026-11-17 11:35）
 
 压缩恢复后先读AGENTS、团队README/SYNC、有效计划、本文件及STATUS的`c32_g32_20261115`。此前完整过程保留在`CONTEXT_CHECKPOINT_20261117_G32_RECOVERY.md`和`CONTEXT_HISTORY_20261117_G32_PRE0936.md`。不要依历史PID重启作业。
 
@@ -24,7 +24,7 @@ payload `3c0a0f9156b6e40093bc5f9f5d91ae6cb5f95c207ba54e51bb2136a5bc44ab57`。
 
 **g32_finish01父277152**，10:28:48.918079启动。外部request/launch/log位于ROOT同名前缀，状态`BUNDLE/runs/g32_finish01/state.json`。取得原协作锁后始终串行，生产包未修改。
 
-**11:20:09.594761最后观察：running/saif，completed=[structure,gate]，error=None；门级14全过，SAIF L01–L06完整输出/窗口核验已过。L07子302685自11:19:47.369710运行。** 原锁277152，shared1048576B、/tmp43149583360B。不要重启队列；新的验证写/tmp，当前不依赖共享盘空闲。
+**11:35:43.053960最后观察：running/saif，completed=[structure,gate]，error=None；门级14全过，SAIF L01–L09完整输出/窗口核验已过。L10子310691自11:34:40.739312运行。** 原锁277152，shared1048576B、/tmp42750861312B。不要重启队列；新的验证写/tmp，当前不依赖共享盘空闲。
 
 只读入口：
 
@@ -92,4 +92,4 @@ C32持久备份`PROJECT/backups/c32-runtime-20261117_0709-repair03-copy01`，157
 
 本地Python `E:/fpga_race-two/.venv-kwt/Scripts/python.exe`3.8；服务器3.6，使用`.open(newline=...)`而非Path.write_text(newline=)。`git push`升级账号时需只对该精确工作区用命令级`-c safe.directory=E:/fpga_race-two/kwt1-c32-g32-20261115`，不用全局设置。
 
-最近已推 **8c09074**；本11:20进度保存后再同步。历史未跟踪`handoff/team/evidence/S0_SYNTH05_FINISH_LAUNCH_20261115.py`不是本轮，**不提交/执行**。压缩前更新根CONTEXT_HANDOFF与STATUS；恢复后重读计划与最新检查点，继续原队列。
+最近已推 **dc386a1**；本11:35进度保存后再同步。历史未跟踪`handoff/team/evidence/S0_SYNTH05_FINISH_LAUNCH_20261115.py`不是本轮，**不提交/执行**。压缩前更新根CONTEXT_HANDOFF与STATUS；恢复后重读计划与最新检查点，继续原队列。

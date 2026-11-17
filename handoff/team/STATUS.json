@@ -5680,7 +5680,7 @@
         "task": "C80 own 10000 random compute blocks"
       }
     ],
-    "last_server_observation": "2026-11-17T11:20:09.594761+08:00",
+    "last_server_observation": "2026-11-17T11:35:43.053960+08:00",
     "p80_original_platform_readonly": {
       "source": "/storage2/2026contest/server4/s4_21usr/Desktop/e203_hbirdv2-master/rtl/e203/subsys/e203_subsys_mems.v",
       "mem_fab_split_outstanding": 1,
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_finish01",
       "queue_pid": 277152,
-      "last_observed_at": "2026-11-17T11:20:09.594761+08:00",
+      "last_observed_at": "2026-11-17T11:35:43.053960+08:00",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7805,9 +7805,9 @@
         ],
         "original_team_lock_held": true,
         "error": null,
-        "saif_completed": 6,
-        "saif_current_layer": "layer_07",
-        "child_pid": 302685
+        "saif_completed": 9,
+        "saif_current_layer": "layer_10",
+        "child_pid": 310691
       },
       "own_gate14_passed": true,
       "own_gate14_outputs": 354816,
