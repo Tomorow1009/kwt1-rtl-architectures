@@ -44,6 +44,11 @@ ALLOW = {
     'light-light126-n1-queueops-20261113_091833': 'directory',
     'n1_precision_inputs_20261113_0840': 'directory',
     'n1_numpy1195_20261113_0905': 'directory',
+    'failed_partial_disposal.json': 'regular',
+    'light-light126-n1-archiveops-a02fd56': 'directory',
+    'light-light126-n1-archiveops-fe65a94dc736': 'directory',
+    'n1_runtime_archive02_1410_control': 'directory',
+    'n1_runtime_archive_1348_control': 'directory',
 }
 MAX_ENTRIES = 10000
 MAX_BYTES = 2*1024**3
