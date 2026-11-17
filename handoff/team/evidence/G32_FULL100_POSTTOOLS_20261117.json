@@ -1,0 +1,24 @@
+{
+  "schema": "g32-full100-postprocess-preparation-v1",
+  "observed_at": "2026-11-17T16:09:42+08:00",
+  "operations_root": "/tmp/s4_21usr_g32_full100_ops_20261117_1605",
+  "operations_manifest_sha256": "331f238efe8150ca9a8ade11439f4185658c35d88f320192dddedc2264322941",
+  "manifest": {
+    "files": {
+      "G32_BASELINE_CONCLUSION.json": "836bc334073e0a5fada5ade763126a2b838bad58c5c0196858d3110f1d95b9fc",
+      "g32_full100_archive.py": "fe8343da3d4d9faad0b30617194fc452b9a30f6c8ddbea897257aa956db43b24",
+      "g32_full100_archive_contract.py": "433698c8daef61a02d12c3a477c72f085bb0aa65243cb82a25c30b58f2dae01c",
+      "g32_full100_report.py": "9bc16e82b2caf0ca59a97d6c6c42850e33f340b2bb8cbb8d65eb581396de6f71"
+    },
+    "frozen_runtime_not_modified": true,
+    "schema": "g32-full100-postprocess-tools-v1",
+    "source_commit": "9940681fe24957376761fb9a77533475f21cbac6"
+  },
+  "dependencies_root": "/tmp/s4_21usr_g32_full100_deps_20261117_1610",
+  "capacity_sha256": "2b591b8f32b583f03b11720d87b5029c64229bb56dc6fe4a86572512b504efcf",
+  "server_python36_import": "passed",
+  "first_import_failure": "Frozen production bundle predates g32_archive_capacity; supplied exact helper in isolated dependency directory",
+  "production_bundle_modified": false,
+  "postprocessing_executed": false,
+  "local_scope_and_report_tests": 13
+}
