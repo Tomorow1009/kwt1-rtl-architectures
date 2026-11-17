@@ -1,0 +1,17 @@
+{
+  "delta_sha256": "9e23ca825460067d868089c993e0f20721bfc56543a0318f96c9d43957f53492",
+  "bytes": 35569,
+  "gui_characters": 49951,
+  "output_payload_sha256": "3c0a0f9156b6e40093bc5f9f5d91ae6cb5f95c207ba54e51bb2136a5bc44ab57",
+  "root": "/tmp/s4_21usr_g32_20261117_0810",
+  "files": 89,
+  "schema": "g32-transfer-preparation-v1",
+  "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "full_payload_sha256": "864ddb7f2c1e18cbeb27155353dabb5bc2442316129e972f5e8edf03fb195d4e",
+  "runtime_payload_files": 89,
+  "excluded_scope": "17 local test or plan/report documents; all production RTL, FW and EDA inputs retained",
+  "GUI_session": 11581,
+  "server_preparation_complete": false,
+  "server_started": false,
+  "FTP_attempt": "proxy rejected non-public address resolution; safety guard retained; FileZilla closed without connection"
+}

@@ -46,3 +46,19 @@ S0/P80/C80/C32-A 已冻结。C32-B 本地十四例通过，但同数据吞吐下
 新增G32独立综合、门级、SAIF、PT和审核工具；23项工具测试通过。实际ICG→寄存器时钟端点清单、原生PT report_clock_gating_check、E端点max/min与TE静态0检查已准备，尚无服务器EDA结论。普通物理缓存、数值与搬运参数不变。三套固件仍07:42编译，依赖未改。
 
 07:50:06服务器只读观察：原锁不存在，无我方dc/pt/vcs/simv作业，/tmp59753811968B，共享盘1048576B；唯一显示的185978是该只读查询自身。尚未启动G32。VNC workspace3/18874435，无未结束输入。共享盘再次近满，继续/tmp产物，不修改桌面T80/旧8，不重复归档或清理。先提交和构建独立包，再确认原锁和空间后启动自己的队列。
+
+## 08:19 传输正在进行：先恢复这一会话
+
+生产源码及本地验证提交 **0e16994675bb15e53642017a88f6307da9af4a01** 已推GitHub；后来补充原锁等待测试，工具测试总数26。所有生产源码、固件依赖不再更改。
+
+**唯一GUI输入统一exec会话11581正在运行**，通过VNC第三工作区窗口18874435分段输入，每段900字符。08:19:07本地进度27900/50005；剩余未完成，不能同时发送其他GUI输入、不能重启传输或输入新命令。先write_stdin轮询到退出，再截图读取最终结果。进度文件 E:/fpga_race-two/takeover_local/g32_delta04_progress.txt。输入文件 local_runs/g32_delta04_0e16994_20261117_0810/gui.txt；PowerShell还给第一行加了目标不存在检查，所以实际总字符50005。最后Python会重建并核验包，但**不启动EDA**。
+
+原完整overlay local_runs/g32_overlay_0e16994_20261117_0805，106文件、payload SHA864ddb7f2c1e18cbeb27155353dabb5bc2442316129e972f5e8edf03fb195d4e。服务器运行版仅排除17份本地测试/计划/验收文档，保留全部生产RTL、固件、综合/活动/功耗工具；89文件运行payload SHA **3c0a0f9156b6e40093bc5f9f5d91ae6cb5f95c207ba54e51bb2136a5bc44ab57**。
+
+增量zlib35569B，SHA **9e23ca825460067d868089c993e0f20721bfc56543a0318f96c9d43957f53492**。仅从已冻结 C32 repair5828804 包读取源；先校验完整manifest321c38...、每个原文件哈希，再做显式LF规范化/名称变换和字节补丁，还原目标精确字节并逐个核验。所有输出在新目录 **/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994**。根目录overlay.json、prepare.py、prepared.json；VNC中间base64为/tmp/g32_delta_0e16994_20261117_0810.b64。源不修改。前三个较大本地delta未发送，不可混用。
+
+FileZilla尝试因既有代理“Expected public FTP server addresses”校验失败，未连接或上传至比赛服务器；不绕过校验。板上已SHA核验的/home/root/g32_0e16994_20261117_0810.zlib仅是完整包暂存。空队列FileZilla窗口20972102已正常关闭。此失败与共享盘无关，不反复重启代理。
+
+新启动器 **E:/fpga_race-two/takeover_local/g32_launch_initial01.py**（SHA5fdf50e0c3b3a87034c65a6f3366633a43e0619722b0094e51438485cbaecb74）仅在本地准备，未传未执行。它要求prepared.json、运行payload、冻结C32-A完整report SHAea4b916...及源码身份一致，18GiB/tmp余量；新queue名g32_initial01，运行自己的ASIC14→恢复→竞争→三块新综合→实际ICG/PT检查→240→精度，原共享锁无损等待。request/process/log均新独立文件，禁止重跑相同名字。
+
+传输终态读取后先确认G32_PREPARED及新manifest哈希；若出现源哈希或缺文件错误，保留失败，不直接跳过检查。通过后才部署启动器、观察进程/锁并显式启动g32_initial01。旧T80/旧8/冻结S0/P80/C80/C32全部保护。后续仍需要自己的门级14、SAIF12/PT12、ICG/模型审核及持久归档；当前G32无服务器PASS。
