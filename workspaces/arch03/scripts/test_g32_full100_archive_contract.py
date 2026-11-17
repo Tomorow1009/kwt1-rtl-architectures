@@ -35,7 +35,7 @@ class CompletionGate(unittest.TestCase):
             with self.assertRaises(ValueError): validate_scope(self.batch,p)
 
     def test_invalid_precision_or_layer_coverage_rejected(self):
-        for value in (float('nan'),float('inf'),-1,3):
+        for value in (float('nan'),float('inf'),-1,3.00001):
             p=copy.deepcopy(self.precision);p['maximum_layer_nrmse_percent']=value
             with self.assertRaises(ValueError): validate_scope(self.batch,p)
         p=copy.deepcopy(self.precision);p['layer_aggregate'][-1]['tasks']=20

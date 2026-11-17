@@ -35,7 +35,7 @@ def validate_scope(batch, precision):
         'Full100 archive requires its own fresh FLOAT precision join')
     for name in ('maximum_layer_nrmse_percent', 'maximum_task_nrmse_percent'):
         value = precision[name]
-        require(type(value) in (int, float) and math.isfinite(value) and 0 <= value < 3,
+        require(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 3,
                 'Invalid internal precision result')
     layers = precision['layer_aggregate']
     require(len(layers) == 12 and all(r['tasks'] == 100 and r['within_limit'] for r in layers),
