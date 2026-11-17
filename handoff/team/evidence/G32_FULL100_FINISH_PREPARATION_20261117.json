@@ -1,0 +1,21 @@
+{
+  "schema": "g32-full100-finish-preparation-v1",
+  "observed_at": "2026-11-17T17:06:53",
+  "source_commit": "21da316",
+  "script_sha256": "b81754108f841acbd5848fac9806dc4119603d684b9dd6214be917a5e69ff6de",
+  "pid": 146858,
+  "operations_root": "/tmp/s4_21usr_g32_full100_finishops_20261117_1705",
+  "control_root": "/tmp/s4_21usr_g32_full100_finish01_20261117",
+  "status": "launched_waiting_existing_full100",
+  "queue_pid": 98932,
+  "migration_pid": 130462,
+  "report_output": "/tmp/s4_21usr_g32_20261117_1530/full100_export01",
+  "snapshot_output": "/tmp/s4_21usr_g32_20261117_1530/closure_snapshot01",
+  "hardware_changed": false,
+  "new_hardware_runs": false,
+  "frozen_tag_modified": false,
+  "durable_archive_completed": false,
+  "source_deletion_authorized_by_this_tool": false,
+  "T80_modified": false,
+  "old8_modified": false
+}
