@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T10:04:16+08:00",
+  "updated": "2026-11-17T10:14:58+08:00",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_initial01",
       "queue_pid": 202586,
-      "last_observed_at": "2026-11-17T10:04:16.122185",
+      "last_observed_at": "2026-11-17T10:14:58.309441",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7755,7 +7755,7 @@
         "pid": 245913,
         "started": "2026-11-17T09:31:49.991797",
         "stage": "batch20",
-        "child_pid": 266177,
+        "child_pid": 271004,
         "status": "running",
         "operations_root": "/tmp/s4_21usr_g32_recoveryops_20261117_0933",
         "operations_manifest_sha256": "cfc31793de02b5795d272f84e3f7cb537a02ad10749d9628fb92a3d368ba02bd",
@@ -7763,10 +7763,10 @@
         "completed": [
           "icg"
         ],
-        "batch20_completed": 143,
+        "batch20_completed": 202,
         "batch20_failed": 0,
-        "checked_outputs": 3624192,
-        "estimated_batch_remaining_seconds_with_margin": 1260.4428154438967
+        "checked_outputs": 5119488,
+        "estimated_batch_remaining_seconds_with_margin": 494.4847845062226
       },
       "recovery_contract_tests": 19,
       "recovery37_evidence": "handoff/team/evidence/G32_STORAGE_RECOVERY37_20261117.json",
@@ -7777,7 +7777,11 @@
       "clock_gating_path_checks_verified": true,
       "clock_gating_native_review_complete": true,
       "status_reader": "/tmp/s4_21usr_g32_20261117_0810/status02.py",
-      "status_reader_sha256": "fdda247adabd1ad34a833cba84c9492a4fc8f92ab8eb5a59fb7b577d7fafb561"
+      "status_reader_sha256": "fdda247adabd1ad34a833cba84c9492a4fc8f92ab8eb5a59fb7b577d7fafb561",
+      "archive_launcher_deployed": true,
+      "archive_started": false,
+      "archive_operations_root": "/tmp/s4_21usr_g32_archiveops_20261117_1006",
+      "archive_launcher_manifest_sha256": "b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26"
     }
   }
 }

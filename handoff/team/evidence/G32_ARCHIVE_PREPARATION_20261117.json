@@ -1,0 +1,12 @@
+{
+  "root": "/tmp/s4_21usr_g32_archiveops_20261117_1006",
+  "source_commit": "4ff6784ee77681b9c27897a7173e917e11a9f4ab",
+  "manifest_sha256": "b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26",
+  "payload_sha256": "b256c85dc7c42117a27073bb518cc9a639668cbed3106b542decd55e8f81d376",
+  "source_sha256": "784d130a8ff9bb0ef9b790088a703ba998c972b197bce8c4104bed5aae471542",
+  "characters": 4801,
+  "server_deployed": true,
+  "archive_started": false,
+  "verified_at": "2026-11-17T10:13:07",
+  "first_GUI_attempt": "BadWindow before any input; viewer reconnected through original tunnel; no remote queue restart"
+}
