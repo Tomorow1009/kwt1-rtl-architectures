@@ -1,0 +1,13 @@
+{
+  "root": "/tmp/s4_21usr_g32_recoveryops_20261117_0933",
+  "source_commit": "c4aa7b8777fec47faad4e24b188fce91a8f4e3e3",
+  "manifest_sha256": "cfc31793de02b5795d272f84e3f7cb537a02ad10749d9628fb92a3d368ba02bd",
+  "files": {
+    "G32_RECOVERY01_LAUNCH_20261117.py": "3e400e74fdfb9350e07ee665bfd4b18ae99cd2eccf2e088bcf47682c34b3f715",
+    "g32_qualification_recovery.py": "7f1d6fb23bccee511e0334981538894707f204dc6357933f991ada5d700ae0f1",
+    "g32_icg_timing_pt2022.py": "33c20a4c5a9d081a9d60e9ed9d57bda80da44081306630a9659499ed9bf1e57d"
+  },
+  "characters": 2220,
+  "original_attempt": "launcher rejected equivalent JSON with different serialization; no queue created",
+  "server_started": false
+}
