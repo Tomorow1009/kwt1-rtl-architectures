@@ -1,0 +1,22 @@
+{
+  "schema": "g32-actual-icg-path-result-v1",
+  "observed_at": "2026-11-17T09:42:40",
+  "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "run": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994/runs/g32_recovery01_icg/g32_icg",
+  "summary_sha256": "2657d4a98c669d56ef62e2c5bb499d943dc15d3c0fe886ad1190251a476de0dd",
+  "summary_hash_machine_asserted": true,
+  "actual_g32_cells": 383,
+  "static_TE_zero": true,
+  "setup_slack_ns": 0.070571,
+  "hold_slack_ns": 0.18723,
+  "enable_path_setup_hold_nonnegative": true,
+  "native_check_definition_report_bytes": 65973,
+  "native_path_report_review_complete": false,
+  "netlist_modified": false,
+  "physical_signoff": false,
+  "energy_verified": false,
+  "stage_accepted": false,
+  "native_path_reports_reason": "Explicit negative-slack filter: no paths below 0; complete per-ICG paths retained in TSV",
+  "batch20_completed_at_last_observation": 35,
+  "batch20_failed": 0
+}

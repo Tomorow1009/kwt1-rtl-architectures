@@ -1,0 +1,12 @@
+{
+  "root": "/tmp/s4_21usr_g32_ops_20261117_0938",
+  "source_commit": "86d4713917de300b3ecb6112bd8b856d104e3026",
+  "manifest_sha256": "f614bef8b387b3943914cd7cd7407934bac2ba47396be15f95e789d1b07d21d4",
+  "payload_sha256": "e044c0f2ec274f641150884f915f9eb8529c3d8dbdf69599bee39eebc0cc0fc5",
+  "characters": 5425,
+  "files": 7,
+  "server_deployed": true,
+  "server_executed": false,
+  "verified_at": "2026-11-17T09:38:08",
+  "GUI_session": null
+}
