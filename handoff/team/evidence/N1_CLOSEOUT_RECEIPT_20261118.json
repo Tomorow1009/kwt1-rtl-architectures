@@ -1,0 +1,67 @@
+{
+  "schema": "n1-closeout-screen-verified-index-v1",
+  "observed_at": "2026-11-18T01:59:22+08:00",
+  "selected_version": "N1",
+  "production_commit": "9305c6948c764fed01fe86b20bb3db94170299ab",
+  "runtime_commit": "0f62e41207909904efd544992013c1244b0fd63b",
+  "status": "original_N1_results_and_durable_archives_verified",
+  "evidence_collection": "Existing board VNC terminal; original remote files retained. This is an index, not a downloaded copy of remote receipts.",
+  "delivery_path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/n1-closeout-20261118_0110",
+  "delivery_selected_files": 27,
+  "delivery_closeout_sha256": "403096198ca6f86edb4a516b7a0133a99af9ced2d993db963e8b9027a4467c68",
+  "delivery_receipt_sha256": "b58dc446147231ae5e5104584c73cd6d94472d412db44e23efb46adbd62efed9",
+  "runtime_archive": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/backups/n1-runtime-20261118_0110/runtime-evidence.tar.gz",
+    "bytes": 1392335721,
+    "sha256": "a871a13520dcf48d697f9ebe190961c327c7ef1ba0dbd7e89cf0ed7b09a77351",
+    "receipt_sha256": "1c5967498464e1cbe3f0beefa1b632fdcd03e176d86753ea15651a12e402e51d",
+    "source_regular_bytes": 7137788745,
+    "members": {
+      "regular": 70263,
+      "directory": 4271,
+      "symlink": 4
+    },
+    "full_member_readback_verified": true,
+    "source_before_after_identical": true,
+    "source_deleted": false,
+    "source_modified": false
+  },
+  "auxiliary_archive": {
+    "path": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/light-light126-undergrad-d2-20261109/operations/n1-aux-archive-20261118_0015/auxiliary-evidence.tar.gz",
+    "bytes": 709504053,
+    "sha256": "387cfa890876ebed24754aed1692d6cfeb099402d11f485f5160ae554c9139ca",
+    "receipt_sha256": "33993d020103fc642b9d07168bea4d5e3359fcf2ae7b5487e7180e71faa23042",
+    "selected_root_entries": 21,
+    "source_regular_bytes": 901602670,
+    "members": {
+      "regular": 899,
+      "directory": 170,
+      "symlink": 0
+    },
+    "full_member_readback_verified": true,
+    "source_deleted": false,
+    "source_modified": false
+  },
+  "capacity_recovery": {
+    "R4_L06_raw_bytes_preserved": 12210217662,
+    "R4_L06_durable_xz_bytes": 2631843264,
+    "R4_L06_receipt_sha256": "6843c87c3a810be7b9d7a36f66e9354ee5c20a0f9867179be301f5f05802c231",
+    "R4_L06_original_gzip_container_retained": false,
+    "R4_L06_original_JSON_retained": true,
+    "R4_L06_staged_xz_retained": true,
+    "B0_duplicate_cleanup": "Only already archived 1200 task.log files (2759700 bytes) and one hierarchy.rpt; complete B0 archive retained. No B0 source or netlist deleted."
+  },
+  "new_hardware_runs_started": false,
+  "T80_modified": false,
+  "old8_modified": false,
+  "frozen_N1_sources_modified": false,
+  "G32_finisher_resumed": false,
+  "topology": "Original N1 shared-write-ACK forwarding; not later T80/G32 shared-SystemBus-readback topology.",
+  "review": "N1_STAGE_REVIEW_20261113.json",
+  "scope": "Existing complete ASIC/E203, no-SDF gate, declared task-mode timing and pre-layout system power evidence; no new hardware rerun or physical signoff claim.",
+  "independent_delivery_check_observed_at": "2026-11-18T02:02:46+08:00",
+  "independent_selected_files_and_receipts_verified": true,
+  "all_closeout_processes_exited": true,
+  "team_lock_present_at_final_check": false,
+  "G32_finisher_state_at_final_check": "T"
+}

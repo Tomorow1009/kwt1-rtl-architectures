@@ -147,3 +147,31 @@ L06迁移保留完整暂存XZ、原JSON与全raw VCD内容；此次没有额外�
 - 两档均verified后运行`publish02.py 控制根/review_payload.json fab93fd3b85370b23fa629635ff4701ba5fc067ff9cebf92fd94afc7f2b1a35d`。新可读结果目标`PROJECT/operations/n1-closeout-20261118_0110`。旧publish.py绑定失败state03，不能使用。
 - 交付只读预检已确认：原综合实际在`N1ROOT/light-light126-n1-v4-20261113_013211-9305c6948c76/runs/n1_synth01/n1_synth`；待复制网表/报告14份49,265,092B，符合64MiB限额。mapped.v 31,806,243B，原文件不修改；完整源/固件/活动仍以三包归档为准。
 - 所有新增本地脚本已做语法和64位SHA字面值长度检查；辅助归档17测试此前已通过。没有新硬件、综合或功耗作业。桌面T80、旧八路、N1冻结源不动。需要继续跟踪当前压缩，而不是重复启动任何旧作业。
+
+## 01:34恢复记录
+
+07d961f已推送私人GitHub个人分支。01:33:41再次只读观察L06 preset3 PID107226仍运行，raw 10,200,547,328/12,210,217,662B，XZ 2,196,067,903B，elapsed 1554.24s，未见错误。原L06 shared gzip仍保留。锁空间入口/migration02、runtime04和publish02均未启动；本地三个专用launch文本语法检查通过，仅待实际前置终态。辅助归档不重做，G32 finisher不恢复。当前workspace3终端空闲，没有待收尾输入会话。
+
+## 01:45：L06暂存全部通过，迁移已启动
+
+01:43:47实际读取stage03终态为fully_verified_staging_original_retained，full_xz_readback_verified=true，PID107226已退出。XZ 2,631,843,264B，压缩1866.9129s，原raw 12,210,217,662B完整SHA与长度一致。stage state SHA `6fe2a6daf8eff0c99a386677111ab3227e9784986ad1ec507e55ddf89b824702`。
+
+01:44已执行已部署的l06_lock_space02.py，PID **127013**，原migration02身份及stage完整终态在启动时核对。日志`/tmp/s4_21usr_n1_closeout_20261117_2355/l06_lock_space02.log`，launch同名`.launch.json`。VNC会话63072已结束且截图确认PID。尚未观察迁移终态或原gzip删除，不能提前称空间恢复。下一步读取lock_space43/state.json、l06_migrate01/state.json及日志；进程正常则等待，不重启。migration verified、PID退出、锁释放后启动准备好的runtime04，之后publish02。
+
+## 01:53：持久迁移通过，N1完整归档运行中
+
+01:52:23已观察R4 L06迁移为durable_xz_verified_staged_xz_retained，full_durable_readback_verified=true，PID127013退出且原锁释放。共享XZ保留原12,210,217,662B原始VCD内容，暂存XZ仍保留；旧gzip容器已删，原JSON保留。持久receipt SHA `6843c87c3a810be7b9d7a36f66e9354ee5c20a0f9867179be301f5f05802c231`；迁移记录空闲4,371,513,344B，读屏时4,173,332,480B。lock_space43只删除1份已完整B0归档的hierarchy.rpt重复件，没有删源码、网表、N1、T80或旧八路。
+
+01:53截图确认 **N1 runtime04 PID133407** 启动。日志`控制根/archive_driver04.log`、状态`控制根/archive_state04.json`，目标`PROJECT/backups/n1-runtime-20261118_0110`。新工具只改变容量储备并打印精确预算，保留完整成员回读和全部源；不重复辅助归档。VNC输入会话80241结束，终端空闲。下一步观察归档终态，不能重启/再次运行同一launch；通过后运行publish02并核对实际文件/receipt。
+
+
+## 02:03最终锚点：本次N1收尾全部完成
+
+- runtime04已成功：`both_archives_verified_original_sources_retained`，三包74,538成员（70,263普通文件、4,271目录、4链接文字），源7,137,788,745B，完整压缩包1,392,335,721B。逐成员解压回读与原件前后内容/元数据核对均通过，全部N1原件保留。
+- 完整三包目录`PROJECT/backups/n1-runtime-20261118_0110`，archive SHA `a871a13520dcf48d697f9ebe190961c327c7ef1ba0dbd7e89cf0ed7b09a77351`，receipt SHA `1c5967498464e1cbe3f0beefa1b632fdcd03e176d86753ea15651a12e402e51d`。已verified辅助档保持原样，不重复跑。
+- publish02实际PID133262已完成，发布到`PROJECT/operations/n1-closeout-20261118_0110`。27份文件包括五个关键RTL、原综合网表/报告、原JSON/CSV和最终审阅附录；README/closeout.json/receipt.json提供入口及全部恢复索引。
+- 交付closeout SHA `403096198ca6f86edb4a516b7a0133a99af9ced2d993db963e8b9027a4467c68`；receipt SHA `b58dc446147231ae5e5104584c73cd6d94472d412db44e23efb46adbd62efed9`。
+- 首次只读交付核对因本地读屏转录receipt SHA两处字符错误而assert；原服务器文件未变。随后按8字符分组重新读取并纠正本地索引，**02:02:46独立核对27份文件字节/内容、closeout/README和两份归档回执全部PASS**，runtime source identical=true。不得把转录错误写成硬件或归档失效。
+- 同一观察确认107226/127013/133407/133262全部退出、原团队锁不存在；G32 finisher146858仍T暂停。所有VNC输入会话77132/65918已结束，当前workspace3第一终端空闲。不要再次启动任何closeout launch；没有本轮待跑硬件任务。
+- 本轮硬件/精度/PPA沿用哈希一致的原完整N1验收，未重复1200、综合或活动。用户要求的N1（5048.64）备份及结果交付已完成；没有进入N2/D1/D2/G32。桌面T80、旧八路、N1冻结源均未修改。
+- 最终中文说明`workspaces/arch03/N1_CLOSEOUT_20261118.md`，机器索引`handoff/team/evidence/N1_CLOSEOUT_RECEIPT_20261118.json`及STATUS已更新，下一步仅提交/推送这些小型完成记录，然后向用户交付实际地址。原N1_FINAL_REVIEW与N1_STAGE_REVIEW保留11月13日历史原文/哈希，其当时“备份待完成”由本次独立索引补充，不反向改写。
