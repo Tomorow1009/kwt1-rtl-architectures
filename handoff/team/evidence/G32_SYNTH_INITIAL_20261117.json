@@ -1,0 +1,31 @@
+{
+  "schema": "g32-initial-synthesis-observation-v1",
+  "observed_at": "2026-11-17T09:14:27",
+  "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
+  "run": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994/runs/g32_initial01_synth/g32_synth",
+  "summary_sha256": "5f270c7366d5914b4fbe219862987e19314e7f6c24f90b00b8f963890a9c8a92",
+  "netlist_sha256": "f02759430cff876497e7158a5b570a7543553f066a58197a5eeca0546c6e02bb",
+  "failed_initial_state_sha256": "de797dab25bccd50134556e363bb074ebe94a22650965495f4e9820cda9d4df5",
+  "conservative_area_mm2": 0.727972347099813,
+  "setup_slack_ns": 0.000433922,
+  "hold_slack_ns": 0.00289777,
+  "small_macros": 92,
+  "large_macros": 128,
+  "unintended_latches": 0,
+  "actual_accelerator_ICGs": 383,
+  "gated_register_clock_pins": 10306,
+  "ICG_domains": {
+    "array": 249,
+    "core": 70,
+    "transport": 64
+  },
+  "constraints_explicit_clear": true,
+  "design_rule_violation_records": 0,
+  "original_queue_pid": 202586,
+  "original_queue_exited": true,
+  "failed_stage": "icg",
+  "failure": "Installed PT2022 does not support pin name filter; three filters require full_name instead",
+  "hardware_modified": false,
+  "stage_accepted": false,
+  "clock_gating_timing_verified": false
+}

@@ -110,3 +110,17 @@ L04 probe PID227895完成并退出，3×64MiB样本往返完全一致。**正确
 纠正后新stage02 PID **232887**，开始 **2026-11-17T09:04:35.936042**，日志/storageops根的stage02.log（完整根为/tmp/s4_21usr_g32_l04_storageops_20261117）。09:05截图状态 **compressing_xz**：原gzip完整副本及独立回读已通过，当前只在/tmp/s4_21usr_r4_l04_xzstage_20261117写新XZ。nice15单核，保留12GiB/tmp余量；完整XZ回读尚未完成。没有共享原文件修改/删除，没有持久迁移。证据G32_R4_L04_STORAGE_PREPARATION_20261117.json记录两个输入转录失败与成功重试。等待其完成再决定后续持久空间操作，不把样本通过当删除授权。
 
 独立ops目录/tmp/s4_21usr_g32_ops_20261117_0845已核验。G32_FINISH01_FROM_INITIAL01_20261117.py / G32_EXPORT_REVIEW01_20261117.py尚未执行。前者须initial01全部七阶段通过、进程退出，给定终态SHA及ops manifest86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26；后者还需finish01终态SHA。当前正式240/门级14/SAIF12/PT12/功耗比较/实际门控审核和持久归档仍待完成。
+
+## 09:14 原队列已退出：综合通过，PT查询属性错误需独立恢复
+
+G32 initial01在icg阶段失败、PID202586已退出；completed=soc/sequence/contention/synth。**不要再按前段“正在综合”或成功initial入口操作。** 失败原因是已安装PT2022对pin不支持`-filter "name == E/TE"`，4条FLT-005/解析错误后G32_CLOCK_GATING_ABORT ICG enable pin mismatch；不是已证实的门控时序违反。原PT日志和失败state保留。
+
+真实综合结果：保守项目面积 **0.727972347099813mm²**；setup **+0.000433922ns**，hold **+0.00289777ns**；92小宏+128大宏，0锁存器；实际383个加速器ICG、10306寄存器时钟端点，array249/core70/transport64；原约束报告明确无违反（0）。这是综合结果，实际门控setup/hold及新PPA尚未完成。
+
+失败initial state SHA **de797dab25bccd50134556e363bb074ebe94a22650965495f4e9820cda9d4df5**；synth summary **5f270c7366d5914b4fbe219862987e19314e7f6c24f90b00b8f963890a9c8a92**；final netlist **f02759430cff876497e7158a5b570a7543553f066a58197a5eeca0546c6e02bb**。新本地证据G32_SYNTH_INITIAL_20261117.json。源/网表不改、不重跑综合。所有GUI会话均已结束，无并发键盘输入。
+
+本地已新增未提交 **workspaces/arch03/scripts/g32_icg_timing_pt2022.py**，仅把3处pin过滤从name改为full_name（`full_name =~ */E`两处、`*/TE`一处）。逆替换与原脚本完整文本相等，Python3.6语法通过；原生产g32_icg_timing.py不修改。尚未传或运行修复。
+
+下一步准备独立G32 qualification恢复队列：明确核验原failed icg/已退出PID/前4份成功回执/相同生产包及最终网表，使用新PT查询模块重跑ICG检查，之后才跑batch20/precision。沿用原共享锁，不重跑已通过ASIC/恢复/竞争/综合，不删除旧state。需要为归档/finish/export增加明确的“原4阶段＋新3阶段”交接入口，不能把原failed队列改成passed，也不能直接使用ops01要求成功initial的启动器。这个恢复协调器和入口适配尚未实现。
+
+R4 L04 stage02 PID232887最后09:05在compressing_xz，继续低优先级、只写新/tmp；尚未读取完整回读终态，原共享gzip仍保留。不要因G32 PT查询失败停止或重启此暂存，不将其当持久归档完成。952675e已推；09:14代码/状态增量尚未提交。

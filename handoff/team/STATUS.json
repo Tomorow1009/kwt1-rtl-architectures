@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T09:07:23.289161",
+  "updated": "2026-11-17T09:16:10.684074",
   "phase": "portable_handoff_validated",
   "baseline_commit": "01d4bdfc8ab805261e62a274c4370ba04e515cf6",
   "historical_server_baseline": "/storage2/2026contest/server4/s4_21usr/Desktop/IC/arch02_server_r03",
@@ -7707,7 +7707,7 @@
       "throughput_change_percent": -0.06031097329243229
     },
     "g32_development": {
-      "status": "own_partition_synthesis_running",
+      "status": "initial_failed_at_PT_pin_filter_after_synthesis_pass",
       "baseline_tag": "arch03-c32a-repair03-20261117-0725",
       "cache": "60_X_128x16_plus32_W_128x16",
       "own_hardware_verified": false,
@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_initial01",
       "queue_pid": 202586,
-      "last_observed_at": "2026-11-17T09:05:40",
+      "last_observed_at": "2026-11-17T09:14:27",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7743,7 +7743,12 @@
         "accelerator"
       ],
       "running_block": "cpu_soc",
-      "storage_staging": "handoff/team/evidence/G32_R4_L04_STORAGE_PREPARATION_20261117.json"
+      "storage_staging": "handoff/team/evidence/G32_R4_L04_STORAGE_PREPARATION_20261117.json",
+      "synthesis_evidence": "handoff/team/evidence/G32_SYNTH_INITIAL_20261117.json",
+      "original_queue_exited": true,
+      "conservative_area_mm2": 0.727972347099813,
+      "actual_ICG_count": 383,
+      "clock_gating_timing_verified": false
     }
   }
 }
