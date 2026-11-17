@@ -1,0 +1,23 @@
+{
+  "schema": "g32-bounded-archived-duplicate-recovery-v1",
+  "source": "handoff/team/evidence/G32_B0_ARCHIVED_EXPECTED_RECOVERY38_20261117.py",
+  "source_commit": "abb81fc",
+  "source_sha256": "e602acf18d5d13fe0fc040f850537be6ef7cb9642f6e28a548aaf40eac42b1ab",
+  "pid": 278712,
+  "started": "2026-11-17T10:32:23.096109",
+  "state_path": "/tmp/s4_21usr_g32_20261117_0810/b0_archived_expected38/state.json",
+  "state_sha256": "4337023c8976f16d9a83d09fa701a2bf507005b8ff882dd88ad15879c1fb24e3",
+  "state_hash_and_counts_machine_asserted": true,
+  "removed_files": 32,
+  "removed_bytes": 4866429,
+  "remaining_files": 120,
+  "remaining_bytes": 18256254,
+  "archive_retained": true,
+  "queue_restarted": false,
+  "own_finish01_lock_acquired": true,
+  "old8_modified": false,
+  "T80_modified": false,
+  "source_netlist_log_activity_modified": false,
+  "protected_frozen_stages_modified": false,
+  "repeat_forbidden": true
+}

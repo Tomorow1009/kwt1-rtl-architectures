@@ -7707,7 +7707,7 @@
       "throughput_change_percent": -0.06031097329243229
     },
     "g32_development": {
-      "status": "own_batch20_running_after_ICG_path_checks",
+      "status": "own240_precision_passed_final_netlist_gate_running",
       "baseline_tag": "arch03-c32a-repair03-20261117-0725",
       "cache": "60_X_128x16_plus32_W_128x16",
       "own_hardware_verified": false,
@@ -7721,9 +7721,9 @@
       "source_commit": "0e16994675bb15e53642017a88f6307da9af4a01",
       "bundle": "/tmp/s4_21usr_g32_20261117_0810/light-light126-g32-0e16994",
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
-      "queue": "g32_initial01",
-      "queue_pid": 202586,
-      "last_observed_at": "2026-11-17T10:14:58.309441",
+      "queue": "g32_finish01",
+      "queue_pid": 277152,
+      "last_observed_at": "2026-11-17T10:34:27.763736",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7736,8 +7736,8 @@
       "sequence_summary_sha256": "a9e837c637a8b5ccaa2beef978f319f7d5c98f2064357879859911d4b2939904",
       "contention_summary_sha256": "4e0bd443f0b778c7ce1bd61214eef840325e99d6634a1ca867bea281625456e4",
       "operations_prepared": true,
-      "operations_manifest_sha256": "86f015d5d33e689dc0bbb668e79976ab81ad637b9b45bf95ededb228e9cfbf26",
-      "operations_root": "/tmp/s4_21usr_g32_ops_20261117_0845",
+      "operations_manifest_sha256": "f614bef8b387b3943914cd7cd7407934bac2ba47396be15f95e789d1b07d21d4",
+      "operations_root": "/tmp/s4_21usr_g32_ops_20261117_0938",
       "mapped_blocks": [
         "shared_sram",
         "accelerator",
@@ -7749,24 +7749,30 @@
       "original_queue_exited": true,
       "conservative_area_mm2": 0.727972347099813,
       "actual_ICG_count": 383,
-      "clock_gating_timing_verified": false,
+      "clock_gating_timing_verified": true,
       "recovery": {
         "queue": "g32_recovery01",
         "pid": 245913,
         "started": "2026-11-17T09:31:49.991797",
-        "stage": "batch20",
-        "child_pid": 271004,
-        "status": "running",
+        "stage": "precision",
+        "child_pid": null,
+        "status": "qualification_recovered_gate_power_pending",
         "operations_root": "/tmp/s4_21usr_g32_recoveryops_20261117_0933",
         "operations_manifest_sha256": "cfc31793de02b5795d272f84e3f7cb537a02ad10749d9628fb92a3d368ba02bd",
         "original_failed_queue_preserved": true,
         "completed": [
-          "icg"
+          "icg",
+          "batch20",
+          "precision"
         ],
-        "batch20_completed": 202,
+        "batch20_completed": 240,
         "batch20_failed": 0,
-        "checked_outputs": 5119488,
-        "estimated_batch_remaining_seconds_with_margin": 494.4847845062226
+        "checked_outputs": 6082560,
+        "estimated_batch_remaining_seconds_with_margin": 0,
+        "checked_totals": 6082560,
+        "finished": "2026-11-17T10:27:22.313638",
+        "driver_exited": true,
+        "state_sha256": "59bfae25095530f60bd551f92e0bc97d5ebbe32b8224f2be14c79e125399d870"
       },
       "recovery_contract_tests": 19,
       "recovery37_evidence": "handoff/team/evidence/G32_STORAGE_RECOVERY37_20261117.json",
@@ -7781,7 +7787,24 @@
       "archive_launcher_deployed": true,
       "archive_started": false,
       "archive_operations_root": "/tmp/s4_21usr_g32_archiveops_20261117_1006",
-      "archive_launcher_manifest_sha256": "b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26"
+      "archive_launcher_manifest_sha256": "b38f1276e0920eb35906d19714f0dc0744effb416c82c149fcf156f49d106e26",
+      "own_batch20_passed": true,
+      "own_precision_passed": true,
+      "first20_precision_evidence": "handoff/team/evidence/G32_FIRST20_PRECISION_20261117.json",
+      "recovery38_evidence": "handoff/team/evidence/G32_STORAGE_RECOVERY38_20261117.json",
+      "obsolete_success_initial_operations_root": "/tmp/s4_21usr_g32_ops_20261117_0845",
+      "finish": {
+        "queue": "g32_finish01",
+        "pid": 277152,
+        "started": "2026-11-17T10:28:48.918079",
+        "status": "running",
+        "stage": "gate",
+        "completed": [
+          "structure"
+        ],
+        "original_team_lock_held": true,
+        "error": null
+      }
     }
   }
 }
