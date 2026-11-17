@@ -77,3 +77,35 @@ bootstrap42已完成：1200份B0已备份逐任务日志重复件、2,759,700B�
 第一次N1归档驱动`archive_driver.py`SHA `1f0d0fe439a3d45a1dddb3c09fcee2081872e68187b81386e0f88e572b667f81`、PID83982在**写入任何归档之前**因截图aux请求SHA转录错误触发assert并退出；日志保留，无`archive_state.json`。重新单独显示完整SHA后已修正本地`N1_CLOSEOUT_ARCHIVE_20261118.py`，SHA `914c74d55f87b3284661d37beed9cf01758485484e8788cd0d98af27d724607e`。第二次只新建`archive_driver02.py/.log/.launch.json`，不覆盖失败文件，先21项辅助plan→identities→归档，后完整三包归档；仍保留20%+2GiB，源不删除。
 
 **最后输入会话67651仍需收尾并截图确认PID及启动结果。** 当前尚未观察到N1任何归档verified。新状态在控制根`archive_state.json`，日志`archive_driver02.log`。本地新中文收尾说明`workspaces/arch03/N1_CLOSEOUT_20261118.md`明确把归档目标标为计划路径，不能在完成前宣称已备份。
+
+## 00:22–00:31：辅助归档完成、完整包容量重试
+
+67651已完成；第二次驱动PID85162实际启动。**辅助归档已verified**：21项、1069成员（170目录/899普通文件/0链接）、源901,602,670B；持久压缩包709,504,053B。目录`PROJECT/operations/n1-aux-archive-20261118_0015`，archive SHA `387cfa890876ebed24754aed1692d6cfeb099402d11f485f5160ae554c9139ca`，receipt SHA `33993d020103fc642b9d07168bea4d5e3359fcf2ae7b5487e7180e71faa23042`。完整成员回读、源前后核对已通过。最终报告/精度来源/审阅资料已有持久副本；不要重跑辅助归档。
+
+完整三包清点74,538成员、7,137,788,745B。精确gzip计数接近1.4GB；00:25第二次驱动在**创建归档目标之前**因`1.2×压缩体积+2GiB`空间前置条件失败，完整包尚未写入，原`backups/n1-runtime-20261118_0015`不存在。保留`archive_driver02.log`及`archive_state.json`，该状态中的auxiliary仍是verified。共享空间当时3,704,673,280B，不能把这次失败写为N1硬件失败。
+
+已在独立工具副本采用显式**1.5GiB储备+20%压缩体积余量**；仅改变RESERVE常量和错误提示，完整SHA、前后树核对、解压回读以及保留原件均不变，不扩大清理。新helper派生SHA `710b186dde6c9a048a7064e88482eac8e4de3b3f8c0ff5943d72709c6da1c05b`，目录控制根`tools-20261118_0030-reserve1536`，记录`capacity_profile.json`。
+
+第三次运行脚本`N1_CLOSEOUT_ARCHIVE_RETRY03_20261118.py`SHA `ab5d885b220aefb4b2316a4e3ce3aaae198b06d933681307abf8f527dd6ad340`，服务端`archive_driver03.py`，PID **89126**（00:30:37截图确认）。仅重试三包，使用新`runtime_request03.json`和`archive_state03.json`，原失败状态不覆盖。新完整包目标为`PROJECT/backups/n1-runtime-20261118_0030`。尚未观察到最终verified。
+
+已同步私人GitHub个人分支提交 **ac1343c**，包含N1已有结论、小型交接和归档工具，不含厂商库/大型数据。后续变化待下一次同步。
+
+交付索引工具本地`handoff/team/evidence/N1_CLOSEOUT_PUBLISH_20261118.py`SHA `a55e71eb657ddfc33b9bcfece3d1e75cf42b5aad75ea544ccd06f30396313ce1`；要求`archive_state03.json`中两档均verified才可执行。它拟在`PROJECT/operations/n1-closeout-20261118_0030`新建可读目录，原JSON/CSV、审核附录、原综合网表/报告、五个关键RTL及两档恢复索引，不改T80。原审阅文件payload SHA `fab93fd3b85370b23fa629635ff4701ba5fc067ff9cebf92fd94afc7f2b1a35d`。
+
+**最后操作：VNC输入会话89104仍在部署publish.py和review_payload.json，约12KB命令；必须先收尾并截图。只部署，不会自行运行publish。** 当前窗口18874436/workspace3第一终端，禁止并行输入；归档89126后台继续。下一步查看archive_driver03.log/state03，等待实际verified后运行publish.py，核对receipt/文件集合，更新中文说明和STATUS并同步GitHub。G32 finisher146858仍暂停；N1/T80/旧八路源没有改动。
+
+## 00:34–00:44：共享空间持续减少；当前恢复入口
+
+89104已结束，publish.py及review_payload.json哈希均在屏幕核对成功，**未执行publish**。随后归档第三次89126又因1.5GiB+20%空间前置失败，仍发生在创建目标之前；`archive_state03.json`为failed_preserved。共享空闲从3.70GB降至1.72GB（00:34），再到1.42GB（00:36）、915406848B（00:40）。我方除709MB辅助归档外没有这些新增共享写入，不能臆测具体占用者。不能继续降低储备并盲重跑。
+
+00:36只读检查完整B0归档对应的其余现存文件：1646项/395,915,288B，不足恢复空间；**未删除这些综合中间产物**。没有删除standard_cells.v、mapped.v、DDC或这些综合报告。现改为已有授权范围内的无损R4压缩迁移，先清理真正已持久保存的/tmp压缩重复件，保留原gzip及持久XZ。
+
+已实际读取：R4 L04持久XZ 2,782,976,660B，receipt SHA `c6962b18892f8bd0b3561224c2e8219ebbd2e791305e90a797a502fb7593d053`；L05持久XZ 2,709,005,716B，receipt SHA仍`5a661ac0fce451fa51c2c2f50ad6e7f6ca2ca2f117038c5ad2b8218e91b46491`。两者均full_durable_readback_verified=true，分别/tmp暂存根的layer_04.vcd.xz、layer_05.vcd.xz仍存在；拟仅在压缩字节SHA/长度及无人使用检查后删除这两份临时重复件，共5,491,982,376B，不删除精确原gzip暂存副本或任何共享备份。
+
+R4 L06既有共享source在`PROJECT/bundles/light-light126-systolic-b-v3-20261112_114355-ced0e139a01e/runs/r4_waves_lossless_archive02/layer_06.vcd.gz`，gzip7,430,640,268B、原VCD12,210,217,662B；原receipt SHA `2e2e38a866a0b90978b1379018e2bd762a0673b7c7b4beb2c353d9d0f38383579`，原状态lossless_archived_raw_removed。**L06共享原件目前没有删除或修改。**
+
+新准备脚本`handoff/team/evidence/N1_R4_L06_STORAGE_STAGE_20261118.py` SHA `273cd25e0684afc6afeeecc017522fec85f3468724238f60d7e8022f3e111e20`，只删除上述两份已验证/tmp重复XZ，再把L06原gzip无损转为新/tmp XZ，preset0、单CPU低优先级、512MiB储备、4GiB输出上限；全量gzip压缩字节核对、raw SHA/字节核对及独立XZ解压回读，原shared gzip保留。工具持原团队锁，不清旧锁。此阶段**不做L06共享迁移**；须观察完整staging终态后再实施迁移。
+
+服务端部署到控制根`l06_stage.py/.log/.launch.json`；状态根`/tmp/s4_21usr_n1_r4_l06_stage_20261118/state.json`。**最后输入会话86682仍在部署约5KB命令，须先write_stdin结束并截图确认PID，不并行发GUI输入。** 新脚本先核对大文件，未观察到任何新增清理或L06压缩完成，不能提前写成功。
+
+下一步：1）核实L06暂存进程/进度，保持G32 finisher146858暂停；2）完整暂存通过后，在新持久目录完成R4 L06无损迁移并保留所有回执，确保原raw VCD可完整恢复；3）有足够共享空间后，以新尝试目录重启**仅N1完整三包**归档，勿重跑已verified辅助档；4）当前publish.py仍硬绑failed的archive_state03.json，最终新尝试通过后需新建publish02.py明确绑定新状态，不能直接运行旧publish.py；5）发布独立N1结果目录，更新计划/检查点/STATUS并同步。尚无N1完整三包持久归档，辅助归档与已完成硬件结果均有效。
