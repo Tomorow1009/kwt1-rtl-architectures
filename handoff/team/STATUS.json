@@ -7723,7 +7723,7 @@
       "bundle_manifest_sha256": "3524e2726880684c1c5681ef90da3a1ca41d78daf20d0df5b648e633b6e42f4a",
       "queue": "g32_finish01",
       "queue_pid": 277152,
-      "last_observed_at": "2026-11-17T11:58:20+08:00",
+      "last_observed_at": "2026-11-17T12:15:58.549942+08:00",
       "transfer_evidence": "handoff/team/evidence/G32_TRANSFER_PREPARATION_20261117.json",
       "recovery36_evidence": "handoff\\team\\evidence\\G32_STORAGE_RECOVERY36_20261117.json",
       "recovery36_completed": true,
@@ -7798,7 +7798,7 @@
         "pid": 277152,
         "started": "2026-11-17T10:28:48.918079",
         "status": "running",
-        "stage": "power_layer_03",
+        "stage": "power_layer_11",
         "completed": [
           "structure",
           "gate",
@@ -7806,16 +7806,24 @@
           "timing_audit",
           "drc_audit",
           "power_layer_01",
-          "power_layer_02"
+          "power_layer_02",
+          "power_layer_03",
+          "power_layer_04",
+          "power_layer_05",
+          "power_layer_06",
+          "power_layer_07",
+          "power_layer_08",
+          "power_layer_09",
+          "power_layer_10"
         ],
         "original_team_lock_held": true,
         "error": null,
         "saif_completed": 12,
         "saif_current_layer": null,
-        "child_pid": 320075,
-        "power_completed": 2,
-        "child_status_at_last_observation": "exited",
-        "observation_time": "2026-11-17T11:57:15.931906+08:00"
+        "child_pid": 2275,
+        "power_completed": 10,
+        "child_status_at_last_observation": "running",
+        "observation_time": "2026-11-17T12:15:58.549942+08:00"
       },
       "own_gate14_passed": true,
       "own_gate14_outputs": 354816,
@@ -7825,7 +7833,8 @@
       "own_saif12_passed": true,
       "own_saif12_summary_sha256": "19500ec93b08c9844f29552be3b000c0fe551337266514203a5e8c42902a6420",
       "own_saif12_bytes": 781461667,
-      "gate_saif_evidence": "handoff/team/evidence/G32_GATE_SAIF12_20261117.json"
+      "gate_saif_evidence": "handoff/team/evidence/G32_GATE_SAIF12_20261117.json",
+      "area_breakdown": "handoff/team/evidence/G32_AREA_BREAKDOWN_20261117.json"
     },
     "current_stage_before_G32": "C32-A own full validation and power12 complete; export_review03 running, independent conclusion pending"
   }
