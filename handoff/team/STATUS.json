@@ -7707,11 +7707,17 @@
       "throughput_change_percent": -0.06031097329243229
     },
     "g32_development": {
-      "status": "implementation_starting_from_frozen_C32_A",
+      "status": "local_tests_complete_preparing_server",
       "baseline_tag": "arch03-c32a-repair03-20261117-0725",
       "cache": "60_X_128x16_plus32_W_128x16",
       "own_hardware_verified": false,
-      "server_started": false
+      "server_started": false,
+      "local_validation": "handoff/team/evidence/G32_LOCAL_VALIDATION_20261117.json",
+      "local_array_random_blocks": 10000,
+      "local_array_outputs": 317824,
+      "local_datapath14": true,
+      "latency2_ABA_gated_bypass_reference": true,
+      "local_tests_passed": 26
     }
   }
 }
